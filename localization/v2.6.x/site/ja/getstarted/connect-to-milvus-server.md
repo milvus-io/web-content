@@ -1,9 +1,7 @@
 ---
 id: connect-to-milvus-server.md
 title: Milvusサーバへの接続
-summary: >-
-  This topic describes how to establish a client connection to a Milvus server
-  and configure common connection options.
+summary: このトピックでは、Milvusサーバへのクライアント接続を確立し、一般的な接続オプションを設定する方法について説明します。
 ---
 <h1 id="Connect-to-Milvus-Server" class="common-anchor-header">Milvusサーバへの接続<button data-href="#Connect-to-Milvus-Server" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,9 +35,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>各言語のSDKがインストールされていること。詳細は<a href="/docs/ja/install-pymilvus.md">Python SDK</a>、<a href="/docs/ja/install-java.md">Java SDK</a>、<a href="/docs/ja/install-go.md">Go SDK</a>、<a href="/docs/ja/install-node.md">Nodejs SDKを</a>ご参照ください。</p></li>
+<li><p>各言語のSDKがインストールされていること。詳細は<a href="/docs/ja/v2.6.x/install-pymilvus.md">Python SDK</a>、<a href="/docs/ja/v2.6.x/install-java.md">Java SDK</a>、<a href="/docs/ja/v2.6.x/install-go.md">Go SDK</a>、<a href="/docs/ja/v2.6.x/install-node.md">Nodejs SDKを</a>ご参照ください。</p></li>
 <li><p>Milvusサーバのアドレス（ローカルデフォルト：<code translate="no">http://localhost:19530</code> 、プロキシポート<strong>19530</strong>）。</p></li>
-<li><p><a href="/docs/ja/authenticate.md">認証が有効な</a>場合は、<strong>トークン</strong>または<strong>ユーザー名+パスワードの</strong>いずれかを指定します。トークンは<code translate="no">username:password</code> (例:<code translate="no">root:Milvus</code>)。詳細については、「<a href="/docs/ja/authenticate.md">ユーザー・アクセスの認証</a>」および「<a href="/docs/ja/users_and_roles.md">ユーザーとロールの作成</a>」を参照してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/authenticate.md">認証が有効な</a>場合は、<strong>トークン</strong>または<strong>ユーザー名+パスワードの</strong>いずれかを指定します。トークンは<code translate="no">username:password</code> (例:<code translate="no">root:Milvus</code>)。詳細については、「<a href="/docs/ja/v2.6.x/authenticate.md">ユーザー・アクセスの認証</a>」および「<a href="/docs/ja/v2.6.x/users_and_roles.md">ユーザーとロールの作成</a>」を参照してください。</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">URIによる接続 (認証無効)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,6 +88,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">認証情報で接続（認証有効）<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -157,10 +156,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>トークンの形式は<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> です。ドキュメントには、デフォルトのクレデンシャルとして<code translate="no">root:Milvus</code> が明記されています。また、<a href="/docs/ja/users_and_roles.md">Create Users &amp; Roles</a>ガイドでは、ユーザーの管理について説明しています。</p>
+<p>トークンの形式は<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> です。ドキュメントには、デフォルトのクレデンシャルとして<code translate="no">root:Milvus</code> が明記されています。また、<a href="/docs/ja/v2.6.x/users_and_roles.md">Create Users &amp; Roles</a>ガイドでは、ユーザーの管理について説明しています。</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">タイムアウトの設定<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,13 +221,13 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>上記のSDKでは、このタイムアウトは接続を確立するときにのみ使用され、他のAPI操作のデフォルトのタイムアウトとしては機能しません。</p></li>
+<li><p>上記のSDKの場合、このタイムアウトは接続を確立するときにのみ使用され、他のAPI操作のデフォルトのタイムアウトとしては機能しません。</p></li>
 <li><p>RESTful APIでは、<code translate="no">Request-Timeout</code> は秒単位のリクエストごとの期限である（Javaの<code translate="no">rpcDeadlineMs</code> やNode.jsの<code translate="no">timeout</code> とは異なり、ミリ秒単位である）ので、期限が必要なすべての呼び出しにこれを含めること。</p></li>
 </ul>
 </div>
@@ -304,12 +304,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>データベースの作成、一覧表示、説明、および広範なデータベース管理タスクについては、<a href="/docs/ja/manage_databases.md">データベース・</a>ガイドを参照してください。</p>
+<p>データベースの作成、一覧表示、説明、および広範なデータベース管理タスクについては、<a href="/docs/ja/v2.6.x/manage_databases.md">データベース・</a>ガイドを参照してください。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">次の作業<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +328,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/create-collection.md">コレクションの作成</a></p></li>
-<li><p><a href="/docs/ja/insert-update-delete.md">エンティティの挿入</a></p></li>
-<li><p><a href="/docs/ja/single-vector-search.md">基本的なベクトル検索</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/create-collection.md">コレクションの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/insert-update-delete.md">エンティティの挿入</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md">基本的なベクトル検索</a></p></li>
 </ul>

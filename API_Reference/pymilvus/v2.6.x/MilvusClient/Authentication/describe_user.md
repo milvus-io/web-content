@@ -1,29 +1,29 @@
 # describe_user()
 
-This operation describes a specific user.
+Returns the `roles` and `description` associated with a user account. Returns an empty dictionary when the user does not exist.
 
-## Request syntax
+## Request Syntax
 
 ```python
 describe_user(
     user_name: str,
-    timeout: Optional[float] = None
-) -> Dict
+    timeout: Optional[float] = None,
+    **kwargs
+) -> dict
 ```
 
 **PARAMETERS:**
 
 - **user_name** (*str*) -
+**[REQUIRED]**
+Name of the user account to describe.
 
-    **[REQUIRED]**
+- **timeout** (*Optional[float]*) -
+Default: `None`
+Maximum time, in seconds, to wait for the RPC to complete.
 
-    The name of the user to describe.
-
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+- **kwargs** (*Any*) -
+Additional request context options.
 
 **RETURN TYPE:**
 
@@ -31,66 +31,33 @@ describe_user(
 
 **RETURNS:**
 
-A dictionary containing detailed information about the specified users.
-
-```python
-# {
-#       'user_name': str, 
-#       'roles': tuple
-# }
-```
+Dictionary with `user_name`, `roles`, and `description`. Returns an empty dictionary when the user is not found.
 
 - **user_name** (*str*) -
+Name of the described user account.
 
-    The name of the specified users.
+- **roles** (*list[str]*) -
+Roles assigned to the user account.
 
-- **roles** (*tuple*) - 
-
-    The roles granted to the specified user.
+- **description** (*str*) -
+Description stored for the user account.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-    This exception will be raised when any error occurs during this operation.
-
-- **BaseException**
-
-    This exception will be raised when this operation fails.
-
-## Example
+## Examples
 
 ```python
 from pymilvus import MilvusClient
 
-# 1. Create a milvus client
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-# 2. Create a role
-client.create_role(role_name="read_only")
-
-# 3. Create a user
-client.create_user(user_name="user_1", password="P@ssw0rd")
-
-# 4. Grant the role to the user
-client.grant_role(user_name="user_1", role_name="read_only")
-
-# 5. Describe the user
-client.describe_user(user_name="user_1")
-
-# {'user_name': 'user_1', 'roles': ('read_only',)}
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+user = client.describe_user("analyst")
+print(user)
+# {
+#     "user_name": "analyst",
+#     "roles": ["read_only"],
+#     "description": "Analytics account",
+# }
 ```
-
-## Related methods
-
-- [create_user()](create_user.md)
-
-- [drop_user()](drop_user.md)
-
-- [list_users()](list_users.md)
-
-- [update_password()](update_password.md)
-

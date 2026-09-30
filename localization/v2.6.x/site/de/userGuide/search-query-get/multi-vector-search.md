@@ -37,8 +37,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Arbeitsablauf der hybriden Suche</span> </span></p>
 <p>Die Multi-Vektor-Hybridsuche integriert verschiedene Suchmethoden oder überspannt Einbettungen aus verschiedenen Modalitäten:</p>
 <ul>
-<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein umfassendes konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Suchanfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
-<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und zusammenhängenden Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
+<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/v2.6.x/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/v2.6.x/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein breites konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Suchanfragen. Hier finden Sie einen detaillierten <a href="/docs/de/v2.6.x/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
+<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einem nahtlosen und zusammenhängenden Sucherlebnis zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,7 +93,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Für die hybride Suche mit mehreren Vektorfeldern sollten Sie mehrere Vektorfelder in einem Sammlungsschema definieren. Details zu den Beschränkungen für die Anzahl der in einer Sammlung zulässigen Vektorfelder finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>.  Falls erforderlich, können Sie jedoch die <a href="/docs/de/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> anpassen, um bei Bedarf bis zu 10 Vektorfelder in eine Sammlung aufzunehmen.</p>
+    </button></h3><p>Für die hybride Suche mit mehreren Vektorfeldern sollten Sie mehrere Vektorfelder in einem Sammlungsschema definieren. Details zu den Beschränkungen für die Anzahl der in einer Sammlung zulässigen Vektorfelder finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>.  Falls erforderlich, können Sie jedoch die <a href="/docs/de/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> anpassen, um bei Bedarf bis zu 10 Vektorfelder in eine Sammlung aufzunehmen.</p>
 <p>In diesem Beispiel werden die folgenden Felder in das Schema aufgenommen:</p>
 <ul>
 <li><p><code translate="no">id</code>: Dient als Primärschlüssel für die Speicherung von Text-IDs. Dieses Feld ist vom Datentyp <code translate="no">INT64</code>.</p></li>
@@ -102,7 +102,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: Dient zur Speicherung von spärlichen Vektoren der Texte. Dieses Feld hat den Datentyp <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Zur Speicherung von dichten Vektoren der Produktbilder. Dieses Feld hat den Datentyp <code translate="no">FLOAT_VETOR</code> mit einer Vektordimension von 512.</p></li>
 </ul>
-<p>Da wir den eingebauten Algorithmus BM25 verwenden werden, um eine Volltextsuche im Textfeld durchzuführen, ist es notwendig, das Schema um den Milvus <code translate="no">Function</code> zu erweitern. Weitere Einzelheiten finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>Da wir den eingebauten Algorithmus BM25 verwenden werden, um eine Volltextsuche im Textfeld durchzuführen, ist es notwendig, das Schema um den Milvus <code translate="no">Function</code> zu erweitern. Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/full-text-search.md">Volltextsuche</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -350,13 +350,13 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nach der Definition des Sammlungsschemas ist der nächste Schritt die Konfiguration der Vektorindizes und die Festlegung der Ähnlichkeitsmetriken. Im gegebenen Beispiel:</p>
+    </button></h3><p>Nach der Definition des Sammlungsschemas ist der nächste Schritt, die Vektorindizes zu konfigurieren und die Ähnlichkeitsmetriken festzulegen. Im gegebenen Beispiel:</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code>: wird ein Index vom Typ <code translate="no">AUTOINDEX</code> mit dem Metrik-Typ <code translate="no">IP</code> für das Text-Density-Vektorfeld erstellt.</p></li>
 <li><p><code translate="no">text_sparse_index</code>Ein Index des Typs<code translate="no">SPARSE_INVERTED_INDEX</code>mit dem Metrik-Typ <code translate="no">BM25</code> wird für das Text-Sparse-Vektorfeld verwendet.</p></li>
 <li><p><code translate="no">image_dense_index</code>Ein Index vom Typ <code translate="no">AUTOINDEX</code> mit dem metrischen Typ <code translate="no">IP</code> wird für das dichte Bildvektorfeld erstellt.</p></li>
 </ul>
-<p>Sie können andere Indextypen wählen, die Ihren Bedürfnissen und Datentypen am besten entsprechen. Weitere Informationen zu den unterstützten Indextypen finden Sie in der Dokumentation zu den <a href="/docs/de/index-vector-fields.md">verfügbaren Indextypen</a>.</p>
+<p>Sie können andere Indextypen wählen, die Ihren Bedürfnissen und Datentypen am besten entsprechen. Weitere Informationen zu den unterstützten Indextypen finden Sie in der Dokumentation zu den <a href="/docs/de/v2.6.x/index-vector-fields.md">verfügbaren Indextypen</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -521,6 +521,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -656,6 +657,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -696,7 +698,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>Die hybride Suche wird durch die Erstellung mehrerer <code translate="no">AnnSearchRequest</code> in der Funktion <code translate="no">hybrid_search()</code> implementiert, wobei jede <code translate="no">AnnSearchRequest</code> eine grundlegende ANN-Suchanfrage für ein bestimmtes Vektorfeld darstellt. Daher muss vor der Durchführung einer Hybrid Search für jedes Vektorfeld eine <code translate="no">AnnSearchRequest</code> erstellt werden.</p>
-<p>Darüber hinaus können Sie durch die Konfiguration des Parameters <code translate="no">expr</code> in einer <code translate="no">AnnSearchRequest</code> die Filterbedingungen für Ihre hybride Suche festlegen. Weitere Informationen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/boolean.md">Filterung erklärt</a>.</p>
+<p>Darüber hinaus können Sie durch die Konfiguration des Parameters <code translate="no">expr</code> in einer <code translate="no">AnnSearchRequest</code> die Filterbedingungen für Ihre hybride Suche festlegen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/v2.6.x/boolean.md">Filterung erklärt</a>.</p>
 <div class="alert note">
 <p>Bei der hybriden Suche unterstützt jede <code translate="no">AnnSearchRequest</code> nur eine Abfrage.</p>
 </div>
@@ -850,7 +852,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um die ANN-Suchergebnissätze zusammenzuführen und neu zu ordnen, ist die Auswahl einer geeigneten Rangordnungsstrategie unerlässlich. Milvus bietet mehrere Arten von Ranking-Strategien an. Weitere Einzelheiten zu diesen Ranking-Mechanismen finden Sie unter <a href="/docs/de/weighted-ranker.md">Weighted Ranker</a> oder <a href="/docs/de/rrf-ranker.md">RRF Ranker</a>.</p>
+    </button></h3><p>Um die ANN-Suchergebnissätze zusammenzuführen und neu zu ordnen, ist die Auswahl einer geeigneten Rangordnungsstrategie unerlässlich. Milvus bietet mehrere Arten von Ranking-Strategien an. Weitere Einzelheiten zu diesen Ranking-Mechanismen finden Sie unter <a href="/docs/de/v2.6.x/weighted-ranker.md">Weighted Ranker</a> oder <a href="/docs/de/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
 <p>Da in diesem Beispiel kein besonderer Schwerpunkt auf bestimmte Suchanfragen gelegt wird, werden wir mit der RRFRanker-Strategie arbeiten.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -989,6 +991,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1034,7 +1037,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>Wenn Ihre Sammlung ein Feld <code translate="no">TIMESTAMPTZ</code> hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den Parameter <code translate="no">timezone</code> im Aufruf der Hybridsuche setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
-<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
+<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
 <p>Das folgende Beispiel zeigt, wie eine Zeitzone für einen hybriden Suchvorgang vorübergehend festgelegt wird:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

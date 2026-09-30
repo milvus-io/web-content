@@ -25,7 +25,7 @@ summary: >-
     </button></h1><p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 놓칠 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥과 연관성이 높은 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환함으로써 벡터 검색을 간소화합니다.</p>
 <p>관련성 점수에 BM25 알고리즘을 사용하는 이 기능은 특정 검색어와 가장 근접하게 일치하는 문서의 우선순위를 정하는 검색 증강 생성(RAG) 시나리오에서 특히 유용합니다.</p>
 <div class="alert note">
-<p>전체 텍스트 검색과 시맨틱 기반의 고밀도 벡터 검색을 통합하면 검색 결과의 정확도와 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
+<p>전체 텍스트 검색과 시맨틱 기반의 고밀도 벡터 검색을 통합하면 검색 결과의 정확도와 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">BM25 구현<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ summary: >-
 <p>Milvus의 전체 텍스트 검색은 아래의 워크플로우를 따릅니다:</p>
 <ol>
 <li><p><strong>원시 텍스트 입력</strong>: 임베딩 모델 없이 텍스트 문서를 삽입하거나 일반 텍스트를 사용하여 쿼리를 입력합니다.</p></li>
-<li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 사용하여 텍스트를 색인 및 검색이 가능한 의미 있는 용어로 처리합니다.</p></li>
+<li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/v2.6.x/analyzer-overview.md">분석기를</a> 사용하여 텍스트를 색인 및 검색이 가능한 의미 있는 용어로 처리합니다.</p></li>
 <li><p><strong>BM25 함수 처리</strong>: 내장된 함수가 이러한 용어를 BM25 채점에 최적화된 희소 벡터 표현으로 변환합니다.</p></li>
 <li><p><strong>컬렉션 저장소</strong>: Milvus는 빠른 검색과 순위를 매길 수 있도록 결과 스파스 임베딩을 컬렉션에 저장합니다.</p></li>
 <li><p><strong>BM25 관련성 점수</strong>: 검색 시 Milvus는 BM25 스코어링 기능을 적용하여 문서 관련성을 계산하고 쿼리 용어와 가장 일치하는 순위를 매긴 결과를 반환합니다.</p></li>
@@ -57,9 +57,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>전체 텍스트 검색</span> </span></p>
 <p>전체 텍스트 검색을 사용하려면 다음 주요 단계를 따르세요:</p>
 <ol>
-<li><p><a href="/docs/ko/full-text-search.md#Create-a-collection-for-BM25-full-text-search">컬렉션을 만듭니다</a>: 필수 필드를 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 BM25 함수를 정의합니다.</p></li>
-<li><p><a href="/docs/ko/full-text-search.md#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
-<li><p><a href="/docs/ko/full-text-search.md#Perform-full-text-search">검색 수행</a>: 자연어 쿼리 텍스트를 사용하여 BM25 관련성에 따라 순위가 매겨진 결과를 검색합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">컬렉션을 만듭니다</a>: 필수 필드를 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 BM25 함수를 정의합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/full-text-search.md#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/full-text-search.md#Perform-full-text-search">검색 수행</a>: 자연어 쿼리 텍스트를 사용하여 BM25 관련성에 따라 순위가 매겨진 결과를 검색합니다.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">BM25 전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,7 +95,7 @@ summary: >-
     </button></h3><p>컬렉션 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
 <ul>
 <li><p><strong>기본 필드</strong>: 컬렉션의 각 엔티티를 고유하게 식별합니다.</p></li>
-<li><p><strong>텍스트 필드</strong> (<code translate="no">VARCHAR</code>): 원시 텍스트 문서를 저장합니다. Milvus가 BM25 관련성 순위를 위해 텍스트를 처리할 수 있도록 <code translate="no">enable_analyzer=True</code> 을 설정해야 합니다. 기본적으로 Milvus는 텍스트 분석을 위해 <a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/standard-analyzer.md"> 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p></li>
+<li><p><strong>텍스트 필드</strong> (<code translate="no">VARCHAR</code>): 원시 텍스트 문서를 저장합니다. Milvus가 BM25 관련성 순위를 위해 텍스트를 처리할 수 있도록 <code translate="no">enable_analyzer=True</code> 을 설정해야 합니다. 기본적으로 Milvus는 텍스트 분석을 위해 <a href="/docs/ko/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/v2.6.x/standard-analyzer.md"> 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/v2.6.x/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p></li>
 <li><p><strong>스파스 벡터 필드</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): BM25 함수에 의해 자동으로 생성된 스파스 임베딩을 저장합니다.</p></li>
 </ul>
 <div class="multipleCode">
@@ -438,7 +438,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>생성할 인덱스의 유형. <code translate="no">AUTOINDEX</code> 을 입력하면 Milvus가 자동으로 인덱스 설정을 최적화합니다. 인덱스 설정을 보다 세밀하게 제어해야 하는 경우 Milvus에서 스파스 벡터에 사용할 수 있는 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</p></td>
+     <td><p>생성할 인덱스의 유형. <code translate="no">AUTOINDEX</code> 을 입력하면 Milvus가 자동으로 인덱스 설정을 최적화합니다. 인덱스 설정을 보다 세밀하게 제어해야 하는 경우 Milvus에서 스파스 벡터에 사용할 수 있는 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -516,6 +516,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -577,6 +578,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -604,7 +606,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>컬렉션에 데이터를 삽입한 후에는 원시 텍스트 쿼리를 사용하여 전체 텍스트 검색을 수행할 수 있습니다. Milvus는 자동으로 쿼리를 스파스 벡터로 변환하고 BM25 알고리즘을 사용하여 일치하는 검색 결과의 순위를 매긴 다음 상위 K (<code translate="no">limit</code>) 결과를 반환합니다.</p>
 <div class="alert note">
-<p>텍스트 형광펜을 구성하여 검색 결과에서 일치하는 용어를 강조 표시할 수 있습니다. 자세한 내용은 <a href="/docs/ko/text-highlighter.md">텍스트 하이라이터를</a> 참조하세요.</p>
+<p>텍스트 형광펜을 구성하여 검색 결과에서 일치하는 용어를 강조 표시할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/text-highlighter.md">텍스트 하이라이터를</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -665,6 +667,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -691,7 +694,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>검색 중에 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></td>
+     <td><p>검색 중에 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -707,7 +710,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>검색 결과에 반환할 필드 이름의 목록입니다. BM25로 생성된 임베딩이 포함된 <strong>스파스 벡터 필드를 제외한</strong> 모든 필드를 지원합니다. 일반적인 출력 필드에는 기본 키 필드(예: <code translate="no">id</code>)와 원본 텍스트 필드(예: <code translate="no">text</code>)가 포함됩니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ를</a> 참조하세요.</p></td>
+     <td><p>검색 결과에 반환할 필드 이름의 목록입니다. BM25로 생성된 임베딩이 포함된 <strong>스파스 벡터 필드를 제외한</strong> 모든 필드를 지원합니다. 일반적인 출력 필드에는 기본 키 필드(예: <code translate="no">id</code>)와 원본 텍스트 필드(예: <code translate="no">text</code>)가 포함됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ를</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -798,4 +801,4 @@ client.search(
 <li><p>전체 텍스트 검색 대신 수동 스파스 벡터 연산 사용</p></li>
 <li><p>사용자 정의 스파스 벡터 워크플로우를 위한 별도의 컬렉션 생성</p></li>
 </ul>
-<p>자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>

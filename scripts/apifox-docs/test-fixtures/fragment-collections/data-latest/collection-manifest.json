@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "collectionId": "fixture-data-plane-latest",
+  "apiSurface": "data-plane",
+  "source": {"repository": "fixture/milvus", "revision": "1111111111111111111111111111111111111111"},
+  "generator": {
+    "repository": "fixture/feishu-markdown-bridge",
+    "revision": "2222222222222222222222222222222222222222",
+    "configDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "review": {
+    "manifestDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "approvalDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "services": [
+    {
+      "id": "milvus-rest",
+      "fragment": "milvus-rest.openapi.json",
+      "sha256": "sha256:ccea5548ac528703300c43460f463383bbbfc19a569130581a887b4b594705d3",
+      "operationCount": 1
+    }
+  ]
+}

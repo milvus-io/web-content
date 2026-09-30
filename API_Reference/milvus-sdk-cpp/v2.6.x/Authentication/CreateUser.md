@@ -1,6 +1,6 @@
 # CreateUser()
 
-This operation creates a user account with a username and password for logging into Milvus. 
+This operation creates a user account with the given username and password for logging in to Milvus. An optional description can be attached to the account.
 
 ```cpp
 Status CreateUser(const CreateUserRequest& request)
@@ -11,49 +11,53 @@ Status CreateUser(const CreateUserRequest& request)
 ```cpp
 auto request = CreateUserRequest()
     .WithUserName(name)
-    .WithPassword(password);
+    .WithPassword(password)
+    .WithDescription(description);
 ```
 
 **REQUEST METHODS:**
 
 - `WithUserName(const std::string& name)`
 
-    Sets the name of the user.
+    Sets the name of the user to create.
 
 - `WithPassword(const std::string& password)`
 
-    Sets the password of the user.
+    Sets the login password of the user.
+
+- `WithDescription(const std::string& description)`
+
+    Sets the description of the user. Optional.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the user was created successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Create a user after connecting a MilvusClientV2.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->CreateUser(
-    milvus::CreateUserRequest().
-        WithUserName(user_name).
-        WithPassword("P@ssw0rd!")
-);
-
+auto request = milvus::CreateUserRequest()
+    .WithUserName("alice")
+    .WithPassword("Milvus123")
+    .WithDescription("User for the analytics team");
+status = client->CreateUser(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

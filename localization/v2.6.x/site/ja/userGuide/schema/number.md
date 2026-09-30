@@ -36,7 +36,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">INT16</code></p></td>
-     <td><p>16 ビット整数、中範囲の整数データの格納に適する。</p></td>
+     <td><p>16 ビット整数、中レンジの整数データ用。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT32</code></p></td>
@@ -57,7 +57,7 @@ summary: >-
 </table>
 <p>数値フィールドを宣言するには、<code translate="no">datatype</code> を使用可能な数値データ型の1つに設定するだけです。例えば、整数フィールドには<code translate="no">DataType.INT64</code> 、浮動小数点フィールドには<code translate="no">DataType.FLOAT</code> 。</p>
 <div class="alert note">
-<p>Milvusは数値フィールドのNULL値とデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に、<code translate="no">default_value</code> を数値に設定してください。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p>
+<p>Milvusは数値フィールドのNULL値とデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に、<code translate="no">default_value</code> を数値に設定してください。詳細は<a href="/docs/ja/v2.6.x/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p>
 </div>
 <h2 id="Add-number-field" class="common-anchor-header">数値フィールドの追加<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ summary: >-
 <li><p><code translate="no">price</code>float データを格納し、NULL 値を許可しますが、デフォルト値はありません。</p></li>
 </ul>
 <div class="alert note">
-<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。しかし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていないスカラーフィールドを挿入することができます。ただし、これによりクエリや管理が複雑になり、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -262,7 +262,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">age</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは<a href="/docs/ja/index-explained.md">インデックス解説を</a>ご参照ください。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">age</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳しくは<a href="/docs/ja/v2.6.x/index-explained.md">インデックス解説を</a>ご参照ください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -380,6 +380,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -479,6 +480,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},
@@ -503,7 +505,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定されたフィルタ式に一致するエンティティを取得します。</p>
+    </button></h2><p>エンティティの挿入後、<code translate="no">query</code> メソッドを使用して、指定したフィルタ式に一致するエンティティを取得します。</p>
 <p><code translate="no">age</code> が 30 より大きいエンティティを取得する：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -564,6 +566,7 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;age &gt; 30&quot;,
@@ -644,6 +647,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;price is null&quot;,
@@ -718,6 +722,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;age == 18&quot;,
@@ -823,6 +828,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -835,4 +841,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリ・ベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>
+<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリ・ベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/v2.6.x/filtering">フィルタリングを</a>参照してください。</p>

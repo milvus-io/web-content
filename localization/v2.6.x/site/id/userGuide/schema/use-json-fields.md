@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bidang JSON adalah bidang yang ditentukan oleh skema di Milvus yang menyimpan data nilai-kunci terstruktur. Nilai-nilai tersebut dapat berupa string, angka, boolean, array, atau objek bersarang.</p>
-<p>Berikut adalah contoh tampilan field JSON dalam dokumen:</p>
+<p>Berikut ini contoh tampilan field JSON dalam sebuah dokumen:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electronics&quot;</span><span class="hljs-punctuation">,</span>
@@ -249,6 +249,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -256,7 +257,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Anda juga dapat mengaktifkan fitur bidang dinamis untuk menyimpan bidang yang tidak dideklarasikan secara fleksibel, tetapi fitur ini tidak diperlukan agar bidang JSON dapat berfungsi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Anda juga dapat mengaktifkan fitur bidang dinamis untuk menyimpan bidang yang tidak dideklarasikan secara fleksibel, tetapi fitur ini tidak diperlukan agar bidang JSON dapat berfungsi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">Menyisipkan entitas dengan data JSON<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -423,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -543,8 +545,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>Tipe cast JSON</strong> (<code translate="no">json_cast_type</code>): Tipe data yang harus digunakan Milvus ketika menginterpretasikan dan mengindeks nilai pada jalur yang ditentukan.</p>
 <ul>
-<li><p>Tipe ini harus sama dengan tipe data aktual dari bidang yang diindeks. Jika Anda ingin mengubah tipe data menjadi tipe data lain selama pengindeksan, pertimbangkan <a href="/docs/id/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">untuk menggunakan fungsi cast.</a></p></li>
-<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">di bawah ini</a>.</p></li>
+<li><p>Tipe ini harus sesuai dengan tipe data aktual dari bidang yang diindeks. Jika Anda ingin mengubah tipe data menjadi tipe data lain selama pengindeksan, pertimbangkan <a href="/docs/id/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">untuk menggunakan fungsi cast.</a></p></li>
+<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">di bawah ini</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Jenis cast JSON yang didukung</h4><p>Tipe cast tidak peka terhadap huruf besar/kecil. Jenis-jenis berikut ini didukung:</p>
@@ -586,7 +588,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>Larik harus berisi elemen dengan tipe yang sama untuk pengindeksan optimal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/array_data_type.md">Bidang Larik</a>.</p>
+<p>Larik harus berisi elemen dengan tipe yang sama untuk pengindeksan optimal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/array_data_type.md">Bidang Larik</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Contoh: Membuat indeks jalur JSON</h4><p>Dengan menggunakan struktur JSON <code translate="no">metadata</code> dari pengenalan kita, berikut ini adalah contoh cara membuat indeks pada jalur JSON yang berbeda:</p>
 <div class="multipleCode">
@@ -899,6 +901,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -949,7 +952,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Anda telah membuat indeks pada setiap bidang vektor.</p></li>
 <li><p>Koleksi dimuat ke dalam memori.</p></li>
 </ul>
-<p>Untuk daftar lengkap operator dan ekspresi yang didukung, lihat <a href="/docs/id/json-operators.md">Operator JSON</a>.</p>
+<p>Untuk daftar lengkap operator dan ekspresi yang didukung, lihat <a href="/docs/id/v2.6.x/json-operators.md">Operator JSON</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">Menggabungkan semuanya<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -969,11 +972,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>Untuk menyelesaikan alur kerja dalam aplikasi dunia nyata, Anda juga perlu:</p>
 <ul>
 <li><p><strong>Membuat indeks pada bidang vektor Anda</strong> (wajib untuk setiap bidang vektor dalam koleksi)</p>
-<p>Lihat Mengatur <a href="/docs/id/create-collection.md#Optional-Set-Index-Parameters">Parameter Indeks</a></p></li>
+<p>Lihat Mengatur <a href="/docs/id/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Parameter Indeks</a></p></li>
 <li><p><strong>Memuat koleksi</strong></p>
-<p>Lihat <a href="/docs/id/load-and-release.md">Memuat &amp; Melepaskan</a></p></li>
+<p>Lihat <a href="/docs/id/v2.6.x/load-and-release.md">Memuat &amp; Melepaskan</a></p></li>
 <li><p><strong>Mencari atau membuat kueri menggunakan filter jalur JSON</strong></p>
-<p>Lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/json-operators.md">Operator JSON</a></p></li>
+<p>Lihat <a href="/docs/id/v2.6.x/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/v2.6.x/json-operators.md">Operator JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1010,7 +1013,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>Field dinamis</strong> adalah objek JSON tersembunyi (<code translate="no">$meta</code>) yang secara otomatis menyimpan field apa pun yang tidak didefinisikan dalam skema.</p></li>
 </ul>
 <p>Keduanya mendukung struktur bersarang dan pengindeksan jalur JSON, tetapi bidang dinamis lebih cocok untuk struktur data opsional atau yang terus berkembang.</p>
-<p>Lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a> untuk detailnya.</p>
+<p>Lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Bidang Dinamis</a> untuk detailnya.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Apakah ada batasan ukuran bidang JSON?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1043,7 +1046,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Tidak, bidang JSON tidak mendukung nilai default. Namun, Anda dapat mengatur <code translate="no">nullable=True</code> saat mendefinisikan bidang untuk mengizinkan entri kosong.</p>
-<p>Lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a> untuk detailnya.</p>
+<p>Lihat <a href="/docs/id/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a> untuk detailnya.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Apakah ada konvensi penamaan untuk kunci bidang JSON?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1126,7 +1129,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Milvus menyimpan semua nilai numerik yang diindeks sebagai nilai ganda.</p>
-<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat menyebabkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
+<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat mengakibatkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
 <h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada jalur JSON yang sama dengan jenis cast yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1142,7 +1145,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, setiap jalur JSON <strong>hanya</strong> mendukung <strong>satu indeks</strong>. Anda harus memilih satu <code translate="no">json_cast_type</code> yang cocok dengan data Anda. Membuat beberapa indeks pada jalur yang sama dengan jenis cast yang berbeda tidak didukung.</p>
+    </button></h3><p>Tidak, setiap jalur JSON <strong>hanya</strong> mendukung <strong>satu indeks</strong>. Anda harus memilih satu <code translate="no">json_cast_type</code> yang cocok dengan data Anda. Membuat beberapa indeks pada jalur yang sama dengan tipe cast yang berbeda tidak didukung.</p>
 <h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Bagaimana jika nilai pada jalur JSON memiliki tipe yang tidak konsisten?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1174,4 +1177,4 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan jenis cast indeks.</p>
+    </button></h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan tipe cast indeks.</p>

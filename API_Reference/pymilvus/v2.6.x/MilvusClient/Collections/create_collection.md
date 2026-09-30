@@ -80,13 +80,13 @@ create_collection(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-- **schema** (*CollectionSchema* | *None*)
+- **schema** (*[CollectionSchema](../CollectionSchema/CollectionSchema.md)* | *None*)
 
     The schema of this collection.
 
     Setting this to **None** indicates this collection will be created in a quick setup manner. 
 
-    To set up a collection with a customized schema, you need to create a **CollectionSchema** object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
+    To set up a collection with a customized schema, you need to create a **[CollectionSchema](../CollectionSchema/CollectionSchema.md)** object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.
 
 - **index_params** (*IndexParams* | *None*)
 

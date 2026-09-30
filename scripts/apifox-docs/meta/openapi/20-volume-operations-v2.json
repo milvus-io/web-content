@@ -1,0 +1,1565 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Volume Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Volume Operations (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/volumes": {
+      "get": {
+        "summary": "List Volumes",
+        "deprecated": false,
+        "description": "This operation lists all volumes in the specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Volume 列表",
+            "description": "本接口将列出指定项目下的所有 Volume。"
+          },
+          "ja-JP": {
+            "summary": "ボリュームを一覧表示",
+            "description": "この操作は、指定したプロジェクト内のすべてのボリュームを一覧表示します。"
+          }
+        },
+        "tags": [
+          "Volume Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The target project of this operation.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前操作的目标项目。"
+              },
+              "ja-JP": {
+                "description": "この操作の対象プロジェクト。"
+              }
+            },
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxx"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to include in each response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每次返回的记录数。"
+              },
+              "ja-JP": {
+                "description": "各レスポンスに含めるレコード数。"
+              }
+            },
+            "required": false,
+            "example": 10,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            },
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The category of the volume. Valid values are `MANAGED` and `EXTERNAL`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Volume 的类别。有效值为 `MANAGED` 和 `EXTERNAL`。"
+              },
+              "ja-JP": {
+                "description": "ボリュームのカテゴリ。有効な値は `MANAGED` および `EXTERNAL` です。"
+              }
+            },
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of volumes.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回 Volume 列表。"
+              },
+              "ja-JP": {
+                "description": "ボリュームの一覧を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "description": "Total number of volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの総数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "Current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "Number of volumes per page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页的 Volume 数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "1 ページあたりのボリューム数。"
+                                }
+                              }
+                            },
+                            "volumes": {
+                              "type": "array",
+                              "description": "List of volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの一覧。"
+                                }
+                              },
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "volumeName": {
+                                    "type": "string",
+                                    "description": "The name of the volume.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Volume 名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリューム名。"
+                                      }
+                                    }
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "Description of the volume.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Volume 描述。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリュームの説明。"
+                                      }
+                                    }
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The category of the volume.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Volume 的类别。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ボリュームのカテゴリ。"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 200,
+                      "data": {
+                        "count": 3,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "volumes": [
+                          {
+                            "volumeName": "my_volume_1",
+                            "type": "MANAGED",
+                            "description": "A volume for storing collection data."
+                          },
+                          {
+                            "volumeName": "my_volume_2",
+                            "type": "EXTERNAL",
+                            "description": "A volume for storing collection data."
+                          },
+                          {
+                            "volumeName": "my_volume_3",
+                            "type": "MANAGED",
+                            "description": "A volume for storing collection data."
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/volumes/create": {
+      "post": {
+        "summary": "Create Volume",
+        "deprecated": false,
+        "description": "This operation creates a new volume in the specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Volume",
+            "description": "本接口用于在指定项目下创建一个新的 Volume。"
+          },
+          "ja-JP": {
+            "summary": "Volume を作成します",
+            "description": "この操作は、指定したプロジェクトに新しい volume を作成します。"
+          }
+        },
+        "tags": [
+          "Volume Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "The ID of the project to which the volume belongs.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "所属项目的 ID。"
+                      },
+                      "ja-JP": {
+                        "description": "volume が属するプロジェクトの ID。"
+                      }
+                    },
+                    "example": "proj-xxxxxxxxxxxxxxxxxxxxxxx"
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "The ID of the region where the volume will be created. You can use [List Cloud Regions](/reference/list-cloud-regions-v2) to list available regions. The region should be bound to the specified project.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Volume 所属区域的 ID。您可以使用 [查看云服务区域](/reference/list-cloud-regions-v2) 接口列出可用区域。该区域应与指定项目绑定。"
+                      },
+                      "ja-JP": {
+                        "description": "volume を作成するリージョンの ID。[List Cloud Regions](/reference/list-cloud-regions-v2) を使用して利用可能なリージョンを一覧表示できます。このリージョンは、指定したプロジェクトに関連付けられている必要があります。"
+                      }
+                    }
+                  },
+                  "volumeName": {
+                    "type": "string",
+                    "description": "The name of the volume to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Volume 名称。"
+                      },
+                      "ja-JP": {
+                        "description": "作成する volume の名前。"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the volume.",
+                    "example": "Raw import data for recommendation workloads",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Volume 描述。",
+                        "example": "Raw import data for recommendation workloads"
+                      },
+                      "ja-JP": {
+                        "description": "volume の説明。"
+                      }
+                    }
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "The category of the volume. Valid values are `MANAGED` and `EXTERNAL`. Defaults to `MANAGED`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Volume 的类别。有效值为 `MANAGED` 和 `EXTERNAL`。默认值为 `MANAGED`。"
+                      },
+                      "ja-JP": {
+                        "description": "volume のカテゴリ。有効な値は `MANAGED` と `EXTERNAL` です。デフォルトは `MANAGED` です。"
+                      }
+                    }
+                  },
+                  "storageIntegrationId": {
+                    "type": "string",
+                    "description": "The storage integration ID. Required when `type` is `EXTERNAL`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "存储集成 ID。当 `type` 为 `EXTERNAL` 时必填。"
+                      },
+                      "ja-JP": {
+                        "description": "storage integration の ID。`type` が `EXTERNAL` の場合は必須です。"
+                      }
+                    }
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "The path prefix within the volume. Required when `type` is `EXTERNAL`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "存储卷内的路径前缀。当 `type` 为 `EXTERNAL` 时必填。"
+                      },
+                      "ja-JP": {
+                        "description": "volume 内のパスプレフィックス。`type` が `EXTERNAL` の場合は必須です。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "volumeName",
+                  "regionId",
+                  "projectId"
+                ]
+              },
+              "examples": {
+                "1": {
+                  "summary": "Managed Volume",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-us-west-2",
+                    "volumeName": "my_volume",
+                    "description": "A volume for storing collection data."
+                  }
+                },
+                "2": {
+                  "summary": "Managed Volume",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "ali-cn-hangzhou",
+                    "volumeName": "my_volume",
+                    "description": "用于存储集合数据的卷描述。"
+                  }
+                },
+                "3": {
+                  "summary": "External Volume",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "aws-us-west-2",
+                    "volumeName": "my_external_volume",
+                    "type": "EXTERNAL",
+                    "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                    "path": "data/",
+                    "description": "A volume for storing collection data."
+                  }
+                },
+                "4": {
+                  "summary": "External Volume",
+                  "x-target-response": "OPTION 1",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "projectId": "proj-xxxxxxxxxxxxxxxxxxxxxxx",
+                    "regionId": "ali-cn-hangzhou",
+                    "volumeName": "my_external_volume",
+                    "type": "EXTERNAL",
+                    "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                    "path": "data/",
+                    "description": "用于存储集合数据的卷描述。"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the name of the created volume.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已创建的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "作成された volume の名前を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns the created volume name.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回已创建的 Volume 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "作成された volume 名を返します。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "volumeName": {
+                              "type": "string",
+                              "description": "The name of the created volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已创建的 Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成された volume の名前。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/volumes/{VOLUME_NAME}": {
+      "get": {
+        "summary": "Describe Volume",
+        "deprecated": false,
+        "description": "Describes a volume in detail.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 Volume 详情",
+            "description": "本接口用于查看指定 Volume 的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "Volume の詳細を取得",
+            "description": "Volume の詳細情報を取得します。"
+          }
+        },
+        "tags": [
+          "Volume Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "VOLUME_NAME",
+            "in": "path",
+            "description": "The name of the volume to describe.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待查看的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "詳細を取得する Volume の名前。"
+              }
+            },
+            "required": true,
+            "example": "my_volume",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns details of the specified volume.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Volume 的详细信息。"
+              },
+              "ja-JP": {
+                "description": "指定した Volume の詳細を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which contains volume details.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含 Volume 详情。"
+                            },
+                            "ja-JP": {
+                              "description": "Volume の詳細を含むレスポンスペイロード。"
+                            }
+                          },
+                          "properties": {
+                            "volumeName": {
+                              "type": "string",
+                              "description": "The name of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の名前。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 描述。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の説明。"
+                                }
+                              }
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "The category of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的类别。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume のカテゴリ。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "The ID of the region where the volume is located.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 所属区域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume が配置されているリージョンの ID。"
+                                }
+                              }
+                            },
+                            "storageIntegrationId": {
+                              "type": "string",
+                              "description": "The storage integration ID. Only returned for external volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成 ID。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合 ID。external volume の場合にのみ返されます。"
+                                }
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "description": "The path prefix within the volume. Only returned for external volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储卷内的路径前缀。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume 内のパスプレフィックス。external volume の場合にのみ返されます。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The current status of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "Volume の現在のステータス。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "The creation time of the volume in ISO 8601 format.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的创建时间，ISO 8601 格式。"
+                                },
+                                "ja-JP": {
+                                  "description": "ISO 8601 形式の Volume の作成時刻。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗時のレスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Managed",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume",
+                        "type": "MANAGED",
+                        "regionId": "aws-us-west-2",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z",
+                        "description": "A volume for storing collection data."
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "External",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_external_volume",
+                        "type": "EXTERNAL",
+                        "regionId": "aws-us-west-2",
+                        "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "path": "data/",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z",
+                        "description": "A volume for storing collection data."
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 63240,
+                      "message": "The specified volume not exists, please check your request."
+                    }
+                  },
+                  "4": {
+                    "summary": "Managed",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume",
+                        "type": "MANAGED",
+                        "regionId": "ali-cn-hangzhou",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z",
+                        "description": "用于存储集合数据的卷描述。"
+                      }
+                    }
+                  },
+                  "5": {
+                    "summary": "External",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_external_volume",
+                        "type": "EXTERNAL",
+                        "regionId": "ali-cn-hangzhou",
+                        "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "path": "data/",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z",
+                        "description": "用于存储集合数据的卷描述。"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Volume",
+        "deprecated": false,
+        "description": "This operation deletes a volume in the specified project.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Volume",
+            "description": "本接口用于删除指定项目下的一个 Volume。"
+          },
+          "ja-JP": {
+            "summary": "Volume を削除します",
+            "description": "この操作は、指定されたプロジェクト内の volume を削除します。"
+          }
+        },
+        "tags": [
+          "Volume Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "VOLUME_NAME",
+            "in": "path",
+            "description": "The name of an existing volume to delete.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待删除的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "削除する既存の volume の名前。"
+              }
+            },
+            "required": true,
+            "example": "my_volume",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the name of the deleted volume.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已删除的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "削除された volume の名前を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns the deleted volume name.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回已删除的 Volume 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "削除された volume 名を返します。"
+                        }
+                      },
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "volumeName": {
+                              "type": "string",
+                              "description": "The name of the deleted volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已删除的 Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除された volume の名前。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Volume",
+        "deprecated": false,
+        "description": "Update the description of a volume.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新 Volume",
+            "description": "更新指定 Volume 的描述。"
+          },
+          "ja-JP": {
+            "summary": "ボリュームを更新",
+            "description": "ボリュームの説明を更新します。"
+          }
+        },
+        "tags": [
+          "Volume Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "VOLUME_NAME",
+            "in": "path",
+            "description": "The name of the volume to update.",
+            "required": true,
+            "example": "my_volume",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "待更新的 Volume 名称。"
+              },
+              "ja-JP": {
+                "description": "更新するボリュームの名前。"
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、適切な権限を持つ API key を使用する必要があります。"
+              }
+            }
+          },
+          {
+            "name": "OrgId",
+            "in": "header",
+            "description": "The organization ID of the volume.",
+            "required": true,
+            "example": "org-xxxxxxxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Volume所属的组织 ID。"
+              },
+              "ja-JP": {
+                "description": "ボリュームの organization ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the volume. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Volume 的新描述。值可以为空字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "ボリュームの新しい説明。値には空文字列を指定できます。"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "description"
+                ],
+                "description": "Request payload for updating a volume.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "更新 Volume 的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "ボリュームを更新するためのリクエストペイロード。"
+                  }
+                }
+              },
+              "examples": {
+                "1": {
+                  "summary": "Description",
+                  "value": {
+                    "description": "This is the new description of the volume."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns details of the specified volume.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定 Volume 的详细信息。"
+              },
+              "ja-JP": {
+                "description": "指定されたボリュームの詳細を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload which contains volume details.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含 Volume 详情。"
+                            },
+                            "ja-JP": {
+                              "description": "ボリュームの詳細を含むレスポンスペイロード。"
+                            }
+                          },
+                          "properties": {
+                            "volumeName": {
+                              "type": "string",
+                              "description": "The name of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの名前。"
+                                }
+                              }
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "The category of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的类别。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームのカテゴリ。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "The ID of the region where the volume is located.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 所属区域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームが配置されているリージョンの ID。"
+                                }
+                              }
+                            },
+                            "storageIntegrationId": {
+                              "type": "string",
+                              "description": "The storage integration ID. Only returned for external volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成 ID。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "storage integration ID。external volume の場合にのみ返されます。"
+                                }
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "description": "The path prefix within the volume. Only returned for external volumes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储卷内的路径前缀。仅对外部 Volume 返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリューム内のパスプレフィックス。external volume の場合にのみ返されます。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The current status of the volume.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的当前状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "ボリュームの現在のステータス。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "The creation time of the volume in ISO 8601 format.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Volume 的创建时间，ISO 8601 格式。"
+                                },
+                                "ja-JP": {
+                                  "description": "ISO 8601 形式のボリューム作成時刻。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Managed",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume",
+                        "type": "MANAGED",
+                        "regionId": "aws-us-west-2",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "External",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_external_volume",
+                        "type": "EXTERNAL",
+                        "regionId": "aws-us-west-2",
+                        "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "path": "data/",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 63240,
+                      "message": "The specified volume not exists, please check your request."
+                    }
+                  },
+                  "4": {
+                    "summary": "Managed",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_volume",
+                        "type": "MANAGED",
+                        "regionId": "ali-cn-hangzhou",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z"
+                      }
+                    }
+                  },
+                  "5": {
+                    "summary": "External",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "volumeName": "my_external_volume",
+                        "type": "EXTERNAL",
+                        "regionId": "ali-cn-hangzhou",
+                        "storageIntegrationId": "integ-xxxxxxxxxxxxxxxxxxx",
+                        "path": "data/",
+                        "status": "RUNNING",
+                        "createTime": "2026-05-06T03:50:35Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

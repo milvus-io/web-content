@@ -22,7 +22,7 @@ result, err := client.DescribeCollection(ctx, option)
 
 **RETURN TYPE:**
 
-*collection* entity.Collection, err error*
+*[collection* ](Collection.md)entity.Collection, err error*
 
 **RETURNS:**
 

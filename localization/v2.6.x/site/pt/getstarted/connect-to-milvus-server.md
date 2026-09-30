@@ -37,9 +37,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>O SDK da sua linguagem instalado. Para obter detalhes, consulte <a href="/docs/pt/install-pymilvus.md">Python SDK</a>, <a href="/docs/pt/install-java.md">Java SDK</a>, <a href="/docs/pt/install-go.md">Go SDK</a> ou <a href="/docs/pt/install-node.md">Nodejs SDK</a>.</p></li>
+<li><p>O SDK da sua linguagem instalado. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/install-pymilvus.md">Python SDK</a>, <a href="/docs/pt/v2.6.x/install-java.md">Java SDK</a>, <a href="/docs/pt/v2.6.x/install-go.md">Go SDK</a> ou <a href="/docs/pt/v2.6.x/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>Um endereço de servidor Milvus (para predefinição local: <code translate="no">http://localhost:19530</code>, porta proxy <strong>19530</strong>).</p></li>
-<li><p>Se <a href="/docs/pt/authenticate.md">a autenticação estiver activada</a>, forneça um <strong>token</strong> ou um <strong>nome de utilizador + palavra-passe</strong>. Um token pode ser <code translate="no">username:password</code> (por exemplo, <code translate="no">root:Milvus</code>). Consulte <a href="/docs/pt/authenticate.md">Autenticar o acesso do usuário</a> e <a href="/docs/pt/users_and_roles.md">Criar usuários e funções</a> para obter detalhes.</p></li>
+<li><p>Se <a href="/docs/pt/v2.6.x/authenticate.md">a autenticação estiver activada</a>, forneça um <strong>token</strong> ou um <strong>nome de utilizador + palavra-passe</strong>. Um token pode ser <code translate="no">username:password</code> (por exemplo, <code translate="no">root:Milvus</code>). Consulte <a href="/docs/pt/v2.6.x/authenticate.md">Autenticar o acesso do usuário</a> e <a href="/docs/pt/v2.6.x/users_and_roles.md">Criar usuários e funções</a> para obter detalhes.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Ligar por URI (autenticação desactivada)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,6 +90,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Ligar com credenciais (autenticação activada)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -157,10 +158,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>O formato do token é <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. A documentação indica explicitamente <code translate="no">root:Milvus</code> como a credencial padrão, e o guia <a href="/docs/pt/users_and_roles.md">Criar usuários e funções</a> aborda o gerenciamento de usuários.</p>
+<p>O formato do token é <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. A documentação indica explicitamente <code translate="no">root:Milvus</code> como a credencial padrão, e o guia <a href="/docs/pt/v2.6.x/users_and_roles.md">Criar usuários e funções</a> aborda o gerenciamento de usuários.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">Configurar um tempo limite<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +223,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -304,12 +306,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Consulte o guia <a href="/docs/pt/manage_databases.md">Banco de dados</a> para criar, listar e descrever bancos de dados e para tarefas mais amplas de gerenciamento de banco de dados.</p>
+<p>Consulte o guia <a href="/docs/pt/v2.6.x/manage_databases.md">Banco de dados</a> para criar, listar e descrever bancos de dados e para tarefas mais amplas de gerenciamento de banco de dados.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +330,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/pt/create-collection.md">Criar coleção</a></p></li>
-<li><p><a href="/docs/pt/insert-update-delete.md">Inserir entidades</a></p></li>
-<li><p><a href="/docs/pt/single-vector-search.md">Pesquisa básica de vetor</a></p></li>
+<li><p><a href="/docs/pt/v2.6.x/create-collection.md">Criar coleção</a></p></li>
+<li><p><a href="/docs/pt/v2.6.x/insert-update-delete.md">Inserir entidades</a></p></li>
+<li><p><a href="/docs/pt/v2.6.x/single-vector-search.md">Pesquisa básica de vetor</a></p></li>
 </ul>

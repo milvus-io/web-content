@@ -120,6 +120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/rename&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
@@ -163,19 +164,19 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeit gelöscht werden sollen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL-Zeit abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p><p>Details finden Sie unter <a href="/docs/de/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeit gelöscht werden müssen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p><p>Details finden Sie unter <a href="/docs/de/v2.6.x/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung zu beeinträchtigen.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p></td>
+     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung zu beeinträchtigen.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/mmap.md">mmap verwenden</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Wenn die Partition Key Isolation aktiviert ist, gruppiert Milvus Entitäten auf der Grundlage des Partition Key Wertes und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage findet Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich verbessert wird.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/use-partition-key.md#Use-Partition-Key-Isolation">Partitionsschlüssel-Isolierung verwenden</a>.</p></td>
+     <td><p>Wenn die Partition Key Isolation aktiviert ist, gruppiert Milvus Entitäten auf der Grundlage des Partition Key Wertes und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage findet Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich verbessert wird.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">Partitionsschlüssel-Isolierung verwenden</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>Aktiviert das dynamische Feld für Sammlungen, die ohne diese Funktion erstellt wurden. Sobald es aktiviert ist, können Sie Entitäten mit Feldern einfügen, die nicht im ursprünglichen Schema definiert sind. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p></td>
+     <td><p>Aktiviert das dynamische Feld für Sammlungen, die ohne diese Funktion erstellt wurden. Sobald es aktiviert ist, können Sie Entitäten mit Feldern einfügen, die nicht im ursprünglichen Schema definiert sind. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/enable-dynamic-field.md">Dynamisches Feld</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
@@ -183,7 +184,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Legt die Standardzeitzone für diese Sammlung fest, wenn zeitabhängige Vorgänge verarbeitet werden, insbesondere <code translate="no">TIMESTAMPTZ</code> Felder. Zeitstempel werden intern in UTC gespeichert, und Milvus konvertiert Werte für die Anzeige und den Vergleich entsprechend dieser Einstellung. Wenn sie gesetzt ist, hat die Zeitzone der Sammlung Vorrang vor der Standard-Zeitzone der Datenbank; der Zeitzonen-Parameter einer Abfrage kann beide vorübergehend außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung eines <code translate="no">TIMESTAMPTZ</code> Feldes finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ Feld</a>.</p></td>
+     <td><p>Legt die Standardzeitzone für diese Sammlung fest, wenn zeitabhängige Vorgänge verarbeitet werden, insbesondere <code translate="no">TIMESTAMPTZ</code> Felder. Zeitstempel werden intern in UTC gespeichert, und Milvus konvertiert Werte für die Anzeige und den Vergleich entsprechend dieser Einstellung. Wenn sie gesetzt ist, hat die Zeitzone der Sammlung Vorrang vor der Standard-Zeitzone der Datenbank; der Zeitzonen-Parameter einer Abfrage kann beide vorübergehend außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Beispiel 1: TTL der Sammlung festlegen<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -245,6 +246,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;test_collection&quot;,
     &quot;properties&quot;: {
@@ -303,6 +305,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -310,7 +313,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">Beispiel 3: Aktivieren des Partitionsschlüssels<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
+<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">Beispiel 3: Partitionsschlüssel einschalten<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -325,7 +328,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der folgende Codeschnipsel demonstriert, wie der Partitionsschlüssel aktiviert wird.</p>
+    </button></h3><p>Der folgende Codeausschnitt zeigt, wie man den Partitionsschlüssel aktiviert.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -361,6 +364,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -420,6 +424,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -479,6 +484,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -533,6 +539,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -586,6 +593,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;propertyKeys&quot;: [

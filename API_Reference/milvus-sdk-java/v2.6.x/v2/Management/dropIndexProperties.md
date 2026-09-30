@@ -65,15 +65,15 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop the `mmap.enabled` property
-List<String> propertyKeys = new ArrayList<>()
-propertyKeys.add("mmap.enabled")
+// 2. Drop the \`mmap.enabled\` property
+List<String> propertyKeys = new ArrayList<>();
+propertyKeys.add("mmap.enabled");
 
 DropIndexPropertiesReq dropIndexPropertiesReq = DropIndexPropertiesReq.builder()
         .collectionName("test")
         .indexName("vector")
         .propertyKeys(propertyKeys)
         .build();
-client.dropIndexProperties(dropIndexPropertiesReq)
+client.dropIndexProperties(dropIndexPropertiesReq);
 ```
 

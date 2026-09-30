@@ -25,9 +25,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada dalam subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
+    </button></h1><p>Berdasarkan file indeks yang merekam urutan penyematan vektor yang diurutkan, pencarian Approximate Nearest Neighbor (ANN) menemukan subkumpulan penyematan vektor berdasarkan vektor kueri yang dibawa dalam permintaan pencarian yang diterima, membandingkan vektor kueri dengan vektor yang ada di subkelompok, dan mengembalikan hasil yang paling mirip. Dengan pencarian ANN, Milvus memberikan pengalaman pencarian yang efisien. Halaman ini membantu Anda mempelajari cara melakukan pencarian ANN dasar.</p>
 <div class="alert note">
-<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, pencarian yang menyertakan bidang-bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang belum secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
+<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, pencarian yang menyertakan bidang-bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang tidak secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/v2.6.x/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,14 +50,14 @@ summary: >-
 <p>Untuk mengurangi kurva pembelajaran, Milvus menyediakan <strong>AUTOINDEX</strong>. Dengan <strong>AUTOINDEX</strong>, Milvus dapat menganalisis distribusi data dalam koleksi Anda saat membangun indeks dan menetapkan parameter indeks yang paling optimal berdasarkan analisis untuk menyeimbangkan antara kinerja pencarian dan ketepatan.</p>
 <p>Pada bagian ini, Anda akan menemukan informasi rinci tentang topik-topik berikut:</p>
 <ul>
-<li><p><a href="/docs/id/single-vector-search.md#Single-Vector-Search">Pencarian vektor tunggal</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Bulk-Vector-Search">Pencarian vektor massal</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#ANN-Search-in-Partition">Pencarian ANN dalam partisi</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Use-Output-Fields">Menggunakan bidang keluaran</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Use-Limit-and-Offset">Gunakan batas dan offset</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Use-Level">Gunakan level</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Get-Recall-Rate">Dapatkan Tingkat Penarikan</a></p></li>
-<li><p><a href="/docs/id/single-vector-search.md#Enhancing-ANN-Search">Meningkatkan pencarian ANN</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Single-Vector-Search">Pencarian vektor tunggal</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Bulk-Vector-Search">Pencarian vektor massal</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">Pencarian ANN dalam partisi</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Use-Output-Fields">Menggunakan bidang keluaran</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">Gunakan batas dan offset</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Use-Level">Gunakan level</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Get-Recall-Rate">Dapatkan Tingkat Penarikan</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">Meningkatkan pencarian ANN</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Pencarian Vektor Tunggal<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,6 +228,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -458,6 +459,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -556,7 +558,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Misalkan Anda telah membuat beberapa partisi dalam koleksi, dan Anda dapat mempersempit cakupan pencarian ke sejumlah partisi tertentu. Dalam hal ini, Anda dapat menyertakan nama partisi target dalam permintaan pencarian untuk membatasi cakupan pencarian dalam partisi yang ditentukan. Mengurangi jumlah partisi yang terlibat dalam pencarian akan meningkatkan kinerja pencarian.</p>
+    </button></h2><p>Misalkan Anda telah membuat beberapa partisi dalam koleksi, dan Anda dapat mempersempit cakupan pencarian ke sejumlah partisi tertentu. Dalam hal ini, Anda dapat menyertakan nama partisi target dalam permintaan pencarian untuk membatasi cakupan pencarian dalam partisi tertentu. Mengurangi jumlah partisi yang terlibat dalam pencarian akan meningkatkan kinerja pencarian.</p>
 <p>Cuplikan kode berikut ini mengasumsikan partisi bernama <strong>PartitionA</strong> dalam koleksi Anda.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -666,6 +668,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -825,6 +828,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -982,6 +986,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1008,7 +1013,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti sementara zona waktu default basis data atau koleksi untuk satu operasi dengan mengatur parameter <code translate="no">timezone</code> dalam panggilan pencarian. Ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
 <p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi pencarian:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1048,32 +1053,32 @@ curl --request POST \
 <ul>
 <li><p>Pencarian yang Difilter</p>
 <p>Anda dapat menyertakan kondisi pemfilteran dalam permintaan pencarian sehingga Milvus melakukan pemfilteran metadata sebelum melakukan pencarian ANN, mengurangi cakupan pencarian dari seluruh koleksi menjadi hanya entitas yang sesuai dengan kondisi pemfilteran yang ditentukan.</p>
-<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata dan kondisi pemfilteran, lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a>, Pemfilteran <a href="/docs/id/boolean.md">yang Dijelaskan</a>, dan topik-topik terkait.</p></li>
+<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata dan kondisi pemfilteran, lihat <a href="/docs/id/v2.6.x/filtered-search.md">Pencarian yang Difilter</a>, Pemfilteran <a href="/docs/id/v2.6.x/boolean.md">yang Dijelaskan</a>, dan topik-topik terkait.</p></li>
 <li><p>Pencarian Rentang</p>
 <p>Anda dapat meningkatkan relevansi hasil pencarian dengan membatasi jarak atau skor entitas yang dikembalikan dalam rentang tertentu. Di Milvus, pencarian rentang melibatkan gambar dua lingkaran konsentris dengan penyematan vektor yang paling mirip dengan vektor kueri sebagai pusatnya. Permintaan pencarian menentukan jari-jari kedua lingkaran, dan Milvus mengembalikan semua sematan vektor yang berada di dalam lingkaran luar tetapi tidak di dalam lingkaran dalam.</p>
-<p>Untuk mengetahui lebih lanjut tentang pencarian rentang, lihat <a href="/docs/id/range-search.md">Pencarian Rentang</a>.</p></li>
+<p>Untuk mengetahui lebih lanjut tentang pencarian rentang, lihat <a href="/docs/id/v2.6.x/range-search.md">Pencarian Rentang</a>.</p></li>
 <li><p>Pencarian Pengelompokan</p>
 <p>Jika entitas yang dikembalikan memiliki nilai yang sama di bidang tertentu, hasil pencarian mungkin tidak mewakili distribusi semua sematan vektor di ruang vektor. Untuk mendiversifikasi hasil pencarian, pertimbangkan untuk menggunakan pencarian pengelompokan.</p>
-<p>Untuk mengetahui lebih lanjut tentang pencarian pengelompokan, lihat <a href="/docs/id/grouping-search.md">Pencarian Pengelompokan</a>,</p></li>
+<p>Untuk mengetahui lebih lanjut tentang pencarian pengelompokan, lihat <a href="/docs/id/v2.6.x/grouping-search.md">Pencarian Pengelompokan</a>,</p></li>
 <li><p>Pencarian Hibrida</p>
 <p>Sebuah koleksi dapat menyertakan beberapa bidang vektor untuk menyimpan penyematan vektor yang dihasilkan menggunakan model penyematan yang berbeda. Dengan demikian, Anda dapat menggunakan pencarian hibrida untuk memberi peringkat ulang hasil pencarian dari bidang vektor ini, sehingga meningkatkan tingkat penemuan kembali.</p>
-<p>Untuk mengetahui lebih lanjut tentang pencarian hibrida, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p></li>
+<p>Untuk mengetahui lebih lanjut tentang pencarian hibrida, lihat <a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a>.</p></li>
 <li><p>Iterator Pencarian</p>
 <p>Satu pencarian ANN mengembalikan maksimal 16.384 entitas. Pertimbangkan untuk menggunakan iterator pencarian jika Anda membutuhkan lebih banyak entitas untuk dikembalikan dalam satu pencarian.</p>
-<p>Untuk detail tentang iterator pencarian, lihat <a href="/docs/id/with-iterators.md">Iterator Pencarian</a>.</p></li>
+<p>Untuk detail tentang iterator pencarian, lihat <a href="/docs/id/v2.6.x/with-iterators.md">Iterator Pencarian</a>.</p></li>
 <li><p>Pencarian Teks Lengkap</p>
 <p>Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung istilah atau frasa tertentu dalam kumpulan data teks, lalu memberi peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga memastikan Anda menerima hasil yang paling akurat dan relevan secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi sematan yang jarang tanpa perlu membuat sematan vektor secara manual.</p>
-<p>Untuk detail tentang pencarian teks lengkap, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
+<p>Untuk detail tentang pencarian teks lengkap, lihat <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
 <li><p>Pencocokan Teks</p>
 <p>Pencocokan kata kunci di Milvus memungkinkan pengambilan dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyaring hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
-<p>Untuk detail tentang pencocokan kata kunci, lihat <a href="/docs/id/keyword-match.md">Pencocokan Kata Kunci</a>.</p></li>
+<p>Untuk detail tentang pencocokan kata kunci, lihat <a href="/docs/id/v2.6.x/keyword-match.md">Pencocokan Kata Kunci</a>.</p></li>
 <li><p>Gunakan Kunci Partisi</p>
 <p>Melibatkan beberapa bidang skalar dalam pemfilteran metadata dan menggunakan kondisi pemfilteran yang agak rumit dapat memengaruhi efisiensi pencarian. Setelah Anda menetapkan bidang skalar sebagai kunci partisi dan menggunakan kondisi pemfilteran yang melibatkan kunci partisi dalam permintaan pencarian, hal ini dapat membantu membatasi cakupan pencarian di dalam partisi yang sesuai dengan nilai kunci partisi yang ditentukan.</p>
-<p>Untuk detail tentang kunci partisi, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
+<p>Untuk detail tentang kunci partisi, lihat <a href="/docs/id/v2.6.x/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
 <li><p>Menggunakan mmap</p>
-<p>Untuk detail tentang pengaturan mmap, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p></li>
+<p>Untuk detail tentang pengaturan mmap, lihat <a href="/docs/id/v2.6.x/mmap.md">Menggunakan mmap</a>.</p></li>
 <li><p>Pemadatan Pengelompokan</p>
-<p>Untuk detail tentang pemadatan pengelompokan, lihat <a href="/docs/id/clustering-compaction.md">Pemadatan Pengel</a>ompokan.</p></li>
+<p>Untuk detail tentang pemadatan pengelompokan, lihat <a href="/docs/id/v2.6.x/clustering-compaction.md">Pemadatan Pengel</a>ompokan.</p></li>
 <li><p>Menggunakan pemeringkatan</p>
-<p>Untuk detail tentang penggunaan pemeringkat untuk meningkatkan relevansi hasil penelusuran, lihat <a href="/docs/id/decay-ranker-overview.md">Ikhtisar</a> Pemeringkat <a href="/docs/id/decay-ranker-overview.md">Peluruhan</a> dan <a href="/docs/id/model-ranker-overview.md">Ikhtisar Pemeringkat Model</a>.</p></li>
+<p>Untuk detail tentang penggunaan pemeringkat untuk meningkatkan relevansi hasil penelusuran, lihat <a href="/docs/id/v2.6.x/decay-ranker-overview.md">Ikhtisar</a> Pemeringkat <a href="/docs/id/v2.6.x/decay-ranker-overview.md">Peluruhan</a> dan <a href="/docs/id/v2.6.x/model-ranker-overview.md">Ikhtisar Pemeringkat Model</a>.</p></li>
 </ul>

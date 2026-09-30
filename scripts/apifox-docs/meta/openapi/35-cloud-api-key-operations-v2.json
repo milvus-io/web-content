@@ -1,0 +1,1673 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cloud API Key Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cloud API Key Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cloud API Key 操作 (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/api-keys": {
+      "get": {
+        "summary": "List API Keys",
+        "description": "Lists customized ACL API keys in the calling organization.",
+        "tags": [
+          "Cloud API Key Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10,
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。"
+              },
+              "ja-JP": {
+                "description": "ページごとに返す項目数。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PagedApiKeys"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "count": 2,
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "apiKeys": [
+                          {
+                            "apiKeyId": "key-xxxxxxxxxxxxxx",
+                            "name": "Data Pipeline",
+                            "description": "API key used by the ingestion pipeline",
+                            "creatorName": "Alice",
+                            "createdBy": "alice@example.com",
+                            "orgRoles": [
+                              {
+                                "bindingId": "rb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                "roleId": "r-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                "roleName": "Org Viewer",
+                                "roleType": "org"
+                              }
+                            ],
+                            "projectRoles": [
+                              {
+                                "projectId": "proj-xxxxxxxx",
+                                "roles": [
+                                  {
+                                    "bindingId": "rb-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+                                    "roleId": "r-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+                                    "roleName": "Data Reader",
+                                    "roleType": "project"
+                                  }
+                                ]
+                              }
+                            ],
+                            "createTime": "2026-07-22T02:30:00Z"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 API Key",
+            "description": "列出调用方组织中的自定义 ACL API Key。"
+          },
+          "ja-JP": {
+            "summary": "API Key を一覧表示",
+            "description": "呼び出し元の組織内のカスタマイズされた ACL API key を一覧表示します。"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create API Key",
+        "description": "Creates a customized ACL API key and assigns its complete initial role set. The secret is returned only once.",
+        "tags": [
+          "Cloud API Key Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Create an API key",
+                  "value": {
+                    "name": "Data Pipeline",
+                    "description": "API key used by the ingestion pipeline",
+                    "orgRole": "Member",
+                    "projects": [
+                      {
+                        "projectId": "proj-xxxxxxxx",
+                        "role": "Data Reader",
+                        "allCluster": true,
+                        "allVolume": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/CreateApiKeyData"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "apiKeyId": "key-xxxxxxxxxxxxxx",
+                        "apiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 API Key",
+            "description": "创建自定义 ACL API Key 并分配完整的初始角色集。密钥仅返回一次。"
+          },
+          "ja-JP": {
+            "summary": "API Key を作成します",
+            "description": "カスタマイズされた ACL API key を作成し、完全な初期ロールセットを割り当てます。シークレットは一度だけ返されます。"
+          }
+        }
+      }
+    },
+    "/v2/api-keys/{apiKeyId}": {
+      "get": {
+        "summary": "Describe API Key",
+        "description": "Returns one customized ACL API key and its directly assigned roles. The secret is never returned.",
+        "tags": [
+          "Cloud API Key Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          },
+          {
+            "name": "apiKeyId",
+            "in": "path",
+            "required": true,
+            "description": "The public API key ID.",
+            "example": "key-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "公开 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "公開 API key の ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ApiKeyDetail"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "apiKeyId": "key-xxxxxxxxxxxxxx",
+                        "name": "Data Pipeline",
+                        "description": "API key used by the ingestion pipeline",
+                        "creatorName": "Alice",
+                        "createdBy": "alice@example.com",
+                        "createTime": "2026-07-22T02:30:00Z",
+                        "orgRole": "Org Viewer",
+                        "projects": [
+                          {
+                            "projectId": "proj-xxxxxxxx",
+                            "projectName": "Project xxxx",
+                            "role": "Data Reader",
+                            "allCluster": true,
+                            "clusters": [],
+                            "allVolume": true,
+                            "volumes": []
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看 API Key",
+            "description": "返回一个自定义 ACL API Key 及其直接分配的角色，不返回密钥。"
+          },
+          "ja-JP": {
+            "summary": "API Key の詳細を取得",
+            "description": "カスタマイズされた ACL API key と、直接割り当てられたロールを返します。シークレットが返されることはありません。"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update API Key",
+        "description": "Updates a customized ACL API key. Role assignments use full replacement semantics.",
+        "tags": [
+          "Cloud API Key Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          },
+          {
+            "name": "apiKeyId",
+            "in": "path",
+            "required": true,
+            "description": "The public API key ID.",
+            "example": "key-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "公开 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "公開 API key の ID。"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiKeyRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Replace the complete role set",
+                  "value": {
+                    "name": "Data Pipeline Production",
+                    "description": "Production ingestion pipeline",
+                    "orgRole": "Member",
+                    "projects": [
+                      {
+                        "projectId": "proj-xxxxxxxx",
+                        "role": "Data Reader",
+                        "allCluster": true,
+                        "allVolume": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ApiKeyDetail"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "apiKeyId": "key-xxxxxxxxxxxxxx",
+                        "name": "Data Pipeline Production",
+                        "description": "Production ingestion pipeline",
+                        "creatorName": "Alice",
+                        "createdBy": "alice@example.com",
+                        "createTime": "2026-07-22T02:30:00Z",
+                        "orgRole": "Member",
+                        "projects": [
+                          {
+                            "projectId": "proj-xxxxxxxx",
+                            "projectName": "Project xxxx",
+                            "role": "Data Reader",
+                            "allCluster": true,
+                            "clusters": [],
+                            "allVolume": true,
+                            "volumes": []
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新 API Key",
+            "description": "更新自定义 ACL API Key。角色分配采用完整替换语义。"
+          },
+          "ja-JP": {
+            "summary": "API Key を更新",
+            "description": "カスタマイズされた ACL API key を更新します。ロールの割り当てには完全置換セマンティクスが使用されます。"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete API Key",
+        "description": "Permanently deletes a customized ACL API key and revokes its role bindings.",
+        "tags": [
+          "Cloud API Key Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            }
+          },
+          {
+            "name": "apiKeyId",
+            "in": "path",
+            "required": true,
+            "description": "The public API key ID.",
+            "example": "key-xxxxxxxxxxxxxx",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "公开 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "公開 API key の ID。"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 0,
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ApiKeyDetail"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "apiKeyId": "key-xxxxxxxxxxxxxx",
+                        "name": "Data Pipeline Production",
+                        "description": "Production ingestion pipeline",
+                        "creatorName": "Alice",
+                        "createdBy": "alice@example.com",
+                        "createTime": "2026-07-22T02:30:00Z",
+                        "orgRole": "Member",
+                        "projects": [
+                          {
+                            "projectId": "proj-xxxxxxxx",
+                            "projectName": "Project xxxx",
+                            "role": "Data Reader",
+                            "allCluster": true,
+                            "clusters": [],
+                            "allVolume": true,
+                            "volumes": []
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-i18n": {
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 API Key",
+            "description": "永久删除自定义 ACL API Key 并撤销其角色绑定。"
+          },
+          "ja-JP": {
+            "summary": "API Key を削除",
+            "description": "カスタマイズされた ACL API key を完全に削除し、そのロールバインディングを取り消します。"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PagedApiKeys": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "The total number of matching items.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配条目的总数。"
+              },
+              "ja-JP": {
+                "description": "一致する項目の総数。"
+              }
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The requested page size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "请求的每页条目数。"
+              },
+              "ja-JP": {
+                "description": "要求されたページサイズ。"
+              }
+            }
+          },
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeyDetail"
+            },
+            "description": "The apiKeys returned on this page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页面返回的API Key。"
+              },
+              "ja-JP": {
+                "description": "このページで返される apiKeys。"
+              }
+            }
+          }
+        },
+        "required": [
+          "count",
+          "currentPage",
+          "pageSize",
+          "apiKeys"
+        ]
+      },
+      "CreateApiKeyData": {
+        "type": "object",
+        "description": "The newly created API key ID and its one-time secret.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "新创建的 API Key ID 及其仅返回一次的密钥。"
+          },
+          "ja-JP": {
+            "description": "新しく作成された API key の ID と、その一度限りのシークレット。"
+          }
+        },
+        "properties": {
+          "apiKeyId": {
+            "type": "string",
+            "description": "The public API key ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "公开 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "公開 API key の ID。"
+              }
+            }
+          },
+          "apiKey": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The secret credential. This value is returned only once.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "密钥凭据，仅返回一次。"
+              },
+              "ja-JP": {
+                "description": "シークレットの資格情報。この値は一度だけ返されます。"
+              }
+            }
+          }
+        },
+        "required": [
+          "apiKeyId",
+          "apiKey"
+        ]
+      },
+      "CreateApiKeyRequest": {
+        "type": "object",
+        "description": "The API key to create, including the organization role and optional project-level access.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "要创建的 API Key，包括组织角色和可选的项目级访问权限。"
+          },
+          "ja-JP": {
+            "description": "作成する API key。組織ロールとオプションのプロジェクトレベルアクセスを含みます。"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The API key display name. It must not be blank.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 显示名称，不得为空。"
+              },
+              "ja-JP": {
+                "description": "API key の表示名。空白にすることはできません。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The API key description.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 描述。"
+              },
+              "ja-JP": {
+                "description": "API key の説明。"
+              }
+            }
+          },
+          "orgRole": {
+            "type": "string",
+            "description": "The organization role assigned to the API key: Owner, Member, or Billing-Admin.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予 API Key 的组织角色：Owner、Member 或 Billing-Admin。"
+              },
+              "ja-JP": {
+                "description": "API key に割り当てられた組織ロール: Owner、Member、または Billing-Admin。"
+              }
+            },
+            "enum": [
+              "Owner",
+              "Member",
+              "Billing-Admin"
+            ]
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectAccessRequest"
+            },
+            "description": "The project-level access list. Required when orgRole is Member.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目级访问列表。当 orgRole 为 Member 时必填。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトレベルのアクセスリスト。orgRole が Member の場合に必須です。"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "orgRole"
+        ]
+      },
+      "UpdateApiKeyRequest": {
+        "type": "object",
+        "description": "The replacement API key metadata and complete desired access set.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "替换后的 API Key 元数据和完整的目标访问集。"
+          },
+          "ja-JP": {
+            "description": "置き換え後の API key メタデータと、完全な希望アクセスセット。"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The API key display name. It must not be blank.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 显示名称，不得为空。"
+              },
+              "ja-JP": {
+                "description": "API key の表示名。空白にすることはできません。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The API key description.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 描述。"
+              },
+              "ja-JP": {
+                "description": "API key の説明。"
+              }
+            }
+          },
+          "orgRole": {
+            "type": "string",
+            "description": "The organization role assigned to the API key: Owner, Member, or Billing-Admin.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予 API Key 的组织角色：Owner、Member 或 Billing-Admin。"
+              },
+              "ja-JP": {
+                "description": "API key に割り当てられた組織ロール: Owner、Member、または Billing-Admin。"
+              }
+            },
+            "enum": [
+              "Owner",
+              "Member",
+              "Billing-Admin"
+            ]
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectAccessRequest"
+            },
+            "description": "The project-level access list. Required when orgRole is Member.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目级访问列表。当 orgRole 为 Member 时必填。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトレベルのアクセスリスト。orgRole が Member の場合に必須です。"
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "orgRole"
+        ]
+      },
+      "ApiKeyDetail": {
+        "type": "object",
+        "properties": {
+          "apiKeyId": {
+            "type": "string",
+            "description": "The public API key ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "公开 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "公開 API key の ID。"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The API key display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 显示名称。"
+              },
+              "ja-JP": {
+                "description": "API key の表示名。"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The API key description.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 描述。"
+              },
+              "ja-JP": {
+                "description": "API key の説明。"
+              }
+            }
+          },
+          "creatorName": {
+            "type": "string",
+            "description": "The resolved display name of the creator.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "解析出的创建者显示名称。"
+              },
+              "ja-JP": {
+                "description": "作成者の解決済み表示名。"
+              }
+            }
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "The creator email address or creator API key ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "创建者邮箱地址或创建者 API Key ID。"
+              },
+              "ja-JP": {
+                "description": "作成者のメールアドレス、または作成者 API key の ID。"
+              }
+            }
+          },
+          "orgRole": {
+            "type": "string",
+            "description": "The organization role assigned to the API key: Owner, Member, or Billing-Admin.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予 API Key 的组织角色：Owner、Member 或 Billing-Admin。"
+              },
+              "ja-JP": {
+                "description": "API key に割り当てられた組織ロール: Owner、Member、または Billing-Admin。"
+              }
+            },
+            "enum": [
+              "Owner",
+              "Member",
+              "Billing-Admin"
+            ]
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeyProjectResponse"
+            },
+            "description": "The project-level access granted to the API key.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授予 API Key 的项目级访问权限。"
+              },
+              "ja-JP": {
+                "description": "API key に付与されたプロジェクトレベルのアクセス。"
+              }
+            }
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The creation time in UTC ISO 8601 format.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "创建时间，采用 UTC ISO 8601 格式。"
+              },
+              "ja-JP": {
+                "description": "UTC ISO 8601 形式の作成時刻。"
+              }
+            }
+          }
+        },
+        "required": [
+          "apiKeyId",
+          "name",
+          "creatorName",
+          "createdBy",
+          "orgRole",
+          "projects",
+          "createTime"
+        ]
+      },
+      "ProjectAccessRequest": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト ID。"
+              }
+            }
+          },
+          "role": {
+            "type": "string",
+            "description": "The project role: Admin, Read-Write, or Read-Only.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目内角色：Admin、Read-Write 或 Read-Only。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトロール: Admin、Read-Write、または Read-Only。"
+              }
+            },
+            "enum": [
+              "Admin",
+              "Read-Write",
+              "Read-Only"
+            ]
+          },
+          "allCluster": {
+            "type": "boolean",
+            "description": "Whether access covers all clusters in the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "访问权限是否覆盖项目内的所有集群。"
+              },
+              "ja-JP": {
+                "description": "アクセスがプロジェクト内のすべてのクラスターを対象とするかどうか。"
+              }
+            }
+          },
+          "clusterIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The clusters the API key can access when allCluster is false.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当 allCluster 为 false 时，API Key 可访问的集群列表。"
+              },
+              "ja-JP": {
+                "description": "allCluster が false の場合に API key がアクセスできるクラスター。"
+              }
+            }
+          },
+          "allVolume": {
+            "type": "boolean",
+            "description": "Whether access covers all volumes in the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "访问权限是否覆盖项目内的所有存储卷。"
+              },
+              "ja-JP": {
+                "description": "アクセスがプロジェクト内のすべてのボリュームを対象とするかどうか。"
+              }
+            }
+          },
+          "volumeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The volumes the API key can access when allVolume is false.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当 allVolume 为 false 时，API Key 可访问的存储卷列表。"
+              },
+              "ja-JP": {
+                "description": "allVolume が false の場合に API key がアクセスできるボリューム。"
+              }
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "role"
+        ]
+      },
+      "ApiKeyProjectResponse": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト ID。"
+              }
+            }
+          },
+          "projectName": {
+            "type": "string",
+            "description": "The project display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目显示名称。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの表示名。"
+              }
+            }
+          },
+          "role": {
+            "type": "string",
+            "description": "The project role: Admin, Read-Write, or Read-Only.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目内角色：Admin、Read-Write 或 Read-Only。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトロール: Admin、Read-Write、または Read-Only。"
+              }
+            },
+            "enum": [
+              "Admin",
+              "Read-Write",
+              "Read-Only"
+            ]
+          },
+          "allCluster": {
+            "type": "boolean",
+            "description": "Whether access covers all clusters in the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "访问权限是否覆盖项目内的所有集群。"
+              },
+              "ja-JP": {
+                "description": "アクセスがプロジェクト内のすべてのクラスターを対象とするかどうか。"
+              }
+            }
+          },
+          "clusters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeyClusterResponse"
+            },
+            "description": "The clusters the API key can access.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 可访问的集群列表。"
+              },
+              "ja-JP": {
+                "description": "API key がアクセスできるクラスター。"
+              }
+            }
+          },
+          "allVolume": {
+            "type": "boolean",
+            "description": "Whether access covers all volumes in the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "访问权限是否覆盖项目内的所有存储卷。"
+              },
+              "ja-JP": {
+                "description": "アクセスがプロジェクト内のすべてのボリュームを対象とするかどうか。"
+              }
+            }
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeyVolumeResponse"
+            },
+            "description": "The volumes the API key can access.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "API Key 可访问的存储卷列表。"
+              },
+              "ja-JP": {
+                "description": "API key がアクセスできるボリューム。"
+              }
+            }
+          }
+        },
+        "required": [
+          "projectId",
+          "role"
+        ]
+      },
+      "ApiKeyClusterResponse": {
+        "type": "object",
+        "properties": {
+          "clusterId": {
+            "type": "string",
+            "description": "The cluster ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群 ID。"
+              },
+              "ja-JP": {
+                "description": "クラスター ID。"
+              }
+            }
+          },
+          "clusterName": {
+            "type": "string",
+            "description": "The cluster display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集群显示名称。"
+              },
+              "ja-JP": {
+                "description": "クラスターの表示名。"
+              }
+            }
+          }
+        },
+        "required": [
+          "clusterId",
+          "clusterName"
+        ]
+      },
+      "ApiKeyVolumeResponse": {
+        "type": "object",
+        "properties": {
+          "volumeId": {
+            "type": "string",
+            "description": "The volume ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "存储卷 ID。"
+              },
+              "ja-JP": {
+                "description": "ボリューム ID。"
+              }
+            }
+          },
+          "volumeName": {
+            "type": "string",
+            "description": "The volume display name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "存储卷显示名称。"
+              },
+              "ja-JP": {
+                "description": "ボリュームの表示名。"
+              }
+            }
+          }
+        },
+        "required": [
+          "volumeId",
+          "volumeName"
+        ]
+      }
+    }
+  }
+}

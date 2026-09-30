@@ -31,7 +31,7 @@ summary: >-
 <li><p>Storage-efficient acceleration of targeted queries</p></li>
 </ul>
 <div class="alert note">
-<p>For complex JSON documents with diverse query patterns, consider <a href="/docs/json-shredding.md">JSON Shredding</a> as an alternative.</p>
+<p>For complex JSON documents with diverse query patterns, consider <a href="/docs/v2.6.x/json-shredding.md">JSON Shredding</a> as an alternative.</p>
 </div>
 <h2 id="JSON-indexing-syntax" class="common-anchor-header">JSON indexing syntax<button data-href="#JSON-indexing-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,12 +97,12 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">json_cast_type</code></p></td>
-     <td><p>The data type to use when interpreting and indexing the value. Must match the actual data type of the key.</p><p>For a list of available cast types, see <a href="/docs/json-indexing.md#Supported-cast-types">Supported cast types</a><a href="/docs/json-indexing.md#Supported-cast-types"> below</a>.</p></td>
+     <td><p>The data type to use when interpreting and indexing the value. Must match the actual data type of the key.</p><p>For a list of available cast types, see <a href="/docs/v2.6.x/json-indexing.md#Supported-cast-types">Supported cast types</a><a href="/docs/v2.6.x/json-indexing.md#Supported-cast-types"> below</a>.</p></td>
      <td><p><code translate="no">"VARCHAR"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">json_cast_function</code></p></td>
-     <td><p><strong>(Optional)</strong> Converts original key values to a target type at index time. This config is required only when key values are stored in a wrong format and you want to convert the data type during indexing.</p><p>For a list of available cast functions, see <a href="/docs/json-indexing.md#Supported-cast-functions">Supported cast functions below</a>.</p></td>
+     <td><p><strong>(Optional)</strong> Converts original key values to a target type at index time. This config is required only when key values are stored in a wrong format and you want to convert the data type during indexing.</p><p>For a list of available cast functions, see <a href="/docs/v2.6.x/json-indexing.md#Supported-cast-functions">Supported cast functions below</a>.</p></td>
      <td><p><code translate="no">"STRING_TO_DOUBLE"</code></p></td>
    </tr>
 </table>
@@ -160,12 +160,12 @@ index_params.add_index(
    </tr>
    <tr>
      <td><p><code translate="no">JSON</code> / <code translate="no">json</code></p></td>
-     <td><p>Entire JSON objects or sub-objects with automatic type inference and flattening.</p><p>Indexing entire JSON objects increases index size. For many-key scenarios, consider <a href="/docs/json-shredding.md">JSON Shredding</a>.</p></td>
+     <td><p>Entire JSON objects or sub-objects with automatic type inference and flattening.</p><p>Indexing entire JSON objects increases index size. For many-key scenarios, consider <a href="/docs/v2.6.x/json-shredding.md">JSON Shredding</a>.</p></td>
      <td><p>Any JSON object</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Arrays should contain elements of the same type for optimal indexing. For more information, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<p>Arrays should contain elements of the same type for optimal indexing. For more information, refer to <a href="/docs/v2.6.x/array_data_type.md">Array Field</a>.</p>
 </div>
 <h3 id="Supported-cast-functions" class="common-anchor-header">Supported cast functions<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -371,7 +371,7 @@ index_params.add_index(
 <li><p><strong>Infers data types</strong>: Each value is automatically categorized as numeric, string, boolean, or date based on its content</p></li>
 <li><p><strong>Creates comprehensive coverage</strong>: All keys and nested paths within the object become searchable</p></li>
 </ul>
-<p>For the <a href="/docs/json-indexing.md#Sample-JSON-structure">sample JSON structure</a> above, index the entire <code translate="no">metadata</code> object:</p>
+<p>For the <a href="/docs/v2.6.x/json-indexing.md#Sample-JSON-structure">sample JSON structure</a> above, index the entire <code translate="no">metadata</code> object:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the entire JSON object</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
@@ -496,4 +496,4 @@ MilvusClient.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No, JSON fields do not support default values. However, you can set <code translate="no">nullable=True</code> when defining the field to allow for empty entries. For more information, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+    </button></h3><p>No, JSON fields do not support default values. However, you can set <code translate="no">nullable=True</code> when defining the field to allow for empty entries. For more information, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>

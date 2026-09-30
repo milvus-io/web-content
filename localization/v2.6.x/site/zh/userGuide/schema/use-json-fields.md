@@ -2,7 +2,7 @@
 id: use-json-fields.md
 title: JSON 字段
 summary: >-
-  Milvus 允许您使用 JSON 数据类型在单个字段中存储结构化数据并编制索引。这样就能实现具有嵌套属性的灵活 Schema，同时还能通过 JSON
+  Milvus 允许您使用 JSON 数据类型在单个字段中存储和索引结构化数据。这样就能实现具有嵌套属性的灵活 Schema，同时还能通过 JSON
   索引进行高效过滤。
 ---
 <h1 id="JSON-Field" class="common-anchor-header">JSON 字段<button data-href="#JSON-Field" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允许您使用<code translate="no">JSON</code> 数据类型在单个字段中存储和索引结构化数据。这样就能实现具有嵌套属性的灵活 Schema，同时还能通过 JSON 索引进行高效过滤。</p>
+    </button></h1><p>Milvus 允许您使用<code translate="no">JSON</code> 数据类型在单个字段中存储和索引结构化数据。这使得 Schema 具有灵活的嵌套属性，同时还能通过 JSON 索引进行高效过滤。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什么是 JSON 字段？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ summary: >-
 <p>下面的示例创建了一个 Collections，其模式包含这些字段：</p>
 <ul>
 <li><p>主键 (<code translate="no">product_id</code>)</p></li>
-<li><p>一个<code translate="no">vector</code> 字段（对于每个 Collections 都是必选字段）</p></li>
+<li><p>一个<code translate="no">vector</code> 字段（对于每个 Collections 都是必填字段）</p></li>
 <li><p>一个<code translate="no">metadata</code> 类型的字段<code translate="no">JSON</code> ，可存储结构化数据，如平面值、数组或嵌套对象</p></li>
 </ul>
 <div class="multipleCode">
@@ -247,6 +247,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -254,7 +255,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>您也可以启用动态字段功能来灵活存储未声明的字段，但这不是 JSON 字段发挥作用的必要条件。更多信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态</a>字段。</p>
+<p>您也可以启用动态字段功能来灵活存储未声明的字段，但这不是 JSON 字段发挥作用的必要条件。更多信息，请参阅<a href="/docs/zh/v2.6.x/enable-dynamic-field.md">动态</a>字段。</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">插入带有 JSON 数据的实体<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -421,6 +422,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -541,8 +543,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSON 转换类型</strong>(<code translate="no">json_cast_type</code>)：Milvus 在指定路径上解释和索引值时应使用的数据类型。</p>
 <ul>
-<li><p>该类型必须与被索引字段的实际数据类型相匹配。如果要在索引过程中将数据类型转换为另一种类型，请考虑<a href="/docs/zh/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用铸型函数</a>。</p></li>
-<li><p>有关完整列表，请参阅<a href="/docs/zh/use-json-fields.md#Supported-JSON-cast-types">下文</a>。</p></li>
+<li><p>该类型必须与被索引字段的实际数据类型相匹配。如果要在索引过程中将数据类型转换为另一种类型，请考虑<a href="/docs/zh/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">使用铸型函数</a>。</p></li>
+<li><p>有关完整列表，请参阅<a href="/docs/zh/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">下文</a>。</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">支持的 JSON 转换类型</h4><p>铸入类型不区分大小写。支持以下类型：</p>
@@ -584,7 +586,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>数组应包含相同类型的元素，以优化索引。更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组字段</a>。</p>
+<p>数组应包含相同类型的元素，以优化索引。更多信息，请参阅<a href="/docs/zh/v2.6.x/array_data_type.md">数组字段</a>。</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">示例创建 JSON 路径索引</h4><p>使用介绍中的<code translate="no">metadata</code> JSON 结构，下面举例说明如何在不同的 JSON 路径上创建索引：</p>
 <div class="multipleCode">
@@ -857,7 +859,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义索引参数后，可以使用<code translate="no">create_index()</code> 将其应用到 Collections 中：</p>
+    </button></h3><p>定义完索引参数后，可以使用<code translate="no">create_index()</code> 将其应用到 Collections 中：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -897,6 +899,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -947,7 +950,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>已在每个向量字段上创建索引。</p></li>
 <li><p>Collections 已加载到内存中。</p></li>
 </ul>
-<p>有关支持的操作符和表达式的完整列表，请参阅<a href="/docs/zh/json-operators.md">JSON 操作符</a>。</p>
+<p>有关支持的操作符和表达式的完整列表，请参阅<a href="/docs/zh/v2.6.x/json-operators.md">JSON 操作符</a>。</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">将所有内容整合在一起<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -967,11 +970,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>要在实际应用中完成工作流程，您还需要</p>
 <ul>
 <li><p><strong>为您的向量字段创建索引</strong>（必须为 Collections 中的每个向量字段<strong>创建索引）</strong></p>
-<p>请参阅<a href="/docs/zh/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">设置索引参数</a></p></li>
 <li><p><strong>加载 Collections</strong></p>
-<p>请参阅<a href="/docs/zh/load-and-release.md">加载和发布</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/load-and-release.md">加载和发布</a></p></li>
 <li><p><strong>使用 JSON 路径过滤器进行搜索或查询</strong></p>
-<p>请参阅<a href="/docs/zh/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/json-operators.md">JSON 操作符</a></p></li>
+<p>请参阅<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/v2.6.x/json-operators.md">JSON 操作符</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1008,7 +1011,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>动态字段</strong>是一个隐藏的 JSON 对象 (<code translate="no">$meta</code>) ，可自动存储模式中未定义的任何字段。</p></li>
 </ul>
 <p>两者都支持嵌套结构和 JSON 路径索引，但动态字段更适合可选或不断演化的数据结构。</p>
-<p>详情请参阅<a href="/docs/zh/enable-dynamic-field.md">动态</a>字段。</p>
+<p>详情请参阅<a href="/docs/zh/v2.6.x/enable-dynamic-field.md">动态</a>字段。</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 字段的大小有限制吗？<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1041,7 +1044,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>不，JSON 字段不支持默认值。不过，您可以在定义字段时设置<code translate="no">nullable=True</code> ，以允许空条目。</p>
-<p>有关详情，请参阅 "<a href="/docs/zh/nullable-and-default.md">可为空和默认值</a>"。</p>
+<p>有关详情，请参阅 "<a href="/docs/zh/v2.6.x/nullable-and-default.md">可为空和默认值</a>"。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 字段键有任何命名约定吗？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,7 +2,7 @@
 id: filtered-search.md
 title: 过滤搜索
 summary: >-
-  ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。不过，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN
+  ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。但是，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN
   搜索前进行元数据过滤，将搜索范围从整个 Collections 缩小到只搜索符合指定过滤条件的实体。
 ---
 <h1 id="Filtered-Search" class="common-anchor-header">过滤搜索<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。但是，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，以便 Milvus 在进行 ANN 搜索前进行元数据过滤，将搜索范围从整个 Collections 缩小到只搜索符合指定过滤条件的实体。</p>
+    </button></h1><p>ANN 搜索能找到与指定向量嵌入最相似的向量嵌入。但是，搜索结果不一定总是正确的。您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN 搜索前进行元数据过滤，将搜索范围从整个 Collections 缩小到只搜索符合指定过滤条件的实体。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,7 +116,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果目标 Collections 中已经存在查询向量，可以考虑使用<code translate="no">ids</code> ，而不是在搜索前检索它们。有关详情，请参阅<a href="/docs/zh/primary-key-search.md">主键搜索</a>。</p>
+<p>如果目标 Collections 中已经存在查询向量，可以考虑使用<code translate="no">ids</code> ，而不是在搜索前检索它们。有关详情，请参阅<a href="/docs/zh/v2.6.x/primary-key-search.md">主键搜索</a>。</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">使用标准过滤进行搜索<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,6 +263,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -275,7 +276,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>搜索请求中的过滤条件为<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。它使用 and 操作符包含两个条件：第一个条件要求在<code translate="no">color</code> 字段中查找值以<code translate="no">red</code> 开头的实体，其他条件要求在<code translate="no">likes</code> 字段中查找值大于<code translate="no">50</code> 的实体。只有两个实体符合这些要求。当 top-K 设置为<code translate="no">3</code> 时，Milvus 将计算这两个实体与查询向量的距离，并将它们作为搜索结果返回。</p>
+<p>搜索请求中的过滤条件为<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。它使用 and 操作符包含两个条件：第一个条件要求在<code translate="no">color</code> 字段中查找值以<code translate="no">red</code> 开头的实体，其他条件要求在<code translate="no">likes</code> 字段中查找值大于<code translate="no">50</code> 的实体。符合这些要求的实体只有两个。当 top-K 设置为<code translate="no">3</code> 时，Milvus 将计算这两个实体与查询向量的距离，并将它们作为搜索结果返回。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> 
@@ -297,7 +298,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关元数据过滤中可使用的操作符的更多信息，请参阅<a href="/docs/zh/filtering">过滤</a>。</p>
+<p>有关元数据过滤中可使用的操作符的更多信息，请参阅<a href="/docs/zh/v2.6.x/filtering">过滤</a>。</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">使用迭代过滤搜索<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -449,6 +450,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

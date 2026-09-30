@@ -15,6 +15,7 @@ delete(DeleteReq.builder()
     .partitionName(String partitionName)
     .filter(String filter)
     .ids(List<Object> ids)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
     .build()
 );
@@ -42,6 +43,10 @@ delete(DeleteReq.builder()
 
     A list of primary key values to identify specific entities.
 
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
+
+    The consistency level for the operation. Available in v2.6.25 or later.
+
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
     A map of template variable values for parameterized filters.
@@ -50,7 +55,15 @@ delete(DeleteReq.builder()
 
 *DeleteResp*
 
-A **DeleteResp** object contains the number of deleted entities.
+A **DeleteResp** object contains the number of deleted entities and the operation cost.
+
+- **deleteCnt** (*long*)
+
+    The number of deleted entities.
+
+- **cost** (*Long*)
+
+    The cost of the operation in milliseconds. Available in v2.6.25 or later.
 
 **EXCEPTIONS:**
 

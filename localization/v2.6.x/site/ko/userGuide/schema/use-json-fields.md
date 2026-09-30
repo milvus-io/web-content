@@ -247,6 +247,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -254,7 +255,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>동적 필드 기능을 활성화하여 선언되지 않은 필드를 유연하게 저장할 수도 있지만 JSON 필드가 작동하기 위해 반드시 필요한 것은 아닙니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>동적 필드 기능을 활성화하여 선언되지 않은 필드를 유연하게 저장할 수도 있지만 JSON 필드가 작동하기 위해 반드시 필요한 것은 아닙니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">JSON 데이터로 엔티티 삽입<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -421,6 +422,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -496,7 +498,7 @@ curl --request POST \
      <td><p>높음</p></td>
    </tr>
 </table>
-<p>¹ <em>배열을 LHS로</em> 표시하면 예를 들어 필터 표현식의 왼쪽이 JSON 배열임을 의미합니다:</p>
+<p>¹ <em>배열이 LHS인</em> 경우 예를 들어 필터 표현식의 왼쪽이 JSON 배열임을 의미합니다:</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -541,8 +543,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSON 캐스트 유형</strong> (<code translate="no">json_cast_type</code>): 지정된 경로에서 값을 해석하고 인덱싱할 때 Milvus가 사용해야 하는 데이터 유형입니다.</p>
 <ul>
-<li><p>이 유형은 인덱싱되는 필드의 실제 데이터 유형과 일치해야 합니다. 인덱싱 중에 데이터 유형을 다른 데이터 유형으로 변환하려면 <a href="/docs/ko/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">형</a> 변환 <a href="/docs/ko/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">함수를 사용하는</a> 것이 좋습니다.</p></li>
-<li><p>전체 목록은 <a href="/docs/ko/use-json-fields.md#Supported-JSON-cast-types">아래를</a> 참조하세요.</p></li>
+<li><p>이 유형은 인덱싱되는 필드의 실제 데이터 유형과 일치해야 합니다. 인덱싱 중에 데이터 유형을 다른 데이터 유형으로 변환하려면 <a href="/docs/ko/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">형</a> 변환 <a href="/docs/ko/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">함수를 사용하는</a> 것이 좋습니다.</p></li>
+<li><p>전체 목록은 <a href="/docs/ko/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">아래를</a> 참조하세요.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">지원되는 JSON 형 변환 유형</h4><p>형 변환 유형은 대소문자를 구분하지 않습니다. 다음 유형이 지원됩니다:</p>
@@ -569,7 +571,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
    <tr>
      <td><p><code translate="no">array_bool</code></p></td>
-     <td><p>부울의 배열</p></td>
+     <td><p>부울 배열</p></td>
      <td><p><code translate="no">[true, false, true]</code></p></td>
    </tr>
    <tr>
@@ -584,7 +586,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>배열은 최적의 인덱싱을 위해 동일한 유형의 요소를 포함해야 합니다. 자세한 내용은 <a href="/docs/ko/array_data_type.md">배열 필드를</a> 참조하세요.</p>
+<p>배열은 최적의 인덱싱을 위해 동일한 유형의 요소를 포함해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/array_data_type.md">배열 필드를</a> 참조하세요.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">예시: JSON 경로 인덱스 만들기</h4><p>다음은 소개에서 설명한 <code translate="no">metadata</code> JSON 구조를 사용하여 다양한 JSON 경로에 인덱스를 만드는 방법에 대한 예제입니다:</p>
 <div class="multipleCode">
@@ -897,6 +899,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -947,7 +950,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>각 벡터 필드에 인덱스를 만들었습니다.</p></li>
 <li><p>컬렉션이 메모리에 로드되었습니다.</p></li>
 </ul>
-<p>지원되는 연산자 및 표현식의 전체 목록은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하세요.</p>
+<p>지원되는 연산자 및 표현식의 전체 목록은 <a href="/docs/ko/v2.6.x/json-operators.md">JSON 연산자를</a> 참조하세요.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">모든 것을 하나로 모으기<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -967,11 +970,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>실제 애플리케이션에서 워크플로우를 완성하려면 다음 작업도 수행해야 합니다:</p>
 <ul>
 <li><p><strong>벡터 필드에 인덱스 생성</strong> (컬렉션의 각 벡터 필드에 필수)</p>
-<p><a href="/docs/ko/create-collection.md#Optional-Set-Index-Parameters">인덱스 매개변수 설정을</a> 참조하세요.</p></li>
+<p><a href="/docs/ko/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">인덱스 매개변수 설정을</a> 참조하세요.</p></li>
 <li><p><strong>컬렉션 로드</strong></p>
-<p><a href="/docs/ko/load-and-release.md">로드 및 릴리스</a> 참조</p></li>
+<p><a href="/docs/ko/v2.6.x/load-and-release.md">로드 및 릴리스</a> 참조</p></li>
 <li><p><strong>JSON 경로 필터를 사용하여 검색 또는 쿼리하기</strong></p>
-<p><a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/json-operators.md">JSON 연산자</a> 참조</p></li>
+<p><a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/v2.6.x/json-operators.md">JSON 연산자</a> 참조</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1008,7 +1011,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>동적 필드는</strong> 스키마에 정의되지 않은 모든 필드를 자동으로 저장하는 숨겨진 JSON 객체(<code translate="no">$meta</code>)입니다.</p></li>
 </ul>
 <p>둘 다 중첩 구조와 JSON 경로 인덱싱을 지원하지만 동적 필드는 선택적 또는 진화하는 데이터 구조에 더 적합합니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.6.x/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSON 필드의 크기에 제한이 있나요?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1041,7 +1044,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>아니요, JSON 필드는 기본값을 지원하지 않습니다. 그러나 필드를 정의할 때 <code translate="no">nullable=True</code> 을 설정하여 빈 항목을 허용할 수 있습니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.6.x/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 필드 키에 대한 명명 규칙이 있나요?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1106,7 +1109,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>문자열 인덱싱</strong>:</p>
 <p>인덱스가 <code translate="no">json_cast_type=&quot;varchar&quot;</code> 를 사용하는 경우 문자열 필터 조건만 인덱스의 이점을 활용하고 다른 유형은 무차별 대입 검색으로 돌아갈 수 있습니다.</p></li>
 <li><p><strong>부울 인덱싱</strong>:</p>
-<p>부울 인덱싱은 문자열 인덱싱과 비슷하게 작동하며, 조건이 참 또는 거짓과 정확히 일치하는 경우에만 인덱스를 사용합니다.</p></li>
+<p>부울 인덱싱은 문자열 인덱싱과 비슷하게 작동하며, 조건이 참 또는 거짓과 정확히 일치하는 경우에만 인덱스가 사용됩니다.</p></li>
 </ul>
 <h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">JSON 필드를 색인할 때 숫자 정밀도는 어떻게 되나요?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -46,7 +46,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 import io.milvus.param.*;
 
 ListCredUsersParam param = ListCredUsersParam.newBuilder().build();
-R<RpcStatus> response = client.listCredUsers(param)
+R<RpcStatus> response = client.listCredUsers(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

@@ -61,7 +61,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>Pesquisa filtrada</span> </span></p>
-<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, Milvus faz o seguinte:</p>
+<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, o Milvus faz o seguinte:</p>
 <ul>
 <li><p>Filtra as entidades que correspondem às condições de filtragem indicadas no pedido de pesquisa.</p></li>
 <li><p>Realiza a pesquisa ANN dentro das entidades filtradas.</p></li>
@@ -87,7 +87,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
    </span> <span class="img-wrapper"> <span>Filtragem iterativa</span> </span></p>
-<p>Conforme ilustrado no diagrama acima, uma pesquisa com filtragem iterativa executa a pesquisa vetorial em iterações. Cada entidade retornada pelo iterador passa por uma filtragem escalar, e esse processo continua até que os topK resultados especificados sejam alcançados.</p>
+<p>Conforme ilustrado no diagrama acima, uma pesquisa com filtragem iterativa executa a pesquisa vetorial em iterações. Cada entidade retornada pelo iterador é submetida à filtragem escalar, e esse processo continua até que os topK resultados especificados sejam alcançados.</p>
 <p>Este método reduz significativamente o número de entidades sujeitas a filtragem escalar, tornando-o especialmente benéfico para lidar com expressões de filtragem altamente complexas.</p>
 <p>No entanto, é importante notar que o iterador processa as entidades uma de cada vez. Essa abordagem sequencial pode levar a tempos de processamento mais longos ou a possíveis problemas de desempenho, especialmente quando um grande número de entidades é submetido à filtragem escalar.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -120,7 +120,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se os vectores de consulta já existirem na coleção de destino, considere utilizar <code translate="no">ids</code> em vez de os recuperar antes das pesquisas. Para obter detalhes, consulte <a href="/docs/pt/primary-key-search.md">Pesquisa de chave primária</a>.</p>
+<p>Se os vectores de consulta já existirem na coleção de destino, considere utilizar <code translate="no">ids</code> em vez de os recuperar antes das pesquisas. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/primary-key-search.md">Pesquisa de chave primária</a>.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">Pesquisa com filtragem padrão<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,6 +267,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -301,7 +302,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para mais informações sobre os operadores que pode utilizar na filtragem de metadados, consulte <a href="/docs/pt/filtering">Filtragem</a>.</p>
+<p>Para mais informações sobre os operadores que pode utilizar na filtragem de metadados, consulte <a href="/docs/pt/v2.6.x/filtering">Filtragem</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Pesquisa com filtragem iterativa<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

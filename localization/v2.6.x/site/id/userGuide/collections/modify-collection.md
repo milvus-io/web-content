@@ -120,6 +120,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/rename&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
@@ -163,19 +164,19 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Jika data koleksi perlu dihapus setelah periode tertentu, pertimbangkan untuk mengatur Time-To-Live (TTL) dalam hitungan detik. Setelah TTL habis, Milvus akan menghapus semua entitas dari koleksi. </p><p>Penghapusan ini bersifat asinkron, yang mengindikasikan bahwa pencarian dan kueri masih dapat dilakukan sebelum penghapusan selesai.</p><p>Untuk detailnya, lihat <a href="/docs/id/set-collection-ttl.md">Mengatur TTL Koleksi</a>.</p></td>
+     <td><p>Jika data koleksi perlu dihapus setelah periode tertentu, pertimbangkan untuk mengatur Time-To-Live (TTL) dalam hitungan detik. Setelah TTL habis, Milvus akan menghapus semua entitas dari koleksi. </p><p>Penghapusan ini bersifat asinkron, yang mengindikasikan bahwa pencarian dan kueri masih dapat dilakukan sebelum penghapusan selesai.</p><p>Untuk detailnya, lihat <a href="/docs/id/v2.6.x/set-collection-ttl.md">Mengatur TTL Koleksi</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Pemetaan memori (Mmap) memungkinkan akses memori langsung ke berkas besar pada disk, sehingga Milvus dapat menyimpan indeks dan data dalam memori dan hard drive. Pendekatan ini membantu mengoptimalkan kebijakan penempatan data berdasarkan frekuensi akses, memperluas kapasitas penyimpanan untuk koleksi tanpa memengaruhi kinerja pencarian.</p><p>Untuk detailnya, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p></td>
+     <td><p>Pemetaan memori (Mmap) memungkinkan akses memori langsung ke berkas besar pada disk, sehingga Milvus dapat menyimpan indeks dan data dalam memori dan hard drive. Pendekatan ini membantu mengoptimalkan kebijakan penempatan data berdasarkan frekuensi akses, memperluas kapasitas penyimpanan untuk koleksi tanpa memengaruhi kinerja pencarian.</p><p>Untuk detailnya, lihat <a href="/docs/id/v2.6.x/mmap.md">Gunakan mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Dengan Isolasi Kunci Partisi diaktifkan, Milvus mengelompokkan entitas berdasarkan nilai Kunci Partisi dan membuat indeks terpisah untuk masing-masing kelompok ini. Setelah menerima permintaan pencarian, Milvus mencari indeks berdasarkan nilai Kunci Partisi yang ditentukan dalam kondisi pemfilteran dan membatasi cakupan pencarian di dalam entitas yang termasuk dalam indeks, sehingga menghindari pemindaian entitas yang tidak relevan selama pencarian dan meningkatkan kinerja pencarian.</p><p>Untuk detailnya, lihat <a href="/docs/id/use-partition-key.md#Use-Partition-Key-Isolation">Menggunakan Isolasi Kunci Partisi</a>.</p></td>
+     <td><p>Dengan Isolasi Kunci Partisi diaktifkan, Milvus mengelompokkan entitas berdasarkan nilai Kunci Partisi dan membuat indeks terpisah untuk masing-masing kelompok ini. Setelah menerima permintaan pencarian, Milvus mencari indeks berdasarkan nilai Kunci Partisi yang ditentukan dalam kondisi pemfilteran dan membatasi cakupan pencarian di dalam entitas yang termasuk dalam indeks, sehingga menghindari pemindaian entitas yang tidak relevan selama pencarian dan meningkatkan kinerja pencarian.</p><p>Untuk detailnya, lihat <a href="/docs/id/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">Menggunakan Isolasi Kunci Partisi</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>Mengaktifkan bidang dinamis untuk koleksi yang dibuat tanpa mengaktifkannya. Setelah diaktifkan, Anda dapat menyisipkan entitas dengan bidang yang tidak ditentukan dalam skema asli. Untuk detailnya, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p></td>
+     <td><p>Mengaktifkan bidang dinamis untuk koleksi yang dibuat tanpa mengaktifkannya. Setelah diaktifkan, Anda dapat menyisipkan entitas dengan bidang yang tidak ditentukan dalam skema asli. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Bidang Dinamis</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
@@ -183,7 +184,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Menentukan zona waktu default untuk koleksi ini saat menangani operasi yang sensitif terhadap waktu, terutama bidang <code translate="no">TIMESTAMPTZ</code>. Stempel waktu disimpan secara internal dalam UTC, dan Milvus mengonversi nilai untuk tampilan dan perbandingan menurut pengaturan ini. Jika disetel, zona waktu koleksi akan menggantikan zona waktu default basis data; parameter zona waktu kueri dapat menggantikan keduanya untuk sementara. Nilainya harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p></td>
+     <td><p>Menentukan zona waktu default untuk koleksi ini saat menangani operasi yang sensitif terhadap waktu, terutama bidang <code translate="no">TIMESTAMPTZ</code>. Stempel waktu disimpan secara internal dalam UTC, dan Milvus mengonversi nilai untuk tampilan dan perbandingan menurut pengaturan ini. Jika disetel, zona waktu koleksi akan menggantikan zona waktu default basis data; parameter zona waktu kueri dapat menggantikan keduanya untuk sementara. Nilainya harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Contoh 1: Mengatur koleksi TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -245,6 +246,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;test_collection&quot;,
     &quot;properties&quot;: {
@@ -303,6 +305,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -361,6 +364,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -420,6 +424,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -479,6 +484,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -533,6 +539,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -586,6 +593,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;propertyKeys&quot;: [

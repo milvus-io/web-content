@@ -1,0 +1,23 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Milvus REST track fixture", "version": "2.6.x"},
+  "x-zdoc-fragment": {"schemaVersion": "1.0", "apiSurface": "data-plane", "service": "milvus-rest"},
+  "tags": [{"name": "Collections"}],
+  "paths": {
+    "/v2/vectordb/collections": {
+      "get": {
+        "operationId": "listCollectionsTrackFixture",
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null,
+        "tags": ["Collections"],
+        "responses": {"200": {
+          "description": "Success",
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        }}
+      }
+    }
+  }
+}

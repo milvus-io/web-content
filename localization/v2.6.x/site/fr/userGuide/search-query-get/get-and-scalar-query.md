@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Outre les recherches ANN, Milvus prend également en charge le filtrage des métadonnées par le biais de requêtes. Cette page explique comment utiliser Query, Get et QueryIterators pour filtrer les métadonnées.</p>
 <div class="alert note">
-<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection, les requêtes qui incluent ces champs renverront les valeurs par défaut définies ou NULL pour les entités qui n'ont pas explicitement défini de valeurs. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
+<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection, les requêtes qui incluent ces champs renverront les valeurs par défaut définies ou NULL pour les entités qui n'ont pas explicitement défini de valeurs. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>Renvoi</p></td>
-     <td><p>Renvoie les entités qui détiennent les clés primaires spécifiées dans la collection ou la partition spécifiée.</p></td>
+     <td><p>Renvoie les entités qui contiennent les clés primaires spécifiées dans la collection ou la partition spécifiée.</p></td>
      <td><p>Renvoie toutes les entités ou un nombre spécifié d'entités qui répondent aux conditions de filtrage personnalisées dans la collection ou la partition spécifiée.</p></td>
      <td><p>Renvoie toutes les entités qui remplissent les conditions de filtrage personnalisées dans la collection ou la partition spécifiée par le biais de requêtes paginées.</p></td>
    </tr>
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lorsque vous devez rechercher des entités par leurs clés primaires, vous pouvez utiliser la méthode <strong>Get.</strong> Les exemples de code suivants supposent que votre collection comporte trois champs nommés <code translate="no">id</code>, <code translate="no">vector</code> et <code translate="no">color</code>.</p>
+    </button></h2><p>Lorsque vous devez rechercher des entités à partir de leurs clés primaires, vous pouvez utiliser la méthode <strong>Get.</strong> Les exemples de code suivants supposent que votre collection comporte trois champs nommés <code translate="no">id</code>, <code translate="no">vector</code> et <code translate="no">color</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -306,6 +307,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -584,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -596,6 +599,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -622,7 +626,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Pour extraire un sous-ensemble représentatif de données de votre collection à des fins d'exploration des données ou de tests de développement, utilisez l'expression <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, où <code translate="no">sampling_factor</code> est un nombre flottant compris entre 0 et 1 représentant le pourcentage de données à échantillonner.</p>
 <div class="alert note">
-<p>Pour une utilisation détaillée, des exemples avancés et les meilleures pratiques, reportez-vous à <a href="/docs/fr/random-sampling.md">Random Sampling (Échantillonnage aléatoire</a>).</p>
+<p>Pour une utilisation détaillée, des exemples avancés et les meilleures pratiques, reportez-vous à <a href="/docs/fr/v2.6.x/random-sampling.md">Random Sampling (Échantillonnage aléatoire</a>).</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -743,7 +747,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>Si votre collection possède un champ <code translate="no">TIMESTAMPTZ</code>, vous pouvez temporairement remplacer le fuseau horaire par défaut de la base de données ou de la collection pour une seule opération en définissant le paramètre <code translate="no">timezone</code> dans l'appel de la requête. Ce paramètre détermine comment les valeurs de <code translate="no">TIMESTAMPTZ</code> sont affichées et comparées au cours de l'opération.</p>
-<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p>
+<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/v2.6.x/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p>
 <p>L'exemple ci-dessous montre comment définir temporairement un fuseau horaire pour une opération de requête :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

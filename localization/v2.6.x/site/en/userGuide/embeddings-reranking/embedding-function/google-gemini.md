@@ -365,4 +365,4 @@ results = client.search(
 
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information about search and query operations, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a> and <a href="/docs/get-and-scalar-query.md">Query</a>.</p>
+<p>For more information about search and query operations, refer to <a href="/docs/v2.6.x/single-vector-search.md">Basic Vector Search</a> and <a href="/docs/v2.6.x/get-and-scalar-query.md">Query</a>.</p>

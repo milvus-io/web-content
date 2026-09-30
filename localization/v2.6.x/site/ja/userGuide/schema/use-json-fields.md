@@ -76,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON フィールドを使用するには、コレクションスキーマで<code translate="no">DataType</code> を<code translate="no">JSON</code> のように指定して明示的に定義します。</p>
+    </button></h2><p>JSON フィールドを使用するには、コレクションスキーマで<code translate="no">DataType</code> を<code translate="no">JSON</code> と指定して明示的に定義します。</p>
 <p>以下の例では、これらのフィールドを含むスキーマでコレクションを作成します：</p>
 <ul>
 <li><p>主キー (<code translate="no">product_id</code>)</p></li>
@@ -246,6 +246,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -253,7 +254,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>宣言されていないフィールドを柔軟に格納するために、ダイナミック・フィールド機能を有効にすることもできますが、JSONフィールドが機能するためには必須ではありません。詳細については、<a href="/docs/ja/enable-dynamic-field.md">ダイナミック・フィールドを</a>参照してください。</p>
+<p>宣言されていないフィールドを柔軟に格納するために、ダイナミック・フィールド機能を有効にすることもできますが、JSONフィールドが機能するためには必須ではありません。詳細については、<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">ダイナミック・フィールドを</a>参照してください。</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">JSON データを持つエンティティの挿入<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -420,6 +421,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -446,7 +448,7 @@ curl --request POST \
 <li><p><strong>JSONフラットインデックス</strong>- 自動型推論でJSONオブジェクト全体（またはサブツリー）にインデックスを付けます。</p></li>
 </ul>
 <div class="alert note">
-<p>JSONフィールドのインデックスは<strong>オプション</strong>です。インデックスなしでも JSON パスによるクエリやフィルタリングは可能ですが、総当たり検索になるためパフォーマンスが低下する可能性があります。</p>
+<p>JSONフィールドのインデックスは<strong>オプション</strong>です。インデックスなしでも JSON パスによるクエリやフィルタリングは可能ですが、総当たり検索によりパフォーマンスが低下する可能性があります。</p>
 </div>
 <h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">パスインデックスとフラットインデックスのどちらかを選択<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -499,7 +501,7 @@ curl --request POST \
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
-<p>これらの場合、<code translate="no">metadata[&quot;tags&quot;]</code> は配列である。JSONフラットインデックスでは、このようなフィルターは高速化されません。代わりに、配列のキャスト型を持つJSONパスインデックスを使用してください。</p>
+<p>これらの場合、<code translate="no">metadata[&quot;tags&quot;]</code> は配列である。JSON フラットインデックスでは、このようなフィルターは高速化されません。代わりに、配列のキャスト型を持つ JSON パスインデックスを使用してください。</p>
 <p><strong>JSON パスインデックスは、次のような場合に使用します：</strong></p>
 <ul>
 <li><p>クエリするホットキーを事前に知っている。</p></li>
@@ -540,8 +542,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>JSONキャストタイプ</strong>(<code translate="no">json_cast_type</code>)：Milvusが指定されたパスの値を解釈し、インデックスを作成する際に使用するデータ型。</p>
 <ul>
-<li><p>この型は、インデックスされるフィールドの実際のデータ型と一致しなければなりません。インデックス作成中にデータ型を別のものに変換したい場合は、<a href="/docs/ja/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">キャスト関数の使用を</a>検討してください。</p></li>
-<li><p>完全なリストについては、<a href="/docs/ja/use-json-fields.md#Supported-JSON-cast-types">以下を</a>参照してください。</p></li>
+<li><p>この型は、インデックスされるフィールドの実際のデータ型と一致しなければなりません。インデックス作成中にデータ型を別のものに変換したい場合は、<a href="/docs/ja/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">キャスト関数の使用を</a>検討してください。</p></li>
+<li><p>完全なリストについては、<a href="/docs/ja/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">以下を</a>参照してください。</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">サポートされるJSONキャスト型</h4><p>キャスト型は大文字と小文字を区別しません。以下の型がサポートされています：</p>
@@ -583,9 +585,9 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>配列は、最適なインデックス作成のために、同じ型の要素を含むべきである。詳細は「<a href="/docs/ja/array_data_type.md">配列フィールド</a>」を参照。</p>
+<p>配列は、最適なインデックス作成のために、同じ型の要素を含むべきである。詳細は「<a href="/docs/ja/v2.6.x/array_data_type.md">配列フィールド</a>」を参照。</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">例JSONパス・インデックスの作成</h4><p><code translate="no">metadata</code> JSON構造を使って、異なるJSONパスにインデックスを作成する例を示します：</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">例JSONパス・インデックスの作成</h4><p>はじめに説明した<code translate="no">metadata</code> JSON構造を使用して、さまざまなJSONパスにインデックスを作成する例を示します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the category field as a string</span>
@@ -809,7 +811,7 @@ metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 (&quot;supplier.country&quot;, Text, &quot;USA&quot;)
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h4 id="Example-Create-JSON-flat-index" class="common-anchor-header">例JSONフラットインデックスの作成</h4><div class="multipleCode">
+<h4 id="Example-Create-JSON-flat-index" class="common-anchor-header">例JSONフラット・インデックスの作成</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Create a flat index on the root object of the JSON column (covers the entire JSON subtree)</span>
 index_params.add_index(
@@ -896,6 +898,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -946,7 +949,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>各ベクトル・フィールドにインデックスが作成されている。</p></li>
 <li><p>コレクションがメモリにロードされている。</p></li>
 </ul>
-<p>サポートされている演算子および式の完全なリストについては、<a href="/docs/ja/json-operators.md">JSON 演算</a>子を参照してください。</p>
+<p>サポートされている演算子および式の完全なリストについては、<a href="/docs/ja/v2.6.x/json-operators.md">JSON 演算</a>子を参照してください。</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">すべてをまとめる<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -962,15 +965,15 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ここまでで、JSONフィールド内に構造化値を定義、挿入、およびオプションでインデックスを作成する方法を学びました。</p>
+    </button></h2><p>ここまでで、JSON フィールド内に構造化値を定義、挿入、およびオプションでインデックスを作成する方法を学びました。</p>
 <p>実際のアプリケーションでワークフローを完成させるには、次のことも行う必要があります：</p>
 <ul>
 <li><p><strong>ベクトルフィールドにインデックスを作成する</strong>（コレクション内の各ベクトルフィールドに必須）。</p>
-<p><a href="/docs/ja/create-collection.md#Optional-Set-Index-Parameters">インデックス・パラメータの設定</a>」を参照。</p></li>
+<p><a href="/docs/ja/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">インデックス・パラメータの設定</a>」を参照。</p></li>
 <li><p><strong>コレクションをロードする。</strong></p>
-<p><a href="/docs/ja/load-and-release.md">Load &amp; Releaseを</a>参照。</p></li>
+<p><a href="/docs/ja/v2.6.x/load-and-release.md">Load &amp; Releaseを</a>参照。</p></li>
 <li><p><strong>JSONパスフィルタを使用した検索またはクエリ</strong></p>
-<p><a href="/docs/ja/filtered-search.md">フィルタ検索と</a> <a href="/docs/ja/json-operators.md">JSON 演算</a>子を参照してください。</p></li>
+<p><a href="/docs/ja/v2.6.x/filtered-search.md">フィルタ検索と</a> <a href="/docs/ja/v2.6.x/json-operators.md">JSON 演算</a>子を参照してください。</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1007,7 +1010,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>ダイナミック・フィールドは</strong>、スキーマで定義されていないフィールドを自動的に格納する隠しJSONオブジェクト(<code translate="no">$meta</code>)です。</p></li>
 </ul>
 <p>どちらも入れ子構造やJSONパス・インデックスをサポートしていますが、ダイナミック・フィールドの方がオプションや進化するデータ構造に適しています。</p>
-<p>詳細は<a href="/docs/ja/enable-dynamic-field.md">ダイナミック・フィールドを</a>参照してください。</p>
+<p>詳細は<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">ダイナミック・フィールドを</a>参照してください。</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">JSONフィールドのサイズに制限はありますか？<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1040,7 +1043,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>いいえ、JSONフィールドはデフォルト値をサポートしていません。ただし、フィールドの定義時に<code translate="no">nullable=True</code> を設定して、空の入力を許可することはできます。</p>
-<p>詳細は「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>詳細については、「<a href="/docs/ja/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSONフィールド・キーの命名規則はありますか？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1105,7 +1108,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>文字列インデックス</strong>：</p>
 <p>文字列インデクシング: インデックスが<code translate="no">json_cast_type=&quot;varchar&quot;</code> を使用している場合、文字列フィルタ条件のみが インデックスの恩恵を受ける。</p></li>
 <li><p><strong>ブールインデックス</strong>：</p>
-<p>ブールインデクシングは文字列インデクシングと同様の動作をし、条件が厳密に真か偽に一致するときのみインデックスを使用する。</p></li>
+<p>ブールインデクシングは文字列インデクシングと似た振る舞いをし、条件が厳密に真か偽に一致するときのみインデックスを使用する。</p></li>
 </ul>
 <h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">JSONフィールドのインデックスを作成する際の数値精度についてはどうでしょうか？<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"

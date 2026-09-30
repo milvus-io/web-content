@@ -29,8 +29,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>混合搜尋工作流程</span> </span></p>
 <p>多向量混合搜尋整合了不同的搜尋方法，或跨越各種模式的嵌入：</p>
 <ul>
-<li><p><strong>稀疏-密集向量搜尋</strong>：<a href="/docs/zh-hant/dense-vector.md">Dense Vector</a>是捕捉語意關係的絕佳方法，而<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>則是精確關鍵字比對的高效方法。混合搜尋結合了這些方法，既能提供廣泛的概念理解，又能提供精確的詞彙相關性，從而改善搜尋結果。混合搜尋利用每種方法的優點，克服獨立方法的限制，為複雜的查詢提供更好的效能。以下是結合語意搜尋與全文檢索的混合式檢索的詳細<a href="/docs/zh-hant/full_text_search_with_milvus.md">指南</a>。</p></li>
-<li><p><strong>多模式向量搜尋</strong>：多模態向量搜尋是一種功能強大的技術，可讓您跨各種資料類型進行搜尋，包括文字、影像、音訊等。這種方法的主要優勢在於它能將不同的模式統一為無縫且具凝聚力的搜尋體驗。例如，在產品搜尋中，使用者可能會輸入文字查詢，以尋找以文字和影像描述的產品。透過混合搜尋方法結合這些模式，您可以提高搜尋準確度或豐富搜尋結果。</p></li>
+<li><p><strong>稀疏-密集向量搜尋</strong>：<a href="/docs/zh-hant/v2.6.x/dense-vector.md">Dense Vector</a>是捕捉語意關係的絕佳方法，而<a href="/docs/zh-hant/v2.6.x/sparse_vector.md">Sparse Vector</a>則是精確關鍵字比對的高效方法。混合搜尋結合了這些方法，既能提供廣泛的概念理解，又能提供精確的詞彙相關性，從而改善搜尋結果。混合搜尋利用每種方法的優點，克服獨立方法的限制，為複雜的查詢提供更好的效能。以下是結合語意搜尋與全文檢索的混合式檢索的詳細<a href="/docs/zh-hant/v2.6.x/full_text_search_with_milvus.md">指南</a>。</p></li>
+<li><p><strong>多模式向量搜尋</strong>：多模態向量搜尋是一種功能強大的技術，可讓您跨各種資料類型進行搜尋，包括文字、影像、音訊等。此方法的主要優勢在於它能將不同的模式統一為無縫且具凝聚力的搜尋體驗。例如，在產品搜尋中，使用者可能會輸入文字查詢，以尋找以文字和影像描述的產品。透過混合搜尋方法結合這些模式，您可以提高搜尋準確度或豐富搜尋結果。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ summary: >-
       </svg>
     </button></h2><p>讓我們考慮一個真實世界的使用案例，其中每個產品都包含文字說明和圖片。根據可用的資料，我們可以進行三種類型的搜尋：</p>
 <ul>
-<li><p><strong>語意文字搜尋：</strong>這包括使用密集向量來查詢產品的文字說明。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來產生文字內嵌。</p></li>
+<li><p><strong>語意文字搜尋：</strong>這包括使用密集向量來查詢產品的文字描述。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來產生文字內嵌。</p></li>
 <li><p><strong>全文檢索</strong>：在此，我們使用關鍵字匹配稀疏向量來查詢產品的文字描述。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等演算法或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型都可以用來達到此目的。</p></li>
 <li><p><strong>多模態影像搜尋：</strong>此方法使用密集向量的文字查詢來查詢影像。圖像嵌入可以使用<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型產生。</p></li>
 </ul>
@@ -85,7 +85,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>對於多向量混合搜尋，我們應該在一個集合模式中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  但是，如果有必要，您可以調整 <a href="/docs/zh-hant/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根據需要在集合中包含最多 10 個向量欄位。</p>
+    </button></h3><p>對於多向量混合搜尋，我們應該在一個集合模式中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  不過，如有必要，您可以調整 <a href="/docs/zh-hant/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根據需要在集合中包含最多 10 個向量欄位。</p>
 <p>本範例在模式中加入下列欄位：</p>
 <ul>
 <li><p><code translate="no">id</code>:作為儲存文字 ID 的主索引鍵。這個欄位的資料類型是<code translate="no">INT64</code> 。</p></li>
@@ -94,7 +94,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>:用於儲存文字的稀疏向量。這個欄位的資料類型是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 <li><p><code translate="no">image_dense</code>:用於儲存產品影像的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VETOR</code> ，向量維度為 512。</p></li>
 </ul>
-<p>由於我們會使用內建的 BM25 演算法來對文字欄位執行全文檢索，因此有必要在模式中加入 Milvus<code translate="no">Function</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
+<p>由於我們會使用內建的 BM25 演算法來對文字欄位執行全文檢索，因此有必要在模式中加入 Milvus<code translate="no">Function</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文</a>檢索。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -345,10 +345,10 @@ schema.WithField(entity.NewField().
     </button></h3><p>定義資料集模式之後，下一步就是設定向量索引並指定相似度指標。在給出的範例中</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code>：針對文字密集向量欄位建立<code translate="no">AUTOINDEX</code> 類型的索引，其公制類型為<code translate="no">IP</code> 。</p></li>
-<li><p><code translate="no">text_sparse_index</code>：使用<code translate="no">BM25</code> 公制類型的<code translate="no">SPARSE_INVERTED_INDEX</code>類型索引，用於文字稀疏向量場。</p></li>
+<li><p><code translate="no">text_sparse_index</code>：使用<code translate="no">BM25</code> 公制類型的<code translate="no">SPARSE_INVERTED_INDEX</code>類型索引用於文字稀疏向量場。</p></li>
 <li><p><code translate="no">image_dense_index</code>：為影像密集向量場建立<code translate="no">AUTOINDEX</code> 與<code translate="no">IP</code> 公制類型的索引。</p></li>
 </ul>
-<p>您可以根據需要選擇其他索引類型，以最適合您的需求和資料類型。如需支援索引類型的進一步資訊，請參閱<a href="/docs/zh-hant/index-vector-fields.md">可用索引類型的</a>說明文件。</p>
+<p>您可以根據需要選擇其他索引類型，以最適合您的需求和資料類型。如需支援索引類型的進一步資訊，請參閱<a href="/docs/zh-hant/v2.6.x/index-vector-fields.md">可用索引類型的</a>說明文件。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -513,6 +513,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -648,6 +649,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -688,7 +690,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>Hybrid Search 是透過在<code translate="no">hybrid_search()</code> 函式中建立多個<code translate="no">AnnSearchRequest</code> 來實作，其中每個<code translate="no">AnnSearchRequest</code> 代表特定向量領域的基本 ANN 搜尋請求。因此，在進行 Hybrid Search 之前，必須為每個向量領域建立一個<code translate="no">AnnSearchRequest</code> 。</p>
-<p>此外，透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以設定混合搜尋的過濾條件。請參閱<a href="/docs/zh-hant/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/boolean.md">過濾說明</a>。</p>
+<p>此外，透過在<code translate="no">AnnSearchRequest</code> 中設定<code translate="no">expr</code> 參數，您可以設定混合搜尋的過濾條件。請參閱<a href="/docs/zh-hant/v2.6.x/filtered-search.md">過濾搜尋與</a> <a href="/docs/zh-hant/v2.6.x/boolean.md">過濾說明</a>。</p>
 <div class="alert note">
 <p>在混合搜尋中，每個<code translate="no">AnnSearchRequest</code> 只支援一個查詢資料。</p>
 </div>
@@ -842,7 +844,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要合併 ANN 搜尋結果集並重新排序，選擇適當的重新排序策略是必要的。Milvus 提供多種重排策略。有關這些重新排名機制的詳細資訊，請參閱<a href="/docs/zh-hant/weighted-ranker.md">Weighted Ranker</a>或<a href="/docs/zh-hant/rrf-ranker.md">RRF Ranker</a>。</p>
+    </button></h3><p>要合併 ANN 搜尋結果集並重新排序，選擇適當的重新排序策略是必要的。Milvus 提供多種重排策略。有關這些重新排名機制的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/weighted-ranker.md">Weighted Ranker</a>或<a href="/docs/zh-hant/v2.6.x/rrf-ranker.md">RRF Ranker</a>。</p>
 <p>在本範例中，由於沒有特別強調特定的搜尋查詢，我們將採用 RRFRanker 策略。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -981,6 +983,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1026,7 +1029,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>如果您的資料集中有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以透過在混合搜尋呼叫中設定<code translate="no">timezone</code> 參數，在單一作業中暫時覆寫資料庫或資料集中的預設時區。這可以控制<code translate="no">TIMESTAMPTZ</code> 值在操作中的顯示和比較方式。</p>
-<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p>
+<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p>
 <p>以下範例顯示如何為混合搜尋作業暫時設定時區：</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

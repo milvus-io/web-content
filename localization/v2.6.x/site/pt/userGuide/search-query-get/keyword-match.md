@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>A correspondência de texto em Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
 <div class="alert note">
-<p>A correspondência de texto concentra-se em encontrar ocorrências exactas dos termos de consulta, sem pontuar a relevância dos documentos correspondentes. Se pretender obter os documentos mais relevantes com base no significado semântico e na importância dos termos de consulta, recomendamos que utilize a <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p>
+<p>A correspondência de texto concentra-se em encontrar ocorrências exactas dos termos de consulta, sem pontuar a relevância dos documentos correspondentes. Se pretender obter os documentos mais relevantes com base no significado semântico e na importância dos termos de consulta, recomendamos que utilize a <a href="/docs/pt/v2.6.x/full-text-search.md">Pesquisa de texto integral</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>O Milvus integra o <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para alimentar o seu índice invertido subjacente e a pesquisa de texto baseada em termos. Para cada entrada de texto, Milvus indexa-o seguindo o procedimento:</p>
 <ol>
-<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, transformando-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
-<li><p><a href="/docs/pt/index-explained.md">Indexação</a>: Após a análise do texto, o Milvus cria um índice invertido que mapeia cada token único para os documentos que o contêm.</p></li>
+<li><p><a href="/docs/pt/v2.6.x/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, transformando-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
+<li><p><a href="/docs/pt/v2.6.x/index-explained.md">Indexação</a>: Após a análise do texto, o Milvus cria um índice invertido que mapeia cada token único para os documentos que o contêm.</p></li>
 </ol>
 <p>Quando um utilizador efectua uma correspondência de texto, o índice invertido é utilizado para recuperar rapidamente todos os documentos que contêm os termos. Isto é muito mais rápido do que analisar cada documento individualmente.</p>
 <p>
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A correspondência de texto funciona no tipo de campo <a href="/docs/pt/string.md"><code translate="no">VARCHAR</code></a> que é essencialmente o tipo de dados string no Milvus. Para ativar a correspondência de texto, defina <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> para <code translate="no">True</code> e, em seguida, configure opcionalmente um <a href="/docs/pt/analyzer-overview.md">analisador</a> para análise de texto ao definir o esquema da coleção.</p>
+    </button></h2><p>A correspondência de texto funciona no tipo de campo <a href="/docs/pt/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> que é essencialmente o tipo de dados string no Milvus. Para ativar a correspondência de texto, defina <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> para <code translate="no">True</code> e, em seguida, configure opcionalmente um <a href="/docs/pt/v2.6.x/analyzer-overview.md">analisador</a> para análise de texto ao definir o esquema da coleção.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Defina <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>O desempenho e a precisão da correspondência de palavras-chave dependem do analisador selecionado. Diferentes analisadores são adaptados a várias línguas e estruturas de texto, pelo que a escolha do analisador correto pode ter um impacto significativo nos resultados da pesquisa para o seu caso de utilização específico.</p>
-<p>Por predefinição, o Milvus utiliza o analisador <code translate="no">standard</code>, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para aplicar essa configuração padrão. Para obter mais informações, consulte <a href="/docs/pt/standard-analyzer.md">Padrão</a>.</p>
+<p>Por predefinição, o Milvus utiliza o analisador <code translate="no">standard</code>, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para aplicar essa configuração padrão. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/standard-analyzer.md">Padrão</a>.</p>
 <p>Nos casos em que um analisador diferente é necessário, você pode configurá-lo usando o parâmetro <code translate="no">analyzer_params</code>. Por exemplo, para aplicar o analisador <code translate="no">english</code> para processar texto em inglês:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -306,7 +306,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O Milvus também fornece vários outros analisadores adequados a diferentes idiomas e cenários. Para obter mais detalhes, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p>
+<p>O Milvus também fornece vários outros analisadores adequados a diferentes idiomas e cenários. Para obter mais detalhes, consulte <a href="/docs/pt/v2.6.x/analyzer-overview.md">Visão geral do analisador</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Usar a correspondência de texto<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -373,7 +373,7 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Para procurar documentos que contenham <code translate="no">machine</code> e <code translate="no">learning</code> mas sem <code translate="no">deep</code> no campo <code translate="no">text</code>, utilize as seguintes expressões:</p>
+<li><p>Para pesquisar documentos que contenham <code translate="no">machine</code> e <code translate="no">learning</code>, mas sem <code translate="no">deep</code> no campo <code translate="no">text</code>, use as seguintes expressões:</p>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#go">Go</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
@@ -405,7 +405,7 @@ schema.WithField(entity.NewField().
     </button></h3><p>A correspondência de texto pode ser usada em combinação com a pesquisa de similaridade de vetor para restringir o escopo da pesquisa e melhorar o desempenho da pesquisa. Ao filtrar a coleção utilizando a correspondência de texto antes da pesquisa de semelhança vetorial, pode reduzir o número de documentos que precisam de ser pesquisados, resultando em tempos de consulta mais rápidos.</p>
 <p>Neste exemplo, a expressão <code translate="no">filter</code> filtra os resultados da pesquisa para incluir apenas documentos que correspondam ao termo especificado <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. A pesquisa de similaridade vetorial é então executada nesse subconjunto filtrado de documentos.</p>
 <div class="alert note">
-<p>Você pode destacar os termos correspondentes nos resultados da pesquisa configurando um marcador de texto. Consulte <a href="/docs/pt/text-highlighter.md">Marcador de texto</a> para obter detalhes.</p>
+<p>Você pode destacar os termos correspondentes nos resultados da pesquisa configurando um marcador de texto. Consulte <a href="/docs/pt/v2.6.x/text-highlighter.md">Marcador de texto</a> para obter detalhes.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -471,6 +471,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -550,6 +551,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

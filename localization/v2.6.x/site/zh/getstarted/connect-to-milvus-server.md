@@ -18,7 +18,7 @@ summary: 本主题介绍如何建立客户端与 Milvus 服务器的连接，并
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题介绍如何建立与 Milvus 服务器的客户端连接并配置常用连接选项。</p>
+    </button></h1><p>本主题介绍如何建立与 Milvus 服务器的客户端连接，并配置常用连接选项。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +35,9 @@ summary: 本主题介绍如何建立客户端与 Milvus 服务器的连接，并
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>已安装所使用语言的 SDK。有关详情，请参阅<a href="/docs/zh/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh/install-java.md">Java SDK</a>、<a href="/docs/zh/install-go.md">Go SDK</a> 或<a href="/docs/zh/install-node.md">Nodejs SDK</a>。</p></li>
+<li><p>已安装所使用语言的 SDK。有关详情，请参阅<a href="/docs/zh/v2.6.x/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh/v2.6.x/install-java.md">Java SDK</a>、<a href="/docs/zh/v2.6.x/install-go.md">Go SDK</a> 或<a href="/docs/zh/v2.6.x/install-node.md">Nodejs SDK</a>。</p></li>
 <li><p>Milvus 服务器地址（本地默认地址：<code translate="no">http://localhost:19530</code> ，代理端口<strong>19530</strong>）。</p></li>
-<li><p>如果<a href="/docs/zh/authenticate.md">启用了身份验证</a>，请提供<strong>令牌</strong>或<strong>用户名 + 密码</strong>。令牌可以是<code translate="no">username:password</code> （如<code translate="no">root:Milvus</code> ）。有关详情，请参阅 "<a href="/docs/zh/authenticate.md">验证用户访问</a>"和 "<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>"。</p></li>
+<li><p>如果<a href="/docs/zh/v2.6.x/authenticate.md">启用了身份验证</a>，请提供<strong>令牌</strong>或<strong>用户名 + 密码</strong>。令牌可以是<code translate="no">username:password</code> （如<code translate="no">root:Milvus</code> ）。有关详情，请参阅 "<a href="/docs/zh/v2.6.x/authenticate.md">验证用户访问</a>"和 "<a href="/docs/zh/v2.6.x/users_and_roles.md">创建用户和角色</a>"。</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">通过 URI 连接（禁用身份验证）<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,6 +88,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">使用凭证连接（启用身份验证）<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -155,10 +156,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>令牌格式为<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。文档明确指出<code translate="no">root:Milvus</code> 为默认凭证，《<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>》指南涵盖了用户管理。</p>
+<p>令牌格式为<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。文档明确指出<code translate="no">root:Milvus</code> 为默认凭据，而《<a href="/docs/zh/v2.6.x/users_and_roles.md">创建用户和角色</a>》指南则涉及用户管理。</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">配置超时<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -219,7 +221,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -302,12 +304,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>有关创建、列出和描述数据库以及更广泛的数据库管理任务，请参阅<a href="/docs/zh/manage_databases.md">数据库</a>指南。</p>
+<p>有关创建、列出和描述数据库以及更广泛的数据库管理任务，请参阅<a href="/docs/zh/v2.6.x/manage_databases.md">数据库</a>指南。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -325,7 +328,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh/create-collection.md">创建 Collections</a></p></li>
-<li><p><a href="/docs/zh/insert-update-delete.md">插入实体</a></p></li>
-<li><p><a href="/docs/zh/single-vector-search.md">基本向量搜索</a></p></li>
+<li><p><a href="/docs/zh/v2.6.x/create-collection.md">创建 Collections</a></p></li>
+<li><p><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入实体</a></p></li>
+<li><p><a href="/docs/zh/v2.6.x/single-vector-search.md">基本向量搜索</a></p></li>
 </ul>

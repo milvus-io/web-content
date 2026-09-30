@@ -2,7 +2,7 @@
 id: set-collection-ttl.md
 title: コレクションTTLの設定
 summary: >-
-  一度データがコレクションに挿入されると、デフォルトでそのまま残ります。しかし、シナリオによっては、一定期間後にデータを削除またはクリーンアップしたい場合があります。このような場合、コレクションのTTL（Time-to-Live）プロパティを設定することで、TTLが切れるとMilvusは自動的にデータを削除します。
+  一度データがコレクションに挿入されると、デフォルトでそのまま残ります。しかし、シナリオによっては、一定期間後にデータを削除またはクリーンアップしたい場合があります。そのような場合、コレクションのTTL（Time-to-Live）プロパティを設定することで、TTLが切れるとMilvusは自動的にデータを削除します。
 ---
 <h1 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,14 +36,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL)は、挿入または変更後、一定期間だけデータが有効またはアクセス可能である必要がある場合にデータベースで一般的に使用されます。その後、データは自動的に削除されます。</p>
-<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することにより、それよりも古いデータを自動的に削除するようにMilvusを設定することができます。これにより、最新14日分のデータのみがコレクションに残ります。</p>
+<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することで、それより古いデータを自動的に削除するようにMilvusを設定することができます。これにより、最新14日分のデータのみがコレクションに残ります。</p>
 <div class="alert note">
 <p>期限切れのエンティティは、検索結果やクエリ結果に表示されません。ただし、24 時間以内に実行する必要がある後続のデータ圧縮までは、ストレージに残ります。</p>
 <p>Milvus設定ファイルの<code translate="no">dataCoord.compaction.expiry.tolerance</code> 設定項目を設定することで、いつデータコンパクションを開始するかを制御することができます。</p>
 <p>この設定項目のデフォルトは<code translate="no">-1</code> で、既存のデータ圧縮間隔が適用されることを示しています。しかし、この値を<code translate="no">12</code> のような正の整数に変更すると、エンティティの有効期限が切れた後、指定した時間数後にデータ圧縮が開始されます。</p>
 </div>
 <p>MilvusコレクションのTTLプロパティは、秒単位の整数で指定します。設定されると、TTLを超えたデータはコレクションから自動的に削除される。</p>
-<p>削除処理は非同期で行われるため、指定したTTLが経過しても検索結果からデータが正確に削除されない場合があります。削除はガベージコレクション(GC)とコンパクション処理に依存し、これらの処理は非決定的な間隔で行われるため、遅延が発生する可能性があります。</p>
+<p>削除処理は非同期処理であるため、指定したTTLが経過しても検索結果からデータが正確に削除されない場合があります。削除はガベージコレクション(GC)とコンパクション処理に依存し、これらの処理は非決定的な間隔で行われるため、遅延が発生する可能性があります。</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTLの設定<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,10 +61,25 @@ summary: >-
       </svg>
     </button></h2><p>TTLプロパティを設定できるのは、以下の場合です。</p>
 <ul>
-<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-when-creating-a-collection">コレクションを作成する。</a></p></li>
-<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-for-an-existing-collection">既存のコレクションのTTLプロパティを変更する。</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">コレクションを作成する。</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">既存のコレクションのTTLプロパティを変更する。</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">コレクションの作成時にTTLを設定する</h3><p>次のコード・スニペットは、コレクションを作成するときにTTLプロパティを設定する方法を示しています。</p>
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">コレクションの作成時にTTLを設定する<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次のコード・スニペットは、コレクションを作成するときにTTLプロパティを設定する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -118,13 +133,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">既存のコレクションにTTLを設定する</h3><p>次のコード・スニペットは、既存のコレクションの TTL プロパティを変更する方法を示しています。</p>
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">既存のコレクションにTTLを設定する<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次のコード・スニペットは、既存のコレクションの TTL プロパティを変更する方法を示します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
@@ -160,6 +191,7 @@ client.alterCollection(alterCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
@@ -215,6 +247,7 @@ client.dropCollection(dropCollectionReq);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;&quot;</span>my_collection<span class="hljs-string">&quot;\&quot;,
     \&quot;properties\&quot;: {

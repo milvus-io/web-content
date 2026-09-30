@@ -30,7 +30,7 @@ summary: >-
     </button></h1><p>A pesquisa de texto integral é uma funcionalidade que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto, classificando depois os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
 <p>Utilizando o algoritmo BM25 para pontuação de relevância, esta funcionalidade é particularmente valiosa em cenários de geração aumentada de recuperação (RAG), onde dá prioridade a documentos que correspondem a termos de pesquisa específicos.</p>
 <div class="alert note">
-<p>Ao integrar a pesquisa de texto integral com a pesquisa de vectores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados de pesquisa. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
+<p>Ao integrar a pesquisa de texto integral com a pesquisa de vectores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados de pesquisa. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">Pesquisa híbrida</a>.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">Implementação do BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,11 +47,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece pesquisa de texto completo com base no algoritmo de relevância BM25, uma função de pontuação amplamente adoptada em sistemas de recuperação de informação, e o Milvus integra-o no fluxo de trabalho de pesquisa para fornecer resultados de texto precisos e classificados por relevância.</p>
+    </button></h2><p>O Milvus fornece pesquisa de texto completo com o algoritmo de relevância BM25, uma função de pontuação amplamente adoptada em sistemas de recuperação de informação, e o Milvus integra-o no fluxo de trabalho de pesquisa para fornecer resultados de texto precisos e classificados por relevância.</p>
 <p>A pesquisa de texto completo em Milvus segue o fluxo de trabalho abaixo:</p>
 <ol>
 <li><p><strong>Entrada de texto em bruto</strong>: Insere documentos de texto ou fornece uma consulta utilizando texto simples, sem necessidade de modelos de incorporação.</p></li>
-<li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/analyzer-overview.md">analisador</a> para processar o texto em termos significativos que podem ser indexados e pesquisados.</p></li>
+<li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/v2.6.x/analyzer-overview.md">analisador</a> para processar o texto em termos significativos que podem ser indexados e pesquisados.</p></li>
 <li><p><strong>Processamento da função BM25</strong>: Uma função incorporada transforma estes termos em representações vectoriais esparsas optimizadas para a pontuação BM25.</p></li>
 <li><p><strong>Armazenamento de colecções</strong>: Milvus armazena os embeddings esparsos resultantes numa coleção para uma rápida recuperação e classificação.</p></li>
 <li><p><strong>Pontuação de relevância BM25</strong>: No momento da pesquisa, o Milvus aplica a função de pontuação BM25 para calcular a relevância do documento e retornar os resultados classificados que melhor correspondem aos termos da consulta.</p></li>
@@ -62,9 +62,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Pesquisa de texto integral</span> </span></p>
 <p>Para utilizar a pesquisa de texto integral, siga estes passos principais:</p>
 <ol>
-<li><p><a href="/docs/pt/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Criar uma coleção</a>: Configure os campos necessários e defina uma função BM25 que converte o texto em bruto em embeddings esparsos.</p></li>
-<li><p><a href="/docs/pt/full-text-search.md#Insert-text-data">Inserir dados</a>: Ingerir os seus documentos de texto em bruto na coleção.</p></li>
-<li><p><a href="/docs/pt/full-text-search.md#Perform-full-text-search">Efetuar pesquisas</a>: Utilize texto de consulta em linguagem natural para obter resultados classificados com base na relevância do BM25.</p></li>
+<li><p><a href="/docs/pt/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Criar uma coleção</a>: Configure os campos necessários e defina uma função BM25 que converte o texto em bruto em embeddings esparsos.</p></li>
+<li><p><a href="/docs/pt/v2.6.x/full-text-search.md#Insert-text-data">Inserir dados</a>: Ingerir os seus documentos de texto em bruto na coleção.</p></li>
+<li><p><a href="/docs/pt/v2.6.x/full-text-search.md#Perform-full-text-search">Efetuar pesquisas</a>: Utilize texto de consulta em linguagem natural para obter resultados classificados com base na relevância do BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Criar uma coleção para a pesquisa de texto completo do BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ summary: >-
     </button></h3><p>O esquema da coleção deve incluir pelo menos três campos obrigatórios:</p>
 <ul>
 <li><p><strong>Campo primário</strong>: Identifica de forma única cada entidade na coleção.</p></li>
-<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Armazena documentos de texto em bruto. Deve definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância BM25. Por defeito, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
+<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Armazena documentos de texto em bruto. Deve definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância BM25. Por defeito, o Milvus utiliza o <a href="/docs/pt/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/v2.6.x/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
 <li><p><strong>Campo de vetor esparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Armazena embeddings esparsos gerados automaticamente pela função BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -443,7 +443,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>O tipo de índice a criar. <code translate="no">AUTOINDEX</code> permite ao Milvus otimizar automaticamente as definições de índice. Se precisar de mais controlo sobre as definições do índice, pode escolher entre vários tipos de índices disponíveis para vectores esparsos no Milvus. Para mais informações, consulte <a href="/docs/pt/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</p></td>
+     <td><p>O tipo de índice a criar. <code translate="no">AUTOINDEX</code> permite ao Milvus otimizar automaticamente as definições de índice. Se precisar de mais controlo sobre as definições do índice, pode escolher entre vários tipos de índices disponíveis para vectores esparsos no Milvus. Para mais informações, consulte <a href="/docs/pt/v2.6.x/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -459,7 +459,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Controla a saturação da frequência do termo. Valores mais elevados aumentam a importância das frequências de termos na classificação de documentos. Intervalo de valores: [1.2, 2.0].</p></td>
+     <td><p>Controla a saturação da frequência dos termos. Valores mais elevados aumentam a importância das frequências de termos na classificação de documentos. Intervalo de valores: [1.2, 2.0].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -521,6 +521,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -582,6 +583,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -609,7 +611,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>Depois de inserir os dados na sua coleção, pode efetuar pesquisas de texto completo utilizando consultas de texto em bruto. Milvus converte automaticamente a sua consulta num vetor esparso e classifica os resultados de pesquisa correspondentes utilizando o algoritmo BM25, e depois devolve os resultados topK (<code translate="no">limit</code>).</p>
 <div class="alert note">
-<p>Pode destacar os termos correspondentes nos resultados da pesquisa configurando um marcador de texto. Consulte <a href="/docs/pt/text-highlighter.md">Marcador de texto</a> para obter detalhes.</p>
+<p>Pode destacar os termos correspondentes nos resultados da pesquisa configurando um marcador de texto. Consulte <a href="/docs/pt/v2.6.x/text-highlighter.md">Marcador de texto</a> para obter detalhes.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -670,6 +672,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -696,7 +699,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporção de termos de baixa importância a ignorar durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p></td>
+     <td><p>Proporção de termos de baixa importância a ignorar durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/sparse_vector.md">Vetor esparso</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -712,7 +715,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo de vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
+     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo do vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -803,4 +806,4 @@ client.search(
 <li><p>Utilize operações manuais de vectores esparsos em vez de pesquisa de texto completo</p></li>
 <li><p>Criar colecções separadas para fluxos de trabalho personalizados de vectores esparsos</p></li>
 </ul>
-<p>Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/sparse_vector.md">Vetor esparso</a>.</p>

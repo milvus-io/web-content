@@ -41,9 +41,9 @@ summary: >-
 <p>Вы можете определить каждый аспект коллекции, включая ее схему, параметры индекса, тип метрики и необходимость ее загрузки при создании, чтобы убедиться, что коллекция полностью соответствует вашим требованиям.</p>
 <p>Чтобы создать коллекцию, необходимо</p>
 <ul>
-<li><p><a href="/docs/ru/create-collection.md#Create-Schema">Создать схему</a></p></li>
-<li><p><a href="/docs/ru/create-collection.md#Optional-Set-Index-Parameters">Задать параметры индекса</a> (необязательно)</p></li>
-<li><p><a href="/docs/ru/create-collection.md#Create-a-Collection">Создать коллекцию</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/create-collection.md#Create-Schema">Создать схему</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Задать параметры индекса</a> (необязательно)</p></li>
+<li><p><a href="/docs/ru/v2.6.x/create-collection.md#Create-a-Collection">Создать коллекцию</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">Создать схему<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +60,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Схема определяет структуру данных коллекции. При создании коллекции необходимо разработать схему в соответствии с вашими требованиями. Для получения подробной информации см. раздел <a href="/docs/ru/schema.md">"Объяснение схемы"</a>.</p>
+    </button></h2><p>Схема определяет структуру данных коллекции. При создании коллекции необходимо разработать схему в соответствии с вашими требованиями. Для получения подробной информации см. раздел <a href="/docs/ru/v2.6.x/schema.md">"Объяснение схемы"</a>.</p>
 <p>Следующие фрагменты кода создают схему с динамическим полем enabled и тремя обязательными полями <code translate="no">my_id</code>, <code translate="no">my_vector</code> и <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -226,7 +226,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>Создание индекса для определенного поля ускоряет поиск по этому полю. Индекс записывает порядок следования сущностей в коллекции. Как показано в следующих фрагментах кода, вы можете использовать <code translate="no">metric_type</code> и <code translate="no">index_type</code> для выбора подходящих способов индексации поля в Milvus и измерения сходства между векторными вкраплениями.</p>
 <p>В Milvus вы можете использовать <code translate="no">AUTOINDEX</code> в качестве типа индекса для всех векторных полей и один из <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code> в качестве типа метрики в зависимости от ваших потребностей.</p>
 <p>Как показано в приведенном выше фрагменте кода, для векторных полей необходимо задать как тип индекса, так и тип метрики, а для скалярных полей - только тип индекса. Индексы обязательны для векторных полей, и рекомендуется создавать индексы для скалярных полей, часто используемых в условиях фильтрации.</p>
-<p>Подробнее см. в разделах <a href="/docs/ru/index-vector-fields.md">Индексные векторные поля</a> и <a href="/docs/ru/index-scalar-fields.md">Индексные скалярные поля</a>.</p>
+<p>Подробнее см. в разделах <a href="/docs/ru/v2.6.x/index-vector-fields.md">Индексные векторные поля</a> и <a href="/docs/ru/v2.6.x/index-scalar-fields.md">Индексные скалярные поля</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -400,6 +400,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_1\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -491,6 +492,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -500,6 +502,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
@@ -520,11 +523,26 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Вы можете задать свойства создаваемой коллекции, чтобы она вписалась в ваш сервис. Ниже перечислены применимые свойства.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Установить номер осколка</h3><p>Осколки - это горизонтальные срезы коллекции, и каждый осколок соответствует каналу ввода данных. По умолчанию каждая коллекция имеет один шард. При создании коллекции можно указать количество шардов, чтобы лучше соответствовать объему данных и рабочей нагрузке.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Установить номер осколка<button data-href="#Set-Shard-Number" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Осколки - это горизонтальные срезы коллекции, и каждый осколок соответствует каналу ввода данных. По умолчанию каждая коллекция имеет один шард. При создании коллекции можно указать количество шардов, чтобы лучше соответствовать объему данных и рабочей нагрузке.</p>
 <p>В качестве общего руководства при задании количества осколков учитывайте следующее:</p>
 <ul>
 <li><strong>Размер данных:</strong> Общепринятой практикой является создание одного шарда на каждые 200 миллионов сущностей. Можно также оценить общий объем данных, например, добавить один шард на каждые 100 ГБ данных, которые вы планируете вставить.</li>
-<li><strong>Использование узлов потока:</strong> Если ваш экземпляр Milvus имеет несколько потоковых узлов, рекомендуется использовать несколько шардов. Это гарантирует, что рабочая нагрузка по вставке данных будет распределена между всеми доступными узлами потока, не позволяя одним из них простаивать, а другим быть перегруженными.</li>
+<li><strong>Использование узлов потока:</strong> Если ваш экземпляр Milvus имеет несколько потоковых узлов, рекомендуется использовать несколько шардов. Это гарантирует, что рабочая нагрузка по вставке данных будет распределена между всеми доступными узлами потока, не позволяя одним из них простаивать, в то время как другие будут перегружены.</li>
 </ul>
 <p>Следующий фрагмент кода демонстрирует, как задать номер шарда при создании коллекции.</p>
 <div class="multipleCode">
@@ -568,13 +586,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Включить mmap</h3><p>Milvus по умолчанию включает mmap для всех коллекций, что позволяет Milvus отображать необработанные данные полей в память вместо их полной загрузки. Это уменьшает объем занимаемой памяти и увеличивает емкость коллекции. Подробнее о mmap читайте в разделе <a href="/docs/ru/mmap.md">Использование mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Включить mmap<button data-href="#Enable-mmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus по умолчанию включает mmap для всех коллекций, что позволяет Milvus отображать необработанные данные полей в память вместо их полной загрузки. Это уменьшает объем занимаемой памяти и увеличивает емкость коллекции. Подробнее о mmap читайте в разделе <a href="/docs/ru/v2.6.x/mmap.md">Использование mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">plaintext</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -621,13 +655,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Установка TTL коллекции</h3><p>Если данные в коллекции должны быть сброшены в течение определенного периода, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит сущности в коллекции. Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Установка TTL коллекции<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Если данные в коллекции должны быть сброшены в течение определенного периода времени, подумайте о том, чтобы установить время жизни коллекции (TTL) в секундах. Как только TTL истечет, Milvus удалит сущности в коллекции. Удаление происходит асинхронно, что означает, что поиск и запросы все еще возможны до завершения удаления.</p>
 <p>Следующий фрагмент кода устанавливает TTL на один день (86400 секунд). Рекомендуется устанавливать TTL как минимум на пару дней.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -677,13 +727,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Установка уровня согласованности</h3><p>При создании коллекции вы можете установить уровень согласованности для поисков и запросов в коллекции. Вы также можете изменить уровень согласованности коллекции во время определенного поиска или запроса.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">Установка уровня согласованности<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При создании коллекции вы можете установить уровень согласованности для поисков и запросов в коллекции. Вы также можете изменить уровень согласованности коллекции во время определенного поиска или запроса.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
@@ -730,12 +796,28 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_6\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/tune_consistency.md">Уровень согласованности</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Включение динамического поля</h3><p>Динамическое поле в коллекции - это зарезервированное поле JavaScript Object Notation (JSON) с именем <strong>$meta</strong>. После включения этого поля Milvus сохраняет все не определенные схемой поля, содержащиеся в каждой сущности, и их значения в виде пар ключ-значение в зарезервированном поле.</p>
-<p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/v2.6.x/tune_consistency.md">Уровень согласованности</a>.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Включение динамического поля<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Динамическое поле в коллекции - это зарезервированное поле JavaScript Object Notation (JSON) с именем <strong>$meta</strong>. После включения этого поля Milvus сохраняет все не определенные схемой поля, содержащиеся в каждой сущности, и их значения в виде пар ключ-значение в зарезервированном поле.</p>
+<p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">Динамическое поле</a>.</p>

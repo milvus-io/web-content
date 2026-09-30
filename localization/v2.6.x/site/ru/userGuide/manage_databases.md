@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus база данных служит логической единицей для организации и управления данными. Для повышения безопасности данных и обеспечения многопользовательского доступа можно создать несколько баз данных, чтобы логически изолировать данные для разных приложений или арендаторов. Например, вы создаете базу данных для хранения данных пользователя A и другую базу данных для пользователя B.</p>
+    </button></h2><p>В Milvus база данных служит логической единицей для организации и управления данными. Чтобы повысить безопасность данных и обеспечить многопользовательскую аренду, можно создать несколько баз данных, чтобы логически изолировать данные для разных приложений или арендаторов. Например, вы создаете базу данных для хранения данных пользователя A и другую базу данных для пользователя B.</p>
 <h2 id="Create-database" class="common-anchor-header">Создание базы данных<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -154,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -225,6 +227,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -244,7 +247,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Каждая база данных имеет свои свойства, вы можете задать свойства базы данных при ее создании, как описано в разделе <a href="/docs/ru/manage_databases.md#Create-database">"Создание базы данных"</a>, или изменить и сбросить свойства любой существующей базы данных.</p>
+    </button></h2><p>Каждая база данных имеет свои свойства, вы можете задать свойства базы данных при ее создании, как описано в разделе <a href="/docs/ru/v2.6.x/manage_databases.md#Create-database">"Создание базы данных"</a>, или изменить и сбросить свойства любой существующей базы данных.</p>
 <p>В следующей таблице перечислены возможные свойства базы данных.</p>
 <table>
    <tr>
@@ -285,7 +288,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>string</p></td>
-     <td><p>Указывает часовой пояс по умолчанию, применяемый к операциям с чувствительными ко времени данными в базе данных, в частности для полей <code translate="no">TIMESTAMPTZ</code>. Коллекции наследуют часовой пояс базы данных, если не задан часовой пояс на уровне коллекции. Параметр часового пояса на уровне запроса может временно отменить значения по умолчанию как для базы данных, так и для коллекции. Значение должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p></td>
+     <td><p>Указывает часовой пояс по умолчанию, применяемый к операциям с чувствительными ко времени данными в базе данных, в частности для полей <code translate="no">TIMESTAMPTZ</code>. Коллекции наследуют часовой пояс базы данных, если не задан часовой пояс на уровне коллекции. Параметр часового пояса на уровне запроса может временно отменить значения по умолчанию как для базы данных, так и для коллекции. Значение должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в разделе <a href="/docs/ru/v2.6.x/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">Изменение свойств базы данных<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -336,6 +339,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -390,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -483,6 +488,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -517,7 +523,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus использует управление доступом на основе ролей (RBAC) для управления разрешениями. Вы можете создавать роли с определенными привилегиями и назначать их пользователям, таким образом контролируя их доступ к различным базам данных. Для получения более подробной информации обратитесь к <a href="/docs/ru/rbac.md">документации по RBAC</a>.</p>
+    </button></h3><p>Milvus использует управление доступом на основе ролей (RBAC) для управления разрешениями. Вы можете создавать роли с определенными привилегиями и назначать их пользователям, таким образом контролируя их доступ к различным базам данных. Для получения более подробной информации обратитесь к <a href="/docs/ru/v2.6.x/rbac.md">документации по RBAC</a>.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Существуют ли ограничения на квоты для баз данных?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -533,4 +539,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Да, Milvus позволяет устанавливать ограничения на квоты для базы данных, например максимальное количество коллекций. Полный список ограничений см. в <a href="/docs/ru/limitations.md">документации Milvus Limits</a>.</p>
+    </button></h3><p>Да, Milvus позволяет устанавливать ограничения на квоты для базы данных, например максимальное количество коллекций. Полный список ограничений см. в <a href="/docs/ru/v2.6.x/limitations.md">документации Milvus Limits</a>.</p>

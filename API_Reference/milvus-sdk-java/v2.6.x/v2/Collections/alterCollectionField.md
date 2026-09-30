@@ -83,15 +83,15 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the `max_length` property of a VarChar field named `varchar`
-Map<String, String> properties = new HashMap<>()
-properties.put("max_length", "512")
+// 2. Alter the \`max_length\` property of a VarChar field named \`varchar\`
+Map<String, String> properties = new HashMap<>();
+properties.put("max_length", "512");
 
 AlterCollectionFieldReq alterCollectionFieldReq = AlterCollectionFieldReq.builder()
         .collectionName("test")
         .fieldName("varchar")
         .properties(properties)
         .build();
-client.alterCollectionField(alterCollectionFieldReq)
+client.alterCollectionField(alterCollectionFieldReq);
 ```
 

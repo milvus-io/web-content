@@ -1,0 +1,761 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "File Resource Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "x-zdoc-fragment": {
+    "schemaVersion": "1.0",
+    "apiSurface": "data-plane",
+    "service": "file-resources-v2"
+  },
+  "tags": [
+    {
+      "name": "File Resource Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "文件资源 (V2)"
+        }
+      },
+      "x-include-target": [
+        "milvus"
+      ]
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/v2/vectordb/file_resources/add": {
+      "post": {
+        "operationId": "addFileResource",
+        "summary": "Add File Resource",
+        "deprecated": false,
+        "description": "Adds a file resource that can be referenced by Milvus features such as analyzers.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "添加文件资源",
+            "description": "添加可供 Analyzer 等 Milvus 功能引用的文件资源。"
+          },
+          "ja-JP": {
+            "summary": "File Resource を追加",
+            "description": "analyzer などの Milvus 機能から参照できるファイルリソースを追加します。"
+          }
+        },
+        "tags": [
+          "File Resource Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The unique name of the file resource.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "文件资源的唯一名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ファイルリソースの一意の名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "The object path of the file in the bucket used by Milvus persistent storage. Include the `minio.rootPath` prefix configured in the Milvus configuration file (typically `milvus.yaml`), if any. The file must already exist. For details, refer to [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources).",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "文件在 Milvus 持久化存储所用 bucket 中的对象路径。如已在 Milvus 配置文件（通常为 `milvus.yaml`）中配置 `minio.rootPath`，需包含该前缀。该文件必须已存在。详情请参阅 [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources)。"
+                      },
+                      "ja-JP": {
+                        "description": "Milvus 永続ストレージで使用されるバケット内のファイルのオブジェクトパス。Milvus 設定ファイル（通常は `milvus.yaml`）で設定されている `minio.rootPath` プレフィックスがあれば含めます。ファイルは既に存在している必要があります。詳細は [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources) を参照してください。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "name",
+                  "path"
+                ],
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "name": "synonyms",
+                "path": "files/synonyms.txt"
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "file resource already exists"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    },
+    "/v2/vectordb/file_resources/list": {
+      "post": {
+        "operationId": "listFileResources",
+        "summary": "List File Resources",
+        "deprecated": false,
+        "description": "Lists the file resources registered with Milvus.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看文件资源列表",
+            "description": "列出已在 Milvus 中注册的文件资源。"
+          },
+          "ja-JP": {
+            "summary": "File Resource を一覧表示",
+            "description": "Milvus に登録されているファイルリソースを一覧表示します。"
+          }
+        },
+        "tags": [
+          "File Resource Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be a pair of colon-joined username and password, like `username:password`.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、`username:password` のようにコロンで連結した username と password の組である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {}
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the registered file resources.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回已注册的文件资源列表。"
+              },
+              "ja-JP": {
+                "description": "登録されているファイルリソースを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ListFileResourcesResponse",
+                      "x-tab-label": "success",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        {
+                          "id": 451799928999570200,
+                          "name": "synonyms",
+                          "path": "files/synonyms.txt"
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 65535,
+                      "message": "service unavailable"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    },
+    "/v2/vectordb/file_resources/remove": {
+      "post": {
+        "operationId": "removeFileResource",
+        "summary": "Remove File Resource",
+        "deprecated": false,
+        "description": "Removes a file resource registered with Milvus.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "移除文件资源",
+            "description": "移除已在 Milvus 中注册的文件资源。"
+          },
+          "ja-JP": {
+            "summary": "File Resource を削除",
+            "description": "Milvus に登録されているファイルリソースを削除します。"
+          }
+        },
+        "tags": [
+          "File Resource Operations (V2)"
+        ],
+        "x-base-urls": {
+          "$ref": "#/components/x-base-urls/ZillizVectorV2"
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be a pair of colon-joined username and password, like `username:password`.",
+            "required": false,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、`username:password` のようにコロンで連結した username と password の組である必要があります。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The unique name of the file resource to remove.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要移除的文件资源的唯一名称。"
+                      },
+                      "ja-JP": {
+                        "description": "削除するファイルリソースの一意の名前。"
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "x-added-at": "3.0.x",
+                "x-last-modified": "3.0.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "name": "synonyms"
+              }
+            }
+          },
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an empty object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回空对象。"
+              },
+              "ja-JP": {
+                "description": "空のオブジェクトを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/EmptyResponse",
+                      "x-tab-label": "success",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse",
+                      "x-tab-label": "failure",
+                      "x-added-at": "3.0.x",
+                      "x-last-modified": "3.0.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "3.0.x",
+                  "x-last-modified": "3.0.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1100,
+                      "message": "file resource not found"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null,
+        "x-include-target": [
+          "milvus"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmptyResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "data": {
+            "type": "object",
+            "properties": {},
+            "description": "An empty result object.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "空结果对象。"
+              },
+              "ja-JP": {
+                "description": "空の結果オブジェクト。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "description": "A successful empty response.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "成功的空响应。"
+          },
+          "ja-JP": {
+            "description": "成功した空のレスポンス。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "错误描述。"
+              },
+              "ja-JP": {
+                "description": "エラーメッセージ。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "description": "Returns an error message.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回错误消息。"
+          },
+          "ja-JP": {
+            "description": "エラーメッセージを返します。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      },
+      "FileResourceInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The unique identifier of the file resource.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "文件资源的唯一标识符。"
+              },
+              "ja-JP": {
+                "description": "ファイルリソースの一意の識別子。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "name": {
+            "type": "string",
+            "description": "The unique name of the file resource.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "文件资源的唯一名称。"
+              },
+              "ja-JP": {
+                "description": "ファイルリソースの一意の名前。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "path": {
+            "type": "string",
+            "description": "The object path recorded for the file resource in the bucket used by Milvus persistent storage. The path includes the `minio.rootPath` prefix configured in the Milvus configuration file (typically `milvus.yaml`), if any. For details, refer to [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources).",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "文件资源记录在 Milvus 持久化存储所用 bucket 中的对象路径。如已在 Milvus 配置文件（通常为 `milvus.yaml`）中配置 `minio.rootPath`，该路径包含相应前缀。详情请参阅 [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources)。"
+              },
+              "ja-JP": {
+                "description": "Milvus 永続ストレージで使用されるバケット内のファイルリソースについて記録されたオブジェクトパス。パスには、Milvus 設定ファイル（通常は `milvus.yaml`）で設定されている `minio.rootPath` プレフィックスが含まれます（存在する場合）。詳細は [Manage File Resources](https://milvus.io/docs/manage-file-resources.md#Manage-File-Resources) を参照してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "path"
+        ],
+        "description": "A registered file resource.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "已注册的文件资源。"
+          },
+          "ja-JP": {
+            "description": "登録済みのファイルリソース。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      },
+      "ListFileResourcesResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileResourceInfo",
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "description": "The registered file resources.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "已注册的文件资源列表。"
+              },
+              "ja-JP": {
+                "description": "登録済みのファイルリソース。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "required": [
+          "code",
+          "data"
+        ],
+        "description": "A successful response containing the registered file resources.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "包含已注册文件资源列表的成功响应。"
+          },
+          "ja-JP": {
+            "description": "登録済みのファイルリソースを含む成功レスポンス。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "x-base-urls": {
+      "ZillizVectorV2": [
+        {
+          "key": "cluster",
+          "label": "Cluster Endpoint",
+          "url": "https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530",
+          "prompt": "Use the cluster endpoint if you are using serving clusters.\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "集群端点",
+              "prompt": "如果您使用的是服务集群，请使用集群端点。\n<ul><li><p><b>Free 与 Serverless 版</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated 版</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            },
+            "ja-JP": {
+              "label": "クラスターエンドポイント",
+              "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
+            }
+          },
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+        },
+        {
+          "key": "on-demand-compute",
+          "label": "Project Endpoint (On-Demand)",
+          "url": "https://{project-id}.{region}.api.zillizcloud.com",
+          "prompt": "<p>Use the on-demand compute endpoint if you are using on-demand clusters.</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>",
+          "x-i18n": {
+            "zh-CN": {
+              "label": "项目端点（按需）",
+              "prompt": "<p>如果您使用的是按需集群，请使用项目端点（按需）。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            },
+            "ja-JP": {
+              "label": "プロジェクトエンドポイント（オンデマンド）",
+              "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
+            }
+          },
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+        }
+      ]
+    }
+  }
+}

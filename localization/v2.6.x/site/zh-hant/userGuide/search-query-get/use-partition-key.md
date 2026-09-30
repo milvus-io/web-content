@@ -45,7 +45,7 @@ summary: >-
 <p>下圖說明 Milvus 在啟用或未啟用分割區金鑰功能的情況下，如何處理集合中的搜尋要求。</p>
 <ul>
 <li><p>如果禁用了分區鍵功 能，Milvus 會在資料集中搜尋與查詢向量最相似的實體。如果您知道哪個分區包含最相關的結果，就可以縮小搜尋範圍。</p></li>
-<li><p>如果啟用了分割區金鑰，Milvus 會根據搜尋篩選器中指定的分割區金鑰值來決定搜尋範圍，並且只掃描分割區中符合條件的實體。</p></li>
+<li><p>如果啟用了分割區金鑰，Milvus 會根據搜尋篩選器中指定的分割區金鑰值來決定搜尋範圍，並只掃描分割區中符合條件的實體。</p></li>
 </ul>
 <p>
   
@@ -68,11 +68,26 @@ summary: >-
       </svg>
     </button></h2><p>要使用分區鍵值，您需要</p>
 <ul>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Key">設定分割區金鑰</a>、</p></li>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">設定要建立的分割區數量</a>(選用)，以及</p></li>
-<li><p><a href="/docs/zh-hant/use-partition-key.md#Create-Filtering-Condition">根據分割區金鑰建立篩選條件</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Set-Partition-Key">設定分割區金鑰</a>、</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Set-Partition-Numbers">設定要建立的分割區數量</a>(選用)，以及</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Create-Filtering-Condition">根據分割區金鑰建立篩選條件</a>。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">設定分割區金鑰</h3><p>若要指定標量欄位為分割區金鑰，您需要在新增標量欄位時，將其<code translate="no">is_partition_key</code> 屬性設定為<code translate="no">true</code> 。</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">設定分割區金鑰<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要指定標量欄位為分割區金鑰，您需要在新增標量欄位時，將其<code translate="no">is_partition_key</code> 屬性設定為<code translate="no">true</code> 。</p>
 <div class="alert note">
 <p>當您設定標量欄位為分割區金鑰時，欄位值不能為空或 null。</p>
 </div>
@@ -222,7 +237,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">設定分割區號碼</h3><p>當您指定一個集合中的標量欄位為分區鍵時，Milvus 會自動在集合中建立 16 個分區。當接收到一個實體時，Milvus 會根據該實體的 Partition Key 值選擇一個分區，並將該實體存儲在該分區中，結果是某些或所有分區持有不同 Partition Key 值的實體。</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">設定分割區號碼<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>當您指定一個集合中的標量欄位為分區鍵時，Milvus 會自動在集合中建立 16 個分區。當接收到一個實體時，Milvus 會根據該實體的 Partition Key 值選擇一個分區，並將該實體存儲在該分區中，結果是某些或所有分區持有不同 Partition Key 值的實體。</p>
 <p>您也可以決定要與集合一起建立的分割區數量。只有當您指定一個標量欄位作為 Partition Key 時，這才有效。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -266,13 +296,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">建立篩選條件</h3><p>在啟用了分割區金鑰功能的資料集中執行 ANN 搜尋時，您需要在搜尋請求中包含涉及分割區金鑰的篩選表達式。在篩選表達式中，您可以限制 Partition Key 的值在特定範圍內，這樣 Milvus 就可以將搜尋範圍限制在相應的分區內。</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">建立篩選條件<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在啟用了分割區金鑰功能的資料集中執行 ANN 搜尋時，您需要在搜尋請求中包含涉及分割區金鑰的篩選表達式。在篩選表達式中，您可以限制 Partition Key 的值在特定範圍內，這樣 Milvus 就可以將搜尋範圍限制在相應的分區內。</p>
 <p>執行刪除作業時，建議包含指定單一磁碟分割索引鍵的篩選表達式，以達到更有效率的刪除。此方法可將刪除作業限制在特定的分割區內，減少壓縮期間的寫入擴大，並節省壓縮和索引的資源。</p>
 <p>以下範例示範基於特定的分割區金鑰值和一組分割區金鑰值，進行基於分割區金鑰的篩選。</p>
 <div class="multipleCode">
@@ -335,7 +381,22 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>目前，「分割區金鑰隔離」功能僅適用於索引類型設定為 HNSW 的搜尋。</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">啟用分割區金鑰隔離</h3><p>以下程式碼範例說明如何啟用分割區金鑰隔離。</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">啟用分割區金鑰隔離<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下程式碼範例說明如何啟用分割區金鑰隔離。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -382,10 +443,11 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>啟用磁碟分割區金鑰隔離後，您仍可依照<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers（設定磁碟分割區號碼</a>）一節所述，設定磁碟分割區金鑰和磁碟分割<a href="/docs/zh-hant/use-partition-key.md#Set-Partition-Numbers">區號碼</a>。請注意，基於分割區金鑰的篩選程式應該只包含特定的分割區金鑰值。</p>
+<p>啟用磁碟分割區金鑰隔離後，您仍可以依照<a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Set-Partition-Numbers">Set Partition Numbers（設定磁碟分割區號碼</a>）中的說明設定磁碟分割區金鑰和磁碟分割<a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Set-Partition-Numbers">區號碼</a>。請注意，基於分割區金鑰的篩選程式應該只包含特定的分割區金鑰值。</p>

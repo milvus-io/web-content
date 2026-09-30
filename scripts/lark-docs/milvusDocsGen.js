@@ -479,7 +479,15 @@ class MilvusDocsGen extends larkDocWriter {
             if (block.block_type === 50 && block.reference_synced) {
                 const { source_document_id, source_block_id } = block.reference_synced
                 const source_blocks = await this.__fetch_doc_blocks(source_document_id);
+                if (!source_blocks) {
+                    console.warn(`Skipping reference_synced block ${source_document_id} - ${source_block_id}: source document blocks unavailable`)
+                    continue
+                }
                 const source_block = source_blocks.find(b => b.block_id == source_block_id)
+                if (!source_block) {
+                    console.warn(`Skipping reference_synced block ${source_document_id} - ${source_block_id}: source block not found`)
+                    continue
+                }
                 if (source_block) {
                     const block_id = block.block_id
                     const parent_id = block.parent_id

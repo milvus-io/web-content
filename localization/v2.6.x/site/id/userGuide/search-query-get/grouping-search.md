@@ -219,6 +219,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -230,7 +231,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada permintaan di atas, <code translate="no">limit=3</code> menunjukkan bahwa sistem akan mengembalikan hasil pencarian dari tiga grup, dengan masing-masing grup berisi satu entitas yang paling mirip dengan vektor kueri.</p>
+<p>Pada permintaan di atas, <code translate="no">limit=3</code> menunjukkan bahwa sistem akan mengembalikan hasil pencarian dari tiga grup, dengan masing-masing grup berisi entitas tunggal yang paling mirip dengan vektor kueri.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Mengonfigurasi ukuran grup<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,6 +359,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -397,5 +399,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Jumlah kelompok</strong>: Parameter <code translate="no">limit</code> mengontrol jumlah grup dari mana hasil pencarian dikembalikan, dan bukan jumlah spesifik entitas dalam setiap grup. Menetapkan <code translate="no">limit</code> yang sesuai membantu mengontrol keragaman pencarian dan kinerja kueri. Mengurangi <code translate="no">limit</code> dapat mengurangi biaya komputasi jika data terdistribusi secara padat atau kinerja menjadi perhatian.</p></li>
 <li><p><strong>Entitas per grup</strong>: Parameter <code translate="no">group_size</code> mengontrol jumlah entitas yang dikembalikan per grup. Menyesuaikan <code translate="no">group_size</code> berdasarkan kasus penggunaan Anda dapat meningkatkan kekayaan hasil pencarian. Namun, jika data tidak terdistribusi secara merata, beberapa grup mungkin mengembalikan lebih sedikit entitas daripada yang ditentukan oleh <code translate="no">group_size</code>, terutama dalam skenario data terbatas.</p></li>
 <li><p><strong>Ukuran kelompok yang ketat</strong>: Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha mengembalikan jumlah entitas yang ditentukan (<code translate="no">group_size</code>) untuk setiap grup, kecuali jika tidak ada cukup data dalam grup tersebut. Pengaturan ini memastikan jumlah entitas yang konsisten per grup, tetapi dapat menyebabkan penurunan kinerja dengan distribusi data yang tidak merata atau sumber daya yang terbatas. Jika jumlah entitas yang ketat tidak diperlukan, pengaturan <code translate="no">strict_group_size=False</code> dapat meningkatkan kecepatan kueri.</p></li>
-<li><p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> daripada mengambilnya sebelum pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
+<li><p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> alih-alih mengambilnya sebelum pencarian. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/primary-key-search.md">Pencarian Kunci Utama</a>.</p></li>
 </ul>

@@ -39,7 +39,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from remote storage.</p>
+    </button></h2><p><a href="/docs/v2.6.x/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from remote storage.</p>
 <p><strong>Warm Up</strong> solves this problem by proactively caching critical data during segment initialization.</p>
 <p>It is especially beneficial when:</p>
 <ul>
@@ -177,7 +177,7 @@ beta: Milvus 2.6.4+
      <td><p>Use <code translate="no">sync</code> for vector indexes that are critical to search latency. In batch or low-frequency workloads, <code translate="no">disable</code> for faster segment readiness.</p></td>
    </tr>
 </table>
-<h2 id="Configure-warmup-at-collection-level--Milvus-2611+" class="common-anchor-header">Configure warmup at collection level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-collection-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-collection-level" class="common-anchor-header">Configure warmup at collection level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-collection-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,7 +275,7 @@ client.create_collection(
      <td><p>Warmup setting for all vector indexes in the collection.</p></td>
    </tr>
 </table>
-<h2 id="Configure-warmup-at-field-level--Milvus-2611+" class="common-anchor-header">Configure warmup at field level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-field-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-field-level" class="common-anchor-header">Configure warmup at field level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-field-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -353,7 +353,7 @@ schema.add_field(
     field_params={<span class="hljs-string">&quot;warmup&quot;</span>: <span class="hljs-string">&quot;sync&quot;</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-warmup-at-index-level--Milvus-2611+" class="common-anchor-header">Configure warmup at index level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-index-level--Milvus-2611+" class="anchor-icon" translate="no">
+<h2 id="Configure-warmup-at-index-level" class="common-anchor-header">Configure warmup at index level<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.11+</span><button data-href="#Configure-warmup-at-index-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

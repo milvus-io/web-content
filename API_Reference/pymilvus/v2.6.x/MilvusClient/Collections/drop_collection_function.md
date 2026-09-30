@@ -2,6 +2,12 @@
 
 This operation drops an existing function from the collection.
 
+<div class="alert note">
+
+This does not apply to external collections.
+
+</div>
+
 ## Request syntax
 
 ```python

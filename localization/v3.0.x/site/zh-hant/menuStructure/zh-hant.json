@@ -1,0 +1,3303 @@
+[
+  {
+    "label": "關於 Milvus",
+    "id": "about",
+    "isMenu": true,
+    "order": 0,
+    "children": [
+      {
+        "label": "什麼是 Milvus",
+        "id": "overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Milvus 領養者",
+        "id": "milvus_adopters.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Milvus 發展藍圖",
+        "id": "roadmap.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "新聞稿",
+        "id": "release_notes.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "比較",
+        "id": "comparison.md",
+        "order": 5,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "開始使用",
+    "id": "getstarted",
+    "isMenu": true,
+    "order": 1,
+    "children": [
+      {
+        "label": "快速入門",
+        "id": "quickstart.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "安裝 Milvus",
+        "id": "install_milvus",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "install-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "執行 Milvus Lite",
+            "id": "milvus_lite.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "執行 Milvus 獨立模式",
+            "id": "run_milvus_docker",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "要求",
+                "id": "prerequisite-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker (Linux)",
+                "id": "install_standalone-docker.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Docker Compose（Linux）",
+                "id": "install_standalone-docker-compose.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Docker Desktop（Windows）",
+                "id": "install_standalone-windows.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "執行 Milvus 分散式系統",
+            "id": "run_milvus_k8s",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "要求",
+                "id": "prerequisite-helm.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvus 操作員",
+                "id": "install_cluster-milvusoperator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Helm 圖表",
+                "id": "install_cluster-helm.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "在 GPU 上執行 Milvus",
+            "id": "run_milvus_gpu",
+            "order": 4,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "要求",
+                "id": "prerequisite-gpu.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Helm 圖表",
+                "id": "install_cluster-helm-gpu.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker Compose",
+                "id": "install_standalone-docker-compose-gpu.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "安裝 SDK",
+        "id": "install_sdks",
+        "order": 2,
+        "children": [
+          {
+            "label": "PyMilvus",
+            "id": "install-pymilvus.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Java SDK",
+            "id": "install-java.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "install-go.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Node.js SDK",
+            "id": "install-node.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "連線至 Milvus 伺服器",
+        "id": "connect-to-milvus-server.md",
+        "order": 3,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "概念",
+    "id": "concepts",
+    "isMenu": true,
+    "order": 2,
+    "children": [
+      {
+        "label": "建築",
+        "id": "architecture",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "architecture_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "主要組件",
+            "id": "main_components.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "串流服務",
+            "id": "streaming_service.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "資料處理",
+            "id": "data_processing.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "儲存 V3",
+            "id": "storage-v3.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "啄木鳥",
+            "id": "woodpecker_architecture.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "諾瓦爾",
+            "id": "knowhere.md",
+            "order": 6,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Bitset",
+        "id": "bitset.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "多租戶架構",
+        "id": "multi_tenancy.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "時間戳記",
+        "id": "timestamp.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "時間同步",
+        "id": "time_sync.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "度量類型",
+        "id": "metric.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "記憶體內副本",
+        "id": "replica.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "術語",
+        "id": "glossary.md",
+        "order": 9,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "使用者指南",
+    "id": "userguide",
+    "isMenu": true,
+    "order": 3,
+    "children": [
+      {
+        "label": "資料庫",
+        "id": "manage_databases.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "系列",
+        "id": "collections",
+        "order": 1,
+        "children": [
+          {
+            "label": "關於本系列",
+            "id": "manage-collections.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "建立收藏集",
+            "id": "create-collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "建立外部集合",
+            "id": "create-an-external-collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "瀏覽系列",
+            "id": "view-collections.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "修改集合",
+            "id": "modify-collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "裝填與釋放",
+            "id": "load-and-release.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "設定集合的 TTL",
+            "id": "set-collection-ttl.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "設定一致性層級",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "管理分割區",
+            "id": "manage-partitions.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "管理別名",
+            "id": "manage-aliases.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "取件服務",
+            "id": "drop-collection.md",
+            "order": 10,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "資料結構與資料欄位",
+        "id": "schema",
+        "order": 2,
+        "children": [
+          {
+            "label": "模式說明",
+            "id": "schema.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "主欄位與自動識別碼",
+            "id": "primary-field.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "稠密向量",
+            "id": "dense-vector.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "二進位向量",
+            "id": "binary-vector.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "稀疏向量",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "VarChar 欄位",
+            "id": "string.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "文字欄位",
+            "id": "text.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "數字欄位",
+            "id": "number.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "JSON 欄位",
+            "id": "json-field",
+            "order": 8,
+            "children": [
+              {
+                "label": "JSON 欄位概覽",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "JSON 索引",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "JSON 拆解",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "陣列欄位",
+            "id": "array_data_type.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "StructArray",
+            "id": "structarray",
+            "order": 10,
+            "children": [
+              {
+                "label": "StructArray 概覽",
+                "id": "array-of-structs.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "建立 StructArray 欄位",
+                "id": "create-structarray-field.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "將資料插入 StructArray 欄位中",
+                "id": "insert-data-into-structarray-fields.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "索引、結構體、陣列與欄位",
+                "id": "index-structarray-fields.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "StructArray 的限制",
+                "id": "structarray-limits.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "幾何領域",
+            "id": "geometry-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "TIMESTAMPTZ 欄位",
+            "id": "timestamptz-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "動態欄位",
+            "id": "enable-dynamic-field.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "可為空欄位",
+            "id": "nullable-and-default.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "預設值",
+            "id": "default-values.md",
+            "order": 15,
+            "children": []
+          },
+          {
+            "label": "分析儀",
+            "id": "analyzer",
+            "order": 16,
+            "children": [
+              {
+                "label": "分析器概覽",
+                "id": "analyzer-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "內建分析器",
+                "id": "built-in-analyzers",
+                "order": 1,
+                "children": [
+                  {
+                    "label": "標準",
+                    "id": "standard-analyzer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "英語",
+                    "id": "english-analyzer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "中文",
+                    "id": "chinese-analyzer.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "阿拉伯語",
+                    "id": "arabic-analyzer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "泰語",
+                    "id": "thai-analyzer.md",
+                    "order": 4,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "分詞器",
+                "id": "tokenizers",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "標準",
+                    "id": "standard-tokenizer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "空白字元",
+                    "id": "whitespace-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Jieba",
+                    "id": "jieba-tokenizer.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "泰語",
+                    "id": "thai-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "林德拉",
+                    "id": "lindera-tokenizer.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "加護病房",
+                    "id": "icu-tokenizer.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "語言識別碼",
+                    "id": "language-identifier.md",
+                    "order": 6,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "篩選器",
+                "id": "filters",
+                "order": 3,
+                "children": [
+                  {
+                    "label": "小寫",
+                    "id": "lowercase-filter.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "ASCII 摺疊",
+                    "id": "ascii-folding-filter.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "阿拉伯語標準化",
+                    "id": "arabic-normalization-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "小數位",
+                    "id": "decimaldigit-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "僅限字母數字",
+                    "id": "alphanumonly-filter.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Cnalphanumonly",
+                    "id": "cnalphanumonly-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "Cncharonly",
+                    "id": "cncharonly-filter.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "拼音",
+                    "id": "pinyin-filter.md",
+                    "order": 7,
+                    "children": []
+                  },
+                  {
+                    "label": "長度",
+                    "id": "length-filter.md",
+                    "order": 8,
+                    "children": []
+                  },
+                  {
+                    "label": "停止",
+                    "id": "stop-filter.md",
+                    "order": 9,
+                    "children": []
+                  },
+                  {
+                    "label": "解合器",
+                    "id": "decompounder-filter.md",
+                    "order": 10,
+                    "children": []
+                  },
+                  {
+                    "label": "斯特默",
+                    "id": "stemmer-filter.md",
+                    "order": 11,
+                    "children": []
+                  },
+                  {
+                    "label": "移除標點符號",
+                    "id": "removepunct-filter.md",
+                    "order": 12,
+                    "children": []
+                  },
+                  {
+                    "label": "正規表達式",
+                    "id": "regex-filter.md",
+                    "order": 13,
+                    "children": []
+                  },
+                  {
+                    "label": "同義詞",
+                    "id": "synonym-filter.md",
+                    "order": 14,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "多語言分析器",
+                "id": "multi-language-analyzers.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "根據您的應用情境選擇合適的分析儀",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "管理檔案資源",
+                "id": "manage-file-resources.md",
+                "order": 6,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "變更集合欄位",
+            "id": "alter-collection-field.md",
+            "order": 16,
+            "children": []
+          },
+          {
+            "label": "變更集合結構",
+            "id": "add-fields-to-an-existing-collection.md",
+            "order": 17,
+            "children": []
+          },
+          {
+            "label": "變更外部匯集結構",
+            "id": "alter-external-collection-schema.md",
+            "order": 18,
+            "children": []
+          },
+          {
+            "label": "最佳實務",
+            "id": "best-practices",
+            "isMenu": true,
+            "order": 19,
+            "children": [
+              {
+                "label": "搜尋的資料模型設計",
+                "id": "schema-hands-on.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "使用結構體陣列進行資料模型設計",
+                "id": "best-practices-for-array-of-structs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "插入與刪除",
+        "id": "insert-and-delete",
+        "order": 3,
+        "children": [
+          {
+            "label": "插入實體",
+            "id": "insert-update-delete.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Upsert 實體",
+            "id": "upsert-entities.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "刪除實體",
+            "id": "delete-entities.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "索引",
+        "id": "manage_indexes",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "索引說明",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "FAISS",
+            "id": "faiss.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "浮點向量索引",
+            "id": "floating-vector-indexes",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "FLAT",
+                "id": "flat.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_SQ8",
+                "id": "ivf-sq8.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "IVF_RABITQ",
+                "id": "ivf-rabitq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "HNSW_SQ",
+                "id": "hnsw-sq.md",
+                "order": 6,
+                "children": []
+              },
+              {
+                "label": "HNSW_PQ",
+                "id": "hnsw-pq.md",
+                "order": 7,
+                "children": []
+              },
+              {
+                "label": "HNSW_PRQ",
+                "id": "hnsw-prq.md",
+                "order": 8,
+                "children": []
+              },
+              {
+                "label": "DISKANN",
+                "id": "diskann.md",
+                "order": 9,
+                "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
+              },
+              {
+                "label": "AISAQ",
+                "id": "aisaq.md",
+                "order": 11,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "二進位向量索引",
+            "id": "binary-vector-indexes",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "BIN_IVF_FLAT",
+                "id": "bin-ivf-flat.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "BIN_FLAT",
+                "id": "bin-flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "稀疏向量索引",
+            "id": "sparse-vector-indexes",
+            "order": 4,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "SPARSE_INVERTED_INDEX",
+                "id": "sparse-inverted-index.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "標量索引",
+            "id": "scalar-indexes",
+            "order": 5,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "位圖",
+                "id": "bitmap.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "倒置",
+                "id": "inverted.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RTREE",
+                "id": "rtree.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "支援 GPU 的索引",
+            "id": "gpu-enabled-indexes",
+            "order": 6,
+            "children": [
+              {
+                "label": "GPU 指數概覽",
+                "id": "gpu-index-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "GPU_CAGRA",
+                "id": "gpu-cagra.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "GPU_IVF_FLAT",
+                "id": "gpu-ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "GPU_IVF_PQ",
+                "id": "gpu-ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "GPU_BRUTE_FORCE",
+                "id": "gpu-brute-force.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "搜尋",
+        "id": "search-rerank",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "人工神經網路的基本搜尋",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "篩選搜尋",
+            "id": "filtered-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "範圍搜尋",
+            "id": "range-search.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "分組搜尋",
+            "id": "grouping-search.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "搜尋聚合",
+            "id": "search-aggregation.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "主鍵搜尋",
+            "id": "primary-key-search.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "混合搜尋",
+            "id": "multi-vector-search.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "查詢",
+            "id": "get-and-scalar-query.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "篩選",
+            "id": "filtering",
+            "order": 8,
+            "children": [
+              {
+                "label": "篩選機制解析",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "基本運算子",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "模式匹配",
+                "id": "pattern-matching.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "篩選與範本設定",
+                "id": "filtering-templating.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "JSON 運算子",
+                "id": "json-operators.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "陣列運算子",
+                "id": "array-operators.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "StructArray 運算子",
+                "id": "struct-array-operators.md",
+                "order": 6,
+                "children": []
+              },
+              {
+                "label": "隨機抽樣",
+                "id": "random-sampling.md",
+                "order": 7,
+                "children": []
+              },
+              {
+                "label": "幾何運算子",
+                "id": "geometry-operators.md",
+                "order": 8,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "全文搜尋",
+            "id": "full-text-search.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "文字比對",
+            "id": "keyword-match.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "文字螢光筆",
+            "id": "text-highlighter.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "短語匹配",
+            "id": "phrase-match.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "使用 StructArray 進行搜尋",
+            "id": "search-with-structarray",
+            "order": 13,
+            "children": [
+              {
+                "label": "使用 StructArray 進行基本向量搜尋",
+                "id": "basic-vector-search-with-structarray.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "使用 StructArray 進行篩選搜尋",
+                "id": "filtered-search-with-structarray.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "使用 StructArray 進行範圍搜尋",
+                "id": "range-search-with-structarray.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "使用 StructArray 進行分組搜尋",
+                "id": "grouping-search-with-structarray.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "使用 StructArray 進行混合搜尋",
+                "id": "hybrid-search-with-structarray.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "使用 EmbeddingLists 進行搜尋：ColBERT 與 ColPali",
+                "id": "search-with-embedding-lists.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "選擇一種 EmbeddingList 搜尋策略",
+                "id": "choose-an-embeddinglist-search-strategy.md",
+                "order": 6,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "針對 Milvus 的 Elasticsearch 查詢",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "搜尋迭代器",
+            "id": "with-iterators.md",
+            "order": 15,
+            "children": []
+          },
+          {
+            "label": "使用分區鍵",
+            "id": "use-partition-key.md",
+            "order": 16,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "函數與模型推斷",
+        "id": "embeddings-reranking",
+        "order": 6,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "BM25 功能",
+            "id": "bm25-function.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "基於模型的嵌入函數",
+            "id": "embedding-function",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "嵌入函數概述",
+                "id": "embedding-function-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "OpenAI",
+                "id": "openai.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Azure OpenAI",
+                "id": "azure-openai.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "DashScope",
+                "id": "dashscope.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "基岩",
+                "id": "bedrock.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Vertex AI",
+                "id": "vertex-ai.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "Voyage AI",
+                "id": "voyage-ai.md",
+                "order": 6,
+                "children": []
+              },
+              {
+                "label": "Cohere",
+                "id": "cohere.md",
+                "order": 7,
+                "children": []
+              },
+              {
+                "label": "SiliconFLow",
+                "id": "siliconflow.md",
+                "order": 8,
+                "children": []
+              },
+              {
+                "label": "Hugging Face TEI",
+                "id": "hugging-face-tei.md",
+                "order": 9,
+                "children": []
+              },
+              {
+                "label": "Hugging Face",
+                "id": "hugging-face.md",
+                "order": 10,
+                "children": []
+              },
+              {
+                "label": "Google Gemini",
+                "id": "google-gemini.md",
+                "order": 11,
+                "children": []
+              },
+              {
+                "label": "Yandex Cloud",
+                "id": "yandex-cloud.md",
+                "order": 12,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "MinHash 函式",
+            "id": "minhash-function.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "重新排序函式",
+            "id": "reranking",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "加權排名器",
+                "id": "weighted-ranker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "RRF 排名系統",
+                "id": "rrf-ranker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "排名提升工具",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "腐朽排名榜",
+                "id": "decay-ranker",
+                "isMenu": true,
+                "order": 3,
+                "children": [
+                  {
+                    "label": "《Decay》排名系統概覽",
+                    "id": "decay-ranker-overview.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "高斯衰減",
+                    "id": "gaussian-decay.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "指數衰減",
+                    "id": "exponential-decay.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "線性衰減",
+                    "id": "linear-decay.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "教學：在 Milvus 中實作基於時間的排序",
+                    "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
+                    "order": 4,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "模特評級系統",
+                "id": "model-ranker",
+                "order": 4,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "模型排名系統概覽",
+                    "id": "model-ranker-overview.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "vLLM 排名系統",
+                    "id": "vllm-ranker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "TEI 排名工具",
+                    "id": "tei-ranker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI 排名系統",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "SiliconFlow Ranker",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "DashScope 排名工具",
+                    "id": "dashscope-ranker.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Hugging Face Ranker",
+                    "id": "hugging-face-ranker.md",
+                    "order": 7,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "儲存空間最佳化",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "使用 mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "叢集式壓縮",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "強制合併壓縮",
+            "id": "force-merge.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "分層儲存",
+            "id": "tiered_storage",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "分層儲存概覽",
+                "id": "tiered-storage-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "熱身",
+                "id": "warm-up.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "驅逐",
+                "id": "eviction.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "快照",
+        "id": "snapshots",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概述",
+            "id": "snapshots.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "管理快照",
+            "id": "manage-snapshots.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "用例",
+            "id": "snapshot-use-cases.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "資料匯入",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "準備原始資料",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "匯入資料",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "AI 工具",
+    "id": "aiTools",
+    "order": 4,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "適用於 AI 代理的 Milvus",
+        "id": "milvus_for_agents.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "AI 提示詞",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "Milvus 的 AGENTS.md",
+            "id": "agents_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Python SDK",
+            "id": "python_sdk.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "模式設計",
+            "id": "schema_design.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "搜尋模式",
+            "id": "search_patterns.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "指數選擇",
+            "id": "index_selection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "RAG 處理流程",
+            "id": "rag_pipeline.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus 技能",
+        "id": "milvus_skill",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/milvus-skill",
+        "children": []
+      },
+      {
+        "label": "Milvus MCP 伺服器",
+        "id": "mcp_server_milvus",
+        "order": 3,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
+        "children": []
+      },
+      {
+        "label": "適用於 Claude Code 的 MCP 伺服器",
+        "id": "mcp_claude_context",
+        "order": 4,
+        "externalLink": "https://github.com/zilliztech/claude-context",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "管理指南",
+    "id": "admin_guide",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "部署",
+        "id": "deployment",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "本地部署",
+            "id": "on_premises",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "使用 Docker",
+                "id": "configure-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "使用 Helm",
+                "id": "configure-helm.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "搭配 Milvus Operator",
+                "id": "configure_operator.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "分配資源",
+                "id": "allocate.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "《在雲端》",
+            "id": "on_cloud",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "部署至 AWS",
+                "id": "eks.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "部署至 GCP",
+                "id": "gcp.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "部署至 Azure",
+                "id": "azure.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "在 OpenShift 上部署",
+                "id": "openshift.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "第 7 層負載平衡",
+                "id": "layer-7-lb",
+                "order": 5,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "aws_layer7.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "GCP",
+                    "id": "gcp_layer7.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "ingress.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "雲端儲存",
+                "id": "cloud-storage",
+                "order": 6,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "s3.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "GCP",
+                    "id": "gcs.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "abs.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "設定",
+        "id": "configuration",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "系統設定",
+            "id": "system_configuration.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "即興",
+            "id": "dynamic_config.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "限制收集次數",
+            "id": "limit_collection_counts.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "設定區塊快取",
+            "id": "chunk_cache.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "協調員 HA",
+            "id": "coordinator_ha.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "QueryNode 使用本機磁碟",
+            "id": "configure-querynode-localdisk.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "資料基礎架構",
+        "id": "data_infra_integration",
+        "isMenu": true,
+        "order": 2,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "data-infra-integration-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "元資料",
+            "id": "metadata",
+            "isMenu": true,
+            "order": 1,
+            "children": [
+              {
+                "label": "etcd",
+                "id": "etcd.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "物件儲存",
+            "id": "object-storage.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "訊息佇列",
+            "id": "mqtype",
+            "isMenu": true,
+            "order": 3,
+            "children": [
+              {
+                "label": "概覽",
+                "id": "mqtype-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "啄木鳥",
+                "id": "woodpecker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "脈衝星",
+                "id": "mq_pulsar.md",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "升級至 Pulsar v3",
+                    "id": "upgrade-pulsar-v3.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "繼續使用 Pulsar v2",
+                    "id": "use-pulsar-v2.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "卡夫卡",
+                "id": "mq_kafka.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "RocksMQ",
+                "id": "mq_rocksmq.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "切換訊息佇列",
+                "id": "switch_milvus_mq_type",
+                "order": 5,
+                "children": [
+                  {
+                    "label": "概述",
+                    "id": "switch-mq-type.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "RocksMQ ↔ Woodpecker",
+                    "id": "switch-rocksmq-woodpecker.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "脈衝星 ↔ 啄木鳥",
+                    "id": "switch-pulsar-woodpecker.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "卡夫卡 ↔ 啄木鳥",
+                    "id": "switch-kafka-woodpecker.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "擴展",
+        "id": "scaling",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "規模叢集",
+            "id": "scaleout.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "獨立式秤台",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "透過 HPA 擴展規模",
+            "id": "hpa.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "規模依賴關係",
+            "id": "scale-dependencies.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "升級",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "升級 Milvus 叢集",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "升級 Milvus 獨立版",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "監控、警示與日誌",
+        "id": "monitor_alert_log",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "監測",
+            "id": "monitoring",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "建築",
+                "id": "monitor_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "部署監控服務",
+                "id": "monitor.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "指標可視化",
+                "id": "visualize.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Milvus 指標儀表板",
+                "id": "metrics_dashboard.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "警示",
+            "id": "alerts",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "建立警示",
+                "id": "alert.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "日誌",
+            "id": "logs",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "設定 Grafana Loki",
+                "id": "configure_grafana_loki.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "設定存取日誌",
+                "id": "configure_access_logs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Trace",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Jaeger 描圖",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "資源群組",
+        "id": "resource_groups",
+        "order": 9,
+        "children": [
+          {
+            "label": "管理資源群組",
+            "id": "resource_group.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "安全",
+        "id": "security",
+        "order": 11,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "啟用驗證",
+            "id": "authenticate.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "啟用 RBAC",
+            "id": "rbac",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "RBAC 概覽",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "使用者、權限與角色",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Privilege Group",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "授予權限",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "補助計畫角色",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "刪除使用者與角色",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "傳輸過程中的加密",
+            "id": "tls.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "使用 SASL/SSL 連線至 Kafka",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "12",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "工具",
+    "id": "tools",
+    "isMenu": true,
+    "order": 6,
+    "children": [
+      {
+        "label": "Attu（Milvus GUI）",
+        "id": "milvus_attu",
+        "order": 0,
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
+      },
+      {
+        "label": "Milvus 備份",
+        "id": "milvus_backup",
+        "order": 1,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "milvus_backup_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "指令",
+            "id": "milvus_backup_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "RESTful API",
+            "id": "milvus_backup_api.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "常見案例",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "單一執行個體中的備份與還原",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "在同一個儲存桶內的實例之間進行遷移",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "在不同儲存桶之間的實例間進行遷移",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "在不同 S3 環境的實例之間進行資料遷移",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "觀鳥者",
+        "id": "birdwatcher",
+        "order": 3,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "安裝指南",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "使用指南",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 2,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "milvus_cdc_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "設定 CDC 複製",
+            "id": "set_up_cdc_replication.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "轉換",
+            "id": "cdc_switchover.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "故障轉移",
+            "id": "cdc_failover.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "CDC 複製中的批量匯入",
+            "id": "bulk_import_in_cdc_replication.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CLI",
+        "id": "cli",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概覽",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "安裝",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "指令",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus 連接器",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Spark",
+            "id": "integrate_with_spark.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
+        "label": "Milvus 尺寸選定工具",
+        "id": "sizing",
+        "order": 7,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      },
+      {
+        "label": "PowerShell Milvus 客戶端",
+        "id": "milvus_powershell",
+        "order": 8,
+        "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
+        "children": []
+      },
+      {
+        "label": "ExportLog",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
+        "label": "模型",
+        "id": "models",
+        "isMenu": true,
+        "order": 10,
+        "children": [
+          {
+            "label": "嵌入向量",
+            "id": "embeddings",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "概覽",
+                "id": "embeddings.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "OpenAI",
+                "id": "embed-with-openai.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "句子轉換器",
+                "id": "embed-with-sentence-transform.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "BGE M3",
+                "id": "embed-with-bgm-m3.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "SPLADE",
+                "id": "embed-with-splade.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "航程",
+                "id": "embed-with-voyage.md",
+                "order": 6,
+                "children": []
+              },
+              {
+                "label": "Jina AI",
+                "id": "embed-with-jina.md",
+                "order": 7,
+                "children": []
+              },
+              {
+                "label": "Cohere",
+                "id": "embed-with-cohere.md",
+                "order": 8,
+                "children": []
+              },
+              {
+                "label": "講師",
+                "id": "embed-with-instructor.md",
+                "order": 9,
+                "children": []
+              },
+              {
+                "label": "Mistral AI",
+                "id": "embed-with-mistral-ai.md",
+                "order": 10,
+                "children": []
+              },
+              {
+                "label": "Nomic",
+                "id": "embed-with-nomic.md",
+                "order": 11,
+                "children": []
+              },
+              {
+                "label": "mGTE",
+                "id": "embed-with-mgte.md",
+                "order": 12,
+                "children": []
+              },
+              {
+                "label": "Model2Vec",
+                "id": "embed-with-model2vec.md",
+                "order": 13,
+                "children": []
+              },
+              {
+                "label": "雙子座",
+                "id": "embed-with-gemini.md",
+                "order": 14,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "重新排名者",
+            "id": "rerankers",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "概覽",
+                "id": "rerankers-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "BGE",
+                "id": "rerankers-bge.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Cohere",
+                "id": "rerankers-cohere.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "交叉編碼器",
+                "id": "rerankers-cross-encoder.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "航程",
+                "id": "rerankers-voyage.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Jina AI",
+                "id": "rerankers-jina.md",
+                "order": 5,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "SDK 程式碼助手 (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 11,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "整合功能",
+    "id": "integrations",
+    "isMenu": true,
+    "order": 8,
+    "children": [
+      {
+        "label": "概覽",
+        "id": "integrations_overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "編排",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "LangChain",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "基本用法",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "文字嵌入",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RAG",
+                "id": "integrate_with_langchain.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "混合搜尋",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "全文搜尋",
+                "id": "full_text_search_with_langchain.md",
+                "order": 5,
+                "children": []
+              },
+              {
+                "label": "非同步搜尋",
+                "id": "langchain_milvus_async.md",
+                "order": 6,
+                "children": []
+              },
+              {
+                "label": "RAG 代理",
+                "id": "agentic_rag_with_milvus_and_langgraph.md",
+                "order": 7,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "LlamaIndex",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_llamaindex.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvus 非同步 API",
+                "id": "llamaindex_milvus_async.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "全文搜尋",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "混合搜尋",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "元資料篩選",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "FastGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "HayStack",
+            "id": "haystack",
+            "order": 4,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "全文搜尋",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "小太右衛門",
+            "id": "kotaemon_with_milvus.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dify",
+            "id": "dify_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Llama Stack",
+            "id": "llama_stack_with_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "n8n",
+            "id": "milvus_and_n8n.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "AnythingLLM",
+            "id": "use_milvus_in_anythingllm.md",
+            "order": 14,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "代理人",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "MemGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "駱駝",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "阿格諾",
+            "id": "integrate_with_agno.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "openai_agents_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "MCP",
+            "id": "milvus_and_mcp.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "MemPalace",
+            "id": "mempalace_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Google ADK",
+            "id": "google_adk_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "基本記憶",
+            "id": "basic_memory_with_milvus.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "EverOS",
+            "id": "everos_with_milvus.md",
+            "order": 9,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "評估與可觀察性",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "拉格",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "LangFuse",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "FiftyOne",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "阿里澤·菲尼克斯",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "DeepEval",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "AIMon",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "模型嵌入",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "OpenAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "HuggingFace",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "PyTorch",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "SentenceTransformers",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "VoyageAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Twelve Labs",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "EmbedAnything",
+            "id": "build_RAG_with_milvus_and_embedAnything.md",
+            "order": 15,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "大型語言模型 (LLMs)",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "vLLM",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "煙火",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "SiliconFlow",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "雙子座",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "奧拉馬",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "知識工程",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "為什麼？如何？",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "凡娜",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "知識表",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "資料來源",
+        "id": "data-sources",
+        "order": 7,
+        "children": [
+          {
+            "label": "Airbyte",
+            "id": "integrate_with_airbyte.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "卡夫卡",
+            "id": "kafka-connect-milvus.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Apify",
+            "id": "apify_milvus_rag.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "非結構化",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "個人識別資訊遮罩",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Firecrawl",
+            "id": "build_RAG_with_milvus_and_firecrawl.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Crawl4AI",
+            "id": "build_RAG_with_milvus_and_crawl4ai.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "AWS S3",
+            "id": "build_RAG_from_s3_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "VectorETL",
+            "id": "ETL_using_vectorETL.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "盛宴",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Docling",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "NLWeb",
+            "id": "NLWeb_with_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "其他",
+        "id": "other-integrations",
+        "order": 8,
+        "children": [
+          {
+            "label": "雪花",
+            "id": "integrate_with_snowpark.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Arm",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Jev",
+            "id": "search_with_jev.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "教學指南",
+    "id": "tutorials",
+    "isMenu": true,
+    "order": 7,
+    "children": [
+      {
+        "label": "概覽",
+        "id": "tutorials-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 建置 RAG",
+        "id": "build-rag-with-milvus.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "進階 RAG",
+        "id": "how_to_enhance_your_rag.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 進行全文檢索",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 進行混合搜尋",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 進行圖片搜尋",
+        "id": "image_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "多模態 RAG",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 進行圖 RAG",
+        "id": "graph_rag_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "情境檢索",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "HDBSCAN 聚類",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "在 Milvus 中使用 ColBERT 和 ColPali",
+        "id": "search-with-embedding-lists",
+        "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
+        "children": []
+      },
+      {
+        "label": "向量視覺化",
+        "id": "vector_visualization.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "電影推薦",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "運用「套娃」嵌入法進行漏斗搜尋",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
+        "children": []
+      },
+      {
+        "label": "Attu 快速入門",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "在 asyncio 中使用 AsyncMilvusClient",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 進行文字轉圖像搜尋",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
+      },
+      {
+        "label": "利用大型語言模型生成 Milvus 查詢篩選表達式",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
+        "children": []
+      },
+      {
+        "label": "探索更多",
+        "id": "explore-more",
+        "order": 99,
+        "children": [
+          {
+            "label": "問答系統",
+            "id": "question_answering_system.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "推薦系統",
+            "id": "recommendation_system.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "影片相似度搜尋",
+            "id": "video_similarity_search.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "音訊相似度搜尋",
+            "id": "audio_similarity_search.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "DNA 序列分類",
+            "id": "dna_sequence_classification.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "文字搜尋引擎",
+            "id": "text_search_engine.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "影像去重系統",
+            "id": "image_deduplication_system.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "常見問題",
+    "id": "faq",
+    "isMenu": true,
+    "order": 11,
+    "children": [
+      {
+        "label": "效能常見問題",
+        "id": "performance_faq.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "產品常見問題",
+        "id": "product_faq.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "營運常見問題",
+        "id": "operational_faq.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvus 的限制",
+        "id": "limitations.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "問題排除",
+        "id": "troubleshooting.md",
+        "order": 4,
+        "children": []
+      }
+    ]
+  }
+]

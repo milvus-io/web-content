@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus 中的文字匹配可根據特定術語進行精確的文件檢索。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <div class="alert note">
-<p>文字匹配著重於尋找查詢字詞的精確出現，而不會對匹配文件的相關性進行評分。如果您想要根據查詢字詞的語意和重要性擷取最相關的文件，我們建議您使用<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
+<p>文字匹配著重於尋找查詢字詞的精確出現，而不會對匹配文件的相關性進行評分。如果您想要根據查詢字詞的語意和重要性擷取最相關的文件，我們建議您使用<a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文</a>檢索。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,8 +41,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 整合了<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>來提供底層的倒排索引和基於詞彙的文字搜尋。對於每一個文本條目，Milvus 都會按照以下程序建立索引：</p>
 <ol>
-<li><p><a href="/docs/zh-hant/analyzer-overview.md">分析器</a>：分析器會將輸入的文字標記化為單獨的字詞或標記，然後根據需要套用篩選器。這可讓 Milvus 根據這些標記建立索引。</p></li>
-<li><p><a href="/docs/zh-hant/index-explained.md">建立索引</a>：在文字分析之後，Milvus 會建立反向索引，將每個獨特的標記映射到包含該標記的文件。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器</a>：分析器會將輸入的文字標記化為單獨的字詞或標記，然後根據需要套用篩選器。這可讓 Milvus 根據這些標記建立索引。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/index-explained.md">建立索引</a>：在文字分析之後，Milvus 會建立反向索引，將每個獨特的標記映射到包含該標記的文件。</p></li>
 </ol>
 <p>當使用者執行文字比對時，倒置索引會被用來快速擷取所有包含該詞彙的文件。這比逐一掃描每份文件要快得多。</p>
 <p>
@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文字匹配作用於 <a href="/docs/zh-hant/string.md"><code translate="no">VARCHAR</code></a>欄位類型，基本上是 Milvus 中的字串資料類型。若要啟用文字匹配，請將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 都設定為<code translate="no">True</code> ，然後在定義收集模式時，選擇性地設定文字分析<a href="/docs/zh-hant/analyzer-overview.md">的分析器</a>。</p>
+    </button></h2><p>文字匹配作用於 <a href="/docs/zh-hant/v2.6.x/string.md"><code translate="no">VARCHAR</code></a>欄位類型，基本上是 Milvus 中的字串資料類型。若要啟用文字匹配，請將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 都設定為<code translate="no">True</code> ，然後在定義收集模式時，選擇性地設定文字分析<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">的分析器</a>。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,8 +214,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>關鍵字比對的效能與準確度取決於所選擇的分析器。不同的分析器是針對各種語言和文字結構量身打造的，因此選擇正確的分析器可以顯著影響您特定使用情況的搜尋結果。</p>
-<p>預設情況下，Milvus 使用<code translate="no">standard</code> 分析器，它會根據空白和標點符號來標記文字，移除長於 40 個字元的標記，並將文字轉換為小寫。應用此預設設定不需要額外參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準</a>。</p>
+    </button></h3><p>關鍵字比對的效能與準確度取決於所選擇的分析器。不同的分析器是針對各種語言和文字結構量身打造的，因此選擇正確的分析器可以顯著影響您特定使用個案的搜尋結果。</p>
+<p>預設情況下，Milvus 使用<code translate="no">standard</code> 分析器，它會根據空白和標點符號來標記文字，移除長於 40 個字元的標記，並將文字轉換為小寫。應用此預設設定不需要額外參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/standard-analyzer.md">標準</a>。</p>
 <p>在需要不同分析器的情況下，您可以使用<code translate="no">analyzer_params</code> 參數設定一個分析器。例如，應用<code translate="no">english</code> 分析器來處理英文文字：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -302,7 +302,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p>
+<p>Milvus 也提供其他各種適合不同語言和情境的分析器。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器概述</a>。</p>
 <h2 id="Use-text-match" class="common-anchor-header">使用文字匹配<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -401,7 +401,7 @@ schema.WithField(entity.NewField().
     </button></h3><p>文字匹配可與向量相似性搜尋結合使用，以縮窄搜尋範圍並提昇搜尋效能。在向量相似性搜尋之前使用文字匹配過濾集合，可以減少需要搜尋的文件數量，從而加快查詢時間。</p>
 <p>在這個範例中，<code translate="no">filter</code> 表達式會過濾搜尋結果，使其只包含符合指定詞彙<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 的文件。然後，向量類似性搜尋會在這個經過過濾的文件子集中執行。</p>
 <div class="alert note">
-<p>您可以透過設定文字高亮器來高亮搜尋結果中的符合詞彙。詳情請參閱<a href="/docs/zh-hant/text-highlighter.md">文字高亮程式</a>。</p>
+<p>您可以透過設定文字高亮器來高亮搜尋結果中符合的詞彙。詳情請參閱<a href="/docs/zh-hant/v2.6.x/text-highlighter.md">文字高亮程式</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -467,6 +467,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -546,6 +547,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,

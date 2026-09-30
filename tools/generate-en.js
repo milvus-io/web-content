@@ -18,9 +18,9 @@ import {
   CACHE_FILE,
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
-import versionJson from "../version.json" assert { type: "json" };
+import versionJson from "../version.json" with { type: "json" };
 
-const VERSIONS = ["v2.6.x", "v2.5.x"];
+const VERSIONS = ["v3.0.x", "v2.6.x"];
 const LATEST_VERSION = versionJson.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";

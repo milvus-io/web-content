@@ -68,7 +68,7 @@ CreateAliasParam param = CreateAliasParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withAlias("alias1")
         .build();
-R<RpcStatus> response = client.createAlias(param)
+R<RpcStatus> response = client.createAlias(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

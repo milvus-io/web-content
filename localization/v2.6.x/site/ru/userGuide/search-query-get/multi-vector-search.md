@@ -36,7 +36,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Рабочий процесс гибридного поиска</span> </span></p>
 <p>Многовекторный гибридный поиск объединяет различные методы поиска или охватывает вкрапления из различных модальностей:</p>
 <ul>
-<li><p><strong>Поиск по разреженным и плотным векторам</strong>: <a href="/docs/ru/dense-vector.md">Плотный вектор</a> отлично подходит для выявления семантических связей, а <a href="/docs/ru/sparse_vector.md">разреженный вектор</a> эффективен для точного подбора ключевых слов. Гибридный поиск объединяет эти подходы, обеспечивая как широкое концептуальное понимание, так и точную релевантность терминов, что улучшает результаты поиска. Используя сильные стороны каждого метода, гибридный поиск преодолевает ограничения отдельных подходов, обеспечивая более высокую производительность при выполнении сложных запросов. Здесь представлено более подробное <a href="/docs/ru/full_text_search_with_milvus.md">руководство</a> по гибридному поиску, сочетающему семантический поиск с полнотекстовым.</p></li>
+<li><p><strong>Поиск по разреженным и плотным векторам</strong>: <a href="/docs/ru/v2.6.x/dense-vector.md">Плотный вектор</a> отлично подходит для выявления семантических связей, а <a href="/docs/ru/v2.6.x/sparse_vector.md">разреженный вектор</a> эффективен для точного подбора ключевых слов. Гибридный поиск объединяет эти подходы, обеспечивая как широкое концептуальное понимание, так и точную релевантность терминов, что улучшает результаты поиска. Используя сильные стороны каждого метода, гибридный поиск преодолевает ограничения отдельных подходов, обеспечивая более высокую производительность при выполнении сложных запросов. Здесь представлено более подробное <a href="/docs/ru/v2.6.x/full_text_search_with_milvus.md">руководство</a> по гибридному поиску, сочетающему семантический поиск с полнотекстовым.</p></li>
 <li><p><strong>Мультимодальный векторный поиск</strong>: Мультимодальный векторный поиск - это мощная техника, позволяющая осуществлять поиск по различным типам данных, включая текст, изображения, аудио и другие. Главное преимущество этого подхода - способность объединить различные модальности в единый и целостный поисковый процесс. Например, при поиске товаров пользователь может ввести текстовый запрос, чтобы найти товары, описанные как текстом, так и изображениями. Объединив эти модальности с помощью гибридного метода поиска, можно повысить точность поиска или обогатить его результаты.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Пример<button data-href="#Example" class="anchor-icon" translate="no">
@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. Подробнее об ограничениях на количество векторных полей, допустимых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Лимиты Zilliz Cloud</a>.  Однако при необходимости можно настроить параметр <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> чтобы включить в коллекцию до 10 векторных полей.</p>
+    </button></h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. Подробнее об ограничениях на количество векторных полей, допустимых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Лимиты Zilliz Cloud</a>.  Однако при необходимости вы можете настроить параметр <a href="/docs/ru/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> чтобы включить в коллекцию до 10 векторных полей.</p>
 <p>В этом примере в схему включены следующие поля:</p>
 <ul>
 <li><p><code translate="no">id</code>: Служит в качестве первичного ключа для хранения текстовых идентификаторов. Это поле имеет тип данных <code translate="no">INT64</code>.</p></li>
@@ -101,7 +101,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: Используется для хранения разреженных векторов текстов. Это поле имеет тип данных <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Используется для хранения плотных векторов изображений товаров. Это поле имеет тип данных <code translate="no">FLOAT_VETOR</code> с размерностью вектора 512.</p></li>
 </ul>
-<p>Поскольку для полнотекстового поиска по текстовому полю мы будем использовать встроенный алгоритм BM25, необходимо добавить в схему поле Milvus <code translate="no">Function</code>. Более подробную информацию вы можете найти в разделе <a href="/docs/ru/full-text-search.md">"Полнотекстовый поиск"</a>.</p>
+<p>Поскольку для полнотекстового поиска по текстовому полю мы будем использовать встроенный алгоритм BM25, необходимо добавить в схему поле Milvus <code translate="no">Function</code>. Более подробную информацию вы можете найти в разделе <a href="/docs/ru/v2.6.x/full-text-search.md">"Полнотекстовый поиск"</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -355,7 +355,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text_sparse_index</code>: индекс типа<code translate="no">SPARSE_INVERTED_INDEX</code>с метрическим типом <code translate="no">BM25</code> используется для текстового разреженного векторного поля.</p></li>
 <li><p><code translate="no">image_dense_index</code>: индекс типа <code translate="no">AUTOINDEX</code> с метрическим типом <code translate="no">IP</code> создается для плотного векторного поля изображения.</p></li>
 </ul>
-<p>При необходимости вы можете выбрать другие типы индексов, чтобы наилучшим образом удовлетворить ваши потребности и типы данных. Для получения дополнительной информации о поддерживаемых типах индексов обратитесь к документации по <a href="/docs/ru/index-vector-fields.md">доступным типам индексов</a>.</p>
+<p>При необходимости вы можете выбрать другие типы индексов, чтобы наилучшим образом удовлетворить ваши потребности и типы данных. Для получения дополнительной информации о поддерживаемых типах индексов обратитесь к документации по <a href="/docs/ru/v2.6.x/index-vector-fields.md">доступным типам индексов</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -548,7 +549,7 @@ curl --request POST \
 <li><p><code translate="no">text_dense</code>: список из 768 значений с плавающей точкой, представляющий плотную вставку текстового описания</p></li>
 <li><p><code translate="no">image_dense</code>: список из 512 значений с плавающей точкой, представляющий плотную вставку изображения продукта.</p></li>
 </ul>
-<p>Вы можете использовать одинаковые или разные модели для генерации плотных вкраплений для каждого поля. В этом примере два плотных вложения имеют разные размеры, что говорит о том, что они были сгенерированы разными моделями. При последующем определении каждого поиска обязательно используйте соответствующую модель для генерации соответствующего вложения запроса.</p>
+<p>Вы можете использовать одинаковые или разные модели для генерации плотных вкраплений для каждого поля. В этом примере два плотных вкрапления имеют разные размеры, что говорит о том, что они были сгенерированы разными моделями. При последующем определении каждого поиска обязательно используйте соответствующую модель для генерации соответствующего вложения запроса.</p>
 <p>Поскольку в этом примере используется встроенная функция BM25 для генерации разреженных вкраплений из текстового поля, вам не нужно задавать разреженные векторы вручную. Однако если вы решили не использовать BM25, вы должны предварительно вычислить и предоставить разреженные вкрапления самостоятельно.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -655,6 +656,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;text&quot;: &quot;Red cotton t-shirt with round neck&quot; , &quot;text_dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...], &quot;image_dense&quot;: [0.6366019600530924, -0.09323198122475052, ...]},
@@ -695,7 +697,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>Гибридный поиск реализуется путем создания нескольких <code translate="no">AnnSearchRequest</code> в функции <code translate="no">hybrid_search()</code>, где каждый <code translate="no">AnnSearchRequest</code> представляет собой базовый запрос на поиск ANN для определенного векторного поля. Поэтому перед проведением гибридного поиска необходимо создать <code translate="no">AnnSearchRequest</code> для каждого векторного поля.</p>
-<p>Кроме того, настроив параметр <code translate="no">expr</code> в <code translate="no">AnnSearchRequest</code>, вы можете задать условия фильтрации для гибридного поиска. См. раздел <a href="/docs/ru/filtered-search.md">"Фильтрация поиска"</a> и <a href="/docs/ru/boolean.md">"Объяснение фильтрации</a>".</p>
+<p>Кроме того, настроив параметр <code translate="no">expr</code> в <code translate="no">AnnSearchRequest</code>, вы можете задать условия фильтрации для гибридного поиска. См. раздел <a href="/docs/ru/v2.6.x/filtered-search.md">"Фильтрация поиска"</a> и <a href="/docs/ru/v2.6.x/boolean.md">"Объяснение фильтрации</a>".</p>
 <div class="alert note">
 <p>В гибридном поиске каждый <code translate="no">AnnSearchRequest</code> поддерживает только один запрос.</p>
 </div>
@@ -849,7 +851,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы объединить и ранжировать наборы результатов поиска ANN, необходимо выбрать подходящую стратегию ранжирования. Milvus предлагает несколько типов стратегий ранжирования. Для получения более подробной информации об этих механизмах ранжирования обратитесь к разделам <a href="/docs/ru/weighted-ranker.md">Взвешенный ранжировщик</a> или <a href="/docs/ru/rrf-ranker.md">Ранжировщик RRF</a>.</p>
+    </button></h3><p>Чтобы объединить и ранжировать наборы результатов поиска ANN, необходимо выбрать подходящую стратегию ранжирования. Milvus предлагает несколько типов стратегий ранжирования. Для получения более подробной информации об этих механизмах ранжирования обратитесь к разделам <a href="/docs/ru/v2.6.x/weighted-ranker.md">Взвешенный ранжировщик</a> или <a href="/docs/ru/v2.6.x/rrf-ranker.md">Ранжировщик RRF</a>.</p>
 <p>В данном примере, поскольку нет особого акцента на конкретных поисковых запросах, мы будем использовать стратегию RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -988,6 +990,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,
@@ -1033,7 +1036,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно изменить часовой пояс базы данных или коллекции по умолчанию для одной операции, задав параметр <code translate="no">timezone</code> в вызове гибридного поиска. Он управляет тем, как отображаются и сравниваются значения <code translate="no">TIMESTAMPTZ</code> во время операции.</p>
-<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
+<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/v2.6.x/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
 <p>В примере ниже показано, как временно установить часовой пояс для операции гибридного поиска:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,

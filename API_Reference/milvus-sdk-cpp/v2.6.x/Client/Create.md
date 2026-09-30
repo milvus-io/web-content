@@ -1,6 +1,6 @@
 # Create()
 
-This operation creates a MilvusClientV2 instance.
+This operation creates a new MilvusClientV2 instance and returns it as a std::shared_ptr<MilvusClientV2>. It is a static factory method that performs no network communication; call Connect() on the returned instance to establish a connection.
 
 ```cpp
 static std::shared_ptr<MilvusClientV2> Create()
@@ -8,22 +8,22 @@ static std::shared_ptr<MilvusClientV2> Create()
 
 **RETURNS:**
 
-*Status*
+*std::shared_ptr<milvus::MilvusClientV2>*
 
-Check `status.IsOk()` to confirm success.
+The newly created MilvusClientV2 client instance, as a std::shared_ptr<MilvusClientV2>, ready to be configured with Connect().
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when the client instance cannot be constructed. Create() only allocates the underlying implementation object and performs no network communication; for example, memory allocation failure may throw std::bad_alloc.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Create a client instance, then connect it to the local Milvus server.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {

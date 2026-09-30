@@ -28,7 +28,7 @@ summary: >-
       </svg>
     </button></h1><p>Basée sur un fichier d'index enregistrant l'ordre trié des intégrations vectorielles, la recherche ANN (Approximate Nearest Neighbor) localise un sous-ensemble d'intégrations vectorielles basées sur le vecteur d'interrogation figurant dans une requête de recherche reçue, compare le vecteur d'interrogation avec ceux du sous-groupe et renvoie les résultats les plus similaires. Avec la recherche ANN, Milvus offre une expérience de recherche efficace. Cette page vous aide à apprendre comment effectuer des recherches ANN de base.</p>
 <div class="alert note">
-<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection, les recherches qui incluent ces champs renverront les valeurs par défaut définies ou NULL pour les entités qui n'ont pas explicitement défini de valeurs. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
+<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection, les recherches qui incluent ces champs renverront les valeurs par défaut définies ou NULL pour les entités qui n'ont pas explicitement défini de valeurs. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,14 +51,14 @@ summary: >-
 <p>Pour réduire la courbe d'apprentissage, Milvus propose <strong>AUTOINDEX</strong>. Avec <strong>AUTOINDEX</strong>, Milvus peut analyser la distribution des données dans votre collection pendant la construction de l'index et définit les paramètres d'index les plus optimisés en fonction de l'analyse pour trouver un équilibre entre les performances de recherche et l'exactitude.</p>
 <p>Dans cette section, vous trouverez des informations détaillées sur les sujets suivants :</p>
 <ul>
-<li><p><a href="/docs/fr/single-vector-search.md#Single-Vector-Search">Recherche à vecteur unique</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Bulk-Vector-Search">Recherche par vecteurs multiples</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#ANN-Search-in-Partition">Recherche ANN dans une partition</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Use-Output-Fields">Utilisation des champs de sortie</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Use-Limit-and-Offset">Utilisation de la limite et du décalage</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Use-Level">Utiliser le niveau</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Get-Recall-Rate">Taux de rappel</a></p></li>
-<li><p><a href="/docs/fr/single-vector-search.md#Enhancing-ANN-Search">Améliorer la recherche ANN</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Single-Vector-Search">Recherche à vecteur unique</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Bulk-Vector-Search">Recherche par vecteurs multiples</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">Recherche ANN dans une partition</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Use-Output-Fields">Utilisation des champs de sortie</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">Utilisation de la limite et du décalage</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Use-Level">Utiliser le niveau</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Get-Recall-Rate">Taux de rappel</a></p></li>
+<li><p><a href="/docs/fr/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">Améliorer la recherche ANN</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Recherche à vecteur unique<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,6 +229,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -459,6 +460,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -667,6 +669,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -826,6 +829,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -983,6 +987,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;,
     &quot;data&quot;: [
@@ -1009,7 +1014,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Si votre collection possède un champ <code translate="no">TIMESTAMPTZ</code>, vous pouvez temporairement remplacer le fuseau horaire par défaut de la base de données ou de la collection pour une seule opération en définissant le paramètre <code translate="no">timezone</code> dans l'appel à la recherche. Ce paramètre contrôle la manière dont les valeurs de <code translate="no">TIMESTAMPTZ</code> sont affichées et comparées au cours de l'opération.</p>
-<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p>
+<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/v2.6.x/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p>
 <p>L'exemple ci-dessous montre comment définir temporairement un fuseau horaire pour une opération de recherche :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1049,32 +1054,32 @@ curl --request POST \
 <ul>
 <li><p>Recherche filtrée</p>
 <p>Vous pouvez inclure des conditions de filtrage dans une demande de recherche afin que Milvus procède au filtrage des métadonnées avant d'effectuer des recherches ANN, réduisant ainsi l'étendue de la recherche de l'ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
-<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, reportez-vous à <a href="/docs/fr/filtered-search.md">Recherche filtrée</a>, <a href="/docs/fr/boolean.md">Explication du filtrage</a> et aux rubriques connexes.</p></li>
+<p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, reportez-vous à <a href="/docs/fr/v2.6.x/filtered-search.md">Recherche filtrée</a>, <a href="/docs/fr/v2.6.x/boolean.md">Explication du filtrage</a> et aux rubriques connexes.</p></li>
 <li><p>Recherche par plage</p>
 <p>Vous pouvez améliorer la pertinence des résultats de recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
-<p>Pour en savoir plus sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
+<p>Pour en savoir plus sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/v2.6.x/range-search.md">Recherche par plage</a>.</p></li>
 <li><p>Recherche de regroupement</p>
 <p>Si les entités renvoyées ont la même valeur dans un champ spécifique, les résultats de la recherche peuvent ne pas représenter la distribution de tous les ancrages vectoriels dans l'espace vectoriel. Pour diversifier les résultats de la recherche, envisagez d'utiliser la recherche par regroupement.</p>
-<p>Pour en savoir plus sur la recherche par regroupement, reportez-vous à la section <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>,</p></li>
+<p>Pour en savoir plus sur la recherche par regroupement, reportez-vous à la section <a href="/docs/fr/v2.6.x/grouping-search.md">Recherche par regroupement</a>,</p></li>
 <li><p>Recherche hybride</p>
 <p>Une collection peut inclure plusieurs champs vectoriels pour enregistrer les intégrations vectorielles générées à l'aide de différents modèles d'intégration. Ce faisant, vous pouvez utiliser une recherche hybride pour classer les résultats de la recherche à partir de ces champs vectoriels, améliorant ainsi le taux de rappel.</p>
-<p>Pour en savoir plus sur la recherche hybride, reportez-vous à la section <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p></li>
+<p>Pour en savoir plus sur la recherche hybride, reportez-vous à la section <a href="/docs/fr/v2.6.x/multi-vector-search.md">Recherche hybride</a>.</p></li>
 <li><p>Itérateur de recherche</p>
 <p>Une recherche ANN unique renvoie un maximum de 16 384 entités. Envisagez d'utiliser des itérateurs de recherche si vous avez besoin d'un plus grand nombre d'entités à renvoyer lors d'une recherche unique.</p>
-<p>Pour plus d'informations sur les itérateurs de recherche, voir <a href="/docs/fr/with-iterators.md">Itérateur de recherche</a>.</p></li>
+<p>Pour plus d'informations sur les itérateurs de recherche, voir <a href="/docs/fr/v2.6.x/with-iterators.md">Itérateur de recherche</a>.</p></li>
 <li><p>Recherche en texte intégral</p>
 <p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de surmonter les limites de la recherche sémantique, qui peut négliger des termes précis, et de s'assurer que vous recevez les résultats les plus précis et les plus pertinents en fonction du contexte. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
-<p>Pour plus de détails sur la recherche en texte intégral, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
+<p>Pour plus de détails sur la recherche en texte intégral, voir <a href="/docs/fr/v2.6.x/full-text-search.md">Recherche en texte intégral</a>.</p></li>
 <li><p>Correspondance de texte</p>
 <p>La recherche par mot-clé dans Milvus permet d'extraire des documents avec précision sur la base de termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
-<p>Pour plus de détails sur la correspondance des mots-clés, voir <a href="/docs/fr/keyword-match.md">Correspondance des mots-clés</a>.</p></li>
+<p>Pour plus de détails sur la correspondance des mots-clés, voir <a href="/docs/fr/v2.6.x/keyword-match.md">Correspondance des mots-clés</a>.</p></li>
 <li><p>Utiliser la clé de partition</p>
 <p>L'implication de plusieurs champs scalaires dans le filtrage des métadonnées et l'utilisation d'une condition de filtrage assez compliquée peuvent affecter l'efficacité de la recherche. Une fois que vous avez défini un champ scalaire comme clé de partition et que vous utilisez une condition de filtrage impliquant la clé de partition dans la requête de recherche, cela peut aider à restreindre l'étendue de la recherche dans les partitions correspondant aux valeurs de clé de partition spécifiées.</p>
-<p>Pour plus d'informations sur la clé de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>
+<p>Pour plus d'informations sur la clé de partition, reportez-vous à la section <a href="/docs/fr/v2.6.x/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>
 <li><p>Utiliser mmap</p>
-<p>Pour plus d'informations sur les paramètres mmap, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
+<p>Pour plus d'informations sur les paramètres mmap, voir <a href="/docs/fr/v2.6.x/mmap.md">Utiliser mmap</a>.</p></li>
 <li><p>Compaction de la mise en grappe</p>
-<p>Pour plus d'informations sur les compactions de clustering, voir <a href="/docs/fr/clustering-compaction.md">Compaction de clustering</a>.</p></li>
+<p>Pour plus d'informations sur les compactions de clustering, voir <a href="/docs/fr/v2.6.x/clustering-compaction.md">Compaction de clustering</a>.</p></li>
 <li><p>Utiliser le reranking</p>
-<p>Pour plus d'informations sur l'utilisation des classificateurs pour améliorer la pertinence des résultats de recherche, voir <a href="/docs/fr/decay-ranker-overview.md">Decay Ranker Overview</a> et <a href="/docs/fr/model-ranker-overview.md">Model Ranker Overview.</a></p></li>
+<p>Pour plus d'informations sur l'utilisation des classificateurs pour améliorer la pertinence des résultats de recherche, voir <a href="/docs/fr/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a> et <a href="/docs/fr/v2.6.x/model-ranker-overview.md">Model Ranker Overview.</a></p></li>
 </ul>

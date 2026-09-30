@@ -113,6 +113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -154,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -225,6 +227,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -244,7 +247,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setiap basis data memiliki propertinya sendiri, Anda dapat mengatur properti basis data ketika Anda membuat basis data seperti yang dijelaskan di <a href="/docs/id/manage_databases.md#Create-database">Membuat basis data</a> atau Anda dapat mengubah dan melepas properti dari basis data yang ada.</p>
+    </button></h2><p>Setiap basis data memiliki propertinya sendiri, Anda dapat mengatur properti basis data ketika Anda membuat basis data seperti yang dijelaskan di <a href="/docs/id/v2.6.x/manage_databases.md#Create-database">Membuat basis data</a> atau Anda dapat mengubah dan melepas properti dari basis data yang ada.</p>
 <p>Tabel berikut mencantumkan properti database yang mungkin.</p>
 <table>
    <tr>
@@ -260,7 +263,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>string</p></td>
-     <td><p>Nama-nama grup sumber daya yang terkait dengan basis data yang ditentukan dalam daftar yang dipisahkan dengan koma.</p></td>
+     <td><p>Nama-nama grup sumber daya yang terkait dengan database yang ditentukan dalam daftar yang dipisahkan dengan koma.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
@@ -285,7 +288,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>string</p></td>
-     <td><p>Menentukan zona waktu default yang diterapkan pada operasi yang peka terhadap waktu di dalam basis data, khususnya untuk bidang <code translate="no">TIMESTAMPTZ</code>. Koleksi mewarisi zona waktu basis data kecuali zona waktu tingkat koleksi ditetapkan. Parameter zona waktu tingkat kueri dapat mengganti sementara default basis data dan koleksi. Nilainya harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p></td>
+     <td><p>Menentukan zona waktu default yang diterapkan pada operasi yang peka terhadap waktu di dalam basis data, khususnya untuk bidang <code translate="no">TIMESTAMPTZ</code>. Koleksi mewarisi zona waktu basis data kecuali zona waktu tingkat koleksi ditetapkan. Parameter zona waktu tingkat kueri dapat mengganti sementara default basis data dan koleksi. Nilainya harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">Mengubah properti basis data<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -336,6 +339,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -390,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -483,6 +488,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -517,7 +523,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus menggunakan Role-Based Access Control (RBAC) untuk mengelola izin. Anda dapat membuat peran dengan hak istimewa tertentu dan memberikannya kepada pengguna, sehingga mengontrol akses mereka ke database yang berbeda. Untuk lebih jelasnya, lihat <a href="/docs/id/rbac.md">dokumentasi RBAC</a>.</p>
+    </button></h3><p>Milvus menggunakan Role-Based Access Control (RBAC) untuk mengelola izin. Anda dapat membuat peran dengan hak istimewa tertentu dan memberikannya kepada pengguna, sehingga mengontrol akses mereka ke database yang berbeda. Untuk lebih jelasnya, lihat <a href="/docs/id/v2.6.x/rbac.md">dokumentasi RBAC</a>.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Apakah ada batasan kuota untuk database?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -533,4 +539,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ya, Milvus memungkinkan Anda untuk mengatur batasan kuota untuk database, seperti jumlah maksimum koleksi. Untuk daftar lengkap batasan, silakan lihat <a href="/docs/id/limitations.md">dokumentasi Batasan Milvus</a>.</p>
+    </button></h3><p>Ya, Milvus memungkinkan Anda untuk mengatur batasan kuota untuk database, seperti jumlah maksimum koleksi. Untuk daftar lengkap batasan, silakan lihat <a href="/docs/id/v2.6.x/limitations.md">dokumentasi Batasan Milvus</a>.</p>

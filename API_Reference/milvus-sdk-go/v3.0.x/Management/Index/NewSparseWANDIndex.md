@@ -1,0 +1,40 @@
+# NewSparseWANDIndex()
+
+This function creates a SPARSE_WAND index configuration for sparse vector search using the Weak-AND algorithm.
+
+```go
+func NewSparseWANDIndex(metricType MetricType, dropRatio float64) Index
+```
+
+**PARAMETERS:**
+
+- **[metricType](../MetricType.md)** (*[MetricType](../MetricType.md)*)
+
+    The distance metric type for similarity search (e.g., entity.COSINE, entity.L2, entity.IP).
+
+- **dropRatio** (*float64*)
+
+    The ratio of small vector values to drop during indexing. Range: [0, 1).
+
+**RETURNS:**
+
+*[Index](Index.md)*
+
+An index configuration instance. Pass this to `CreateIndex()` via the index option.
+
+## Example
+
+```go
+import (
+	"github.com/milvus-io/milvus/client/v3/index"
+	"github.com/milvus-io/milvus/client/v3/entity"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+// Create index configuration
+idx := index.NewSparseWANDIndex(entity.COSINE, 0.2)
+
+// Use with CreateIndex
+createIdxOption := milvusclient.NewCreateIndexOption("collection_name", "vector_field", idx)
+task, err := client.CreateIndex(ctx, createIdxOption)
+```

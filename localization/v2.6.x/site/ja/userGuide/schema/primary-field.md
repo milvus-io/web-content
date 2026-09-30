@@ -108,7 +108,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>どのモードを選べばよいかわからない場合は、取り込みが簡単で一意性が保証される<a href="/docs/ja/primary-field.md#Quickstart-Use-AutoID">AutoIDから始めて</a>ください。</p></li>
+<li><p>どのモードを選べばよいかわからない場合は、取り込みが簡単で一意性が保証される<a href="/docs/ja/v2.6.x/primary-field.md#Quickstart-Use-AutoID">AutoIDから始めて</a>ください。</p></li>
 <li><p>手動で主キーを設定することが有益でない限り、すべてのケースで<code translate="no">autoId</code> を使用することをお勧めします。</p></li>
 </ul>
 </div>
@@ -277,6 +277,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -361,6 +362,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -535,6 +537,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -626,6 +629,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -668,7 +672,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>データ移行時に既存の ID を保持するには、<code translate="no">alter_collection_properties</code> を呼び出して<code translate="no">allow_insert_auto_id</code> プロパティを有効にします。trueに設定すると、AutoIDが有効になっていても、milvusはユーザが提供したIDを受け入れます。</p>
-<p>設定の詳細については、「<a href="/docs/ja/modify-collection.md#Example-5-Enable-allowinsertautoid">コレクションの変更</a>」を参照してください。</p>
+<p>設定の詳細については、「<a href="/docs/ja/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">コレクションの変更</a>」を参照してください。</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">クラスタ間でのグローバルなAutoIDの一意性の確保<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +712,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AutoIDが内部で一意の識別子を生成する仕組みを理解することで、<a href="/docs/ja/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">クラスタIDを</a>正しく<a href="/docs/ja/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">設定</a>したり、ID関連の問題をトラブルシューティングしたりする際に役立ちます。</p>
+    </button></h2><p>AutoIDが内部で一意の識別子を生成する仕組みを理解することで、<a href="/docs/ja/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">クラスタIDを</a>正しく<a href="/docs/ja/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">設定</a>したり、ID関連の問題をトラブルシューティングしたりする際に役立ちます。</p>
 <p>AutoIDは、構造化された64ビット形式を使用して一意性を保証します：</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

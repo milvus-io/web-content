@@ -29,7 +29,7 @@ summary: >-
     </button></h1><p>Полнотекстовый поиск - это функция поиска документов, содержащих определенные термины или фразы в текстовых массивах данных, с последующим ранжированием результатов по релевантности. Эта функция позволяет преодолеть ограничения семантического поиска, который может упускать из виду точные термины, обеспечивая получение наиболее точных и контекстуально релевантных результатов. Кроме того, она упрощает векторный поиск, принимая исходный текст, автоматически преобразуя текстовые данные в разреженные вкрапления без необходимости вручную генерировать векторные вкрапления.</p>
 <p>Эта функция, использующая алгоритм BM25 для оценки релевантности, особенно ценна в сценариях поиска с расширенной генерацией (RAG), где приоритет отдается документам, которые точно соответствуют определенным поисковым терминам.</p>
 <div class="alert note">
-<p>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительную информацию см. в разделе <a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a>.</p>
+<p>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a>.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">Реализация BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +50,7 @@ summary: >-
 <p>Полнотекстовый поиск в Milvus осуществляется по следующей схеме:</p>
 <ol>
 <li><p><strong>Ввод исходного текста</strong>: Вы вставляете текстовые документы или задаете запрос, используя обычный текст, без использования моделей встраивания.</p></li>
-<li><p><strong>Анализ текста</strong>: Milvus использует <a href="/docs/ru/analyzer-overview.md">анализатор</a> для преобразования текста в содержательные термины, которые можно индексировать и искать.</p></li>
+<li><p><strong>Анализ текста</strong>: Milvus использует <a href="/docs/ru/v2.6.x/analyzer-overview.md">анализатор</a> для преобразования текста в содержательные термины, которые можно индексировать и искать.</p></li>
 <li><p><strong>Обработка функций BM25</strong>: Встроенная функция преобразует эти термины в разреженные векторные представления, оптимизированные для скоринга BM25.</p></li>
 <li><p><strong>Хранилище коллекций</strong>: Milvus сохраняет полученные разреженные вкрапления в коллекции для быстрого поиска и ранжирования.</p></li>
 <li><p><strong>Оценка релевантности BM25</strong>: Во время поиска Milvus применяет функцию оценки релевантности BM25 для расчета релевантности документов и возвращает ранжированные результаты, которые наилучшим образом соответствуют условиям запроса.</p></li>
@@ -61,9 +61,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Полнотекстовый поиск</span> </span></p>
 <p>Чтобы использовать полнотекстовый поиск, выполните следующие основные действия:</p>
 <ol>
-<li><p><a href="/docs/ru/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Создайте коллекцию</a>: Задайте необходимые поля и определите функцию BM25, которая преобразует необработанный текст в разреженные вкрапления.</p></li>
-<li><p><a href="/docs/ru/full-text-search.md#Insert-text-data">Вставьте данные</a>: Добавьте в коллекцию документы с необработанным текстом.</p></li>
-<li><p><a href="/docs/ru/full-text-search.md#Perform-full-text-search">Выполните поиск</a>: Используйте текст запроса на естественном языке для получения ранжированных результатов, основанных на релевантности BM25.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Создайте коллекцию</a>: Задайте необходимые поля и определите функцию BM25, которая преобразует необработанный текст в разреженные вкрапления.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/full-text-search.md#Insert-text-data">Вставьте данные</a>: Добавьте в коллекцию документы с необработанным текстом.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/full-text-search.md#Perform-full-text-search">Выполните поиск</a>: Используйте текст запроса на естественном языке для получения ранжированных результатов, основанных на релевантности BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Создание коллекции для полнотекстового поиска BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ summary: >-
     </button></h3><p>Схема вашей коллекции должна включать как минимум три обязательных поля:</p>
 <ul>
 <li><p><strong>Первичное поле</strong>: Уникально идентифицирует каждую сущность в коллекции.</p></li>
-<li><p><strong>Текстовое поле</strong> (<code translate="no">VARCHAR</code>): Хранит необработанные текстовые документы. Необходимо установить значение <code translate="no">enable_analyzer=True</code>, чтобы Milvus мог обрабатывать текст для ранжирования релевантности BM25. По умолчанию Milvus использует <a href="/docs/ru/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ru/standard-analyzer.md"> анализатор</a> для анализа текста. Чтобы настроить другой анализатор, обратитесь к разделу <a href="/docs/ru/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
+<li><p><strong>Текстовое поле</strong> (<code translate="no">VARCHAR</code>): Хранит необработанные текстовые документы. Необходимо установить значение <code translate="no">enable_analyzer=True</code>, чтобы Milvus мог обрабатывать текст для ранжирования релевантности BM25. По умолчанию Milvus использует <a href="/docs/ru/v2.6.x/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ru/v2.6.x/standard-analyzer.md"> анализатор</a> для анализа текста. Чтобы настроить другой анализатор, обратитесь к разделу <a href="/docs/ru/v2.6.x/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
 <li><p><strong>Разреженное векторное поле</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Хранит разреженные вкрапления, автоматически генерируемые функцией BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -442,7 +442,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Тип создаваемого индекса. <code translate="no">AUTOINDEX</code> позволяет Milvus автоматически оптимизировать настройки индекса. Если вам нужно больше контроля над настройками индекса, вы можете выбрать один из различных типов индексов, доступных для разреженных векторов в Milvus. Дополнительную информацию см. в разделе <a href="/docs/ru/index.md#Indexes-supported-in-Milvus">Индексы, поддерживаемые в Milvus</a>.</p></td>
+     <td><p>Тип создаваемого индекса. <code translate="no">AUTOINDEX</code> позволяет Milvus автоматически оптимизировать настройки индекса. Если вам нужно больше контроля над настройками индекса, вы можете выбрать один из различных типов индексов, доступных для разреженных векторов в Milvus. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/index.md#Indexes-supported-in-Milvus">Индексы, поддерживаемые в Milvus</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -454,7 +454,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях <em>k</em> или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li></ul></td>
+     <td><p>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях <em>k</em> или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных оценок влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -520,6 +520,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -581,6 +582,7 @@ client.insert(InsertReq.builder()
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
@@ -608,7 +610,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>После того как вы вставили данные в свою коллекцию, вы можете выполнять полнотекстовый поиск с помощью запросов на основе необработанного текста. Milvus автоматически преобразует ваш запрос в разреженный вектор и ранжирует совпадающие результаты поиска с помощью алгоритма BM25, а затем возвращает результаты topK (<code translate="no">limit</code>).</p>
 <div class="alert note">
-<p>Вы можете выделить совпадающие термины в результатах поиска, настроив текстовый маркер. Подробнее см. в разделе <a href="/docs/ru/text-highlighter.md">"Выделитель текста"</a>.</p>
+<p>Вы можете выделить совпадающие термины в результатах поиска, настроив текстовый маркер. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/text-highlighter.md">"Выделитель текста"</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -669,6 +671,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -695,7 +698,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Доля малозначимых терминов, которые следует игнорировать при поиске. Подробнее см. в разделе <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p></td>
+     <td><p>Доля малозначимых терминов, которые следует игнорировать при поиске. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/sparse_vector.md">"Разреженный вектор</a>".</p></td>
    </tr>
    <tr>
      <td></td>
@@ -711,7 +714,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Список имен полей, возвращаемых в результатах поиска. Поддерживаются все поля <strong>, кроме поля разреженного вектора</strong>, содержащего сгенерированные BM25 вкрапления. Общие поля вывода включают поле первичного ключа (например, <code translate="no">id</code>) и поле исходного текста (например, <code translate="no">text</code>). Дополнительную информацию см. в разделе <a href="/docs/ru/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
+     <td><p>Список имен полей, возвращаемых в результатах поиска. Поддерживаются все поля <strong>, кроме поля разреженного вектора</strong>, содержащего сгенерированные BM25 вкрапления. Общие поля вывода включают поле первичного ключа (например, <code translate="no">id</code>) и поле исходного текста (например, <code translate="no">text</code>). Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -802,4 +805,4 @@ client.search(
 <li><p>Используйте ручные операции с разреженными векторами вместо полнотекстового поиска</p></li>
 <li><p>Создавайте отдельные коллекции для пользовательских рабочих процессов с разреженными векторами</p></li>
 </ul>
-<p>Подробнее см. в разделе <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p>
+<p>Подробнее см. в разделе <a href="/docs/ru/v2.6.x/sparse_vector.md">"Разреженный вектор</a>".</p>

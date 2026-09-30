@@ -12,7 +12,7 @@ Use the `CreateDatabaseParam.Builder` to construct a `CreateDatabaseParam` objec
 
 ```java
 import io.milvus.param.collection.CreateDatabaseParam;
-CreateDatabaseParam.Builder builder = CreateDatabaseParam.newBuilder()
+CreateDatabaseParam.Builder builder = CreateDatabaseParam.newBuilder();
 ```
 
 Methods of `CreateDatabaseParam.Builder`:
@@ -67,7 +67,7 @@ import io.milvus.param.collection.CreateDatabaseParam;
 CreateDatabaseParam param = CreateDatabaseParam.newBuilder()
         .withDatabaseName("mydb")
         .build();
-R<RpcStatus> response = client.createDatabase(param)
+R<RpcStatus> response = client.createDatabase(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

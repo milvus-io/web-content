@@ -27,70 +27,24 @@ await milvusClient.listRoles(
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns** *Promise\<SelectRoleResponse>*
+**RETURNS** *Promise<SelectRoleResponse>*
 
 This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 ```javascript
 {
     results: RoleResult[],
-    status: ResStatus
+    status:  ResStatus
 }
 ```
 
 **PARAMETERS:**
 
-- **results** 
+- **results** (*RoleResult[]*) -
+A list of **RoleResult** objects, one per role defined in the current Milvus instance. For the full **RoleResult** field reference, refer to the `describeRole()` doc.
 
-    - **RoleResult** *(RoleResult[]) -*
-
-        - **entities** (*GrantEntity[]*) -
-
-            - **db_name** (*string*) -
-
-                The name of the database(s) that the current role can access.
-
-            - **grantor** (*Grantor*) -
-
-                - **privilege** (*string*) -
-
-                    The privileges of the grantor
-
-                - **user** (*string*) -
-
-                    The name of grantor.
-
-            - **object** (*ObjectEntity*) -
-
-                - **name** (*RbacObjects*) -
-
-                    The object of the role. Possible values include *Collection, Global, and User.*
-
-            - **object_name** (*string*) -
-
-                The name of the object.
-
-            - **role** (*RoleEntity*) -
-
-                - **name** (*string*) -
-
-                    The name of the current role.
-
-        - **role** (*RoleEntity*) -
-
-            - **name** (*string*) -
-
-                The name of the current role.
-
-        - **users** (*User[]*) -
-
-            - **name** (*string*) -
-
-                The name(s) of the user(s) with the specified role.
-
-- **status**
-
-    A **ResStatus object.
+- **ResStatus**
+A **ResStatus** object.
 
     - **code** (*number*) -
 
@@ -98,9 +52,9 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
     - **error_code** (*string* | *number*) -
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 

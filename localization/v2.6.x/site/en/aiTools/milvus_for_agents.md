@@ -95,19 +95,19 @@ summary: >-
       </svg>
     </button></h3><div class="card-wrapper">
 <div class="start_card_container">
-  <a href="/docs/agents_overview.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/agents_overview.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">AGENTS.md</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Top-level rules for any AI coding agent. Start here if you only want one file.</p>
   </a>
 </div>
 <div class="start_card_container">
-  <a href="/docs/python_sdk.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/python_sdk.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Python SDK</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Correct connection patterns, MilvusClient usage, and ORM API prohibition.</p>
   </a>
 </div>
 <div class="start_card_container">
-  <a href="/docs/schema_design.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/schema_design.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Schema Design</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Field types, primary keys, schema immutability, and BM25 configuration.</p>
   </a>
@@ -115,19 +115,19 @@ summary: >-
 </div>
 <div class="card-wrapper">
 <div class="start_card_container">
-  <a href="/docs/search_patterns.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/search_patterns.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Search Patterns</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">ANN, hybrid, and full-text search with critical constraint rules.</p>
   </a>
 </div>
 <div class="start_card_container">
-  <a href="/docs/index_selection.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/index_selection.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Index Selection</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Decision tree for AUTOINDEX, HNSW, DiskANN, and IVF_FLAT.</p>
   </a>
 </div>
 <div class="start_card_container">
-  <a href="/docs/rag_pipeline.md" style="text-decoration: none; color: inherit;">
+  <a href="/docs/v2.6.x/rag_pipeline.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RAG Pipeline</p>
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">End-to-end retrieval-augmented generation flow with Milvus.</p>
   </a>
@@ -183,10 +183,10 @@ summary: >-
 <tr><th>Stage</th><th>Deployment</th><th>Why</th></tr>
 </thead>
 <tbody>
-<tr><td>Prototyping</td><td><a href="/docs/milvus_lite.md">Milvus Lite</a></td><td>Zero-config, in-process. Runs anywhere Python runs — ideal for rapid agent prototyping.</td></tr>
-<tr><td>Development</td><td><a href="/docs/install_standalone-docker.md">Milvus Standalone</a></td><td>Single-node Docker deployment. Good for local development and testing with realistic data volumes.</td></tr>
+<tr><td>Prototyping</td><td><a href="/docs/v2.6.x/milvus_lite.md">Milvus Lite</a></td><td>Zero-config, in-process. Runs anywhere Python runs — ideal for rapid agent prototyping.</td></tr>
+<tr><td>Development</td><td><a href="/docs/v2.6.x/install_standalone-docker.md">Milvus Standalone</a></td><td>Single-node Docker deployment. Good for local development and testing with realistic data volumes.</td></tr>
 <tr><td>Production</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>Fully managed, serverless Milvus. No infrastructure to manage — agents just connect and operate.</td></tr>
-<tr><td>Self-hosted production</td><td><a href="/docs/install_cluster-helm.md">Milvus Distributed</a></td><td>Multi-node Kubernetes deployment for teams that need full control over their infrastructure.</td></tr>
+<tr><td>Self-hosted production</td><td><a href="/docs/v2.6.x/install_cluster-helm.md">Milvus Distributed</a></td><td>Multi-node Kubernetes deployment for teams that need full control over their infrastructure.</td></tr>
 </tbody>
 </table>
 <div class="alert note">

@@ -87,7 +87,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
    </span> <span class="img-wrapper"> <span>Pemfilteran Iteratif</span> </span></p>
-<p>Seperti yang diilustrasikan pada diagram di atas, pencarian dengan pemfilteran berulang melakukan pencarian vektor dalam beberapa kali iterasi. Setiap entitas yang dikembalikan oleh iterator mengalami pemfilteran skalar, dan proses ini terus berlanjut hingga hasil topK yang ditentukan tercapai.</p>
+<p>Seperti yang diilustrasikan pada diagram di atas, pencarian dengan penyaringan berulang melakukan pencarian vektor dalam beberapa kali iterasi. Setiap entitas yang dikembalikan oleh iterator mengalami pemfilteran skalar, dan proses ini terus berlanjut hingga hasil topK yang ditentukan tercapai.</p>
 <p>Metode ini secara signifikan mengurangi jumlah entitas yang mengalami pemfilteran skalar, sehingga sangat bermanfaat untuk menangani ekspresi pemfilteran yang sangat kompleks.</p>
 <p>Namun, penting untuk dicatat bahwa iterator memproses entitas satu per satu. Pendekatan berurutan ini dapat menyebabkan waktu pemrosesan yang lebih lama atau potensi masalah kinerja, terutama ketika sejumlah besar entitas mengalami pemfilteran skalar.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -120,7 +120,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> alih-alih mengambilnya sebelum melakukan pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p>
+<p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> alih-alih mengambilnya sebelum melakukan pencarian. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/primary-key-search.md">Pencarian Kunci Utama</a>.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">Pencarian dengan pemfilteran standar<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,6 +267,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -301,7 +302,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang operator yang dapat Anda gunakan dalam pemfilteran metadata, lihat <a href="/docs/id/filtering">Pemfilteran</a>.</p>
+<p>Untuk informasi lebih lanjut tentang operator yang dapat Anda gunakan dalam pemfilteran metadata, lihat <a href="/docs/id/v2.6.x/filtering">Pemfilteran</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Mencari dengan pemfilteran berulang<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,6 +454,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

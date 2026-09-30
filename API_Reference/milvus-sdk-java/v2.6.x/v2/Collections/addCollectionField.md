@@ -20,11 +20,11 @@ addCollectionField(AddCollectionFieldReq.builder()
 
 - `collectionName(String collectionName)` -
 
-    The name of the target collection.
+The name of the target collection.
 
 - `databaseName(String databaseName)` -
 
-    The name of the database. Defaults to the current database if not specified.
+The name of the database. Defaults to the current database if not specified.
 
 **RETURNS:**
 
@@ -34,7 +34,7 @@ addCollectionField(AddCollectionFieldReq.builder()
 
 - **MilvusClientException**
 
-    This exception will be raised when any error occurs during this operation.
+This exception will be raised when any error occurs during this operation.
 
 ## Example
 

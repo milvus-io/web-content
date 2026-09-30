@@ -37,8 +37,8 @@ summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiap
       </svg>
     </button></h2><ul>
 <li><p>Anda sudah menyiapkan data Anda dan menempatkannya ke dalam bucket Milvus.</p>
-<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk menyiapkan data Anda terlebih dahulu, dan memastikan bahwa data yang disiapkan telah ditransfer ke bucket Milvus pada instance MinIO yang dimulai bersama dengan instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/prepare-source-data.md">Menyiapkan Data Sumber</a>.</p></li>
-<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p></li>
+<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk menyiapkan data Anda terlebih dahulu, dan memastikan bahwa data yang disiapkan telah ditransfer ke bucket Milvus pada instance MinIO yang dimulai bersama dengan instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/prepare-source-data.md">Menyiapkan Data Sumber</a>.</p></li>
+<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat <a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Cuplikan kode berikut ini membuat koleksi sederhana dengan skema yang diberikan. Untuk informasi lebih lanjut tentang parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> dalam referensi SDK.</p>
@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
@@ -326,7 +329,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limitations" class="common-anchor-header">Keterbatasan<button data-href="#Limitations" class="anchor-icon" translate="no">
+<h2 id="Limitations" class="common-anchor-header">Batasan<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -382,7 +385,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>Kendala terkait perilaku penghapusan:</p>
 <ul>
 <li><p>Sebelum status pekerjaan impor adalah <strong>Selesai</strong>, penghapusan tidak dijamin dan mungkin atau mungkin tidak berhasil.</p></li>
-<li><p>Penghapusan setelah status pekerjaan <strong>selesai</strong> dijamin akan berhasil.</p></li>
+<li><p>Penghapusan setelah status pekerjaan <strong>selesai</strong> dijamin berhasil.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Rekomendasi<button data-href="#Recommendations" class="anchor-icon" translate="no">

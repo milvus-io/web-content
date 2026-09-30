@@ -18,6 +18,14 @@ public void appendRow(JsonObject rowData) throws IOException, InterruptedExcepti
 
 **EXCEPTIONS:**
 
+- **IOException**
+
+    This is a checked exception thrown when any data-read or data-write errors occur during this operation.
+
+- **InterruptedException**
+
+    This is a checked exception thrown when a thread that is currently "blocking" (waiting, sleeping, or otherwise occupied) is interrupted by another thread using the `Thread.interrupt()` method.
+
 - **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.

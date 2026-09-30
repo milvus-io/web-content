@@ -1,62 +1,45 @@
 # create_user()
 
-This operation creates a new user with a corresponding password.
+This operation creates a user and optionally stores a description for that user.
 
 ## Request Syntax
 
 ```python
 create_user(
-    user: str,
+    user_name: str,
     password: str,
-    using: str,
-    timeout: float | None
-)
-```
-
-```python
-from pymilvus import utility
-
-# Create a new user
-utility.create_user(
-    user="string",
-    password="string",
-    using="default"
-)
+    timeout: Optional[float] = None,
+    description: Optional[str] = None
+) -> None
 ```
 
 **PARAMETERS:**
 
-- **user** (*string*) - 
+- **user_name** (*str*) -
 
     **[REQUIRED]**
 
-    The name of the new user to create. The value should start with a letter and can only contain underline, letters and numbers.
+    The name of the user to create.
 
-- **password** (*string*) - 
+- **password** (*str*) -
 
     **[REQUIRED]**
 
-    The corresponding password to the new user to create. 
+    The password for the user. The password must satisfy the server password policy.
 
-    The password must be a string of 8 to 64 characters and must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.
+- **timeout** (*float*) -
 
-- **using** (*string*) - 
+    The timeout duration for this operation. If set to `None`, the client waits until the server responds or an error occurs.
 
-    The alias of the employed connection.
+- **description** (*str*) -
 
-    The default value is **default**, indicating that this operation employs the default connection.
-
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    An optional description of the user.
 
 **RETURN TYPE:**
 
-*NoneType*
+*None*
 
-**RETURNS:**
-
-None
+This operation returns no value.
 
 **EXCEPTIONS:**
 
@@ -64,35 +47,19 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
+- **ParamError**
+
+    This exception will be raised when a parameter value is invalid.
+
 ## Examples
 
 ```python
-from pymilvus import connections, utility
+from pymilvus import MilvusClient
 
-# Connection to localhost:19530
-connections.connect()
-
-# Create a user
-user = utility.create_user(user="admin", password="123456")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+client.create_user(
+    user_name="analyst_user",
+    password="P@ssw0rd!",
+    description="Read-only analyst account",
+)
 ```
-
-## Related operations
-
-The following operations are related to `create_user()`
-
-- [Role](../Role/Role.md)
-
-- [delete_user()](delete_user.md)
-
-- [list_roles()](list_roles.md)
-
-- [list_user()](list_user.md)
-
-- [list_users()](list_users.md)
-
-- [list_usernames()](list_usernames.md)
-
-- [reset_password()](reset_password.md)
-
-- [update_password()](update_password.md)
-

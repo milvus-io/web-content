@@ -1,67 +1,65 @@
 # create_user()
 
-This operation creates a user.
+Adds optional description. Async variant shares the sync method parameter and response contract.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_user(
     user_name: str,
     password: str,
-    timeout: Optional[float] = None
-)
+    timeout: Optional[float] = None,
+    description: Optional[str] = None,
+    **kwargs,
+) -> None
 ```
 
 **PARAMETERS:**
 
 - **user_name** (*str*) -
-
-    **[REQUIRED]**
-
-    The name of the user to create.
+**[REQUIRED]**
+The name of the user account to create.
 
 - **password** (*str*) -
+**[REQUIRED]**
+The password for the new user account.
 
-    **[REQUIRED]**
+- **timeout** (*Optional[float]*) -
+Default: `None`
+The maximum time, in seconds, to wait for the RPC to complete.
 
-    The password of the user to create.
+- **description** (*Optional[str]*) -
+Default: `None`
+The optional description of the user account.
 
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+- **kwargs** (*Any*) -
+The additional request context options.
 
 **RETURN TYPE:**
 
-*NoneType*
+*None*
 
 **RETURNS:**
 
-None
+Returns no value after the user is created successfully.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-    This exception will be raised when any error occurs during this operation.
+## Examples
 
-- **BaseException**
-
-    This exception will be raised when this operation fails.
-
-## Example
+Demonstrates create user usage.
 
 ```python
 from pymilvus import MilvusClient
 
-# 1. Create a milvus client
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-# 2. Create a user
-client.create_user(user_name="user_1", password="P@ssw0rd")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+client.create_user("analyst", "Milvus123", description="Analytics account")
+client.update_user("analyst", description="Updated analytics account")
+client.create_role("read_only", description="Read-only role")
+client.alter_role("read_only", description="Updated read-only role")
+print(client.describe_user("analyst"))
+print(client.describe_role("read_only"))
 ```
-

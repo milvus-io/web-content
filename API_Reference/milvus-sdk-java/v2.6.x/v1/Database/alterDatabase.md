@@ -12,7 +12,7 @@ Use the `AlterDatabaseParam.Builder` to construct an `AlterDatabaseParam` object
 
 ```java
 import io.milvus.param.collection.AlterDatabaseParam;
-AlterDatabaseParam.Builder builder = AlterDatabaseParam.newBuilder()
+AlterDatabaseParam.Builder builder = AlterDatabaseParam.newBuilder();
 ```
 
 Methods of `AlterDatabaseParam.Builder`:
@@ -86,7 +86,7 @@ Use the `DescribeDatabaseParam.Builder` to construct a `DescribeDatabaseParam` o
 
 ```java
 import io.milvus.param.collection.DescribeDatabaseParam;
-DescribeDatabaseParam.Builder builder = DescribeDatabaseParam.newBuilder()
+DescribeDatabaseParam.Builder builder = DescribeDatabaseParam.newBuilder();
 ```
 
 Methods of `DescribeDatabaseParam.Builder`:

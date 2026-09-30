@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يشرح هذا الدليل كيفية تمكين Woodpecker واستخدامه كسجل الكتابة الأمامية (WAL) في Milvus 2.6.x. Woodpecker هو سجل كتابة أمامي سحابي أصلي مصمم لتخزين الكائنات، ويوفر إنتاجية عالية، ونفقات تشغيلية منخفضة، وقابلية توسع سلسة. للاطلاع على البنية والتفاصيل القياسية، راجع <a href="/docs/ar/woodpecker_architecture.md">Woodpecker</a>.</p>
+    </button></h1><p>يشرح هذا الدليل كيفية تمكين Woodpecker واستخدامه كسجل الكتابة الأمامية (WAL) في Milvus 2.6.x. Woodpecker هو سجل كتابة أمامي سحابي أصلي مصمم لتخزين الكائنات، ويوفر إنتاجية عالية، ونفقات تشغيلية منخفضة، وقابلية توسع سلسة. للحصول على تفاصيل البنية والمعيار القياسي، راجع <a href="/docs/ar/v2.6.x/woodpecker_architecture.md">Woodpecker</a>.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد تثبيت مشغل <a href="/docs/ar/install_cluster-milvusoperator.md">Milvus،</a> ابدأ تشغيل مجموعة Milvus مع تمكين Woodpecker باستخدام النموذج الرسمي:</p>
+    </button></h3><p>بعد تثبيت مشغل <a href="/docs/ar/v2.6.x/install_cluster-milvusoperator.md">Milvus،</a> ابدأ تشغيل مجموعة Milvus مع تمكين Woodpecker باستخدام النموذج الرسمي:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -220,7 +220,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>قم بتشغيل الأمر التالي لإلغاء تثبيت مجموعة ميلفوس العنقودية.</p>
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا كنت بحاجة إلى ضبط معلمات Woodpecker، اتبع الإعدادات الموضحة في <a href="/docs/ar/deploy_pulsar.md">تكوين تخزين الرسائل</a>.</p>
+<p>إذا كنت بحاجة إلى ضبط معلمات Woodpecker، اتبع الإعدادات الموضحة في <a href="/docs/ar/v2.6.x/deploy_pulsar.md">تكوين تخزين الرسائل</a>.</p>
 <h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">تمكين Woodpecker لمجموعة Milvus العنقودية على Kubernetes (مخطط Helm، التخزين=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +236,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم أولاً بإضافة مخطط Milvus Helm وتحديثه كما هو موضح في <a href="/docs/ar/install_cluster-helm.md">تشغيل Milvus في Kubernetes مع Helm</a>.</p>
+    </button></h3><p>قم أولاً بإضافة وتحديث مخطط ميلفوس هيلم كما هو موضح في <a href="/docs/ar/v2.6.x/install_cluster-helm.md">تشغيل ميلفوس في Kubernetes مع هيلم</a>.</p>
 <p>ثم قم بالنشر باستخدام أحد الأمثلة التالية:</p>
 <p>- النشر العنقودي (الإعدادات الموصى بها مع تمكين Woodpecker وعقدة التدفق):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -255,7 +255,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد النشر، اتبع المستندات لتوجيه المنفذ والاتصال. لضبط معلمات Woodpecker، اتبع الإعدادات الموضحة في <a href="/docs/ar/deploy_pulsar.md">تكوين تخزين الرسائل</a>.</p>
+<p>بعد النشر، اتبع المستندات لتوجيه المنفذ والاتصال. لضبط معلمات Woodpecker، اتبع الإعدادات الموضحة في <a href="/docs/ar/v2.6.x/deploy_pulsar.md">تكوين تخزين الرسائل</a>.</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">قم بتمكين Woodpecker لـ Milvus Standalone في Docker (التخزين = محلي)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>اتبع <a href="/docs/ar/install_standalone-docker.md">تشغيل Milvus في Docker</a>. مثال:</p>
+    </button></h3><p>اتبع <a href="/docs/ar/v2.6.x/install_standalone-docker.md">تشغيل Milvus في Docker</a>. مثال:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -303,7 +303,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>اتبع <a href="/docs/ar/install_standalone-docker-compose.md">تشغيل Milvus مع Docker Compose</a>. مثال:</p>
+    </button></h3><p>اتبع <a href="/docs/ar/v2.6.x/install_standalone-docker-compose.md">تشغيل Milvus مع Docker Compose</a>. مثال:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -338,7 +338,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استنادًا إلى المعايير وحدود الواجهة الخلفية في <a href="/docs/ar/woodpecker_architecture.md">Woodpecker،</a> قم بتحسين إنتاجية الكتابة من طرف إلى طرف من الجوانب التالية:</p>
+    </button></h2><p>استنادًا إلى المعايير وحدود الواجهة الخلفية في <a href="/docs/ar/v2.6.x/woodpecker_architecture.md">Woodpecker،</a> قم بتحسين إنتاجية الكتابة من طرف إلى طرف من الجوانب التالية:</p>
 <ul>
 <li>جانب التخزين<ul>
 <li><strong>تخزين الكائنات (متوافق مع minio/S3)</strong>: زيادة التزامن وحجم الكائن (تجنب الكائنات الصغيرة). راقب حدود عرض النطاق الترددي للشبكة والمجموعة. غالبًا ما تصل عقدة MinIO واحدة على SSD إلى حوالي 100 ميجابايت/ثانية محليًا؛ يمكن أن تصل عقدة EC2 واحدة إلى S3 إلى GB/s.</li>
@@ -413,5 +413,5 @@ batch_count = <span class="hljs-number">2000</span>
       </svg>
     </button></h2><p>Woodpecker عبارة عن نظام WAL سحابي أصلي مصمم لتخزين الكائنات مع مفاضلات بين الإنتاجية والتكلفة والكمون. يعطي الوضع المدمج خفيف الوزن المدعوم حاليًا الأولوية لتحسين التكلفة والإنتاجية، حيث أن معظم السيناريوهات تتطلب فقط كتابة البيانات في غضون وقت معين بدلاً من المطالبة بزمن انتقال منخفض لطلبات الكتابة الفردية. ولذلك، يستخدم Woodpecker عمليات كتابة مجمّعة، مع فواصل زمنية افتراضية تبلغ 10 مللي ثانية لعمليات التخزين الخلفية لنظام الملفات المحلي و200 مللي ثانية لعمليات التخزين الخلفية الشبيهة ب MinIO. أثناء عمليات الكتابة البطيئة، يساوي الحد الأقصى لزمن الاستجابة وقت الفاصل الزمني بالإضافة إلى وقت التدفق.</p>
 <p>لاحظ أنه لا يتم تشغيل إدخال الدُفعات ليس فقط حسب الفواصل الزمنية ولكن أيضًا حسب حجم الدُفعة، والذي يتم تشغيله افتراضيًا على 2 ميغابايت.</p>
-<p>للحصول على تفاصيل حول البنية وأوضاع النشر (MemoryBuffer / QuorumBuffer) والأداء، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
+<p>للحصول على تفاصيل حول البنية وأوضاع النشر (MemoryBuffer / QuorumBuffer) والأداء، راجع <a href="/docs/ar/v2.6.x/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
 <p>لمزيد من تفاصيل المعلمات، راجع <a href="https://github.com/zilliztech/woodpecker">مستودع Woodpecker GitHub</a>.</p>

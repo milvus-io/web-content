@@ -455,4 +455,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>If you are using AI coding assistants like Claude Code or Cursor, you can install <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> to help your AI tools write correct Milvus code.</p>
-<p>For more agent tools including MCP servers and curated prompts, see <a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a>.</p>
+<p>For more agent tools including MCP servers and curated prompts, see <a href="/docs/v2.6.x/milvus_for_agents.md">Milvus for AI Agents</a>.</p>

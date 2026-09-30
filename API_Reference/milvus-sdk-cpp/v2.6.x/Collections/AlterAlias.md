@@ -1,6 +1,6 @@
 # AlterAlias()
 
-This operation changes the alias of a collection to another.
+This operation reassigns the alias set by WithAlias from the collection it currently points to, so that it addresses the collection set by WithCollectionName; subsequent search and query operations issued through the alias resolve to the new collection. On success, the client also refreshes its local collection-timestamp and schema caches for the alias so cached lookups follow the reassignment.
 
 ```cpp
 Status AlterAlias(const AlterAliasRequest& request)
@@ -19,44 +19,46 @@ auto request = AlterAliasRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the database that contains the alias and the target collection; the default database is used if this is left empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the target collection that the alias is reassigned to; after the operation succeeds, the alias points to this collection instead of its previous one.
 
 - `WithAlias(const std::string& alias)`
 
-    Sets the name of the alias.
+    Sets the name of the alias to change; this alias is detached from its current collection and rebound to the collection set by WithCollectionName.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the alias was successfully reassigned to the target collection.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for the underlying failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Reassign an existing alias to a new collection after connecting a MilvusClientV2.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->AlterAlias(
-    milvus::AlterAliasRequest()
-        .WithCollectionName("new_collection")
-        .WithAlias("my_alias"));
+// Point the alias "product_alias" at the collection "product_collection_v2".
+auto request = milvus::AlterAliasRequest()
+    .WithDatabaseName("default")
+    .WithCollectionName("product_collection_v2")
+    .WithAlias("product_alias");
+status = client->AlterAlias(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>حقل JSON هو حقل معرّف بالمخطط في Milvus يخزن بيانات منظمة ذات قيمة رئيسية. يمكن أن تتضمن القيم سلاسل أو أرقامًا أو منطقية أو مصفوفات أو كائنات متداخلة بعمق.</p>
+    </button></h2><p>حقل JSON هو حقل معرّف بمخطط في Milvus يخزن بيانات منظمة ذات قيمة رئيسية. يمكن أن تتضمن القيم سلاسل أو أرقامًا أو منطقية أو مصفوفات أو كائنات متداخلة بعمق.</p>
 <p>إليك مثال لما قد يبدو عليه حقل JSON في مستند:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -248,6 +248,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -255,7 +256,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>يمكنك أيضًا تمكين خاصية الحقل الديناميكي لتخزين الحقول غير المعلنة بمرونة، لكنها ليست مطلوبة لكي تعمل حقول JSON. لمزيد من المعلومات، راجع الحقل <a href="/docs/ar/enable-dynamic-field.md">الديناميكي</a>.</p>
+<p>يمكنك أيضًا تمكين خاصية الحقل الديناميكي لتخزين الحقول غير المعلنة بمرونة، لكنها ليست مطلوبة لكي تعمل حقول JSON. لمزيد من المعلومات، راجع الحقل <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الديناميكي</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">إدراج كيانات ببيانات JSON<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -422,6 +423,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -497,7 +499,7 @@ curl --request POST \
      <td><p>أعلى</p></td>
    </tr>
 </table>
-<p>¹ <em>المصفوفات كـ LHS</em> يعني أن الجانب الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
+<p>¹ <em>المصفوفات كـ LHS</em> يعني أن الطرف الأيسر من تعبير المرشح هو مصفوفة JSON، على سبيل المثال:</p>
 <pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
 json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -542,8 +544,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>نوع JSON cast type</strong> (<code translate="no">json_cast_type</code>): نوع البيانات الذي يجب أن يستخدمه Milvus عند تفسير وفهرسة القيمة في المسار المحدد.</p>
 <ul>
-<li><p>يجب أن يتطابق هذا النوع مع نوع البيانات الفعلي للحقل الذي تتم فهرسته. إذا كنت ترغب في تحويل نوع البيانات إلى نوع آخر أثناء الفهرسة، ففكر في <a href="/docs/ar/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">استخدام دالة الإرسال</a>.</p></li>
-<li><p>للحصول على قائمة كاملة، انظر <a href="/docs/ar/use-json-fields.md#Supported-JSON-cast-types">أدناه</a>.</p></li>
+<li><p>يجب أن يتطابق هذا النوع مع نوع البيانات الفعلي للحقل الذي تتم فهرسته. إذا كنت ترغب في تحويل نوع البيانات إلى نوع آخر أثناء الفهرسة، ففكر في <a href="/docs/ar/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">استخدام دالة الإرسال</a>.</p></li>
+<li><p>للحصول على قائمة كاملة، انظر <a href="/docs/ar/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">أدناه</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">أنواع مصبوبات JSON المدعومة</h4><p>أنواع المصبوب غير حساسة لحالة الأحرف. الأنواع التالية مدعومة:</p>
@@ -585,9 +587,9 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>يجب أن تحتوي المصفوفات على عناصر من نفس النوع للفهرسة المثلى. لمزيد من المعلومات، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفات</a>.</p>
+<p>يجب أن تحتوي المصفوفات على عناصر من نفس النوع للفهرسة المثلى. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/array_data_type.md">حقل المصفوفات</a>.</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">مثال: إنشاء فهارس مسار JSON</h4><p>باستخدام بنية <code translate="no">metadata</code> JSON من مقدمتنا، إليك أمثلة على كيفية إنشاء فهارس على مسارات JSON مختلفة:</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">مثال: إنشاء فهارس مسار JSON</h4><p>باستخدام بنية <code translate="no">metadata</code> JSON من مقدمتنا، إليك أمثلة على كيفية إنشاء فهارس على مسارات JSON المختلفة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the category field as a string</span>
@@ -765,7 +767,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>معلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون نفس نوع مخرجات الدالة المصبوبة.</p></li>
+<li><p>المعلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون نفس نوع مخرجات الدالة المصبوبة.</p></li>
 <li><p>إذا فشل التحويل (على سبيل المثال، سلسلة غير رقمية)، يتم تخطي القيمة ولا تتم فهرستها.</p></li>
 </ul>
 </div>
@@ -799,7 +801,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 metadata[&quot;price&quot;] = 99.99
 metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد ميلفوس نوعها بالترتيب التالي:</p>
+<li><p><strong>استنتاج الأنواع تلقائيًا</strong> - لكل قيمة، يحدد Milvus نوعها بالترتيب التالي:</p>
 <pre><code translate="no" class="language-plaintext">unsigned integer → signed integer → floating-point → string
 <button class="copy-code-btn"></button></code></pre>
 <p>يتم استخدام النوع الأول الذي يناسب القيمة للفهرسة.</p>
@@ -898,6 +900,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -948,7 +951,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>أنك أنشأت فهرسًا على كل حقل متجه.</p></li>
 <li><p>تم تحميل المجموعة في الذاكرة.</p></li>
 </ul>
-<p>للاطلاع على قائمة كاملة بالمشغلات والتعبيرات المدعومة، راجع <a href="/docs/ar/json-operators.md">مشغلات JSON</a>.</p>
+<p>للاطلاع على قائمة كاملة بالمشغلات والتعبيرات المدعومة، راجع <a href="/docs/ar/v2.6.x/json-operators.md">مشغلات JSON</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">اجمع كل شيء معًا<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -968,11 +971,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>لإكمال سير العمل في تطبيق واقعي، ستحتاج أيضًا إلى:</p>
 <ul>
 <li><p><strong>إنشاء فهرس على الحقول المتجهة</strong> (إلزامي لكل حقل متجه في مجموعة)</p>
-<p>الرجوع إلى <a href="/docs/ar/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a></p></li>
+<p>الرجوع إلى <a href="/docs/ar/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a></p></li>
 <li><p><strong>تحميل المجموعة</strong></p>
-<p>راجع <a href="/docs/ar/load-and-release.md">تحميل وتحرير</a></p></li>
+<p>راجع <a href="/docs/ar/v2.6.x/load-and-release.md">تحميل وتحرير</a></p></li>
 <li><p><strong>البحث أو الاستعلام باستخدام مرشحات مسار JSON</strong></p>
-<p>راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/json-operators.md">وعوامل تشغيل JSON</a></p></li>
+<p>راجع <a href="/docs/ar/v2.6.x/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/v2.6.x/json-operators.md">وعوامل تشغيل JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1009,7 +1012,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>الحقل<strong>الديناميكي</strong> عبارة عن كائن JSON مخفي (<code translate="no">$meta</code>) يخزن تلقائيًا أي حقل غير محدد في المخطط.</p></li>
 </ul>
 <p>كلاهما يدعمان البنى المتداخلة وفهرسة مسار JSON، لكن الحقول الديناميكية أكثر ملاءمة لهياكل البيانات الاختيارية أو المتطورة.</p>
-<p>راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a> للحصول على التفاصيل.</p>
+<p>راجع <a href="/docs/ar/v2.6.x/enable-dynamic-field.md">الحقل الديناميكي</a> للحصول على التفاصيل.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">هل هناك أي قيود على حجم حقل JSON؟<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1042,7 +1045,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>لا، لا تدعم حقول JSON القيم الافتراضية. ومع ذلك، يمكنك تعيين <code translate="no">nullable=True</code> عند تعريف الحقل للسماح بإدخالات فارغة.</p>
-<p>راجع <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a> للحصول على التفاصيل.</p>
+<p>راجع <a href="/docs/ar/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a> للحصول على التفاصيل.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">هل هناك أي اصطلاحات تسمية لمفاتيح حقول JSON؟<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

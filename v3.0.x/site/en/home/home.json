@@ -1,0 +1,135 @@
+{
+  "section1": {
+    "order": 0,
+    "title": "",
+    "items": [{
+        "title": "Install Milvus",
+        "key": "stand-alone",
+        "btnLabel": "Learn to install",
+        "link": "install_standalone-docker.md"
+      },
+
+
+      {
+        "title": "Quick Start",
+        "key": "Cluster",
+        "btnLabel": "Learn to use",
+        "link": "quickstart.md"
+      },
+      {
+        "title": "Milvus Bootcamp",
+        "key": "bootcamps",
+        "btnLabel": "Learn More",
+        "link": "/bootcamp"
+      }
+    ]
+  },
+  "section2": {
+    "order": -1,
+    "title": "Welcome to Milvus Documentation! ",
+    "desc": [
+      "Here you will learn about <a href='overview.md'>what Milvus is</a>, and how to <a href='install_standalone-docker.md'>install</a>, <a href='manage_connection.md'>use</a>, and <a href='eks.md'>deploy</a> Milvus to build an <a href='image_similarity_search.md'>application</a> according to your business need. You will also find <a href='performance_faq.md'>FAQs</a> and <a href='api-reference/pymilvus/v2.0.0rc6/api/collection.html'>API references</a> here.",
+      "You can start by browsing the recomended contents below or using the search box at the top left to search across the documentation. If you do not find the information you are looking for, feel free to ask <i>MilMil</i> at the bottom right or submit an issue via GitHub by using the buttons at the top right of each page."
+    ]
+  },
+  "section3": {
+    "title": "Recommended articles",
+    "items": [{
+        "label": "Use",
+        "list": [{
+            "text": "Manage Collections",
+            "link": "manage-collections.md"
+          },
+          {
+            "text": "Insert, Upsert & Delete",
+            "link": "insert-update-delete.md"
+          },
+          {
+            "text": "Manage Indexes",
+            "link": "manage-indexes.md"
+          },
+          {
+            "text": "Single-Vector Search",
+            "link": "single-vector-search.md"
+          },
+          {
+            "text": "Get & Scalar Query",
+            "link": "get-and-scalar-query.md"
+          }
+        ]
+      },
+      {
+        "label": "Deploy",
+        "list": [{
+            "text": "Deploy on Clouds",
+            "link": "eks.md"
+          },
+          {
+            "text": "Scale a Milvus Cluster",
+            "link": "scaleout.md"
+          },
+          {
+            "text": "Set up Storage",
+            "link": "deploy_s3.md"
+          },
+          {
+            "text": "Monitor and Alert",
+            "link": "monitor.md"
+          },
+          {
+            "text": "Upgrade",
+            "link": "upgrade.md"
+          }
+        ]
+      },
+      {
+        "label": "Learn",
+        "list": [{
+            "text": "System Configurations",
+            "link": "configuration_standalone-basic.md"
+          },
+          {
+            "text": "Architecture Overview",
+            "link": "architecture_overview.md"
+          },
+          {
+            "text": "Vector Index",
+            "link": "index_selection.md"
+          },
+          {
+            "text": "Similarity Metrics",
+            "link": "metric.md"
+          },
+          {
+            "text": "Glossary",
+            "link": "glossary.md"
+          }
+        ]
+      }
+    ]
+  },
+  "section4": {
+    "loadBtn": {
+      "label": "See More Blogs",
+      "isExternal": true,
+      "link": "/blog"
+    },
+    "title": "Blog",
+    "items": [{
+      "time": "Feb 19, 2024",
+      "link": "https://milvus.io/blog/what-milvus-version-to-start-with.md",
+      "title": "What Milvus version to start with",
+      "abstract": "Selecting the appropriate Milvus version is foremost to the success of any project leveraging vector search technology. With different Milvus versions tailored to varying requirements, understanding the importance of selecting the correct version is crucial for achieving the desired results.",
+      "imgSrc": "https://zilliz-cms.s3.us-west-2.amazonaws.com/2_0_cover_bbc582b347.jpg"
+    }]
+  },
+  "section5": {
+    "title": "What's new in docs",
+    "date": "March 2024",
+    "list": [
+      "With the release of Milvus 2.0-RC7, we've made a number of compatibility and performance updates. Check out the <a href='release_notes.md'>Release Notes</a> for details. Note that RC7 is <i>not compatible</i> with previous versions of Milvus 2.0.0 due to changes made to storage format.",
+      "<a href='/docs/v2.0.0/image_similarity_search.md'>Tutorials</a> are updated with direct links to Jupyter notebook, GitHub repos, and online demos. Read the latest tutorial about how to use Milvus to build a <a href='/blog/dna_sequence_classification.md'>DNA sequence classification model</a>.",
+      "The list of <a href='/docs/v2.0.0/milvus_adopters.md'>Milvus adopters</a> is further extended with more use cases added to the <a href='https://milvus.io/blog'>blog</a>. <a href='https://github.com/milvus-io/milvus-docs/issues/new?assignees=&labels=&template=--error-report.yaml&title=v2.0.0%20Milvus%20Adopters%20(milvus_adopters.md)%20Doc%20Update'>Let us know</a> if your organization also uses Milvus and would like to be mentioned as well."
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # DropCollectionFieldProperties()
 
-Drop a field's properties.
+This operation removes the specified property keys from a field of an existing collection, restoring those properties to their defaults. Each key is sent as a delete key on an AlterCollectionField request, and the client invalidates its cached schema for the collection afterwards.
 
 ```cpp
 Status DropCollectionFieldProperties(const DropCollectionFieldPropertiesRequest& request)
@@ -13,60 +13,63 @@ auto request = DropCollectionFieldPropertiesRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithFieldName(field_name)
-    .WithPropertyKeys(keys);
+    .WithPropertyKeys(keys)
+    .AddPropertyKey(key);
 ```
 
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name; the default database is used if it is empty. Optional.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection that owns the field.
 
 - `WithFieldName(const std::string& field_name)`
 
-    Sets the name of the field.
+    Sets the name of the field whose properties will be dropped.
 
 - `WithPropertyKeys(std::set<std::string>&& keys)`
 
-    Sets the properties to drop from this field.
+    Sets the whole set of property keys to remove from the field, replacing any keys added previously.
 
 - `AddPropertyKey(const std::string& key)`
 
-    Sets a property to drop from this field.
+    Adds one property key to be removed from the field.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the specified property keys were removed from the collection field.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when the request cannot be constructed, the RPC transport fails, or the server rejects the drop. Inspect Status::IsOk() and Status::Message() (or the exception message) for the failure reason.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Drop the mmap.enabled property from a vector field after connecting a MilvusClientV2.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->DropCollectionFieldProperties(
-    milvus::DropCollectionFieldPropertiesRequest()
-        .WithCollectionName("my_collection")
-        .WithFieldName("my_field")
-        .AddPropertyKey("max_length"));
+// Remove the "mmap.enabled" property from the vector field, restoring its default
+auto request = milvus::DropCollectionFieldPropertiesRequest()
+    .WithDatabaseName("default")
+    .WithCollectionName("my_collection")
+    .WithFieldName("my_vector")
+    .AddPropertyKey(milvus::MMAP_ENABLED);
+status = client->DropCollectionFieldProperties(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

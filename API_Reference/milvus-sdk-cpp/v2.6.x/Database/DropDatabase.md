@@ -1,6 +1,6 @@
 # DropDatabase()
 
-This operation drops a database.
+This operation drops the specified database and everything in it, permanently deleting the database together with all of its collections, partitions, and data on the server. After the drop succeeds, the client also invalidates its schema and collection timestamp caches for that database.
 
 ```cpp
 Status DropDatabase(const DropDatabaseRequest& request)
@@ -17,36 +17,37 @@ auto request = DropDatabaseRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the name of the database to drop. If the name is empty, the database currently used by the connection (the default database unless UseDatabase() was called) is dropped.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the database was dropped successfully.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details, such as NOT_CONNECTED when the client is not connected to the server.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Use DropDatabase() after connecting a MilvusClientV2.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-status = client->DropDatabase(
-    milvus::DropDatabaseRequest()
-        .WithDatabaseName(my_db_name)
-);
+const std::string db_name = "my_temp_db";
+
+auto request = milvus::DropDatabaseRequest()
+    .WithDatabaseName(db_name);
+status = client->DropDatabase(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

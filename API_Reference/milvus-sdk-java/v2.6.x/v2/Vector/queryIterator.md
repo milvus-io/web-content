@@ -75,7 +75,7 @@ queryIterator(QueryIteratorReq.builder()
 
 - `reduceStopForBest(boolean reduceStopForBest)` -
 
-    Whether to stop iteration when the best result is found.
+    Whether to stop iteration when the best result is found. Defaults to `true` in v2.6.25 or later; in earlier versions it defaults to `false`.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 

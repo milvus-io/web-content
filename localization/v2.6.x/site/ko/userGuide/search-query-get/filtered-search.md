@@ -84,9 +84,9 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
    </span> <span class="img-wrapper"> <span>반복 필터링</span> </span></p>
-<p>위 다이어그램에서 볼 수 있듯이, 반복 필터링을 사용한 검색은 벡터 검색을 반복적으로 수행합니다. 반복기가 반환하는 각 엔티티는 스칼라 필터링을 거치며, 이 프로세스는 지정된 상위 K 결과에 도달할 때까지 계속됩니다.</p>
+<p>위 다이어그램에서 볼 수 있듯이 반복 필터링을 사용한 검색은 벡터 검색을 반복해서 수행합니다. 반복기가 반환하는 각 엔티티는 스칼라 필터링을 거치며, 이 프로세스는 지정된 상위 K 결과에 도달할 때까지 계속됩니다.</p>
 <p>이 방법은 스칼라 필터링의 대상이 되는 엔티티의 수를 크게 줄여주므로 매우 복잡한 필터링 표현식을 처리하는 데 특히 유용합니다.</p>
-<p>하지만 반복기는 엔티티를 한 번에 하나씩 처리한다는 점에 유의해야 합니다. 이러한 순차적 접근 방식은 특히 많은 수의 엔티티에 스칼라 필터링을 적용할 때 처리 시간이 길어지거나 잠재적인 성능 문제가 발생할 수 있습니다.</p>
+<p>그러나 반복기는 엔티티를 한 번에 하나씩 처리한다는 점에 유의해야 합니다. 이러한 순차적 접근 방식은 특히 많은 수의 엔티티에 스칼라 필터링을 적용할 때 처리 시간이 길어지거나 잠재적인 성능 문제가 발생할 수 있습니다.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +117,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우 검색 전에 검색 벡터를 검색하는 대신 <code translate="no">ids</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/primary-key-search.md">기본 키 검색을</a> 참조하세요.</p>
+<p>쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우 검색 전에 검색 벡터를 검색하는 대신 <code translate="no">ids</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/primary-key-search.md">기본 키 검색을</a> 참조하세요.</p>
 </div>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">표준 필터링으로 검색하기<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,6 +264,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -298,7 +299,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>메타데이터 필터링에 사용할 수 있는 연산자에 대한 자세한 내용은 <a href="/docs/ko/filtering">필터링을</a> 참조하세요.</p>
+<p>메타데이터 필터링에 사용할 수 있는 연산자에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/filtering">필터링을</a> 참조하세요.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">반복 필터링으로 검색하기<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -450,6 +451,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [

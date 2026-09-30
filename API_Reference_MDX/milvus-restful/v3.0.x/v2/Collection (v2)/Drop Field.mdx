@@ -1,0 +1,31 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 28
+slug: /restful/Drop Field
+beta: FALSE
+title: "Drop Collection Field | RESTful"
+description: "This operation drops a field from an existing collection by field name or field ID. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Drop Collection Field"
+sidebar_custom_props:
+  badges:
+    - "post"
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Drop Collection Field"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Drop Collection Field
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Drop Collection Field","deprecated":false,"description":"This operation drops a field from an existing collection by field name or field ID.","x-i18n":{"zh-CN":{"summary":"删除 Collection 字段","description":"本操作通过字段名称或字段 ID 从现有 Collection 中删除字段。"},"ja-JP":{"summary":"コレクションフィールドの削除","description":"この操作は、フィールド名またはフィールド ID を使用して、既存のコレクションからフィールドを削除します。"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`. If you are using a project endpoint, only a valid API key with sufficient permissions applies.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string","x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。如果您使用的是项目端点，则仅具备足够权限的有效 API 密钥适用。"},"ja-JP":{"description":"認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組み合わせである必要があります。project endpoint を使用している場合は、十分な権限を持つ有効な API key のみ使用できます。"}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database.","x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-i18n":{"zh-CN":{"description":"Database 名称。若未指定，则使用默认 Database。"},"ja-JP":{"description":"データベースの名前。"}}},"collectionName":{"type":"string","description":"The name of the collection.","x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-i18n":{"zh-CN":{"description":"目标 Collection 的名称。"},"ja-JP":{"description":"コレクションの名前。"}}},"fieldName":{"type":"string","description":"The name of the field to drop.","x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-i18n":{"zh-CN":{"description":"待删除字段的名称。"},"ja-JP":{"description":"削除するフィールドの名前。"}}},"fieldId":{"type":"integer","format":"int64","description":"The ID of the field to drop.","x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null,"x-i18n":{"zh-CN":{"description":"待删除字段的 ID。"},"ja-JP":{"description":"削除するフィールドの ID。"}}}},"required":["collectionName"],"anyOf":[{"required":["fieldName"]},{"required":["fieldId"]}],"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"example":{"dbName":"default","collectionName":"documents","fieldName":"obsolete_field"}}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"},"ja-JP":{"description":"空のオブジェクトを返します。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"},"ja-JP":{"description":"レスポンスコード。"}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null},"data":{"type":"object","properties":{},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"},"ja-JP":{"description":"エラーメッセージを返します。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"},"ja-JP":{"description":"レスポンスコード。"}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"},"ja-JP":{"description":"エラーメッセージ。"}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null}},"x-added-at":"2.6.x","x-last-modified":"2.6.x","x-deprecated-since":null}],"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1100,"message":"field not found"}}}}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}},"x-added-at":"3.0.x","x-last-modified":"3.0.x","x-deprecated-since":null}
+export const endpoint = "/v2/vectordb/collections/fields/drop"
+export const method = "post"

@@ -69,7 +69,7 @@ summary: Milvus 中的每个 Collections 都必须有一个主字段，以唯一
    </tr>
    <tr>
      <td><p><code translate="no">VARCHAR</code></p></td>
-     <td><p>长度可变的字符串类型。当实体标识符来自外部系统（如产品代码或用户 ID）时使用该类型。需要<code translate="no">max_length</code> 属性来定义每个值允许的最大字节数。</p></td>
+     <td><p>长度可变的字符串类型。当实体标识符来自外部系统（例如，产品代码或用户 ID）时使用该类型。需要<code translate="no">max_length</code> 属性来定义每个值允许的最大字节数。</p></td>
    </tr>
 </table>
 <h2 id="Choose-between-AutoID-and-Manual-IDs" class="common-anchor-header">在自动 ID 和手动 ID 之间进行选择<button data-href="#Choose-between-AutoID-and-Manual-IDs" class="anchor-icon" translate="no">
@@ -107,7 +107,7 @@ summary: Milvus 中的每个 Collections 都必须有一个主字段，以唯一
 </table>
 <div class="alert note">
 <ul>
-<li><p>如果不确定选择哪种模式，请<a href="/docs/zh/primary-field.md#Quickstart-Use-AutoID">从自动 ID 开始</a>，这样可以简化输入并保证唯一性。</p></li>
+<li><p>如果不确定选择哪种模式，请<a href="/docs/zh/v2.6.x/primary-field.md#Quickstart-Use-AutoID">从自动 ID 开始</a>，这样可以简化输入并保证唯一性。</p></li>
 <li><p>建议在所有情况下都使用<code translate="no">autoId</code> ，除非手动设置主键是有益的。</p></li>
 </ul>
 </div>
@@ -276,6 +276,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -360,6 +361,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -534,6 +536,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -625,6 +628,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -667,7 +671,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>要在数据迁移过程中保留现有 ID，请通过调用<code translate="no">alter_collection_properties</code> 启用<code translate="no">allow_insert_auto_id</code> 属性。当设置为 true 时，即使启用了 AutoID，Milvus 也会接受用户提供的 ID。</p>
-<p>有关配置详情，请参阅<a href="/docs/zh/modify-collection.md#Example-5-Enable-allowinsertautoid">修改 Collections</a>。</p>
+<p>有关配置详情，请参阅<a href="/docs/zh/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">修改 Collections</a>。</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">确保跨集群的全局 AutoID 唯一性<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -707,7 +711,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>了解 AutoID 如何在内部生成唯一标识符，有助于正确<a href="/docs/zh/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">配置群集 ID</a>和排除 ID 相关问题。</p>
+    </button></h2><p>了解 AutoID 如何在内部生成唯一标识符，有助于正确<a href="/docs/zh/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">配置群集 ID</a>和排除 ID 相关问题。</p>
 <p>AutoID 使用结构化的 64 位格式来保证唯一性：</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

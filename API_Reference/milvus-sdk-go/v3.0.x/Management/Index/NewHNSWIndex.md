@@ -1,0 +1,44 @@
+# NewHNSWIndex()
+
+This function creates an HNSW (Hierarchical Navigable Small World) index configuration for high-recall vector search.
+
+```go
+func NewHNSWIndex(metricType MetricType, m int, efConstruction int) Index
+```
+
+**PARAMETERS:**
+
+- **[metricType](../MetricType.md)** (*[MetricType](../MetricType.md)*)
+
+    The distance metric type for similarity search (e.g., entity.COSINE, entity.L2, entity.IP).
+
+- **m** (*int*)
+
+    The number of bi-directional links for each element. Higher values improve recall but increase memory usage. Typical range: 4-64.
+
+- **efConstruction** (*int*)
+
+    The size of the dynamic candidate list during index construction. Higher values improve index quality but slow down build time. Typical range: 8-512.
+
+**RETURNS:**
+
+*[Index](Index.md)*
+
+An index configuration instance. Pass this to `CreateIndex()` via the index option.
+
+## Example
+
+```go
+import (
+	"github.com/milvus-io/milvus/client/v3/index"
+	"github.com/milvus-io/milvus/client/v3/entity"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+// Create index configuration
+idx := index.NewHNSWIndex(entity.COSINE, 16, 200)
+
+// Use with CreateIndex
+createIdxOption := milvusclient.NewCreateIndexOption("collection_name", "vector_field", idx)
+task, err := client.CreateIndex(ctx, createIdxOption)
+```

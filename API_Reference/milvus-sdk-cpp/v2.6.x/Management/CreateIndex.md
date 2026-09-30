@@ -1,6 +1,6 @@
 # CreateIndex()
 
-This operation indexes on vector fields or scalar fields.
+This operation creates indexes on vector or scalar fields of a collection, and can create multiple indexes in a single call. It runs synchronously by default, waiting until the indexes are ready before returning.
 
 ```cpp
 Status CreateIndex(const CreateIndexRequest& request)
@@ -13,6 +13,7 @@ auto request = CreateIndexRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithIndexes(indexes)
+    .AddIndex(index)
     .WithSync(sync)
     .WithTimeoutMs(timeout_ms);
 ```
@@ -21,67 +22,63 @@ auto request = CreateIndexRequest()
 
 - `WithDatabaseName(const std::string& db_name)`
 
-    Sets the target database name. The default database applies if it is empty.
+    Sets the target database name; the default database is used when it is left empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection.
+    Sets the name of the collection whose fields are to be indexed.
 
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
-    Sets the indexes to be created.
+    Sets the list of index descriptions (milvus::IndexDesc) to be created; each description carries the field name, index name, index type, and metric type.
 
 - `AddIndex(IndexDesc&& index)`
 
-    Adds an index to be created.
+    Adds one index description (milvus::IndexDesc) to the list of indexes to be created.
 
 - `WithSync(bool sync)`
 
-    Sets whether to operate in sync mode. The default value is **True**.
-
-    - **True**: This operation returns until the indexes are created.
-
-    - **False**: This operation returns immediately.
+    Sets the sync mode. When true (the default), the call waits until the indexes are ready; when false, it returns immediately regardless of index readiness. Optional.
 
 - `WithTimeoutMs(int64_t timeout_ms)`
 
-    Sets the timeout in milliseconds. The default value is 60000 ms. This parameter only works when this operation works in sync mode. 
-
-    If `WaitFlushedMs` is set to 0, this operation repeatedly calls `DescribeIndex()` to check the index state until the index is fully built. If `WaitFlushedMs` is greater than 0, this operation will break the loop after a specified period of time and return a status indicating a timeout.
+    Sets the timeout in milliseconds for waiting until the indexes are ready; it only applies in sync mode and defaults to 60000 ms. With zero, CreateIndex() polls DescribeIndex() until the index is fully built; with a positive value, it stops polling after the given span and returns a timeout status. Optional.
 
 **RETURNS:**
 
 *Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the indexes were created successfully and, in sync mode, whether they became ready within the configured timeout.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **std::exception**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    When request construction, network transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
 ## Example
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-auto client = milvus::MilvusClientV2::Create();
+Create an HNSW index with the L2 metric on a vector field after connecting a MilvusClientV2.
 
+```cpp
+auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-milvus::IndexDesc index_vector("vector_field_name", "vector_index_name", milvus::IndexType::HNSW,
-                               milvus::MetricType::L2);
-index_vector.AddExtraParam("M", "32");
-index_vector.AddExtraParam("efConstruction", "100");
+// Build an index description: field name, index name, index type, metric type.
+milvus::IndexDesc index_desc("vector_field", "vector_index", milvus::IndexType::HNSW, milvus::MetricType::L2);
+index_desc.AddExtraParam("M", "16");
+index_desc.AddExtraParam("efConstruction", "200");
 
-status = client->CreateIndex(milvus::CreateIndexRequest()
-                                 .WithCollectionName(collection_name)
-                                 .WithSync(true)
-                                 .AddIndex(std::move(index_vector)));
+auto request = milvus::CreateIndexRequest()
+    .WithDatabaseName("default")
+    .WithCollectionName("my_collection")
+    .WithSync(true)
+    .AddIndex(std::move(index_desc));
+status = client->CreateIndex(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

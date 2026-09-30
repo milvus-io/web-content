@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor, como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
+    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
 <p>Os vectores binários têm uma vasta gama de aplicações, especialmente em situações em que a eficiência computacional e a otimização do armazenamento são cruciais. Em sistemas de IA de grande escala, como motores de pesquisa ou sistemas de recomendação, o processamento em tempo real de grandes quantidades de dados é fundamental. Ao reduzir o tamanho dos vectores, os vectores binários ajudam a diminuir a latência e os custos computacionais sem sacrificar significativamente a precisão. Além disso, os vectores binários são úteis em ambientes com recursos limitados, como dispositivos móveis e sistemas incorporados, onde a memória e a capacidade de processamento são limitadas. Através da utilização de vectores binários, podem ser implementadas funções de IA complexas nestes ambientes restritos, mantendo um elevado desempenho.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>Utilizar o vetor binário</span> </span></p>
 <div class="alert note">
-<p>Embora os vectores binários sejam excelentes em cenários específicos, têm limitações na sua capacidade de expressão, o que dificulta a captura de relações semânticas complexas. Portanto, em cenários do mundo real, os vectores binários são frequentemente utilizados juntamente com outros tipos de vectores para equilibrar a eficiência e a expressividade. Para obter mais informações, consulte <a href="/docs/pt/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
+<p>Embora os vectores binários sejam excelentes em cenários específicos, têm limitações na sua capacidade de expressão, o que dificulta a captura de relações semânticas complexas. Portanto, em cenários do mundo real, os vectores binários são frequentemente utilizados juntamente com outros tipos de vectores para equilibrar a eficiência e a expressividade. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/dense-vector.md">Vetor denso</a> e <a href="/docs/pt/v2.6.x/sparse_vector.md">Vetor esparso</a>.</p>
 </div>
 <h2 id="Use-binary-vectors" class="common-anchor-header">Usar vetores binários<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Adicionar campo de vetores</h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Adicionar campo de vetores<button data-href="#Add-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui:</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor binário suportado, ou seja, <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>Especificar as dimensões do vetor utilizando o parâmetro <code translate="no">dim</code>. Observe que <code translate="no">dim</code> deve ser um múltiplo de 8, pois os vetores binários devem ser convertidos em uma matriz de bytes ao serem inseridos. Cada 8 valores booleanos (0 ou 1) serão empacotados em 1 byte. Por exemplo, se <code translate="no">dim=128</code>, é necessária uma matriz de 16 bytes para a inserção.</p></li>
@@ -198,7 +213,22 @@ schema.WithField(entity.NewField().
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo, é adicionado um campo de vetor chamado <code translate="no">binary_vector</code> para armazenar vectores binários. O tipo de dados deste campo é <code translate="no">BINARY_VECTOR</code>, com uma dimensão de 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor</h3><p>Para acelerar as pesquisas, deve ser criado um índice para o campo de vetor binário. A indexação pode melhorar significativamente a eficiência da recuperação de dados vectoriais em grande escala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para acelerar as pesquisas, deve ser criado um índice para o campo de vetor binário. A indexação pode melhorar significativamente a eficiência da recuperação de dados vectoriais em grande escala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -244,9 +274,24 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima, um índice chamado <code translate="no">binary_vector_index</code> é criado para o campo <code translate="no">binary_vector</code>, usando o tipo de índice <code translate="no">AUTOINDEX</code>. O <code translate="no">metric_type</code> é definido como <code translate="no">HAMMING</code>, indicando que a distância de Hamming é utilizada para a medição da semelhança.</p>
-<p>O Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. O AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte <a href="/docs/pt/index-explained.md">Índice Explicado</a>.</p>
-<p>Adicionalmente, o Milvus suporta outras métricas de similaridade para vectores binários. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor binário e do índice estiverem concluídas, crie uma coleção que contenha vectores binários. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
+<p>O Milvus fornece vários tipos de índices para uma melhor experiência de pesquisa vetorial. AUTOINDEX é um tipo de índice especial concebido para suavizar a curva de aprendizagem da pesquisa vetorial. Há muitos tipos de índices disponíveis para escolher. Para mais pormenores, consulte <a href="/docs/pt/v2.6.x/index-explained.md">Índice Explicado</a>.</p>
+<p>Adicionalmente, o Milvus suporta outras métricas de similaridade para vectores binários. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/metric.md">Tipos de métricas</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Criar coleção<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando as definições do vetor binário e do índice estiverem concluídas, crie uma coleção que contenha vectores binários. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -293,13 +338,29 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><p>Depois de criar a coleção, use o método <code translate="no">insert</code> para adicionar dados que contenham vetores binários. Note que os vectores binários devem ser fornecidos sob a forma de uma matriz de bytes, em que cada byte representa 8 valores booleanos.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de criar a coleção, use o método <code translate="no">insert</code> para adicionar dados que contenham vetores binários. Note que os vectores binários devem ser fornecidos sob a forma de uma matriz de bytes, em que cada byte representa 8 valores booleanos.</p>
 <p>Por exemplo, para um vetor binário de 128 dimensões, é necessário um vetor de 16 bytes (uma vez que 128 bits ÷ 8 bits/byte = 16 bytes). Abaixo está um exemplo de código para inserir dados:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -389,12 +450,28 @@ client.<span class="hljs-title function_">insert</span>({
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados que são mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Efetuar pesquisa de semelhanças<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados que são mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
 <p>Durante as operações de pesquisa, os vectores binários também têm de ser fornecidos sob a forma de uma matriz de bytes. Certifique-se de que a dimensionalidade do vetor de consulta corresponde à dimensão especificada ao definir <code translate="no">dim</code> e que cada 8 valores booleanos são convertidos em 1 byte.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -486,6 +563,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
@@ -495,4 +573,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a>.</p>
+<p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/v2.6.x/single-vector-search.md">Pesquisa ANN básica</a>.</p>

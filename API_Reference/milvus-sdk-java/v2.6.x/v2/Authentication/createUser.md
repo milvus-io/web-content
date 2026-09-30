@@ -1,6 +1,6 @@
 # createUser()
 
-This operation creates a user.
+Creates a user with credentials and an optional description.
 
 ```java
 public void createUser(CreateUserReq request)
@@ -9,54 +9,41 @@ public void createUser(CreateUserReq request)
 ## Request Syntax
 
 ```java
-createUser(CreateUserReq.builder()
-    .userName(String userName)
-    .password(String password)
-    .build()
-)
+CreateUserReq.builder()
+    .userName(userName)
+    .password(password)
+    .description(description)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
-- `userName(String roleName)`
+- `userName(String userName)`
 
-    The name of the user to create.
+    The name of the user account.
 
 - `password(String password)`
 
-    The password of the user to create.
+    The initial password for the user account.
 
-**RETURNS:**
+- `description(String description)`
 
-*void*
+    The human-readable description of the user account.
 
 **EXCEPTIONS:**
 
 - **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Creates a user with credentials and an optional description.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.rbac.request.CreateUserReq;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Create a user
-CreateUserReq createUserReq = CreateUserReq.builder()
-        .userName("test")
-        .password("Zilliz@2023")
-        .build();
-        
-client.createUser(createUserReq);
+client.createUser(CreateUserReq.builder()
+    .userName("alice")
+    .password("Milvus-Password-123")
+    .description("Analytics user")
+    .build());
 ```
-

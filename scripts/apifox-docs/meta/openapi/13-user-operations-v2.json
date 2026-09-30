@@ -1,0 +1,1935 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Cluster User Operations (V2)",
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Cluster User (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/vectordb/users/create": {
+      "post": {
+        "summary": "Create User",
+        "deprecated": false,
+        "description": "This operation creates a new user with a corresponding password.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建用户",
+            "description": "本接口可创建新用户并为其设置密码。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーを作成",
+            "description": "この操作は、対応するパスワードを持つ新しいユーザーを作成します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結された username と password の組である必要があります。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前。値は文字で始まる必要があり、アンダースコア、文字、数字のみを使用できます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The corresponding password to the user. \nThe password must must include at least three of the following character types: uppercase letters, lowercase letters, numbers, and special characters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户对应的密码。该密码必须如下字符类型中的三种或以上：大写字母、小写字母、数字和特殊字符。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーに対応するパスワード。\nパスワードには、次の文字種のうち少なくとも 3 種類を含める必要があります: 大文字、小文字、数字、特殊文字。"
+                      }
+                    },
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "format": "password",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the user.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户描述。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーの説明。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "userName",
+                  "password"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "userName": "myUser",
+                    "password": "P@ssw0rd",
+                    "description": "Read-only analyst account."
+                  }
+                }
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/describe": {
+      "post": {
+        "summary": "Describe User",
+        "deprecated": false,
+        "description": "This operation describes the detailed information of a specific user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看用户详情",
+            "description": "本接口可列出指定用户的详细信息。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーの詳細を取得",
+            "description": "この操作は、特定のユーザーの詳細情報を取得します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンには、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせを指定する必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前。値は文字で始まり、アンダースコア、英字、数字のみを含めることができます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "userName": "my_user"
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the name of the roles assigned to the specified user.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回为指定用户所分配的角色名称。"
+              },
+              "ja-JP": {
+                "description": "指定されたユーザーに割り当てられているロール名を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "The name of a role assigned to the specified user.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "已分配给指定用户的角色名称。"
+                              },
+                              "ja-JP": {
+                                "description": "指定されたユーザーに割り当てられているロールの名前。"
+                              }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          },
+                          "description": "Response payload which is a list of roles already assigned to the user.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为已分配给当前用户的角色名称列表。"
+                            },
+                            "ja-JP": {
+                              "description": "ユーザーにすでに割り当てられているロールのリストであるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the user.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用户描述。"
+                            },
+                            "ja-JP": {
+                              "description": "ユーザーの説明。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "db_admin"
+                      ],
+                      "description": "Read-only analyst account."
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "public"
+                      ],
+                      "description": "Read-only analyst account."
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/list": {
+      "post": {
+        "summary": "List Users",
+        "deprecated": false,
+        "description": "This operation lists the information of all existing users.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查看用户列表",
+            "description": "本接口可列出所有已创建用户的相关信息。"
+          },
+          "ja-JP": {
+            "summary": "ユーザー一覧",
+            "description": "この操作は、既存のすべてのユーザーの情報を一覧表示します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで結合したユーザー名とパスワードの組である必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "description": "An empty object.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "空对象。"
+                  },
+                  "ja-JP": {
+                    "description": "空のオブジェクト。"
+                  }
+                },
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "example": {}
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "An object that contains contains the user information.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回包含所有用户名称的数组。"
+              },
+              "ja-JP": {
+                "description": "ユーザー情報を含むオブジェクト。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "A username.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "用户名。"
+                              },
+                              "ja-JP": {
+                                "description": "ユーザー名。"
+                              }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          },
+                          "description": "Response payload which is a list of usernames.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，为所有用户名列表。"
+                            },
+                            "ja-JP": {
+                              "description": "ユーザー名の一覧であるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "description": "A success response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス。"
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "milvus"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "root"
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": [
+                        "db_admin"
+                      ]
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/drop": {
+      "post": {
+        "summary": "Drop User",
+        "deprecated": false,
+        "description": "This operation deletes an existing user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除用户",
+            "description": "本接口会删除一个已存在的用户。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーの削除",
+            "description": "この操作は既存のユーザーを削除します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせである必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-include-target": [
+              "milvus"
+            ],
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前。値は英字で始まる必要があり、アンダースコア、英字、および数字のみを含めることができます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "userName": "my_user"
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します。"
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/update_password": {
+      "post": {
+        "summary": "Update User",
+        "deprecated": false,
+        "description": "This operation updates the password or description of a specified user.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "更新用户",
+            "description": "本操作可更新指定用户的密码或描述。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーを更新",
+            "description": "この操作は、指定したユーザーのパスワードまたは説明を更新します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結した username と password の組である必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前です。値は文字で始まる必要があり、アンダースコア、英字、数字のみを含めることができます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The current password of the user. Provide this field together with `newPassword` when changing the password.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户当前密码。修改密码时，需与 `newPassword` 一起提供。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーの現在のパスワードです。パスワードを変更する場合は、このフィールドを `newPassword` とあわせて指定してください。"
+                      }
+                    },
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "format": "password",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "newPassword": {
+                    "type": "string",
+                    "description": "The new password for the user. Provide this field together with `password` when changing the password.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户的新密码。修改密码时，需与 `password` 一起提供。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーの新しいパスワードです。パスワードを変更する場合は、このフィールドを `password` とあわせて指定してください。"
+                      }
+                    },
+                    "format": "password",
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the user. The value can be an empty string.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用户的新描述。该值可以为空字符串。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーの新しい説明です。値には空文字列を指定できます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "example": {
+                "newPassword": "P@ssw0rd!",
+                "userName": "myUser",
+                "password": "P@ssw0rd*"
+              },
+              "examples": {
+                "1": {
+                  "summary": "Update password",
+                  "value": {
+                    "userName": "myUser",
+                    "password": "P@ssw0rd*",
+                    "newPassword": "P@ssw0rd!"
+                  }
+                },
+                "2": {
+                  "summary": "Update description",
+                  "value": {
+                    "userName": "myUser",
+                    "description": "Read-only analyst account."
+                  }
+                }
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "Return an empty object or an error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロードです。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "空のオブジェクトまたはエラーメッセージを返します"
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/grant_role": {
+      "post": {
+        "summary": "Grant Role To User",
+        "deprecated": false,
+        "description": "This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain operations.<include target=\"milvus\">To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).</include>",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "授予用户角色",
+            "description": "本接口可以为指定用户分配指定角色。角色授予完成后，用户将获得当前角色所允许的权限，并可以执行相应的操作。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーにロールを付与",
+            "description": "この操作は、指定したロールを現在のユーザーに付与します。ロールが付与されると、ユーザーは現在のロールで許可されている権限を取得し、特定の操作を実行できます。<include target=\"milvus\">この操作を完了するには、Milvus インスタンスで認証を有効にする必要があります。詳細については、[Authenticate User Access](https://milvus.io/docs/authenticate.md) を参照してください。</include>"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結したユーザー名とパスワードの組み合わせである必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前。値は文字で始まる必要があり、アンダースコア、英字、数字のみを含めることができます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the target role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ロールの名前。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "admin",
+                    "userName": "milvusAdmin"
+                  },
+                  "x-include-target": [
+                    "milvus"
+                  ]
+                },
+                "2": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "db_admin",
+                    "userName": "myUser"
+                  },
+                  "x-include-target": [
+                    "zilliz"
+                  ]
+                }
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    },
+    "/v2/vectordb/users/revoke_role": {
+      "post": {
+        "summary": "Revoke Role From User",
+        "deprecated": false,
+        "description": "This operation revokes a privilege granted to the current role.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "撤销用户角色",
+            "description": "本接口撤销已授予指定用户的权限。"
+          },
+          "ja-JP": {
+            "summary": "ユーザーからロールを取り消す",
+            "description": "この操作は、現在のロールに付与された権限を取り消します。"
+          }
+        },
+        "tags": [
+          "Cluster User Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、<include target=\"zilliz\">適切な権限を持つ API key または </include>`username:password` のようにコロンで連結されたユーザー名とパスワードの組である必要があります。"
+              }
+            },
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string",
+                    "description": "The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ユーザーの名前。値は英字で始まる必要があり、アンダースコア、英字、数字のみを含めることができます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "roleName": {
+                    "type": "string",
+                    "description": "The name of the target role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "目标角色名称。"
+                      },
+                      "ja-JP": {
+                        "description": "対象ロールの名前。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "roleName",
+                  "userName"
+                ],
+                "x-i18n-langs": [
+                  "zh-CN"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null
+              },
+              "examples": {
+                "1": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "admin",
+                    "userName": "milvusAdmin"
+                  },
+                  "x-include-target": [
+                    "milvus"
+                  ]
+                },
+                "2": {
+                  "summary": "example",
+                  "value": {
+                    "roleName": "db_admin",
+                    "userName": "myUser"
+                  },
+                  "x-include-target": [
+                    "zilliz"
+                  ]
+                }
+              }
+            }
+          },
+          "x-added-at": "2.6.x",
+          "x-last-modified": "2.6.x",
+          "x-deprecated-since": null
+        },
+        "responses": {
+          "200": {
+            "description": "None",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "A success response",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンス"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "type": "integer",
+                          "example": 0,
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Response payload which is an empty object.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷。为空对象。"
+                            },
+                            "ja-JP": {
+                              "description": "空のオブジェクトであるレスポンスペイロード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗レスポンス。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          },
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        }
+                      },
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    }
+                  ],
+                  "x-added-at": "2.6.x",
+                  "x-last-modified": "2.6.x",
+                  "x-deprecated-since": null
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": {}
+                    }
+                  },
+                  "2": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "x-i18n": {
+              "ja-JP": {
+                "description": "なし"
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

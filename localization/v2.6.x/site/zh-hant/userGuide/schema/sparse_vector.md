@@ -42,8 +42,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>透過標記化和評分，文件可以表示為字詞袋向量，其中每個維度對應於詞彙中的特定字詞。只有存在於文件中的單字才有非零值，這就是稀疏向量表示法。稀疏向量可以使用兩種方法產生：</p>
 <ul>
-<li><p><strong>傳統的統計技術</strong>，例如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term</a>Frequency-Inverse Document Frequency）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（<a href="https://en.wikipedia.org/wiki/Okapi_BM25">Best</a>Matching 25），會根據詞彙在語料庫中出現的頻率和重要性來分配權重。這些方法會計算簡單的統計資料，作為每個維度的分數，而每個維度代表一個標記。  Milvus 利用 BM25 方法提供內建的<strong>全文搜尋</strong>功能，可自動將文字轉換為稀疏向量，省去手動預處理的需要。這種方法非常適合以關鍵字為基礎的搜尋，在這種情況下，精確度和精確匹配非常重要。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p></li>
-<li><p><strong>神經稀疏嵌入模型</strong>是通過在大型資料集上進行訓練來生成稀疏表示的學習方法。它們通常是具有 Transformer 架構的深度學習模型，能夠根據語義上下文來擴充和衡量詞彙。Milvus 也支援由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型所產生的外部稀疏嵌入。詳情請參閱<a href="/docs/zh-hant/embeddings.md#Embedding-Overview">嵌入</a>。</include></p></li>
+<li><p><strong>傳統的統計技術</strong>，例如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Term</a>Frequency-Inverse Document Frequency）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（<a href="https://en.wikipedia.org/wiki/Okapi_BM25">Best</a>Matching 25），會根據詞彙在語料庫中出現的頻率和重要性來分配權重。這些方法會計算簡單的統計資料，作為每個維度的分數，而每個維度代表一個標記。  Milvus 利用 BM25 方法提供內建的<strong>全文搜尋</strong>功能，可自動將文字轉換為稀疏向量，省去手動預處理的需要。這種方法非常適合以關鍵字為基礎的搜尋，在這種情況下，精確度和精確匹配非常重要。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文</a>檢索。</p></li>
+<li><p><strong>神經稀疏嵌入模型</strong>是通過在大型資料集上進行訓練來生成稀疏表示的學習方法。它們通常是具有 Transformer 架構的深度學習模型，能夠根據語義上下文來擴充和衡量詞彙。Milvus 也支援由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型所產生的外部稀疏嵌入。詳情請參閱<a href="/docs/zh-hant/v2.6.x/embeddings.md#Embedding-Overview">嵌入</a>。</include></p></li>
 </ul>
 <p>稀疏向量和原始文字可以儲存在 Milvus 中，以便進行有效的檢索。下圖概述了整個流程。</p>
 <p>
@@ -51,7 +51,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>稀疏向量工作流程</span> </span></p>
 <div class="alert note">
-<p>除了稀疏向量，Milvus 也支援密集向量和二進位向量。密集向量是捕捉深層語意關係的理想選擇，而二進位向量則在快速相似性比較和內容重複刪除等情況下表現優異。如需詳細資訊，請參閱<a href="/docs/zh-hant/dense-vector.md">密集向量</a>和<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>。</p>
+<p>除了稀疏向量，Milvus 也支援密集向量和二進位向量。密集向量是捕捉深層語意關係的理想選擇，而二進位向量則在快速相似性比較和內容重複刪除等情況下表現優異。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/dense-vector.md">密集向量</a>和<a href="/docs/zh-hant/v2.6.x/binary-vector.md">二進位向量</a>。</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">資料格式<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在以下各節中，我們將示範如何儲存從 SPLADE 等已學會的稀疏嵌入模型中取得的向量。如果您正在尋找一些東西來補充以密集向量為基礎的語意搜尋，為了簡單起見，我們建議使用 BM25 進行<a href="/docs/zh-hant/full-text-search.md">Full Text Search</a>，而非 SPLADE。如果您已經執行品質評估，並決定使用 SPLADE，您可以參考<a href="/docs/zh-hant/embeddings.md#Embedding-Overview">Embeddings</a>如何使用 SPLADE 產生稀疏向量。</p>
+    </button></h2><p>在以下各節中，我們將示範如何儲存從 SPLADE 等已學習的稀疏嵌入模型中取得的向量。如果您正在尋找一些東西來補充以密集向量為基礎的語意搜尋，為了簡單起見，我們推薦使用 BM25 進行<a href="/docs/zh-hant/v2.6.x/full-text-search.md">Full Text Search</a>，而非 SPLADE。如果您已經執行品質評估，並決定使用 SPLADE，您可以參考<a href="/docs/zh-hant/v2.6.x/embeddings.md#Embedding-Overview">Embeddings</a>如何使用 SPLADE 產生稀疏向量。</p>
 <p>Milvus 支援以下格式的稀疏向量輸入：</p>
 <ul>
 <li><p><strong>字典清單 (格式為<code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -107,7 +107,7 @@ sparse_vector = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在建立集合之前，您需要指定集合模式，該模式定義字段，並可選擇將文字字段轉換為相對應的稀疏向量表示的函式。</p>
+    </button></h2><p>在建立集合之前，您需要指定集合模式，該模式定義字段，以及將文字字段轉換為相對應的稀疏向量表示的函式。</p>
 <h3 id="Add-fields" class="common-anchor-header">新增欄位<button data-href="#Add-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ sparse_vector = [
       </svg>
     </button></h3><p>要在 Milvus 中使用稀疏向量，您需要創建一個集合，其模式包括以下欄位：</p>
 <ul>
-<li><p>預留用於儲存稀疏向量的<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，可從<code translate="no">VARCHAR</code> 欄位自動產生，或直接在輸入資料中提供。</p></li>
+<li><p>預留用於儲存稀疏向量的<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，可從<code translate="no">VARCHAR</code> 欄位自動產生或直接在輸入資料中提供。</p></li>
 <li><p>通常，稀疏向量所代表的原始文字也會儲存在集合中。您可以使用<code translate="no">VARCHAR</code> 欄位來儲存原始文字。</p></li>
 </ul>
 <div class="multipleCode">
@@ -279,7 +279,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>:此欄位使用<code translate="no">VARCHAR</code> 資料類型儲存文字串，最大長度為 65535 位元組。</p></li>
 </ul>
 <div class="alert note">
-<p>要啟用 Milvus 或在插入資料時從指定的文字欄位產生稀疏向量內嵌，必須採取涉及函數的額外步驟。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。</p>
+<p>要啟用 Milvus 或在插入資料時從指定的文字欄位產生稀疏向量內嵌，必須採取涉及函數的額外步驟。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文檢索</a>。</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">設定索引參數<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +296,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為稀疏向量建立索引的過程與<a href="/docs/zh-hant/dense-vector.md">稠密向量</a>相似，但指定的索引類型 (<code translate="no">index_type</code>)、距離度量 (<code translate="no">metric_type</code>) 和索引參數 (<code translate="no">params</code>) 有所不同。</p>
+    </button></h2><p>為稀疏向量建立索引的過程與<a href="/docs/zh-hant/v2.6.x/dense-vector.md">稠密向量</a>相似，但指定的索引類型 (<code translate="no">index_type</code>)、距離度量 (<code translate="no">metric_type</code>) 和索引參數 (<code translate="no">params</code>) 有所不同。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -356,9 +356,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>本範例使用<code translate="no">SPARSE_INVERTED_INDEX</code> 索引類型與<code translate="no">IP</code> 作為度量。如需詳細資訊，請參閱下列資源：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 已解釋的索引及其參數</p></li>
-<li><p><a href="/docs/zh-hant/metric.md">度量類型</a>：不同欄位類型所支援的度量類型</p></li>
-<li><p><a href="/docs/zh-hant/full-text-search.md">全文檢索</a>：全文檢索的詳細教學</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 已解釋的索引及其參數</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/metric.md">度量類型</a>：不同欄位類型所支援的度量類型</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文檢索</a>：全文檢索的詳細教學</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">建立資料集<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -375,7 +375,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>稀疏向量和索引設定完成後，就可以建立包含稀疏向量的集合。以下範例使用 <a href="/docs/zh-hant/create-collection.md"><code translate="no">create_collection</code></a>方法來建立一個名為<code translate="no">my_collection</code> 的集合。</p>
+    </button></h2><p>稀疏向量和索引設定完成後，就可以建立包含稀疏向量的集合。以下範例使用 <a href="/docs/zh-hant/v2.6.x/create-collection.md"><code translate="no">create_collection</code></a>方法來建立一個名為<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -415,6 +415,7 @@ client.createCollection(requestCreate);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -540,6 +541,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {
@@ -692,6 +694,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: $queryData,
@@ -704,4 +707,4 @@ curl --request POST \
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本向量搜尋</a>。</p>
+<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/single-vector-search.md">基本向量搜尋</a>。</p>

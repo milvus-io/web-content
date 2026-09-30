@@ -2,10 +2,10 @@
 id: install-node.md
 label: Install Node.js SDK
 related_key: SDK
-summary: Scoprite come installare l'SDK Node.js di Milvus.
-title: Installare l'SDK Milvus Nodejs
+summary: Scopri come installare l'SDK Node.js di Milvus.
+title: Installazione dell'SDK Milvus per Node.js
 ---
-<h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Installare l'SDK Milvus Nodejs<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Installazione dell'SDK Milvus per Node.js<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: Installare l'SDK Milvus Nodejs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo argomento descrive come installare l'SDK Milvus Node.js per Milvus.</p>
+    </button></h1><p>In questa sezione viene descritto come installare l'SDK Milvus per Node.js.</p>
 <h2 id="Compatibility" class="common-anchor-header">Compatibilità<button data-href="#Compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,13 +36,13 @@ title: Installare l'SDK Milvus Nodejs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La seguente raccolta mostra le versioni di Milvus e le versioni raccomandate di @zilliz/milvus2-sdk-node:</p>
+    </button></h2><p>La tabella seguente riporta le versioni di Milvus e le versioni consigliate di @zilliz/milvus2-sdk-node:</p>
 <table>
 <thead>
-<tr><th style="text-align:center">Versione Milvus</th><th style="text-align:center">Versione @zilliz/milvus2-sdk-node raccomandata</th></tr>
+<tr><th style="text-align:center">Versione di Milvus</th><th style="text-align:center">Versione consigliata di @zilliz/milvus2-sdk-node</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">più recente</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">ultima</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
@@ -82,13 +82,13 @@ title: Installare l'SDK Milvus Nodejs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il modo consigliato per iniziare a usare il client Milvus node.js è usare npm (Node package manager) per installare la dipendenza nel vostro progetto.</p>
+    </button></h2><p>Il modo consigliato per iniziare a utilizzare il client Node.js di Milvus è utilizzare npm (Node Package Manager) per installare la dipendenza nel proprio progetto.</p>
 <pre><code translate="no" class="language-javascript">npm install @zilliz/milvus2-sdk-node
 # or ...
 yarn add @zilliz/milvus2-sdk-node
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo scaricherà l'sdk Milvus node.js e aggiungerà una voce di dipendenza nel file package.json.</p>
-<h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p>In questo modo verrà scaricato l’SDK Milvus per Node.js e verrà aggiunta una voce di dipendenza nel file package.json.</p>
+<h2 id="Whats-next" class="common-anchor-header">Prossimi passi<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,16 +103,16 @@ yarn add @zilliz/milvus2-sdk-node
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver installato l'SDK Milvus Node.js, è possibile:</p>
+    </button></h2><p>Una volta installato l’SDK Milvus per Node.js, potrai:</p>
 <ul>
-<li><p>Visualizzare l'<a href="https://github.com/milvus-io/milvus-sdk-node">avvio rapido dell'SDK Milvus node.js</a></p></li>
+<li><p>Consultare <a href="https://github.com/milvus-io/milvus-sdk-node">la guida rapida all'SDK Milvus per Node.js</a></p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserire, aggiornare o eliminare</a></li>
+<li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
+<li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p>Esplora il <a href="/api-reference/node/v2.4.x/About.md">riferimento API di Milvus Node.js</a></p></li>
+<li><p>Esplora <a href="/api-reference/node/v2.6.x/About.md">la documentazione di riferimento dell'API Milvus per Node.js</a></p></li>
 </ul>

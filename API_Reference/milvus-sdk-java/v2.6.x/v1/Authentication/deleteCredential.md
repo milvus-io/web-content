@@ -57,7 +57,7 @@ import io.milvus.param.*;
 DeleteCredentialParam param = DeleteCredentialParam.newBuilder()
         .withUsername("user")
         .build();
-R<RpcStatus> response = client.deleteCredential(param)
+R<RpcStatus> response = client.deleteCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

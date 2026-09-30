@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たないため、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されます。この場合、<strong>radius</strong>値が<strong>range_filter</strong>値より小さいことを確認してください。</p>
+    </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たず、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されることを示しています。この場合、<strong>radius</strong>値が<strong>range_filter</strong>値より小さいことを確認してください。</p>
 <p>以下のコードスニペットでは、milvusがクエリベクトルとの距離またはスコアが<strong>0.4</strong>～<strong>0.6に</strong>収まるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -230,6 +230,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -247,5 +248,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>クエリベクターがすでにターゲットコレクションに存在する場合は、検索前にそれらを取得する代わりに<code translate="no">ids</code> 。詳細は<a href="/docs/ja/primary-key-search.md">プライマリ・キー検索を</a>参照。</p>
+<p>クエリベクターがすでにターゲットコレクションに存在する場合は、検索前にそれらを取得する代わりに<code translate="no">ids</code> 。詳細は<a href="/docs/ja/v2.6.x/primary-key-search.md">プライマリ・キー検索を</a>参照。</p>
 </div>

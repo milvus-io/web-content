@@ -248,6 +248,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -255,7 +256,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Também pode ativar a funcionalidade de campo dinâmico para armazenar campos não declarados de forma flexível, mas não é necessário para que os campos JSON funcionem. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Também pode ativar a funcionalidade de campo dinâmico para armazenar campos não declarados de forma flexível, mas não é necessário para que os campos JSON funcionem. Para obter mais informações, consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">Inserir entidades com dados JSON<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -422,6 +423,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -542,8 +544,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>Tipo de conversão JSON</strong> (<code translate="no">json_cast_type</code>): O tipo de dados que o Milvus deve utilizar ao interpretar e indexar o valor no caminho especificado.</p>
 <ul>
-<li><p>Este tipo deve corresponder ao tipo de dados real do campo que está a ser indexado. Se pretender converter o tipo de dados para outro durante a indexação, considere <a href="/docs/pt/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">a utilização de uma função cast</a>.</p></li>
-<li><p>Para obter uma lista completa, veja <a href="/docs/pt/use-json-fields.md#Supported-JSON-cast-types">abaixo</a>.</p></li>
+<li><p>Este tipo deve corresponder ao tipo de dados real do campo que está a ser indexado. Se pretender converter o tipo de dados para outro durante a indexação, considere <a href="/docs/pt/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">a utilização de uma função cast</a>.</p></li>
+<li><p>Para obter uma lista completa, veja <a href="/docs/pt/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">abaixo</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Tipos de conversão JSON suportados</h4><p>Os tipos de conversão não diferenciam maiúsculas de minúsculas. São suportados os seguintes tipos:</p>
@@ -585,7 +587,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>As matrizes devem conter elementos do mesmo tipo para uma indexação óptima. Para mais informações, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<p>As matrizes devem conter elementos do mesmo tipo para uma indexação óptima. Para mais informações, consulte <a href="/docs/pt/v2.6.x/array_data_type.md">Campo de matriz</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Exemplo: Criar índices de caminho JSON</h4><p>Usando a estrutura <code translate="no">metadata</code> JSON da nossa introdução, aqui estão exemplos de como criar índices em diferentes caminhos JSON:</p>
 <div class="multipleCode">
@@ -784,7 +786,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para <strong>indexação plana J</strong>SON, Milvus indexa todos os pares chave-valor dentro de um caminho de objeto JSON (incluindo objetos aninhados) <em>achatando</em> a estrutura JSON e inferindo automaticamente o tipo de cada valor.</p>
+    </button></h3><p>Para <strong>indexação plana JSON</strong>, Milvus indexa todos os pares chave-valor dentro de um caminho de objeto JSON (incluindo objetos aninhados) <em>achatando</em> a estrutura JSON e inferindo automaticamente o tipo de cada valor.</p>
 <h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">Como o achatamento e a inferência de tipo funcionam</h4><p>Quando você cria um índice plano JSON em um caminho de objeto, Milvus irá:</p>
 <ol>
 <li><p><strong>Achatar</strong> - Atravessar recursivamente o objeto a partir do especificado <code translate="no">json_path</code> e extrair pares de valores-chave aninhados como caminhos totalmente qualificados. Usando o exemplo anterior <code translate="no">metadata</code>:</p>
@@ -898,6 +900,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -948,7 +951,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Criou um índice em cada campo de vetor.</p></li>
 <li><p>A coleção está carregada na memória.</p></li>
 </ul>
-<p>Para obter uma lista completa de operadores e expressões suportados, consulte <a href="/docs/pt/json-operators.md">Operadores JSON</a>.</p>
+<p>Para obter uma lista completa de operadores e expressões suportados, consulte <a href="/docs/pt/v2.6.x/json-operators.md">Operadores JSON</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">Juntar tudo<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -968,11 +971,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>Para concluir o fluxo de trabalho em um aplicativo do mundo real, você também precisará:</p>
 <ul>
 <li><p><strong>Criar um índice nos campos de vetor</strong> (obrigatório para cada campo de vetor em uma coleção)</p>
-<p>Consulte <a href="/docs/pt/create-collection.md#Optional-Set-Index-Parameters">Definir parâmetros de índice</a></p></li>
+<p>Consulte <a href="/docs/pt/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Definir parâmetros de índice</a></p></li>
 <li><p><strong>Carregar a coleção</strong></p>
-<p>Consulte <a href="/docs/pt/load-and-release.md">Carregar e liberar</a></p></li>
+<p>Consulte <a href="/docs/pt/v2.6.x/load-and-release.md">Carregar e liberar</a></p></li>
 <li><p><strong>Pesquisar ou consultar usando filtros de caminho JSON</strong></p>
-<p>Consulte <a href="/docs/pt/filtered-search.md">Pesquisa filtrada</a> e <a href="/docs/pt/json-operators.md">operadores JSON</a></p></li>
+<p>Consulte <a href="/docs/pt/v2.6.x/filtered-search.md">Pesquisa filtrada</a> e <a href="/docs/pt/v2.6.x/json-operators.md">operadores JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1009,7 +1012,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>O campo dinâmico</strong> é um objeto JSON oculto (<code translate="no">$meta</code>) que armazena automaticamente qualquer campo não definido no esquema.</p></li>
 </ul>
 <p>Ambos suportam estruturas aninhadas e indexação de caminhos JSON, mas os campos dinâmicos são mais adequados para estruturas de dados opcionais ou em evolução.</p>
-<p>Consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a> para obter detalhes.</p>
+<p>Consulte <a href="/docs/pt/v2.6.x/enable-dynamic-field.md">Campo dinâmico</a> para obter detalhes.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Há alguma limitação no tamanho de um campo JSON?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1042,7 +1045,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Não, os campos JSON não suportam valores predefinidos. No entanto, pode definir <code translate="no">nullable=True</code> ao definir o campo para permitir entradas vazias.</p>
-<p>Consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a> para obter detalhes.</p>
+<p>Consulte <a href="/docs/pt/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a> para obter detalhes.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Há alguma convenção de nomenclatura para chaves de campo JSON?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1079,7 +1082,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus armazena valores de string exatamente como eles aparecem na entrada JSON - sem transformação semântica. As cadeias de caracteres com aspas inadequadas podem resultar em erros durante a análise.</p>
+    </button></h3><p>Milvus armazena valores de string exatamente como aparecem na entrada JSON - sem transformação semântica. As cadeias de caracteres com aspas inadequadas podem resultar em erros durante a análise.</p>
 <p><strong>Exemplos de strings válidas</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>

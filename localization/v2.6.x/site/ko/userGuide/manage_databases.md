@@ -112,11 +112,12 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>데이터베이스를 만들 때 데이터베이스에 대한 속성을 설정할 수도 있습니다. 다음 예는 데이터베이스의 복제본 수를 설정하는 예제입니다.</p>
+<p>데이터베이스를 만들 때 데이터베이스에 대한 속성을 설정할 수도 있습니다. 다음 예제는 데이터베이스의 복제본 수를 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_database(
@@ -153,6 +154,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -224,6 +226,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -243,7 +246,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 데이터베이스에는 고유한 속성이 있으며 데이터베이스 생성에 설명된 대로 데이터베이스를 <a href="/docs/ko/manage_databases.md#Create-database">만들</a> 때 데이터베이스 속성을 설정하거나 기존 데이터베이스의 속성을 변경하여 삭제할 수 있습니다.</p>
+    </button></h2><p>각 데이터베이스에는 고유한 속성이 있으며 데이터베이스 생성에 설명된 대로 데이터베이스를 <a href="/docs/ko/v2.6.x/manage_databases.md#Create-database">만들</a> 때 데이터베이스 속성을 설정하거나 기존 데이터베이스의 속성을 변경하여 삭제할 수 있습니다.</p>
 <p>다음 표에는 사용 가능한 데이터베이스 속성이 나열되어 있습니다.</p>
 <table>
    <tr>
@@ -284,7 +287,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>문자열</p></td>
-     <td><p>데이터베이스 내에서 시간에 민감한 작업, 특히 <code translate="no">TIMESTAMPTZ</code> 필드에 적용되는 기본 표준 시간대를 지정합니다. 컬렉션 수준 표준 시간대가 설정되어 있지 않으면 컬렉션은 데이터베이스 표준 시간대를 상속합니다. 쿼리 수준 표준 시간대 매개변수는 데이터베이스 및 컬렉션 기본값을 모두 일시적으로 재정의할 수 있습니다. 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드를 사용하는 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p></td>
+     <td><p>데이터베이스 내에서 시간에 민감한 작업, 특히 <code translate="no">TIMESTAMPTZ</code> 필드에 적용되는 기본 표준 시간대를 지정합니다. 컬렉션 수준 표준 시간대가 설정되어 있지 않으면 컬렉션은 데이터베이스 표준 시간대를 상속합니다. 쿼리 수준 표준 시간대 매개변수는 데이터베이스 및 컬렉션 기본값을 모두 일시적으로 재정의할 수 있습니다. 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드를 사용하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">데이터베이스 속성 변경하기<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -335,6 +338,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -389,6 +393,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -482,6 +487,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -516,7 +522,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus는 역할 기반 액세스 제어(RBAC)를 사용하여 권한을 관리합니다. 특정 권한이 있는 역할을 생성하고 사용자에게 할당하여 다양한 데이터베이스에 대한 액세스를 제어할 수 있습니다. 자세한 내용은 <a href="/docs/ko/rbac.md">RBAC 설명서를</a> 참조하세요.</p>
+    </button></h3><p>Milvus는 역할 기반 액세스 제어(RBAC)를 사용하여 권한을 관리합니다. 특정 권한이 있는 역할을 생성하고 사용자에게 할당하여 다양한 데이터베이스에 대한 액세스를 제어할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/rbac.md">RBAC 설명서를</a> 참조하세요.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">데이터베이스에 대한 쿼터 제한이 있나요?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -532,4 +538,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>예, Milvus에서는 최대 컬렉션 수와 같은 데이터베이스에 대한 쿼터 제한을 설정할 수 있습니다. 전체 제한 목록은 <a href="/docs/ko/limitations.md">Milvus 제한 문서를</a> 참조하세요.</p>
+    </button></h3><p>예, Milvus에서는 최대 컬렉션 수와 같은 데이터베이스에 대한 쿼터 제한을 설정할 수 있습니다. 전체 제한 목록은 <a href="/docs/ko/v2.6.x/limitations.md">Milvus 제한 문서를</a> 참조하세요.</p>

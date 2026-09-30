@@ -204,7 +204,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">IN</code>: Used to match values within a specific set or range.</p></li>
-<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).  Milvus allows you to build an <code translate="no">NGRAM</code> index on VARCHAR or JSON fields to accelerate text queries. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</p></li>
+<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).  Milvus allows you to build an <code translate="no">NGRAM</code> index on VARCHAR or JSON fields to accelerate text queries. For details, refer to <a href="/docs/v2.6.x/ngram.md">NGRAM</a>.</p></li>
 </ul>
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -604,7 +604,7 @@ summary: >-
 <li><p>The ARRAY field is completely missing from the entity.</p></li>
 </ul>
 <div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/v2.6.x/array_data_type.md">Array Field</a>.</p>
 </div>
 <p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
@@ -702,4 +702,4 @@ summary: >-
       </svg>
     </button></h2><p><strong>Is there a limit to the length of the match value list in filter conditions (e.g., filter=’color in ["red", "green", “blue”]')? What should I do if the list is too long?</strong></p>
 <p>Zilliz Cloud does not impose a length limit on the match value list in filter conditions. However, an excessively long list can significantly impact query performance.
-If your filter condition includes a long list of match values or a complex expression with many elements, we recommend using <a href="/docs/filtering-templating.md">Filter Templating</a> to improve query performance.</p>
+If your filter condition includes a long list of match values or a complex expression with many elements, we recommend using <a href="/docs/v2.6.x/filtering-templating.md">Filter Templating</a> to improve query performance.</p>

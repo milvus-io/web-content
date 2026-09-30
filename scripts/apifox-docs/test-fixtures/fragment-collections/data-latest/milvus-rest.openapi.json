@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Milvus REST fixture", "version": "v2"},
+  "x-zdoc-fragment": {"schemaVersion": "1.0", "apiSurface": "data-plane", "service": "milvus-rest"},
+  "tags": [{"name": "Collections"}],
+  "paths": {
+    "/v2/vectordb/collections": {
+      "get": {
+        "operationId": "listCollectionsFixture",
+        "tags": ["Collections"],
+        "responses": {"200": {"description": "Success"}}
+      }
+    }
+  }
+}

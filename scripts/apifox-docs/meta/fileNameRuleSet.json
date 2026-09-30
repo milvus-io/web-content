@@ -14,7 +14,7 @@
         "name": "Delete",
         "match": "endsWith"
     },
-    {   
+    {
         "path": "get",
         "name": "Get",
         "match": "endsWith"
@@ -55,6 +55,11 @@
         "match": "removeAndCapitalize"
     },
     {
+        "path": "-indexes",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
         "path": "-index",
         "name": "-",
         "match": "removeAndCapitalize"
@@ -83,7 +88,7 @@
         "path": "-user",
         "name": "-",
         "match": "removeAndCapitalize"
-    },    
+    },
     {
         "path": "-to-role",
         "name": "-",
@@ -120,6 +125,16 @@
         "match": "contains"
     },
     {
+        "path": "get-compaction-state",
+        "name": "Get Compaction State",
+        "match": "contains"
+    },
+    {
+        "path": "run-analyzer",
+        "name": "Run Analyzer",
+        "match": "contains"
+    },
+    {
         "path": "-database",
         "name": "-",
         "match": "removeAndCapitalize"
@@ -128,7 +143,7 @@
         "path": "-databases",
         "name": "-",
         "match": "removeAndCapitalize"
-    },    
+    },
     {
         "path": "-resource-group",
         "name": "-",
@@ -138,5 +153,60 @@
         "path": "-resource-groups",
         "name": "-",
         "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-privilege-groups",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-privilege-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-to-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-from-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "add-file-resource",
+        "name": "Add File Resource",
+        "match": "endsWith"
+    },
+    {
+        "path": "list-file-resources",
+        "name": "List File Resources",
+        "match": "endsWith"
+    },
+    {
+        "path": "remove-file-resource",
+        "name": "Remove File Resource",
+        "match": "endsWith"
+    },
+    {
+        "path": "get-restore-snapshot-job-state",
+        "name": "Get Restore Snapshot Job State",
+        "match": "endsWith"
+    },
+    {
+        "path": "export-snapshot",
+        "name": "Export Snapshot",
+        "match": "endsWith"
+    },
+    {
+        "path": "list-restore-snapshot-jobs",
+        "name": "List Restore Snapshot Jobs",
+        "match": "endsWith"
+    },
+    {
+        "path": "restore-external-snapshot",
+        "name": "Restore External Snapshot",
+        "match": "endsWith"
     }
 ]

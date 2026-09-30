@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسمح لك ميلفوس بإدراج كيانات ذات هياكل مرنة ومتطورة من خلال ميزة خاصة تسمى الحقل <strong>الديناميكي</strong>. يتم تنفيذ هذا الحقل كحقل JSON مخفي يسمى <code translate="no">$meta</code> ، والذي يخزن تلقائيًا أي حقول في بياناتك <strong>غير محددة بشكل صريح</strong> في مخطط المجموعة.</p>
+    </button></h1><p>يسمح لك ميلفوس بإدراج كيانات ذات هياكل مرنة ومتطورة من خلال ميزة خاصة تسمى الحقل <strong>الديناميكي</strong>. يتم تنفيذ هذا الحقل كحقل JSON مخفي اسمه <code translate="no">$meta</code> ، والذي يخزن تلقائيًا أي حقول في بياناتك <strong>غير محددة بشكل صريح</strong> في مخطط المجموعة.</p>
 <h2 id="How-it-works" class="common-anchor-header">كيف يعمل الحقل الديناميكي<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,6 +262,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -378,6 +379,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -416,7 +418,22 @@ curl --request POST \
 <div class="alert note">
 <p>فهرسة مفاتيح الحقول الديناميكية <strong>اختيارية</strong>. لا يزال بإمكانك الاستعلام أو التصفية حسب مفاتيح الحقول الديناميكية بدون فهرس، ولكن قد يؤدي ذلك إلى أداء أبطأ بسبب البحث بالقوة الغاشمة.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">بناء جملة فهرسة مسار JSON</h3><p>لإنشاء فهرس مسار JSON، حدد:</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">بناء جملة فهرسة مسار JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإنشاء فهرس مسار JSON، حدد:</p>
 <ul>
 <li><p><strong>مسار JSON</strong> (<code translate="no">json_path</code>): المسار إلى المفتاح أو الحقل المتداخل داخل كائن JSON الذي تريد فهرسته.</p>
 <ul>
@@ -426,10 +443,25 @@ curl --request POST \
 <li><p><strong>نوع إرسال JSON</strong> (<code translate="no">json_cast_type</code>): نوع البيانات الذي يجب أن يستخدمه Milvus عند تفسير وفهرسة القيمة في المسار المحدد.</p>
 <ul>
 <li><p>يجب أن يتطابق هذا النوع مع نوع البيانات الفعلي للحقل الذي تتم فهرسته.</p></li>
-<li><p>للاطلاع على قائمة كاملة، ارجع إلى <a href="/docs/ar/use-json-fields.md#Supported-JSON-cast-types">أنواع مسبوكات JSON المدعومة</a>.</p></li>
+<li><p>للاطلاع على قائمة كاملة، ارجع إلى <a href="/docs/ar/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">أنواع مسبوكات JSON المدعومة</a>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">استخدام مسار JSON لفهرسة مفاتيح الحقل الديناميكي</h3><p>بما أن الحقل الديناميكي هو حقل JSON، يمكنك فهرسة أي مفتاح داخله باستخدام صيغة مسار JSON. يعمل هذا مع كل من القيم العددية البسيطة والبنى المتداخلة المعقدة.</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">استخدام مسار JSON لفهرسة مفاتيح الحقل الديناميكي<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بما أن الحقل الديناميكي هو حقل JSON، يمكنك فهرسة أي مفتاح داخله باستخدام صيغة مسار JSON. يعمل هذا مع كل من القيم العددية البسيطة والبنى المتداخلة المعقدة.</p>
 <p><strong>أمثلة على مسار JSON:</strong></p>
 <ul>
 <li><p>للمفاتيح البسيطة: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
@@ -633,7 +665,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">استخدم دوال JSON cast لتحويل النوع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>إذا كان مفتاح الحقل الديناميكي يحتوي على قيم بتنسيق غير صحيح، (على سبيل المثال الأرقام المخزنة كسلاسل)، يمكنك استخدام دالة الإرسال لتحويلها:</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">استخدم دوال JSON cast لتحويل النوع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كان مفتاح الحقل الديناميكي يحتوي على قيم بتنسيق غير صحيح، (على سبيل المثال الأرقام المخزنة كسلاسل)، يمكنك استخدام دالة الإرسال لتحويلها:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -693,10 +740,25 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <div class="alert note">
 <ul>
 <li><p>إذا فشل تحويل النوع (على سبيل المثال القيمة <code translate="no">&quot;not_a_number&quot;</code> لا يمكن تحويلها إلى رقم)، يتم تخطي القيمة وإلغاء فهرستها.</p></li>
-<li><p>للحصول على تفاصيل حول معلمات دالة الإرسال، راجع <a href="/docs/ar/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">حقل JSON</a>.</p></li>
+<li><p>للحصول على تفاصيل حول معلمات دالة الإرسال، راجع <a href="/docs/ar/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">حقل JSON</a>.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">تطبيق الفهارس على المجموعة</h3><p>بعد تحديد معلمات الفهرس، يمكنك تطبيقها على المجموعة باستخدام <code translate="no">create_index()</code>:</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">تطبيق الفهارس على المجموعة<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد معلمات الفهرس، يمكنك تطبيقها على المجموعة باستخدام <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -747,6 +809,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -773,7 +836,7 @@ curl --request POST \
 <li><p>بالنسبة للمفاتيح غير JSON (مثل السلاسل والأرقام والمنطقيات)، يمكنك الإشارة إليها باسم المفتاح مباشرةً.</p></li>
 <li><p>بالنسبة للمفاتيح التي تخزّن كائنات JSON، استخدم صيغة مسار JSON للوصول إلى القيم المتداخلة.</p></li>
 </ul>
-<p>استنادًا <a href="/docs/ar/enable-dynamic-field.md#Insert-entities-to-the-collection">إلى </a><a href="/docs/ar/enable-dynamic-field.md#Insert-entities-to-the-collection">مثال الكيان</a> من القسم السابق، تتضمن تعبيرات التصفية الصالحة:</p>
+<p>استنادًا <a href="/docs/ar/v2.6.x/enable-dynamic-field.md#Insert-entities-to-the-collection">إلى </a><a href="/docs/ar/v2.6.x/enable-dynamic-field.md#Insert-entities-to-the-collection">مثال الكيان</a> من القسم السابق، تتضمن تعبيرات التصفية الصالحة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
@@ -897,6 +960,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -911,7 +975,7 @@ curl --request POST \
 <div class="alert note">
 <p>لا يتم تضمين مفاتيح الحقول الديناميكية في النتائج افتراضيًا ويجب طلبها صراحةً.</p>
 </div>
-<p>للاطلاع على قائمة كاملة بالمشغلات وتعبيرات التصفية المدعومة، راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a>.</p>
+<p>للاطلاع على قائمة كاملة بالمشغلات وتعبيرات التصفية المدعومة، راجع <a href="/docs/ar/v2.6.x/filtered-search.md">البحث المصفى</a>.</p>
 <h2 id="Put-it-all-together" class="common-anchor-header">ضع كل ذلك معًا<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -931,11 +995,11 @@ curl --request POST \
 <p>لإكمال سير العمل في تطبيق واقعي، ستحتاج أيضًا إلى:</p>
 <ul>
 <li><p><strong>إنشاء فهرس على الحقل المتجه الخاص بك</strong> (إلزامي لكل مجموعة)</p>
-<p>الرجوع إلى <a href="/docs/ar/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a></p></li>
+<p>الرجوع إلى <a href="/docs/ar/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a></p></li>
 <li><p><strong>تحميل المجموعة</strong></p>
-<p>ارجع إلى <a href="/docs/ar/load-and-release.md">تحميل وتحرير</a></p></li>
+<p>ارجع إلى <a href="/docs/ar/v2.6.x/load-and-release.md">تحميل وتحرير</a></p></li>
 <li><p><strong>البحث أو الاستعلام باستخدام مرشحات مسار JSON</strong></p>
-<p>راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/json-operators.md">وعوامل تشغيل JSON</a></p></li>
+<p>راجع <a href="/docs/ar/v2.6.x/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/v2.6.x/json-operators.md">وعوامل تشغيل JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -952,19 +1016,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">متى يجب تحديد حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي؟</h3><p>يجب عليك تعريف حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي عندما:</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">متى يجب تحديد حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي؟<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يجب عليك تعريف حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي عندما:</p>
 <ul>
 <li><p><strong>يتم تضمين الحقل بشكل متكرر في حقول_المخرجات</strong>: يتم ضمان إمكانية استرجاع الحقول المحددة صراحةً فقط بكفاءة من خلال <code translate="no">output_fields</code>. لا يتم تحسين مفاتيح الحقول الديناميكية للاسترجاع عالي التردد وقد تتكبد نفقات أداء زائدة.</p></li>
 <li><p><strong>يتم الوصول إلى الحقل أو تصفيته بشكل متكرر</strong>: في حين أن فهرسة مفتاح الحقل الديناميكي يمكن أن يوفر أداء تصفية مماثل لحقول المخطط الثابتة، فإن الحقول المحددة صراحةً توفر بنية أوضح وقابلية صيانة أفضل.</p></li>
 <li><p><strong>تحتاج إلى تحكم كامل في سلوك الحقل</strong>: تدعم الحقول الصريحة القيود على مستوى المخطط والتحقق من الصحة والكتابة بشكل أوضح، والتي يمكن أن تكون مفيدة لإدارة تكامل البيانات واتساقها.</p></li>
 <li><p><strong>تريد تجنب التناقضات في الفهرسة</strong>: تكون البيانات في مفاتيح الحقول الديناميكية أكثر عرضة لعدم الاتساق في النوع أو البنية. يساعد استخدام مخطط ثابت على ضمان جودة البيانات، خاصةً إذا كنت تخطط لاستخدام الفهرسة أو الصب.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">هل يمكنني إنشاء فهارس متعددة على نفس مفتاح الحقل الديناميكي بأنواع بيانات مختلفة؟</h3><p>لا، يمكنك إنشاء فهرس <strong>واحد فقط لكل مسار JSON</strong>. حتى إذا كان مفتاح الحقل الديناميكي يحتوي على قيم من أنواع مختلطة (على سبيل المثال، بعض السلاسل وبعض الأرقام)، يجب عليك اختيار فهرس واحد <code translate="no">json_cast_type</code> عند فهرسة هذا المسار. الفهارس المتعددة على نفس المفتاح بأنواع مختلفة غير مدعومة في الوقت الحالي.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">عند فهرسة مفتاح حقل ديناميكي، ماذا لو فشل صب البيانات؟</h3><p>إذا أنشأت فهرسًا على مفتاح حقل ديناميكي وفشل صب البيانات - على سبيل المثال، إذا كانت القيمة التي من المفترض أن يتم صبها إلى <code translate="no">double</code> هي سلسلة غير رقمية مثل <code translate="no">&quot;abc&quot;</code>- فسيتم <strong>تخطي</strong> هذه القيم المحددة <strong>بصمت أثناء إنشاء الفهرس</strong>. لن تظهر في الفهرس وبالتالي لن <strong>يتم إرجاعها في نتائج البحث المستندة إلى التصفية أو نتائج الاستعلام</strong> التي تعتمد على الفهرس.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">هل يمكنني إنشاء فهارس متعددة على نفس مفتاح الحقل الديناميكي بأنواع بيانات مختلفة؟<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لا، يمكنك إنشاء فهرس <strong>واحد فقط لكل مسار JSON</strong>. حتى إذا كان مفتاح الحقل الديناميكي يحتوي على قيم من أنواع مختلطة (على سبيل المثال، بعض السلاسل وبعض الأرقام)، يجب عليك اختيار فهرس واحد <code translate="no">json_cast_type</code> عند فهرسة هذا المسار. الفهارس المتعددة على نفس المفتاح بأنواع مختلفة غير مدعومة في الوقت الحالي.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">عند فهرسة مفتاح حقل ديناميكي، ماذا لو فشل صب البيانات؟<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا أنشأت فهرسًا على مفتاح حقل ديناميكي وفشل صب البيانات - على سبيل المثال، إذا كانت القيمة التي من المفترض أن يتم صبها إلى <code translate="no">double</code> هي سلسلة غير رقمية مثل <code translate="no">&quot;abc&quot;</code>- فسيتم <strong>تخطي</strong> هذه القيم المحددة <strong>بصمت أثناء إنشاء الفهرس</strong>. لن تظهر في الفهرس وبالتالي لن <strong>يتم إرجاعها في نتائج البحث المستندة إلى التصفية أو نتائج الاستعلام</strong> التي تعتمد على الفهرس.</p>
 <p>هذا له بعض الآثار المهمة:</p>
 <ul>
 <li><p><strong>لا رجوع إلى الفحص الكامل</strong>: إذا تمت فهرسة غالبية الكيانات بنجاح، فإن استعلامات التصفية ستعتمد بالكامل على الفهرس. سيتم استبعاد الكيانات التي فشلت في الفهرسة من مجموعة النتائج - حتى لو كانت تتطابق منطقياً مع شرط التصفية.</p></li>
 <li><p><strong>مخاطر دقة البحث</strong>: في مجموعات البيانات الكبيرة التي تكون فيها جودة البيانات غير متناسقة (خاصةً في مفاتيح الحقول الديناميكية)، يمكن أن يؤدي هذا السلوك إلى نتائج مفقودة غير متوقعة. من المهم ضمان تنسيق بيانات متناسق وصالح قبل الفهرسة.</p></li>
 <li><p><strong>استخدم دوال الإرسال بحذر</strong>: إذا كنت تستخدم <code translate="no">json_cast_function</code> لتحويل السلاسل إلى أرقام أثناء الفهرسة، تأكد من أن قيم السلسلة قابلة للتحويل بشكل موثوق. سيؤدي عدم التطابق بين <code translate="no">json_cast_type</code> والنوع المحول الفعلي إلى حدوث أخطاء أو تخطي الإدخالات.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">ماذا يحدث إذا كان الاستعلام الخاص بي يستخدم نوع بيانات مختلف عن نوع البيانات المفهرس المُحَوَّل؟</h3><p>إذا كان استعلامك يقارن مفتاح حقل ديناميكي باستخدام <strong>نوع بيانات مختلف</strong> عما تم استخدامه في الفهرس (على سبيل المثال، الاستعلام بمقارنة سلسلة عندما تم إرسال الفهرس إلى <code translate="no">double</code>)، <strong>فلن يستخدم</strong> النظام <strong>الفهرس،</strong> وقد يعود إلى الفحص الكامل <em>فقط إذا كان ذلك ممكنًا</em>. للحصول على أفضل أداء ودقة، تأكد من تطابق نوع الاستعلام الخاص بك مع <code translate="no">json_cast_type</code> المستخدم أثناء إنشاء الفهرس.</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">ماذا يحدث إذا كان الاستعلام الخاص بي يستخدم نوع بيانات مختلف عن نوع البيانات المفهرس المُحَوَّل؟<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كان استعلامك يقارن مفتاح حقل ديناميكي باستخدام <strong>نوع بيانات مختلف</strong> عما تم استخدامه في الفهرس (على سبيل المثال، الاستعلام باستخدام مقارنة سلسلة عندما تم إرسال الفهرس إلى <code translate="no">double</code>)، <strong>فلن يستخدم</strong> النظام <strong>الفهرس،</strong> وقد يعود إلى الفحص الكامل <em>فقط إذا كان ذلك ممكنًا</em>. للحصول على أفضل أداء ودقة، تأكد من تطابق نوع الاستعلام الخاص بك مع <code translate="no">json_cast_type</code> المستخدم أثناء إنشاء الفهرس.</p>

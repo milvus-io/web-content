@@ -20,7 +20,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
 
     **[REQUIRED]**
 
@@ -195,7 +195,7 @@ add_field(
 
 **RETURNS:**
 
-A **CollectionSchema** object contains the fields that have been added to the schema.
+A **[CollectionSchema](CollectionSchema.md)** object contains the fields that have been added to the schema.
 
 **EXCEPTIONS:**
 

@@ -1,6 +1,6 @@
 # describeCollection()
 
-This operation lists detailed information about a specific collection.
+Returns metadata for a collection selected by name or ID.
 
 ```java
 public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
@@ -9,30 +9,30 @@ public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
 ## Request Syntax
 
 ```java
-describeCollection(DescribeCollectionReq.builder()
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .build()
-)
+DescribeCollectionReq.builder()
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .collectionId(collectionId)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)`
 
-    The name of the database to which the target collection belongs.
+    The name of the database that contains the target resource.
 
 - `collectionName(String collectionName)`
 
-    The name of an existing collection.
+    The name of the target collection.
 
-    Setting this to a non-existing collection results in **MilvusException**.
+- `collectionId(Long collectionId)`
 
-**RETURN TYPE:**
-
-*DescribeCollectionResp*
+    The ID of the target collection.
 
 **RETURNS:**
+
+*DescribeCollectionResp*
 
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
@@ -78,7 +78,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- **collectionSchema** (*CreateCollectionReq.CollectionSchema*)
+- **[collectionSchema](CollectionSchema/CollectionSchema.md)** (*CreateCollectionReq.CollectionSchema*)
 
     The scheme of the collection.
 
@@ -94,6 +94,18 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The consistency level of the collection.
 
+- **updateTimestamp** (*Long*)
+
+    The timestamp of the last metadata update of the collection. Available in v2.6.25 or later.
+
+- **consistencyLevelName** (*String*)
+
+    The name of the consistency level of the collection. Available in v2.6.25 or later.
+
+- **aliases** (*List\<String\>*)
+
+    A list of aliases of the collection. Available in v2.6.25 or later.
+
 - **shardsNum** (*Integer*) -
 
     The number of shards in the collection.
@@ -106,28 +118,16 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Returns metadata for a collection selected by name or ID.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.DescribeCollectionReq;
-import io.milvus.v2.service.collection.response.DescribeCollectionResp;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Get the collection detail
-DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
-        .collectionName("test")
-        .build();
-DescribeCollectionResp describeCollectionResp = client.describeCollection(describeCollectionReq);
-
+DescribeCollectionResp collection = client.describeCollection(
+    DescribeCollectionReq.builder()
+        .databaseName("default")
+        .collectionName("books")
+        .build());
 ```

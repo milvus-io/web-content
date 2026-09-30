@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "prune fixture", "version": "1.0.0" },
+  "paths": {
+    "/search": {
+      "post": {
+        "tags": ["Search"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SearchRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SearchResult" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchRequest": { "type": "object", "properties": { "result": { "$ref": "#/components/schemas/SearchResult" } } },
+      "SearchResult": { "type": "object" },
+      "Unused": { "type": "string" }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": { "type": "apiKey", "in": "header", "name": "X-API-Key" }
+    }
+  }
+}

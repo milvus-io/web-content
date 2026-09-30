@@ -1,0 +1,82 @@
+# compact()
+
+This operation compacts the collection by merging small segments into larger ones. It is recommended to call this operation after inserting a large amount of data into a collection.
+
+```java
+public CompactResp compact(CompactReq request)
+```
+
+## Request Syntax
+
+```java
+compact(CompactReq.builder()
+    .databaseName(String databaseName)
+    .collectionName(String collectionName)
+    .isClustering(Boolean isClustering)
+    .isL0(Boolean isL0)
+    .targetSize(Long targetSize)
+    .targetSizeUnit(String targetSizeUnit)
+    .build()
+);
+```
+
+**BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database. Defaults to the current database if not specified.
+
+- `collectionName(String collectionName)`
+
+    The name of the target collection.
+
+- `isClustering(Boolean isClustering)`
+
+    Whether to perform clustering compaction. Defaults to `Boolean.FALSE`.
+
+- `isL0(Boolean isL0)`
+
+    Whether to request L0 compaction. Defaults to `Boolean.FALSE` and is independent from clustering compaction.
+
+- `targetSize(Long targetSize)`
+
+    The target segment size expressed in `targetSizeUnit`. A `null` value uses the server default.
+
+- `targetSizeUnit(String targetSizeUnit)`
+
+    The unit of `targetSize`. Supported values: `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, `"pb"`. Defaults to `"mb"`.
+
+**RETURNS:**
+
+*CompactResp*
+
+A **CompactResp** object contains a compaction ID.
+
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.CompactReq;
+import io.milvus.v2.service.utility.response.CompactResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Compact a collection
+client.compact(CompactReq.builder()
+    .collectionName("my_collection")
+    .build());
+```

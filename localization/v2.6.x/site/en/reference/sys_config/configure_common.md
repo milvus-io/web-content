@@ -1274,7 +1274,7 @@ summary: Learn how to configure common for Milvus.
         <li>Valid values: [0, 1, 2, 3, 4, 5, 6, 7] (supports up to 8 clusters)</li>      
         <li>Each cluster must have a unique clusterID to prevent AutoID overlap when running multiple clusters.</li>      
         <li>This ID is embedded in the 64-bit AutoID structure as part of the cluster_id segment.</li>      
-        <li>For more information, refer to <a href="/docs/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Primary Field & AutoID</a>.</li>      </td>
+        <li>For more information, refer to <a href="/docs/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Primary Field & AutoID</a>.</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

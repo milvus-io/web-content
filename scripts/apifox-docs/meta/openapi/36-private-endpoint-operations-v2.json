@@ -1,0 +1,1705 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Private Endpoint Operations (V2)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Private Endpoint Operations (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Private Endpoint 操作 (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/privateEndpointServices": {
+      "get": {
+        "summary": "List Private Endpoint Services",
+        "description": "Lists the private endpoint services available across cloud regions.",
+        "tags": [
+          "Private Endpoint Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": false,
+            "description": "The ID of a project used to scope the available services.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于限定可用服务范围的项目 ID。"
+              },
+              "ja-JP": {
+                "description": "利用可能なサービスをスコープするために使用するプロジェクトの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxx"
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "required": false,
+            "description": "The ID of a cloud region used to filter the services.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于筛选服务的云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "サービスをフィルタリングするために使用するクラウドリージョンの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "summary": "AWS",
+                "x-target-lang": "en-US",
+                "value": "aws-us-west-2"
+              },
+              "2": {
+                "summary": "Alibaba Cloud",
+                "x-target-lang": "zh-CN",
+                "value": "ali-cn-hangzhou"
+              }
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            },
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page. Values outside 1 to 100 use the default value of 10.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。超出 1 至 100 范围时使用默认值 10。"
+              },
+              "ja-JP": {
+                "description": "ページごとに返す項目数。1 から 100 の範囲外の値にはデフォルト値の 10 が使用されます。"
+              }
+            },
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功结果或错误消息。"
+              },
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ListPrivateEndpointServicesResponse"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointServices": [
+                          {
+                            "regionId": "aws-us-west-2",
+                            "cloudId": "aws",
+                            "endpointService": "com.amazonaws.vpce.us-west-2.vpce-svc-xxxxxxxxxxxxxxxxx",
+                            "whitelistRequired": false
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "count": 1
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointServices": [
+                          {
+                            "regionId": "ali-cn-hangzhou",
+                            "cloudId": "ali",
+                            "endpointService": "com.aliyuncs.privatelink.cn-hangzhou.epsrv-xxxxxxxxxxxxxxxxx",
+                            "whitelistRequired": true
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "count": 1
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "Failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 Private Endpoint 服务",
+            "description": "列出各云地域中可用的 Private Endpoint 服务。"
+          },
+          "ja-JP": {
+            "summary": "Private Endpoint Service を一覧表示",
+            "description": "クラウドリージョン全体で利用可能なプライベートエンドポイントサービスを一覧表示します。"
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}/privateEndpoints": {
+      "get": {
+        "summary": "List Private Endpoints",
+        "description": "Lists the private endpoints in a project.",
+        "tags": [
+          "Private Endpoint Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxx"
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": false,
+            "description": "The page number to return. The first page is 1.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回的页码，第一页为 1。"
+              },
+              "ja-JP": {
+                "description": "返すページ番号。最初のページは 1 です。"
+              }
+            },
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The number of items to return per page. Values outside 1 to 100 use the default value of 10.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页返回的条目数。超出 1 至 100 范围时使用默认值 10。"
+              },
+              "ja-JP": {
+                "description": "ページごとに返す項目数。1 から 100 の範囲外の値にはデフォルト値の 10 が使用されます。"
+              }
+            },
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功结果或错误消息。"
+              },
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/ListPrivateEndpointsResponse"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpoints": [
+                          {
+                            "regionId": "aws-us-west-2",
+                            "cloudId": "aws",
+                            "endpointService": "com.amazonaws.vpce.us-west-2.vpce-svc-xxxxxxxxxxxxxxxxx",
+                            "endpointServiceStatus": "AVAILABLE",
+                            "endpointId": "vpce-xxxxxxxxxxxxxxxxx",
+                            "endpointStatus": "AVAILABLE"
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "count": 1
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpoints": [
+                          {
+                            "regionId": "ali-cn-hangzhou",
+                            "cloudId": "ali",
+                            "endpointService": "com.aliyuncs.privatelink.cn-hangzhou.epsrv-xxxxxxxxxxxxxxxxx",
+                            "endpointServiceStatus": "AVAILABLE",
+                            "endpointId": "ep-xxxxxxxxxxxxxxxxx",
+                            "endpointStatus": "AVAILABLE"
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 10,
+                        "count": 1
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "Failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "列出 Private Endpoint",
+            "description": "列出项目中的 Private Endpoint。"
+          },
+          "ja-JP": {
+            "summary": "Private Endpoint を一覧表示",
+            "description": "プロジェクト内のプライベートエンドポイントを一覧表示します。"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Private Endpoint",
+        "description": "Creates a private endpoint in a project.",
+        "tags": [
+          "Private Endpoint Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxx"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePrivateEndpointRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "AWS PrivateLink",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "regionId": "aws-us-west-2",
+                    "endpointId": "vpce-xxxxxxxxxxxxxxxxx"
+                  }
+                },
+                "2": {
+                  "summary": "Alibaba Cloud PrivateLink",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "regionId": "ali-cn-hangzhou",
+                    "endpointId": "ep-xxxxxxxxxxxxxxxxx"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功结果或错误消息。"
+              },
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/PrivateEndpointMutationResponse"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointId": "vpce-xxxxxxxxxxxxxxxxx",
+                        "regionId": "aws-us-west-2"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointId": "ep-xxxxxxxxxxxxxxxxx",
+                        "regionId": "ali-cn-hangzhou"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "Failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Private Endpoint",
+            "description": "在项目中创建 Private Endpoint。"
+          },
+          "ja-JP": {
+            "summary": "Private Endpoint を作成します",
+            "description": "プロジェクト内にプライベートエンドポイントを作成します。"
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}/privateEndpoints/{endpointId}": {
+      "delete": {
+        "summary": "Delete Private Endpoint",
+        "description": "Deletes a private endpoint from a project.",
+        "tags": [
+          "Private Endpoint Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxx"
+          },
+          {
+            "name": "endpointId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the private endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint ID。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイントの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "summary": "AWS PrivateLink",
+                "x-target-lang": "en-US",
+                "value": "vpce-xxxxxxxxxxxxxxxxx"
+              },
+              "2": {
+                "summary": "Alibaba Cloud PrivateLink",
+                "x-target-lang": "zh-CN",
+                "value": "ep-xxxxxxxxxxxxxxxxx"
+              }
+            }
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "required": true,
+            "description": "The ID of the cloud region that contains the private endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint 所在的云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイントを含むクラウドリージョンの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "1": {
+                "summary": "AWS",
+                "x-target-lang": "en-US",
+                "value": "aws-us-west-2"
+              },
+              "2": {
+                "summary": "Alibaba Cloud",
+                "x-target-lang": "zh-CN",
+                "value": "ali-cn-hangzhou"
+              }
+            }
+          },
+          {
+            "name": "gcpProjectId",
+            "in": "query",
+            "required": false,
+            "description": "The Google Cloud project ID. This parameter applies to Google Cloud regions.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Google Cloud 项目 ID。该参数适用于 Google Cloud 地域。"
+              },
+              "ja-JP": {
+                "description": "Google Cloud プロジェクト ID。このパラメーターは Google Cloud リージョンに適用されます。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功结果或错误消息。"
+              },
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "$ref": "#/components/schemas/DeletePrivateEndpointResponse"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointId": "vpce-xxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "endpointId": "ep-xxxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "Failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "删除 Private Endpoint",
+            "description": "从项目中删除 Private Endpoint。"
+          },
+          "ja-JP": {
+            "summary": "Private Endpoint を削除",
+            "description": "プロジェクトからプライベートエンドポイントを削除します。"
+          }
+        }
+      }
+    },
+    "/v2/projects/{projectId}/privateEndpointWhitelist": {
+      "post": {
+        "summary": "Add Private Endpoint Whitelist Entry",
+        "description": "Adds an external cloud account to the private endpoint whitelist of a project.",
+        "tags": [
+          "Private Endpoint Operations (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API Key。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the project.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            },
+            "example": "proj-xxxxxxxxxxxxxxxxxxx"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPrivateEndpointWhitelistRequest"
+              },
+              "examples": {
+                "1": {
+                  "summary": "AWS account",
+                  "x-target-lang": "en-US",
+                  "value": {
+                    "regionId": "aws-us-west-2",
+                    "outerUserId": "123456789012"
+                  }
+                },
+                "2": {
+                  "summary": "Alibaba Cloud account",
+                  "x-target-lang": "zh-CN",
+                  "value": {
+                    "regionId": "ali-cn-hangzhou",
+                    "outerUserId": "1234567890123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a successful result or an error message.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回成功结果或错误消息。"
+              },
+              "ja-JP": {
+                "description": "成功した結果またはエラーメッセージを返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "type": "object",
+                      "description": "A successful response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "成功したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          },
+                          "example": 0
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "The operation result.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "操作结果。"
+                            },
+                            "ja-JP": {
+                              "description": "操作結果。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "data"
+                      ]
+                    },
+                    {
+                      "x-tab-label": "failure",
+                      "type": "object",
+                      "description": "A failure response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "失败响应。"
+                        },
+                        "ja-JP": {
+                          "description": "失敗したレスポンス。"
+                        }
+                      },
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "The response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "The error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误消息。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "message"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "x-target-response": "OPTION 1",
+                    "value": {
+                      "code": 0,
+                      "data": "success"
+                    }
+                  },
+                  "3": {
+                    "summary": "Failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "添加 Private Endpoint 白名单条目",
+            "description": "将外部云账号添加到项目的 Private Endpoint 白名单。"
+          },
+          "ja-JP": {
+            "summary": "Private Endpoint ホワイトリストエントリを追加",
+            "description": "外部クラウドアカウントをプロジェクトのプライベートエンドポイントホワイトリストに追加します。"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PrivateEndpointService": {
+        "type": "object",
+        "description": "A private endpoint service available in a cloud region.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "云地域中可用的 Private Endpoint 服务。"
+          },
+          "ja-JP": {
+            "description": "クラウドリージョンで利用可能なプライベートエンドポイントサービス。"
+          }
+        },
+        "properties": {
+          "regionId": {
+            "type": "string",
+            "description": "The cloud region ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョン ID。"
+              }
+            }
+          },
+          "cloudId": {
+            "type": "string",
+            "description": "The cloud provider ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云服务提供商 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドプロバイダー ID。"
+              }
+            }
+          },
+          "endpointService": {
+            "type": "string",
+            "description": "The endpoint service name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Endpoint 服务名称。"
+              },
+              "ja-JP": {
+                "description": "エンドポイントサービス名。"
+              }
+            }
+          },
+          "whitelistRequired": {
+            "type": "boolean",
+            "description": "Whether the service requires the external cloud account to be added to a whitelist.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "该服务是否要求将外部云账号添加到白名单。"
+              },
+              "ja-JP": {
+                "description": "サービスが外部クラウドアカウントのホワイトリストへの追加を必要とするかどうか。"
+              }
+            }
+          }
+        }
+      },
+      "PrivateEndpoint": {
+        "type": "object",
+        "description": "A private endpoint and its service status.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Private Endpoint 及其服务状态。"
+          },
+          "ja-JP": {
+            "description": "プライベートエンドポイントとそのサービスステータス。"
+          }
+        },
+        "properties": {
+          "regionId": {
+            "type": "string",
+            "description": "The cloud region ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョン ID。"
+              }
+            }
+          },
+          "cloudId": {
+            "type": "string",
+            "description": "The cloud provider ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云服务提供商 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドプロバイダー ID。"
+              }
+            }
+          },
+          "endpointService": {
+            "type": "string",
+            "description": "The endpoint service name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Endpoint 服务名称。"
+              },
+              "ja-JP": {
+                "description": "エンドポイントサービス名。"
+              }
+            }
+          },
+          "endpointServiceStatus": {
+            "type": "string",
+            "description": "The status of the endpoint service.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Endpoint 服务状态。"
+              },
+              "ja-JP": {
+                "description": "エンドポイントサービスのステータス。"
+              }
+            }
+          },
+          "endpointId": {
+            "type": "string",
+            "description": "The private endpoint ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint ID。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイント ID。"
+              }
+            }
+          },
+          "endpointStatus": {
+            "type": "string",
+            "description": "The status of the private endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint 状态。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイントのステータス。"
+              }
+            }
+          },
+          "gcpProjectId": {
+            "type": "string",
+            "description": "The Google Cloud project ID, when applicable.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Google Cloud 项目 ID（如适用）。"
+              },
+              "ja-JP": {
+                "description": "該当する場合の Google Cloud プロジェクト ID。"
+              }
+            }
+          }
+        }
+      },
+      "ListPrivateEndpointServicesResponse": {
+        "type": "object",
+        "description": "A paginated list of private endpoint services.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Private Endpoint 服务分页列表。"
+          },
+          "ja-JP": {
+            "description": "ページングされたプライベートエンドポイントサービスのリスト。"
+          }
+        },
+        "properties": {
+          "endpointServices": {
+            "type": "array",
+            "description": "The private endpoint services.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint 服务列表。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイントサービス。"
+              }
+            },
+            "items": {
+              "$ref": "#/components/schemas/PrivateEndpointService"
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "The number of items per page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页条目数。"
+              },
+              "ja-JP": {
+                "description": "ページごとの項目数。"
+              }
+            }
+          },
+          "count": {
+            "type": "integer",
+            "description": "The total number of matching services.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配的服务总数。"
+              },
+              "ja-JP": {
+                "description": "一致するサービスの総数。"
+              }
+            }
+          }
+        }
+      },
+      "ListPrivateEndpointsResponse": {
+        "type": "object",
+        "description": "A paginated list of private endpoints.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Private Endpoint 分页列表。"
+          },
+          "ja-JP": {
+            "description": "ページングされたプライベートエンドポイントのリスト。"
+          }
+        },
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "description": "The private endpoints.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint 列表。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイント。"
+              }
+            },
+            "items": {
+              "$ref": "#/components/schemas/PrivateEndpoint"
+            }
+          },
+          "currentPage": {
+            "type": "integer",
+            "description": "The current page number.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "当前页码。"
+              },
+              "ja-JP": {
+                "description": "現在のページ番号。"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "The number of items per page.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "每页条目数。"
+              },
+              "ja-JP": {
+                "description": "ページごとの項目数。"
+              }
+            }
+          },
+          "count": {
+            "type": "integer",
+            "description": "The total number of matching endpoints.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "匹配的 Private Endpoint 总数。"
+              },
+              "ja-JP": {
+                "description": "一致するエンドポイントの総数。"
+              }
+            }
+          }
+        }
+      },
+      "CreatePrivateEndpointRequest": {
+        "type": "object",
+        "description": "The request for creating a private endpoint.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Private Endpoint 的请求。"
+          },
+          "ja-JP": {
+            "description": "プライベートエンドポイントを作成するためのリクエスト。"
+          }
+        },
+        "properties": {
+          "regionId": {
+            "type": "string",
+            "description": "The ID of the cloud region in which to create the private endpoint.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "创建 Private Endpoint 的云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイントを作成するクラウドリージョンの ID。"
+              }
+            }
+          },
+          "endpointId": {
+            "type": "string",
+            "description": "The VPC endpoint ID provided by the cloud provider.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云服务提供商提供的 VPC Endpoint ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドプロバイダーから提供される VPC エンドポイント ID。"
+              }
+            }
+          },
+          "gcpProjectId": {
+            "type": "string",
+            "description": "The Google Cloud project ID. This field is required for Google Cloud regions.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Google Cloud 项目 ID。Google Cloud 地域需要此字段。"
+              },
+              "ja-JP": {
+                "description": "Google Cloud プロジェクト ID。このフィールドは Google Cloud リージョンでは必須です。"
+              }
+            }
+          }
+        },
+        "required": [
+          "regionId",
+          "endpointId"
+        ]
+      },
+      "PrivateEndpointMutationResponse": {
+        "type": "object",
+        "description": "The created private endpoint identifiers.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "已创建的 Private Endpoint 标识。"
+          },
+          "ja-JP": {
+            "description": "作成されたプライベートエンドポイントの識別子。"
+          }
+        },
+        "properties": {
+          "endpointId": {
+            "type": "string",
+            "description": "The private endpoint ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Private Endpoint ID。"
+              },
+              "ja-JP": {
+                "description": "プライベートエンドポイント ID。"
+              }
+            }
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The cloud region ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョン ID。"
+              }
+            }
+          }
+        }
+      },
+      "DeletePrivateEndpointResponse": {
+        "type": "object",
+        "description": "The deleted private endpoint identifier.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "已删除的 Private Endpoint 标识。"
+          },
+          "ja-JP": {
+            "description": "削除されたプライベートエンドポイントの識別子。"
+          }
+        },
+        "properties": {
+          "endpointId": {
+            "type": "string",
+            "description": "The deleted private endpoint ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "已删除的 Private Endpoint ID。"
+              },
+              "ja-JP": {
+                "description": "削除されたプライベートエンドポイントの ID。"
+              }
+            }
+          }
+        }
+      },
+      "AddPrivateEndpointWhitelistRequest": {
+        "type": "object",
+        "description": "The request for adding an external cloud account to the private endpoint whitelist.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "将外部云账号添加到 Private Endpoint 白名单的请求。"
+          },
+          "ja-JP": {
+            "description": "外部クラウドアカウントをプライベートエンドポイントのホワイトリストに追加するためのリクエスト。"
+          }
+        },
+        "properties": {
+          "regionId": {
+            "type": "string",
+            "description": "The cloud region ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云地域 ID。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョン ID。"
+              }
+            }
+          },
+          "outerUserId": {
+            "type": "string",
+            "description": "The external cloud account identifier, such as an Azure subscription ID or an Alibaba Cloud account ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部云账号标识，例如 Azure 订阅 ID 或阿里云账号 ID。"
+              },
+              "ja-JP": {
+                "description": "外部クラウドアカウントの識別子。Azure サブスクリプション ID や Alibaba Cloud アカウント ID など。"
+              }
+            }
+          }
+        },
+        "required": [
+          "regionId",
+          "outerUserId"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

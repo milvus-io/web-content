@@ -1,20 +1,20 @@
 ---
 id: embedding-function-overview.md
-title: Обзор функций встраиванияCompatible with Milvus 2.6.x
+title: Обзор функции встраиванияCompatible with Milvus 2.6.x
 summary: >-
-  Модуль Function в Milvus позволяет преобразовывать необработанные текстовые
-  данные в векторные вкрапления, автоматически вызывая внешних провайдеров
-  вкраплений (например, OpenAI, AWS Bedrock, Google Vertex AI и т. д.).
-  Благодаря модулю Function вам больше не нужно вручную взаимодействовать с API
-  для встраивания - весь процесс отправки запросов провайдерам, получения
-  встраиваний и их хранения в ваших коллекциях выполняет модуль Milvus. Для
-  семантического поиска вам нужно предоставить только исходные данные запроса,
-  но не вектор запроса. Milvus генерирует вектор запроса на основе той же
-  модели, которую вы использовали для встраивания, сравнивает его с сохраненными
+  Модуль «Function» в Milvus позволяет преобразовывать необработанные текстовые
+  данные в векторные вложения путем автоматического вызова внешних поставщиков
+  услуг вложений (таких как OpenAI, AWS Bedrock, Google Vertex AI и т. д.).
+  Благодаря модулю «Функции» вам больше не нужно вручную взаимодействовать с API
+  встраивания — Milvus полностью берет на себя весь процесс отправки запросов
+  поставщикам, получения встраиваний и их сохранения в ваших коллекциях. Для
+  семантического поиска вам нужно предоставить только исходные данные запроса, а
+  не вектор запроса. Milvus генерирует вектор запроса с помощью той же модели,
+  которую вы использовали для загрузки данных, сравнивает его с сохраненными
   векторами и возвращает наиболее релевантные результаты.
 beta: Milvus 2.6.x
 ---
-<h1 id="Embedding-Function-Overview" class="common-anchor-header">Обзор функций встраивания<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
+<h1 id="Embedding-Function-Overview" class="common-anchor-header">Обзор функции встраивания<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Модуль Function в Milvus позволяет преобразовывать необработанные текстовые данные в векторные вкрапления путем автоматического вызова внешних провайдеров вкраплений (таких как OpenAI, AWS Bedrock, Google Vertex AI и т. д.). С модулем Function вам больше не нужно вручную взаимодействовать с API для встраивания - Milvus сам управляет всем процессом отправки запросов провайдерам, получения встраиваний и их хранения в ваших коллекциях. Для семантического поиска вам нужно предоставить только исходные данные запроса, но не вектор запроса. Milvus генерирует вектор запроса по той же модели, которую вы использовали для встраивания, сравнивает его с сохраненными векторами и возвращает наиболее релевантные результаты.</p>
+    </button></h1><p>Модуль «Функции» в Milvus позволяет преобразовывать необработанные текстовые данные в векторные вложения путем автоматического вызова внешних поставщиков услуг вложения (таких как OpenAI, AWS Bedrock, Google Vertex AI и т. д.). Благодаря модулю «Функции» вам больше не нужно вручную взаимодействовать с API встраивания — Milvus полностью берет на себя весь процесс отправки запросов поставщикам, получения встраиваний и их сохранения в ваших коллекциях. Для семантического поиска вам нужно предоставить только исходные данные запроса, а не вектор запроса. Milvus генерирует вектор запроса с помощью той же модели, которую вы использовали для загрузки данных, сравнивает его с сохраненными векторами и возвращает наиболее релевантные результаты.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,15 +46,15 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Любое поле ввода, в которое встраивается модуль Function, всегда должно содержать значение; если будет предоставлен null, модуль выдаст ошибку.</p></li>
-<li><p>Модуль Function обрабатывает только те поля, которые явно определены в схеме коллекции; он не генерирует вставки для динамических полей.</p></li>
-<li><p>Встраиваемые поля ввода должны иметь тип <code translate="no">VARCHAR</code>.</p></li>
-<li><p>Модуль Function может внедрить поле ввода в:</p>
+<li><p>Любое поле ввода, вложение которого выполняет модуль Function, всегда должно содержать значение; если указано значение null, модуль выдаст ошибку.</p></li>
+<li><p>Модуль Function обрабатывает только те поля, которые явно определены в схеме коллекции; он не генерирует вложения для динамических полей.</p></li>
+<li><p>Поля ввода, подлежащие встраиванию, должны быть типа « <code translate="no">VARCHAR</code> ».</p></li>
+<li><p>Модуль «Функция» может встраивать поле ввода в следующие типы:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
 <li><p><code translate="no">INT8_VECTOR</code></p></li>
 </ul>
-<p>Преобразования в <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code> или <code translate="no">BFLOAT16_VECTOR</code> не поддерживаются.</p></li>
+<p>Преобразования в типы « <code translate="no">BINARY_VECTOR</code> », « <code translate="no">FLOAT16_VECTOR</code> » или « <code translate="no">BFLOAT16_VECTOR</code> » не поддерживаются.</p></li>
 </ul>
 <h2 id="Supported-embedding-service-providers" class="common-anchor-header">Поддерживаемые поставщики услуг встраивания<button data-href="#Supported-embedding-service-providers" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,64 +73,70 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><table>
    <tr>
-     <th><p>Провайдер</p></th>
+     <th><p>Поставщик</p></th>
      <th><p>Типичные модели</p></th>
      <th><p>Тип встраивания</p></th>
      <th><p>Метод аутентификации</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/openai.md">OpenAI</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/openai.md">OpenAI</a></p></td>
      <td><p>text-embedding-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>API-ключ</p></td>
+     <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>На основе развертывания</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/dashscope.md">DashScope</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/bedrock.md">Bedrock</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Пара AK/SK</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/vertex-ai.md">ИИ Vertex</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/vertex-ai.md">Vertex AI</a></p></td>
      <td><p>text-embedding-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Учетная запись службы GCP в формате JSON</p></td>
+     <td><p>Учетные данные JSON учетной записи службы GCP</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/voyage-ai.md">Voyage AI</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>API-ключ</p></td>
+     <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/cohere.md">Cohere</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/siliconflow.md">SiliconFlow</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>ключ API</p></td>
+     <td><p>Ключ API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ru/hugging-face-tei.md">Обнимающееся лицо</a></p></td>
+     <td><p><a href="/docs/ru/v2.6.x/hugging-face-tei.md">Hugging Face TEI</a></p></td>
      <td><p>Любая модель, обслуживаемая TEI</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Дополнительный ключ API</p></td>
+   </tr>
+   <tr>
+     <td><p><a href="/docs/ru/v2.6.x/hugging-face.md">Hugging Face</a></p></td>
+     <td><p>Модели, предоставляемые через <code translate="no">hf-inference</code> для извлечения признаков</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
+     <td><p>Ключ API</p></td>
    </tr>
 </table>
 <h2 id="How-it-works" class="common-anchor-header">Как это работает<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -148,19 +154,21 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>На следующей схеме показано, как функция работает в Milvus.</p>
+    </button></h2><p>На приведенной ниже схеме показано, как работает функция в Milvus.</p>
 <ol>
-<li><p><strong>Входной текст</strong>: Пользователи вводят в Milvus исходные данные (например, документы).</p></li>
-<li><p><strong>Генерация вкраплений</strong>: Модуль Function в Milvus автоматически вызывает сконфигурированный поставщик моделей для преобразования исходных данных в векторные вкрапления.</p></li>
-<li><p><strong>Хранить эмбеддинги</strong>: Полученные эмбеддинги хранятся в явно определенных векторных полях в коллекциях Milvus.</p></li>
-<li><p><strong>Запрашивать текст</strong>: Пользователи отправляют текстовые запросы в Milvus.</p></li>
-<li><p><strong>Семантический поиск</strong>: Milvus преобразует запросы в векторные вкрапления, проводит поиск по сходству с хранящимися вкраплениями и извлекает релевантные результаты.</p></li>
-<li><p><strong>Возврат результатов</strong>: Milvus возвращает приложению наиболее подходящие результаты.</p></li>
+<li><p><strong>Входной текст</strong>: пользователи загружают исходные данные (например, документы) в Milvus.</p></li>
+<li><p><strong>Генерация вложений</strong>: модуль «Функция» в Milvus автоматически вызывает настроенный поставщик моделей для преобразования необработанных данных во векторные вложения.</p></li>
+<li><p><strong>Хранение вложений</strong>: Полученные вложения хранятся в явно определённых векторных полях в коллекциях Milvus.</p></li>
+<li><p><strong>Текст запроса</strong>: пользователи отправляют текстовые запросы в Milvus.</p></li>
+<li><p><strong>Семантический поиск</strong>: Milvus внутренне преобразует запросы в векторные вложения, проводит поиск по схожести среди сохраненных вложений и извлекает релевантные результаты.</p></li>
+<li><p><strong>Возврат результатов</strong>: Milvus возвращает приложению результаты с наибольшим совпадением.</p></li>
 </ol>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
-   </span> <span class="img-wrapper"> <span>Обзор функций встраивания</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" /> 
+   <span>Обзор функции вложений</span>
+  
+ </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Настройка учетных данных<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,20 +184,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Прежде чем использовать функцию встраивания с Milvus, настройте учетные данные службы встраивания для доступа к Milvus.</p>
-<p>Milvus позволяет предоставлять учетные данные службы встраивания двумя способами:</p>
+    </button></h2><p>Перед использованием функции вложения с Milvus настройте учетные данные службы вложения для доступа к Milvus.</p>
+<p>Milvus позволяет указывать учетные данные службы вложений двумя способами:</p>
 <ul>
 <li><p><strong>Файл конфигурации</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>Пример в этой теме демонстрирует <strong>рекомендуемую настройку</strong> с помощью <code translate="no">milvus.yaml</code>.</p></li>
+<p>Пример в этом разделе демонстрирует <strong>рекомендуемую настройку</strong> с использованием файла <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Переменные среды</strong>:</p>
-<p>Подробные сведения о настройке учетных данных с помощью переменных окружения см. в документации поставщика службы встраивания (например, <a href="/docs/ru/openai.md">OpenAI</a> или <a href="/docs/ru/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Подробные сведения о настройке учетных данных с помощью переменных среды см. в документации поставщика службы встраивания (например, <a href="/docs/ru/v2.6.x/openai.md">OpenAI</a> или <a href="/docs/ru/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
-<p>На следующей схеме показан процесс настройки учетных данных через файл конфигурации Milvus (<code translate="no">milvus.yaml</code>) и последующего вызова функции в Milvus.</p>
-<p>
+<p>На следующей схеме показан процесс настройки учетных данных с помощью конфигурационного файла Milvus (<code translate="no">milvus.yaml</code>) и последующего вызова функции в Milvus.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
-   </span> <span class="img-wrapper"> <span>Переполнение конфигурации учетных данных</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Шаг 1: Добавьте учетные данные в файл конфигурации Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
+   <span>Настройка учетных данных Overflow</span>
+  
+ </span></p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Шаг 1: Добавление учетных данных в файл конфигурации Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,7 +214,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В файле <code translate="no">milvus.yaml</code> отредактируйте блок <code translate="no">credential</code> с записями для каждого провайдера, к которому вам нужен доступ:</p>
+    </button></h3><p>В файле <code translate="no">milvus.yaml</code> отредактируйте блок ` <code translate="no">credential</code> `, добавив записи для каждого поставщика, к которому вам требуется доступ:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -240,7 +250,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В том же файле конфигурации (<code translate="no">milvus.yaml</code>) отредактируйте блок <code translate="no">function</code>, чтобы указать Milvus, какой ключ использовать для встраивания вызовов служб:</p>
+    </button></h3><p>В том же файле конфигурации (<code translate="no">milvus.yaml</code>) отредактируйте блок <code translate="no">function</code>, чтобы указать Milvus, какой ключ использовать для встраивания вызовов сервисов:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -259,7 +269,7 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения о том, как применять конфигурацию Milvus, см. в разделе <a href="/docs/ru/dynamic_config.md">Настройка Milvus на лету</a>.</p>
+<p>Для получения дополнительной информации о том, как применить конфигурацию Milvus, см. раздел <a href="/docs/ru/v2.6.x/dynamic_config.md">«Настройка Milvus на лету</a>».</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Использование функции встраивания<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -275,7 +285,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как учетные данные настроены в файле конфигурации Milvus, выполните следующие шаги, чтобы определить и использовать функции встраивания.</p>
+    </button></h2><p>После настройки учетных данных в конфигурационном файле Milvus выполните следующие шаги, чтобы определить и использовать функции встраивания.</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Шаг 1: Определите поля схемы<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,15 +301,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы использовать функцию встраивания, создайте коллекцию с определенной схемой. Эта схема должна включать как минимум три необходимых поля:</p>
+    </button></h3><p>Чтобы использовать функцию встраивания, создайте коллекцию с определенной схемой. Эта схема должна включать как минимум три обязательных поля:</p>
 <ul>
-<li><p><strong>Первичное поле</strong>, которое уникально идентифицирует каждую сущность в коллекции.</p></li>
+<li><p><strong>Основное поле</strong>, которое однозначно идентифицирует каждую сущность в коллекции.</p></li>
 <li><p><strong>Скалярное поле</strong>, в котором хранятся исходные данные для встраивания.</p></li>
-<li><p><strong>Векторное поле</strong>, зарезервированное для хранения векторных вкраплений, которые функция будет генерировать для скалярного поля.</p></li>
+<li><p><strong>Векторное поле</strong>, предназначенное для хранения векторных вложений, которые функция будет генерировать для скалярного поля.</p></li>
 </ul>
-<p>Следующий пример определяет схему с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вкраплений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с результатами выбранной вами модели встраивания.</p>
+<p>В следующем примере определена схема с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вложений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с выходом выбранной вами модели вложения.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -330,7 +345,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Шаг 2: Добавьте функцию встраивания в схему<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Шаг 2: Добавление функции встраивания в схему<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -345,10 +360,15 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Модуль Function в Milvus автоматически преобразует исходные данные, хранящиеся в скалярном поле, во вкрапления и сохраняет их в явно определенном векторном поле.</p>
-<p>Пример ниже добавляет модуль Function (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в эмбеддинги, сохраняя полученные векторы в векторном поле <code translate="no">&quot;dense&quot;</code>, определенном ранее.</p>
+    </button></h3><p>Модуль «Функция» в Milvus автоматически преобразует необработанные данные, хранящиеся в скалярном поле, в вложения и сохраняет их в явно определённом векторном поле.</p>
+<p>В приведенном ниже примере добавляется модуль «Функция» (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в вложения, сохраняя результирующие векторы в ранее определённом векторном поле <code translate="no">&quot;dense&quot;</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -380,63 +400,63 @@ schema.add_function(text_embedding_function)
    <tr>
      <th><p>Параметр</p></th>
      <th><p>Описание</p></th>
-     <th><p>Пример Значение</p></th>
+     <th><p>Пример значения</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Уникальный идентификатор для функции встраивания в Milvus.</p></td>
+     <td><p>Уникальный идентификатор функции вложения в Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Тип используемой функции. Для встраивания текста установите значение <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Примечание</strong>: Milvus принимает для этого параметра значения <code translate="no">FunctionType.BM25</code> (для преобразования с разреженной вставкой) и <code translate="no">FunctionType.RERANK</code> (для ранжирования). Подробности см. в разделе <a href="/docs/ru/decay-ranker-overview.md">Обзор</a> <a href="/docs/ru/full-text-search.md">полнотекстового поиска</a> и <a href="/docs/ru/decay-ranker-overview.md">ранжирования по распаду</a>.</p></td>
+     <td><p>Тип используемой функции. Для встраивания текста установите значение <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Примечание</strong>: для этого параметра Milvus принимает значения <code translate="no">FunctionType.BM25</code> (для преобразования с разреженным вложением) и <code translate="no">FunctionType.RERANK</code> (для переранжирования). Подробности см. в разделах <a href="/docs/ru/v2.6.x/full-text-search.md">«Полнотекстовый поиск</a> » и <a href="/docs/ru/v2.6.x/decay-ranker-overview.md">«Обзор Decay Ranker</a> ».</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Скалярное поле, содержащее исходные данные для встраивания. В настоящее время этот параметр принимает только одно имя поля.</p></td>
+     <td><p>Скалярное поле, содержащее исходные данные для вложения. В настоящее время этот параметр принимает только одно имя поля.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>Векторное поле для хранения сгенерированных вкраплений. В настоящее время этот параметр принимает только одно имя поля.</p></td>
+     <td><p>Векторное поле для хранения сгенерированных вложений. В настоящее время этот параметр принимает только одно имя поля.</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Словарь, содержащий конфигурации встраивания. Примечание: Параметры внутри <code translate="no">params</code> зависят от поставщиков моделей встраивания.</p></td>
+     <td><p>Словарь, содержащий конфигурации вложений. Примечание: Параметры в « <code translate="no">params</code> » (Параметры вложения) варьируются в зависимости от поставщиков моделей вложений.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
-     <td><p>Поставщик модели встраивания.</p></td>
+     <td><p>Поставщик модели вложения.</p></td>
      <td><p><code translate="no">"openai"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
-     <td><p>Указывает, какую модель встраивания использовать.</p></td>
+     <td><p>Указывает, какую модель вложения следует использовать.</p></td>
      <td><p><code translate="no">"text-embedding-3-small"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>Метка учетной записи, определенная в разделе верхнего уровня <code translate="no">credential:</code> на сайте <code translate="no">milvus.yaml</code>. </p><ul><li><p>При указании этого параметра Milvus извлекает соответствующую пару ключей или API-токен и подписывает запрос на стороне сервера.</p></li><li><p>Если метка не указана (<code translate="no">None</code>), Milvus возвращается к учетной записи, явно настроенной для провайдера целевой модели в <code translate="no">milvus.yaml</code>.</p></li><li><p>Если метка неизвестна или отсутствует ключ, вызов завершается неудачей.</p></li></ul></td>
+     <td><p>Метка учетных данных, определённая в разделе верхнего уровня <code translate="no">credential:</code> на сайте <code translate="no">milvus.yaml</code>. </p><ul><li><p>Если этот параметр указан, Milvus извлекает соответствующую пару ключей или токен API и подписывает запрос на стороне сервера.</p></li><li><p>Если этот параметр опущен (<code translate="no">None</code>), Milvus использует учетные данные, явно настроенные для целевого поставщика модели в файле <code translate="no">milvus.yaml</code>.</p></li><li><p>Если метка неизвестна или указанный ключ отсутствует, вызов завершается с ошибкой.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Количество измерений для выходных вкраплений. Для моделей OpenAI третьего поколения вы можете сократить полный вектор, чтобы снизить стоимость и время ожидания без существенной потери семантической информации. Более подробную информацию можно найти в <a href="https://openai.com/blog/new-embedding-models-and-api-updates">блоге анонса OpenAI</a>.</p><p><strong>Примечание:</strong> Если вы сокращаете размерность вектора, убедитесь, что значение <code translate="no">dim</code>, указанное в методе <code translate="no">add_field</code> схемы для векторного поля, совпадает с конечной выходной размерностью вашей функции встраивания.</p></td>
+     <td><p>Количество измерений выходных вложений. Для моделей третьего поколения OpenAI можно сократить полный вектор, чтобы снизить затраты и задержку без значительной потери семантической информации. Дополнительную информацию см. <a href="https://openai.com/blog/new-embedding-models-and-api-updates">в блоге с объявлением OpenAI</a>.</p><p><strong>Примечание:</strong> если вы сокращаете размерность вектора, убедитесь, что значение параметра « <code translate="no">dim</code> », указанное в методе <code translate="no">add_field</code> схемы для поля вектора, соответствует конечной размерности выходных данных вашей функции вложения.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">user</code></p></td>
-     <td><p>Идентификатор уровня пользователя для отслеживания использования API.</p></td>
+     <td><p>Идентификатор на уровне пользователя для отслеживания использования API.</p></td>
      <td><p><code translate="no">"user123"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Для коллекций с несколькими скалярными полями, требующими преобразования текста в вектор, добавьте в схему коллекции отдельные функции, обеспечив каждой функции уникальное имя и значение <code translate="no">output_field_names</code>.</p>
+<p>Для коллекций с несколькими скалярными полями, требующими преобразования текста в вектор, добавьте в схему коллекции отдельные функции, убедившись, что каждая функция имеет уникальное имя и значение <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">Шаг 3: Настройте индекс<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+<h3 id="Step-3-Configure-index" class="common-anchor-header">Шаг 3: Настройка индекса<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -451,9 +471,14 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, опция, которая позволяет Milvus выбрать и настроить наиболее подходящий тип индекса, основываясь на структуре ваших данных.</p>
+    </button></h3><p>После определения схемы с необходимыми полями и встроенной функцией настройте индекс для вашей коллекции. Чтобы упростить этот процесс, используйте параметр ` <code translate="no">AUTOINDEX</code> ` в качестве ` <code translate="no">index_type</code>` — эта опция позволяет Milvus выбрать и настроить наиболее подходящий тип индекса на основе структуры ваших данных.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -487,9 +512,14 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Теперь создайте коллекцию, используя заданную схему и параметры индекса.</p>
+    </button></h3><p>Теперь создайте коллекцию, используя заданные параметры схемы и индекса.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -522,7 +552,12 @@ client.create_collection(
       </svg>
     </button></h3><p>После настройки коллекции и индекса вы готовы к вставке исходных данных. В этом процессе вам нужно только предоставить исходный текст. Модуль Function, который мы определили ранее, автоматически генерирует соответствующий разреженный вектор для каждой текстовой записи.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -538,7 +573,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Шаг 6: Выполните поиск вектора<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Шаг 6: Выполнение векторного поиска<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -553,9 +588,14 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После вставки данных выполните семантический поиск по необработанному тексту запроса. Milvus автоматически преобразует ваш запрос в вектор вложения, извлекает релевантные документы на основе сходства и возвращает результаты с наибольшим количеством совпадений.</p>
+    </button></h3><p>После вставки данных выполните семантический поиск, используя исходный текст запроса. Milvus автоматически преобразует ваш запрос в вектор вложения, извлекает релевантные документы на основе схожести и возвращает результаты с наибольшим совпадением.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -578,8 +618,8 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Для получения дополнительной информации об операциях поиска и запроса обратитесь к разделу <a href="/docs/ru/single-vector-search.md">Базовый векторный поиск</a> и <a href="/docs/ru/get-and-scalar-query.md">запрос</a>.</p>
-<h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<p>Дополнительную информацию об операциях поиска и запросов см. в разделе <a href="/docs/ru/v2.6.x/single-vector-search.md">«Основной векторный поиск</a> и <a href="/docs/ru/v2.6.x/get-and-scalar-query.md">запросы</a>».</p>
+<h2 id="FAQ" class="common-anchor-header">Часто задаваемые вопросы<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -594,7 +634,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">В чем разница между настройкой учетных данных в milvus.yaml и переменных окружения?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">В чём разница между настройкой учетных данных в файле milvus.yaml и использованием переменных среды?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,7 +649,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Оба метода работают, но использование <code translate="no">milvus.yaml</code> является рекомендуемым подходом, поскольку обеспечивает централизованное управление учетными данными и согласованное именование учетных данных для всех провайдеров. При использовании переменных окружения имена переменных зависят от поставщика услуг встраивания, поэтому обратитесь к специальной странице каждого поставщика, чтобы понять, какие именно имена переменных окружения требуются (например, <a href="/docs/ru/openai.md">OpenAI</a> или <a href="/docs/ru/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>Оба метода работают, но рекомендуется использовать файл ` <code translate="no">milvus.yaml</code> `, так как он обеспечивает централизованное управление учетными данными и единообразное именование учетных данных для всех поставщиков. При использовании переменных среды имена переменных варьируются в зависимости от поставщика службы вложений, поэтому обратитесь к специальной странице каждого поставщика, чтобы узнать конкретные имена требуемых переменных среды (например, <a href="/docs/ru/v2.6.x/openai.md">OpenAI</a> или <a href="/docs/ru/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Что произойдет, если я не укажу параметр учетных данных в определении функции?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -625,13 +665,13 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus придерживается следующего порядка разрешения учетных данных:</p>
+    </button></h3><p>Milvus следует следующему порядку определения учетных данных:</p>
 <ol>
-<li>Сначала он ищет учетные данные по умолчанию, настроенные для данного провайдера в файле <code translate="no">milvus.yaml</code>.</li>
-<li>Если в milvus.yaml нет мандата по умолчанию, он возвращается к переменным окружения (если они настроены).</li>
-<li>Если ни учетные данные <code translate="no">milvus.yaml</code>, ни переменные окружения не настроены, Milvus выдаст ошибку.</li>
+<li>Сначала он ищет учетные данные по умолчанию, настроенные для данного поставщика в файле ` <code translate="no">milvus.yaml</code> `</li>
+<li>Если в файле milvus.yaml учетные данные по умолчанию отсутствуют, используется резервный вариант — переменные среды (если они настроены)</li>
+<li>Если не настроены ни учетные данные в файле ` <code translate="no">milvus.yaml</code> `, ни переменные среды, Milvus выдаст ошибку</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Как проверить, что вставки генерируются правильно?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Как я могу убедиться, что вложения генерируются правильно?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -646,13 +686,13 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Проверить можно следующим образом:</p>
+    </button></h3><p>Вы можете проверить следующим образом:</p>
 <ol>
-<li>Запросить коллекцию после вставки, чтобы проверить, содержит ли векторное поле данные.</li>
-<li>Убедиться, что длина векторного поля соответствует ожидаемым размерам</li>
-<li>Выполнить простой поиск по сходству, чтобы убедиться, что вкрапления дают значимые результаты.</li>
+<li>Запросив коллекцию после вставки, чтобы убедиться, что поле векторов содержит данные</li>
+<li>Проверить, соответствует ли длина векторного поля ожидаемым вами размерам</li>
+<li>Выполнив простой поиск по схожести, чтобы убедиться, что вложения дают значимые результаты</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Могу ли я при поиске сходства использовать вектор запроса, а не необработанный текст?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Могу ли я использовать вектор запроса вместо необработанного текста при поиске по схожести?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -667,10 +707,15 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Да, вы можете использовать предварительно вычисленные векторы запросов вместо необработанного текста для поиска сходства. Хотя модуль Function автоматически преобразует необработанные текстовые запросы во вкрапления, вы также можете напрямую указать векторные данные в параметре <code translate="no">data</code> в операции поиска. <strong>Примечание</strong>: размерность предоставленного вами вектора запроса должна соответствовать размерности векторных вкраплений, сгенерированных вашим функциональным модулем.</p>
+    </button></h3><p>Да, для поиска по схожести можно использовать заранее вычисленные векторные запросы вместо необработанного текста. Хотя модуль «Функция» автоматически преобразует текстовые запросы в вложения, вы также можете напрямую предоставить векторные данные в параметр « <code translate="no">data</code> » в своей операции поиска. <strong>Примечание</strong>: размер вектора запроса, который вы предоставляете, должен соответствовать размеру векторных вложений, сгенерированных вашим модулем «Функция».</p>
 <p><strong>Пример</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 

@@ -1,126 +1,55 @@
 # describe_role()
 
-This operation describes a specific role.
+Response now exposes the role description. Async variant shares the sync method parameter and response contract. Intermediate wrapper field converted into the public describe_role() response dictionary.
 
-## Request syntax
+## Request Syntax
 
 ```python
 describe_role(
     role_name: str,
-    timeout: Optional[float] = None
-) -> List[Dict]
+    timeout: Optional[float] = None,
+    **kwargs,
+) -> dict
 ```
 
 **PARAMETERS:**
 
 - **role_name** (*str*) -
+**[REQUIRED]**
+The name of the role to describe.
 
-    **[REQUIRED]**
+- **timeout** (*Optional[float]*) -
+Default: `None`
+The maximum time, in seconds, to wait for the RPC to complete.
 
-    The name of the role to describe.
-
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+- **kwargs** (*Any*) -
+The additional request context options.
 
 **RETURN TYPE:**
 
-*list*
+*dict*
 
 **RETURNS:**
 
-A list of dictionaries containing the permissions assigned to the role. The structure of each dictionary reassembles the following:
-
-```python
-#  {
-#      'object_type': str, 
-#      'object_name': str, 
-#      'db_name': str, 
-#      'role_name': str, 
-#      'privilege': str, 
-#      'grantor_name': str
-#  }
-```
-
-**PARAMETERS:**
-
-- **object_type** (*str*) -
-
-    The type of the resource object granted to the role. 
-
-    Possible values are **Collection**, **Global**, and **User**.
-
-- **object_name** (*str*) -
-
-    The name of the resource object granted to the role. You are advised to use an asterisk (*).
-
-- **db_name** (*str*) -
-
-    The name of the database to which the role has access.
-
-- **role_name** (*str*) -
-
-    The name of the specified role.
-
-- **privilege** (*str*) -
-
-    The name of a privilege granted to the role. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md) for more.
-
-- **grantor_name** (*str*) - 
-
-    The name of the user who has granted the above permission to the specified role.
+Dictionary with role, description, and privileges.
 
 **EXCEPTIONS:**
 
 - **MilvusException**
+Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-    This exception will be raised when any error occurs during this operation.
+## Examples
 
-- **BaseException**
-
-    This exception will be raised when this operation fails.
-
-## Example
+Demonstrates describe role usage.
 
 ```python
 from pymilvus import MilvusClient
 
-# 1. Create a milvus client
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
-# 2. Create a role
-client.create_role(role_name="read_only")
-
-# 3. Grant permissions
-client.grant_privilege(
-    role_name="read_only",
-    object_type="Global",
-    privilege="DescribeCollection",
-    object_name="*"
-)
-
-# 3. Describe the role
-client.describe_role(role_name="read_only")
-
-# Output
-#
-# {
-#     "role": "read_only",
-#     "privileges": [
-#         {
-#             "object_type": "Global",
-#             "object_name": "*",
-#             "db_name": "default",
-#             "role_name": "read_only",
-#             "privilege": "DescribeCollection",
-#             "grantor_name": "root"
-#         }
-#     ]
-# }
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+client.create_user("analyst", "Milvus123", description="Analytics account")
+client.update_user("analyst", description="Updated analytics account")
+client.create_role("read_only", description="Read-only role")
+client.alter_role("read_only", description="Updated read-only role")
+print(client.describe_user("analyst"))
+print(client.describe_role("read_only"))
 ```
-

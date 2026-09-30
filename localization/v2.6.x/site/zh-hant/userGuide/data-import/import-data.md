@@ -36,9 +36,9 @@ summary: 本頁示範匯入準備資料的程序。
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>您已經準備好您的資料，並將其放入 Milvus 資料桶。</p>
-<p>如果沒有，您應該先使用<strong>RemoteBulkWriter</strong>準備您的資料，並確保準備好的資料已經傳輸到與您的 Milvus 實例一起啟動的 MinIO 實例上的 Milvus 資料桶。如需詳細資訊，請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備原始資料</a>。</p></li>
-<li><p>您已經使用您用來準備資料的模式建立了一個集合。如果沒有，請參閱<a href="/docs/zh-hant/manage-collections.md">管理集合</a>。</p></li>
+<li><p>您已經準備好您的資料並將其放入 Milvus 資料桶。</p>
+<p>如果沒有，您應該先使用<strong>RemoteBulkWriter</strong>準備您的資料，並確保準備好的資料已經傳輸到與您的 Milvus 實例一起啟動的 MinIO 實例上的 Milvus 資料桶。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/prepare-source-data.md">準備原始資料</a>。</p></li>
+<li><p>您已經使用您用來準備資料的模式建立了一個集合。如果沒有，請參閱<a href="/docs/zh-hant/v2.6.x/manage-collections.md">管理集合</a>。</p></li>
 </ul>
 <div class="language-python">
 <p>下面的程式碼片段使用給定的模式建立一個簡單的集合。有關參數的詳細資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 參考資料。</p>
@@ -110,6 +110,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;files&quot;: [
         [
@@ -127,7 +128,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>目標資料集的名稱。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>一個檔案路徑清單，相對於與您的 Milvus 實例一同啟動的 MioIO 實例上 Milvus 資料桶的根路徑。可能的子清單如下：</p>
+<p>一個檔案路徑清單，相對於與您的 Milvus 實例一起啟動的 MioIO 實例上 Milvus 資料桶的根路徑。可能的子清單如下：</p>
 <ul>
 <li><p><strong>JSON 檔案</strong></p>
 <p>如果準備的檔案是 JSON 格式，<strong>每個子清單應該包含單一準備的 JSON 檔案路徑</strong>。</p>
@@ -167,7 +168,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>獲得匯入工作 ID 後，您可以檢查匯入進度，如下所示：</p>
+    </button></h2><p>得到匯入工作 ID 後，您可以檢查匯入進度，如下所示：</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -223,6 +224,7 @@ resp = get_import_progress(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
@@ -307,6 +309,7 @@ resp = list_import_jobs(
 
 curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot; \
 --header &quot;Content-Type: application/json&quot; \
+--header &quot;Request-Timeout: 10&quot; \
 --data-raw &#x27;{
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
@@ -347,7 +350,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>並發匯入要求的最大數目限制為<strong>1024</strong>。</p></li>
 </ul>
 <ul>
-<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果您已在目標資料集中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
+<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果已在目標集合中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制條件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -368,7 +371,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <ul>
 <li><p>關於載入行為的限制：</p>
 <ul>
-<li>如果一個集合在匯入前已經被載入，您可以使用<code translate="no">refresh_load</code> 函式在匯入完成後載入新匯入的資料。</li>
+<li>如果在匯入前已經載入資料集，您可以在匯入完成後使用<code translate="no">refresh_load</code> 函式載入新匯入的資料。</li>
 </ul></li>
 <li><p>有關查詢和搜尋行為的限制：</p>
 <ul>
@@ -400,4 +403,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們強烈建議您使用多檔案匯入功能，它允許您在單一要求中上傳多個檔案。此方法不僅能簡化匯入程序，還能大幅提升匯入效能。同時，透過整合上傳，您可以減少花在資料管理上的時間，並使您的工作流程更有效率。</p>
+    </button></h2><p>我們強烈建議您使用多檔案匯入功能，它允許您在單一要求中上傳多個檔案。此方法不僅能簡化匯入程序，還能大幅提升匯入效能。同時，透過整合上傳，您可以減少花在資料管理上的時間，使工作流程更有效率。</p>

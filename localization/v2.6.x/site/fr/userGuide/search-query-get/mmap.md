@@ -9,7 +9,7 @@ summary: >-
   fréquence d'accès, en augmentant la capacité de stockage des collections sans
   affecter de manière significative les performances de recherche. Cette page
   vous aide à comprendre comment Milvus utilise mmap pour permettre un stockage
-  et une récupération rapides et efficaces des données.
+  et une récupération des données rapides et efficaces.
 ---
 <h1 id="Use-mmap" class="common-anchor-header">Utiliser mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus fournit des paramètres mmap hiérarchiques aux niveaux global, du champ, de l'index et de la collection, les niveaux de l'index et du champ étant prioritaires sur le niveau de la collection, et le niveau de la collection sur le niveau global.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Paramètres mmap globaux</h3><p>Le paramètre de niveau cluster est le paramètre global et a la priorité la plus faible. Milvus fournit plusieurs paramètres liés au mmap à l'adresse <code translate="no">milvus.yaml</code>. Ces paramètres s'appliquent à toutes les collections de la grappe.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Paramètres mmap globaux<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le paramètre de niveau cluster est le paramètre global et a la priorité la plus faible. Milvus fournit plusieurs paramètres liés au mmap à l'adresse <code translate="no">milvus.yaml</code>. Ces paramètres s'appliquent à toutes les collections de la grappe.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -111,9 +126,24 @@ summary: >-
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>Pour appliquer les paramètres ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
+<p>Pour appliquer les paramètres ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/v2.6.x/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
 <p>Parfois, les paramètres mmap globaux ne sont pas flexibles face à des cas d'utilisation particuliers. Pour appliquer d'autres paramètres à une collection spécifique ou à ses index, envisagez de configurer mmap spécifiquement pour une collection, un champ ou un index. Vous devez libérer et charger une collection avant que les modifications apportées aux paramètres mmap ne prennent effet.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à un champ</h3><p>Pour configurer l'espace mmap spécifique à un champ, vous devez inclure le paramètre <code translate="no">mmap_enabled</code> lorsque vous ajoutez un champ. Vous pouvez activer la fonction mmap pour ce champ spécifique en attribuant à ce paramètre la valeur <code translate="no">True</code>.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à un champ<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer l'espace mmap spécifique à un champ, vous devez inclure le paramètre <code translate="no">mmap_enabled</code> lorsque vous ajoutez un champ. Vous pouvez activer la fonction mmap pour ce champ spécifique en attribuant à ce paramètre la valeur <code translate="no">True</code>.</p>
 <p>L'exemple suivant montre comment configurer le mmap spécifique à un champ lors de l'ajout d'un champ.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -281,6 +311,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -290,6 +321,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;fieldName&quot;: &quot;doc_chunk&quot;,
@@ -303,7 +335,22 @@ curl --request POST \
 <p>Pensez à activer mmap pour les champs qui stockent de gros volumes de données. Les champs scalaires et vectoriels sont pris en charge.</p>
 </div>
 <p>Vous pouvez ensuite créer une collection à l'aide du schéma créé ci-dessus. Lors de la réception d'une demande de chargement de la collection, Milvus utilise la mise en correspondance des données brutes du champ <strong>doc_chunk</strong> dans la mémoire.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à l'index</h3><p>Pour configurer le mmap spécifique à un index, vous devez inclure la propriété <code translate="no">mmap.enable</code> dans les paramètres de l'index lorsque vous ajoutez l'index. Vous pouvez activer la fonction mmap sur cet index spécifique en définissant la propriété <code translate="no">true</code>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à l'index<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer le mmap spécifique à un index, vous devez inclure la propriété <code translate="no">mmap.enable</code> dans les paramètres de l'index lorsque vous ajoutez l'index. Vous pouvez activer la fonction mmap sur cet index spécifique en définissant la propriété <code translate="no">true</code>.</p>
 <p>L'exemple suivant montre comment configurer mmap spécifique à l'index lorsque vous ajoutez un index.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -377,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexParams&quot;: [
@@ -394,6 +442,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;indexName&quot;: &quot;doc_chunk&quot;,
@@ -406,7 +455,22 @@ curl --request POST \
 <p>Cela s'applique aux index des champs vectoriels et scalaires.</p>
 </div>
 <p>Vous pouvez ensuite référencer les paramètres d'index dans une collection. Lors de la réception d'une demande de chargement de la collection, Milvus met en correspondance l'index du champ <strong>titre</strong> dans la mémoire.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à une collection</h3><p>Pour configurer une stratégie mmap à l'échelle de la collection, vous devez inclure la propriété <code translate="no">mmap.enabled</code> dans la demande de création d'une collection. Vous pouvez activer la fonction mmap pour une collection en définissant cette propriété sur <code translate="no">true</code>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à une collection<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer une stratégie mmap à l'échelle de la collection, vous devez inclure la propriété <code translate="no">mmap.enabled</code> dans la demande de création d'une collection. Vous pouvez activer la fonction mmap pour une collection en définissant cette propriété sur <code translate="no">true</code>.</p>
 <p>L'exemple suivant montre comment activer mmap dans une collection nommée <strong>my_collection</strong> lors de sa création. Lors de la réception d'une demande de chargement de la collection, Milvus met en correspondance les données brutes de tous les champs dans la mémoire.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -436,6 +500,7 @@ client.createCollection(req);
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -505,6 +570,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -513,6 +579,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -524,6 +591,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>

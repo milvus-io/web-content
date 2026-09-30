@@ -75,7 +75,7 @@ UpdateCredentialParam param = UpdateCredentialParam.newBuilder()
         .withOldPassword("old_password")
         .withNewPassword("new_password")
         .build();
-R<RpcStatus> response = client.updateCredential(param)
+R<RpcStatus> response = client.updateCredential(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

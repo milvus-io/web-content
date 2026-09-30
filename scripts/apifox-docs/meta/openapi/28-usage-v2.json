@@ -1,0 +1,672 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Restful API copy",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Usage (V2)",
+      "x-include-target": [
+        "zilliz"
+      ],
+      "x-i18n": {
+        "zh-CN": {
+          "name": "Usage (V2)"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/v2/usage/query": {
+      "post": {
+        "summary": "Query Daily Usage",
+        "deprecated": false,
+        "description": "Queries the daily usage of the specified organization in the specified time period. The current user should be an organization owner or a billing admin.",
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "查询日用量",
+            "description": "本接口查询指定组织指定时间段的日用量。当前用户须为组织所有者或计费管理员。"
+          },
+          "ja-JP": {
+            "summary": "日次使用量を照会",
+            "description": "指定した期間における、指定した組織の日次使用量を照会します。現在のユーザーは組織オーナーまたは請求管理者である必要があります。"
+          }
+        },
+        "tags": [
+          "Usage (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The authentication token should be an API key with appropriate privileges.",
+            "required": true,
+            "example": "Bearer {{TOKEN}}",
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "认证令牌，应为具备适当权限的 API 密钥。"
+              },
+              "ja-JP": {
+                "description": "認証トークンは、適切な権限を持つ API key である必要があります。"
+              }
+            },
+            "x-i18n-langs": [
+              "zh-CN"
+            ]
+          }
+        ],
+        "requestBody": {
+          "description": "The request body to query the daily usage of the organization.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "description": "The start time of the query period, in the format of `YYYY-MM-DD`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "查询时间段开始日期，格式为 `YYYY-MM-DD`。"
+                      },
+                      "ja-JP": {
+                        "description": "照会期間の開始時刻です。形式は `YYYY-MM-DD` です。"
+                      }
+                    }
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "The end time of the query period, in the format of `YYYY-MM-DD`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "查询时间段结束日期，格式为 `YYYY-MM-DD`。"
+                      },
+                      "ja-JP": {
+                        "description": "照会期間の終了時刻です。形式は `YYYY-MM-DD` です。"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "start": "2024-01-01T00:00:00Z",
+                "end": "2024-02-0100:00:00Z"
+              }
+            }
+          },
+          "x-i18n": {
+            "ja-JP": {
+              "description": "組織の日次使用量を照会するためのリクエスト本文です。"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the detailed daily usage of the specified organization in the specified time period.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "返回指定组织指定时间段的日用量详情。"
+              },
+              "ja-JP": {
+                "description": "指定した期間における、指定した組織の日次使用量の詳細を返します。"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "x-tab-label": "success",
+                      "description": "Returns the detailed daily usage of the organization in the specified time period.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回指定组织指定时间段的日用量详情。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した期間における組織の日次使用量の詳細を返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "results": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "intervalStart": {
+                                    "type": "string",
+                                    "description": "The start time of the interval to query, in the format of `YYYY-MM-DDTHH:mm:ssZ`.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "查询时间段开始时间，格式为 `YYYY-MM-DDTHH:mm:ssZ`。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "照会する期間の開始時刻です。形式は `YYYY-MM-DDTHH:mm:ssZ` です。"
+                                      }
+                                    }
+                                  },
+                                  "intervalEnd": {
+                                    "type": "string",
+                                    "description": "The end time of the interval to query, in the format of `YYYY-MM-DDTHH:mm:ssZ`.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "查询时间段结束时间，格式为 `YYYY-MM-DDTHH:mm:ssZ`。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "照会する期間の終了時刻です。形式は `YYYY-MM-DDTHH:mm:ssZ` です。"
+                                      }
+                                    }
+                                  },
+                                  "total": {
+                                    "type": "number",
+                                    "description": "The total amount of the usage within the specified interval.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指定时间段内的用量总金额。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "指定した期間内の使用量の合計金額です。"
+                                      }
+                                    }
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "description": "The currency that applies to the total amount.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "总金额币种。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "合計金額に適用される通貨です。"
+                                      }
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "array",
+                                    "description": "The breakdowns of the usage within the specified interval.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指定时间段内的用量明细。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "指定した期間内の使用量の内訳です。"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "costType": {
+                                          "type": "string",
+                                          "description": "The type of the cost.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "费用类型。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コストの種類です。"
+                                            }
+                                          },
+                                          "enum": [
+                                            "compute",
+                                            "storage",
+                                            "backup",
+                                            "migration_same_region",
+                                            "migration_cross_region",
+                                            "read_vcu",
+                                            "write_vcu",
+                                            "storage_serverless",
+                                            "pipeline_tokens"
+                                          ]
+                                        },
+                                        "properties": {
+                                          "type": "object",
+                                          "description": "The details of the current cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项详情。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "現在のコスト項目の詳細です。"
+                                            }
+                                          },
+                                          "properties": {
+                                            "projectId": {
+                                              "type": "string",
+                                              "description": "The ID of the project to which the cluster that generates the cost item belongs.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "产生当前费用项目的集群所属项目 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターが属するプロジェクトの ID です。"
+                                                }
+                                              }
+                                            },
+                                            "regionId": {
+                                              "type": "string",
+                                              "description": "The ID of the region to which the cluster that generates the cost item belongs.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "产生当前费用项目的集群所属区域 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターが属するリージョンの ID です。"
+                                                }
+                                              }
+                                            },
+                                            "cuType": {
+                                              "type": "string",
+                                              "description": "The type of the compute unit (CU) of the cluster that generates the cost item.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "产生当前费用项目的集群的 CU 类型。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターの compute unit (CU) の種類です。"
+                                                }
+                                              }
+                                            },
+                                            "plan": {
+                                              "type": "string",
+                                              "description": "The subscription plan of the cluster that generates the cost item.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "产生当前费用项目的集群的订阅计划。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターのサブスクリプションプランです。"
+                                                }
+                                              }
+                                            },
+                                            "clusterId": {
+                                              "type": "string",
+                                              "description": "The ID of the cluster that generates the cost item.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "产生当前费用项目的集群 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "このコスト項目を生成するクラスターの ID です。"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "quantity": {
+                                          "type": "number",
+                                          "description": "The amount of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの量です。"
+                                            }
+                                          }
+                                        },
+                                        "unit": {
+                                          "type": "string",
+                                          "description": "The unit of the amount of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源数量单位。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソース量の単位です。"
+                                            }
+                                          }
+                                        },
+                                        "listPrice": {
+                                          "type": "object",
+                                          "description": "The list price of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源列表价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの定価です。"
+                                            }
+                                          },
+                                          "properties": {
+                                            "unitPrice": {
+                                              "type": "number",
+                                              "description": "The unit price of the used resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "price": {
+                                          "type": "object",
+                                          "description": "The actual price of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源实际价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの実際の価格です。"
+                                            }
+                                          },
+                                          "properties": {
+                                            "unitPrice": {
+                                              "type": "number",
+                                              "description": "The unit price of the used resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "amount": {
+                                          "type": "number",
+                                          "description": "The actual cost recorded in the cost item in cents.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源实际费用。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に記録された実際のコストです。単位はセントです。"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "The current page number of the query result.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "查询结果当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の現在のページ番号です。"
+                                }
+                              },
+                              "minimum": 1,
+                              "default": 1
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "The number of items per page of the query result.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "查询结果每页显示条目数。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の 1 ページあたりの項目数です。"
+                                }
+                              },
+                              "minimum": 1,
+                              "maximum": 100,
+                              "default": 10
+                            },
+                            "total": {
+                              "type": "integer",
+                              "description": "The total number of items of the query result.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "查询结果总条目数。"
+                                },
+                                "ja-JP": {
+                                  "description": "照会結果の項目総数です。"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "x-tab-label": "error",
+                      "description": "Returns an error message.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エラーメッセージを返します。"
+                        }
+                      },
+                      "x-i18n-langs": [
+                        "zh-CN"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "description": "Response code.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "Error message.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "错误描述。"
+                            },
+                            "ja-JP": {
+                              "description": "エラーメッセージ。"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "en-US",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "results": [
+                          {
+                            "intervalStart": "2024-01-01T00:00:00Z",
+                            "intervalEnd": "2024-01-02T00:00:00Z",
+                            "total": 12345.12345678,
+                            "currency": "USD",
+                            "items": [
+                              {
+                                "costType": "compute",
+                                "properties": {
+                                  "projectId": "prj-12jhiu212748391",
+                                  "regionId": "aws-us-west-2",
+                                  "cuType": "Performance-optimized",
+                                  "plan": "Standard",
+                                  "clusterId": "in01-xxxxx"
+                                },
+                                "quantity": 55.6778,
+                                "unit": "CU-hours",
+                                "listPrice": {
+                                  "unitPrice": 123
+                                },
+                                "price": {
+                                  "unitPrice": 123
+                                },
+                                "amount": 12345.12345678
+                              },
+                              {
+                                "costType": "storage",
+                                "properties": {
+                                  "projectId": "prj-12jhiu212748391",
+                                  "regionId": "aws-us-west-2",
+                                  "cuType": "Performance-optimized",
+                                  "plan": "Standard",
+                                  "clusterId": "in01-xxxxx"
+                                },
+                                "quantity": 55.6778,
+                                "unit": "...",
+                                "amount": 12345.12345678
+                              },
+                              {
+                                "costType": "read_vcu",
+                                "properties": {
+                                  "projectId": "prj-12jhiu212748391",
+                                  "regionId": "aws-us-west-2",
+                                  "clusterId": "in01-xxxxx"
+                                },
+                                "quantity": 8123789132,
+                                "unit": "...",
+                                "amount": 12345.12345678,
+                                "listPrice": {
+                                  "unitPrice": 123
+                                },
+                                "price": {
+                                  "unitPrice": 123
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 100,
+                        "total": 10000
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "success",
+                    "x-target-response": "OPTION 1",
+                    "x-target-lang": "zh-CN",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "results": [
+                          {
+                            "intervalStart": "2024-01-01T00:00:00Z",
+                            "intervalEnd": "2024-01-02T00:00:00Z",
+                            "total": 12345.12345678,
+                            "currency": "USD",
+                            "items": [
+                              {
+                                "costType": "compute",
+                                "properties": {
+                                  "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                                  "regionId": "ali-cn-hangzhou",
+                                  "cuType": "Performance-optimized",
+                                  "plan": "Standard",
+                                  "clusterId": "inxx-xxxxx"
+                                },
+                                "quantity": 55.6778,
+                                "unit": "CU-hours",
+                                "listPrice": {
+                                  "unitPrice": 123
+                                },
+                                "price": {
+                                  "unitPrice": 123
+                                },
+                                "amount": 12345.12345678
+                              },
+                              {
+                                "costType": "storage",
+                                "properties": {
+                                  "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                                  "regionId": "ali-cn-hangzhou",
+                                  "cuType": "Performance-optimized",
+                                  "plan": "Standard",
+                                  "clusterId": "inxx-xxxxx"
+                                },
+                                "quantity": 55.6778,
+                                "unit": "...",
+                                "amount": 12345.12345678
+                              },
+                              {
+                                "costType": "read_vcu",
+                                "properties": {
+                                  "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
+                                  "regionId": "ali-cn-hangzhou",
+                                  "clusterId": "inxx-xxxxx"
+                                },
+                                "quantity": 8123789132,
+                                "unit": "...",
+                                "amount": 12345.12345678,
+                                "listPrice": {
+                                  "unitPrice": 123
+                                },
+                                "price": {
+                                  "unitPrice": 123
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "currentPage": 1,
+                        "pageSize": 100,
+                        "total": 10000
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "failure",
+                    "x-target-response": "OPTION 2",
+                    "value": {
+                      "code": 21119,
+                      "message": "The apikey is illegal."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": []
+}

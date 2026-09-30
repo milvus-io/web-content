@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Zilliz control-plane fixture", "version": "latest"},
+  "x-zdoc-fragment": {"schemaVersion": "1.0", "apiSurface": "control-plane", "service": "projects"},
+  "tags": [{"name": "Projects", "x-i18n": {"zh-CN": {"name": "项目"}}}],
+  "paths": {
+    "/v2/projects": {
+      "get": {
+        "operationId": "listProjectsFixture",
+        "summary": "List projects",
+        "x-i18n": {"zh-CN": {"summary": "列出项目"}},
+        "tags": ["Projects"],
+        "responses": {"200": {"description": "Success", "x-i18n": {"zh-CN": {"description": "成功"}}}}
+      }
+    }
+  }
+}

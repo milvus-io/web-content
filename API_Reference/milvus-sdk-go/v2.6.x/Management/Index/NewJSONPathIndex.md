@@ -8,7 +8,7 @@ func NewJSONPathIndex(indexType IndexType, jsonCastType string, jsonPath string)
 
 **PARAMETERS:**
 
-- **indexType** (*[IndexType](../IndexType.md)*)
+- **[indexType](../IndexType.md)** (*[IndexType](../IndexType.md)*)
 
     The index algorithm type to use.
 
@@ -22,7 +22,7 @@ func NewJSONPathIndex(indexType IndexType, jsonCastType string, jsonPath string)
 
 **RETURNS:**
 
-*Index*
+*[Index](Index.md)*
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 

@@ -23,11 +23,9 @@ summary: >-
       </svg>
     </button></h1><p>الكيانات في المجموعة هي سجلات البيانات التي تشترك في نفس مجموعة الحقول. تشكل قيم الحقول في كل سجل بيانات كيانًا. تقدم هذه الصفحة كيفية إدراج الكيانات في مجموعة.</p>
 <div class="alert note">
-<p>إذا قمت بإضافة حقول جديدة ديناميكيًا بعد إنشاء المجموعة، ولم تقم بتحديد قيم لهذه الحقول عند إدراج الكيانات، فإن Milvus يقوم تلقائيًا بتعبئتها إما بقيمها الافتراضية المحددة أو بقيمها الافتراضية NULL إذا لم يتم تعيين القيم الافتراضية. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>الحقول المضافة بعد إنشاء المجموعة</strong>: إذا قمت بإضافة حقول جديدة إلى مجموعة بعد الإنشاء ولم تحدد قيمًا أثناء الإدراج، يقوم Milvus تلقائيًا بتعبئتها تلقائيًا بقيمها الافتراضية المحددة أو NULL إذا لم يتم تعيين أي قيم افتراضية. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p></li>
-<li><p><strong>معالجة التكرار</strong>: لا تتحقق عملية <code translate="no">insert</code> القياسية من عدم وجود مفاتيح أساسية مكررة. يؤدي إدراج بيانات بمفتاح أساسي موجود إلى إنشاء كيان جديد بنفس المفتاح، مما يؤدي إلى تكرار البيانات ومشاكل محتملة في التطبيق. لتحديث الكيانات الموجودة أو تجنب التكرارات، استخدم العملية <strong><code translate="no">upsert</code></strong> بدلاً من ذلك. لمزيد من المعلومات، راجع <a href="/docs/ar/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>الحقول المضافة بعد إنشاء المجموعة</strong>: إذا قمت بإضافة حقول جديدة إلى مجموعة بعد الإنشاء ولم تحدد قيمًا أثناء الإدراج، يقوم Milvus تلقائيًا بتعبئتها بقيم افتراضية محددة أو NULL إذا لم يتم تعيين أي قيم افتراضية. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p></li>
+<li><p><strong>معالجة التكرار</strong>: لا تتحقق عملية <code translate="no">insert</code> القياسية من عدم وجود مفاتيح أساسية مكررة. يؤدي إدراج بيانات بمفتاح أساسي موجود إلى إنشاء كيان جديد بنفس المفتاح، مما يؤدي إلى تكرار البيانات ومشاكل محتملة في التطبيق. لتحديث الكيانات الموجودة أو تجنب التكرارات، استخدم العملية <strong><code translate="no">upsert</code></strong> بدلاً من ذلك. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

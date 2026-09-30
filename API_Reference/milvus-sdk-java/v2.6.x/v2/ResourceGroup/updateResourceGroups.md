@@ -53,18 +53,18 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 ResourceGroupLimit requests = new ResourceGroupLimit(1);
 ResourceGroupLimit limits = new ResourceGroupLimit(1);
 
-ResourceGroupConfig config = ResourceGroupConfig.builder()
+ResourceGroupConfig config = ResourceGroupConfig.newBuilder()
     .withRequests(requests)
     .withLimits(limits)
-    .build()
+    .build();
 
-Map<String, ResourceGroupConfig> resourceGroups = new Map<>();
+Map<String, ResourceGroupConfig> resourceGroups = new HashMap<>();
 resourceGroups.put("rg1", config);
 
 // 3. Update resource groups
 UpdateResourceGroupsReq updateResourceGroupsReq = UpdateResourceGroupsReq.builder()
     .resourceGroups(resourceGroups)
     .build();
-client.updateResourceGroups(updateResourceGroupsReq)
+client.updateResourceGroups(updateResourceGroupsReq);
 ```
 

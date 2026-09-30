@@ -53,7 +53,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -80,7 +80,7 @@ If you have installed Milvus Operator before, upgrade it using the following com
 helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz
 ```
 
 </div>
@@ -133,7 +133,7 @@ Once the Milvus Operator pod is running, you can deploy a Milvus cluster as foll
 $ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 ```
 
-The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v2.6.15) and all new architectural components including the Streaming Node. 
+The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v2.6.24) and all new architectural components including the Streaming Node. 
 
 **Architecture highlights in this deployment:**
 - **Message Queue**: [Uses Woodpecker](use-woodpecker.md) (reduces infrastructure maintenance)
@@ -314,7 +314,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml
 ```
 
 ## What's next

@@ -25,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>Текстовое соответствие в Milvus позволяет точно находить документы по определенным терминам. Эта функция в основном используется для фильтрации поиска по определенным условиям и может включать скалярную фильтрацию для уточнения результатов запроса, позволяя искать сходство в векторах, которые соответствуют скалярным критериям.</p>
 <div class="alert note">
-<p>Текстовое совпадение нацелено на поиск точных вхождений терминов запроса, без оценки релевантности сопоставленных документов. Если вы хотите получить наиболее релевантные документы, основанные на семантическом значении и важности терминов запроса, мы рекомендуем вам использовать <a href="/docs/ru/full-text-search.md">полнотекстовый поиск</a>.</p>
+<p>Текстовое совпадение нацелено на поиск точных вхождений терминов запроса, без оценки релевантности сопоставленных документов. Если вы хотите получить наиболее релевантные документы, основанные на семантическом значении и важности терминов запроса, мы рекомендуем вам использовать <a href="/docs/ru/v2.6.x/full-text-search.md">полнотекстовый поиск</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,8 +44,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus интегрирует <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> для работы с инвертированным индексом и текстовым поиском по терминам. Для каждой текстовой записи Milvus индексирует ее в соответствии с процедурой:</p>
 <ol>
-<li><p><a href="/docs/ru/analyzer-overview.md">Анализатор</a>: Анализатор обрабатывает входной текст, разбивая его на отдельные слова, или лексемы, а затем применяя фильтры по мере необходимости. Это позволяет Milvus построить индекс на основе этих лексем.</p></li>
-<li><p><a href="/docs/ru/index-explained.md">Индексирование</a>: После анализа текста Milvus создает инвертированный индекс, который сопоставляет каждую уникальную лексему с содержащими ее документами.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/analyzer-overview.md">Анализатор</a>: Анализатор обрабатывает входной текст, разбивая его на отдельные слова, или лексемы, а затем применяя фильтры по мере необходимости. Это позволяет Milvus построить индекс на основе этих лексем.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/index-explained.md">Индексирование</a>: После анализа текста Milvus создает инвертированный индекс, который сопоставляет каждую уникальную лексему с содержащими ее документами.</p></li>
 </ol>
 <p>Когда пользователь выполняет поиск по тексту, инвертированный индекс используется для быстрого извлечения всех документов, содержащих эти термины. Это намного быстрее, чем сканирование каждого документа по отдельности.</p>
 <p>
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Текстовое совпадение работает по <a href="/docs/ru/string.md"><code translate="no">VARCHAR</code></a> тип поля, который по сути является строковым типом данных в Milvus. Чтобы включить текстовое соответствие, установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> на <code translate="no">True</code>, а затем при определении схемы коллекции настройте <a href="/docs/ru/analyzer-overview.md">анализатор</a> для текстового анализа.</p>
+    </button></h2><p>Текстовое совпадение работает по <a href="/docs/ru/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> тип поля, который по сути является строковым типом данных в Milvus. Чтобы включить текстовое соответствие, установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> на <code translate="no">True</code>, а затем при определении схемы коллекции настройте <a href="/docs/ru/v2.6.x/analyzer-overview.md">анализатор</a> для текстового анализа.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,8 +217,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Производительность и точность подбора ключевых слов зависят от выбранного анализатора. Различные анализаторы адаптированы к различным языкам и структурам текста, поэтому выбор правильного анализатора может существенно повлиять на результаты поиска для конкретного случая использования.</p>
-<p>По умолчанию в Milvus используется анализатор <code translate="no">standard</code>, который выполняет токенизацию текста на основе пробелов и знаков препинания, удаляет лексемы длиной более 40 символов и преобразует текст в строчные буквы. Для применения этой настройки по умолчанию не требуется никаких дополнительных параметров. Дополнительные сведения см. в разделе <a href="/docs/ru/standard-analyzer.md">Стандартный</a>.</p>
+    </button></h3><p>Производительность и точность подбора ключевых слов зависят от выбранного анализатора. Различные анализаторы приспособлены к различным языкам и структурам текста, поэтому выбор правильного анализатора может существенно повлиять на результаты поиска для конкретного случая использования.</p>
+<p>По умолчанию в Milvus используется анализатор <code translate="no">standard</code>, который выполняет токенизацию текста на основе пробелов и знаков препинания, удаляет лексемы длиной более 40 символов и преобразует текст в строчные буквы. Для применения этой настройки по умолчанию не требуется никаких дополнительных параметров. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/standard-analyzer.md">Стандартный</a>.</p>
 <p>В случаях, когда требуется другой анализатор, его можно настроить с помощью параметра <code translate="no">analyzer_params</code>. Например, чтобы применить анализатор <code translate="no">english</code> для обработки английского текста:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -305,7 +305,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus также предоставляет различные другие анализаторы, подходящие для разных языков и сценариев. Более подробную информацию можно найти в разделе <a href="/docs/ru/analyzer-overview.md">Обзор анализаторов</a>.</p>
+<p>Milvus также предоставляет различные другие анализаторы, подходящие для разных языков и сценариев. Более подробную информацию можно найти в разделе <a href="/docs/ru/v2.6.x/analyzer-overview.md">Обзор анализаторов</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Использование текстового соответствия<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -404,7 +404,7 @@ schema.WithField(entity.NewField().
     </button></h3><p>Текстовое совпадение можно использовать в сочетании с поиском по векторному сходству, чтобы сузить область поиска и повысить его производительность. Фильтрация коллекции с помощью текстового соответствия перед векторным поиском по сходству позволяет сократить количество документов, в которых необходимо выполнить поиск, что приводит к сокращению времени выполнения запроса.</p>
 <p>В этом примере выражение <code translate="no">filter</code> фильтрует результаты поиска, чтобы включить только документы, соответствующие указанному термину <code translate="no">keyword1</code> или <code translate="no">keyword2</code>. Затем векторный поиск по сходству выполняется в этом отфильтрованном подмножестве документов.</p>
 <div class="alert note">
-<p>Вы можете выделить совпадающие термины в результатах поиска, настроив текстовый маркер. Подробности см. в разделе <a href="/docs/ru/text-highlighter.md">"Выделитель текста"</a>.</p>
+<p>Вы можете выделить совпадающие термины в результатах поиска, настроив текстовый маркер. Подробности см. в разделе <a href="/docs/ru/v2.6.x/text-highlighter.md">"Выделитель текста"</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -470,6 +470,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;annsField&quot;: &quot;embeddings&quot;,
@@ -549,13 +550,14 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$filter</span>&quot;</span><span class="hljs-string">&#x27;,
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Considerations" class="common-anchor-header">Соображения<button data-href="#Considerations" class="anchor-icon" translate="no">
+<h2 id="Considerations" class="common-anchor-header">Замечания<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -575,7 +577,7 @@ curl --request POST \
 <li><p>После определения анализатора в схеме его настройки становятся постоянными для данной коллекции. Если вы решите, что другой анализатор будет лучше соответствовать вашим потребностям, вы можете удалить существующую коллекцию и создать новую с нужной конфигурацией анализатора.</p></li>
 <li><p>Правила экранирования в выражениях <code translate="no">filter</code>:</p>
 <ul>
-<li><p>Символы, заключенные в двойные или одинарные кавычки в выражениях, интерпретируются как строковые константы. Если строковая константа включает в себя экранирующие символы, то они должны быть представлены с помощью экранирующей последовательности. Например, используйте <code translate="no">\\</code> для обозначения <code translate="no">\</code>, <code translate="no">\\t</code> для обозначения табуляции <code translate="no">\t</code>, и <code translate="no">\\n</code> для обозначения новой строки.</p></li>
+<li><p>Символы, заключенные в двойные или одинарные кавычки в выражениях, интерпретируются как строковые константы. Если строковая константа включает в себя управляющие символы, то они должны быть представлены с помощью управляющей последовательности. Например, используйте <code translate="no">\\</code> для обозначения <code translate="no">\</code>, <code translate="no">\\t</code> для обозначения табуляции <code translate="no">\t</code>, и <code translate="no">\\n</code> для обозначения новой строки.</p></li>
 <li><p>Если строковая константа заключена в одинарные кавычки, то одинарная кавычка внутри константы должна быть представлена как <code translate="no">\\'</code>, а двойная кавычка может быть представлена как <code translate="no">&quot;</code> или <code translate="no">\\&quot;</code>. Пример: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Если строковая константа заключена в двойные кавычки, то двойная кавычка внутри константы должна быть представлена как <code translate="no">\\&quot;</code>, а одинарная кавычка может быть представлена как <code translate="no">'</code> или <code translate="no">\\'</code>. Пример: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

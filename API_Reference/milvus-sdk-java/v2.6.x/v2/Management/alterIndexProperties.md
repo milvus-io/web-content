@@ -65,15 +65,15 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the `mmap.enabled` property
-Map<String, String> properties = new HashMap<>()
-properties.put("mmap.enabled", "true")
+// 2. Alter the \`mmap.enabled\` property
+Map<String, String> properties = new HashMap<>();
+properties.put("mmap.enabled", "true");
 
 AlterIndexPropertiesReq alterIndexPropertiesReq = AlterIndexPropertiesReq.builder()
         .collectionName("test")
         .indexName("vector")
         .properties(properties)
         .build();
-client.alterIndexProperties(alterCollectionFieldReq)
+client.alterIndexProperties(alterIndexPropertiesReq);
 ```
 

@@ -20,7 +20,7 @@ err := client.UpdateResourceGroup(ctx, option)
 
     The name of the resource group.
 
-- **resourceGroupConfig** (**[entity.ResourceGroupConfig](ResourceGroupConfig.md)*)
+- **[resourceGroupConfig](ResourceGroupConfig.md)** (**[entity.ResourceGroupConfig](ResourceGroupConfig.md)*)
 
     The resource group config.
 

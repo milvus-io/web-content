@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, une base de données sert d'unité logique pour organiser et gérer les données. Pour améliorer la sécurité des données et parvenir à une multi-location, vous pouvez créer plusieurs bases de données afin d'isoler logiquement les données pour différentes applications ou différents locataires. Par exemple, vous créez une base de données pour stocker les données de l'utilisateur A et une autre base de données pour l'utilisateur B.</p>
+    </button></h2><p>Dans Milvus, une base de données sert d'unité logique pour organiser et gérer les données. Pour améliorer la sécurité des données et parvenir à la multi-location, vous pouvez créer plusieurs bases de données afin d'isoler logiquement les données pour différentes applications ou différents locataires. Par exemple, vous créez une base de données pour stocker les données de l'utilisateur A et une autre base de données pour l'utilisateur B.</p>
 <h2 id="Create-database" class="common-anchor-header">Créer une base de données<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
@@ -154,6 +155,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database_2&quot;,
     &quot;properties&quot;: {
@@ -225,6 +227,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;default&quot;
 }&#x27;</span>
@@ -244,7 +247,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Chaque base de données a ses propres propriétés. Vous pouvez définir les propriétés d'une base de données lorsque vous la créez, comme décrit dans <a href="/docs/fr/manage_databases.md#Create-database">Créer une base de données</a>, ou vous pouvez modifier et supprimer les propriétés d'une base de données existante.</p>
+    </button></h2><p>Chaque base de données a ses propres propriétés. Vous pouvez définir les propriétés d'une base de données lorsque vous la créez, comme décrit dans <a href="/docs/fr/v2.6.x/manage_databases.md#Create-database">Créer une base de données</a>, ou vous pouvez modifier et supprimer les propriétés d'une base de données existante.</p>
 <p>Le tableau suivant répertorie les propriétés possibles des bases de données.</p>
 <table>
    <tr>
@@ -285,7 +288,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>chaîne de caractères</p></td>
-     <td><p>Spécifie le fuseau horaire par défaut appliqué aux opérations sensibles à l'heure dans la base de données, en particulier pour les champs <code translate="no">TIMESTAMPTZ</code>. Les collections héritent du fuseau horaire de la base de données, sauf si un fuseau horaire est défini au niveau de la collection. Un paramètre de fuseau horaire au niveau de la requête peut temporairement remplacer les valeurs par défaut de la base de données et de la collection. La valeur doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation d'un champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la <a href="/docs/fr/timestamptz-field.md">rubrique Champ TIMESTAMPTZ</a>.</p></td>
+     <td><p>Spécifie le fuseau horaire par défaut appliqué aux opérations sensibles à l'heure dans la base de données, en particulier pour les champs <code translate="no">TIMESTAMPTZ</code>. Les collections héritent du fuseau horaire de la base de données, sauf si un fuseau horaire est défini au niveau de la collection. Un paramètre de fuseau horaire au niveau de la requête peut temporairement remplacer les valeurs par défaut de la base de données et de la collection. La valeur doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation d'un champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/v2.6.x/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Alter-database-properties" class="common-anchor-header">Modifier les propriétés d'une base de données<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
@@ -336,6 +339,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;properties&quot;: {
@@ -390,6 +394,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;,
     &quot;propertyKeys&quot;: [
@@ -483,6 +488,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
@@ -517,7 +523,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus utilise le contrôle d'accès basé sur les rôles (RBAC) pour gérer les autorisations. Vous pouvez créer des rôles avec des privilèges spécifiques et les attribuer à des utilisateurs, contrôlant ainsi leur accès à différentes bases de données. Pour plus de détails, voir la <a href="/docs/fr/rbac.md">documentation RBAC</a>.</p>
+    </button></h3><p>Milvus utilise le contrôle d'accès basé sur les rôles (RBAC) pour gérer les autorisations. Vous pouvez créer des rôles avec des privilèges spécifiques et les attribuer à des utilisateurs, contrôlant ainsi leur accès à différentes bases de données. Pour plus de détails, voir la <a href="/docs/fr/v2.6.x/rbac.md">documentation RBAC</a>.</p>
 <h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Existe-t-il des limitations de quotas pour une base de données ?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -533,4 +539,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, Milvus vous permet de définir des limitations de quotas pour une base de données, telles que le nombre maximum de collections. Pour une liste complète des limitations, veuillez vous référer à la <a href="/docs/fr/limitations.md">documentation Limites de Milvus</a>.</p>
+    </button></h3><p>Oui, Milvus vous permet de définir des limitations de quotas pour une base de données, telles que le nombre maximum de collections. Pour une liste complète des limitations, veuillez vous référer à la <a href="/docs/fr/v2.6.x/limitations.md">documentation Limites de Milvus</a>.</p>

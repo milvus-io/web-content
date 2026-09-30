@@ -20,7 +20,7 @@ err := client.CreateAlias(ctx, option)
 
     The name of the target collection.
 
-- **alias** (*string*)
+- **[alias](Alias.md)** (*string*)
 
     The alias name to assign.
 

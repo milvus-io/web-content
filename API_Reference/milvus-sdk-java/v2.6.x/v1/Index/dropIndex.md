@@ -68,7 +68,7 @@ DropIndexParam param = DropIndexParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withIndexName("index1")
         .build();
-R<RpcStatus> response = client.dropIndex(param)
+R<RpcStatus> response = client.dropIndex(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }

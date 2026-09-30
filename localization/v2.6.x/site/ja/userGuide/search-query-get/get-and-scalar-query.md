@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p>MilvusではANN検索だけでなく、クエリーによるメタデータのフィルタリングにも対応しています。このページでは、Query、Get、QueryIteratorを使ってメタデータフィルタリングを行う方法を紹介します。</p>
 <div class="alert note">
-<p>コレクション作成後に新しいフィールドを動的に追加した場合、これらのフィールドを含むクエリは定義されたデフォルト値を返すか、明示的に値を設定していないエンティティの場合はNULLを返します。詳細は、"<a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
+<p>コレクション作成後に新しいフィールドを動的に追加した場合、これらのフィールドを含むクエリは定義されたデフォルト値を返すか、明示的に値を設定していないエンティティの場合はNULLを返します。詳細は、"<a href="/docs/ja/v2.6.x/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>" を参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,6 +209,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -304,6 +305,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -327,7 +329,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ページ分割されたクエリを使用して、カスタム・フィルタリング条件でエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用して、フィルタリング条件を満たすエンティティを検索するためにすべてのエンティティを繰り返し処理します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> から始まる<code translate="no">color</code> 値を保持するすべてのエンティティを返します。</p>
+    </button></h2><p>ページ分割されたクエリを使用して、カスタム・フィルタリング条件によってエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用して、フィルタリング条件を満たすエンティティを検索するためにすべてのエンティティを繰り返し処理します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> から始まる<code translate="no">color</code> 値を保持するすべてのエンティティを返します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
@@ -582,6 +584,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -594,6 +597,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -620,7 +624,7 @@ curl --request POST \
       </svg>
     </button></h2><p>データ探索や開発テストのために、コレクションから代表的なデータのサブセットを抽出するには、<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 式を使用します。<code translate="no">sampling_factor</code> は、サンプリングするデータのパーセンテージを表す 0 ～ 1 の float です。</p>
 <div class="alert note">
-<p>詳細な使用方法、高度な例、ベストプラクティスについては、<a href="/docs/ja/random-sampling.md">ランダム・サンプリングを</a>参照してください。</p>
+<p>詳細な使用方法、高度な例、ベストプラクティスについては、<a href="/docs/ja/v2.6.x/random-sampling.md">ランダム・サンプリングを</a>参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -741,7 +745,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、クエリコールで<code translate="no">timezone</code> パラメータを設定することで、1 回の操作でデータベースまたはコレクションのデフォルトタイムゾーンを一時的にオーバーライドできます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
-<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
+<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/v2.6.x/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
 <p>以下の例では、クエリ操作にタイムゾーンを一時的に設定する方法を示します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

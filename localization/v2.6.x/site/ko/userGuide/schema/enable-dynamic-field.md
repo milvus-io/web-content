@@ -261,6 +261,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -377,6 +378,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;data&quot;: [
     {
@@ -415,7 +417,22 @@ curl --request POST \
 <div class="alert note">
 <p>동적 필드 키 인덱싱은 <strong>선택 사항입니다</strong>. 인덱스 없이도 동적 필드 키를 기준으로 쿼리하거나 필터링할 수 있지만 무차별 대입 검색으로 인해 성능이 느려질 수 있습니다.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 경로 인덱싱 구문</h3><p>JSON 경로 인덱스를 만들려면 다음을 지정합니다:</p>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON 경로 인덱싱 구문<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>JSON 경로 인덱스를 만들려면 다음을 지정합니다:</p>
 <ul>
 <li><p><strong>JSON 경로</strong> (<code translate="no">json_path</code>): 색인하려는 JSON 객체 내의 키 또는 중첩된 필드의 경로입니다.</p>
 <ul>
@@ -425,10 +442,25 @@ curl --request POST \
 <li><p><strong>JSON 캐스트 유형</strong> (<code translate="no">json_cast_type</code>): 지정된 경로의 값을 해석하고 인덱싱할 때 Milvus가 사용해야 하는 데이터 유형입니다.</p>
 <ul>
 <li><p>이 유형은 인덱싱되는 필드의 실제 데이터 유형과 일치해야 합니다.</p></li>
-<li><p>전체 목록은 <a href="/docs/ko/use-json-fields.md#Supported-JSON-cast-types">지원되는 JSON 형 변환 유형을</a> 참조하세요.</p></li>
+<li><p>전체 목록은 <a href="/docs/ko/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">지원되는 JSON 형 변환 유형을</a> 참조하세요.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">JSON 경로를 사용하여 동적 필드 키 색인하기</h3><p>동적 필드는 JSON 필드이므로 JSON 경로 구문을 사용하여 필드 내의 모든 키를 색인할 수 있습니다. 이는 단순한 스칼라 값과 복잡한 중첩 구조 모두에서 작동합니다.</p>
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">JSON 경로를 사용하여 동적 필드 키 색인하기<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>동적 필드는 JSON 필드이므로 JSON 경로 구문을 사용하여 필드 내의 모든 키를 색인할 수 있습니다. 이는 단순한 스칼라 값과 복잡한 중첩 구조 모두에서 작동합니다.</p>
 <p><strong>JSON 경로 예시:</strong></p>
 <ul>
 <li><p>간단한 키의 경우 <code translate="no">overview</code>, <code translate="no">words</code></p></li>
@@ -632,7 +664,22 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">유형 변환에 JSON 형변환 함수 사용<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>동적 필드 키에 잘못된 형식의 값(예: 문자열로 저장된 숫자)이 포함된 경우 형 변환 함수를 사용하여 변환할 수 있습니다:</p>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">유형 변환에 JSON 형변환 함수 사용<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>동적 필드 키에 잘못된 형식의 값(예: 문자열로 저장된 숫자)이 포함된 경우 형 변환 함수를 사용하여 변환할 수 있습니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
@@ -692,10 +739,25 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <div class="alert note">
 <ul>
 <li><p>유형 변환에 실패하면(예: <code translate="no">&quot;not_a_number&quot;</code> 값을 숫자로 변환할 수 없음) 해당 값은 건너뛰고 색인화되지 않습니다.</p></li>
-<li><p>형변환 함수 매개변수에 대한 자세한 내용은 <a href="/docs/ko/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON 필드를</a> 참조하세요.</p></li>
+<li><p>형변환 함수 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON 필드를</a> 참조하세요.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">컬렉션에 인덱스 적용</h3><p>인덱스 파라미터를 정의한 후 <code translate="no">create_index()</code> 를 사용하여 컬렉션에 적용할 수 있습니다:</p>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">컬렉션에 인덱스 적용<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>인덱스 파라미터를 정의한 후 <code translate="no">create_index()</code> 을 사용하여 컬렉션에 적용할 수 있습니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -746,6 +808,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -772,7 +835,7 @@ curl --request POST \
 <li><p>JSON이 아닌 키(예: 문자열, 숫자, 부울)의 경우 키 이름으로 직접 참조할 수 있습니다.</p></li>
 <li><p>JSON 개체를 저장하는 키의 경우 JSON 경로 구문을 사용하여 중첩된 값에 액세스합니다.</p></li>
 </ul>
-<p>이전 섹션의<a href="/docs/ko/enable-dynamic-field.md#Insert-entities-to-the-collection">예제 엔티티를</a> 기준으로 유효한 필터 표현식은 다음과 같습니다:</p>
+<p>이전 섹션의<a href="/docs/ko/v2.6.x/enable-dynamic-field.md#Insert-entities-to-the-collection">예제 엔티티를</a> 기준으로 유효한 필터 표현식은 다음과 같습니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
@@ -896,6 +959,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;data\&quot;: [
@@ -910,7 +974,7 @@ curl --request POST \
 <div class="alert note">
 <p>동적 필드 키는 기본적으로 결과에 포함되지 않으므로 명시적으로 요청해야 합니다.</p>
 </div>
-<p>지원되는 연산자 및 필터 표현식의 전체 목록은 <a href="/docs/ko/filtered-search.md">필터링된 검색을</a> 참조하세요.</p>
+<p>지원되는 연산자 및 필터 표현식의 전체 목록은 <a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색을</a> 참조하세요.</p>
 <h2 id="Put-it-all-together" class="common-anchor-header">정리하기<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -930,11 +994,11 @@ curl --request POST \
 <p>실제 애플리케이션에서 워크플로우를 완료하려면 다음과 같은 작업도 수행해야 합니다:</p>
 <ul>
 <li><p><strong>벡터 필드에 인덱스 생성</strong> (각 컬렉션에 필수)</p>
-<p><a href="/docs/ko/create-collection.md#Optional-Set-Index-Parameters">인덱스 매개변수 설정을</a> 참조하세요.</p></li>
+<p><a href="/docs/ko/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">인덱스 매개변수 설정을</a> 참조하세요.</p></li>
 <li><p><strong>컬렉션 로드</strong></p>
-<p><a href="/docs/ko/load-and-release.md">로드 및 릴리스</a> 참조</p></li>
+<p><a href="/docs/ko/v2.6.x/load-and-release.md">로드 및 릴리스</a> 참조</p></li>
 <li><p><strong>JSON 경로 필터를 사용하여 검색 또는 쿼리하기</strong></p>
-<p><a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/json-operators.md">JSON 연산자</a> 참조</p></li>
+<p><a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/v2.6.x/json-operators.md">JSON 연산자</a> 참조</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -951,19 +1015,79 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">동적 필드 키를 사용하는 대신 스키마에 명시적으로 필드를 정의해야 하는 경우는 언제인가요?</h3><p>다음과 같은 경우에는 동적 필드 키를 사용하는 대신 스키마에 명시적으로 필드를 정의해야 합니다:</p>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">동적 필드 키를 사용하는 대신 스키마에 명시적으로 필드를 정의해야 하는 경우는 언제인가요?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음과 같은 경우에는 동적 필드 키를 사용하는 대신 스키마에 명시적으로 필드를 정의해야 합니다:</p>
 <ul>
 <li><p><strong>필드가 출력_필드에 자주 포함되는</strong> 경우: 명시적으로 정의된 필드만 <code translate="no">output_fields</code> 을 통해 효율적으로 검색할 수 있도록 보장됩니다. 동적 필드 키는 빈번한 검색에 최적화되어 있지 않으며 성능 오버헤드가 발생할 수 있습니다.</p></li>
 <li><p><strong>필드에 자주 액세스하거나 필터링하는</strong> 경우: 동적 필드 키를 인덱싱하면 고정 스키마 필드와 비슷한 필터링 성능을 제공할 수 있지만, 명시적으로 정의된 필드는 더 명확한 구조와 더 나은 유지보수성을 제공합니다.</p></li>
 <li><p><strong>필드 동작을 완전히 제어할 수 있어야</strong> 합니다: 명시적 필드는 스키마 수준의 제약 조건, 유효성 검사, 보다 명확한 타이핑을 지원하므로 데이터 무결성과 일관성을 관리하는 데 유용할 수 있습니다.</p></li>
 <li><p><strong>인덱싱 불일치를 피하고 싶습니다</strong>: 동적 필드 키의 데이터는 유형이나 구조가 불일치하기 쉽습니다. 고정 스키마를 사용하면 특히 인덱싱이나 캐스팅을 사용하려는 경우 데이터 품질을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">동일한 동적 필드 키에 서로 다른 데이터 유형으로 여러 인덱스를 만들 수 있나요?</h3><p>아니요, <strong>JSON 경로당 하나의 인덱스만</strong> 만들 수 있습니다. 동적 필드 키에 혼합 유형 값(예: 일부 문자열과 일부 숫자)이 포함되어 있더라도 해당 경로를 색인할 때는 단일 <code translate="no">json_cast_type</code> 을 선택해야 합니다. 현재로서는 동일한 키에 대해 서로 다른 유형의 여러 인덱스가 지원되지 않습니다.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">동적 필드 키를 색인할 때 데이터 캐스팅이 실패하면 어떻게 하나요?</h3><p>동적 필드 키에 인덱스를 만들었는데 데이터 캐스팅이 실패하는 경우(예: <code translate="no">double</code> 로 캐스팅되어야 하는 값이 <code translate="no">&quot;abc&quot;</code>과 같은 숫자가 아닌 문자열인 경우) <strong>인덱스 생성 중에</strong> 이러한 특정 값은 <strong>자동으로 건너뛰게</strong> 됩니다. 인덱스에 표시되지 않으므로 인덱스에 의존하는 <strong>필터 기반 검색이나 쿼리 결과에서 반환되지</strong> 않습니다.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">동일한 동적 필드 키에 서로 다른 데이터 유형으로 여러 인덱스를 만들 수 있나요?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>아니요, <strong>JSON 경로당 하나의 인덱스만</strong> 만들 수 있습니다. 동적 필드 키에 혼합 유형 값(예: 일부 문자열과 일부 숫자)이 포함되어 있더라도 해당 경로를 색인할 때는 단일 <code translate="no">json_cast_type</code> 을 선택해야 합니다. 현재로서는 동일한 키에 대해 서로 다른 유형의 여러 인덱스가 지원되지 않습니다.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">동적 필드 키를 색인할 때 데이터 캐스팅이 실패하면 어떻게 하나요?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>동적 필드 키에 인덱스를 만들었는데 데이터 캐스팅이 실패하는 경우(예: <code translate="no">double</code> 로 캐스팅되어야 하는 값이 <code translate="no">&quot;abc&quot;</code>과 같은 숫자가 아닌 문자열인 경우) <strong>인덱스 생성 중에</strong> 이러한 특정 값은 <strong>자동으로 건너뛰게</strong> 됩니다. 인덱스에 표시되지 않으므로 인덱스에 의존하는 <strong>필터 기반 검색이나 쿼리 결과에서 반환되지</strong> 않습니다.</p>
 <p>여기에는 몇 가지 중요한 의미가 있습니다:</p>
 <ul>
 <li><p><strong>전체 스캔에 대한 폴백이 없습니다</strong>: 대부분의 엔티티가 성공적으로 색인되면 필터링 쿼리는 전적으로 색인에 의존하게 됩니다. 캐스팅에 실패한 엔티티는 논리적으로 필터 조건과 일치하더라도 결과 세트에서 제외됩니다.</p></li>
-<li><p><strong>검색 정확도 위험</strong>: 데이터 품질이 일관되지 않은 대규모 데이터 세트(특히 동적 필드 키)에서는 이러한 동작으로 인해 예기치 않은 결과 누락이 발생할 수 있습니다. 인덱싱하기 전에 일관되고 유효한 데이터 형식을 보장하는 것이 중요합니다.</p></li>
+<li><p><strong>검색 정확도 위험</strong>: 데이터 품질이 일관되지 않은 대규모 데이터 세트(특히 동적 필드 키의 경우)에서는 이러한 동작으로 인해 예기치 않은 결과 누락이 발생할 수 있습니다. 인덱싱하기 전에 일관되고 유효한 데이터 형식을 보장하는 것이 중요합니다.</p></li>
 <li><p><strong>형변환 함수는 신중하게 사용하세요</strong>: 인덱싱 중에 <code translate="no">json_cast_function</code> 을 사용하여 문자열을 숫자로 변환하는 경우, 문자열 값이 안정적으로 변환 가능한지 확인하세요. <code translate="no">json_cast_type</code> 과 실제 변환된 유형이 일치하지 않으면 오류가 발생하거나 항목이 건너뛰게 됩니다.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">쿼리가 인덱싱된 형 변환 유형과 다른 데이터 유형을 사용하는 경우 어떻게 되나요?</h3><p>쿼리에서 인덱스에 사용된 것과 <strong>다른 데이터 유형을</strong> 사용하여 동적 필드 키를 비교하는 경우(예: 인덱스가 <code translate="no">double</code> 로 캐스팅된 경우 문자열 비교로 쿼리), 시스템에서 <strong>인덱스를 사용하지 않고</strong> <em>가능한 경우에만</em> 전체 스캔으로 돌아갈 수 있습니다. 최상의 성능과 정확성을 위해 쿼리 유형이 인덱스 생성 중에 사용된 <code translate="no">json_cast_type</code> 과 일치하는지 확인하세요.</p>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">쿼리가 인덱싱된 형 변환 유형과 다른 데이터 유형을 사용하는 경우 어떻게 되나요?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿼리에서 인덱스에 사용된 것과 <strong>다른 데이터 유형을</strong> 사용하여 동적 필드 키를 비교하는 경우(예: 인덱스가 <code translate="no">double</code> 로 캐스팅된 경우 문자열 비교로 쿼리), 시스템에서 <strong>인덱스를 사용하지 않고</strong> <em>가능한 경우에만</em> 전체 스캔으로 돌아갈 수 있습니다. 최상의 성능과 정확성을 위해 쿼리 유형이 인덱스 생성 중에 사용된 <code translate="no">json_cast_type</code> 과 일치하는지 확인하세요.</p>

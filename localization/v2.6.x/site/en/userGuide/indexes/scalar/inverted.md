@@ -114,7 +114,7 @@ index_params = client.prepare_index_params()
 )
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Create-indexes-on-JSON-fields--Milvus-2511+" class="common-anchor-header">Create indexes on JSON fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Create-indexes-on-JSON-fields--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Create-indexes-on-JSON-fields" class="common-anchor-header">Create indexes on JSON fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Create-indexes-on-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,7 +147,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to <a href="/docs/json-indexing.md">JSON Indexing</a>.</p>
+<p>For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to <a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -212,6 +212,6 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Learn about <a href="/docs/index-explained.md">other index types</a></p></li>
-<li><p>See <a href="/docs/json-indexing.md">JSON Indexing</a> for advanced JSON indexing scenarios</p></li>
+<li><p>Learn about <a href="/docs/v2.6.x/index-explained.md">other index types</a></p></li>
+<li><p>See <a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a> for advanced JSON indexing scenarios</p></li>
 </ul>

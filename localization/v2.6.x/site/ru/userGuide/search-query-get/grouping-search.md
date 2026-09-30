@@ -218,6 +218,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -229,7 +230,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше запросе <code translate="no">limit=3</code> указывает на то, что система вернет результаты поиска из трех групп, причем каждая группа будет содержать одну наиболее похожую на вектор запроса сущность.</p>
+<p>В приведенном выше запросе <code translate="no">limit=3</code> указывает, что система вернет результаты поиска из трех групп, причем каждая группа будет содержать одну сущность, наиболее похожую на вектор запроса.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Настройка размера группы<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,6 +358,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -396,5 +398,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Количество групп</strong>: Параметр <code translate="no">limit</code> управляет количеством групп, из которых возвращаются результаты поиска, а не конкретным количеством сущностей в каждой группе. Установка подходящего значения <code translate="no">limit</code> помогает контролировать разнообразие поиска и производительность запросов. Уменьшение <code translate="no">limit</code> может снизить затраты на вычисления, если данные распределены плотно или производительность вызывает беспокойство.</p></li>
 <li><p><strong>Сущности на группу</strong>: Параметр <code translate="no">group_size</code> управляет количеством сущностей, возвращаемых на группу. Настройка параметра <code translate="no">group_size</code> в зависимости от конкретного случая использования может повысить насыщенность результатов поиска. Однако если данные распределены неравномерно, некоторые группы могут возвращать меньше сущностей, чем указано на <code translate="no">group_size</code>, особенно в сценариях с ограниченным количеством данных.</p></li>
 <li><p><strong>Строгий размер группы</strong>: При использовании <code translate="no">strict_group_size=True</code> система будет пытаться вернуть указанное количество сущностей (<code translate="no">group_size</code>) для каждой группы, если только в этой группе нет достаточного количества данных. Эта настройка обеспечивает постоянное количество сущностей в группе, но может привести к снижению производительности при неравномерном распределении данных или ограниченных ресурсах. Если строгий подсчет сущностей не требуется, установка <code translate="no">strict_group_size=False</code> может повысить скорость выполнения запросов.</p></li>
-<li><p>Если векторы запроса уже существуют в целевой коллекции, используйте <code translate="no">ids</code>, чтобы не извлекать их перед поиском. Подробнее см. в разделе <a href="/docs/ru/primary-key-search.md">Поиск по первичному ключу</a>.</p></li>
+<li><p>Если векторы запроса уже существуют в целевой коллекции, используйте <code translate="no">ids</code>, чтобы не извлекать их перед поиском. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/primary-key-search.md">Поиск по первичному ключу</a>.</p></li>
 </ul>

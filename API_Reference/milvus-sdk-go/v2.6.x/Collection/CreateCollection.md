@@ -1,88 +1,70 @@
 # CreateCollection()
 
-This operation creates a new collection with the specified schema and options.
+Creates a collection after automatically validating options that expose a `Validate()` method, including struct-array schemas.
 
 ```go
 func (c *Client) CreateCollection(ctx context.Context, option CreateCollectionOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Syntax
-
-```go
-option := milvusclient.NewCreateCollectionOption(name, collectionSchema).
-    WithAutoID(autoID).
-    WithShardNum(shardNum).
-    WithDynamicSchema(dynamicSchema).
-    WithVarcharPK(varcharPK, maxLen).
-    WithIndexOptions(indexOpts).
-    WithProperty(key, value).
-    WithConsistencyLevel(cl).
-    WithMetricType(metricType).
-    WithPKFieldName(name).
-    WithVectorFieldName(name).
-    WithNumPartitions(numPartitions)
-
-// Alternative constructor(s):
-// option := milvusclient.SimpleCreateCollectionOptions(name string, dim int64)
-
-err := client.CreateCollection(ctx, option)
-```
-
 **PARAMETERS:**
 
-- **name** (*string*)
+- **name** (*string*) -
 
-    The name of the target collection.
+    **[REQUIRED]**
 
-- **collectionSchema** (**[entity.Schema](Schema.md)*)
+    The name of the collection to create.
 
-    The schema defining the collection fields and their data types.
+- **collectionSchema** (**entity.Schema*) -
 
-**OPTION METHODS:**
+    **[REQUIRED]**
+
+    The schema that defines the collection fields and configuration.
+
+**BUILDER METHODS:**
 
 - `WithAutoID(autoID bool)`
 
-    Sets whether to automatically generate IDs for inserted entities.
+    This sets whether Milvus automatically generates primary keys.
 
 - `WithShardNum(shardNum int32)`
 
-    Sets the number of shards for data distribution across nodes.
+    This sets the number of shards for the collection.
 
 - `WithDynamicSchema(dynamicSchema bool)`
 
-    Enables or disables the dynamic schema feature for flexible field insertion.
+    This enables or disables the dynamic field.
 
 - `WithVarcharPK(varcharPK bool, maxLen int)`
 
-    Configures the collection to use varchar as the primary key type with a maximum length.
+    This uses a VarChar primary key with the specified maximum length.
 
-- `WithIndexOptions(indexOpts ...[CreateIndexOption](../Management/CreateIndex.md))`
+- `WithIndexOptions(indexOpts ...CreateIndexOption)`
 
-    Specifies the index options to apply when creating the collection.
+    This sets the index creation options used during collection creation.
 
 - `WithProperty(key string, value any)`
 
-    Sets a custom property key-value pair on the resource.
+    This sets a collection property after converting the value to its string representation.
 
-- `WithConsistencyLevel(cl [entity.ConsistencyLevel](ConsistencyLevel.md))`
+- `WithConsistencyLevel(cl entity.ConsistencyLevel)`
 
-    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    This sets the collection consistency level.
 
-- `WithMetricType(metricType [entity.MetricType](../Management/MetricType.md))`
+- `WithMetricType(metricType entity.MetricType)`
 
-    Sets the distance metric type for vector similarity search (e.g., COSINE, L2, IP).
+    This sets the metric type for the default vector index.
 
 - `WithPKFieldName(name string)`
 
-    Sets the name of the primary key field.
+    This sets the primary-key field name.
 
 - `WithVectorFieldName(name string)`
 
-    Sets the name of the vector field.
+    This sets the vector field name.
 
 - `WithNumPartitions(numPartitions int64)`
 
-    Sets the number of partitions for the collection.
+    This sets the number of partitions used with a partition key.
 
 **RETURN TYPE:**
 
@@ -90,50 +72,43 @@ err := client.CreateCollection(ctx, option)
 
 **RETURNS:**
 
-Returns nil on success, or an error describing what went wrong.
+Returns nil after the collection is created. Returns an error when schema validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 
-    Check `err != nil` for failure details.
+    Validation, request construction, or the RPC fails. Check the returned error for failure details.
 
 ## Example
+
+Demonstrates CreateCollection() usage.
 
 ```go
 import (
 	"context"
 
 	"github.com/milvus-io/milvus/client/v2/entity"
-	"github.com/milvus-io/milvus/client/v2/index"
 	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-collectionName := `customized_setup_1`
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-	Address: milvusAddr,
-})
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{Address: "127.0.0.1:19530"})
 if err != nil {
-	// handle err
+	// handle error
 }
+defer cli.Close(ctx)
 
-indexOptions := []milvusclient.CreateIndexOption{
-	milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)).WithIndexName("my_vector"),
-	milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewSortedIndex()).WithIndexName("my_id"),
-}
+structSchema := entity.NewStructSchema().
+	WithField(entity.NewField().WithName("text").WithDataType(entity.FieldTypeVarChar).WithMaxLength(256))
 
-schema := entity.NewSchema().WithDynamicFieldEnabled(true).
-	WithField(entity.NewField().WithName("my_id").WithIsAutoID(true).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
-	WithField(entity.NewField().WithName("my_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).
-	WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512))
+schema := entity.NewSchema().
+	WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+	WithField(entity.NewField().WithName("chunks").WithDataType(entity.FieldTypeArray).WithElementType(entity.FieldTypeStruct).WithStructSchema(structSchema))
 
-err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(collectionName, schema).
-	WithIndexOptions(indexOptions...),
-)
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("books", schema))
 if err != nil {
 	// handle error
 }

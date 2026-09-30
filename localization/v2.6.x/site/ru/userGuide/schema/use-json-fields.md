@@ -249,6 +249,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
@@ -256,7 +257,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Вы также можете включить функцию динамического поля для гибкого хранения необъявленных полей, но это не обязательно для работы JSON-полей. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Вы также можете включить функцию динамического поля для гибкого хранения необъявленных полей, но это не обязательно для работы JSON-полей. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">Вставка сущностей с данными JSON<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -423,6 +424,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/product_catalog/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;data\&quot;: <span class="hljs-variable">$entities</span>
 }&quot;</span>
@@ -543,8 +545,8 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
 </ul></li>
 <li><p><strong>Тип приведения JSON</strong> (<code translate="no">json_cast_type</code>): Тип данных, который Milvus должен использовать при интерпретации и индексировании значения по указанному пути.</p>
 <ul>
-<li><p>Этот тип должен совпадать с реальным типом данных индексируемого поля. Если во время индексирования необходимо преобразовать тип данных в другой, <a href="/docs/ru/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">используйте функцию cast</a>.</p></li>
-<li><p>Полный список см. <a href="/docs/ru/use-json-fields.md#Supported-JSON-cast-types">ниже</a>.</p></li>
+<li><p>Этот тип должен совпадать с реальным типом данных индексируемого поля. Если во время индексирования необходимо преобразовать тип данных в другой, <a href="/docs/ru/v2.6.x/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">используйте функцию cast</a>.</p></li>
+<li><p>Полный список см. <a href="/docs/ru/v2.6.x/use-json-fields.md#Supported-JSON-cast-types">ниже</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Поддерживаемые типы приведения JSON</h4><p>Типы приведения не чувствительны к регистру. Поддерживаются следующие типы:</p>
@@ -586,7 +588,7 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>Массивы должны содержать элементы одного типа для оптимального индексирования. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+<p>Массивы должны содержать элементы одного типа для оптимального индексирования. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/v2.6.x/array_data_type.md">Поле массива</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Пример: Создание индексов путей в JSON</h4><p>Используя структуру JSON <code translate="no">metadata</code> из нашего введения, приведем примеры создания индексов для различных путей JSON:</p>
 <div class="multipleCode">
@@ -899,6 +901,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
@@ -949,7 +952,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p>Вы создали индекс для каждого векторного поля.</p></li>
 <li><p>Коллекция загружена в память.</p></li>
 </ul>
-<p>Полный список поддерживаемых операторов и выражений см. в разделе <a href="/docs/ru/json-operators.md">Операторы JSON</a>.</p>
+<p>Полный список поддерживаемых операторов и выражений см. в разделе <a href="/docs/ru/v2.6.x/json-operators.md">Операторы JSON</a>.</p>
 <h2 id="Pull-it-all-together" class="common-anchor-header">Соберите все воедино<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -969,11 +972,11 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <p>Чтобы завершить этот процесс в реальном приложении, вам также потребуется:</p>
 <ul>
 <li><p><strong>Создать индекс для векторных полей</strong> (обязательно для каждого векторного поля в коллекции).</p>
-<p>См. раздел <a href="/docs/ru/create-collection.md#Optional-Set-Index-Parameters">"Установка параметров индекса</a></p></li>
+<p>См. раздел <a href="/docs/ru/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">"Установка параметров индекса</a></p></li>
 <li><p><strong>Загрузить коллекцию</strong></p>
-<p>См. раздел <a href="/docs/ru/load-and-release.md">Загрузка и освобождение</a></p></li>
+<p>См. раздел <a href="/docs/ru/v2.6.x/load-and-release.md">Загрузка и освобождение</a></p></li>
 <li><p><strong>Выполнить поиск или запрос с использованием фильтров пути JSON</strong></p>
-<p>См. раздел <a href="/docs/ru/filtered-search.md">Фильтрованный поиск</a> и <a href="/docs/ru/json-operators.md">операторы JSON</a></p></li>
+<p>См. раздел <a href="/docs/ru/v2.6.x/filtered-search.md">Фильтрованный поиск</a> и <a href="/docs/ru/v2.6.x/json-operators.md">операторы JSON</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1010,7 +1013,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>Динамическое поле</strong> - это скрытый JSON-объект (<code translate="no">$meta</code>), который автоматически сохраняет любое поле, не определенное в схеме.</p></li>
 </ul>
 <p>Оба варианта поддерживают вложенные структуры и индексацию путей JSON, но динамические поля больше подходят для необязательных или развивающихся структур данных.</p>
-<p>Подробности см. в разделе <a href="/docs/ru/enable-dynamic-field.md">"Динамическое поле"</a>.</p>
+<p>Подробности см. в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">"Динамическое поле"</a>.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Существуют ли ограничения на размер поля JSON?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1043,7 +1046,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><p>Нет, поля JSON не поддерживают значения по умолчанию. Однако при определении поля можно установить значение <code translate="no">nullable=True</code>, чтобы разрешить пустые записи.</p>
-<p>Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Подробности см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Существуют ли какие-либо соглашения об именовании для ключей полей JSON?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1103,7 +1106,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>Численное индексирование</strong>:</p>
+<li><p><strong>Числовое индексирование</strong>:</p>
 <p>Если индекс создан с помощью <code translate="no">json_cast_type=&quot;double&quot;</code>, только числовые условия фильтрации (например, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) будут использовать индекс. Нечисловые условия могут вернуться к грубому сканированию.</p></li>
 <li><p><strong>Индексирование строк</strong>:</p>
 <p>Если в индексе используется <code translate="no">json_cast_type=&quot;varchar&quot;</code>, только условия фильтрации строк получат преимущества от индекса; другие типы могут вернуться к грубому сканированию.</p></li>

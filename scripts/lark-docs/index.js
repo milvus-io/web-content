@@ -1,14 +1,17 @@
 #!/usr/bin/env node
-const { program } = require('commander')
-const MilvusDocsGen = require('./milvusDocsGen.js')
-const MilvusSdkDocsGen = require('./milvusSdkDocsGen.js')
-const fs = require('node:fs')
 const path = require('node:path')
-require('dotenv/config')
+require('dotenv').config({ path: path.resolve(__dirname, '..', '..', '.env') })
+process.env.DOTENV_CONFIG_QUIET = process.env.DOTENV_CONFIG_QUIET || 'true'
+
+const { program } = require('commander')
+const MilvusDocsGen = require('../lib/milvusDocsGen.js')
+const MilvusSdkDocsGen = require('../lib/milvusSdkDocsGen.js')
+const LarkUtils = require('../lib/larkUtils.js')
+const fs = require('node:fs')
 
 program
     .name('fetch-milvus-docs')
-    .description('Fetch and generate Milvus guide docs from Feishu bitable')
+    .description('Fetch and generate Milvus guide and SDK docs from Feishu bitable')
     .requiredOption('-c, --config <config>', 'Path to config JSON')
     .requiredOption('-m, --manual <manual>', 'Name of the manual to publish')
     .option('-d, --doc <doc>', 'Title of the document or parent node')
@@ -80,6 +83,12 @@ program
             const result = await gen.write_doc(opts.doc)
             if (!result) process.exit(1)
             docs = [result]
+        }
+
+        if (opts.all && !opts.output) {
+            const utils = new LarkUtils()
+            if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true })
+            utils.pre_process_file_paths(outputDir)
         }
 
         // Write files

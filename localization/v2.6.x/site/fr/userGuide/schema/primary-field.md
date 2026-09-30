@@ -60,7 +60,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le champ primaire doit utiliser un type de données scalaire pris en charge qui permet d'identifier les entités de manière unique.</p>
+    </button></h2><p>Le champ primaire doit utiliser un type de données scalaires pris en charge qui permet d'identifier les entités de manière unique.</p>
 <table>
    <tr>
      <th><p>Type de données</p></th>
@@ -72,7 +72,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">VARCHAR</code></p></td>
-     <td><p>Type de chaîne de longueur variable. À utiliser lorsque les identifiants d'entité proviennent de systèmes externes (par exemple, codes de produit ou identifiants d'utilisateur). Nécessite la propriété <code translate="no">max_length</code> pour définir le nombre maximal d'octets autorisés par valeur.</p></td>
+     <td><p>Type de chaîne de longueur variable. À utiliser lorsque les identifiants d'entité proviennent de systèmes externes (par exemple, codes de produit ou identifiants d'utilisateur). Nécessite la propriété <code translate="no">max_length</code> pour définir le nombre maximum d'octets autorisés par valeur.</p></td>
    </tr>
 </table>
 <h2 id="Choose-between-AutoID-and-Manual-IDs" class="common-anchor-header">Choix entre AutoID et ID manuels<button data-href="#Choose-between-AutoID-and-Manual-IDs" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Si vous ne savez pas quel mode choisir, <a href="/docs/fr/primary-field.md#Quickstart-Use-AutoID">commencez par AutoID</a> pour une ingestion plus simple et une unicité garantie.</p></li>
+<li><p>Si vous ne savez pas quel mode choisir, <a href="/docs/fr/v2.6.x/primary-field.md#Quickstart-Use-AutoID">commencez par AutoID</a> pour une ingestion plus simple et une unicité garantie.</p></li>
 <li><p>Il est conseillé d'utiliser <code translate="no">autoId</code> dans tous les cas, à moins que la définition manuelle des clés primaires ne soit bénéfique.</p></li>
 </ul>
 </div>
@@ -279,6 +279,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -363,6 +364,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -537,6 +539,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -628,6 +631,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -670,7 +674,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>Pour préserver les ID existants lors de la migration des données, activez la propriété <code translate="no">allow_insert_auto_id</code> en effectuant l'appel <code translate="no">alter_collection_properties</code>. Lorsque cette propriété est définie sur true, Milvus accepte les ID fournis par l'utilisateur même si l'AutoID est activé.</p>
-<p>Pour plus de détails sur la configuration, voir <a href="/docs/fr/modify-collection.md#Example-5-Enable-allowinsertautoid">Modifier la collecte</a>.</p>
+<p>Pour plus de détails sur la configuration, voir <a href="/docs/fr/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">Modifier la collecte</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">Garantir l'unicité globale de l'AutoID dans les clusters<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -710,7 +714,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comprendre comment AutoID génère des identifiants uniques en interne peut vous aider à <a href="/docs/fr/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configurer</a> correctement <a href="/docs/fr/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">les ID de clusters</a> et à résoudre les problèmes liés aux ID.</p>
+    </button></h2><p>Comprendre comment AutoID génère des identifiants uniques en interne peut vous aider à <a href="/docs/fr/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configurer</a> correctement <a href="/docs/fr/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">les ID de clusters</a> et à résoudre les problèmes liés aux ID.</p>
 <p>AutoID utilise un format structuré de 64 bits pour garantir l'unicité :</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

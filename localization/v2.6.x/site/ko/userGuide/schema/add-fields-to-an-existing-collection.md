@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
 <li><p>스칼라 필드(<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> 등)를 추가할 수 있습니다. 벡터 필드는 기존 컬렉션에 추가할 수 없습니다.</p></li>
 <li><p>새 필드에 대한 값이 없는 기존 엔티티를 수용하려면 새 필드를 null 가능(nullable=True)으로 설정해야 합니다.</p></li>
 <li><p>로드된 컬렉션에 필드를 추가하면 메모리 사용량이 증가합니다.</p></li>
-<li><p>컬렉션당 총 필드 수에는 최대 제한이 있습니다. 자세한 내용은 <a href="/docs/ko/limitations.md#Number-of-resources-in-a-collection">밀버스 제한을</a> 참조하세요.</p></li>
+<li><p>컬렉션당 총 필드 수에는 최대 제한이 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/limitations.md#Number-of-resources-in-a-collection">밀버스 제한을</a> 참조하세요.</p></li>
 <li><p>필드 이름은 정적 필드 중에서 고유해야 합니다.</p></li>
 <li><p>원래 <code translate="no">enable_dynamic_field=True</code> 으로 만들지 않은 컬렉션에는 동적 필드 기능을 활성화하기 위해 <code translate="no">$meta</code> 필드를 추가할 수 없습니다.</p></li>
 </ul>
@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
 <li><p>기존 컬렉션</p></li>
 </ul>
 <div class="alert note">
-<p>컬렉션 생성 및 기본 작업은 컬렉션 <a href="/docs/ko/create-collection.md">만들기를</a> 참조하세요.</p>
+<p>컬렉션 생성 및 기본 작업은 컬렉션 <a href="/docs/ko/v2.6.x/create-collection.md">만들기를</a> 참조하세요.</p>
 </div>
 <h2 id="Basic-usage" class="common-anchor-header">기본 사용법<button data-href="#Basic-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,6 +167,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;product_catalog&quot;,
@@ -265,6 +266,7 @@ client.add_collection_field(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;product_catalog&quot;,
@@ -371,6 +373,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 <span class="hljs-comment"># ❌ This is NOT supported</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;existing_collection&quot;,
@@ -383,8 +386,8 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <button class="copy-code-btn"></button></code></pre>
 <p>동적 스키마 기능을 사용하려면 다음과 같이 하세요:</p>
 <ul>
-<li><p><strong>새 컬렉션을</strong> 만듭니다: 컬렉션을 만들 때 <code translate="no">enable_dynamic_field</code> 을 True로 설정합니다. 자세한 내용은 <a href="/docs/ko/create-collection.md#Create-Schema">컬렉션 만들기를</a> 참조하세요.</p></li>
-<li><p><strong>기존 컬렉션을</strong> 참조하세요: 컬렉션 수준 속성 <code translate="no">dynamicfield.enabled</code> 을 True로 설정합니다. 자세한 내용은 <a href="/docs/ko/modify-collection.md#Example-4-Enable-dynamic-field">컬렉션 수정을</a> 참조하세요.</p></li>
+<li><p><strong>새 컬렉션을</strong> 만듭니다: 컬렉션을 만들 때 <code translate="no">enable_dynamic_field</code> 을 True로 설정합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/create-collection.md#Create-Schema">컬렉션 만들기를</a> 참조하세요.</p></li>
+<li><p><strong>기존 컬렉션을</strong> 참조하세요: 컬렉션 수준 속성 <code translate="no">dynamicfield.enabled</code> 을 True로 설정합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/modify-collection.md#Example-4-Enable-dynamic-field">컬렉션 수정을</a> 참조하세요.</p></li>
 </ul>
 <h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">동적 필드 키와 이름이 같은 필드를 추가하면 어떻게 되나요?<button data-href="#What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -513,6 +516,7 @@ insertR = client.insert(InsertReq.builder()
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Step 1: Insert initial data with dynamic fields...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -527,6 +531,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 2: Add static field with same name as dynamic field...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/collections/fields/add&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -540,6 +545,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nStep 3: Insert new data after adding static field...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/insert&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -631,6 +637,7 @@ results = client.<span class="hljs-title function_">query</span>({
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Query 1: Static field only (dynamic field masked)...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -641,6 +648,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 2: Both static and original dynamic values...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
@@ -651,6 +659,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\nQuery 3: New entity with static field value...&quot;</span>
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_HOST}</span>/v2/vectordb/entities/query&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${AUTH_TOKEN}</span>&quot;</span> \
   -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,

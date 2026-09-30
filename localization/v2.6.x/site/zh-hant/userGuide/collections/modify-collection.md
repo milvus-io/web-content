@@ -118,6 +118,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/rename&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
@@ -161,19 +162,19 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>如果集合的資料需要在特定時間後刪除，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。 </p><p>刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。</p><p>詳情請參閱<a href="/docs/zh-hant/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
+     <td><p>如果集合的資料需要在特定時間後刪除，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。 </p><p>刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。</p><p>詳情請參閱<a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></td>
+     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/mmap.md">使用 mmap</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>在啟用「分割區金鑰隔離」的情況下，Milvus 會根據分割區金鑰值將實體分組，並為每個分組建立獨立索引。收到搜尋請求後，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大幅提升搜尋效能。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md#Use-Partition-Key-Isolation">使用分割區金鑰隔離</a>。</p></td>
+     <td><p>在啟用「分割區金鑰隔離」的情況下，Milvus 會根據分割區金鑰值將實體分組，並為每個分組建立獨立索引。收到搜尋請求後，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大幅提升搜尋效能。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">使用分割區金鑰隔離</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>對於未啟用動態欄位而建立的集合，啟用動態欄位。啟用後，您可以插入原始模式中未定義欄位的實體。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p></td>
+     <td><p>對於未啟用動態欄位而建立的集合，啟用動態欄位。啟用後，您可以插入原始模式中未定義欄位的實體。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
@@ -181,7 +182,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>在處理時間敏感的作業時，指定此集合的預設時區，尤其是<code translate="no">TIMESTAMPTZ</code> 欄位。時間戳在內部以 UTC 儲存，Milvus 會根據此設定轉換值來顯示和比較。如果設定，集合時區會取代資料庫的預設時區；查詢的時區參數可以暫時取代這兩個參數。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+     <td><p>在處理時間敏感的作業，特別是<code translate="no">TIMESTAMPTZ</code> 欄位時，指定此集合的預設時區。時間戳在內部以 UTC 儲存，Milvus 會根據此設定轉換值來顯示和比較。如果設定，集合時區會取代資料庫的預設時區；查詢的時區參數可以暫時取代這兩個參數。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定收集 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -243,6 +244,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;test_collection&quot;,
     &quot;properties&quot;: {
@@ -301,6 +303,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
@@ -359,6 +362,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -418,6 +422,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -477,6 +482,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -531,6 +537,7 @@ client.alterCollection(alterCollectionReq);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
   -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
   -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
@@ -584,6 +591,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;propertyKeys&quot;: [

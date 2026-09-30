@@ -8,7 +8,7 @@ func NewMinHashLSHIndex(metricType entity.MetricType, lshBand int) *minhashLSHIn
 
 **PARAMETERS:**
 
-- **metricType** (*[entity.MetricType](../MetricType.md)*)
+- **[metricType](../MetricType.md)** (*[entity.MetricType](../MetricType.md)*)
 
     The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
@@ -18,7 +18,7 @@ func NewMinHashLSHIndex(metricType entity.MetricType, lshBand int) *minhashLSHIn
 
 **RETURNS:**
 
-*Index*
+*[Index](Index.md)*
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 

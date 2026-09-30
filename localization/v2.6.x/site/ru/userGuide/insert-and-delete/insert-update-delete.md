@@ -23,11 +23,9 @@ summary: >-
       </svg>
     </button></h1><p>Сущности в коллекции - это записи данных, которые имеют одинаковый набор полей. Значения полей в каждой записи данных образуют сущность. На этой странице описана процедура вставки сущностей в коллекцию.</p>
 <div class="alert note">
-<p>Если вы динамически добавляете новые поля после создания коллекции и не указываете значения для этих полей при вставке сущностей, Milvus автоматически заполняет их либо определенными значениями по умолчанию, либо NULL, если значения по умолчанию не установлены. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
-<div class="alert note">
 <ul>
-<li><p><strong>Поля, добавленные после создания коллекции</strong>: Если вы добавляете новые поля в коллекцию после создания и не указываете значения при вставке, Milvus автоматически заполняет их определенными значениями по умолчанию или NULL, если значения по умолчанию не заданы. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p></li>
-<li><p><strong>Обработка дубликатов</strong>: Стандартная операция <code translate="no">insert</code> не проверяет наличие дубликатов первичных ключей. При вставке данных с существующим первичным ключом создается новая сущность с тем же ключом, что приводит к дублированию данных и потенциальным проблемам в работе приложения. Чтобы обновить существующие сущности или избежать дублирования, используйте операцию <strong><code translate="no">upsert</code></strong> вместо этого. Дополнительную информацию см. в разделе <a href="/docs/ru/upsert-entities.md">Upsert Entities</a>.</p></li>
+<li><p><strong>Поля, добавленные после создания коллекции</strong>: Если вы добавляете новые поля в коллекцию после создания и не указываете значения при вставке, Milvus автоматически заполняет их определенными значениями по умолчанию или NULL, если значения по умолчанию не заданы. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p></li>
+<li><p><strong>Обработка дубликатов</strong>: Стандартная операция <code translate="no">insert</code> не проверяет наличие дубликатов первичных ключей. При вставке данных с существующим первичным ключом создается новая сущность с тем же ключом, что приводит к дублированию данных и потенциальным проблемам в работе приложения. Чтобы обновить существующие сущности или избежать дублирования, используйте операцию <strong><code translate="no">upsert</code></strong> вместо этого. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/upsert-entities.md">Upsert Entities</a>.</p></li>
 </ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -223,6 +221,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
@@ -397,6 +396,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},

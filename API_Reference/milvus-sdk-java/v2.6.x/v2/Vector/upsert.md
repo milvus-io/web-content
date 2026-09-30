@@ -1,6 +1,6 @@
 # upsert()
 
-This operation inserts or updates data in a specific collection.
+Upserts entities and supports partial field updates with per-field update operations.
 
 ```java
 public UpsertResp upsert(UpsertReq request)
@@ -9,79 +9,98 @@ public UpsertResp upsert(UpsertReq request)
 ## Request Syntax
 
 ```java
-upsert(UpsertReq.builder()
-    .data(List<JsonObject> data)
-    .databaseName(String databaseName)
-    .collectionName(String collectionName)
-    .partitionName(String partitionName)
-    .partialUpdate(boolean partialUpdate)
-    .build()
-);
+UpsertReq.builder()
+    .data(data)
+    .databaseName(databaseName)
+    .collectionName(collectionName)
+    .partitionName(partitionName)
+    .partialUpdate(partialUpdate)
+    .fieldOps(fieldOps)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
-- `data(List<JsonObject> data)` -
+- `data(List<JsonObject> data)`
 
-    A list of data rows to insert/upsert as JSON objects.
+    The entities to upsert, represented as JSON objects.
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
-    The name of the database. Defaults to the current database if not specified.
+    The name of the database that contains the target resource.
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     The name of the target collection.
 
-- `partitionName(String partitionName)` -
+- `partitionName(String partitionName)`
 
-    The name of the target partition.
+    The name of the target partition. Leave it empty to address the entire collection.
 
-- `partialUpdate(boolean partialUpdate)` -
+- `partialUpdate(boolean partialUpdate)`
 
-    Whether to allow partial field updates during upsert.
+    Whether to update only the fields supplied in each entity.
+
+- `fieldOps(List<FieldPartialUpdateOp> fieldOps)`
+
+    The `UpsertReq.FieldPartialUpdateOp` entries that define per-field behavior during a partial update.
+
+    - `fieldName(String fieldName)` -
+
+        The name of the field whose update behavior this entry controls.
+
+    - `opType(UpsertReq.FieldPartialUpdateOp.OpType opType)` -
+
+        The operation applied to the field. Defaults to **REPLACE**.
+
+        - `REPLACE` -
+
+            Overwrites the field with the supplied value. This is the default and applies to all field types.
+
+        - `ARRAY_APPEND` -
+
+            Appends the supplied values to an array field. The resulting length must not exceed the field `max_capacity`.
+
+        - `ARRAY_REMOVE` -
+
+            Removes every occurrence of each supplied value from an array field. It is a no-op when the base array is empty or no value matches.
 
 **RETURNS:**
 
 *UpsertResp*
 
-An **UpsertResp** object that contains information about the number of inserted or updated entities.
+- **upsertCnt** (*long*)
+
+    The number of upserted entities.
+
+- **primaryKeys** (*List\<Object\>*)
+
+    The primary keys of the upserted entities.
+
+- **cost** (*Long*)
+
+    The cost of the operation in milliseconds. Available in v2.6.25 or later.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Upserts entities and supports partial field updates with per-field update operations.
+
 ```java
-import com.google.gson.JsonObject;
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.UpsertReq;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Upsert operation
-JsonObject row = new JsonObject();
-List<Float> vectorList = new ArrayList<>();
-vectorList.add(2.0f);
-vectorList.add(3.0f);
-row.add("vector", gson.toJsonTree(vectorList));
-row.addProperty("id", 0L);
-row.addProperty("color", "purple")
-
-UpsertReq upsertReq = UpsertReq.builder()
-        .collectionName("test")
-        .data(Collections.singletonList(row))
-        .build();
-client.upsert(upsertReq);
-
+UpsertResp response = client.upsert(UpsertReq.builder()
+    .databaseName("default")
+    .collectionName("books")
+    .data(rows)
+    .partialUpdate(true)
+    .fieldOps(Collections.singletonList(
+        UpsertReq.FieldPartialUpdateOp.builder()
+            .fieldName("tags")
+            .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+            .build()))
+    .build());
 ```

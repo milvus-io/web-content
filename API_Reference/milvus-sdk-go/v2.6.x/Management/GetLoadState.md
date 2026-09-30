@@ -51,7 +51,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-collectionName := `customized_setup_1`
+collectionName := \`customized_setup_1\`
 
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 	Address: milvusAddr,

@@ -35,9 +35,9 @@ summary: 本主題描述如何建立用戶端與 Milvus 伺服器的連線，以
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>已安裝您語言的 SDK。詳情請參閱<a href="/docs/zh-hant/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh-hant/install-java.md">Java SDK</a>、<a href="/docs/zh-hant/install-go.md">Go SDK</a> 或<a href="/docs/zh-hant/install-node.md">Nodejs SDK</a>。</p></li>
+<li><p>已安裝您語言的 SDK。詳情請參閱<a href="/docs/zh-hant/v2.6.x/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh-hant/v2.6.x/install-java.md">Java SDK</a>、<a href="/docs/zh-hant/v2.6.x/install-go.md">Go SDK</a> 或<a href="/docs/zh-hant/v2.6.x/install-node.md">Nodejs SDK</a>。</p></li>
 <li><p>Milvus 伺服器位址 (本機預設：<code translate="no">http://localhost:19530</code> ，proxy 埠<strong>19530</strong>)。</p></li>
-<li><p>如果<a href="/docs/zh-hant/authenticate.md">啟用了驗證</a>，請提供<strong>令牌</strong>或<strong>使用者名稱 + 密碼</strong>。令牌可以是<code translate="no">username:password</code> (例如：<code translate="no">root:Milvus</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">驗證使用者存取</a>及<a href="/docs/zh-hant/users_and_roles.md">建立使用者與角色</a>。</p></li>
+<li><p>如果<a href="/docs/zh-hant/v2.6.x/authenticate.md">啟用了驗證</a>，請提供<strong>令牌</strong>或<strong>使用者名稱 + 密碼</strong>。令牌可以是<code translate="no">username:password</code> (例如：<code translate="no">root:Milvus</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/authenticate.md">驗證使用者存取</a>及<a href="/docs/zh-hant/v2.6.x/users_and_roles.md">建立使用者與角色</a>。</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">透過 URI 連線 (停用驗證)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,6 +88,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">使用憑證連接（啟用驗證）<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -155,10 +156,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>令牌格式為<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。說明文件明確註明<code translate="no">root:Milvus</code> 為預設憑證，「<a href="/docs/zh-hant/users_and_roles.md">建立使用者與角色</a>」指南涵蓋管理使用者。</p>
+<p>令牌格式為<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。說明文件明確註明<code translate="no">root:Milvus</code> 為預設憑證，而<a href="/docs/zh-hant/v2.6.x/users_and_roles.md">Create Users &amp; Roles</a>指南則涵蓋管理使用者。</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">設定逾時<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -219,7 +221,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -302,12 +304,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>有關建立、列出和描述資料<a href="/docs/zh-hant/manage_databases.md">庫</a>，以及更廣泛的資料庫管理任務，請參閱資料庫指南。</p>
+<p>有關建立、列出和描述資料<a href="/docs/zh-hant/v2.6.x/manage_databases.md">庫</a>，以及更廣泛的資料庫管理任務，請參閱資料庫指南。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -325,7 +328,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh-hant/create-collection.md">建立集合</a></p></li>
-<li><p><a href="/docs/zh-hant/insert-update-delete.md">插入實體</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md">基本向量搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/create-collection.md">建立集合</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/insert-update-delete.md">插入實體</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">基本向量搜尋</a></p></li>
 </ul>

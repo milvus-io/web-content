@@ -1,6 +1,6 @@
 # createRole()
 
-This operation creates a custom role.
+Creates a role with an optional description.
 
 ```java
 public void createRole(CreateRoleReq request)
@@ -9,47 +9,35 @@ public void createRole(CreateRoleReq request)
 ## Request Syntax
 
 ```java
-createRole(CreateRoleReq.builder()
-    .roleName(String roleName)
-    .build()
-)
+CreateRoleReq.builder()
+    .roleName(roleName)
+    .description(description)
+    .build();
 ```
 
 **BUILDER METHODS:**
 
 - `roleName(String roleName)`
 
-    The name of the role to create.
+    The name of the role.
 
-**RETURNS:**
+- `description(String description)`
 
-*void*
+    The human-readable description of the role.
 
 **EXCEPTIONS:**
 
 - **MilvusClientExceptions**
 
-    This exception will be raised when any error occurs during this operation.
+    Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
 
+Creates a role with an optional description.
+
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.rbac.request.CreateRoleReq;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Create a role
-CreateRoleReq createRoleReq = CreateRoleReq.builder()
-        .roleName("read_only")
-        .build();
-        
-client.createRole(createRoleReq);
+client.createRole(CreateRoleReq.builder()
+    .roleName("analyst")
+    .description("Read-only analytics role")
+    .build());
 ```

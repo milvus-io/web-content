@@ -1,6 +1,16 @@
 {
   "apifox": {
-    "specifications": "scripts/apifox-docs/meta/openapi.json"
+    "specifications": "scripts/apifox-docs/meta/openapi",
+    "restful": {
+      "milvus-v3.0.x": {
+        "specifications": "scripts/apifox-docs/meta/openapi",
+        "lang": "en-US",
+        "target": "milvus",
+        "targets": {
+          "outputDir": "API_Reference_MDX/milvus-restful/v3.0.x"
+        }
+      }
+    }
   },
   "milvus": {
     "manuals": {
@@ -52,6 +62,18 @@
           "alt_texts": []
         }
       },
+      "pymilvus-v3.0.x": {
+        "base": "Hk05b5eI6aXXSSsd6j9cqwwMn5a:tblKV2Wj45qrmD0J",
+        "sourceType": "drive",
+        "language": "python",
+        "targets": {
+          "outputDir": "API_Reference/pymilvus/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "java-v2.4.x": {
         "base": "WqHJb3zimaxXjssk4Kic4GEDnte:tbl5bsj6PQ0uDIyn",
         "sourceType": "drive",
@@ -82,6 +104,18 @@
         "language": "java",
         "targets": {
           "outputDir": "API_Reference/milvus-sdk-java/v2.6.x/v2",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "java-v3.0.x": {
+        "base": "AOFDbSmwma9XrNsLa8KcQgt9ngc:tbl63oNrbGDCXorc",
+        "sourceType": "drive",
+        "language": "java",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-java/v3.0.x/v2",
           "imageDir": "assets"
         },
         "images": {
@@ -124,6 +158,18 @@
           "alt_texts": []
         }
       },
+      "node-v3.0.x": {
+        "base": "LlrPbysPZau2dGsSVuicHmvCn0e:tblT65LG94H2vobA",
+        "sourceType": "drive",
+        "language": "javascript",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-node/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "go-v2.6.x": {
         "base": "Yc7gbtmgSal2ewsdqlhcLWVanbh:tblM12OyAwhSeXiC",
         "sourceType": "drive",
@@ -136,12 +182,36 @@
           "alt_texts": []
         }
       },
+      "go-v3.0.x": {
+        "base": "KQT5bV62QaioKisKZT0crwZDnke:tbltgcl1fpw5Mt8E",
+        "sourceType": "drive",
+        "language": "go",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-go/v3.0.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
       "cpp-v2.6.x": {
         "base": "XmndbkxkQaigA8soRiCcTT41nMd:tbln9XaZjW6RuEhu",
         "sourceType": "drive",
         "language": "cpp",
         "targets": {
           "outputDir": "API_Reference/milvus-sdk-cpp/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "cpp-v3.0.x": {
+        "base": "QdLkbfmnFatl4TsThKDc5Dobn5g:tbl3pnlF1gu6KlTY",
+        "sourceType": "drive",
+        "language": "cpp",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-cpp/v3.0.x",
           "imageDir": "assets"
         },
         "images": {

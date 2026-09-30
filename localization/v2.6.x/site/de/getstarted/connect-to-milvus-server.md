@@ -37,9 +37,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Das SDK Ihrer Sprache ist installiert. Einzelheiten finden Sie unter <a href="/docs/de/install-pymilvus.md">Python SDK</a>, <a href="/docs/de/install-java.md">Java SDK</a>, <a href="/docs/de/install-go.md">Go SDK</a> oder <a href="/docs/de/install-node.md">Nodejs SDK</a>.</p></li>
-<li><p>Eine Milvus-Serveradresse (für die lokale Voreinstellung: <code translate="no">http://localhost:19530</code>, Proxy-Port <strong>19530</strong>).</p></li>
-<li><p>Wenn <a href="/docs/de/authenticate.md">die Authentifizierung aktiviert ist</a>, geben Sie entweder ein <strong>Token</strong> oder einen <strong>Benutzernamen und ein Passwort</strong> an. Ein Token kann <code translate="no">username:password</code> sein (z. B. <code translate="no">root:Milvus</code>). Weitere Informationen finden Sie unter <a href="/docs/de/authenticate.md">Authentifizierung des Benutzerzugangs</a> und <a href="/docs/de/users_and_roles.md">Erstellen von Benutzern und Rollen</a>.</p></li>
+<li><p>Das SDK Ihrer Sprache ist installiert. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/install-pymilvus.md">Python SDK</a>, <a href="/docs/de/v2.6.x/install-java.md">Java SDK</a>, <a href="/docs/de/v2.6.x/install-go.md">Go SDK</a> oder <a href="/docs/de/v2.6.x/install-node.md">Nodejs SDK</a>.</p></li>
+<li><p>Eine Milvus-Serveradresse (für den lokalen Standard: <code translate="no">http://localhost:19530</code>, Proxy-Port <strong>19530</strong>).</p></li>
+<li><p>Wenn <a href="/docs/de/v2.6.x/authenticate.md">die Authentifizierung aktiviert ist</a>, geben Sie entweder ein <strong>Token</strong> oder einen <strong>Benutzernamen und ein Passwort</strong> an. Ein Token kann <code translate="no">username:password</code> sein (z. B. <code translate="no">root:Milvus</code>). Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/authenticate.md">Authentifizierung des Benutzerzugriffs</a> und <a href="/docs/de/v2.6.x/users_and_roles.md">Erstellen von Benutzern und Rollen</a>.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Verbindung über URI (Authentifizierung deaktiviert)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,6 +90,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Verbinden mit Anmeldeinformationen (Authentifizierung aktiviert)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
@@ -157,10 +158,11 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Das Token-Format ist <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. In den Dokumenten wird <code translate="no">root:Milvus</code> ausdrücklich als Standard-Anmeldeinformation angegeben, und die Anleitung <a href="/docs/de/users_and_roles.md">Benutzer und Rollen erstellen</a> behandelt die Verwaltung von Benutzern.</p>
+<p>Das Token-Format ist <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. In den Dokumenten wird <code translate="no">root:Milvus</code> ausdrücklich als Standard-Anmeldeinformation angegeben, und die Anleitung <a href="/docs/de/v2.6.x/users_and_roles.md">Benutzer und Rollen erstellen</a> behandelt die Verwaltung von Benutzern.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">Konfigurieren Sie eine Zeitüberschreitung<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +223,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     --max-time 7 \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -304,12 +306,13 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-str
 curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
     -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{
       &quot;dbName&quot;: &quot;analytics&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Lesen Sie das <a href="/docs/de/manage_databases.md">Datenbankhandbuch</a> zum Erstellen, Auflisten und Beschreiben von Datenbanken und für weitergehende Aufgaben der Datenbankverwaltung.</p>
+<p>Lesen Sie das <a href="/docs/de/v2.6.x/manage_databases.md">Datenbankhandbuch</a> zum Erstellen, Auflisten und Beschreiben von Datenbanken und für weitergehende Aufgaben der Datenbankverwaltung.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +330,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/de/create-collection.md">Sammlung erstellen</a></p></li>
-<li><p><a href="/docs/de/insert-update-delete.md">Entitäten einfügen</a></p></li>
-<li><p><a href="/docs/de/single-vector-search.md">Grundlegende Vektorsuche</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/create-collection.md">Sammlung erstellen</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/insert-update-delete.md">Entitäten einfügen</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/single-vector-search.md">Grundlegende Vektorsuche</a></p></li>
 </ul>

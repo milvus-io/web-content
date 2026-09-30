@@ -1,6 +1,18 @@
 # optimize()
 
-This operation optimizes a collection by adjusting segment sizes to improve query performance. This method performs a sequence of operations: waiting for index building, triggering force-merge compaction, waiting for completion, rebuilding indexes, and refreshing the collection load.
+- **is_l0** (*bool*) -
+
+    Whether to run L0 compaction.
+
+- **target_size** (*int*) -
+
+    Target segment size after compaction. Must be a positive integer. If omitted, the server default is used.
+
+- **target_size_unit** (*str*) -
+
+    Unit for `target_size`. Supported values are `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, and `"pb"`. The client converts this value to MB before sending the request.
+
+This operation compacts small segments in a collection and returns a compaction job ID that you can poll for progress.
 
 <div class="alert warning">
 
@@ -8,15 +20,18 @@ This is a Preview version feature for non-production use only (Benchmark, POC).
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.optimize(
     collection_name: str,
-    target_size: str = None,
+    is_clustering: bool = False,
+    is_l0: bool = False,
+    target_size: int | None = None,
+    target_size_unit: str = "mb",
     wait: bool = True,
-    timeout: float = None
-) -> Union[OptimizeResult, OptimizeTask]
+    timeout: float | None = None,
+)
 ```
 
 **PARAMETERS:**
@@ -27,7 +42,7 @@ client.optimize(
 
     The name of the collection to optimize.
 
-- **target_size** (*str* | *None*) -
+- **is_clustering** (*bool*) -
 
     Target segment size. Format: `"1000MB"`, `"1GB"`, `"1.2gb"`. If not provided, uses the system default.
 
@@ -35,13 +50,14 @@ client.optimize(
 
     Whether to wait for optimization to complete. Defaults to **True**. If **False**, returns an `OptimizeTask` for async tracking.
 
-- **timeout** (*float* | *None*) -
+- **timeout** (*float*) -
 
     Maximum time in seconds to wait for optimization. Only applies when `wait=True`.
 
 **RETURN TYPE:**
+*OptimizeResult | OptimizeTask*
 
-*OptimizeResult* | *OptimizeTask*
+Returns an `OptimizeResult` when `wait=True`, or an `OptimizeTask` when `wait=False`.
 
 **RETURNS:**
 
@@ -57,30 +73,29 @@ When `wait=True`, returns an **OptimizeResult** with status, collection_name, co
 
     This exception will be raised when index build fails, compaction fails, or timeout occurs.
 
-## Example
+## Examples
 
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
-# Synchronous optimization
+# Wait for completion
 result = client.optimize(
-    collection_name="my_collection",
-    target_size="512MB"
+    collection_name="book",
+    target_size=512,
+    target_size_unit="mb",
+    wait=True,
 )
+print(result)
 
-# Asynchronous optimization
+# Run asynchronously
 task = client.optimize(
-    collection_name="my_collection",
-    target_size="512MB",
-    wait=False
+    collection_name="book",
+    is_clustering=True,
+    target_size=1,
+    target_size_unit="gb",
+    wait=False,
 )
-while not task.done():
-    print(f"Progress: {task.progress()}")
-    time.sleep(1)
-result = task.result()
+print(task.job_id)
 ```

@@ -110,7 +110,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Se non siete sicuri di quale modalità scegliere, <a href="/docs/it/primary-field.md#Quickstart-Use-AutoID">iniziate con AutoID</a> per un'ingestione più semplice e un'unicità garantita.</p></li>
+<li><p>Se non siete sicuri di quale modalità scegliere, <a href="/docs/it/v2.6.x/primary-field.md#Quickstart-Use-AutoID">iniziate con AutoID</a> per un'ingestione più semplice e un'unicità garantita.</p></li>
 <li><p>Si consiglia di affidarsi a <code translate="no">autoId</code> in tutti i casi, a meno che non sia utile impostare manualmente le chiavi primarie.</p></li>
 </ul>
 </div>
@@ -279,6 +279,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -363,6 +364,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -387,7 +389,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h2><p>Se è necessario controllare gli ID manualmente, disabilitare AutoID e fornire i propri valori.</p>
-<h3 id="Step-1-Create-a-collection-without-AutoID" class="common-anchor-header">Passo 1: Creare un insieme senza AutoID<button data-href="#Step-1-Create-a-collection-without-AutoID" class="anchor-icon" translate="no">
+<h3 id="Step-1-Create-a-collection-without-AutoID" class="common-anchor-header">Passo 1: creare un insieme senza AutoID<button data-href="#Step-1-Create-a-collection-without-AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -537,6 +539,7 @@ client.createCollection(requestCreate);
 
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
@@ -628,6 +631,7 @@ System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</spa
 <span class="hljs-comment"># 插入数据</span>
 curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
 -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-H <span class="hljs-string">&#x27;Request-Timeout: 10&#x27;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
@@ -670,7 +674,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>Per preservare gli ID esistenti durante la migrazione dei dati, abilitare la proprietà <code translate="no">allow_insert_auto_id</code> effettuando la chiamata <code translate="no">alter_collection_properties</code>. Se impostata su true, Milvus accetta gli ID forniti dall'utente anche se AutoID è abilitato.</p>
-<p>Per i dettagli sulla configurazione, fare riferimento a <a href="/docs/it/modify-collection.md#Example-5-Enable-allowinsertautoid">Modifica della raccolta</a>.</p>
+<p>Per i dettagli sulla configurazione, fare riferimento a <a href="/docs/it/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">Modifica della raccolta</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">Garantire l'unicità dell'AutoID globale in tutti i cluster<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -710,7 +714,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Capire come AutoID genera internamente gli identificatori univoci può aiutare a <a href="/docs/it/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configurare</a> correttamente <a href="/docs/it/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">gli ID dei cluster</a> e a risolvere i problemi relativi agli ID.</p>
+    </button></h2><p>Capire come AutoID genera internamente gli identificatori univoci può aiutare a <a href="/docs/it/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configurare</a> correttamente <a href="/docs/it/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">gli ID dei cluster</a> e a risolvere i problemi relativi agli ID.</p>
 <p>AutoID utilizza un formato strutturato a 64 bit per garantire l'unicità:</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

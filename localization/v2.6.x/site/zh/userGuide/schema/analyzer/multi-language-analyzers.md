@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多语言分析器Compatible with Milvus 2.5.11+
 summary: >-
-  Milvus 执行文本分析时，通常会在 Collections
+  Milvus 在进行文本分析时，通常会在 Collections
   的整个文本字段中应用一个分析器。如果该分析器针对英语进行了优化，那么它在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会遇到困难，从而导致召回率降低。例如，搜索西班牙语单词
   "teléfono"（意为 "电话"）时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。
 beta: Milvus 2.5.11+
@@ -22,7 +22,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 执行文本分析时，通常会在 Collections 的整个文本字段中应用单个分析器。如果该分析器针对英语进行了优化，那么在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会很吃力，从而导致召回率降低。例如，搜索西班牙语单词<em>"teléfono"</em>（意为<em>"电话"）</em>时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。</p>
+    </button></h1><p>Milvus 执行文本分析时，通常会在 Collections 的整个文本字段中应用单个分析器。如果该分析器针对英语进行了优化，那么它在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会很吃力，从而导致召回率降低。例如，搜索西班牙语单词<em>"teléfono"</em>（意为<em>"电话"）</em>时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。</p>
 <p>多语言分析器解决了这个问题，它允许你在一个 Collections 中为一个文本字段配置多个分析器。这样，你就可以在一个文本字段中存储多语言文档，Milvus 会根据每个文档的相应语言规则分析文本。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>此功能仅适用于基于 BM25 的文本检索和稀疏向量。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文检索</a>。</p></li>
+<li><p>此功能仅适用于基于 BM25 的文本检索和稀疏向量。更多信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文检索</a>。</p></li>
 <li><p>单个 Collections 中的每个文档只能使用一个分析器，由其语言标识符字段值决定。</p></li>
 <li><p>性能可能会因分析器的复杂程度和文本数据的大小而有所不同。</p></li>
 </ul>
@@ -67,7 +67,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>配置多语言分析器</strong>：</p>
 <ul>
-<li><p>使用格式设置多语言分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>，其中每个<code translate="no">analyzer_config</code> 都遵循<a href="/docs/zh/analyzer-overview.md#Analyzer-types">分析仪概述</a>中所述的标准<code translate="no">analyzer_params</code> 配置。</p></li>
+<li><p>使用格式设置多语言分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>，其中每个<code translate="no">analyzer_config</code> 都遵循<a href="/docs/zh/v2.6.x/analyzer-overview.md#Analyzer-types">分析仪概述</a>中所述的标准<code translate="no">analyzer_params</code> 配置。</p></li>
 <li><p>定义一个特殊标识符字段，用于确定每个文档的分析仪选择。</p></li>
 <li><p>配置<code translate="no">default</code> 分析器，用于处理未知语言。</p></li>
 </ul></li>
@@ -205,7 +205,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>是</p></td>
      <td><p>列出 Milvus 可用于处理文本的每种特定语言分析器。<code translate="no">analyzers</code> 中的每个分析器都遵循以下格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
      <td><ul>
-<li>使用标准<code translate="no">analyzer_params</code> 语法定义每个分析器（请参阅<a href="/docs/zh/analyzer-overview.md#Analyzer-types">分析器概述</a>）。</li>
+<li>使用标准<code translate="no">analyzer_params</code> 语法定义每个分析器（请参阅<a href="/docs/zh/v2.6.x/analyzer-overview.md#Analyzer-types">分析器概述</a>）。</li>
 <li>添加一个关键字为<code translate="no">default</code> 的条目；只要存储在<code translate="no">by_field</code> 中的值与任何其他分析器名称不匹配，Milvus 就会返回到该分析器。</li>
 </ul></td>
    </tr>
@@ -242,7 +242,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>创建支持多语言的 Collections 需要配置特定字段和索引：</p>
-<h3 id="Add-fields" class="common-anchor-header">添加字段</h3><p>在这一步中，用四个基本字段定义 Collections Schema：</p>
+<h3 id="Add-fields" class="common-anchor-header">添加字段<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在这一步中，用四个基本字段定义 Collections Schema：</p>
 <ul>
 <li><p><strong>主键字段</strong>(<code translate="no">id</code>)：Collections 中每个实体的唯一标识符。设置<code translate="no">auto_id=True</code> 可使 Milvus 自动生成这些 ID。</p></li>
 <li><p><strong>语言指示符字段</strong>(<code translate="no">language</code>)：此 VARCHAR 字段对应于<code translate="no">multi_analyzer_params</code> 中指定的<code translate="no">by_field</code> 。它存储每个实体的语言标识符，告诉 Milvus 使用哪种分析器。</p></li>
@@ -450,7 +465,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">定义 BM25 函数</h3><p>定义一个 BM25 函数，以便从原始文本数据中生成稀疏向量表示：</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">定义 BM25 函数<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义一个 BM25 函数，以便从原始文本数据中生成稀疏向量表示：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -510,8 +540,23 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>该函数会根据每个文本条目的语言标识符自动应用相应的分析器。有关基于 BM25 的文本检索的更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文检索</a>。</p>
-<h3 id="Configure-index-params" class="common-anchor-header">配置索引参数</h3><p>为实现高效搜索，请在稀疏向量场上创建索引：</p>
+<p>该函数会根据每个文本条目的语言标识符自动应用相应的分析器。有关基于 BM25 的文本检索的更多信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文检索</a>。</p>
+<h3 id="Configure-index-params" class="common-anchor-header">配置索引参数<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>为实现高效搜索，请在稀疏向量场上创建索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -551,7 +596,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>索引通过组织稀疏向量来提高搜索性能，从而实现高效的 BM25 相似性计算。</p>
-<h3 id="Create-the-collection" class="common-anchor-header">创建 Collections</h3><p>最后的创建步骤将您之前的所有配置汇集在一起：</p>
+<h3 id="Create-the-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>最后的创建步骤将您之前的所有配置汇集在一起：</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> 为你的 Collection 命名，以备将来参考。</p></li>
 <li><p><code translate="no">schema=schema</code> 应用您定义的字段结构和功能。</p></li>
@@ -609,6 +669,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -752,6 +813,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -799,11 +861,26 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">使用英文分析器</h3><p>使用多语言分析器搜索时，<code translate="no">search_params</code> 包含关键配置：</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">使用英文分析器<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用多语言分析器搜索时，<code translate="no">search_params</code> 包含关键配置：</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 必须与您的索引配置相匹配。</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 指定对查询文本应用哪种分析器。这与存储文档中使用的分析器无关。</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> 控制特定于 BM25 的行为；在这里，它会保留搜索中的所有术语。更多信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> 控制特定于 BM25 的行为；在这里，它会保留搜索中的所有术语。更多信息，请参阅<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -910,6 +987,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -924,7 +1002,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">使用中文分析器</h3><p>本示例演示了针对不同的查询文本切换到中文分析器（使用其别名<code translate="no">&quot;cn&quot;</code> ）。所有其他参数保持不变，但现在使用特定于中文的标记化规则处理查询文本。</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">使用中文分析器<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>本示例演示了针对不同的查询文本切换到中文分析器（使用其别名<code translate="no">&quot;cn&quot;</code> ）。所有其他参数保持不变，但现在使用特定于中文的标记化规则处理查询文本。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
@@ -1020,6 +1113,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

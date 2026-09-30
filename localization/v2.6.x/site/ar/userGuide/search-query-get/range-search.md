@@ -37,14 +37,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عند تنفيذ طلب البحث عن النطاق، يستخدم ميلفوس المتجهات الأكثر تشابهًا مع متجه الاستعلام من نتائج بحث النطاق كمركز، مع تحديد <strong>نصف القطر</strong> المحدد في طلب البحث كنصف قطر الدائرة الخارجية، <strong>وفلتر_النطاق_نصف</strong> قطر الدائرة الداخلية لرسم دائرتين متحدتي المركز. سيتم إرجاع جميع المتجهات ذات درجات التشابه التي تقع داخل المنطقة الحلقية التي تشكلها هاتان الدائرتان متحدة المركز. هنا، يمكن تعيين <strong>range_filter</strong> على <strong>0،</strong> مما يشير إلى أنه سيتم إرجاع جميع الكيانات التي تقع ضمن درجة التشابه المحددة (نصف القطر).</p>
+    </button></h2><p>عند تنفيذ طلب البحث عن النطاق، يستخدم ميلفوس المتجهات الأكثر تشابهًا مع متجه الاستعلام من نتائج بحث النطاق كمركز، مع تحديد <strong>نصف القطر</strong> المحدد في طلب البحث كنصف قطر الدائرة الخارجية، <strong>وفلتر_النطاق_نصف</strong> قطر الدائرة الداخلية لرسم دائرتين متحدتي المركز. سيتم إرجاع جميع المتجهات ذات درجات التشابه التي تقع داخل المنطقة الحلقية التي تشكلها هاتان الدائرتان متحدة المركز. هنا، يمكن ضبط <strong>range_filter</strong> على <strong>0،</strong> مما يشير إلى أنه سيتم إرجاع جميع الكيانات التي تقع ضمن درجة التشابه المحددة (نصف القطر).</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
    </span> <span class="img-wrapper"> <span>بحث النطاق</span> </span></p>
 <p>يوضح الرسم البياني أعلاه أن طلب البحث عن النطاق يحمل معلمتين: <strong>نصف القطر</strong> و <strong>range_filter</strong>. عند تلقي طلب بحث النطاق، يقوم ميلفوس بما يلي:</p>
 <ul>
-<li><p>استخدام نوع المقياس المحدد<strong>(COSINE</strong>) للعثور على جميع تضمينات المتجهات الأكثر تشابهًا مع متجه الاستعلام.</p></li>
+<li><p>استخدام نوع القياس المحدد<strong>(COSINE</strong>) للعثور على جميع التضمينات المتجهة الأكثر تشابهًا مع متجه الاستعلام.</p></li>
 <li><p>تصفية التضمينات المتجهة التي تقع <strong>مسافاتها</strong> أو <strong>درجاتها</strong> إلى متجه الاستعلام ضمن النطاق المحدد بواسطة معلمات <strong>نصف القطر</strong> و <strong>range_filter</strong>.</p></li>
 <li><p>إرجاع الكيانات <strong>الأعلى K</strong> من الكيانات التي تمت تصفيتها.</p></li>
 </ul>
@@ -63,7 +63,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>تشير مسافة IP الأكبر إلى تشابه أعلى.</p></td>
-     <td><p>لتجاهل التضمينات المتجهة الأكثر تشابهًا، تأكد من أن</p><p><code translate="no">radius</code> &lt;= المسافة &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>لتجاهل تضمينات المتجهات الأكثر تشابهًا، تأكد من أن</p><p><code translate="no">radius</code> &lt;= المسافة &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
@@ -232,6 +232,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
@@ -249,5 +250,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة، ففكر في استخدام <code translate="no">ids</code> بدلاً من استرجاعها قبل البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-key-search.md">بحث المفتاح الأساسي</a>.</p>
+<p>إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة، ففكر في استخدام <code translate="no">ids</code> بدلاً من استرجاعها قبل البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/primary-key-search.md">بحث المفتاح الأساسي</a>.</p>
 </div>

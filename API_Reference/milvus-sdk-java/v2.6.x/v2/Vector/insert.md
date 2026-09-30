@@ -42,6 +42,18 @@ insert(InsertReq.builder()
 
 An **InsertResp** object containing information about the number of inserted entities.
 
+- **InsertCnt** (*long*)
+
+    The number of inserted entities.
+
+- **primaryKeys** (*List\<Object\>*)
+
+    The primary keys of the inserted entities.
+
+- **cost** (*Long*)
+
+    The cost of the operation in milliseconds. Available in v2.6.25 or later.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

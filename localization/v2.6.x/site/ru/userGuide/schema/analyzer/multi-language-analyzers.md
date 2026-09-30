@@ -29,7 +29,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Когда Milvus выполняет анализ текста, он обычно применяет один анализатор ко всем текстовым полям в коллекции. Если этот анализатор оптимизирован для английского языка, он не справляется с различными правилами токенизации и стемминга, требуемыми для других языков, таких как китайский, испанский или французский, что приводит к снижению коэффициента отзыва. Например, при поиске испанского слова <em>"teléfono"</em> (что означает <em>"телефон")</em> анализатор, ориентированный на английский язык, не справится с задачей: он может опустить ударение и не применить испаноязычное стеблирование, в результате чего релевантные результаты будут пропущены.</p>
-<p>Мультиязычные анализаторы решают эту проблему, позволяя настраивать несколько анализаторов для одного текстового поля в одной коллекции. Таким образом, вы можете хранить в текстовом поле многоязычные документы, а Milvus будет анализировать текст в соответствии с правилами языка для каждого документа.</p>
+<p>Мультиязычные анализаторы решают эту проблему, позволяя настраивать несколько анализаторов для текстового поля в одной коллекции. Таким образом, вы можете хранить в текстовом поле многоязычные документы, а Milvus будет анализировать текст в соответствии с правилами языка для каждого документа.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Эта функция работает только с текстовым поиском на основе BM25 и разреженных векторов. Дополнительные сведения см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p></li>
+<li><p>Эта функция работает только с текстовым поиском на основе BM25 и разреженных векторов. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/full-text-search.md">Полнотекстовый поиск</a>.</p></li>
 <li><p>Каждый документ в одной коллекции может использовать только один анализатор, определяемый значением поля идентификатора языка.</p></li>
 <li><p>Производительность может варьироваться в зависимости от сложности анализаторов и размера текстовых данных.</p></li>
 </ul>
@@ -73,7 +73,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>Настройка многоязычных анализаторов</strong>:</p>
 <ul>
-<li><p>Настройте несколько языковых анализаторов, используя формат: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, где каждый <code translate="no">analyzer_config</code> следует стандартной конфигурации <code translate="no">analyzer_params</code>, как описано в разделе <a href="/docs/ru/analyzer-overview.md#Analyzer-types">Обзор анализаторов</a>.</p></li>
+<li><p>Настройте несколько языковых анализаторов, используя формат: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, где каждый <code translate="no">analyzer_config</code> следует стандартной конфигурации <code translate="no">analyzer_params</code>, как описано в разделе <a href="/docs/ru/v2.6.x/analyzer-overview.md#Analyzer-types">Обзор анализаторов</a>.</p></li>
 <li><p>Определите специальное поле идентификатора, которое будет определять выбор анализатора для каждого документа.</p></li>
 <li><p>Настройте анализатор <code translate="no">default</code> для работы с неизвестными языками.</p></li>
 </ul></li>
@@ -211,7 +211,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Да</p></td>
      <td><p>Перечисляет все языковые анализаторы, которые Milvus может использовать для обработки текста. Каждый анализатор в <code translate="no">analyzers</code> имеет следующий формат: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
-<li>Определите каждый анализатор с помощью стандартного синтаксиса <code translate="no">analyzer_params</code> (см. <a href="/docs/ru/analyzer-overview.md#Analyzer-types">Обзор анализаторов</a>).</li>
+<li>Определите каждый анализатор с помощью стандартного синтаксиса <code translate="no">analyzer_params</code> (см. <a href="/docs/ru/v2.6.x/analyzer-overview.md#Analyzer-types">Обзор анализаторов</a>).</li>
 <li>Добавьте запись с ключом <code translate="no">default</code>; Milvus возвращается к этому анализатору всякий раз, когда значение, хранящееся в <code translate="no">by_field</code>, не совпадает ни с одним другим именем анализатора.</li>
 </ul></td>
    </tr>
@@ -248,7 +248,22 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
         ></path>
       </svg>
     </button></h2><p>Создание коллекции с поддержкой нескольких языков требует настройки определенных полей и индексов:</p>
-<h3 id="Add-fields" class="common-anchor-header">Добавление полей</h3><p>На этом шаге определите схему коллекции с четырьмя основными полями:</p>
+<h3 id="Add-fields" class="common-anchor-header">Добавление полей<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>На этом шаге определите схему коллекции с четырьмя основными полями:</p>
 <ul>
 <li><p><strong>Поле первичного ключа</strong> (<code translate="no">id</code>): Уникальный идентификатор для каждой сущности в коллекции. Установка <code translate="no">auto_id=True</code> позволяет Milvus автоматически генерировать эти идентификаторы.</p></li>
 <li><p><strong>Поле индикатора языка</strong> (<code translate="no">language</code>): Это поле VARCHAR соответствует <code translate="no">by_field</code>, указанному в вашем <code translate="no">multi_analyzer_params</code>. В нем хранится идентификатор языка для каждой сущности, который указывает Milvus, какой анализатор использовать.</p></li>
@@ -456,7 +471,22 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;SparseFloatVector&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-BM25-function" class="common-anchor-header">Определение функции BM25</h3><p>Определите функцию BM25 для генерации разреженных векторных представлений из ваших необработанных текстовых данных:</p>
+<h3 id="Define-BM25-function" class="common-anchor-header">Определение функции BM25<button data-href="#Define-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Определите функцию BM25 для генерации разреженных векторных представлений из ваших необработанных текстовых данных:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
@@ -516,8 +546,23 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Эта функция автоматически применяет соответствующий анализатор к каждой текстовой записи на основе ее языкового идентификатора. Дополнительную информацию о поиске текста на основе BM25 см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p>
-<h3 id="Configure-index-params" class="common-anchor-header">Настройка параметров индекса</h3><p>Чтобы обеспечить эффективный поиск, создайте индекс на разреженном векторном поле:</p>
+<p>Эта функция автоматически применяет соответствующий анализатор к каждой текстовой записи на основе ее языкового идентификатора. Дополнительную информацию о поиске текста на основе BM25 см. в разделе <a href="/docs/ru/v2.6.x/full-text-search.md">Полнотекстовый поиск</a>.</p>
+<h3 id="Configure-index-params" class="common-anchor-header">Настройка параметров индекса<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы обеспечить эффективный поиск, создайте индекс на разреженном векторном поле:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Configure index parameters</span>
@@ -557,7 +602,22 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Индекс улучшает производительность поиска, упорядочивая разреженные векторы для эффективного вычисления сходства BM25.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">Создание коллекции</h3><p>Этот заключительный шаг создания коллекции объединяет все ваши предыдущие конфигурации:</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Этот заключительный шаг создания коллекции объединяет все ваши предыдущие конфигурации:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> присваивает коллекции имя для дальнейшего использования.</p></li>
 <li><p><code translate="no">schema=schema</code> применяет структуру и функции полей, которые вы определили.</p></li>
@@ -615,6 +675,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&quot;{
   \&quot;collectionName\&quot;: \&quot;multilingual_documents\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
@@ -758,6 +819,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [
@@ -805,11 +867,26 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Используйте английский анализатор</h3><p>При поиске с помощью мультиязычных анализаторов, <code translate="no">search_params</code> содержит важную конфигурацию:</p>
+    </button></h2><h3 id="Use-English-analyzer" class="common-anchor-header">Используйте английский анализатор<button data-href="#Use-English-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При поиске с помощью мультиязычных анализаторов, <code translate="no">search_params</code> содержит важную конфигурацию:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> должна соответствовать конфигурации вашего индекса.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> Указывает, какой анализатор применить к тексту запроса. Это не зависит от того, какие анализаторы используются в хранимых документах.</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> управляет поведением, специфичным для BM25; здесь он сохраняет все термины в поиске. Дополнительные сведения см. в разделе <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> управляет поведением, специфичным для BM25; здесь он сохраняет все термины в поиске. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/sparse_vector.md">"Разреженный вектор</a>".</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -916,6 +993,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;artificial intelligence&quot;],
@@ -930,7 +1008,22 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Использование китайского анализатора</h3><p>Этот пример демонстрирует переключение на китайский анализатор (используя его псевдоним <code translate="no">&quot;cn&quot;</code>) для различных текстов запросов. Все остальные параметры остаются прежними, но теперь текст запроса обрабатывается с использованием правил токенизации, специфичных для китайского языка.</p>
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Использование китайского анализатора<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Этот пример демонстрирует переключение на китайский анализатор (используя его псевдоним <code translate="no">&quot;cn&quot;</code>) для различных текстов запросов. Все остальные параметры остаются прежними, но теперь текст запроса обрабатывается с использованием правил токенизации, специфичных для китайского языка.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
@@ -1026,6 +1119,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 --data <span class="hljs-string">&#x27;{
   &quot;collectionName&quot;: &quot;multilingual_documents&quot;,
   &quot;data&quot;: [&quot;人工智能&quot;],

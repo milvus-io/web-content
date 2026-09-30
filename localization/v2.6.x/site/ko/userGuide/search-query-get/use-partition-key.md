@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>파티션 키는 파티션에 기반한 검색 최적화 솔루션입니다. 특정 스칼라 필드를 파티션 키로 지정하고 검색 시 파티션 키를 기준으로 필터링 조건을 지정하면 검색 범위를 여러 파티션으로 좁혀 검색 효율을 높일 수 있습니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을 소개합니다.</p>
+    </button></h1><p>파티션 키는 파티션에 기반한 검색 최적화 솔루션입니다. 특정 스칼라 필드를 파티션 키로 지정하고 검색 시 파티션 키를 기반으로 필터링 조건을 지정하면 검색 범위를 여러 파티션으로 좁혀 검색 효율을 높일 수 있습니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을 소개합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,11 +69,26 @@ summary: >-
       </svg>
     </button></h2><p>파티션 키를 사용하려면 다음을 수행해야 합니다.</p>
 <ul>
-<li><p><a href="/docs/ko/use-partition-key.md#Set-Partition-Key">파티션 키를 설정합니다</a>,</p></li>
-<li><p><a href="/docs/ko/use-partition-key.md#Set-Partition-Numbers">생성할 파티션 수 설정</a> (선택 사항), 그리고</p></li>
-<li><p><a href="/docs/ko/use-partition-key.md#Create-Filtering-Condition">파티션 키를 기준으로 필터링 조건을 만듭니다</a>.</p></li>
+<li><p><a href="/docs/ko/v2.6.x/use-partition-key.md#Set-Partition-Key">파티션 키를 설정합니다</a>,</p></li>
+<li><p><a href="/docs/ko/v2.6.x/use-partition-key.md#Set-Partition-Numbers">생성할 파티션 수 설정</a> (선택 사항), 그리고</p></li>
+<li><p><a href="/docs/ko/v2.6.x/use-partition-key.md#Create-Filtering-Condition">파티션 키를 기준으로 필터링 조건을 만듭니다</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">파티션 키 설정</h3><p>스칼라 필드를 파티션 키로 지정하려면 스칼라 필드를 추가할 때 <code translate="no">is_partition_key</code> 속성을 <code translate="no">true</code> 으로 설정해야 합니다.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">파티션 키 설정<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스칼라 필드를 파티션 키로 지정하려면 스칼라 필드를 추가할 때 <code translate="no">is_partition_key</code> 속성을 <code translate="no">true</code> 으로 설정해야 합니다.</p>
 <div class="alert note">
 <p>스칼라 필드를 파티션 키로 설정할 때 필드 값은 비어 있거나 null일 수 없습니다.</p>
 </div>
@@ -223,7 +238,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">파티션 번호 설정</h3><p>컬렉션의 스칼라 필드를 파티션 키로 지정하면 Milvus는 자동으로 컬렉션에 16개의 파티션을 생성합니다. 엔티티를 받으면 Milvus는 이 엔티티의 파티션 키 값에 따라 파티션을 선택하고 해당 파티션에 엔티티를 저장하므로 일부 또는 모든 파티션에 다른 파티션 키 값을 가진 엔티티가 저장됩니다.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">파티션 번호 설정<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션의 스칼라 필드를 파티션 키로 지정하면 Milvus는 컬렉션에 자동으로 16개의 파티션을 생성합니다. 엔티티를 받으면 Milvus는 이 엔티티의 파티션 키 값에 따라 파티션을 선택하고 해당 파티션에 엔티티를 저장하므로 일부 또는 모든 파티션에 다른 파티션 키 값을 가진 엔티티가 저장됩니다.</p>
 <p>컬렉션과 함께 생성할 파티션의 수를 결정할 수도 있습니다. 이는 파티션 키로 지정된 스칼라 필드가 있는 경우에만 유효합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -267,13 +297,29 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">필터링 조건 생성</h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서 파티션 키 값을 특정 범위 내로 제한하면 밀버스에서 해당 파티션 내로 검색 범위를 제한할 수 있습니다.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">필터링 조건 생성<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서 파티션 키 값을 특정 범위 내로 제한하면 밀버스에서 해당 파티션 내로 검색 범위를 제한할 수 있습니다.</p>
 <p>삭제 작업을 수행할 때 보다 효율적인 삭제를 위해 단일 파티션 키를 지정하는 필터 표현식을 포함하는 것이 좋습니다. 이 접근 방식은 삭제 작업을 특정 파티션으로 제한하여 압축 중에 쓰기 증폭을 줄이고 압축 및 인덱싱을 위한 리소스를 절약합니다.</p>
 <p>다음 예제에서는 특정 파티션 키 값과 파티션 키 값 집합을 기반으로 한 파티션 키 기반 필터링을 보여줍니다.</p>
 <div class="multipleCode">
@@ -331,12 +377,27 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>파티션 키 격리</span> </span></p>
-<p>위 그림에서 볼 수 있듯이 Milvus는 파티션 키 값을 기준으로 엔티티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 밀버스는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔터티 내에서 검색 범위를 제한하여 검색 시 관련 없는 엔터티를 검색하는 것을 방지하고 검색 성능을 크게 향상시킵니다.</p>
+<p>위 그림에서 볼 수 있듯이 Milvus는 파티션 키 값을 기준으로 엔티티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 밀버스는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔터티 내에서 검색 범위를 제한하여 검색 시 관련 없는 엔터티를 검색하지 않도록 하여 검색 성능을 크게 향상시킵니다.</p>
 <p>파티션 키 격리를 활성화한 후에는 Milvus가 일치하는 인덱스에 포함된 엔티티 내에서 검색 범위를 제한할 수 있도록 파티션 키 기반 필터에 특정 값을 하나만 포함해야 합니다.</p>
 <div class="alert note">
 <p>현재 파티션 키 격리 기능은 인덱스 유형이 HNSW로 설정된 검색에만 적용됩니다.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">파티션 키 격리 사용</h3><p>다음 코드 예제는 파티션 키 격리를 활성화하는 방법을 보여줍니다.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">파티션 키 격리 사용<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 코드 예제는 파티션 키 격리를 활성화하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -383,10 +444,11 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>파티션 키 격리를 활성화한 후에도 파티션 <a href="/docs/ko/use-partition-key.md#Set-Partition-Numbers">번호 설정에</a> 설명된 대로 파티션 키와 파티션 수를 설정할 수 있습니다. 파티션 키 기반 필터에는 특정 파티션 키 값만 포함되어야 한다는 점에 유의하세요.</p>
+<p>파티션 키 격리를 활성화한 후에도 파티션 <a href="/docs/ko/v2.6.x/use-partition-key.md#Set-Partition-Numbers">번호 설정에</a> 설명된 대로 파티션 키와 파티션 수를 설정할 수 있습니다. 파티션 키 기반 필터에는 특정 파티션 키 값만 포함되어야 한다는 점에 유의하세요.</p>

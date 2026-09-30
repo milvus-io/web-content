@@ -53,7 +53,7 @@ if err != nil {
 	// handle err
 }
 
-collectionName := `customized_setup_1`
+collectionName := \`customized_setup_1\`
 
 task, err := cli.Flush(ctx, milvusclient.NewFlushOption(collectionName))
 if err != nil {

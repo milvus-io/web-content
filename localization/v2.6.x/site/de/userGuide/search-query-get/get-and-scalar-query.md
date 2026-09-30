@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Zusätzlich zur ANN-Suche unterstützt Milvus auch die Filterung von Metadaten durch Abfragen. Auf dieser Seite wird die Verwendung von Query, Get und QueryIterators zur Durchführung der Metadatenfilterung erläutert.</p>
 <div class="alert note">
-<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Abfragen, die diese Felder enthalten, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Details finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
+<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, geben Abfragen, die diese Felder enthalten, die definierten Standardwerte oder NULL für Entitäten zurück, die nicht explizit Werte festgelegt haben. Details finden Sie unter <a href="/docs/de/v2.6.x/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,6 +211,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;id&quot;: [0, 1, 2],
@@ -234,7 +235,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen suchen müssen, verwenden Sie die Methode <strong>Query</strong>. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt, und geben die angegebene Anzahl von Entitäten zurück, die einen <code translate="no">color</code> Wert enthalten, der mit <code translate="no">red</code> beginnt.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen suchen müssen, verwenden Sie die <strong>Query-Methode</strong>. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt, und geben die angegebene Anzahl von Entitäten zurück, die einen <code translate="no">color</code> Wert enthalten, der mit <code translate="no">red</code> beginnt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -306,6 +307,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
@@ -584,6 +586,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -596,6 +599,7 @@ curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/get&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],
@@ -622,7 +626,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Um eine repräsentative Teilmenge von Daten aus Ihrer Sammlung für die Datenexploration oder Entwicklungstests zu extrahieren, verwenden Sie den Ausdruck <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, wobei <code translate="no">sampling_factor</code> eine Fließkommazahl zwischen 0 und 1 ist, die den Prozentsatz der zu stichprobenartigen Daten darstellt.</p>
 <div class="alert note">
-<p>Ausführliche Informationen zur Verwendung, fortgeschrittene Beispiele und bewährte Verfahren finden Sie unter <a href="/docs/de/random-sampling.md">Zufallsstichproben</a>.</p>
+<p>Ausführliche Informationen zur Verwendung, fortgeschrittene Beispiele und bewährte Verfahren finden Sie unter <a href="/docs/de/v2.6.x/random-sampling.md">Zufallsstichproben</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -743,7 +747,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>Wenn Ihre Sammlung ein <code translate="no">TIMESTAMPTZ</code> Feld hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den <code translate="no">timezone</code> Parameter im Abfrageaufruf setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
-<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
+<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
 <p>Das folgende Beispiel zeigt, wie eine Zeitzone für eine Abfrageoperation vorübergehend festgelegt wird:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

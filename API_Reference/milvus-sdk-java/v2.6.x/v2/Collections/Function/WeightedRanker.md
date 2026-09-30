@@ -42,19 +42,20 @@ WeightedRanker.builder()
 
 **RETURNS:**
 
- A weighted ranker instance.
+A weighted ranker instance.
 
 ## Examples:
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-import io.milvus.v2.service.vector.request.ranker.WeightedRanker
+import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
+import java.util.Arrays;
 import java.util.Collections;
 
 // use the WeightedRanker class
 WeightedRanker.builder()
-    .weights([0.4, 0.6])
-    .build());
+    .weights(Arrays.asList(0.4f, 0.6f))
+    .build();
     
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
