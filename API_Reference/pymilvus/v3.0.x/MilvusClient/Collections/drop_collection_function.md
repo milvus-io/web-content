@@ -1,8 +1,10 @@
 # drop_collection_function()
 
-<div class="alert note">
+<div class="alert warning">
 
-This method is deprecated in PyMilvus v3.0.2 or later, because Milvus 3.0 and later do not support dropping a function separately. For the latest equivalent, refer to [`drop_function_field()`](drop_function_field.md), which also removes the function's output field and its index.
+**Deprecated in PyMilvus v3.0.2 or later.**
+
+This method is deprecated because Milvus 3.0 and later do not support dropping a function separately. Use [`drop_function_field()`](drop_function_field.md) instead, which also removes the function's output field and its index.
 
 </div>
 

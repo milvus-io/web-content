@@ -1,5 +1,13 @@
 # using_database()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated. Use [use_database()](use_database.md) instead.
+
+</div>
+
 This operation changes the database currently in use.
 
 ## Request Syntax

@@ -1,8 +1,10 @@
 # add_collection_function()
 
-<div class="alert note">
+<div class="alert warning">
 
-This method is deprecated in PyMilvus v3.0.2 or later, because Milvus 3.0 and later do not support adding a function separately. For the latest equivalent, refer to [`add_function_field()`](add_function_field.md), which adds the function together with its output field and index.
+**Deprecated in PyMilvus v3.0.2 or later.**
+
+This method is deprecated because Milvus 3.0 and later do not support adding a function separately. Use [`add_function_field()`](add_function_field.md) instead, which adds the function together with its output field and index.
 
 </div>
 

@@ -1,5 +1,13 @@
 # query_iterator()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated. Use the MilvusClient [query_iterator()](../../MilvusClient/Vector/query_iterator.md) instead.
+
+</div>
+
 This operation returns a Python iterator for you to iterate over the query results. It is useful especially when the query result contains a large volume of data.
 
 ## Request Syntax

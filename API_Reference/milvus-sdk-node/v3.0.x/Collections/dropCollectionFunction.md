@@ -1,5 +1,13 @@
 # dropCollectionFunction()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated. Use [dropFunctionField()](dropFunctionField.md) instead.
+
+</div>
+
 This operation removes a custom function from an existing collection.
 
 ```javascript

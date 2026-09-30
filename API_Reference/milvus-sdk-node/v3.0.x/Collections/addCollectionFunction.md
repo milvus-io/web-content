@@ -1,5 +1,13 @@
 # addCollectionFunction()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method is deprecated. Use [addFunctionField()](addFunctionField.md) instead.
+
+</div>
+
 This operation adds a custom function to an existing collection.
 
 ```javascript
