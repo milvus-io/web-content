@@ -83,7 +83,7 @@ summary: ⚡️ 一次配置，永久提高效率！
         ></path>
       </svg>
     </button></h1><p>查找您的 AI IDE，一键配置，开启无忧编码之旅。</p>
-<h2 id="Cursor" class="common-anchor-header">光标<button data-href="#Cursor" class="anchor-icon" translate="no">
+<h2 id="Cursor" class="common-anchor-header">Cursor<button data-href="#Cursor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +102,7 @@ summary: ⚡️ 一次配置，永久提高效率！
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cursor-mcp-settings.png" alt="Cursor Mcp Settings" class="doc-image" id="cursor-mcp-settings" />
-   </span> <span class="img-wrapper"> <span>光标麦克风设置</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Cursor 麦克风设置</span> </span></p>
 <p>建议将以下配置粘贴到 Cursor<code translate="no">~/.cursor/mcp.json</code> 文件中。您也可以通过在项目文件夹中创建<code translate="no">.cursor/mcp.json</code> 来安装特定项目。更多信息请参见<a href="https://docs.cursor.com/context/model-context-protocol">Cursor MCP 文档</a>。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -115,7 +115,7 @@ summary: ⚡️ 一次配置，永久提高效率！
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Claude-Desktop" class="common-anchor-header">克劳德桌面<button data-href="#Claude-Desktop" class="anchor-icon" translate="no">
+<h2 id="Claude-Desktop" class="common-anchor-header">Claude Desktop<button data-href="#Claude-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -142,7 +142,7 @@ summary: ⚡️ 一次配置，永久提高效率！
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Claude-Code" class="common-anchor-header">克劳德代码<button data-href="#Claude-Code" class="anchor-icon" translate="no">
+<h2 id="Claude-Code" class="common-anchor-header">Claude Code<button data-href="#Claude-Code" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
