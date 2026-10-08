@@ -1,13 +1,15 @@
 ---
 id: json-shredding.md
 title: "JSON Shredding"
-summary: "JSON shredding accelerates JSON queries by converting traditional row-based storage into optimized columnar storage. While maintaining JSON's flexibility for data modeling, Milvus performs behind-the-scenes columnar optimization that dramatically improves access and query efficiency."
+summary: "Learn how JSON shredding accelerates queries on JSON fields, how to configure it, and which limitations apply."
 beta: Milvus 2.6.2+
 ---
 
 # JSON Shredding
 
-JSON shredding accelerates JSON queries by converting traditional row-based storage into optimized columnar storage. While maintaining JSON's flexibility for data modeling, Milvus performs behind-the-scenes columnar optimization that dramatically improves access and query efficiency.
+JSON shredding accelerates queries on JSON fields by organizing JSON values into columnar data and building auxiliary indexes in the background. Queries can access the values they need without parsing each complete JSON document. You continue to use the same JSON fields and filter expressions.
+
+JSON shredding supports JSON fields in both managed and external collections, using the same configuration. For external collection prerequisites and setup, see [Create an External Collection](create-an-external-collection.md).
 
 JSON shredding is effective for most JSON query scenarios. The performance benefits become more pronounced with:
 
@@ -21,9 +23,11 @@ JSON shredding is effective for most JSON query scenarios. The performance benef
 
 The JSON shredding process happens in three distinct phases to optimize data for fast retrieval.
 
-### Phase 1: Ingestion & key classification
+<a id="Phase-1-Ingestion--key-classification"></a>
 
-As new JSON documents are written, Milvus continuously samples and analyzes them to build statistics for each JSON key. This analysis includes the key's occurrence ratio and type stability (whether its data type is consistent across documents).
+### Phase 1: Key classification
+
+Milvus analyzes JSON data in the background to build statistics for each JSON key. This analysis includes the key's occurrence ratio and type stability (whether its data type is consistent across documents).
 
 Based on these statistics, JSON keys are categorized into the following for optimal storage.
 
@@ -70,7 +74,7 @@ Based on this data, the keys would be classified as follows:
 
 ### Phase 2: Storage optimization
 
-The classification from [Phase 1](json-shredding.md#Phase-1-Ingestion--key-classification) dictates the storage layout. Milvus uses a columnar format optimized for queries.
+The classification from [Phase 1](json-shredding.md#Phase-1-Key-classification) dictates the storage layout. Milvus uses a columnar format optimized for queries. The shredded data and auxiliary indexes require additional storage.
 
 ![Json Shredding Flow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/json-shredding-flow.png)
 
@@ -86,19 +90,21 @@ The final phase leverages the optimized storage layout to intelligently select t
 
 - **Optimized path**: Queries on shared keys (e.g., `json['e'] = 'rare'`) use inverted index to quickly locate relevant documents
 
+JSON shredding does not accelerate values inside arrays. Use [JSON path indexes](json-indexing.md) with array cast types for those queries.
+
 ## Enable JSON shredding
 
-To activate the feature, set `common.enabledJSONShredding` to `true` in your `milvus.yaml` configuration file. New data will automatically trigger the shredding process.
+JSON shredding is enabled by default in Milvus 3.0. The following settings in `milvus.yaml` control whether Milvus builds and loads shredded data, and whether queries use it:
 
 ```yaml
-# milvus.yaml
-...
 common:
-  enabledJSONShredding: true # Indicates whether to enable JSON key stats build and load processes
-...
+  enabledJSONShredding: true       # Build and load JSON shredding data
+  usingJSONShreddingForQuery: true # Use shredded data during queries
 ```
 
-Once enabled, Milvus will begin analyzing and restructuring your JSON data upon ingestion without any further manual intervention.
+If your deployment has disabled either setting, set it to `true` and apply the change through the configuration-update workflow supported by your deployment. Editing the file alone does not ensure that the running deployment has received the change.
+
+Milvus automatically builds shredding data for eligible segments in the background. Building and loading take time; enabling the feature does not mean that all JSON data is immediately accelerated. You do not need to create a JSON path index to use shredding or change your query syntax. For verification steps, see the [FAQ](json-shredding.md#FAQ).
 
 ## Parameter tuning
 
@@ -114,11 +120,11 @@ For most users, once JSON shredding is enabled, the default settings for other p
    <tr>
      <td><p><code>common.enabledJSONShredding</code></p></td>
      <td><p>Controls whether the JSON shredding build and load processes are enabled.</p></td>
-     <td><p>false</p></td>
-     <td><p>Must be set to <strong>true</strong> to activate the feature.</p></td>
+     <td><p>true</p></td>
+     <td><p>Keep enabled to allow Milvus to build and load shredding data.</p></td>
    </tr>
    <tr>
-     <td><p><code>common.usingjsonShreddingForQuery</code></p></td>
+     <td><p><code>common.usingJSONShreddingForQuery</code></p></td>
      <td><p>Controls whether Milvus uses shredded data for acceleration.</p></td>
      <td><p>true</p></td>
      <td><p>Set to <strong>false</strong> as a recovery measure if queries fail, reverting to the original query path.</p></td>
@@ -145,7 +151,7 @@ For most users, once JSON shredding is enabled, the default settings for other p
 
 ## Performance benchmarks
 
-Our testing demonstrates significant performance improvements across different JSON key types and query patterns.
+The following benchmark measures JSON query performance with and without shredding for the dataset and environment described below. Results vary with the data, deployment, and query workload.
 
 ### Test environment and methodology
 
@@ -215,25 +221,37 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
 
 ### Key insights
 
-- **Shared key queries** show the most dramatic improvements (up to 89x faster)
+- In this benchmark, **shared key queries** achieved up to 89x higher QPS.
 
-- **Typed key queries** provide consistent 15-30x performance gains
+- **Typed key queries** achieved approximately 15–33x higher QPS.
 
-- **All query types** benefit from JSON Shredding with no performance regressions
+- Benchmark your own workload to evaluate the performance benefit and additional storage usage.
 
 ## FAQ
 
 - **How do I verify if JSON shredding works properly?**
 
-    1. First, check if the data has been built by using the `show segment --format table` command in the [Birdwatcher](birdwatcher_usage_guides.md) tool. If successful, the output will contain `shredding_data/` and `shared_key_index/` under the **Json Key Stats** field.
+    Check both build and load status. A successful JSON query alone does not show whether it used shredded data. Use a [Birdwatcher](birdwatcher_usage_guides.md) version compatible with your Milvus deployment, connect to its etcd metadata, and run the following commands in Birdwatcher. Replace `<collection_id>` with the numeric collection ID.
 
-        ![Birdwatcher Output](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher-output.png)
+    1. Check which segments have built JSON stats:
 
-    1. Next, verify that the data has been loaded by running `show loaded-json-stats` on the query node. The output will display details about the loaded shredded data for each query node.
+        ```text
+        show json-stats --collection <collection_id>
+        ```
+
+        The output lists JSON stats for each field with built stats, including the version, file count, and memory size.
+
+    1. After loading the collection, check whether query nodes have loaded the JSON stats:
+
+        ```text
+        show loaded-json-stats --collection <collection_id>
+        ```
+
+        The output reports loaded JSON stats by query node, segment, and field. Check that the expected segments and JSON fields have loaded stats.
 
 - **What if I encounter an error?**
 
-    If the build or load process fails, you can quickly disable the feature by setting `common.enabledJSONShredding=false`. To clear any remaining tasks, use the `remove stats-task <task_id>` command in [Birdwatcher](birdwatcher_usage_guides.md). If a query fails, set `common.usingjsonShreddingForQuery=false` to revert to the original query path, bypassing the shredded data.
+    If the build or load process fails, you can quickly disable the feature by setting `common.enabledJSONShredding=false`. To clear any remaining tasks, use the `remove stats-task <task_id>` command in [Birdwatcher](birdwatcher_usage_guides.md). If a query fails, set `common.usingJSONShreddingForQuery=false` to revert to the original query path, bypassing the shredded data.
 
 - **How do I select between JSON shredding and JSON indexing?**
 
@@ -242,4 +260,3 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
     - **JSON indexing** is better for targeted optimization of specific key-based queries and has lower storage overhead. It's suitable for simpler JSON structures. Note that JSON shredding does not cover queries on keys inside arrays, so you need a JSON index to accelerate those.
 
     For details, refer to [JSON Field Overview](json-field-overview.md#Next-Accelerate-JSON-queries).
-

@@ -687,7 +687,7 @@ curl --request POST \
 
 ## Step 5: Refresh data
 
-Once the collection is ready, refresh it to create the metadata and indexes for your data.
+Once the collection is ready, refresh it to register the external data with Milvus.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -794,8 +794,8 @@ The refresh operation is asynchronous, so you need to set up an iteration to mon
 
 ## Next steps
 
-Once you have refreshed the external collection, you can load and release the collection and perform similarity searches and queries in the external collection as you would in any managed collection, except that collections in a database for on-demand computing must be attached to an on-demand cluster for searches and queries.
+After refreshing the external collection, [load it](load-and-release.md) to run [vector searches](single-vector-search.md) and [queries](get-and-scalar-query.md) as you would with a managed collection.
 
-Before conducting DQL operations, such as search, query, get, and hybrid search, you need to create a session to attach the compute resources of an on-demand cluster.
+To narrow search results by field values, use [scalar filters](filtered-search.md). If your workload frequently filters on JSON fields, see [JSON Shredding](json-shredding.md) for configuration and verification steps to accelerate those queries.
 
 If the external data source later contains another field that you want to expose in Milvus, add a field to the external collection schema and refresh the external collection again. For details, refer to [Alter External Collection Schema](alter-external-collection-schema.md).
