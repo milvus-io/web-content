@@ -286,9 +286,12 @@ local directory via this table before editing. Current latest version line is
   git -C sdk-tmp/sdks/milvus diff --stat client/v2.6.2..client/v2.6.5 -- client/
   git -C sdk-tmp/sdks/milvus diff client/v2.6.2..client/v2.6.5 -- client/milvusclient/ client/entity/ client/index/
 
-  # side A: client methods at a tag
+  # side A: client methods at a tag (EXCLUDE blacklisted symbols — currently only
+  # GetService(), a test/trusted backdoor that must never be documented. Other
+  # methods that take or return raw proto types, e.g. the CDC/ and Snapshot/ ones,
+  # ARE real documented features — keep them.)
   git -C sdk-tmp/sdks/milvus grep -n "^func (c \*Client) [A-Z]" client/v3.0.0 -- client/milvusclient/ | grep -v _test | \
-    sed -E 's/.*\) ([A-Za-z0-9_]+)\(.*/\1/' | sort -u
+    grep -v "GetService(" | sed -E 's/.*\) ([A-Za-z0-9_]+)\(.*/\1/' | sort -u
 
   # side A: option constructors at a tag
   git -C sdk-tmp/sdks/milvus grep -n "^func New[A-Z]" client/v3.0.0 -- client/milvusclient/*.go | grep -v _test | \
@@ -313,6 +316,16 @@ local directory via this table before editing. Current latest version line is
   (`Vector/ResultSet.md`, `Vector/InsertResult.md`, ...) or as a nested member
   list under the operation's `**RETURNS:**` — match whichever the tree already
   uses for that operation.
+
+- **Blacklist**: `Client.GetService()` (returns the raw gRPC
+  `milvuspb.MilvusServiceClient`) is a test/trusted backdoor and is **blacklisted**
+  — it must NEVER be documented, backfilled, or surfaced in reconciliation; if a
+  page documents it, remove it (confirm with the user first). The side-A method
+  extraction above excludes it. Do NOT blacklist other methods that take or return
+  raw proto types — e.g. the CDC/ (`UpdateReplicateConfiguration`,
+  `GetReplicateInfo`, `CreateReplicateStream`, `DumpMessages`) and Snapshot/
+  (`DescribeSnapshot`, `GetExportSnapshotState`, `GetRestoreSnapshotState`,
+  `ListRestoreSnapshotJobs`) operations ARE real, documented features; keep them.
 
 ## milvus-sdk-node
 

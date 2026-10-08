@@ -343,6 +343,9 @@ Categorize each changed symbol:
 - **Internal-only additions**: new symbols not exposed through public request/response
   or client methods (e.g. C++ `BloomFilter.h` is an internal cache type) — **skip**,
   do not create a page unless it surfaces in a public API.
+- **Blacklisted symbols**: symbols on a per-SDK blacklist (see
+  `.skills/update-milvus-sdk-docs/references/sdk-map.md`) are never documented — e.g. Go
+  `Client.GetService()`. **Skip** them: never create or update a page for them.
 - **Response/result changes**: modified output members.
 
 ### Step 2b — Cross-check the merged PRs between the tags
@@ -387,6 +390,8 @@ own new page automatically (no need to ask the user). Exceptions:
   enum value);
 - **new request parameters/fields** → add to the existing operation page;
 - **internal-only symbols** → skip (no page);
+- **blacklisted symbols** (per-SDK blacklist in `references/sdk-map.md`, e.g. Go
+  `Client.GetService()`) → skip (no page);
 - only ask the user when a new symbol does not fit the one-page-per-API shape.
 
 **Follow the SDK's directory convention for new type pages.** The convention
@@ -663,7 +668,12 @@ members from base classes** (e.g. for C++: `RequestBase.h`,
 `SearchRequestBase.h`, `IndexRequestBase.h`, ...), not just the header that
 shares the page's name.
 
-Report three categories:
+Report three categories. **Before reporting anything, filter out blacklisted
+symbols** — per-SDK blacklisted functions (see
+`.skills/update-milvus-sdk-docs/references/sdk-map.md`, e.g. Go `Client.GetService()`)
+are intentionally undocumented. Never backfill them as "missing". If an existing
+page documents a blacklisted symbol, flag it for removal in the review summary
+and confirm with the user before deleting it.
 
 - **Missing on page but present in code** → add, following the style guide.
 - **Present on page but absent in code** → remove, or keep with a deprecation note
@@ -959,6 +969,9 @@ Notes:
   per API); new enum values go into the existing enum page. Only ask the user
   when a symbol does not fit the one-page-per-API shape.
 - **Internal types** (e.g. C++ `BloomFilter.h`): skip unless exposed publicly.
+- **Blacklisted symbols**: per-SDK blacklisted functions (see `references/sdk-map.md`,
+  e.g. Go `Client.GetService()`) must never be documented or backfilled; if a page
+  documents a blacklisted symbol, remove it (confirm with the user first).
 - **Legacy/private enum values**: ignore values that exist in the SDK but are not
   meant for public use. Notably, when a `DataType` enum contains a `String`
   value (e.g. `io.milvus.v2.common.DataType.String(20)` in milvus-sdk-java), do
