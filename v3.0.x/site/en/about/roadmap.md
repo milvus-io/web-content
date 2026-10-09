@@ -15,11 +15,9 @@ Welcome to the Milvus Roadmap!
 
 We are ushering Milvus into a new era — the next-generation multimodal database — **spanning structured to unstructured data, real-time retrieval to offline analytics, and single-cluster performance to a global** **Vector Lakebase architecture.**
 
-This roadmap outlines the core objectives for **Milvus v3.0 (public beta)**, and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Zilliz Vector Lakebase**.
+This roadmap outlines the core objectives for **Milvus v3.0** and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Zilliz Vector Lakebase**.
 
-## 🌠 Milvus v3.0 (Public Beta)
-
-**Public Beta: May 2026**
+## 🌠 Milvus v3.0
 
 Focus: Building a **semantic-native query engine** with in-engine sorting, aggregation, and multi-vector retrieval, and the **lake-native foundation of Zilliz Vector Lakebase** so compute reaches data without migration.
 
