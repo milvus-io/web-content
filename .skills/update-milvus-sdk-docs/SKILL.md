@@ -818,50 +818,147 @@ whose API semantics are uncertain from the source alone.
 
 ### Response/output member description format
 
-When an operation returns an object with members, document them under
-`**RETURNS:**` as a nested bullet list starting from the response parameter,
-following the shape already used in `milvus-sdk-cpp/v2.6.x/Vector/Query.md` and
-`milvus-sdk-cpp/v3.0.x/...` response sections (precedent: PR #1156). Each
-member is a `- **<Member>** (*<type>*) -` bullet; nested members indent further.
-The type names match the SDK's own response class at the target tag.
+Every operation page documents its return in two steps: a `**RETURN TYPE:**`
+heading that names the type, and a `**RETURNS:**` block that describes the value
+and — when the return is a compound object (struct / dict / response class) —
+lists its members as a nested `- **<Member>** (*<type>*) -` bullet list. The four
+SDK example docs (pymilvus / java / go / cpp `describeCollection`) are the
+canonical reference for this shape.
+
+**Canonical structure (pymilvus / java / go / node / rust / csharp):**
 
 ````markdown
+**RETURN TYPE:**
+
+*<ReturnType>*
+
 **RETURNS:**
 
-*Status*
+<one-sentence description of the returned value>.
 
-Returns a status indicating whether the operation succeeded.
+[optional language-idiomatic code block showing the returned object's shape]
 
-- **response** (*DescribeRoleResponse*) -
+**PARAMETERS:**   <- the returned object's members, as nested bullets
 
-    - **Desc** (*const RoleDesc&*) -
+- **<Member>** (*<Type>*) -
 
-        Get role description.
+    <one-sentence description of the member>.
 
-        - **Name** (*const std::string&*) -
+    - **<NestedMember>** (*<Type>*) -
 
-            Get name of the role.
-
-        - **Description** (*const std::string&*) -
-
-            Get the role description.
-
-        - **GrantItems** (*const std::vector<GrantItem>&*) -
-
-            Get privilege items of the role.
-
-            - **object_type_** (*std::string*) -
-
-                privilege type.
+        <one-sentence description of the nested member>.
 ````
 
-Language adaptations:
-- **java/rust/go/node/csharp**: the response member list follows the same nested
-  bullet shape but with that language's type spellings and the operation's
-  actual return type (e.g. java `*DescribeCollectionResp*` → its Lombok fields;
-  rust `Result<SearchResponse>` → the response struct's `pub` members; go
-  `*ResultSet` → its exported fields; csharp `SearchResults` → its `{ get; }`
-  properties; node `SearchRes` → its interface members).
+Rules:
+- Each member is a `- **<Member>** (*<type>*) -` bullet; nested members indent
+  further. The type names match the SDK's own response class at the target tag.
+- When the return is a compound object, show its shape with a language-idiomatic
+  code block before the member list: a Go `struct`, a Node TS interface or object
+  literal, a Rust `struct`, a pymilvus example `dict`, a Java Lombok field list.
+  Keep the block to the type shape only — no filler.
+- If a member's type has its own page, link it (e.g. go
+  `*[entity.Collection](Collection.md), error*`).
+- One sentence per member, no padding.
+
+**Per-SDK templates:**
+
+- **cpp** — the operation fills an out-param `response` and returns `Status`, so
+  there is **no** `**RETURN TYPE:**` heading: `*Status*` is the first line of
+  `**RETURNS:**`, and the response members nest under `- **response** (*XxxResponse*) -`
+  (established shape, precedent PR #1156; see
+  `milvus-sdk-cpp/v3.0.x/Collections/DescribeCollection.md`).
+
+  ````markdown
+  **RETURNS:**
+
+  *Status*
+
+  Returns a status indicating whether the operation succeeded.
+
+  - **response** (*DescribeRoleResponse*) -
+
+      - **Desc** (*const RoleDesc&*) -
+
+          Get role description.
+
+          - **Name** (*const std::string&*) -
+
+              Get name of the role.
+  ````
+
+- **pymilvus** — `**RETURN TYPE:**` is `*dict*` (or the typed return). `**RETURNS:**`
+  is a sentence optionally followed by an example `dict`; the dict keys are then
+  documented as nested bullets under `**PARAMETERS:**` (e.g. `describe_collection`
+  → `collection_name`, `fields`, `properties`, ...).
+
+- **java (V2)** — `**RETURN TYPE:**` is the `*XxxResp*` class. `**RETURNS:**` is a
+  sentence ("A **DescribeCollectionResp** object that contains detailed
+  information ..."); the Lombok fields of the `*Resp*` are documented as nested
+  bullets under `**PARAMETERS:**`.
+
+- **go** — `**RETURN TYPE:**` is `*<Type>, error*` (e.g. `*entity.Collection, error*`).
+  `**RETURNS:**` is a sentence optionally followed by the Go `struct` definition of
+  the returned type; the exported fields are documented as nested bullets under
+  `**PARAMETERS:**`.
+
+- **rust** — `**RETURN TYPE:**` is `*Result\<XxxResponse\>*`. `**RETURNS:**` is a
+  sentence optionally followed by the response `struct` shape; the response's
+  public accessors — e.g. `description()` returning `&CollectionDesc`, whose
+  getters like `get_collection_name()` / `get_schema()` are the members — are
+  documented as nested bullets under `**PARAMETERS:**`.
+
+  ````markdown
+  **RETURN TYPE:**
+
+  *Result\<DescribeCollectionResponse\>*
+
+  **RETURNS:**
+
+  A **DescribeCollectionResponse** containing detailed information about the specified collection. Returns an `Error` if the operation fails.
+
+  **PARAMETERS:**
+
+  - **description** (*&CollectionDesc*) -
+
+      The collection description.
+
+      - **get_collection_name** (*&str*) -
+
+          The name of the collection.
+
+      - **get_collection_id** (*i64*) -
+
+          The numeric ID of the collection.
+
+      - **get_schema** (*&CollectionSchema*) -
+
+          The collection schema, with field definitions and the primary key.
+  ````
+
+- **node** — the heading and type share one line, `**RETURNS** *Promise<XxxRes>*`,
+  followed by a sentence, an optional TS interface / object-shape block, and the
+  interface members as nested bullets under `**PARAMETERS:**` (e.g.
+  `describeCollection` → `Promise<DescribeCollectionResponse>` with `schema`,
+  `collectionID`, `collection_name`, ...).
+
+  ````markdown
+  **RETURNS** *Promise<DescribeCollectionResponse>*
+
+  This method returns a promise that resolves to a **DescribeCollectionResponse** object.
+
+  **PARAMETERS:**
+
+  - **schema** (*CollectionSchema*) -
+
+      The schema of the collection.
+
+  - **collectionID** (*string*) -
+
+      The internal collection ID assigned by Milvus.
+  ````
+
+- **csharp** — `**RETURN TYPE:**` is the `*XxxResult*` class; `**RETURNS:**` is a
+  sentence and the `{ get; }` properties are documented as nested bullets.
 - **Verbosity**: match the sibling pages — one sentence per member, no padding.
   Do not expand every code comment into a paragraph.
 - Match the tone, sentence patterns, terminology, **and verbosity** of existing
