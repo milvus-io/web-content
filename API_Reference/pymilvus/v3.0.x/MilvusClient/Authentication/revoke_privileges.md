@@ -77,6 +77,10 @@ client.revoke_privilege(
 
 *None*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **BaseException**

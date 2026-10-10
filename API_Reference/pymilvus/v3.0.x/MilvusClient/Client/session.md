@@ -22,6 +22,8 @@ MilvusClient.session(
 
 *MilvusClientSession*
 
+**RETURNS:**
+
 A session object that proxies search, query, and get operations to the specified on-demand cluster.
 
 **EXCEPTIONS:**

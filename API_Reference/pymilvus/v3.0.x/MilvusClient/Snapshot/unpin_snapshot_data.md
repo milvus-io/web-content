@@ -31,6 +31,8 @@ unpin_snapshot_data(
 
 *NoneType*
 
+**RETURNS:**
+
 This operation does not return data.
 
 **EXCEPTIONS:**

@@ -52,6 +52,8 @@ Unit for target_size. Supported values: "b", "kb", "mb" (default), "gb", "tb", "
 
 *int*
 
+**RETURNS:**
+
 Compaction job ID for follow-up status queries.
 
 A compaction job ID, which can be used to get the compaction status.

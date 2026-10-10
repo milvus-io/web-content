@@ -181,7 +181,7 @@ search(
 
     This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-- **ranker** (*[Function](../Function/Function.md)* | *[FunctionScore](../FunctionScore.md)*) -
+- **ranker** (*[Function](../Collections/Function/Function.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     The ranker to use for the search.
 

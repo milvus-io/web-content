@@ -20,6 +20,10 @@ client.flush_all(
 
 *NoneType*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **MilvusException**

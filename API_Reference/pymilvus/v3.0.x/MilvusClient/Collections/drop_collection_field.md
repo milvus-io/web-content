@@ -41,6 +41,8 @@ drop_collection_field(
 
 *NoneType*
 
+**RETURNS:**
+
 This operation does not return data.
 
 **EXCEPTIONS:**

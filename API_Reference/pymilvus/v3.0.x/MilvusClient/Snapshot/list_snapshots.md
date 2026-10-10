@@ -24,6 +24,8 @@ An optional duration of time in seconds to allow for the RPC.
 
 *List[str]*
 
+**RETURNS:**
+
 A list of snapshot names.
 
 **EXCEPTIONS:**

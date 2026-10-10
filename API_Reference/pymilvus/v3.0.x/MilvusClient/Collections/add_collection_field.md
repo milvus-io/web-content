@@ -83,6 +83,8 @@ add_collection_field(
 
 *None*
 
+**RETURNS:**
+
 **EXCEPTIONS:**
 
 - **MilvusException**
