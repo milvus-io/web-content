@@ -244,6 +244,10 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
             The relevance scores of the fragments.
 
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
+
+        The highlight result for the specified field name, or `null` if none exists.
+
     - `getElementOffset()` (*Long*) -
 
         For struct-array element-level queries, the index of the matched element within the array. Null for ordinary queries.

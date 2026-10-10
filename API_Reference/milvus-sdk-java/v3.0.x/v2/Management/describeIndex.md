@@ -101,4 +101,12 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
         **Deprecated.** The properties of the index. Use `extraParams` instead.
 
+- `getIndexDescByFieldName(String fieldName)` (*IndexDesc*) -
+
+    Returns the index description for the specified field name, or `null` if none is found. Throws `IllegalArgumentException` if the field name is `null`.
+
+- `getIndexDescByIndexName(String indexName)` (*IndexDesc*) -
+
+    Returns the index description for the specified index name, or `null` if none is found. Throws `IllegalArgumentException` if the index name is `null`.
+
 **EXCEPTIONS

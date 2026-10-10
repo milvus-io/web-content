@@ -50,6 +50,10 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         The ID of the partition to which the current segment belongs.
 
+    - `getCollectionName()` (*String*) -
+
+        The name of the collection to which the current segment belongs.
+
     - `getNumOfRows()` (*Long*) -
 
         The number of entities in the current segment.
@@ -61,6 +65,10 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
     - `getLevel()` (*String*) -
 
         The compaction level of the current segment. Possible values are : "Legacy", "L0", "L1", "L2".
+
+    - `getStorageVersion()` (*Long*) -
+
+        The storage version of the current segment.
 
     - `getIsSorted()` (*Boolean*) -
 

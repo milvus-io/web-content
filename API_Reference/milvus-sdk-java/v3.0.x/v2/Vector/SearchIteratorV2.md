@@ -105,7 +105,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 *SearchIteratorV2*
 
-*SearchIteratorV2*
+A **SearchIteratorV2** object that iterates over the search results in batches.
 
 **EXCEPTIONS:**
 

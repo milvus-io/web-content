@@ -55,10 +55,6 @@ get(GetReq.builder()
 
 *GetResp*
 
-**RETURN TYPE:**
-
-*GetResp*
-
 **RETURNS:**
 
 A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.

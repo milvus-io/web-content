@@ -34,9 +34,13 @@ getQuerySegmentInfo(GetQuerySegmentInfoReq.builder()
 
 A **GetQuerySegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following parameters:
 
-- `getSegmentInfos()` (*List<PersistentSegmentInfo>*) -
+- `getSegmentInfos()` (*List<QuerySegmentInfo>*) -
 
-    A list of segments, each represented by a **PersistentSegmentInfo** object, which exposes the following getters
+    A list of segments, each represented by a **QuerySegmentInfo** object, which exposes the following getters
+
+    - `getCollectionName()` (*String*) -
+
+        The name of the collection to which the current segment belongs.
 
     - `getSegmentID()` (*Long*) -
 
@@ -77,6 +81,10 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
     - `getNodeIDs()` (*List<Long>*) -
 
         A list of query node IDs.
+
+    - `getStorageVersion()` (*Long*) -
+
+        The storage version of the current segment.
 
     - `getIsSorted()` (*Boolean*) -
 
