@@ -23,48 +23,32 @@ getCompactionPlans(GetCompactionPlansReq.builder()
 
     The ID of the compaction job returned by `compact()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetCompactionPlansResp*
 
-A **GetCompactionPlansResp** object that contains the compaction state and merge plans. The object has the following fields:
+**RETURNS:**
 
-- **compactionId** (*Long*) -
+A **GetCompactionPlansResp** object that contains the compaction state and merge plans.
+
+- `getCompactionId()` (*Long*) -
 
     The ID of the compaction.
 
-- **state** (*CompactionState*) -
+- `getState()` (*CompactionState*) -
 
     The state of the compaction.
 
-- **plans** (*List\<CompactionPlan\>*) -
+- `getPlans()` (*List\<CompactionPlan\>*) -
 
-    The merge plans of the compaction. Each **CompactionPlan** has the following fields:
+    The merge plans of the compaction. Each **CompactionPlan** has the following getters:
 
-    - **target** (*Long*) -
+    - `getTarget()` (*Long*) -
 
         The ID of the target segment.
 
-    - **sources** (*List\<Long\>*) -
+    - `getSources()` (*List\<Long\>*) -
 
         The IDs of the source segments.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.utility.request.GetCompactionPlansReq;
-import io.milvus.v2.service.utility.response.GetCompactionPlansResp;
-
-GetCompactionPlansResp plans = client.getCompactionPlans(
-    GetCompactionPlansReq.builder()
-        .compactionID(jobId)
-        .build()
-);
-System.out.println(plans);
-```
+**EXCEPTIONS

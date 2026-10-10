@@ -26,68 +26,52 @@ listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
 
     The name of the collection associated with the snapshot operation.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListRestoreSnapshotJobsResp*
 
-A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs that match the request filter. The object has the following fields:
+**RETURNS:**
 
-- **jobs** (*List\<RestoreSnapshotJobInfo\>*) -
+A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs that match the request filter.
 
-    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following fields:
+- `getJobs()` (*List\<RestoreSnapshotJobInfo\>*) -
 
-    - **jobId** (*Long*) -
+    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following getters:
+
+    - `getJobId()` (*Long*) -
 
         The ID of the restore job.
 
-    - **snapshotName** (*String*) -
+    - `getSnapshotName()` (*String*) -
 
         The name of the snapshot to restore.
 
-    - **dbName** (*String*) -
+    - `getDbName()` (*String*) -
 
         The name of the database.
 
-    - **collectionName** (*String*) -
+    - `getCollectionName()` (*String*) -
 
         The name of the collection.
 
-    - **state** (*String*) -
+    - `getState()` (*String*) -
 
         The state of the restore job.
 
-    - **progress** (*Integer*) -
+    - `getProgress()` (*Integer*) -
 
         The progress of the restore job, expressed as a percentage.
 
-    - **reason** (*String*) -
+    - `getReason()` (*String*) -
 
         The reason the restore job failed, if any.
 
-    - **startTime** (*Long*) -
+    - `getStartTime()` (*Long*) -
 
         The start time of the restore job.
 
-    - **timeCost** (*Long*) -
+    - `getTimeCost()` (*Long*) -
 
         The time cost of the restore job, in seconds.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.snapshot.request.ListRestoreSnapshotJobsReq;
-import io.milvus.v2.service.snapshot.response.ListRestoreSnapshotJobsResp;
-
-ListRestoreSnapshotJobsReq request = ListRestoreSnapshotJobsReq.builder()
-    .databaseName("default")
-    .collectionName("book_chunks")
-    .build();
-
-ListRestoreSnapshotJobsResp response = client.listRestoreSnapshotJobs(request);
-```
+**EXCEPTIONS

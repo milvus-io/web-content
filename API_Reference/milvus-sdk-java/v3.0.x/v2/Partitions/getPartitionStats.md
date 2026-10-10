@@ -30,34 +30,20 @@ GetPartitionStatsReq.builder()
 
     The name of the target partition.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetPartitionStatsResp*
 
-A **GetPartitionStatsResp** object that contains `numOfEntities` and the complete stats map returned by Milvus. The object has the following fields:
+**RETURNS:**
 
-- **numOfEntities** (*Long*) -
+A **GetPartitionStatsResp** object that contains `numOfEntities` and the complete stats map returned by Milvus.
+
+- `getNumOfEntities()` (*Long*) -
 
     The number of entities in the partition.
 
-- **stats** (*Map\<String, String\>*) -
+- `getStats()` (*Map\<String, String\>*) -
 
     The complete stats map returned by Milvus.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
-
-## Example
-
-Demonstrates getPartitionStats() with the reviewed v3.0.x API.
-
-```java
-GetPartitionStatsResp response = client.getPartitionStats(GetPartitionStatsReq.builder()
-    .collectionName("books")
-    .partitionName("history")
-    .build());
-Map<String, String> stats = response.getStats();
-```
+**EXCEPTIONS

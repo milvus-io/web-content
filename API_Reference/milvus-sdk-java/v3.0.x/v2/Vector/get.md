@@ -55,76 +55,48 @@ get(GetReq.builder()
 
 *GetResp*
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetResp*
 
-A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available. The object has the following fields:
+**RETURNS:**
 
-- **queryResults** (*List\<QueryResult\>*) -
+A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.
 
-    The queried entities. Each **QueryResult** has the following fields:
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-    - **entity** (*Map\<String, Object\>*) -
+    The queried entities. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
 
         The field values of the result.
 
-    - **elementOffset** (*Long*) -
+    - `getElementOffset()` (*Long*) -
 
         For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
 
-- **sessionTs** (*long*) -
+- `getSessionTs()` (*long*) -
 
     The session timestamp used for the operation.
 
-- **cost** (*Long*) -
+- `getCost()` (*Long*) -
 
     The time cost of the operation, in milliseconds.
 
-- **scannedRemoteBytes** (*Long*) -
+- `getScannedRemoteBytes()` (*Long*) -
 
     The number of bytes scanned from remote storage.
 
-- **scannedTotalBytes** (*Long*) -
+- `getScannedTotalBytes()` (*Long*) -
 
     The total number of bytes scanned during the operation.
 
-- **cacheHitRatio** (*Float*) -
+- `getCacheHitRatio()` (*Float*) -
 
     The cache hit ratio of the operation.
 
-- **getResults** (*List\<QueryResult\>*) -
+- `getGetResults()` (*List\<QueryResult\>*) -
 
     **Deprecated.** Use `getQueryResults()` instead.
 
-**EXCEPTIONS:**
-
-- **MilvusClientExceptions**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.GetReq;
-import io.milvus.v2.service.vector.response.GetResp;
-import java.util.Collections;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Get entity with id 0
-GetReq getReq = GetReq.builder()
-        .collectionName("test")
-        .ids(Collections.singletonList("0"))
-        .build();
-GetResp getResp = client.get(getReq);
-```
+**EXCEPTIONS

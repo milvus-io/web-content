@@ -14,41 +14,24 @@ listFileResources(ListFileResourcesReq.builder().build());
 
 This request takes no parameters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListFileResourcesResp*
 
-The response wraps `List<FileResourceInfo>` accessible via `getResources()`. The object has the following fields:
+**RETURNS:**
 
-- **resources** (*List\<FileResourceInfo\>*) -
+A **ListFileResourcesResp** object that contains the result of this operation.
 
-    The list of file resources. Each **FileResourceInfo** has the following fields:
+- `getResources()` (*List\<FileResourceInfo\>*) -
 
-    - **name** (*String*) -
+    The list of file resources. Each **FileResourceInfo** has the following getters:
+
+    - `getName()` (*String*) -
 
         The unique name of the resource.
 
-    - **path** (*String*) -
+    - `getPath()` (*String*) -
 
         The original local path that was uploaded.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.utility.request.ListFileResourcesReq;
-import io.milvus.v2.service.utility.response.ListFileResourcesResp;
-import io.milvus.v2.service.utility.response.FileResourceInfo;
-
-ListFileResourcesResp resp = client.listFileResources(
-    ListFileResourcesReq.builder().build()
-);
-for (FileResourceInfo res : resp.getResources()) {
-    System.out.println(res.getName() + " → " + res.getPath());
-}
-```
+**EXCEPTIONS

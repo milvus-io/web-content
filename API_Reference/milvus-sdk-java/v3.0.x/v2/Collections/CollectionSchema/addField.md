@@ -23,6 +23,7 @@ CollectionSchema.addField(AddFieldReq.builder()
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
     .defaultValue(DataType dataType)
+    .enableDefaultValue(Boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .enableMatch(Boolean enableMatch)
     .analyzerParams(Map<String, Object> analyzerParams)
@@ -107,6 +108,10 @@ CollectionSchema.addField(AddFieldReq.builder()
 - `defaultValue(DataType dataType)` -
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+
+- `enableDefaultValue(Boolean enableDefaultValue)` -
+
+    Whether to pass the configured `defaultValue` to the server. Set to `true` so the default value takes effect; otherwise the default value is ignored.
 
 - `enableAnalyzer(Boolean enableAnalyzer)` -
 

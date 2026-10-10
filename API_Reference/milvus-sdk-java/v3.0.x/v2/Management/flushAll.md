@@ -25,35 +25,16 @@ flushAll(FlushAllReq.builder()
 
     How long to wait for the flush-all operation to finish. Values greater than zero enable synchronous waiting.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *FlushAllResp*
 
-A **FlushAllResp** object that contains the flush-all timestamp. The object has the following fields:
+**RETURNS:**
 
-- **flushAllTs** (*Long*) -
+A **FlushAllResp** object that contains the flush-all timestamp.
+
+- `getFlushAllTs()` (*Long*) -
 
     The timestamp of the flush-all operation.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when validation fails or the server returns an error for this operation.
-
-## Example
-
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
-
-FlushAllResp resp = client.flushAll(FlushAllReq.builder()
-    .databaseName("default")
-    .waitFlushedTimeoutMs(60000L)
-    .build());
-System.out.println(resp.getFlushAllTs());
-```
-
-<!-- category: Management; action: CREATE; addedSince: v3.0.x -->
+**EXCEPTIONS

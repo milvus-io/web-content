@@ -46,41 +46,16 @@ compact(CompactReq.builder()
 
     The unit of `targetSize`. Supported values: `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, `"pb"`. Defaults to `"mb"`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompactResp*
 
-A **CompactResp** object that contains a compaction ID. The object has the following fields:
+**RETURNS:**
 
-- **compactionID** (*Long*) -
+A **CompactResp** object that contains a compaction ID.
+
+- `getCompactionID()` (*Long*) -
 
     The ID of the compaction.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.utility.request.CompactReq;
-import io.milvus.v2.service.utility.response.CompactResp;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Compact a collection
-client.compact(CompactReq.builder()
-    .collectionName("my_collection")
-    .build());
-```
+**EXCEPTIONS

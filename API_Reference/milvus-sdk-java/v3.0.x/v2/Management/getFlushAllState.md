@@ -25,38 +25,16 @@ getFlushAllState(GetFlushAllStateReq.builder()
 
     The flush-all timestamp returned by `flushAll`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetFlushAllStateResp*
 
-A **GetFlushAllStateResp** object that indicates whether the flush-all operation has completed. The object has the following fields:
+**RETURNS:**
 
-- **flushed** (*Boolean*) -
+A **GetFlushAllStateResp** object that indicates whether the flush-all operation has completed.
+
+- `getFlushed()` (*Boolean*) -
 
     Whether the flush-all operation has completed.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when validation fails or the server returns an error for this operation.
-
-## Example
-
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
-
-FlushAllResp flush = client.flushAll(FlushAllReq.builder()
-    .databaseName("default")
-    .build());
-GetFlushAllStateResp state = client.getFlushAllState(GetFlushAllStateReq.builder()
-    .databaseName("default")
-    .flushAllTs(flush.getFlushAllTs())
-    .build());
-System.out.println(state.getFlushed());
-```
-
-<!-- category: Management; action: CREATE; addedSince: v3.0.x -->
+**EXCEPTIONS

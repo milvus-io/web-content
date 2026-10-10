@@ -56,90 +56,44 @@ runAnalyzer(RunAnalyzerReq.builder()
 
     A list of analyzer names to use.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *RunAnalyzerResp*
 
-A **RunAnalyzerResp** object that contains the analyzer output. The object has the following fields:
+**RETURNS:**
 
-- **results** (*List\<AnalyzerResult\>*) -
+A **RunAnalyzerResp** object that contains the analyzer output.
 
-    The analysis results for the input texts. Each **AnalyzerResult** has the following fields:
+- `getResults()` (*List\<AnalyzerResult\>*) -
 
-    - **tokens** (*List\<AnalyzerToken\>*) -
+    The analysis results for the input texts. Each **AnalyzerResult** has the following getters:
 
-        The tokens produced by the analyzer. Each **AnalyzerToken** has the following fields:
+    - `getTokens()` (*List\<AnalyzerToken\>*) -
 
-        - **token** (*String*) -
+        The tokens produced by the analyzer. Each **AnalyzerToken** has the following getters:
+
+        - `getToken()` (*String*) -
 
             The token text.
 
-        - **startOffset** (*Long*) -
+        - `getStartOffset()` (*Long*) -
 
             The start offset of the token in the input text.
 
-        - **endOffset** (*Long*) -
+        - `getEndOffset()` (*Long*) -
 
             The end offset of the token in the input text.
 
-        - **position** (*Long*) -
+        - `getPosition()` (*Long*) -
 
             The position of the token in the token sequence.
 
-        - **positionLength** (*Long*) -
+        - `getPositionLength()` (*Long*) -
 
             The number of positions the token spans.
 
-        - **hash** (*Long*) -
+        - `getHash()` (*Long*) -
 
             The hash value of the token.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.RunAnalyzerReq;
-import io.milvus.v2.service.vector.response.RunAnalyzerResp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Run analyzer
-List<String> texts = new ArrayList<>();
-texts.add("Analyzers (tokenizers) for multi languages");
-texts.add("2.5 to take advantage of enhancements and fixes!");
-
-Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("tokenizer", "standard");
-analyzerParams.put("filter",
-        Arrays.asList("lowercase",
-                new HashMap<String, Object>() {{
-                    put("type", "stop");
-                    put("stop_words", Arrays.asList("to", "of", "for", "the"));
-                }}));
-
-RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
-        .texts(texts)
-        .analyzerParams(analyzerParams)
-        .withDetail(true)
-        .withHash(true)
-        .build());
-```
+**EXCEPTIONS

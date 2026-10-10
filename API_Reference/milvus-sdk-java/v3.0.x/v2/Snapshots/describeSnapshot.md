@@ -31,53 +31,36 @@ describeSnapshot(DescribeSnapshotReq.builder()
 
     The name of the snapshot.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeSnapshotResp*
 
-A **DescribeSnapshotResp** object containing snapshot metadata. The object has the following fields:
+**RETURNS:**
 
-- **name** (*String*) -
+A **DescribeSnapshotResp** object containing snapshot metadata.
+
+- `getName()` (*String*) -
 
     The name of the snapshot.
 
-- **description** (*String*) -
+- `getDescription()` (*String*) -
 
     The description of the snapshot.
 
-- **collectionName** (*String*) -
+- `getCollectionName()` (*String*) -
 
     The name of the collection the snapshot was taken from.
 
-- **partitionNames** (*List\<String\>*) -
+- `getPartitionNames()` (*List\<String\>*) -
 
     The names of the partitions included in the snapshot.
 
-- **createTs** (*Long*) -
+- `getCreateTs()` (*Long*) -
 
     The creation timestamp of the snapshot.
 
-- **s3Location** (*String*) -
+- `getS3Location()` (*String*) -
 
     The storage location of the snapshot.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.snapshot.request.DescribeSnapshotReq;
-import io.milvus.v2.service.snapshot.response.DescribeSnapshotResp;
-
-DescribeSnapshotReq request = DescribeSnapshotReq.builder()
-    .databaseName("default")
-    .collectionName("book_chunks")
-    .snapshotName("book_chunks_backup")
-    .build();
-
-DescribeSnapshotResp response = client.describeSnapshot(request);
-```
+**EXCEPTIONS

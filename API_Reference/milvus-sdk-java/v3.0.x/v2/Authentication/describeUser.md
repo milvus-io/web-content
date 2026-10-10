@@ -23,38 +23,24 @@ DescribeUserResp resp = client.describeUser(DescribeUserReq.builder()
 
     The name of the user to describe.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeUserResp*
 
-A **DescribeUserResp** object that contains `userName`, `roles`, and `description`. The object has the following fields:
+**RETURNS:**
 
-- **userName** (*String*) -
+A **DescribeUserResp** object that contains `userName`, `roles`, and `description`.
+
+- `getUserName()` (*String*) -
 
     The name of the user.
 
-- **roles** (*List\<String\>*) -
+- `getRoles()` (*List\<String\>*) -
 
     The roles assigned to the user.
 
-- **description** (*String*) -
+- `getDescription()` (*String*) -
 
     The description of the user.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.rbac.request.DescribeUserReq;
-import io.milvus.v2.service.rbac.response.DescribeUserResp;
-
-DescribeUserResp resp = client.describeUser(DescribeUserReq.builder()
-    .userName("analyst_user")
-    .build());
-System.out.println(resp.getDescription());
-```
+**EXCEPTIONS

@@ -26,71 +26,52 @@ listRefreshExternalCollectionJobs(ListRefreshExternalCollectionJobsReq.builder()
 
     The collection name to filter by. If empty, jobs across all collections in the database are returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListRefreshExternalCollectionJobsResp*
 
-A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExternalCollectionJobInfo>` accessible via `getJobs()`. The object has the following fields:
+**RETURNS:**
 
-- **jobs** (*List\<RefreshExternalCollectionJobInfo\>*) -
+A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExternalCollectionJobInfo>` accessible via `getJobs()`.
+
+- `getJobs()` (*List\<RefreshExternalCollectionJobInfo\>*) -
 
     The refresh jobs that match the request filter. Each **RefreshExternalCollectionJobInfo** has the same shape as the entry returned by `getRefreshExternalCollectionProgress()`:
 
-    - **jobId** (*long*) -
+    - `getJobId()` (*long*) -
 
         The job identifier.
 
-    - **collectionName** (*String*) -
+    - `getCollectionName()` (*String*) -
 
         The target collection name.
 
-    - **state** (*String*) -
+    - `getState()` (*String*) -
 
         The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
 
-    - **progress** (*int*) -
+    - `getProgress()` (*int*) -
 
         The completion percentage (0-100).
 
-    - **reason** (*String*) -
+    - `getReason()` (*String*) -
 
         The failure reason if `state` is `"FAILED"`; empty otherwise.
 
-    - **externalSource** (*String*) -
+    - `getExternalSource()` (*String*) -
 
         The external source used by the job.
 
-    - **externalSpec** (*String*) -
+    - `getExternalSpec()` (*String*) -
 
         The external source specification used by the job.
 
-    - **startTime** (*long*) -
+    - `getStartTime()` (*long*) -
 
         The job start timestamp (epoch milliseconds).
 
-    - **endTime** (*long*) -
+    - `getEndTime()` (*long*) -
 
         The job end timestamp (epoch milliseconds), or 0 if still running.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.utility.request.ListRefreshExternalCollectionJobsReq;
-import io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
-import io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
-
-ListRefreshExternalCollectionJobsResp resp = client.listRefreshExternalCollectionJobs(
-    ListRefreshExternalCollectionJobsReq.builder()
-        .collectionName("my_collection")
-        .build()
-);
-for (RefreshExternalCollectionJobInfo job : resp.getJobs()) {
-    System.out.println(job.getJobId() + " " + job.getState());
-}
-```
+**EXCEPTIONS

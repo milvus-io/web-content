@@ -19,71 +19,44 @@ CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
 
 For the full list of `GetReq` builder methods, refer to [get()](get.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompletableFuture\<GetResp\>*
 
-A future completed with a **GetResp** object representing one or more queried entities, or completed exceptionally when the operation fails. The **GetResp** object has the following fields:
+**RETURNS:**
 
-- **queryResults** (*List\<QueryResult\>*) -
+A future completed with a **GetResp** object representing one or more queried entities, or completed exceptionally when the operation fails. The **GetResp** object exposes the following getters:
 
-    The queried entities. Each **QueryResult** has the following fields:
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-    - **entity** (*Map\<String, Object\>*) -
+    The queried entities. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
 
         The field values of the result.
 
-    - **elementOffset** (*Long*) -
+    - `getElementOffset()` (*Long*) -
 
         For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
 
-- **sessionTs** (*long*) -
+- `getSessionTs()` (*long*) -
 
     The session timestamp used for the operation.
 
-- **cost** (*Long*) -
+- `getCost()` (*Long*) -
 
     The time cost of the operation, in milliseconds.
 
-- **scannedRemoteBytes** (*Long*) -
+- `getScannedRemoteBytes()` (*Long*) -
 
     The number of bytes scanned from remote storage.
 
-- **scannedTotalBytes** (*Long*) -
+- `getScannedTotalBytes()` (*Long*) -
 
     The total number of bytes scanned during the operation.
 
-- **cacheHitRatio** (*Float*) -
+- `getCacheHitRatio()` (*Float*) -
 
     The cache hit ratio of the operation.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception will be raised when request validation, transport, or server execution fails.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.GetReq;
-import io.milvus.v2.service.vector.response.GetResp;
-
-import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
-
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
-        .collectionName("my_collection")
-        .ids(Collections.singletonList("0"))
-        .build());
-GetResp response = future.get();
-```
+**EXCEPTIONS

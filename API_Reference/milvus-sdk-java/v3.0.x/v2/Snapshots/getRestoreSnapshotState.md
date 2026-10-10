@@ -21,67 +21,52 @@ getRestoreSnapshotState(GetRestoreSnapshotStateReq.builder()
 
     The restore snapshot job ID returned by `restoreSnapshot()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetRestoreSnapshotStateResp*
 
-A **GetRestoreSnapshotStateResp** object containing restore job state, progress, reason, timing, and collection metadata. The object has the following fields:
+**RETURNS:**
 
-- **jobInfo** (*RestoreSnapshotJobInfo*) -
+A **GetRestoreSnapshotStateResp** object containing restore job state, progress, reason, timing, and collection metadata.
 
-    The restore job information. Each **RestoreSnapshotJobInfo** has the following fields:
+- `getJobInfo()` (*RestoreSnapshotJobInfo*) -
 
-    - **jobId** (*Long*) -
+    The restore job information. Each **RestoreSnapshotJobInfo** has the following getters:
+
+    - `getJobId()` (*Long*) -
 
         The ID of the restore job.
 
-    - **snapshotName** (*String*) -
+    - `getSnapshotName()` (*String*) -
 
         The name of the snapshot to restore.
 
-    - **dbName** (*String*) -
+    - `getDbName()` (*String*) -
 
         The name of the database.
 
-    - **collectionName** (*String*) -
+    - `getCollectionName()` (*String*) -
 
         The name of the collection.
 
-    - **state** (*String*) -
+    - `getState()` (*String*) -
 
         The state of the restore job.
 
-    - **progress** (*Integer*) -
+    - `getProgress()` (*Integer*) -
 
         The progress of the restore job, expressed as a percentage.
 
-    - **reason** (*String*) -
+    - `getReason()` (*String*) -
 
         The reason the restore job failed, if any.
 
-    - **startTime** (*Long*) -
+    - `getStartTime()` (*Long*) -
 
         The start time of the restore job.
 
-    - **timeCost** (*Long*) -
+    - `getTimeCost()` (*Long*) -
 
         The time cost of the restore job, in seconds.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
-
-## Example
-
-```java
-import io.milvus.v2.service.snapshot.request.GetRestoreSnapshotStateReq;
-import io.milvus.v2.service.snapshot.response.GetRestoreSnapshotStateResp;
-
-GetRestoreSnapshotStateReq request = GetRestoreSnapshotStateReq.builder()
-    .jobId(123456789L)
-    .build();
-
-GetRestoreSnapshotStateResp response = client.getRestoreSnapshotState(request);
-```
+**EXCEPTIONS

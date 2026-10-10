@@ -110,74 +110,44 @@ QueryReq.builder()
 
     Values substituted into placeholders in the filter expression.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryResp*
 
-A **QueryResp** object that contains query rows ordered according to `orderByFields` when provided, along with execution metrics. The object has the following fields:
+**RETURNS:**
 
-- **queryResults** (*List\<QueryResult\>*) -
+A **QueryResp** object that contains query rows ordered according to `orderByFields` when provided, along with execution metrics.
 
-    The query result rows. Each **QueryResult** has the following fields:
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-    - **entity** (*Map\<String, Object\>*) -
+    The query result rows. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
 
         The field values of the result row.
 
-    - **elementOffset** (*Long*) -
+    - `getElementOffset()` (*Long*) -
 
         For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
 
-- **sessionTs** (*long*) -
+- `getSessionTs()` (*long*) -
 
     The session timestamp used for the query.
 
-- **cost** (*Long*) -
+- `getCost()` (*Long*) -
 
     The time cost of the query operation, in milliseconds.
 
-- **scannedRemoteBytes** (*Long*) -
+- `getScannedRemoteBytes()` (*Long*) -
 
     The number of bytes scanned from remote storage.
 
-- **scannedTotalBytes** (*Long*) -
+- `getScannedTotalBytes()` (*Long*) -
 
     The total number of bytes scanned during the query.
 
-- **cacheHitRatio** (*Float*) -
+- `getCacheHitRatio()` (*Float*) -
 
     The cache hit ratio of the query.
 
-**EXCEPTIONS:**
-
-- **MilvusClientException**
-
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
-
-## Example
-
-Demonstrates query() against Milvus.
-
-```java
-// include-start milvus
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
-// include-start zilliz
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .clusterId(CLUSTER_ID)
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
-```
+**EXCEPTIONS

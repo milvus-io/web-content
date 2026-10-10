@@ -70,7 +70,7 @@ LocalBulkWriterParam.newBuilder()
 
 - `withConfig(String key, Object val)`
 
-    A dictionary specifying optional configurations for processing CSV files. This parameter applies only when you set `fileType` to `CSV` in `withFileType()`. The dictionary contains the following fields:
+    A dictionary specifying optional configurations for processing CSV files. This parameter applies only when you set `fileType` to `CSV` in `withFileType()`. The dictionary contains the following getters:
 
     - **sep** (*string*) -
 
