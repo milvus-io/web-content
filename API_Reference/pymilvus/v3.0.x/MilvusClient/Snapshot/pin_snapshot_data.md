@@ -46,6 +46,8 @@ pin_snapshot_data(
 
 *int*
 
+**RETURNS:**
+
 The `pin_id` used to release this pin with `unpin_snapshot_data()`.
 
 **EXCEPTIONS:**

@@ -148,7 +148,7 @@ A dictionary that contains detailed information about the specified collection.
 
         Whether the current field serves as the primary key of the collection.
 
-- **functions** (*list[[Function](../Function/Function.md)]*) -
+- **functions** (*list[[Function](Function/Function.md)]*) -
 
     The functions that have been defined in the schema.
 

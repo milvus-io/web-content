@@ -25,6 +25,10 @@ An optional duration of time in seconds to allow for the RPC.
 
 *None*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **MilvusException**

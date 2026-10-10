@@ -129,5 +129,5 @@ The following operations are related to `construct_from_dataframe()`:
 
 - [CollectionSchema](../CollectionSchema/CollectionSchema.md)
 
-- [FieldSchema](../../MilvusClient/FieldSchema/FieldSchema.md)
+- [FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md)
 

@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](../DataType.md)** (*[DataType](../DataType.md)*) - 
 
     **[REQUIRED]**
 

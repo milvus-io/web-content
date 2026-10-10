@@ -28,13 +28,13 @@ client.add_function_field(
 
     The name of the collection to modify.
 
-- **field_schema** (*[FieldSchema](../FieldSchema/FieldSchema.md)*) -
+- **field_schema** (*[FieldSchema](FieldSchema/FieldSchema.md)*) -
 
     **[REQUIRED]**
 
     The schema of the new output field produced by the function. For example, a **SPARSE_FLOAT_VECTOR** field for BM25 or a **BINARY_VECTOR** field for MinHash.
 
-- **func** (*[Function](../Function/Function.md)*) -
+- **func** (*[Function](Function/Function.md)*) -
 
     **[REQUIRED]**
 

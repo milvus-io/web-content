@@ -19,7 +19,7 @@ FieldSchema(
 **[REQUIRED]**
 Name of the field.
 
-- **dtype** ([DataType](../Collections/DataType.md)) -
+- **dtype** ([DataType](../DataType.md)) -
 **[REQUIRED]**
 Data type of the field.
 

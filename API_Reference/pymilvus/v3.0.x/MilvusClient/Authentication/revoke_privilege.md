@@ -59,6 +59,10 @@ client.revoke_privilege(
 
 *NoneType*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **MilvusException**

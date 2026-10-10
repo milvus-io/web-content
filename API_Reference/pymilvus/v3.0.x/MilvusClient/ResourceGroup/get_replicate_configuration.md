@@ -26,6 +26,8 @@ get_replicate_configuration(
 
 *ReplicateConfiguration*
 
+**RETURNS:**
+
 The current replication configuration, including cluster definitions and cross-cluster topology.
 
 **EXCEPTIONS:**

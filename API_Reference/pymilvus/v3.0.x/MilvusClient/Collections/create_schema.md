@@ -136,11 +136,11 @@ This is a class method. You should call this method like this: `MilvusClient.cre
 
 **RETURN TYPE:**
 
-*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*
+*[CollectionSchema](CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 
-A **[CollectionSchema](../CollectionSchema/CollectionSchema.md)** object.
+A **[CollectionSchema](CollectionSchema/CollectionSchema.md)** object.
 
 **EXCEPTIONS:**
 

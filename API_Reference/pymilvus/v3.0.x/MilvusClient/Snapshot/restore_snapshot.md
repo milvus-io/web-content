@@ -57,6 +57,8 @@ client.restore_snapshot(
 
 *int*
 
+**RETURNS:**
+
 The restore job ID. Use this ID with `get_restore_snapshot_state()` to track the restore progress.
 
 **EXCEPTIONS:**

@@ -32,6 +32,8 @@ create_role(
 
 *None*
 
+**RETURNS:**
+
 This operation returns no value.
 
 **EXCEPTIONS:**

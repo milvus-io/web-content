@@ -35,7 +35,7 @@ client.add_collection_struct_field(
 
     The name of the new struct field.
 
-- **struct_schema** (*[StructFieldSchema](../StructFieldSchema/StructFieldSchema.md)*) -
+- **struct_schema** (*[StructFieldSchema](StructFieldSchema/StructFieldSchema.md)*) -
 
     **[REQUIRED]**
 
