@@ -27,7 +27,27 @@ getCompactionPlans(GetCompactionPlansReq.builder()
 
 *GetCompactionPlansResp*
 
-The response contains the compaction state and merge plans.
+A **GetCompactionPlansResp** object that contains the compaction state and merge plans. The object has the following fields:
+
+- **compactionId** (*Long*) -
+
+    The ID of the compaction.
+
+- **state** (*CompactionState*) -
+
+    The state of the compaction.
+
+- **plans** (*List\<CompactionPlan\>*) -
+
+    The merge plans of the compaction. Each **CompactionPlan** has the following fields:
+
+    - **target** (*Long*) -
+
+        The ID of the target segment.
+
+    - **sources** (*List\<Long\>*) -
+
+        The IDs of the source segments.
 
 **EXCEPTIONS:**
 

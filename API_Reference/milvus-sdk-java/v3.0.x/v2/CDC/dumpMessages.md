@@ -44,6 +44,24 @@ dumpMessages(DumpMessagesReq.builder()
 
 *DumpMessagesResp*
 
+A **DumpMessagesResp** object that contains the dumped messages. The object has the following fields:
+
+- **messages** (*Iterable\<DumpMessageInfo\>*) -
+
+    The dumped messages. Each **DumpMessageInfo** has the following fields:
+
+    - **messageID** (*MessageID*) -
+
+        The ID of the message.
+
+    - **payload** (*byte[]*) -
+
+        The payload of the message.
+
+    - **properties** (*Map\<String, String\>*) -
+
+        The properties of the message.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

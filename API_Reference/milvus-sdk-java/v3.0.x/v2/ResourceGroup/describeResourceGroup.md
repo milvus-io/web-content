@@ -39,7 +39,7 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
     The number of query nodes allocated to the current resource group.
 
-- **numberOfAvailableNode** (*Interger*) -
+- **numberOfAvailableNode** (*Integer*) -
 
     The number of available query nodes.
 
@@ -51,7 +51,7 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
     The number of outgoing nodes.
 
-- **numberOfInComingNode** (*Map<String, Integer>*) -
+- **numberOfIncomingNode** (*Map<String, Integer>*) -
 
     The number of incoming nodes.
 

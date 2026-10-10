@@ -30,7 +30,11 @@ listSnapshots(ListSnapshotsReq.builder()
 
 *ListSnapshotsResp*
 
-A response containing the snapshot names that match the request filter.
+A **ListSnapshotsResp** object containing the snapshot names that match the request filter. The object has the following fields:
+
+- **snapshots** (*List\<String\>*) -
+
+    The names of the snapshots that match the request filter.
 
 **EXCEPTIONS:**
 

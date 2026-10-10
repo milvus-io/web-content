@@ -29,6 +29,32 @@ getReplicateInfo(GetReplicateInfoReq.builder()
 
 *GetReplicateInfoResp*
 
+A **GetReplicateInfoResp** object that contains the checkpoint and salvage checkpoint information. The object has the following fields:
+
+- **checkpoint** (*ReplicateCheckpoint*) -
+
+    The current replication checkpoint. Each **ReplicateCheckpoint** has the following fields:
+
+    - **clusterId** (*String*) -
+
+        The ID of the cluster.
+
+    - **pchannel** (*String*) -
+
+        The physical channel.
+
+    - **messageID** (*MessageID*) -
+
+        The message ID of the checkpoint.
+
+    - **timeTick** (*Long*) -
+
+        The time tick of the checkpoint.
+
+- **salvageCheckpoint** (*ReplicateCheckpoint*) -
+
+    The salvage checkpoint used to recover the replication. Has the same fields as `checkpoint`.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

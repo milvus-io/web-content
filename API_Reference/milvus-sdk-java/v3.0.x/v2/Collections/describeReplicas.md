@@ -52,7 +52,7 @@ A DescribeReplicasResp that contains detailed information about the replicas in 
 
         The IDs of partitions associated with the current replica.
 
-    - **shardReplicas** (*List<ShardReplicas>*) -
+    - **shardReplicas** (*List\<ShardReplica\>*) -
 
         The shards associated with the current replica. Each of the shards contains the following information:
 

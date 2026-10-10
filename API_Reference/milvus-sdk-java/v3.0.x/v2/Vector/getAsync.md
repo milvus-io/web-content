@@ -23,7 +23,39 @@ For the full list of `GetReq` builder methods, refer to [get()](get.md).
 
 *CompletableFuture\<GetResp\>*
 
-A future completed with a `GetResp`, or completed exceptionally when the operation fails.
+A future completed with a **GetResp** object representing one or more queried entities, or completed exceptionally when the operation fails. The **GetResp** object has the following fields:
+
+- **queryResults** (*List\<QueryResult\>*) -
+
+    The queried entities. Each **QueryResult** has the following fields:
+
+    - **entity** (*Map\<String, Object\>*) -
+
+        The field values of the result.
+
+    - **elementOffset** (*Long*) -
+
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- **sessionTs** (*long*) -
+
+    The session timestamp used for the operation.
+
+- **cost** (*Long*) -
+
+    The time cost of the operation, in milliseconds.
+
+- **scannedRemoteBytes** (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- **scannedTotalBytes** (*Long*) -
+
+    The total number of bytes scanned during the operation.
+
+- **cacheHitRatio** (*Float*) -
+
+    The cache hit ratio of the operation.
 
 **EXCEPTIONS:**
 

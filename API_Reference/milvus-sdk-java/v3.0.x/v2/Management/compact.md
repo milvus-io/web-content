@@ -50,7 +50,11 @@ compact(CompactReq.builder()
 
 *CompactResp*
 
-A **CompactResp** object contains a compaction ID.
+A **CompactResp** object that contains a compaction ID. The object has the following fields:
+
+- **compactionID** (*Long*) -
+
+    The ID of the compaction.
 
 **EXCEPTIONS:**
 

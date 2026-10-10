@@ -49,7 +49,19 @@ UpsertReq.builder()
 
 *UpsertResp*
 
-Contains the number of inserted or updated entities and the operation cost (`getCost()`).
+An **UpsertResp** object that contains the number of inserted or updated entities, primary keys, and the operation cost. The object has the following fields:
+
+- **upsertCnt** (*long*) -
+
+    The number of entities upserted.
+
+- **primaryKeys** (*List\<Object\>*) -
+
+    The primary keys of the upserted entities.
+
+- **cost** (*Long*) -
+
+    The time cost of the upsert operation, in milliseconds.
 
 **EXCEPTIONS:**
 

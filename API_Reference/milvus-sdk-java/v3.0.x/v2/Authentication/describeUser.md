@@ -27,7 +27,19 @@ DescribeUserResp resp = client.describeUser(DescribeUserReq.builder()
 
 *DescribeUserResp*
 
-The response contains `userName`, `roles`, and `description`.
+A **DescribeUserResp** object that contains `userName`, `roles`, and `description`. The object has the following fields:
+
+- **userName** (*String*) -
+
+    The name of the user.
+
+- **roles** (*List\<String\>*) -
+
+    The roles assigned to the user.
+
+- **description** (*String*) -
+
+    The description of the user.
 
 **EXCEPTIONS:**
 

@@ -204,7 +204,123 @@ SearchReq.builder()
 
 *SearchResp*
 
-Contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
+A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets. The object has the following fields:
+
+- **searchResults** (*List\<List\<SearchResult\>\>*) -
+
+    The search results, one list per query vector. Each **SearchResult** has the following fields:
+
+    - **entity** (*Map\<String, Object\>*) -
+
+        The retrieved entity data.
+
+    - **score** (*Float*) -
+
+        The similarity score of the result.
+
+    - **id** (*Object*) -
+
+        The primary key value of the result.
+
+    - **primaryKey** (*String*) -
+
+        The primary key value rendered as a string.
+
+    - **highlightResults** (*Map\<String, HighlightResult\>*) -
+
+        The highlighted text fragments for each requested field, keyed by field name. Each **HighlightResult** has the following fields:
+
+        - **fieldName** (*String*) -
+
+            The name of the highlighted field.
+
+        - **fragments** (*List\<String\>*) -
+
+            The highlighted text fragments.
+
+        - **scores** (*List\<Float\>*) -
+
+            The relevance scores of the fragments.
+
+    - **elementOffset** (*Long*) -
+
+        For struct-array element-level queries, the index of the matched element within the array. Null for ordinary queries.
+
+- **sessionTs** (*long*) -
+
+    The session timestamp used for the search.
+
+- **recalls** (*List\<Float\>*) -
+
+    The recall values of the search, one per query vector.
+
+- **cost** (*Long*) -
+
+    The time cost of the search operation, in milliseconds.
+
+- **scannedRemoteBytes** (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- **scannedTotalBytes** (*Long*) -
+
+    The total number of bytes scanned during the search.
+
+- **cacheHitRatio** (*Float*) -
+
+    The cache hit ratio of the search.
+
+- **aggregationBuckets** (*List\<List\<AggregationBucket\>\>*) -
+
+    The aggregation buckets, one list per query vector. Each **AggregationBucket** has the following fields:
+
+    - **key** (*List\<KeyEntry\>*) -
+
+        The bucket key entries that define the bucket. Each **KeyEntry** has the following fields:
+
+        - **fieldId** (*long*) -
+
+            The ID of the field the key is based on.
+
+        - **fieldName** (*String*) -
+
+            The name of the field the key is based on.
+
+        - **value** (*Object*) -
+
+            The value of the key.
+
+    - **count** (*long*) -
+
+        The number of entities in the bucket.
+
+    - **metrics** (*Map\<String, Object\>*) -
+
+        The aggregation metric values for the bucket.
+
+    - **hits** (*List\<AggregationHit\>*) -
+
+        The top hits inside the bucket. Each **AggregationHit** has the following fields:
+
+        - **id** (*Object*) -
+
+            The primary key of the hit.
+
+        - **score** (*Float*) -
+
+            The similarity score of the hit.
+
+        - **fields** (*Map\<String, Object\>*) -
+
+            The field values of the hit.
+
+        - **fieldIds** (*Map\<String, Long\>*) -
+
+            The field ID map of the hit.
+
+    - **subGroups** (*List\<AggregationBucket\>*) -
+
+        The nested sub-buckets.
 
 **EXCEPTIONS:**
 

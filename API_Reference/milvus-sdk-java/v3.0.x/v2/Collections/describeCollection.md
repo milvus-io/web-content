@@ -35,7 +35,203 @@ describeCollection(DescribeCollectionReq.builder()
 
 *DescribeCollectionResp*
 
-A **DescribeCollectionResp** object that contains detailed information about the specified collection.
+A **DescribeCollectionResp** object that contains detailed information about the specified collection. The object has the following fields:
+
+- **collectionName** (*String*) -
+
+    The name of the collection.
+
+- **collectionID** (*Long*) -
+
+    The internal ID of the collection.
+
+- **databaseName** (*String*) -
+
+    The name of the database the collection belongs to.
+
+- **description** (*String*) -
+
+    The description of the collection.
+
+- **numOfPartitions** (*Long*) -
+
+    The number of partitions in the collection.
+
+- **fieldNames** (*List\<String\>*) -
+
+    The names of all fields in the collection.
+
+- **vectorFieldNames** (*List\<String\>*) -
+
+    The names of all vector fields in the collection.
+
+- **primaryFieldName** (*String*) -
+
+    The name of the primary key field.
+
+- **enableDynamicField** (*Boolean*) -
+
+    Whether the dynamic field is enabled.
+
+- **autoID** (*Boolean*) -
+
+    Whether primary key values are auto-generated.
+
+- **collectionSchema** (*CollectionSchema*) -
+
+    The schema of the collection.
+
+    - **fieldSchemaList** (*List\<FieldSchema\>*) -
+
+        The field definitions of the collection. Each **FieldSchema** has the following fields:
+
+        - **name** (*String*) -
+
+            The name of the field.
+
+        - **description** (*String*) -
+
+            The description of the field.
+
+        - **dataType** (*DataType*) -
+
+            The data type of the field.
+
+        - **maxLength** (*Integer*) -
+
+            The maximum length for VarChar fields.
+
+        - **dimension** (*Integer*) -
+
+            The dimension of vector fields.
+
+        - **isPrimaryKey** (*Boolean*) -
+
+            Whether the field is the primary key.
+
+        - **isPartitionKey** (*Boolean*) -
+
+            Whether the field is the partition key.
+
+        - **isClusteringKey** (*Boolean*) -
+
+            Whether the field is the clustering key.
+
+        - **autoID** (*Boolean*) -
+
+            Whether primary key values are auto-generated.
+
+        - **elementType** (*DataType*) -
+
+            The element type of array fields.
+
+        - **maxCapacity** (*Integer*) -
+
+            The maximum capacity of array fields.
+
+        - **isNullable** (*Boolean*) -
+
+            Whether the field accepts null values.
+
+        - **defaultValue** (*Object*) -
+
+            The default value of the field.
+
+        - **enableAnalyzer** (*Boolean*) -
+
+            Whether text analysis is enabled.
+
+        - **analyzerParams** (*Map\<String, Object\>*) -
+
+            The analyzer configuration.
+
+        - **enableMatch** (*Boolean*) -
+
+            Whether keyword matching is enabled.
+
+        - **typeParams** (*Map\<String, String\>*) -
+
+            Additional type parameters.
+
+        - **multiAnalyzerParams** (*Map\<String, Object\>*) -
+
+            The multi-language analyzer configuration.
+
+        - **externalField** (*String*) -
+
+            The external source field this field maps to.
+
+        - **fieldId** (*Long*) -
+
+            The internal ID of the field.
+
+        - **isDynamic** (*Boolean*) -
+
+            Whether the field is the dynamic field.
+
+        - **isFunctionOutput** (*Boolean*) -
+
+            Whether the field is a function output field.
+
+        - **indexes** (*List\<Map\<String, Object\>\>*) -
+
+            The indexes defined on the field.
+
+    - **structFields** (*List\<StructFieldSchema\>*) -
+
+        The struct field definitions of the collection.
+
+    - **enableDynamicField** (*boolean*) -
+
+        Whether the dynamic field is enabled.
+
+    - **functionList** (*List\<Function\>*) -
+
+        The functions defined on the collection.
+
+    - **externalSource** (*String*) -
+
+        The external source backing the collection.
+
+    - **externalSpec** (*JsonObject*) -
+
+        The external source specification.
+
+- **createTime** (*Long*) -
+
+    The creation time of the collection.
+
+- **createUtcTime** (*Long*) -
+
+    The UTC creation time of the collection.
+
+- **consistencyLevel** (*ConsistencyLevel*) -
+
+    The consistency level of the collection.
+
+- **shardsNum** (*Integer*) -
+
+    The number of shards in the collection.
+
+- **properties** (*Map\<String, String\>*) -
+
+    The properties of the collection.
+
+- **aliases** (*List\<String\>*) -
+
+    The aliases of the collection.
+
+- **updateTimestamp** (*Long*) -
+
+    The last update timestamp of the collection.
+
+- **enableNamespace** (*Boolean*) -
+
+    Whether namespace is enabled.
+
+- **schemaVersion** (*Integer*) -
+
+    The schema version of the collection.
 
 **EXCEPTIONS:**
 

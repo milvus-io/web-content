@@ -55,7 +55,19 @@ delete(DeleteReq.builder()
 
 *DeleteResp*
 
-A **DeleteResp** object contains the number of deleted entities and the operation cost (`getCost()`).
+A **DeleteResp** object that contains the number of deleted entities and the operation cost. The object has the following fields:
+
+- **deleteCnt** (*long*) -
+
+    The number of entities deleted.
+
+- **primaryKeys** (*List\<Object\>*) -
+
+    The primary keys of the deleted entities.
+
+- **cost** (*Long*) -
+
+    The time cost of the delete operation, in milliseconds.
 
 **EXCEPTIONS:**
 

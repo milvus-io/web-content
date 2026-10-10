@@ -10,6 +10,44 @@ public GetReplicateConfigurationResp getReplicateConfiguration()
 
 *GetReplicateConfigurationResp*
 
+A **GetReplicateConfigurationResp** object that contains the replication configuration. The object has the following fields:
+
+- **replicateConfiguration** (*ReplicateConfiguration*) -
+
+    The replication configuration, which contains the following fields:
+
+    - **clusters** (*List\<MilvusCluster\>*) -
+
+        The clusters involved in the replication. Each **MilvusCluster** has the following fields:
+
+        - **clusterId** (*String*) -
+
+            The ID of the cluster.
+
+        - **uri** (*String*) -
+
+            The URI of the cluster.
+
+        - **token** (*String*) -
+
+            The token used to connect to the cluster.
+
+        - **pchannels** (*List\<String\>*) -
+
+            The physical channels of the cluster.
+
+    - **crossClusterTopologies** (*List\<CrossClusterTopology\>*) -
+
+        The cross-cluster topologies. Each **CrossClusterTopology** has the following fields:
+
+        - **sourceClusterId** (*String*) -
+
+            The ID of the source cluster.
+
+        - **targetClusterId** (*String*) -
+
+            The ID of the target cluster.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

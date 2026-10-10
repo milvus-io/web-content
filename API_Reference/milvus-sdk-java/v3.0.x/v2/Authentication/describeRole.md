@@ -31,7 +31,43 @@ DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
 
 *DescribeRoleResp*
 
-The response contains `roleName`, `grantInfos`, and `description`.
+A **DescribeRoleResp** object that contains `roleName`, `grantInfos`, and `description`. The object has the following fields:
+
+- **roleName** (*String*) -
+
+    The name of the role.
+
+- **grantInfos** (*List\<GrantInfo\>*) -
+
+    The privilege grants of the role. Each **GrantInfo** has the following fields:
+
+    - **objectType** (*String*) -
+
+        The type of the object to which the privilege applies.
+
+    - **objectName** (*String*) -
+
+        The name of the object to which the privilege applies.
+
+    - **roleName** (*String*) -
+
+        The name of the role.
+
+    - **grantor** (*String*) -
+
+        The user who granted the privilege.
+
+    - **privilege** (*String*) -
+
+        The granted privilege.
+
+    - **dbName** (*String*) -
+
+        The name of the database.
+
+- **description** (*String*) -
+
+    The description of the role.
 
 **EXCEPTIONS:**
 

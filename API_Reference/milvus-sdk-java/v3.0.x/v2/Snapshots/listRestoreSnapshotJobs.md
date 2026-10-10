@@ -30,7 +30,47 @@ listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
 
 *ListRestoreSnapshotJobsResp*
 
-A response containing restore snapshot jobs that match the request filter.
+A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs that match the request filter. The object has the following fields:
+
+- **jobs** (*List\<RestoreSnapshotJobInfo\>*) -
+
+    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following fields:
+
+    - **jobId** (*Long*) -
+
+        The ID of the restore job.
+
+    - **snapshotName** (*String*) -
+
+        The name of the snapshot to restore.
+
+    - **dbName** (*String*) -
+
+        The name of the database.
+
+    - **collectionName** (*String*) -
+
+        The name of the collection.
+
+    - **state** (*String*) -
+
+        The state of the restore job.
+
+    - **progress** (*Integer*) -
+
+        The progress of the restore job, expressed as a percentage.
+
+    - **reason** (*String*) -
+
+        The reason the restore job failed, if any.
+
+    - **startTime** (*Long*) -
+
+        The start time of the restore job.
+
+    - **timeCost** (*Long*) -
+
+        The time cost of the restore job, in seconds.
 
 **EXCEPTIONS:**
 

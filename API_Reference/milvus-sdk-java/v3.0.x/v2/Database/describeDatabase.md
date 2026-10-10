@@ -27,7 +27,17 @@ describeDatabase(DescribeDatabaseReq.builder()
 
 **RETURNS:**
 
-A **DescribeDatabaseResp** object that contains detailed information about the specified database.
+*DescribeDatabaseResp*
+
+A **DescribeDatabaseResp** object that contains detailed information about the specified database. The object has the following fields:
+
+- **databaseName** (*String*) -
+
+    The name of the database.
+
+- **properties** (*Map\<String, String\>*) -
+
+    The properties of the database.
 
 **EXCEPTIONS:**
 

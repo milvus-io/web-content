@@ -29,6 +29,12 @@ getFlushAllState(GetFlushAllStateReq.builder()
 
 *GetFlushAllStateResp*
 
+A **GetFlushAllStateResp** object that indicates whether the flush-all operation has completed. The object has the following fields:
+
+- **flushed** (*Boolean*) -
+
+    Whether the flush-all operation has completed.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

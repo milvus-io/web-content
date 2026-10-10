@@ -42,9 +42,11 @@ refreshExternalCollection(RefreshExternalCollectionReq.builder()
 
 *RefreshExternalCollectionResp*
 
-The response carries a single field:
+A **RefreshExternalCollectionResp** object that carries the newly started refresh job ID. The object has the following fields:
 
-- `jobId` (*long*) - The numeric ID of the newly started refresh job. Persist this value to query progress with `getRefreshExternalCollectionProgress()`.
+- **jobId** (*long*) -
+
+    The numeric ID of the newly started refresh job. Persist this value to query progress with `getRefreshExternalCollectionProgress()`.
 
 **EXCEPTIONS:**
 

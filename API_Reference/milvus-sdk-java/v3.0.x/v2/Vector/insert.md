@@ -39,7 +39,19 @@ InsertReq.builder()
 
 *InsertResp*
 
-Contains the number of inserted entities, generated primary keys when applicable, and the operation cost (`getCost()`).
+An **InsertResp** object that contains the number of inserted entities, generated primary keys when applicable, and the operation cost. The object has the following fields:
+
+- **InsertCnt** (*long*) -
+
+    The number of entities inserted.
+
+- **primaryKeys** (*List\<Object\>*) -
+
+    The primary keys generated for the inserted entities.
+
+- **cost** (*Long*) -
+
+    The time cost of the insert operation, in milliseconds.
 
 **EXCEPTIONS:**
 

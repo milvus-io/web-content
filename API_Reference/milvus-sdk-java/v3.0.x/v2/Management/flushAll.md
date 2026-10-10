@@ -29,6 +29,12 @@ flushAll(FlushAllReq.builder()
 
 *FlushAllResp*
 
+A **FlushAllResp** object that contains the flush-all timestamp. The object has the following fields:
+
+- **flushAllTs** (*Long*) -
+
+    The timestamp of the flush-all operation.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

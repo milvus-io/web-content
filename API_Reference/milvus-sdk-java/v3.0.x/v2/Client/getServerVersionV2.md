@@ -24,6 +24,28 @@ getServerVersionV2(GetServerVersionReq.builder()
 
 *GetServerVersionResp*
 
+A **GetServerVersionResp** object that contains the version information of the connected Milvus server. The object has the following fields:
+
+- **version** (*String*) -
+
+    The version of the Milvus server.
+
+- **buildTime** (*String*) -
+
+    The build time of the server.
+
+- **gitCommit** (*String*) -
+
+    The git commit of the server build.
+
+- **goVersion** (*String*) -
+
+    The Go version used to build the server.
+
+- **deployMode** (*String*) -
+
+    The deployment mode of the server.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

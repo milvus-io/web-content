@@ -35,7 +35,31 @@ describeSnapshot(DescribeSnapshotReq.builder()
 
 *DescribeSnapshotResp*
 
-A response containing snapshot metadata, including snapshot name, description, collection name, partition names, create timestamp, and storage location.
+A **DescribeSnapshotResp** object containing snapshot metadata. The object has the following fields:
+
+- **name** (*String*) -
+
+    The name of the snapshot.
+
+- **description** (*String*) -
+
+    The description of the snapshot.
+
+- **collectionName** (*String*) -
+
+    The name of the collection the snapshot was taken from.
+
+- **partitionNames** (*List\<String\>*) -
+
+    The names of the partitions included in the snapshot.
+
+- **createTs** (*Long*) -
+
+    The creation timestamp of the snapshot.
+
+- **s3Location** (*String*) -
+
+    The storage location of the snapshot.
 
 **EXCEPTIONS:**
 

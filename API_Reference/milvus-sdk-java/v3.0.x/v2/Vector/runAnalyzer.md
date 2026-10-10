@@ -60,7 +60,39 @@ runAnalyzer(RunAnalyzerReq.builder()
 
 *RunAnalyzerResp*
 
-A **RunAnalyzerResp** contains a list of **AnalyzerResult** objects, each of which is a list of **AnalyzerToken** objects. 
+A **RunAnalyzerResp** object that contains the analyzer output. The object has the following fields:
+
+- **results** (*List\<AnalyzerResult\>*) -
+
+    The analysis results for the input texts. Each **AnalyzerResult** has the following fields:
+
+    - **tokens** (*List\<AnalyzerToken\>*) -
+
+        The tokens produced by the analyzer. Each **AnalyzerToken** has the following fields:
+
+        - **token** (*String*) -
+
+            The token text.
+
+        - **startOffset** (*Long*) -
+
+            The start offset of the token in the input text.
+
+        - **endOffset** (*Long*) -
+
+            The end offset of the token in the input text.
+
+        - **position** (*Long*) -
+
+            The position of the token in the token sequence.
+
+        - **positionLength** (*Long*) -
+
+            The number of positions the token spans.
+
+        - **hash** (*Long*) -
+
+            The hash value of the token.
 
 **EXCEPTIONS:**
 

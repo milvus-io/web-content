@@ -40,7 +40,11 @@ pinSnapshotData(PinSnapshotDataReq.builder()
 
 *PinSnapshotDataResp*
 
-A response containing the pin ID for the pinned snapshot data.
+A **PinSnapshotDataResp** object containing the pin ID for the pinned snapshot data. The object has the following fields:
+
+- **pinId** (*Long*) -
+
+    The ID of the pin.
 
 **EXCEPTIONS:**
 

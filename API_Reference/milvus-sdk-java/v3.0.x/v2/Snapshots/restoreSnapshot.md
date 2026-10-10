@@ -45,7 +45,11 @@ restoreSnapshot(RestoreSnapshotReq.builder()
 
 *RestoreSnapshotResp*
 
-A response containing the restore snapshot job ID.
+A **RestoreSnapshotResp** object containing the restore snapshot job ID. The object has the following fields:
+
+- **jobId** (*Long*) -
+
+    The ID of the restore job.
 
 **EXCEPTIONS:**
 

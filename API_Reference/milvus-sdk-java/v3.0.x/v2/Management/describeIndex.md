@@ -45,7 +45,59 @@ describeIndex(DescribeIndexReq.builder()
 
 *DescribeIndexResp*
 
-A **DescribeIndexResp** object that contains the details of the specified index.
+A **DescribeIndexResp** object that contains the details of the specified index. The object has the following fields:
+
+- **indexDescriptions** (*List\<IndexDesc\>*) -
+
+    The index descriptions. Each **IndexDesc** has the following fields:
+
+    - **fieldName** (*String*) -
+
+        The name of the field the index is built on.
+
+    - **indexName** (*String*) -
+
+        The name of the index.
+
+    - **id** (*long*) -
+
+        The internal ID of the index.
+
+    - **indexType** (*IndexType*) -
+
+        The type of the index.
+
+    - **metricType** (*MetricType*) -
+
+        The metric type used to measure vector similarity.
+
+    - **extraParams** (*Map\<String, String\>*) -
+
+        The extra parameters of the index.
+
+    - **indexedRows** (*long*) -
+
+        The number of rows that have been indexed.
+
+    - **totalRows** (*long*) -
+
+        The total number of rows in the collection.
+
+    - **pendingIndexRows** (*long*) -
+
+        The number of rows waiting to be indexed.
+
+    - **indexState** (*IndexBuildState*) -
+
+        The build state of the index.
+
+    - **indexFailedReason** (*String*) -
+
+        The reason the index build failed, if any.
+
+    - **properties** (*Map\<String, String\>*) -
+
+        **Deprecated.** The properties of the index. Use `extraParams` instead.
 
 **EXCEPTIONS:**
 

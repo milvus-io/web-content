@@ -18,11 +18,19 @@ This request takes no parameters.
 
 *ListFileResourcesResp*
 
-The response wraps `List<FileResourceInfo>` accessible via `getResources()`. Each `FileResourceInfo` entry has:
+The response wraps `List<FileResourceInfo>` accessible via `getResources()`. The object has the following fields:
 
-- `name` (*String*) - The unique name of the resource.
+- **resources** (*List\<FileResourceInfo\>*) -
 
-- `path` (*String*) - The original local path that was uploaded.
+    The list of file resources. Each **FileResourceInfo** has the following fields:
+
+    - **name** (*String*) -
+
+        The unique name of the resource.
+
+    - **path** (*String*) -
+
+        The original local path that was uploaded.
 
 **EXCEPTIONS:**
 

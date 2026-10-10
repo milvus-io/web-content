@@ -16,6 +16,7 @@ CollectionSchema.addField(AddFieldReq.builder()
     .maxLength(Integer maxLength)
     .isPrimaryKey(Boolean isPrimaryKey)
     .isPartitionKey(Boolean isPartitionKey)
+    .isClusteringKey(Boolean isClusteringKey)
     .autoID(Boolean autoID)
     .dimension(int dimension)
     .elementType(DataType elementType)
@@ -66,6 +67,10 @@ CollectionSchema.addField(AddFieldReq.builder()
     Whether the current field is the partitionKey field.
 
     Setting this to **True** makes the current field the partition key.
+
+- `isClusteringKey(Boolean isClusteringKey)` -
+
+    Whether the current field is the clustering key. The clustering key controls on-disk segment grouping to accelerate queries that filter on this field.
 
 - `autoID(Boolean autoID)` -
 

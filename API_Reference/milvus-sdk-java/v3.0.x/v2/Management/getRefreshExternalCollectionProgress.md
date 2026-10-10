@@ -27,23 +27,47 @@ getRefreshExternalCollectionProgress(GetRefreshExternalCollectionProgressReq.bui
 
 *GetRefreshExternalCollectionProgressResp*
 
-The response wraps a single `RefreshExternalCollectionJobInfo` accessible via `getJobInfo()`. Fields on the job info:
+A **GetRefreshExternalCollectionProgressResp** object that wraps a single **RefreshExternalCollectionJobInfo** accessible via `getJobInfo()`. The object has the following fields:
 
-- `jobId` (*long*) - The job identifier.
+- **jobInfo** (*RefreshExternalCollectionJobInfo*) -
 
-- `collectionName` (*String*) - The target collection name.
+    The refresh job information. Each **RefreshExternalCollectionJobInfo** has the following fields:
 
-- `state` (*String*) - The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+    - **jobId** (*long*) -
 
-- `progress` (*int*) - The completion percentage (0–100).
+        The job identifier.
 
-- `reason` (*String*) - Failure reason if `state` is `"FAILED"`; empty otherwise.
+    - **collectionName** (*String*) -
 
-- `externalSource` (*String*) - The external source used by the job.
+        The target collection name.
 
-- `startTime` (*long*) - The job start timestamp (epoch milliseconds).
+    - **state** (*String*) -
 
-- `endTime` (*long*) - The job end timestamp (epoch milliseconds), or 0 if still running.
+        The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+
+    - **progress** (*int*) -
+
+        The completion percentage (0-100).
+
+    - **reason** (*String*) -
+
+        The failure reason if `state` is `"FAILED"`; empty otherwise.
+
+    - **externalSource** (*String*) -
+
+        The external source used by the job.
+
+    - **externalSpec** (*String*) -
+
+        The external source specification used by the job.
+
+    - **startTime** (*long*) -
+
+        The job start timestamp (epoch milliseconds).
+
+    - **endTime** (*long*) -
+
+        The job end timestamp (epoch milliseconds), or 0 if still running.
 
 **EXCEPTIONS:**
 

@@ -114,9 +114,39 @@ QueryReq.builder()
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided, along with execution metrics (`getCost()`, `getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`).
+A **QueryResp** object that contains query rows ordered according to `orderByFields` when provided, along with execution metrics. The object has the following fields:
 
-For struct-array element-level queries (via `element_filter`), each returned `QueryResult` carries the matched element's index through `getElementOffset()`.
+- **queryResults** (*List\<QueryResult\>*) -
+
+    The query result rows. Each **QueryResult** has the following fields:
+
+    - **entity** (*Map\<String, Object\>*) -
+
+        The field values of the result row.
+
+    - **elementOffset** (*Long*) -
+
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- **sessionTs** (*long*) -
+
+    The session timestamp used for the query.
+
+- **cost** (*Long*) -
+
+    The time cost of the query operation, in milliseconds.
+
+- **scannedRemoteBytes** (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- **scannedTotalBytes** (*Long*) -
+
+    The total number of bytes scanned during the query.
+
+- **cacheHitRatio** (*Float*) -
+
+    The cache hit ratio of the query.
 
 **EXCEPTIONS:**
 

@@ -30,7 +30,19 @@ describeAlias(DescribeAliasReq.builder()
 
 *DescribeAliasResp*
 
-A **DescribeAliasResp** object containing the alias details.
+A **DescribeAliasResp** object that contains the alias details. The object has the following fields:
+
+- **databaseName** (*String*) -
+
+    The name of the database.
+
+- **collectionName** (*String*) -
+
+    The name of the collection the alias refers to.
+
+- **alias** (*String*) -
+
+    The name of the alias.
 
 **EXCEPTIONS:**
 

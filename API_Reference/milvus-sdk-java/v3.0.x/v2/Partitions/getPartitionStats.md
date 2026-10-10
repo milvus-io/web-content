@@ -34,7 +34,15 @@ GetPartitionStatsReq.builder()
 
 *GetPartitionStatsResp*
 
-Contains numOfEntities and the complete stats map returned by Milvus.
+A **GetPartitionStatsResp** object that contains `numOfEntities` and the complete stats map returned by Milvus. The object has the following fields:
+
+- **numOfEntities** (*Long*) -
+
+    The number of entities in the partition.
+
+- **stats** (*Map\<String, String\>*) -
+
+    The complete stats map returned by Milvus.
 
 **EXCEPTIONS:**
 

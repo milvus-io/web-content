@@ -12,7 +12,13 @@ public ListDatabasesResp listDatabases()
 
 **RETURNS:**
 
-A ListDatabasesResp object contains a list of all database names.
+*ListDatabasesResp*
+
+A **ListDatabasesResp** object contains a list of all database names. The object has the following fields:
+
+- **databaseNames** (*List\<String\>*) -
+
+    The names of all databases in the cluster.
 
 **EXCEPTIONS:**
 

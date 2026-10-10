@@ -57,17 +57,45 @@ get(GetReq.builder()
 
 **RETURNS:**
 
-A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.
+*GetResp*
 
-**PARAMETERS:**
+A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available. The object has the following fields:
 
-- **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
+- **queryResults** (*List\<QueryResult\>*) -
 
-    **Deprecated.** A list of **QueryResp.QueryResult** objects.
+    The queried entities. Each **QueryResult** has the following fields:
 
-- **fields** (*Map\\\\<String,Object\\\\>*)
+    - **entity** (*Map\<String, Object\>*) -
 
-    A map that contains key-value pairs of field names and their values.
+        The field values of the result.
+
+    - **elementOffset** (*Long*) -
+
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- **sessionTs** (*long*) -
+
+    The session timestamp used for the operation.
+
+- **cost** (*Long*) -
+
+    The time cost of the operation, in milliseconds.
+
+- **scannedRemoteBytes** (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- **scannedTotalBytes** (*Long*) -
+
+    The total number of bytes scanned during the operation.
+
+- **cacheHitRatio** (*Float*) -
+
+    The cache hit ratio of the operation.
+
+- **getResults** (*List\<QueryResult\>*) -
+
+    **Deprecated.** Use `getQueryResults()` instead.
 
 **EXCEPTIONS:**
 

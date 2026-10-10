@@ -34,6 +34,16 @@ getLoadStateV2(GetLoadStateReq.builder()
 
 *GetLoadStateResp*
 
+A **GetLoadStateResp** object that indicates the load state of the collection. The object has the following fields:
+
+- **state** (*LoadState*) -
+
+    The load state of the collection.
+
+- **progress** (*Long*) -
+
+    The loading progress of the collection, expressed as a percentage.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

@@ -32,17 +32,19 @@ MilvusClientV2.listAliases(ListAliasesReq.builder()
 
 **RETURNS:**
 
-A **ListAliasResp** object containing a list of aliases for the specified collection. If the collection has no aliases, an empty list will be returned.
+A **ListAliasResp** object containing a list of aliases for the specified collection. If the collection has no aliases, an empty list will be returned. The object has the following fields:
 
-**PARAMETERS:**
-
-- **alias** (*List\<String\>*)
+- **alias** (*List\<String\>*) -
 
     A list of strings containing the aliases.
 
-- **collectionName** (*String*)
+- **collectionName** (*String*) -
 
     The name of the collection.
+
+- **dbName** (*String*) -
+
+    The name of the database.
 
 **EXCEPTIONS:**
 
