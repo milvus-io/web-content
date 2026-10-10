@@ -18,37 +18,16 @@ listResourceGroups(ListResourceGroupsReq.builder()
 
 *ListResourceGroupsResp*
 
+**RETURN TYPE:**
+
+*ListResourceGroupsResp*
+
 **RETURNS:**
 
-A **ListResourceGroupsResp** object is a list of group names in strings.
+A **ListResourceGroupsResp** object that contains a list of group names.
 
-**EXCEPTIONS:**
+- `getGroupNames()` (*List\<String\>*) -
 
-- **MilvusClientExceptions**
+    The names of all resource groups.
 
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.resourcegroup.request.ListResourceGroupsReq;
-import io.milvus.v2.service.resourcegroup.response.ListResourceGroupsResp;
-import java.util.List;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. List resource groups    
-ListResourceGroupsReq listResourceGroupsReq = ListResourceGroupsReq.builder()
-    .build();
-ListResourceGroupsResp groupNames = client.listResourceGroups(listResourceGroupsReq);
-```
-
+**EXCEPTIONS

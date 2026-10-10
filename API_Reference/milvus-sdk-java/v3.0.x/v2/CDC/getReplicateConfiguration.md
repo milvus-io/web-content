@@ -6,27 +6,48 @@ This operation gets the current replicate configuration. Use it to inspect confi
 public GetReplicateConfigurationResp getReplicateConfiguration()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetReplicateConfigurationResp*
 
-**EXCEPTIONS:**
+**RETURNS:**
 
-- **MilvusClientException**
+A **GetReplicateConfigurationResp** object that contains the replication configuration.
 
-    This exception will be raised when validation fails or the server returns an error for this operation.
+- `getReplicateConfiguration()` (*ReplicateConfiguration*) -
 
-## Example
+    The replication configuration, which contains the following getters:
 
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+    - `getClusters()` (*List\<MilvusCluster\>*) -
 
-GetReplicateConfigurationResp resp = client.getReplicateConfiguration();
-ReplicateConfiguration config = resp.getReplicateConfiguration();
-System.out.println(config.getClusters());
-```
+        The clusters involved in the replication. Each **MilvusCluster** has the following getters:
 
-<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->
+        - `getClusterId()` (*String*) -
+
+            The ID of the cluster.
+
+        - `getUri()` (*String*) -
+
+            The URI of the cluster.
+
+        - `getToken()` (*String*) -
+
+            The token used to connect to the cluster.
+
+        - `getPchannels()` (*List\<String\>*) -
+
+            The physical channels of the cluster.
+
+    - `getCrossClusterTopologies()` (*List\<CrossClusterTopology\>*) -
+
+        The cross-cluster topologies. Each **CrossClusterTopology** has the following getters:
+
+        - `getSourceClusterId()` (*String*) -
+
+            The ID of the source cluster.
+
+        - `getTargetClusterId()` (*String*) -
+
+            The ID of the target cluster.
+
+**EXCEPTIONS

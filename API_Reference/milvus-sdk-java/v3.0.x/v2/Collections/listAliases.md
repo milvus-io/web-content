@@ -30,48 +30,24 @@ MilvusClientV2.listAliases(ListAliasesReq.builder()
 
 *ListAliasResp*
 
+**RETURN TYPE:**
+
+*ListAliasResp*
+
 **RETURNS:**
 
 A **ListAliasResp** object containing a list of aliases for the specified collection. If the collection has no aliases, an empty list will be returned.
 
-**PARAMETERS:**
-
-- **alias** (*List\<String\>*)
+- `getAlias()` (*List\<String\>*) -
 
     A list of strings containing the aliases.
 
-- **collectionName** (*String*)
+- `getCollectionName()` (*String*) -
 
     The name of the collection.
 
-**EXCEPTIONS:**
+- `getDbName()` (*String*) -
 
-- **MilvusClientExceptions**
+    The name of the database.
 
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.utility.request.ListAliasesReq;
-import io.milvus.v2.service.utility.response.ListAliasResp;
-import java.util.List;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. List aliases
-ListAliasesReq listAliasesReq = ListAliasesReq.builder()
-        .databaseName("my_database")
-        .collectionName("my_collection")
-        .build();
-ListAliasResp listAliasResp = client.listAliases(listAliasesReq);
-```
+**EXCEPTIONS

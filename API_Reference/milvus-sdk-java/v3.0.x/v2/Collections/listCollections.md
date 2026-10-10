@@ -20,48 +20,20 @@ listCollections()
 
 A **ListCollectionsResp** object containing a list of collection names. If there is not any collection, an empty list will be returned.
 
-**PARAMETERS:**
-
-- **collectionNames** (*List<String>*)
+- `getCollectionNames()` (*List<String>*) -
 
     A list of strings containing the names of all existing collections.
 
-- **collectionInfos** (*List<CollectionInfo>*)
+- `getCollectionInfos()` (*List<CollectionInfo>*) -
 
-    A list of **CollectionInfo** objects. A **CollectionInfo** object has the following fields:
+    A list of **CollectionInfo** objects. A **CollectionInfo** object exposes the following getters:
 
-    - **collectionName** (*String*)
+    - `getCollectionName()` (*String*) -
 
         The name of a collection.
 
-    - **shardNum** (*Integer*)
+    - `getShardNum()` (*Integer*) -
 
         The number of shards in the above collection.
 
-**EXCEPTIONS:**
-
-- **MilvusClientExceptions**
-
-    This exception will be raised when any error occurs during this operation.
-
-## Example
-
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.response.ListCollectionsResp;
-import java.util.List;
-import java.util.Set;
-
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. List collections
-ListCollectionsResp listAliasResp = client.listCollections();
-```
-
+**EXCEPTIONS

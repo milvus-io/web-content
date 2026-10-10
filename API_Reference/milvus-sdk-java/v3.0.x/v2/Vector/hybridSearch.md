@@ -94,68 +94,132 @@ hybridSearch(HybridSearchReq.builder()
 
     **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`.
 
+**RETURN TYPE:**
+
+*SearchResp*
+
 **RETURNS:**
 
-*SearchResp*
+A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
 
-*SearchResp*
+- `getSearchResults()` (*List\<List\<SearchResult\>\>*) -
 
-**EXCEPTIONS:**
+    The search results, one list per query vector. Each **SearchResult** has the following getters:
 
-- **MilvusClientException**
+    - `getEntity()` (*Map\<String, Object\>*) -
 
-    This exception will be raised when any error occurs during this operation.
+        The retrieved entity data.
 
-## Example
+    - `getScore()` (*Float*) -
 
-```java
-import io.milvus.v2.service.vector.request.AnnSearchReq;
-import io.milvus.v2.service.vector.request.HybridSearchReq;
-import io.milvus.v2.service.vector.request.FunctionScore;
-import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
-import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.common.ConsistencyLevel;
+        The similarity score of the result.
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+    - `getId()` (*Object*) -
 
-// Build ANN search requests for multiple vector fields
-List<AnnSearchReq> searchRequests = new ArrayList<>();
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName("float_vector")
-        .vectors(floatVectors)
-        .params("{\"nprobe\": 10}")
-        .limit(10)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName("binary_vector")
-        .vectors(binaryVectors)
-        .limit(50)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName("sparse_vector")
-        .vectors(sparseVectors)
-        .limit(100)
-        .build());
+        The primary key value of the result.
 
-// Hybrid search with WeightedRanker via FunctionScore
-SearchResp searchResp = client.hybridSearch(HybridSearchReq.builder()
-        .collectionName("my_collection")
-        .searchRequests(searchRequests)
-        .functionScore(FunctionScore.builder()
-                .addFunction(WeightedRanker.builder()
-                        .weights(Arrays.asList(0.2f, 0.5f, 0.6f))
-                        .build())
-                .build())
-        .limit(5)
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .build());
+    - `getPrimaryKey()` (*String*) -
 
-List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
-for (List<SearchResp.SearchResult> results : searchResults) {
-    for (SearchResp.SearchResult result : results) {
-        System.out.println(result);
-    }
-}
-```
+        The primary key value rendered as a string.
+
+    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
+
+        The highlighted text fragments for each requested field, keyed by field name. Each **HighlightResult** has the following getters:
+
+        - `getFieldName()` (*String*) -
+
+            The name of the highlighted field.
+
+        - `getFragments()` (*List\<String\>*) -
+
+            The highlighted text fragments.
+
+        - `getScores()` (*List\<Float\>*) -
+
+            The relevance scores of the fragments.
+
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
+
+        The highlight result for the specified field name, or `null` if none exists.
+
+    - `getElementOffset()` (*Long*) -
+
+        For struct-array element-level queries, the index of the matched element within the array. Null for ordinary queries.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the search.
+
+- `getRecalls()` (*List\<Float\>*) -
+
+    The recall values of the search, one per query vector.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the search operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the search.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the search.
+
+- `getAggregationBuckets()` (*List\<List\<AggregationBucket\>\>*) -
+
+    The aggregation buckets, one list per query vector. Each **AggregationBucket** has the following getters:
+
+    - `getKey()` (*List\<KeyEntry\>*) -
+
+        The bucket key entries that define the bucket. Each **KeyEntry** has the following getters:
+
+        - `getFieldId()` (*long*) -
+
+            The ID of the field the key is based on.
+
+        - `getFieldName()` (*String*) -
+
+            The name of the field the key is based on.
+
+        - `getValue()` (*Object*) -
+
+            The value of the key.
+
+    - `getCount()` (*long*) -
+
+        The number of entities in the bucket.
+
+    - `getMetrics()` (*Map\<String, Object\>*) -
+
+        The aggregation metric values for the bucket.
+
+    - `getHits()` (*List\<AggregationHit\>*) -
+
+        The top hits inside the bucket. Each **AggregationHit** has the following getters:
+
+        - `getId()` (*Object*) -
+
+            The primary key of the hit.
+
+        - `getScore()` (*Float*) -
+
+            The similarity score of the hit.
+
+        - `getFields()` (*Map\<String, Object\>*) -
+
+            The field values of the hit.
+
+        - `getFieldIds()` (*Map\<String, Long\>*) -
+
+            The field ID map of the hit.
+
+    - `getSubGroups()` (*List\<AggregationBucket\>*) -
+
+        The nested sub-buckets.
+
+**EXCEPTIONS

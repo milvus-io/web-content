@@ -23,46 +23,52 @@ getRefreshExternalCollectionProgress(GetRefreshExternalCollectionProgressReq.bui
 
     The job ID returned by `refreshExternalCollection()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetRefreshExternalCollectionProgressResp*
 
-The response wraps a single `RefreshExternalCollectionJobInfo` accessible via `getJobInfo()`. Fields on the job info:
+**RETURNS:**
 
-- `jobId` (*long*) - The job identifier.
+A **GetRefreshExternalCollectionProgressResp** object that wraps a single **RefreshExternalCollectionJobInfo** accessible via `getJobInfo()`.
 
-- `collectionName` (*String*) - The target collection name.
+- `getJobInfo()` (*RefreshExternalCollectionJobInfo*) -
 
-- `state` (*String*) - The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+    The refresh job information. Each **RefreshExternalCollectionJobInfo** has the following getters:
 
-- `progress` (*int*) - The completion percentage (0–100).
+    - `getJobId()` (*long*) -
 
-- `reason` (*String*) - Failure reason if `state` is `"FAILED"`; empty otherwise.
+        The job identifier.
 
-- `externalSource` (*String*) - The external source used by the job.
+    - `getCollectionName()` (*String*) -
 
-- `startTime` (*long*) - The job start timestamp (epoch milliseconds).
+        The target collection name.
 
-- `endTime` (*long*) - The job end timestamp (epoch milliseconds), or 0 if still running.
+    - `getState()` (*String*) -
 
-**EXCEPTIONS:**
+        The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
 
-- **MilvusClientException**
+    - `getProgress()` (*int*) -
 
-    This exception will be raised when any error occurs during this operation.
+        The completion percentage (0-100).
 
-## Example
+    - `getReason()` (*String*) -
 
-```java
-import io.milvus.v2.service.utility.request.GetRefreshExternalCollectionProgressReq;
-import io.milvus.v2.service.utility.response.GetRefreshExternalCollectionProgressResp;
-import io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
+        The failure reason if `state` is `"FAILED"`; empty otherwise.
 
-GetRefreshExternalCollectionProgressResp resp = client.getRefreshExternalCollectionProgress(
-    GetRefreshExternalCollectionProgressReq.builder()
-        .jobId(jobId)
-        .build()
-);
-RefreshExternalCollectionJobInfo info = resp.getJobInfo();
-System.out.println(info.getState() + " " + info.getProgress() + "%");
-```
+    - `getExternalSource()` (*String*) -
+
+        The external source used by the job.
+
+    - `getExternalSpec()` (*String*) -
+
+        The external source specification used by the job.
+
+    - `getStartTime()` (*long*) -
+
+        The job start timestamp (epoch milliseconds).
+
+    - `getEndTime()` (*long*) -
+
+        The job end timestamp (epoch milliseconds), or 0 if still running.
+
+**EXCEPTIONS

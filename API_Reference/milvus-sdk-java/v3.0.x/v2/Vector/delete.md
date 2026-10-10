@@ -51,39 +51,24 @@ delete(DeleteReq.builder()
 
     The consistency level for the delete operation. Defaults to the server default when omitted.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DeleteResp*
 
-A **DeleteResp** object contains the number of deleted entities and the operation cost (`getCost()`).
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **DeleteResp** object that contains the number of deleted entities and the operation cost.
 
-- **MilvusClientException**
+- `getDeleteCnt()` (*long*) -
 
-    This exception will be raised when any error occurs during this operation.
+    The number of entities deleted.
 
-## Example
+- `getPrimaryKeys()` (*List\<Object\>*) -
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.DeleteReq;
-import io.milvus.v2.service.vector.response.DeleteResp;
-import java.util.Set;
+    The primary keys of the deleted entities.
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+- `getCost()` (*Long*) -
 
-// 2. Delete entities with filter "id > 10"
-DeleteReq deleteReq = DeleteReq.builder()
-        .collectionName("test")
-        .filter("id > 10")
-        .build();
-DeleteResp deleteResp = client.delete(deleteReq);
-```
+    The time cost of the delete operation, in milliseconds.
+
+**EXCEPTIONS

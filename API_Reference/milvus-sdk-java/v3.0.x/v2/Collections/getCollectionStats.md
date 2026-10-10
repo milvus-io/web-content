@@ -25,23 +25,20 @@ GetCollectionStatsReq.builder()
 
     The name of the target collection.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetCollectionStatsResp*
 
-Contains numOfEntities and the complete stats map returned by Milvus.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **GetCollectionStatsResp** object that contains `numOfEntities` and the complete stats map returned by Milvus.
 
-- **MilvusClientException**
+- `getNumOfEntities()` (*Long*) -
 
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+    The number of entities in the collection.
 
-## Example
+- `getStats()` (*Map\<String, String\>*) -
 
-```java
-GetCollectionStatsResp response = client.getCollectionStats(GetCollectionStatsReq.builder()
-    .collectionName("books")
-    .build());
-Map<String, String> stats = response.getStats();
-```
+    The complete stats map returned by Milvus.
+
+**EXCEPTIONS

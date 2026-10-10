@@ -104,7 +104,7 @@ searchIterator(SearchIteratorReq.builder()
 
 *SearchIterator*
 
-A *SearchIterator* object to iterate search results, which offers the following methods:
+A **SearchIterator** object that iterates over the search results in batches.
 
 **EXCEPTIONS:**
 

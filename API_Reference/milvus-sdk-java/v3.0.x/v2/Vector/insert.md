@@ -35,25 +35,24 @@ InsertReq.builder()
 
     The name of the target partition.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *InsertResp*
 
-Contains the number of inserted entities, generated primary keys when applicable, and the operation cost (`getCost()`).
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **InsertResp** object that contains the result of this operation.
 
-- **MilvusClientException**
+- `getInsertCnt()` (*long*) -
 
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+    The number of entities inserted.
 
-## Example
+- `getPrimaryKeys()` (*List\<Object\>*) -
 
-Demonstrates insert() with the reviewed v3.0.x API.
+    The primary keys generated for the inserted entities.
 
-```java
-InsertResp response = client.insert(InsertReq.builder()
-    .collectionName("books")
-    .data(rows)
-    .build());
-```
+- `getCost()` (*Long*) -
+
+    The time cost of the insert operation, in milliseconds.
+
+**EXCEPTIONS

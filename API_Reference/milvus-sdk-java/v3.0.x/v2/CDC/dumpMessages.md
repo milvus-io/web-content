@@ -40,37 +40,28 @@ dumpMessages(DumpMessagesReq.builder()
 
     Whether to include the start message itself. Defaults to `Boolean.TRUE`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DumpMessagesResp*
 
-**EXCEPTIONS:**
+**RETURNS:**
 
-- **MilvusClientException**
+A **DumpMessagesResp** object that contains the dumped messages.
 
-    This exception will be raised when validation fails or the server returns an error for this operation.
+- `getMessages()` (*Iterable\<DumpMessageInfo\>*) -
 
-## Example
+    The dumped messages. Each **DumpMessageInfo** has the following getters:
 
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+    - `getMessageID()` (*MessageID*) -
 
-GetReplicateInfoResp info = client.getReplicateInfo(GetReplicateInfoReq.builder()
-    .sourceClusterId("cluster-a")
-    .targetPchannel("by-dev-rootcoord-dml_0_123v0")
-    .build());
+        The ID of the message.
 
-DumpMessagesResp resp = client.dumpMessages(DumpMessagesReq.builder()
-    .pchannel("by-dev-rootcoord-dml_0_123v0")
-    .startMessageID(info.getCheckpoint().getMessageID())
-    .includeStartMessage(true)
-    .build());
-for (DumpMessageInfo message : resp) {
-    System.out.println(message.getProperties());
-}
-```
+    - `getPayload()` (*byte[]*) -
 
-<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->
+        The payload of the message.
+
+    - `getProperties()` (*Map\<String, String\>*) -
+
+        The properties of the message.
+
+**EXCEPTIONS

@@ -20,29 +20,32 @@ getServerVersionV2(GetServerVersionReq.builder()
 
     Whether to fetch detailed server build information. Defaults to `Boolean.FALSE`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetServerVersionResp*
 
-**EXCEPTIONS:**
+**RETURNS:**
 
-- **MilvusClientException**
+A **GetServerVersionResp** object that contains the version information of the connected Milvus server.
 
-    This exception will be raised when validation fails or the server returns an error for this operation.
+- `getVersion()` (*String*) -
 
-## Example
+    The version of the Milvus server.
 
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+- `getBuildTime()` (*String*) -
 
-GetServerVersionResp version = client.getServerVersionV2(GetServerVersionReq.builder()
-    .detail(true)
-    .build());
-System.out.println(version.getVersion());
-System.out.println(version.getGitCommit());
-```
+    The build time of the server.
 
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->
+- `getGitCommit()` (*String*) -
+
+    The git commit of the server build.
+
+- `getGoVersion()` (*String*) -
+
+    The Go version used to build the server.
+
+- `getDeployMode()` (*String*) -
+
+    The deployment mode of the server.
+
+**EXCEPTIONS

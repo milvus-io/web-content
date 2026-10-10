@@ -110,44 +110,44 @@ QueryReq.builder()
 
     Values substituted into placeholders in the filter expression.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided, along with execution metrics (`getCost()`, `getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`).
+**RETURNS:**
 
-For struct-array element-level queries (via `element_filter`), each returned `QueryResult` carries the matched element's index through `getElementOffset()`.
+A **QueryResp** object that contains query rows ordered according to `orderByFields` when provided, along with execution metrics.
 
-**EXCEPTIONS:**
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-- **MilvusClientException**
+    The query result rows. Each **QueryResult** has the following getters:
 
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+    - `getEntity()` (*Map\<String, Object\>*) -
 
-## Example
+        The field values of the result row.
 
-Demonstrates query() against Milvus.
+    - `getElementOffset()` (*Long*) -
 
-```java
-// include-start milvus
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
-// include-start zilliz
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .clusterId(CLUSTER_ID)
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
-```
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the query.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the query operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the query.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the query.
+
+**EXCEPTIONS

@@ -94,7 +94,7 @@ queryIterator(QueryIteratorReq.builder()
 
 *QueryIterator*
 
-*QueryIterator*
+A **QueryIterator** object that iterates over the query results in batches.
 
 **EXCEPTIONS:**
 

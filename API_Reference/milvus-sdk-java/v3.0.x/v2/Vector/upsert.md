@@ -45,24 +45,24 @@ UpsertReq.builder()
 
     Field-level operations. `ARRAY_APPEND` and `ARRAY_REMOVE` imply partial-update semantics.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *UpsertResp*
 
-Contains the number of inserted or updated entities and the operation cost (`getCost()`).
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **UpsertResp** object that contains the result of this operation.
 
-- **MilvusClientException**
+- `getUpsertCnt()` (*long*) -
 
-    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+    The number of entities upserted.
 
-## Example
+- `getPrimaryKeys()` (*List\<Object\>*) -
 
-```java
-UpsertResp response = client.upsert(UpsertReq.builder()
-    .collectionName("books")
-    .data(rows)
-    .fieldOps(fieldOps)
-    .build());
-```
+    The primary keys of the upserted entities.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the upsert operation, in milliseconds.
+
+**EXCEPTIONS

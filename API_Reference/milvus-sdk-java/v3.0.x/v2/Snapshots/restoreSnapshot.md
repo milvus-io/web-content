@@ -41,31 +41,16 @@ restoreSnapshot(RestoreSnapshotReq.builder()
 
     The database in which to create the restored collection. If omitted, the current database is used.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *RestoreSnapshotResp*
 
-A response containing the restore snapshot job ID.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **RestoreSnapshotResp** object containing the restore snapshot job ID.
 
-- **MilvusClientException**
+- `getJobId()` (*Long*) -
 
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+    The ID of the restore job.
 
-## Example
-
-```java
-import io.milvus.v2.service.snapshot.request.RestoreSnapshotReq;
-import io.milvus.v2.service.snapshot.response.RestoreSnapshotResp;
-
-RestoreSnapshotReq request = RestoreSnapshotReq.builder()
-    .snapshotName("book_chunks_backup")
-    .sourceCollectionName("book_chunks")
-    .targetCollectionName("book_chunks_restored")
-    .sourceDbName("default")
-    .targetDbName("default")
-    .build();
-
-RestoreSnapshotResp response = client.restoreSnapshot(request);
-```
+**EXCEPTIONS

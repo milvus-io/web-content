@@ -41,39 +41,72 @@ describeIndex(DescribeIndexReq.builder()
 
     A timestamp for time-travel queries. Defaults to `0L`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeIndexResp*
 
+**RETURNS:**
+
 A **DescribeIndexResp** object that contains the details of the specified index.
 
-**EXCEPTIONS:**
+- `getIndexDescriptions()` (*List\<IndexDesc\>*) -
 
-- **MilvusClientException**
+    The index descriptions. Each **IndexDesc** has the following getters:
 
-    This exception will be raised when any error occurs during this operation.
+    - `getFieldName()` (*String*) -
 
-## Example
+        The name of the field the index is built on.
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.index.request.DescribeIndexReq;
-import io.milvus.v2.service.index.response.DescribeIndexResp;
-import java.util.Set;
+    - `getIndexName()` (*String*) -
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+        The name of the index.
 
-// 2. Describe the index for the field "vector"
-DescribeIndexReq describeIndexReq = DescribeIndexReq.builder()
-        .collectionName("test")
-        .fieldName("vector")
-        .build();
-DescribeIndexResp describeIndexResp = client.describeIndex(describeIndexReq);
-```
+    - `getId()` (*long*) -
+
+        The internal ID of the index.
+
+    - `getIndexType()` (*IndexType*) -
+
+        The type of the index.
+
+    - `getMetricType()` (*MetricType*) -
+
+        The metric type used to measure vector similarity.
+
+    - `getExtraParams()` (*Map\<String, String\>*) -
+
+        The extra parameters of the index.
+
+    - `getIndexedRows()` (*long*) -
+
+        The number of rows that have been indexed.
+
+    - `getTotalRows()` (*long*) -
+
+        The total number of rows in the collection.
+
+    - `getPendingIndexRows()` (*long*) -
+
+        The number of rows waiting to be indexed.
+
+    - `getIndexState()` (*IndexBuildState*) -
+
+        The build state of the index.
+
+    - `getIndexFailedReason()` (*String*) -
+
+        The reason the index build failed, if any.
+
+    - `getProperties()` (*Map\<String, String\>*) -
+
+        **Deprecated.** The properties of the index. Use `extraParams` instead.
+
+- `getIndexDescByFieldName(String fieldName)` (*IndexDesc*) -
+
+    Returns the index description for the specified field name, or `null` if none is found. Throws `IllegalArgumentException` if the field name is `null`.
+
+- `getIndexDescByIndexName(String indexName)` (*IndexDesc*) -
+
+    Returns the index description for the specified index name, or `null` if none is found. Throws `IllegalArgumentException` if the index name is `null`.
+
+**EXCEPTIONS

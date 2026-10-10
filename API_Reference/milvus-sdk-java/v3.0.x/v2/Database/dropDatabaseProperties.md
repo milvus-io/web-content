@@ -30,8 +30,6 @@ dropDatabaseProperties(DropDatabasePropertiesReq.builder()
 
 *void*
 
-*void*
-
 **EXCEPTIONS:**
 
 - **MilvusClientException**

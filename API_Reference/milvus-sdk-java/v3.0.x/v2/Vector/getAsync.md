@@ -19,39 +19,44 @@ CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
 
 For the full list of `GetReq` builder methods, refer to [get()](get.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompletableFuture\<GetResp\>*
 
-A future completed with a `GetResp`, or completed exceptionally when the operation fails.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A future completed with a **GetResp** object representing one or more queried entities, or completed exceptionally when the operation fails. The **GetResp** object exposes the following getters:
 
-- **MilvusClientException**
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-    This exception will be raised when request validation, transport, or server execution fails.
+    The queried entities. Each **QueryResult** has the following getters:
 
-## Example
+    - `getEntity()` (*Map\<String, Object\>*) -
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.GetReq;
-import io.milvus.v2.service.vector.response.GetResp;
+        The field values of the result.
 
-import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+    - `getElementOffset()` (*Long*) -
 
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
 
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+- `getSessionTs()` (*long*) -
 
-CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
-        .collectionName("my_collection")
-        .ids(Collections.singletonList("0"))
-        .build());
-GetResp response = future.get();
-```
+    The session timestamp used for the operation.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the operation.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the operation.
+
+**EXCEPTIONS

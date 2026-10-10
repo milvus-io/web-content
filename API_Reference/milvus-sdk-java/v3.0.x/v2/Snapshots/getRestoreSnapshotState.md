@@ -21,27 +21,52 @@ getRestoreSnapshotState(GetRestoreSnapshotStateReq.builder()
 
     The restore snapshot job ID returned by `restoreSnapshot()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetRestoreSnapshotStateResp*
 
-A response containing restore job state, progress, reason, timing, and collection metadata.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **GetRestoreSnapshotStateResp** object containing restore job state, progress, reason, timing, and collection metadata.
 
-- **MilvusClientException**
+- `getJobInfo()` (*RestoreSnapshotJobInfo*) -
 
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+    The restore job information. Each **RestoreSnapshotJobInfo** has the following getters:
 
-## Example
+    - `getJobId()` (*Long*) -
 
-```java
-import io.milvus.v2.service.snapshot.request.GetRestoreSnapshotStateReq;
-import io.milvus.v2.service.snapshot.response.GetRestoreSnapshotStateResp;
+        The ID of the restore job.
 
-GetRestoreSnapshotStateReq request = GetRestoreSnapshotStateReq.builder()
-    .jobId(123456789L)
-    .build();
+    - `getSnapshotName()` (*String*) -
 
-GetRestoreSnapshotStateResp response = client.getRestoreSnapshotState(request);
-```
+        The name of the snapshot to restore.
+
+    - `getDbName()` (*String*) -
+
+        The name of the database.
+
+    - `getCollectionName()` (*String*) -
+
+        The name of the collection.
+
+    - `getState()` (*String*) -
+
+        The state of the restore job.
+
+    - `getProgress()` (*Integer*) -
+
+        The progress of the restore job, expressed as a percentage.
+
+    - `getReason()` (*String*) -
+
+        The reason the restore job failed, if any.
+
+    - `getStartTime()` (*Long*) -
+
+        The start time of the restore job.
+
+    - `getTimeCost()` (*Long*) -
+
+        The time cost of the restore job, in seconds.
+
+**EXCEPTIONS

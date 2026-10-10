@@ -26,28 +26,16 @@ listSnapshots(ListSnapshotsReq.builder()
 
     The name of the collection associated with the snapshot operation.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListSnapshotsResp*
 
-A response containing the snapshot names that match the request filter.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **ListSnapshotsResp** object containing the snapshot names that match the request filter.
 
-- **MilvusClientException**
+- `getSnapshots()` (*List\<String\>*) -
 
-    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+    The names of the snapshots that match the request filter.
 
-## Example
-
-```java
-import io.milvus.v2.service.snapshot.request.ListSnapshotsReq;
-import io.milvus.v2.service.snapshot.response.ListSnapshotsResp;
-
-ListSnapshotsReq request = ListSnapshotsReq.builder()
-    .databaseName("default")
-    .collectionName("book_chunks")
-    .build();
-
-ListSnapshotsResp response = client.listSnapshots(request);
-```
+**EXCEPTIONS

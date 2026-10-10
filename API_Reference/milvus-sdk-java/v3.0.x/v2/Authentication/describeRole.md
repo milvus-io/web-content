@@ -27,26 +27,48 @@ DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
 
     The name of the database that the role applies to. Defaults to the current database when omitted.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeRoleResp*
 
-The response contains `roleName`, `grantInfos`, and `description`.
+**RETURNS:**
 
-**EXCEPTIONS:**
+A **DescribeRoleResp** object that contains `roleName`, `grantInfos`, and `description`.
 
-- **MilvusClientException**
+- `getRoleName()` (*String*) -
 
-    This exception will be raised when any error occurs during this operation.
+    The name of the role.
 
-## Example
+- `getGrantInfos()` (*List\<GrantInfo\>*) -
 
-```java
-import io.milvus.v2.service.rbac.request.DescribeRoleReq;
-import io.milvus.v2.service.rbac.response.DescribeRoleResp;
+    The privilege grants of the role. Each **GrantInfo** has the following getters:
 
-DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
-    .roleName("analytics_reader")
-    .build());
-System.out.println(resp.getDescription());
-```
+    - `getObjectType()` (*String*) -
+
+        The type of the object to which the privilege applies.
+
+    - `getObjectName()` (*String*) -
+
+        The name of the object to which the privilege applies.
+
+    - `getRoleName()` (*String*) -
+
+        The name of the role.
+
+    - `getGrantor()` (*String*) -
+
+        The user who granted the privilege.
+
+    - `getPrivilege()` (*String*) -
+
+        The granted privilege.
+
+    - `getDbName()` (*String*) -
+
+        The name of the database.
+
+- `getDescription()` (*String*) -
+
+    The description of the role.
+
+**EXCEPTIONS

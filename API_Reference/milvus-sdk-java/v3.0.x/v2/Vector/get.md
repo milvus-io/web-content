@@ -59,44 +59,40 @@ get(GetReq.builder()
 
 A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.
 
-**PARAMETERS:**
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-- **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
+    The queried entities. Each **QueryResult** has the following getters:
 
-    **Deprecated.** A list of **QueryResp.QueryResult** objects.
+    - `getEntity()` (*Map\<String, Object\>*) -
 
-- **fields** (*Map\\\\<String,Object\\\\>*)
+        The field values of the result.
 
-    A map that contains key-value pairs of field names and their values.
+    - `getElementOffset()` (*Long*) -
 
-**EXCEPTIONS:**
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
 
-- **MilvusClientExceptions**
+- `getSessionTs()` (*long*) -
 
-    This exception will be raised when any error occurs during this operation.
+    The session timestamp used for the operation.
 
-## Example
+- `getCost()` (*Long*) -
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.GetReq;
-import io.milvus.v2.service.vector.response.GetResp;
-import java.util.Collections;
-import java.util.Set;
+    The time cost of the operation, in milliseconds.
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+- `getScannedRemoteBytes()` (*Long*) -
 
-// 2. Get entity with id 0
-GetReq getReq = GetReq.builder()
-        .collectionName("test")
-        .ids(Collections.singletonList("0"))
-        .build();
-GetResp getResp = client.get(getReq);
-```
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the operation.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the operation.
+
+- `getGetResults()` (*List\<QueryResult\>*) -
+
+    **Deprecated.** Use `getQueryResults()` instead.
+
+**EXCEPTIONS

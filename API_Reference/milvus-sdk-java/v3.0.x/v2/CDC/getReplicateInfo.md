@@ -25,29 +25,44 @@ getReplicateInfo(GetReplicateInfoReq.builder()
 
     The target physical channel whose replicate checkpoint should be returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetReplicateInfoResp*
 
-**EXCEPTIONS:**
+**RETURNS:**
 
-- **MilvusClientException**
+A **GetReplicateInfoResp** object that contains the checkpoint and salvage checkpoint information.
 
-    This exception will be raised when validation fails or the server returns an error for this operation.
+- `getCheckpoint()` (*ReplicateCheckpoint*) -
 
-## Example
+    The current replication checkpoint. Each **ReplicateCheckpoint** has the following getters:
 
-```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+    - `getClusterId()` (*String*) -
 
-GetReplicateInfoResp resp = client.getReplicateInfo(GetReplicateInfoReq.builder()
-    .sourceClusterId("cluster-a")
-    .targetPchannel("by-dev-rootcoord-dml_0_123v0")
-    .build());
-System.out.println(resp.getCheckpoint());
-```
+        The ID of the cluster.
 
-<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->
+    - `getPchannel()` (*String*) -
+
+        The physical channel.
+
+    - `getMessageID()` (*MessageID*) -
+
+        The message ID of the checkpoint. Each **MessageID** has the following getters:
+
+        - `getId()` (*String*) -
+
+            The message ID value.
+
+        - `getWalName()` (*String*) -
+
+            The WAL implementation name. Supported values are `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
+
+    - `getTimeTick()` (*Long*) -
+
+        The time tick of the checkpoint.
+
+- `getSalvageCheckpoint()` (*ReplicateCheckpoint*) -
+
+    The salvage checkpoint used to recover the replication. Has the same fields as `checkpoint`.
+
+**EXCEPTIONS
