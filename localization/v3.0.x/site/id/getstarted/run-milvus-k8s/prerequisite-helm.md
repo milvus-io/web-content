@@ -41,8 +41,8 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 <tr><th>Komponen</th><th>Persyaratan</th><th>Rekomendasi</th><th>Catatan</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU</td><td><ul><li>Prosesor Intel Core Generasi ke-2 atau yang lebih baru</li><li>Apple Silicon</li></ul></td><td><ul><li>Standalone: 4 inti atau lebih</li><li>Cluster: 8 inti atau lebih</li></ul></td><td></td></tr>
-<tr><td>Set instruksi CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Pencarian kesamaan vektor dan pembuatan indeks di Milvus memerlukan dukungan CPU terhadap set ekstensi single instruction, multiple data (SIMD). Pastikan CPU mendukung setidaknya satu dari ekstensi SIMD yang tercantum. Lihat <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPU dengan AVX</a> untuk informasi lebih lanjut.</td></tr>
+<tr><td>Prosesor</td><td><ul><li>Prosesor Intel Core Generasi ke-2 atau yang lebih tinggi</li><li>Apple Silicon</li></ul></td><td><ul><li>Standalone: 4 inti atau lebih</li><li>Cluster: 8 inti atau lebih</li></ul></td><td></td></tr>
+<tr><td>Set instruksi CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Pencarian kesamaan vektor dan pembuatan indeks di Milvus memerlukan dukungan CPU terhadap set ekstensi single instruction, multiple data (SIMD). Pastikan CPU mendukung setidaknya salah satu ekstensi SIMD yang tercantum. Lihat <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPU dengan AVX</a> untuk informasi lebih lanjut.</td></tr>
 <tr><td>RAM</td><td><ul><li>Standalone: 8G</li><li>Cluster: 32G</li></ul></td><td><ul><li>Standalone: 16G</li><li>Cluster: 128G</li></ul></td><td>Ukuran RAM bergantung pada volume data.</td></tr>
 <tr><td>Hard drive</td><td>SSD SATA 3.0 atau CloudStorage</td><td>SSD NVMe atau yang lebih tinggi</td><td>Ukuran hard drive bergantung pada volume data.</td></tr>
 </tbody>
@@ -80,8 +80,8 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Lihat <a href="#Additional-disk-requirements">persyaratan disk tambahan</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v0.1.37</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Mode layanan didukung mulai dari Woodpecker <code translate="no">v0.1.37</code> dan seterusnya.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Opsional — hanya jika Anda mengalihkan antrian pesan ke Pulsar; tidak diinstal secara default.</td></tr>
+<tr><td>Woodpecker</td><td>Disertakan dalam Milvus (mode layanan: <code translate="no">v0.1.46</code>+)</td><td>Antrian pesan default. Untuk penerapan terdistribusi, Woodpecker dapat berjalan sebagai <strong>layanan</strong> khusus; tetapkan versinya dengan <code translate="no">--set woodpecker.image.tag</code>. Untuk mode layanan, kami merekomendasikan Milvus 3.0.3 atau yang lebih baru dengan Woodpecker <code translate="no">v0.1.46</code> atau yang lebih baru.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Opsional — hanya jika Anda mengganti antrian pesan ke Pulsar; tidak diinstal secara default.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Persyaratan disk tambahan<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
@@ -139,9 +139,9 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Unduh minikube</li>
 </ol>
-<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Yang Anda perlukan</strong>, klik tombol yang sesuai dengan platform target Anda, lalu salin perintah untuk mengunduh dan menginstal file biner.</p>
+<p>Buka halaman <a href="https://minikube.sigs.k8s.io/docs/start/">Memulai</a>, periksa apakah Anda telah memenuhi persyaratan yang tercantum di bagian <strong>Yang Anda perlukan</strong>, klik tombol yang sesuai dengan platform target Anda, lalu salin perintah untuk mengunduh dan menginstal binari.</p>
 <ol start="2">
-<li>Jalankan kluster K8s menggunakan minikube</li>
+<li>Mulai kluster K8s menggunakan minikube</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>

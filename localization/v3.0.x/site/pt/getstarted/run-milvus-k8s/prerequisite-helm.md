@@ -43,7 +43,7 @@ title: Requisitos para executar o Milvus no Kubernetes
 <tbody>
 <tr><td>CPU</td><td><ul><li>CPU Intel Core de 2.ª geração ou superior</li><li>Apple Silicon</li></ul></td><td><ul><li>Autónomo: 4 núcleos ou mais</li><li>Cluster: 8 núcleos ou mais</li></ul></td><td></td></tr>
 <tr><td>Conjunto de instruções da CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>A pesquisa de similaridade de vetores e a criação de índices no Milvus requerem que a CPU suporte conjuntos de extensões de instrução única, dados múltiplos (SIMD). Certifique-se de que a CPU suporta, pelo menos, uma das extensões SIMD listadas. Consulte <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPUs com AVX</a> para obter mais informações.</td></tr>
-<tr><td>RAM</td><td><ul><li>Autónomo: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Autónomo: 16 G</li><li>Cluster: 128 G</li></ul></td><td>A capacidade da RAM depende do volume de dados.</td></tr>
+<tr><td>RAM</td><td><ul><li>Autónomo: 8 G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Autónomo: 16 G</li><li>Cluster: 128 G</li></ul></td><td>A capacidade da RAM depende do volume de dados.</td></tr>
 <tr><td>Disco rígido</td><td>SSD SATA 3.0 ou CloudStorage</td><td>SSD NVMe ou superior</td><td>A capacidade do disco rígido depende do volume de dados.</td></tr>
 </tbody>
 </table>
@@ -80,8 +80,8 @@ title: Requisitos para executar o Milvus no Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">os requisitos adicionais de espaço em disco</a>.</td></tr>
 <tr><td>MinIO</td><td>LANÇAMENTO.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Incluído no Milvus (modo de serviço: <code translate="no">v0.1.37</code>+)</td><td>Fila de mensagens predefinida. Para implementações distribuídas, o Woodpecker pode ser executado como um <strong>serviço</strong> dedicado; fixe a sua versão com <code translate="no">--set woodpecker.image.tag</code>. O modo de serviço é suportado a partir da versão <code translate="no">v0.1.37</code> do Woodpecker.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional — apenas se mudar a fila de mensagens para o Pulsar; não está instalado por predefinição.</td></tr>
+<tr><td>Woodpecker</td><td>Incluído no Milvus (modo de serviço: <code translate="no">v0.1.46</code>+)</td><td>Fila de mensagens predefinida. Para implementações distribuídas, o Woodpecker pode ser executado como um <strong>serviço</strong> dedicado; fixe a sua versão com <code translate="no">--set woodpecker.image.tag</code>. Para o modo de serviço, recomendamos o Milvus 3.0.3 ou posterior com o Woodpecker <code translate="no">v0.1.46</code> ou posterior.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional — apenas se mudar a fila de mensagens para o Pulsar; não é instalado por predefinição.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Requisitos adicionais de disco<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
@@ -104,7 +104,7 @@ title: Requisitos para executar o Milvus no Kubernetes
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Idealmente, o seu disco deve atingir mais de 500 IOPS e um tempo de latência fsync inferior a 10 ms no percentil 99. Consulte a <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentação</a> do etcd para obter requisitos mais detalhados.</p>
+<p>Idealmente, o seu disco deve atingir mais de 500 IOPS e uma latência de fsync inferior a 10 ms no 99.º percentil. Consulte a <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentação</a> do etcd para obter requisitos mais detalhados.</p>
 <h2 id="FAQs" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +139,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Descarregue o minikube</li>
 </ol>
-<p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">«Começar»</a>, verifique se cumpre as condições indicadas na secção <strong>«O que vai precisar»</strong>, clique nos botões correspondentes à sua plataforma de destino e copie os comandos para descarregar e instalar o binário.</p>
+<p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">«Começar»</a>, verifique se cumpre as condições indicadas na secção <strong>«O que vai precisar»</strong>, clique nos botões correspondentes à sua plataforma de destino e copie os comandos para descarregar e instalar o ficheiro binário.</p>
 <ol start="2">
 <li>Inicie um cluster K8s utilizando o minikube</li>
 </ol>

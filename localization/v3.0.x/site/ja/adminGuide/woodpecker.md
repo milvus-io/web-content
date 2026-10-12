@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Woodpeckerは、Milvus 3.xにおける<strong>デフォルトのメッセージキュー（書き込み先行ログ、WAL）</strong>です。オブジェクトストレージ向けに設計されたクラウドネイティブなWALであり、高いスループット、低い運用オーバーヘッド、シームレスなスケーラビリティを提供します。アーキテクチャおよびベンチマークの詳細については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpecker」</a>を参照してください。</p>
+    </button></h1><p>Woodpecker は、Milvus 3.x<strong>のデフォルトのメッセージキュー（書き込み先行ログ、WAL）</strong>です。オブジェクトストレージ向けに設計されたクラウドネイティブな WAL であり、高いスループット、低い運用オーバーヘッド、シームレスなスケーラビリティを提供します。アーキテクチャおよびベンチマークの詳細については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpecker」</a>を参照してください。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li>Milvus 3.x では、Woodpecker<strong>がデフォルトの</strong>WAL/メッセージキューとして機能し、ロギングサービスとして順序付き書き込みとリカバリを提供します。Pulsar や Kafka などの外部メッセージキューサービスは不要です。</li>
-<li>Woodpeckerは、Milvus/ストリーミングノードに<strong>組み込んで</strong>実行することも（デフォルト）、独自のポッドを持つ<strong>専用サービス</strong>として実行することもできます（分散/クラスターのみ）。</li>
+<li>Woodpeckerは、Milvus/ストリーミングノードに<strong>組み込んで</strong>実行することも（デフォルト）、独自のポッドを持つ<strong>専用サービス</strong>として実行することも可能です（分散/クラスターのみ）。</li>
 <li><code translate="no">storage.type</code> モードとして、オブジェクトストレージ（<code translate="no">minio</code> 、デフォルト）、ローカルファイルシステム（<code translate="no">local</code> ）、および専用の<code translate="no">service</code> の3つをサポートしています。「<a href="#Deployment-modes">デプロイメントモード</a>」を参照してください。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">クイックスタート<button data-href="#Quick-start" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ summary: >-
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>注：稼働中のクラスターで<code translate="no">mq.type</code> を切り替えることは、アップグレード操作となります。アップグレード手順を厳守し、本番環境に切り替える前に、新しいクラスターで検証を行ってください。</p>
+<p>注：稼働中のクラスターで<code translate="no">mq.type</code> を切り替える操作は、アップグレード操作となります。アップグレード手順を厳密に遵守し、本番環境に切り替える前に、新しいクラスターで検証を行ってください。</p>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +126,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>ログセグメントの同期・フラッシュ・コンパクション・読み取りポリシーを制御します。これらは、スループットとレイテンシの調整における主要な設定項目です。</li>
+<li>ログセグメントの同期・フラッシュ・コンパクション・読み取りポリシーを制御します。これらは、スループットとレイテンシのチューニングにおける主要な調整項目です。</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -164,9 +164,9 @@ summary: >-
 <ul>
 <li><code translate="no">minio</code> では、WoodpeckerはMilvus（MinIO/S3/GCS/OSSなど）と同一のオブジェクトストレージを共有します。</li>
 <li><code translate="no">local</code> では、シングルノードのローカルディスクはスタンドアロンモードでのみ利用可能です。すべてのポッドが共有ファイルシステム（例：NFS）にアクセスできる場合、クラスターモードでも<code translate="no">local</code> を使用できます。</li>
-<li><strong><code translate="no">service</code> このモードでは、Woodpeckerが独立してスケーラブルなサービスとして実行され、分散/クラスター展開でのみ利用可能です。</strong>スタンドアロン展開では、組み込みモード（<code translate="no">minio</code> または<code translate="no">local</code> ）が使用されます。</li>
+<li><strong><code translate="no">service</code> モードでは、Woodpeckerは独立してスケーラブルなサービスとして実行され、分散/クラスター展開でのみ利用可能です。</strong>スタンドアロン展開では、組み込みモード（<code translate="no">minio</code> または<code translate="no">local</code> ）が使用されます。</li>
 </ul>
-<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">オブジェクトストレージとの互換性<code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
+<h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">オブジェクトストレージとの互換性について<code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,14 +181,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のマトリックスは、Woodpeckerが<code translate="no">storage.type=minio</code> で構成された場合の、現在確認されているオブジェクトストレージバックエンドの互換性をまとめたものです。<a href="https://github.com/zilliztech/woodpecker/discussions/150">この情報はGitHubディスカッション#150に基づいています</a>。</p>
+    </button></h2><p>以下のマトリックスは、Woodpeckerが<code translate="no">storage.type=minio</code> で構成された場合の、オブジェクトストレージバックエンドの現在確認されている互換性をまとめたものです。<a href="https://github.com/zilliztech/woodpecker/discussions/150">この情報はGitHubディスカッション#150に基づいています</a>。</p>
 <table>
 <thead>
 <tr><th>プロバイダー／サービス</th><th>ステータス</th><th>備考</th></tr>
 </thead>
 <tbody>
 <tr><td>Azure Blob Storage</td><td>サポート対象</td><td>ネイティブの Azure SDK を使用します。</td></tr>
-<tr><td>AWS S3</td><td>サポート済み</td><td>条件付き書き込みを完全にサポートしたネイティブ S3。</td></tr>
+<tr><td>AWS S3</td><td>対応</td><td>条件付き書き込みを完全にサポートしたネイティブ S3。</td></tr>
 <tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>対応</td><td>S3の条件付き書き込みを完全にサポートしています。</td></tr>
 <tr><td>Aliyun OSS</td><td>対応</td><td>S3互換インターフェースを通じてサポートされています。</td></tr>
 <tr><td>Tencent COS</td><td>対応</td><td>S3互換インターフェースを通じてサポートされています。</td></tr>
@@ -201,7 +201,7 @@ summary: >-
 <p>注：</p>
 <ul>
 <li>互換性は、ネイティブSDKのサポートまたはS3条件付き書き込みセマンティクスのサポートに依存します。</li>
-<li>Woodpecker用にMinIOをセルフホストする場合は、<code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 以降を使用してください。</li>
+<li>Woodpecker用にMinIOを自社ホストする場合、<code translate="no">RELEASE.2024-12-18T13-15-44Z</code> 以降を使用してください。</li>
 <li>このマトリックスは<a href="https://github.com/zilliztech/woodpecker/discussions/150">現在の検討状況を</a>反映したものであり、バックエンドのサポートがさらに検証されるにつれて変更される可能性があります。</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">導入ガイド<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
@@ -238,7 +238,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>このサンプルでは、Woodpecker をメッセージキューとして設定し、ストリーミングノードを有効にします。初回起動時はイメージの取得に時間がかかる場合があります。すべてのポッドの準備が整うまでお待ちください：</p>
+<p>このサンプルでは、Woodpeckerをメッセージキューとして設定し、ストリーミングノードを有効にします。初回起動時はイメージの取得に時間がかかる場合があります。すべてのポッドの準備が整うまでお待ちください:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
@@ -260,8 +260,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>以下のコマンドを実行して、Milvusクラスターをアンインストールします。</p>
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>Woodpeckerのパラメータを調整する必要がある場合は、「<a href="#Configuration">構成</a>」に記載されている設定に従ってください。</p>
-<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">Kubernetes上のMilvusクラスターでWoodpeckerを有効にする（Helmチャート、storage=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
+<p>Woodpeckerのパラメータを調整する必要がある場合は、「<a href="#Configuration">設定</a>」に記載されている手順に従ってください。</p>
+<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">Kubernetes上のMilvusクラスタでWoodpeckerを有効にする（Helmチャート、storage=minio）<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,7 +295,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>デプロイ後は、ドキュメントに従ってポートフォワーディングを行い、接続してください。Woodpeckerのパラメータを調整するには、「<a href="#Configuration">設定」</a>に記載されている手順に従ってください。</p>
+<p>デプロイ後は、ドキュメントに従ってポートフォワードを行い、接続してください。Woodpeckerのパラメータを調整するには、「<a href="#Configuration">設定」</a>に記載されている手順に従ってください。</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker での Milvus スタンドアロン（storage=local）で Woodpecker を有効にする<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -311,19 +311,19 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 3.x では、Docker スタンドアロン展開では、<strong>デフォルトで</strong> <strong>ローカルファイルシステムを</strong>WAL バックエンドとして使用する Woodpecker が使用されます。追加の設定は不要です。「<a href="/docs/ja/install_standalone-docker.md">Docker で Milvus を実行する</a>」の手順に従ってください：</p>
+    </button></h3><p>Milvus 3.x では、Docker スタンドアロン展開において、Woodpecker<strong>はデフォルトで</strong> <strong>ローカルファイルシステムを</strong>WAL バックエンドとして使用します。追加の設定は不要です。「<a href="/docs/ja/install_standalone-docker.md">Docker で Milvus を実行する</a>」の手順に従ってください:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Woodpeckerを調整するには、初回起動後に生成された<code translate="no">user.yaml</code> を編集し、<code translate="no">bash standalone_embed.sh restart</code> を実行して変更を適用してください（<code translate="no">start</code> を再実行すると<code translate="no">user.yaml</code> が再生成されるため、編集内容は<code translate="no">restart</code> で適用してください）：</p>
+<p>Woodpeckerを調整するには、初回起動後に生成された<code translate="no">user.yaml</code> を編集し、<code translate="no">bash standalone_embed.sh restart</code> を実行して変更を適用してください（<code translate="no">start</code> を実行すると<code translate="no">user.yaml</code> が再生成されるため、編集内容は<code translate="no">restart</code> で適用してください）：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
     <span class="hljs-attr">segmentSyncPolicy:</span>
       <span class="hljs-attr">maxFlushThreads:</span> <span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">Docker Compose を使用した Milvus スタンドアロン版で Woodpecker を有効にする（storage=minio）<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="anchor-icon" translate="no">
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">Docker Compose を使用した Milvus スタンドアロンで Woodpecker を有効にする（storage=minio）<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,17 +374,17 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Woodpecker サービスモードについては、コンパクションのクリーンアップおよびグループコミットの最適化のため、近日リリース予定の Milvus 3.0.1 以降、および Woodpecker v0.1.37 以降を使用することを推奨します。</p>
+<p>Woodpecker サービスモードをご利用の場合は、Milvus 3.0.3 以降と Woodpecker v0.1.46 以降を組み合わせることを推奨します。</p>
 </div>
-<p>Woodpecker<strong>サービスモードは</strong> <strong>Milvus 3.0</strong>の機能です。分散/クラスタ展開の場合、<code translate="no">streaming.woodpecker.embedded=false</code> を設定することで、Woodpecker をストリーミングノードに組み込むのではなく、<strong>専用のサービス</strong>（個別のポッド）として実行できます：</p>
+<p><strong>Woodpecker</strong> <strong>のサービス</strong> <strong>モードはMilvus 3.0の</strong>機能です。分散/クラスタ展開の場合、<code translate="no">streaming.woodpecker.embedded=false</code> を設定することで、Woodpeckerをストリーミングノードに組み込むのではなく、<strong>専用のサービス</strong>（個別のポッド）として実行できます：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトでレプリカ数4）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）上でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。これにより、クラスタには別の<code translate="no">woodpecker</code> ポッドセットが含まれることになります：</p>
+<p>これにより、Woodpeckerは専用のStatefulSet（<code translate="no">my-release-milvus-woodpecker</code> 、デフォルトで4つのレプリカ）としてデプロイされ、ヘッドレスサービスによってフロントエンドが構成されます。ポート<code translate="no">18080</code> （サービス）、<code translate="no">17946</code> （ゴシップ）、<code translate="no">9091</code> （メトリクス）上でゴシップクラスタリングが行われ、ストレージバックエンドにはMinIOが使用されます。 このサービスには<strong>3ノード</strong>のクォーラムが必要です。デフォルトの<strong>レプリカ数4は</strong>、1ノードの障害を許容しつつクォーラムを維持するため、<code translate="no">woodpecker.replicaCount</code> を3未満に設定しないでください。このクラスタには、別途<code translate="no">woodpecker</code> のポッドセットが含まれます：</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -408,7 +408,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpeckerのスループットおよびレイテンシの特性は、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の新機能）で異なります。以下のガイダンスはモードごとに分類されています。</p>
+    </button></h2><p>Woodpeckerのスループットとレイテンシの特性は、<strong>組み込み</strong>モードと<strong>サービス</strong>モード（Milvus 3.0の新機能）で異なります。以下のガイダンスはモードごとに分類されています。</p>
 <h3 id="Embedded-mode" class="common-anchor-header">組み込みモード<button data-href="#Embedded-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -428,18 +428,18 @@ docker restart milvus-standalone
 <ul>
 <li>ストレージ側
 <ul>
-<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やします（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルで100 MB/s程度が上限となることが多いですが、EC2からS3への単一接続ではGB/sに達することがあります。</li>
+<li><strong>オブジェクトストレージ（MinIO／S3互換）</strong>：同時実行数とオブジェクトサイズを増やします（極小のオブジェクトは避けてください）。ネットワークおよびバケットの帯域幅制限に注意してください。SSD上の単一のMinIOノードでは、ローカルで100 MB/s程度が上限となることが多いですが、単一のEC2からS3への転送ではGB/sに達することがあります。</li>
 <li><strong>ローカル／共有ファイルシステム（ローカル）</strong>：NVMeや高速ディスクを優先します。ファイルシステムが小規模な書き込みやfsyncのレイテンシに適切に対応していることを確認してください。</li>
 </ul></li>
 <li>Woodpeckerの調整パラメータ
 <ul>
-<li><code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> および<code translate="no">maxFlushThreads</code> を増やして、フラッシュ量を拡大し、並列性を高めます。</li>
-<li>メディアの特性に応じて<code translate="no">maxInterval</code> を調整してください（集約時間を長くすることで、レイテンシとスループットのトレードオフを調整できます）。</li>
+<li><code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> および<code translate="no">maxFlushThreads</code> を増やして、フラッシュ量を拡大し、並列度を高めます。</li>
+<li>メディアの特性に応じて<code translate="no">maxInterval</code> を調整します（集約時間を長くすることで、レイテンシとスループットのトレードオフを図ります）。</li>
 <li>オブジェクトストレージの場合は、セグメント切り替えを減らすために<code translate="no">segmentRollingPolicy.maxSize</code> を増やすことを検討してください。</li>
 </ul></li>
 <li>クライアント／アプリケーション側
 <ul>
-<li>バッチサイズを大きくし、同時書き込みを行うライターやクライアントの数を増やしてください。</li>
+<li>バッチサイズを大きくし、同時書き込みを行うライター/クライアントの数を増やしてください。</li>
 <li>頻繁な小規模な書き込みを避けるため、リフレッシュやインデックス構築のタイミング（トリガー前にバッチをまとめる）を制御してください。</li>
 </ul></li>
 </ul>
@@ -458,7 +458,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>サービスモードでは、オブジェクトストレージをバックエンドとする WAL の高い書き込みスループットを維持しつつ、低レイテンシを実現します（<a href="#Latency">「レイテンシ」</a>を参照）。 上記のストレージ側およびクライアント側のチューニングは引き続き適用されます。さらに、Woodpeckerは独自のサービスとして実行されるため、レプリカ（<code translate="no">woodpecker.replicaCount</code> 、デフォルトは4）を追加することで書き込み容量を水平方向にスケールでき、書き込みは1-RTTクォーラムレプリケーションと、ブローカーによる転送を回避するトポロジーを意識した読み取りの恩恵を受けます。</p>
+    </button></h3><p>サービスモードでは、オブジェクトストレージをバックエンドとする WAL の高い書き込みスループットを維持しつつ、低レイテンシを実現します（<a href="#Latency">「レイテンシ」</a>を参照）。 上記のストレージ側およびクライアント側のチューニングは引き続き適用されます。さらに、Woodpeckerは独自のサービスとして実行されるため、レプリカ（<code translate="no">woodpecker.replicaCount</code> 、デフォルトは4）を追加することで書き込み容量を水平方向に拡張でき、書き込みは1-RTTクォーラムレプリケーションと、ブローカーによる転送を回避するトポロジー認識型読み取りの恩恵を受けます。</p>
 <p><strong>バッチ挿入のデモ</strong>— 以下のコマンドを使用して書き込みスループットを測定してください：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -532,7 +532,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮してオブジェクトストレージ向けに設計されたクラウドネイティブなWALです。軽量な組み込みモードは、コストとスループットの最適化を優先します。これは、ほとんどのシナリオにおいて、個々の書き込みリクエストに対して低レイテンシを求めるのではなく、単にデータが特定の時間内に書き込まれることが求められるためです。 そのため、Woodpeckerはバッチ書き込みを採用しており、デフォルトの間隔はローカルファイルシステムストレージバックエンドで10ms、MinIOのようなストレージバックエンドで200msに設定されています。書き込み処理が遅い場合、最大レイテンシは間隔時間とフラッシュ時間の合計に等しくなります。</p>
+    </button></h3><p>Woodpeckerは、スループット、コスト、レイテンシのトレードオフを考慮してオブジェクトストレージ向けに設計されたクラウドネイティブなWALです。軽量な組み込みモードは、コストとスループットの最適化を優先します。これは、ほとんどのシナリオにおいて、個々の書き込みリクエストに対して低レイテンシが求められるのではなく、データが一定の時間内に書き込まれることだけが求められるためです。 そのため、Woodpeckerはバッチ書き込みを採用しており、デフォルトの間隔はローカルファイルシステムストレージバックエンドで10ms、MinIOのようなストレージバックエンドで200msに設定されています。書き込み処理が遅い場合、最大レイテンシは間隔時間とフラッシュ時間の合計となります。</p>
 <p>なお、バッチ挿入は時間間隔だけでなく、デフォルトで2MBに設定されているバッチサイズによってもトリガーされる点に注意してください。</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">サービスモード (Milvus 3.0 以降)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -549,13 +549,119 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>を実現します。これは、従来の3レプリカ構成のローカルディスクWALと同等のレベルです。一般的な3レプリカ、AZを跨ぐ展開環境において、書き込みレイテンシはミリ秒単位に収まります。これは以下の仕組みによって実現されています。</p>
+    </button></h3><p>サービスモードでは、コストを低く抑えつつ、<strong>ミリ秒レベルの書き込みレイテンシ</strong>（従来の3レプリカ構成のローカルディスクWALと同等）を実現します。一般的な3レプリカのAZ横断展開において、書き込みレイテンシはミリ秒単位に収まります。これは以下の仕組みによって達成されます：</p>
 <ul>
-<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ以内にクォーラム書き込みを完了します。これにより、AZ間トラフィックは2つのレプリカ分のデータ量に固定されます（ブローカー/リーダーベースのレプリケーションで典型的な、約1/3の余分なAZ間トラフィックと比較して）。</li>
-<li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最も近いレプリカに直接行われるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
-<li><strong>セグメントのローリング直後のオブジェクトストレージへの即時アップロード</strong>— 各セグメントはそのライフサイクル全体を追跡し、ローリングされるとすぐにオブジェクトストレージにアップロードされます。これにより、レイテンシを犠牲にすることなく、ローカルディスクの占有容量とストレージコストを低く抑えることができます。</li>
-<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードすれば済み（ノード全体のコピーは不要）、スケーリングはノード間レプリケーションの帯域幅に制約されず、大規模なノード交換でもレプリケーションストームが発生しません。</li>
+<li><strong>1 RTT クォーラム書き込み</strong>— クライアント主導型レプリケーションでは、1回のラウンドトリップ（RTT）以内にクォーラム書き込みを完了します。これにより、AZをまたぐトラフィックは2つのレプリカ分のデータ量に固定されます（これに対し、ブローカー／リーダーベースのレプリケーションでは、通常、約1/3分の追加のAZ間トラフィックが発生します）。</li>
+<li><strong>トポロジーを意識したシングルホップ読み取り</strong>— 各読み取りはブローカーを経由せずに最も近いレプリカに直接送信されるため、ブローカーベースのシステムに見られるランダムなAZ間読み取り（AZ間読み取りトラフィックの約2/3）を回避します。</li>
+<li><strong>セグメントのローリング後の即時オブジェクトストレージへのアップロード</strong>— 各セグメントはそのライフサイクル全体を追跡し、ローリングされるとすぐにオブジェクトストレージにアップロードされるため、レイテンシを犠牲にすることなく、ローカルディスクの占有容量とストレージコストを低く抑えることができる。</li>
+<li><strong>ノード間での継続的なレプリケーションなし</strong>— ログは共有ストレージとして機能するオブジェクトストレージに永続化されるため、フェイルオーバー時には生存しているレプリカのみを再アップロードし（ノード全体のコピーは行わない）、スケーリングはノード間レプリケーションの帯域幅に制限されず、大規模なノード置換でもレプリケーションストームが発生しない。</li>
 </ul>
-<p>AZをまたぐ展開において、サービスモードは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込み量を</strong>約<strong>3分の1</strong>、<strong>読み取り量を約3分の2</strong>削減します。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpecker アーキテクチャ」を</a>参照してください。</p>
+<p>AZをまたぐ展開において、サービスモードは、ブローカーベースのログシステムと比較して、AZ間ネットワーク<strong>トラフィックの書き込みを</strong>約<strong>1/3</strong>、<strong>読み取りを</strong>約<strong>2/3</strong>削減します。詳細な設計およびコスト分析については、<a href="/docs/ja/woodpecker_architecture.md">「Woodpeckerアーキテクチャ」を</a>参照してください。</p>
 <p>アーキテクチャ、デプロイメントモード（MemoryBuffer / QuorumBuffer）、およびパフォーマンスの詳細については、「<a href="/docs/ja/woodpecker_architecture.md">Woodpecker Architecture</a>」を参照してください。</p>
 <p>パラメータの詳細については、Woodpecker<a href="https://github.com/zilliztech/woodpecker">のGitHubリポジトリ</a>を参照してください。</p>
+<h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Milvus および Woodpecker のバージョン<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Embedded-mode-Milvus-26x" class="common-anchor-header">組み込みモード（Milvus 2.6.x）<button data-href="#Embedded-mode-Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 2.6.x では、Woodpecker は Milvus に組み込まれて実行され、<strong>Milvus イメージ</strong>に含まれています。以下の表には、各 Milvus リリースで使用される Woodpecker ライブラリが記載されています。別途デプロイやアップグレードを行うための Woodpecker サーバーイメージは存在しません。 Milvus をアップグレードすると、組み込みの Woodpecker ライブラリも更新されます。各バージョン範囲には、両方のエンドポイントが含まれています。</p>
+<table>
+<thead>
+<tr><th>Milvus リリース</th><th>組み込み Woodpecker ライブラリ</th><th>依存関係のソース</th></tr>
+</thead>
+<tbody>
+<tr><td>v2.6.0</td><td><code translate="no">v0.1.3</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.1–v2.6.2</td><td><code translate="no">v0.1.4</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.1/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.2/pkg/go.mod">最新のリリース</a></td></tr>
+<tr><td>v2.6.3–v2.6.5v2.6.3–v2.6.5</td><td><code translate="no">v0.1.6</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.3/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.5/pkg/go.mod">最後のリリース</a></td></tr>
+<tr><td>v2.6.6</td><td><code translate="no">v0.1.11</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.6/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.7</td><td><code translate="no">v0.1.12</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.7/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.8–v2.6.12</td><td><code translate="no">v0.1.13</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.8/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.12/pkg/go.mod">最新のリリース</a></td></tr>
+<tr><td>v2.6.13–v2.6.15</td><td><code translate="no">v0.1.14-0.20260317120738-e47dc37481fd</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.13/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.15/pkg/go.mod">最後のリリース</a></td></tr>
+<tr><td>v2.6.16–v2.6.17</td><td><code translate="no">v0.1.14-0.20260427080535-9dc9b3189baa</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.16/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.17/pkg/go.mod">最後のリリース</a></td></tr>
+<tr><td>v2.6.18–v2.6.23</td><td><code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod">最後のリリース</a></td></tr>
+<tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">最初のリリース</a>·<a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">最後のリリース</a></td></tr>
+</tbody>
+</table>
+<p><code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> などのバージョンは、特定の Woodpecker コミットを識別する Go の疑似バージョンです。これらは、Milvus のパッチリリース間の依存関係の更新を区別するために、embedded-mode テーブルに完全に保持されています。</p>
+<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">サービスモード（Milvus 3.0以降）<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Woodpeckerのサービスモードは、Milvus 3.0以降でサポートされています。<strong>Woodpeckerクライアントライブラリ</strong>はMilvusイメージに同梱されていますが、<strong>Woodpeckerサーバーイメージは</strong>別途リリースおよびデプロイされます。サーバーイメージのバージョンは、<code translate="no">woodpecker.image.tag</code> で設定してください。</p>
+<p>クライアントは、古いサーバーバージョンとの下位互換性があります。Milvus をアップグレードする際は、クライアントとサーバーの両方がそのバージョンの修正プログラムを受け取れるよう、Woodpecker サービスイメージも以下の対応するバージョンにアップグレードすることを推奨します。「サーバー」列には推奨される組み合わせが記載されていますが、互換性のあるサーバーの最低バージョンは指定されていません。</p>
+<table>
+<thead>
+<tr><th>Milvus リリース</th><th>同梱のWoodpeckerクライアント</th><th>推奨されるWoodpeckerサーバーイメージタグ</th><th>クライアントの依存関係ソース</th></tr>
+</thead>
+<tbody>
+<tr><td>v3.0.0</td><td><code translate="no">v0.1.33</code></td><td><code translate="no">v0.1.33</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.1</td><td><code translate="no">v0.1.38</code></td><td><code translate="no">v0.1.38</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.2</td><td><code translate="no">v0.1.42</code></td><td><code translate="no">v0.1.42</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.3</td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod">go.mod</a></td></tr>
+</tbody>
+</table>
+<p>Milvus 3.x は組み込みモードもサポートしています。このモードでは、バンドルされている Woodpecker ライブラリが「クライアント」列に記載されているバージョンを使用し、別途サーバーイメージは必要ありません。</p>
+<h3 id="Latest-releases-and-upgrade-recommendations" class="common-anchor-header">最新リリースとアップグレードに関する推奨事項<button data-href="#Latest-releases-and-upgrade-recommendations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>2026年10月12日現在、</strong>2.6.x および 3.x シリーズの最新の安定版リリースは以下の通りです：</p>
+<table>
+<thead>
+<tr><th>Milvus シリーズ</th><th>最新の安定版 Milvus リリース</th><th>同梱の Woodpecker ライブラリ／クライアント</th><th>推奨されるサービスイメージタグ</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">v2.6.25</a></td><td><code translate="no">v0.1.44</code> (組み込み)</td><td>該当なし</td></tr>
+<tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">v3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
+</tbody>
+</table>
+<p>バンドルされているWoodpeckerライブラリの更新を含む最新の修正プログラムを適用するには、<strong>選択したMilvusリリースシリーズの最新の安定版パッチリリースへの</strong>アップグレードを推奨します。新しいリリースについては、<a href="https://github.com/milvus-io/milvus/releases">Milvusのリリース情報</a>および対象リリースの<code translate="no">pkg/go.mod</code> をご確認ください。上記の表は、記載された日付時点で利用可能なリリースを示しています。</p>
+<p><strong>Woodpecker サービスモード</strong>の場合は、<strong>Milvus 3.0.3 以降と Woodpecker v0.1.46 以降の使用を</strong>推奨します。サービスモードで Milvus をアップグレードする際は、別途デプロイされている Woodpecker サーバーイメージも、対応する推奨バージョンに更新してください。</p>
+<p>アップグレード手順については、「<a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm を使用した Milvus クラスタのアップグレード</a>」、「<a href="/docs/ja/upgrade_milvus_cluster-operator.md">Milvus Operator を使用した Milvus クラスタのアップグレード</a>」、または「<a href="/docs/ja/upgrade_milvus_standalone-docker.md">Docker Compose を使用した Milvus スタンドアロンのアップグレード</a>」を参照してください。</p>

@@ -38,9 +38,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>default</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
-<li>Woodpecker dapat dijalankan <strong>secara tertanam</strong> di node Milvus/streaming (default), atau sebagai <strong>layanan khusus</strong> dengan pod-nya sendiri (hanya terdistribusi/kluster).</li>
-<li>Woodpecker mendukung tiga mode penyimpanan ( <code translate="no">storage.type</code> ): penyimpanan objek (<code translate="no">minio</code>, default), sistem berkas lokal (<code translate="no">local</code>), dan penyimpanan khusus ( <code translate="no">service</code>). Lihat <a href="#Deployment-modes">Mode Penyebaran</a>.</li>
+<li>Di Milvus 3.x, Woodpecker adalah WAL/antrian pesan <strong>bawaan</strong>, yang menyediakan penulisan terurut dan pemulihan sebagai layanan pencatatan. Tidak diperlukan layanan antrian pesan eksternal (seperti Pulsar atau Kafka).</li>
+<li>Woodpecker dapat dijalankan <strong>secara tertanam</strong> di dalam node Milvus/streaming (default), atau sebagai <strong>layanan khusus</strong> dengan pod-nya sendiri (hanya untuk distribusi/kluster).</li>
+<li>Woodpecker mendukung tiga mode penyimpanan ( <code translate="no">storage.type</code> ): penyimpanan objek (<code translate="no">minio</code>, default), sistem file lokal (<code translate="no">local</code>), dan penyimpanan khusus ( <code translate="no">service</code>). Lihat <a href="#Deployment-modes">Mode Deployment</a>.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Panduan Cepat<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,12 +127,12 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>Mengontrol kebijakan sinkronisasi/pembersihan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyetelan throughput/latensi.</li>
+<li>Mengontrol kebijakan sinkronisasi/pengosongan/pemadatan/pembacaan untuk segmen log. Ini adalah pengaturan utama untuk penyesuaian throughput dan latensi.</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
 <li><strong>type</strong>: <code translate="no">minio</code> untuk penyimpanan objek yang kompatibel dengan MinIO/S3 (MinIO/S3/GCS/OSS, dll.); <code translate="no">local</code> untuk sistem berkas lokal/bersama.</li>
-<li><strong>rootPath</strong>: Jalur akar untuk backend penyimpanan (berlaku untuk <code translate="no">local</code>; dengan <code translate="no">minio</code>, jalur ditentukan oleh bucket/prefix).</li>
+<li><strong>rootPath</strong>: Jalur akar untuk backend penyimpanan (berlaku untuk <code translate="no">local</code>; dengan <code translate="no">minio</code>, jalur ditentukan oleh bucket/prefiks).</li>
 </ul></li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">Mode penerapan<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -195,15 +195,15 @@ summary: >-
 <tr><td>Tencent COS</td><td>Didukung</td><td>Didukung melalui antarmuka yang kompatibel dengan S3.</td></tr>
 <tr><td>Google Cloud Storage (GCS)</td><td>Didukung</td><td>Didukung melalui mode interoperabilitas S3.</td></tr>
 <tr><td>Huawei Cloud OBS</td><td>Tidak didukung</td><td>Tidak memiliki semantik Conditional Write yang diperlukan.</td></tr>
-<tr><td>VAST Data</td><td>Didukung</td><td>Telah diverifikasi oleh komunitas; hanya berfungsi dengan bucket non-versi.</td></tr>
-<tr><td>Penyimpanan lain yang kompatibel dengan S3</td><td>Sebagian</td><td>Bergantung pada dukungan penuh untuk semantik Penulisan Bersyarat S3.</td></tr>
+<tr><td>VAST Data</td><td>Didukung</td><td>Telah diverifikasi oleh komunitas; hanya berfungsi dengan bucket tanpa versi.</td></tr>
+<tr><td>Penyimpanan lain yang kompatibel dengan S3</td><td>Sebagian</td><td>Bergantung pada dukungan penuh terhadap semantik Penulisan Bersyarat S3.</td></tr>
 </tbody>
 </table>
 <p>Catatan:</p>
 <ul>
 <li>Kompatibilitas bergantung pada dukungan SDK asli atau dukungan untuk semantik Penulisan Bersyarat S3.</li>
 <li>Jika Anda menghosting MinIO sendiri untuk Woodpecker, gunakan versi <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> atau yang lebih baru.</li>
-<li>Matriks ini mencerminkan <a href="https://github.com/zilliztech/woodpecker/discussions/150">diskusi saat ini</a> dan dapat berkembang seiring dengan validasi dukungan backend lebih lanjut.</li>
+<li>Matriks ini mencerminkan <a href="https://github.com/zilliztech/woodpecker/discussions/150">diskusi saat ini</a> dan dapat berubah seiring dengan validasi dukungan backend lebih lanjut.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Panduan penerapan<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,11 +239,11 @@ summary: >-
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Contoh ini mengonfigurasi Woodpecker sebagai antrian pesan dan mengaktifkan Streaming Node. Pengaktifan pertama mungkin memerlukan waktu untuk menarik gambar; tunggu hingga semua pod siap:</p>
+<p>Contoh ini mengonfigurasi Woodpecker sebagai antrian pesan dan mengaktifkan Streaming Node. Pengaktifan pertama mungkin memerlukan waktu untuk mengunduh gambar; tunggu hingga semua pod siap:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 kubectl get milvus my-release -o yaml | grep -A2 status
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah siap, Anda akan melihat pods yang mirip dengan:</p>
+<p>Setelah siap, Anda akan melihat pod-pod seperti berikut:</p>
 <pre><code translate="no">NAME                                               READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                  <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">17</span>m
@@ -277,7 +277,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pertama, tambahkan dan perbarui Helm chart Milvus seperti yang dijelaskan dalam <a href="/docs/id/install_cluster-helm.md">Jalankan Milvus di Kubernetes dengan Helm</a>.</p>
+    </button></h3><p>Pertama, tambahkan dan perbarui Helm Chart Milvus seperti yang dijelaskan dalam bagian " <a href="/docs/id/install_cluster-helm.md">Menjalankan Milvus di Kubernetes dengan Helm</a>".</p>
 <p>Kemudian lakukan deployment dengan salah satu contoh berikut:</p>
 <p>– Deploy kluster (pengaturan yang direkomendasikan dengan Woodpecker dan Streaming Node diaktifkan):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -375,17 +375,17 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.1 yang akan datang atau rilis yang lebih baru dengan Woodpecker v0.1.37 atau yang lebih baru untuk pembersihan kompaksi dan optimasi komit grup.</p>
+<p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.3 atau yang lebih baru dengan Woodpecker v0.1.46 atau yang lebih baru.</p>
 </div>
-<p><strong>Mode layanan</strong> Woodpecker adalah fitur <strong>Milvus 3.0</strong>. Untuk penyebaran terdistribusi/kluster, Anda dapat menjalankan Woodpecker sebagai <strong>layanan khusus</strong> (pod terpisah) alih-alih tertanam di node streaming dengan mengatur ` <code translate="no">streaming.woodpecker.embedded=false</code>`:</p>
+<p><strong>Mode layanan</strong> Woodpecker adalah fitur <strong>Milvus 3.0</strong>. Untuk deployment terdistribusi/kluster, Anda dapat menjalankan Woodpecker sebagai <strong>layanan terpisah</strong> (pod terpisah) alih-alih tertanam di node streaming dengan mengatur ` <code translate="no">streaming.woodpecker.embedded=false</code>`:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pengaturan ini akan menyebarkan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, terkluster melalui mekanisme gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), dengan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika memastikan kuorum tetap terpenuhi sekaligus menoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup kumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
+<p>Pengaturan ini akan mengimplementasikan Woodpecker sebagai StatefulSet khusus (<code translate="no">my-release-milvus-woodpecker</code>, 4 replika secara default) yang didukung oleh layanan headless, terkluster melalui mekanisme gossip pada port <code translate="no">18080</code> (layanan), <code translate="no">17946</code> (gossip), dan <code translate="no">9091</code> (metrik), dengan MinIO sebagai backend penyimpanannya. Layanan ini memerlukan kuorum sebanyak <strong>3</strong> node; pengaturan default <strong>4</strong> replika memastikan kuorum tetap terpenuhi sekaligus menoleransi kegagalan satu node, jadi jangan atur ` <code translate="no">woodpecker.replicaCount</code> ` di bawah 3. Kluster tersebut kemudian mencakup sekumpulan pod ` <code translate="no">woodpecker</code> ` terpisah:</p>
 <pre><code translate="no"><span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">0</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">1</span>
 <span class="hljs-keyword">my</span>-release-milvus-woodpecker-<span class="hljs-number">2</span>
@@ -394,7 +394,7 @@ docker restart milvus-standalone
 <div class="alert note">
 <p>Mode layanan Woodpecker ( <code translate="no">service</code> ) hanya untuk deployment <strong>terdistribusi/kluster</strong> — deployment mandiri menjalankan Woodpecker yang tertanam (<code translate="no">minio</code> atau <code translate="no">local</code>). Milvus Operator belum mendukung mode layanan Woodpecker.</p>
 </div>
-<h2 id="Throughput-tuning-tips" class="common-anchor-header">Tips penyetelan throughput<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
+<h2 id="Throughput-tuning-tips" class="common-anchor-header">Tips penyesuaian throughput<button data-href="#Throughput-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -435,7 +435,7 @@ docker restart milvus-standalone
 <li>Pengaturan Woodpecker
 <ul>
 <li>Tingkatkan nilai ` <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> ` dan ` <code translate="no">maxFlushThreads</code> ` untuk flush yang lebih besar dan paralelisme yang lebih tinggi.</li>
-<li>Sesuaikan nilai ` <code translate="no">maxInterval</code> ` sesuai karakteristik media (tukar latensi dengan throughput menggunakan agregasi yang lebih panjang).</li>
+<li>Sesuaikan nilai <code translate="no">maxInterval</code> sesuai dengan karakteristik media (tukar latensi dengan throughput melalui agregasi yang lebih lama).</li>
 <li>Untuk penyimpanan objek, pertimbangkan untuk meningkatkan nilai ` <code translate="no">segmentRollingPolicy.maxSize</code> ` guna mengurangi pergantian segmen.</li>
 </ul></li>
 <li>Sisi klien/aplikasi
@@ -459,7 +459,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Mode layanan mempertahankan throughput penulisan tinggi dari WAL yang didukung penyimpanan objek sekaligus menambahkan latensi rendah (lihat <a href="#Latency">Latensi</a>). Penyesuaian di sisi penyimpanan dan sisi klien di atas tetap berlaku; selain itu, karena Woodpecker berjalan sebagai layanannya sendiri, Anda dapat menskalakan kapasitas penulisan secara horizontal dengan menambahkan replika (<code translate="no">woodpecker.replicaCount</code>, default 4), dan penulisan mendapat manfaat dari replikasi kuorum satu-RTT serta pembacaan yang sadar topologi yang menghindari penerusan broker.</p>
+    </button></h3><p>Mode layanan mempertahankan throughput penulisan yang tinggi dari WAL yang didukung penyimpanan objek sekaligus menambahkan latensi rendah (lihat <a href="#Latency">Latensi</a>). Penyesuaian sisi penyimpanan dan sisi klien di atas tetap berlaku; selain itu, karena Woodpecker berjalan sebagai layanannya sendiri, Anda dapat menskalakan kapasitas penulisan secara horizontal dengan menambahkan replika (<code translate="no">woodpecker.replicaCount</code>, default 4), dan penulisan mendapat manfaat dari replikasi kuorum satu-RTT serta pembacaan yang sadar topologi yang menghindari penerusan broker.</p>
 <p><strong>Demo penyisipan batch</strong> — gunakan perintah berikut untuk mengukur throughput penulisan:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -533,7 +533,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu, bukan menuntut latensi rendah untuk setiap permintaan penulisan. Oleh karena itu, Woodpecker menerapkan penulisan bertahap (batch), dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
+    </button></h3><p>Woodpecker adalah WAL cloud-native yang dirancang untuk penyimpanan objek dengan kompromi antara throughput, biaya, dan latensi. Mode tertanam yang ringan memprioritaskan optimasi biaya dan throughput, karena sebagian besar skenario hanya memerlukan data ditulis dalam waktu tertentu daripada menuntut latensi rendah untuk permintaan penulisan individu. Oleh karena itu, Woodpecker menerapkan penulisan berbatch, dengan interval default 10 ms untuk backend penyimpanan sistem berkas lokal dan 200 ms untuk backend penyimpanan sejenis MinIO. Selama operasi penulisan yang lambat, latensi maksimum sama dengan waktu interval ditambah waktu flush.</p>
 <p>Perlu dicatat bahwa penyisipan batch dipicu tidak hanya oleh interval waktu tetapi juga oleh ukuran batch, yang secara default sebesar 2MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -550,13 +550,119 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Mode layanan menghadirkan <strong>latensi penulisan tingkat milidetik</strong> — setara dengan WAL disk lokal tiga replika tradisional — sambil menjaga biaya tetap rendah. Dalam penyebaran tiga replika lintas AZ yang umum, latensi penulisan tetap berada dalam kisaran milidetik. Hal ini dicapai melalui:</p>
+    </button></h3><p>Mode layanan menghadirkan <strong>latensi penulisan tingkat milidetik</strong> — setara dengan WAL disk lokal tiga replika tradisional — sambil menjaga biaya tetap rendah. Dalam penyebaran tiga replika lintas AZ yang umum, latensi penulisan tetap berada dalam rentang milidetik. Hal ini dicapai melalui:</p>
 <ul>
-<li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
-<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas AZ acak (≈2/3 lalu lintas pembacaan lintas AZ) pada sistem berbasis broker.</li>
-<li><strong>Unggahan langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segmen melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah segment rolling, sehingga menjaga penggunaan ruang disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
+<li><strong>Penulisan kuorum satu RTT</strong> — replikasi yang digerakkan klien menyelesaikan penulisan kuorum dalam satu putaran perjalanan (round trip), dengan lalu lintas lintas-AZ dibatasi pada data setara dua replika (dibandingkan dengan lalu lintas lintas-AZ tambahan sekitar 1/3 yang umum pada replikasi berbasis broker/leader).</li>
+<li><strong>Pembacaan satu lompatan yang sadar topologi</strong> — setiap pembacaan langsung menuju replika terdekat alih-alih diteruskan melalui broker, sehingga menghindari pembacaan lintas-AZ acak (≈2/3 lalu lintas pembacaan lintas-AZ) yang umum terjadi pada sistem berbasis broker.</li>
+<li><strong>Unggah langsung ke penyimpanan objek setelah segment rolling</strong> — setiap segment melacak siklus hidupnya secara penuh dan diunggah ke penyimpanan objek segera setelah segment rolling, sehingga menjaga penggunaan ruang disk lokal dan biaya penyimpanan tetap rendah tanpa mengorbankan latensi.</li>
 <li><strong>Tidak ada replikasi node-ke-node yang berkelanjutan</strong> — log disimpan ke penyimpanan objek yang berfungsi sebagai penyimpanan bersama, sehingga failover hanya mengunggah ulang replika yang masih berfungsi (tanpa menyalin seluruh node), penskalaan tidak dibatasi oleh bandwidth replikasi antar-node, dan penggantian node skala besar tidak menyebabkan badai replikasi.</li>
 </ul>
 <p>Dalam penerapan lintas AZ, mode layanan juga menghemat sekitar <strong>1/3 lalu lintas jaringan tulis</strong> dan <strong>2/3 lalu lintas jaringan baca</strong> lintas AZ dibandingkan dengan sistem log berbasis broker. Untuk analisis desain dan biaya selengkapnya, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <p>Untuk detail mengenai arsitektur, mode penerapan (MemoryBuffer / QuorumBuffer), dan kinerja, lihat <a href="/docs/id/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <p>Untuk detail parameter lebih lanjut, lihat <a href="https://github.com/zilliztech/woodpecker">repositori GitHub</a> Woodpecker.</p>
+<h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Versi Milvus dan Woodpecker<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Embedded-mode-Milvus-26x" class="common-anchor-header">Mode tertanam (Milvus 2.6.x)<button data-href="#Embedded-mode-Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Milvus 2.6.x, Woodpecker berjalan tertanam di Milvus dan sudah termasuk dalam <strong>gambar Milvus</strong>. Tabel di bawah ini mencatat pustaka Woodpecker yang digunakan oleh setiap rilis Milvus; tidak ada gambar server Woodpecker terpisah untuk diterapkan atau ditingkatkan. Perbarui Milvus untuk memperbarui pustaka Woodpecker yang tertanam. Setiap rentang versi mencakup kedua titik akhir.</p>
+<table>
+<thead>
+<tr><th>Rilis Milvus</th><th>Pustaka Woodpecker tertanam</th><th>Sumber dependensi</th></tr>
+</thead>
+<tbody>
+<tr><td>v2.6.0</td><td><code translate="no">v0.1.3</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.1–v2.6.2</td><td><code translate="no">v0.1.4</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.1/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.2/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.3–v2.6.5</td><td><code translate="no">v0.1.6</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.3/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.5/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.6</td><td><code translate="no">v0.1.11</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.6/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.7</td><td><code translate="no">v0.1.12</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.7/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.8–v2.6.12</td><td><code translate="no">v0.1.13</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.8/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.12/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.13–v2.6.15</td><td><code translate="no">v0.1.14-0.20260317120738-e47dc37481fd</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.13/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.15/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.16–v2.6.17</td><td><code translate="no">v0.1.14-0.20260427080535-9dc9b3189baa</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.16/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.17/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.18–v2.6.23</td><td><code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod">Rilis terakhir</a></td></tr>
+<tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">Rilis pertama</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">Rilis terakhir</a></td></tr>
+</tbody>
+</table>
+<p>Versi seperti <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> adalah versi semu Go yang mengidentifikasi komit Woodpecker tertentu. Versi-versi ini disimpan secara lengkap dalam tabel mode tertanam untuk membedakan pembaruan ketergantungan antara rilis patch Milvus.</p>
+<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode layanan (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mode layanan Woodpecker didukung mulai dari Milvus 3.0. <strong>Pustaka klien Woodpecker</strong> disertakan dalam gambar Milvus, sedangkan <strong>gambar server Woodpecker</strong> dirilis dan diterapkan secara terpisah. Konfigurasikan versi gambar server dengan <code translate="no">woodpecker.image.tag</code>.</p>
+<p>Klien ini kompatibel mundur dengan versi server yang lebih lama. Saat meng-upgrade Milvus, kami menyarankan untuk juga meng-upgrade gambar layanan Woodpecker ke versi yang sesuai di bawah ini agar baik klien maupun server menerima perbaikan untuk versi tersebut. Kolom server mencantumkan pasangan yang direkomendasikan; kolom ini tidak menentukan versi server minimum yang kompatibel.</p>
+<table>
+<thead>
+<tr><th>Rilis Milvus</th><th>Klien Woodpecker yang disertakan</th><th>Tag gambar server Woodpecker yang direkomendasikan</th><th>Sumber ketergantungan klien</th></tr>
+</thead>
+<tbody>
+<tr><td>v3.0.0</td><td><code translate="no">v0.1.33</code></td><td><code translate="no">v0.1.33</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.1</td><td><code translate="no">v0.1.38</code></td><td><code translate="no">v0.1.38</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.2</td><td><code translate="no">v0.1.42</code></td><td><code translate="no">v0.1.42</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.3</td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod">go.mod</a></td></tr>
+</tbody>
+</table>
+<p>Milvus 3.x juga mendukung mode tertanam. Dalam mode tersebut, pustaka Woodpecker yang disertakan menggunakan versi yang tercantum di kolom klien, dan tidak diperlukan gambar server terpisah.</p>
+<h3 id="Latest-releases-and-upgrade-recommendations" class="common-anchor-header">Rilis terbaru dan rekomendasi pembaruan<button data-href="#Latest-releases-and-upgrade-recommendations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per <strong>12 Oktober 2026,</strong> rilis stabil terbaru dalam seri 2.6.x dan 3.x adalah:</p>
+<table>
+<thead>
+<tr><th>Seri Milvus</th><th>Rilis Milvus stabil terbaru</th><th>Pustaka/klien Woodpecker yang disertakan</th><th>Tag gambar layanan yang direkomendasikan</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">v2.6.25</a></td><td><code translate="no">v0.1.44</code> (terintegrasi)</td><td>Tidak berlaku</td></tr>
+<tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">v3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
+</tbody>
+</table>
+<p>Kami merekomendasikan untuk melakukan pembaruan ke <strong>rilis patch stabil terbaru dalam seri rilis Milvus yang Anda pilih</strong> guna mendapatkan perbaikan terbaru, termasuk pembaruan pada pustaka Woodpecker yang disertakan. Untuk rilis yang lebih baru, periksa <a href="https://github.com/milvus-io/milvus/releases">rilis Milvus</a> dan halaman " <code translate="no">pkg/go.mod</code>" dari rilis yang dituju; tabel di atas menjelaskan rilis yang tersedia pada tanggal yang disebutkan.</p>
+<p>Untuk <strong>mode layanan Woodpecker</strong>, kami merekomendasikan <strong>Milvus 3.0.3 atau yang lebih baru dengan Woodpecker v0.1.46 atau yang lebih baru</strong>. Saat memutakhirkan Milvus dalam mode layanan, perbarui juga gambar server Woodpecker yang diterapkan secara terpisah ke versi yang direkomendasikan yang sesuai.</p>
+<p>Untuk prosedur peningkatan versi, lihat <a href="/docs/id/upgrade_milvus_cluster-helm.md">Meningkatkan Versi Kluster Milvus dengan Helm</a>, <a href="/docs/id/upgrade_milvus_cluster-operator.md">Meningkatkan Versi Kluster Milvus dengan Milvus Operator</a>, atau <a href="/docs/id/upgrade_milvus_standalone-docker.md">Meningkatkan Versi Milvus Standalone dengan Docker Compose</a>.</p>

@@ -38,7 +38,7 @@ title: 在 Kubernetes 上執行 Milvus 的需求
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>元件</th><th>需求</th><th>建議</th><th>備註</th></tr>
+<tr><th>元件</th><th>要求</th><th>建議</th><th>備註</th></tr>
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>Intel 第二代 Core 處理器或更高規格</li><li>Apple Silicon</li></ul></td><td><ul><li>獨立模式：4 核心或以上</li><li>叢集模式：8 核心或以上</li></ul></td><td></td></tr>
@@ -79,8 +79,8 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>請參閱<a href="#Additional-disk-requirements">額外的磁碟需求</a>。</td></tr>
-<tr><td>MinIO</td><td>發行版.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>隨 Milvus 捆綁提供（服務模式：<code translate="no">v0.1.37</code> 及以上版本）</td><td>預設訊息佇列。針對分散式部署，Woodpecker 可作為專用<strong>服務</strong>運行；請透過<code translate="no">--set woodpecker.image.tag</code> 鎖定其版本。服務模式自 Woodpecker<code translate="no">v0.1.37</code> 起開始支援。</td></tr>
+<tr><td>MinIO</td><td>發行版.2024-12-18T13:15:44Z</td><td></td></tr>
+<tr><td>Woodpecker</td><td>隨 Milvus 捆綁提供（服務模式：<code translate="no">v0.1.46</code> 及以上版本）</td><td>預設訊息佇列。針對分散式部署，Woodpecker 可作為專用<strong>服務</strong>運行；請透過<code translate="no">--set woodpecker.image.tag</code> 鎖定其版本。若採用服務模式，我們建議搭配 Milvus 3.0.3 或更新版本，並使用 Woodpecker<code translate="no">v0.1.46</code> 或更新版本。</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>可選 — 僅當您將訊息佇列切換至 Pulsar 時才需安裝；預設未安裝。</td></tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>理想情況下，您的磁碟應達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的要求。</p>
+<p>理想情況下，您的磁碟應能達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的規格要求。</p>
 <h2 id="FAQs" class="common-anchor-header">常見問題<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">如何在本地啟動 K8s 叢集以進行測試？<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">如何在本地啟動 K8s 叢集以供測試？<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +135,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以使用<a href="https://minikube.sigs.k8s.io/docs/">minikube</a>、<a href="https://kind.sigs.k8s.io/">kind</a> 和<a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> 等工具，快速在本地端建立 Kubernetes 叢集。以下步驟以 minikube 為例進行說明。</p>
+    </button></h3><p>您可以使用<a href="https://minikube.sigs.k8s.io/docs/">minikube</a>、<a href="https://kind.sigs.k8s.io/">kind</a> 和<a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> 等工具，在本地快速建立 Kubernetes 叢集。以下步驟以 minikube 為例進行說明。</p>
 <ol>
 <li>下載 minikube</li>
 </ol>
@@ -173,7 +173,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><p>若您的硬體和軟體符合要求，您可以：</p>
 <ul>
 <li><a href="/docs/zh-hant/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernetes 中執行 Milvus</a></li>
-<li><a href="/docs/zh-hant/install_cluster-helm.md">使用 Helm 在 Kubernetes 中執行 Milvus</a></li>
+<li><a href="/docs/zh-hant/install_cluster-helm.md">透過 Helm 在 Kubernetes 中執行 Milvus</a></li>
 </ul></li>
 <li><p>有關安裝 Milvus 時可設定的參數，請參閱《<a href="/docs/zh-hant/system_configuration.md">系統配置》</a>。</p></li>
 </ul>

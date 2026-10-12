@@ -20,7 +20,7 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page répertorie la configuration matérielle et logicielle requise pour installer et faire fonctionner Milvus.</p>
+    </button></h1><p>Cette page répertorie la configuration matérielle et logicielle requise pour mettre en place et faire fonctionner Milvus.</p>
 <h2 id="Hardware-requirements" class="common-anchor-header">Configuration matérielle requise<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,14 +63,14 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
         ></path>
       </svg>
     </button></h2><p>Il est recommandé d'exécuter le cluster Kubernetes sur des plateformes Linux.</p>
-<p>kubectl est l'outil en ligne de commande de Kubernetes. Utilisez une version de kubectl dont la version mineure ne diffère pas de plus d'une version par rapport à celle de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
-<p>minikube est requis pour exécuter un cluster Kubernetes en local. minikube nécessite Docker comme dépendance. Assurez-vous d’installer Docker avant d’installer Milvus à l’aide de Helm. Consultez la section « <a href="https://docs.docker.com/get-docker">Obtenir Docker</a> » pour plus d’informations.</p>
+<p>kubectl est l'outil en ligne de commande de Kubernetes. Utilisez une version de kubectl dont la version mineure ne diffère pas de plus d'une version de celle de votre cluster. L'utilisation de la dernière version de kubectl permet d'éviter des problèmes imprévus.</p>
+<p>minikube est nécessaire pour exécuter un cluster Kubernetes en local. minikube nécessite Docker comme dépendance. Assurez-vous d’installer Docker avant d’installer Milvus à l’aide de Helm. Consultez la section « <a href="https://docs.docker.com/get-docker">Obtenir Docker</a> » pour plus d’informations.</p>
 <table>
 <thead>
 <tr><th>Système d’exploitation</th><th>Logiciels</th><th>Remarque</th></tr>
 </thead>
 <tbody>
-<tr><td>Plateformes Linux</td><td><ul><li>Kubernetes 1.16 ou version ultérieure</li><li>kubectl</li><li>Helm 3.0.0 ou version ultérieure</li><li>minikube (pour Milvus en mode autonome)</li><li>Docker 19.03 ou version ultérieure (pour Milvus en mode autonome)</li></ul></td><td>Consultez <a href="https://helm.sh/docs/">la documentation Helm</a> pour plus d'informations.</td></tr>
+<tr><td>Plates-formes Linux</td><td><ul><li>Kubernetes 1.16 ou version ultérieure</li><li>kubectl</li><li>Helm 3.0.0 ou version ultérieure</li><li>minikube (pour Milvus en mode autonome)</li><li>Docker 19.03 ou version ultérieure (pour Milvus en mode autonome)</li></ul></td><td>Consultez <a href="https://helm.sh/docs/">la documentation Helm</a> pour plus d'informations.</td></tr>
 </tbody>
 </table>
 <table>
@@ -79,9 +79,9 @@ title: Configuration requise pour exécuter Milvus sur Kubernetes
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Voir <a href="#Additional-disk-requirements">les exigences supplémentaires en matière d'espace disque</a>.</td></tr>
-<tr><td>MinIO</td><td>VERSION.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v0.1.37</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Le mode service est pris en charge à partir de la version <code translate="no">v0.1.37</code> de Woodpecker.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Facultatif — uniquement si vous basculez la file d'attente de messages vers Pulsar ; non installé par défaut.</td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
+<tr><td>Woodpecker</td><td>Fourni avec Milvus (mode service : <code translate="no">v0.1.46</code>+)</td><td>File d'attente de messages par défaut. Pour les déploiements distribués, Woodpecker peut s'exécuter en tant que <strong>service</strong> dédié ; fixez sa version avec <code translate="no">--set woodpecker.image.tag</code>. Pour le mode service, nous recommandons Milvus 3.0.3 ou une version ultérieure avec Woodpecker <code translate="no">v0.1.46</code> ou une version ultérieure.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Facultatif — uniquement si vous basculez la file d’attente de messages vers Pulsar ; non installé par défaut.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Exigences supplémentaires en matière de stockage<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">

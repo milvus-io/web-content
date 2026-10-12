@@ -61,7 +61,7 @@ summary: >-
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Cambiar « <code translate="no">mq.type</code> » en un clúster en ejecución es una operación de actualización. Sigue el procedimiento de actualización con cuidado y comprueba que todo funciona correctamente en un clúster nuevo antes de realizar el cambio en el entorno de producción.</p>
+<p>Nota: Cambiar « <code translate="no">mq.type</code> » en un clúster en ejecución es una operación de actualización. Sigue el procedimiento de actualización cuidadosamente y comprueba que todo funciona correctamente en un clúster nuevo antes de realizar el cambio en el entorno de producción.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ summary: >-
 <tr><th><code translate="no">storage.type</code></th><th>Cómo funciona Woodpecker</th><th>Backend WAL</th><th>Milvus autónomo</th><th>Milvus distribuido (clúster)</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">minio</code> (predeterminado)</td><td>Integrado en el nodo Milvus/streaming</td><td>Almacenamiento de objetos (compatible con MinIO/S3)</td><td>Compatible</td><td>Compatible</td></tr>
+<tr><td><code translate="no">minio</code> (por defecto)</td><td>Integrado en el nodo Milvus/streaming</td><td>Almacenamiento de objetos (compatible con MinIO/S3)</td><td>Compatible</td><td>Compatible</td></tr>
 <tr><td><code translate="no">local</code></td><td>Integrado en el nodo Milvus/streaming</td><td>Sistema de archivos local</td><td>Compatible</td><td>Limitado (todos los nodos necesitan un sistema de archivos compartido, p. ej., NFS)</td></tr>
 <tr><td><code translate="no">service</code></td><td><strong>Servicio Woodpecker dedicado</strong> (con sus propios pods)</td><td>Almacenamiento de objetos (compatible con MinIO/S3)</td><td><strong>No compatible</strong></td><td>Compatible</td></tr>
 </tbody>
@@ -193,9 +193,9 @@ summary: >-
 <tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>Compatible</td><td>Compatibilidad total con la escritura condicional de S3.</td></tr>
 <tr><td>Aliyun OSS</td><td>Compatible</td><td>Compatible a través de su interfaz compatible con S3.</td></tr>
 <tr><td>Tencent COS</td><td>Compatible</td><td>Compatible a través de su interfaz compatible con S3.</td></tr>
-<tr><td>Google Cloud Storage (GCS)</td><td>Compatible</td><td>Compatible a través del modo de interoperabilidad S3.</td></tr>
+<tr><td>Google Cloud Storage (GCS)</td><td>Compatible</td><td>Compatible a través del modo de interoperabilidad con S3.</td></tr>
 <tr><td>Huawei Cloud OBS</td><td>No compatible</td><td>Carece de la semántica de escritura condicional necesaria.</td></tr>
-<tr><td>VAST Data</td><td>Compatible</td><td>Verificado por la comunidad; solo funciona con buckets sin versionado.</td></tr>
+<tr><td>VAST Data</td><td>Compatible</td><td>Verificado por la comunidad; solo funciona con buckets sin versiones.</td></tr>
 <tr><td>Otros almacenes compatibles con S3</td><td>Parcial</td><td>Depende de la compatibilidad total con la semántica de escritura condicional de S3.</td></tr>
 </tbody>
 </table>
@@ -203,7 +203,7 @@ summary: >-
 <ul>
 <li>La compatibilidad depende de la compatibilidad nativa con el SDK o de la compatibilidad con la semántica de escritura condicional de S3.</li>
 <li>Si alojas MinIO por tu cuenta para Woodpecker, utiliza la versión <code translate="no">RELEASE.2024-12-18T13-15-44Z</code> o posterior.</li>
-<li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el estado actual de las conversaciones</a> y puede evolucionar a medida que se valide más a fondo la compatibilidad del backend.</li>
+<li>Esta matriz refleja <a href="https://github.com/zilliztech/woodpecker/discussions/150">el estado actual de las conversaciones</a> y puede evolucionar a medida que se vaya validando más a fondo la compatibilidad del backend.</li>
 </ul>
 <h2 id="Deployment-guides" class="common-anchor-header">Guías de implementación<button data-href="#Deployment-guides" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -278,8 +278,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>En primer lugar, añade y actualiza el gráfico Helm de Milvus tal y como se describe en <a href="/docs/es/install_cluster-helm.md">«Ejecutar Milvus en Kubernetes con Helm</a>».</p>
-<p>A continuación, realiza la implementación siguiendo uno de los siguientes ejemplos:</p>
-<p>– Implementación en clúster (ajustes recomendados con Woodpecker y Streaming Node habilitados):</p>
+<p>A continuación, realice la implementación siguiendo uno de los ejemplos siguientes:</p>
+<p>– Despliegue en clúster (ajustes recomendados con Woodpecker y Streaming Node habilitados):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -296,7 +296,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Tras la implementación, sigue la documentación para redirigir puertos y conectarte. Para ajustar los parámetros de Woodpecker, sigue la configuración descrita en <a href="#Configuration">«Configuración</a>».</p>
+<p>Tras el despliegue, sigue la documentación para realizar el reenvío de puertos y conectarte. Para ajustar los parámetros de Woodpecker, sigue la configuración descrita en <a href="#Configuration">«Configuración</a>».</p>
 <h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Habilitar Woodpecker para Milvus autónomo en Docker (storage=local)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,13 +375,13 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Para el modo de servicio de Woodpecker, recomendamos utilizar la próxima versión de Milvus 3.0.1 o una posterior, junto con Woodpecker v0.1.37 o posterior, para obtener optimizaciones en la limpieza de compactación y la confirmación por grupos.</p>
+<p>Para el modo de servicio de Woodpecker, recomendamos utilizar Milvus 3.0.3 o posterior con Woodpecker v0.1.46 o posterior.</p>
 </div>
-<p><strong>El modo de servicio</strong> de Woodpecker es una característica <strong>de Milvus 3.0</strong>. Para implementaciones distribuidas o en clúster, puede ejecutar Woodpecker como un <strong>servicio dedicado</strong> (pods independientes) en lugar de integrado en el nodo de streaming configurando ` <code translate="no">streaming.woodpecker.embedded=false</code>`:</p>
+<p><strong>El modo de servicio</strong> de Woodpecker es una característica <strong>de Milvus 3.0</strong>. Para implementaciones distribuidas o en clúster, puede ejecutar Woodpecker como un <strong>servicio dedicado</strong> (pods independientes) en lugar de integrado en el nodo de streaming configurando « <code translate="no">streaming.woodpecker.embedded=false</code> »:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.37 \
+  --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.woodpecker.embedded=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -440,7 +440,7 @@ docker restart milvus-standalone
 </ul></li>
 <li>Lado del cliente/aplicación
 <ul>
-<li>Utilice lotes de mayor tamaño y un mayor número de escritores o clientes simultáneos.</li>
+<li>Utilice lotes de mayor tamaño y un mayor número de escritores/clientes simultáneos.</li>
 <li>Controle el momento de la actualización o la creación del índice (agrupe los datos antes de activarlo) para evitar pequeñas escrituras frecuentes.</li>
 </ul></li>
 </ul>
@@ -459,7 +459,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El modo de servicio mantiene el alto rendimiento de escritura de un WAL respaldado por almacenamiento de objetos, al tiempo que añade baja latencia (véase <a href="#Latency">Latencia</a>). El ajuste tanto en el lado del almacenamiento como en el del cliente descrito anteriormente sigue siendo válido; además, dado que Woodpecker se ejecuta como un servicio independiente, la capacidad de escritura se escala horizontalmente añadiendo réplicas (<code translate="no">woodpecker.replicaCount</code>, 4 por defecto), y las escrituras se benefician de la replicación por quórum de un RTT y de lecturas que tienen en cuenta la topología, lo que evita el reenvío por parte del broker.</p>
+    </button></h3><p>El modo de servicio mantiene el alto rendimiento de escritura de un WAL respaldado por almacenamiento de objetos, al tiempo que añade baja latencia (véase <a href="#Latency">Latencia</a>). El ajuste tanto del lado del almacenamiento como del lado del cliente descrito anteriormente sigue siendo válido; además, dado que Woodpecker se ejecuta como un servicio independiente, la capacidad de escritura se escala horizontalmente añadiendo réplicas (<code translate="no">woodpecker.replicaCount</code>, 4 por defecto), y las escrituras se benefician de la replicación de quórum de un RTT y de lecturas que tienen en cuenta la topología, lo que evita el reenvío por parte del broker.</p>
 <p><strong>Demostración de inserción por lotes</strong>: utiliza lo siguiente para medir el rendimiento de escritura:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -533,7 +533,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo consumo, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban dentro de un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para backends de almacenamiento en sistemas de archivos locales y de 200 ms para backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo del intervalo más el tiempo de vaciado.</p>
+    </button></h3><p>Woodpecker es un WAL nativo de la nube diseñado para el almacenamiento de objetos, que ofrece un equilibrio entre rendimiento, coste y latencia. El modo integrado, de bajo peso, da prioridad a la optimización del coste y el rendimiento, ya que la mayoría de los escenarios solo requieren que los datos se escriban en un plazo determinado, en lugar de exigir una baja latencia para las solicitudes de escritura individuales. Por lo tanto, Woodpecker emplea escrituras por lotes, con intervalos predeterminados de 10 ms para backends de almacenamiento en sistemas de archivos locales y de 200 ms para backends de almacenamiento tipo MinIO. Durante las operaciones de escritura lentas, la latencia máxima es igual al tiempo de intervalo más el tiempo de vaciado.</p>
 <p>Cabe señalar que la inserción por lotes se activa no solo por intervalos de tiempo, sino también por el tamaño del lote, cuyo valor por defecto es de 2 MB.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Modo de servicio (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -550,13 +550,119 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica con tres réplicas entre zonas (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
+    </button></h3><p>El modo de servicio ofrece <strong>una latencia de escritura del orden de los milisegundos</strong> —del mismo orden que un WAL tradicional en disco local con tres réplicas— al tiempo que mantiene bajos los costes. En una implementación típica con tres réplicas y entre zonas de disponibilidad (AZ), la latencia de escritura se mantiene en el rango de los milisegundos. Esto se consigue mediante:</p>
 <ul>
-<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con el tráfico entre zonas (AZ) limitado al volumen de datos de dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio, típico de la replicación basada en brokers o líderes).</li>
+<li><strong>Escrituras de quórum en un solo RTT</strong>: la replicación impulsada por el cliente completa una escritura de quórum en un solo viaje de ida y vuelta, con un tráfico entre zonas (AZ) limitado al volumen de datos de dos réplicas (frente al tráfico adicional entre zonas de aproximadamente un tercio que suele caracterizar a la replicación basada en brokers o líderes).</li>
 <li><strong>Lecturas de un solo salto que tienen en cuenta la topología</strong>: cada lectura se dirige directamente a la réplica más cercana en lugar de reenviarse a través de un broker, lo que evita las lecturas aleatorias entre zonas (aproximadamente dos tercios del tráfico de lectura entre zonas) propias de los sistemas basados en brokers.</li>
-<li><strong>Carga inmediata al almacenamiento de objetos tras el desplazamiento de segmentos</strong>: cada segmento realiza un seguimiento de todo su ciclo de vida y se carga al almacenamiento de objetos tan pronto como se desplaza, lo que mantiene bajo el espacio ocupado en el disco local y el coste de almacenamiento sin sacrificar la latencia.</li>
-<li><strong>No hay replicación continua de nodo a nodo</strong>: los registros persisten en el almacenamiento de objetos, que actúa como almacenamiento compartido, por lo que la conmutación por error solo vuelve a cargar las réplicas supervivientes (sin copia completa del nodo); el escalado no está limitado por el ancho de banda de replicación entre nodos, y la sustitución de nodos a gran escala no provoca «tormentas de replicación».</li>
+<li><strong>Carga inmediata al almacenamiento de objetos tras la rotación de segmentos</strong>: cada segmento realiza un seguimiento de todo su ciclo de vida y se carga al almacenamiento de objetos tan pronto como se rota, lo que mantiene bajo el espacio ocupado en el disco local y el coste de almacenamiento sin sacrificar la latencia.</li>
+<li><strong>Sin replicación continua de nodo a nodo</strong>: los registros persisten en el almacenamiento de objetos, que actúa como almacenamiento compartido, por lo que la conmutación por error solo vuelve a cargar las réplicas supervivientes (sin copia completa del nodo); el escalado no está limitado por el ancho de banda de replicación entre nodos, y la sustitución de nodos a gran escala no provoca tormentas de replicación.</li>
 </ul>
 <p>En implementaciones entre zonas de disponibilidad (AZ), el modo de servicio también ahorra aproximadamente <strong>un tercio del</strong> tráfico de red <strong>de escritura</strong> y <strong>dos tercios del de lectura</strong> entre zonas de disponibilidad, en comparación con los sistemas de registros basados en brokers. Para consultar el análisis completo del diseño y los costes, véase <a href="/docs/es/woodpecker_architecture.md">Arquitectura de Woodpecker</a>.</p>
 <p>Para obtener más detalles sobre la arquitectura, los modos de implementación (MemoryBuffer / QuorumBuffer) y el rendimiento, consulta <a href="/docs/es/woodpecker_architecture.md">la arquitectura de Woodpecker</a>.</p>
-<p>Para obtener más detalles sobre los parámetros, consulte el <a href="https://github.com/zilliztech/woodpecker">repositorio de GitHub</a> de Woodpecker.</p>
+<p>Para obtener más detalles sobre los parámetros, consulta el <a href="https://github.com/zilliztech/woodpecker">repositorio de GitHub</a> de Woodpecker.</p>
+<h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Versiones de Milvus y Woodpecker<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Embedded-mode-Milvus-26x" class="common-anchor-header">Modo integrado (Milvus 2.6.x)<button data-href="#Embedded-mode-Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En Milvus 2.6.x, Woodpecker se ejecuta integrado en Milvus y está incluido en la <strong>imagen de Milvus</strong>. La tabla siguiente recoge la biblioteca de Woodpecker utilizada por cada versión de Milvus; no existe una imagen de servidor de Woodpecker independiente que haya que implementar o actualizar. Actualiza Milvus para actualizar la biblioteca de Woodpecker integrada. Cada rango de versiones incluye ambos puntos finales.</p>
+<table>
+<thead>
+<tr><th>Versiones de Milvus</th><th>Biblioteca de Woodpecker integrada</th><th>Fuente de la dependencia</th></tr>
+</thead>
+<tbody>
+<tr><td>v2.6.0</td><td><code translate="no">v0.1.3</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.1–v2.6.2</td><td><code translate="no">v0.1.4</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.1/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.2/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.3–v2.6.5</td><td><code translate="no">v0.1.6</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.3/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.5/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.6</td><td><code translate="no">v0.1.11</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.6/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.7</td><td><code translate="no">v0.1.12</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.7/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.8–v2.6.12</td><td><code translate="no">v0.1.13</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.8/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.12/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.13–v2.6.15</td><td><code translate="no">v0.1.14-0.20260317120738-e47dc37481fd</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.13/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.15/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.16–v2.6.17</td><td><code translate="no">v0.1.14-0.20260427080535-9dc9b3189baa</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.16/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.17/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.18–v2.6.23</td><td><code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod">Última versión</a></td></tr>
+<tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">Primera versión</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">Última versión</a></td></tr>
+</tbody>
+</table>
+<p>Las versiones del tipo <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> son pseudoversiones de Go que identifican una confirmación específica de Woodpecker. Se conservan íntegramente en la tabla del modo integrado para distinguir las actualizaciones de dependencias entre las versiones de parches de Milvus.</p>
+<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Modo de servicio (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El modo de servicio de Woodpecker es compatible a partir de Milvus 3.0. La <strong>biblioteca cliente de Woodpecker</strong> se incluye en la imagen de Milvus, mientras que la <strong>imagen del servidor de Woodpecker</strong> se publica y se implementa por separado. Configura la versión de la imagen del servidor con <code translate="no">woodpecker.image.tag</code>.</p>
+<p>El cliente es compatible con versiones anteriores del servidor. Al actualizar Milvus, recomendamos actualizar también la imagen del servicio Woodpecker a la versión correspondiente que se indica a continuación, de modo que tanto el cliente como el servidor reciban las correcciones de esa versión. La columna «Servidor» enumera las combinaciones recomendadas; no especifica una versión mínima compatible del servidor.</p>
+<table>
+<thead>
+<tr><th>Versión de Milvus</th><th>Cliente Woodpecker incluido</th><th>Etiqueta recomendada de la imagen del servidor Woodpecker</th><th>Fuente de la dependencia del cliente</th></tr>
+</thead>
+<tbody>
+<tr><td>v3.0.0</td><td><code translate="no">v0.1.33</code></td><td><code translate="no">v0.1.33</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.1</td><td><code translate="no">v0.1.38</code></td><td><code translate="no">v0.1.38</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.2</td><td><code translate="no">v0.1.42</code></td><td><code translate="no">v0.1.42</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.3</td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod">go.mod</a></td></tr>
+</tbody>
+</table>
+<p>Milvus 3.x también es compatible con el modo integrado. En este modo, la biblioteca Woodpecker incluida utiliza la versión indicada en la columna «cliente» y no se requiere una imagen de servidor independiente.</p>
+<h3 id="Latest-releases-and-upgrade-recommendations" class="common-anchor-header">Últimas versiones y recomendaciones de actualización<button data-href="#Latest-releases-and-upgrade-recommendations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A fecha de <strong>12 de octubre de 2026</strong>, las últimas versiones estables de las series 2.6.x y 3.x son:</p>
+<table>
+<thead>
+<tr><th>Serie Milvus</th><th>Última versión estable de Milvus</th><th>Biblioteca/cliente Woodpecker incluido</th><th>Etiqueta de imagen de servicio recomendada</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">v2.6.25</a></td><td><code translate="no">v0.1.44</code> (integrada)</td><td>No aplicable</td></tr>
+<tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">v3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
+</tbody>
+</table>
+<p>Recomendamos actualizar a la <strong>última versión estable de su serie de versiones de Milvus elegida</strong> para recibir las últimas correcciones, incluidas las actualizaciones de la biblioteca Woodpecker incluida. Para versiones más recientes, consulte las <a href="https://github.com/milvus-io/milvus/releases">versiones de Milvus</a> y la página <code translate="no">pkg/go.mod</code> de la versión de destino; las tablas anteriores describen las versiones disponibles en la fecha indicada.</p>
+<p>Para <strong>el modo de servicio de Woodpecker</strong>, recomendamos <strong>Milvus 3.0.3 o posterior con Woodpecker v0.1.46 o posterior</strong>. Al actualizar Milvus en modo de servicio, actualice también la imagen del servidor Woodpecker, desplegada por separado, a la versión recomendada correspondiente.</p>
+<p>Para conocer los procedimientos de actualización, consulta <a href="/docs/es/upgrade_milvus_cluster-helm.md">«Actualizar un clúster de Milvus con Helm»</a>, <a href="/docs/es/upgrade_milvus_cluster-operator.md">«Actualizar un clúster de Milvus con Milvus Operator</a>» o <a href="/docs/es/upgrade_milvus_standalone-docker.md">«Actualizar Milvus independiente con Docker Compose</a>».</p>

@@ -43,7 +43,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 <tbody>
 <tr><td>CPU</td><td><ul><li>CPU Intel Core di seconda generazione o superiore</li><li>Apple Silicon</li></ul></td><td><ul><li>Modello autonomo: 4 core o più</li><li>Cluster: 8 core o più</li></ul></td><td></td></tr>
 <tr><td>Set di istruzioni della CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La ricerca di similarità vettoriale e la creazione di indici all'interno di Milvus richiedono il supporto da parte della CPU dei set di estensioni SIMD (Single Instruction, Multiple Data). Assicurarsi che la CPU supporti almeno una delle estensioni SIMD elencate. Per ulteriori informazioni, consultare <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">la sezione CPU con AVX</a>.</td></tr>
-<tr><td>RAM</td><td><ul><li>Modalità standalone: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Modalità standalone: 16G</li><li>Cluster: 128G</li></ul></td><td>La quantità di RAM dipende dal volume dei dati.</td></tr>
+<tr><td>RAM</td><td><ul><li>Modalità standalone: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Modalità standalone: 16 G</li><li>Cluster: 128 G</li></ul></td><td>La quantità di RAM dipende dal volume dei dati.</td></tr>
 <tr><td>Disco rigido</td><td>SSD SATA 3.0 o CloudStorage</td><td>SSD NVMe o superiore</td><td>La dimensione del disco rigido dipende dal volume dei dati.</td></tr>
 </tbody>
 </table>
@@ -63,14 +63,14 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
         ></path>
       </svg>
     </button></h2><p>Si consiglia di eseguire il cluster Kubernetes su piattaforme Linux.</p>
-<p>kubectl è lo strumento a riga di comando per Kubernetes. Utilizzare una versione di kubectl che differisca di non più di una versione secondaria rispetto a quella del proprio cluster. L'utilizzo dell'ultima versione di kubectl aiuta a evitare problemi imprevisti.</p>
+<p>kubectl è lo strumento a riga di comando per Kubernetes. Utilizzare una versione di kubectl che differisca di non più di una versione secondaria rispetto a quella del proprio cluster. L'utilizzo della versione più recente di kubectl aiuta a evitare problemi imprevisti.</p>
 <p>minikube è necessario quando si esegue il cluster Kubernetes localmente. minikube richiede Docker come dipendenza. Assicurarsi di installare Docker prima di installare Milvus utilizzando Helm. Per ulteriori informazioni, consultare la sezione " <a href="https://docs.docker.com/get-docker">Ottenere Docker</a> ".</p>
 <table>
 <thead>
 <tr><th>Sistema operativo</th><th>Software</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>Piattaforme Linux</td><td><ul><li>Kubernetes 1.16 o versioni successive</li><li>kubectl</li><li>Helm 3.0.0 o versioni successive</li><li>minikube (per Milvus standalone)</li><li>Docker 19.03 o versioni successive (per Milvus standalone)</li></ul></td><td>Per ulteriori informazioni, consultare <a href="https://helm.sh/docs/">la documentazione di Helm</a>.</td></tr>
+<tr><td>Piattaforme Linux</td><td><ul><li>Kubernetes 1.16 o versioni successive</li><li>kubectl</li><li>Helm 3.0.0 o versioni successive</li><li>minikube (per Milvus in modalità standalone)</li><li>Docker 19.03 o versioni successive (per Milvus standalone)</li></ul></td><td>Per ulteriori informazioni, consultare <a href="https://helm.sh/docs/">la documentazione di Helm</a>.</td></tr>
 </tbody>
 </table>
 <table>
@@ -80,7 +80,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Vedi <a href="#Additional-disk-requirements">i requisiti aggiuntivi relativi al disco</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>In bundle con Milvus (modalità servizio: <code translate="no">v0.1.37</code>+)</td><td>Coda di messaggi predefinita. Per le distribuzioni distribuite, Woodpecker può essere eseguito come <strong>servizio</strong> dedicato; fissarne la versione con <code translate="no">--set woodpecker.image.tag</code>. La modalità servizio è supportata a partire dalla versione <code translate="no">v0.1.37</code> di Woodpecker.</td></tr>
+<tr><td>Woodpecker</td><td>In bundle con Milvus (modalità servizio: <code translate="no">v0.1.46</code>+)</td><td>Coda di messaggi predefinita. Per le distribuzioni distribuite, Woodpecker può essere eseguito come <strong>servizio</strong> dedicato; fissarne la versione con <code translate="no">--set woodpecker.image.tag</code>. Per la modalità servizio, si consiglia Milvus 3.0.3 o versioni successive con Woodpecker <code translate="no">v0.1.46</code> o versioni successive.</td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td>Opzionale — solo se si passa alla coda di messaggi Pulsar; non installato di default.</td></tr>
 </tbody>
 </table>
@@ -139,9 +139,9 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Scarica minikube</li>
 </ol>
-<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il file binario.</p>
+<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il binario.</p>
 <ol start="2">
-<li>Avviare un cluster K8s utilizzando minikube</li>
+<li>Avvia un cluster K8s utilizzando minikube</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>
