@@ -20,17 +20,17 @@ listPrivilegeGroups(ListPrivilegeGroupsReq.builder()
 
 **RETURNS:**
 
-A **ListPrivilegeGroupsResp** object contains the following fields:
+A **ListPrivilegeGroupsResp** object contains the following getters:.
 
-- **privilegeGroups** (*List<PrivilegeGroup>*) -
+- `getPrivilegeGroups()` (*List<PrivilegeGroup>*) -
 
     A list of privilege groups, each of which is a **PrivilegeGroup** object.
 
-    - **groupName** (String) -
+    - `getGroupName()` (String) -
 
         The name of the current privilege group.
 
-    - **privileges** (List<String>) - 
+    - `getPrivileges()` (List<String>) -
 
         The privileges added into the current privilege group.
 

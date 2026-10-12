@@ -23,27 +23,53 @@ getRefreshExternalCollectionProgress(GetRefreshExternalCollectionProgressReq.bui
 
     The job ID returned by `refreshExternalCollection()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetRefreshExternalCollectionProgressResp*
 
-The response wraps a single `RefreshExternalCollectionJobInfo` accessible via `getJobInfo()`. Fields on the job info:
+**RETURNS:**
 
-- `jobId` (*long*) - The job identifier.
+A **GetRefreshExternalCollectionProgressResp** object that wraps a single **RefreshExternalCollectionJobInfo** accessible via `getJobInfo()`.
 
-- `collectionName` (*String*) - The target collection name.
+- `getJobInfo()` (*RefreshExternalCollectionJobInfo*) -
 
-- `state` (*String*) - The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+    The refresh job information. Each **RefreshExternalCollectionJobInfo** has the following getters:
 
-- `progress` (*int*) - The completion percentage (0–100).
+    - `getJobId()` (*long*) -
 
-- `reason` (*String*) - Failure reason if `state` is `"FAILED"`; empty otherwise.
+        The job identifier.
 
-- `externalSource` (*String*) - The external source used by the job.
+    - `getCollectionName()` (*String*) -
 
-- `startTime` (*long*) - The job start timestamp (epoch milliseconds).
+        The target collection name.
 
-- `endTime` (*long*) - The job end timestamp (epoch milliseconds), or 0 if still running.
+    - `getState()` (*String*) -
+
+        The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+
+    - `getProgress()` (*int*) -
+
+        The completion percentage (0-100).
+
+    - `getReason()` (*String*) -
+
+        The failure reason if `state` is `"FAILED"`; empty otherwise.
+
+    - `getExternalSource()` (*String*) -
+
+        The external source used by the job.
+
+    - `getExternalSpec()` (*String*) -
+
+        The external source specification used by the job.
+
+    - `getStartTime()` (*long*) -
+
+        The job start timestamp (epoch milliseconds).
+
+    - `getEndTime()` (*long*) -
+
+        The job end timestamp (epoch milliseconds), or 0 if still running.
 
 **EXCEPTIONS:**
 

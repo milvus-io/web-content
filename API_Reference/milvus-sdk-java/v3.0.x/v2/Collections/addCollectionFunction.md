@@ -28,7 +28,7 @@ AddCollectionFunctionReq.builder()
 
 - `function(CreateCollectionReq.Function function)`
 
-    The function definition to add to existing collection fields.
+    The function definition to add to existing collection fields. See [Function](Function.md).
 
 **RETURNS:**
 

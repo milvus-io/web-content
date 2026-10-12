@@ -29,21 +29,19 @@ listCollectionsV2(ListCollectionsReq.builder()
 
 A **ListCollectionsResp** object containing a list of collection names. If there is not any collection, an empty list will be returned.
 
-**PARAMETERS:**
-
-- **collectionNames** (*List<String>*)
+- `getCollectionNames()` (*List<String>*) -
 
     A list of strings containing the names of all existing collections.
 
-- **collectionInfos** (*List<CollectionInfo>*)
+- `getCollectionInfos()` (*List<CollectionInfo>*) -
 
-    A list of **CollectionInfo** objects. A **CollectionInfo** object has the following fields:
+    A list of **CollectionInfo** objects. A **CollectionInfo** object exposes the following getters:
 
-    - **collectionName** (*String*)
+    - `getCollectionName()` (*String*) -
 
         The name of a collection.
 
-    - **shardNum** (*Integer*)
+    - `getShardNum()` (*Integer*) -
 
         The number of shards in the above collection.
 

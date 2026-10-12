@@ -394,6 +394,11 @@ own new page automatically (no need to ask the user). Exceptions:
   `Client.GetService()`) → skip (no page);
 - only ask the user when a new symbol does not fit the one-page-per-API shape.
 
+When an operation/request/response page references a type that has a dedicated
+page (e.g. `CollectionSchema`, `DataType`, `IndexType`), the change list must
+include adding the relative link to that type page (see **Dedicated type pages &
+cross-links** under the Doc style guide).
+
 **Follow the SDK's directory convention for new type pages.** The convention
 differs per SDK — always match the SDK's existing tree (see the per-SDK
 page-mapping rules in `references/sdk-map.md`):
@@ -682,7 +687,14 @@ and confirm with the user before deleting it.
   header; fix to match the code.
 
 Also check: enum values missing from type pages, stale version pins, missing
-`@deprecated` markers.
+`@deprecated` markers, **missing dedicated type pages** (important classes/structs/
+enums that surface in request params, return types, or response members but have
+no page — create one), **missing cross-links** (references to a type whose
+page exists but is not linked — add the relative `.md` link), and **misplaced
+type pages** (a type page sitting outside its owning category directory — move
+it into the correct category, e.g. `MilvusClient/FunctionScore.md` →
+`MilvusClient/Vector/FunctionScore.md`, and update every relative link to and
+from the moved page).
 
 **Duplicated symbols on a page**: also flag when the same symbol appears more
 than once on a page (e.g. the same `WithXxx` method in both a brief
@@ -706,7 +718,9 @@ with its `RoleDesc`/`GrantItem` members). The response class lives in a
   `GrantItem`). Extract public getters (`const Xxx& Member() const`).
 - **java (V2)** → `io/milvus/v2/service/<group>/response/*Resp.java`
   (e.g. `DescribeCollectionResp.java`). Lombok `@Data` means an added/removed
-  `private` field = an added/removed output member.
+  `private` field = an added/removed output member. **Document response members
+  as getter methods only** (`` `getXxx()` ``), never the raw Lombok fields —
+  users access response data exclusively through getters.
 - **rust** → `src/v2/response/<category>.rs` (`pub struct XxxResponse`).
 - **csharp** → `Milvus.Client/` result classes (`SearchResults.cs`,
   `MutationResult.cs`, `RoleResult.cs`, `UserResult.cs`, ...). Extract public
@@ -816,16 +830,86 @@ whose API semantics are uncertain from the source alone.
   return type; `**ERROR HANDLING:**` describes exceptions/Status failure.
 - One page per operation / per class. Refer to related types with relative links.
 
+### Dedicated type pages & cross-links
+
+Every important class, struct, or enum gets its own dedicated type page, and
+every reference to it links to that page. **java is the model for both the page
+set and the placement.**
+
+- **Dedicated type pages** — each of these gets a one-page-per-type page:
+  `CollectionSchema`, `FieldSchema`, `StructFieldSchema`, `Function`,
+  `FunctionType`, `DataType`, `IndexType`, `MetricType`, `SegmentState`,
+  `CompactionState` / `CompactionType` / `CompactionTaskState`,
+  `ResourceGroupConfig`, `Highlighter`, `LexicalHighlighter`, `SemanticHighlighter`,
+  `FunctionScore`, `EmbeddingList`, `CollectionDesc`, `LoadState`,
+  `ConsistencyLevel`, `IndexParam`, `FieldOp`, `FieldOpType`, `BulkFileType`,
+  `BulkInsertState`, `LocalBulkWriter`, `RemoteBulkWriter`, `VolumeBulkWriter`,
+  `AggregationBucket`, `AggregationHit`, `SearchAggregation`, `TopHits`,
+  `FunctionChain`, `FunctionChainArg`, `FunctionChainExpr`, `FunctionChainOp`,
+  `FunctionChainStage`, `FunctionParamValue`, `BoostRanker`, `DecayRanker`,
+  `ModelRanker`, `RRFRanker`, `WeightedRanker`, and the ORM classes `Collection`,
+  `Partition`, `Role`. Enum values live in the one enum page — do NOT create a
+  page per enum value.
+- **Place type pages in their owning category directory** (java model): the page
+  lives under the category the type belongs to, e.g.
+  `Collections/CollectionSchema/CollectionSchema.md`, `Collections/DataType.md`,
+  `Vector/FunctionScore/FunctionScore.md`, `Vector/Highlighter/Highlighter.md`,
+  `Management/IndexType.md`, `ResourceGroup/ResourceGroupConfig.md`, and
+  bulk-writer types under `DataImport/`. Do NOT hoist a single type page to the
+  SDK root or a generic top-level directory (pymilvus's
+  `MilvusClient/FunctionScore.md` and `MilvusClient/EmbeddingList/...` placement
+  is the anti-pattern to avoid). Follow the per-SDK directory convention in
+  `references/sdk-map.md` (java nests clusters under the primary type, cpp
+  documents related classes in one page, ...). Reconciliation moves existing
+  misplaced type pages into their owning category (see Reconciliation Pass 1).
+- **Link every reference**: anywhere an operation/request/response page names a
+  type that has a dedicated page — a request parameter type, a return type, a
+  member/function type in a RETURNS list, or a prose mention — link it with a
+  relative `.md` link (e.g. `[CollectionSchema](../Collections/CollectionSchema/CollectionSchema.md)`,
+  `[DataType](DataType.md)`; go `*[entity.Collection](Collection.md), error*`;
+  cpp `[DataType](DataType.md)`). Do not leave a referenced type as bare text
+  when its page exists.
+- **Link request-parameter types too.** When a request's parameter/member
+  (documented under `**BUILDER METHODS:**` / `**REQUEST METHODS:**` /
+  `**PARAMETERS:**`) uses an enum or class that has a dedicated type page, link
+  the type name in the parameter's description. (The Request Syntax block is a
+  code block, so its type names stay as plain code — only the markdown
+  description gets the link.) Java example: `idType(DataType idType)` →
+  "…Defaults to `DataType.Int64`. See [DataType](DataType.md)";
+  `collectionSchema(CollectionSchema collectionSchema)` →
+  "…See [CollectionSchema](CollectionSchema/CollectionSchema.md)";
+  `indexParams(List<IndexParam> indexParams)` →
+  "…See [IndexParam](../Management/IndexParam.md)";
+  `consistencyLevel(ConsistencyLevel consistencyLevel)` →
+  "…See [ConsistencyLevel](ConsistencyLevel.md)". pymilvus's
+  `create_collection` (links `DataType`/`CollectionSchema`) is the reference;
+  do not leave a referenced enum/class as bare text when its page exists.
+- **Create missing pages on the way**: when a referenced type has no page yet,
+  create its dedicated type page (see Step 3), then link to it.
+
 ### Response/output member description format
 
 Every operation page documents its return in two steps: a `**RETURN TYPE:**`
 heading that names the type, and a `**RETURNS:**` block that describes the value
 and — when the return is a compound object (struct / dict / response class) —
-lists its members as a nested `- **<Member>** (*<type>*) -` bullet list. The four
-SDK example docs (pymilvus / java / go / cpp `describeCollection`) are the
-canonical reference for this shape.
+lists its members. The four SDK example docs (pymilvus / java / go / cpp
+`describeCollection`) are the canonical reference. **Pick the list style by how
+the returned type exposes its state:**
 
-**Canonical structure (pymilvus / java / go / node / rust / csharp):**
+- **Directly exposed members — go, node, pymilvus, csharp**: the returned
+  struct/class exposes its fields, interface members, dict keys, or `{ get; }`
+  properties directly. Show the struct/object shape in a code block, then list
+  the members under `**PARAMETERS:**` as `- **<Member>** (*<type>*) -` bullets
+  (go's `describeCollection` example is the model).
+- **Encapsulated — java, cpp, rust**: the returned struct/class hides its state
+  behind member functions (getters/accessors). List the getters/accessors only —
+  never the raw members/fields. For cpp/rust, show the struct plus its member
+  functions in a code block, then list the functions under `**METHODS:**` as
+  `` - `<member>()` (*<type>*) - `` bullets. For java, list the `*Resp*` getter
+  methods directly under `**RETURNS:**` as `` `getXxx()` `` bullets (no
+  `**METHODS:**` heading; see the java (V2) template below).
+
+Canonical template — exposed members (go model):
 
 ````markdown
 **RETURN TYPE:**
@@ -836,110 +920,128 @@ canonical reference for this shape.
 
 <one-sentence description of the returned value>.
 
-[optional language-idiomatic code block showing the returned object's shape]
+```go
+type Collection struct {
+    ID   int64
+    Name string
+    ...
+}
+```
 
-**PARAMETERS:**   <- the returned object's members, as nested bullets
+**PARAMETERS:**
 
-- **<Member>** (*<Type>*) -
+- **ID** (*int64*) -
 
-    <one-sentence description of the member>.
+    The unique identifier of the collection.
 
-    - **<NestedMember>** (*<Type>*) -
+- **Name** (*string*) -
 
-        <one-sentence description of the nested member>.
+    The name of the collection.
+````
+
+Canonical template — encapsulated (java/cpp/rust):
+
+````markdown
+**RETURN TYPE:**
+
+*Result\<DescribeCollectionResponse\>*
+
+**RETURNS:**
+
+<one-sentence description>. Returns an `Error` if the operation fails.
+
+```rust
+DescribeCollectionResponse
+    description()             // -> &CollectionDesc
+        get_collection_name() // -> &str
+        get_schema()          // -> &CollectionSchema
+            get_fields()      // -> &[FieldSchema]
+```
+
+**METHODS:**
+
+- `description()` (*&CollectionDesc*) -
+
+    The collection description.
+
+    - `get_collection_name()` (*&str*) -
+
+        The name of the collection.
+
+    - `get_schema()` (*&CollectionSchema*) -
+
+        The collection schema.
+
+        - `get_fields()` (*&[FieldSchema]*) -
+
+            The fields declared on the collection.
 ````
 
 Rules:
-- Each member is a `- **<Member>** (*<type>*) -` bullet; nested members indent
+- Members under `**PARAMETERS:**` are field-style `- **<Member>** (*<type>*) -`
+  bullets; functions under `**METHODS:**` are method-style
+  `` - `<member>()` (*<type>*) - `` bullets. Nested members/functions indent
   further. The type names match the SDK's own response class at the target tag.
-- When the return is a compound object, show its shape with a language-idiomatic
-  code block before the member list: a Go `struct`, a Node TS interface or object
-  literal, a Rust `struct`, a pymilvus example `dict`, a Java Lombok field list.
-  Keep the block to the type shape only — no filler.
-- If a member's type has its own page, link it (e.g. go
-  `*[entity.Collection](Collection.md), error*`).
-- One sentence per member, no padding.
+- **Expand nested struct/class members recursively** (the C++ `describeCollection`
+  example is the model: `response` → `Desc`/`CollectionDesc` → `Schema`/`CollectionSchema`
+  → `Fields`/`FieldSchema` → ...). When a member/function's type is itself a struct,
+  class, or response type (e.g. `CollectionDesc`, `CollectionSchema`, `FieldSchema`,
+  `CollectionInfo`, `ReplicaInfo`), list that type's own members/functions
+  underneath it, indented further — down the whole chain, not just one level. Do
+  this for every SDK, not only C++.
+- **Always link a member/function type that has a dedicated type page** — a leaf
+  enum or scalar (e.g. cpp `([DataType](...))`, go `*[entity.Collection](Collection.md)`),
+  **or a schema/record type such as `CollectionSchema`/`FieldSchema`** — with a
+  relative `.md` link (e.g. java `getCollectionSchema()` →
+  `[CollectionSchema](CollectionSchema/CollectionSchema.md)`). Do not leave a
+  referenced type as bare text when its page exists, and do not re-expand a
+  dedicated-page type's full member list inline where the SDK tree links it
+  (java links `CollectionSchema`; cpp still expands `Schema`/`Fields` inline and
+  links the leaf `DataType`).
+- Show the return object's shape with a language-idiomatic code block before the
+  member list: a Go `struct`, a Node TS interface or object literal, a Rust
+  struct with its accessors, a pymilvus example `dict`, a Java class with its
+  getters. Keep the block to the type shape only — no filler.
+- One sentence per member/function, no padding.
 
 **Per-SDK templates:**
 
-- **cpp** — the operation fills an out-param `response` and returns `Status`, so
-  there is **no** `**RETURN TYPE:**` heading: `*Status*` is the first line of
-  `**RETURNS:**`, and the response members nest under `- **response** (*XxxResponse*) -`
-  (established shape, precedent PR #1156; see
-  `milvus-sdk-cpp/v3.0.x/Collections/DescribeCollection.md`).
-
-  ````markdown
-  **RETURNS:**
-
-  *Status*
-
-  Returns a status indicating whether the operation succeeded.
-
-  - **response** (*DescribeRoleResponse*) -
-
-      - **Desc** (*const RoleDesc&*) -
-
-          Get role description.
-
-          - **Name** (*const std::string&*) -
-
-              Get name of the role.
-  ````
-
-- **pymilvus** — `**RETURN TYPE:**` is `*dict*` (or the typed return). `**RETURNS:**`
-  is a sentence optionally followed by an example `dict`; the dict keys are then
-  documented as nested bullets under `**PARAMETERS:**` (e.g. `describe_collection`
-  → `collection_name`, `fields`, `properties`, ...).
-
-- **java (V2)** — `**RETURN TYPE:**` is the `*XxxResp*` class. `**RETURNS:**` is a
-  sentence ("A **DescribeCollectionResp** object that contains detailed
-  information ..."); the Lombok fields of the `*Resp*` are documented as nested
-  bullets under `**PARAMETERS:**`.
-
 - **go** — `**RETURN TYPE:**` is `*<Type>, error*` (e.g. `*entity.Collection, error*`).
-  `**RETURNS:**` is a sentence optionally followed by the Go `struct` definition of
-  the returned type; the exported fields are documented as nested bullets under
-  `**PARAMETERS:**`.
-
-- **rust** — `**RETURN TYPE:**` is `*Result\<XxxResponse\>*`. `**RETURNS:**` is a
-  sentence optionally followed by the response `struct` shape; the response's
-  public accessors — e.g. `description()` returning `&CollectionDesc`, whose
-  getters like `get_collection_name()` / `get_schema()` are the members — are
-  documented as nested bullets under `**PARAMETERS:**`.
+  `**RETURNS:**` is a sentence; show the returned `struct` definition, then list
+  the exported fields under `**PARAMETERS:**`.
 
   ````markdown
   **RETURN TYPE:**
 
-  *Result\<DescribeCollectionResponse\>*
+  *entity.Collection, error*
 
   **RETURNS:**
 
-  A **DescribeCollectionResponse** containing detailed information about the specified collection. Returns an `Error` if the operation fails.
+  The collection description including schema, fields, and properties. Returns an error if the operation fails.
+
+  ```go
+  type Collection struct {
+      ID   int64
+      Name string
+      ...
+  }
+  ```
 
   **PARAMETERS:**
 
-  - **description** (*&CollectionDesc*) -
+  - **ID** (*int64*) -
 
-      The collection description.
+      The unique identifier of the collection.
 
-      - **get_collection_name** (*&str*) -
+  - **Name** (*string*) -
 
-          The name of the collection.
-
-      - **get_collection_id** (*i64*) -
-
-          The numeric ID of the collection.
-
-      - **get_schema** (*&CollectionSchema*) -
-
-          The collection schema, with field definitions and the primary key.
+      The name of the collection.
   ````
 
 - **node** — the heading and type share one line, `**RETURNS** *Promise<XxxRes>*`,
-  followed by a sentence, an optional TS interface / object-shape block, and the
-  interface members as nested bullets under `**PARAMETERS:**` (e.g.
-  `describeCollection` → `Promise<DescribeCollectionResponse>` with `schema`,
-  `collectionID`, `collection_name`, ...).
+  followed by a sentence, an optional TS interface block, then the interface
+  members under `**PARAMETERS:**` (e.g. `describeCollection` →
+  `Promise<DescribeCollectionResponse>` with `schema`, `collectionID`, ...).
 
   ````markdown
   **RETURNS** *Promise<DescribeCollectionResponse>*
@@ -957,8 +1059,99 @@ Rules:
       The internal collection ID assigned by Milvus.
   ````
 
+- **pymilvus** — `**RETURN TYPE:**` is `*dict*` (or the typed return); `**RETURNS:**`
+  is a sentence optionally followed by an example `dict`; the dict keys are then
+  documented under `**PARAMETERS:**` (e.g. `describe_collection` →
+  `collection_name`, `fields`, `properties`, ...).
+
 - **csharp** — `**RETURN TYPE:**` is the `*XxxResult*` class; `**RETURNS:**` is a
-  sentence and the `{ get; }` properties are documented as nested bullets.
+  sentence; the `{ get; }` properties are documented under `**PARAMETERS:**`.
+
+- **java (V2)** — `**RETURN TYPE:**` is the `*XxxResp*` class. `**RETURNS:**` is a
+  sentence ("A **DescribeCollectionResp** object that contains detailed
+  information ..."), then the `*Resp*` class's **getter methods** listed directly
+  under `**RETURNS:**` as `` `getXxx()` `` bullets (no `**METHODS:**` heading —
+  the java tree nests them under `**RETURNS:**`). **List getter methods only** —
+  never the raw Lombok fields/members, because users access response data
+  exclusively through getters. When a getter's return type has a dedicated type
+  page, link it (e.g. `getCollectionSchema()` returns `CollectionSchema` →
+  `[CollectionSchema](CollectionSchema/CollectionSchema.md)`).
+
+- **cpp** — the operation fills an out-param `response` and returns `Status`, so
+  there is **no** `**RETURN TYPE:**` heading: `*Status*` is the first line of
+  `**RETURNS:**`. Show the response class's getter methods in a code block, then
+  document them under `**METHODS:**`.
+
+  ````markdown
+  **RETURNS:**
+
+  *Status*
+
+  Returns a status indicating whether the operation succeeded.
+
+  ```cpp
+  DescribeCollectionResponse
+      Desc()               // -> const CollectionDesc&
+          CollectionName() // -> const std::string&
+          Schema()         // -> const CollectionSchema&
+              Fields()     // -> const std::vector<FieldSchema>&
+  ```
+
+  **METHODS:**
+
+  - `Desc()` (*const CollectionDesc&*) -
+
+      Get collection description.
+
+      - `CollectionName()` (*const std::string&*) -
+
+          Get name of the collection.
+
+      - `Schema()` (*const CollectionSchema&*) -
+
+          Collection schema.
+
+          - `Fields()` (*const std::vector<FieldSchema>&*) -
+
+              Fields schema array.
+  ````
+
+- **rust** — `**RETURN TYPE:**` is `*Result\<XxxResponse\>*`; `**RETURNS:**` is a
+  sentence; show the response struct's accessors in a code block, then document
+  them under `**METHODS:**`.
+
+  ````markdown
+  **RETURN TYPE:**
+
+  *Result\<DescribeCollectionResponse\>*
+
+  **RETURNS:**
+
+  A **DescribeCollectionResponse** containing detailed information about the specified collection. Returns an `Error` if the operation fails.
+
+  **METHODS:**
+
+  - `description()` (*&CollectionDesc*) -
+
+      The collection description.
+
+      - `get_collection_name()` (*&str*) -
+
+          The name of the collection.
+
+      - `get_collection_id()` (*i64*) -
+
+          The numeric ID of the collection.
+
+      - `get_schema()` (*&CollectionSchema*) -
+
+          The collection schema, with field definitions and the primary key.
+  ````
+
+- **csharp** — `**RETURN TYPE:**` is the `*XxxResult*` / `*XxxResp*` class;
+  `**RETURNS:**` is a sentence and the C# `{ get; }` properties (both the V1
+  result classes and the V2 `Milvus.Client.V2` `*Resp` types) are documented
+  under `**PARAMETERS:**` as field-style bullets.
 - **Verbosity**: match the sibling pages — one sentence per member, no padding.
   Do not expand every code comment into a paragraph.
 - Match the tone, sentence patterns, terminology, **and verbosity** of existing

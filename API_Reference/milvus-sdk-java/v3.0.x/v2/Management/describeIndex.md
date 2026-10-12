@@ -41,11 +41,73 @@ describeIndex(DescribeIndexReq.builder()
 
     A timestamp for time-travel queries. Defaults to `0L`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeIndexResp*
 
+**RETURNS:**
+
 A **DescribeIndexResp** object that contains the details of the specified index.
+
+- `getIndexDescriptions()` (*List\<IndexDesc\>*) -
+
+    The index descriptions. Each **IndexDesc** has the following getters:
+
+    - `getFieldName()` (*String*) -
+
+        The name of the field the index is built on.
+
+    - `getIndexName()` (*String*) -
+
+        The name of the index.
+
+    - `getId()` (*long*) -
+
+        The internal ID of the index.
+
+    - `getIndexType()` (*IndexType*) -
+
+        The type of the index.
+
+    - `getMetricType()` (*MetricType*) -
+
+        The metric type used to measure vector similarity.
+
+    - `getExtraParams()` (*Map\<String, String\>*) -
+
+        The extra parameters of the index.
+
+    - `getIndexedRows()` (*long*) -
+
+        The number of rows that have been indexed.
+
+    - `getTotalRows()` (*long*) -
+
+        The total number of rows in the collection.
+
+    - `getPendingIndexRows()` (*long*) -
+
+        The number of rows waiting to be indexed.
+
+    - `getIndexState()` (*IndexBuildState*) -
+
+        The build state of the index.
+
+    - `getIndexFailedReason()` (*String*) -
+
+        The reason the index build failed, if any.
+
+    - `getProperties()` (*Map\<String, String\>*) -
+
+        **Deprecated.** The properties of the index. Use `extraParams` instead.
+
+- `getIndexDescByFieldName(String fieldName)` (*IndexDesc*) -
+
+    Returns the index description for the specified field name, or `null` if none is found. Throws `IllegalArgumentException` if the field name is `null`.
+
+- `getIndexDescByIndexName(String indexName)` (*IndexDesc*) -
+
+    Returns the index description for the specified index name, or `null` if none is found. Throws `IllegalArgumentException` if the index name is `null`.
 
 **EXCEPTIONS:**
 

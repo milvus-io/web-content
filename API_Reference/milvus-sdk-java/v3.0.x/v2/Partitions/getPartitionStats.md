@@ -30,11 +30,21 @@ GetPartitionStatsReq.builder()
 
     The name of the target partition.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetPartitionStatsResp*
 
-Contains numOfEntities and the complete stats map returned by Milvus.
+**RETURNS:**
+
+A **GetPartitionStatsResp** object that contains `numOfEntities` and the complete stats map returned by Milvus.
+
+- `getNumOfEntities()` (*Long*) -
+
+    The number of entities in the partition.
+
+- `getStats()` (*Map\<String, String\>*) -
+
+    The complete stats map returned by Milvus.
 
 **EXCEPTIONS:**
 

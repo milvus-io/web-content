@@ -26,11 +26,17 @@ listSnapshots(ListSnapshotsReq.builder()
 
     The name of the collection associated with the snapshot operation.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListSnapshotsResp*
 
-A response containing the snapshot names that match the request filter.
+**RETURNS:**
+
+A **ListSnapshotsResp** object containing the snapshot names that match the request filter.
+
+- `getSnapshots()` (*List\<String\>*) -
+
+    The names of the snapshots that match the request filter.
 
 **EXCEPTIONS:**
 

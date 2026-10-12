@@ -98,7 +98,7 @@ SearchReq.builder()
 
 - `metricType(IndexParam.MetricType metricType)`
 
-    The metric type used to measure vector similarity.
+    The metric type used to measure vector similarity. See [MetricType](../Management/MetricType.md).
 
 - `topK(int topK)`
 
@@ -146,7 +146,7 @@ SearchReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the search.
+    The consistency level for the search. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
@@ -174,11 +174,11 @@ SearchReq.builder()
 
 - `functionScore(FunctionScore functionScore)`
 
-    The scoring functions applied to the search results.
+    The scoring functions applied to the search results. See [FunctionScore](FunctionScore/FunctionScore.md).
 
 - `ranker(CreateCollectionReq.Function ranker)`
 
-    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`.
+    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`. See [Function](../Collections/Function.md).
 
 - `functionChains(List<FunctionChain> functionChains)`
 
@@ -194,17 +194,139 @@ SearchReq.builder()
 
 - `highlighter(Highlighter highlighter)`
 
-    Text-highlighting configuration for returned fields.
+    Text-highlighting configuration for returned fields. See [Highlighter](Highlighter/Highlighter.md).
 
 - `searchAggregation(SearchAggregation searchAggregation)`
 
     Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *SearchResp*
 
-Contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
+**RETURNS:**
+
+A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
+
+- `getSearchResults()` (*List\<List\<SearchResult\>\>*) -
+
+    The search results, one list per query vector. Each **SearchResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The retrieved entity data.
+
+    - `getScore()` (*Float*) -
+
+        The similarity score of the result.
+
+    - `getId()` (*Object*) -
+
+        The primary key value of the result.
+
+    - `getPrimaryKey()` (*String*) -
+
+        The primary key value rendered as a string.
+
+    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
+
+        The highlighted text fragments for each requested field, keyed by field name. Each **HighlightResult** has the following getters:
+
+        - `getFieldName()` (*String*) -
+
+            The name of the highlighted field.
+
+        - `getFragments()` (*List\<String\>*) -
+
+            The highlighted text fragments.
+
+        - `getScores()` (*List\<Float\>*) -
+
+            The relevance scores of the fragments.
+
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
+
+        The highlight result for the specified field name, or `null` if none exists.
+
+    - `getElementOffset()` (*Long*) -
+
+        For struct-array element-level queries, the index of the matched element within the array. Null for ordinary queries.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the search.
+
+- `getRecalls()` (*List\<Float\>*) -
+
+    The recall values of the search, one per query vector.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the search operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the search.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the search.
+
+- `getAggregationBuckets()` (*List\<List\<AggregationBucket\>\>*) -
+
+    The aggregation buckets, one list per query vector. Each **AggregationBucket** has the following getters:
+
+    - `getKey()` (*List\<KeyEntry\>*) -
+
+        The bucket key entries that define the bucket. Each **KeyEntry** has the following getters:
+
+        - `getFieldId()` (*long*) -
+
+            The ID of the field the key is based on.
+
+        - `getFieldName()` (*String*) -
+
+            The name of the field the key is based on.
+
+        - `getValue()` (*Object*) -
+
+            The value of the key.
+
+    - `getCount()` (*long*) -
+
+        The number of entities in the bucket.
+
+    - `getMetrics()` (*Map\<String, Object\>*) -
+
+        The aggregation metric values for the bucket.
+
+    - `getHits()` (*List\<AggregationHit\>*) -
+
+        The top hits inside the bucket. Each **AggregationHit** has the following getters:
+
+        - `getId()` (*Object*) -
+
+            The primary key of the hit.
+
+        - `getScore()` (*Float*) -
+
+            The similarity score of the hit.
+
+        - `getFields()` (*Map\<String, Object\>*) -
+
+            The field values of the hit.
+
+        - `getFieldIds()` (*Map\<String, Long\>*) -
+
+            The field ID map of the hit.
+
+    - `getSubGroups()` (*List\<AggregationBucket\>*) -
+
+        The nested sub-buckets.
 
 **EXCEPTIONS:**
 

@@ -16,12 +16,14 @@ CollectionSchema.addField(AddFieldReq.builder()
     .maxLength(Integer maxLength)
     .isPrimaryKey(Boolean isPrimaryKey)
     .isPartitionKey(Boolean isPartitionKey)
+    .isClusteringKey(Boolean isClusteringKey)
     .autoID(Boolean autoID)
     .dimension(int dimension)
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
     .defaultValue(DataType dataType)
+    .enableDefaultValue(Boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .enableMatch(Boolean enableMatch)
     .analyzerParams(Map<String, Object> analyzerParams)
@@ -47,7 +49,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     The data type of the field.
 
-    You can choose from the following options when selecting a data type for different fields.
+    You can choose from the following options when selecting a data type for different fields. See [DataType](../DataType.md).
 
 - `maxLength(Integer maxLength)` -
 
@@ -66,6 +68,10 @@ CollectionSchema.addField(AddFieldReq.builder()
     Whether the current field is the partitionKey field.
 
     Setting this to **True** makes the current field the partition key.
+
+- `isClusteringKey(Boolean isClusteringKey)` -
+
+    Whether the current field is the clustering key. The clustering key controls on-disk segment grouping to accelerate queries that filter on this field.
 
 - `autoID(Boolean autoID)` -
 
@@ -101,7 +107,11 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `defaultValue(DataType dataType)` -
 
-    Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+    Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion. See [DataType](../DataType.md).
+
+- `enableDefaultValue(Boolean enableDefaultValue)` -
+
+    Whether to pass the configured `defaultValue` to the server. Set to `true` so the default value takes effect; otherwise the default value is ignored.
 
 - `enableAnalyzer(Boolean enableAnalyzer)` -
 
@@ -127,7 +137,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     A list of fields in the Array of Structs field.
 
-    This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**.
+    This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**. See [FieldSchema](../FieldSchema.md).
 
 - `externalField(String externalField)` -
 

@@ -232,19 +232,25 @@ local directory via this table before editing. Current latest version line is
 - **Response surface** (see SKILL.md Pass 1): V2 response classes live in
   `io/milvus/v2/service/<group>/response/*Resp.java`
   (e.g. `DescribeCollectionResp.java`, `SearchResp.java`). Reconcile each
-  operation page's `**RETURNS:**` block against them:
+  operation page's `**RETURNS:**` block against them. The response members are
+  documented as **getter methods only** (`` `getXxx()` `` bullets), never the raw
+  Lombok fields — users access response data exclusively through getters.
 
   ```bash
-  # side A: fields of one response class at a tag (Lombok @Data → field list IS the output surface)
+  # side A: getter method names of one response class at a tag (Lombok @Data →
+  # field list → getXxx() accessors; strip the field list to the getter surface)
   git -C sdk-tmp/sdks/milvus-sdk-java show v3.0.9:sdk-core/src/main/java/io/milvus/v2/service/collection/response/DescribeCollectionResp.java \
-    | grep -E "^    private " | sed -E 's/^    private (final )?//;s/^.* //;s/;//' | sort -u
-  # side B: members documented on the page under **RETURNS:** (nested members are indented, so allow leading whitespace)
-  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-java/v3.0.x/v2/Collections/describeCollection.md | \
-    sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
+    | grep -E "^    private " | sed -E 's/^    private (final )?//;s/^.* //;s/;//' | sort -u \
+    | sed -E 's/^[a-z]/\U&/;s/^/get/'
+  # side B: getters documented on the page under **RETURNS:** (nested members are indented, so allow leading whitespace)
+  grep -oE "^\s*- \`get[A-Za-z0-9_]+\(\)\`" API_Reference/milvus-sdk-java/v3.0.x/v2/Collections/describeCollection.md | \
+    sed -E 's/^\s*- \`([A-Za-z0-9_]+)\(\)\`/\1/' | sort -u
   ```
-  Format precedent: java pages currently describe the `*XxxResp*` return in
-  one sentence; extend to a nested member list under `**RETURNS:**` where the
-  response carries meaningful fields (same shape as the cpp format in SKILL.md).
+  Format precedent: java pages describe the `*XxxResp*` return in one sentence
+  followed by the response class's getter methods (`` `getXxx()` `` bullets);
+  extend to the full getter list where the response carries meaningful fields.
+  When a getter's return type has a dedicated type page (e.g. `CollectionSchema`,
+  `FieldSchema`), link it instead of re-expanding every nested member inline.
 
 - **Known quirks**: doc pages use `**PARAMETERS:**`/`**RETURNS:**` with Java
   types; `About.md` needs every version literal bumped (bulkwriter too). Do NOT

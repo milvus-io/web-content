@@ -18,9 +18,17 @@ listResourceGroups(ListResourceGroupsReq.builder()
 
 *ListResourceGroupsResp*
 
+**RETURN TYPE:**
+
+*ListResourceGroupsResp*
+
 **RETURNS:**
 
-A **ListResourceGroupsResp** object is a list of group names in strings.
+A **ListResourceGroupsResp** object that contains a list of group names.
+
+- `getGroupNames()` (*List\<String\>*) -
+
+    The names of all resource groups.
 
 **EXCEPTIONS:**
 

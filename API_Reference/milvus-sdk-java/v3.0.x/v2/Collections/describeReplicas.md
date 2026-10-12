@@ -30,57 +30,59 @@ describeReplicas(DescribeReplicasReq.builder()
 
 *DescribeReplicasResp*
 
+**RETURN TYPE:**
+
+*DescribeReplicasResp*
+
 **RETURNS:**
 
 A DescribeReplicasResp that contains detailed information about the replicas in the specified collection.
 
-**PARAMETERS:**
+- `getReplicas()` (*List<ReplicaInfo>*) -
 
-- **replicas** (*List<ReplicaInfo>*) -
+    A list of replicas, each of which contains the following getters:
 
-    A list of replicas, each of which contains the following fields:
-
-    - **replicaID** (*Long*) -
+    - `getReplicaID()` (*Long*) -
 
         The ID of a replica.
 
-    - **collectionID** (*Long*) -
+    - `getCollectionID()` (*Long*) -
 
         The ID of the specified collection.
 
-    - **partitionIDs** (*List<Long>*) -
+    - `getPartitionIDs()` (*List<Long>*) -
 
         The IDs of partitions associated with the current replica.
 
-    - **shardReplicas** (*List<ShardReplicas>*) -
+    - `getShardReplicas()` (*List\<ShardReplica\>*) -
 
         The shards associated with the current replica. Each of the shards contains the following information:
 
-        - **leaderID** (*Long*) -
+        - `getLeaderID()` (*Long*) -
 
             The ID of the leader shard
 
-        - **leaderAddress** (*String*) -
+        - `getLeaderAddress()` (*String*) -
 
             The address of the leader shard in the form of `IP:PORT`.
 
-        - **channelName** (*String*) -
+        - `getChannelName()` (*String*) -
 
             The name of the channel associated with the current shard.
 
-        - **nodeIDs** (*List<Long>*) -
+        - `getNodeIDs()` (*List<Long>*) -
 
             The IDs of the query nodes associated with the current shard.
 
-    - **nodeIDs** (*List<Long>*) -
+    - `getNodeIDs()` (*List<Long>*) -
 
         The IDs of the query nodes associated with the current replica.
 
-    - **resourceGroupName** (*String*) -
+    - `getResourceGroupName()` (*String*) -
 
         The name of the resource group associated with the current replica.
 
-    - **numOutboundNode** (*Map<String, Integer>*) -
+    - `getNumOutboundNode()` (*Map<String, Integer>*) -
 
         The number of outbound query nodes.
 

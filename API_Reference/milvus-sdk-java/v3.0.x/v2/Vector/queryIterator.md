@@ -56,7 +56,7 @@ queryIterator(QueryIteratorReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `offset(long offset)`
 
@@ -94,7 +94,7 @@ queryIterator(QueryIteratorReq.builder()
 
 *QueryIterator*
 
-*QueryIterator*
+A **QueryIterator** object that iterates over the query results in batches.
 
 **EXCEPTIONS:**
 

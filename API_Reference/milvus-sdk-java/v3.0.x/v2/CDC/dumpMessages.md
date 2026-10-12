@@ -40,9 +40,29 @@ dumpMessages(DumpMessagesReq.builder()
 
     Whether to include the start message itself. Defaults to `Boolean.TRUE`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DumpMessagesResp*
+
+**RETURNS:**
+
+A **DumpMessagesResp** object that contains the dumped messages.
+
+- `getMessages()` (*Iterable\<DumpMessageInfo\>*) -
+
+    The dumped messages. Each **DumpMessageInfo** has the following getters:
+
+    - `getMessageID()` (*MessageID*) -
+
+        The ID of the message.
+
+    - `getPayload()` (*byte[]*) -
+
+        The payload of the message.
+
+    - `getProperties()` (*Map\<String, String\>*) -
+
+        The properties of the message.
 
 **EXCEPTIONS:**
 

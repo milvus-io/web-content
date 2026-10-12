@@ -80,7 +80,7 @@ QueryReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the query.
+    The consistency level for the query. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `offset(long offset)`
 
@@ -110,13 +110,45 @@ QueryReq.builder()
 
     Values substituted into placeholders in the filter expression.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryResp*
 
-Contains query rows ordered according to orderByFields when provided, along with execution metrics (`getCost()`, `getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`).
+**RETURNS:**
 
-For struct-array element-level queries (via `element_filter`), each returned `QueryResult` carries the matched element's index through `getElementOffset()`.
+A **QueryResp** object that contains query rows ordered according to `orderByFields` when provided, along with execution metrics.
+
+- `getQueryResults()` (*List\<QueryResult\>*) -
+
+    The query result rows. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The field values of the result row.
+
+    - `getElementOffset()` (*Long*) -
+
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the query.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the query operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the query.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the query.
 
 **EXCEPTIONS:**
 

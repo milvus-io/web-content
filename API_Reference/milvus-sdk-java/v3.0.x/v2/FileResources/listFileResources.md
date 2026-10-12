@@ -14,15 +14,25 @@ listFileResources(ListFileResourcesReq.builder().build());
 
 This request takes no parameters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ListFileResourcesResp*
 
-The response wraps `List<FileResourceInfo>` accessible via `getResources()`. Each `FileResourceInfo` entry has:
+**RETURNS:**
 
-- `name` (*String*) - The unique name of the resource.
+A **ListFileResourcesResp** object that contains the result of this operation.
 
-- `path` (*String*) - The original local path that was uploaded.
+- `getResources()` (*List\<FileResourceInfo\>*) -
+
+    The list of file resources. Each **FileResourceInfo** has the following getters:
+
+    - `getName()` (*String*) -
+
+        The unique name of the resource.
+
+    - `getPath()` (*String*) -
+
+        The original local path that was uploaded.
 
 **EXCEPTIONS:**
 

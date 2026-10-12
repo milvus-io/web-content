@@ -35,7 +35,7 @@ CreateCollectionReq.Function.builder()
 
     The type of function for processing raw data. Possible values:
 
-    - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
+    - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field. See [FunctionType](Function/FunctionType.md).
 
 - `inputFieldNames(List<String> inputFieldNames)`
 

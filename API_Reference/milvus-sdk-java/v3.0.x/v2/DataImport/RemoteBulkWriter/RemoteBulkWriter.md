@@ -45,7 +45,7 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating CreateCollectionReq.CollectionSchema.
+    The schema of the target collection that is defined by instantiating [CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md).
 
 - `withConnectParam(StorageConnectParam connectParam)`
 
@@ -75,7 +75,7 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withConfig(String key, Object val)`
 
-    A dictionary specifying optional configurations for processing CSV files. This parameter applies only when you set `fileType` to `CSV` in `withFileType()`. The dictionary contains the following fields:
+    A dictionary specifying optional configurations for processing CSV files. This parameter applies only when you set `fileType` to `CSV` in `withFileType()`. The dictionary contains the following getters:
 
     - **sep** (*string*) -
 

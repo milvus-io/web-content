@@ -119,7 +119,3 @@ Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors onl
 ### SPARSE_WAND
 
 Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
-
-### EMB_LIST_HNSW
-
-Sets the index type to EMB_LIST_HNSW. This applies to an Array of Structs field.

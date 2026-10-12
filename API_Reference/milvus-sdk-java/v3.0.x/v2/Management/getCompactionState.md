@@ -29,7 +29,7 @@ getCompactionState(GetCompactionStateReq.builder()
 
 A **GetCompactionStateResp** instance, which comprises the following parameters:
 
-- **state** (*CompactState*)
+- `getState()` (*CompactState*) -
 
     The current state of the specified compact operation. Possible values are:
 
@@ -39,15 +39,15 @@ A **GetCompactionStateResp** instance, which comprises the following parameters:
 
     - Completed(2)
 
-- **executingPlanNo** (*Long*)
+- `getExecutingPlanNo()` (*Long*) -
 
     The ID of the corresponding execution plan.
 
-- **timeoutPlanNo** (*Long*)
+- `getTimeoutPlanNo()` (*Long*) -
 
     The ID of the timeout plan.
 
-- **completedPlanNo** (*Long*) 
+- `getCompletedPlanNo()` (*Long*) -
 
     The ID of the completed plan.
 

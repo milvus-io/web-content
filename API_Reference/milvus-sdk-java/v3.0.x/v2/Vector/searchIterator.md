@@ -54,7 +54,7 @@ searchIterator(SearchIteratorReq.builder()
 
 - `metricType(IndexParam.MetricType metricType)`
 
-    The metric type used to measure vector similarity.
+    The metric type used to measure vector similarity. See [MetricType](../Management/MetricType.md).
 
 - `topK(int topK)`
 
@@ -86,7 +86,7 @@ searchIterator(SearchIteratorReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
@@ -104,7 +104,7 @@ searchIterator(SearchIteratorReq.builder()
 
 *SearchIterator*
 
-A *SearchIterator* object to iterate search results, which offers the following methods:
+A **SearchIterator** object that iterates over the search results in batches.
 
 **EXCEPTIONS:**
 

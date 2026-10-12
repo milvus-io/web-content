@@ -45,11 +45,25 @@ UpsertReq.builder()
 
     Field-level operations. `ARRAY_APPEND` and `ARRAY_REMOVE` imply partial-update semantics.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *UpsertResp*
 
-Contains the number of inserted or updated entities and the operation cost (`getCost()`).
+**RETURNS:**
+
+A **UpsertResp** object that contains the result of this operation.
+
+- `getUpsertCnt()` (*long*) -
+
+    The number of entities upserted.
+
+- `getPrimaryKeys()` (*List\<Object\>*) -
+
+    The primary keys of the upserted entities.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the upsert operation, in milliseconds.
 
 **EXCEPTIONS:**
 

@@ -19,11 +19,11 @@ IndexParam.builder()
 
 - `indexType(IndexType indexType)` -
 
-    The type of index to build on the field. For available index types, refer to IndexType.
+    The type of index to build on the field. For available index types, refer to IndexType. See [IndexType](IndexType.md).
 
 - `metricType(MetricType metricType)` -
 
-    The metric type for vector similarity measurement. For available metric types, refer to MetricType.
+    The metric type for vector similarity measurement. For available metric types, refer to MetricType. See [MetricType](MetricType.md).
 
 - `extraParams(Map<String, Object> extraParams)` -
 

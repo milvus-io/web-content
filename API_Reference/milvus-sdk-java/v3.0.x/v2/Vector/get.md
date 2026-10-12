@@ -59,15 +59,41 @@ get(GetReq.builder()
 
 A **GetResp** object representing one or more queried entities, including the operation cost (`getCost()`) and scanned-byte metrics (`getScannedRemoteBytes()`, `getScannedTotalBytes()`, `getCacheHitRatio()`) when available.
 
-**PARAMETERS:**
+- `getQueryResults()` (*List\<QueryResult\>*) -
 
-- **getResults** (*List\\\\<QueryResp.QueryResult\\\\>*)
+    The queried entities. Each **QueryResult** has the following getters:
 
-    **Deprecated.** A list of **QueryResp.QueryResult** objects.
+    - `getEntity()` (*Map\<String, Object\>*) -
 
-- **fields** (*Map\\\\<String,Object\\\\>*)
+        The field values of the result.
 
-    A map that contains key-value pairs of field names and their values.
+    - `getElementOffset()` (*Long*) -
+
+        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the operation.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the operation.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the operation.
+
+- `getGetResults()` (*List\<QueryResult\>*) -
+
+    **Deprecated.** Use `getQueryResults()` instead.
 
 **EXCEPTIONS:**
 

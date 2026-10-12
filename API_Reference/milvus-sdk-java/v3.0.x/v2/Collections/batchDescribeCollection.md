@@ -31,7 +31,7 @@ A list of collection IDs to describe in batch.
 
 *List<DescribeCollectionResp>*
 
-A list of **DescribeCollectionResp** objects.
+A list of **DescribeCollectionResp** objects, one per requested collection. See [describeCollection](describeCollection.md) for the fields of each **DescribeCollectionResp**.
 
 **EXCEPTIONS:**
 

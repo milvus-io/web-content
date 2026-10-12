@@ -20,19 +20,23 @@ None
 
 *CheckHealthResp*
 
-**RETURNS**
+**RETURN TYPE:**
 
-A **CheckHealthResp** object that contains detailed information about the current Milvus instance. The object has the following fields:
+*CheckHealthResp*
 
-- **isHealthy** (*Boolean*) -
+**RETURNS:**
+
+A **CheckHealthResp** object that contains detailed information about the current Milvus instance.
+
+- `getIsHealthy()` (*Boolean*) -
 
     Whether the current Milvus instance is in a healthy state.
 
-- **reasons** (*List<String>*) -
+- `getReasons()` (*List<String>*) -
 
     Return the unhealthy reasons if the server is in an unhealthy state.
 
-- **quotaStates** (*List<String>*) - 
+- `getQuotaStates()` (*List<String>*) -
 
     The names of unhealthy states. The following names could be in the list: "*ReadLimited*", "*WriteLimited*", "*DenyToRead*", "*DenyToWrite*", "*DenyToDDL*".
 

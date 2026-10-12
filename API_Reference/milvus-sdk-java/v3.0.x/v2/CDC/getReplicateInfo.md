@@ -25,9 +25,45 @@ getReplicateInfo(GetReplicateInfoReq.builder()
 
     The target physical channel whose replicate checkpoint should be returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetReplicateInfoResp*
+
+**RETURNS:**
+
+A **GetReplicateInfoResp** object that contains the checkpoint and salvage checkpoint information.
+
+- `getCheckpoint()` (*ReplicateCheckpoint*) -
+
+    The current replication checkpoint. Each **ReplicateCheckpoint** has the following getters:
+
+    - `getClusterId()` (*String*) -
+
+        The ID of the cluster.
+
+    - `getPchannel()` (*String*) -
+
+        The physical channel.
+
+    - `getMessageID()` (*MessageID*) -
+
+        The message ID of the checkpoint. Each **MessageID** has the following getters:
+
+        - `getId()` (*String*) -
+
+            The message ID value.
+
+        - `getWalName()` (*String*) -
+
+            The WAL implementation name. Supported values are `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
+
+    - `getTimeTick()` (*Long*) -
+
+        The time tick of the checkpoint.
+
+- `getSalvageCheckpoint()` (*ReplicateCheckpoint*) -
+
+    The salvage checkpoint used to recover the replication. Has the same fields as `checkpoint`.
 
 **EXCEPTIONS:**
 

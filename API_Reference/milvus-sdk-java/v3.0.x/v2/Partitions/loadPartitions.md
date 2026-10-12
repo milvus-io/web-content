@@ -70,8 +70,6 @@ loadPartitions(LoadPartitionsReq.builder()
 
 *void*
 
-*void*
-
 **EXCEPTIONS:**
 
 - **MilvusClientException**

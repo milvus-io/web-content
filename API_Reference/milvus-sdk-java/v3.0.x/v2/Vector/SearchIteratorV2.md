@@ -79,7 +79,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
@@ -105,7 +105,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 *SearchIteratorV2*
 
-*SearchIteratorV2*
+A **SearchIteratorV2** object that iterates over the search results in batches.
 
 **EXCEPTIONS:**
 

@@ -20,9 +20,33 @@ getServerVersionV2(GetServerVersionReq.builder()
 
     Whether to fetch detailed server build information. Defaults to `Boolean.FALSE`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetServerVersionResp*
+
+**RETURNS:**
+
+A **GetServerVersionResp** object that contains the version information of the connected Milvus server.
+
+- `getVersion()` (*String*) -
+
+    The version of the Milvus server.
+
+- `getBuildTime()` (*String*) -
+
+    The build time of the server.
+
+- `getGitCommit()` (*String*) -
+
+    The git commit of the server build.
+
+- `getGoVersion()` (*String*) -
+
+    The Go version used to build the server.
+
+- `getDeployMode()` (*String*) -
+
+    The deployment mode of the server.
 
 **EXCEPTIONS:**
 

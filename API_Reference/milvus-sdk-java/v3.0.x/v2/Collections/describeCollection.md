@@ -31,11 +31,93 @@ describeCollection(DescribeCollectionReq.builder()
 
     The numeric ID of the collection. Use this when you need to identify a collection by ID instead of name.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeCollectionResp*
 
+**RETURNS:**
+
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
+
+- `getCollectionName()` (*String*) -
+
+    The name of the collection.
+
+- `getCollectionID()` (*Long*) -
+
+    The internal ID of the collection.
+
+- `getDatabaseName()` (*String*) -
+
+    The name of the database the collection belongs to.
+
+- `getDescription()` (*String*) -
+
+    The description of the collection.
+
+- `getNumOfPartitions()` (*Long*) -
+
+    The number of partitions in the collection.
+
+- `getFieldNames()` (*List\<String\>*) -
+
+    The names of all fields in the collection.
+
+- `getVectorFieldNames()` (*List\<String\>*) -
+
+    The names of all vector fields in the collection.
+
+- `getPrimaryFieldName()` (*String*) -
+
+    The name of the primary key field.
+
+- `getEnableDynamicField()` (*Boolean*) -
+
+    Whether the dynamic field is enabled.
+
+- `getAutoID()` (*Boolean*) -
+
+    Whether primary key values are auto-generated.
+
+- `getCollectionSchema()` (*CollectionSchema*) -
+
+    The schema of the collection. See [CollectionSchema](CollectionSchema/CollectionSchema.md).
+
+- `getCreateTime()` (*Long*) -
+
+    The creation time of the collection.
+
+- `getCreateUtcTime()` (*Long*) -
+
+    The UTC creation time of the collection.
+
+- `getConsistencyLevel()` (*ConsistencyLevel*) -
+
+    The consistency level of the collection.
+
+- `getShardsNum()` (*Integer*) -
+
+    The number of shards in the collection.
+
+- `getProperties()` (*Map\<String, String\>*) -
+
+    The properties of the collection.
+
+- `getAliases()` (*List\<String\>*) -
+
+    The aliases of the collection.
+
+- `getUpdateTimestamp()` (*Long*) -
+
+    The last update timestamp of the collection.
+
+- `getEnableNamespace()` (*Boolean*) -
+
+    Whether namespace is enabled.
+
+- `getSchemaVersion()` (*Integer*) -
+
+    The schema version of the collection.
 
 **EXCEPTIONS:**
 

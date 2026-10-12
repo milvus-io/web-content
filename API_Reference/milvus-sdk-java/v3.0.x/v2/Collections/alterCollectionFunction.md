@@ -33,7 +33,7 @@ alterCollectionFunction(AlterCollectionFunctionReq.builder()
 
     **[REQUIRED]**
 
-    The new function definition to replace the existing one.
+    The new function definition to replace the existing one. See [Function](Function.md).
 
 **RETURNS:**
 

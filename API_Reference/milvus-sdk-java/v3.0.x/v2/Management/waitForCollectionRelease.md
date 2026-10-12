@@ -10,6 +10,7 @@ public void waitForCollectionRelease(ReleaseCollectionReq request)
 
 ```java
 waitForCollectionRelease(ReleaseCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .async(Boolean async)
     .timeout(Long timeout)
@@ -18,6 +19,10 @@ waitForCollectionRelease(ReleaseCollectionReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database. Defaults to the current database if not specified.
 
 - `collectionName(String collectionName)`
 

@@ -10,7 +10,7 @@ public StructFieldSchema addField(AddFieldReq addFieldReq)
 
 - **addFieldReq** (*AddFieldReq*) -
 
-    An AddFieldReq object defining the sub-field properties.
+    An AddFieldReq object defining the sub-field properties. For the full list of `AddFieldReq` builder methods, refer to [addField()](../CollectionSchema/addField.md).
 
 **RETURNS:**
 

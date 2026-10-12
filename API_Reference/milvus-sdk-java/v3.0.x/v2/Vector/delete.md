@@ -49,13 +49,27 @@ delete(DeleteReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the delete operation. Defaults to the server default when omitted.
+    The consistency level for the delete operation. Defaults to the server default when omitted. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DeleteResp*
 
-A **DeleteResp** object contains the number of deleted entities and the operation cost (`getCost()`).
+**RETURNS:**
+
+A **DeleteResp** object that contains the number of deleted entities and the operation cost.
+
+- `getDeleteCnt()` (*long*) -
+
+    The number of entities deleted.
+
+- `getPrimaryKeys()` (*List\<Object\>*) -
+
+    The primary keys of the deleted entities.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the delete operation, in milliseconds.
 
 **EXCEPTIONS:**
 

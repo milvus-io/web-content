@@ -26,11 +26,25 @@ describeAlias(DescribeAliasReq.builder()
 
     The alias name.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeAliasResp*
 
-A **DescribeAliasResp** object containing the alias details.
+**RETURNS:**
+
+A **DescribeAliasResp** object that contains the alias details.
+
+- `getDatabaseName()` (*String*) -
+
+    The name of the database.
+
+- `getCollectionName()` (*String*) -
+
+    The name of the collection the alias refers to.
+
+- `getAlias()` (*String*) -
+
+    The name of the alias.
 
 **EXCEPTIONS:**
 

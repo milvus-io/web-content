@@ -29,7 +29,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `structFields(List<CreateCollectionReq.StructFieldSchema> structFields)` -
 
-    A list of struct fields (nested-object fields) for the schema. Use this when the collection contains fields whose values are themselves structured records.
+    A list of struct fields (nested-object fields) for the schema. Use this when the collection contains fields whose values are themselves structured records. See [StructFieldSchema](../StructFieldSchema/StructFieldSchema.md).
 
 - `enableDynamicField(boolean enableDynamicField)` -
 
@@ -37,7 +37,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `functionList(List<CreateCollectionReq.Function> functionList)` -
 
-    Attaches functions (e.g., BM25, JSON-path extraction) that derive values from existing fields at insert time. Each `Function` declares its inputs, outputs, and parameters.
+    Attaches functions (e.g., BM25, JSON-path extraction) that derive values from existing fields at insert time. Each `Function` declares its inputs, outputs, and parameters. See [Function](../Function.md).
 
 - `externalSource(String externalSource)` -
 
