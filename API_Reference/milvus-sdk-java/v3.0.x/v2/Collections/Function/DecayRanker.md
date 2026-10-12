@@ -37,7 +37,7 @@ DecayRanker.builder()
 
 - `functionType(FunctionType functionType)`
 
-    The type of function for processing raw data. For **DecayRanker**, set this to `FunctionType.RERANK`.
+    The type of function for processing raw data. For **DecayRanker**, set this to `FunctionType.RERANK`. See [FunctionType](FunctionType.md).
 
 - `inputFieldNames(List<String> inputFieldNames)`
 

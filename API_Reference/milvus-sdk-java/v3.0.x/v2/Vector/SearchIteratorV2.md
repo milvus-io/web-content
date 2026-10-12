@@ -79,7 +79,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 

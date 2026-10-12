@@ -49,7 +49,7 @@ delete(DeleteReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the delete operation. Defaults to the server default when omitted.
+    The consistency level for the delete operation. Defaults to the server default when omitted. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 **RETURN TYPE:**
 

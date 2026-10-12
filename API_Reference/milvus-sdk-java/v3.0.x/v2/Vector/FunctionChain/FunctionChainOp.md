@@ -36,7 +36,7 @@ FunctionChainOp.builder()
 
 - `expr(FunctionChainExpr expr)`
 
-    The function expression attached to this operation.
+    The function expression attached to this operation. See [FunctionChainExpr](FunctionChainExpr.md).
 
 - `inputs(List<String> inputs)`
 
@@ -48,7 +48,7 @@ FunctionChainOp.builder()
 
 - `params(Map<String, FunctionParamValue> params)`
 
-    The named parameters of this operation.
+    The named parameters of this operation. See [FunctionParamValue](FunctionParamValue.md).
 
 **RETURN TYPE:**
 

@@ -48,7 +48,7 @@ CreateCollectionReq.FieldSchema.builder()
 
 - `dataType(DataType dataType)` -
 
-    The data type of the field. You can choose from the following options when selecting a data type for different fields: primary key field — use **DataType.Int64** or **DataType.VarChar**; scalar fields — choose from **DataType.Bool**, **DataType.Int8**, **DataType.Int16**, **DataType.Int32**, **DataType.Int64**, **DataType.Float**, **DataType.Double**, **DataType.VarChar**, **DataType.JSON**, or **DataType.Array**; vector fields — select **DataType.BinaryVector** or **DataType.FloatVector**.
+    The data type of the field. You can choose from the following options when selecting a data type for different fields: primary key field — use **DataType.Int64** or **DataType.VarChar**; scalar fields — choose from **DataType.Bool**, **DataType.Int8**, **DataType.Int16**, **DataType.Int32**, **DataType.Int64**, **DataType.Float**, **DataType.Double**, **DataType.VarChar**, **DataType.JSON**, or **DataType.Array**; vector fields — select **DataType.BinaryVector** or **DataType.FloatVector**. See [DataType](DataType.md).
 
 - `maxLength(Integer maxLength)` -
 

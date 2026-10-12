@@ -55,7 +55,7 @@ createCollection(CreateCollectionReq.builder()
 
 - `idType(DataType idType)` -
 
-    The data type of the primary key field. Defaults to `DataType.Int64`.
+    The data type of the primary key field. Defaults to `DataType.Int64`. See [DataType](DataType.md).
 
 - `maxLength(Integer maxLength)` -
 
@@ -83,15 +83,15 @@ createCollection(CreateCollectionReq.builder()
 
 - `collectionSchema(CollectionSchema collectionSchema)` -
 
-    A CollectionSchema object defining the collection structure.
+    A CollectionSchema object defining the collection structure. See [CollectionSchema](CollectionSchema/CollectionSchema.md).
 
 - `indexParams(List<IndexParam> indexParams)` -
 
-    A list of IndexParam objects defining the index configuration. Defaults to `new ArrayList<>()`.
+    A list of IndexParam objects defining the index configuration. Defaults to `new ArrayList<>()`. See [IndexParam](../Management/IndexParam.md).
 
 - `indexParam(IndexParam indexParam)` -
 
-    Appends a single index parameter to create together with the collection.
+    Appends a single index parameter to create together with the collection. See [IndexParam](../Management/IndexParam.md).
 
 - `numPartitions(Integer numPartitions)` -
 
@@ -99,7 +99,7 @@ createCollection(CreateCollectionReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation. Defaults to `ConsistencyLevel.BOUNDED`.
+    The consistency level for the operation. Defaults to `ConsistencyLevel.BOUNDED`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `properties(final Map<String, String> properties)` -
 

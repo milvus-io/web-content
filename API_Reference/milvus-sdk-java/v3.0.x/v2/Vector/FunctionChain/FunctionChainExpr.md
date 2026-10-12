@@ -26,7 +26,7 @@ FunctionChainExpr.builder()
 
 - `arg(FunctionChainArg arg)`
 
-    Appends an argument, which can be a column reference or a literal.
+    Appends an argument, which can be a column reference or a literal. See [FunctionChainArg](FunctionChainArg.md).
 
 - `param(String key, Object value)`
 

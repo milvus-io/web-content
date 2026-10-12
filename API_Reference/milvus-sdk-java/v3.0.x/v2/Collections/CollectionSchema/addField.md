@@ -49,7 +49,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     The data type of the field.
 
-    You can choose from the following options when selecting a data type for different fields.
+    You can choose from the following options when selecting a data type for different fields. See [DataType](../DataType.md).
 
 - `maxLength(Integer maxLength)` -
 
@@ -107,7 +107,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `defaultValue(DataType dataType)` -
 
-    Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+    Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion. See [DataType](../DataType.md).
 
 - `enableDefaultValue(Boolean enableDefaultValue)` -
 
@@ -137,7 +137,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     A list of fields in the Array of Structs field.
 
-    This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**.
+    This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**. See [FieldSchema](../FieldSchema.md).
 
 - `externalField(String externalField)` -
 

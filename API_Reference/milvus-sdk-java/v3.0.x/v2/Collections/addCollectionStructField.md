@@ -49,7 +49,7 @@ addCollectionStructField(AddCollectionStructFieldReq.builder()
 
 - `structFields(List<CreateCollectionReq.FieldSchema> structFields)`
 
-    The scalar or vector fields contained in each struct element.
+    The scalar or vector fields contained in each struct element. See [FieldSchema](FieldSchema.md).
 
 - `addStructField(AddFieldReq addFieldReq)`
 

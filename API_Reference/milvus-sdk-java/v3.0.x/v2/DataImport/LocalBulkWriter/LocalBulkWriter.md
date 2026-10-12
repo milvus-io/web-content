@@ -44,7 +44,7 @@ LocalBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating **CreateCollectionReq.CollectionSchema**.
+    The schema of the target collection that is defined by instantiating [CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md).
 
 - `withLocalPath(String localPath)`
 

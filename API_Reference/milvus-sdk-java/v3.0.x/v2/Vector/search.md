@@ -98,7 +98,7 @@ SearchReq.builder()
 
 - `metricType(IndexParam.MetricType metricType)`
 
-    The metric type used to measure vector similarity.
+    The metric type used to measure vector similarity. See [MetricType](../Management/MetricType.md).
 
 - `topK(int topK)`
 
@@ -146,7 +146,7 @@ SearchReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the search.
+    The consistency level for the search. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)`
 
@@ -174,11 +174,11 @@ SearchReq.builder()
 
 - `functionScore(FunctionScore functionScore)`
 
-    The scoring functions applied to the search results.
+    The scoring functions applied to the search results. See [FunctionScore](FunctionScore/FunctionScore.md).
 
 - `ranker(CreateCollectionReq.Function ranker)`
 
-    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`.
+    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`. See [Function](../Collections/Function.md).
 
 - `functionChains(List<FunctionChain> functionChains)`
 
@@ -194,7 +194,7 @@ SearchReq.builder()
 
 - `highlighter(Highlighter highlighter)`
 
-    Text-highlighting configuration for returned fields.
+    Text-highlighting configuration for returned fields. See [Highlighter](Highlighter/Highlighter.md).
 
 - `searchAggregation(SearchAggregation searchAggregation)`
 

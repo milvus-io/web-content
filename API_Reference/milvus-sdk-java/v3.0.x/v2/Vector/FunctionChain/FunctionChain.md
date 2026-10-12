@@ -25,7 +25,7 @@ FunctionChain.builder()
 
 - `stage(FunctionChainStage stage)`
 
-    The execution stage where this function chain runs. Throws `MilvusClientException` if the stage is `null`.
+    The execution stage where this function chain runs. Throws `MilvusClientException` if the stage is `null`. See [FunctionChainStage](FunctionChainStage.md).
 
 - `name(String name)`
 
@@ -33,7 +33,7 @@ FunctionChain.builder()
 
 - `map(String output, FunctionChainExpr expr)`
 
-    Adds a `map` operation that computes a new output column from an expression.
+    Adds a `map` operation that computes a new output column from an expression. See [FunctionChainExpr](FunctionChainExpr.md).
 
 - `sort(String by, boolean desc, String tieBreakCol)`
 

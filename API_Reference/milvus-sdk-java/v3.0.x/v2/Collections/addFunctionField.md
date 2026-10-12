@@ -50,7 +50,7 @@ AddFunctionFieldReq.builder()
 
 - `dataType(DataType dataType)`
 
-    The data type of the new function output field.
+    The data type of the new function output field. See [DataType](DataType.md).
 
 - `maxLength(Integer maxLength)`
 
@@ -62,7 +62,7 @@ AddFunctionFieldReq.builder()
 
 - `elementType(DataType elementType)`
 
-    The element type for an array field.
+    The element type for an array field. See [DataType](DataType.md).
 
 - `maxCapacity(Integer maxCapacity)`
 
@@ -94,11 +94,11 @@ AddFunctionFieldReq.builder()
 
 - `function(CreateCollectionReq.Function function)`
 
-    The function definition. It must have exactly one output matching fieldName.
+    The function definition. It must have exactly one output matching fieldName. See [Function](Function.md).
 
 - `indexParam(IndexParam indexParam)`
 
-    The bound index configuration. It must use the same field and an explicit index type other than None or AUTOINDEX.
+    The bound index configuration. It must use the same field and an explicit index type other than None or AUTOINDEX. See [IndexParam](../Management/IndexParam.md).
 
 **RETURNS:**
 

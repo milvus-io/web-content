@@ -72,7 +72,7 @@ hybridSearch(HybridSearchReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `groupByFieldName(String groupByFieldName)`
 
@@ -88,11 +88,11 @@ hybridSearch(HybridSearchReq.builder()
 
 - `functionScore(FunctionScore functionScore)`
 
-    A FunctionScore object for custom scoring.
+    A FunctionScore object for custom scoring. See [FunctionScore](FunctionScore/FunctionScore.md).
 
 - `ranker(CreateCollectionReq.Function ranker)`
 
-    **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`.
+    **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`. See [Function](../Collections/Function.md).
 
 **RETURN TYPE:**
 

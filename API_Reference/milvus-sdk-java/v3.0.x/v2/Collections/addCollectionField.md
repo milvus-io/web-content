@@ -52,7 +52,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 
 - `dataType(DataType dataType)` -
 
-    The data type of the field. Scalar, vector, array, JSON, and struct-related field types follow the same `DataType` values used when creating a collection.
+    The data type of the field. Scalar, vector, array, JSON, and struct-related field types follow the same `DataType` values used when creating a collection. See [DataType](DataType.md).
 
 - `maxLength(Integer maxLength)` -
 
@@ -64,7 +64,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 
 - `elementType(DataType elementType)` -
 
-    The element type for an array field.
+    The element type for an array field. See [DataType](DataType.md).
 
 - `maxCapacity(Integer maxCapacity)` -
 
@@ -100,7 +100,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 
 - `structFields(List<CreateCollectionReq.FieldSchema> structFields)` -
 
-    Nested field schemas for a struct field.
+    Nested field schemas for a struct field. See [FieldSchema](FieldSchema.md).
 
 - `externalField(String externalField)` -
 

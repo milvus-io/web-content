@@ -80,7 +80,7 @@ QueryReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-    The consistency level for the query.
+    The consistency level for the query. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `offset(long offset)`
 
