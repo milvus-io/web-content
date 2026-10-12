@@ -64,4 +64,33 @@ A **DumpMessagesResp** object that contains the dumped messages.
 
         The properties of the message.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when validation fails or the server returns an error for this operation.
+
+## Example
+
+```java
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .build());
+
+GetReplicateInfoResp info = client.getReplicateInfo(GetReplicateInfoReq.builder()
+    .sourceClusterId("cluster-a")
+    .targetPchannel("by-dev-rootcoord-dml_0_123v0")
+    .build());
+
+DumpMessagesResp resp = client.dumpMessages(DumpMessagesReq.builder()
+    .pchannel("by-dev-rootcoord-dml_0_123v0")
+    .startMessageID(info.getCheckpoint().getMessageID())
+    .includeStartMessage(true)
+    .build());
+for (DumpMessageInfo message : resp) {
+    System.out.println(message.getProperties());
+}
+```
+
+<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->

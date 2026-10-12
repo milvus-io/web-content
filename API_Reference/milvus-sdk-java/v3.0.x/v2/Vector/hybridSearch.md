@@ -222,4 +222,62 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
         The nested sub-buckets.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.FunctionScore;
+import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.ConsistencyLevel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+// Build ANN search requests for multiple vector fields
+List<AnnSearchReq> searchRequests = new ArrayList<>();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("float_vector")
+        .vectors(floatVectors)
+        .params("{\"nprobe\": 10}")
+        .limit(10)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("binary_vector")
+        .vectors(binaryVectors)
+        .limit(50)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("sparse_vector")
+        .vectors(sparseVectors)
+        .limit(100)
+        .build());
+
+// Hybrid search with WeightedRanker via FunctionScore
+SearchResp searchResp = client.hybridSearch(HybridSearchReq.builder()
+        .collectionName("my_collection")
+        .searchRequests(searchRequests)
+        .functionScore(FunctionScore.builder()
+                .addFunction(WeightedRanker.builder()
+                        .weights(Arrays.asList(0.2f, 0.5f, 0.6f))
+                        .build())
+                .build())
+        .limit(5)
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build());
+
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
+```

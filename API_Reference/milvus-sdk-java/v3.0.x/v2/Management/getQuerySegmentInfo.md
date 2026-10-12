@@ -90,4 +90,32 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         Whether the entities in the current segment are sorted.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientExceptions**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.GetQuerySegmentInfoReq;
+import io.milvus.v2.service.utility.response.GetQuerySegmentInfoResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get segment info
+GetQuerySegmentInfoResp segInfoResp = client.getQuerySegmentInfo(GetQuerySegmentInfoReq.builder()
+        .collectionName("test")
+        .build());
+```
+

@@ -150,4 +150,36 @@ A **QueryResp** object that contains query rows ordered according to `orderByFie
 
     The cache hit ratio of the query.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
+## Example
+
+Demonstrates query() against Milvus.
+
+```java
+// include-start milvus
+QueryResp response = client.query(QueryReq.builder()
+    .collectionName("books")
+    .orderByFields(Collections.singletonList(OrderByField.builder()
+        .fieldName("published_year")
+        .direction(AggDirection.DESC)
+        .build()))
+    .limit(10)
+    .build());
+// include-end
+// include-start zilliz
+QueryResp response = client.query(QueryReq.builder()
+    .collectionName("books")
+    .clusterId(CLUSTER_ID)
+    .orderByFields(Collections.singletonList(OrderByField.builder()
+        .fieldName("published_year")
+        .direction(AggDirection.DESC)
+        .build()))
+    .limit(10)
+    .build());
+// include-end
+```

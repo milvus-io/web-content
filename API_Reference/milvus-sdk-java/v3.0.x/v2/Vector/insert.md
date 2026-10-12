@@ -55,4 +55,19 @@ A **InsertResp** object that contains the result of this operation.
 
     The time cost of the insert operation, in milliseconds.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
+## Example
+
+Demonstrates insert() with the reviewed v3.0.x API.
+
+```java
+InsertResp response = client.insert(InsertReq.builder()
+    .collectionName("books")
+    .data(rows)
+    .build());
+```

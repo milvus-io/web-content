@@ -48,4 +48,25 @@ A **GetServerVersionResp** object that contains the version information of the c
 
     The deployment mode of the server.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when validation fails or the server returns an error for this operation.
+
+## Example
+
+```java
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .build());
+
+GetServerVersionResp version = client.getServerVersionV2(GetServerVersionReq.builder()
+    .detail(true)
+    .build());
+System.out.println(version.getVersion());
+System.out.println(version.getGitCommit());
+```
+
+<!-- category: Client; action: CREATE; addedSince: v3.0.x -->

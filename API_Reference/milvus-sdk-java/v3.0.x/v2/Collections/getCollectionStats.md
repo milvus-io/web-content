@@ -41,4 +41,17 @@ A **GetCollectionStatsResp** object that contains `numOfEntities` and the comple
 
     The complete stats map returned by Milvus.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
+## Example
+
+```java
+GetCollectionStatsResp response = client.getCollectionStats(GetCollectionStatsReq.builder()
+    .collectionName("books")
+    .build());
+Map<String, String> stats = response.getStats();
+```

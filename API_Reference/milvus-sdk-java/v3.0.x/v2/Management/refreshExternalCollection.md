@@ -50,4 +50,31 @@ A **RefreshExternalCollectionResp** object that carries the newly started refres
 
     The numeric ID of the newly started refresh job. Persist this value to query progress with `getRefreshExternalCollectionProgress()`.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.utility.request.RefreshExternalCollectionReq;
+import io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+
+JsonObject spec = new JsonObject();
+spec.addProperty("endpoint", "https://s3.amazonaws.com");
+spec.addProperty("bucket", "my-bucket");
+spec.addProperty("path", "data/snapshots/2026-05-01/");
+
+RefreshExternalCollectionResp resp = client.refreshExternalCollection(
+    RefreshExternalCollectionReq.builder()
+        .collectionName("my_collection")
+        .externalSource("s3")
+        .externalSpec(spec)
+        .build()
+);
+long jobId = resp.getJobId();
+System.out.println("Started refresh job: " + jobId);
+```

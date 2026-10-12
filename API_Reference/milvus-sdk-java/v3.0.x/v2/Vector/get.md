@@ -95,4 +95,34 @@ A **GetResp** object representing one or more queried entities, including the op
 
     **Deprecated.** Use `getQueryResults()` instead.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientExceptions**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.GetReq;
+import io.milvus.v2.service.vector.response.GetResp;
+import java.util.Collections;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get entity with id 0
+GetReq getReq = GetReq.builder()
+        .collectionName("test")
+        .ids(Collections.singletonList("0"))
+        .build();
+GetResp getResp = client.get(getReq);
+```

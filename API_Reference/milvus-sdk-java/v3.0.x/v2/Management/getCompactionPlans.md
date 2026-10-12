@@ -51,4 +51,22 @@ A **GetCompactionPlansResp** object that contains the compaction state and merge
 
         The IDs of the source segments.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.utility.request.GetCompactionPlansReq;
+import io.milvus.v2.service.utility.response.GetCompactionPlansResp;
+
+GetCompactionPlansResp plans = client.getCompactionPlans(
+    GetCompactionPlansReq.builder()
+        .compactionID(jobId)
+        .build()
+);
+System.out.println(plans);
+```

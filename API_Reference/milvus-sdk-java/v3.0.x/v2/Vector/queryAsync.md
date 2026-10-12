@@ -60,4 +60,34 @@ A future completed with a **QueryResp** object that contains query rows and exec
 
     The cache hit ratio of the query.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when request validation, transport, or server execution fails.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+CompletableFuture<QueryResp> future = client.queryAsync(QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("age > 20")
+        .outputFields(Arrays.asList("name", "age"))
+        .build());
+QueryResp response = future.get();
+```

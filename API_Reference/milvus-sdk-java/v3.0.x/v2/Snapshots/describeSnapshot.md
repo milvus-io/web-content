@@ -63,4 +63,23 @@ A **DescribeSnapshotResp** object containing snapshot metadata.
 
     The storage location of the snapshot.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.snapshot.request.DescribeSnapshotReq;
+import io.milvus.v2.service.snapshot.response.DescribeSnapshotResp;
+
+DescribeSnapshotReq request = DescribeSnapshotReq.builder()
+    .databaseName("default")
+    .collectionName("book_chunks")
+    .snapshotName("book_chunks_backup")
+    .build();
+
+DescribeSnapshotResp response = client.describeSnapshot(request);
+```

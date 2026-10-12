@@ -43,4 +43,20 @@ A **DescribeUserResp** object that contains `userName`, `roles`, and `descriptio
 
     The description of the user.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.rbac.request.DescribeUserReq;
+import io.milvus.v2.service.rbac.response.DescribeUserResp;
+
+DescribeUserResp resp = client.describeUser(DescribeUserReq.builder()
+    .userName("analyst_user")
+    .build());
+System.out.println(resp.getDescription());
+```

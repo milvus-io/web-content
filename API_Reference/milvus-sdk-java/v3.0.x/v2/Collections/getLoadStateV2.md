@@ -50,4 +50,25 @@ A **GetLoadStateResp** object that indicates the load state of the collection.
 
     The loading progress of the collection, expressed as a percentage.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when validation fails or the server returns an error for this operation.
+
+## Example
+
+```java
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .build());
+
+GetLoadStateResp resp = client.getLoadStateV2(GetLoadStateReq.builder()
+    .collectionName("book")
+    .build());
+System.out.println(resp.getState());
+System.out.println(resp.getProgress());
+```
+
+<!-- category: Collections; action: CREATE; addedSince: v3.0.x -->

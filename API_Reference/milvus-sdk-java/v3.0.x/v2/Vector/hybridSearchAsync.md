@@ -149,4 +149,43 @@ A future completed with a **SearchResp** object that contains search results, re
 
         The nested sub-buckets.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when request validation, transport, or server execution fails.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.builder()
+        .collectionName("my_collection")
+        .searchRequests(Arrays.asList(
+                AnnSearchReq.builder()
+                        .vectorFieldName("dense_vector")
+                        .vectors(Collections.singletonList(queryVector))
+                        .build(),
+                AnnSearchReq.builder()
+                        .vectorFieldName("sparse_vector")
+                        .vectors(Collections.singletonList(sparseVector))
+                        .build()))
+        .build());
+SearchResp response = future.get();
+```

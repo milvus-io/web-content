@@ -328,4 +328,40 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
         The nested sub-buckets.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
+## Example
+
+Demonstrates search() against Milvus.
+
+```java
+// include-start milvus
+SearchResp response = client.search(SearchReq.builder()
+    .collectionName("books")
+    .data(Collections.singletonList(queryVector))
+    .annsField("embedding")
+    .searchAggregation(SearchAggregation.builder()
+        .fields(Collections.singletonList("category"))
+        .size(10)
+        .build())
+    .limit(10)
+    .build());
+// include-end
+// include-start zilliz
+SearchResp response = client.search(SearchReq.builder()
+    .collectionName("books")
+    .clusterId(CLUSTER_ID)
+    .data(Collections.singletonList(queryVector))
+    .annsField("embedding")
+    .searchAggregation(SearchAggregation.builder()
+        .fields(Collections.singletonList("category"))
+        .size(10)
+        .build())
+    .limit(10)
+    .build());
+// include-end
+```

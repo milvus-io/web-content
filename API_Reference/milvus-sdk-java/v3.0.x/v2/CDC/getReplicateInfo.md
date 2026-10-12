@@ -65,4 +65,25 @@ A **GetReplicateInfoResp** object that contains the checkpoint and salvage check
 
     The salvage checkpoint used to recover the replication. Has the same fields as `checkpoint`.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when validation fails or the server returns an error for this operation.
+
+## Example
+
+```java
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .build());
+
+GetReplicateInfoResp resp = client.getReplicateInfo(GetReplicateInfoReq.builder()
+    .sourceClusterId("cluster-a")
+    .targetPchannel("by-dev-rootcoord-dml_0_123v0")
+    .build());
+System.out.println(resp.getCheckpoint());
+```
+
+<!-- category: CDC; action: CREATE; addedSince: v3.0.x -->

@@ -65,4 +65,18 @@ A **UpsertResp** object that contains the result of this operation.
 
     The time cost of the upsert operation, in milliseconds.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
+## Example
+
+```java
+UpsertResp response = client.upsert(UpsertReq.builder()
+    .collectionName("books")
+    .data(rows)
+    .fieldOps(fieldOps)
+    .build());
+```

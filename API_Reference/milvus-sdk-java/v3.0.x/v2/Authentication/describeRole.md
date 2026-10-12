@@ -71,4 +71,20 @@ A **DescribeRoleResp** object that contains `roleName`, `grantInfos`, and `descr
 
     The description of the role.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.rbac.request.DescribeRoleReq;
+import io.milvus.v2.service.rbac.response.DescribeRoleResp;
+
+DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
+    .roleName("analytics_reader")
+    .build());
+System.out.println(resp.getDescription());
+```

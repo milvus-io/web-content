@@ -71,4 +71,33 @@ A **DeleteResp** object that contains the number of deleted entities and the ope
 
     The time cost of the delete operation, in milliseconds.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.DeleteReq;
+import io.milvus.v2.service.vector.response.DeleteResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Delete entities with filter "id > 10"
+DeleteReq deleteReq = DeleteReq.builder()
+        .collectionName("test")
+        .filter("id > 10")
+        .build();
+DeleteResp deleteResp = client.delete(deleteReq);
+```

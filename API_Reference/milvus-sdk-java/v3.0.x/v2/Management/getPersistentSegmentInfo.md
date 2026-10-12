@@ -74,4 +74,31 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         Whether the entities in the current segment are sorted.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientExceptions**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.GetPersistentSegmentInfoReq;
+import io.milvus.v2.service.utility.response.GetPersistentSegmentInfoResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get segment info
+GetPersistentSegmentInfoResp segInfoResp = client.getPersistentSegmentInfo(GetPersistentSegmentInfoReq.builder()
+        .collectionName(randomCollectionName)
+        .build());
+```

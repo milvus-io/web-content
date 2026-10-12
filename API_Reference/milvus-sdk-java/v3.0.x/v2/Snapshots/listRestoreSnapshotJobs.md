@@ -74,4 +74,22 @@ A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs th
 
         The time cost of the restore job, in seconds.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.snapshot.request.ListRestoreSnapshotJobsReq;
+import io.milvus.v2.service.snapshot.response.ListRestoreSnapshotJobsResp;
+
+ListRestoreSnapshotJobsReq request = ListRestoreSnapshotJobsReq.builder()
+    .databaseName("default")
+    .collectionName("book_chunks")
+    .build();
+
+ListRestoreSnapshotJobsResp response = client.listRestoreSnapshotJobs(request);
+```

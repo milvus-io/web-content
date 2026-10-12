@@ -69,4 +69,21 @@ A **GetRestoreSnapshotStateResp** object containing restore job state, progress,
 
         The time cost of the restore job, in seconds.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.snapshot.request.GetRestoreSnapshotStateReq;
+import io.milvus.v2.service.snapshot.response.GetRestoreSnapshotStateResp;
+
+GetRestoreSnapshotStateReq request = GetRestoreSnapshotStateReq.builder()
+    .jobId(123456789L)
+    .build();
+
+GetRestoreSnapshotStateResp response = client.getRestoreSnapshotState(request);
+```

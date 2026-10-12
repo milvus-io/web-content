@@ -109,4 +109,33 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     Returns the index description for the specified index name, or `null` if none is found. Throws `IllegalArgumentException` if the index name is `null`.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.index.request.DescribeIndexReq;
+import io.milvus.v2.service.index.response.DescribeIndexResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Describe the index for the field "vector"
+DescribeIndexReq describeIndexReq = DescribeIndexReq.builder()
+        .collectionName("test")
+        .fieldName("vector")
+        .build();
+DescribeIndexResp describeIndexResp = client.describeIndex(describeIndexReq);
+```

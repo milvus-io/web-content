@@ -235,4 +235,33 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The schema version of the collection.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.DescribeCollectionReq;
+import io.milvus.v2.service.collection.response.DescribeCollectionResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get the collection detail
+DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
+        .collectionName("test")
+        .build();
+DescribeCollectionResp describeCollectionResp = client.describeCollection(describeCollectionReq);
+
+```

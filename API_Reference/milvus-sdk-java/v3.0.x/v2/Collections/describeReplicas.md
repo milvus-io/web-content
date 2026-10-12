@@ -86,4 +86,37 @@ A DescribeReplicasResp that contains detailed information about the replicas in 
 
         The number of outbound query nodes.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientExceptions**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.ReplicaInfo;
+import io.milvus.v2.service.collection.request.DescribeReplicasReq;
+import io.milvus.v2.service.collection.response.DescribeReplicasResp;
+import java.util.Set;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// describe the replicas of a collection named \`test\`
+DescribeReplicasReq describeReplicasReq = DescribeReplicasReq.builder()
+        .collectionName("test")
+        .build();
+DescribeReplicasResp descReplicaResp = client.describeReplicas(describeReplicasReq);
+for (ReplicaInfo replica : descReplicaResp.getReplicas()) {
+    System.out.println(replica.getReplicaID());
+}
+```
+

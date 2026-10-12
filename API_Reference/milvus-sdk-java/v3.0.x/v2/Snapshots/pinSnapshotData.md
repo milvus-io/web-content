@@ -48,4 +48,24 @@ A **PinSnapshotDataResp** object containing the pin ID for the pinned snapshot d
 
     The ID of the pin.
 
-**EXCEPTIONS
+**EXCEPTIONS:**
+
+- **MilvusClientException**
+
+    This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
+
+## Example
+
+```java
+import io.milvus.v2.service.snapshot.request.PinSnapshotDataReq;
+import io.milvus.v2.service.snapshot.response.PinSnapshotDataResp;
+
+PinSnapshotDataReq request = PinSnapshotDataReq.builder()
+    .snapshotName("book_chunks_backup")
+    .databaseName("default")
+    .collectionName("book_chunks")
+    .ttlSeconds(3600L)
+    .build();
+
+PinSnapshotDataResp response = client.pinSnapshotData(request);
+```
