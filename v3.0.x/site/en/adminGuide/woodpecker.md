@@ -360,3 +360,54 @@ In cross-AZ deployments, service mode also saves roughly **1/3 of write** and **
 For details on architecture, deployment modes (MemoryBuffer / QuorumBuffer), and performance, see [Woodpecker Architecture](woodpecker_architecture.md).
 
 For more parameter details, refer to the Woodpecker [GitHub repository](https://github.com/zilliztech/woodpecker).
+
+## Milvus and Woodpecker versions
+
+### Embedded mode (Milvus 2.6.x)
+
+In Milvus 2.6.x, Woodpecker runs embedded in Milvus and is included in the **Milvus image**. The table below records the Woodpecker library used by each Milvus release; there is no separate Woodpecker server image to deploy or upgrade. Upgrade Milvus to update the embedded Woodpecker library. Each version range includes both endpoints.
+
+| Milvus release(s) | Embedded Woodpecker library | Dependency source |
+| --- | --- | --- |
+| v2.6.0 | `v0.1.3` | [go.mod](https://github.com/milvus-io/milvus/blob/v2.6.0/pkg/go.mod) |
+| v2.6.1–v2.6.2 | `v0.1.4` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.1/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.2/pkg/go.mod) |
+| v2.6.3–v2.6.5 | `v0.1.6` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.3/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.5/pkg/go.mod) |
+| v2.6.6 | `v0.1.11` | [go.mod](https://github.com/milvus-io/milvus/blob/v2.6.6/pkg/go.mod) |
+| v2.6.7 | `v0.1.12` | [go.mod](https://github.com/milvus-io/milvus/blob/v2.6.7/pkg/go.mod) |
+| v2.6.8–v2.6.12 | `v0.1.13` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.8/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.12/pkg/go.mod) |
+| v2.6.13–v2.6.15 | `v0.1.14-0.20260317120738-e47dc37481fd` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.13/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.15/pkg/go.mod) |
+| v2.6.16–v2.6.17 | `v0.1.14-0.20260427080535-9dc9b3189baa` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.16/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.17/pkg/go.mod) |
+| v2.6.18–v2.6.23 | `v0.1.14-0.20260519022627-fdf34b23e0d7` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod) |
+| v2.6.24–v2.6.25 | `v0.1.44` | [First release](https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod) · [Last release](https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod) |
+
+Versions such as `v0.1.14-0.20260519022627-fdf34b23e0d7` are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.
+
+### Service mode (Milvus 3.0+)
+
+Woodpecker service mode is supported starting with Milvus 3.0. The **Woodpecker client library** is bundled in the Milvus image, while the **Woodpecker server image** is released and deployed separately. Configure the server image version with `woodpecker.image.tag`.
+
+The client is backward compatible with older server versions. When upgrading Milvus, we recommend also upgrading the Woodpecker service image to the corresponding version below so that both the client and server receive the fixes for that version. The server column lists the recommended pairing; it does not specify a minimum compatible server version.
+
+| Milvus release | Bundled Woodpecker client | Recommended Woodpecker server image tag | Client dependency source |
+| --- | --- | --- | --- |
+| v3.0.0 | `v0.1.33` | `v0.1.33` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod) |
+| v3.0.1 | `v0.1.38` | `v0.1.38` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod) |
+| v3.0.2 | `v0.1.42` | `v0.1.42` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod) |
+| v3.0.3 | `v0.1.46` | `v0.1.46` | [go.mod](https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod) |
+
+Milvus 3.x also supports embedded mode. In that mode, the bundled Woodpecker library uses the version listed in the client column, and no separate server image is required.
+
+### Latest releases and upgrade recommendations
+
+As of **October 12, 2026**, the latest stable releases in the 2.6.x and 3.x series are:
+
+| Milvus series | Latest stable Milvus release | Bundled Woodpecker library/client | Recommended service image tag |
+| --- | --- | --- | --- |
+| 2.6.x | [v2.6.25](https://github.com/milvus-io/milvus/releases/tag/v2.6.25) | `v0.1.44` (embedded) | Not applicable |
+| 3.x | [v3.0.3](https://github.com/milvus-io/milvus/releases/tag/v3.0.3) | `v0.1.46` | `v0.1.46` |
+
+We recommend upgrading to the **latest stable patch release in your chosen Milvus release series** to receive the latest fixes, including updates to the bundled Woodpecker library. For newer releases, check the [Milvus releases](https://github.com/milvus-io/milvus/releases) and the target release's `pkg/go.mod`; the tables above describe the releases available on the stated date.
+
+For **Woodpecker service mode**, we recommend **Milvus 3.0.3 or later with Woodpecker v0.1.46 or later**. When upgrading Milvus in service mode, also update the separately deployed Woodpecker server image to the corresponding recommended version.
+
+For upgrade procedures, see [Upgrade Milvus Cluster with Helm](upgrade_milvus_cluster-helm.md), [Upgrade Milvus Cluster with Milvus Operator](upgrade_milvus_cluster-operator.md), or [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md).
