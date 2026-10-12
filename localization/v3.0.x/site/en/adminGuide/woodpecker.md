@@ -560,3 +560,109 @@ batch_count = <span class="hljs-number">2000</span>
 <p>In cross-AZ deployments, service mode also saves roughly <strong>1/3 of write</strong> and <strong>2/3 of read</strong> cross-AZ network traffic compared with broker-based log systems. For the full design and cost analysis, see <a href="/docs/woodpecker_architecture.md">Woodpecker Architecture</a>.</p>
 <p>For details on architecture, deployment modes (MemoryBuffer / QuorumBuffer), and performance, see <a href="/docs/woodpecker_architecture.md">Woodpecker Architecture</a>.</p>
 <p>For more parameter details, refer to the Woodpecker <a href="https://github.com/zilliztech/woodpecker">GitHub repository</a>.</p>
+<h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Milvus and Woodpecker versions<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Embedded-mode-Milvus-26x" class="common-anchor-header">Embedded mode (Milvus 2.6.x)<button data-href="#Embedded-mode-Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In Milvus 2.6.x, Woodpecker runs embedded in Milvus and is included in the <strong>Milvus image</strong>. The table below records the Woodpecker library used by each Milvus release; there is no separate Woodpecker server image to deploy or upgrade. Upgrade Milvus to update the embedded Woodpecker library. Each version range includes both endpoints.</p>
+<table>
+<thead>
+<tr><th>Milvus release(s)</th><th>Embedded Woodpecker library</th><th>Dependency source</th></tr>
+</thead>
+<tbody>
+<tr><td>v2.6.0</td><td><code translate="no">v0.1.3</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.1–v2.6.2</td><td><code translate="no">v0.1.4</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.1/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.2/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.3–v2.6.5</td><td><code translate="no">v0.1.6</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.3/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.5/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.6</td><td><code translate="no">v0.1.11</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.6/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.7</td><td><code translate="no">v0.1.12</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.7/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v2.6.8–v2.6.12</td><td><code translate="no">v0.1.13</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.8/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.12/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.13–v2.6.15</td><td><code translate="no">v0.1.14-0.20260317120738-e47dc37481fd</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.13/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.15/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.16–v2.6.17</td><td><code translate="no">v0.1.14-0.20260427080535-9dc9b3189baa</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.16/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.17/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.18–v2.6.23</td><td><code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.18/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.23/pkg/go.mod">Last release</a></td></tr>
+<tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">First release</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">Last release</a></td></tr>
+</tbody>
+</table>
+<p>Versions such as <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> are Go pseudo-versions that identify a specific Woodpecker commit. They are preserved in full in the embedded-mode table to distinguish the dependency updates between Milvus patch releases.</p>
+<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Service mode (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Woodpecker service mode is supported starting with Milvus 3.0. The <strong>Woodpecker client library</strong> is bundled in the Milvus image, while the <strong>Woodpecker server image</strong> is released and deployed separately. Configure the server image version with <code translate="no">woodpecker.image.tag</code>.</p>
+<p>The client is backward compatible with older server versions. When upgrading Milvus, we recommend also upgrading the Woodpecker service image to the corresponding version below so that both the client and server receive the fixes for that version. The server column lists the recommended pairing; it does not specify a minimum compatible server version.</p>
+<table>
+<thead>
+<tr><th>Milvus release</th><th>Bundled Woodpecker client</th><th>Recommended Woodpecker server image tag</th><th>Client dependency source</th></tr>
+</thead>
+<tbody>
+<tr><td>v3.0.0</td><td><code translate="no">v0.1.33</code></td><td><code translate="no">v0.1.33</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.0/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.1</td><td><code translate="no">v0.1.38</code></td><td><code translate="no">v0.1.38</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.1/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.2</td><td><code translate="no">v0.1.42</code></td><td><code translate="no">v0.1.42</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.2/pkg/go.mod">go.mod</a></td></tr>
+<tr><td>v3.0.3</td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v3.0.3/pkg/go.mod">go.mod</a></td></tr>
+</tbody>
+</table>
+<p>Milvus 3.x also supports embedded mode. In that mode, the bundled Woodpecker library uses the version listed in the client column, and no separate server image is required.</p>
+<h3 id="Latest-releases-and-upgrade-recommendations" class="common-anchor-header">Latest releases and upgrade recommendations<button data-href="#Latest-releases-and-upgrade-recommendations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>As of <strong>October 12, 2026</strong>, the latest stable releases in the 2.6.x and 3.x series are:</p>
+<table>
+<thead>
+<tr><th>Milvus series</th><th>Latest stable Milvus release</th><th>Bundled Woodpecker library/client</th><th>Recommended service image tag</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">v2.6.25</a></td><td><code translate="no">v0.1.44</code> (embedded)</td><td>Not applicable</td></tr>
+<tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">v3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
+</tbody>
+</table>
+<p>We recommend upgrading to the <strong>latest stable patch release in your chosen Milvus release series</strong> to receive the latest fixes, including updates to the bundled Woodpecker library. For newer releases, check the <a href="https://github.com/milvus-io/milvus/releases">Milvus releases</a> and the target release’s <code translate="no">pkg/go.mod</code>; the tables above describe the releases available on the stated date.</p>
+<p>For <strong>Woodpecker service mode</strong>, we recommend <strong>Milvus 3.0.3 or later with Woodpecker v0.1.46 or later</strong>. When upgrading Milvus in service mode, also update the separately deployed Woodpecker server image to the corresponding recommended version.</p>
+<p>For upgrade procedures, see <a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Cluster with Helm</a>, <a href="/docs/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster with Milvus Operator</a>, or <a href="/docs/upgrade_milvus_standalone-docker.md">Upgrade Milvus Standalone with Docker Compose</a>.</p>
