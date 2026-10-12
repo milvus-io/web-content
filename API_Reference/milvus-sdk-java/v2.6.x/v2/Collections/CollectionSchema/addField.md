@@ -1,9 +1,9 @@
 # addField()
 
-This operation adds a vector field to the schema of a collection.
+This operation adds a field to the schema of a collection.
 
 ```java
-public void addField(AddFieldReq addFieldReq)
+public CollectionSchema addField(AddFieldReq addFieldReq)
 ```
 
 ## Request Syntax
@@ -16,12 +16,14 @@ CollectionSchema.addField(AddFieldReq.builder()
     .maxLength(Integer maxLength)
     .isPrimaryKey(Boolean isPrimaryKey)
     .isPartitionKey(Boolean isPartitionKey)
+    .isClusteringKey(Boolean isClusteringKey)
     .autoID(Boolean autoID)
     .dimension(int dimension)
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
-    .defaultValue(DataType dataType)
+    .defaultValue(Object defaultValue)
+    .enableDefaultValue(boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .enableMatch(Boolean enableMatch)
     .analyzerParams(Map<String, Object> analyzerParams)
@@ -44,7 +46,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `dataType(DataType dataType)`
 
-    The data type of the field.
+    The data type of the field. See [DataType](../DataType.md).
 
     You can choose from the following options when selecting a data type for different fields:
 
@@ -71,6 +73,12 @@ CollectionSchema.addField(AddFieldReq.builder()
     Whether the current field is the partitionKey field.
 
     Setting this to **True** makes the current field the partition key.
+
+- `isClusteringKey(Boolean isClusteringKey)`
+
+    Whether the current field is the clustering key.
+
+    Setting this to **True** makes the current field the clustering key.
 
 - `autoID(Boolean autoID)`
 
@@ -110,9 +118,13 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     For more information, refer to [Nullable & Default](https://milvus.io/docs/nullable-and-default.md).
 
-- `defaultValue(DataType dataType)`
+- `defaultValue(Object defaultValue)`
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+
+- `enableDefaultValue(boolean enableDefaultValue)`
+
+    Whether to pass the default value set for the field to the server. Set this to `true` together with `defaultValue` to have the server apply the default value.
 
 - `enableAnalyzer(Boolean enableAnalyzer)`
 
@@ -167,13 +179,19 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**.
 
+- `addStructField(AddFieldReq addFieldReq)`
+
+    Adds a single field to the Array-of-Struct field. This is an alternative to `structFields`.
+
 **RETURNS:**
 
-*void*
+*CollectionSchema*
+
+The updated **CollectionSchema** object.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -184,7 +202,7 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
 // add two field, id and vector
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());

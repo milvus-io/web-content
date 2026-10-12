@@ -3,7 +3,7 @@
 This operation resets the specified index properties to their default values.
 
 ```java
-public Void dropIndexProperties(DropIndexPropertiesReq request)
+public void dropIndexProperties(DropIndexPropertiesReq request)
 ```
 
 ## Request Syntax
@@ -46,7 +46,7 @@ dropIndexProperties(DropIndexPropertiesReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

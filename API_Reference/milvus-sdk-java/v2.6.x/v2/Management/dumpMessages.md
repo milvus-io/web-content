@@ -39,6 +39,20 @@ dumpMessages(DumpMessagesReq.builder()
 
 *DumpMessagesResp*
 
+A **DumpMessagesResp** object that iterates over the dumped messages. Each iterated message is a **DumpMessageInfo** object with the following members:
+
+- **messageID** (*GetReplicateInfoResp.MessageID*)
+
+    The ID of the message.
+
+- **payload** (*byte[]*)
+
+    The payload of the message.
+
+- **properties** (*Map\<String, String\>*)
+
+    The properties of the message.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

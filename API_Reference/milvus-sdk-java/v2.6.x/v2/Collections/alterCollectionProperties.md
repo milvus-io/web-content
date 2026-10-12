@@ -3,7 +3,7 @@
 This operation modifies the properties of a specified collection.
 
 ```java
-public Void alterCollectionProperties(AlterCollectionPropertiesReq request)
+public void alterCollectionProperties(AlterCollectionPropertiesReq request)
 ```
 
 ## Request Syntax
@@ -45,7 +45,7 @@ alterCollectionProperties(AlterCollectionPropertiesReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

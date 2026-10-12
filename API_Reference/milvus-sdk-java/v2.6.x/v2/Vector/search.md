@@ -14,6 +14,7 @@ search(SearchReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .annsField(String annsField)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .filter(String filter)
     .outputFields(List<String> outputFields)
@@ -56,6 +57,10 @@ search(SearchReq.builder()
 
     The name of the vector field for approximate nearest neighbor search.
 
+- `metricType(IndexParam.MetricType metricType)` -
+
+    The metric type used to measure similarity between vectors. See [MetricType](../Management/MetricType.md).
+
 - `topK(int topK)` -
 
     **Deprecated.** The number of top results to return.
@@ -70,7 +75,7 @@ search(SearchReq.builder()
 
 - `data(List<BaseVector> data)` -
 
-    A list of data rows to insert/upsert as JSON objects.
+    A list of query vectors.
 
 - `ids(List<Object> ids)` -
 
@@ -102,7 +107,7 @@ search(SearchReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)` -
 
@@ -126,7 +131,11 @@ search(SearchReq.builder()
 
 - `functionScore(FunctionScore functionScore)` -
 
-    A FunctionScore object for custom scoring.
+    A FunctionScore object for custom scoring. See [FunctionScore](FunctionScore/FunctionScore.md).
+
+- `ranker(CreateCollectionReq.Function ranker)` -
+
+    **Deprecated.** A Function object used for ranking. Use `functionScore` instead. See [Function](../Collections/Function.md).
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
@@ -134,11 +143,9 @@ search(SearchReq.builder()
 
 - `highlighter(Highlighter highlighter)` -
 
-    A Highlighter object for text highlighting in search results.
+    A Highlighter object for text highlighting in search results. See [Highlighter](Highlighter/Highlighter.md).
 
 **RETURNS:**
-
-*SearchResp*
 
 *SearchResp*
 

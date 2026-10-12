@@ -1,4 +1,4 @@
-# SearchIteratorV2()
+# searchIteratorV2()
 
 This operation creates an iterator for you to iterate over the search results. It is useful, especially when the search result contains a large volume of data.
 
@@ -14,6 +14,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .limit(long limit)
     .filter(String filter)
@@ -49,6 +50,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
     The name of the vector field to search.
 
+- `metricType(IndexParam.MetricType metricType)` -
+
+    The metric type used to measure similarity between vectors. See [MetricType](../Management/MetricType.md).
+
 - `topK(int topK)` -
 
     The number of top results to return.
@@ -79,7 +84,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)` -
 
@@ -101,9 +106,11 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
     A map of template variable values for parameterized filters.
 
-**RETURNS:**
+- `externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)` -
 
-*SearchIteratorV2*
+    A function used to filter the search results before returning them.
+
+**RETURNS:**
 
 *SearchIteratorV2*
 

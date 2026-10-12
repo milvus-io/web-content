@@ -3,7 +3,7 @@
 This operation grants privileges or privilege groups to a specific role.
 
 ```java
-public Void grantPrivilegeV2(GrantPrivilegeReqV2 request)
+public void grantPrivilegeV2(GrantPrivilegeReqV2 request)
 ```
 
 ## Request Syntax
@@ -42,7 +42,7 @@ grantPrivilegeV2(GrantPrivilegeReqV2.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -5,6 +5,7 @@ IndexParam defines the parameters for configuring an index on a collection field
 ```java
 IndexParam.builder()
     .fieldName(String fieldName)
+    .indexName(String indexName)
     .indexType(IndexType indexType)
     .metricType(MetricType metricType)
     .extraParams(Map<String, Object> extraParams)
@@ -17,13 +18,17 @@ IndexParam.builder()
 
     The name of the field to index.
 
+- `indexName(String indexName)` -
+
+    The name of the index.
+
 - `indexType(IndexType indexType)` -
 
-    The type of index to build on the field. For available index types, refer to IndexType.
+    The type of index to build on the field. Defaults to `IndexType.AUTOINDEX`. For available index types, refer to [IndexType](IndexType.md).
 
 - `metricType(MetricType metricType)` -
 
-    The metric type for vector similarity measurement. For available metric types, refer to MetricType.
+    The metric type for vector similarity measurement. For available metric types, refer to [MetricType](MetricType.md).
 
 - `extraParams(Map<String, Object> extraParams)` -
 

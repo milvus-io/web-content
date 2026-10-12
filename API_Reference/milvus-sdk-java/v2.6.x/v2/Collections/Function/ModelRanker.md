@@ -14,6 +14,7 @@ ModelRanker.builder()
     .description(String description)
     .inputFieldNames(List<String> inputFieldNames)
     .params(Map<String, String> params)
+    .param(String key, String value)
     .provider(String provider)
     .queries(List<String> queries)
     .endpoint(String endpoint)
@@ -41,6 +42,10 @@ ModelRanker.builder()
     - `max_client_batch_size`(int) -
 
         The maximum number of documents to process in a single batch. Larger values increase throughput but require more memory. The value defaults to `32`.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
 
 - `provider(String provider)`
 

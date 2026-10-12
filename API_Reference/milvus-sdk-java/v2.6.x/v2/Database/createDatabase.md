@@ -24,7 +24,7 @@ createDatabase(CreateDatabaseReq.builder()
 
 - `properties(Map<String, String> properties)`
 
-The properties of the database, such as replica number, resource groups.
+    The properties of the database, such as replica number, resource groups.
 
 **RETURNS:**
 
@@ -32,7 +32,7 @@ The properties of the database, such as replica number, resource groups.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

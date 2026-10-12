@@ -13,9 +13,12 @@ This constructor initializes a new `LexicalHighlighter` instance.
 ```java
 LexicalHighlighter.builder()
     .highlightQueries(List<HighlightQuery>)
+    .addHighlightQuery(HighlightQuery)
     .highlightSearchText(Boolean)
     .preTags(List<String>)
+    .addPreTag(String)
     .postTags(List<String>)
+    .addPostTag(String)
     .fragmentOffset(Integer)
     .fragmentSize(Integer)
     .numOfFragments(Integer)
@@ -47,6 +50,10 @@ LexicalHighlighter.builder()
 
     For details, refer to [Text Highlighter](https://milvus.io/docs/text-highlighter.md).
 
+- `addHighlightQuery(HighlightQuery)`
+
+    Adds a single `HighlightQuery` instance to the highlight queries.
+
 - `highlightSearchText(Boolean)`
 
     Whether to highlight search terms used in BM25 full text search. If True, the BM25 query terms are used as the source of highlighted terms. If unset, BM25 search terms are not highlighted.
@@ -55,9 +62,17 @@ LexicalHighlighter.builder()
 
     Tags inserted before each matched term in the returned highlight. Supports plain strings (e.g., `{`) or HTML-safe markers (e.g., `<em>`, `<mark>`). If multiple tags are provided, tags rotate by match sequence.
 
+- `addPreTag(String)`
+
+    Adds a single tag to the pre-tags list.
+
 - `postTags(List<String>)`
 
     Tags inserted after each matched term, paired with `pre_tags`. Rotation follows the same order as pre_tags when multiple tags are provided.
+
+- `addPostTag(String)`
+
+    Adds a single tag to the post-tags list.
 
 - `fragmentOffset(Integer)`
 

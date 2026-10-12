@@ -14,6 +14,7 @@ searchIterator(SearchIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
+    .metricType(IndexParam.MetricType metricType)
     .topK(int topK)
     .limit(long limit)
     .expr(String expr)
@@ -47,6 +48,10 @@ searchIterator(SearchIteratorReq.builder()
 
     The name of the vector field.
 
+- `metricType(IndexParam.MetricType metricType)` -
+
+    The metric type used to measure similarity between vectors. See [MetricType](../Management/MetricType.md).
+
 - `topK(int topK)` -
 
     **Deprecated.** The number of top results to return.
@@ -77,7 +82,7 @@ searchIterator(SearchIteratorReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `ignoreGrowing(boolean ignoreGrowing)` -
 

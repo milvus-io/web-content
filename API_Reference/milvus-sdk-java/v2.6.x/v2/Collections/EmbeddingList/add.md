@@ -14,11 +14,11 @@ public void add(BaseVector vector)
 
 **RETURN TYPE:**
 
-*[EmbeddingList](EmbeddingList.md)*
+*void*
 
 **RETURNS:**
 
-An EmbeddingList instance that can be used again to chain up other `add()` methods.
+None.
 
 **EXCEPTIONS:**
 

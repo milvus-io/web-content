@@ -53,15 +53,11 @@ A **GetResp** object representing one or more queried entities.
 
 - **getResults** (*List\<QueryResp.QueryResult\>*)
 
-    A list of **QueryResp.QueryResult** objects.
-
-- **fields** (*Map\<String,Object\>*)
-
-    A map that contains key-value pairs of field names and their values.
+    A list of **QueryResp.QueryResult** objects, each of which represents a queried entity.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

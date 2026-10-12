@@ -3,7 +3,7 @@
 This operation updates the configuration of the specified resource groups.
 
 ```java
-public Void updateResourceGroups(UpdateResourceGroupsReq request)
+public void updateResourceGroups(UpdateResourceGroupsReq request)
 ```
 
 ## Request Syntax
@@ -29,7 +29,7 @@ updateResourceGroups(UpdateResourceGroupsReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

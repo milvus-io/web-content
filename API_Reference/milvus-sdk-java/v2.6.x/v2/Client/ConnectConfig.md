@@ -23,6 +23,8 @@ ConnectConfig.builder()
     .serverPemPath(String serverPemPath)
     .serverName(String serverName)
     .proxyAddress(String proxyAddress)
+    .sslContext(SSLContext sslContext)
+    .clientRequestId(ThreadLocal<String> clientRequestId)
     .option(Map<String, String> option)
     .build()
 ```
@@ -33,7 +35,7 @@ ConnectConfig.builder()
 
     **[REQUIRED]**
 
-    The server endpoint URI. Accepts `http:*//*host:port` for a local Milvus instance or an HTTPS URL for Zilliz Cloud.
+    The server endpoint URI. Accepts `http://host:port` for a local Milvus instance or an HTTPS URL for Zilliz Cloud.
 
 - `token(String token)` -
 
@@ -107,9 +109,45 @@ ConnectConfig.builder()
 
     HTTP proxy address for the gRPC connection. Default: `null`.
 
-- `option(Map<String, String> option)`
+- `sslContext(SSLContext sslContext)` -
+
+    A custom SSL context for TLS connections.
+
+- `clientRequestId(ThreadLocal<String> clientRequestId)` -
+
+    The ID of a client request. You can use this parameter to maintain a map of threads, with each thread mapping to a specific request ID.
+
+- `option(Map<String, String> option)` -
 
     Optional key-value metadata sent to the server during connection initialization.
+
+## Getters
+
+The following are the getter methods of the `ConnectConfig` class:
+
+- `getHost()`
+
+    Returns the hostname of the Milvus instance.
+
+- `getPort()`
+
+    Returns the port number of the Milvus instance.
+
+- `getAuthorization()`
+
+    Returns the credentials used to set up the connection.
+
+- `getDbName()`
+
+    Returns the name of the database in use.
+
+- `isSecure()`
+
+    Returns whether the connection is over TLS.
+
+- `getProxyAddress()`
+
+    Returns the proxy server's address.
 
 ## Example
 

@@ -6,7 +6,7 @@ This operation gets information about persistent segments of a collection from t
 public GetQuerySegmentInfoResp getQuerySegmentInfo(GetQuerySegmentInfoReq request)
 ```
 
-## Request Parameters
+## Request Syntax
 
 ```java
 getQuerySegmentInfo(GetQuerySegmentInfoReq.builder()
@@ -34,9 +34,9 @@ getQuerySegmentInfo(GetQuerySegmentInfoReq.builder()
 
 A **GetQuerySegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following parameters:
 
-- **segmentInfos** (*List<PersistentSegmentInfo>*) -
+- **segmentInfos** (*List<QuerySegmentInfo>*) -
 
-    A list of segments, each represented by a **PersistentSegmentInfo** object, which has the following fields
+    A list of segments, each represented by a **QuerySegmentInfo** object, which has the following fields
 
     - **segmentID** (*Long*) -
 
@@ -82,13 +82,17 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         A list of query node IDs.
 
+    - **storageVersion** (*Long*) -
+
+        The storage version of the current segment.
+
     - **isSorted** (*Boolean*) -   
 
         Whether the entities in the current segment are sorted.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

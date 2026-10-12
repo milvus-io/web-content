@@ -10,7 +10,7 @@ public void revokePrivilege(RevokePrivilegeReq request)
 
 ```java
 revokePrivilege(RevokePrivilegeReq.builder()
-    .dbName(String databaseName)
+    .dbName(String dbName)
     .roleName(String roleName)
     .objectType(String objectType)
     .privilege(String privilege)
@@ -21,7 +21,7 @@ revokePrivilege(RevokePrivilegeReq.builder()
 
 **BUILDER METHODS:**
 
-- `dbName(String databaseName)`
+- `dbName(String dbName)`
 
     The name of a database. 
 
@@ -47,7 +47,7 @@ revokePrivilege(RevokePrivilegeReq.builder()
 
 - `privilege(String privilege)`
 
-    The name of the privilege to assign. 
+    The name of the privilege to revoke. 
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
@@ -61,7 +61,7 @@ revokePrivilege(RevokePrivilegeReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

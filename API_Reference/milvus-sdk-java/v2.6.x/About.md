@@ -85,7 +85,7 @@ public class QuickStart {
         MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
         String collectionName = "hello_milvus";
-        CreateCollectionReq.CollectionSchema schema = client.createSchema();
+        CreateCollectionReq.CollectionSchema schema = client.CreateSchema();
         schema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(true).build());
         schema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(3).build());
         client.createCollection(CreateCollectionReq.builder()
@@ -135,11 +135,11 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 |:-----:|:-----:|
 | 2.0.2 | 2.0.4 |
 | 2.1 | 2.1.0-beta4 |
-| 2.2.0 ~ 2.2.8 | 2.2.5 |
-| 2.2.9 ~ 2.2.14 | 2.2.13 |
-| 2.3.x | 2.3.9 |
+| 2.2.0 ~ 2.2.8 | 2.2.0 ~ 2.2.5 |
+| >= 2.2.9 | 2.2.7 ~ 2.2.15 |
+| 2.3.x | 2.3.11 |
 | 2.4.x | 2.4.11 |
-| 2.5.x | 2.5.14 |
+| 2.5.x | 2.5.15 |
 | 2.6.x | 2.6.25 |
 
 ## Contributing
@@ -148,4 +148,4 @@ We are committed to building a collaborative, exuberant open-source community fo
 
 ## License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](https://github.com/milvus-io/milvus-sdk-java/blob/master/LICENSE)

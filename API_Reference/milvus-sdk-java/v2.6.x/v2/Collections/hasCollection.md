@@ -28,7 +28,7 @@ hasCollection(HasCollectionReq.builder()
 
 **RETURN TYPE:**
 
-*bool*
+*Boolean*
 
 **RETURNS:**
 
@@ -36,7 +36,7 @@ A boolean value indicating whether the specified collection exists.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

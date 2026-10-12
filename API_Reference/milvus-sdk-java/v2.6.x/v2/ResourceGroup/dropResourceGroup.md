@@ -3,7 +3,7 @@
 This operation drops a resource group.
 
 ```java
-public Void dropResourceGroup(DropResourceGroupReq request)
+public void dropResourceGroup(DropResourceGroupReq request)
 ```
 
 ## Request Syntax
@@ -17,7 +17,7 @@ dropResourceGroup(DropResourceGroupReq.builder()
 
 **BUILDER METHODS:**
 
-- `groupName(String collectionName)`
+- `groupName(String groupName)`
 
     **[REQUIRED]**
 
@@ -29,7 +29,7 @@ dropResourceGroup(DropResourceGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -27,7 +27,15 @@ getCompactionPlans(GetCompactionPlansReq.builder()
 
 *GetCompactionPlansResp*
 
-The response contains the compaction state and merge plans.
+**PARAMETERS:**
+
+- **state** (*CompactionState*)
+
+    The current state of the specified compact operation.
+
+- **plans** (*List\<CompactionPlan\>*)
+
+    A list of compaction plans, each of which shows which segments will be combined.
 
 **EXCEPTIONS:**
 

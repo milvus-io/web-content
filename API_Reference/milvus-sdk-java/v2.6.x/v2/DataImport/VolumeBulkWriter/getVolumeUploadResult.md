@@ -1,6 +1,6 @@
 # getVolumeUploadResult()
 
-This operation retrieves the result of the update to the specified volume.
+This operation retrieves the result of the upload to the specified volume.
 
 ```java
 public UploadFilesResult getVolumeUploadResult()
@@ -36,7 +36,7 @@ An UploadFilesResult instance that has the following methods:
 
 - `toString()`
 
-    Strigifies the UploadFilesResult instance.
+    Stringifies the UploadFilesResult instance.
 
 ## Example
 

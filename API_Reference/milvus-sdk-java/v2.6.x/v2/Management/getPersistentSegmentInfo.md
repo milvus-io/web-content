@@ -6,7 +6,7 @@ This operation gets information about persistent segments of a collection from t
 public GetPersistentSegmentInfoResp getPersistentSegmentInfo(GetPersistentSegmentInfoReq request)
 ```
 
-## Request Parameters
+## Request Syntax
 
 ```java
 getPersistentSegmentInfo(GetPersistentSegmentInfoReq.builder()
@@ -50,6 +50,10 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         The ID of the partition to which the current segment belongs.
 
+    - **collectionName** (*String*) -
+
+        The name of the collection to which the current segment belongs.
+
     - **numOfRows** (*Long*) -
 
         The number of entities in the current segment.
@@ -62,13 +66,17 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         The compaction level of the current segment. Possible values are : "Legacy", "L0", "L1", "L2".
 
+    - **storageVersion** (*Long*) -
+
+        The storage version of the current segment.
+
     - **isSorted** (*Boolean*) -   
 
         Whether the entities in the current segment are sorted.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

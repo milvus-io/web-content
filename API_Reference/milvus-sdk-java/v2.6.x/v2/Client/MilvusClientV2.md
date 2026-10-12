@@ -35,7 +35,7 @@ ConnectConfig.builder()
     .connectTimeoutMs(long connectTimeoutMs)
     .keepAliveTimeMs(long keepAliveTimeMs)
     .keepAliveTimeoutMs(long keepAliveTimeoutMs)
-    .keepAliveWithoutCalls(Boolean keeAliveWithoutCalls)
+    .keepAliveWithoutCalls(Boolean keepAliveWithoutCalls)
     .rpcDeadlineMs(long rpcDeadlineMs)
     .clientKeyPath(String clientKeyPath)
     .clientPemPath(String clientPemPath)
@@ -102,19 +102,19 @@ ConnectConfig.builder()
 
     The time in milliseconds between keep-alive probes sent by the client to the server.
 
-    The value defaults to **55000**.
+    The value defaults to **10000**.
 
 - `keepAliveTimeoutMs(long keepAliveTimeout)`
 
     The timeout duration in milliseconds for the server to respond to a keep-alive probe sent by the client.
 
-    The value defaults to **20000**.
+    The value defaults to **5000**.
 
 - `keepAliveWithoutCalls(boolean enable)`
 
     Whether to send keep-alive probes without making requests.
 
-    The value defaults to **false**.
+    The value defaults to **true**.
 
 - `rpcDeadlineMs(long rpcDeadline)`
 
@@ -150,7 +150,7 @@ ConnectConfig.builder()
 
     Whether to use TLS for the connection.
 
-    The value defaults to **true**.
+    The value defaults to **false**.
 
 - `idleTimeoutMs(long idleTimeout)`
 
@@ -164,29 +164,7 @@ ConnectConfig.builder()
 
 **PUBLIC METHODS:**
 
-- `getHost()`
-
-    Returns the hostname of the currently connected Milvus instance.
-
-- `getPort()`
-
-    Returns the port number at which the currently connected Milvus instance.
-
-- `getAuthorization()`
-
-    Returns the credentials used to set up the current connection.
-
-- `getDbName()`
-
-    Returns the name of the database currently in use.
-
-- `isSecure()`
-
-    Returns whether the current connection is over TLS.
-
-- `getProxyAddress()`
-
-    Returns the proxy server's address specified in **[ConnectConfig](ConnectConfig.md)**.
+For the getter methods that expose connection details (such as `getHost()`, `getPort()`, `getAuthorization()`, `getDbName()`, `isSecure()`, and `getProxyAddress()`), refer to **[ConnectConfig](ConnectConfig.md)**, where these accessors are defined.
 
 ## Examples
 

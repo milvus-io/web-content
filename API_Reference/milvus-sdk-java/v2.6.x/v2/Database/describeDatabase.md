@@ -21,7 +21,7 @@ describeDatabase(DescribeDatabaseReq.builder()
 
     The name of the database.
 
-**RETURN TYPE**:
+**RETURN TYPE:**
 
 *DescribeDatabaseResp*
 
@@ -29,9 +29,19 @@ describeDatabase(DescribeDatabaseReq.builder()
 
 A **DescribeDatabaseResp** object that contains detailed information about the specified database.
 
+**PARAMETERS:**
+
+- **databaseName** (*String*)
+
+    The name of the database.
+
+- **properties** (*Map\<String, String\>*)
+
+    The properties of the database.
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

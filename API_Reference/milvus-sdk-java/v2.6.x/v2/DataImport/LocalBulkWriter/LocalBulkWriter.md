@@ -17,14 +17,14 @@ A **LocalBulkWriter** object intends to rewrite your raw data locally in a forma
 </div>
 
 ```java
-LocalBulkWriter(LocalBulkWriterParam bulkWriterParam)
+LocalBulkWriter(LocalBulkWriterParam bulkWriterParam) throws IOException
 ```
 
 **PARAMETERS:**
 
 - **bulkWriterParam** (*LocalBulkWriterParam*) -
 
-    A [LocalBulkWriterParam](LocalBulkWriter.md) instance.
+    A LocalBulkWriterParam instance.
 
 ## LocalBulkWriterParam
 
@@ -33,6 +33,7 @@ LocalBulkWriter(LocalBulkWriterParam bulkWriterParam)
 ```java
 LocalBulkWriterParam.newBuilder()
     .withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)
+    .withCollectionSchema(CollectionSchemaParam collectionSchema)
     .withLocalPath(String localPath)
     .withChunkSize(long chunkSize)
     .withFileType(BulkFileType fileType)
@@ -44,7 +45,11 @@ LocalBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating **CreateCollectionReq.CollectionSchema**.
+    The schema of the target collection that is defined by instantiating **CreateCollectionReq.CollectionSchema**. See [CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md).
+
+- `withCollectionSchema(CollectionSchemaParam collectionSchema)`
+
+    The V1 schema of the target collection that is defined by instantiating **CollectionSchemaParam**.
 
 - `withLocalPath(String localPath)`
 
@@ -54,7 +59,7 @@ LocalBulkWriterParam.newBuilder()
 
     The maximum size of a file segment. While rewriting your raw data, Milvus splits it into segments.
 
-    The value defaults to **536,870,912** in bytes, which is **512 MB**.
+    The value defaults to **134,217,728** in bytes, which is **128 MB**.
 
     <div class="alert note">
     

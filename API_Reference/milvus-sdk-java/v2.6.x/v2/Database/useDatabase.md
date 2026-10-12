@@ -3,7 +3,7 @@
 This operation changes the database in use.
 
 ```java
-public void useDatabase(String dbName)
+public void useDatabase(String dbName) throws InterruptedException
 ```
 
 ## Request Syntax
@@ -12,21 +12,25 @@ public void useDatabase(String dbName)
 useDatabase(String dbName)
 ```
 
-**PARAMETERS**
+**PARAMETERS:**
 
 - **dbName** (*String*) -
 
     The name of the target database.
 
-**RETURNS**
+**RETURNS:**
 
 *void*
 
-**EXCEPTIONS**
+**EXCEPTIONS:**
 
-- InterruptedException
+- **IllegalArgumentException**
 
-    This exception will be raised when any error occurs during disconnection from Milvus.
+    Raised when `dbName` is null.
+
+- **RuntimeException**
+
+    Raised when the operation is interrupted while re-establishing the connection.
 
 ## Example
 

@@ -22,7 +22,7 @@ addFunction(Function.builder()
 
 - `functionType(FunctionType functionType)`
 
-    The type of function for processing raw data. Possible values:
+    The type of function for processing raw data. Possible values: See [FunctionType](../Function/FunctionType.md).
 
     - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
 
@@ -42,6 +42,14 @@ addFunction(Function.builder()
 
     A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
+- `params(Map<String, String> params)`
+
+    A set of key-value pairs that configures the function properties.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
+
 **RETURN TYPE:**
 
 *Function*
@@ -52,7 +60,7 @@ A `Function` object
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

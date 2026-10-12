@@ -45,7 +45,7 @@ delete(DeleteReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation. Available in v2.6.25 or later.
+    The consistency level for the operation. Available in v2.6.25 or later. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 

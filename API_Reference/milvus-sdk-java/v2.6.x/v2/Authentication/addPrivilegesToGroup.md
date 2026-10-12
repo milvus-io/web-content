@@ -3,7 +3,7 @@
 This operation adds privileges to a specific privilege group.
 
 ```java
-public Void addPrivilegesToGroup(AddPrivilegesToGroupReq request)
+public void addPrivilegesToGroup(AddPrivilegesToGroupReq request)
 ```
 
 ## Request Syntax
@@ -32,7 +32,7 @@ addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

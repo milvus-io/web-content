@@ -3,7 +3,7 @@
 This operation creates a privilege group.
 
 ```java
-public Void createPrivilegeGroup(CreatePrivilegeGroupReq request)
+public void createPrivilegeGroup(CreatePrivilegeGroupReq request)
 ```
 
 ## Request Syntax
@@ -27,7 +27,7 @@ createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -6,7 +6,7 @@ This operation checks the health condition of the current Milvus instance.
 public CheckHealthResp checkHealth()
 ```
 
-## Request syntax
+## Request Syntax
 
 ```java
 CheckHealthResp()
@@ -20,7 +20,7 @@ None
 
 *CheckHealthResp*
 
-**RETURNS**
+**RETURNS:**
 
 A **CheckHealthResp** object that contains detailed information about the current Milvus instance. The object has the following fields:
 
@@ -38,7 +38,7 @@ A **CheckHealthResp** object that contains detailed information about the curren
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

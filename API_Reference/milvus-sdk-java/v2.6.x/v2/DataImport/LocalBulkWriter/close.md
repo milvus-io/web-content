@@ -3,7 +3,7 @@
 This operation closes the current LocalBulkWriter instance.
 
 ```java
-public void close()
+public void close() throws Exception
 ```
 
 ## Request Syntax

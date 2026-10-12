@@ -3,7 +3,7 @@
 This operation commits the appended data.
 
 ```java
- public void commit(boolean async)
+ public void commit(boolean async) throws InterruptedException
 ```
 
 ## Request Syntax
