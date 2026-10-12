@@ -4,6 +4,10 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
+### None
+
+The index type is not set.
+
 ### FLAT
 
 Sets the index type to FLAT.
@@ -26,7 +30,7 @@ Sets the index type to HNSW.
 
 ### HNSW_SQ
 
-Sets the index type to HNSW.
+Sets the index type to HNSW_SQ.
 
 ### HNSW_PQ
 
@@ -98,7 +102,7 @@ Sets the index type to RTREE. This applies to geometry fields only.
 
 ### STL_SORT
 
-Sets the index type to SLT_SORT. This applies to fields of numeric types only.
+Sets the index type to STL_SORT. This applies to fields of numeric types only.
 
 ### INVERTED
 
@@ -115,7 +119,3 @@ Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors onl
 ### SPARSE_WAND
 
 Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
-
-### EMB_LIST_HNSW
-
-Sets the index type to EMB_LIST_HNSW. This applies to an Array of Structs field.

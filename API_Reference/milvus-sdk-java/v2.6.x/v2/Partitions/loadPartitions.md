@@ -1,6 +1,6 @@
 # loadPartitions()
 
-This operation releases the partitions in a specified collection from memory.
+This operation loads the partitions in a specified collection into memory.
 
 ```java
 public void loadPartitions(LoadPartitionsReq request)
@@ -72,8 +72,6 @@ loadPartitions(LoadPartitionsReq.builder()
     The load priority. Available in v2.6.25 or later.
 
 **RETURNS:**
-
-*void*
 
 *void*
 

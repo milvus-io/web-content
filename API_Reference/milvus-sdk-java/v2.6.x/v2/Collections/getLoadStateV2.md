@@ -34,6 +34,16 @@ getLoadStateV2(GetLoadStateReq.builder()
 
 *GetLoadStateResp*
 
+**PARAMETERS:**
+
+- **state** (*LoadState*)
+
+    The current load state of the collection or partition.
+
+- **progress** (*Long*)
+
+    The loading progress of the collection or partition.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

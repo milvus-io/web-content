@@ -93,7 +93,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - `getConsistencyLevel()` (*ConsistencyLevel*) -
 
-    The consistency level of the collection.
+    The consistency level of the collection. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `getShardsNum()` (*Integer*) -
 

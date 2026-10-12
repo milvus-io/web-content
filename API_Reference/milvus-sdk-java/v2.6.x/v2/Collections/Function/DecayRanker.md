@@ -17,6 +17,7 @@ DecayRanker.builder()
     .functionType(FunctionType functionType)
     .inputFieldNames(List<String> inputFieldNames)
     .params(Map<String, String> params)
+    .param(String key, String value)
     .function(String function)
     .origin(Number origin)
     .scale(Number scale)
@@ -37,7 +38,7 @@ DecayRanker.builder()
 
 - `functionType(FunctionType functionType)`
 
-    The type of function for processing raw data. For **DecayRanker**, set this to `FunctionType.RERANK`.
+    The type of function for processing raw data. For **DecayRanker**, set this to `FunctionType.RERANK`. See [FunctionType](FunctionType.md).
 
 - `inputFieldNames(List<String> inputFieldNames)`
 
@@ -46,6 +47,10 @@ DecayRanker.builder()
 - `params(Map<String, String> params)`
 
     A set of key-value pairs that configures the function properties.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
 
 - `function(String function)`
 

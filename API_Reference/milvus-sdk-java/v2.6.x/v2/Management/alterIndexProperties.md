@@ -3,7 +3,7 @@
 This operation modifies the properties of a specified index.
 
 ```java
-public Void alterIndexProperties(AlterIndexPropertiesReq request)
+public void alterIndexProperties(AlterIndexPropertiesReq request)
 ```
 
 ## Request Syntax
@@ -40,13 +40,17 @@ alterIndexProperties(AlterIndexPropertiesReq.builder()
 
         Whether to enable mmap for the current index.
 
+- `property(String key, String value)`
+
+    Adds a single index property as a key-value pair.
+
 **RETURNS:**
 
 *void*
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

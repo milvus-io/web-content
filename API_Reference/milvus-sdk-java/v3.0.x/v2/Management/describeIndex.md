@@ -67,11 +67,11 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getIndexType()` (*IndexType*) -
 
-        The type of the index.
+        The type of the index. See [IndexType](IndexType.md).
 
     - `getMetricType()` (*MetricType*) -
 
-        The metric type used to measure vector similarity.
+        The metric type used to measure vector similarity. See [MetricType](MetricType.md).
 
     - `getExtraParams()` (*Map\<String, String\>*) -
 

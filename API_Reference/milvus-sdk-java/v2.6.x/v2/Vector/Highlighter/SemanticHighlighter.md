@@ -13,9 +13,13 @@ This constructor initializes a new `SemanticHighlighter` instance.
 ```java
 SemanticHighlighter.builder()
     .queries(List<String>)
+    .addQuery(String)
     .inputFields(List<String>)
+    .addInputField(String)
     .preTags(List<String>)
+    .addPreTag(String)
     .postTags(List<String>)
+    .addPostTag(String)
     .threshold(Float)
     .highlightOnly(Boolean)
     .modelDeploymentID(String)
@@ -29,17 +33,33 @@ SemanticHighlighter.builder()
 
     A list of search queries to match against the document. The highlighter uses these queries to identify semantically relevant text segments in the results.
 
+- `addQuery(String)`
+
+    Adds a single search query to the query list.
+
 - `inputFields(List<String>)`
 
     The schema fields to highlight. Specifies which text fields in the search results should be processed for semantic highlighting.
+
+- `addInputField(String)`
+
+    Adds a single input field to the input-fields list.
 
 - `preTags(List<String>)`
 
     Tags inserted before each matched segment in the returned highlight. Supports plain strings (e.g., `{`) or HTML-safe markers (e.g., `<em>`, `<mark>`). If multiple tags are provided, tags rotate by match sequence.
 
+- `addPreTag(String)`
+
+    Adds a single tag to the pre-tags list.
+
 - `postTags(List<String>)`
 
     Tags inserted after each matched segment, paired with `pre_tags`. Rotation follows the same order as `pre_tags` when multiple tags are provided.
+
+- `addPostTag(String)`
+
+    Adds a single tag to the post-tags list.
 
 - `threshold(Float)`
 
@@ -47,7 +67,7 @@ SemanticHighlighter.builder()
 
 - `highlightOnly(Boolean)`
 
-    If `True` (default), only the sentence-level fragments that are semantically related to the query are returned, which helps focus on the most relevant context. If set to `False`, the full paragraph containing those fragments is returned instead, as long as its length does not exceed the model’s context limit. However, when full paragraphs are returned, the `scores` field is no longer meaningful.
+    If set to `True`, only the sentence-level fragments that are semantically related to the query are returned, which helps focus on the most relevant context. If set to `False`, the full paragraph containing those fragments is returned instead, as long as its length does not exceed the model’s context limit. However, when full paragraphs are returned, the `scores` field is no longer meaningful.
 
 - `modelDeploymentID(String)`
 

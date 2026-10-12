@@ -37,17 +37,21 @@ getPartitionStats(GetPartitionStatsReq.builder()
 
 **RETURNS:**
 
-A **GetPartitionStatsResp** object containing collected statistics on the specified collection.
+A **GetPartitionStatsResp** object containing collected statistics on the specified partition.
 
 **PARAMETERS:**
 
-- **numOfEntities** (*long*)
+- **numOfEntities** (*Long*)
 
     The count of entities in the partition.
 
+- **stats** (*Map\<String, String\>*)
+
+    A map of additional statistics collected on the partition.
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

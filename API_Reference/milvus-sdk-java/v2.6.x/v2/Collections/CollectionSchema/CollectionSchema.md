@@ -13,6 +13,9 @@ Constructs the schema of a collection by defining fields, data types, and other 
 ```java
 CreateCollectionReq.CollectionSchema.builder()
     .fieldSchemaList(List<CreateCollectionReq.FieldSchema>)
+    .structFields(List<CreateCollectionReq.StructFieldSchema>)
+    .enableDynamicField(boolean)
+    .functionList(List<CreateCollectionReq.Function>)
     .build();
 ```
 
@@ -28,6 +31,18 @@ CreateCollectionReq.CollectionSchema.builder()
 
     </div>
 
+- `structFields(List<CreateCollectionReq.StructFieldSchema>)`
+
+    A list of **[StructFieldSchema](../StructFieldSchema/StructFieldSchema.md)** objects that define the Array-of-Struct fields in the collection schema.
+
+- `enableDynamicField(boolean enableDynamicField)`
+
+    Whether to enable the dynamic field. Defaults to `false`.
+
+- `functionList(List<CreateCollectionReq.Function>)`
+
+    A list of **[Function](../Function.md)** objects that define the functions of the collection schema.
+
 **RETURN TYPE:**
 
 *CollectionSchema*
@@ -38,7 +53,7 @@ A **CollectionSchema** object.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

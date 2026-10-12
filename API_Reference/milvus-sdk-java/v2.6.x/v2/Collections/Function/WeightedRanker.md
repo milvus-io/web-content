@@ -14,6 +14,7 @@ WeightedRanker.builder()
     .description(String description)
     .functionType(FunctionType functionType)
     .params(Map<String, String> params)
+    .param(String key, String value)
     .weights(List<Float> weights)
     .build()    
 ```
@@ -31,6 +32,10 @@ WeightedRanker.builder()
 - `params(Map<String, String> params)`
 
     A set of key-value pairs that configures the function properties.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
 
 - `weights(List<Float> weights)`
 

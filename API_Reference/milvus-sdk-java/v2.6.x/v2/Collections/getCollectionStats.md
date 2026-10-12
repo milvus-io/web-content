@@ -36,13 +36,17 @@ A **GetCollectionStatsResp** object containing collected statistics on the speci
 
 **PARAMETERS:**
 
-- **numOfEntities** (*long*)
+- **numOfEntities** (*Long*)
 
     The count of entities in the collection.
 
+- **stats** (*Map\<String, String\>*)
+
+    A map of additional statistics collected on the collection.
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

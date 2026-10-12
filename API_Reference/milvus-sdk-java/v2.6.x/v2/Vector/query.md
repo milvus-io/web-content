@@ -55,7 +55,7 @@ query(QueryReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `offset(long offset)` -
 
@@ -85,7 +85,7 @@ query(QueryReq.builder()
 
 *QueryResp*
 
-A **QueryResp object representing specific query results with the specified output fields
+A **QueryResp** object representing specific query results with the specified output fields
 
 **EXCEPTIONS:**
 

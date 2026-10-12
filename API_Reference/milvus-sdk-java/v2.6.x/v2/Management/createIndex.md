@@ -31,7 +31,7 @@ createIndex(CreateIndexReq.builder()
 
 - `indexParams(List<IndexParam> indexParams)` -
 
-    A list of IndexParam objects defining the index configuration.
+    A list of IndexParam objects defining the index configuration. See [IndexParam](IndexParam.md).
 
 - `sync(Boolean sync)` -
 

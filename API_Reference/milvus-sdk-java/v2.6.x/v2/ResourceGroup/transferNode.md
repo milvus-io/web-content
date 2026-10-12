@@ -25,7 +25,7 @@ transferNode(TransferNodeReq.builder()
 
 - `targetGroupName(String targetGroupName)`
 
-    The name of the source resource group to which the query nodes are moved.
+    The name of the target resource group to which the query nodes are moved.
 
 - `numOfNodes(Integer numOfNodes)`
 
@@ -37,7 +37,7 @@ transferNode(TransferNodeReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

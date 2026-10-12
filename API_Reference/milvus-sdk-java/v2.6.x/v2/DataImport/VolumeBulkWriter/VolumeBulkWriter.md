@@ -12,6 +12,30 @@ A **VolumeBulkWriter** object intends to rewrite your raw data to a Zilliz Cloud
 
 </div>
 
+## Constructor
+
+Constructs a **VolumeBulkWriter** instance with a set of parameters.
+
+```java
+public VolumeBulkWriter(VolumeBulkWriterParam bulkWriterParam) throws IOException
+```
+
+## Request Syntax
+
+```java
+VolumeBulkWriterParam.newBuilder()
+    .withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)
+    .withRemotePath(String remotePath)
+    .withChunkSize(long chunkSize)
+    .withFileType(BulkFileType fileType)
+    .withConfig(String key, Object value)
+    .withCloudEndpoint(String cloudEndpoint)
+    .withApiKey(String apiKey)
+    .withVolumeName(String volumeName)
+    .withConnectType(ConnectType connectType)
+    .build()
+```
+
 **BUILDER METHODS:**
 
 - `withCollectionSchema(CollectionSchemaParam collectionSchema)`

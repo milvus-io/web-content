@@ -1,9 +1,9 @@
 # dropPrivilegeGroup()
 
-This operation creates a privilege group.
+This operation drops a privilege group.
 
 ```java
-public Void dropPrivilegeGroup(DropPrivilegeGroupReq request)
+public void dropPrivilegeGroup(DropPrivilegeGroupReq request)
 ```
 
 ## Request Syntax
@@ -27,7 +27,7 @@ dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

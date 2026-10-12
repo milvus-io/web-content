@@ -40,9 +40,13 @@ UpdatePasswordReq.builder()
 
     The human-readable description of the user account.
 
+**RETURNS:**
+
+*void*
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 

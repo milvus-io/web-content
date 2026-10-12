@@ -13,6 +13,7 @@ RRFRanker.builder()
     .name(String name)
     .description(String description)
     .params(Map<String, String> params)
+    .param(String key, String value)
     .k(int k)
     .build()
 ```
@@ -30,6 +31,10 @@ RRFRanker.builder()
 - `params(Map<String, String> params)`
 
     A set of key-value pairs that configures the function properties.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
 
 - `k(int k)`
 

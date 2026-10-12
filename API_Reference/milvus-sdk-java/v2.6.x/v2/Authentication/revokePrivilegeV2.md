@@ -3,7 +3,7 @@
 This operation revokes privileges or privilege groups from a specific role.
 
 ```java
-public Void revokePrivilegeV2(RevokePrivilegeReqV2 request)
+public void revokePrivilegeV2(RevokePrivilegeReqV2 request)
 ```
 
 ## Request Syntax
@@ -42,7 +42,7 @@ revokePrivilegeV2(RevokePrivilegeReqV2.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

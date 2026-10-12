@@ -11,8 +11,7 @@ public GetCompactionStateResp getCompactionState(GetCompactionStateReq request)
 ```java
 getCompactionState(GetCompactionStateReq.builder()
     .compactionID(Long compactionID)
-    .build();
-)
+    .build())
 ```
 
 **BUILDER METHODS:**
@@ -29,11 +28,11 @@ getCompactionState(GetCompactionStateReq.builder()
 
 A **GetCompactionStateResp** instance, which comprises the following parameters:
 
-- **state** (*CompactState*)
+- **state** (*CompactionState*)
 
     The current state of the specified compact operation. Possible values are:
 
-    - UndefinedState(0)
+    - UndefiedState(0)
 
     - Executing(1)
 

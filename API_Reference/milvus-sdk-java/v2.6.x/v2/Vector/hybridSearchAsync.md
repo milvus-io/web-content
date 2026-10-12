@@ -14,7 +14,7 @@ This method uses the same request parameters as `hybridSearch()` but returns a `
 CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.builder()
     .collectionName(String collectionName)
     .searchRequests(List<AnnSearchReq> searchRequests)
-    .ranker(FunctionScore ranker)
+    .functionScore(FunctionScore functionScore)
     .limit(long limit)
     .build());
 ```

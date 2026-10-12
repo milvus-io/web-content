@@ -3,7 +3,7 @@
 This operation removes privileges from a specific privilege group.
 
 ```java
-public Void removePrivilegesFromGroup(RemovePrivilegesFromGroupReq request)
+public void removePrivilegesFromGroup(RemovePrivilegesFromGroupReq request)
 ```
 
 ## Request Syntax
@@ -32,7 +32,7 @@ removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

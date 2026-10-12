@@ -1,9 +1,9 @@
 # close()
 
-This operation closes the current LocalBulkWriter instance.
+This operation closes the current RemoteBulkWriter instance.
 
 ```java
-public void close()
+public void close() throws Exception
 ```
 
 ## Request Syntax

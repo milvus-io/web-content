@@ -14,6 +14,7 @@ BoostRanker.builder()
     .description(String description)
     .inputFieldNames(List<String> inputFieldNames)
     .params(Map<String, String> params)
+    .param(String key, String value)
     .filter(String filter)
     .weight(Float weight)
     .randomScoreSeed(Long randomScoreSeed)
@@ -38,6 +39,10 @@ BoostRanker.builder()
 - `params(Map<String, String> params)`
 
     A set of key-value pairs that configures the function properties.
+
+- `param(String key, String value)`
+
+    Adds a single key-value pair to the function properties.
 
 - `filter(String filter)`
 

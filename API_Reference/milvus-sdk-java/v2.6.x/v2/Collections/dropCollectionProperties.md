@@ -3,7 +3,7 @@
 This operation resets the properties of a specified collection to their default values.
 
 ```java
-public Void dropCollectionProperties(DropCollectionPropertiesReq request)
+public void dropCollectionProperties(DropCollectionPropertiesReq request)
 ```
 
 ## Request Syntax
@@ -45,7 +45,7 @@ dropCollectionProperties(DropCollectionPropertiesReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -1,6 +1,6 @@
 # getBatchFiles()
 
-This operation returns a list of files passed to the current LocalBulkWriter instance.
+This operation returns a list of files passed to the current RemoteBulkWriter instance.
 
 ```java
 public List<List<String>> getBatchFiles()

@@ -17,14 +17,14 @@ A **RemoteBulkWriter** object intends to rewrite your raw data in a format that 
 </div>
 
 ```java
-public RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam)
+public RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam) throws IOException
 ```
 
 **PARAMETERS:**
 
 - **bulkWriterParam** (*RemoteBulkWriterParam*) -
 
-    A [RemoteBulkWriterParam](RemoteBulkWriter.md) instance.
+    A RemoteBulkWriterParam instance.
 
 ## RemoteBulkWriterParam
 
@@ -33,6 +33,7 @@ public RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam)
 ```java
 RemoteBulkWriterParam.newBuilder()
     .withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)
+    .withCollectionSchema(CollectionSchemaParam collectionSchema)
     .withConnectParam(StorageConnectParam connectParam)
     .withRemotePath(String remotePath)
     .withChunkSize(long chunkSize)
@@ -45,11 +46,15 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating CreateCollectionReq.CollectionSchema.
+    The schema of the target collection that is defined by instantiating CreateCollectionReq.CollectionSchema. See [CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md).
+
+- `withCollectionSchema(CollectionSchemaParam collectionSchema)`
+
+    The V1 schema of the target collection that is defined by instantiating **CollectionSchemaParam**.
 
 - `withConnectParam(StorageConnectParam connectParam)`
 
-    The parameters used to connect to a remote bucket, which is defined by instantiating [StorageConnectParam](RemoteBulkWriter.md).
+    The parameters used to connect to a remote bucket, which is defined by instantiating **StorageConnectParam**.
 
 - `withRemotePath(String remotePath)`
 
@@ -59,7 +64,7 @@ RemoteBulkWriterParam.newBuilder()
 
     The maximum size of a file segment. While rewriting your raw data, Milvus splits it into segments.
 
-    The value defaults to **536,870,912** in bytes, which is **512 MB**.
+    The value defaults to **134,217,728** in bytes, which is **128 MB**.
 
     <div class="alert note">
     
@@ -98,7 +103,7 @@ AzureConnectParam.newBuilder()
     .withContainerName(String containerName)
     .withConnStr(String connStr)
     .withAccountUrl(String accountUrl)
-    .withCredential(TokenCrendtial credential)
+    .withCredential(TokenCredential credential)
     .build()
 ```
 
@@ -116,7 +121,7 @@ AzureConnectParam.newBuilder()
 
     A string in format like `https://<storage-account>.blob.core.windows.net`. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
 
-- `withCredential(TokenCrendtial credential)`
+- `withCredential(TokenCredential credential)`
 
     Account access key for the account. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) for more info.
 

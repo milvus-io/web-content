@@ -26,7 +26,7 @@ MilvusClientV2Pool(PoolConfig poolConfig, ConnectConfig connectConfig);
 
     - If no idle client is available after **MaxBlockWaitDuration**, this method will return a null object to the caller.
 
-- `returnClient(String key, MilvusClient grpcClient)`
+- `returnClient(String key, MilvusClientV2 grpcClient)`
 
     Return a client object. Once a client is returned, it becomes idle state and waits for the next caller.
 
@@ -80,19 +80,19 @@ PoolConfig poolConfig = PoolConfig.builder()
 
 - `maxIdlePerKey(int maxIdlePerKey)`
 
-    The maximum number of idle clients for each key. If the number of idle clients exceeds this number, some clients will be automatically closed. The default value is 5.
+    The maximum number of idle clients for each key. If the number of idle clients exceeds this number, some clients will be automatically closed. The default value is 2.
 
 - `minIdlePerKey(int minIdlePerKey)`
 
-    The minimize number of idle clients for each key. The default value is 0.
+    The minimize number of idle clients for each key. The default value is 1.
 
 - `maxTotalPerKey(int maxTotalPerKey)`
 
-    The maximum number of clients for each key, including idle clients and active clients. The default value is 10.
+    The maximum number of clients for each key, including idle clients and active clients. The default value is 5.
 
 - `maxTotal(int maxTotal)`
 
-    The maximum number of clients in total, including idle clients and active clients. The default value is 50.
+    The maximum number of clients in total, including idle clients and active clients. The default value is 1000.
 
 - `blockWhenExhausted(boolean blockWhenExhausted)`
 

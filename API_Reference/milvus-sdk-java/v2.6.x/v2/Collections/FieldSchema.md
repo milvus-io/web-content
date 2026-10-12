@@ -23,6 +23,14 @@ CreateCollectionReq.FieldSchema.builder()
 
     .elementType(DataType elementType)
     .maxCapacity(int maxCapacity)
+    .isClusteringKey(boolean isClusteringKey)
+    .isNullable(boolean isNullable)
+    .defaultValue(Object defaultValue)
+    .enableAnalyzer(boolean enableAnalyzer)
+    .analyzerParams(Map<String, Object> analyzerParams)
+    .enableMatch(boolean enableMatch)
+    .typeParams(Map<String, String> typeParams)
+    .multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)
 
     .build();
 ```
@@ -93,6 +101,40 @@ CreateCollectionReq.FieldSchema.builder()
 
     This is required if **[dataType](DataType.md)** of this field is set to **DataType.Array**.
 
+- `isClusteringKey(boolean isClusteringKey)`
+
+    Whether the current field is the clustering key.
+
+    Setting this to **True** makes the current field the clustering key.
+
+- `isNullable(boolean isNullable)`
+
+    Whether the field can accept null values. Defaults to `false`.
+
+- `defaultValue(Object defaultValue)`
+
+    The default value of the field, used when no value is provided during data insertion.
+
+- `enableAnalyzer(boolean enableAnalyzer)`
+
+    Whether to enable text analysis for the specified `VARCHAR` field.
+
+- `analyzerParams(Map<String, Object> analyzerParams)`
+
+    Configures the analyzer for text processing, specifically for `DataType.VarChar` fields.
+
+- `enableMatch(boolean enableMatch)`
+
+    Whether to enable keyword matching for the specified `VARCHAR` field.
+
+- `typeParams(Map<String, String> typeParams)`
+
+    The parameters specific to the data type of the field. Once specified, a parameter overrides the corresponding value set above.
+
+- `multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)`
+
+    A multi-language analyzer that allows you to configure multiple analyzers for a text field and store multilingual documents in this text field.
+
 **RETURN TYPE:**
 
 *FieldSchema*
@@ -103,7 +145,7 @@ A **FieldSchema** object.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

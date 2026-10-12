@@ -3,7 +3,7 @@
 This operation adds a function to the `FunctionScore` instance.
 
 ```java
-public B addFunction(CreateCollectionReq.Function func)
+public FunctionScore.FunctionScoreBuilder addFunction(CreateCollectionReq.Function func)
 ```
 
 ## Request Syntax
@@ -22,9 +22,9 @@ addFunction(
 
 **RETURN TYPE:**
 
-*B extends FunctionScore.FunctionScoreBuilder<C, B>*
+*FunctionScore.FunctionScoreBuilder*
 
-**RETURNS**
+**RETURNS:**
 
 A **[FunctionScore](FunctionScore.md)** builder for chaining up multiple `addFunction()` methods.
 

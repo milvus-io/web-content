@@ -83,13 +83,11 @@ UpsertReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
 ## Example
-
-Upserts entities and supports partial field updates with per-field update operations.
 
 ```java
 UpsertResp response = client.upsert(UpsertReq.builder()

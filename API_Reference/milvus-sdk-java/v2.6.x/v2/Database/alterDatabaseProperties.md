@@ -3,7 +3,7 @@
 This operation alters a database's properties. 
 
 ```java
-public Void alterDatabaseProperties(AlterDatabasePropertiesReq request)
+public void alterDatabaseProperties(AlterDatabasePropertiesReq request)
 ```
 
 ## Request Syntax
@@ -56,7 +56,7 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

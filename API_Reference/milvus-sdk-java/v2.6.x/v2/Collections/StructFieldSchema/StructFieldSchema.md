@@ -8,7 +8,7 @@ io.milvus.v2.service.collection.request.CreateCollectionReq.StructFieldSchema
 
 <div class="alert note">
 
-This class cannot be explicitly instantiated. You need to describe a collection with an Array of Structs field to view its instances.
+This class can be instantiated with `CreateCollectionReq.StructFieldSchema.builder()`, or obtained by describing a collection with an Array of Structs field.
 
 </div>
 

@@ -24,9 +24,11 @@ createCollection(CreateCollectionReq.builder()
     .numShards(Integer numShards)
     .collectionSchema(CollectionSchema collectionSchema)
     .indexParams(List<IndexParam> indexParams)
+    .indexParam(IndexParam indexParam)
     .numPartitions(Integer numPartitions)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
     .properties(final Map<String, String> properties)
+    .property(String key, String value)
     .build()
 );
 ```
@@ -55,7 +57,7 @@ createCollection(CreateCollectionReq.builder()
 
 - `idType(DataType idType)` -
 
-    The data type of the primary key field. Defaults to `DataType.Int64`.
+    The data type of the primary key field. Defaults to `DataType.Int64`. See [DataType](DataType.md).
 
 - `maxLength(Integer maxLength)` -
 
@@ -83,11 +85,15 @@ createCollection(CreateCollectionReq.builder()
 
 - `collectionSchema(CollectionSchema collectionSchema)` -
 
-    A CollectionSchema object defining the collection structure.
+    A CollectionSchema object defining the collection structure. See [CollectionSchema](CollectionSchema/CollectionSchema.md).
 
 - `indexParams(List<IndexParam> indexParams)` -
 
-    A list of IndexParam objects defining the index configuration. Defaults to `new ArrayList<>()`.
+    A list of IndexParam objects defining the index configuration. Defaults to `new ArrayList<>()`. See [IndexParam](../Management/IndexParam.md).
+
+- `indexParam(IndexParam indexParam)` -
+
+    Adds a single IndexParam object to the index configuration. See [IndexParam](../Management/IndexParam.md).
 
 - `numPartitions(Integer numPartitions)` -
 
@@ -95,11 +101,15 @@ createCollection(CreateCollectionReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation. Defaults to `ConsistencyLevel.BOUNDED`.
+    The consistency level for the operation. Defaults to `ConsistencyLevel.BOUNDED`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `properties(final Map<String, String> properties)` -
 
     A map of collection properties. Defaults to `new HashMap<>()`.
+
+- `property(String key, String value)` -
+
+    Adds a single collection property as a key-value pair.
 
 **RETURNS:**
 
@@ -130,7 +140,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with schema, when indexParams is specified, it will create index as well
-CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 

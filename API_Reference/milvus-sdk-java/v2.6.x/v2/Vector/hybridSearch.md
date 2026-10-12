@@ -24,6 +24,7 @@ hybridSearch(HybridSearchReq.builder()
     .groupSize(Integer groupSize)
     .strictGroupSize(Boolean strictGroupSize)
     .functionScore(FunctionScore functionScore)
+    .ranker(CreateCollectionReq.Function ranker)
     .build()
 );
 ```
@@ -68,7 +69,7 @@ hybridSearch(HybridSearchReq.builder()
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level for the operation.
+    The consistency level for the operation. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `groupByFieldName(String groupByFieldName)` -
 
@@ -84,11 +85,13 @@ hybridSearch(HybridSearchReq.builder()
 
 - `functionScore(FunctionScore functionScore)` -
 
-    A FunctionScore object for custom scoring.
+    A FunctionScore object for custom scoring. See [FunctionScore](FunctionScore/FunctionScore.md).
+
+- `ranker(CreateCollectionReq.Function ranker)` -
+
+    **Deprecated.** A Function object used for ranking. Use `functionScore` instead. See [Function](../Collections/Function.md).
 
 **RETURNS:**
-
-*SearchResp*
 
 *SearchResp*
 

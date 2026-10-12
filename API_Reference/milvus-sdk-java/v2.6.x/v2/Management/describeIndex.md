@@ -47,6 +47,60 @@ describeIndex(DescribeIndexReq.builder()
 
 A **DescribeIndexResp** object that contains the details of the specified index.
 
+**PARAMETERS:**
+
+- **indexDescriptions** (*List\<IndexDesc\>*)
+
+    A list of index descriptions. Each **IndexDesc** object has the following members:
+
+    - **fieldName** (*String*)
+
+        The name of the field the index is built on.
+
+    - **indexName** (*String*)
+
+        The name of the index.
+
+    - **id** (*long*)
+
+        The ID of the index.
+
+    - **indexType** (*[IndexType](IndexType.md)*)
+
+        The index type.
+
+    - **metricType** (*[MetricType](MetricType.md)*)
+
+        The metric type.
+
+    - **extraParams** (*Map\<String, String\>*)
+
+        Additional index parameters.
+
+    - **indexedRows** (*long*)
+
+        The number of rows that have been indexed.
+
+    - **totalRows** (*long*)
+
+        The total number of rows in the field.
+
+    - **pendingIndexRows** (*long*)
+
+        The number of rows that are still pending indexing.
+
+    - **indexState** (*IndexBuildState*)
+
+        The state of the index build.
+
+    - **indexFailedReason** (*String*)
+
+        The reason for the index build failure, if any.
+
+    - **properties** (*Map\<String, String\>*)
+
+        The properties of the index.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

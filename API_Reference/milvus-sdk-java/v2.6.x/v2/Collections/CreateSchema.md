@@ -2,6 +2,12 @@
 
 This operation creates a collection schema.
 
+<div class="alert note">
+
+Since v2.5.9, the instance method `createSchema()` is deprecated. Use the static method `CreateSchema()` instead.
+
+</div>
+
 ```java
 public static CreateCollectionReq.CollectionSchema CreateSchema()
 ```
@@ -9,7 +15,7 @@ public static CreateCollectionReq.CollectionSchema CreateSchema()
 ## Request Syntax
 
 ```java
-MilvusClientV2.createSchema()
+MilvusClientV2.CreateSchema()
 ```
 
 **PARAMETERS:**

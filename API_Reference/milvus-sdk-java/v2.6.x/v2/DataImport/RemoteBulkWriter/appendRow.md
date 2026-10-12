@@ -18,6 +18,14 @@ public void appendRow(JsonObject rowData) throws IOException, InterruptedExcepti
 
 **EXCEPTIONS:**
 
+- **IOException**
+
+    Raised when an I/O error occurs while buffering the row.
+
+- **InterruptedException**
+
+    Raised when the operation is interrupted while buffering the row.
+
 - **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.

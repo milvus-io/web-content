@@ -11,6 +11,7 @@ public void dropRole(DropRoleReq request)
 ```java
 dropRole(DropRoleReq.builder()
     .roleName(String roleName)
+    .forceDrop(boolean forceDrop)
     .build()
 )
 ```
@@ -21,13 +22,17 @@ dropRole(DropRoleReq.builder()
 
     The name of the role to drop.
 
+- `forceDrop(boolean forceDrop)`
+
+    Whether to forcibly drop the role even if it has granted privileges.
+
 **RETURNS:**
 
 *void*
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -18,7 +18,7 @@ getElementType()
 
 **RETURNS:**
 
-The return value will always be `DataType.Array`.
+The return value will always be `DataType.Struct`.
 
 ## Examples
 

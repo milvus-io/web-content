@@ -3,14 +3,14 @@
 This operation creates a resource group.
 
 ```java
-public Void createResourceGroup(CreateResourceGroupReq request)
+public void createResourceGroup(CreateResourceGroupReq request)
 ```
 
 ## Request Syntax
 
 ```java
 createResourceGroup(CreateResourceGroupReq.builder()
-    .groupName(String collectionName)
+    .groupName(String groupName)
     .config(ResourceGroupConfig config)
     .build()
 )
@@ -18,7 +18,7 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
 **BUILDER METHODS:**
 
-- `groupName(String collectionName)`
+- `groupName(String groupName)`
 
     **[REQUIRED]**
 
@@ -62,7 +62,7 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 

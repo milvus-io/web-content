@@ -54,7 +54,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The description of the current collection.
 
-- **numOfPartitions** (*long*)
+- **numOfPartitions** (*Long*)
 
     The number of partitions in the current collection.
 
@@ -62,9 +62,9 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     A list of fields in the current collection.
 
-- **vectorFieldName** (*List\<String\>*)
+- **vectorFieldNames** (*List\<String\>*)
 
-    The name of the vector field.
+    The names of the vector fields.
 
 - **primaryFieldName** (*String*)
 
@@ -116,7 +116,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 
