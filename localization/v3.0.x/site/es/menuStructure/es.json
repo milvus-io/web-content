@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Usuarios de Milvus",
+        "label": "Adoptantes de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -44,7 +44,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Inicio rápido",
+        "label": "Guía de inicio rápido",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Recogida de paquetes",
+            "label": "Recogida en punto de entrega",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -431,7 +431,7 @@
             "children": []
           },
           {
-            "label": "Campo de número",
+            "label": "Campo numérico",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -529,7 +529,7 @@
             "children": []
           },
           {
-            "label": "Valores predeterminados",
+            "label": "Valores por defecto",
             "id": "default-values.md",
             "order": 15,
             "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Solo caracteres alfanuméricos",
+                    "label": "Solo alfanumérico",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Emparejamiento de socios",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1229,7 +1235,7 @@
             "children": []
           },
           {
-            "label": "Utilizar la clave de partición",
+            "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de descomposición",
+                "label": "Clasificación de la descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1469,7 +1475,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Utilizar mmap",
+            "label": "Utiliza mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
@@ -1611,7 +1617,7 @@
             "children": []
           },
           {
-            "label": "Canal de RAG",
+            "label": "Proceso RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1897,7 +1903,7 @@
                 "children": []
               },
               {
-                "label": "Cola de mensajes del conmutador",
+                "label": "Cambiar cola de mensajes",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -2216,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de distintos buckets",
+                "label": "Migrar entre instancias de distintos depósitos",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2237,7 +2243,7 @@
         "order": 3,
         "children": [
           {
-            "label": "Resumen general",
+            "label": "Resumen",
             "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
@@ -2496,7 +2502,7 @@
                 "children": []
               },
               {
-                "label": "Jina IA",
+                "label": "Jina AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -3188,7 +3194,7 @@
         "children": []
       },
       {
-        "label": "Guía de inicio rápido con Attu",
+        "label": "Introducción rápida a Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []

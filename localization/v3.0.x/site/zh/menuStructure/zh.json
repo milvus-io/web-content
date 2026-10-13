@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "什么是Milvus",
+        "label": "什么是 Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本Collection",
+            "label": "关于本系列 Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -340,13 +340,13 @@
             "children": []
           },
           {
-            "label": "修改 Collection",
+            "label": "Modify Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "加载与释放",
+            "label": "装载与释放",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -485,7 +485,7 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段中",
+                "label": "将数据插入 StructArray 字段",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "内置分析仪",
+                "label": "内置分析器",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Lindera",
+                    "label": "林德拉",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -673,7 +673,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cncharonly简体中文（大陆）",
+                    "label": "Cncharonly",
                     "id": "cncharonly-filter.md",
                     "order": 6,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改 Collection Schema",
+            "label": "修改集合 Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1140,11 +1140,17 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "会员配对",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
           {
-            "label": "全文检索",
+            "label": "全文搜索",
             "id": "full-text-search.md",
             "order": 9,
             "children": []
@@ -1185,7 +1191,7 @@
                 "children": []
               },
               {
-                "label": "使用 StructArray 进行范围搜索",
+                "label": "使用 StructArray 进行区间搜索",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1217,7 +1223,7 @@
             ]
           },
           {
-            "label": "Elasticsearch 向 Milvus 发送的查询",
+            "label": "Elasticsearch 向 Milvus 发起的查询",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "衰变排名榜",
+                "label": "衰减排名器",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1409,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "模型排名概述",
+                    "label": "模型排名概览",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1421,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1581,7 +1587,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 的 Agents.md",
+            "label": "Milvus 版 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1871,7 +1877,7 @@
                 "order": 2,
                 "children": [
                   {
-                    "label": "升级到 Pulsar v3",
+                    "label": "升级至 Pulsar v3",
                     "id": "upgrade-pulsar-v3.md",
                     "order": 0,
                     "children": []
@@ -2210,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "在同一个存储桶内进行实例间迁移",
+                "label": "在同一个存储桶内迁移实例",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []

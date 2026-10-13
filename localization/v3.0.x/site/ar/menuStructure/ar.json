@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل Milvus بشكل مستقل",
+            "label": "تشغيل Milvus في الوضع المستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "الطائر النقار",
+            "label": "طائر النقار",
             "id": "woodpecker_architecture.md",
             "order": 5,
             "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "تعيين مدة صلاحية مجموعة (TTL)",
+            "label": "تعيين مدة صلاحية مجموعة TTL",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "متجه متفرق",
+            "label": "المتجه المتفرق",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "معرّف اللغة",
+                    "label": "مُعرِّف اللغة",
                     "id": "language-identifier.md",
                     "order": 6,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "جهاز تفكيك المركبات",
+                    "label": "جهاز فصل المركبات",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -729,7 +729,7 @@
                 ]
               },
               {
-                "label": "أجهزة التحليل متعددة اللغات",
+                "label": "أدوات التحليل متعددة اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
@@ -773,7 +773,7 @@
             "order": 19,
             "children": [
               {
-                "label": "تصميم نموذج البيانات لعملية البحث",
+                "label": "تصميم نموذج البيانات للبحث",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
@@ -820,7 +820,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "شرح المؤشر",
+            "label": "شرح الفهرس",
             "id": "index-explained.md",
             "order": 0,
             "children": []
@@ -912,7 +912,7 @@
             ]
           },
           {
-            "label": "مؤشرات المتجهات الثنائية",
+            "label": "فهارس المتجهات الثنائية",
             "id": "binary-vector-indexes",
             "order": 3,
             "isMenu": true,
@@ -1139,6 +1139,12 @@
                 "label": "مشغلات الهندسة",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "مطابقة العضوية",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1383,7 +1389,7 @@
                     "children": []
                   },
                   {
-                    "label": "الاضمحلال الأسي",
+                    "label": "الانحلال الأسي",
                     "id": "exponential-decay.md",
                     "order": 2,
                     "children": []
@@ -1415,7 +1421,7 @@
                     "children": []
                   },
                   {
-                    "label": "مصنف vLLM",
+                    "label": "مُصنِّف نماذج اللغة الكبيرة (vLLM)",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1433,13 +1439,13 @@
                     "children": []
                   },
                   {
-                    "label": "مصنف Voyage AI",
+                    "label": "مُصنِّف Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
                   },
                   {
-                    "label": "برنامج تصنيف SiliconFlow",
+                    "label": "برنامج SiliconFlow Ranker",
                     "id": "siliconflow-ranker.md",
                     "order": 5,
                     "children": []
@@ -1475,13 +1481,13 @@
             "children": []
           },
           {
-            "label": "التجميع والضغط",
+            "label": "التكتل والضغط",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "إجباري دمج وضغط البيانات",
+            "label": "إجبار الضغط بالدمج",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1975,7 +1981,7 @@
             "children": []
           },
           {
-            "label": "ترقية إصدار Milvus المستقل",
+            "label": "ترقية Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2108,7 +2114,7 @@
                 "children": []
               },
               {
-                "label": "المستخدمون، والصلاحيات، والأدوار",
+                "label": "المستخدمون، والامتيازات، والأدوار",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
@@ -2192,7 +2198,7 @@
             "children": []
           },
           {
-            "label": "واجهة برمجة التطبيقات (API) القائمة على نمط REST",
+            "label": "واجهة برمجة التطبيقات (API) القائمة على REST",
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
@@ -2428,7 +2434,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال أي آي",
+                "label": "ميسترال آي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
@@ -2496,7 +2502,7 @@
                 "children": []
               },
               {
-                "label": "جينا AI",
+                "label": "جينا أي آي",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -2514,7 +2520,7 @@
     ]
   },
   {
-    "label": "عمليات التكامل",
+    "label": "عمليات الدمج",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
@@ -2536,7 +2542,7 @@
             "order": 0,
             "children": [
               {
-                "label": "طرق الاستخدام الأساسية",
+                "label": "الاستخدام الأساسي",
                 "id": "basic_usage_langchain.md",
                 "order": 1,
                 "children": []
@@ -2855,13 +2861,13 @@
             "children": []
           },
           {
-            "label": "جينا AI",
+            "label": "جينا أي آي",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
           },
           {
-            "label": "تويلف لابز",
+            "label": "تويلف لابس",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2892,7 +2898,7 @@
             "children": []
           },
           {
-            "label": "ميسترال آي آي",
+            "label": "ميسترال أي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
@@ -3163,7 +3169,7 @@
         "children": []
       },
       {
-        "label": "استخدم ColBERT وColPali مع Milvus",
+        "label": "استخدام ColBERT وColPali مع Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -3182,7 +3188,7 @@
         "children": []
       },
       {
-        "label": "البحث القمعي باستخدام التضمينات المتداخلة (Matryoshka)",
+        "label": "البحث القمعي باستخدام التضمينات المتداخلة (Matryoshka Embeddings)",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

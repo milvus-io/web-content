@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "Что такое Milvus",
+        "label": "Что такое Milvus?",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "Запуск автономной версии Milvus",
+            "label": "Запустить Milvus в автономном режиме",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -235,7 +235,7 @@
             "children": []
           },
           {
-            "label": "Хранилище V3",
+            "label": "Хранение V3",
             "id": "storage-v3.md",
             "order": 4,
             "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Поля массива структур в Index",
+                "label": "Поля массива структур в индексе",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдэра",
+                    "label": "Линдер",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабоского языка",
+                    "label": "Нормализация арабского языка",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -709,13 +709,13 @@
                     "children": []
                   },
                   {
-                    "label": "Удалить точку",
+                    "label": "Удалить пробел",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
                   },
                   {
-                    "label": "Регулярное выражение",
+                    "label": "Регулярные выражения",
                     "id": "regex-filter.md",
                     "order": 13,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Выберите аналитический прибор, подходящий для ваших задач",
+                "label": "Выберите анализатор, подходящий для ваших задач",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Объекты с операцией «Upsert»",
+            "label": "Объекты с функцией «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Матч по членству",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1179,7 +1185,7 @@
                 "children": []
               },
               {
-                "label": "Фильтрованный поиск с использованием StructArray",
+                "label": "Фильтрованный поиск с помощью StructArray",
                 "id": "filtered-search-with-structarray.md",
                 "order": 1,
                 "children": []
@@ -1209,7 +1215,7 @@
                 "children": []
               },
               {
-                "label": "Выберите стратегию поиска EmbeddingList",
+                "label": "Выберите стратегию поиска в списке вложений",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1347,7 +1353,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг по взвешенным оценкам",
+                "label": "Рейтинг с взвешиванием",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1409,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор Model Ranker",
+                    "label": "Обзор модели ранжирования",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1475,13 +1481,13 @@
             "children": []
           },
           {
-            "label": "Уплотнение кластеров",
+            "label": "Уплотнение с группировкой",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Принудительное слияние и уплотнение",
+            "label": "Принудительная уплотнение слияния",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1672,7 +1678,7 @@
                 "children": []
               },
               {
-                "label": "С оператором Milvus",
+                "label": "С помощью Milvus Operator",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1772,7 +1778,7 @@
         ]
       },
       {
-        "label": "Настройки",
+        "label": "Настройка",
         "id": "configuration",
         "order": 1,
         "isMenu": true,
@@ -1944,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "Автономный масштаб",
+            "label": "Масштаб «Автономный»",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -2132,7 +2138,7 @@
                 "children": []
               },
               {
-                "label": "Удаление пользователей и ролей",
+                "label": "Удалить пользователей и роли",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2146,7 +2152,7 @@
             "children": []
           },
           {
-            "label": "Подключение к Kafka с использованием SASL/SSL",
+            "label": "Подключение к Kafka с помощью SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2168,7 +2174,7 @@
     "order": 6,
     "children": [
       {
-        "label": "Атту (графический интерфейс Milvus)",
+        "label": "Attu (графический интерфейс Milvus)",
         "id": "milvus_attu",
         "order": 0,
         "externalLink": "https://github.com/zilliztech/attu",
@@ -2210,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном хранилище",
+                "label": "Перенос данных между экземплярами в одном бакете",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2222,7 +2228,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в разных средах S3",
+                "label": "Перенос данных между экземплярами в различных средах S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2341,14 +2347,14 @@
         "children": []
       },
       {
-        "label": "Инструмент для подбора размера Milvus",
+        "label": "Инструмент для определения размера Milvus",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
       {
-        "label": "Клиент PowerShell Milvus",
+        "label": "Клиент Milvus для PowerShell",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
@@ -2597,7 +2603,7 @@
                 "children": []
               },
               {
-                "label": "Полнотекстовый поиск",
+                "label": "Поиск по полному тексту",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
                 "children": []
@@ -2861,7 +2867,7 @@
             "children": []
           },
           {
-            "label": "Twelve Labs",
+            "label": "«Twelve Labs»",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -3002,7 +3008,7 @@
             "children": []
           },
           {
-            "label": "Маскировщик персональных данных",
+            "label": "Маска PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3145,13 +3151,13 @@
         "children": []
       },
       {
-        "label": "Графический RAG с использованием Milvus",
+        "label": "График RAG с использованием Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "Контекстуальный поиск",
+        "label": "Контекстный поиск",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3182,7 +3188,7 @@
         "children": []
       },
       {
-        "label": "Поиск по воронке с использованием вложений «матрешка»",
+        "label": "Поиск по воронке с использованием вложений «матрешки»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3206,7 +3212,7 @@
         "children": []
       },
       {
-        "label": "Генерация выражений фильтров запросов Milvus с помощью крупных языковых моделей",
+        "label": "Генерация выражений фильтрации запросов Milvus с помощью крупных языковых моделей",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3229,7 +3235,7 @@
             "children": []
           },
           {
-            "label": "Поиск по схожести видео",
+            "label": "Поиск по сходству видео",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []
@@ -3293,7 +3299,7 @@
         "children": []
       },
       {
-        "label": "Устранение неполадок",
+        "label": "Устранение неисправностей",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

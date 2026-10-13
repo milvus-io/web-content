@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース情報",
+        "label": "リリース",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -98,7 +98,7 @@
                 "children": []
               },
               {
-                "label": "Docker Desktop（Windows）",
+                "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
                 "order": 4,
                 "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "GPUでMilvusを実行する",
+            "label": "GPUを使用してMilvusを実行する",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -160,7 +160,7 @@
         ]
       },
       {
-        "label": "SDK のインストール",
+        "label": "SDKのインストール",
         "id": "install_sdks",
         "order": 2,
         "children": [
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリレプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "タイ",
+                    "label": "タイ語",
                     "id": "thai-tokenizer.md",
                     "order": 3,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "ピンの取り外し",
+                    "label": "「Punct」を削除",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -729,13 +729,13 @@
                 ]
               },
               {
-                "label": "多言語アナライザー",
+                "label": "多言語アナライザ",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "用途に合った適切なアナライザーを選択してください",
+                "label": "用途に合ったアナライザーを選びましょう",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -794,7 +794,7 @@
         "order": 3,
         "children": [
           {
-            "label": "エンティティを挿入",
+            "label": "エンティティの挿入",
             "id": "insert-update-delete.md",
             "order": 0,
             "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "メンバーシップ・マッチ",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1150,7 +1156,7 @@
             "children": []
           },
           {
-            "label": "テキストの一致",
+            "label": "テキスト一致",
             "id": "keyword-match.md",
             "order": 10,
             "children": []
@@ -1243,7 +1249,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "BM25の機能",
+            "label": "BM25 の機能",
             "id": "bm25-function.md",
             "order": 0,
             "children": []
@@ -1403,7 +1409,7 @@
                 ]
               },
               {
-                "label": "モデル・ランカー",
+                "label": "モデルランカー",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1475,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "クラスタリング圧縮",
+            "label": "クラスタリング・コンパクテーション",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1660,7 +1666,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Docker を使用する場合",
+                "label": "Docker を使って",
                 "id": "configure-docker.md",
                 "order": 0,
                 "children": []
@@ -1944,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "スケール スタンドアロン",
+            "label": "スタンドアロン版",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -1956,7 +1962,7 @@
             "children": []
           },
           {
-            "label": "スケール依存関係",
+            "label": "スケール依存性",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -1975,7 +1981,7 @@
             "children": []
           },
           {
-            "label": "Milvus Standalone のアップグレード",
+            "label": "Milvus スタンドアロンのアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2001,13 +2007,13 @@
                 "children": []
               },
               {
-                "label": "監視サービスの展開",
+                "label": "監視サービスの導入",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "指標を可視化する",
+                "label": "指標の可視化",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
@@ -2096,7 +2102,7 @@
             "children": []
           },
           {
-            "label": "RBAC を有効にする",
+            "label": "RBACを有効にする",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2198,7 +2204,7 @@
             "children": []
           },
           {
-            "label": "よくある症例",
+            "label": "よくある事例",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2341,7 +2347,7 @@
         "children": []
       },
       {
-        "label": "Milvus サイズ決定ツール",
+        "label": "Milvus サイズ選定ツール",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2506,7 +2512,7 @@
         ]
       },
       {
-        "label": "SDKコードヘルパー (MCP)",
+        "label": "SDKコードヘルパー（MCP）",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -2609,7 +2615,7 @@
                 "children": []
               },
               {
-                "label": "メタデータのフィルタリング",
+                "label": "メタデータによるフィルタリング",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -3002,7 +3008,7 @@
             "children": []
           },
           {
-            "label": "PIIマスカー",
+            "label": "PII マスカー",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3145,7 +3151,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使用したグラフ RAG",
+        "label": "Milvus を使用した RAG のグラフ化",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3206,7 +3212,7 @@
         "children": []
       },
       {
-        "label": "大規模言語モデルを用いたMilvusクエリフィルタ式の生成",
+        "label": "大規模言語モデルを用いたMilvusクエリフィルター式の生成",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3235,7 +3241,7 @@
             "children": []
           },
           {
-            "label": "音声類似度検索",
+            "label": "音声類似性検索",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

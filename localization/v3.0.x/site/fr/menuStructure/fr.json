@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Exécuter Milvus avec un GPU",
+            "label": "Exécuter Milvus avec le GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -299,7 +299,7 @@
     ]
   },
   {
-    "label": "Guide de l'utilisateur",
+    "label": "Guide d'utilisation",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Collecte de colis",
+            "label": "Collecte des colis déposés",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -594,7 +594,7 @@
                     "children": []
                   },
                   {
-                    "label": "Espace",
+                    "label": "Espace blanc",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Uniquement alphanumérique",
+                    "label": "Alphanumonly",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "Supprimer Punct",
+                    "label": "Supprimer le point",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Entités « Upsert »",
+            "label": "Entités « upsert »",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Match des membres",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Classement de la dégradation",
+                "label": "Classement de la décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1395,7 +1401,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutoriel : Mise en place d'un classement basé sur le temps dans Milvus",
+                    "label": "Tutoriel : Mise en œuvre d'un classement basé sur le temps dans Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1605,7 +1611,7 @@
             "children": []
           },
           {
-            "label": "Sélection d'index",
+            "label": "Sélection d'indices",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1950,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "Évoluer avec HPA",
+            "label": "Échelle avec HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1964,7 +1970,7 @@
         ]
       },
       {
-        "label": "Mise à niveau",
+        "label": "Mise à jour",
         "id": "upgrade_milvus",
         "order": 7,
         "children": [
@@ -2204,7 +2210,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration au sein d'une même instance",
+                "label": "Sauvegarde et restauration dans une seule instance",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2355,7 +2361,7 @@
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Journal d'exportation",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -3182,7 +3188,7 @@
         "children": []
       },
       {
-        "label": "Recherche par entonnoir avec des représentations de type « matriochka »",
+        "label": "Recherche en entonnoir avec les représentations « matriochka »",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Recherche « texte vers image » avec Milvus",
+        "label": "Recherche d'images à partir de texte avec Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
@@ -3281,7 +3287,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelle",
+        "label": "FAQ opérationnelles",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

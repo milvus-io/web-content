@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "Tipi di unità metriche",
+        "label": "Tipi metrici",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "TTL della collezione di insiemi",
+            "label": "TTL della raccolta di insiemi",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Modifica dello schema di raccolta esterno",
+            "label": "Modifica dello schema della raccolta esterna",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Entità \"upsert\"",
+            "label": "Entità Upsert",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali",
+            "label": "Ricerca di base con reti neurali artificiali (ANN)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1124,7 +1124,7 @@
                 "children": []
               },
               {
-                "label": "Operatori di StructArray",
+                "label": "Operatori StructArray",
                 "id": "struct-array-operators.md",
                 "order": 6,
                 "children": []
@@ -1139,6 +1139,12 @@
                 "label": "Operatori geometrici",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Abbinamento soci",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1619,7 +1625,7 @@
         ]
       },
       {
-        "label": "Abilità Milvus",
+        "label": "Abilità di Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1897,7 +1903,7 @@
                 "children": []
               },
               {
-                "label": "Coda dei messaggi Switch",
+                "label": "Coda dei messaggi dello switch",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -2001,7 +2007,7 @@
                 "children": []
               },
               {
-                "label": "Implementare i servizi di monitoraggio",
+                "label": "Implementazione dei servizi di monitoraggio",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -2126,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Ruoli relativi alle sovvenzioni",
+                "label": "Ruoli di sovvenzione",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2146,7 +2152,7 @@
             "children": []
           },
           {
-            "label": "Connettersi a Kafka tramite SASL/SSL",
+            "label": "Connettiti a Kafka con SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2216,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in bucket diversi",
+                "label": "Migrazione tra istanze in diversi bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2355,7 +2361,7 @@
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Registro delle esportazioni",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2460,7 +2466,7 @@
             ]
           },
           {
-            "label": "Reranker",
+            "label": "Rerankers",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2542,7 +2548,7 @@
                 "children": []
               },
               {
-                "label": "Incorporamento del testo",
+                "label": "Incorporamento di testo",
                 "id": "langchain_milvus_dido.md",
                 "order": 2,
                 "children": []
@@ -3133,7 +3139,7 @@
         "children": []
       },
       {
-        "label": "Ricerca di immagini con Milvus",
+        "label": "Ricerca immagini con Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
@@ -3275,13 +3281,13 @@
         "children": []
       },
       {
-        "label": "Domande frequenti sul prodotto",
+        "label": "Domande frequenti sui prodotti",
         "id": "product_faq.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "Domande frequenti sull’operatività",
+        "label": "Domande frequenti sull'operatività",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

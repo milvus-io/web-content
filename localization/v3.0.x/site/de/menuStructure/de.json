@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufschlüsselung",
+                "label": "JSON-Aufspaltung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennung",
+                    "label": "Sprachkennzeichnung",
                     "id": "language-identifier.md",
                     "order": 6,
                     "children": []
@@ -667,7 +667,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Nur Cnalphanum",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
+                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Schema der „Alter“-Kollektion ändern",
+            "label": "Schema der Alter-Kollektion ändern",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -938,7 +938,7 @@
             ]
           },
           {
-            "label": "Indizes für spärliche Vektoren",
+            "label": "Spärliche Vektorindizes",
             "id": "sparse-vector-indexes",
             "order": 4,
             "isMenu": true,
@@ -952,7 +952,7 @@
             ]
           },
           {
-            "label": "Skalarindizes",
+            "label": "Skalare Indizes",
             "id": "scalar-indexes",
             "order": 5,
             "isMenu": true,
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Mitgliedschafts-Match",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1209,7 +1215,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie eine Suchstrategie für die EmbeddingList aus",
+                "label": "Wählen Sie eine Suchstrategie für die „EmbeddingList“ aus",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1365,13 +1371,13 @@
                 "children": []
               },
               {
-                "label": "Verfalls-Ranking",
+                "label": "Verfall-Rangliste",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
                 "children": [
                   {
-                    "label": "Übersicht über den „Decay Ranker“",
+                    "label": "Übersicht über den Decay-Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1481,13 +1487,13 @@
             "children": []
           },
           {
-            "label": "Zusammenführung und Verdichtung erzwingen",
+            "label": "Zusammenführung und Komprimierung erzwingen",
             "id": "force-merge.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Stufenweiser Speicher",
+            "label": "Mehrstufige Speicherung",
             "id": "tiered_storage",
             "order": 3,
             "isMenu": true,
@@ -2222,7 +2228,7 @@
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen in verschiedenen S3-Umgebungen",
+                "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2249,7 +2255,7 @@
             "children": []
           },
           {
-            "label": "Anleitungen",
+            "label": "Anwendungshinweise",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
@@ -2460,7 +2466,7 @@
             ]
           },
           {
-            "label": "Reranker",
+            "label": "Neubewertungen",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2704,7 +2710,7 @@
         ]
       },
       {
-        "label": "Vertreter",
+        "label": "Agenten",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2757,7 +2763,7 @@
             "children": []
           },
           {
-            "label": "Grundlegendes zum Arbeitsspeicher",
+            "label": "Grundlegendes zum Gedächtnis",
             "id": "basic_memory_with_milvus.md",
             "order": 8,
             "children": []
@@ -2771,7 +2777,7 @@
         ]
       },
       {
-        "label": "Auswertung und Überwachbarkeit",
+        "label": "Auswertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -2936,7 +2942,7 @@
         ]
       },
       {
-        "label": "Wissensverarbeitung",
+        "label": "Wissensingenieurwesen",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [
@@ -3182,7 +3188,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Embeddings",
+        "label": "Trichter-Suche mit Matroschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

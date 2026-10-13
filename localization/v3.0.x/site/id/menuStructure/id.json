@@ -437,7 +437,7 @@
             "children": []
           },
           {
-            "label": "Kolom JSON",
+            "label": "Bidang JSON",
             "id": "json-field",
             "order": 8,
             "children": [
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Indeks, Struktur, Array, Bidang",
+                "label": "Indeks Bidang StructArray",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -649,7 +649,7 @@
                     "children": []
                   },
                   {
-                    "label": "Normalisasi Bahasa Arab",
+                    "label": "Normalisasi Hubungan dengan Negara-Negara Arab",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Pertandingan Anggota",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1191,7 +1197,7 @@
                 "children": []
               },
               {
-                "label": "Pencarian Berbasis Kelompok dengan StructArray",
+                "label": "Pencarian Berkelompok dengan StructArray",
                 "id": "grouping-search-with-structarray.md",
                 "order": 3,
                 "children": []
@@ -1237,7 +1243,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi &amp; Model",
+        "label": "Inferensi Fungsi dan Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1341,7 +1347,7 @@
             "children": []
           },
           {
-            "label": "Fungsi Penilaian Ulang",
+            "label": "Fungsi Penataan Ulang Peringkat",
             "id": "reranking",
             "order": 3,
             "isMenu": true,
@@ -1481,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "Pemadatan dengan Penggabungan Paksa",
+            "label": "Pemadatan Penggabungan Paksa",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1563,7 +1569,7 @@
     ]
   },
   {
-    "label": "Alat Berbasis Kecerdasan Buatan",
+    "label": "Alat AI",
     "id": "aiTools",
     "order": 4,
     "isMenu": true,
@@ -1633,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Kode Claude",
+        "label": "Server MCP untuk Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1692,7 +1698,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Melakukan deployment di AWS",
+                "label": "Lakukan penerapan di AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
@@ -1790,7 +1796,7 @@
             "children": []
           },
           {
-            "label": "Membatasi Jumlah Pengumpulan",
+            "label": "Membatasi Jumlah Koleksi",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1938,7 +1944,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kluster Skala",
+            "label": "Kelompok Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -1983,7 +1989,7 @@
         ]
       },
       {
-        "label": "Pemantauan, Peringatan, &amp; Log",
+        "label": "Pemantauan, Peringatan, dan Catatan",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2013,7 +2019,7 @@
                 "children": []
               },
               {
-                "label": "Dasbor Metrik Milvus",
+                "label": "Dasbor Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2126,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Peran Hibah",
+                "label": "Peran Pemberian Dana",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2210,13 +2216,13 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar Instansi dalam Satu Bucket",
+                "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrasi Antar Instansi di Seluruh Bucket",
+                "label": "Migrasi Antar-Instan di Berbagai Bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2232,7 +2238,7 @@
         ]
       },
       {
-        "label": "Pengamat burung",
+        "label": "Pengamat Burung",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2484,7 +2490,7 @@
                 "children": []
               },
               {
-                "label": "Enkoder Silang",
+                "label": "Encoder Silang",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
@@ -3151,7 +3157,7 @@
         "children": []
       },
       {
-        "label": "Pencarian Berdasarkan Konteks",
+        "label": "Pencarian Kontekstual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3163,7 +3169,7 @@
         "children": []
       },
       {
-        "label": "Gunakan ColBERT dan ColPali bersama Milvus",
+        "label": "Gunakan ColBERT dan ColPali dengan Milvus",
         "id": "search-with-embedding-lists",
         "order": 10,
         "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
@@ -3188,7 +3194,7 @@
         "children": []
       },
       {
-        "label": "Panduan Memulai dengan Attu",
+        "label": "Panduan Cepat Menggunakan Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []
@@ -3206,7 +3212,7 @@
         "children": []
       },
       {
-        "label": "Membuat Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
+        "label": "Pembuatan Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3269,7 +3275,7 @@
     "order": 11,
     "children": [
       {
-        "label": "Pertanyaan Umum (FAQ) tentang Kinerja",
+        "label": "Pertanyaan Umum tentang Kinerja",
         "id": "performance_faq.md",
         "order": 0,
         "children": []
@@ -3281,7 +3287,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum (FAQ) seputar Operasional",
+        "label": "Pertanyaan Umum (FAQ) tentang Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []
