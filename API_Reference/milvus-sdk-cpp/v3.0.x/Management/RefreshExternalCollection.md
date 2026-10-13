@@ -22,21 +22,45 @@ auto request = milvus::RefreshExternalCollectionRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the external collection to refresh.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithExternalSource(const std::string& external_source)`
 
     Sets the external source type.
 
+- `SetExternalSource(const std::string& external_source)`
+
+    Set the external data source, e.g. an S3 path.
+
 - `WithExternalSpec(const nlohmann::json& external_spec)`
 
     Sets provider-specific refresh configuration as JSON.
 
+- `SetExternalSpec(const nlohmann::json& external_spec)`
+
+    Set the external file specification.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The refresh job ID is carried in the response object.
+
+- **response** (*RefreshExternalCollectionResponse*) -
+
+    - **JobID** (*int64_t*) -
+
+        Get the refresh job identifier.
 
 **EXCEPTIONS:**
 

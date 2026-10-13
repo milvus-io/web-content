@@ -23,9 +23,17 @@ auto request = BatchDescribeCollectionsRequest()
 
     Sets the name of the database that contains the collections to describe.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target database name.
+
 - `WithCollectionNames(std::vector<std::string>&& collection_names)`
 
     Sets the names of the collections to describe.
+
+- `SetCollectionNames(std::vector<std::string>&& collection_names)`
+
+    Set collection names.
 
 - `AddCollectionName(const std::string& collection_name)`
 
@@ -34,6 +42,10 @@ auto request = BatchDescribeCollectionsRequest()
 - `WithCollectionIDs(std::vector<int64_t>&& collection_ids)`
 
     Sets the IDs of the collections to describe.
+
+- `SetCollectionIDs(std::vector<int64_t>&& collection_ids)`
+
+    Set collection ids.
 
 - `AddCollectionID(int64_t collection_id)`
 

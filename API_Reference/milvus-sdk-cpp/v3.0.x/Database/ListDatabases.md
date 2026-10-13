@@ -8,9 +8,15 @@ Status ListDatabases(const ListDatabasesRequest& request, ListDatabasesResponse&
 
 **RETURNS:**
 
-*Status* with *ListDatabasesResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The list of database names is carried in the response object.
+
+- **response** (*ListDatabasesResponse*) -
+
+    - **DatabaseNames** (*const std::vector<std::string>&*) -
+
+        Get database names.
 
 **EXCEPTIONS:**
 

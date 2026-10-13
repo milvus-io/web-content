@@ -20,9 +20,17 @@ auto request = UpdateUserRequest()
 
     Sets the name of the user.
 
+- `SetUserName(const std::string& user_name)`
+
+    Set the user name.
+
 - `WithDescription(const std::string& description)`
 
     Sets the user's description.
+
+- `SetDescription(const std::string& description)`
+
+    Set the user description.
 
 **RETURNS:**
 

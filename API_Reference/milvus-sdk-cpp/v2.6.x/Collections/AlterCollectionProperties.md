@@ -21,13 +21,25 @@ auto request = AlterCollectionPropertiesRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets the altered properties of this collection. For available properties, refer to [Supported properties](https://milvus.io/docs/modify-collection.md#Supported-properties).
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set altered properties of this collection.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 

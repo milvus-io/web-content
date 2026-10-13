@@ -27,13 +27,25 @@ auto request = DropCollectionFunctionRequest()
 
     Sets the name of the target database. If it is empty, the default database is used.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the target collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithFunctionName(std::string function_name)`
 
     Sets the name of the function to drop. This cannot be empty.
+
+- `SetFunctionName(std::string function_name)`
+
+    Set the name of the function to drop.
 
 **RETURNS:**
 

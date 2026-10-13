@@ -20,9 +20,17 @@ auto request = DropRoleRequest()
 
     Sets the name of the role.
 
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
+
 - `WithForceDrop(bool force_drop)`
 
     Sets the flag whether to force drop the role.
+
+- `SetForceDrop(bool force_drop)`
+
+    Set the flag whether to force drop the role.
 
 **RETURNS:**
 

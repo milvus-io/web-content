@@ -8,9 +8,15 @@ Status ListRoles(const ListRolesRequest& request, ListRolesResponse& response)
 
 **RETURNS:**
 
-*Status* with *ListRolesResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the ListRolesResponse carries the list of role names.
+
+- **response** (*ListRolesResponse*) -
+
+    - **RoleNames** (*const std::vector<std::string>&*) -
+
+        Get role names.
 
 **EXCEPTIONS:**
 

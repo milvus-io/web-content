@@ -38,7 +38,7 @@ param.WithMaxRetryTimes(max_retry_times)
 
 - `WithBackOffMultiplier(uint64_t backoff_multiplier)`
 
-    Sets the multiplier applied to the current backoff interval after each retry. For example, a multiplier of `3` triples of the wait time on each successive attempt. Must be greater than `0`. Default: `3`.
+    Sets the multiplier applied to the current backoff interval after each retry. For example, a multiplier of `3` triples the wait time on each successive attempt. Must be greater than `0`. Default: `3`.
 
 - `WithRetryOnRateLimit(bool retry_on_ratelimit)`
 

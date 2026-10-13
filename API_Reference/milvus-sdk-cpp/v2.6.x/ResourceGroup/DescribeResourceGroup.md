@@ -21,9 +21,79 @@ auto request = DescribeResourceGroupRequest()
 
 **RETURNS:**
 
-*Status* with *DescribeResourceGroupResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the DescribeResourceGroupResponse carries the resource group description.
+
+- **response** (*DescribeResourceGroupResponse*) -
+
+    - **Desc** (*const ResourceGroupDesc&*) -
+
+        Get resource group description.
+
+        - **Name** (*const std::string&*) -
+
+            Name of the resource group.
+
+        - **Capacity** (*uint32_t*) -
+
+            Capacity of requested nodes.
+
+        - **AvailableNodesNum** (*uint32_t*) -
+
+            Number of available nodes.
+
+        - **LoadedReplicasNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+
+            Loaded replica number for each collection.
+
+        - **OutgoingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+
+            Accessed other resource group's nodes number for each collection.
+
+        - **IncomingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+
+            The number of nodes accessed by other resource groups for each collection.
+
+        - **Config** (*const ResourceGroupConfig&*) -
+
+            Configurations of the resource group.
+
+            - **Requests** (*uint32_t*) -
+
+                Number of requested nodes.
+
+            - **Limits** (*uint32_t*) -
+
+                Maximum number of nodes.
+
+            - **TransferFromGroups** (*const std::set<std::string>&*) -
+
+                Group names from which the nodes can be transferred.
+
+            - **TransferToGroups** (*const std::set<std::string>&*) -
+
+                Group names to which the nodes can be transferred.
+
+            - **NodeFilters** (*const std::unordered_map<std::string, std::string>&*) -
+
+                Node filters; the resource group will prefer to accept nodes matching the filter.
+
+        - **Nodes** (*const std::vector<NodeInfo>&*) -
+
+            Basic informations of all nodes in the resource group.
+
+            - **id_** (*int64_t*) -
+
+                id of this node.
+
+            - **address_** (*std::string*) -
+
+                address of this node.
+
+            - **hostname_** (*std::string*) -
+
+                hostname of this node.
 
 **EXCEPTIONS:**
 

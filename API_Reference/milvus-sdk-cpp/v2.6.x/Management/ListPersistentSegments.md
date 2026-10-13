@@ -26,9 +26,51 @@ auto request = ListPersistentSegmentsRequest()
 
 **RETURNS:**
 
-*Status* with *ListPersistentSegmentsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the ListPersistentSegmentsResponse carries the persisted segment information.
+
+- **response** (*ListPersistentSegmentsResponse*) -
+
+    - **Result** (*const std::vector<SegmentInfo>&*) -
+
+        Get informations of segments.
+
+        - **CollectionID** (*int64_t*) -
+
+            The collection id which this segment belongs to.
+
+        - **PartitionID** (*int64_t*) -
+
+            The partition id which this segment belongs to.
+
+        - **SegmentID** (*int64_t*) -
+
+            ID of the segment.
+
+        - **RowCount** (*int64_t*) -
+
+            Row count of the segment.
+
+        - **State** (*SegmentState*) -
+
+            Current state of the segment.
+
+        - **CollectionName** (*const std::string&*) -
+
+            The collection name which this segment belongs to.
+
+        - **Level** (*SegmentLevel*) -
+
+            Level of the segment.
+
+        - **StorageVersion** (*int64_t*) -
+
+            Storage version of the segment.
+
+        - **IsSorted** (*bool*) -
+
+            Whether the segment is sorted.
 
 **EXCEPTIONS:**
 
@@ -56,5 +98,5 @@ status = client->ListPersistentSegments(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Segment count: " << response.Segments().size() << std::endl;
+std::cout << "Segment count: " << response.Result().size() << std::endl;
 ```

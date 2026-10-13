@@ -12,6 +12,7 @@ Status CreateSnapshot(const CreateSnapshotRequest& request)
 auto request = milvus::CreateSnapshotRequest()
     .WithDatabaseName("default")
     .WithCollectionName("book")
+    .WithSnapshotName("snapshot_20260617")
     .WithDescription("before quarterly reindex")
     .WithCompactionProtectionSeconds(3600);
 ```
@@ -22,17 +23,41 @@ auto request = milvus::CreateSnapshotRequest()
 
     Sets the database that contains the collection.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the collection to snapshot.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
+
+- `WithSnapshotName(const std::string& snapshot_name)`
+
+    Sets the name of the snapshot to create.
+
+- `SetSnapshotName(const std::string& snapshot_name)`
+
+    Set the target snapshot name.
 
 - `WithDescription(const std::string& description)`
 
     Sets an optional snapshot description.
 
+- `SetDescription(const std::string& description)`
+
+    Set the snapshot description.
+
 - `WithCompactionProtectionSeconds(int64_t seconds)`
 
     Sets how long compaction should preserve data needed by the snapshot.
+
+- `SetCompactionProtectionSeconds(int64_t seconds)`
+
+    Set the compaction protection window in seconds.
 
 **RETURNS:**
 
@@ -57,6 +82,7 @@ if (!status.IsOk()) {
 auto request = milvus::CreateSnapshotRequest()
     .WithDatabaseName("default")
     .WithCollectionName("book")
+    .WithSnapshotName("snapshot_20260617")
     .WithDescription("before quarterly reindex")
     .WithCompactionProtectionSeconds(3600);
 status = client->CreateSnapshot(request);

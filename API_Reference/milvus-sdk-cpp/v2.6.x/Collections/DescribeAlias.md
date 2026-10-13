@@ -20,15 +20,41 @@ auto request = DescribeAliasRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithAlias(const std::string& alias)`
 
     Sets the name of the alias.
 
+- `SetAlias(const std::string& alias)`
+
+    Set name of the alias.
+
 **RETURNS:**
 
-*Status* with *DescribeAliasResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the DescribeAliasResponse carries the description of the alias.
+
+- **response** (*DescribeAliasResponse*) -
+
+    - **Desc** (*const AliasDesc&*) -
+
+        Get alias description.
+
+        - **Name** (*const std::string&*) -
+
+            Alias name.
+
+        - **DatabaseName** (*const std::string&*) -
+
+            Database name which the alias belongs to.
+
+        - **CollectionName** (*const std::string&*) -
+
+            Collection name with which the alias is associated.
 
 **EXCEPTIONS:**
 

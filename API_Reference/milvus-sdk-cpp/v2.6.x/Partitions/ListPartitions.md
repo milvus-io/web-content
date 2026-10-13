@@ -20,15 +20,53 @@ auto request = ListPartitionsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name. If database name is empty, will list collections of the default database.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection.
+
 **RETURNS:**
 
-*Status* with *ListPartitionsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the ListPartitionsResponse carries the list of partitions and brief information for each.
+
+- **response** (*ListPartitionsResponse*) -
+
+    - **PartitionsNames** (*const std::vector<std::string>&*) -
+
+        Get partition names.
+
+    - **PartitionInfos** (*const std::vector<PartitionInfo>&*) -
+
+        Get informations of partitions.
+
+        - **Name** (*std::string*) -
+
+            Get name of this partition.
+
+        - **Id** (*int64_t*) -
+
+            Get internal id of this partition.
+
+        - **CreatedUtcTimestamp** (*uint64_t*) -
+
+            Get the utc timestamp calculated by created_timestamp.
+
+        - **InMemoryPercentage** (*int64_t*) -
+
+            Get partition loading percentage.
+
+        - **Loaded** (*bool*) -
+
+            Indicates whether the partition has been loaded completely.
 
 **EXCEPTIONS:**
 

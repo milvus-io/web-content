@@ -21,9 +21,17 @@ auto request = FlushRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionNames(std::set<std::string>&& names)`
 
     Sets the name of the collection.
+
+- `SetCollectionNames(std::set<std::string>&& names)`
+
+    Set collection names to be flushed.
 
 - `AddCollectionName(const std::string& name)`
 
@@ -32,6 +40,10 @@ auto request = FlushRequest()
 - `WithWaitFlushedMs(int64_t ms)`
 
     Sets the number of milliseconds to wait for the flush action to complete. The default value is 0. If `WaitFlushedMs` is set to 0, this operation repeatedly calls `GetFlushState()` to check the status of related segments until all segments are flushed, ensuring that the buffer is persisted successfully. If `WaitFlushedMs` is greater than 0, this operation will break the loop after a specified period of time and return a status indicating a timeout.
+
+- `SetWaitFlushedMs(int64_t ms)`
+
+    Set milliseconds to wait the flush action done.. Default value is 0. If the WaitFlushedMs is zero, the Flush() will call GetFlushState() to check related segments state,
 
 **RETURNS:**
 

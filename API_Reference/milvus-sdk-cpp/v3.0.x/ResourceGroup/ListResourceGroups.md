@@ -8,9 +8,15 @@ Status ListResourceGroups(const ListResourceGroupsRequest& request, ListResource
 
 **RETURNS:**
 
-*Status* with *ListResourceGroupsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The list of resource group names is carried in the response object.
+
+- **response** (*ListResourceGroupsResponse*) -
+
+    - **GroupNames** (*const std::vector<std::string>&*) -
+
+        Get names of resource groups.
 
 **EXCEPTIONS:**
 

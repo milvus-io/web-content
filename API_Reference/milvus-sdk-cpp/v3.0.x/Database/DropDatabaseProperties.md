@@ -20,9 +20,17 @@ auto request = DropDatabasePropertiesRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithPropertyKeys(std::set<std::string>&& keys)`
 
     Sets the key of the database property to delete.
+
+- `SetPropertyKeys(std::set<std::string>&& keys)`
+
+    Set deleted keys of this database.
 
 - `AddPropertyKey(const std::string& key)`
 

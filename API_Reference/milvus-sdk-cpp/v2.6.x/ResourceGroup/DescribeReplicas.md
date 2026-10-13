@@ -22,9 +22,17 @@ auto request = DescribeReplicasRequest()
 
     Sets the collection whose replicas you want to inspect.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithDatabaseName(const std::string& db_name)`
 
     Sets the target database. If omitted, the default database is used.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
 
 **RETURNS:**
 

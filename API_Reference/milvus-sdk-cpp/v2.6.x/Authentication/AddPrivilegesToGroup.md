@@ -24,6 +24,10 @@ auto request = AddPrivilegesToGroupRequest()
 
     Sets the privileges to be added to the specified group.
 
+- `AddPrivilege(const std::string& privilege)`
+
+    Adds one privilege to be granted to the specified group.
+
 **RETURNS:**
 
 *Status*

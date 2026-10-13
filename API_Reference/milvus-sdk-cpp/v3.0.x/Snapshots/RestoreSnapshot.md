@@ -23,25 +23,53 @@ auto request = milvus::RestoreSnapshotRequest()
 
     Sets the snapshot to restore.
 
+- `SetSnapshotName(const std::string& snapshot_name)`
+
+    Set the name of the snapshot to restore.
+
 - `WithSourceDatabaseName(const std::string& db_name)`
 
     Sets the source database.
+
+- `SetSourceDatabaseName(const std::string& db_name)`
+
+    Set the source database name.
 
 - `WithSourceCollectionName(const std::string& collection_name)`
 
     Sets the source collection.
 
+- `SetSourceCollectionName(const std::string& collection_name)`
+
+    Set the source collection name.
+
 - `WithTargetDatabaseName(const std::string& db_name)`
 
     Sets the target database.
+
+- `SetTargetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
 
 - `WithTargetCollectionName(const std::string& collection_name)`
 
     Sets the target collection.
 
+- `SetTargetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The restore job ID is carried in the response object.
+
+- **response** (*RestoreSnapshotResponse*) -
+
+    - **JobID** (*int64_t*) -
+
+        Get the restore job identifier.
 
 **EXCEPTIONS:**
 

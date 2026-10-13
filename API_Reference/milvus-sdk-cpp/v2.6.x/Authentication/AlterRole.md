@@ -20,7 +20,15 @@ auto request = AlterRoleRequest()
 
     Sets the name of the role to alter.
 
+- `SetRoleName(const std::string& role_name)`
+
+    Sets the name of the role to alter.
+
 - `WithDescription(const std::string& description)`
+
+    Sets the new description for the role.
+
+- `SetDescription(const std::string& description)`
 
     Sets the new description for the role.
 

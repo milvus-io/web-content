@@ -29,33 +29,65 @@ auto request = CreateCollectionRequest()
 
     Sets the name of the database in which the collection is created.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to create.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection. Note: due to history reason, the CollectionSchema also contains a collection name. SetCollectionName() will override the collection name of CollectionSchema.
 
 - `WithDescription(const std::string& description)`
 
     Sets the description of the collection.
 
+- `SetDescription(const std::string& description)`
+
+    Set the description of the collection.
+
 - `WithCollectionSchema(const CollectionSchemaPtr& schema)`
 
     Sets the collection schema that defines the fields of the collection. Takes a shared pointer to the schema (const CollectionSchemaPtr&).
+
+- `SetCollectionSchema(const CollectionSchemaPtr& schema)`
+
+    Set collection schema.
 
 - `WithNumPartitions(int64_t num_partitions)`
 
     Sets the number of partitions created when the collection uses a partition key field.
 
+- `SetNumPartitions(int64_t num_partitions)`
+
+    Set number of partitions when there is a partition key.
+
 - `WithNumShards(int64_t num_shards)`
 
     Sets the number of shards of the collection.
+
+- `SetNumShards(int64_t num_shards)`
+
+    Set number of shards of the collection. Note: due to history reason, the CollectionSchema also contains a shards number. SetNumShards() will override the shards_num of CollectionSchema.
 
 - `WithConsistencyLevel(ConsistencyLevel level)`
 
     Sets the default consistency level of the collection.
 
+- `SetConsistencyLevel(ConsistencyLevel level)`
+
+    Set default consistency level of this collection.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets collection-level properties, such as "collection.ttl.seconds" to define a TTL retention window. The map is passed by rvalue reference, so pass it with std::move.
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set properties of this collection. For example, "collection.ttl.seconds" sets a collection-level TTL retention window.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 
@@ -64,6 +96,10 @@ auto request = CreateCollectionRequest()
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
     Sets the indexes to create along with the collection. The vector is passed by rvalue reference, so pass it with std::move.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    Set indexes to be created.
 
 - `AddIndex(IndexDesc&& index)`
 

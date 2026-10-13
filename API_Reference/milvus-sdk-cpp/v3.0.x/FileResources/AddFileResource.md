@@ -20,6 +20,10 @@ auto request = milvus::AddFileResourceRequest()
 
     Sets the resource name.
 
+- `SetName(const std::string& name)`
+
+    Set the resource name.
+
 - `WithPath(const std::string& path)`
 
     Sets the file path for the resource.

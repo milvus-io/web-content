@@ -21,13 +21,25 @@ auto request = CreateAliasRequest()
 
     Sets the name of the target database; the default database is used if this is left empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to alias.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithAlias(const std::string& alias)`
 
     Sets the name of the alias to create.
+
+- `SetAlias(const std::string& alias)`
+
+    Set name of the alias.
 
 **RETURNS:**
 

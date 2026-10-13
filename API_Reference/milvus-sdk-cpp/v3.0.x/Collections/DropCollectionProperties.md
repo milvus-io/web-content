@@ -22,13 +22,25 @@ auto request = DropCollectionPropertiesRequest()
 
     Sets the target database name; the default database is used if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose properties will be dropped.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPropertyKeys(std::set<std::string>&& keys)`
 
     Sets the property keys to drop from the collection. The request takes ownership of the set via an rvalue reference, so pass it with std::move.
+
+- `SetPropertyKeys(std::set<std::string>&& keys)`
+
+    Set the property keys to drop from the collection. The request takes ownership of the set via an rvalue reference, so pass it with std::move.
 
 - `AddPropertyKey(const std::string& key)`
 

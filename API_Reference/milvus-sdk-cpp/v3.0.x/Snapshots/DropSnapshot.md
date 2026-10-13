@@ -21,13 +21,25 @@ auto request = milvus::DropSnapshotRequest()
 
     Sets the database name.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the collection name.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
+
 - `WithSnapshotName(const std::string& snapshot_name)`
 
     Sets the snapshot name to drop.
+
+- `SetSnapshotName(const std::string& snapshot_name)`
+
+    Set the target snapshot name.
 
 **RETURNS:**
 

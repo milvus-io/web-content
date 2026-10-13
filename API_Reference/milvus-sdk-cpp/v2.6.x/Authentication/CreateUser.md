@@ -21,13 +21,25 @@ auto request = CreateUserRequest()
 
     Sets the name of the user to create.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 - `WithPassword(const std::string& password)`
 
     Sets the login password of the user.
 
+- `SetPassword(const std::string& password)`
+
+    Set password of the user.
+
 - `WithDescription(const std::string& description)`
 
     Sets the description of the user. Optional.
+
+- `SetDescription(const std::string& description)`
+
+    Set description of the user.
 
 **RETURNS:**
 

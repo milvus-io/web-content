@@ -22,21 +22,45 @@ auto request = milvus::PinSnapshotDataRequest()
 
     Sets the database name.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the collection name.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
 
 - `WithSnapshotName(const std::string& snapshot_name)`
 
     Sets the snapshot name.
 
+- `SetSnapshotName(const std::string& snapshot_name)`
+
+    Set the target snapshot name.
+
 - `WithTtlSeconds(int64_t ttl_seconds)`
 
     Sets how long snapshot data should remain pinned.
 
+- `SetTtlSeconds(int64_t ttl_seconds)`
+
+    Set the pin TTL in seconds.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The pin ID is carried in the response object.
+
+- **response** (*PinSnapshotDataResponse*) -
+
+    - **PinID** (*int64_t*) -
+
+        Get the pin identifier of the pinned data.
 
 **EXCEPTIONS:**
 

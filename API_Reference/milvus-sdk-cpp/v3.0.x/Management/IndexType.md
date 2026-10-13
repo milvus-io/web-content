@@ -9,6 +9,7 @@ enum class IndexType {
     FLAT = 1, IVF_FLAT = 2, IVF_SQ8 = 3, IVF_PQ = 4,
     HNSW = 5, DISKANN = 6, AUTOINDEX = 7, SCANN = 8,
     HNSW_SQ = 9, HNSW_PQ = 10, HNSW_PRQ = 11, IVF_RABITQ = 12,
+    AISAQ = 13,
     // Dense float — GPU
     GPU_IVF_FLAT = 201, GPU_IVF_PQ = 202,
     GPU_BRUTE_FORCE = 203, GPU_CAGRA = 204,
@@ -19,6 +20,8 @@ enum class IndexType {
     BITMAP = 1104, NGRAM = 1105, FMINDEX = 1106,
     // Sparse vectors
     SPARSE_INVERTED_INDEX = 1201, SPARSE_WAND = 1202,
+    // Geometry
+    RTREE = 1301,
 };
 ```
 
@@ -49,6 +52,8 @@ enum class IndexType {
 - **HNSW_PRQ** (11) - HNSW with product residual quantization. Best recall among HNSW quantized variants.
 
 - **IVF_RABITQ** (12) - IVF with RaBitQ binary quantization. Very low memory; competitive recall.
+
+- **AISAQ** (13) - IVF-style ANN index designed for cost-efficient storage and high recall. Extra params: `nlist`.
 
 *Dense float vectors — GPU:*
 
@@ -88,6 +93,10 @@ enum class IndexType {
 
 - **SPARSE_WAND** (1202) - Weak AND (WAND) algorithm for sparse vectors. Faster than `SPARSE_INVERTED_INDEX` for large result sets at a small recall cost.
 
+*Geometry (`GEOMETRY`):*
+
+- **RTREE** (1301) - R-tree index for geometry fields. Enables fast spatial filtering.
+
 *Internal:*
 
 - **INVALID** (0) - Uninitialized; do not use directly.
@@ -96,7 +105,6 @@ enum class IndexType {
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
 #include <milvus/types/IndexType.h>
 using namespace milvus;
 

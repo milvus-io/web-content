@@ -20,15 +20,37 @@ auto request = ListAliasesRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection.
+
 **RETURNS:**
 
-*Status* with *ListAliasesResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the ListAliasesResponse carries the aliases associated with the collection.
+
+- **response** (*ListAliasesResponse*) -
+
+    - **DatabaseName** (*const std::string&*) -
+
+        Get the database name where the aliases exist.
+
+    - **CollectionName** (*const std::string&*) -
+
+        Get the collection name with which the aliases are associated.
+
+    - **Aliases** (*const std::vector<std::string>&*) -
+
+        Get aliases.
 
 **EXCEPTIONS:**
 

@@ -23,17 +23,33 @@ auto request = AlterCollectionFieldPropertiesRequest()
 
     Sets the target database name; the default database is used if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection that contains the field to alter.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithFieldName(const std::string& field_name)`
 
     Sets the name of the field to alter.
 
+- `SetFieldName(const std::string& field_name)`
+
+    Set name of the field.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets the properties to apply to the field as key/value pairs. The request takes ownership of the map via an rvalue reference, so pass it with std::move.
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set altered properties of this field.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 

@@ -8,9 +8,15 @@ Status ListUsers(const ListUsersRequest& request, ListUsersResponse& response)
 
 **RETURNS:**
 
-*Status* with *ListUsersResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The list of user names is carried in the response object.
+
+- **response** (*ListUsersResponse*) -
+
+    - **UserNames** (*const std::vector<std::string>&*) -
+
+        Get names of users.
 
 **EXCEPTIONS:**
 

@@ -20,15 +20,37 @@ auto request = GetCollectionStatsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 **RETURNS:**
 
-*Status* with *GetCollectionStatsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the GetCollectionStatsResponse carries the collection statistics, which currently contain only the row count.
+
+- **response** (*GetCollectionStatsResponse*) -
+
+    - **Stats** (*const CollectionStat&*) -
+
+        Get collection stats.
+
+        - **Name** (*const std::string&*) -
+
+            Get collection name.
+
+        - **RowCount** (*uint64_t*) -
+
+            Return row count of this collection.
 
 **EXCEPTIONS:**
 

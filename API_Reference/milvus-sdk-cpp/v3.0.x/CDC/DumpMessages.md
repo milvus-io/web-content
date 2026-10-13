@@ -22,17 +22,33 @@ auto request = DumpMessagesRequest()
 
     Sets the physical channel whose messages are dumped.
 
+- `SetPChannel(const std::string& pchannel)`
+
+    Set the Pulsar channel name.
+
 - `WithStartMessageID(ReplicateMessageID&& start_message_id)`
 
     Sets the message ID from which the dump starts.
+
+- `SetStartMessageID(ReplicateMessageID&& start_message_id)`
+
+    Set the start message identifier.
 
 - `WithStartTimeTick(uint64_t start_timetick)`
 
     Sets the starting time tick of the dump window.
 
+- `SetStartTimeTick(uint64_t start_timetick)`
+
+    Set the start time tick.
+
 - `WithEndTimeTick(uint64_t end_timetick)`
 
     Sets the ending time tick of the dump window.
+
+- `SetEndTimeTick(uint64_t end_timetick)`
+
+    Set the end time tick.
 
 ### DumpedMessage
 

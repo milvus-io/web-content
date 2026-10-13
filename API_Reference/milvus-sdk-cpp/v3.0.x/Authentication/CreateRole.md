@@ -20,7 +20,15 @@ auto request = CreateRoleRequest()
 
     Set name of the role.
 
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
+
 - `WithDescription(const std::string& description)`
+
+    Set description of the role.
+
+- `SetDescription(const std::string& description)`
 
     Set description of the role.
 

@@ -19,6 +19,10 @@ auto request = DescribeDatabaseRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 **RETURNS:**
 
 *Status* with *DescribeDatabaseResponse*

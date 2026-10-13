@@ -21,17 +21,29 @@ auto request = ReleasePartitionsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection.
 
 - `WithPartitionNames(const std::set<std::string>& partition_names)`
 
     Sets the names of the partitions.
 
+- `SetPartitionNames(const std::set<std::string>& partition_names)`
+
+    Set name of the partitions.
+
 - `AddPartitionName(const std::string& partition_name)`
 
-    Adds a partition to be loaded.
+    Adds a partition to be released.
 
 **RETURNS:**
 

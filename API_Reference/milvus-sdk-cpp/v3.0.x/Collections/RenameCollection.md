@@ -22,17 +22,33 @@ auto request = RenameCollectionRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithNewCollectionName(const std::string& collection_name)`
 
     Set the new name of the collection.
 
+- `SetNewCollectionName(const std::string& collection_name)`
+
+    Set new name of the collection.
+
 - `WithTargetDatabaseName(const std::string& db_name)`
 
     Set the name of the target database. The renamed collection is moved to this database. The default database applies if it is empty.
+
+- `SetTargetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
 
 **RETURNS:**
 

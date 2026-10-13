@@ -20,15 +20,49 @@ auto request = ListCollectionsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name. If database name is empty, will list collections of the default database
+
 - `WithOnlyShowLoaded(bool only_show_loaded)`
 
     Sets the flag only show loaded collections or show all collections. Default: `false`.
 
+- `SetOnlyShowLoaded(bool only_show_loaded)`
+
+    Set the flag only show loaded collections or show all collections.
+
 **RETURNS:**
 
-*Status* with *ListCollectionsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The list of collections and their brief information are carried in the response object.
+
+- **response** (*ListCollectionsResponse*) -
+
+    - **CollectionInfos** (*const std::vector<CollectionInfo>&*) -
+
+        Get brief information of collections.
+
+        - **Name** (*const std::string&*) -
+
+            Name of the collection.
+
+        - **ID** (*int64_t*) -
+
+            Internal ID of the collection.
+
+        - **CreatedTime** (*uint64_t*) -
+
+            UTC time when the collection is created.
+
+        - **MemoryPercentage** (*uint64_t*) -
+
+            Loading percentage of the collection.
+
+    - **CollectionNames** (*const std::vector<std::string>&*) -
+
+        Get collection names.
 
 **EXCEPTIONS:**
 

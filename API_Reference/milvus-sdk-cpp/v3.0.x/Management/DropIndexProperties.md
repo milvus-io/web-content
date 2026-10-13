@@ -23,17 +23,33 @@ auto request = DropIndexPropertiesRequest()
 
     Sets the target database name. If left empty, the default database is used.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection that owns the index.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithIndexName(const std::string& index_name)`
 
     Sets the name of the index whose properties are to be dropped. Currently, this API only supports index_name.
 
+- `SetIndexName(const std::string& index_name)`
+
+    Set name of the index. Currently, this API only supports index_name.
+
 - `WithPropertyKeys(std::set<std::string>&& keys)`
 
     Sets the property keys to remove from the index. Accepts a std::set<std::string> by rvalue reference, so the contents are moved into the request.
+
+- `SetPropertyKeys(std::set<std::string>&& keys)`
+
+    Set deleted keys of this index.
 
 - `AddPropertyKey(const std::string& key)`
 

@@ -21,15 +21,31 @@ auto request = DropCollectionFieldRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithFieldName(std::string field_name)`
 
     Set the name of the field to drop.
 
+- `SetFieldName(std::string field_name)`
+
+    Set the name of the field to drop.
+
 - `WithFieldID(int64_t field_id)`
+
+    Set the ID of the field to drop.
+
+- `SetFieldID(int64_t field_id)`
 
     Set the ID of the field to drop.
 

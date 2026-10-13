@@ -31,9 +31,23 @@ auto request = GetPartitionStatsRequest()
 
 **RETURNS:**
 
-*Status* with *GetPartitionStatsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success. Currently, the response contains only the row count.
+Returns a Status indicating whether the operation succeeded. On success, the GetPartitionStatsResponse carries the partition statistics, which currently contain only the row count.
+
+- **response** (*GetPartitionStatsResponse*) -
+
+    - **Stats** (*const PartitionStat&*) -
+
+        Get partition stats.
+
+        - **Name** (*const std::string&*) -
+
+            Get partition name.
+
+        - **RowCount** (*uint64_t*) -
+
+            Return row count of this partition.
 
 **EXCEPTIONS:**
 

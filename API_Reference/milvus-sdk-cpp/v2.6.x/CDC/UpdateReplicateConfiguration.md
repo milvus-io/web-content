@@ -20,7 +20,15 @@ auto request = UpdateReplicateConfigurationRequest()
 
     Sets the new replication configuration, including the Milvus cluster entries and the cross-cluster topologies that replication should follow.
 
+- `SetConfiguration(ReplicateConfiguration&& configuration)`
+
+    Sets the new replication configuration, including the Milvus cluster entries and the cross-cluster topologies that replication should follow.
+
 - `WithForcePromote(bool force_promote)`
+
+    Sets whether to force-promote the configuration, allowing the update to proceed even when existing replication state would otherwise hold it back.
+
+- `SetForcePromote(bool force_promote)`
 
     Sets whether to force-promote the configuration, allowing the update to proceed even when existing replication state would otherwise hold it back.
 

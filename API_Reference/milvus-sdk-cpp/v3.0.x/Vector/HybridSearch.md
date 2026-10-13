@@ -38,19 +38,35 @@ auto request = HybridSearchRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Set the partition names. If partition names are empty, will query in the entire collection.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
     Add a partition name.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
 
     Set the output field names.
 
@@ -62,7 +78,15 @@ auto request = HybridSearchRequest()
 
     Set the consistency level. For details, refer to [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
+
+    Set sub search requests.
+
+- `SetSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
 
     Set sub search requests.
 
@@ -72,13 +96,25 @@ auto request = HybridSearchRequest()
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Set rerank, suc as RRF/Weighted function. [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md) and its sibling pages.
+    Set rerank, such as RRF/Weighted function. [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md) and its sibling pages.
+
+- `SetRerank(const FunctionPtr& rerank)`
+
+    Set rerank, such as RRF/Weighted function. Read the doc for more info: https://milvus.io/docs/reranking.md
 
 - `WithLimit(int64_t limit)`
 
     Set search limit(topk).
 
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk)
+
 - `WithOffset(int64_t offset)`
+
+    Set offset value. Note: this value is stored in the ExtraParams.
+
+- `SetOffset(int64_t offset)`
 
     Set offset value. Note: this value is stored in the ExtraParams.
 
@@ -86,7 +122,15 @@ auto request = HybridSearchRequest()
 
     Set round decimal value.
 
+- `SetRoundDecimal(int64_t round_decimal)`
+
+    Set round decimal value.
+
 - `WithIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing flag.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
 
     Set ignore growing flag.
 
@@ -98,11 +142,23 @@ auto request = HybridSearchRequest()
 
     Set group by field value.
 
+- `SetGroupByField(const std::string& field_name)`
+
+    Set group by field value.
+
 - `WithGroupSize(int64_t group_size)`
 
     Set group size value.
 
+- `SetGroupSize(int64_t group_size)`
+
+    Set group size value.
+
 - `WithStrictGroupSize(bool strict_group_size)`
+
+    Set strict group size flag.
+
+- `SetStrictGroupSize(bool strict_group_size)`
 
     Set strict group size flag.
 
@@ -128,6 +184,10 @@ SubSearchRequest()
 - `WithLimit(int64_t limit)`
 
     Sets the search limit (topk) of this sub search.
+
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk)
 
 - `WithFilter(std::string filter)`
 

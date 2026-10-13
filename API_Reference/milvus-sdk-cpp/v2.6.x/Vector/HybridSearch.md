@@ -36,13 +36,25 @@ auto request = HybridSearchRequest()
 
     Sets the target database name to search; the default database is used when it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to search.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names to search; if the set is empty, the entire collection is searched. The setter takes an rvalue, so pass a moved-in or temporary std::set<std::string>.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -52,6 +64,10 @@ auto request = HybridSearchRequest()
 
     Sets the names of the fields to return in the results. The setter takes an rvalue, so pass a moved-in or temporary std::set<std::string>.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Adds an output field name to the set of fields returned in the results.
@@ -60,9 +76,17 @@ auto request = HybridSearchRequest()
 
     Sets the consistency level of the search; see the Milvus consistency level documentation for details.
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
 
     Sets the whole list of sub-search requests to run. The setter takes an rvalue, so pass a moved-in or temporary std::vector<SubSearchRequestPtr>.
+
+- `SetSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
+
+    Set sub search requests.
 
 - `AddSubRequest(const SubSearchRequestPtr& request)`
 
@@ -72,21 +96,41 @@ auto request = HybridSearchRequest()
 
     Sets the reranking function that fuses the sub-search results, such as an RRFRerank or WeightedRerank function.
 
+- `SetRerank(const FunctionPtr& rerank)`
+
+    Set rerank, such as RRF/Weighted function. Read the doc for more info: https://milvus.io/docs/reranking.md
+
 - `WithLimit(int64_t limit)`
 
     Sets the search limit (topk), the maximum number of fused results to return.
+
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk)
 
 - `WithOffset(int64_t offset)`
 
     Sets the offset of the first result to return. Note: this value is stored in the extra parameters.
 
+- `SetOffset(int64_t offset)`
+
+    Set offset value. Note: this value is stored in the ExtraParams.
+
 - `WithRoundDecimal(int64_t round_decimal)`
 
     Sets the number of decimal places to which returned similarity scores are rounded.
 
+- `SetRoundDecimal(int64_t round_decimal)`
+
+    Set round decimal value.
+
 - `WithIgnoreGrowing(bool ignore_growing)`
 
     Sets the ignore-growing flag, which controls whether data in growing segments is excluded from the search.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing flag.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
@@ -96,13 +140,25 @@ auto request = HybridSearchRequest()
 
     Sets the field whose values are used to group the search results.
 
+- `SetGroupByField(const std::string& field_name)`
+
+    Set group by field value.
+
 - `WithGroupSize(int64_t group_size)`
 
     Sets the group size value, the maximum number of results allowed per group.
 
+- `SetGroupSize(int64_t group_size)`
+
+    Set group size value.
+
 - `WithStrictGroupSize(bool strict_group_size)`
 
     Sets the strict group size flag, which controls whether the group size is strictly enforced.
+
+- `SetStrictGroupSize(bool strict_group_size)`
+
+    Set strict group size flag.
 
 <table>
    <tr>

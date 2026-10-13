@@ -22,17 +22,33 @@ auto request = UpdatePasswordRequest()
 
     Sets the name of the user whose password is to be updated.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 - `WithOldPassword(const std::string& password)`
 
     Sets the current password of the user, used to authenticate the update.
+
+- `SetOldPassword(const std::string& password)`
+
+    Set password of the user.
 
 - `WithNewPassword(const std::string& password)`
 
     Sets the new password to assign to the user.
 
+- `SetNewPassword(const std::string& password)`
+
+    Set new password of the user.
+
 - `WithDescription(const std::string& description)`
 
     Sets an updated description for the user. Optional.
+
+- `SetDescription(const std::string& description)`
+
+    Set description of the user.
 
 **RETURNS:**
 

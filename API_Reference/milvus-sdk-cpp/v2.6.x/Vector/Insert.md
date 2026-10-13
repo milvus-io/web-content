@@ -25,17 +25,33 @@ auto request = InsertRequest()
 
     Sets the target database name; the default database is used when it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the target collection that receives the inserted rows.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithPartitionName(const std::string& partition_name)`
 
     Sets the target partition name; the default partition is used when it is empty. Optional.
 
+- `SetPartitionName(const std::string& partition_name)`
+
+    Set the partition name. If partition name is empty, will use the default partition.
+
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
     Sets the column-based field data to insert, one FieldData entry per field; ColumnsData and RowsData cannot both be set.
+
+- `SetColumnsData(std::vector<FieldDataPtr>&& columns_data)`
+
+    Set fields data. ColumnsData and RowsData cannot both be set.
 
 - `AddColumnData(const FieldDataPtr& column_data)`
 
@@ -44,6 +60,10 @@ auto request = InsertRequest()
 - `WithRowsData(EntityRows&& rows_data)`
 
     Sets the row-based data as a list of nlohmann::json objects, one per entity row, with each key naming a schema field; ColumnsData and RowsData cannot both be set.
+
+- `SetRowsData(EntityRows&& rows_data)`
+
+    Set entity rows. ColumnsData and RowsData cannot both be set.
 
 - `AddRowData(EntityRow&& row_data)`
 

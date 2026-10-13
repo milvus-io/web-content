@@ -29,11 +29,23 @@ auto request = CreateCollectionRequest()
 
     Sets the name of the database in which the collection is created; falls back to the connection's current database when omitted. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to create; this name overrides the name held by the CollectionSchema.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection. Note: due to history reason, the CollectionSchema also contains a collection name.
+
 - `WithDescription(const std::string& description)`
+
+    Sets the description of the collection; this description overrides the description held by the CollectionSchema. Optional.
+
+- `SetDescription(const std::string& description)`
 
     Sets the description of the collection; this description overrides the description held by the CollectionSchema. Optional.
 
@@ -41,21 +53,41 @@ auto request = CreateCollectionRequest()
 
     Sets the collection schema that defines the collection's fields, passed as a CollectionSchemaPtr; the operation fails if the schema pointer is null.
 
+- `SetCollectionSchema(const CollectionSchemaPtr& schema)`
+
+    Set collection schema.
+
 - `WithNumPartitions(int64_t num_partitions)`
 
     Sets the number of partitions to use when the schema contains a partition key field; only sent when greater than zero. Optional.
+
+- `SetNumPartitions(int64_t num_partitions)`
+
+    Set number of partitions when there is a partition key.
 
 - `WithNumShards(int64_t num_shards)`
 
     Sets the number of shards of the collection, overriding the shards number held by the CollectionSchema; defaults to 1. Optional.
 
+- `SetNumShards(int64_t num_shards)`
+
+    Set number of shards of the collection. Note: due to history reason, the CollectionSchema also contains a shards number.
+
 - `WithConsistencyLevel(ConsistencyLevel level)`
 
     Sets the default consistency level of the collection, such as ConsistencyLevel::BOUNDED, which is also the default when not set. Optional.
 
+- `SetConsistencyLevel(ConsistencyLevel level)`
+
+    Set default consistency level of this collection.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets the collection-level properties as a key-value string map, moved into the request. Optional.
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set properties of this collection.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 
@@ -64,6 +96,10 @@ auto request = CreateCollectionRequest()
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
     Sets the index descriptors to be created; each index is created immediately after the collection is created. Optional.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    Set indexes to be created.
 
 - `AddIndex(IndexDesc&& index)`
 

@@ -27,17 +27,33 @@ auto request = DeleteRequest()
 
     Sets the target database name; the default database is used when it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to delete entities from.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithPartitionName(const std::string& partition_name)`
 
     Sets the partition name; the default partition is used when it is empty. Optional.
 
+- `SetPartitionName(const std::string& partition_name)`
+
+    Set the partition name. If partition name is empty, will use the default partition.
+
 - `WithFilter(const std::string& filter)`
 
     Sets the boolean filter expression that matches the entities to delete. Either a filter or primary keys must be set, but not both.
+
+- `SetFilter(const std::string& filter)`
+
+    Set filter expression.
 
 - `AddFilterTemplate(std::string key, nlohmann::json&& filter_template)`
 
@@ -47,6 +63,10 @@ auto request = DeleteRequest()
 
     Sets the filter templates as a map from placeholder names to template values; only takes effect when the filter expression is not empty. Optional.
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates. Only take effect when filter is not empty.
+
 - `AddFilterTemplate(const std::string& key, nlohmann::json&& filter_template)`
 
     Adds a named filter template that fills a placeholder in the filter expression, improving parsing performance for long value lists; valid template values are boolean, numeric, string, or array, and it only takes effect when the filter expression is not empty. Optional.
@@ -55,9 +75,17 @@ auto request = DeleteRequest()
 
     Sets the primary keys of the entities to delete; the parameter takes an rvalue reference, so pass std::move(ids), and it only takes effect when the filter expression is empty. Either a filter or primary keys must be set, but not both.
 
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys to be deleted. Only take effect when filter is empty.
+
 - `WithIDs(std::vector<std::string>&& id_array)`
 
     Sets the primary keys of the entities to delete; the parameter takes an rvalue reference, so pass std::move(ids), and it only takes effect when the filter expression is empty. Either a filter or primary keys must be set, but not both.
+
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys to be deleted. Only take effect when filter is empty.
 
 **RETURNS:**
 

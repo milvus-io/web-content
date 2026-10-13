@@ -19,9 +19,57 @@ auto request = milvus::GetRefreshExternalCollectionProgressRequest()
 
     Sets the refresh job ID returned by `RefreshExternalCollection()`.
 
+- `SetJobID(int64_t job_id)`
+
+    Set the refresh job identifier.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The refresh job information is carried in the response object.
+
+- **response** (*GetRefreshExternalCollectionProgressResponse*) -
+
+    - **JobInfo** (*const RefreshExternalCollectionJobInfo&*) -
+
+        Get the refresh job information.
+
+        - **CollectionName** (*const std::string&*) -
+
+            Name of the collection being refreshed.
+
+        - **EndTime** (*uint64_t*) -
+
+            End timestamp of the refresh job.
+
+        - **ExternalSource** (*const std::string&*) -
+
+            External data source, for example an S3 path.
+
+        - **ExternalSpec** (*const nlohmann::json&*) -
+
+            External file specification.
+
+        - **JobID** (*int64_t*) -
+
+            Refresh job identifier.
+
+        - **Progress** (*int32_t*) -
+
+            Refresh progress in percent (0 to 100).
+
+        - **Reason** (*const std::string&*) -
+
+            Failure reason of the refresh job, empty when the job has not failed.
+
+        - **StartTime** (*uint64_t*) -
+
+            Start timestamp of the refresh job.
+
+        - **State** (*RefreshExternalCollectionStateCode*) -
+
+            Current state of the refresh job.
 
 **EXCEPTIONS:**
 

@@ -21,13 +21,25 @@ auto request = AlterCollectionFunctionRequest()
 
     Sets the target database name; the default database is used if it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose function is altered.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithFunction(const FunctionPtr& function)`
 
     Sets the Function object carrying the new definition; its name identifies which existing function of the collection is replaced.
+
+- `SetFunction(const FunctionPtr& function)`
+
+    Set the function with new definition. The function name is taken from the function object to identify which function to alter.
 
 **RETURNS:**
 
