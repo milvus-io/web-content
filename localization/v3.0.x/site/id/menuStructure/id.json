@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Pengambilan Barang yang Ditinggalkan",
+            "label": "Pengambilan Barang",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -437,7 +437,7 @@
             "children": []
           },
           {
-            "label": "Kolom JSON",
+            "label": "Bidang JSON",
             "id": "json-field",
             "order": 8,
             "children": [
@@ -643,7 +643,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusunan ASCII",
+                    "label": "Penyusutan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Pertandingan Anggota",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1237,7 +1243,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi &amp; Model",
+        "label": "Inferensi Fungsi dan Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1377,7 +1383,7 @@
                     "children": []
                   },
                   {
-                    "label": "Peluruhan Gaussian",
+                    "label": "Peluruhan Gauss",
                     "id": "gaussian-decay.md",
                     "order": 1,
                     "children": []
@@ -1445,7 +1451,7 @@
                     "children": []
                   },
                   {
-                    "label": "DashScope Ranker",
+                    "label": "DashScope Peringkat",
                     "id": "dashscope-ranker.md",
                     "order": 6,
                     "children": []
@@ -1475,7 +1481,7 @@
             "children": []
           },
           {
-            "label": "Pemadatan Berkelompok",
+            "label": "Pengelompokan dan Pemadatan",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1633,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Kode Claude",
+        "label": "Server MCP untuk Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1692,13 +1698,13 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Melakukan Deploy di AWS",
+                "label": "Lakukan penerapan di AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Melakukan penerapan di GCP",
+                "label": "Melakukan deployment di GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1920,7 +1926,7 @@
                     "children": []
                   },
                   {
-                    "label": "Kafka ↔ Woodpecker",
+                    "label": "Kafka ↔ Burung Pelatuk",
                     "id": "switch-kafka-woodpecker.md",
                     "order": 3,
                     "children": []
@@ -1938,7 +1944,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kelompok Skala",
+            "label": "Kluster Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -1983,7 +1989,7 @@
         ]
       },
       {
-        "label": "Pemantauan, Peringatan, dan Catatan",
+        "label": "Pemantauan, Peringatan &amp; Catatan",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2013,7 +2019,7 @@
                 "children": []
               },
               {
-                "label": "Dasbor Metrik Milvus",
+                "label": "Dasbor Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2076,7 +2082,7 @@
         "order": 9,
         "children": [
           {
-            "label": "Kelola Kelompok Sumber Daya",
+            "label": "Kelola Grup Sumber Daya",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Perintah (0.6.0)",
+            "label": "Perintah",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API HTTP (0.6.0)",
+            "label": "API HTTP",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Perintah (0.5.x)",
+                "label": "Perintah",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "API HTTP (0.5.x)",
+                "label": "API HTTP",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Kasus Umum (0.5.x)",
+                "label": "Kasus-kasus Umum",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2234,7 +2240,7 @@
                     "children": []
                   },
                   {
-                    "label": "Migrasi Antar Instansi dalam Satu Bucket",
+                    "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
                     "id": "shared-bucket-backup-and-restore.md",
                     "order": 1,
                     "children": []
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Perbarui ke versi 0.6.0",
+                "label": "Lakukan pembaruan ke versi 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -3083,7 +3089,7 @@
         "order": 8,
         "children": [
           {
-            "label": "Bunga Salju",
+            "label": "Bunga salju",
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
@@ -3153,7 +3159,7 @@
         "children": []
       },
       {
-        "label": "Pencarian Berdasarkan Konteks",
+        "label": "Pencarian Kontekstual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3208,7 +3214,7 @@
         "children": []
       },
       {
-        "label": "Membuat Ekspresi Filter Kueri Milvus dengan Model Bahasa Besar",
+        "label": "Pembuatan Ekspresi Filter Kueri Milvus Menggunakan Model Bahasa Besar",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []
@@ -3283,7 +3289,7 @@
         "children": []
       },
       {
-        "label": "Pertanyaan Umum tentang Operasional",
+        "label": "Pertanyaan Umum (FAQ) tentang Operasional",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

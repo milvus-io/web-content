@@ -299,7 +299,7 @@
     ]
   },
   {
-    "label": "Guide de l'utilisateur",
+    "label": "Guide d'utilisation",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Analyse de JSON",
+                "label": "Analyse de fichiers JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ StructArray",
+                "label": "Créer un champ de type StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Uniquement alphanumérique",
+                    "label": "Alphanumonly",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Match des membres",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1156,7 +1162,7 @@
             "children": []
           },
           {
-            "label": "Surligneuse de texte",
+            "label": "Surligneur de texte",
             "id": "text-highlighter.md",
             "order": 11,
             "children": []
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Classement de la désintégration",
+                "label": "Classement de la décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1421,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI Ranker",
+                    "label": "Classement TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1481,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "Forcer la compactation par fusion",
+            "label": "Forcer la compaction par fusion",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1493,7 +1499,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Présentation du stockage hiérarchisé",
+                "label": "Présentation du stockage à plusieurs niveaux",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Commandes (0.6.0)",
+            "label": "Commandes",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API HTTP (0.6.0)",
+            "label": "API HTTP",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Commandes (0.5.x)",
+                "label": "Commandes",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "API HTTP (0.5.x)",
+                "label": "API HTTP",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Cas courants (0.5.x)",
+                "label": "Cas courants",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Passer à la version 0.6.0",
+                "label": "Passer à la version 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2387,7 +2393,7 @@
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Journal d'exportation",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2623,7 +2629,7 @@
                 "children": []
               },
               {
-                "label": "API asynchrone Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2949,7 +2955,7 @@
         "order": 5,
         "children": [
           {
-            "label": "PourquoiComment",
+            "label": "Pourquoi ? Comment ?",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -3184,7 +3190,7 @@
         "children": []
       },
       {
-        "label": "Recherche en entonnoir avec des représentations de type « matriochka »",
+        "label": "Recherche en entonnoir avec les représentations « matriochka »",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3196,7 +3202,7 @@
         "children": []
       },
       {
-        "label": "Utilisation de AsyncMilvusClient avec asyncio",
+        "label": "Utilisation d'AsyncMilvusClient avec asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []
@@ -3208,7 +3214,7 @@
         "children": []
       },
       {
-        "label": "Génération d'expressions de filtrage de requêtes Milvus à l'aide de modèles linguistiques de grande envergure",
+        "label": "Génération d'expressions de filtrage de requêtes Milvus à l'aide de grands modèles linguistiques",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

@@ -1,9 +1,10 @@
 ---
 id: snapshot-backup-and-restore.md
-summary: '컬렉션을 백업한 후, 동일한 Milvus 인스턴스에서 새로운 이름으로 복원합니다.'
-title: 단일 인스턴스에서의 스냅샷 백업 및 복원
+summary: '컬렉션을 백업한 후, 동일한 Milvus 인스턴스에서 다른 이름으로 복원합니다.'
+title: 단일 인스턴스에서의 스냅샷 백업 및 복원Compatible with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">단일 인스턴스에서의 스냅샷 백업 및 복원<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">단일 인스턴스에서의 스냅샷 백업 및 복원<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +19,7 @@ title: 단일 인스턴스에서의 스냅샷 백업 및 복원
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>컬렉션을 백업한 후 동일한 Milvus 인스턴스에서 새 이름으로 복원합니다. 이 예제에서는 <strong>Milvus Backup 0.6.0을</strong> 사용하여 <code translate="no">coll</code> 의 스냅샷을 생성하고, <strong>Milvus 3.0.1 이상에서</strong> <code translate="no">coll_bak</code> 으로 복원하는 방법을 설명합니다. Backup 0.5.x의 경우, <a href="/docs/ko/single-instance-backup-and-restore.md">‘단일 인스턴스 내 백업 및 복원’을</a> 참조하십시오.</p>
+    </button></h1><p>컬렉션을 백업한 후 동일한 Milvus 인스턴스에서 새 이름으로 복원합니다. 이 예제에서는 <code translate="no">coll</code> 의 스냅샷을 생성하고, <strong>Milvus 3.0.1 이상에서</strong> <code translate="no">coll_bak</code> 로 복원합니다. Backup 0.5.x의 경우, <a href="/docs/ko/single-instance-backup-and-restore.md">‘단일 인스턴스 내 백업 및 복원’을</a> 사용하십시오.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,13 +61,13 @@ title: 단일 인스턴스에서의 스냅샷 백업 및 복원
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus Backup 0.6.0 및 Milvus 3.0.1 이상 <a href="/docs/ko/milvus_backup_0_6_cli.md">버전을</a> 사용하십시오. <a href="/docs/ko/milvus_backup_0_6_cli.md">‘명령을 사용하여 데이터 백업 및</a> 복원’에 설명된 대로 도구를 설치하십시오.</li>
-<li><code translate="no">coll</code> 라는 이름의 기존 컬렉션을 사용하거나, 아래의 선택적 샘플 컬렉션을 생성하십시오. 소스 결과와 복원된 결과를 비교할 때는 해당 컬렉션의 데이터를 변경하지 마십시오.</li>
-<li>Milvus Backup에서 Milvus gRPC 포트(19530), 관리 포트(9091) 및 오브젝트 스토리지에 접근할 수 있도록 설정하십시오. 또한 Milvus 서버는 스냅샷 내보내기 및 가져오기를 위해 백업 스토리지에 접근할 수 있어야 합니다.</li>
-<li>예시에 나와 있는 호스트 이름, 버킷 이름, 루트 경로 및 자격 증명을 사용자의 배포 설정으로 대체하십시오. Milvus 스토리지 설정은 실행 중인 인스턴스와 일치해야 하며, 백업 구성을 변경한다고 해서 Milvus가 재구성되지는 않습니다.</li>
-<li>대상 인스턴스에 <code translate="no">coll_bak</code> 가 존재하지 않는지 확인하십시오.</li>
+<li>Milvus 3.0.1 이상을 사용하십시오. 이 예제는 Milvus Backup 0.6.0 및 Milvus 3.0.1에서 검증되었습니다. <a href="/docs/ko/milvus_backup_0_6_cli.md">‘명령을 사용하여 데이터 백업 및</a> 복원’에 설명된 대로 도구를 설치하십시오.</li>
+<li><code translate="no">coll</code> 라는 기존 컬렉션을 사용하거나, 아래의 선택적 샘플 컬렉션을 생성하십시오. 소스 결과와 복원된 결과를 비교할 때는 해당 데이터의 내용을 변경하지 마십시오.</li>
+<li>Milvus Backup에서 Milvus의 gRPC 포트(19530), 관리 포트(9091) 및 객체 스토리지에 접근할 수 있도록 설정하십시오. 또한 Milvus 서버는 스냅샷 내보내기 및 가져오기를 위해 백업 스토리지에 접근할 수 있어야 합니다.</li>
+<li>예시 호스트 이름, 버킷 이름, 루트 경로 및 자격 증명을 실제 배포 환경의 설정으로 대체하십시오. Milvus 스토리지 설정은 실행 중인 인스턴스와 일치해야 하며, 백업 구성을 변경한다고 해서 Milvus가 재구성되지는 않습니다.</li>
+<li>대상 인스턴스에 ` <code translate="no">coll_bak</code> `가 존재하지 않는지 확인하십시오.</li>
 </ul>
-<p>Milvus 스토리지 설정에 대해서는 <a href="/docs/ko/deploy_s3.md">‘객체 스토리지’를</a> 참조하십시오. 기존 v1 백업 구성에 대해서는 <a href="/docs/ko/milvus_backup_upgrade.md#Migrate-the-configuration">‘Milvus Backup 업그레이드’를</a> 참조하십시오.</p>
+<p>Milvus 스토리지 설정에 대해서는 <a href="/docs/ko/deploy_s3.md">‘오브젝트 스토리지’를</a> 참조하십시오. 기존 v1 백업 구성에 대해서는 <a href="/docs/ko/milvus_backup_upgrade.md#Migrate-the-configuration">‘Milvus Backup 업그레이드’를</a> 참조하십시오.</p>
 <h2 id="Prepare-sample-data" class="common-anchor-header">샘플 데이터 준비<button data-href="#Prepare-sample-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,10 +140,10 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">milvus-backup</code> 바이너리가 있는 디렉터리에서 다음 명령을 실행하십시오. 나머지 명령을 실행할 때도 이 작업 디렉터리를 유지하십시오:</p>
+    </button></h3><p><code translate="no">milvus-backup</code> 바이너리가 포함된 디렉터리에서 다음 명령을 실행하십시오. 나머지 명령을 실행할 때도 이 작업 디렉터리를 유지하십시오:</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>다음 내용을 <code translate="no">configs/backup-source.yaml</code> 파일로 저장하십시오. 이 예제에서는 MinIO의 기본 테스트 자격 증명을 사용하므로, 사용자의 오브젝트 스토어에 맞는 자격 증명로 대체하십시오.</p>
+<p>다음 내용을 <code translate="no">configs/backup-source.yaml</code> 로 저장하십시오. 이 예제에서는 MinIO의 기본 테스트 자격 증명을 사용하므로, 사용자의 오브젝트 스토어에 맞는 자격 증명서로 대체하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">configVersion:</span> <span class="hljs-string">v2</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">grpc:</span>
@@ -189,8 +190,8 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup create --format snapshot --filter coll -n my_backup --config configs/backup-source.yaml
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>연결성 확인 결과 <code translate="no">Success!</code> 이 표시되어야 합니다. create 명령어 실행 시 <code translate="no">create backup success</code> 이 표시되어야 하며, 백업 정보에는 <code translate="no">coll</code> 이 나열되어야 합니다.</p>
-<p><code translate="no">--format snapshot</code> 을 명시적으로 지정하면 스냅샷 워크플로가 선택됩니다. Milvus 3.0에서는 기본값인 <code translate="no">auto</code> 도 스냅샷을 선택합니다. 백업에는 메타데이터와 <code translate="no">bucket-a/backup/my_backup</code> 아래에 있는 내보낸 스냅샷 번들이 포함됩니다. 디렉터리 전체를 보존하십시오.</p>
+<p>연결성 확인 결과 <code translate="no">Success!</code> 이 표시되어야 합니다. 생성 명령어 실행 시 <code translate="no">create backup success</code> 이 표시되어야 하며, 백업 정보에는 <code translate="no">coll</code> 이 나열되어야 합니다.</p>
+<p><code translate="no">--format snapshot</code> 를 명시적으로 지정하면 스냅샷 워크플로가 선택됩니다. Milvus 3.0에서는 기본값인 <code translate="no">auto</code> 도 스냅샷을 선택합니다. 백업에는 메타데이터와 <code translate="no">bucket-a/backup/my_backup</code> 아래에 있는 내보낸 스냅샷 번들이 포함됩니다. 디렉터리 전체를 보존하십시오.</p>
 <h2 id="Restore-within-the-same-instance" class="common-anchor-header">동일한 인스턴스 내에서 복원<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,10 +207,10 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>동일한 구성을 사용하여 접미사를 붙여 백업을 복원하십시오:</p>
+    </button></h2><p>동일한 구성을 사용하여 접미사가 붙은 백업을 복원합니다.</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>CLI 명령어 ` <code translate="no">--filter</code> `는 ` <code translate="no">-s</code> ` 또는 ` <code translate="no">--rename</code>`를 적용한 <strong>후</strong> 대상 이름과 일치합니다. 이 복원 명령어에서는 ` <code translate="no">coll</code>` 대신 ` <code translate="no">coll_bak</code>`를 사용하십시오. 아무것도 일치하지 않는 필터는 컬렉션을 생성하지 않고 성공적으로 종료될 수 있습니다.</p>
+<p>CLI <code translate="no">--filter</code> 는 <code translate="no">-s</code> 또는 <code translate="no">--rename</code> 을 적용한 <strong>후</strong> 대상 이름과 일치합니다. 이 복원 명령에서는 <code translate="no">coll</code> 대신 <code translate="no">coll_bak</code> 을 사용하십시오. 일치하는 항목이 없는 필터는 컬렉션을 생성하지 않고 성공적으로 종료될 수 있습니다.</p>
 <p>복원된 컬렉션은 대상 인스턴스에 구성된 스토리지를 사용합니다. Milvus는 스냅샷 가져오기 및 그 결과로 생성된 데이터 레이아웃을 관리합니다.</p>
 <h2 id="Verify-the-result" class="common-anchor-header">결과 확인<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"

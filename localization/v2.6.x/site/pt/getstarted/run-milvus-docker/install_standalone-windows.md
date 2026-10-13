@@ -91,7 +91,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Após executar o script de instalação:​</p>
 <ul>
 <li><p>Foi iniciado um contentor Docker denominado <strong>milvus-standalone</strong> na porta <strong>19530</strong>.​</p></li>
-<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e está disponível na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
+<li><p>Um etcd incorporado está instalado juntamente com o Milvus no mesmo contentor e funciona na porta <strong>2379</strong>. O seu ficheiro de configuração está mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.​</p></li>
 <li><p>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul>
 <p>Pode utilizar os seguintes comandos para gerir o contentor do Milvus e os dados armazenados.​</p>
@@ -287,7 +287,7 @@ Creating milvus-standalone ... done​
 <p>Se a virtualização estiver desativada, poderá ser necessário verificar as definições da BIOS do firmware da sua placa-mãe. A forma de ativar a virtualização nas definições da BIOS varia consoante o fabricante da placa-mãe. No caso das placas-mãe ASUS, por exemplo, pode consultar <a href="https://www.asus.com/support/faq/1043786/">este artigo</a> sobre como ativar a virtualização.​</p>
 <p>Em seguida, terá de reiniciar o computador e ativar o Hyper-V. Para mais detalhes, consulte este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artigo da Microsoft</a>.​</p></li>
 <li><p>Verifique se o Serviço do Docker Desktop foi iniciado.​</p>
-<p>Pode executar o seguinte comando para iniciar o serviço Docker Desktop.​</p>
+<p>Pode executar o seguinte comando para iniciar o Serviço do Docker Desktop.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -312,7 +312,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
-   <span>Inicie o Docker Desktop como Administrador</span>
+   <span>Inicie o Docker Desktop como administrador</span>
   
  </span></p></li>
 </ol>
@@ -348,7 +348,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Como posso resolver os erros relacionados com o volume que surgem durante o arranque do Milvus, com a mensagem « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Como posso resolver os erros relacionados com o volume que aparecem durante o arranque do Milvus, com a mensagem « <code translate="no">Read config failed</code> »?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -366,7 +366,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Mensagem de erro «Falha na leitura da configuração» na inicialização do Milvus</span>
+   <span>Mensagem de erro «Falha ao ler a configuração» na inicialização do Milvus</span>
   
  </span></p>
 <p>Para resolver o erro apresentado durante o arranque do Milvus com a mensagem «Falha ao ler a configuração», tem de verificar se o volume montado no contentor do Milvus está correto. Se o volume estiver corretamente montado no contentor, pode utilizar o comando <code translate="no">docker exec</code> para aceder ao contentor e listar a pasta <strong>/milvus/configs</strong> da seguinte forma:​</p>
@@ -406,13 +406,13 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p><a href="/docs/pt/v2.6.x/upgrade_milvus_cluster-helm.md">Atualizar o Milvus utilizando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/v2.6.x/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus em nuvens:</p>
+<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
 <ul>
 <li><a href="/docs/pt/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/pt/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/pt/v2.6.x/milvus-webui.md">a Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/v2.6.x/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.6.x/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>

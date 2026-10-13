@@ -137,8 +137,8 @@ Creating milvus-standalone ... done
 <li>los contenedores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> y <strong>milvus-etcd</strong> estarán en funcionamiento.
 <ul>
 <li>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>«milvus-minio»</strong> sirve los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
-<li>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> de forma local con la configuración predeterminada y asigna sus datos a <strong>«volumes/milvus»</strong> en la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-minio»</strong> atiende los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>«volumes/minio»</strong> en la carpeta actual.</li>
+<li>El contenedor <strong>«milvus-standalone»</strong> atiende los puertos <strong>19530</strong> de forma local con la configuración predeterminada y asigna sus datos a <strong>la carpeta «volumes/milvus»</strong> de la carpeta actual.</li>
 </ul></li>
 </ul>
 <p>Puedes comprobar si los contenedores están en funcionamiento mediante el siguiente comando:</p>
@@ -158,7 +158,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Hacer que los dispositivos GPU <code translate="no">0</code> y <code translate="no">1</code> sean visibles para Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede detener y eliminar este contenedor de la siguiente manera.</p>
+<p>Puedes detener y eliminar este contenedor de la siguiente manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
@@ -189,7 +189,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Utiliza el siguiente comando para copiar el archivo « <code translate="no">milvus.yaml</code> » desde el contenedor de Milvus a tu equipo local. Sustituye « <code translate="no">&lt;milvus_container_id&gt;</code> » por el ID real de tu contenedor de Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Abre el archivo « <code translate="no">milvus.yaml</code> » copiado con tu editor de texto preferido. Por ejemplo, si utilizas vim:</p>
+<li><p>Abre el archivo « <code translate="no">milvus.yaml</code> » copiado con tu editor de texto preferido. Por ejemplo, utilizando vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Edita los parámetros « <code translate="no">initMemSize</code> » y « <code translate="no">maxMemSize</code> » según sea necesario y guarda los cambios:</p>
@@ -200,10 +200,10 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">initMemSize</code>: Tamaño inicial del grupo de memoria. El valor predeterminado es 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamaño máximo del grupo de memoria. El valor predeterminado es 2048.</li>
+<li><code translate="no">initMemSize</code>: Tamaño inicial del pool de memoria. El valor por defecto es 1024.</li>
+<li><code translate="no">maxMemSize</code>: Tamaño máximo del pool de memoria. El valor predeterminado es 2048.</li>
 </ul></li>
-<li><p>Utiliza el siguiente comando para copiar el archivo « <code translate="no">milvus.yaml</code> » modificado de nuevo al contenedor de Milvus. Sustituye « <code translate="no">&lt;milvus_container_id&gt;</code> » por el ID real de tu contenedor de Milvus.</p>
+<li><p>Utiliza el siguiente comando para copiar el archivo « <code translate="no">milvus.yaml</code> » modificado de vuelta al contenedor de Milvus. Sustituye « <code translate="no">&lt;milvus_container_id&gt;</code> » por el ID real de tu contenedor de Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Reinicia el contenedor de Milvus para aplicar los cambios:</p>
@@ -231,7 +231,7 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Una vez instalado Milvus en Docker, puedes:</p>
 <ul>
-<li><p>Consulta <a href="/docs/es/quickstart.md">la Guía de inicio rápido</a> para ver lo que puede hacer Milvus.</p></li>
+<li><p>Consulta <a href="/docs/es/quickstart.md">la Guía de inicio rápido</a> para ver lo que Milvus puede hacer.</p></li>
 <li><p>Consulta <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a> para obtener más información sobre la instancia de Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>

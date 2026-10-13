@@ -1,11 +1,14 @@
 ---
 id: milvus_backup_0_6_api.md
 summary: >-
-  Buat dan pantau tugas pencadangan dan pemulihan Milvus Backup 0.6.0 melalui
-  API HTTP.
-title: Gunakan API HTTP Milvus Backup 0.6.0
+  Buat dan pantau tugas pencadangan dan pemulihan melalui API HTTP Milvus
+  Backup.
+title: >-
+  Mencadangkan dan Memulihkan Data Menggunakan APICompatible with Milvus Backup
+  0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Use-the-Milvus-Backup-060-HTTP-API" class="common-anchor-header">Gunakan API HTTP Milvus Backup 0.6.0<button data-href="#Use-the-Milvus-Backup-060-HTTP-API" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Mencadangkan dan Memulihkan Data Menggunakan API<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +23,8 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Gunakan API HTTP Milvus Backup untuk membuat cadangan, memulihkan koleksi, dan memantau tugas asinkron. Contoh snapshot di bawah ini menggunakan <strong>Milvus Backup 0.6.0</strong> dengan <strong>Milvus 3.0.1 atau versi yang lebih baru</strong>. Untuk Milvus Backup 0.5.x, gunakan <a href="/docs/id/milvus_backup_api.md">panduan API 0.5.x</a>. Untuk instalasi yang sudah ada, lihat <a href="/docs/id/milvus_backup_upgrade.md">Memperbarui Milvus Backup</a>.</p>
-<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Peroleh Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h1><p>Gunakan API HTTP Milvus Backup untuk membuat cadangan, memulihkan koleksi, dan memantau tugas asinkron. Contoh snapshot di bawah ini memerlukan <strong>Milvus 3.0.1 atau versi yang lebih baru</strong>. Untuk Milvus Backup 0.5.x, gunakan <a href="/docs/id/milvus_backup_api.md">panduan API 0.5.x</a>. Untuk instalasi yang sudah ada, lihat <a href="/docs/id/milvus_backup_upgrade.md">Memperbarui Milvus Backup</a>.</p>
+<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Mendapatkan Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +39,7 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unduh dan ekstrak biner yang sesuai dari <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">rilis v0.6.0</a>. Untuk membangun dari sumber, ikuti <a href="/docs/id/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">Dapatkan Milvus Backup</a>; proses pembangunan memerlukan Go 1.26 atau yang lebih baru.</p>
+    </button></h2><p>Contoh di bawah ini telah divalidasi dengan <strong>Milvus Backup 0.6.0</strong>. Unduh dan ekstrak biner yang sesuai dari <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">rilis v0.6.0</a>. Untuk membangun dari sumber, ikuti <a href="/docs/id/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">Mendapatkan Milvus Backup</a>; proses pembangunan memerlukan Go 1.26 atau yang lebih baru.</p>
 <h2 id="Prepare-configuration-file" class="common-anchor-header">Siapkan berkas konfigurasi<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,8 +55,8 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Buat <a href="/docs/id/milvus_backup_0_6_cli.md#Prepare-configuration-file">berk</a> <code translate="no">configs/backup.yaml</code> menggunakan contoh v2 di bagian <a href="/docs/id/milvus_backup_0_6_cli.md#Prepare-configuration-file">"Siapkan berkas konfigurasi</a>". Konfigurasikan akses ke Milvus, penyimpanan instance, dan tujuan cadangan. Server Milvus juga harus dapat mengakses penyimpanan cadangan untuk operasi snapshot.</p>
-<p>Jika Anda memiliki berkas v1, berkas tersebut masih dapat dimuat. Lihat " <a href="/docs/id/milvus_backup_upgrade.md#Migrate-the-configuration">Migrasi Konfigurasi</a> " sebelum mengubah skema atau variabel lingkungannya.</p>
+    </button></h2><p>Buat berk <code translate="no">configs/backup.yaml</code> menggunakan contoh v2 di <a href="/docs/id/milvus_backup_0_6_cli.md#Prepare-configuration-file">Siapkan berkas konfigurasi</a>. Konfigurasikan akses ke Milvus, penyimpanan instance, dan tujuan cadangan. Server Milvus juga harus dapat mengakses penyimpanan cadangan untuk operasi snapshot.</p>
+<p>Jika Anda memiliki berkas v1, berkas tersebut tetap dapat dimuat. Lihat " <a href="/docs/id/milvus_backup_upgrade.md#Migrate-the-configuration">Migrasi Konfigurasi"</a> sebelum mengubah skema atau variabel lingkungannya.</p>
 <p>Dari direktori yang berisi file biner, periksa konfigurasi dan uji konektivitas:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
@@ -77,7 +80,7 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
     </button></h2><p>Jalankan layanan dengan konfigurasi yang telah Anda periksa:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Port defaultnya adalah 8080. Untuk memilih port lain, gunakan ` <code translate="no">-p</code>`:</p>
+<p>Port defaultnya adalah 8080. Untuk memilih port lain, gunakan <code translate="no">-p</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Jalankan hanya salah satu perintah ini untuk layanan tertentu. Contoh di bawah ini menggunakan port 8080; ubah URL-nya jika Anda memilih port lain. Swagger UI tersedia di <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
@@ -97,7 +100,7 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan koleksi yang sudah ada bernama <code translate="no">coll</code>, atau buat koleksi uji coba berisi 256 entitas dari <a href="/docs/id/snapshot-backup-and-restore.md#Prepare-sample-data">Siapkan data sampel</a>. Ubah nama koleksi dalam permintaan jika Anda menggunakan data Anda sendiri. Pertahankan data uji coba tetap sama saat memverifikasi hasil.</p>
+    </button></h2><p>Gunakan koleksi yang sudah ada bernama <code translate="no">coll</code>, atau buat koleksi uji dengan 256 entitas dari <a href="/docs/id/snapshot-backup-and-restore.md#Prepare-sample-data">Siapkan data sampel</a>. Ubah nama koleksi dalam permintaan jika Anda menggunakan data Anda sendiri. Pertahankan data uji tetap tidak berubah saat memverifikasi hasil.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Cadangkan data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,8 +146,8 @@ title: Gunakan API HTTP Milvus Backup 0.6.0
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> mengembalikan metadata JSON, termasuk <code translate="no">collection_backups</code>; perintah ini <strong>tidak</strong> mengunduh berkas cadangan. Untuk cadangan yang dibuat oleh proses lain, kueri berdasarkan nama saja dapat mengembalikan metadata tanpa menunjukkan kemajuan tugas yang sedang berjalan. Gunakan ID tugas dari respons create layanan saat ini saat memantau cadangan yang aktif.</p>
-<p>Format default adalah ` <code translate="no">auto</code>`, yang memilih snapshot pada Milvus 3.0. Untuk secara eksplisit meminta `binlog`, tambahkan ` <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> ` ke badan permintaan `create`. Preset ` <code translate="no">--for</code> ` pada CLI bukanlah bidang permintaan HTTP.</p>
+<p><code translate="no">get_backup</code> mengembalikan metadata JSON, termasuk <code translate="no">collection_backups</code>; perintah ini <strong>tidak</strong> mengunduh berkas cadangan. Untuk cadangan yang dibuat oleh proses lain, kueri berdasarkan nama saja dapat mengembalikan metadata tanpa menampilkan kemajuan tugas yang sedang berjalan. Gunakan ID tugas dari respons create layanan saat ini saat memantau cadangan yang aktif.</p>
+<p>Format defaultnya adalah <code translate="no">auto</code>, yang memilih snapshot pada Milvus 3.0. Untuk secara eksplisit meminta binlog, tambahkan <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> ke badan permintaan create. Preset <code translate="no">--for</code> pada CLI bukanlah bidang permintaan HTTP.</p>
 <p>Untuk menyimpan atau memindahkan cadangan, salin seluruh direktori ke penyimpanan objek. Lihat <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">panduan transfer versi 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Memulihkan data<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -161,7 +164,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pastikan bahwa <code translate="no">coll_bak</code> belum ada. Kirim permintaan pemulihan dengan sufiks:</p>
+    </button></h2><p>Pastikan bahwa <code translate="no">coll_bak</code> belum ada. Kirimkan permintaan pemulihan dengan sufiks:</p>
 <pre><code translate="no" class="language-shell">curl --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
   --header &#x27;Content-Type: application/json&#x27; \
   --data &#x27;{
@@ -171,7 +174,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
     &quot;collection_suffix&quot;: &quot;_bak&quot;
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Bidang HTTP ` <code translate="no">collection_names</code> ` memilih nama <strong>dalam cadangan</strong>, sebelum sufiks diterapkan. Permintaan ini memilih ` <code translate="no">coll</code> ` dan membuat ` <code translate="no">coll_bak</code>`. Opsi ` <code translate="no">--filter</code> ` pada CLI justru mencocokkan nama tujuan setelah penggantian nama; jangan ganti ` <code translate="no">coll_bak</code> ` ke dalam bidang HTTP ini.</p>
+<p>Bidang HTTP ` <code translate="no">collection_names</code> ` memilih nama-nama <strong>dalam cadangan</strong>, sebelum sufiks diterapkan. Permintaan ini memilih ` <code translate="no">coll</code> ` dan membuat ` <code translate="no">coll_bak</code>`. Sebaliknya, opsi ` <code translate="no">--filter</code> ` pada CLI mencocokkan nama tujuan setelah penggantian nama; jangan mengganti ` <code translate="no">coll_bak</code> ` ke dalam bidang HTTP ini.</p>
 <p>Salin <code translate="no">data.id</code> dari respons pemulihan dan periksa status tugas:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>

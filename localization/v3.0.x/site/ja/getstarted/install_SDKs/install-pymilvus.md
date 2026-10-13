@@ -21,7 +21,7 @@ title: Milvus Python SDK のインストール
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Milvus 用の Python SDK「pymilvus」のインストール方法について説明します。</p>
-<p>現在のバージョンのMilvusでは、Python、Node.js、Go、Java用のSDKがサポートされています。</p>
+<p>現在のバージョンのMilvusでは、Python、Node.js、Go、JavaのSDKがサポートされています。</p>
 <h2 id="Requirements" class="common-anchor-header">要件<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Milvus Python SDK のインストール
       </svg>
     </button></h2><ul>
 <li>Python 3.7 以降が必要です。</li>
-<li>Google Protobuf がインストールされている必要があります。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
+<li>Google Protobuf がインストールされていること。コマンド `<code translate="no">pip3 install protobuf==3.20.0</code>` でインストールできます。</li>
 <li>grpcio-tools がインストールされていること。コマンド `<code translate="no">pip3 install grpcio-tools</code>` でインストールできます。</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip を使用して PyMilvus をインストールする<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: Milvus Python SDK のインストール
       </svg>
     </button></h2><p>PyMilvus は<a href="https://pypi.org/project/pymilvus/">Python Package Index</a> で入手可能です。</p>
 <div class="alert note">
-インストールした Milvus サーバーのバージョンと一致する PyMilvus バージョンをインストールすることを推奨します。詳細については、<a href="/docs/ja/release_notes.md">リリースノートを</a>参照してください。
+インストールした Milvus サーバーのバージョンと一致する PyMilvus バージョンをインストールすることをお勧めします。詳細については、<a href="/docs/ja/release_notes.md">リリースノートを</a>参照してください。
 </div>
 <pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">3.0</span>.<span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -102,7 +102,7 @@ title: Milvus Python SDK のインストール
 <ul>
 <li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、Upsert、削除</a></li>
+<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトルの検索</a></li>
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>

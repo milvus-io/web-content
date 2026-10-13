@@ -3,9 +3,9 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 summary: 'Узнайте, как установить Java SDK для Milvus.'
-title: Установка Milvus Java SDK
+title: Установка Java SDK для Milvus
 ---
-<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Установка Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Установка Java SDK для Milvus<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ title: Установка Milvus Java SDK
 <li>Java (версия 8 или более поздняя)</li>
 <li>Apache Maven или Gradle/Grails</li>
 </ul>
-<h2 id="Install-Milvus-Java-SDK" class="common-anchor-header">Установка Java SDK для Milvus<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-Java-SDK" class="common-anchor-header">Установка Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

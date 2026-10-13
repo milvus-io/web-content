@@ -133,7 +133,7 @@ title: Docker Compose를 사용하여 Milvus 구성하기
     </td>
   </tr>
   <tr>
-    <td>데이터 및 메타</td>
+    <td>데이터 및 메타데이터</td>
     <td>
         <ul>
             <li><a href="/docs/ko/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
@@ -292,8 +292,8 @@ title: Docker Compose를 사용하여 Milvus 구성하기
     </button></h2><ul>
 <li>Docker Compose 또는 Helm을 사용하여 다음 Milvus 종속성을 관리하는 방법을 알아보세요:
 <ul>
-<li><a href="/docs/ko/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 객체 스토리지 구성</a></li>
-<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 오브젝트 스토리지 구성</a></li>
+<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토리지 구성</a></li>
 <li><a href="/docs/ko/deploy_pulsar.md">Docker Compose 또는 Helm을 사용하여 메시지 스토리지 구성하기</a></li>
 </ul></li>
 </ul>

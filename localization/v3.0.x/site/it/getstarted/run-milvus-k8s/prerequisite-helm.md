@@ -43,7 +43,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 <tbody>
 <tr><td>CPU</td><td><ul><li>CPU Intel Core di seconda generazione o superiore</li><li>Apple Silicon</li></ul></td><td><ul><li>Modello autonomo: 4 core o più</li><li>Cluster: 8 core o più</li></ul></td><td></td></tr>
 <tr><td>Set di istruzioni della CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La ricerca di similarità vettoriale e la creazione di indici all'interno di Milvus richiedono il supporto da parte della CPU dei set di estensioni SIMD (Single Instruction, Multiple Data). Assicurarsi che la CPU supporti almeno una delle estensioni SIMD elencate. Per ulteriori informazioni, consultare <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">la sezione CPU con AVX</a>.</td></tr>
-<tr><td>RAM</td><td><ul><li>Modalità standalone: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Modalità standalone: 16G</li><li>Cluster: 128G</li></ul></td><td>La quantità di RAM dipende dal volume dei dati.</td></tr>
+<tr><td>RAM</td><td><ul><li>Modalità standalone: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Modalità standalone: 16 G</li><li>Cluster: 128 G</li></ul></td><td>La quantità di RAM dipende dal volume dei dati.</td></tr>
 <tr><td>Disco rigido</td><td>SSD SATA 3.0 o CloudStorage</td><td>SSD NVMe o superiore</td><td>La dimensione del disco rigido dipende dal volume dei dati.</td></tr>
 </tbody>
 </table>
@@ -64,13 +64,13 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
       </svg>
     </button></h2><p>Si consiglia di eseguire il cluster Kubernetes su piattaforme Linux.</p>
 <p>kubectl è lo strumento a riga di comando per Kubernetes. Utilizzare una versione di kubectl che differisca di non più di una versione secondaria rispetto a quella del proprio cluster. L'utilizzo dell'ultima versione di kubectl aiuta a evitare problemi imprevisti.</p>
-<p>minikube è necessario quando si esegue il cluster Kubernetes localmente. minikube richiede Docker come dipendenza. Assicurarsi di installare Docker prima di installare Milvus utilizzando Helm. Per ulteriori informazioni, consultare la sezione " <a href="https://docs.docker.com/get-docker">Ottenere Docker</a> ".</p>
+<p>minikube è necessario per l'esecuzione locale del cluster Kubernetes. minikube richiede Docker come dipendenza. Assicurarsi di installare Docker prima di installare Milvus tramite Helm. Per ulteriori informazioni, consultare la sezione " <a href="https://docs.docker.com/get-docker">Ottenere Docker</a> ".</p>
 <table>
 <thead>
 <tr><th>Sistema operativo</th><th>Software</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>Piattaforme Linux</td><td><ul><li>Kubernetes 1.16 o versioni successive</li><li>kubectl</li><li>Helm 3.0.0 o versioni successive</li><li>minikube (per Milvus standalone)</li><li>Docker 19.03 o versioni successive (per Milvus standalone)</li></ul></td><td>Per ulteriori informazioni, consultare <a href="https://helm.sh/docs/">la documentazione di Helm</a>.</td></tr>
+<tr><td>Piattaforme Linux</td><td><ul><li>Kubernetes 1.16 o versioni successive</li><li>kubectl</li><li>Helm 3.0.0 o versioni successive</li><li>minikube (per Milvus in modalità standalone)</li><li>Docker 19.03 o versioni successive (per Milvus standalone)</li></ul></td><td>Per ulteriori informazioni, consultare <a href="https://helm.sh/docs/">la documentazione di Helm</a>.</td></tr>
 </tbody>
 </table>
 <table>
@@ -104,7 +104,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Idealmente, il disco dovrebbe raggiungere oltre 500 IOPS e una latenza fsync inferiore a 10 ms per il 99° percentile. Consultare la <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentazione</a> di etcd per requisiti più dettagliati.</p>
+<p>Idealmente, il disco dovrebbe raggiungere oltre 500 IOPS e una latenza fsync inferiore a 10 ms al 99° percentile. Consultare la <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentazione</a> di etcd per requisiti più dettagliati.</p>
 <h2 id="FAQs" class="common-anchor-header">Domande frequenti<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Come posso avviare un cluster K8s localmente a scopo di test?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Come posso avviare un cluster K8s in locale a scopo di test?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,9 +139,9 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol>
 <li>Scarica minikube</li>
 </ol>
-<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il file binario.</p>
+<p>Vai alla pagina <a href="https://minikube.sigs.k8s.io/docs/start/">"Get Started</a> ", verifica di soddisfare i requisiti elencati nella sezione <strong>"What you’ll need</strong> ", fai clic sui pulsanti corrispondenti alla tua piattaforma di destinazione e copia i comandi per scaricare e installare il binario.</p>
 <ol start="2">
-<li>Avviare un cluster K8s utilizzando minikube</li>
+<li>Avvia un cluster K8s utilizzando minikube</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>

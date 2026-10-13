@@ -38,7 +38,7 @@ title: 在 Docker 中运行 Milvus（Linux）
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">安装 Docker</a>。</li>
-<li>安装前<a href="/docs/zh/prerequisite-docker.md">请检查硬件和软件的要求</a>。</li>
+<li>安装前<a href="/docs/zh/prerequisite-docker.md">请检查硬件和软件要求</a>。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">在 Docker 中安装 Milvus<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <p><strong>v3.0-beta 版本的新功能：</strong></p>
 <ul>
 <li><strong>流式处理节点</strong>：增强了数据处理能力</li>
-<li><strong>Woodpecker MQ（默认）</strong>：此 Docker 部署将 Woodpecker 用作消息队列，并以<strong>本地文件系统</strong>作为其 WAL 后端，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</li>
+<li><strong>Woodpecker MQ（默认）</strong>：此 Docker 部署将 Woodpecker 用作消息队列，并使用<strong>本地文件系统</strong>作为其 WAL 后端，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</li>
 <li><strong>优化架构</strong>：整合组件以提升性能</li>
 </ul>
 <p>请务必下载最新脚本，以确保获得最新的配置和架构改进。</p>
@@ -76,7 +76,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <p>运行安装脚本后：</p>
 <ul>
 <li>一个名为 Milvus Standalone 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并监听<strong>2379</strong> 端口。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
 <li>Milvus 数据卷已映射到当前目录下的<strong>volumes/milvus</strong>目录中。</li>
 </ul>
@@ -173,14 +173,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>默认情况下，此部署运行<strong>Woodpecker</strong>（本地文件系统 WAL）作为消息队列，并使用<strong>嵌入式 etcd</strong>管理元数据——无需额外安装其他组件。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
+    </button></h2><p>默认情况下，此部署使用<strong>Woodpecker</strong>（本地文件系统 WAL）作为消息队列，并使用<strong>嵌入式 etcd</strong>管理元数据——无需安装其他组件。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
 <ul>
 <li>消息队列：<a href="/docs/zh/woodpecker.md">Woodpecker</a>（默认）·<a href="/docs/zh/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh/mq_kafka.md">Kafka</a>·<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></li>
 <li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">S3 兼容</a></li>
 <li>元数据：<a href="/docs/zh/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+<p>Storage V3 默认处于禁用状态。在使用依赖于它的功能之前，请先启用它。有关要求和兼容性考虑，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,6 +220,6 @@ EOF
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

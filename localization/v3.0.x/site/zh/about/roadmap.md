@@ -73,7 +73,7 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹<strong>数据模型升级</strong></h4><ul>
 <li><p>引入统一的<strong>Tensor / StructList</strong>数据类型，以支持多向量嵌入结构，实现与<em>ColBERT</em>、<em>CoLQwen</em>、<em>视频及多模态向量的</em>兼容性。</p></li>
 <li><p>新增<strong>地理数据</strong>支持，包括点、区域及空间索引（基于<em>libspatial</em>），以拓展 LBS 和 GIS 领域的应用场景。</p></li>
-<li><p>支持<strong>带时区的时间戳</strong>数据类型。</p></li>
+<li><p>支持<strong>带时区的 Timestamp</strong>数据类型。</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹<strong>StreamNode 架构重构</strong></h4><ul>
 <li><p>重写流式摄入管道，以优化增量写入和实时计算。</p></li>
@@ -81,14 +81,14 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
 <li><p>引入新的消息队列引擎：<strong>Woodpecker</strong>。</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹<strong>热/冷分层与存储架构（StorageV2）</strong></h4><ul>
-<li><p>支持双存储格式：<strong>Parquet</strong>和<strong>Vortex，</strong>提升并发性和内存效率。</p></li>
+<li><p>支持双存储格式：<strong>Parquet</strong>和<strong>Vortex，</strong>从而提升并发性和内存效率。</p></li>
 <li><p>实现分层存储，具备自动热/冷数据分离和智能调度功能。</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹<strong>Vector Lake 原型（v0.1）</strong></h4><ul>
 <li><p>通过 FFI 与<strong>Spark</strong>/<strong>DuckDB</strong>/<strong>DataFusion</strong>集成，支持离线模式 Schema 演进和 KNN 查询。</p></li>
 <li><p>提供多模态数据可视化及 Spark ETL 演示，构建基础数据湖架构。</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0（计划于2026年初发布）<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0（计划于 2026 年初发布）<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
         ></path>
       </svg>
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹<strong>搜索体验全面升级</strong></h4><ul>
-<li><p>引入<strong>“更多类似内容”（MLT）</strong>相似度搜索，支持带位置或反例的搜索。</p></li>
+<li><p>引入<strong>“更多类似内容”（MLT）</strong>相似度搜索功能，支持带位置信息或反例的搜索。</p></li>
 <li><p>新增语义搜索功能，例如<strong>高亮显示</strong>和<strong>权重提升</strong>。</p></li>
 <li><p>支持<strong>自定义词典</strong>和<strong>同义词表</strong>，可在分析器层定义词汇和语义规则。</p></li>
 <li><p>引入查询<strong>聚合</strong>功能。</p></li>
@@ -133,7 +133,7 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹<strong>Schema与主键增强</strong></h4><ul>
 <li><p>实现<strong>全局主键去重（Global PK Dedup）</strong>，以确保数据的一致性和唯一性。</p></li>
 <li><p>支持<strong>灵活的Schema管理</strong>（添加/删除列、备份填充）。</p></li>
-<li><p>允许向量字段中包含<strong>NULL 值</strong>。</p></li>
+<li><p>允许向量字段中<strong>包含NULL值</strong>。</p></li>
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹<strong>扩展非结构化数据类型（BLOB / 文本）</strong></h4><ul>
 <li><p>引入<strong>BLOB 类型</strong>，为文件、图像和视频等二进制数据提供原生存储和引用功能。</p></li>
@@ -228,7 +228,7 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
 <ul>
 <li><p>💬<strong>分享反馈</strong>：提出新功能或优化建议</p></li>
 <li><p>🐛<strong>报告问题</strong>：通过 GitHub Issues 提交 bug</p></li>
-<li><p>🔧<strong>贡献代码</strong>：提交 PR 并协助构建核心功能</p>
+<li><p>🔧<strong>贡献代码</strong>：提交拉取请求 (PR)，协助构建核心功能</p>
 <ul>
 <li><p><strong>拉取请求</strong>：直接为我们的<a href="https://github.com/milvus-io/milvus/pulls">代码库</a>做出贡献。无论是修复 bug、添加功能还是完善文档，我们都欢迎您的贡献。</p></li>
 <li><p><strong>开发指南</strong>：请查阅我们的<a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">《贡献者指南》</a>，了解代码贡献的相关规范。</p></li>

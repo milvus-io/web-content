@@ -346,13 +346,13 @@
             "children": []
           },
           {
-            "label": "Carica e rilascio",
+            "label": "Caricamento e rilascio",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "TTL della raccolta di insiemi",
+            "label": "TTL della collezione di insiemi",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -540,7 +540,7 @@
             "order": 16,
             "children": [
               {
-                "label": "Panoramica sull’analizzatore",
+                "label": "Panoramica sull'analizzatore",
                 "id": "analyzer-overview.md",
                 "order": 0,
                 "children": []
@@ -1124,7 +1124,7 @@
                 "children": []
               },
               {
-                "label": "Operatori di StructArray",
+                "label": "Operatori StructArray",
                 "id": "struct-array-operators.md",
                 "order": 6,
                 "children": []
@@ -1139,6 +1139,12 @@
                 "label": "Operatori geometrici",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Abbinamento soci",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1469,13 +1475,13 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Utilizzare mmap",
+            "label": "Utilizza mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Compattazione per raggruppamento",
+            "label": "Compattazione tramite raggruppamento",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1569,7 +1575,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "Milvus per gli agenti di intelligenza artificiale",
+        "label": "Milvus per agenti di intelligenza artificiale",
         "id": "milvus_for_agents.md",
         "order": 0,
         "children": []
@@ -1619,7 +1625,7 @@
         ]
       },
       {
-        "label": "Abilità di Milvus",
+        "label": "Abilità Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1633,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Server MCP per il codice Claude",
+        "label": "Server MCP per Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2001,7 +2007,7 @@
                 "children": []
               },
               {
-                "label": "Implementazione dei servizi di monitoraggio",
+                "label": "Implementare i servizi di monitoraggio",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -2146,7 +2152,7 @@
             "children": []
           },
           {
-            "label": "Connettiti a Kafka tramite SASL/SSL",
+            "label": "Connettiti a Kafka con SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Comandi (0.6.0)",
+            "label": "Comandi",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API HTTP (0.6.0)",
+            "label": "API HTTP",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,25 +2216,25 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Comandi (0.5.x)",
+                "label": "Comandi",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "API HTTP (0.5.x)",
+                "label": "API HTTP",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Casi comuni (0.5.x)",
+                "label": "Casi più comuni",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Backup e ripristino in un'unica istanza",
+                    "label": "Backup e ripristino in un’unica istanza",
                     "id": "single-instance-backup-and-restore.md",
                     "order": 0,
                     "children": []
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Aggiornamento alla versione 0.6.0",
+                "label": "Aggiornamento alla versione 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2387,7 +2393,7 @@
         "children": []
       },
       {
-        "label": "ExportLog",
+        "label": "Registro delle esportazioni",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2623,7 +2629,7 @@
                 "children": []
               },
               {
-                "label": "API asincrona di Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -3283,7 +3289,7 @@
         "children": []
       },
       {
-        "label": "Domande frequenti sull’operatività",
+        "label": "Domande frequenti sull'operatività",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -61,7 +61,7 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
 <p>Consulte los siguientes enlaces para obtener más información sobre cada parámetro.</p>
 <p>Ordenado por:</p>
 <div class="filter">
-<a href="#component">Componentes o dependencias</a> <a href="#purpose">Finalidad de la configuración</a> 
+<a href="#component">Componentes o dependencias</a> <a href="#purpose">Objetivos de configuración</a> 
 </div>
 <div class="filter-component table-wrapper">
 <table id="component">
@@ -85,7 +85,7 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
         <ul>
             <li><a href="/docs/es/configure_rootcoord.md">Coordenada raíz</a></li>
             <li><a href="/docs/es/configure_proxy.md">Proxy</a></li>
-            <li><a href="/docs/es/configure_querycoord.md">Coordenada de consulta</a></li>
+            <li><a href="/docs/es/configure_querycoord.md">Coordenadas de consulta</a></li>
             <li><a href="/docs/es/configure_querynode.md">Nodo de consulta</a></li>
             <li><a href="/docs/es/configure_indexnode.md">Nodo de índice</a></li>
             <li><a href="/docs/es/configure_datacoord.md">Coordenadas de datos</a></li>
@@ -213,11 +213,11 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
         ></path>
       </svg>
     </button></h2><p>Descarga el archivo de instalación de Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml">independiente</a> y guárdalo como « <code translate="no">docker-compose.yml</code> ».</p>
-<p>También puede simplemente ejecutar el siguiente comando.</p>
+<p>También puedes simplemente ejecutar el siguiente comando.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-installation-file" class="common-anchor-header">Modifica el archivo de instalación<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-installation-file" class="common-anchor-header">Modificar el archivo de instalación<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +233,7 @@ En la versión actual, todos los parámetros solo surten efecto tras reiniciar M
         ></path>
       </svg>
     </button></h2><p>En <code translate="no">docker-compose.yml</code>, añade una sección « <code translate="no">volumes</code> » debajo de cada « <code translate="no">milvus-standalone</code> ».</p>
-<p>Asigna la ruta local a tu archivo « <code translate="no">milvus.yaml</code> » a las rutas correspondientes de los contenedores de Docker hacia los archivos de configuración « <code translate="no">/milvus/configs/milvus.yaml</code> » en todas las secciones « <code translate="no">volumes</code> ».</p>
+<p>Asigna la ruta local a tu archivo « <code translate="no">milvus.yaml</code> » a las rutas correspondientes del contenedor Docker hacia los archivos de configuración « <code translate="no">/milvus/configs/milvus.yaml</code> » en todas las secciones « <code translate="no">volumes</code> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
@@ -271,7 +271,7 @@ Los datos se almacenan en la carpeta <code translate="no">/volumes</code> según
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez que haya terminado de modificar el archivo de configuración y el de instalación, ya puede iniciar Milvus.</p>
+    </button></h2><p>Una vez que haya terminado de modificar el archivo de configuración y el archivo de instalación, ya puede iniciar Milvus.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Próximos pasos<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -3,7 +3,7 @@ id: install_cluster-helm.md
 label: Helm
 related_key: Kubernetes
 summary: Découvrez comment installer un cluster Milvus sur Kubernetes.
-title: Installer Milvus Cluster avec Helm
+title: Installer le cluster Milvus avec Helm
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Exécuter Milvus dans Kubernetes avec Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Le référentiel des Helm Charts de Milvus, disponible à l’adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code>, a été archivé. Nous utilisons désormais le nouveau référentiel accessible à l’adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Le référentiel archivé reste disponible pour les charts jusqu’à la version 4.0.31, mais veuillez utiliser le nouveau référentiel pour les versions ultérieures.</p>
+<p>Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code> a été archivé. Nous utilisons désormais le nouveau référentiel à l’adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code>. Le référentiel archivé est toujours disponible pour les charts jusqu’à la version 4.0.31, mais utilisez le nouveau référentiel pour les versions ultérieures.</p>
 </div>
 <p>Récupérez ensuite les Helm Charts Milvus depuis le dépôt comme suit :</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -186,7 +186,7 @@ La commande ci-dessus déploie Milvus avec les configurations recommandées. Pou
   --<span class="hljs-built_in">set</span> pulsar.zookeeper.pdb.usePolicy=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Pour plus d’informations, consultez <a href="https://artifacthub.io/packages/helm/milvus/milvus">le Helm Chart Milvus</a> et <a href="https://helm.sh/docs/">la documentation Helm</a>.</p>
+<p>Pour plus d’informations, consultez <a href="https://artifacthub.io/packages/helm/milvus/milvus">le Helm Chart de Milvus</a> et <a href="https://helm.sh/docs/">la documentation Helm</a>.</p>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Vérifiez l'état du cluster Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ La commande ci-dessus déploie Milvus avec les configurations recommandées. Pou
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vérifiez que votre déploiement s’est bien déroulé en contrôlant l’état des pods :</p>
+    </button></h3><p>Vérifiez que votre déploiement s’est bien déroulé en vérifiant l’état des pods :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v2.6.17, vous devriez voir des pods similaires à ceux-ci :</p>
@@ -253,7 +253,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>Configurer la redirection de port :</strong></p>
 <pre><code translate="no" class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Cette commande redirige votre port local <code translate="no">27017</code> vers le port Milvus <code translate="no">19530</code>. Vous devriez voir s'afficher :</p>
+<p>Cette commande redirige votre port local <code translate="no">27017</code> vers le port Milvus <code translate="no">19530</code>. Vous devriez voir s’afficher :</p>
 <pre><code translate="no"><span class="hljs-attribute">Forwarding</span> from <span class="hljs-number">127.0.0.1:27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Détails de la connexion :</strong></p>
@@ -265,14 +265,14 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>Options de redirection de port :</strong></p>
 <ul>
 <li><strong>Attribution automatique du port local</strong>: utilisez <code translate="no">:19530</code> au lieu de <code translate="no">27017:19530</code> pour laisser kubectl choisir un port disponible</li>
-<li><strong>Écouter sur toutes les interfaces</strong>: Ajoutez <code translate="no">--address 0.0.0.0</code> pour autoriser les connexions depuis d’autres machines :
+<li><strong>Écouter sur toutes les interfaces</strong>: Ajoutez <code translate="no">--address 0.0.0.0</code> pour autoriser les connexions depuis d'autres machines :
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
 <li><strong>Déploiement autonome</strong>: si vous utilisez le mode autonome, le nom du service reste le même</li>
 </ul>
 </div>
 <p><strong>Laissez ce terminal ouvert</strong> pendant que vous utilisez Milvus. Vous pouvez désormais vous connecter à Milvus à l’aide de n’importe quel SDK Milvus à l’adresse <code translate="no">localhost:27017</code>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -323,7 +323,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est livré avec un outil graphique intégré appelé Milvus WebUI, accessible via votre navigateur. Milvus WebUI améliore la visibilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser Milvus WebUI pour consulter les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collecte, et afficher la liste détaillée des configurations de Milvus. Pour plus de détails sur l’interface Web de Milvus, consultez la documentation <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus est fourni avec un outil graphique intégré appelé Milvus WebUI, accessible via votre navigateur. Milvus WebUI améliore la visibilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser Milvus WebUI pour consulter les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collecte, et afficher la liste détaillée des configurations de Milvus. Pour plus de détails sur Milvus WebUI, consultez la documentation <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a></p>
 <p>Pour activer l’accès à Milvus WebUI, vous devez rediriger le port du pod proxy vers un port local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -366,11 +366,11 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>La commande ci-dessus génère des modèles de chart pour un cluster Milvus et enregistre le résultat dans un fichier de manifeste nommé <code translate="no">milvus_manifest.yaml</code>. À l’aide de ce manifeste, vous pouvez installer un cluster Milvus dont les composants et les dépendances sont répartis dans des pods distincts.</p>
 <div class="alert note">
 <ul>
-<li>Pour installer une instance Milvus en mode autonome, où tous les composants Milvus sont regroupés dans un seul pod, vous devez exécuter <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
+<li>Pour installer une instance Milvus en mode autonome, où tous les composants Milvus sont regroupés dans un seul pod, vous devez plutôt exécuter la commande ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` afin de générer les modèles de chart pour une instance Milvus en mode autonome.</li>
 <li>Pour modifier les configurations de Milvus, téléchargez le <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> modèle, y indiquer les paramètres souhaités, puis utiliser <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> pour générer le manifeste en conséquence.</li>
 </ul>
 </div>
-<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. Télécharger le script de récupération d’images<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
+<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. Télécharger le script de récupération des images<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -408,7 +408,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Les images sont extraites dans un sous-dossier nommé « <code translate="no">images</code> » dans le répertoire actuel.</p>
+<p>Les images sont extraites dans un sous-dossier nommé « <code translate="no">images</code> » situé dans le répertoire courant.</p>
 <h3 id="4-Load-images" class="common-anchor-header">4. Charger les images<button data-href="#4-Load-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -445,7 +445,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Jusqu’à présent, vous pouvez suivre les étapes <a href="#2-Check-Milvus-cluster-status">2</a> et <a href="#3-Forward-a-local-port-to-Milvus">3</a> de l’installation en ligne pour vérifier l’état du cluster et rediriger un port local vers Milvus.</p>
-<h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Mise à jour d’un cluster Milvus en cours d’exécution<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
+<h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Mise à niveau d'un cluster Milvus en cours d'exécution<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +499,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Une fois Milvus installé dans Docker, vous pouvez :</p>
 <ul>
-<li><p>Consultez <a href="/docs/fr/v2.6.x/quickstart.md">Hello Milvus</a> pour découvrir les fonctionnalités de Milvus.</p></li>
+<li><p>Consulter la page « <a href="/docs/fr/v2.6.x/quickstart.md">Hello Milvus</a> » pour découvrir les fonctionnalités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/v2.6.x/manage_databases.md">Gérer les bases de données</a></li>
@@ -519,7 +519,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour la surveillance et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, un outil open source dédié aux sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et la mise à jour dynamique des configurations.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open source permettant une gestion intuitive de Milvus.</p></li>
 <li><p><a href="/docs/fr/v2.6.x/monitor.md">Surveillez Milvus avec Prometheus</a>.</p></li>
 </ul>

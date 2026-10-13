@@ -41,7 +41,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La tabla siguiente muestra si RocksMQ, Pulsar, Kafka y Woodpecker son compatibles con Milvus en modo autónomo y en modo de clúster.</p>
+    </button></h2><p>La tabla siguiente muestra si RocksMQ, Pulsar, Kafka y Woodpecker son compatibles con Milvus en modo autónomo y en modo clúster.</p>
 <table>
 <thead>
 <tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th><th style="text-align:center">Woodpecker</th></tr>
@@ -58,9 +58,9 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
 <li>modo autónomo: Woodpecker (predeterminado) &gt; RocksMQ &gt; Pulsar &gt; Kafka</li>
 <li>modo clúster: Woodpecker (predeterminado) &gt; Pulsar &gt; Kafka</li>
 </ul></li>
-<li>El almacenamiento de mensajes no se puede cambiar mientras el sistema Milvus está en ejecución.</li>
+<li>El almacenamiento de mensajes no se puede cambiar mientras el sistema Milvus está en funcionamiento.</li>
 <li>Solo se admiten las versiones 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0-beta, debe mantener su elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
+<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0-beta, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +144,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gestiona los registros de cambios recientes, genera registros de flujo y proporciona suscripciones a registros. La configuración de Pulsar para el almacenamiento de mensajes es compatible tanto con Milvus independiente como con el clúster de Milvus. Sin embargo, con Milvus Operator, solo se puede configurar Pulsar como almacenamiento de mensajes para el clúster de Milvus. Añade los campos obligatorios en « <code translate="no">spec.dependencies.pulsar</code> » para configurar Pulsar.</p>
+    </button></h2><p>Pulsar gestiona los registros de cambios recientes, genera registros de flujo y ofrece suscripciones a registros. La configuración de Pulsar para el almacenamiento de mensajes es compatible tanto con Milvus independiente como con el clúster de Milvus. Sin embargo, con Milvus Operator, solo puedes configurar Pulsar como almacenamiento de mensajes para el clúster de Milvus. Añade los campos obligatorios en « <code translate="no">spec.dependencies.pulsar</code> » para configurar Pulsar.</p>
 <p><code translate="no">pulsar</code> Admite <code translate="no">external</code> y <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar externo<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -281,7 +281,7 @@ Los campos utilizados para configurar un servicio Pulsar externo son los siguien
     </button></h3><p><code translate="no">external</code> indica que se utiliza un servicio externo de Kafka.</p>
 <p>Los campos utilizados para configurar un servicio externo de Kafka incluyen:</p>
 <ul>
-<li><code translate="no">external</code>: Un valor « <code translate="no">true</code> » indica que Milvus utiliza un servicio externo de Kafka.</li>
+<li><code translate="no">external</code>: Un valor de <code translate="no">true</code> indica que Milvus utiliza un servicio de Kafka externo.</li>
 <li><code translate="no">brokerList</code>: La lista de brokers a los que enviar los mensajes.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio Kafka externo.</p>
@@ -346,7 +346,7 @@ Los campos utilizados para configurar un servicio Pulsar externo son los siguien
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Consulta <a href="https://artifacthub.io/packages/helm/bitnami/kafka">aquí</a> los elementos de configuración completos para configurar un servicio interno de Kafka. Añade los elementos de configuración que necesites en « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Consulta <a href="https://artifacthub.io/packages/helm/bitnami/kafka">aquí</a> los elementos de configuración completos para configurar un servicio interno de Kafka. Añade los elementos de configuración necesarios en « <code translate="no">kafka.inCluster.values</code> ».</p>
 <p>Suponiendo que el archivo de configuración se llama « <code translate="no">milvuscluster.yaml</code> », ejecute el siguiente comando para aplicar la configuración.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

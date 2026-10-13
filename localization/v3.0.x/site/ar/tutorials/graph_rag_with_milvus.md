@@ -1,9 +1,9 @@
 ---
 id: graph_rag_with_milvus.md
-summary: الرسم البياني RAG مع ميلفوس
-title: الرسم البياني RAG مع ميلفوس
+summary: رسم بياني لـ RAG باستخدام Milvus
+title: رسم بياني لـ RAG باستخدام Milvus
 ---
-<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">الرسم البياني RAG مع ميلفوس<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">رسم بياني لـ RAG باستخدام Milvus<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,16 +24,16 @@ title: الرسم البياني RAG مع ميلفوس
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>يُبرز التطبيق الواسع النطاق للنماذج اللغوية الكبيرة أهمية تحسين دقة وملاءمة استجاباتها. يعمل التوليد المعزّز للاسترجاع (RAG) على تعزيز النماذج بقواعد معرفية خارجية، مما يوفر المزيد من المعلومات السياقية ويخفف من مشاكل مثل الهلوسة والمعرفة غير الكافية. ومع ذلك، فإن الاعتماد فقط على نماذج RAG البسيطة له حدوده، خاصةً عند التعامل مع علاقات الكيانات المعقدة والأسئلة متعددة القفزات، حيث غالبًا ما يكافح النموذج لتقديم إجابات دقيقة.</p>
-<p>يوفر إدخال الرسوم البيانية المعرفية (KGs) في نظام RAG حلاً جديدًا. تقدم KGs الكيانات وعلاقاتها بطريقة منظمة، مما يوفر معلومات استرجاع أكثر دقة ويساعد RAG على التعامل بشكل أفضل مع مهام الإجابة عن الأسئلة المعقدة. لا يزال نظام KG-RAG في مراحله المبكرة، ولا يوجد إجماع حول كيفية استرجاع الكيانات والعلاقات من KGs بشكل فعال أو كيفية دمج البحث عن التشابه المتجه مع هياكل الرسم البياني.</p>
-<p>في هذا الدفتر، نقدم في هذا الدفتر نهجًا بسيطًا ولكنه قوي لتحسين أداء هذا السيناريو بشكل كبير. وهو عبارة عن نموذج RAG بسيط مع استرجاع متعدد الاتجاهات ثم إعادة ترتيبها، ولكنه يطبق RAG Graph RAG منطقيًا، ويحقق أداءً متطورًا في التعامل مع الأسئلة متعددة القفزات. دعونا نرى كيف يتم تنفيذه.</p>
+<p>يُبرز الانتشار الواسع لنماذج اللغة الكبيرة أهمية تحسين دقة استجاباتها ومدى ملاءمتها. يعزز نظام التوليد المعزز بالاسترجاع (RAG) النماذج بقواعد معرفية خارجية، مما يوفر المزيد من المعلومات السياقية ويخفف من مشكلات مثل الهلوسة ونقص المعرفة. ومع ذلك، فإن الاعتماد حصريًا على نماذج RAG البسيطة له حدوده، خاصة عند التعامل مع العلاقات المعقدة بين الكيانات والأسئلة متعددة الخطوات، حيث غالبًا ما يواجه النموذج صعوبة في تقديم إجابات دقيقة.</p>
+<p>يقدم إدخال الرسوم البيانية المعرفية (KGs) في نظام RAG حلاً جديدًا. تعرض الرسوم البيانية المعرفية الكيانات وعلاقاتها بطريقة منظمة، مما يوفر معلومات استرجاع أكثر دقة ويساعد RAG على التعامل بشكل أفضل مع مهام الإجابة على الأسئلة المعقدة. لا يزال KG-RAG في مراحله المبكرة، ولا يوجد إجماع حول كيفية استرجاع الكيانات والعلاقات من الرسوم البيانية المعرفية (KGs) بشكل فعال أو كيفية دمج البحث عن التشابه المتجهي مع هياكل الرسوم البيانية.</p>
+<p>في هذا الدفتر، نقدم نهجًا بسيطًا لكنه قوي لتحسين أداء هذا السيناريو بشكل كبير. إنه نموذج RAG بسيط مع استرجاع متعدد الاتجاهات ثم إعادة الترتيب، لكنه ينفذ Graph RAG بشكل منطقي، ويحقق أداءً متطورًا في التعامل مع الأسئلة متعددة الخطوات. دعونا نرى كيف يتم تنفيذه.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات المسبقة<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,14 +52,14 @@ title: الرسم البياني RAG مع ميلفوس
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، فلتفعيل التبعيات التي تم تثبيتها للتو، قد تحتاج إلى <strong>إعادة تشغيل بيئة التشغيل</strong> (انقر على قائمة «Runtime» في أعلى الشاشة، واختر «Restart session» من القائمة المنسدلة).</p>
 </blockquote>
-<p>سنستخدم النماذج من OpenAI. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
+<p>سنستخدم النماذج من OpenAI. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح واجهة برمجة التطبيقات (API)</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>قم باستيراد المكتبات والتبعيات اللازمة.</p>
+<p>استيراد المكتبات والتبعيات الضرورية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
@@ -71,7 +71,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتهيئة مثيل عميل Milvus، وLLM، ونموذج التضمين.</p>
+<p>قم بتهيئة مثيل عميل Milvus، ونموذج اللغة الكبير (LLM)، ونموذج التضمين.</p>
 <pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
 llm = ChatOpenAI(
@@ -81,11 +81,11 @@ llm = ChatOpenAI(
 embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>بالنسبة للوسيطات في MilvusClient:</p>
+<p>بالنسبة للمعلمات في MilvusClient:</p>
 <ul>
-<li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث أنها تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
-<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
+<li>يُعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، الطريقة الأكثر ملاءمة، حيث يستخدم <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> تلقائيًا لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كانت لديك بيانات ضخمة الحجم، فيمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يرجى استخدام عنوان URI للخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> وهي الخدمة السحابية المُدارة بالكامل لـ Milvus، فقم بتعديل <code translate="no">uri</code> و <code translate="no">token</code> ، اللذين يتوافقان مع نقطة <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">النهاية العامة (Public Endpoint) ومفتاح واجهة برمجة التطبيقات (API key)</a> في Zilliz Cloud.</li>
 </ul>
 </div>
 <h2 id="Offline-Data-Loading" class="common-anchor-header">تحميل البيانات دون اتصال بالإنترنت<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
@@ -103,7 +103,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">إعداد البيانات<button data-href="#Data-Preparation" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">تحضير البيانات<button data-href="#Data-Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,7 +118,8 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>سوف نستخدم مجموعة بيانات النانو التي تقدم العلاقة بين عائلة برنولي وأويلر للتوضيح كمثال. تحتوي مجموعة بيانات النانو على 4 مقاطع ومجموعة من الثلاثيات المقابلة، حيث يحتوي كل ثلاثي على موضوع ومسند وكائن. عمليًا، يمكنك استخدام أي نهج لاستخراج الثلاثيات من مجموعة البيانات المخصصة الخاصة بك.</p>
+    </button></h3><p>سنستخدم مجموعة بيانات nano التي توضح العلاقة بين عائلة برنولي وإيولر لتوضيح ذلك كمثال. تحتوي مجموعة بيانات nano على 4 مقاطع ومجموعة من الثلاثيات المقابلة، حيث تحتوي كل ثلاثية على موضوع، ومسند، ومفعول به.
+في الممارسة العملية، يمكنك استخدام أي نهج لاستخراج الثلاثيات من المجموعة النصية المخصصة الخاصة بك.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -182,10 +183,10 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
 <button class="copy-code-btn"></button></code></pre>
 <p>نقوم ببناء الكيانات والعلاقات على النحو التالي:</p>
 <ul>
-<li>الكيان هو الفاعل أو المفعول به في الثلاثية، لذلك نستخرجها مباشرةً من الثلاثيات.</li>
-<li>نقوم هنا ببناء مفهوم العلاقة من خلال الربط المباشر بين الفاعل والمصدر والمفعول به والمفعول به مع وضع مسافة بينهما.</li>
+<li>الكيان هو الفاعل أو المفعول به في الثلاثي، لذا نستخلصهما مباشرةً من الثلاثيات.</li>
+<li>هنا نبني مفهوم العلاقة عن طريق ربط الفاعل والمفعول به والمفعول به مباشرةً بفراغ بينها.</li>
 </ul>
-<p>نقوم أيضًا بإعداد إملاء لتحويل معرف الكيان إلى معرف العلاقة، وإملاء آخر لتحويل معرف العلاقة إلى معرف المقطع لاستخدامه لاحقًا.</p>
+<p>كما نقوم بإعداد قاموس لربط معرّف الكيان بمعرّف العلاقة، وقاموس آخر لربط معرّف العلاقة بمعرّف المقطع لاستخدامهما لاحقًا.</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
 relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
@@ -226,7 +227,7 @@ passages = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إنشاء مجموعات ميلفوس للكيان والعلاقة والممر. يتم استخدام مجموعة الكيانات ومجموعة العلاقات كمجموعات رئيسية لبناء الرسم البياني في طريقتنا، بينما يتم استخدام مجموعة المقاطع كمقارنة استرجاع RAG الساذجة أو لغرض مساعد.</p>
+    </button></h3><p>إنشاء مجموعات Milvus للكيانات والعلاقات والمقاطع. تُستخدم مجموعة الكيانات ومجموعة العلاقات كمجموعات رئيسية لبناء الرسم البياني في طريقتنا، بينما تُستخدم مجموعة المقاطع كمقارنة بسيطة لاسترجاع RAG أو لأغراض مساعدة.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -247,7 +248,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>إدراج البيانات مع معلومات البيانات الوصفية الخاصة بها في مجموعات Milvus، بما في ذلك مجموعات الكيانات والعلاقات والممرات. تتضمن معلومات البيانات الوصفية معرّف المقطع ومعرّف الكيان أو معرّف العلاقة.</p>
+<p>أدخل البيانات مع معلومات الوصف الوصفي الخاصة بها في مجموعات Milvus، بما في ذلك مجموعات الكيانات والعلاقات والمقاطع. تتضمن معلومات الوصف الوصفي معرّف المقطع ومعرّف الكيان أو العلاقة المجاورة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],
@@ -306,7 +307,7 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">استرجاع التشابه<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">الاسترجاع القائم على التشابه<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,8 +322,9 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نقوم باسترجاع أعلى K كيانات وعلاقات متشابهة بناءً على استعلام الإدخال من Milvus.</p>
-<p>عند إجراء عملية استرجاع الكيانات، يجب علينا أولاً استخراج كيانات الاستعلام من نص الاستعلام باستخدام طريقة معينة مثل NER (التعرف على الكيانات المسماة). للتبسيط، نقوم بإعداد نتائج NER هنا. إذا كنت ترغب في تغيير الاستعلام كسؤالك المخصص، فعليك تغيير قائمة NER للاستعلام المقابلة. من الناحية العملية، يمكنك استخدام أي نموذج أو نهج آخر لاستخراج الكيانات من الاستعلام.</p>
+    </button></h3><p>نقوم باسترداد الكيانات والعلاقات الأكثر تشابهًا (topK) بناءً على الاستعلام المدخل من Milvus.</p>
+<p>عند إجراء استرجاع الكيانات، يجب أولاً استخراج كيانات الاستعلام من نص الاستعلام باستخدام طريقة محددة مثل NER (التعرف على الكيانات المسماة). للتبسيط، نقوم هنا بإعداد نتائج NER مسبقًا. إذا كنت ترغب في تغيير الاستعلام ليكون سؤالًا مخصصًا لك، فيجب عليك تغيير قائمة NER الخاصة بالاستعلام المقابل.
+في الممارسة العملية، يمكنك استخدام أي نموذج أو نهج آخر لاستخراج الكيانات من الاستعلام.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
 query_ner_list = [<span class="hljs-string">&quot;Euler&quot;</span>]
@@ -365,12 +367,14 @@ relation_search_res = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نحن نستخدم الكيانات والعلاقات المسترجعة لتوسيع المخطط الفرعي والحصول على العلاقات المرشحة، ثم دمجها من الطريقتين. فيما يلي مخطط انسيابي لعملية توسيع المخطط الفرعي:  <span class="img-wrapper">
+    </button></h3><p>نستخدم الكيانات والعلاقات المسترجعة لتوسيع الرسم البياني الفرعي والحصول على العلاقات المرشحة، ثم دمجها من الاتجاهين. فيما يلي مخطط تدفق لعملية توسيع الرسم البياني الفرعي:
+
+  <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>نقوم هنا ببناء مصفوفة تجاور ونستخدم عملية ضرب المصفوفات لحساب معلومات تخطيط التجاور في حدود بضع درجات. بهذه الطريقة، يمكننا الحصول بسرعة على معلومات أي درجة من درجات التوسيع.</p>
+<p>هنا نقوم ببناء مصفوفة الجوار ونستخدم ضرب المصفوفات لحساب معلومات تخطيط الجوار ضمن درجات قليلة. وبهذه الطريقة، يمكننا الحصول بسرعة على معلومات عن أي درجة من درجات التوسيع.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Construct the adjacency matrix of entities and relations where the value of the adjacency matrix is 1 if an entity is related to a relation, otherwise 0.</span>
 entity_relation_adj = np.zeros((<span class="hljs-built_in">len</span>(entities), <span class="hljs-built_in">len</span>(relations)))
 <span class="hljs-keyword">for</span> entity_id, entity <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(entities):
@@ -397,7 +401,7 @@ relation_adj_target_degree = relation_adj_1_degree
 
 entity_relation_adj_target_degree = entity_adj_target_degree @ entity_relation_adj
 <button class="copy-code-btn"></button></code></pre>
-<p>من خلال أخذ القيمة من مصفوفة توسيع الدرجة المستهدفة، يمكننا بسهولة توسيع الدرجة المقابلة من الكيان والعلاقات المسترجعة للحصول على جميع علاقات المخطط الفرعي.</p>
+<p>من خلال أخذ القيمة من مصفوفة توسيع الدرجة المستهدفة، يمكننا بسهولة توسيع الدرجة المقابلة من الكيانات والعلاقات المسترجعة للحصول على جميع علاقات الرسم البياني الفرعي.</p>
 <pre><code translate="no" class="language-python">expanded_relations_from_relation = <span class="hljs-built_in">set</span>()
 expanded_relations_from_entity = <span class="hljs-built_in">set</span>()
 <span class="hljs-comment"># You can set the similarity threshold here to guarantee the quality of the retrieved ones.</span>
@@ -435,7 +439,7 @@ relation_candidate_texts = [
     relations[relation_id] <span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> relation_candidate_ids
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>لقد حصلنا على العلاقات المرشحة من خلال توسيع المخطط الفرعي، والتي سيتم إعادة ترتيبها بواسطة LLM في الخطوة التالية.</p>
+<p>لقد حصلنا على العلاقات المرشحة من خلال توسيع الرسم البياني الفرعي، والتي سيتم إعادة ترتيبها بواسطة LLM في الخطوة التالية.</p>
 <h3 id="LLM-reranking" class="common-anchor-header">إعادة ترتيب LLM<button data-href="#LLM-reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -451,7 +455,7 @@ relation_candidate_texts = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>في هذه المرحلة، نستخدم آلية الانتباه الذاتي القوية في LLM لتصفية مجموعة العلاقات المرشحة وتنقيحها. نستخدم مطالبة من لقطة واحدة، حيث ندمج الاستعلام ومجموعة العلاقات المرشحة في المطالبة، ونوجه LLM لاختيار العلاقات المحتملة التي يمكن أن تساعد في الإجابة عن الاستعلام. ونظرًا لأن بعض الاستفسارات قد تكون معقدة، فإننا نعتمد نهج تسلسل الأفكار، مما يسمح ل LLM بتوضيح عملية التفكير في إجابته. نشترط أن تكون استجابة LLM بصيغة json من أجل التحليل المريح.</p>
+    </button></h3><p>في هذه المرحلة، نستخدم آلية الانتباه الذاتي القوية لـ LLM لمزيد من التصفية وتحسين مجموعة العلاقات المرشحة. نستخدم موجهًا أحاديًا، ندمج فيه الاستعلام ومجموعة العلاقات المرشحة، ونوجه LLM لاختيار العلاقات المحتملة التي يمكن أن تساعد في الإجابة على الاستعلام. ونظرًا لأن بعض الاستفسارات قد تكون معقدة، فإننا نعتمد نهج «سلسلة الأفكار» (Chain-of-Thought)، مما يسمح لـ LLM بتوضيح عملية التفكير الخاصة به في ردّه. ونشترط أن يكون رد LLM بتنسيق json لتسهيل تحليله.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -537,7 +541,7 @@ rerank_relation_ids = rerank_relations(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكننا الحصول على المقاطع النهائية المسترجعة من العلاقات المعاد ترتيبها.</p>
+    </button></h3><p>يمكننا الحصول على المقاطع النهائية المسترجعة من العلاقات التي أعيد ترتيبها.</p>
 <pre><code translate="no" class="language-python">final_top_k = <span class="hljs-number">2</span>
 
 final_passages = []
@@ -549,7 +553,7 @@ final_passage_ids = []
             final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكننا مقارنة النتائج مع طريقة RAG الساذجة التي تسترجع المقاطع الأعلىK بناءً على تضمين الاستعلام مباشرةً من مجموعة المقاطع.</p>
+<p>يمكننا مقارنة النتائج مع طريقة RAG البسيطة، التي تستخرج المقاطع topK بناءً على تضمين الاستعلام مباشرةً من مجموعة المقاطع.</p>
 <pre><code translate="no" class="language-python">naive_passage_res = milvus_client.search(
     collection_name=passage_col_name,
     data=[query_embedding],
@@ -600,4 +604,5 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>كما نرى أن المقاطع التي تم استرجاعها من طريقة RAG الساذجة أخطأت في استرجاع مقطع أساسي صحيح، مما أدى إلى إجابة خاطئة. أما المقاطع المسترجعة من طريقتنا فهي صحيحة، وتساعد في الحصول على إجابة دقيقة للسؤال.</p>
+<p>وكما نرى، فقد فاتت المقاطع المسترجعة من طريقة RAG البسيطة مقطعًا من الحقيقة المعيارية، مما أدى إلى إجابة خاطئة.
+أما المقاطع المسترجعة من طريقتنا فهي صحيحة، وتساعد في الحصول على إجابة دقيقة للسؤال.</p>

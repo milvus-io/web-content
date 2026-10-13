@@ -130,15 +130,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если выполнение вышеуказанной команды не удалось, проверьте, установлен ли в вашей системе Docker Compose версии 1. В этом случае рекомендуется перейти на Docker Compose версии 2 в соответствии с указаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p>
+<p>Если выполнение вышеуказанной команды не удалось, проверьте, установлен ли в вашей системе Docker Compose V1. В этом случае рекомендуется перейти на Docker Compose V2 в соответствии с примечаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p>
 </div>
 <p>После запуска Milvus</p>
 <ul>
-<li>контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong> будут запущены.
+<li>запущены контейнеры с именами <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> и <strong>milvus-etcd</strong>.
 <ul>
 <li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
-<li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9090</strong> и <strong>9091</strong> с использованием учетных данных по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
-<li>Контейнер <strong>milvus-standalone</strong> обслуживает локально порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
+<li>Контейнер <strong>milvus-minio</strong> обслуживает локально порты <strong>9090</strong> и <strong>9091</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
+<li>Контейнер <strong>milvus-standalone</strong> обслуживает локальные порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.</li>
 </ul></li>
 </ul>
 <p>Вы можете проверить, запущены ли контейнеры, с помощью следующей команды:</p>
@@ -155,7 +155,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Сделать устройство GPU <code translate="no">0</code> видимым для Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Сделайте устройства GPU <code translate="no">0</code> и <code translate="no">1</code> видимыми для Milvus:</p>
+<p>Сделать устройства GPU <code translate="no">0</code> и <code translate="no">1</code> видимыми для Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете остановить и удалить этот контейнер следующим образом.</p>
@@ -186,13 +186,13 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </div>
 <p>Чтобы настроить пул памяти, измените параметры <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> в файле <code translate="no">milvus.yaml</code> следующим образом.</p>
 <ol>
-<li><p>Используйте следующую команду, чтобы скопировать файл ` <code translate="no">milvus.yaml</code> ` из контейнера Milvus на свой локальный компьютер. Замените ` <code translate="no">&lt;milvus_container_id&gt;</code> ` на фактический идентификатор вашего контейнера Milvus.</p>
+<li><p>Используйте следующую команду, чтобы скопировать файл ` <code translate="no">milvus.yaml</code> ` из контейнера Milvus на ваш локальный компьютер. Замените ` <code translate="no">&lt;milvus_container_id&gt;</code> ` на фактический идентификатор вашего контейнера Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Откройте скопированный файл <code translate="no">milvus.yaml</code> в удобном для вас текстовом редакторе. Например, с помощью vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Измените настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по необходимости и сохраните изменения:</p>
+<li><p>Отредактируйте настройки <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code> по необходимости и сохраните изменения:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">gpu:</span>
   <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>
@@ -203,10 +203,10 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><code translate="no">initMemSize</code>: Начальный размер пула памяти. По умолчанию — 1024.</li>
 <li><code translate="no">maxMemSize</code>: Максимальный размер пула памяти. По умолчанию — 2048.</li>
 </ul></li>
-<li><p>Используйте следующую команду, чтобы скопировать отредактированный файл ` <code translate="no">milvus.yaml</code> ` обратно в контейнер Milvus. Замените ` <code translate="no">&lt;milvus_container_id&gt;</code> ` на фактический ID вашего контейнера Milvus.</p>
+<li><p>Используйте следующую команду, чтобы скопировать отредактированный файл ` <code translate="no">milvus.yaml</code> ` обратно в контейнер Milvus. Замените ` <code translate="no">&lt;milvus_container_id&gt;</code> ` на фактический идентификатор вашего контейнера Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Перезапустите контейнер Milvus, чтобы применить изменения:</p>
+<li><p>Перезапустите контейнер Milvus, чтобы изменения вступили в силу:</p>
 <pre><code translate="no" class="language-shell">docker stop &lt;milvus_container_id&gt;
 docker start &lt;milvus_container_id&gt;
 <button class="copy-code-btn"></button></code></pre></li>
@@ -240,7 +240,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
@@ -249,7 +249,7 @@ docker start &lt;milvus_container_id&gt;
 </ul></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a> — интуитивно понятным веб-интерфейсом для мониторинга и управления Milvus.</p></li>
 <li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a> — инструментом с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Познакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> — инструментом с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Познакомьтесь с <a href="https://github.com/zilliztech/attu">Attu</a> — инструментом с графическим интерфейсом с открытым исходным кодом для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Осуществляйте мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

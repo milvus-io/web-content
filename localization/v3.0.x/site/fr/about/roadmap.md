@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p><strong>Feuille de route du produit Milvus</strong></p>
 <p>Bienvenue sur la feuille de route de Milvus !</p>
 <p>Nous faisons entrer Milvus dans une nouvelle ère : celle de la base de données multimodale de nouvelle génération, couvrant <strong>aussi bien les données structurées que non structurées</strong>, <strong>la recherche en temps réel que l’analyse hors ligne</strong>, et <strong>les performances d’un cluster unique que l’architecture d’un lac de données mondial</strong>.</p>
-<p>Cette feuille de route présente les objectifs principaux de <strong>Milvus v2.6 (en cours de développement)</strong>, <strong>Milvus v3.0 (prévu pour fin 2026)</strong> et <strong>Milvus v3.1 (développement à long terme)</strong>, ainsi que le plan d’évolution de <strong>Vector Lake (lac de données / Loon)</strong>.</p>
+<p>Cette feuille de route présente les objectifs principaux de <strong>Milvus v2.6 (en cours de développement)</strong>, <strong>Milvus v3.0 (prévu pour fin 2026)</strong> et <strong>Milvus v3.1 (développement à long terme)</strong>, ainsi que le plan d'évolution de <strong>Vector Lake (lac de données / Loon)</strong>.</p>
 <h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (en cours de développement)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>Mise à niveau du modèle de données</strong></h4><ul>
-<li><p>Introduction d’un type de données unifié <strong>Tensor / StructList</strong> pour prendre en charge les structures d’embedding multi-vecteurs, permettant ainsi la compatibilité avec <em>ColBERT</em>, <em>CoLQwen</em>, <em>les vidéos</em> et <em>les vecteurs multimodaux</em>.</p></li>
+<li><p>Introduction d’un type de données unifié <strong>Tensor / StructList</strong> pour prendre en charge les structures d’embedding multi-vecteurs, permettant ainsi la compatibilité avec <em>ColBERT</em>, <em>CoLQwen</em>, <em>la vidéo</em> et <em>les vecteurs multimodaux</em>.</p></li>
 <li><p>Ajout de la prise en charge <strong>des données géographiques</strong>, notamment les points, les régions et l’indexation spatiale (basée sur <em>libspatial</em>), afin d’étendre les cas d’utilisation dans les services de localisation (LBS) et les systèmes d’information géographique (SIG).</p></li>
 <li><p>Prise en charge du type de données « <strong>Timestamp with Timezone</strong> ».</p></li>
 </ul>
@@ -84,11 +84,11 @@ summary: >-
 <li><p>Introduction d’un nouveau moteur de file d’attente de messages : <strong>Woodpecker</strong>.</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Hiérarchisation des données « chaudes » et « froides » et architecture de stockage (StorageV2)</strong></h4><ul>
-<li><p>Prise en charge de deux formats de stockage : <strong>Parquet</strong> et <strong>Vortex</strong>, améliorant la concurrence et l’efficacité mémoire.</p></li>
+<li><p>Prise en charge de deux formats de stockage : <strong>Parquet</strong> et <strong>Vortex</strong>, améliorant ainsi la concurrence et l’efficacité de la mémoire.</p></li>
 <li><p>Mettre en œuvre un stockage à plusieurs niveaux avec séparation automatique des données « chaudes » et « froides » et planification intelligente.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Prototype de Vector Lake (v0.1)</strong></h4><ul>
-<li><p>Intégration avec <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, permettant l’évolution hors ligne des schémas et les requêtes KNN.</p></li>
+<li><p>Intégration avec <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, permettant l'évolution hors ligne des schémas et les requêtes KNN.</p></li>
 <li><p>Fournit une visualisation multimodale des données et une démo ETL Spark, établissant ainsi l’architecture de base du lac de données.</p></li>
 </ul>
 <h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (prévu pour début 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
@@ -135,7 +135,7 @@ summary: >-
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>Améliorations du schéma et de la clé primaire</strong></h4><ul>
 <li><p>Mettre en œuvre <strong>la déduplication globale des clés primaires (Global PK Dedup)</strong> pour garantir la cohérence et l’unicité des données.</p></li>
-<li><p>Prise en charge <strong>d’une gestion flexible des schémas</strong> (ajout/suppression de colonnes, remplissage des sauvegardes).</p></li>
+<li><p>Prise en charge <strong>d’une gestion flexible des schémas</strong> (ajout/suppression de colonnes, remplissage de sauvegarde).</p></li>
 <li><p>Autoriser <strong>les valeurs NULL</strong> dans les champs vectoriels.</p></li>
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Extension des types de données non structurées (BLOB / Texte)</strong></h4><ul>
@@ -150,7 +150,7 @@ summary: >-
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
 <li><p>Prise en charge <strong>du stockage TEXT / BLOB</strong> et <strong>de la gestion des instantanés multiversions</strong>.</p></li>
 <li><p>Intégration de Spark pour les tâches d’indexation hors ligne, de regroupement, de déduplication et de réduction de dimensionnalité.</p></li>
-<li><p>Proposer <strong>des démonstrations de requêtes « à froid » et de benchmarks hors ligne avec ChatPDF</strong>.</p></li>
+<li><p>Proposer <strong>des démonstrations de performances de ChatPDF pour les requêtes « à froid » et hors ligne</strong>.</p></li>
 </ul>
 <h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1 (vision à long terme)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -186,15 +186,15 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>Écosystème des fonctions définies par l’utilisateur (UDF) et du calcul distribué</strong></h4><ul>
 <li><p>Prise en charge <strong>des fonctions définies par l’utilisateur (UDF)</strong>, permettant aux développeurs d’intégrer une logique personnalisée dans les workflows de récupération et de calcul.</p></li>
-<li><p>Intégration poussée avec <strong>Ray Dataset / Daft</strong> pour l’exécution distribuée des UDF et le traitement des données multimodales.</p></li>
+<li><p>Intégration approfondie avec <strong>Ray Dataset / Daft</strong> pour l’exécution distribuée des UDF et le traitement des données multimodales.</p></li>
 </ul>
-<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Évolution des requêtes scalaires et du format local</strong></h4><ul>
+<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Requêtes scalaires et évolution du format local</strong></h4><ul>
 <li><p>Optimisation des performances de filtrage et d’agrégation pour les champs scalaires.</p></li>
 <li><p>Amélioration de l’évaluation des expressions et de l’exécution accélérée par index.</p></li>
 <li><p>Prise en charge <strong>des mises à jour sur place</strong> pour les formats de fichiers locaux.</p></li>
 </ul>
 <h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>Fonctionnalités de recherche avancées</strong></h4><ul>
-<li><p>Ajout des fonctionnalités suivantes : requêtes <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong> et <strong>de correspondance approximative</strong>.</p></li>
+<li><p>Ajout des fonctionnalités suivantes : requêtes <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong> et <strong>de correspondance floue</strong>.</p></li>
 <li><p>Améliorer la recherche de texte grâce à la prise en charge de :</p>
 <ul>
 <li><p><code translate="no">match_phrase_prefix</code></p></li>
@@ -203,15 +203,15 @@ summary: >-
 <li><p><code translate="no">Phrase Suggester</code></p></li>
 </ul></li>
 </ul>
-<h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>Le partitionnement dynamique et l'évolutivité</strong></h4><ul>
+<h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>Partitionnement dynamique et évolutivité</strong></h4><ul>
 <li><p>Activer <strong>le fractionnement automatique des shards</strong> et <strong>l'équilibrage de charge</strong> pour une évolutivité transparente.</p></li>
 <li><p>Améliorer <strong>la création d’index globaux</strong> et garantir <strong>les performances de recherche distribuée</strong>.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
-<li><p>Intégration poussée avec <strong>Ray / Daft / PyTorch</strong> pour prendre en charge les fonctions définies par l'utilisateur (UDF) distribuées et les cas d'utilisation de l'ingénierie contextuelle.</p></li>
-<li><p>Proposez <strong>des démos RAG (Retrieval-Augmented Generation)</strong> <strong>et l’importation depuis des tables Iceberg</strong>.</p></li>
+<li><p>Intégration approfondie avec <strong>Ray / Daft / PyTorch</strong> pour prendre en charge les fonctions définies par l’utilisateur (UDF) distribuées et les cas d’utilisation de l’ingénierie contextuelle.</p></li>
+<li><p>Proposez <strong>des démos RAG (Retrieval-Augmented Generation)</strong> <strong>et importez depuis des tables Iceberg</strong>.</p></li>
 </ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Construire ensemble l’avenir de Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Construisons ensemble l’avenir de Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -6,7 +6,7 @@
     "order": 0,
     "children": [
       {
-        "label": "Milvus란 무엇인가",
+        "label": "Milvus란 무엇인가요?",
         "id": "overview.md",
         "order": 0,
         "children": []
@@ -191,7 +191,7 @@
         ]
       },
       {
-        "label": "Milvus 서버에 연결하기",
+        "label": "Milvus 서버에 연결",
         "id": "connect-to-milvus-server.md",
         "order": 3,
         "children": []
@@ -299,7 +299,7 @@
     ]
   },
   {
-    "label": "사용자 가이드",
+    "label": "사용자 안내서",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "외부 컬렉션 만들기",
+            "label": "외부 컬렉션 생성",
             "id": "create-an-external-collection.md",
             "order": 2,
             "children": []
@@ -715,7 +715,7 @@
                     "children": []
                   },
                   {
-                    "label": "정규 표현식",
+                    "label": "정규식",
                     "id": "regex-filter.md",
                     "order": 13,
                     "children": []
@@ -749,7 +749,7 @@
             ]
           },
           {
-            "label": "컬렉션 필드 수정",
+            "label": "컬렉션 필드 변경",
             "id": "alter-collection-field.md",
             "order": 16,
             "children": []
@@ -1065,7 +1065,7 @@
             "children": []
           },
           {
-            "label": "기본 키 검색",
+            "label": "주키 검색",
             "id": "primary-key-search.md",
             "order": 5,
             "children": []
@@ -1136,9 +1136,15 @@
                 "children": []
               },
               {
-                "label": "기하 연산자",
+                "label": "기하학 연산자",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "멤버십 매치",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1173,7 +1179,7 @@
             "order": 13,
             "children": [
               {
-                "label": "StructArray를 사용한 기본 벡터 검색",
+                "label": "StructArray를 이용한 기본 벡터 검색",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1197,7 +1203,7 @@
                 "children": []
               },
               {
-                "label": "StructArray를 이용한 하이브리드 검색",
+                "label": "StructArray를 활용한 하이브리드 검색",
                 "id": "hybrid-search-with-structarray.md",
                 "order": 4,
                 "children": []
@@ -1353,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "RRF 랭킹",
+                "label": "RRF 랭커",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1633,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "클로드 코드용 MCP 서버",
+        "label": "Claude 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "명령어 (0.6.0)",
+            "label": "명령어",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "HTTP API (0.6.0)",
+            "label": "HTTP API",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "명령어 (0.5.x)",
+                "label": "명령어",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "HTTP API (0.5.x)",
+                "label": "HTTP API",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "일반적인 사례 (0.5.x)",
+                "label": "흔히 발생하는 사례",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2240,7 +2246,7 @@
                     "children": []
                   },
                   {
-                    "label": "버킷 간 인스턴스 간 마이그레이션",
+                    "label": "버킷 간 인스턴스 마이그레이션",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "0.6.0으로 업데이트",
+                "label": "0.6.x 버전으로 업그레이드",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2301,7 +2307,7 @@
         ]
       },
       {
-        "label": "조류 관찰가",
+        "label": "조류 관찰자",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2373,7 +2379,7 @@
         "children": []
       },
       {
-        "label": "Milvus 크기 측정 도구",
+        "label": "Milvus 크기 조정 도구",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -3243,7 +3249,7 @@
             "children": []
           },
           {
-            "label": "DNA 서열 분류",
+            "label": "DNA 염기서열 분류",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

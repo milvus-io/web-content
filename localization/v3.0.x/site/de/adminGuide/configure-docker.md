@@ -96,7 +96,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_common.md">Allgemein</a></li>
             <li><a href="/docs/de/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/de/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/de/configure_indexcoord.md">Indexkoordinaten</a></li>
+            <li><a href="/docs/de/configure_indexcoord.md">Indexkoordinate</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichtenwarteschlange</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>

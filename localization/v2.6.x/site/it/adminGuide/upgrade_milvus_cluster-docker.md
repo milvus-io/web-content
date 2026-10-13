@@ -20,9 +20,9 @@ title: Aggiornamento del cluster Milvus con Docker Compose
         ></path>
       </svg>
     </button></h1><p>In questa sezione viene descritto come aggiornare Milvus utilizzando Docker Compose.</p>
-<p>Normalmente, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus modificandone l'immagine</a>. Tuttavia, prima di qualsiasi aggiornamento dalla versione v2.1.x alla v2.6.17, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a>.</p>
+<p>Normalmente, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus modificandone l’immagine</a>. Tuttavia, prima di qualsiasi aggiornamento dalla versione v2.1.x alla v2.6.17, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a>.</p>
 <div class="alert note">
-<p><strong>Limiti della coda dei messaggi</strong>: durante l'aggiornamento a Milvus v2.6.17, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni relative alle code di messaggi</strong>: durante l'aggiornamento a Milvus v2.6.17, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornamento di Milvus modificandone l’immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ title: Aggiornamento del cluster Milvus con Docker Compose
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.17</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Eseguire i seguenti comandi per eseguire l’aggiornamento.</p>
+<li><p>Eseguire i seguenti comandi per effettuare l’aggiornamento.</p>
 <pre><code translate="no" class="language-shell">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>

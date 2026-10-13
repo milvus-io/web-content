@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p><strong>Roteiro do produto Milvus</strong></p>
 <p>Bem-vindo ao Roteiro do Milvus!</p>
-<p>Estamos a conduzir o Milvus para uma nova era — a base de dados multimodal de próxima geração — que abrange <strong>desde dados estruturados a não estruturados</strong>, <strong>da recuperação em tempo real à análise offline</strong> e <strong>do desempenho num único cluster a uma arquitetura global de lago de dados</strong>.</p>
+<p>Estamos a conduzir o Milvus para uma nova era — a base de dados multimodal de próxima geração — que abrange <strong>desde dados estruturados a não estruturados</strong>, <strong>da recuperação em tempo real à análise offline</strong> e <strong>do desempenho num único cluster a uma arquitetura global de data lake</strong>.</p>
 <p>Este roteiro descreve os objetivos principais para <strong>o Milvus v2.6 (em desenvolvimento)</strong>, <strong>o Milvus v3.0 (previsto para o final de 2026)</strong> e <strong>o Milvus v3.1 (desenvolvimento a longo prazo)</strong>, juntamente com o plano de evolução do <strong>Vector Lake (data lake / Loon)</strong>.</p>
 <h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (em desenvolvimento)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,8 +56,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Cronograma: meados de 2025 – final de 2025</strong></p>
-<p>Foco: <strong>Atualização do modelo de dados</strong>, <strong>refatoração da arquitetura de streaming</strong>, <strong>desenvolvimento de capacidades de armazenamento em camadas «quentes» e «frias»</strong> e lançamento do <strong>protótipo do Vector Lake (v0.1)</strong>.</p>
+    </button></h2><p><strong>Cronograma: Meados de 2025 – Final de 2025</strong></p>
+<p>Foco: <strong>Atualizar o modelo de dados</strong>, <strong>refatorar a arquitetura de streaming</strong>, <strong>desenvolver capacidades de armazenamento em camadas «quentes» e «frias»</strong> e lançar o <strong>protótipo do Vector Lake (v0.1)</strong>.</p>
 <h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Principais destaques<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ summary: >-
 <li><p>Introdução de um novo motor de filas de mensagens: <strong>Woodpecker</strong>.</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Arquitetura de armazenamento e camadas «quentes»/«frias» (StorageV2)</strong></h4><ul>
-<li><p>Suportar dois formatos de armazenamento: <strong>Parquet</strong> e <strong>Vortex</strong>, melhorando a concorrência e a eficiência da memória.</p></li>
+<li><p>Suporte a dois formatos de armazenamento: <strong>Parquet</strong> e <strong>Vortex</strong>, melhorando a concorrência e a eficiência da memória.</p></li>
 <li><p>Implementar armazenamento em camadas com separação automática de dados «quentes» e «frios» e agendamento inteligente.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Protótipo do Vector Lake (v0.1)</strong></h4><ul>
@@ -106,7 +106,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Cronograma: Final de 2025 – Início de 2026</strong></p>
+    </button></h2><p><strong>Cronograma: Final de 2025 – início de 2026</strong></p>
 <p>Foco: Melhorias abrangentes na <strong>experiência de pesquisa</strong>, <strong>flexibilidade do esquema</strong> e <strong>suporte a dados não estruturados</strong>, juntamente com o lançamento do <strong>Vector Lake (v0.2)</strong>.</p>
 <h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Principais destaques<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,7 +134,7 @@ summary: >-
 <li><p>Melhorar o isolamento de recursos e as estratégias de agendamento para suportar milhões de tabelas num único cluster.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>Melhorias no esquema e na chave primária</strong></h4><ul>
-<li><p>Implementar <strong>a deduplicação global de chaves primárias (Global PK Dedup)</strong> para garantir a consistência e a unicidade dos dados.</p></li>
+<li><p>Implementar <strong>a deduplicação global de chaves primárias (Global PK Dedup)</strong> para garantir a consistência e a exclusividade dos dados.</p></li>
 <li><p>Suportar <strong>a gestão flexível de esquemas</strong> (adição/eliminação de colunas, preenchimento de cópias de segurança).</p></li>
 <li><p>Permitir <strong>valores NULL</strong> em campos vetoriais.</p></li>
 </ul>
@@ -148,7 +148,7 @@ summary: >-
 <li><p>Implementação <strong>de alta disponibilidade (HA) ativo-em espera</strong> em implementações com vários clusters.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
-<li><p>Suporta <strong>armazenamento de TEXT/BLOB</strong> e <strong>gestão de instantâneos com várias versões</strong>.</p></li>
+<li><p>Suporta <strong>armazenamento TEXT/BLOB</strong> e <strong>gestão de instantâneos com várias versões</strong>.</p></li>
 <li><p>Integra o Spark para tarefas de indexação offline, agrupamento em clusters, deduplicação e redução de dimensionalidade.</p></li>
 <li><p>Apresentar <strong>demonstrações de consultas em modo «cold» e benchmarks offline do ChatPDF</strong>.</p></li>
 </ul>
@@ -184,16 +184,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>UDF e ecossistema de computação distribuída</strong></h4><ul>
+    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>Ecossistema de UDF e computação distribuída</strong></h4><ul>
 <li><p>Suporte <strong>a funções definidas pelo utilizador (UDFs)</strong>, permitindo que os programadores incorporem lógica personalizada nos fluxos de trabalho de recuperação e computação.</p></li>
 <li><p>Integração profunda com <strong>o Ray Dataset / Daft</strong> para a execução distribuída de UDF e o processamento de dados multimodais.</p></li>
 </ul>
-<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Evolução das consultas escalares e do formato local</strong></h4><ul>
+<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Consultas escalares e evolução do formato local</strong></h4><ul>
 <li><p>Otimização do desempenho de filtragem e agregação para campos escalares.</p></li>
 <li><p>Melhoria da avaliação de expressões e da execução acelerada por índices.</p></li>
 <li><p>Suporta <strong>atualizações no local</strong> para formatos de ficheiros locais.</p></li>
 </ul>
-<h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>Funcionalidades de pesquisa avançadas</strong></h4><ul>
+<h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>Funcionalidades avançadas de pesquisa</strong></h4><ul>
 <li><p>Adicione as seguintes funcionalidades: consultas <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong> e <strong>de correspondência aproximada</strong>.</p></li>
 <li><p>Melhorar a recuperação de texto com suporte para:</p>
 <ul>
@@ -211,7 +211,7 @@ summary: >-
 <li><p>Integração profunda com <strong>Ray / Daft / PyTorch</strong> para suportar UDFs distribuídas e casos de utilização de Engenharia de Contexto.</p></li>
 <li><p>Fornece <strong>demonstrações de RAG (Retrieval-Augmented Generation)</strong> <strong>e permite a importação a partir de tabelas Iceberg</strong>.</p></li>
 </ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Construir em conjunto o futuro do Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Construindo em conjunto o futuro do Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

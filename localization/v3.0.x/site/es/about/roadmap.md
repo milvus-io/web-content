@@ -4,8 +4,8 @@ title: Hoja de ruta de Milvus
 related_key: Milvus roadmap
 summary: >-
   Milvus es una base de datos vectorial de código abierto diseñada para impulsar
-  aplicaciones de inteligencia artificial. A continuación, te presentamos
-  nuestra hoja de ruta, que servirá de guía para nuestro desarrollo.
+  aplicaciones de inteligencia artificial. A continuación te presentamos nuestra
+  hoja de ruta, que sirve de guía para nuestro desarrollo.
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Hoja de ruta de Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ summary: >-
 <li><p>Compatibilidad con el tipo de datos <strong>«Timestamp with Timezone</strong> ».</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>Reestructuración de la arquitectura de StreamNode</strong></h4><ul>
-<li><p>Reescritura del canal de ingestión de streaming para optimizar las escrituras incrementales y el cálculo en tiempo real.</p></li>
+<li><p>Se ha reescrito el canal de ingestión de streaming para optimizar las escrituras incrementales y el cálculo en tiempo real.</p></li>
 <li><p>Mejora significativa del rendimiento y la estabilidad de la concurrencia, sentando las bases para un procesamiento unificado en tiempo real y fuera de línea.</p></li>
 <li><p>Introducción de un nuevo motor de colas de mensajes: <strong>Woodpecker</strong>.</p></li>
 </ul>
@@ -107,7 +107,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>Calendario: finales de 2025 – principios de 2026</strong></p>
-<p>Enfoque: mejoras integrales en <strong>la experiencia de búsqueda</strong>, <strong>la flexibilidad de los esquemas</strong> y <strong>la compatibilidad con datos no estructurados</strong>, junto con el lanzamiento de <strong>Vector Lake (v0.2)</strong>.</p>
+<p>Enfoque: Mejoras integrales en <strong>la experiencia de búsqueda</strong>, <strong>la flexibilidad de los esquemas</strong> y <strong>la compatibilidad con datos no estructurados</strong>, junto con el lanzamiento de <strong>Vector Lake (v0.2)</strong>.</p>
 <h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Aspectos más destacados<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>Renovación de la experiencia de búsqueda</strong></h4><ul>
 <li><p>Introducción de la búsqueda por similitud <strong>«Más como este» (MLT)</strong>, con soporte para búsquedas con posición o ejemplos negativos.</p></li>
-<li><p>Se añaden capacidades de búsqueda semántica, como <strong>el resaltado</strong> y <strong>el refuerzo</strong>.</p></li>
+<li><p>Se añaden capacidades de búsqueda semántica, como <strong>el resaltado</strong> y <strong>la potenciación</strong>.</p></li>
 <li><p>Compatibilidad con <strong>diccionarios personalizados</strong> y <strong>tablas de sinónimos</strong>, lo que permite definir reglas léxicas y semánticas en la capa del analizador.</p></li>
 <li><p>Introducción de capacidades de <strong>agregación</strong> para las consultas.</p></li>
 </ul>
@@ -135,11 +135,11 @@ summary: >-
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>Mejoras en el esquema y la clave primaria</strong></h4><ul>
 <li><p>Implementar <strong>la deduplicación global de claves primarias (Global PK Dedup)</strong> para garantizar la coherencia y la unicidad de los datos.</p></li>
-<li><p>Admite <strong>una gestión flexible de esquemas</strong> (adición/eliminación de columnas, relleno de copias de seguridad).</p></li>
+<li><p>Admite <strong>una gestión flexible de esquemas</strong> (añadir o eliminar columnas, relleno de copias de seguridad).</p></li>
 <li><p>Permitir <strong>valores NULL</strong> en campos vectoriales.</p></li>
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Ampliación de los tipos de datos no estructurados (BLOB / Texto)</strong></h4><ul>
-<li><p>Introducción del <strong>tipo BLOB</strong>, que proporciona almacenamiento y referencias nativas para datos binarios, como archivos, imágenes y vídeos.</p></li>
+<li><p>Introducir el <strong>tipo BLOB</strong>, que proporciona almacenamiento y referencias nativas para datos binarios, como archivos, imágenes y vídeos.</p></li>
 <li><p>Introducir <strong>el tipo TEXT</strong>, que ofrece capacidades mejoradas de búsqueda de texto completo y basada en el contenido.</p></li>
 </ul>
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Funcionalidades de nivel empresarial</strong></h4><ul>
@@ -148,8 +148,8 @@ summary: >-
 <li><p>Implementación de <strong>alta disponibilidad (HA)</strong> en modo <strong>activo-en espera</strong> en implementaciones con varios clústeres.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
-<li><p>Admite <strong>el almacenamiento de TEXT/BLOB</strong> y <strong>la gestión de instantáneas multiversión</strong>.</p></li>
-<li><p>Integra Spark para tareas de indexación sin conexión, agrupación en clústeres, deduplicación y reducción de dimensionalidad.</p></li>
+<li><p>Admite <strong>almacenamiento de TEXT/BLOB</strong> y <strong>gestión de instantáneas multiversión</strong>.</p></li>
+<li><p>Integra Spark para tareas de indexación fuera de línea, agrupación en clústeres, deduplicación y reducción de dimensionalidad.</p></li>
 <li><p>Ofrecer <strong>demostraciones de consultas en frío y pruebas de rendimiento sin conexión de ChatPDF</strong>.</p></li>
 </ul>
 <h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1 (visión a largo plazo)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
@@ -209,7 +209,7 @@ summary: >-
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
 <li><p>Integración profunda con <strong>Ray, Daft y PyTorch</strong> para admitir funciones definidas por el usuario (UDF) distribuidas y casos de uso de ingeniería de contexto.</p></li>
-<li><p>Ofrece <strong>demostraciones de RAG (generación aumentada por recuperación)</strong> <strong>e importación desde tablas de Iceberg</strong>.</p></li>
+<li><p>Ofrece <strong>demostraciones de RAG (Generación Aumentada por Recuperación)</strong> <strong>e importación desde tablas de Iceberg</strong>.</p></li>
 </ul>
 <h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Construyendo juntos el futuro de Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,9 +229,9 @@ summary: >-
     </button></h2><p>Milvus es un proyecto de código abierto impulsado por una comunidad global de desarrolladores.</p>
 <p>Invitamos cordialmente a todos los miembros de la comunidad a que nos ayuden a dar forma a la base de datos multimodal de próxima generación:</p>
 <ul>
-<li><p>💬 <strong>Comparte tus comentarios</strong>: propone nuevas funcionalidades o ideas de optimización</p></li>
+<li><p>💬 <strong>Comparte tus comentarios</strong>: propone nuevas funciones o ideas de optimización</p></li>
 <li><p>🐛 <strong>Informar de problemas</strong>: notificar errores a través de GitHub Issues</p></li>
-<li><p>🔧 <strong>Aporta código</strong>: envía pull requests y ayuda a desarrollar las funciones principales</p>
+<li><p>🔧 <strong>Aporta código</strong>: envía solicitudes de incorporación de cambios (PR) y ayuda a desarrollar las funciones principales</p>
 <ul>
 <li><p><strong>Solicitudes de incorporación de cambios</strong>: contribuye directamente a nuestro <a href="https://github.com/milvus-io/milvus/pulls">código fuente</a>. Ya sea corrigiendo errores, añadiendo funcionalidades o mejorando la documentación, tus contribuciones son bienvenidas.</p></li>
 <li><p><strong>Guía de desarrollo</strong>: Consulta nuestra <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Guía para colaboradores</a> para conocer las directrices sobre las contribuciones de código.</p></li>

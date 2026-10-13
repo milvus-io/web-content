@@ -35,9 +35,9 @@ title: Ressourcengruppen verwalten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine Ressourcengruppe kann mehrere oder alle Abfrageknoten eines Milvus-Clusters enthalten. Sie entscheiden selbst, wie Sie die Abfrageknoten auf die Ressourcengruppen verteilen möchten, je nachdem, was für Sie am sinnvollsten ist. In einem Szenario mit mehreren Sammlungen können Sie beispielsweise jeder Ressourcengruppe eine angemessene Anzahl von Abfrageknoten zuweisen und Sammlungen in verschiedene Ressourcengruppen laden, sodass die Vorgänge innerhalb jeder Sammlung physisch unabhängig von denen in anderen Sammlungen sind.</p>
+    </button></h2><p>Eine Ressourcengruppe kann mehrere oder alle Abfrageknoten in einem Milvus-Cluster enthalten. Sie entscheiden selbst, wie Sie die Abfrageknoten auf die Ressourcengruppen verteilen möchten, je nachdem, was für Sie am sinnvollsten ist. In einem Szenario mit mehreren Sammlungen können Sie beispielsweise jeder Ressourcengruppe eine angemessene Anzahl von Abfrageknoten zuweisen und Sammlungen in verschiedene Ressourcengruppen laden, sodass die Vorgänge innerhalb jeder Sammlung physisch unabhängig von denen in anderen Sammlungen sind.</p>
 <p>Beachten Sie, dass eine Milvus-Instanz beim Start eine Standard-Ressourcengruppe unterhält, die alle Abfrageknoten enthält, und diese als <strong>__default_resource_group</strong> bezeichnet.</p>
-<p>Ab Version 2.4.1 bietet Milvus eine deklarative Ressourcengruppen-API an, während die alte Ressourcengruppen-API veraltet ist. Die neue deklarative API ermöglicht es Benutzern, Idempotenz zu erreichen und die Sekundärentwicklung in Cloud-nativen Umgebungen einfacher durchzuführen.</p>
+<p>Ab Version 2.4.1 bietet Milvus eine deklarative Ressourcengruppen-API an, während die alte Ressourcengruppen-API veraltet ist. Die neue deklarative API ermöglicht es Benutzern, Idempotenz zu erreichen und sekundäre Entwicklungen in Cloud-nativen Umgebungen einfacher durchzuführen.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Konzepte der Ressourcengruppe<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,16 +64,16 @@ title: Ressourcengruppen verwalten
 <ul>
 <li>Das Attribut <strong>„requests“</strong> legt die Bedingungen fest, die eine Ressourcengruppe erfüllen muss.</li>
 <li>Das Attribut <strong>„limits“</strong> legt die maximalen Grenzwerte für eine Ressourcengruppe fest.</li>
-<li>Die Attribute <strong>„transfer_from“</strong> und <strong>„transfer_to“</strong> beschreiben, aus welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen und an welche Ressourcengruppen sie Ressourcen übertragen soll.</li>
+<li>Die Attribute <strong>„transfer_from“</strong> und <strong>„transfer_to“</strong> beschreiben, aus welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen sollte und an welche Ressourcengruppen sie Ressourcen übertragen sollte.</li>
 </ul>
 <p>Sobald sich die Konfiguration einer Ressourcengruppe ändert, passt Milvus die aktuellen Ressourcen der Abfrageknoten so weit wie möglich an die neue Konfiguration an und stellt sicher, dass alle Ressourcengruppen letztendlich die folgende Bedingung erfüllen:</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Ausgenommen sind die folgenden Fälle:</p>
 <ul>
 <li>Wenn die Anzahl der QueryNodes im Milvus-Cluster nicht ausreicht, d. h. <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, gibt es immer Ressourcengruppen ohne genügend QueryNodes.</li>
-<li>Wenn die Anzahl der QueryNodes im Milvus-Cluster zu hoch ist, d. h. <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, werden die redundanten QueryNodes immer zuerst in die <strong>__default_resource_group</strong> verschoben.</li>
+<li>Wenn die Anzahl der QueryNodes im Milvus-Cluster zu hoch ist, d. h. <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, werden die redundanten QueryNodes immer zuerst in der <strong>__default_resource_group</strong> platziert.</li>
 </ul>
-<p>Sollte sich die Anzahl der QueryNodes im Cluster ändern, wird Milvus natürlich kontinuierlich versuchen, sich an die aktuellen Bedingungen anzupassen. Daher können Sie zunächst die Änderungen an der Konfiguration der Ressourcengruppen vornehmen und anschließend die Skalierung der QueryNodes durchführen.</p>
+<p>Sollte sich die Anzahl der QueryNodes im Cluster ändern, versucht Milvus natürlich kontinuierlich, sich an die aktuellen Bedingungen anzupassen. Daher können Sie zunächst die Änderungen an der Konfiguration der Ressourcengruppen vornehmen und anschließend die Skalierung der QueryNodes durchführen.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Verwenden Sie die deklarative API zur Verwaltung von Ressourcengruppen<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Beachten Sie, dass „ <code translate="no">_resource_groups</code> “ ein optionaler Parameter ist; wenn Sie ihn nicht angeben, lädt Milvus die Replikate auf die Abfrageknoten in der Standard-Ressourcengruppe.</p>
 <p>Damit Milvus jede Replik einer Sammlung in eine separate Ressourcengruppe lädt, muss die Anzahl der Ressourcengruppen der Anzahl der Repliken entsprechen.</p></li>
 <li><p>Replikate zwischen Ressourcengruppen verschieben.</p>
-<p>Milvus nutzt <a href="/docs/de/replica.md">Replikate</a>, um einen Lastausgleich zwischen <a href="/docs/de/glossary.md#Segment">Segmenten</a> zu erreichen, die auf mehrere Abfrageknoten verteilt sind. Sie können bestimmte Replikate einer Sammlung wie folgt von einer Ressourcengruppe in eine andere verschieben:</p>
+<p>Milvus nutzt <a href="/docs/de/replica.md">Replikate</a>, um eine Lastverteilung zwischen <a href="/docs/de/glossary.md#Segment">Segmenten</a> zu erreichen, die auf mehrere Abfrageknoten verteilt sind. Sie können bestimmte Replikate einer Sammlung wie folgt von einer Ressourcengruppe in eine andere verschieben:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -200,7 +200,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Eine Ressourcengruppe löschen.</p>
-<p>Sie können eine Ressourcengruppe, die keinen Abfrageknoten enthält (<code translate="no">limits.node_num = 0</code>), jederzeit löschen. In dieser Anleitung enthält die Ressourcengruppe „ <code translate="no">rg</code> “ derzeit einen Abfrageknoten. Sie müssen zunächst die Konfiguration „ <code translate="no">limits.node_num</code> “ der Ressourcengruppe auf Null setzen.</p>
+<p>Sie können eine Ressourcengruppe, die keinen Abfrageknoten enthält (<code translate="no">limits.node_num = 0</code>), jederzeit löschen. In dieser Anleitung verfügt die Ressourcengruppe „ <code translate="no">rg</code> “ derzeit über einen Abfrageknoten. Sie müssen zunächst die Konfigurations <code translate="no">limits.node_num</code> r Ressourcengruppe auf Null setzen.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
@@ -231,11 +231,11 @@ except Exception:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Derzeit kann Milvus in cloud-nativen Umgebungen nicht eigenständig skalieren. Durch die Verwendung der <strong>deklarativen Ressourcengruppen-API</strong> in Verbindung mit Container-Orchestrierung kann Milvus jedoch auf einfache Weise die Ressourcenisolierung und -verwaltung für QueryNodes erreichen.
+    </button></h2><p>Derzeit kann Milvus in Cloud-nativen Umgebungen nicht eigenständig skalieren. Durch die Verwendung der <strong>deklarativen Ressourcengruppen-API</strong> in Verbindung mit Container-Orchestrierung kann Milvus jedoch auf einfache Weise die Ressourcenisolierung und -verwaltung für QueryNodes erreichen.
 Hier ist eine bewährte Vorgehensweise für die Verwaltung von QueryNodes in einer Cloud-Umgebung:</p>
 <ol>
 <li><p>Standardmäßig erstellt Milvus eine <strong>__default_resource_group</strong>. Diese Ressourcengruppe kann nicht gelöscht werden und dient zudem als Standard-Lade-Ressourcengruppe für alle Sammlungen; redundante QueryNodes werden ihr stets zugewiesen. Daher können wir eine „pending“-Ressourcengruppe erstellen, um nicht genutzte QueryNode-Ressourcen aufzunehmen und so zu verhindern, dass diese Ressourcen von der <strong>`__default_resource_group`</strong> belegt werden.</p>
-<p>Wenn wir zudem die Einschränkung „ <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> “ strikt durchsetzen, können wir die Zuweisung von QueryNodes im Cluster präzise steuern. Nehmen wir an, es gibt derzeit nur einen QueryNode im Cluster, und initialisieren wir den Cluster.
+<p>Wenn wir zudem die Einschränkung „ <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> “ strikt durchsetzen, können wir die Zuweisung von QueryNodes im Cluster präzise steuern. Nehmen wir an, es befindet sich derzeit nur ein QueryNode im Cluster, und initialisieren wir den Cluster.
 Hier ist ein Beispiel für eine Konfiguration:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -300,7 +300,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Cluster-Scale-in</p>
-<p>Ebenso können wir Regeln für die Skalierung nach unten festlegen, die der Auswahl von QueryNodes aus der Ressourcengruppe <strong> „__pending_nodes“</strong> Vorrang einräumen. Diese Informationen lassen sich über die API „ <code translate="no">describe_resource_group</code> “ abrufen. Damit wird das Ziel der Skalierung einer bestimmten Ressourcengruppe nach unten erreicht.</p>
+<p>Ebenso können wir Regeln für die Skalierung nach unten festlegen, die der Auswahl von QueryNodes aus der Ressourcengruppe <strong> „__pending_nodes“</strong> Priorität einräumen. Diese Informationen lassen sich über die API „ <code translate="no">describe_resource_group</code> “ abrufen. Damit wird das Ziel der Skalierung einer bestimmten Ressourcengruppe nach unten erreicht.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

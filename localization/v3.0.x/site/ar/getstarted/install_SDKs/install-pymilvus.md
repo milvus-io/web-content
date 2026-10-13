@@ -38,7 +38,7 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
         ></path>
       </svg>
     </button></h2><ul>
-<li>يلزم وجود Python 3.7 أو إصدار أحدث.</li>
+<li>يلزم توفر Python 3.7 أو إصدار أحدث.</li>
 <li>يجب تثبيت Google protobuf. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
 <li>يجب تثبيت grpcio-tools. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install grpcio-tools</code>.</li>
 </ul>
@@ -104,7 +104,7 @@ title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvu
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث عن متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p>استكشاف <a href="/api-reference/pymilvus/v3.0.x/About.md">مرجع واجهة برمجة تطبيقات PyMilvus</a></p></li>
 </ul>

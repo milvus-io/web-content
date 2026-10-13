@@ -39,7 +39,7 @@ title: Eseguire Milvus in Docker (Linux)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Installare Docker Desktop</a>.​</p></li>
+<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Installare Docker Desktop</a>.</p></li>
 <li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Installare Windows Subsystem for Linux 2 (WSL 2)</a>.​</p></li>
 <li><p>Installare Python 3.8 o versioni successive.</p></li>
 </ul>
@@ -90,8 +90,8 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>Dopo aver eseguito lo script di installazione:​</p>
 <ul>
-<li><p>È stato avviato un container Docker denominato <strong>milvus-standalone</strong> sulla porta <strong>19530</strong>.</p></li>
-<li><p>Insieme a Milvus, nello stesso container è stato installato un etcd incorporato, che opera sulla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.​</p></li>
+<li><p>È stato avviato un container Docker denominato <strong>milvus-standalone</strong> sulla porta <strong>19530</strong>.​</p></li>
+<li><p>Insieme a Milvus, nello stesso container è stato installato un etcd integrato, che è disponibile sulla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.​</p></li>
 <li><p>Il volume di dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.​</p></li>
 </ul>
 <p>È possibile utilizzare i seguenti comandi per gestire il container Milvus e i dati memorizzati.​</p>
@@ -123,7 +123,7 @@ Delete successfully. # Data has been removed.​
       </svg>
     </button></h3><p>Se si preferisce avviare Milvus utilizzando comandi Linux e script di shell su Windows, assicurarsi di aver già installato WSL 2. Per i dettagli su come installare WSL 2, è possibile fare riferimento a questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.​</p>
 <ol>
-<li><p>Avviare WSL 2.</p>
+<li><p>Avvia WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
@@ -172,7 +172,7 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h2><p>Una volta installato Docker Desktop su Microsoft Windows, è possibile accedere alla CLI di Docker da PowerShell o dal Prompt dei comandi di Windows in modalità <strong>amministratore</strong>. È possibile eseguire Docker Compose in PowerShell, nel Prompt dei comandi di Windows o in WSL 2 per avviare Milvus.​</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Da PowerShell o dal prompt dei comandi di Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Da PowerShell o dal Prompt dei comandi di Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,7 +188,7 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il tasto destro del mouse e selezionando " <strong>Esegui come amministratore</strong>".​</p></li>
+<li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il tasto destro del mouse e selezionando <strong>«Esegui come amministratore</strong>».​</p></li>
 <li><p>Eseguire i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.17/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
@@ -200,11 +200,11 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>A seconda della connessione di rete, il download delle immagini per l’installazione di Milvus potrebbe richiedere un po’ di tempo. Una volta che i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, è possibile notare che ​</p>
+<p>A seconda della connessione di rete, il download delle immagini per l’installazione di Milvus potrebbe richiedere un po’ di tempo. Una volta che i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, è possibile osservare che​</p>
 <ul>
-<li><p>il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella <strong>cartella volumes/etcd</strong> all’interno della cartella corrente​</p></li>
+<li><p>il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella <strong>cartella volumes/etcd</strong> all’interno della cartella corrente.</p></li>
 <li><p>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9090</strong> e <strong>9091</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella <strong>cartella volumes/minio</strong> nella directory corrente.​</p></li>
-<li><p>Il container <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella <strong>cartella volumes/milvus</strong> nella directory corrente.​</p></li>
+<li><p>Il container <strong>milvus-standalone</strong> espone localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.​</p></li>
 </ul></li>
 </ol>
 <p>È inoltre possibile utilizzare la versione Linux dei comandi Docker Compose se è installato WSL 2.​</p>
@@ -223,7 +223,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La procedura è simile a quella utilizzata con Docker Compose per installare Milvus sui sistemi Linux.​</p>
+    </button></h3><p>La procedura è simile a quella utilizzata con Docker Compose per installare Milvus nei sistemi Linux.​</p>
 <ol>
 <li><p>Avviare WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -274,20 +274,20 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una volta installato Docker Desktop su Windows, potresti riscontrare l'errore " <code translate="no">Docker Engine stopped</code> " se il tuo computer non è configurato correttamente. In questo caso, potrebbe essere necessario effettuare i seguenti controlli:​</p>
+    </button></h3><p>Una volta installato Docker Desktop su Windows, è possibile che si verifichi l'errore " <code translate="no">Docker Engine stopped</code> " se il computer non è configurato correttamente. In questo caso, potrebbe essere necessario effettuare i seguenti controlli:​</p>
 <ol>
 <li><p>Verifica se la virtualizzazione è abilitata.​</p>
-<p>Puoi verificare se la virtualizzazione è abilitata controllando la scheda <strong>Prestazioni</strong> in <strong>Gestione attività</strong>.​</p>
+<p>Puoi verificare se la virtualizzazione è abilitata controllando la scheda <strong>"Prestazioni</strong> " in <strong>Gestione attività</strong>.​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
    <span>Virtualizzazione in Gestione attività</span>
   
  </span></p>
-<p>Se la virtualizzazione è disabilitata, potrebbe essere necessario controllare le impostazioni del BIOS del firmware della scheda madre. La procedura per abilitare la virtualizzazione nelle impostazioni del BIOS varia a seconda del produttore della scheda madre. Per le schede madri ASUS, ad esempio, è possibile fare riferimento a <a href="https://www.asus.com/support/faq/1043786/">questo articolo</a> sull'abilitazione della virtualizzazione.​</p>
+<p>Se la virtualizzazione è disabilitata, potrebbe essere necessario controllare le impostazioni del BIOS del firmware della scheda madre. La procedura per abilitare la virtualizzazione nelle impostazioni del BIOS varia a seconda del produttore della scheda madre. Per le schede madri ASUS, ad esempio, è possibile fare riferimento a <a href="https://www.asus.com/support/faq/1043786/">questo articolo</a> sull’abilitazione della virtualizzazione.​</p>
 <p>Successivamente, è necessario riavviare il computer e abilitare Hyper-V. Per ulteriori dettagli, consultare questo <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">articolo di Microsoft</a>.​</p></li>
 <li><p>Verificare se il servizio Docker Desktop è stato avviato.​</p>
-<p>È possibile eseguire il seguente comando per avviare il servizio Docker Desktop.​</p>
+<p>È possibile eseguire il comando seguente per avviare il servizio Docker Desktop.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -300,7 +300,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Verificare se il daemon di Docker è stato avviato.​</p>
+<li><p>Verificare che il daemon di Docker sia stato avviato.​</p>
 <p>Per avviare il daemon di Docker, è necessario accedere alla directory di installazione di Docker Desktop ed eseguire il comando ` <code translate="no">.\DockerCli.exe -SwitchDaemon</code> `.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
@@ -333,18 +333,18 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h3><p>Se si sono verificati problemi relativi a WSL durante l’esecuzione di Milvus da WSL 2, potrebbe essere necessario verificare se Docker Desktop è stato configurato per utilizzare il motore basato su WSL 2 come segue:​</p>
 <ol>
-<li><p>Assicurati che l’opzione “Usa il motore basato su WSL 2” sia selezionata in <strong>Impostazioni</strong> &gt; <strong>Generale</strong>.</p>
+<li><p>Assicurati che l’opzione “Usa il motore basato su WSL 2” sia selezionata in <strong>Impostazioni</strong> &gt; <strong>Generale</strong>. ​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
-   <span>Utilizza il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span>
+   <span>Utilizzare il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span>
   
  </span></p></li>
-<li><p>Seleziona tra le distribuzioni WSL 2 installate quella su cui desideri abilitare l'integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
+<li><p>Seleziona tra le distribuzioni WSL 2 installate quelle su cui desideri abilitare l’integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
-   <span>Selezionare le distribuzioni WSL 2 nelle impostazioni di Docker Desktop</span>
+   <span>Selezione delle distribuzioni WSL 2 nelle impostazioni di Docker Desktop</span>
   
  </span></p></li>
 </ol>
@@ -404,15 +404,15 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Aggiornamento di Milvus tramite Helm Chart</a>.</p></li>
-<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il proprio cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/v2.6.x/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/it/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/it/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per il monitoraggio e la gestione di Milvus.</p></li>
+<li><p>Scopri <a href="/docs/it/v2.6.x/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open source per il backup dei dati di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Scopri <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento GUI open source per una gestione intuitiva di Milvus.</p></li>

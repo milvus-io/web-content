@@ -41,7 +41,7 @@ summary: >-
 <p>Willkommen bei der Milvus-Roadmap!</p>
 <p>Wir führen Milvus in eine neue Ära – die der multimodalen Datenbank der nächsten Generation –, die von <strong>strukturierten bis zu unstrukturierten Daten</strong>, <strong>von Echtzeit-Abfragen bis zu Offline-Analysen</strong> und <strong>von der Leistung eines einzelnen Clusters bis hin zu einer globalen Data-Lake-Architektur</strong> reicht.</p>
 <p>Diese Roadmap skizziert die Kernziele für <strong>Milvus v2.6 (in Arbeit)</strong>, <strong>Milvus v3.0 (geplant für Ende 2026)</strong> und <strong>Milvus v3.1 (langfristige Entwicklung)</strong> sowie den Entwicklungsplan für <strong>Vector Lake (Data Lake / Loon)</strong>.</p>
-<h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (in Entwicklung)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
+<h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (in Arbeit)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,20 +74,20 @@ summary: >-
         ></path>
       </svg>
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>Aktualisierung des Datenmodells</strong></h4><ul>
-<li><p>Einführung eines einheitlichen <strong>Tensor-/StructList-Datentyps</strong> zur Unterstützung von Multi-Vektor-Einbettungsstrukturen, wodurch Kompatibilität mit <em>ColBERT</em>, <em>CoLQwen</em>, <em>Video-</em> und <em>multimodalen Vektoren</em> ermöglicht wird.</p></li>
-<li><p>Erweiterung um Unterstützung <strong>für Geodaten</strong>, einschließlich Punkten, Regionen und räumlicher Indizierung (basierend auf <em>libspatial</em>), um Anwendungsfälle in den Bereichen LBS und GIS zu erweitern.</p></li>
+<li><p>Einführung eines einheitlichen <strong>Tensor-/StructList-Datentyps</strong> zur Unterstützung von Multi-Vektor-Embedding-Strukturen, wodurch Kompatibilität mit <em>ColBERT</em>, <em>CoLQwen</em>, <em>Video-</em> und <em>multimodalen Vektoren</em> ermöglicht wird.</p></li>
+<li><p>Erweiterung um <strong>Geodaten-Unterstützung</strong>, einschließlich Punkten, Regionen und räumlicher Indizierung (basierend auf <em>libspatial</em>), um Anwendungsfälle in den Bereichen LBS und GIS zu erweitern.</p></li>
 <li><p>Unterstützung für den Datentyp <strong>„Timestamp with Timezone</strong> “.</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>Überarbeitung der StreamNode-Architektur</strong></h4><ul>
 <li><p>Neuprogrammierung der Streaming-Erfassungspipeline zur Optimierung inkrementeller Schreibvorgänge und Echtzeitberechnungen.</p></li>
-<li><p>Deutliche Verbesserung der Parallelverarbeitungsleistung und -stabilität, wodurch die Grundlage für eine einheitliche Echtzeit- und Offline-Verarbeitung geschaffen wird.</p></li>
+<li><p>Deutliche Verbesserung der Parallelverarbeitungsleistung und Stabilität, wodurch die Grundlage für eine einheitliche Echtzeit- und Offline-Verarbeitung geschaffen wird.</p></li>
 <li><p>Einführung einer neuen Message-Queue-Engine: <strong>Woodpecker</strong>.</p></li>
 </ul>
 <h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Hot/Cold-Tiering und Speicherarchitektur (StorageV2)</strong></h4><ul>
-<li><p>Unterstützung zweier Speicherformate: <strong>Parquet</strong> und <strong>Vortex</strong>, wodurch die Parallelität und die Speichereffizienz verbessert werden.</p></li>
+<li><p>Unterstützung zweier Speicherformate: <strong>Parquet</strong> und <strong>Vortex</strong>, wodurch die Parallelität und Speichereffizienz verbessert werden.</p></li>
 <li><p>Implementierung einer mehrstufigen Speicherung mit automatischer Trennung von „Hot“- und „Cold“-Daten sowie intelligenter Planung.</p></li>
 </ul>
-<h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Vector Lake-Prototyp (v0.1)</strong></h4><ul>
+<h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>„Vector Lake“-Prototyp (v0.1)</strong></h4><ul>
 <li><p>Integration mit <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> über FFI, wodurch Offline-Schemaentwicklung und KNN-Abfragen ermöglicht werden.</p></li>
 <li><p>Bereitstellung einer multimodalen Datenvisualisierung und einer Spark-ETL-Demo zur Etablierung der grundlegenden Data-Lake-Architektur.</p></li>
 </ul>
@@ -123,32 +123,32 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>Überarbeitung der Sucherfahrung</strong></h4><ul>
+    </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>Überarbeitung der Suchfunktion</strong></h4><ul>
 <li><p>Einführung der Ähnlichkeitssuche <strong>„More Like This“ (MLT)</strong> mit Unterstützung für Suchanfragen mit Positionsangaben oder Negativbeispielen.</p></li>
 <li><p>Erweiterung um semantische Suchfunktionen wie <strong>Hervorhebung</strong> und <strong>Gewichtung</strong>.</p></li>
 <li><p>Unterstützung <strong>benutzerdefinierter Wörterbücher</strong> und <strong>Synonymtabellen</strong>, wodurch lexikalische und semantische Regeldefinitionen auf der Analyzer-Ebene ermöglicht werden.</p></li>
-<li><p>Einführung von <strong>Aggregationsfunktionen</strong> für Abfragen.</p></li>
+<li><p>Einführung von <strong>Aggregationsfunktionen</strong> für Suchanfragen.</p></li>
 </ul>
-<h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Mandantenfähigkeit und Ressourcenmanagement</strong></h4><ul>
-<li><p>Aktivierung von Multi-Tenancy-Löschvorgängen, Statistiken und Hot/Cold-Tiering.</p></li>
-<li><p>Verbesserung der Ressourcenisolierung und der Planungsstrategien, um Millionen von Tabellen in einem einzigen Cluster zu unterstützen.</p></li>
+<h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Mandantenfähigkeit und Ressourcenverwaltung</strong></h4><ul>
+<li><p>Aktivierung von Multi-Tenancy-Löschfunktionen, Statistiken und Hot/Cold-Tiering.</p></li>
+<li><p>Verbessern Sie die Ressourcenisolierung und die Planungsstrategien, um Millionen von Tabellen in einem einzigen Cluster zu unterstützen.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>Verbesserungen bei Schemata und Primärschlüsseln</strong></h4><ul>
-<li><p>Implementierung <strong>einer globalen Primärschlüssel-Deduplizierung (Global PK Dedup)</strong>, um Datenkonsistenz und Eindeutigkeit zu gewährleisten.</p></li>
+<li><p>Implementierung <strong>der globalen Primärschlüssel-Deduplizierung (Global PK Dedup)</strong>, um Datenkonsistenz und Eindeutigkeit zu gewährleisten.</p></li>
 <li><p>Unterstützung <strong>einer flexiblen Schemaverwaltung</strong> (Hinzufügen/Entfernen von Spalten, Backup-Füllung).</p></li>
 <li><p>Erlauben Sie <strong>NULL-Werte</strong> in Vektorfeldern.</p></li>
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Erweiterte unstrukturierte Datentypen (BLOB / Text)</strong></h4><ul>
 <li><p>Einführung des <strong>BLOB-Typs</strong>, der native Speicherung und Referenzierung für binäre Daten wie Dateien, Bilder und Videos ermöglicht.</p></li>
-<li><p>Führen Sie <strong>den TEXT-Typ</strong> ein, der erweiterte Volltext- und inhaltsbasierte Suchfunktionen bietet.</p></li>
+<li><p>Einführung <strong>des TEXT-Typs</strong>, der erweiterte Volltext- und inhaltsbasierte Suchfunktionen bietet.</p></li>
 </ul>
-<h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Funktionen auf Enterprise-Niveau</strong></h4><ul>
-<li><p>Unterstützung von <strong>Snapshot-basierten Backups und Wiederherstellungen</strong>.</p></li>
+<h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Funktionen auf Unternehmensniveau</strong></h4><ul>
+<li><p>Unterstützung von <strong>Snapshot-basierten Sicherungen und Wiederherstellungen</strong>.</p></li>
 <li><p>Bereitstellung von <strong>End-to-End-Tracing</strong> und <strong>Audit-Protokollierung</strong>.</p></li>
 <li><p>Implementierung von <strong>Active-Standby-Hochverfügbarkeit (HA)</strong> über mehrere Cluster hinweg.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
-<li><p>Unterstützt <strong>TEXT-/BLOB-Speicherung</strong> und <strong>die Verwaltung von Snapshots mit mehreren Versionen</strong>.</p></li>
+<li><p>Unterstützung von <strong>TEXT-/BLOB-Speicher</strong> und <strong>der Verwaltung von Snapshots mit mehreren Versionen</strong>.</p></li>
 <li><p>Integration von Spark für Offline-Indizierung, Clustering, Deduplizierung und Aufgaben zur Dimensionsreduktion.</p></li>
 <li><p>Bereitstellung von <strong>ChatPDF-Demos für Cold-Query- und Offline-Benchmarks</strong>.</p></li>
 </ul>
@@ -186,7 +186,7 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>UDF- und verteilte Rechenumgebung</strong></h4><ul>
 <li><p>Unterstützung <strong>benutzerdefinierter Funktionen (UDFs)</strong>, die es Entwicklern ermöglichen, benutzerdefinierte Logik in Abruf- und Berechnungsworkflows einzubinden.</p></li>
-<li><p>Tiefe Integration mit <strong>Ray Dataset / Daft</strong> für die verteilte Ausführung von UDFs und die Verarbeitung multimodaler Daten.</p></li>
+<li><p>Enge Integration mit <strong>Ray Dataset / Daft</strong> für die verteilte Ausführung von UDFs und die Verarbeitung multimodaler Daten.</p></li>
 </ul>
 <h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Skalare Abfragen und Weiterentwicklung des lokalen Formats</strong></h4><ul>
 <li><p>Optimierung der Filter- und Aggregationsleistung für skalare Felder.</p></li>
@@ -231,9 +231,9 @@ summary: >-
 <ul>
 <li><p>💬 <strong>Feedback geben</strong>: Schlagen Sie neue Funktionen oder Optimierungsideen vor</p></li>
 <li><p>🐛 <strong>Probleme melden</strong>: Fehler über GitHub Issues melden</p></li>
-<li><p>🔧 <strong>Code beisteuern</strong>: Reichen Sie Pull-Requests ein und helfen Sie beim Aufbau der Kernfunktionen</p>
+<li><p>🔧 <strong>Code beisteuern</strong>: Reicht Pull-Requests ein und helft beim Aufbau der Kernfunktionen</p>
 <ul>
-<li><p><strong>Pull-Anfragen</strong>: Leisten Sie einen direkten Beitrag zu unserer <a href="https://github.com/milvus-io/milvus/pulls">Codebasis</a>. Ob es um die Behebung von Fehlern, das Hinzufügen von Funktionen oder die Verbesserung der Dokumentation geht – Ihre Beiträge sind herzlich willkommen.</p></li>
+<li><p><strong>Pull-Requests</strong>: Leisten Sie einen direkten Beitrag zu unserer <a href="https://github.com/milvus-io/milvus/pulls">Codebasis</a>. Ob es um die Behebung von Fehlern, das Hinzufügen von Funktionen oder die Verbesserung der Dokumentation geht – Ihre Beiträge sind herzlich willkommen.</p></li>
 <li><p><strong>Entwicklungsleitfaden</strong>: In unserem <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Leitfaden für Mitwirkende</a> findest du Richtlinien für Code-Beiträge.</p></li>
 </ul></li>
 <li><p>⭐ <strong>Weiterempfehlen</strong>: Teilen Sie Best Practices und Erfolgsgeschichten</p></li>

@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Pelajari cara meng-upgrade Milvus standalone menggunakan Helm Chart.
-title: Memperbarui Milvus Standalone Menggunakan Helm Chart
+title: Memperbarui Milvus Standalone dengan Helm Chart
 ---
 <div class="tab-wrapper"><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Operator</a>, Helm, Docker<a href="/docs/id/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Memperbarui Milvus Standalone Menggunakan Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Memperbarui Milvus Standalone dengan Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,9 +84,9 @@ title: Memperbarui Milvus Standalone Menggunakan Helm Chart
 </ul>
 <p><strong>Persyaratan kompatibilitas:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan langsung dari rilis kandidat tidak didukung.</li>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.17. Peningkatan langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan merujuk ke <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> melakukan upgrade ke v2.5.16 atau yang lebih baru sebelum melakukan upgrade ke v2.6.17.</li>
+<li>Anda <strong>harus</strong> melakukan peningkatan ke v2.5.16 atau yang lebih baru sebelum meningkatkan ke v2.6.17.</li>
 </ul>
 <p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v2.6.17, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alert note">
@@ -161,7 +161,7 @@ Repositori Milvus Helm Charts di <code translate="no">https://milvus-io.github.i
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Langkah 3: Perbarui ke v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v2617" class="common-anchor-header">Langkah 3: Tingkatkan ke v2.6.17<button data-href="#Step-3-Upgrade-to-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,4 +201,4 @@ kubectl get pods
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk dukungan tambahan, silakan merujuk ke <a href="https://milvus.io/docs">dokumentasi Milvus</a> atau <a href="https://github.com/milvus-io/milvus/discussions">forum komunitas</a>.</p>
+<p>Untuk dukungan tambahan, silakan lihat <a href="https://milvus.io/docs">dokumentasi Milvus</a> atau <a href="https://github.com/milvus-io/milvus/discussions">forum komunitas</a>.</p>

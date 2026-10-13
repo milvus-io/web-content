@@ -81,7 +81,7 @@ title: Instalar o Milvus Standalone com um pacote RPM/DEB
         ></path>
       </svg>
     </button></h2><p>Para instalar o pacote RPM/DEB, pode utilizar o gestor de pacotes do seu sistema.</p>
-<p>Para sistemas baseados em RPM (como o CentOS, o Fedora e o RHEL), utilize o comando « <code translate="no">yum</code> » para instalar o pacote.</p>
+<p>Para sistemas baseados em RPM (como CentOS, Fedora e RHEL), utilize o comando « <code translate="no">yum</code> » para instalar o pacote.</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -138,7 +138,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por exemplo, para alterar o <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode procurar o parâmetro «target» e modificá-lo em conformidade. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">«Configuração do sistema</a>».</p>
+    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <code translate="no">/etc/milvus/configs/milvus.yaml</code>. Por exemplo, para alterar o <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode procurar o parâmetro «target» e modificá-lo em conformidade. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">«Configuração do Sistema</a>».</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Parar o Milvus Standalone<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Depois de instalar o Milvus Standalone, pode:</p>
 <ul>
-<li><p>Consulte <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consultar <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus utilizando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus em nuvens:</p>
+<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

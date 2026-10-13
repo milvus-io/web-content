@@ -26,7 +26,7 @@ title: Executar o Milvus no Docker (Windows)
 <p>Por predefinição, esta implementação executa <strong>o Woodpecker</strong> (sistema de ficheiros local) como fila de mensagens, pelo que não é necessário qualquer serviço externo de fila de mensagens. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</p>
 </blockquote>
 <p>Esta página demonstra como executar o Milvus no Windows utilizando o Docker Desktop para Windows.</p>
-<h2 id="Prerequisites​" class="common-anchor-header">Pré-requisitos​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
+<h2 id="Prerequisites​" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,7 +192,7 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>«Executar como administrador</strong>».​</p></li>
-<li><p>Execute os seguintes comandos no PowerShell ou no Prompt de Comando do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.​</p>
+<li><p>Execute os seguintes comandos no PowerShell ou na Linha de Comandos do Windows para descarregar o ficheiro de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
@@ -203,14 +203,14 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>Dependendo da sua ligação de rede, o download das imagens para a instalação do Milvus pode demorar algum tempo. Assim que os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estiverem ativos, poderá verificar que ​</p>
+<p>Dependendo da sua ligação de rede, o download das imagens para a instalação do Milvus pode demorar algum tempo. Assim que os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estiverem em funcionamento, poderá verificar que ​</p>
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.​</p></li>
-<li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9000</strong> e <strong>9001</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.​</p></li>
+<li><p>O contentor <strong>milvus-minio</strong> disponibiliza as portas <strong>9000</strong> e <strong>9001</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.​</p></li>
 <li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.​</p></li>
 </ul></li>
 </ol>
-<p>Também pode utilizar a versão Linux dos comandos do Docker Compose se tiver o WSL 2 instalado.​</p>
+<p>Também pode utilizar a versão Linux dos comandos do Docker Compose, caso tenha o WSL 2 instalado.​</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">A partir do WSL 2​<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +290,7 @@ Creating milvus-standalone ... done​
 <p>Se a virtualização estiver desativada, poderá ser necessário verificar as definições da BIOS do firmware da sua placa-mãe. A forma de ativar a virtualização nas definições da BIOS varia consoante o fabricante da placa-mãe. No caso das placas-mãe ASUS, por exemplo, pode consultar <a href="https://www.asus.com/support/faq/1043786/">este artigo</a> sobre como ativar a virtualização.​</p>
 <p>Em seguida, terá de reiniciar o computador e ativar o Hyper-V. Para mais detalhes, consulte este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artigo da Microsoft</a>.​</p></li>
 <li><p>Verifique se o Serviço do Docker Desktop foi iniciado.​</p>
-<p>Pode executar o seguinte comando para iniciar o Serviço Docker Desktop.</p>
+<p>Pode executar o seguinte comando para iniciar o Serviço do Docker Desktop.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
@@ -304,7 +304,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Verifique se o Docker Daemon foi iniciado.​</p>
-<p>Tem de aceder ao diretório de instalação do Docker Desktop e executar o comando « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar o daemon do Docker.​</p>
+<p>Tem de aceder ao diretório de instalação do Docker Desktop e executar « <code translate="no">.\DockerCli.exe -SwitchDaemon</code> » para iniciar o daemon do Docker.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -343,7 +343,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Utilizar o motor baseado no WSL 2 nas definições do Docker Desktop</span>
   
  </span></p></li>
-<li><p>Selecione, entre as distribuições WSL 2 instaladas, aquelas nas quais pretende ativar a integração com o Docker, acedendo a: <strong>Definições</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração WSL</strong>.</p>
+<li><p>Selecione, entre as distribuições WSL 2 instaladas, aquelas nas quais pretende ativar a integração com o Docker, acedendo a: <strong>Definições</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração com o WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -419,7 +419,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a monitorização e gestão do Milvus.</p></li>
-<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para a realização de cópias de segurança dos dados do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para cópias de segurança dos dados do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/birdwatcher_overview.md">o Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e atualizações dinâmicas de configuração.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para a gestão intuitiva do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitorize o Milvus com o Prometheus</a>.</p></li>

@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース",
+        "label": "リリース情報",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリレプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -442,7 +442,7 @@
             "order": 8,
             "children": [
               {
-                "label": "JSONフィールドの概要",
+                "label": "JSON フィールドの概要",
                 "id": "json-field-overview.md",
                 "order": 0,
                 "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "NULLが許容されるフィールド",
+            "label": "NULL許容フィールド",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "デコンパウンダー",
+                    "label": "脱コンパウンド装置",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -709,7 +709,7 @@
                     "children": []
                   },
                   {
-                    "label": "ピントを取り除く",
+                    "label": "「Punct」を削除",
                     "id": "removepunct-filter.md",
                     "order": 12,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "用途に合ったアナライザーを選ぶ",
+                "label": "用途に合ったアナライザーを選びましょう",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -749,7 +749,7 @@
             ]
           },
           {
-            "label": "コレクションフィールドの変更",
+            "label": "コレクションのフィールドを変更する",
             "id": "alter-collection-field.md",
             "order": 16,
             "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Upsertエンティティ",
+            "label": "アップサートされるエンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -990,7 +990,7 @@
             ]
           },
           {
-            "label": "GPU対応のインデックス",
+            "label": "GPU対応インデックス",
             "id": "gpu-enabled-indexes",
             "order": 6,
             "children": [
@@ -1059,7 +1059,7 @@
             "children": []
           },
           {
-            "label": "検索の集約",
+            "label": "検索の集計",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "メンバーシップ・マッチ",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1150,7 +1156,7 @@
             "children": []
           },
           {
-            "label": "テキストの一致",
+            "label": "テキスト一致",
             "id": "keyword-match.md",
             "order": 10,
             "children": []
@@ -1168,7 +1174,7 @@
             "children": []
           },
           {
-            "label": "StructArray を使用した検索",
+            "label": "StructArray を使った検索",
             "id": "search-with-structarray",
             "order": 13,
             "children": [
@@ -1209,7 +1215,7 @@
                 "children": []
               },
               {
-                "label": "EmbeddingList の検索戦略を選択してください",
+                "label": "EmbeddingList の検索戦略を選択する",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1217,7 +1223,7 @@
             ]
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1237,13 +1243,13 @@
         ]
       },
       {
-        "label": "関数およびモデルの推定",
+        "label": "関数およびモデルの推論",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "BM25の機能",
+            "label": "BM25 の機能",
             "id": "bm25-function.md",
             "order": 0,
             "children": []
@@ -1403,7 +1409,7 @@
                 ]
               },
               {
-                "label": "モデル・ランカー",
+                "label": "モデルランカー",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1481,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "強制マージ・コンパクション",
+            "label": "強制マージ・コンパクテーション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1877,7 +1883,7 @@
                     "children": []
                   },
                   {
-                    "label": "Pulsar v2を引き続きご利用ください",
+                    "label": "Pulsar v2を引き続き使用する",
                     "id": "use-pulsar-v2.md",
                     "order": 1,
                     "children": []
@@ -1920,7 +1926,7 @@
                     "children": []
                   },
                   {
-                    "label": "カフカ ↔ ウッドペッカー",
+                    "label": "カフカ ↔ キツツキ",
                     "id": "switch-kafka-woodpecker.md",
                     "order": 3,
                     "children": []
@@ -1944,7 +1950,7 @@
             "children": []
           },
           {
-            "label": "スケール スタンドアロン",
+            "label": "スタンドアロン版",
             "id": "scale-standalone.md",
             "order": 1,
             "children": []
@@ -1975,7 +1981,7 @@
             "children": []
           },
           {
-            "label": "Milvus スタンドアロンのアップグレード",
+            "label": "Milvus Standalone のアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2096,7 +2102,7 @@
             "children": []
           },
           {
-            "label": "RBAC を有効にする",
+            "label": "RBACを有効にする",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "コマンド (0.6.0)",
+            "label": "コマンド",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "HTTP API (0.6.0)",
+            "label": "HTTP API",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "コマンド (0.5.x)",
+                "label": "コマンド",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "HTTP API (0.5.x)",
+                "label": "HTTP API",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "よくあるケース (0.5.x)",
+                "label": "よくある事例",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "0.6.0 にアップグレードする",
+                "label": "0.6.x へアップグレードする",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2301,7 +2307,7 @@
         ]
       },
       {
-        "label": "バードウォッチャー",
+        "label": "野鳥観察者",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2538,7 +2544,7 @@
         ]
       },
       {
-        "label": "SDKコードヘルパー（MCP）",
+        "label": "SDK コードヘルパー (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -3111,7 +3117,7 @@
         "children": []
       },
       {
-        "label": "Milvusを使ってRAGを構築する",
+        "label": "Milvus を使って RAG を構築する",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3147,7 +3153,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使用したグラフ RAG",
+        "label": "Milvus を使用した RAG のグラフ化",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3237,7 +3243,7 @@
             "children": []
           },
           {
-            "label": "音声類似度検索",
+            "label": "音声類似性検索",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -3289,7 +3295,7 @@
         "children": []
       },
       {
-        "label": "Milvus リミッツ",
+        "label": "Milvus Limits",
         "id": "limitations.md",
         "order": 3,
         "children": []

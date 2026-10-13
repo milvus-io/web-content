@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Anwender",
+        "label": "Milvus-Nutzer",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "TTL der Mengenauswahl",
+            "label": "TTL der Set-Sammlung",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufteilung",
+                "label": "JSON-Aufspaltung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -523,7 +523,7 @@
             "children": []
           },
           {
-            "label": "Felder, die den Wert „null“ annehmen können",
+            "label": "Felder, die den Wert „Null“ annehmen können",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennung",
+                    "label": "Sprachkennzeichnung",
                     "id": "language-identifier.md",
                     "order": 6,
                     "children": []
@@ -667,7 +667,7 @@
                     "children": []
                   },
                   {
-                    "label": "Nur Cnalphanum",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Entmischgerät",
+                    "label": "Entmischungsgerät",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
+                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Schema der „Alter“-Kollektion ändern",
+            "label": "Schema der Alter-Kollektion ändern",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -938,7 +938,7 @@
             ]
           },
           {
-            "label": "Indizes für spärliche Vektoren",
+            "label": "Spärliche Vektorindizes",
             "id": "sparse-vector-indexes",
             "order": 4,
             "isMenu": true,
@@ -952,7 +952,7 @@
             ]
           },
           {
-            "label": "Skalarindizes",
+            "label": "Skalare Indizes",
             "id": "scalar-indexes",
             "order": 5,
             "isMenu": true,
@@ -1053,7 +1053,7 @@
             "children": []
           },
           {
-            "label": "Gruppierte Suche",
+            "label": "Gruppensuche",
             "id": "grouping-search.md",
             "order": 3,
             "children": []
@@ -1139,6 +1139,12 @@
                 "label": "Geometrieoperatoren",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Mitgliedschafts-Match",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1395,7 +1401,7 @@
                     "children": []
                   },
                   {
-                    "label": "Anleitung: Implementierung einer zeitbasierten Rangfolge in Milvus",
+                    "label": "Anleitung: Implementierung eines zeitbasierten Rankings in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1481,19 +1487,19 @@
             "children": []
           },
           {
-            "label": "Zusammenführung und Verdichtung erzwingen",
+            "label": "Zusammenführung und Komprimierung erzwingen",
             "id": "force-merge.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Stufenweise Speicherung",
+            "label": "Mehrstufige Speicherung",
             "id": "tiered_storage",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über mehrstufige Speicherung",
+                "label": "Übersicht über die mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1505,7 +1511,7 @@
                 "children": []
               },
               {
-                "label": "Zwangsräumung",
+                "label": "Räumung",
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
@@ -1877,7 +1883,7 @@
                     "children": []
                   },
                   {
-                    "label": "Pulsar v2 weiterhin nutzen",
+                    "label": "Pulsar v2 weiterhin verwenden",
                     "id": "use-pulsar-v2.md",
                     "order": 1,
                     "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Befehle (0.6.0)",
+            "label": "Befehle",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "HTTP-API (0.6.0)",
+            "label": "HTTP-API",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Befehle (0.5.x)",
+                "label": "Befehle",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "HTTP-API (0.5.x)",
+                "label": "HTTP-API",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Häufige Fälle (0.5.x)",
+                "label": "Häufige Fälle",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Auf 0.6.0 aktualisieren",
+                "label": "Auf 0.6.x aktualisieren",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2373,7 +2379,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Größenauswahl-Tool",
+        "label": "Milvus-Größenrechner",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2492,7 +2498,7 @@
             ]
           },
           {
-            "label": "Reranker",
+            "label": "Neubewertungen",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2623,7 +2629,7 @@
                 "children": []
               },
               {
-                "label": "Milvus-Async-API",
+                "label": "Milvus Async-API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2736,7 +2742,7 @@
         ]
       },
       {
-        "label": "Vertreter",
+        "label": "Agenten",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2779,7 +2785,7 @@
         ]
       },
       {
-        "label": "Auswertung und Beobachtbarkeit",
+        "label": "Bewertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -3184,7 +3190,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Einbettungen",
+        "label": "Trichter-Suche mit Matroschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

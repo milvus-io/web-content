@@ -106,7 +106,7 @@
             ]
           },
           {
-            "label": "Executar o Milvus Distributed",
+            "label": "Executar o Milvus Distribuído",
             "id": "run_milvus_k8s",
             "order": 3,
             "isMenu": true,
@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico de leme",
+                "label": "Gráfico do leme",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Gráfico do leme",
+                "label": "Gráfico de leme",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -160,7 +160,7 @@
         ]
       },
       {
-        "label": "Instalar os SDKs",
+        "label": "Instalar SDKs",
         "id": "install_sdks",
         "order": 2,
         "children": [
@@ -376,7 +376,7 @@
             "children": []
           },
           {
-            "label": "Recolha em ponto de entrega",
+            "label": "Recolha de encomendas",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo primário e AutoID",
+            "label": "Campo principal e identificação automática",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Descompostação",
+                    "label": "Descomponedor",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de recolha externo",
+            "label": "Alterar o esquema de cobrança externo",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "Filtragem e criação de modelos",
+                "label": "Filtragem e Modelagem",
                 "id": "filtering-templating.md",
                 "order": 3,
                 "children": []
@@ -1139,6 +1139,12 @@
                 "label": "Operadores geométricos",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Correspondência de membros",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1173,7 +1179,7 @@
             "order": 13,
             "children": [
               {
-                "label": "Pesquisa básica em vetores com StructArray",
+                "label": "Pesquisa básica de vetores com StructArray",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1347,7 +1353,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Classificador ponderado",
+                "label": "Classificador Ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Classificação de Decadência",
+                "label": "Classificação de Decay",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1389,7 +1395,7 @@
                     "children": []
                   },
                   {
-                    "label": "Decaimento linear",
+                    "label": "Decadência linear",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
@@ -1481,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "Forçar a compactação por fusão",
+            "label": "Forçar a compactação da fusão",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1605,7 +1611,7 @@
             "children": []
           },
           {
-            "label": "Seleção do índice",
+            "label": "Seleção do Índice",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1808,7 +1814,7 @@
             "children": []
           },
           {
-            "label": "QueryNode a utilizar o disco local",
+            "label": "QueryNode utilizando o disco local",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1932,7 +1938,7 @@
         ]
       },
       {
-        "label": "Dimensionamento",
+        "label": "Escalabilidade",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2013,7 +2019,7 @@
                 "children": []
               },
               {
-                "label": "Painel de controlo da Milvus Metrics",
+                "label": "Painel de Controlo da Milvus Metrics",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -2120,7 +2126,7 @@
                 "children": []
               },
               {
-                "label": "Conceder privilégios",
+                "label": "Conceder Privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Comandos (0.6.0)",
+            "label": "Comandos",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API HTTP (0.6.0)",
+            "label": "API HTTP",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,25 +2216,25 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Comandos (0.5.x)",
+                "label": "Comandos",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "API HTTP (0.5.x)",
+                "label": "API HTTP",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Casos comuns (0.5.x)",
+                "label": "Casos comuns",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Cópia de segurança e recuperação numa única instância",
+                    "label": "Cópia de segurança e restauração numa única instância",
                     "id": "single-instance-backup-and-restore.md",
                     "order": 0,
                     "children": []
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Atualizar para a versão 0.6.0",
+                "label": "Atualizar para a versão 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2293,7 +2299,7 @@
             "children": []
           },
           {
-            "label": "Importação em massa na replicação do CDC",
+            "label": "Importação em massa na replicação CDC",
             "id": "bulk-import-in-cdc-replication.md",
             "order": 4,
             "children": []
@@ -2442,7 +2448,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "Jina IA",
                 "id": "embed-with-jina.md",
                 "order": 7,
                 "children": []
@@ -2528,7 +2534,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "Jina IA",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -2863,7 +2869,7 @@
             "children": []
           },
           {
-            "label": "Jina AI",
+            "label": "Jina IA",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
@@ -3184,7 +3190,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com representações Matryoshka",
+        "label": "Pesquisa em funil com incorporações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -3237,7 +3243,7 @@
             "children": []
           },
           {
-            "label": "Pesquisa por semelhança áudio",
+            "label": "Pesquisa de semelhança de áudio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -3249,7 +3255,7 @@
             "children": []
           },
           {
-            "label": "Motor de busca de texto",
+            "label": "Motor de pesquisa de texto",
             "id": "text_search_engine.md",
             "order": 10,
             "children": []

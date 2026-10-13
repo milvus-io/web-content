@@ -4,7 +4,7 @@ title: خريطة طريق Milvus
 related_key: Milvus roadmap
 summary: >-
   Milvus هي قاعدة بيانات متجهة مفتوحة المصدر صُممت لدعم تطبيقات الذكاء
-  الاصطناعي. وفيما يلي خارطة الطريق الخاصة بنا لتوجيه عملية التطوير.
+  الاصطناعي. وفيما يلي خارطة الطريق التي ستوجه مسار تطويرنا.
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">خريطة طريق Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ summary: >-
       </svg>
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>ترقية نموذج البيانات</strong></h4><ul>
 <li><p>إدخال نوع بيانات موحد <strong>Tensor / StructList</strong> لدعم هياكل التضمين متعددة المتجهات، مما يتيح التوافق مع <em>ColBERT</em> <em>وCoLQwen</em> <em>والفيديو</em> <em>والمتجهات متعددة الوسائط</em>.</p></li>
-<li><p>إضافة دعم <strong>البيانات الجغرافية،</strong> بما في ذلك النقاط والمناطق والفهرسة المكانية (استنادًا إلى <em>libspatial</em>)، لتوسيع حالات الاستخدام في خدمات المواقع (LBS) ونظم المعلومات الجغرافية (GIS).</p></li>
+<li><p>إضافة دعم <strong>البيانات الجغرافية،</strong> بما في ذلك النقاط والمناطق والفهرسة المكانية (استنادًا إلى <em>libspatial</em>)، لتوسيع حالات الاستخدام في خدمات المواقع الجغرافية (LBS) ونظم المعلومات الجغرافية (GIS).</p></li>
 <li><p>دعم نوع البيانات " <strong>الطابع الزمني مع المنطقة الزمنية</strong> ".</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>إعادة هيكلة بنية StreamNode</strong></h4><ul>
@@ -82,8 +82,8 @@ summary: >-
 <li><p>تحسين أداء التزامن والاستقرار بشكل كبير، مما يضع الأساس للمعالجة الموحدة في الوقت الفعلي وبدون اتصال بالإنترنت.</p></li>
 <li><p>تقديم محرك جديد لقائمة انتظار الرسائل: <strong>Woodpecker</strong>.</p></li>
 </ul>
-<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>التصنيف إلى مستويات "الساخنة" و"الباردة" وبنية التخزين (StorageV2)</strong></h4><ul>
-<li><p>دعم تنسيقات التخزين المزدوجة: <strong>Parquet</strong> و <strong>Vortex،</strong> مما يعزز التزامن وكفاءة الذاكرة.</p></li>
+<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>التصنيف إلى مستويات "ساخنة" و"باردة" وبنية التخزين (StorageV2)</strong></h4><ul>
+<li><p>دعم تنسيقات تخزين مزدوجة: <strong>Parquet</strong> و <strong>Vortex،</strong> مما يعزز التزامن وكفاءة الذاكرة.</p></li>
 <li><p>تنفيذ التخزين المتدرج مع الفصل التلقائي بين البيانات الساخنة والباردة والجدولة الذكية.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>نموذج Vector Lake (v0.1)</strong></h4><ul>
@@ -126,7 +126,7 @@ summary: >-
 <li><p>تقديم ميزة البحث عن التشابه <strong>"More Like This" (MLT)</strong> مع دعم عمليات البحث باستخدام الموضع أو الأمثلة السلبية.</p></li>
 <li><p>إضافة قدرات البحث الدلالي مثل <strong>التمييز</strong> <strong>والتعزيز</strong>.</p></li>
 <li><p>دعم <strong>القواميس المخصصة</strong> <strong>وجداول المرادفات</strong>، مما يتيح تعريف القواعد المعجمية والدلالية في طبقة المحلل.</p></li>
-<li><p>تقديم قدرات <strong>التجميع</strong> للاستعلامات.</p></li>
+<li><p>إدخال قدرات <strong>التجميع</strong> للاستعلامات.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>الاستخدام المتعدد وإدارة الموارد</strong></h4><ul>
 <li><p>تمكين الحذف متعدد المستأجرين، والإحصاءات، والتصنيف إلى مستويات ساخنة/باردة.</p></li>
@@ -139,11 +139,11 @@ summary: >-
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>أنواع البيانات غير المنظمة الموسعة (BLOB / النص)</strong></h4><ul>
 <li><p>إدخال <strong>نوع BLOB،</strong> الذي يوفر تخزينًا مرجعيًا أصليًا للبيانات الثنائية مثل الملفات والصور ومقاطع الفيديو.</p></li>
-<li><p>إدخال <strong>نوع TEXT،</strong> الذي يوفر إمكانيات بحث محسّنة للنص الكامل والمستندة إلى المحتوى.</p></li>
+<li><p>إدخال <strong>نوع TEXT،</strong> الذي يوفر إمكانيات محسّنة للبحث عن النص الكامل والمستند إلى المحتوى.</p></li>
 </ul>
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>إمكانيات على مستوى المؤسسات</strong></h4><ul>
 <li><p>دعم <strong>النسخ الاحتياطي والاستعادة المستندة إلى اللقطات</strong>.</p></li>
-<li><p>توفير <strong>التتبع الشامل</strong> <strong>وتسجيل عمليات التدقيق</strong>.</p></li>
+<li><p>توفير <strong>التتبع الشامل</strong> <strong>وتسجيل التدقيق</strong>.</p></li>
 <li><p>تنفيذ <strong>التوافر العالي (HA) بنظام النشط-الاحتياطي</strong> عبر عمليات النشر متعددة المجموعات.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
@@ -204,13 +204,13 @@ summary: >-
 </ul>
 <h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>التجزئة الديناميكية وقابلية التوسع</strong></h4><ul>
 <li><p>تمكين <strong>التقسيم التلقائي للأجزاء</strong> <strong>وموازنة الحمل</strong> من أجل قابلية التوسع السلس.</p></li>
-<li><p>تحسين <strong>بناء الفهرس الشامل</strong> وضمان <strong>أداء البحث الموزع</strong>.</p></li>
+<li><p>تحسين <strong>إنشاء الفهرس الشامل</strong> وضمان <strong>أداء البحث الموزع</strong>.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
 <li><p>تكامل عميق مع <strong>Ray / Daft / PyTorch</strong> لدعم الدوال المحددة من قبل المستخدم (UDFs) الموزعة وحالات استخدام هندسة السياق.</p></li>
-<li><p>توفير <strong>عروض توضيحية لـ RAG (Retrieval-Augmented Generation)</strong> <strong>والاستيراد من جداول Iceberg</strong>.</p></li>
+<li><p>توفير <strong>عروض توضيحية لـ RAG (الإنشاء المعزز بالاسترجاع)</strong> <strong>والاستيراد من جداول Iceberg</strong>.</p></li>
 </ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 بناء مستقبل Milvus معًا<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 البناء المشترك لمستقبل Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -232,7 +232,7 @@ summary: >-
 <li><p>🐛 <strong>الإبلاغ عن المشكلات</strong>: الإبلاغ عن الأخطاء عبر GitHub Issues</p></li>
 <li><p>🔧 <strong>المساهمة بالكود</strong>: أرسل طلبات سحب (PRs) وساعد في بناء الميزات الأساسية</p>
 <ul>
-<li><p><strong>طلبات السحب (Pull Requests</strong>): ساهم مباشرة في <a href="https://github.com/milvus-io/milvus/pulls">قاعدة الكود</a> الخاصة بنا. سواء كان ذلك لإصلاح الأخطاء البرمجية أو إضافة ميزات أو تحسين الوثائق، فإن مساهماتك مرحب بها.</p></li>
+<li><p><strong>طلبات السحب (Pull Requests</strong>): ساهم مباشرةً في <a href="https://github.com/milvus-io/milvus/pulls">قاعدة الكود</a> الخاصة بنا. سواء كان ذلك لإصلاح الأخطاء البرمجية أو إضافة ميزات أو تحسين الوثائق، فإن مساهماتك مرحب بها.</p></li>
 <li><p><strong>دليل التطوير</strong>: راجع <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">دليل المساهمين</a> للحصول على إرشادات حول المساهمة في الكود.</p></li>
 </ul></li>
 <li><p>⭐ <strong>انشر الخبر</strong>: شارك أفضل الممارسات وقصص النجاح</p></li>

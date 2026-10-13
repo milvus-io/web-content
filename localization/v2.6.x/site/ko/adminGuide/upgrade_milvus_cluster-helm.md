@@ -54,7 +54,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.x에서 2.6.17로 업그레이드하는 과정에는 다음과 같은 중요한 아키텍처 변경 사항이 포함됩니다:</p>
+    </button></h3><p>Milvus 2.5.x에서 2.6.17로 업그레이드하는 과정에는 다음과 같은 주요 아키텍처 변경 사항이 포함됩니다:</p>
 <ul>
 <li><strong>코디네이터 통합</strong>: 기존에 별도로 운영되던 코디네이터(<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>)가 단일 코디네이터로 통합되었습니다. <code translate="no">mixCoord</code></li>
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
@@ -128,7 +128,7 @@ helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 에 있는 Milvus Helm 차트 저장소는 아카이브 처리되었습니다. 차트 버전 4.0.31 이상은 새로운 저장소 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 을 사용하십시오.
 </div>
-<p>Helm 차트 버전과 Milvus 버전의 호환성을 확인하려면:</p>
+<p>Milvus 버전과 Helm 차트 버전의 호환성을 확인하려면:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>이 가이드는 최신 버전을 설치한다고 가정합니다. 특정 버전을 설치해야 하는 경우, <code translate="no">--version</code> 매개변수를 적절히 지정하십시오.</p>
@@ -147,10 +147,10 @@ helm repo update zilliztech
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>클러스터에서 현재 별도의 코디네이터를 사용하고 있는지 확인하십시오:</p>
+    </button></h3><p>클러스터에서 현재 별도의 코디네이터를 사용하고 있는지 확인합니다:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>별도의 코디네이터 포드(<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>)가 표시되면 v2.5.16으로 업그레이드하고 <code translate="no">mixCoordinator</code> 를 활성화하십시오:</p>
+<p>별도의 코디네이터 포드(<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>)가 표시되면, v2.5.16으로 업그레이드하고 <code translate="no">mixCoordinator</code> 를 활성화하십시오:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \
@@ -188,7 +188,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>v2.5.16이 <code translate="no">mixCoordinator</code> 와 함께 정상적으로 실행되면 v2.6.17로 업그레이드하십시오:</p>
+    </button></h3><p><code translate="no">mixCoordinator</code> 를 사용하여 v2.5.16이 정상적으로 실행되면 v2.6.17로 업그레이드하십시오:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.17&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -218,4 +218,4 @@ kubectl get pods
 <span class="hljs-comment"># Verify Helm release</span>
 helm list
 <button class="copy-code-btn"></button></code></pre>
-<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼</a>을 참조하십시오.</p>
+<p>추가 지원이 필요하면 <a href="https://milvus.io/docs">Milvus 문서</a> 나 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼을</a> 참조하십시오.</p>

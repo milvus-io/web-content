@@ -80,14 +80,14 @@ title: Milvus-Cluster mit Milvus Operator aktualisieren
       </svg>
     </button></h3><p><strong>Systemanforderungen:</strong></p>
 <ul>
-<li>Kubernetes-Cluster mit Milvus, bereitgestellt über den Milvus Operator</li>
+<li>Kubernetes-Cluster mit Milvus, das über den Milvus Operator bereitgestellt wurde</li>
 <li><code translate="no">kubectl</code> konfiguriert für den Zugriff auf Ihren Cluster</li>
 <li>Helm 3.x installiert</li>
 </ul>
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.17 <strong>kompatibel</strong>. Direkte Upgrades von Release-Kandidaten werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 ausführen und Ihre Daten beibehalten müssen, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
+<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten möchten, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Hilfe zur Migration.</li>
 <li>Sie <strong>müssen</strong> vor dem Upgrade auf v2.6.17 ein Upgrade auf v2.5.16 oder höher durchführen, wobei „ <code translate="no">mixCoord</code> “ aktiviert sein muss.</li>
 </ul>
 <p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.17 müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
@@ -169,7 +169,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Upgrade auf Version 2.6.17</h4><p>Sobald v2.5.16 erfolgreich mit „ <code translate="no">mixCoord</code> “ läuft, führen Sie ein Upgrade auf v2.6.17 durch:</p>
+<h4 id="23-Upgrade-to-v2617" class="common-anchor-header">2.3 Upgrade auf Version 2.6.17</h4><p>Sobald Version 2.5.16 erfolgreich mit „ <code translate="no">mixCoord</code> “ läuft, führen Sie ein Upgrade auf Version 2.6.17 durch:</p>
 <p>Aktualisieren Sie Ihre Konfigurationsdatei (in diesem Beispiel „<code translate="no">milvusupgrade.yaml</code> “):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

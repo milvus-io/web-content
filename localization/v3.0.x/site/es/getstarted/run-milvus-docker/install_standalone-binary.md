@@ -39,7 +39,7 @@ title: Instalar Milvus en modo autónomo con un paquete RPM/DEB
         ></path>
       </svg>
     </button></h2><ul>
-<li>Ya tiene instalado libstdc++ 8.5.0 o una versión posterior.</li>
+<li>Ya debe tener instalado libstdc++ 8.5.0 o una versión posterior.</li>
 <li><a href="/docs/es/prerequisite-docker.md">Comprueba los requisitos de hardware y software</a> antes de la instalación.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Descargar el paquete RPM/DEB<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -85,11 +85,11 @@ title: Instalar Milvus en modo autónomo con un paquete RPM/DEB
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Para sistemas basados en DEB (como Ubuntu y Debian), utiliza el comando « <code translate="no">apt</code> » para instalar el paquete.</p>
+<p>En los sistemas basados en DEB (como Ubuntu y Debian), utiliza el comando « <code translate="no">apt</code> » para instalar el paquete.</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus de forma independiente<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar Milvus en modo autónomo<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

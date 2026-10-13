@@ -44,7 +44,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Inicio rápido",
+        "label": "Guía de inicio rápido",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Ejecutar Milvus con la GPU",
+            "label": "Ejecuta Milvus con la GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -211,7 +211,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Resumen general",
+            "label": "Resumen",
             "id": "architecture_overview.md",
             "order": 0,
             "children": []
@@ -370,7 +370,7 @@
             "children": []
           },
           {
-            "label": "Gestionar aliases",
+            "label": "Gestionar alias",
             "id": "manage-aliases.md",
             "order": 9,
             "children": []
@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "Descomposición de JSON",
+                "label": "Análisis de JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_ESPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESCASO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
+            "label": "Búsqueda básica con redes neuronales artificiales",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1139,6 +1139,12 @@
                 "label": "Operadores geométricos",
                 "id": "geometry-operators.md",
                 "order": 8,
+                "children": []
+              },
+              {
+                "label": "Emparejamiento de socios",
+                "id": "membership-match.md",
+                "order": 9,
                 "children": []
               }
             ]
@@ -1611,7 +1617,7 @@
             "children": []
           },
           {
-            "label": "Canalización RAG",
+            "label": "Proceso RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1619,7 +1625,7 @@
         ]
       },
       {
-        "label": "Habilidad Milvus",
+        "label": "Habilidad de Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1897,7 +1903,7 @@
                 "children": []
               },
               {
-                "label": "Cola de mensajes del conmutador",
+                "label": "Cambiar cola de mensajes",
                 "id": "switch_milvus_mq_type",
                 "order": 5,
                 "children": [
@@ -2146,7 +2152,7 @@
             "children": []
           },
           {
-            "label": "Conectarse a Kafka con SASL/SSL",
+            "label": "Conectarse a Kafka mediante SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "Comandos (0.6.0)",
+            "label": "Comandos",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API HTTP (0.6.0)",
+            "label": "API HTTP",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Comandos (0.5.x)",
+                "label": "Comandos",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "API HTTP (0.5.x)",
+                "label": "API HTTP",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Casos habituales (0.5.x)",
+                "label": "Casos habituales",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "Actualizar a la versión 0.6.0",
+                "label": "Actualizar a la versión 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2281,7 +2287,7 @@
             "children": []
           },
           {
-            "label": "Cambio",
+            "label": "Transición",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -3010,7 +3016,7 @@
             "children": []
           },
           {
-            "label": "Enmascarador de datos de carácter personal (PII)",
+            "label": "Enmascarador de datos personales",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3190,7 +3196,7 @@
         "children": []
       },
       {
-        "label": "Guía de inicio rápido con Attu",
+        "label": "Introducción rápida a Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []

@@ -98,7 +98,7 @@ Il est recommandé d’installer une version de PyMilvus correspondant à celle 
       </svg>
     </button></h2><p>Une fois PyMilvus installé, vous pouvez :</p>
 <ul>
-<li><p>Découvrir les opérations de base de Milvus :</p>
+<li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
 <li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>

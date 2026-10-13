@@ -25,7 +25,7 @@ title: Milvus in Docker ausführen (Windows)
     </button></h1><blockquote>
 <p>Standardmäßig verwendet diese Bereitstellung <strong>Woodpecker</strong> (lokales Dateisystem) als Nachrichtenwarteschlange, sodass kein externer Nachrichtenwarteschlangendienst erforderlich ist. Siehe <a href="/docs/de/woodpecker.md">Woodpecker</a>.</p>
 </blockquote>
-<p>Auf dieser Seite wird gezeigt, wie Sie Milvus unter Windows mit Docker Desktop für Windows ausführen.</p>
+<p>Auf dieser Seite wird gezeigt, wie Sie Milvus unter Windows mit Docker Desktop für Windows ausführen können.</p>
 <h2 id="Prerequisites​" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: Milvus in Docker ausführen (Windows)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Installieren Sie Docker Desktop</a>.​</p></li>
+<li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Installieren Sie Docker Desktop</a>.</p></li>
 <li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Installieren Sie das Windows-Subsystem für Linux 2 (WSL 2)</a>.​</p></li>
 <li><p>Installieren Sie Python 3.8 oder höher.</p></li>
 </ul>
@@ -94,7 +94,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Nach Ausführung des Installationsskripts:​</p>
 <ul>
 <li><p>Ein Docker-Container namens <strong>„milvus-standalone“</strong> wurde am Port <strong>19530</strong> gestartet.​</p></li>
-<li><p>Ein „embed etcd“ wird zusammen mit Milvus im selben Container installiert und ist am Port <strong>2379</strong> erreichbar. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.​</p></li>
+<li><p>Ein eingebetteter etcd wird zusammen mit Milvus im selben Container installiert und ist am Port <strong>2379</strong> erreichbar. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.​</p></li>
 <li><p>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.​</p></li>
 </ul>
 <p>Mit den folgenden Befehlen können Sie den Milvus-Container und die gespeicherten Daten verwalten.​</p>
@@ -126,7 +126,7 @@ Delete successfully. # Data has been removed.​
       </svg>
     </button></h3><p>Wenn Sie Milvus unter Windows lieber mit Linux-Befehlen und Shell-Skripten starten möchten, stellen Sie sicher, dass Sie WSL 2 bereits installiert haben. Einzelheiten zur Installation von WSL 2 finden Sie in diesem <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft-Artikel</a>.​</p>
 <ol>
-<li><p>Starten Sie WSL 2.</p>
+<li><p>Starten Sie WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
@@ -159,7 +159,7 @@ Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">Milvus mit Docker Compose ausführen​<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
+<h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">Führen Sie Milvus mit Docker Compose aus​<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,8 +205,8 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>Je nach Ihrer Netzwerkverbindung kann das Herunterladen der Images für die Milvus-Installation eine Weile dauern. Sobald die Container mit den Namen <strong>„milvus-standalone“</strong>, <strong>„milvus-minio“</strong> und <strong>„milvus-etcd“</strong> laufen, können Sie feststellen, dass ​</p>
 <ul>
-<li><p>Der Container <strong>„milvus-etcd“</strong> keine Ports gegenüber dem Host freigibt und seine Daten auf <strong>„volumes/etcd“</strong> im aktuellen Ordner abbildet.</p></li>
-<li><p>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9000</strong> und <strong>9001</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten <strong>dem Verzeichnis „volumes/minio“</strong> im aktuellen Ordner zu.</p></li>
+<li><p>Der Container <strong>„milvus-etcd“</strong> keine Ports nach außen freigibt und seine Daten auf <strong>„volumes/etcd“</strong> im aktuellen Ordner abbildet.</p></li>
+<li><p>Der Container <strong>„milvus-minio“</strong> stellt lokal die Ports <strong>9000</strong> und <strong>9001</strong> mit den Standard-Anmeldedaten bereit und ordnet seine Daten dem <strong>Verzeichnis „volumes/minio“</strong> im aktuellen Ordner zu.​</p></li>
 <li><p>Der Container <strong>„milvus-standalone“</strong> stellt lokal die Ports <strong>19530</strong> mit den Standardeinstellungen bereit und ordnet seine Daten dem Verzeichnis <strong>„volumes/milvus“</strong> im aktuellen Ordner zu.​</p></li>
 </ul></li>
 </ol>
@@ -287,9 +287,9 @@ Creating milvus-standalone ... done​
    <span>Virtualisierung im Task-Manager</span>
   
  </span></p>
-<p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Mainboards überprüfen. Die Vorgehensweise zum Aktivieren der Virtualisierung in den BIOS-Einstellungen variiert je nach Mainboard-Hersteller. Für ASUS-Mainboards können Sie beispielsweise <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zum Aktivieren der Virtualisierung zu Rate ziehen.​</p>
+<p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Vorgehensweise zum Aktivieren der Virtualisierung in den BIOS-Einstellungen variiert je nach Motherboard-Hersteller. Für ASUS-Motherboards können Sie beispielsweise <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zum Aktivieren der Virtualisierung zu Rate ziehen.​</p>
 <p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Weitere Informationen finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.​</p></li>
-<li><p>Überprüfen Sie, ob der Docker-Desktop-Dienst gestartet wurde.</p>
+<li><p>Überprüfen Sie, ob der Docker Desktop-Dienst gestartet wurde.​</p>
 <p>Sie können den folgenden Befehl ausführen, um den Docker Desktop-Dienst zu starten.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
@@ -311,7 +311,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 
 </code></pre></li>
 <li><p>Überprüfen Sie, ob Sie Docker Desktop im <strong>Administratormodus</strong> gestartet haben.</p>
-<p>Stellen Sie sicher, dass Sie Docker Desktop im Administratormodus gestartet haben. Klicken Sie dazu mit der rechten Maustaste auf <strong>Docker Desktop</strong> und wählen Sie <strong>„Als Administrator ausführen</strong>“.​</p>
+<p>Stellen Sie sicher, dass Sie Docker Desktop im Administratormodus gestartet haben. Klicken Sie dazu mit der rechten Maustaste auf <strong>Docker Desktop</strong> und wählen Sie <strong>„Als Administrator ausführen</strong>“.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
@@ -334,7 +334,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn beim Ausführen von Milvus unter WSL 2 Probleme im Zusammenhang mit WSL aufgetreten sind, müssen Sie möglicherweise überprüfen, ob Sie Docker Desktop wie folgt für die Verwendung der WSL 2-basierten Engine konfiguriert haben:​</p>
+    </button></h3><p>Wenn bei der Ausführung von Milvus unter WSL 2 Probleme im Zusammenhang mit WSL aufgetreten sind, müssen Sie möglicherweise überprüfen, ob Sie Docker Desktop wie folgt für die Verwendung der WSL 2-basierten Engine konfiguriert haben:​</p>
 <ol>
 <li><p>Stellen Sie sicher, dass unter <strong>„Einstellungen</strong> &gt; <strong>Allgemein“</strong> die Option „WSL 2-basierte Engine verwenden“ aktiviert ist. ​</p>
 <p><span class="img-wrapper">
@@ -351,7 +351,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Wie kann ich mit den beim Start von Milvus angezeigten volumenbezogenen Fehlern umgehen, die lauten: „ <code translate="no">Read config failed</code> “?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Wie kann ich mit den volumenbezogenen Fehlern umgehen, die beim Start von Milvus angezeigt werden und lauten: „ <code translate="no">Read config failed</code> “?​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -383,7 +383,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <div class="alert note">
 <p>Storage V3 ist standardmäßig deaktiviert. Aktivieren Sie es, bevor Sie Funktionen nutzen, die davon abhängen. Informationen zu Anforderungen und Kompatibilitätsaspekten finden Sie unter <a href="/docs/de/storage-v3.md">„Storage V3</a>“.</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">Was folgt<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Was als Nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -400,13 +400,13 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Schauen Sie sich <a href="/docs/de/quickstart.md">den Schnellstart</a> an, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Schauen Sie sich <a href="/docs/de/quickstart.md">den Schnellstart</a> an, um zu erfahren, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/manage-collections.md">Verwalten von Sammlungen</a></li>
+<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
 <li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
 <li><a href="/docs/de/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>

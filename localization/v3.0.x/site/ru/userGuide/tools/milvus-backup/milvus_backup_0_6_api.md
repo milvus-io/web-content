@@ -1,11 +1,14 @@
 ---
 id: milvus_backup_0_6_api.md
 summary: >-
-  Создавайте и контролируйте задачи резервного копирования и восстановления в
-  Milvus Backup 0.6.0 с помощью HTTP-API.
-title: Использование HTTP-API Milvus Backup 0.6.0
+  Создавайте и контролируйте задачи резервного копирования и восстановления с
+  помощью HTTP-API Milvus Backup.
+title: >-
+  Резервное копирование и восстановление данных с помощью APICompatible with
+  Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Use-the-Milvus-Backup-060-HTTP-API" class="common-anchor-header">Использование HTTP-API Milvus Backup 0.6.0<button data-href="#Use-the-Milvus-Backup-060-HTTP-API" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Резервное копирование и восстановление данных с помощью API<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Использование HTTP-API Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Используйте HTTP-API Milvus Backup для создания резервных копий, восстановления коллекций и мониторинга асинхронных задач. В приведенном ниже примере используется <strong>Milvus Backup 0.6.0</strong> с <strong>Milvus 3.0.1 или более поздней версией</strong>. Для версии Backup 0.5.x воспользуйтесь <a href="/docs/ru/milvus_backup_api.md">руководством по API версии 0.5.x</a>. Для существующей установки см. раздел <a href="/docs/ru/milvus_backup_upgrade.md">«Обновление Milvus Backup</a>».</p>
+    </button></h1><p>Используйте HTTP-API Milvus Backup для создания резервных копий, восстановления коллекций и мониторинга асинхронных задач. Приведенный ниже пример создания моментального снимка требует <strong>Milvus версии 3.0.1 или более поздней</strong>. Для версии Backup 0.5.x используйте <a href="/docs/ru/milvus_backup_api.md">руководство по API версии 0.5.x</a>. Для существующей установки см. раздел <a href="/docs/ru/milvus_backup_upgrade.md">«Обновление Milvus Backup</a>».</p>
 <h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Получение Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +39,7 @@ title: Использование HTTP-API Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Загрузите и распакуйте соответствующий бинарный файл из <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">релиза v0.6.0</a>. Чтобы собрать программу из исходного кода, следуйте <a href="/docs/ru/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">инструкциям в разделе «Получение Milvus Backup»</a>; для сборки требуется Go версии 1.26 или более поздней.</p>
+    </button></h2><p>Приведенные ниже примеры проверены на <strong>Milvus Backup 0.6.0</strong>. Загрузите и распакуйте соответствующий бинарный файл из <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">выпуска v0.6.0</a>. Чтобы собрать программу из исходного кода, следуйте <a href="/docs/ru/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">инструкциям в разделе «Получение Milvus Backup»</a>; для сборки требуется Go версии 1.26 или более поздней.</p>
 <h2 id="Prepare-configuration-file" class="common-anchor-header">Подготовка файла конфигурации<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,13 +55,13 @@ title: Использование HTTP-API Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Создайте <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">файл</a>` <code translate="no">configs/backup.yaml</code> `, используя пример версии v2, приведенный в <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">разделе «Подготовка конфигурационного файла</a>». Настройте доступ к Milvus, хранилищу экземпляра и месту назначения резервной копии. Сервер Milvus также должен иметь доступ к хранилищу резервных копий для операций создания моментальных снимков.</p>
+    </button></h2><p>Создайте <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">файл</a>` <code translate="no">configs/backup.yaml</code> `, используя пример v2 в <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">разделе «Подготовка файла конфигурации</a>». Настройте доступ к Milvus, хранилищу экземпляра и месту назначения резервной копии. Сервер Milvus также должен иметь доступ к хранилищу резервных копий для выполнения операций создания моментальных снимков.</p>
 <p>Если у вас есть файл версии v1, его по-прежнему можно загрузить. См. <a href="/docs/ru/milvus_backup_upgrade.md#Migrate-the-configuration">раздел «Миграция конфигурации»</a> перед изменением схемы или переменных среды.</p>
 <p>Из каталога, содержащего исполняемый файл, проверьте конфигурацию и подключение:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Продолжайте, когда проверка подключения покажет сообщение « <code translate="no">Success!</code> ».</p>
+<p>Продолжайте, когда проверка подключения покажет статус « <code translate="no">Success!</code> ».</p>
 <h2 id="Start-up-the-API-server" class="common-anchor-header">Запустите сервер API<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,8 +83,8 @@ title: Использование HTTP-API Milvus Backup 0.6.0
 <p>Порт по умолчанию — 8080. Чтобы выбрать другой порт, используйте <code translate="no">-p</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Для данной службы запускайте только одну из этих команд. В приведенных ниже примерах используется порт 8080; измените URL-адреса, если вы выбрали другой порт. Swagger UI доступен по адресу <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
-<p>Обеспечьте непрерывную работу службы во время опроса задач. Идентификаторы задач и текущий прогресс привязаны к процессу службы; сохраненная резервная копия остается в хранилище объектов после остановки процесса.</p>
+<p>Для данной службы выполняйте только одну из этих команд. В приведенных ниже примерах используется порт 8080; измените URL-адреса, если вы выбрали другой порт. Swagger UI доступен по адресу <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
+<p>Обеспечьте непрерывную работу службы во время опроса задач. Идентификаторы задач и данные о текущем ходе выполнения относятся к процессу службы; сохраненная резервная копия остается в хранилище объектов после остановки процесса.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Подготовка данных<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +128,7 @@ title: Использование HTTP-API Milvus Backup 0.6.0
 <p>В ответе содержится значение <code translate="no">requestId</code>. Отправка запроса не означает, что резервное копирование завершено. Скопируйте это значение в поле <code translate="no">backup_id</code> и выполняйте опрос:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_backup?backup_id=BACKUP_REQUEST_ID&amp;backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Дождитесь, пока значение <code translate="no">data.state_code</code> изменится на <code translate="no">2</code>. API использует следующие состояния задач:</p>
+<p>Дождитесь, пока <code translate="no">data.state_code</code> не станет <code translate="no">2</code>. API использует следующие состояния задач:</p>
 <table>
 <thead>
 <tr><th><code translate="no">state_code</code></th><th>Значение</th></tr>
@@ -133,18 +136,18 @@ title: Использование HTTP-API Milvus Backup 0.6.0
 <tbody>
 <tr><td><code translate="no">0</code></td><td>Начальное</td></tr>
 <tr><td><code translate="no">1</code></td><td>Выполняется</td></tr>
-<tr><td><code translate="no">2</code></td><td>Успешно</td></tr>
+<tr><td><code translate="no">2</code></td><td>Успех</td></tr>
 <tr><td><code translate="no">3</code></td><td>Сбой</td></tr>
 <tr><td><code translate="no">4</code></td><td>Время ожидания истекло</td></tr>
 </tbody>
 </table>
-<p>Проверьте как ответ, так и состояние задачи. Одного кода HTTP 200 недостаточно: ненулевое значение параметра « <code translate="no">code</code> » в ответе указывает на ошибку. В случае успешного ответа параметр « <code translate="no">code</code> » может отсутствовать, поскольку его значение равно нулю. Если задача завершилась сбоем или истекло время ожидания, проверьте детали ответа и журнал сервера перед восстановлением из этой резервной копии.</p>
+<p>Проверьте как ответ, так и состояние задачи. Одного только кода HTTP 200 недостаточно: ненулевое значение параметра « <code translate="no">code</code> » указывает на ошибку. В случае успешного ответа параметр « <code translate="no">code</code> » может отсутствовать, поскольку его значение равно нулю. Если задача завершилась сбоем или истек тайм-аут, проверьте детали ответа и журнал сервера перед восстановлением из этой резервной копии.</p>
 <p>Выведите список сохраненных резервных копий и проверьте завершенную резервную копию по имени:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> возвращает метаданные в формате JSON, включая <code translate="no">collection_backups</code>; при этом файлы резервных копий <strong>не</strong> загружаются. Для резервной копии, созданной другим процессом, запрос только по имени может вернуть метаданные без информации о текущем ходе выполнения задачи. При мониторинге активной резервной копии используйте идентификатор задачи из ответа на запрос create текущего сервиса.</p>
-<p>Формат по умолчанию — <code translate="no">auto</code>, который выбирает моментальный снимок в Milvus 3.0. Чтобы явно запросить бинарный журнал, добавьте <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> в тело запроса create. Предустановленные значения CLI <code translate="no">--for</code> не являются полем HTTP-запроса.</p>
+<p><code translate="no">get_backup</code> возвращает метаданные в формате JSON, включая <code translate="no">collection_backups</code>; при этом файлы резервной копии <strong>не</strong> загружаются. Для резервной копии, созданной другим процессом, запрос только по имени может вернуть метаданные без информации о текущем ходе выполнения задачи. При мониторинге активной резервной копии используйте ID задачи из ответа на запрос create текущего сервиса.</p>
+<p>Формат по умолчанию — <code translate="no">auto</code>, который выбирает моментальный снимок в Milvus 3.0. Чтобы явно запросить бинарный журнал, добавьте <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> в тело запроса create. Предустановленные значения CLI <code translate="no">--for</code> не являются полями HTTP-запроса.</p>
 <p>Чтобы сохранить или переместить резервную копию, скопируйте весь каталог в объектное хранилище. См. <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">руководство по переносу версии 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Восстановление данных<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +194,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте целевой экземпляр, в котором <code translate="no">coll</code> не существует. Запустите отдельный сервис API резервного копирования, настроенный для этой цели и места завершенного резервного копирования, затем отправьте этот запрос целевому сервису:</p>
+    </button></h3><p>Используйте целевой экземпляр, в котором <code translate="no">coll</code> не существует. Запустите отдельный сервис API резервного копирования, настроенный для этого целевого объекта и местоположения завершенного резервного копирования, затем отправьте этот запрос целевому сервису:</p>
 <pre><code translate="no" class="language-shell">curl --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
   --header &#x27;Content-Type: application/json&#x27; \
   --data &#x27;{
@@ -201,7 +204,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
     &quot;collection_suffix&quot;: &quot;&quot;
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Опрашивайте <code translate="no">get_restore</code> на том же сервисе, используя возвращенный ID задачи. Настройте <code translate="no">milvus.*</code> для целевого объекта восстановления и <code translate="no">backup.storage</code> для существующей резервной копии. См. раздел <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">«Подготовка файла конфигурации</a>».</p>
+<p>Опрашивайте <code translate="no">get_restore</code> на том же сервисе, используя возвращенный идентификатор задачи. Настройте <code translate="no">milvus.*</code> для цели восстановления и <code translate="no">backup.storage</code> для существующей резервной копии. См. раздел <a href="/docs/ru/milvus_backup_0_6_cli.md#Prepare-configuration-file">«Подготовка файла конфигурации</a>».</p>
 <h2 id="Verify-restored-data" class="common-anchor-header">Проверка восстановленных данных<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,5 +220,5 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После успешного завершения задачи восстановления подключитесь к целевому экземпляру Milvus и убедитесь, что ожидаемая коллекция и данные существуют. Для тестовой коллекции из 256 объектов воспользуйтесь полными проверками скалярных величин, векторов и поиска, описанными в разделе <a href="/docs/ru/snapshot-backup-and-restore.md#Verify-the-result">«Проверка результата</a>».</p>
+    </button></h2><p>После успешного завершения задачи восстановления подключитесь к целевому экземпляру Milvus и убедитесь, что ожидаемая коллекция и данные существуют. Для тестовой коллекции из 256 объектов используйте полные проверки скалярных величин, векторов и поиска, описанные в разделе <a href="/docs/ru/snapshot-backup-and-restore.md#Verify-the-result">«Проверка результата</a>».</p>
 <p>Замените <code translate="no">coll_bak</code> на <code translate="no">coll</code> при восстановлении с сохранением исходного имени. Программа проверки считывает восстановленные данные, не удаляя их. Для производственных данных сравните их с базовым набором данных, зафиксированным на момент резервного копирования.</p>

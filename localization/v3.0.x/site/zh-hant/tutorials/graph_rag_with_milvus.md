@@ -1,9 +1,9 @@
 ---
 id: graph_rag_with_milvus.md
-summary: 使用 Milvus 顯示 RAG
-title: 使用 Milvus 的圖形 RAG
+summary: 使用 Milvus 建立圖形 RAG
+title: 使用 Milvus 進行圖 RAG
 ---
-<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">使用 Milvus 的圖形 RAG<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Graph-RAG-with-Milvus" class="common-anchor-header">使用 Milvus 進行圖 RAG<button data-href="#Graph-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +24,9 @@ title: 使用 Milvus 的圖形 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>大型語言模型的廣泛應用突顯了改善其回應準確性和相關性的重要性。檢索增強世代 (Retrieval-Augmented Generation，RAG) 利用外部知識庫增強模型，提供更多的上下文資訊，並減少幻覺和知識不足等問題。然而，僅依賴簡單的 RAG 模式有其限制，尤其是在處理複雜的實體關係和多跳問題時，模型往往難以提供準確的答案。</p>
-<p>將知識圖形 (KG) 引進 RAG 系統提供了新的解決方案。KG 以結構化的方式呈現實體及其關係，提供更精確的檢索資訊，並協助 RAG 更好地處理複雜的問題解答任務。KG-RAG 仍處於早期階段，對於如何從 KG 中有效地檢索實體及其關係，以及如何整合向量相似性搜尋與圖形結構，目前尚未達成共識。</p>
-<p>在本筆記中，我們將介紹一種簡單但功能強大的方法，以大幅改善此情況的效能。它是一個簡單的 RAG 范例，先進行多向擷取，然後再重新排序，但它在邏輯上實現了 Graph RAG，並在處理多跳問題時達到最先進的效能。讓我們來看看它是如何實作的。</p>
+<p>大型語言模型的廣泛應用，凸顯了提升其回應準確性與相關性的重要性。 檢索增強生成（RAG）透過外部知識庫強化模型，提供更多語境資訊，並緩解「幻覺」與「知識不足」等問題。然而，僅依賴簡單的 RAG 範式存在其局限性，特別是在處理複雜的實體關係與多跳問題時，模型往往難以提供準確的答案。</p>
+<p>將知識圖譜（KGs）引入 RAG 系統提供了一種新的解決方案。知識圖譜以結構化的方式呈現實體及其關係，提供更精確的檢索資訊，並協助 RAG 更好地處理複雜的問答任務。 KG-RAG 仍處於早期階段，目前對於如何有效從知識圖譜中檢索實體與關係，以及如何將向量相似度搜尋與圖結構整合，尚無共識。</p>
+<p>在本筆記本中，我們介紹了一種簡單卻強大的方法，用以大幅提升此情境下的表現。這是一種採用多路檢索並進行重新排序的簡易 RAG 範式，但它在邏輯上實現了圖 RAG（Graph RAG），並在處理多跳問題時達到了最先進的表現。 讓我們來看看它的具體實現方式。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -48,18 +48,18 @@ title: 使用 Milvus 的圖形 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在執行本筆記本之前，請確認您已安裝下列依賴項目：</p>
+    </button></h2><p>在執行此筆記本之前，請確保已安裝以下依賴項：</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>若您使用 Google Colab，為啟用剛安裝的依賴項，您可能需要<strong>重新啟動執行環境</strong>（點擊螢幕頂端的「Runtime」選單，並從下拉式選單中選擇「Restart session」）。</p>
 </blockquote>
-<p>我們將使用 OpenAI 的模型。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
+<p>我們將使用 OpenAI 的模型。您應將<a href="https://platform.openai.com/docs/quickstart">API 金鑰</a> <code translate="no">OPENAI_API_KEY</code> 設定為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>匯入必要的函式庫和相依性。</p>
+<p>導入必要的函式庫與依賴項。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
@@ -71,7 +71,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>初始化 Milvus 用戶端實例、LLM 和嵌入模型。</p>
+<p>初始化 Milvus 客戶端、LLM 以及嵌入模型的實例。</p>
 <pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
 llm = ChatOpenAI(
@@ -81,11 +81,11 @@ llm = ChatOpenAI(
 embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>對於 MilvusClient 中的 args：</p>
+<p>關於 MilvusClient 的參數：</p>
 <ul>
-<li>將<code translate="no">uri</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
-<li>如果您有大規模的資料，您可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如<code translate="no">http://localhost:19530</code> ，作為您的<code translate="no">uri</code> 。</li>
-<li>如果您要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
+<li>將<code translate="no">uri</code> 設定為本機檔案（例如<code translate="no">./milvus.db</code> ）是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存至此檔案中。</li>
+<li>若您擁有大量資料，可在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更佳的 Milvus 伺服器。在此設定中，請將伺服器 URI（例如<code translate="no">http://localhost:19530</code> ）設為您的<code translate="no">uri</code> 。</li>
+<li>若您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全託管雲端服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，這兩者分別對應 Zilliz Cloud 中的「<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公開端點</a>」<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">和「API 金鑰」</a>。</li>
 </ul>
 </div>
 <h2 id="Offline-Data-Loading" class="common-anchor-header">離線資料載入<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
@@ -118,7 +118,8 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>我們將以介紹 Bernoulli 家族與 Euler 關係的奈米資料集為例進行說明。實際上，您可以使用任何方法從自訂的語料庫中抽取三元組。</p>
+    </button></h3><p>我們將使用一個介紹伯努利家族與歐拉之間關係的 nano 資料集作為示範範例。該 nano 資料集包含 4 段文字及一組對應的三元組，其中每個三元組包含主語、謂語和賓語。
+實際操作時，您可以使用任何方法從您自訂的語料庫中提取三元組。</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -180,12 +181,12 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
     },
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>我們以下列方式建構實體與關係：</p>
+<p>我們將實體與關係建構如下：</p>
 <ul>
-<li>實體是三元組中的主語或客語，因此我們直接從三元組中抽取它們。</li>
-<li>在這裡，我們透過直接串連主語、謂語和客語來建構關係的概念，並在中間加上空格。</li>
+<li>實體即為三元組中的主語或賓語，因此我們直接從三元組中提取它們。</li>
+<li>在此，我們透過將主語、謂語和賓語以空格分隔並直接串接，來建構「關係」的概念。</li>
 </ul>
-<p>我們也準備了一個 dict 來對應實體 id 到關係 id，以及另一個 dict 來對應關係 id 到通道 id，以備日後使用。</p>
+<p>我們還準備了一個字典，用以將實體 ID 映射至關係 ID，並準備了另一個字典，用以將關係 ID 映射至段落 ID，以供日後使用。</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
 relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
@@ -226,7 +227,7 @@ passages = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>為實體、關係和段落建立 Milvus 集合。在我們的方法中，實體集合和關係集合作為圖形建構的主要集合，而通道集合則作為幼稚 RAG 檢索比較或輔助用途。</p>
+    </button></h3><p>建立用於實體、關係及段落的 Milvus 集合。在我們的方法中，實體集合與關係集合用作建構圖的主要集合，而段落集合則用於簡單 RAG 檢索的比較或輔助目的。</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -247,7 +248,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>將資料連同其 metadata 資訊插入 Milvus 集合，包括實體集合、關係集合和段落集合。元資料資訊包括段落 id 和相鄰實體或關係 id。</p>
+<p>將資料連同其元資料資訊一併插入 Milvus 集合中，包括實體、關係及段落集合。元資料資訊包含段落 ID 以及相鄰實體或關係的 ID。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],
@@ -306,7 +307,7 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">相似性擷取<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">相似度檢索<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,8 +322,9 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>我們根據輸入的查詢從 Milvus 擷取前 K 個相似的實體和關係。</p>
-<p>在執行實體擷取時，我們必須先使用特定的方法，例如 NER（命名實體辨識），從查詢文字中萃取查詢實體。為了簡單起見，我們在此準備 NER 的結果。實際上，您可以使用任何其他模型或方法來從查詢中抽取實體。</p>
+    </button></h3><p>我們根據輸入查詢，從 Milvus 中檢索前 K 個最相似的實體與關係。</p>
+<p>在執行實體檢索時，應先透過特定方法（如 NER，即命名實體識別）從查詢文字中提取查詢實體。為簡化流程，此處已預先準備好 NER 結果。若您想將查詢改為自訂問題，則必須修改對應的查詢 NER 清單。
+實際上，您可以使用任何其他模型或方法從查詢中提取實體。</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
 query_ner_list = [<span class="hljs-string">&quot;Euler&quot;</span>]
@@ -350,7 +352,7 @@ relation_search_res = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expand-Subgraph" class="common-anchor-header">展開子圖<button data-href="#Expand-Subgraph" class="anchor-icon" translate="no">
+<h3 id="Expand-Subgraph" class="common-anchor-header">擴展子圖<button data-href="#Expand-Subgraph" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -365,12 +367,14 @@ relation_search_res = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>我們使用擷取到的實體和關係來展開子圖，並取得候選關係，然後從兩種方式合併它們。以下是子圖擴展過程的流程圖：  <span class="img-wrapper">
+    </button></h3><p>我們利用檢索到的實體與關係來擴展子圖並獲得候選關係，然後將從兩種途徑獲得的候選關係進行合併。以下是子圖擴展流程的流程圖：
+
+  <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>在此我們建構一個相鄰矩陣，並使用矩陣乘法來計算幾度內的相鄰映射資訊。透過這種方式，我們可以快速取得任何擴充度的資訊。</p>
+<p>在此我們構建鄰接矩陣，並透過矩陣乘法計算幾度內的鄰接映射資訊。藉此，我們能快速取得任何擴展程度的資訊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Construct the adjacency matrix of entities and relations where the value of the adjacency matrix is 1 if an entity is related to a relation, otherwise 0.</span>
 entity_relation_adj = np.zeros((<span class="hljs-built_in">len</span>(entities), <span class="hljs-built_in">len</span>(relations)))
 <span class="hljs-keyword">for</span> entity_id, entity <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(entities):
@@ -397,7 +401,7 @@ relation_adj_target_degree = relation_adj_1_degree
 
 entity_relation_adj_target_degree = entity_adj_target_degree @ entity_relation_adj
 <button class="copy-code-btn"></button></code></pre>
-<p>從目標程度擴充矩陣中取值，我們可以很容易地從擷取的實體與關係中擴充相對應的程度，從而得到子圖的所有關係。</p>
+<p>透過取用目標擴展度矩陣中的數值，我們可以輕鬆地從檢索到的實體和關係中擴展對應的度數，從而獲得子圖的所有關係。</p>
 <pre><code translate="no" class="language-python">expanded_relations_from_relation = <span class="hljs-built_in">set</span>()
 expanded_relations_from_entity = <span class="hljs-built_in">set</span>()
 <span class="hljs-comment"># You can set the similarity threshold here to guarantee the quality of the retrieved ones.</span>
@@ -435,7 +439,7 @@ relation_candidate_texts = [
     relations[relation_id] <span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> relation_candidate_ids
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>我們透過擴展子圖得到候選關係，下一步將使用 LLM 對這些候選關係重新排序。</p>
+<p>透過子圖擴展，我們已取得候選關係，這些關係將在下一步由 LLM 進行重新排序。</p>
 <h3 id="LLM-reranking" class="common-anchor-header">LLM 重新排序<button data-href="#LLM-reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -451,7 +455,7 @@ relation_candidate_texts = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在這個階段，我們利用 LLM 強大的自我注意機制來進一步篩選和提昇候選關係集。我們使用單次提示，將查詢和候選關係集納入提示中，並指示 LLM 挑選可能有助於回答查詢的潛在關係。鑑於某些查詢可能很複雜，我們採用 Chain-of-Thought 方法，允許 LLM 在回應中闡明其思考過程。我們規定 LLM 的回應是 json 格式，以方便解析。</p>
+    </button></h3><p>在此階段，我們運用 LLM 強大的自我注意力機制，進一步篩選並精煉候選關係集。我們採用一次性提示（one-shot prompt），將查詢與候選關係集整合至提示中，並指示 LLM 選取有助於回答查詢的潛在關係。 鑑於部分查詢可能較為複雜，我們採用「思維鏈」（Chain-of-Thought）方法，讓 LLM 能在回應中闡述其思考過程。我們規定 LLM 的回應須採用 JSON 格式，以便後續解析。</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -537,7 +541,7 @@ rerank_relation_ids = rerank_relations(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>我們可以從重新排序的關係中取得最終擷取的段落。</p>
+    </button></h3><p>我們可以從重新排序的關係中取得最終檢索到的段落。</p>
 <pre><code translate="no" class="language-python">final_top_k = <span class="hljs-number">2</span>
 
 final_passages = []
@@ -549,7 +553,7 @@ final_passage_ids = []
             final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
-<p>我們可以將結果與幼稚的 RAG 方法進行比較，後者是直接從段落集合中根據查詢嵌入擷取 topK 段落。</p>
+<p>我們可將結果與「簡單 RAG」方法進行比較，該方法是直接根據查詢嵌入向量，從段落集合中檢索前 K 個段落。</p>
 <pre><code translate="no" class="language-python">naive_passage_res = milvus_client.search(
     collection_name=passage_col_name,
     data=[query_embedding],
@@ -600,4 +604,5 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>我們可以看到，從 naive RAG 擷取的段落遺漏了一個 ground-truth 段落，這導致了錯誤的答案；而從我們的方法擷取的段落是正確的，這有助於得到準確的問題答案。</p>
+<p>如我們所見，傳統 RAG 方法檢索到的段落遺漏了一段真實答案段落，導致答案錯誤。
+我們的方法所檢索到的段落是正確的，有助於獲得問題的準確答案。</p>

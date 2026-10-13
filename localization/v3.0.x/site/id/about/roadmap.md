@@ -4,8 +4,8 @@ title: Peta Jalan Milvus
 related_key: Milvus roadmap
 summary: >-
   Milvus adalah basis data vektor sumber terbuka yang dirancang untuk mendukung
-  aplikasi kecerdasan buatan (AI). Berikut adalah peta jalan kami yang akan
-  menjadi panduan dalam proses pengembangan.
+  aplikasi kecerdasan buatan. Berikut adalah peta jalan kami yang akan menjadi
+  panduan dalam proses pengembangan.
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Peta Jalan Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,8 +39,8 @@ summary: >-
       </svg>
     </button></h2><p><strong>Peta Jalan Produk Milvus</strong></p>
 <p>Selamat datang di Peta Jalan Milvus!</p>
-<p>Kami sedang membawa Milvus ke era baru — basis data multimodal generasi berikutnya — yang mencakup <strong>data terstruktur hingga tidak terstruktur</strong>, <strong>pengambilan data secara real-time hingga analisis offline</strong>, serta <strong>kinerja kluster tunggal hingga arsitektur data lake global</strong>.</p>
-<p>Peta jalan ini menguraikan tujuan inti untuk <strong>Milvus v2.6 (sedang dalam pengembangan)</strong>, <strong>Milvus v3.0 (ditargetkan pada akhir 2026)</strong>, dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, bersama dengan rencana evolusi untuk <strong>Vector Lake (data lake / Loon)</strong>.</p>
+<p>Kami sedang membawa Milvus ke era baru — basis data multimodal generasi berikutnya — yang mencakup <strong>data terstruktur hingga tidak terstruktur</strong>, <strong>pengambilan data secara real-time hingga analitik offline</strong>, serta <strong>kinerja kluster tunggal hingga arsitektur data lake global</strong>.</p>
+<p>Peta jalan ini menguraikan tujuan inti untuk <strong>Milvus v2.6 (sedang dalam pengembangan)</strong>, <strong>Milvus v3.0 (ditargetkan akhir 2026)</strong>, dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, bersama dengan rencana evolusi untuk <strong>Vector Lake (data lake / Loon)</strong>.</p>
 <h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (Sedang Dikembangkan)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,12 +83,12 @@ summary: >-
 <li><p>Meningkatkan kinerja dan stabilitas konkurensi secara signifikan, yang menjadi landasan bagi pemrosesan real-time dan offline yang terpadu.</p></li>
 <li><p>Memperkenalkan mesin antrian pesan baru: <strong>Woodpecker</strong>.</p></li>
 </ul>
-<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Pengelompokan Tingkat Panas/Dingin &amp; Arsitektur Penyimpanan (StorageV2)</strong></h4><ul>
+<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Tiering Panas/Dingin &amp; Arsitektur Penyimpanan (StorageV2)</strong></h4><ul>
 <li><p>Mendukung dua format penyimpanan: <strong>Parquet</strong> dan <strong>Vortex</strong>, sehingga meningkatkan kinerja koncurrency dan efisiensi memori.</p></li>
-<li><p>Menerapkan penyimpanan berjenjang dengan pemisahan data panas/dingin secara otomatis serta penjadwalan cerdas.</p></li>
+<li><p>Menerapkan penyimpanan berjenjang dengan pemisahan data panas/dingin secara otomatis dan penjadwalan cerdas.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Prototipe Vector Lake (v0.1)</strong></h4><ul>
-<li><p>Integrasi dengan <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> melalui FFI, memungkinkan evolusi skema secara offline dan kueri KNN.</p></li>
+<li><p>Mengintegrasikan dengan <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> melalui FFI, sehingga memungkinkan evolusi skema offline dan kueri KNN.</p></li>
 <li><p>Menyediakan visualisasi data multimodal dan demo ETL Spark, yang membangun arsitektur data lake dasar.</p></li>
 </ul>
 <h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (Ditargetkan pada Awal 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
@@ -124,9 +124,9 @@ summary: >-
         ></path>
       </svg>
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>Perombakan Pengalaman Pencarian</strong></h4><ul>
-<li><p>Memperkenalkan pencarian kesamaan " <strong>More Like This" (MLT)</strong> dengan dukungan untuk pencarian menggunakan posisi atau contoh negatif.</p></li>
+<li><p>Memperkenalkan pencarian kesamaan " <strong>More Like This" (MLT)</strong> dengan dukungan untuk pencarian berdasarkan posisi atau contoh negatif.</p></li>
 <li><p>Menambahkan kemampuan pencarian semantik seperti <strong>penyorotan</strong> dan <strong>peningkatan</strong>.</p></li>
-<li><p>Mendukung <strong>kamus kustom</strong> dan <strong>tabel sinonim</strong>, memungkinkan definisi aturan leksikal dan semantik di lapisan Analyzer.</p></li>
+<li><p>Mendukung <strong>kamus kustom</strong> dan <strong>tabel sinonim</strong>, yang memungkinkan definisi aturan leksikal dan semantik di lapisan Analyzer.</p></li>
 <li><p>Memperkenalkan kemampuan <strong>agregasi</strong> untuk kueri.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Multi-Tenancy &amp; Manajemen Sumber Daya</strong></h4><ul>
@@ -145,7 +145,7 @@ summary: >-
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Kemampuan Tingkat Perusahaan</strong></h4><ul>
 <li><p>Mendukung <strong>pencadangan dan pemulihan berbasis snapshot</strong>.</p></li>
 <li><p>Menyediakan <strong>pelacakan end-to-end</strong> dan <strong>pencatatan audit</strong>.</p></li>
-<li><p>Menerapkan <strong>Ketersediaan Tinggi (HA) Aktif-Siaga</strong> di seluruh penyebaran multi-kluster.</p></li>
+<li><p>Menerapkan <strong>Ketersediaan Tinggi (HA) Aktif-Siaga</strong> di seluruh penerapan multi-cluster.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
 <li><p>Mendukung <strong>penyimpanan TEXT / BLOB</strong> dan <strong>pengelolaan snapshot multi-versi</strong>.</p></li>
@@ -204,7 +204,7 @@ summary: >-
 </ul></li>
 </ul>
 <h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>Pembagian Shard Dinamis &amp; Skalabilitas</strong></h4><ul>
-<li><p>Aktifkan <strong>pemisahan shard otomatis</strong> dan <strong>penyeimbangan beban</strong> untuk penskalaan yang mulus.</p></li>
+<li><p>Aktifkan <strong>pemisahan shard otomatis</strong> dan <strong>penyeimbangan beban</strong> untuk penskalaan yang lancar.</p></li>
 <li><p>Tingkatkan <strong>pembuatan indeks global</strong> dan pastikan <strong>kinerja pencarian terdistribusi</strong>.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
@@ -230,8 +230,8 @@ summary: >-
 <p>Kami dengan hangat mengundang seluruh anggota komunitas untuk turut membentuk basis data multimodal generasi berikutnya:</p>
 <ul>
 <li><p>💬 <strong>Berikan masukan</strong>: Usulkan fitur baru atau ide optimasi</p></li>
-<li><p>🐛 <strong>Laporkan masalah</strong>: Kirim laporan bug melalui GitHub Issues</p></li>
-<li><p>🔧 <strong>Berkontribusi dengan kode</strong>: Kirimkan PR dan bantu membangun fitur inti</p>
+<li><p>🐛 <strong>Laporkan masalah</strong>: Laporkan bug melalui GitHub Issues</p></li>
+<li><p>🔧 <strong>Berkontribusi pada kode</strong>: Kirimkan PR dan bantu membangun fitur inti</p>
 <ul>
 <li><p><strong>Pull request</strong>: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik itu memperbaiki bug, menambahkan fitur, atau menyempurnakan dokumentasi, kontribusi Anda sangat kami hargai.</p></li>
 <li><p><strong>Panduan pengembangan</strong>: Lihat <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Panduan Kontributor</a> kami untuk panduan mengenai kontribusi kode.</p></li>

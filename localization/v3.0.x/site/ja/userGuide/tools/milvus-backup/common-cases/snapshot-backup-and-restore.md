@@ -1,9 +1,10 @@
 ---
 id: snapshot-backup-and-restore.md
 summary: コレクションをバックアップし、同じMilvusインスタンス内で新しい名前で復元します。
-title: 1つのインスタンスでのスナップショットのバックアップと復元
+title: 1つのインスタンスでのスナップショットのバックアップと復元Compatible with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">1つのインスタンスでのスナップショットのバックアップと復元<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">1つのインスタンスでのスナップショットのバックアップと復元<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +19,7 @@ title: 1つのインスタンスでのスナップショットのバックアッ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>コレクションをバックアップし、同じMilvusインスタンス内で新しい名前で復元します。この例では、<strong>Milvus Backup 0.6.0を使用して</strong> <code translate="no">coll</code> のスナップショットを作成し、<strong>Milvus 3.0.1以降で</strong> <code translate="no">coll_bak</code> として復元します。Backup 0.5.xの場合は、「<a href="/docs/ja/single-instance-backup-and-restore.md">1つのインスタンス内でのバックアップと復元」を</a>参照してください。</p>
+    </button></h1><p>コレクションをバックアップし、同じMilvusインスタンス内で新しい名前で復元します。この例では、<code translate="no">coll</code> のスナップショットを作成し、<strong>Milvus 3.0.1以降で</strong> <code translate="no">coll_bak</code> として復元します。Backup 0.5.xの場合は、「<a href="/docs/ja/single-instance-backup-and-restore.md">1つのインスタンス内でのバックアップと復元」を</a>参照してください。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,11 +61,11 @@ title: 1つのインスタンスでのスナップショットのバックアッ
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus Backup 0.6.0 および Milvus 3.0.1 以降を使用してください。<a href="/docs/ja/milvus_backup_0_6_cli.md">「コマンドを使用したデータのバックアップと復元</a>」の手順に従ってツールをインストールしてください。</li>
+<li>Milvus 3.0.1 以降を使用してください。この例は、Milvus Backup 0.6.0 および Milvus 3.0.1 で検証されています。「<a href="/docs/ja/milvus_backup_0_6_cli.md">コマンドを使用したデータのバックアップと復元</a>」の手順に従ってツールをインストールしてください。</li>
 <li>「<code translate="no">coll</code> 」という名前の既存のコレクションを使用するか、以下のオプションのサンプルコレクションを作成してください。ソースと復元後の結果を比較する際は、そのデータを変更しないでください。</li>
-<li>Milvus Backup から Milvus の gRPC ポート (19530)、管理ポート (9091)、およびオブジェクトストレージにアクセスできるようにしてください。また、Milvus サーバーは、スナップショットのエクスポートおよびインポートのためにバックアップストレージにアクセスできる必要があります。</li>
-<li>例のホスト名、バケット名、ルートパス、および認証情報を、ご自身のデプロイ設定に置き換えてください。Milvusのストレージ設定は、実行中のインスタンスと一致している必要があります。バックアップ設定を変更しても、Milvusの設定は再構成されません。</li>
-<li>ターゲットインスタンスに<code translate="no">coll_bak</code> が存在しないことを確認してください。</li>
+<li>Milvus gRPC ポート (19530)、管理ポート (9091)、およびオブジェクトストレージを Milvus Backup からアクセス可能にしてください。また、Milvus サーバーは、スナップショットのエクスポートおよびインポートのためにバックアップストレージにアクセスできる必要があります。</li>
+<li>例示されているホスト名、バケット名、ルートパス、および認証情報を、ご自身のデプロイ設定に置き換えてください。Milvusのストレージ設定は、実行中のインスタンスと一致している必要があります。バックアップ構成を変更しても、Milvusの設定は再構成されません。</li>
+<li>ターゲットインスタンスに `<code translate="no">coll_bak</code> ` が存在しないことを確認してください。</li>
 </ul>
 <p>Milvusのストレージ設定については、「<a href="/docs/ja/deploy_s3.md">オブジェクトストレージ</a>」を参照してください。既存のv1バックアップ構成については、「<a href="/docs/ja/milvus_backup_upgrade.md#Migrate-the-configuration">Milvus Backupのアップグレード</a>」を参照してください。</p>
 <h2 id="Prepare-sample-data" class="common-anchor-header">サンプルデータの準備<button data-href="#Prepare-sample-data" class="anchor-icon" translate="no">
@@ -83,7 +84,7 @@ title: 1つのインスタンスでのスナップショットのバックアッ
         ></path>
       </svg>
     </button></h2><p>以下のコマンドでは、<code translate="no">coll</code> という名前の既存のコレクションを使用しています。名前を一貫して変更することで、独自のコレクションを使用することもできます。</p>
-<p>小規模なテスト用コレクションの場合は、PyMilvus をインストールし、空のコレクション名に対して以下のコマンドを実行してください。Milvus がローカルにない場合は、URI を置き換えてください：</p>
+<p>小規模なテスト用コレクションの場合は、PyMilvus をインストールし、空のコレクション名に対して以下のコマンドを実行してください。Milvus がローカルにない場合は、URI を置き換えてください:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus==3.0.0
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -139,7 +140,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">milvus-backup</code> バイナリが含まれるディレクトリから、以下を実行してください。残りのコマンドを実行する際も、この作業ディレクトリを維持してください：</p>
+    </button></h3><p><code translate="no">milvus-backup</code> バイナリが含まれるディレクトリから、以下のコマンドを実行してください。残りのコマンドを実行する際も、この作業ディレクトリを維持してください：</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
 <p>以下の内容を「<code translate="no">configs/backup-source.yaml</code> 」として保存してください。この例では MinIO のデフォルトのテスト用認証情報を使用しています。お使いのオブジェクトストアの認証情報に置き換えてください。</p>
@@ -168,7 +169,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <span class="hljs-attr">transfer:</span>
   <span class="hljs-attr">mode:</span> <span class="hljs-string">auto</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus.storage</code> はソースインスタンスのデータを記述します。<code translate="no">backup.storage</code> はバックアップ先の設定を記述します。設定されていないバックアップストレージのフィールドは<code translate="no">milvus.storage</code> から継承されますが、<code translate="no">rootPath</code> は例外で、デフォルトでは<code translate="no">backup</code> に設定されます。</p>
+<p><code translate="no">milvus.storage</code> はソースインスタンスのデータを記述します。<code translate="no">backup.storage</code> はバックアップ先を記述します。設定されていないバックアップストレージのフィールドは<code translate="no">milvus.storage</code> から継承されますが、<code translate="no">rootPath</code> は例外で、デフォルトでは<code translate="no">backup</code> となります。</p>
 <p>Milvus と Milvus Backup が同じオブジェクトストアにアクセスするために異なるアドレスを使用している場合は、<code translate="no">backup.storage.milvusAddress</code> および<code translate="no">milvusPort</code> を、Milvus サーバーからアクセス可能なアドレスに設定してください。<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">0.6.0 の設定例</a>を参照してください。</p>
 <h3 id="Step-2-Check-connectivity-and-create-a-backup" class="common-anchor-header">ステップ 2: 接続を確認し、バックアップを作成する<button data-href="#Step-2-Check-connectivity-and-create-a-backup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -189,9 +190,9 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup create --format snapshot --filter coll -n my_backup --config configs/backup-source.yaml
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>接続性の確認では、<code translate="no">Success!</code> が表示されるはずです。create コマンドでは<code translate="no">create backup success</code> が表示され、バックアップ情報には<code translate="no">coll</code> が一覧表示されるはずです。</p>
-<p>明示的に `<code translate="no">--format snapshot</code> ` を指定すると、スナップショットワークフローが選択されます。Milvus 3.0 では、デフォルトの `<code translate="no">auto</code> ` でもスナップショットが選択されます。バックアップには、メタデータと `<code translate="no">bucket-a/backup/my_backup</code>` 配下のエクスポートされたスナップショットバンドルが含まれます。ディレクトリ全体を保存してください。</p>
-<h2 id="Restore-within-the-same-instance" class="common-anchor-header">同一インスタンス内での復元<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
+<p>接続性の確認では、<code translate="no">Success!</code> が表示されるはずです。create コマンドを実行すると<code translate="no">create backup success</code> が表示され、バックアップ情報には<code translate="no">coll</code> が一覧表示されるはずです。</p>
+<p>明示的に `<code translate="no">--format snapshot</code> ` を指定すると、スナップショットワークフローが選択されます。Milvus 3.0 では、デフォルトの `<code translate="no">auto</code> ` でもスナップショットが選択されます。バックアップには、メタデータと、`<code translate="no">bucket-a/backup/my_backup</code>` 配下にエクスポートされたスナップショットバンドルが含まれます。ディレクトリ全体を保存してください。</p>
+<h2 id="Restore-within-the-same-instance" class="common-anchor-header">同じインスタンス内での復元<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -226,7 +227,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>上記のオプションの 256 エンティティのサンプルデータについては、復元先に対して次のコマンドを実行してください。<code translate="no">localhost:19530</code> を、データの準備に使用したのと同じ Milvus エンドポイントに置き換えてください。これにより、データを削除することなく、件数、すべてのスカラー値およびベクトル値、およびベクトル検索結果が検証されます。</p>
+    </button></h2><p>上記のオプションの 256 エンティティのサンプルデータについては、復元先に対して以下のコマンドを実行してください。<code translate="no">localhost:19530</code> を、データの準備に使用したのと同じ Milvus エンドポイントに置き換えてください。これにより、データを削除することなく、エンティティ数、すべてのスカラー値およびベクトル値、およびベクトル検索結果が検証されます:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -256,4 +257,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>その他のデータについては、バックアップ時のベースラインと比較してください。復元されたコレクションにベクトルインデックスが存在しない場合は、読み込み前に適切なベクトルインデックスを作成してください。コマンドの実行が成功しただけでは、期待通りのデータが復元されたことを証明するものではありません。</p>
+<p>その他のデータについては、バックアップ時点のベースラインと比較してください。復元されたコレクションにベクトルインデックスが存在しない場合は、読み込み前に適切なベクトルインデックスを作成してください。コマンドが正常に実行されただけでは、期待通りのデータが復元されたことを証明するものではありません。</p>

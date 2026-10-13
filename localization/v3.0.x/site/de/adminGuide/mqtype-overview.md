@@ -51,7 +51,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Jede Milvus-Instanz verwendet genau eine Nachrichtenwarteschlange.</p></li>
-<li><p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p></li>
+<li><p><strong>Einschränkungen bei Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p></li>
 <li><p>Informationen zum Ändern der Nachrichtenwarteschlange einer laufenden Instanz finden Sie unter <a href="/docs/de/switch-mq-type.md">„Nachrichtenwarteschlange wechseln</a>“. Die Funktion „Nachrichtenwarteschlange wechseln“ ist ab <strong>Milvus 3.0</strong> verfügbar – führen Sie <strong>daher</strong> zunächst ein Upgrade auf Milvus 3.0 oder höher durch.</p></li>
 </ul>
 </div>

@@ -57,7 +57,7 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
     </button></h3><p>L’aggiornamento da Milvus 2.5.x alla versione 2.6.17 comporta modifiche architetturali significative:</p>
 <ul>
 <li><strong>Consolidamento del coordinatore</strong>: i coordinatori separati legacy (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) sono stati consolidati in un unico <code translate="no">mixCoord</code></li>
-<li><strong>Nuovi componenti</strong>: introduzione dello Streaming Node per un’elaborazione dei dati potenziata</li>
+<li><strong>Nuovi componenti</strong>: introduzione del nodo di streaming per un’elaborazione dei dati potenziata</li>
 <li><strong>Rimozione di componenti</strong>: <code translate="no">indexNode</code> è stato rimosso e consolidato</li>
 </ul>
 <p>Questo processo di aggiornamento garantisce una corretta migrazione alla nuova architettura. Per ulteriori informazioni sulle modifiche all’architettura, consultare <a href="/docs/it/v2.6.x/architecture_overview.md">la Panoramica dell’architettura di Milvus</a>.</p>
@@ -85,9 +85,9 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
 <ul>
 <li>Milvus v2.6.0-rc1 <strong>non</strong> è <strong>compatibile</strong> con la versione v2.6.17. Gli aggiornamenti diretti dalle versioni candidate non sono supportati.</li>
 <li>Se attualmente si sta utilizzando la versione v2.6.0-rc1 e si desidera conservare i propri dati, si prega di consultare <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">questa guida della community</a> per assistenza nella migrazione.</li>
-<li><strong>È necessario</strong> effettuare l'aggiornamento alla versione v2.5.16 o successive prima di passare alla v2.6.17.</li>
+<li><strong>È necessario</strong> eseguire l’aggiornamento alla versione v2.5.16 o successive prima di passare alla v2.6.17.</li>
 </ul>
-<p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v2.6.17, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
 <div class="alter note">
 <p>Per motivi di sicurezza, con il rilascio della v2.6.17 Milvus aggiorna MinIO alla versione RELEASE.2024-12-18T13-15-44Z.</p>
 </div>
@@ -157,7 +157,7 @@ docker compose up -d
       </svg>
     </button></h3><p>Una volta che la versione v2.5.16 è in esecuzione corretta, esegui l'aggiornamento alla versione v2.6.17:</p>
 <ol>
-<li><p>Modifica il file <code translate="no">docker-compose.yaml</code> esistente e aggiorna entrambi i tag delle immagini Milvus e MinIO:</p>
+<li><p>Modifica il file <code translate="no">docker-compose.yaml</code> esistente e aggiorna entrambi i tag delle immagini di Milvus e MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
@@ -168,7 +168,7 @@ docker compose up -d
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.17</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Applicare l'aggiornamento finale:</p>
+<li><p>Applicare l’aggiornamento finale:</p>
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>

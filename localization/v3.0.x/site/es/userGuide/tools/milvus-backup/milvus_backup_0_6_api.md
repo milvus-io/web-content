@@ -1,11 +1,14 @@
 ---
 id: milvus_backup_0_6_api.md
 summary: >-
-  Crear y supervisar las tareas de copia de seguridad y restauración de Milvus
-  Backup 0.6.0 a través de la API HTTP.
-title: Utilizar la API HTTP de Milvus Backup 0.6.0
+  Crea y supervisa tareas de copia de seguridad y restauración a través de la
+  API HTTP de Milvus Backup.
+title: >-
+  Copia de seguridad y restauración de datos mediante APICompatible with Milvus
+  Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Use-the-Milvus-Backup-060-HTTP-API" class="common-anchor-header">Utilizar la API HTTP de Milvus Backup 0.6.0<button data-href="#Use-the-Milvus-Backup-060-HTTP-API" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Copia de seguridad y restauración de datos mediante API<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utiliza la API HTTP de Milvus Backup para crear copias de seguridad, restaurar colecciones y supervisar tareas asíncronas. El ejemplo de instantánea que se muestra a continuación utiliza <strong>Milvus Backup 0.6.0</strong> con <strong>Milvus 3.0.1 o posterior</strong>. Para Backup 0.5.x, consulta la <a href="/docs/es/milvus_backup_api.md">guía de la API 0.5.x</a>. Si ya tienes una instalación, consulta <a href="/docs/es/milvus_backup_upgrade.md">Actualizar Milvus Backup</a>.</p>
+    </button></h1><p>Utiliza la API HTTP de Milvus Backup para crear copias de seguridad, restaurar colecciones y supervisar tareas asíncronas. El ejemplo de instantánea que se muestra a continuación requiere <strong>Milvus 3.0.1 o una versión posterior</strong>. Para Backup 0.5.x, utiliza la <a href="/docs/es/milvus_backup_api.md">guía de la API 0.5.x</a>. Para una instalación existente, consulta <a href="/docs/es/milvus_backup_upgrade.md">Actualizar Milvus Backup</a>.</p>
 <h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Obtener Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +39,7 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Descarga y extrae el binario correspondiente de la <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">versión v0.6.0</a>. Si prefieres compilarlo desde el código fuente, sigue <a href="/docs/es/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">las instrucciones de «Cómo obtener Milvus Backup»</a>; la compilación requiere Go 1.26 o posterior.</p>
+    </button></h2><p>Los ejemplos que se muestran a continuación se han validado con <strong>Milvus Backup 0.6.0</strong>. Descarga y extrae el binario correspondiente de la <a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">versión v0.6.0</a>. Si prefieres compilarlo desde el código fuente, sigue las instrucciones de <a href="/docs/es/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">«Obtener Milvus Backup»</a>; la compilación requiere Go 1.26 o posterior.</p>
 <h2 id="Prepare-configuration-file" class="common-anchor-header">Preparar el archivo de configuración<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,13 +55,13 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Crea <a href="/docs/es/milvus_backup_0_6_cli.md#Prepare-configuration-file">un archivo</a> « <code translate="no">configs/backup.yaml</code> » utilizando el ejemplo de la versión v2 que se encuentra en <a href="/docs/es/milvus_backup_0_6_cli.md#Prepare-configuration-file">«Preparar el archivo de configuración</a>». Configura el acceso a Milvus, al almacenamiento de la instancia y al destino de la copia de seguridad. El servidor de Milvus también debe poder acceder al almacenamiento de la copia de seguridad para realizar operaciones de instantáneas.</p>
-<p>Si dispone de un archivo v1, este seguirá siendo cargable. Consulte <a href="/docs/es/milvus_backup_upgrade.md#Migrate-the-configuration">«Migrar la configuración</a> » antes de modificar su esquema o sus variables de entorno.</p>
+    </button></h2><p>Cree <a href="/docs/es/milvus_backup_0_6_cli.md#Prepare-configuration-file">un archivo</a>` <code translate="no">configs/backup.yaml</code> ` utilizando el ejemplo de la versión 2 que se muestra en <a href="/docs/es/milvus_backup_0_6_cli.md#Prepare-configuration-file">«Preparar el archivo de configuración</a>». Configure el acceso a Milvus, al almacenamiento de la instancia y al destino de la copia de seguridad. El servidor de Milvus también debe poder acceder al almacenamiento de la copia de seguridad para realizar operaciones de instantáneas.</p>
+<p>Si dispone de un archivo de la versión v1, este seguirá siendo compatible. Consulte <a href="/docs/es/milvus_backup_upgrade.md#Migrate-the-configuration">«Migrar la configuración</a> » antes de modificar su esquema o sus variables de entorno.</p>
 <p>Desde el directorio que contiene el binario, revisa la configuración y comprueba la conectividad:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Continúe cuando la comprobación de conectividad indique « <code translate="no">Success!</code> ».</p>
+<p>Continúa cuando la comprobación de conectividad indique « <code translate="no">Success!</code> ».</p>
 <h2 id="Start-up-the-API-server" class="common-anchor-header">Inicie el servidor de la API<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +84,7 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Ejecuta solo uno de estos comandos para un servicio determinado. Los ejemplos siguientes utilizan el puerto 8080; cambia sus URL si has seleccionado otro puerto. Swagger UI está disponible en <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
-<p>Mantenga el servicio en ejecución mientras se recopilan las tareas. Los ID de las tareas y el progreso en tiempo real pertenecen al proceso del servicio; la copia de seguridad persistente permanece en el almacenamiento de objetos una vez que el proceso se detiene.</p>
+<p>Mantén el servicio en ejecución mientras se realizan las tareas de sondeo. Los ID de las tareas y el progreso en tiempo real pertenecen al proceso del servicio; la copia de seguridad persistente permanece en el almacenamiento de objetos una vez que el proceso se detiene.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Prepara los datos<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +100,7 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilice una colección existente denominada <code translate="no">coll</code> o cree la colección de prueba de 256 entidades que se indica en <a href="/docs/es/snapshot-backup-and-restore.md#Prepare-sample-data">«Preparar datos de ejemplo</a>». Modifique los nombres de las colecciones en las solicitudes si utiliza sus propios datos. Mantenga los datos de prueba sin cambios mientras verifica el resultado.</p>
+    </button></h2><p>Utilice una colección existente denominada <code translate="no">coll</code> o cree la colección de prueba de 256 entidades tal y como se indica en <a href="/docs/es/snapshot-backup-and-restore.md#Prepare-sample-data">«Preparar datos de ejemplo</a>». Modifique los nombres de las colecciones en las solicitudes si utiliza sus propios datos. Mantenga los datos de prueba sin cambios mientras verifica el resultado.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Realizar una copia de seguridad de los datos<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,10 +125,10 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
     &quot;collection_names&quot;: [&quot;coll&quot;]
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>La respuesta incluye un « <code translate="no">requestId</code> ». El envío no implica que la copia de seguridad se haya completado. Copie ese valor en « <code translate="no">backup_id</code> » y realice consultas periódicas:</p>
+<p>La respuesta incluye un <code translate="no">requestId</code>. El envío no implica que la copia de seguridad se haya completado. Copie ese valor en <code translate="no">backup_id</code> y realice consultas periódicas:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_backup?backup_id=BACKUP_REQUEST_ID&amp;backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Espere a que <code translate="no">data.state_code</code> se convierta en <code translate="no">2</code>. La API utiliza estos estados de tarea:</p>
+<p>Espere a que <code translate="no">data.state_code</code> se convierta en <code translate="no">2</code>. La API utiliza los siguientes estados de tarea:</p>
 <table>
 <thead>
 <tr><th><code translate="no">state_code</code></th><th>Significado</th></tr>
@@ -144,7 +147,7 @@ title: Utilizar la API HTTP de Milvus Backup 0.6.0
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">get_backup</code> devuelve metadatos en formato JSON, incluido <code translate="no">collection_backups</code>; <strong>no</strong> descarga los archivos de copia de seguridad. En el caso de una copia de seguridad creada por otro proceso, una consulta solo por nombre puede devolver metadatos sin el progreso en tiempo real de la tarea. Utiliza el ID de la tarea de la respuesta de creación del servicio actual al supervisar una copia de seguridad activa.</p>
-<p>El formato predeterminado es <code translate="no">auto</code>, que selecciona la instantánea en Milvus 3.0. Para solicitar explícitamente el binlog, añada <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> al cuerpo de la solicitud create. Los ajustes preestablecidos de la CLI <code translate="no">--for</code> no son un campo de solicitud HTTP.</p>
+<p>El formato predeterminado es <code translate="no">auto</code>, que selecciona la instantánea en Milvus 3.0. Para solicitar explícitamente el binlog, añada <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> al cuerpo de la solicitud de creación. Los ajustes preestablecidos de la CLI <code translate="no">--for</code> no son un campo de la solicitud HTTP.</p>
 <p>Para conservar o trasladar la copia de seguridad, copia todo el directorio en el almacenamiento de objetos. Consulta la <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">guía de transferencia de la versión 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Restaurar datos<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,7 +179,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Espera a que aparezca <code translate="no">data.state_code: 2</code> y comprueba en <code translate="no">collection_restore_tasks</code> que aparece la colección de destinos esperada. Una tarea enviada aún no supone una restauración verificada.</p>
-<h3 id="Restore-with-the-original-name" class="common-anchor-header">Restauración con el nombre original<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
+<h3 id="Restore-with-the-original-name" class="common-anchor-header">Restaurar con el nombre original<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

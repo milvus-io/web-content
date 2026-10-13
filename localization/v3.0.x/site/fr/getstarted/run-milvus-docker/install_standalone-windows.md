@@ -25,8 +25,8 @@ title: Exécuter Milvus dans Docker (Windows)
     </button></h1><blockquote>
 <p>Par défaut, ce déploiement utilise <strong>Woodpecker</strong> (système de fichiers local) comme file d'attente de messages ; aucun service externe de file d'attente de messages n'est donc nécessaire. Voir <a href="/docs/fr/woodpecker.md">Woodpecker</a>.</p>
 </blockquote>
-<p>Cette page explique comment exécuter Milvus sous Windows à l'aide de Docker Desktop pour Windows.​</p>
-<h2 id="Prerequisites​" class="common-anchor-header">Prérequis<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
+<p>Cette page explique comment exécuter Milvus sous Windows à l'aide de Docker Desktop pour Windows.</p>
+<h2 id="Prerequisites​" class="common-anchor-header">Prérequis​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,8 +61,8 @@ title: Exécuter Milvus dans Docker (Windows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un script d'installation permettant de l'installer en tant que conteneur Docker. Une fois Docker Desktop installé sous Microsoft Windows, vous pouvez accéder à l'interface de ligne de commande (CLI) de Docker depuis PowerShell ou l'invite de commande Windows en mode <strong>administrateur</strong>, ainsi que depuis WSL 2. ​</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Depuis PowerShell ou l’invite de commande Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus fournit un script d'installation permettant de l'installer en tant que conteneur Docker. Une fois Docker Desktop installé sous Microsoft Windows, vous pouvez accéder à l'interface CLI de Docker depuis PowerShell ou l'invite de commande Windows en mode <strong>administrateur</strong>, ainsi que depuis WSL 2. ​</p>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Depuis PowerShell ou l'invite de commande Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,7 @@ title: Exécuter Milvus dans Docker (Windows)
     </button></h3><p>Si vous êtes plus à l'aise avec PowerShell ou l'invite de commande Windows, la commande à utiliser est la suivante.</p>
 <ol>
 <li><p>Ouvrez Docker Desktop en mode administrateur en cliquant avec le bouton droit de la souris et en sélectionnant « <strong>Exécuter en tant qu’administrateur</strong> ».​</p></li>
-<li><p>Téléchargez le script d’installation et enregistrez-le sous le nom « <code translate="no">standalone.bat</code> ».​</p>
+<li><p>Téléchargez le script d'installation et enregistrez-le sous le nom « <code translate="no">standalone.bat</code> ».​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
@@ -91,11 +91,11 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
-<p>Une fois le script d’installation exécuté :​</p>
+<p>Une fois le script d'installation exécuté :​</p>
 <ul>
 <li><p>Un conteneur Docker nommé <strong>milvus-standalone</strong> a été lancé sur le port <strong>19530</strong>.​</p></li>
 <li><p>Un etcd intégré est installé avec Milvus dans le même conteneur et est accessible sur le port <strong>2379</strong>. Son fichier de configuration est mappé vers <strong>embedEtcd.yaml</strong> dans le dossier actuel.​</p></li>
-<li><p>Le volume de données Milvus est mappé vers le répertoire <strong>volumes/milvus</strong> du dossier actuel.​</p></li>
+<li><p>Le volume de données Milvus est mappé vers <strong>volumes/milvus</strong> dans le dossier actuel.​</p></li>
 </ul>
 <p>Vous pouvez utiliser les commandes suivantes pour gérer le conteneur Milvus et les données stockées.​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
@@ -140,7 +140,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Lancez Milvus en tant que conteneur Docker.</p>
+<li><p>Lancez Milvus en tant que conteneur Docker.​</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
@@ -174,7 +174,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois Docker Desktop installé sous Microsoft Windows, vous pouvez accéder à l’interface CLI de Docker depuis PowerShell ou l’invite de commande Windows en mode <strong>administrateur</strong>. Vous pouvez exécuter Docker Compose soit dans PowerShell, soit dans l’invite de commande Windows, soit dans WSL 2 pour démarrer Milvus.​</p>
+    </button></h2><p>Une fois Docker Desktop installé sous Microsoft Windows, vous pouvez accéder à l'interface CLI de Docker depuis PowerShell ou l'invite de commande Windows en mode <strong>administrateur</strong>. Vous pouvez exécuter Docker Compose dans PowerShell, l'invite de commande Windows ou WSL 2 pour démarrer Milvus.​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Depuis PowerShell ou l'invite de commande Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>Ouvrez Docker Desktop en mode administrateur en cliquant avec le bouton droit de la souris et en sélectionnant « <strong>Exécuter en tant qu’administrateur</strong> ».​</p></li>
-<li><p>Exécutez les commandes suivantes dans PowerShell ou l’invite de commande Windows pour télécharger le fichier de configuration Docker Compose de Milvus Standalone et démarrer Milvus.​</p>
+<li><p>Exécutez les commandes suivantes dans PowerShell ou l’invite de commande Windows pour télécharger le fichier de configuration Docker Compose de Milvus Standalone et démarrer Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
@@ -205,8 +205,8 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>En fonction de votre connexion réseau, le téléchargement des images pour l’installation de Milvus peut prendre un certain temps. Une fois que les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont opérationnels, vous pouvez constater que ​</p>
 <ul>
-<li><p>le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le</strong> répertoire ` <strong>volumes/etcd</strong> ` du dossier actuel.</p></li>
-<li><p>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9000</strong> et <strong>9001</strong> avec les identifiants d’authentification par défaut et mappe ses données vers le répertoire <strong>volumes/minio</strong> du dossier actuel.</p></li>
+<li><p>le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers le répertoire <strong>volumes/etcd</strong> du dossier actuel.</p></li>
+<li><p>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9000</strong> et <strong>9001</strong> avec les identifiants d’authentification par défaut et mappe ses données vers <strong>le répertoire volumes/minio</strong> du dossier actuel.​</p></li>
 <li><p>Le conteneur <strong>milvus-standalone</strong> expose localement les ports <strong>19530</strong> avec les paramètres par défaut et mappe ses données vers <strong>le répertoire volumes/milvus</strong> du dossier actuel.​</p></li>
 </ul></li>
 </ol>
@@ -234,7 +234,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>Téléchargez le fichier de configuration de Milvus.</p>
+<li><p>Téléchargez le fichier de configuration de Milvus.​</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -277,17 +277,17 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois Docker Desktop installé sous Windows, vous pouvez rencontrer l'erreur « <code translate="no">Docker Engine stopped</code> » si votre ordinateur n'est pas correctement configuré. Dans ce cas, vous devrez peut-être effectuer les vérifications suivantes :​</p>
+    </button></h3><p>Une fois Docker Desktop installé sous Windows, vous pouvez rencontrer l’erreur « <code translate="no">Docker Engine stopped</code> » si votre ordinateur n’est pas correctement configuré. Dans ce cas, vous devrez peut-être effectuer les vérifications suivantes :​</p>
 <ol>
 <li><p>Vérifiez si la virtualisation est activée.​</p>
-<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>« Performances</strong> » du <strong>Gestionnaire des tâches</strong>.​</p>
+<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>« Performances</strong> » du <strong>Gestionnaire des tâches</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
    <span>La virtualisation dans le Gestionnaire des tâches</span>
   
  </span></p>
-<p>Si la virtualisation est désactivée, vous devrez peut-être vérifier les paramètres du BIOS de la carte mère. La procédure d’activation de la virtualisation dans les paramètres du BIOS varie selon les fabricants de cartes mères. Pour les cartes mères ASUS, par exemple, vous pouvez consulter <a href="https://www.asus.com/support/faq/1043786/">cet article</a> sur l’activation de la virtualisation.​</p>
+<p>Si la virtualisation est désactivée, vous devrez peut-être vérifier les paramètres du BIOS de votre carte mère. La procédure pour activer la virtualisation dans les paramètres du BIOS varie selon les fabricants de cartes mères. Pour les cartes mères ASUS, par exemple, vous pouvez consulter <a href="https://www.asus.com/support/faq/1043786/">cet article</a> sur l’activation de la virtualisation.​</p>
 <p>Vous devez ensuite redémarrer votre ordinateur et activer Hyper-V. Pour plus de détails, consultez cet <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">article Microsoft</a>.​</p></li>
 <li><p>Vérifiez si le service Docker Desktop a été démarré.​</p>
 <p>Vous pouvez exécuter la commande suivante pour démarrer le service Docker Desktop.​</p>
@@ -315,7 +315,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" /> 
-   <span>Démarrer Docker Desktop en tant qu’administrateur</span>
+   <span>Lancer Docker Desktop en tant qu’administrateur</span>
   
  </span></p></li>
 </ol>
@@ -369,14 +369,14 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Message d’erreur « Read config failed » lors du démarrage de Milvus</span>
+   <span>Message d’erreur « Échec de la lecture de la configuration » au démarrage de Milvus</span>
   
  </span></p>
 <p>Pour résoudre l’erreur « Échec de la lecture de la configuration » qui s’affiche au démarrage de Milvus, vous devez vérifier si le volume monté dans le conteneur Milvus est correct. Si le volume est correctement monté dans le conteneur, vous pouvez utiliser la commande <code translate="no">docker exec</code> pour accéder au conteneur et lister le dossier <strong>/milvus/configs</strong> comme suit :​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
-   <span>Afficher les fichiers de configuration de Milvus</span>
+   <span>Lister les fichiers de configuration de Milvus</span>
   
  </span></p>
 <p>​</p>
@@ -400,7 +400,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Une fois Milvus installé dans Docker, vous pouvez :</p>
 <ul>
-<li><p>Consultez <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
+<li><p>Consulter <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> pour découvrir les fonctionnalités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>

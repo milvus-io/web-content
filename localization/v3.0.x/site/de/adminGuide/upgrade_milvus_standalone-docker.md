@@ -27,7 +27,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
       </svg>
     </button></h1><p>In dieser Anleitung wird beschrieben, wie Sie eine Milvus 2.6.x-Standalone-Bereitstellung mit Docker Compose auf v3.0-beta aktualisieren.</p>
 <div class="alert note">
-<p>Dieses Verfahren wurde mit der offiziellen Milvus 2.6.20 Standalone-Docker-Compose-Konfiguration validiert. Bei der Aktualisierung blieben etcd, MinIO, Woodpecker und die vorhandenen Datenverzeichnisse erhalten; lediglich das Milvus-Image wurde auf „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ geändert.</p>
+<p>Dieses Verfahren wurde mit der offiziellen Milvus 2.6.20-Standalone-Docker-Compose-Konfiguration validiert. Bei der Aktualisierung wurden etcd, MinIO, Woodpecker und die vorhandenen Datenverzeichnisse beibehalten; lediglich das Milvus-Image wurde auf „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ geändert.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,10 +50,10 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <li>Die für die bestehende Bereitstellung verwendete Docker-Compose-Datei und -Konfiguration</li>
 <li>Eine aktuelle Sicherung der Milvus-Metadaten und persistenten Daten</li>
 </ul>
-<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0-beta müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alert warning">
-<p>Ersetzen Sie im Rahmen dieses Vorgangs nicht Ihre aktuelle Compose-Datei und ändern Sie keine Abhängigkeitsversionen. Behalten Sie die vorhandenen etcd-, Objektspeicher-, Nachrichtenwarteschlangen-, Volume- und Konfigurationsdaten bei. Aktualisieren Sie lediglich das Milvus-Image-Tag.</p>
-<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch die Rückkehr des Milvus-Images zur Version 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback zu Fehlern beim Einlesen des aktualisierten Zustands kommen. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die Metadaten und die Backups der persistenten Daten vor dem Upgrade wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
+<p>Ersetzen Sie im Rahmen dieses Vorgangs nicht Ihre aktuelle Compose-Datei und ändern Sie keine Abhängigkeitsversionen. Behalten Sie das vorhandene etcd, den Objektspeicher, die Nachrichtenwarteschlange, die Volumes und die Konfiguration bei. Aktualisieren Sie lediglich das Milvus-Image-Tag.</p>
+<p>Dieses Verfahren validiert kein Downgrade oder Rollback durch die Rückstellung des Milvus-Images auf 2.6.x. Nachdem v3.0-beta Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die Metadaten und die Backups der persistenten Daten aus der Zeit vor dem Upgrade wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
     </button></h3><p>Speichern Sie eine Kopie der aktuellen Compose-Datei und aller eingebundenen Milvus-Konfigurationsdateien:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cp</span> docker-compose.yml docker-compose-before-upgrade.yml
 <button class="copy-code-btn"></button></code></pre>
-<p>Vergewissern Sie sich vor Beginn des Upgrades, dass die aktuellen Container fehlerfrei sind:</p>
+<p>Stellen Sie vor Beginn des Upgrades sicher, dass die aktuellen Container fehlerfrei sind:</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Update-the-Milvus-image" class="common-anchor-header">Schritt 2: Milvus-Image aktualisieren<button data-href="#Step-2-Update-the-Milvus-image" class="anchor-icon" translate="no">
@@ -138,4 +138,4 @@ docker compose images standalone
 
 docker compose logs --<span class="hljs-built_in">tail</span> 100 standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Stellen Sie sicher, dass der Dienst „ <code translate="no">standalone</code> “ ordnungsgemäß funktioniert, sein Image „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ lautet und die vorhandenen Sammlungen weiterhin abgefragt und durchsucht werden können. Führen Sie diese Überprüfungen durch, bevor Sie Funktionen aktivieren, die spezifisch für die Version v3.0-beta sind.</p>
+<p>Stellen Sie sicher, dass der Dienst „ <code translate="no">standalone</code> “ ordnungsgemäß läuft, sein Image „ <code translate="no">milvusdb/milvus:v3.0-beta</code> “ lautet und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie Funktionen aktivieren, die spezifisch für die Version v3.0-beta sind.</p>

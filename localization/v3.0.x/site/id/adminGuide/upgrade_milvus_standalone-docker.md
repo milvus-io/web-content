@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Pelajari cara meng-upgrade Milvus standalone menggunakan Docker Compose.
 title: Memperbarui Milvus Standalone dengan Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/upgrade_milvus_standalone-docker.md" class='active '>Operator Helm Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/upgrade_milvus_standalone-docker.md" class='active '>Operator</a>, Helm, Docker<a href="/docs/id/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Memperbarui Milvus Standalone dengan Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,16 +44,16 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
       </svg>
     </button></h2><ul>
 <li>Docker Engine dan Docker Compose V2</li>
-<li>Penyebaran Milvus 2.6.x standalone yang sudah ada dan dikelola oleh Docker Compose</li>
+<li>Penerapan Milvus 2.6.x standalone yang sudah ada dan dikelola oleh Docker Compose</li>
 <li>Berkas Docker Compose dan konfigurasi yang digunakan untuk deployment yang sudah ada</li>
 <li>Cadangan terbaru dari metadata Milvus dan data persisten</li>
 </ul>
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan peningkatan ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Berganti antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Beralih antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alert warning">
 <p>Jangan mengganti berkas Compose Anda saat ini atau mengubah versi dependensi sebagai bagian dari prosedur ini. Pertahankan etcd, penyimpanan objek, antrian pesan, volume, dan konfigurasi yang ada. Perbarui hanya tag gambar Milvus.</p>
-<p>Prosedur ini tidak mendukung penurunan versi atau rollback dengan mengubah gambar Milvus kembali ke 2.6.x. Setelah v3.0-beta menulis data, rollback yang hanya melibatkan gambar mungkin gagal membaca status yang telah diperbarui. Jika peningkatan gagal, hentikan penulisan dan gunakan rencana pemulihan yang mengembalikan metadata sebelum peningkatan dan cadangan data persisten. Validasi rencana pemulihan di lingkungan non-produksi terlebih dahulu.</p>
+<p>Prosedur ini tidak memvalidasi penurunan versi atau rollback dengan mengubah gambar Milvus kembali ke 2.6.x. Setelah v3.0-beta menulis data, rollback yang hanya melibatkan gambar mungkin gagal membaca status yang telah diperbarui. Jika peningkatan gagal, hentikan penulisan dan gunakan rencana pemulihan yang memulihkan metadata sebelum peningkatan serta cadangan data persisten. Validasi rencana pemulihan di lingkungan non-produksi terlebih dahulu.</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan versi<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,8 +113,8 @@ title: Memperbarui Milvus Standalone dengan Docker Compose
 <pre><code translate="no" class="language-bash">docker compose pull standalone
 docker compose up --detach standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Docker Compose akan menjaga agar kontainer etcd dan object-storage yang ada tetap berjalan dan menggunakan kembali direktori data yang telah dikonfigurasi.</p>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Verifikasi pembaruan<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<p>Docker Compose menjaga agar kontainer etcd dan object-storage yang ada tetap berjalan dan menggunakan kembali direktori data yang telah dikonfigurasi.</p>
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Verifikasi proses upgrade<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

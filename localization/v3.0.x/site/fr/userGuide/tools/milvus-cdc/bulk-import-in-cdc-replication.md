@@ -20,7 +20,7 @@ title: Importation en masse dans le cadre d'une réplication CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce guide explique comment effectuer une importation en masse vers des clusters Milvus faisant partie d’une topologie de réplication CDC. Dans un cluster en réplication, l’importation en masse doit utiliser la validation en deux phases (2PC) afin que l’importation soit validée en un seul point ordonné sur les clusters principal et de secours.</p>
+    </button></h1><p>Ce guide explique comment effectuer une importation en masse vers des clusters Milvus faisant partie d’une topologie de réplication CDC. Dans un cluster en réplication, l’importation en masse doit utiliser le protocole de validation en deux phases (2PC) afin que l’importation soit validée en un seul point ordonné sur les clusters principal et de secours.</p>
 <p>Dans ce guide, le cluster principal correspond au cluster Milvus source, et le cluster de secours correspond au cluster Milvus cible.</p>
 <p>Avant de commencer, assurez-vous que la réplication CDC est déjà configurée entre vos clusters. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/set_up_cdc_replication.md">Configurer la réplication CDC</a> ».</p>
 <h2 id="Why-2PC-is-required" class="common-anchor-header">Pourquoi le protocole 2PC est-il nécessaire ?<button data-href="#Why-2PC-is-required" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: Importation en masse dans le cadre d'une réplication CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L’importation dans un cluster en réplication est désactivée par défaut. Activez-la en définissant ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` sur ` <code translate="no">true</code> ` sur les clusters principal et de secours.</p>
+    </button></h2><p>L’importation dans un cluster réplicatif est désactivée par défaut. Activez-la en définissant ` <code translate="no">dataCoord.import.enableInReplicatingCluster</code> ` sur ` <code translate="no">true</code> ` à la fois sur le cluster principal et sur le cluster de secours.</p>
 <p>Si vous déployez Milvus avec Milvus Operator, ajoutez le paramètre suivant à ` <code translate="no">spec.config</code> ` de chaque ressource ` <code translate="no">Milvus</code> ` :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">spec:</span>
   <span class="hljs-attr">config:</span>
@@ -73,13 +73,13 @@ title: Importation en masse dans le cadre d'une réplication CDC
     <span class="hljs-attr">enableInReplicatingCluster:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ce paramètre est actualisable ; il peut donc prendre effet sans redémarrage complet.</p>
-<p>Lorsque ce paramètre est activé, un cluster de réplication n’accepte que les importations via <code translate="no">auto_commit=false</code>. Le tableau suivant répertorie les requêtes couramment rejetées :</p>
+<p>Lorsque ce paramètre est activé, un cluster de réplication n’accepte que les importations effectuées via <code translate="no">auto_commit=false</code>. Le tableau suivant répertorie les requêtes couramment rejetées :</p>
 <table>
 <thead>
 <tr><th>Situation</th><th>Message d'erreur</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">dataCoord.import.enableInReplicatingCluster</code> n'est pas activée</td><td><code translate="no">import in replicating cluster is not supported yet</code></td></tr>
+<tr><td><code translate="no">dataCoord.import.enableInReplicatingCluster</code> n'est pas activé</td><td><code translate="no">import in replicating cluster is not supported yet</code></td></tr>
 <tr><td><code translate="no">auto_commit=true</code> est soumise</td><td><code translate="no">auto_commit=true import in replicating cluster is not supported</code></td></tr>
 </tbody>
 </table>
@@ -98,9 +98,9 @@ title: Importation en masse dans le cadre d'une réplication CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Exécutez tous les appels d’importation sur le cluster principal. Les données importées et la décision de validation sont automatiquement répliquées vers le cluster de secours ; vous n’avez donc pas à soumettre ni à valider vous-même l’importation sur le cluster de secours.</p>
-<p>Chaque cluster lit les fichiers d'importation à partir de son propre stockage d'objets. Assurez-vous que les fichiers à importer existent à la fois dans le stockage d'objets principal et dans le stockage d'objets de secours. Vous pouvez télécharger les fichiers sur les deux clusters ou utiliser un stockage d'objets accessible aux deux clusters. Si les fichiers sont manquants sur le cluster de secours, l'importation répliquée échoue sur ce cluster avec une erreur « objet introuvable ».</p>
-<p>L’exemple suivant utilise les aides à l’importation basées sur REST disponibles à l’adresse <code translate="no">pymilvus.bulk_writer</code>. Les valeurs « <code translate="no">url</code> » correspondent aux adresses Milvus que vous utilisez pour les autres appels API.</p>
+    </button></h2><p>Exécutez tous les appels d’importation sur le cluster principal. Les données importées et la décision de validation sont automatiquement répliquées vers le cluster de secours ; vous n’avez donc pas besoin de soumettre ou de valider vous-même l’importation sur le cluster de secours.</p>
+<p>Chaque cluster lit les fichiers d’importation à partir de son propre stockage d’objets. Assurez-vous que les fichiers à importer existent à la fois dans le stockage d’objets principal et dans le stockage d’objets de secours. Vous pouvez télécharger les fichiers sur les deux clusters ou utiliser un stockage d’objets accessible aux deux clusters. Si les fichiers sont manquants sur le cluster de secours, l’importation répliquée échoue sur ce cluster avec une erreur « objet introuvable ».</p>
+<p>L’exemple suivant utilise les aides à l’importation basées sur REST disponibles à l’adresse <code translate="no">pymilvus.bulk_writer</code>. Les valeurs « <code translate="no">url</code> » correspondent aux adresses Milvus que vous utilisez pour les autres appels d’API.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import, commit_import, get_import_progress
@@ -177,7 +177,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Valider avant que le cluster de secours ait terminé l’importation ne corrompt pas les données, mais le cluster de secours est encore en train de rattraper son retard lorsque la validation est appliquée. Attendre que les clusters principal et de secours signalent tous deux <code translate="no">Uncommitted</code> permet de confirmer que les données importées ont été entièrement répliquées et que les deux clusters sont prêts à les rendre visibles conjointement.</p>
+    </button></h3><p>Valider avant que le cluster de secours ait terminé l’importation n’endommage pas les données, mais le cluster de secours est encore en train de rattraper son retard lorsque la validation est appliquée. Attendre que les clusters principal et de secours signalent tous deux « <code translate="no">Uncommitted</code> » permet de confirmer que les données importées ont été entièrement répliquées et que les deux clusters sont prêts à les rendre visibles simultanément.</p>
 <h2 id="Step-3-Verify-the-data" class="common-anchor-header">Étape 3 : Vérifier les données<button data-href="#Step-3-Verify-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ wait_for_state(standby_url, job_id, <span class="hljs-string">&quot;Completed&qu
         ></path>
       </svg>
     </button></h2><p>Une fois que la tâche a atteint l’ <code translate="no">Completed</code>, les entités importées sont visibles sur les deux clusters. Chargez et interrogez la collection sur le cluster principal, puis exécutez la même requête sur le cluster de secours sans y charger manuellement la collection, et vérifiez que les entités importées sont présentes sur les deux clusters.</p>
-<p>Le cluster de secours est en lecture seule tant qu’il reste en mode de secours. N’effectuez pas d’importations, de validations ou d’autres opérations DDL ou DCL directement sur le cluster de secours. Effectuez ces opérations sur le cluster principal et laissez la réplication CDC les appliquer au cluster de secours.</p>
+<p>Le cluster de secours est en lecture seule tant qu’il reste en mode de secours. Ne soumettez pas d’importations, de validations ou d’autres opérations DDL ou DCL directement sur le cluster de secours. Effectuez ces opérations sur le cluster principal et laissez la réplication CDC les appliquer au cluster de secours.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

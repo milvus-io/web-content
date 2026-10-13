@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本系列 Collection",
+            "label": "关于本Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -334,19 +334,19 @@
             "children": []
           },
           {
-            "label": "View Collections",
+            "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "修改 Collection",
+            "label": "修改Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "加载与释放",
+            "label": "装载与释放",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -389,7 +389,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema解析",
+            "label": "Schema说明",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -485,13 +485,13 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段",
+                "label": "将数据插入 StructArray 字段中",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "索引、结构体和数组字段",
+                "label": "索引、结构体、数组、字段",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Lindera",
+                    "label": "林德拉",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -667,13 +667,13 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Cnalphanumonly简体中文（大陆）",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
                   },
                   {
-                    "label": "Cncharonly简体中文（大陆）",
+                    "label": "Cncharonly",
                     "id": "cncharonly-filter.md",
                     "order": 6,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "解复合器",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神经网络基本搜索",
+            "label": "人工神经网络的基本搜索",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1088,7 +1088,7 @@
             "order": 8,
             "children": [
               {
-                "label": "过滤原理解析",
+                "label": "过滤原理详解",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "会员配对",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },
@@ -1173,7 +1179,7 @@
             "order": 13,
             "children": [
               {
-                "label": "使用 StructArray 进行基本的向量搜索",
+                "label": "使用 StructArray 进行基本向量搜索",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1217,7 +1223,7 @@
             ]
           },
           {
-            "label": "Elasticsearch 向 Milvus 发送的查询",
+            "label": "Elasticsearch 向 Milvus 发起的查询",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1353,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名器",
+                "label": "RRF 排名系统",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1365,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "衰变排名榜",
+                "label": "衰减排名器",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1451,7 +1457,7 @@
                     "children": []
                   },
                   {
-                    "label": "Hugging Face Ranker",
+                    "label": "Hugging Face 排名器",
                     "id": "hugging-face-ranker.md",
                     "order": 7,
                     "children": []
@@ -1633,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Claude Code 专用 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1871,7 +1877,7 @@
                 "order": 2,
                 "children": [
                   {
-                    "label": "升级到 Pulsar v3",
+                    "label": "升级至 Pulsar v3",
                     "id": "upgrade-pulsar-v3.md",
                     "order": 0,
                     "children": []
@@ -1983,7 +1989,7 @@
         ]
       },
       {
-        "label": "监控、警报和日志",
+        "label": "监控、警报与日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2186,13 +2192,13 @@
             "children": []
           },
           {
-            "label": "命令 (0.6.0)",
+            "label": "命令",
             "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "HTTP API (0.6.0)",
+            "label": "HTTP API",
             "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
@@ -2210,19 +2216,19 @@
             "isMenu": true,
             "children": [
               {
-                "label": "命令 (0.5.x)",
+                "label": "命令",
                 "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "HTTP API (0.5.x)",
+                "label": "HTTP API",
                 "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "常见情况 (0.5.x)",
+                "label": "常见案例",
                 "id": "common-cases",
                 "order": 2,
                 "isMenu": true,
@@ -2240,7 +2246,7 @@
                     "children": []
                   },
                   {
-                    "label": "在不同存储桶之间的实例间进行迁移",
+                    "label": "在不同存储桶之间的实例之间进行迁移",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -2254,7 +2260,7 @@
                 ]
               },
               {
-                "label": "升级至 0.6.0",
+                "label": "升级到 0.6.x 版本",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -3123,7 +3129,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 进行全文检索",
+        "label": "使用 Milvus 进行全文搜索",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []

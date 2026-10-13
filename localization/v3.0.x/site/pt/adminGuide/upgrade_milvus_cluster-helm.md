@@ -51,7 +51,7 @@ title: Atualizar o cluster Milvus com o Helm Chart
 <p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0-beta, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
 <p>Não altere nem faça o downgrade do Helm Chart como parte deste procedimento. Mantenha a versão do Chart já instalada para a sua versão do Helm. A linha de base testada manteve o Helm Chart 5.0.22 e alterou apenas a etiqueta da imagem do Milvus para <code translate="no">v3.0-beta</code>.</p>
-<p>Este procedimento não valida um downgrade ou uma reversão que implique alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0-beta gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados pré-atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Este procedimento não valida um downgrade ou uma reversão que implique alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0-beta gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados anteriores à atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,5 +167,5 @@ kubectl get pods --namespace &lt;namespace&gt; \
 <button class="copy-code-btn"></button></code></pre>
 <p>Verifique se todas as cargas de trabalho necessárias estão prontas, se todos os componentes do Milvus utilizam « <code translate="no">v3.0-beta</code> » e se as suas coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão v3.0-beta.</p>
 <div class="alert note">
-<p>A atualização para o Milvus 3.0 não ativa o Storage V3. Depois de verificar a atualização, analise <a href="/docs/pt/storage-v3.md">o Storage V3</a> antes de ativar funcionalidades que dependam dele. Assim que o Milvus gravar dados no Storage V3, não será suportado o regresso a uma versão mais antiga do Milvus que não consiga ler o Storage V3.</p>
+<p>A atualização para o Milvus 3.0 não ativa o Storage V3. Depois de verificar a atualização, analise <a href="/docs/pt/storage-v3.md">o Storage V3</a> antes de ativar funcionalidades que dependam dele. Assim que o Milvus gravar dados no Storage V3, não será suportado o regresso a uma versão anterior do Milvus que não consiga ler o Storage V3.</p>
 </div>

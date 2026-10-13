@@ -88,7 +88,7 @@ Na versão atual, todos os parâmetros só entram em vigor após o reinício do 
             <li><a href="/docs/pt/v2.6.x/configure_querycoord.md">Coordenada de consulta</a></li>
             <li><a href="/docs/pt/v2.6.x/configure_querynode.md">Nó de consulta</a></li>
             <li><a href="/docs/pt/v2.6.x/configure_indexnode.md">Nó de índice</a></li>
-            <li><a href="/docs/pt/v2.6.x/configure_datacoord.md">Coordenada de dados</a></li>
+            <li><a href="/docs/pt/v2.6.x/configure_datacoord.md">Coordenadas de dados</a></li>
             <li><a href="/docs/pt/v2.6.x/configure_datanode.md">Nó de dados</a></li>
             <li><a href="/docs/pt/v2.6.x/configure_localstorage.md">Armazenamento local</a></li>
             <li><a href="/docs/pt/v2.6.x/configure_log.md">Registo</a></li>
@@ -233,7 +233,7 @@ Na versão atual, todos os parâmetros só entram em vigor após o reinício do 
         ></path>
       </svg>
     </button></h2><p>No ficheiro « <code translate="no">docker-compose.yml</code> », adicione uma secção « <code translate="no">volumes</code> » em cada « <code translate="no">milvus-standalone</code> ».</p>
-<p>Mapeie o caminho local para o seu ficheiro « <code translate="no">milvus.yaml</code> » para os caminhos correspondentes do contentor Docker para os ficheiros de configuração « <code translate="no">/milvus/configs/milvus.yaml</code> » em todas as secções « <code translate="no">volumes</code> ».</p>
+<p>Mapeie o caminho local para o seu ficheiro « <code translate="no">milvus.yaml</code> » para os caminhos correspondentes nos contentores Docker para os ficheiros de configuração « <code translate="no">/milvus/configs/milvus.yaml</code> » em todas as secções « <code translate="no">volumes</code> ».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
   <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

@@ -42,8 +42,8 @@ title: Requisitos para ejecutar Milvus en Kubernetes
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>CPU Intel Core de 2.ª generación o superior</li><li>Apple Silicon</li></ul></td><td><ul><li>Autónomo: 4 núcleos o más</li><li>Clúster: 8 núcleos o más</li></ul></td><td></td></tr>
-<tr><td>Conjunto de instrucciones de la CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La búsqueda de similitud vectorial y la creación de índices en Milvus requieren que la CPU sea compatible con los conjuntos de extensiones de instrucción única, datos múltiples (SIMD). Asegúrate de que la CPU sea compatible con al menos una de las extensiones SIMD enumeradas. Consulta <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">«CPU con AVX»</a> para obtener más información.</td></tr>
-<tr><td>RAM</td><td><ul><li>Autónomo: 8 G</li><li>Clúster: 32 G</li></ul></td><td><ul><li>Sistema independiente: 16 G</li><li>Clúster: 128 G</li></ul></td><td>El tamaño de la memoria RAM depende del volumen de datos.</td></tr>
+<tr><td>Conjunto de instrucciones de la CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La búsqueda de similitud vectorial y la creación de índices en Milvus requieren que la CPU sea compatible con los conjuntos de extensiones de instrucción única, datos múltiples (SIMD). Asegúrate de que la CPU sea compatible con al menos una de las extensiones SIMD enumeradas. Consulta <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">«CPUs con AVX»</a> para obtener más información.</td></tr>
+<tr><td>RAM</td><td><ul><li>Autónomo: 8 G</li><li>Clúster: 32 G</li></ul></td><td><ul><li>Sistema independiente: 16 G</li><li>Clúster: 128 G</li></ul></td><td>El tamaño de la RAM depende del volumen de datos.</td></tr>
 <tr><td>Disco duro</td><td>SSD SATA 3.0 o CloudStorage</td><td>SSD NVMe o superior</td><td>El tamaño del disco duro depende del volumen de datos.</td></tr>
 </tbody>
 </table>
@@ -63,7 +63,7 @@ title: Requisitos para ejecutar Milvus en Kubernetes
         ></path>
       </svg>
     </button></h2><p>Se recomienda ejecutar el clúster de Kubernetes en plataformas Linux.</p>
-<p>kubectl es la herramienta de línea de comandos de Kubernetes. Utiliza una versión de kubectl que no difiera en más de una versión menor de la de tu clúster. Utilizar la última versión de kubectl ayuda a evitar problemas imprevistos.</p>
+<p>kubectl es la herramienta de línea de comandos de Kubernetes. Utiliza una versión de kubectl que no difiera en más de una versión secundaria de la de tu clúster. Utilizar la última versión de kubectl ayuda a evitar problemas imprevistos.</p>
 <p>Se necesita minikube para ejecutar un clúster de Kubernetes de forma local. minikube requiere Docker como dependencia. Asegúrate de instalar Docker antes de instalar Milvus mediante Helm. Consulta <a href="https://docs.docker.com/get-docker">«Obtener Docker»</a> para obtener más información.</p>
 <table>
 <thead>
@@ -78,10 +78,10 @@ title: Requisitos para ejecutar Milvus en Kubernetes
 <tr><th>Software</th><th>Versión</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>Consulta <a href="#Additional-disk-requirements">los requisitos adicionales de disco</a>.</td></tr>
+<tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">los requisitos adicionales de disco</a>.</td></tr>
 <tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Incluido con Milvus (modo de servicio: <code translate="no">v0.1.36</code>+)</td><td>Cola de mensajes predeterminada. Para implementaciones distribuidas, Woodpecker puede ejecutarse como un <strong>servicio</strong> dedicado; fija su versión con <code translate="no">--set woodpecker.image.tag</code>. El modo de servicio es compatible a partir de la versión <code translate="no">v0.1.36</code> de Woodpecker.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional: solo si se cambia la cola de mensajes a Pulsar; no se instala de forma predeterminada.</td></tr>
+<tr><td>Woodpecker</td><td>Incluido con Milvus (modo de servicio: <code translate="no">v0.1.36</code>+)</td><td>Cola de mensajes predeterminada. Para implementaciones distribuidas, Woodpecker puede ejecutarse como un <strong>servicio</strong> dedicado; fija su versión con <code translate="no">--set woodpecker.image.tag</code>. El modo de servicio es compatible a partir de Woodpecker <code translate="no">v0.1.36</code> en adelante.</td></tr>
+<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional: solo si cambias la cola de mensajes a Pulsar; no se instala de forma predeterminada.</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Requisitos adicionales de disco<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
@@ -104,7 +104,7 @@ title: Requisitos para ejecutar Milvus en Kubernetes
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Lo ideal es que su disco alcance más de 500 IOPS y una latencia de fsync inferior a 10 ms en el percentil 99. Consulte la <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentación</a> de etcd para conocer los requisitos más detallados.</p>
+<p>Lo ideal es que el disco alcance más de 500 IOPS y una latencia de fsync inferior a 10 ms en el percentil 99. Consulta la <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">documentación</a> de etcd para conocer los requisitos más detallados.</p>
 <h2 id="FAQs" class="common-anchor-header">Preguntas frecuentes<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,5 +175,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/es/install_cluster-milvusoperator.md">Ejecutar Milvus en Kubernetes con Milvus Operator</a></li>
 <li><a href="/docs/es/install_cluster-helm.md">Ejecutar Milvus en Kubernetes con Helm</a></li>
 </ul></li>
-<li><p>Consulta <a href="/docs/es/system_configuration.md">«Configuración del sistema</a> » para conocer los parámetros que puedes configurar durante la instalación de Milvus.</p></li>
+<li><p>Consulta <a href="/docs/es/system_configuration.md">«Configuración del sistema</a> » para conocer los parámetros que puedes configurar al instalar Milvus.</p></li>
 </ul>

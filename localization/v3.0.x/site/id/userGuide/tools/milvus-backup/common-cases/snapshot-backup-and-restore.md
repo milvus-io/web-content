@@ -3,9 +3,12 @@ id: snapshot-backup-and-restore.md
 summary: >-
   Buat cadangan koleksi dan pulihkan dengan nama baru di instance Milvus yang
   sama.
-title: Pencadangan dan Pemulihan Snapshot dalam Satu Instansi
+title: >-
+  Pencadangan dan Pemulihan Snapshot dalam Satu InstansiCompatible with Milvus
+  Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Pencadangan dan Pemulihan Snapshot dalam Satu Instansi<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Pencadangan dan Pemulihan Snapshot dalam Satu Instansi<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Pencadangan dan Pemulihan Snapshot dalam Satu Instansi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cadangkan sebuah koleksi dan pulihkan dengan nama baru di instance Milvus yang sama. Contoh ini menggunakan <strong>Milvus Backup 0.6.0</strong> untuk membuat snapshot dari <code translate="no">coll</code> dan memulihkannya sebagai <code translate="no">coll_bak</code> di <strong>Milvus 3.0.1 atau versi yang lebih baru</strong>. Untuk Backup 0.5.x, gunakan <a href="/docs/id/single-instance-backup-and-restore.md">Cadangkan dan Pulihkan dalam Satu Instance</a>.</p>
+    </button></h1><p>Cadangkan sebuah koleksi dan pulihkan dengan nama baru di instance Milvus yang sama. Contoh ini membuat snapshot dari <code translate="no">coll</code> dan memulihkannya sebagai <code translate="no">coll_bak</code> pada <strong>Milvus 3.0.1 atau versi yang lebih baru</strong>. Untuk Backup 0.5.x, gunakan <a href="/docs/id/single-instance-backup-and-restore.md">Cadangkan dan Pulihkan dalam Satu Instance</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,8 +65,8 @@ title: Pencadangan dan Pemulihan Snapshot dalam Satu Instansi
         ></path>
       </svg>
     </button></h2><ul>
-<li>Gunakan Milvus Backup 0.6.0 dan Milvus 3.0.1 atau versi yang lebih baru. Instal alat tersebut sesuai dengan petunjuk dalam <a href="/docs/id/milvus_backup_0_6_cli.md">"Membackup dan Memulihkan Data Menggunakan Perintah</a>".</li>
-<li>Gunakan koleksi yang sudah ada bernama " <code translate="no">coll</code>", atau buat koleksi contoh opsional di bawah ini. Pastikan data koleksi tersebut tetap tidak berubah saat membandingkan hasil sumber dan hasil pemulihan.</li>
+<li>Gunakan Milvus 3.0.1 atau versi yang lebih baru. Contoh ini telah diverifikasi dengan Milvus Backup 0.6.0 dan Milvus 3.0.1. Instal alat ini sesuai dengan petunjuk dalam <a href="/docs/id/milvus_backup_0_6_cli.md">"Membackup dan Memulihkan Data Menggunakan Perintah</a>".</li>
+<li>Gunakan koleksi yang sudah ada bernama " <code translate="no">coll</code>", atau buat koleksi contoh opsional di bawah ini. Pastikan data koleksi tersebut tetap tidak diubah saat membandingkan hasil sumber dan hasil yang dipulihkan.</li>
 <li>Pastikan port gRPC Milvus (19530), port manajemen (9091), dan penyimpanan objek dapat diakses oleh Milvus Backup. Server Milvus juga harus dapat mengakses penyimpanan cadangan untuk ekspor dan impor snapshot.</li>
 <li>Ganti nama host, nama bucket, jalur root, dan kredensial contoh dengan pengaturan deployment Anda. Pengaturan penyimpanan Milvus harus sesuai dengan instance yang sedang berjalan; mengubah konfigurasi cadangan tidak akan mengonfigurasi ulang Milvus.</li>
 <li>Pastikan bahwa ` <code translate="no">coll_bak</code> ` tidak ada di instance tujuan.</li>
@@ -85,7 +88,7 @@ title: Pencadangan dan Pemulihan Snapshot dalam Satu Instansi
         ></path>
       </svg>
     </button></h2><p>Perintah di bawah ini menggunakan koleksi yang sudah ada bernama <code translate="no">coll</code>. Anda dapat menggunakan koleksi Anda sendiri dengan mengubah nama secara konsisten.</p>
-<p>Untuk koleksi uji kecil, instal PyMilvus dan jalankan perintah berikut pada nama koleksi kosong. Ganti URI jika Milvus tidak berada di lingkungan lokal:</p>
+<p>Untuk koleksi uji kecil, instal PyMilvus dan jalankan perintah berikut pada nama koleksi kosong. Ganti URI jika Milvus tidak berada di lokal:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus==3.0.0
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -144,7 +147,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
     </button></h3><p>Jalankan perintah berikut dari direktori yang berisi file biner ` <code translate="no">milvus-backup</code> `. Pertahankan direktori kerja ini untuk perintah-perintah selanjutnya:</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Simpan baris perintah berikut sebagai <code translate="no">configs/backup-source.yaml</code>. Contoh ini menggunakan kredensial uji coba default MinIO; gantilah dengan kredensial untuk penyimpanan objek Anda.</p>
+<p>Simpan yang berikut ini sebagai <code translate="no">configs/backup-source.yaml</code>. Contoh ini menggunakan kredensial uji coba default MinIO; gantilah dengan kredensial untuk penyimpanan objek Anda.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">configVersion:</span> <span class="hljs-string">v2</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">grpc:</span>
@@ -170,7 +173,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <span class="hljs-attr">transfer:</span>
   <span class="hljs-attr">mode:</span> <span class="hljs-string">auto</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus.storage</code> menjelaskan data instance sumber. ` <code translate="no">backup.storage</code> ` menjelaskan tujuan cadangan. Bidang penyimpanan cadangan yang tidak diatur mewarisi nilai dari ` <code translate="no">milvus.storage</code>`, kecuali ` <code translate="no">rootPath</code>`, yang secara default bernilai ` <code translate="no">backup</code>`.</p>
+<p><code translate="no">milvus.storage</code> menjelaskan data instance sumber. ` <code translate="no">backup.storage</code> ` menjelaskan tujuan cadangan. Bidang penyimpanan cadangan yang tidak diatur akan mewarisi nilai dari ` <code translate="no">milvus.storage</code>`, kecuali ` <code translate="no">rootPath</code>`, yang secara default bernilai ` <code translate="no">backup</code>`.</p>
 <p>Jika Milvus dan Milvus Backup menggunakan alamat yang berbeda untuk mengakses penyimpanan objek yang sama, konfigurasikan ` <code translate="no">backup.storage.milvusAddress</code> ` dan ` <code translate="no">milvusPort</code> ` dengan alamat yang dapat dijangkau oleh server Milvus. Lihat <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">contoh konfigurasi versi 0.6.0</a>.</p>
 <h3 id="Step-2-Check-connectivity-and-create-a-backup" class="common-anchor-header">Langkah 2: Periksa konektivitas dan buat cadangan<button data-href="#Step-2-Check-connectivity-and-create-a-backup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,9 +194,9 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup create --format snapshot --filter coll -n my_backup --config configs/backup-source.yaml
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Pemeriksaan konektivitas harus menampilkan <code translate="no">Success!</code>. Perintah create harus menampilkan <code translate="no">create backup success</code>, dan informasi cadangan harus mencantumkan <code translate="no">coll</code>.</p>
+<p>Pemeriksaan konektivitas seharusnya melaporkan <code translate="no">Success!</code>. Perintah create seharusnya melaporkan <code translate="no">create backup success</code>, dan informasi cadangan seharusnya mencantumkan <code translate="no">coll</code>.</p>
 <p><code translate="no">--format snapshot</code> yang dinyatakan secara eksplisit memilih alur kerja snapshot. <code translate="no">auto</code> default juga memilih snapshot pada Milvus 3.0. Cadangan mencakup metadata dan bundel snapshot yang diekspor di bawah <code translate="no">bucket-a/backup/my_backup</code>. Simpan seluruh direktori.</p>
-<h2 id="Restore-within-the-same-instance" class="common-anchor-header">Pemulihan dalam instance yang sama<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
+<h2 id="Restore-within-the-same-instance" class="common-anchor-header">Pemulihan di dalam instance yang sama<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,7 +215,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Perintah CLI ` <code translate="no">--filter</code> ` mencocokkan nama target <strong>setelah</strong> menerapkan ` <code translate="no">-s</code> ` atau ` <code translate="no">--rename</code>`. Gunakan ` <code translate="no">coll_bak</code>`, bukan ` <code translate="no">coll</code>`, dalam perintah pemulihan ini. Filter yang tidak cocok dengan apa pun dapat keluar dengan sukses tanpa membuat koleksi.</p>
-<p>Koleksi yang dipulihkan menggunakan penyimpanan yang dikonfigurasi pada instans target. Milvus mengelola impor snapshot dan tata letak data yang dihasilkan.</p>
+<p>Koleksi yang dipulihkan menggunakan penyimpanan yang telah dikonfigurasi pada instans target. Milvus mengelola impor snapshot dan tata letak data yang dihasilkan.</p>
 <h2 id="Verify-the-result" class="common-anchor-header">Verifikasi hasilnya<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -228,7 +231,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk data sampel opsional dengan 256 entitas di atas, jalankan perintah ini pada target pemulihan. Ganti <code translate="no">localhost:19530</code> dengan endpoint Milvus yang sama yang digunakan untuk menyiapkan data. Perintah ini memverifikasi jumlah entitas, setiap nilai skalar dan vektor, serta hasil pencarian vektor tanpa menghapus data:</p>
+    </button></h2><p>Untuk data sampel opsional berisi 256 entitas di atas, jalankan perintah ini pada target pemulihan. Ganti <code translate="no">localhost:19530</code> dengan endpoint Milvus yang sama yang digunakan untuk menyiapkan data. Perintah ini memverifikasi jumlah entitas, setiap nilai skalar dan vektor, serta hasil pencarian vektor tanpa menghapus data:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -258,4 +261,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk data lain, bandingkan dengan baseline saat pencadangan Anda sendiri. Buat indeks vektor yang sesuai sebelum memuat jika koleksi yang dipulihkan tidak memilikinya. Perintah yang berhasil saja tidak membuktikan bahwa data yang diharapkan telah dipulihkan.</p>
+<p>Untuk data lain, bandingkan dengan baseline pada saat pencadangan Anda sendiri. Buat indeks vektor yang sesuai sebelum memuat jika koleksi yang dipulihkan tidak memilikinya. Perintah yang berhasil saja tidak membuktikan bahwa data yang diharapkan telah dipulihkan.</p>

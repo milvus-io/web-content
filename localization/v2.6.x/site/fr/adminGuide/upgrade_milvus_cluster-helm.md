@@ -57,10 +57,10 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
     </button></h3><p>La mise à niveau de Milvus 2.5.x vers la version 2.6.17 implique des changements architecturaux importants :</p>
 <ul>
 <li><strong>Consolidation des coordinateurs</strong>: les anciens coordinateurs distincts (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) ont été regroupés en un seul <code translate="no">mixCoord</code></li>
-<li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement des données amélioré</li>
+<li><strong>Nouveaux composants</strong>: introduction du nœud de streaming pour un traitement amélioré des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> a été supprimé et consolidé</li>
 </ul>
-<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture de Milvus</a>.</p>
+<p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d’informations sur les modifications apportées à l’architecture, consultez <a href="/docs/fr/v2.6.x/architecture_overview.md">la présentation de l’architecture Milvus</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Configuration requise<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,15 +84,15 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 </ul>
 <p><strong>Exigences de compatibilité :</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>n’</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à jour directes à partir de versions candidates ne sont pas prises en charge.</li>
+<li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à niveau directes à partir de versions candidates ne sont pas prises en charge.</li>
 <li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous souhaitez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide concernant la migration.</li>
 <li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou une version ultérieure avec l'option « <code translate="no">mixCoordinator</code> » activée avant de passer à la version v2.6.17.</li>
 </ul>
-<p><strong>Limitations relatives aux files d'attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d'attente de messages. Le changement de système de file d'attente de messages au cours de la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les versions futures.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alert note">
-Depuis la version 4.2.21 du Helm chart de Milvus, nous avons introduit le chart pulsar-v3.x en tant que dépendance. Pour des raisons de compatibilité ascendante, veuillez mettre à jour votre Helm vers la version 3.14 ou une version ultérieure, et veillez à ajouter l’option « <code translate="no">--reset-then-reuse-values</code> » chaque fois que vous utilisez ` <code translate="no">helm upgrade</code>`.
+Depuis la version 4.2.21 du Helm chart de Milvus, nous avons introduit le chart pulsar-v3.x en tant que dépendance. Pour des raisons de compatibilité ascendante, veuillez mettre à jour votre Helm vers la version 3.14 ou une version ultérieure, et veillez à ajouter l’option <code translate="no">--reset-then-reuse-values</code> chaque fois que vous utilisez <code translate="no">helm upgrade</code>.
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à jour<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,7 +151,7 @@ Le dépôt des charts Helm de Milvus à l’adresse <code translate="no">https:/
     </button></h3><p>Vérifiez si votre cluster utilise actuellement des coordinateurs distincts :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Si vous constatez la présence de pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la v2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
+<p>Si vous constatez la présence de pods de coordinateurs distincts (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>), effectuez la mise à niveau vers la version 2.5.16 et activez <code translate="no">mixCoordinator</code>:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --<span class="hljs-built_in">set</span> mixCoordinator.enabled=<span class="hljs-literal">true</span> \

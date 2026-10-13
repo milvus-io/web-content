@@ -1,9 +1,10 @@
 ---
 id: snapshot-backup-and-restore.md
 summary: 備份一個收藏集，並在同一個 Milvus 實例中以新名稱還原該收藏集。
-title: 在單一實例中進行快照備份與還原
+title: 在單一實例中執行快照備份與還原Compatible with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">在單一實例中進行快照備份與還原<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">在單一實例中執行快照備份與還原<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +19,7 @@ title: 在單一實例中進行快照備份與還原
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在同一個 Milvus 實例中備份一個集合，並以新名稱還原該集合。本範例使用<strong>Milvus Backup 0.6.0</strong>建立<code translate="no">coll</code> 的快照，並在<strong>Milvus 3.0.1 或更新版本中</strong>將其還原為<code translate="no">coll_bak</code> 。若使用 Backup 0.5.x<a href="/docs/zh-hant/single-instance-backup-and-restore.md">，請參閱「單一實例中的備份與還原」</a>。</p>
+    </button></h1><p>在同一個 Milvus 實例中備份一個集合，並以新名稱還原該集合。此範例將為<code translate="no">coll</code> 建立快照，並在<strong>Milvus 3.0.1 或更新版本中</strong>將其還原為<code translate="no">coll_bak</code> 。若使用 Backup 0.5.x<a href="/docs/zh-hant/single-instance-backup-and-restore.md">，請參閱「單一實例中的備份與還原</a>」。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,11 +61,11 @@ title: 在單一實例中進行快照備份與還原
         ></path>
       </svg>
     </button></h2><ul>
-<li>請使用 Milvus Backup 0.6.0 及 Milvus 3.0.1 或更新版本。請依照<a href="/docs/zh-hant/milvus_backup_0_6_cli.md">《使用命令備份與還原資料》</a>中的說明安裝該工具。</li>
-<li>請使用名為<code translate="no">coll</code> 的現有集合，或建立下方的可選範例集合。在比較來源與還原結果時，請保持其資料不變。</li>
-<li>請確保 Milvus Backup 可存取 Milvus 的 gRPC 埠 (19530)、管理埠 (9091) 以及物件儲存空間。此外，Milvus 伺服器也必須能夠存取備份儲存空間，以便進行快照的匯出與匯入。</li>
-<li>請將範例中的主機名稱、儲存桶名稱、根路徑及憑證，替換為您的部署設定。Milvus 儲存設定必須與正在運行的實例相符；變更備份配置並不會重新配置 Milvus。</li>
-<li>請確保目標實例中不存在<code translate="no">coll_bak</code> 。</li>
+<li>請使用 Milvus 3.0.1 或更新版本。此範例已透過 Milvus Backup 0.6.0 及 Milvus 3.0.1 進行驗證。請依照<a href="/docs/zh-hant/milvus_backup_0_6_cli.md">《使用指令備份與還原資料</a>》中的說明安裝此工具。</li>
+<li>請使用名為「<code translate="no">coll</code> 」的現有集合，或建立以下可選的範例集合。在比較來源與還原結果時，請保持其資料不變。</li>
+<li>請確保 Milvus Backup 能存取 Milvus 的 gRPC 埠 (19530)、管理埠 (9091) 以及物件儲存空間。此外，Milvus 伺服器也必須能夠存取備份儲存空間，以便進行快照的匯出與匯入。</li>
+<li>請將範例中的主機名稱、儲存桶名稱、根路徑及憑證替換為您的部署設定。Milvus 儲存設定必須與正在運行的實例相符；變更備份設定並不會重新配置 Milvus。</li>
+<li>請確保目標實例中不存在 `<code translate="no">coll_bak</code> `。</li>
 </ul>
 <p>有關 Milvus 儲存設定，請參閱「<a href="/docs/zh-hant/deploy_s3.md">物件儲存</a>」。關於現有的 v1 備份設定，請參閱「<a href="/docs/zh-hant/milvus_backup_upgrade.md#Migrate-the-configuration">升級 Milvus Backup</a>」。</p>
 <h2 id="Prepare-sample-data" class="common-anchor-header">準備範例資料<button data-href="#Prepare-sample-data" class="anchor-icon" translate="no">
@@ -139,7 +140,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在包含<code translate="no">milvus-backup</code> 二進位檔的目錄中執行以下指令。執行後續指令時請保留此工作目錄：</p>
+    </button></h3><p>在包含<code translate="no">milvus-backup</code> 二進位檔的目錄中執行以下指令。後續指令請維持此工作目錄：</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
 <p>將以下內容儲存為<code translate="no">configs/backup-source.yaml</code> 。此範例使用 MinIO 的預設測試憑證；請將其替換為您所使用物件儲存庫的憑證。</p>
@@ -168,8 +169,8 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <span class="hljs-attr">transfer:</span>
   <span class="hljs-attr">mode:</span> <span class="hljs-string">auto</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus.storage</code> 描述來源實例的資料。<code translate="no">backup.storage</code> 描述備份目標。未設定的備份儲存空間欄位將繼承自<code translate="no">milvus.storage</code> ，唯獨<code translate="no">rootPath</code> 除外，其預設值為<code translate="no">backup</code> 。</p>
-<p>若 Milvus 與 Milvus Backup 使用不同的位址連線至同一物件儲存庫，請將 `<code translate="no">backup.storage.milvusAddress</code> ` 和 `<code translate="no">milvusPort</code> ` 設定為 Milvus 伺服器可連線到的位址。請參閱<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">0.6.0 版本的配置範例</a>。</p>
+<p><code translate="no">milvus.storage</code> 描述來源實例的資料。<code translate="no">backup.storage</code> 描述備份目標。未設定的備份儲存場域將繼承自<code translate="no">milvus.storage</code> ，惟<code translate="no">rootPath</code> 除外，其預設值為<code translate="no">backup</code> 。</p>
+<p>若 Milvus 與 Milvus Backup 使用不同的位址存取同一物件儲存庫，請將 `<code translate="no">backup.storage.milvusAddress</code> ` 和 `<code translate="no">milvusPort</code> ` 設定為 Milvus 伺服器可存取的位址。請參閱<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">0.6.0 版本的設定範例</a>。</p>
 <h3 id="Step-2-Check-connectivity-and-create-a-backup" class="common-anchor-header">步驟 2：檢查連線狀態並建立備份<button data-href="#Step-2-Check-connectivity-and-create-a-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,8 +190,8 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup create --format snapshot --filter coll -n my_backup --config configs/backup-source.yaml
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>連線性檢查應顯示<code translate="no">Success!</code> 。建立指令應顯示<code translate="no">create backup success</code> ，且備份資訊應列出<code translate="no">coll</code> 。</p>
-<p>明示的<code translate="no">--format snapshot</code> 會選擇快照工作流程。在 Milvus 3.0 中，預設的<code translate="no">auto</code> 同樣會選擇快照。備份內容包含元資料，以及位於<code translate="no">bucket-a/backup/my_backup</code> 下的匯出快照封裝檔。請完整保留該目錄。</p>
+<p>連線檢查應顯示<code translate="no">Success!</code> 。建立指令應顯示<code translate="no">create backup success</code> ，而備份資訊應列出<code translate="no">coll</code> 。</p>
+<p>明示的<code translate="no">--format snapshot</code> 會選擇快照工作流程。在 Milvus 3.0 中，預設的<code translate="no">auto</code> 同樣會選擇快照。備份內容包含元資料，以及位於<code translate="no">bucket-a/backup/my_backup</code> 下的已匯出快照封裝檔。請完整保留該目錄。</p>
 <h2 id="Restore-within-the-same-instance" class="common-anchor-header">在同一實例內還原<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,7 +211,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>CLI 指令<code translate="no">--filter</code> 會將目標名稱與<code translate="no">-s</code> 或<code translate="no">--rename</code><strong>後綴進行比對</strong>。在此還原指令中，請使用<code translate="no">coll_bak</code> ，而非<code translate="no">coll</code> 。若篩選條件未匹配任何項目，系統將成功退出而不建立集合。</p>
-<p>還原後的集合會使用目標實例所設定的儲存空間。Milvus 負責管理快照匯入以及隨之產生的資料佈局。</p>
+<p>還原後的集合會使用目標實例所設定的儲存空間。Milvus 負責管理快照匯入及隨之產生的資料佈局。</p>
 <h2 id="Verify-the-result" class="common-anchor-header">驗證結果<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,4 +257,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>對於其他資料，請與您自身的備份時點基準進行比對。若還原後的集合尚未建立向量索引，請在載入前建立適當的向量索引。僅憑指令執行成功，並不能證明預期資料已成功還原。</p>
+<p>針對其他資料，請與您自身的備份時點基準進行比對。若還原後的集合尚未建立向量索引，請在載入前建立適當的向量索引。僅憑指令執行成功，並不能證明預期資料已成功還原。</p>

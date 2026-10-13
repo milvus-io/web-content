@@ -23,7 +23,7 @@ title: Actualizar Milvus Standalone con Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía describe cómo actualizar tu implementación independiente de Milvus de la versión 2.5.x a la 2.6.17 utilizando Helm Chart.</p>
+    </button></h1><p>Esta guía describe cómo actualizar tu implementación de Milvus Standalone de la versión v2.5.x a la v2.6.17 utilizando Helm Chart.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Actualizar Milvus Standalone con Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2617" class="common-anchor-header">Novedades de la versión v2.6.17<button data-href="#Whats-new-in-v2617" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2617" class="common-anchor-header">Novedades de la versión 2.6.17<button data-href="#Whats-new-in-v2617" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,14 +122,14 @@ Desde la versión 4.2.21 del gráfico Helm de Milvus, hemos introducido el gráf
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>En primer lugar, actualiza tu gráfico Helm de Milvus a la versión 5.0.0:</p>
+    </button></h3><p>En primer lugar, actualice su gráfico Helm de Milvus a la versión 5.0.0:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 El repositorio de gráficos Helm de Milvus en <code translate="no">https://milvus-io.github.io/milvus-helm/</code> ha sido archivado. Utilice el nuevo repositorio <code translate="no">https://zilliztech.github.io/milvus-helm/</code> para las versiones 4.0.31 y posteriores del gráfico.
 </div>
-<p>Para comprobar la compatibilidad de la versión del Helm Chart con las versiones de Milvus:</p>
+<p>Para comprobar la compatibilidad de la versión del gráfico de Helm con las versiones de Milvus:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta guía da por hecho que está instalando la última versión. Si necesita instalar una versión específica, especifique el parámetro <code translate="no">--version</code> en consecuencia.</p>
@@ -149,9 +149,9 @@ El repositorio de gráficos Helm de Milvus en <code translate="no">https://milvu
         ></path>
       </svg>
     </button></h3><div class="alert-note">
-<p>Omite este paso si tu implementación independiente ya ejecuta la v2.5.16 o superior.</p>
+<p>Omita este paso si su implementación independiente ya ejecuta la v2.5.16 o superior.</p>
 </div>
-<p>Actualiza tu Milvus independiente a la v2.5.16:</p>
+<p>Actualiza tu Milvus autónomo a la v2.5.16:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
@@ -176,7 +176,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez que la versión 2.5.16 se ejecute correctamente, actualiza a la versión 2.6.17:</p>
+    </button></h3><p>Una vez que la versión 2.5.16 se esté ejecutando correctamente, actualiza a la versión 2.6.17:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.17&quot;</span> \
   --reset-then-reuse-values \
@@ -197,7 +197,7 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Confirma que tu instalación independiente ejecuta la nueva versión:</p>
+    </button></h2><p>Confirma que tu instalación independiente está ejecutando la nueva versión:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>

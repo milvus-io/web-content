@@ -23,7 +23,7 @@ title: Memperbarui Milvus Standalone dengan Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara meng-upgrade deployment Milvus 2.6.x standalone ke v3.0-beta menggunakan Helm.</p>
+    </button></h1><p>Panduan ini menjelaskan cara memperbarui deployment Milvus 2.6.x standalone ke v3.0-beta menggunakan Helm.</p>
 <div class="alert note">
 <p>Prosedur ini telah diverifikasi dari Milvus 2.6.20 hingga Milvus v3.0-beta dengan Milvus Helm Chart 5.0.22. Jika Anda menggunakan rilis patch Milvus 2.6.x atau versi Helm Chart lainnya, lakukan verifikasi pembaruan terlebih dahulu di lingkungan non-produksi.</p>
 </div>
@@ -48,10 +48,10 @@ title: Memperbarui Milvus Standalone dengan Helm Chart
 <li>Nilai Helm yang digunakan untuk penyebaran yang sudah ada</li>
 <li>Cadangan terbaru dari metadata Milvus dan data persisten</li>
 </ul>
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian sistem antrian pesan selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0-beta, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Beralih antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia pada versi mendatang.</p>
 <div class="alert warning">
 <p>Jangan mengubah atau menurunkan versi Helm Chart sebagai bagian dari prosedur ini. Pertahankan versi Chart yang sudah terinstal untuk rilis Helm Anda. Baseline yang telah diuji mempertahankan Helm Chart 5.0.22 dan hanya mengubah tag gambar Milvus menjadi <code translate="no">v3.0-beta</code>.</p>
-<p>Prosedur ini tidak memvalidasi penurunan versi atau rollback dengan mengubah gambar Milvus kembali ke 2.6.x. Setelah v3.0-beta menulis data, rollback yang hanya melibatkan gambar mungkin gagal membaca status yang telah diperbarui. Jika peningkatan versi gagal, hentikan penulisan dan gunakan rencana pemulihan yang mengembalikan metadata sebelum peningkatan versi serta cadangan data persisten. Validasi rencana pemulihan di lingkungan non-produksi terlebih dahulu.</p>
+<p>Prosedur ini tidak memvalidasi penurunan versi atau rollback dengan mengubah gambar Milvus kembali ke 2.6.x. Setelah v3.0-beta menulis data, rollback yang hanya melibatkan gambar mungkin gagal membaca status yang telah diperbarui. Jika peningkatan gagal, hentikan penulisan dan gunakan rencana pemulihan yang memulihkan metadata sebelum peningkatan serta cadangan data persisten. Validasi rencana pemulihan tersebut terlebih dahulu di lingkungan non-produksi.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan versi<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

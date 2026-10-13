@@ -119,7 +119,7 @@ dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على ملف Milvus الثنائي على <code translate="no">/usr/bin/milvus</code> ، وملف خدمة systemd على <code translate="no">/lib/systemd/system/milvus.service</code> ، والتبعيات على <code translate="no">/usr/lib/milvus/</code>.</p>
 <div class="alert note">
-<p>بشكل افتراضي، يعمل Milvus Standalone باستخدام <strong>Woodpecker</strong> (نظام الملفات المحلي) كقائمة انتظار الرسائل مع etcd المدمج، لذلك لا توجد حاجة إلى خدمة مراسلة خارجية أو خدمة بيانات وصفية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</p>
+<p>بشكل افتراضي، يعمل Milvus Standalone على تشغيل <strong>Woodpecker</strong> (نظام الملفات المحلي) كقائمة انتظار الرسائل الخاصة به مع etcd المدمج، لذلك لا توجد حاجة إلى خدمة مراسلة خارجية أو خدمة بيانات وصفية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</p>
 </div>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>بعد تثبيت Milvus Standalone، يمكنك:</p>
 <ul>
-<li><p>راجع <a href="/docs/ar/quickstart.md">«البدء السريع</a> » لمعرفة ما يمكن أن يفعله Milvus.</p></li>
+<li><p>راجع <a href="/docs/ar/quickstart.md">«البدء السريع</a> » لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -205,7 +205,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>

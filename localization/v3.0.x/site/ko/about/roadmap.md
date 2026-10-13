@@ -55,7 +55,7 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
       </svg>
     </button></h2><p><strong>일정: 2025년 중반 – 2025년 말</strong></p>
 <p>중점 사항: <strong>데이터 모델 업그레이드</strong>, <strong>스트리밍 아키텍처 리팩토링</strong>, <strong>핫/콜드 티어링 기능 구축</strong>, <strong>Vector Lake 프로토타입(v0.1)</strong> 출시.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 내용<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 특징<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,10 +77,10 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>StreamNode 아키텍처 리팩토링</strong></h4><ul>
 <li><p>증분 쓰기 및 실시간 계산을 최적화하기 위해 스트리밍 수집 파이프라인을 재작성했습니다.</p></li>
-<li><p>동시 처리 성능과 안정성을 대폭 개선하여, 실시간 및 오프라인 처리를 통합할 수 있는 기반을 마련했습니다.</p></li>
+<li><p>동시 실행 성능과 안정성을 대폭 개선하여, 실시간 및 오프라인 처리를 통합할 수 있는 기반을 마련했습니다.</p></li>
 <li><p>새로운 메시지 큐 엔진인 <strong>Woodpecker</strong>를 도입합니다.</p></li>
 </ul>
-<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>핫/콜드 계층화 및 스토리지 아키텍처 (StorageV2)</strong></h4><ul>
+<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>핫/콜드 티어링 및 스토리지 아키텍처 (StorageV2)</strong></h4><ul>
 <li><p><strong>Parquet</strong> 및 <strong>Vortex라는</strong> 두 가지 스토리지 형식을 지원하여 동시 처리 능력과 메모리 효율성을 향상시킵니다.</p></li>
 <li><p>자동 핫/콜드 데이터 분리 및 지능형 스케줄링을 통해 계층형 스토리지를 구현합니다.</p></li>
 </ul>
@@ -123,11 +123,11 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
     </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>검색 경험 대대적 개편</strong></h4><ul>
 <li><p>위치 기반 검색 또는 부정 예시를 지원하는 <strong>‘More Like This(MLT)</strong> ’ 유사도 검색 기능 도입.</p></li>
 <li><p><strong>하이라이트</strong> 및 <strong>부스팅과</strong> 같은 시맨틱 검색 기능을 추가합니다.</p></li>
-<li><p><strong>사용자 정의 사전</strong> 및 <strong>동의어 테이블을</strong> 지원하여 분석기(Analyzer) 계층에서 어휘 및 의미 규칙을 정의할 수 있게 되었습니다.</p></li>
+<li><p><strong>사용자 정의 사전</strong> 및 <strong>동의어 테이블을</strong> 지원하여 분석기(Analyzer) 계층에서 어휘 및 의미적 규칙을 정의할 수 있게 되었습니다.</p></li>
 <li><p>쿼리에 대한 <strong>집계</strong> 기능을 도입했습니다.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>멀티테넌시 및 리소스 관리</strong></h4><ul>
-<li><p>다중 테넌트 삭제, 통계, 핫/콜드 계층화를 지원합니다.</p></li>
+<li><p>다중 테넌트에 대한 삭제, 통계 및 핫/콜드 계층화를 지원합니다.</p></li>
 <li><p>단일 클러스터에서 수백만 개의 테이블을 지원할 수 있도록 리소스 격리 및 스케줄링 전략을 개선합니다.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>스키마 및 기본 키 개선</strong></h4><ul>
@@ -135,13 +135,13 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
 <li><p><strong>유연한 스키마 관리</strong> (열 추가/삭제, 백업 채우기)를 지원합니다.</p></li>
 <li><p>벡터 필드에서 <strong>NULL 값을</strong> 허용합니다.</p></li>
 </ul>
-<h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>비정형 데이터 유형 확장 (BLOB / 텍스트)</strong></h4><ul>
+<h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>확장된 비정형 데이터 유형(BLOB / 텍스트)</strong></h4><ul>
 <li><p>파일, 이미지, 동영상과 같은 바이너리 데이터에 대한 네이티브 저장 및 참조 기능을 제공하는 <strong>BLOB 유형을</strong> 도입합니다.</p></li>
-<li><p><strong>TEXT 유형을</strong> 도입하여 향상된 전체 텍스트 및 콘텐츠 기반 검색 기능을 제공합니다.</p></li>
+<li><p>강화된 전체 텍스트 및 콘텐츠 기반 검색 기능을 제공하는 <strong>TEXT 유형을</strong> 도입합니다.</p></li>
 </ul>
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>엔터프라이즈급 기능</strong></h4><ul>
 <li><p><strong>스냅샷 기반 백업 및 복구를</strong> 지원합니다.</p></li>
-<li><p><strong>종단 간 추적</strong> 및 <strong>감사 로깅</strong> 기능을 제공합니다.</p></li>
+<li><p><strong>엔드투엔드 추적</strong> 및 <strong>감사 로깅</strong> 기능을 제공합니다.</p></li>
 <li><p>다중 클러스터 배포 환경에서 <strong>액티브-스탠바이 고가용성(HA)을</strong> 구현합니다.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>벡터 레이크(v0.2)</strong></h4><ul>
@@ -166,7 +166,7 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
       </svg>
     </button></h2><p><strong>일정: 2026년 중반</strong></p>
 <p>중점 사항: <strong>사용자 정의 함수(UDF)</strong>, <strong>분산 컴퓨팅 통합</strong>, <strong>스칼라 쿼리 최적화</strong>, <strong>동적 샤딩</strong>, <strong>Vector Lake(v1.0)</strong>의 정식 출시.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 특징<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 하이라이트<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,12 +182,12 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
         ></path>
       </svg>
     </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>UDF 및 분산 컴퓨팅 생태계</strong></h4><ul>
-<li><p><strong>사용자 정의 함수(UDF)를</strong> 지원하여, 개발자가 검색 및 계산 워크플로우에 맞춤형 로직을 적용할 수 있도록 합니다.</p></li>
-<li><p><strong>Ray Dataset / Daft와의</strong> 긴밀한 연동을 통해 분산 UDF 실행 및 다중 모달 데이터 처리를 지원합니다.</p></li>
+<li><p><strong>사용자 정의 함수(UDF)를</strong> 지원하여, 개발자가 검색 및 계산 워크플로우에 사용자 지정 로직을 적용할 수 있도록 합니다.</p></li>
+<li><p><strong>Ray Dataset / Daft와의</strong> 긴밀한 연동을 통해 분산 UDF 실행 및 다중 모드 데이터 처리를 지원합니다.</p></li>
 </ul>
 <h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>스칼라 쿼리 및 로컬 포맷 개선</strong></h4><ul>
 <li><p>스칼라 필드의 필터링 및 집계 성능을 최적화합니다.</p></li>
-<li><p>표현식 평가 및 인덱스 가속 실행을 강화합니다.</p></li>
+<li><p>표현식 평가 및 인덱스 가속 실행 기능을 강화합니다.</p></li>
 <li><p>로컬 파일 형식에 대한 <strong>인플레이스 업데이트를</strong> 지원합니다.</p></li>
 </ul>
 <h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>고급 검색 기능</strong></h4><ul>
@@ -224,13 +224,13 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
         ></path>
       </svg>
     </button></h2><p>Milvus는 전 세계 개발자 커뮤니티가 주도하는 오픈소스 프로젝트입니다.</p>
-<p>모든 커뮤니티 구성원 여러분을 따뜻하게 초대하여 차세대 멀티모달 데이터베이스를 함께 만들어 나가길 바랍니다:</p>
+<p>모든 커뮤니티 구성원 여러분께서 차세대 멀티모달 데이터베이스를 함께 만들어 가실 것을 진심으로 초대합니다:</p>
 <ul>
 <li><p>💬 <strong>피드백 공유</strong>: 새로운 기능이나 최적화 아이디어를 제안해 주세요</p></li>
 <li><p>🐛 <strong>문제 보고</strong>: GitHub Issues를 통해 버그를 신고해 주세요</p></li>
 <li><p>🔧 <strong>코드 기여</strong>: PR을 제출하고 핵심 기능 개발에 기여해 주세요</p>
 <ul>
-<li><p><strong>풀 리퀘스트(PR)</strong>: <a href="https://github.com/milvus-io/milvus/pulls">코드베이스</a>에 직접 기여해 주세요. 버그 수정, 기능 추가, 문서 개선 등 어떤 형태의 기여라도 환영합니다.</p></li>
+<li><p><strong>풀 리퀘스트(</strong>PR<strong>)</strong>: <a href="https://github.com/milvus-io/milvus/pulls">코드베이스</a>에 직접 기여해 주세요. 버그 수정, 기능 추가, 문서 개선 등 어떤 형태의 기여라도 환영합니다.</p></li>
 <li><p><strong>개발 가이드</strong>: 코드 기여에 대한 지침은 <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">기여자 가이드를</a> 확인해 주세요.</p></li>
 </ul></li>
 <li><p>⭐ <strong>널리 알리기</strong>: 모범 사례와 성공 사례를 공유해 주세요</p></li>

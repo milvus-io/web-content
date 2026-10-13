@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: تعرف على كيفية تثبيت Milvus بشكل مستقل باستخدام Docker.
-title: تشغيل Milvus في Docker (Linux)
+title: تشغيل Milvus في Docker (لينكس)
 ---
-<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">تشغيل Milvus في Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">تشغيل Milvus في Docker (لينكس)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,8 +66,8 @@ title: تشغيل Milvus في Docker (Linux)
 <p><strong>ما الجديد في الإصدار v2.6.17:</strong></p>
 <ul>
 <li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
-<li><strong>Woodpecker MQ</strong>: تحسين قائمة انتظار الرسائل مع تقليل أعباء الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام Woodpecker</a> لمزيد من التفاصيل</li>
-<li><strong>بنية محسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
+<li><strong>Woodpecker MQ</strong>: قائمة انتظار رسائل محسّنة مع تقليل أعباء الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام Woodpecker</a> لمزيد من التفاصيل</li>
+<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
 </ul>
 <p>احرص دائمًا على تنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
 <p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، يُنصح باستخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
@@ -80,7 +80,7 @@ title: تشغيل Milvus في Docker (Linux)
 <li>لتغيير التكوين الافتراضي لـ Milvus، أضف إعداداتك إلى ملف <strong>user.yaml</strong> الموجود في المجلد الحالي، ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على الرابط <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب</a> لـ <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus</a>.</p>
+<p>يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب</a> ل <a href="/docs/ar/v2.6.x/milvus-webui.md">ـ Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ title: تشغيل Milvus في Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تعديل إعدادات Milvus في ملف <strong>user.yaml</strong> الموجود في المجلد الحالي. على سبيل المثال، لتغيير <code translate="no">proxy.healthCheckTimeout</code> إلى <code translate="no">1000</code> ms، يمكنك تعديل الملف كما يلي:</p>
+    </button></h2><p>يمكنك تعديل إعدادات Milvus في ملف <strong>user.yaml</strong> الموجود في المجلد الحالي. على سبيل المثال، لتغيير <code translate="no">proxy.healthCheckTimeout</code> إلى <code translate="no">1000</code> ms، يمكنك تعديل الملف على النحو التالي:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -132,7 +132,7 @@ EOF
 <li>تنزيل أحدث برنامج نصي للتثبيت مع التكوينات المحدثة</li>
 <li>سحب أحدث صورة Docker لـ Milvus</li>
 <li>إعادة تشغيل الحاوية بالإصدار الجديد</li>
-<li>يحتفظ ببياناتك وتكويناتك الحالية</li>
+<li>يحتفظ ببياناتك وإعداداتك الحالية</li>
 </ul>
 <p>هذه هي الطريقة الموصى بها لترقية النشر المستقل لـ Milvus.</p>
 </div>
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة إمكانيات Milvus.</p></li>
+<li><p>الاطلاع على <a href="/docs/ar/v2.6.x/quickstart.md">دليل البدء السريع</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -183,7 +183,7 @@ EOF
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
@@ -196,6 +196,6 @@ EOF
 <li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
-<li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة سهلة الاستخدام.</p></li>
+<li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/monitor.md">راقب Milvus باستخدام Prometheus</a>.</p></li>
 </ul>

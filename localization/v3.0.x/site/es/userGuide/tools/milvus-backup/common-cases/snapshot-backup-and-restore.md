@@ -3,9 +3,12 @@ id: snapshot-backup-and-restore.md
 summary: >-
   Haz una copia de seguridad de una colección y restáurala con un nuevo nombre
   en la misma instancia de Milvus.
-title: Copia de seguridad y restauración de instantáneas en una misma instancia
+title: >-
+  Copia de seguridad y restauración de instantáneas en una misma
+  instanciaCompatible with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Copia de seguridad y restauración de instantáneas en una misma instancia<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Copia de seguridad y restauración de instantáneas en una misma instancia<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Copia de seguridad y restauración de instantáneas en una misma instanci
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Realiza una copia de seguridad de una colección y restáurala con un nuevo nombre en la misma instancia de Milvus. En este ejemplo se utiliza <strong>Milvus Backup 0.6.0</strong> para crear una instantánea de <code translate="no">coll</code> y restaurarla como <code translate="no">coll_bak</code> en <strong>Milvus 3.0.1 o posterior</strong>. Para Backup 0.5.x, utiliza <a href="/docs/es/single-instance-backup-and-restore.md">«Copia de seguridad y restauración en una misma instancia</a>».</p>
+    </button></h1><p>Realiza una copia de seguridad de una colección y restáurala con un nuevo nombre en la misma instancia de Milvus. En este ejemplo se crea una instantánea de <code translate="no">coll</code> y se restaura como <code translate="no">coll_bak</code> en <strong>Milvus 3.0.1 o posterior</strong>. Para Backup 0.5.x, utiliza <a href="/docs/es/single-instance-backup-and-restore.md">«Copia de seguridad y restauración en una misma instancia</a>».</p>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,8 +65,8 @@ title: Copia de seguridad y restauración de instantáneas en una misma instanci
         ></path>
       </svg>
     </button></h2><ul>
-<li>Utiliza Milvus Backup 0.6.0 y Milvus 3.0.1 o una versión posterior. Instala la herramienta tal y como se describe en <a href="/docs/es/milvus_backup_0_6_cli.md">«Copia de seguridad y restauración de datos mediante comandos</a>».</li>
-<li>Utilice una colección existente denominada « <code translate="no">coll</code> » o cree la colección de ejemplo opcional que se indica a continuación. Mantenga sus datos sin cambios mientras compara los resultados de origen y los restaurados.</li>
+<li>Utiliza Milvus 3.0.1 o una versión posterior. Este ejemplo se ha validado con Milvus Backup 0.6.0 y Milvus 3.0.1. Instala la herramienta tal y como se describe en <a href="/docs/es/milvus_backup_0_6_cli.md">«Copia de seguridad y restauración de datos mediante comandos</a>».</li>
+<li>Utiliza una colección existente denominada « <code translate="no">coll</code> » o crea la colección de ejemplo opcional que se indica a continuación. Mantén sus datos sin cambios mientras comparas los resultados de origen y los restaurados.</li>
 <li>Haga que el puerto gRPC de Milvus (19530), el puerto de gestión (9091) y el almacenamiento de objetos sean accesibles para Milvus Backup. El servidor de Milvus también debe poder acceder al almacenamiento de copias de seguridad para la exportación e importación de instantáneas.</li>
 <li>Sustituya los nombres de host, los nombres de los buckets, las rutas raíz y las credenciales del ejemplo por la configuración de su implementación. La configuración de almacenamiento de Milvus debe coincidir con la de la instancia en ejecución; cambiar la configuración de la copia de seguridad no reconfigura Milvus.</li>
 <li>Asegúrese de que no exista el archivo « <code translate="no">coll_bak</code> » en la instancia de destino.</li>
@@ -85,7 +88,7 @@ title: Copia de seguridad y restauración de instantáneas en una misma instanci
         ></path>
       </svg>
     </button></h2><p>Los comandos que se muestran a continuación utilizan una colección existente denominada <code translate="no">coll</code>. Puede utilizar su propia colección cambiando los nombres de forma coherente.</p>
-<p>Para una pequeña colección de prueba, instala PyMilvus y ejecuta lo siguiente con el nombre de una colección vacía. Sustituye el URI si Milvus no es local:</p>
+<p>Para una pequeña colección de prueba, instala PyMilvus y ejecuta lo siguiente con un nombre de colección vacío. Sustituye el URI si Milvus no es local:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus==3.0.0
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -141,7 +144,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ejecuta lo siguiente desde el directorio que contiene el binario <code translate="no">milvus-backup</code>. Mantén este directorio de trabajo para los comandos restantes:</p>
+    </button></h3><p>Ejecuta lo siguiente desde el directorio que contiene el binario « <code translate="no">milvus-backup</code> ». Mantén este directorio de trabajo para los comandos restantes:</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
 <p>Guarda lo siguiente como <code translate="no">configs/backup-source.yaml</code>. El ejemplo utiliza las credenciales de prueba predeterminadas de MinIO; sustitúyelas por las credenciales de tu almacén de objetos.</p>
@@ -191,9 +194,9 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup create --format snapshot --filter coll -n my_backup --config configs/backup-source.yaml
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>La comprobación de conectividad debería mostrar <code translate="no">Success!</code>. El comando de creación debería mostrar <code translate="no">create backup success</code>, y la información de la copia de seguridad debería incluir <code translate="no">coll</code>.</p>
-<p>La especificación explícita de « <code translate="no">--format snapshot</code> » selecciona el flujo de trabajo de instantáneas. La opción predeterminada « <code translate="no">auto</code> » también selecciona la instantánea en Milvus 3.0. La copia de seguridad incluye metadatos y un paquete de instantáneas exportado en « <code translate="no">bucket-a/backup/my_backup</code> ». Conserve el directorio completo.</p>
-<h2 id="Restore-within-the-same-instance" class="common-anchor-header">Restauración dentro de la misma instancia<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
+<p>La comprobación de conectividad debería indicar <code translate="no">Success!</code>. El comando de creación debería indicar <code translate="no">create backup success</code>, y la información de la copia de seguridad debería mostrar <code translate="no">coll</code>.</p>
+<p>La especificación explícita de « <code translate="no">--format snapshot</code> » selecciona el flujo de trabajo de instantáneas. La opción predeterminada « <code translate="no">auto</code> » también selecciona la instantánea en Milvus 3.0. La copia de seguridad incluye metadatos y un paquete de instantáneas exportado en « <code translate="no">bucket-a/backup/my_backup</code> ». Conserva todo el directorio.</p>
+<h2 id="Restore-within-the-same-instance" class="common-anchor-header">Restaurar dentro de la misma instancia<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,7 +211,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utiliza la misma configuración para restaurar la copia de seguridad con un sufijo:</p>
+    </button></h2><p>Utilice la misma configuración para restaurar la copia de seguridad con un sufijo:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>La CLI <code translate="no">--filter</code> coincide con el nombre de destino <strong>tras</strong> aplicar <code translate="no">-s</code> o <code translate="no">--rename</code>. Utiliza <code translate="no">coll_bak</code>, no <code translate="no">coll</code>, en este comando de restauración. Un filtro que no coincida con nada puede finalizar correctamente sin crear una colección.</p>
@@ -228,7 +231,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para los datos de muestra opcionales de 256 entidades anteriores, ejecuta esto en el destino de restauración. Sustituye <code translate="no">localhost:19530</code> por el mismo punto final de Milvus utilizado para preparar los datos. Verifica el recuento, cada valor escalar y vectorial, y un resultado de búsqueda vectorial sin eliminar datos:</p>
+    </button></h2><p>Para los datos de ejemplo opcionales de 256 entidades mencionados anteriormente, ejecuta esto en el destino de restauración. Sustituye <code translate="no">localhost:19530</code> por el mismo punto final de Milvus utilizado para preparar los datos. De este modo se comprueba el recuento, todos los valores escalares y vectoriales, y un resultado de búsqueda vectorial sin eliminar datos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -258,4 +261,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Para otros datos, compáralos con tu propia referencia del momento de la copia de seguridad. Crea un índice vectorial adecuado antes de la carga si la colección restaurada no dispone de ninguno. El mero hecho de que el comando se ejecute correctamente no garantiza que se hayan restaurado los datos esperados.</p>
+<p>Para otros datos, compáralos con tu propia referencia del momento de la copia de seguridad. Crea un índice vectorial adecuado antes de la carga si la colección restaurada no tiene ninguno. El mero hecho de que el comando se ejecute correctamente no garantiza que se hayan restaurado los datos esperados.</p>

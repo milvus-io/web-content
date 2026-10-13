@@ -3,9 +3,12 @@ id: snapshot-backup-and-restore.md
 summary: >-
   Eseguire il backup di una raccolta e ripristinarla con un nuovo nome nella
   stessa istanza di Milvus.
-title: Backup e ripristino di uno snapshot in un'unica istanza
+title: >-
+  Backup e ripristino di uno snapshot in un'unica istanzaCompatible with Milvus
+  Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Backup e ripristino di uno snapshot in un'unica istanza<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Backup e ripristino di uno snapshot in un'unica istanza<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Backup e ripristino di uno snapshot in un'unica istanza
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Eseguire il backup di una raccolta e ripristinarla con un nuovo nome nella stessa istanza di Milvus. Questo esempio utilizza <strong>Milvus Backup 0.6.0</strong> per creare uno snapshot di <code translate="no">coll</code> e ripristinarlo come <code translate="no">coll_bak</code> su <strong>Milvus 3.0.1 o versioni successive</strong>. Per Backup 0.5.x, utilizzare <a href="/docs/it/single-instance-backup-and-restore.md">Backup e ripristino in un'unica istanza</a>.</p>
+    </button></h1><p>Eseguire il backup di una raccolta e ripristinarla con un nuovo nome nella stessa istanza di Milvus. Questo esempio crea uno snapshot di <code translate="no">coll</code> e lo ripristina come <code translate="no">coll_bak</code> su <strong>Milvus 3.0.1 o versioni successive</strong>. Per Backup 0.5.x, utilizzare <a href="/docs/it/single-instance-backup-and-restore.md">Backup e ripristino in un'unica istanza</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Backup e ripristino di uno snapshot in un'unica istanza
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Posizione</th><th>Istanza Milvus</th><th>Archivio oggetti</th><th>Bucket</th><th>Percorso radice</th></tr>
+<tr><th>Posizione</th><th>Istanza Milvus</th><th>Archiviazione oggetti</th><th>Bucket</th><th>Percorso radice</th></tr>
 </thead>
 <tbody>
 <tr><td>Dati di origine</td><td><code translate="no">milvus-a</code></td><td><code translate="no">minio-a</code></td><td><code translate="no">bucket-a</code></td><td><code translate="no">files</code></td></tr>
@@ -62,10 +65,10 @@ title: Backup e ripristino di uno snapshot in un'unica istanza
         ></path>
       </svg>
     </button></h2><ul>
-<li>Utilizzare Milvus Backup 0.6.0 e Milvus 3.0.1 o versioni successive. Installare lo strumento come descritto in <a href="/docs/it/milvus_backup_0_6_cli.md">"Backup e ripristino dei dati tramite comandi</a>".</li>
+<li>Utilizzare Milvus 3.0.1 o versioni successive. Questo esempio è stato verificato con Milvus Backup 0.6.0 e Milvus 3.0.1. Installare lo strumento come descritto in <a href="/docs/it/milvus_backup_0_6_cli.md">"Backup e ripristino dei dati tramite comandi</a>".</li>
 <li>Utilizzare una raccolta esistente denominata " <code translate="no">coll</code>" oppure creare la raccolta di esempio opzionale riportata di seguito. Mantenere invariati i dati della raccolta durante il confronto tra i risultati della sorgente e quelli ripristinati.</li>
 <li>Rendere accessibili a Milvus Backup la porta gRPC di Milvus (19530), la porta di gestione (9091) e l’object storage. Il server Milvus deve inoltre poter accedere allo storage di backup per l’esportazione e l’importazione degli snapshot.</li>
-<li>Sostituire i nomi host, i nomi dei bucket, i percorsi radice e le credenziali di esempio con le proprie impostazioni di distribuzione. Le impostazioni di archiviazione di Milvus devono corrispondere all’istanza in esecuzione; la modifica della configurazione di backup non riconfigura Milvus.</li>
+<li>Sostituire i nomi host, i nomi dei bucket, i percorsi radice e le credenziali di esempio con le proprie impostazioni di distribuzione. Le impostazioni di archiviazione di Milvus devono corrispondere all’istanza in esecuzione; la modifica della configurazione di backup non comporta la riconfigurazione di Milvus.</li>
 <li>Assicurarsi che <code translate="no">coll_bak</code> non esista nell’istanza di destinazione.</li>
 </ul>
 <p>Per le impostazioni di archiviazione di Milvus, vedere <a href="/docs/it/deploy_s3.md">Archiviazione a oggetti</a>. Per le configurazioni di backup v1 esistenti, vedere <a href="/docs/it/milvus_backup_upgrade.md#Migrate-the-configuration">Aggiornamento di Milvus Backup</a>.</p>
@@ -85,7 +88,7 @@ title: Backup e ripristino di uno snapshot in un'unica istanza
         ></path>
       </svg>
     </button></h2><p>I comandi riportati di seguito utilizzano una raccolta esistente denominata <code translate="no">coll</code>. È possibile utilizzare una propria raccolta modificando i nomi in modo coerente.</p>
-<p>Per una piccola raccolta di prova, installare PyMilvus ed eseguire il seguente comando su una raccolta vuota. Sostituire l’URI se Milvus non è locale:</p>
+<p>Per una piccola raccolta di prova, installare PyMilvus ed eseguire quanto segue su una raccolta vuota. Sostituire l’URI se Milvus non è locale:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus==3.0.0
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -110,8 +113,8 @@ rows = [
 client.insert(<span class="hljs-string">&quot;coll&quot;</span>, rows)
 client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo modo si creano 256 entità. Mantenere invariati questi dati di prova mentre si seguono i passaggi rimanenti.</p>
-<h2 id="Back-up-the-collection" class="common-anchor-header">Eseguire il backup della raccolta<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
+<p>In questo modo vengono create 256 entità. Mantenere invariati questi dati di prova mentre si seguono i passaggi rimanenti.</p>
+<h2 id="Back-up-the-collection" class="common-anchor-header">Eseguire il backup della collezione<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +129,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Passaggio 1: Preparazione della configurazione<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Passaggio 1: Preparare la configurazione<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,8 +173,8 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <span class="hljs-attr">transfer:</span>
   <span class="hljs-attr">mode:</span> <span class="hljs-string">auto</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus.storage</code> descrive i dati dell’istanza di origine. <code translate="no">backup.storage</code> descrive la destinazione del backup. I campi relativi allo spazio di archiviazione di backup non impostati ereditano i valori da <code translate="no">milvus.storage</code>, ad eccezione di <code translate="no">rootPath</code>, il cui valore predefinito è <code translate="no">backup</code>.</p>
-<p>Se Milvus e Milvus Backup utilizzano indirizzi diversi per raggiungere lo stesso archivio a oggetti, configurare <code translate="no">backup.storage.milvusAddress</code> e <code translate="no">milvusPort</code> con l’indirizzo raggiungibile dal server Milvus. Vedere <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">l’esempio di configurazione della versione 0.6.0</a>.</p>
+<p><code translate="no">milvus.storage</code> descrive i dati dell’istanza di origine. <code translate="no">backup.storage</code> descrive la destinazione del backup. I campi relativi allo storage di backup non impostati ereditano i valori da <code translate="no">milvus.storage</code>, ad eccezione di <code translate="no">rootPath</code>, il cui valore predefinito è <code translate="no">backup</code>.</p>
+<p>Se Milvus e Milvus Backup utilizzano indirizzi diversi per raggiungere lo stesso archivio oggetti, configurare <code translate="no">backup.storage.milvusAddress</code> e <code translate="no">milvusPort</code> con l’indirizzo raggiungibile dal server Milvus. Vedere <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/configs/backup.yaml">l’esempio di configurazione della versione 0.6.0</a>.</p>
 <h3 id="Step-2-Check-connectivity-and-create-a-backup" class="common-anchor-header">Passaggio 2: Verificare la connettività e creare un backup<button data-href="#Step-2-Check-connectivity-and-create-a-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,4 +261,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Per altri dati, confrontare con la propria linea di base relativa al momento del backup. Creare un indice vettoriale appropriato prima del caricamento se la collezione ripristinata ne è sprovvista. Il semplice esito positivo del comando non garantisce che i dati previsti siano stati ripristinati.</p>
+<p>Per altri dati, confrontare con la propria linea di base al momento del backup. Creare un indice vettoriale appropriato prima del caricamento se la raccolta ripristinata ne è sprovvista. Il semplice esito positivo del comando non garantisce che i dati previsti siano stati ripristinati.</p>

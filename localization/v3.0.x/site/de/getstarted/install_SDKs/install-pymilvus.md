@@ -42,7 +42,7 @@ title: Milvus Python SDK installieren
 <li>Google Protobuf muss installiert sein. Sie können es mit dem Befehl „ <code translate="no">pip3 install protobuf==3.20.0</code> “ installieren.</li>
 <li>grpcio-tools muss installiert sein. Sie können es mit dem Befehl „ <code translate="no">pip3 install grpcio-tools</code> “ installieren.</li>
 </ul>
-<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">PyMilvus über pip installieren<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
+<h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Installieren Sie PyMilvus über pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,5 +106,5 @@ Es wird empfohlen, eine PyMilvus-Version zu installieren, die mit der Version de
 <li><a href="/docs/de/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/api-reference/pymilvus/v3.0.x/About.md">PyMilvus-API-Referenz</a> erkunden</p></li>
+<li><p>Entdecken Sie <a href="/api-reference/pymilvus/v3.0.x/About.md">die PyMilvus-API-Referenz</a></p></li>
 </ul>

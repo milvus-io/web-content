@@ -3,9 +3,12 @@ id: snapshot-backup-and-restore.md
 summary: >-
   Sauvegarder une collection et la restaurer sous un nouveau nom dans la même
   instance Milvus.
-title: Sauvegarde et restauration d'un instantané dans une même instance
+title: >-
+  Sauvegarde et restauration d'un instantané dans une même instanceCompatible
+  with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Sauvegarde et restauration d'un instantané dans une même instance<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">Sauvegarde et restauration d'un instantané dans une même instance<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ title: Sauvegarde et restauration d'un instantané dans une même instance
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sauvegardez une collection et restaurez-la sous un nouveau nom dans la même instance Milvus. Cet exemple utilise <strong>Milvus Backup 0.6.0</strong> pour créer un instantané de <code translate="no">coll</code> et le restaurer sous le nom <code translate="no">coll_bak</code> sur <strong>Milvus 3.0.1 ou une version ultérieure</strong>. Pour Backup 0.5.x, utilisez <a href="/docs/fr/single-instance-backup-and-restore.md">Sauvegarde et restauration dans une seule instance</a>.</p>
+    </button></h1><p>Sauvegardez une collection et restaurez-la sous un nouveau nom dans la même instance Milvus. Cet exemple crée un instantané de <code translate="no">coll</code> et le restaure sous le nom <code translate="no">coll_bak</code> sur <strong>Milvus 3.0.1 ou une version ultérieure</strong>. Pour Backup 0.5.x, utilisez « <a href="/docs/fr/single-instance-backup-and-restore.md">Sauvegarde et restauration dans une seule instance</a> ».</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,13 +65,13 @@ title: Sauvegarde et restauration d'un instantané dans une même instance
         ></path>
       </svg>
     </button></h2><ul>
-<li>Utilisez Milvus Backup 0.6.0 et Milvus 3.0.1 ou une version ultérieure. Installez l'outil comme décrit dans la section « <a href="/docs/fr/milvus_backup_0_6_cli.md">Sauvegarder et restaurer des données à l'aide de commandes</a> ».</li>
+<li>Utilisez Milvus 3.0.1 ou une version ultérieure. Cet exemple a été validé avec Milvus Backup 0.6.0 et Milvus 3.0.1. Installez l'outil comme décrit dans la section « <a href="/docs/fr/milvus_backup_0_6_cli.md">Sauvegarder et restaurer des données à l'aide de commandes</a> ».</li>
 <li>Utilisez une collection existante nommée « <code translate="no">coll</code> », ou créez la collection d'exemple facultative ci-dessous. Ne modifiez pas ses données lorsque vous comparez les résultats de la source et ceux de la restauration.</li>
 <li>Rendez le port gRPC de Milvus (19530), le port de gestion (9091) et le stockage d’objets accessibles à Milvus Backup. Le serveur Milvus doit également pouvoir accéder au stockage de sauvegarde pour l’exportation et l’importation des instantanés.</li>
-<li>Remplacez les noms d’hôtes, noms de compartiments, chemins d’accès racines et identifiants fournis à titre d’exemple par vos paramètres de déploiement. Les paramètres de stockage de Milvus doivent correspondre à ceux de l’instance en cours d’exécution ; la modification de la configuration de sauvegarde ne reconfigure pas Milvus.</li>
+<li>Remplacez les noms d’hôtes, noms de compartiments, chemins d’accès racine et identifiants d’exemple par vos paramètres de déploiement. Les paramètres de stockage Milvus doivent correspondre à ceux de l’instance en cours d’exécution ; la modification de la configuration de sauvegarde ne reconfigure pas Milvus.</li>
 <li>Assurez-vous que le fichier « <code translate="no">coll_bak</code> » n’existe pas dans l’instance cible.</li>
 </ul>
-<p>Pour les paramètres de stockage Milvus, consultez la section <a href="/docs/fr/deploy_s3.md">Stockage d’objets</a>. Pour les configurations de sauvegarde v1 existantes, consultez la section <a href="/docs/fr/milvus_backup_upgrade.md#Migrate-the-configuration">Mise à niveau de Milvus Backup</a>.</p>
+<p>Pour les paramètres de stockage Milvus, consultez la section <a href="/docs/fr/deploy_s3.md">Stockage objet</a>. Pour les configurations de sauvegarde v1 existantes, consultez la section <a href="/docs/fr/milvus_backup_upgrade.md#Migrate-the-configuration">Mise à niveau de Milvus Backup</a>.</p>
 <h2 id="Prepare-sample-data" class="common-anchor-header">Préparez des données d’exemple<button data-href="#Prepare-sample-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +113,7 @@ rows = [
 client.insert(<span class="hljs-string">&quot;coll&quot;</span>, rows)
 client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Cela crée 256 entités. Conservez ces données de test telles quelles tout en suivant les étapes suivantes.</p>
+<p>Cela crée 256 entités. Conservez ces données de test telles quelles tout en suivant les étapes restantes.</p>
 <h2 id="Back-up-the-collection" class="common-anchor-header">Sauvegarder la collection<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +147,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
     </button></h3><p>Exécutez la commande suivante depuis le répertoire contenant le binaire <code translate="no">milvus-backup</code>. Conservez ce répertoire de travail pour les commandes suivantes :</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Enregistrez le fichier suivant sous le nom <code translate="no">configs/backup-source.yaml</code>. L’exemple utilise les identifiants de test par défaut de MinIO ; remplacez-les par ceux de votre magasin d’objets.</p>
+<p>Enregistrez le contenu suivant sous le nom <code translate="no">configs/backup-source.yaml</code>. L’exemple utilise les identifiants de test par défaut de MinIO ; remplacez-les par ceux de votre magasin d’objets.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">configVersion:</span> <span class="hljs-string">v2</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">grpc:</span>
@@ -192,7 +195,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>La vérification de la connectivité doit afficher <code translate="no">Success!</code>. La commande de création doit afficher <code translate="no">create backup success</code>, et les informations de sauvegarde doivent indiquer <code translate="no">coll</code>.</p>
-<p>La mention explicite « <code translate="no">--format snapshot</code> » sélectionne le workflow de snapshot. La valeur par défaut « <code translate="no">auto</code> » sélectionne également le snapshot sur Milvus 3.0. La sauvegarde comprend des métadonnées et un ensemble de snapshots exporté sous « <code translate="no">bucket-a/backup/my_backup</code> ». Conservez l’intégralité du répertoire.</p>
+<p>La commande explicite « <code translate="no">--format snapshot</code> » sélectionne le workflow de snapshot. La commande par défaut « <code translate="no">auto</code> » sélectionne également le snapshot sur Milvus 3.0. La sauvegarde comprend des métadonnées et un bundle de snapshot exporté sous « <code translate="no">bucket-a/backup/my_backup</code> ». Conservez l’intégralité du répertoire.</p>
 <h2 id="Restore-within-the-same-instance" class="common-anchor-header">Restauration au sein de la même instance<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -211,8 +214,8 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
     </button></h2><p>Utilisez la même configuration pour restaurer la sauvegarde en ajoutant un suffixe :</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>La commande CLI <code translate="no">--filter</code> correspond au nom de la cible <strong>après</strong> application de <code translate="no">-s</code> ou <code translate="no">--rename</code>. Utilisez <code translate="no">coll_bak</code>, et non <code translate="no">coll</code>, dans cette commande de restauration. Un filtre qui ne correspond à rien peut se terminer avec succès sans créer de collection.</p>
-<p>La collection restaurée utilise le stockage configuré de l’instance cible. Milvus gère l’importation du snapshot et la structure des données qui en résulte.</p>
+<p>L’ <code translate="no">--filter</code> de la CLI correspond au nom de la cible <strong>après</strong> application de <code translate="no">-s</code> ou <code translate="no">--rename</code>. Utilisez <code translate="no">coll_bak</code>, et non <code translate="no">coll</code>, dans cette commande de restauration. Un filtre qui ne correspond à rien peut se terminer avec succès sans créer de collection.</p>
+<p>La collection restaurée utilise le stockage configuré de l’instance cible. Milvus gère l’importation de l’instantané et la structure des données qui en résulte.</p>
 <h2 id="Verify-the-result" class="common-anchor-header">Vérifiez le résultat<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,4 +261,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour d’autres données, comparez-les à votre propre référence au moment de la sauvegarde. Créez un index vectoriel approprié avant le chargement si la collection restaurée n’en possède pas. Le simple fait qu’une commande aboutisse ne prouve pas à lui seul que les données attendues ont bien été restaurées.</p>
+<p>Pour d’autres données, comparez-les à votre propre référence au moment de la sauvegarde. Créez un index vectoriel approprié avant le chargement si la collection restaurée n’en possède pas. Le simple fait qu’une commande aboutisse ne prouve pas à lui seul que les données attendues ont été restaurées.</p>

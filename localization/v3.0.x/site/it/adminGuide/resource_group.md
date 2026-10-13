@@ -136,8 +136,8 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Spostare i nodi tra i gruppi di risorse.</p>
-<p>Si noterà che il gruppo di risorse descritto non contiene ancora alcun nodo di query. Spostare alcuni nodi dal gruppo di risorse predefinito a quello appena creato come segue:
-Supponendo che attualmente ci sia 1 QueryNode nel gruppo <strong> di risorse __default_resource_group</strong> del cluster e che si voglia trasferire un nodo nel <strong>gruppo di risorse</strong> creato.<code translate="no">update_resource_groups</code> garantisce l'atomicità per più modifiche di configurazione, quindi Milvus non vedrà alcuno stato intermedio.</p>
+<p>Si noterà che il gruppo di risorse descritto non ha ancora alcun nodo di query. Spostare alcuni nodi dal gruppo di risorse predefinito a quello appena creato come segue:
+Supponendo che attualmente ci sia 1 QueryNode nel <strong>__default_resource_group</strong> del cluster e che si voglia trasferire un nodo nel <strong>gruppo di risorse</strong> creato.<code translate="no">update_resource_groups</code> garantisce l'atomicità per più modifiche di configurazione, quindi Milvus non vedrà alcuno stato intermedio.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -161,7 +161,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Caricare le collezioni e le partizioni in un gruppo di risorse.</p>
-<p>Una volta che in un gruppo di risorse sono presenti dei nodi di query, è possibile caricare le collezioni in tale gruppo di risorse. Il frammento di codice seguente presuppone che esista già una collezione denominata <code translate="no">demo</code>.</p>
+<p>Una volta che in un gruppo di risorse sono presenti dei nodi di query, è possibile caricare le collezioni in questo gruppo di risorse. Il frammento di codice seguente presuppone che esista già una collezione denominata <code translate="no">demo</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>
@@ -233,8 +233,8 @@ except Exception:
     </button></h2><p>Attualmente, Milvus non è in grado di scalare autonomamente in up o in down in ambienti cloud-native. Tuttavia, utilizzando <strong>l’API Declarative Resource Group</strong> in combinazione con l’orchestrazione dei container, Milvus può facilmente ottenere l’isolamento e la gestione delle risorse per i QueryNodes.
 Ecco una buona pratica per la gestione dei QueryNodes in un ambiente cloud:</p>
 <ol>
-<li><p>Per impostazione predefinita, Milvus crea un <strong>__default_resource_group</strong>. Questo gruppo di risorse non può essere eliminato e funge anche da gruppo di risorse di caricamento predefinito per tutte le collezioni; inoltre, i QueryNode ridondanti vengono sempre assegnati ad esso. Pertanto, è possibile creare un gruppo di risorse in sospeso per contenere le risorse dei QueryNode inutilizzate, impedendo che tali risorse vengano occupate dal gruppo <strong>__default_resource_group</strong>.</p>
-<p>Inoltre, se applichiamo rigorosamente il vincolo ` <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>`, possiamo controllare con precisione l’assegnazione dei QueryNode nel cluster. Supponiamo che al momento vi sia un solo QueryNode nel cluster e inizializziamo il cluster.
+<li><p>Per impostazione predefinita, Milvus crea un <strong>__default_resource_group</strong>. Questo gruppo di risorse non può essere eliminato e funge anche da gruppo di risorse di caricamento predefinito per tutte le collezioni; inoltre, i QueryNode ridondanti vengono sempre assegnati ad esso. Pertanto, è possibile creare un gruppo di risorse in sospeso per contenere le risorse dei QueryNode inattive, impedendo che tali risorse vengano occupate dal <strong>__default_resource_group</strong>.</p>
+<p>Inoltre, se applichiamo rigorosamente il vincolo <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, possiamo controllare con precisione l’assegnazione dei QueryNode nel cluster. Supponiamo che al momento ci sia un solo QueryNode nel cluster e inizializziamo il cluster.
 Ecco un esempio di configurazione:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -299,7 +299,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ridimensionamento del cluster</p>
-<p>Analogamente, possiamo stabilire regole di riduzione delle dimensioni che diano priorità alla selezione dei QueryNodes dal gruppo di risorse <strong>__pending_nodes</strong>. Queste informazioni possono essere ottenute tramite l’API <code translate="no">describe_resource_group</code>. Raggiungere l’obiettivo di ridurre le dimensioni di un gruppo di risorse specificato.</p>
+<p>Allo stesso modo, possiamo stabilire regole di riduzione che diano priorità alla selezione dei QueryNodes dal gruppo di risorse <strong>__pending_nodes</strong>. Queste informazioni possono essere ottenute tramite l’API <code translate="no">describe_resource_group</code>. Raggiungere l’obiettivo di ridurre un gruppo di risorse specificato.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

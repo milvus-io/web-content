@@ -25,7 +25,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
       </svg>
     </button></h1><p>Ce guide décrit comment mettre à niveau votre cluster Milvus 2.6.x vers la version v3.0-beta à l'aide de Helm.</p>
 <div class="alert note">
-<p>Cette procédure a été validée pour une mise à niveau de Milvus 2.6.20 vers Milvus v3.0-beta avec le Helm Chart Milvus 5.0.22. Si vous utilisez une autre version de Milvus 2.6.x ou une autre version du Helm Chart, testez d’abord la mise à niveau dans un environnement hors production.</p>
+<p>Cette procédure a été validée de Milvus 2.6.20 à Milvus v3.0-beta avec le Helm Chart Milvus 5.0.22. Si vous utilisez une autre version de Milvus 2.6.x ou une autre version du Helm Chart, testez d’abord la mise à niveau dans un environnement hors production.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
 <li>Les valeurs Helm utilisées pour le déploiement existant</li>
 <li>Une sauvegarde récente des métadonnées et des données persistantes de Milvus</li>
 </ul>
-<p><strong>Limitations relatives à la file d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0-beta, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alert warning">
 <p>Ne modifiez pas et ne rétrogradez pas le Helm Chart dans le cadre de cette procédure. Conservez la version du Chart déjà installée pour votre version Helm. La configuration de référence testée a conservé le Helm Chart 5.0.22 et n’a modifié que le tag de l’image Milvus pour <code translate="no">v3.0-beta</code>.</p>
 <p>Cette procédure ne valide pas de retour à une version antérieure ni de restauration consistant à ramener l’image Milvus à la version 2.6.x. Une fois que la version v3.0-beta a écrit des données, une restauration portant uniquement sur l’image peut ne pas parvenir à lire l’état mis à jour. Si la mise à niveau échoue, arrêtez les écritures et utilisez un plan de reprise qui restaure les métadonnées antérieures à la mise à niveau ainsi que les sauvegardes des données persistantes. Validez d’abord le plan de reprise dans un environnement hors production.</p>
@@ -114,7 +114,7 @@ helm repo update zilliztech
 <div class="alert note">
 Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https://milvus-io.github.io/milvus-helm/</code> a été archivé. Utilisez le nouveau référentiel <code translate="no">https://zilliztech.github.io/milvus-helm/</code> pour les versions 4.0.31 et ultérieures des charts.
 </div>
-<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Étape 3 : Mettre à niveau Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Étape 3 : Mise à niveau de Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -141,7 +141,7 @@ Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
-<p>L’option ` <code translate="no">--reset-then-reuse-values</code> ` conserve les valeurs de la version précédente tout en appliquant la substitution explicite d’image par rapport aux valeurs par défaut du Chart sélectionné.</p>
+<p>L’option ` <code translate="no">--reset-then-reuse-values</code> ` conserve les valeurs de la version précédente tout en appliquant le remplacement explicite de l’image par rapport aux valeurs par défaut du Chart sélectionné.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">Vérification de la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,5 +167,5 @@ kubectl get pods --namespace &lt;namespace&gt; \
 <button class="copy-code-btn"></button></code></pre>
 <p>Vérifiez que toutes les charges de travail requises sont prêtes, que tous les composants Milvus utilisent <code translate="no">v3.0-beta</code> et que vos collections existantes restent consultables et recherchables. Effectuez ces vérifications avant d’activer toute fonctionnalité spécifique à la version v3.0-beta.</p>
 <div class="alert note">
-<p>La mise à niveau vers Milvus 3.0 n’active pas Storage V3. Après avoir vérifié la mise à niveau, consultez la documentation relative à <a href="/docs/fr/storage-v3.md">Storage V3</a> avant d’activer les fonctionnalités qui en dépendent. Une fois que Milvus a écrit des données dans Storage V3, la rétrogradation vers une version antérieure de Milvus incapable de lire Storage V3 n’est pas prise en charge.</p>
+<p>La mise à niveau vers Milvus 3.0 n’active pas Storage V3. Après avoir vérifié la mise à niveau, consultez la documentation relative à <a href="/docs/fr/storage-v3.md">Storage V3</a> avant d’activer les fonctionnalités qui en dépendent. Une fois que Milvus a écrit des données Storage V3, la rétrogradation vers une version antérieure de Milvus incapable de lire Storage V3 n’est pas prise en charge.</p>
 </div>

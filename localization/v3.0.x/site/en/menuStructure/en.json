@@ -1140,6 +1140,12 @@
                 "id": "geometry-operators.md",
                 "order": 8,
                 "children": []
+              },
+              {
+                "label": "Membership Match",
+                "id": "membership-match.md",
+                "order": 9,
+                "children": []
               }
             ]
           },

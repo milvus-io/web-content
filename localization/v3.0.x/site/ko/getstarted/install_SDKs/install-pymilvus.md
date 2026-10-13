@@ -98,7 +98,7 @@ title: Milvus Python SDK 설치
       </svg>
     </button></h2><p>PyMilvus를 설치한 후에는 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 작동 방식을 익히기:</p>
+<li><p>Milvus의 기본 작동 방식을 익힐 수 있습니다:</p>
 <ul>
 <li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>

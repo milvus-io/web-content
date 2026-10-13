@@ -57,8 +57,8 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Configurez votre instance Milvus en fonction de vos scénarios d'application en ajustant les paramètres correspondants dans le fichier « <code translate="no">milvus.yaml</code> ».</p>
-<p>Consultez les liens suivants pour plus d'informations sur chaque paramètre.</p>
+    </button></h2><p>Configurez votre instance Milvus en fonction de vos scénarios d'application en ajustant les paramètres correspondants dans <code translate="no">milvus.yaml</code>.</p>
+<p>Consultez les liens suivants pour plus d’informations sur chaque paramètre.</p>
 <p>Trié par :</p>
 <div class="filter">
 <a href="#component">Composants ou dépendances</a> <a href="#purpose">Objectifs de configuration</a> 
@@ -88,7 +88,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
             <li><a href="/docs/fr/configure_querycoord.md">Coordonnateur de requêtes</a></li>
             <li><a href="/docs/fr/configure_querynode.md">Nœud de requête</a></li>
             <li><a href="/docs/fr/configure_indexnode.md">Nœud d'index</a></li>
-            <li><a href="/docs/fr/configure_datacoord.md">Coordonnées de données</a></li>
+            <li><a href="/docs/fr/configure_datacoord.md">Coordonnées des données</a></li>
             <li><a href="/docs/fr/configure_datanode.md">Nœud de données</a></li>
             <li><a href="/docs/fr/configure_localstorage.md">Stockage local</a></li>
             <li><a href="/docs/fr/configure_log.md">Journal</a></li>
@@ -96,7 +96,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
             <li><a href="/docs/fr/configure_common.md">Commun</a></li>
             <li><a href="/docs/fr/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/fr/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/fr/configure_indexcoord.md">Coordonnées d’index</a></li>
+            <li><a href="/docs/fr/configure_indexcoord.md">Coordonnées d'index</a></li>
             <li><a href="/docs/fr/configure_metastore.md">Métastore</a></li>
             <li><a href="/docs/fr/configure_mq.md">File d'attente de messages</a></li>
             <li><a href="/docs/fr/configure_tikv.md">Tikv</a></li>
@@ -254,7 +254,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu’après le 
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Les données sont stockées dans le dossier <code translate="no">/volumes</code> conformément à la configuration par défaut décrite à l’adresse <code translate="no">docker-compose.yml</code>. Pour modifier le dossier de stockage des données, modifiez le fichier <code translate="no">docker-compose.yml</code> ou exécutez la commande <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
+Les données sont stockées dans le dossier <code translate="no">/volumes</code> conformément à la configuration par défaut décrite dans <code translate="no">docker-compose.yml</code>. Pour modifier le dossier de stockage des données, modifiez le fichier <code translate="no">docker-compose.yml</code> ou exécutez la commande <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Démarrer Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -271,7 +271,7 @@ Les données sont stockées dans le dossier <code translate="no">/volumes</code>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois les modifications apportées au fichier de configuration et au fichier d'installation, vous pouvez démarrer Milvus.</p>
+    </button></h2><p>Une fois les modifications apportées au fichier de configuration et au fichier d’installation, vous pouvez démarrer Milvus.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Étapes suivantes<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -293,7 +293,7 @@ Les données sont stockées dans le dossier <code translate="no">/volumes</code>
 <li>Découvrez comment gérer les dépendances suivantes de Milvus avec Docker Compose ou Helm :
 <ul>
 <li><a href="/docs/fr/deploy_s3.md">Configurer le stockage d’objets avec Docker Compose ou Helm</a></li>
-<li><a href="/docs/fr/deploy_etcd.md">Configurer le stockage de métadonnées avec Docker Compose ou Helm</a></li>
+<li><a href="/docs/fr/deploy_etcd.md">Configurer le stockage des métadonnées avec Docker Compose ou Helm</a></li>
 <li><a href="/docs/fr/deploy_pulsar.md">Configurer le stockage des messages avec Docker Compose ou Helm</a></li>
 </ul></li>
 </ul>

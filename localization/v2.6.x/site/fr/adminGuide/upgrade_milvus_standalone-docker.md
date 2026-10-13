@@ -25,7 +25,7 @@ title: Mise à niveau de Milvus en mode autonome avec Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce guide décrit comment mettre à niveau votre déploiement Milvus autonome de la version v2.5.x à la version v2.6.17 à l'aide de Docker Compose.</p>
+    </button></h1><p>Ce guide décrit comment mettre à niveau votre déploiement autonome de Milvus de la version 2.5.x à la version 2.6.17 à l'aide de Docker Compose.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,11 +85,11 @@ title: Mise à niveau de Milvus en mode autonome avec Docker Compose
 </ul>
 <p><strong>Exigences de compatibilité :</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à niveau directes à partir de versions candidates ne sont pas prises en charge.</li>
+<li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec la version v2.6.17. Les mises à jour directes à partir de versions candidates ne sont pas prises en charge.</li>
 <li>Si vous utilisez actuellement la version v2.6.0-rc1 et que vous souhaitez conserver vos données, veuillez consulter <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide concernant la migration.</li>
-<li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou ultérieure avant de passer à la version v2.6.17.</li>
+<li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version v2.5.16 ou une version ultérieure avant de passer à la version v2.6.17.</li>
 </ul>
-<p><strong>Limitations relatives à la file d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le changement de système de file d’attente de messages pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les prochaines versions.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v2.6.17, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <div class="alter note">
 <p>Pour des raisons de sécurité, Milvus met à jour son MinIO vers la version RELEASE.2024-12-18T13-15-44Z avec la sortie de la version v2.6.17.</p>
 </div>
@@ -124,7 +124,7 @@ title: Mise à niveau de Milvus en mode autonome avec Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Ignorez cette étape si votre déploiement autonome exécute déjà la version 2.5.16 ou une version ultérieure.</p>
+<p>Ignorez cette étape si votre déploiement autonome exécute déjà la version v2.5.16 ou une version supérieure.</p>
 </div>
 <ol>
 <li><p>Modifiez votre fichier ` <code translate="no">docker-compose.yaml</code> ` existant et mettez à jour la balise de l’image Milvus vers la version v2.5.16 :</p>
@@ -138,7 +138,7 @@ title: Mise à niveau de Milvus en mode autonome avec Docker Compose
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Vérifiez la mise à jour vers la version 2.5.16 :</p>
+<li><p>Vérifiez la mise à niveau vers la version 2.5.16 :</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

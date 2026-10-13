@@ -1,9 +1,10 @@
 ---
 id: snapshot-backup-and-restore.md
 summary: 备份一个 Collection，并在同一 Milvus 实例中以新名称将其恢复。
-title: 在同一实例中进行快照备份和还原
+title: 在同一实例中进行快照备份和还原Compatible with Milvus Backup 0.6.x
+beta: Milvus Backup 0.6.x
 ---
-<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">在同一实例中进行快照备份和还原<button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Snapshot-Backup-and-Restore-in-One-Instance" class="common-anchor-header">在同一实例中进行快照备份和还原<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Snapshot-Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +19,7 @@ title: 在同一实例中进行快照备份和还原
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在同一 Milvus 实例中备份一个 Collection，并以新名称将其恢复。本示例使用<strong>Milvus Backup 0.6.0</strong>为<code translate="no">coll</code> 创建快照，并在<strong>Milvus 3.0.1 或更高版本中</strong>将其恢复为<code translate="no">coll_bak</code> 。对于 Backup 0.5.x，请使用<a href="/docs/zh/single-instance-backup-and-restore.md">“在同一实例中备份和恢复”</a>。</p>
+    </button></h1><p>在同一 Milvus 实例中备份一个 Collection，并以新名称将其还原。本示例将在<strong>Milvus 3.0.1 或更高版本中</strong>，对<code translate="no">coll</code> 创建快照，并将其还原为<code translate="no">coll_bak</code> 。对于 Backup 0.5.x，请<a href="/docs/zh/single-instance-backup-and-restore.md">使用“在同一实例中备份和还原”</a>。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,10 +61,10 @@ title: 在同一实例中进行快照备份和还原
         ></path>
       </svg>
     </button></h2><ul>
-<li>请使用 Milvus Backup 0.6.0 以及 Milvus 3.0.1 或更高版本。请按照<a href="/docs/zh/milvus_backup_0_6_cli.md">《使用命令备份和还原数据</a>》中的说明安装该工具。</li>
+<li>请使用 Milvus 3.0.1 或更高版本。本示例已在 Milvus Backup 0.6.0 和 Milvus 3.0.1 上经过验证。请按照<a href="/docs/zh/milvus_backup_0_6_cli.md">《使用命令备份和还原数据</a>》中的说明安装该工具。</li>
 <li>使用名为<code translate="no">coll</code> 的现有Collection，或创建下文中的可选示例Collection。在比较源数据与恢复结果时，请保持该Collection的数据不变。</li>
 <li>确保 Milvus Backup 可以访问 Milvus 的 gRPC 端口（19530）、管理端口（9091）以及对象存储。此外，Milvus 服务器还必须能够访问备份存储，以便进行快照导出和导入。</li>
-<li>请将示例中的主机名、存储桶名称、根路径和凭据替换为您部署环境中的实际设置。Milvus 存储设置必须与正在运行的实例保持一致；更改备份配置不会重新配置 Milvus。</li>
+<li>请将示例中的主机名、存储桶名称、根路径和凭据替换为您部署环境中的实际设置。Milvus 存储设置必须与运行中的实例一致；更改备份配置不会重新配置 Milvus。</li>
 <li>请确保目标实例中不存在<code translate="no">coll_bak</code> 。</li>
 </ul>
 <p>有关 Milvus 存储设置，请参<a href="/docs/zh/deploy_s3.md">阅“对象存储”</a>。有关现有的 v1 备份配置，请参阅<a href="/docs/zh/milvus_backup_upgrade.md#Migrate-the-configuration">“升级 Milvus Backup”</a>。</p>
@@ -82,8 +83,8 @@ title: 在同一实例中进行快照备份和还原
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下命令使用了一个名为<code translate="no">coll</code> 的现有 Collection。您可以通过统一更改名称来使用自己的 Collection。</p>
-<p>若要创建小型测试集合，请安装 PyMilvus 并针对空 Collection 名称运行以下命令。如果 Milvus 并非本地部署，请替换 URI：</p>
+    </button></h2><p>以下命令使用名为<code translate="no">coll</code> 的现有 Collection。您可以通过统一更改名称来使用自己的 Collection。</p>
+<p>若要创建小型测试集合，请安装 PyMilvus，并针对空 Collection 名称运行以下命令。如果 Milvus 并非本地部署，请替换 URI：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus==3.0.0
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -139,10 +140,10 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在包含<code translate="no">milvus-backup</code> 二进制文件的目录中运行以下命令。后续命令请保持此工作目录不变：</p>
+    </button></h3><p>在包含<code translate="no">milvus-backup</code> 二进制文件的目录中运行以下命令。后续命令请继续使用此工作目录：</p>
 <pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>将以下内容保存为<code translate="no">configs/backup-source.yaml</code> 。示例中使用了 MinIO 的默认测试凭据；请将其替换为您所用对象存储的凭据。</p>
+<p>将以下内容保存为<code translate="no">configs/backup-source.yaml</code> 。示例中使用了 MinIO 的默认测试凭据；请将其替换为您的对象存储的凭据。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">configVersion:</span> <span class="hljs-string">v2</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">grpc:</span>
@@ -190,7 +191,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
 ./milvus-backup get -n my_backup --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>连通性检查应显示<code translate="no">Success!</code> 。创建命令应显示<code translate="no">create backup success</code> ，且备份信息应列出<code translate="no">coll</code> 。</p>
-<p>显式指定<code translate="no">--format snapshot</code> 可选择快照工作流。在 Milvus 3.0 中，默认的<code translate="no">auto</code> 同样会选择快照。备份包含元数据以及位于<code translate="no">bucket-a/backup/my_backup</code> 下的导出快照包。请保留整个目录。</p>
+<p>显式指定<code translate="no">--format snapshot</code> 会选择快照工作流。在 Milvus 3.0 中，默认的<code translate="no">auto</code> 同样会选择快照。备份包含元数据以及位于<code translate="no">bucket-a/backup/my_backup</code> 下的导出快照包。请保留整个目录。</p>
 <h2 id="Restore-within-the-same-instance" class="common-anchor-header">在同一实例内恢复<button data-href="#Restore-within-the-same-instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,10 +207,10 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用相同的配置并添加后缀来恢复备份：</p>
+    </button></h2><p>使用相同的配置并添加后缀来还原备份：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-source.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>CLI 命令<code translate="no">--filter</code> <strong>会在</strong>应用<code translate="no">-s</code> 或<code translate="no">--rename</code><strong>后</strong>匹配目标名称。在此还原命令中请使用<code translate="no">coll_bak</code> ，而非<code translate="no">coll</code> 。匹配结果为空的过滤器可成功退出，且不会创建 Collection。</p>
+<p>CLI 命令 `<code translate="no">--filter</code> `<strong>会在</strong>应用 `<code translate="no">-s</code> ` 或 `<code translate="no">--rename</code>`<strong>后</strong>匹配目标名称。在此还原命令中请使用 `<code translate="no">coll_bak</code>`，而非 `<code translate="no">coll</code>`。匹配结果为空的过滤器可成功退出，且不会创建 Collections。</p>
 <p>恢复后的 Collection 使用目标实例的配置存储。Milvus 负责管理快照导入及由此产生的数据布局。</p>
 <h2 id="Verify-the-result" class="common-anchor-header">验证结果<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,7 +227,7 @@ client.flush(<span class="hljs-string">&quot;coll&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于上文提到的可选 256 个实体的示例数据，请在恢复目标上运行以下命令。将<code translate="no">localhost:19530</code> 替换为用于准备数据的同一 Milvus 端点。该命令可在不删除数据的情况下验证数据条目数量、每个标量和向量值，以及向量搜索结果：</p>
+    </button></h2><p>对于上述可选的 256 个实体的示例数据，请在恢复目标上运行以下命令。将<code translate="no">localhost:19530</code> 替换为用于准备数据的同一 Milvus 端点。该命令可在不删除数据的情况下验证数据个数、每个标量和向量值，以及向量搜索结果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -256,4 +257,4 @@ hits = client.search(<span class="hljs-string">&quot;coll_bak&quot;</span>, data
 <span class="hljs-keyword">assert</span> hits[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-number">7</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backup and restore verified&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>对于其他数据，请与您自己的备份时基线进行对比。如果恢复后的Collection中没有向量索引，请在加载前创建一个合适的向量索引。仅凭命令执行成功并不能证明预期数据已被恢复。</p>
+<p>对于其他数据，请与您自己的备份时基线进行对比。如果恢复后的Collection中没有向量索引，请在加载前创建一个合适的向量索引。仅凭命令执行成功并不能证明预期数据已成功恢复。</p>
