@@ -59,28 +59,43 @@ auto request = RunAnalyzerRequest()
 
 **RETURNS:**
 
-*Status* with *RunAnalyzerResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the RunAnalyzerResponse carries the analyzer results for the input texts.
 
-### AnalyzerResults
+- **response** (*RunAnalyzerResponse*) -
 
-This page documents `AnalyzerResults`, `AnalyzerResult`, and `AnalyzerToken`. `AnalyzerResults` is a type alias for `std::vector<AnalyzerResult>` and is returned via `Results()` on a `RunAnalyzerResponse`. Each `AnalyzerResult` corresponds to one input text string and contains the list of tokens produced by the analyzer.
+    - **Results** (*const std::vector<AnalyzerResult>&*) -
 
-```cpp
-using AnalyzerResults = std::vector<AnalyzerResult>;
-```
+        Get results of analyzer.
 
-Access the per-text results via the standard vector API:
+        - **Tokens** (*const std::vector<AnalyzerToken>&*) -
 
-```cpp
-const AnalyzerResults& results = response.Results();
-for (const auto& result : results) {
-    for (const auto& token : result.Tokens()) {
-        std::cout << token.token_ << "\n";
-    }
-}
-```
+            Get tokens of the analyzer result.
+
+            - **token_** (*std::string*) -
+
+                The token string, such as a word or sub-word.
+
+            - **start_offset_** (*int64_t*) -
+
+                Byte offset in the original text where the token starts.
+
+            - **end_offset_** (*int64_t*) -
+
+                Byte offset in the original text where the token ends.
+
+            - **position_** (*int64_t*) -
+
+                Position index of the token in the token sequence.
+
+            - **position_length_** (*int64_t*) -
+
+                Number of positions the token spans. This is usually 1.
+
+            - **hash_** (*uint32_t*) -
+
+                32-bit hash of the token string.
 
 **EXCEPTIONS:**
 

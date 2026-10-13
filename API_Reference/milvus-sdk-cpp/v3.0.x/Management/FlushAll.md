@@ -20,13 +20,29 @@ auto request = milvus::FlushAllRequest()
 
     Sets the database whose collections should be flushed.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which collections are flushed.
+
 - `WithWaitFlushedMs(int64_t wait_flushed_ms)`
 
     Sets how long to wait for all flush operations to finish. Zero means wait indefinitely.
 
+- `SetWaitFlushedMs(int64_t ms)`
+
+    Set milliseconds to wait the flush-all action done. Default value is 0, which means forever.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The flush-all timestamp is carried in the response object.
+
+- **response** (*FlushAllResponse*) -
+
+    - **FlushAllTs** (*uint64_t*) -
+
+        Get flush-all timestamp.
 
 **EXCEPTIONS:**
 

@@ -23,21 +23,41 @@ auto request = TransferReplicaRequest()
 
     Sets the database name in which the collection is created.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection.
 
 - `WithSourceGroup(const std::string& source_group)`
 
     Set the name of the source resource group.
 
+- `SetSourceGroup(const std::string& source_group)`
+
+    Set name of the source resource group.
+
 - `WithTargetGroup(const std::string& target_group)`
 
     Set the name of the target resource group.
 
+- `SetTargetGroup(const std::string& target_group)`
+
+    Set name of the target resource group.
+
 - `WithNumReplicas(int64_t num)`
 
     Set the number of replicas to transfer.
+
+- `SetNumReplicas(int64_t num)`
+
+    Set number of replicas to transfer.
 
 **RETURNS:**
 

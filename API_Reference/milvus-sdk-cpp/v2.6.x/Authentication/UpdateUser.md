@@ -20,7 +20,15 @@ auto request = UpdateUserRequest()
 
     Sets the name of the existing user whose description is updated.
 
+- `SetUserName(const std::string& user_name)`
+
+    Sets the name of the existing user whose description is updated.
+
 - `WithDescription(const std::string& description)`
+
+    Sets the new description to store for the user.
+
+- `SetDescription(const std::string& description)`
 
     Sets the new description to store for the user.
 

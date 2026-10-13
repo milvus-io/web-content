@@ -23,21 +23,41 @@ auto request = OptimizeRequest()
 
     Sets the name of the database in which the collection is created. Defaults to the client's current database when empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to be optimized; it must not be empty.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection to be optimized.
 
 - `WithTargetSize(const std::string& target_size)`
 
     Sets the target segment size for compaction, such as "512MB" or "1GB"; accepted units are B, KB, MB, GB, TB, and PB, and the value must be at least 1MB.
 
+- `SetTargetSize(const std::string& target_size)`
+
+    Set target segment size.
+
 - `WithAsync(bool async)`
 
     Sets whether to run the optimization asynchronously on a background task; defaults to false.
 
+- `SetAsync(bool async)`
+
+    Set async option.
+
 - `WithTimeoutMs(int64_t timeout_ms)`
 
     Sets the overall task timeout in milliseconds. Zero means no overall timeout.
+
+- `SetTimeoutMs(int64_t timeout_ms)`
+
+    Set overall task timeout in milliseconds. Zero means no overall timeout.
 
 **RETURNS:**
 

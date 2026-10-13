@@ -40,13 +40,25 @@ auto request = QueryIteratorRequest()
 
     Sets the target database name; the default database is used if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to query.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names to query; if empty, the entire collection is queried.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -56,6 +68,10 @@ auto request = QueryIteratorRequest()
 
     Sets the names of the fields to include in each batch of results.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Sets one more output field name to include in each batch of results.
@@ -64,9 +80,17 @@ auto request = QueryIteratorRequest()
 
     Sets the consistency level used for the query reads.
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithFilter(std::string filter)`
 
     Sets the scalar filtering expression that determines which entities the iterator pages through.
+
+- `SetFilter(std::string filter)`
+
+    Set filter expression.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
@@ -76,17 +100,33 @@ auto request = QueryIteratorRequest()
 
     Sets the template values used by the filter expression as a map; they only take effect when the filter is not empty.
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates. Read the doc for more info: https://milvus.io/docs/filtering-templating.md#Filter-Templating
+
 - `WithLimit(int64_t limit)`
 
     Sets the limit value, which is only available when the filter expression is empty. Note: this value is stored in the ExtraParams.
+
+- `SetLimit(int64_t limit)`
+
+    Set limit value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
     Sets the offset value, which is only available when the filter expression is empty. Note: this value is stored in the ExtraParams.
 
+- `SetOffset(int64_t offset)`
+
+    Set offset value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
+
 - `WithIgnoreGrowing(bool ignore_growing)`
 
     Sets whether to ignore data in growing segments during the query. Note: this value is stored in the ExtraParams.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing segments. Note: this value is stored in the ExtraParams.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
@@ -96,9 +136,17 @@ auto request = QueryIteratorRequest()
 
     Sets the timezone, which takes effect for Timestamptz fields. Note: this value is stored in the ExtraParams.
 
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
 
     Sets the flag controlling the internal retrieve strategy. Defaults to `true` in v2.6.7 or later; in earlier versions it defaults to `false`.
+
+- `SetReduceStopForBest(bool reduce_stop_for_best)`
+
+    Set the flag of internal retrieve strategy.
 
 **RETURNS:**
 

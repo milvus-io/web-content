@@ -20,9 +20,17 @@ auto request = DropAliasRequest()
 
     Sets the name of the database that contains the alias. If left empty, the database of the current connection is used. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collection is created.
+
 - `WithAlias(const std::string& alias)`
 
     Sets the name of the alias to drop.
+
+- `SetAlias(const std::string& alias)`
+
+    Set name of the alias.
 
 **RETURNS:**
 

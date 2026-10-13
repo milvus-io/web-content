@@ -21,13 +21,25 @@ auto request = TransferNodeRequest()
 
     Sets the name of the source resource group.
 
+- `SetSourceGroup(const std::string& source_group)`
+
+    Set name of the source resource group.
+
 - `WithTargetGroup(const std::string& target_group)`
 
     Sets the name of the target resource group.
 
+- `SetTargetGroup(const std::string& target_group)`
+
+    Set name of the target resource group.
+
 - `WithNumNodes(int64_t num_nodes)`
 
     Sets the number of nodes to transfer.
+
+- `SetNumNodes(int64_t num_nodes)`
+
+    Set number of nodes to transfer.
 
 **RETURNS:**
 

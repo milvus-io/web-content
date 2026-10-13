@@ -18,11 +18,11 @@ auto request = RevokeRoleRequest()
 
 - `WithUserName(const std::string& name)`
 
-    Sets the name of the target use of this operation.
+    Sets the name of the target user of this operation.
 
 - `WithRoleName(const std::string& name)`
 
-    Sets the name of the role to be granted.
+    Sets the name of the role to be revoked.
 
 **RETURNS:**
 

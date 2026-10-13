@@ -21,13 +21,25 @@ auto request = DropPartitionRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionName(const std::string& partition_name)`
 
     Sets the name of the partition.
+
+- `SetPartitionName(const std::string& partition_name)`
+
+    Set name of the partition.
 
 **RETURNS:**
 

@@ -22,7 +22,15 @@ auto request = DumpMessagesRequest()
 
     Sets the name of the physical channel (pchannel) whose messages are to be dumped.
 
+- `SetPChannel(const std::string& pchannel)`
+
+    Sets the name of the physical channel (pchannel) whose messages are to be dumped.
+
 - `WithStartMessageID(ReplicateMessageID&& start_message_id)`
+
+    Sets the replicate message ID (message ID plus WAL name) from which dumping begins; an empty WAL name leaves the WAL unspecified on the request. Moves the given ReplicateMessageID.
+
+- `SetStartMessageID(ReplicateMessageID&& start_message_id)`
 
     Sets the replicate message ID (message ID plus WAL name) from which dumping begins; an empty WAL name leaves the WAL unspecified on the request. Moves the given ReplicateMessageID.
 
@@ -30,7 +38,15 @@ auto request = DumpMessagesRequest()
 
     Sets the start timetick of the range of messages to dump.
 
+- `SetStartTimeTick(uint64_t start_timetick)`
+
+    Sets the start timetick of the range of messages to dump.
+
 - `WithEndTimeTick(uint64_t end_timetick)`
+
+    Sets the end timetick of the range of messages to dump.
+
+- `SetEndTimeTick(uint64_t end_timetick)`
 
     Sets the end timetick of the range of messages to dump.
 

@@ -20,13 +20,29 @@ auto request = milvus::GetFlushAllStateRequest()
 
     Sets the database used for the original flush-all operation.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which collections are flushed.
+
 - `WithFlushAllTs(uint64_t flush_all_ts)`
 
     Sets the timestamp returned by `FlushAll()`.
 
+- `SetFlushAllTs(uint64_t flush_all_ts)`
+
+    Set flush-all timestamp returned by FlushAll().
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. On success, the GetFlushAllStateResponse indicates whether the flush-all action has finished.
+
+- **response** (*GetFlushAllStateResponse*) -
+
+    - **Flushed** (*bool*) -
+
+        Whether the flush-all action has finished.
 
 **EXCEPTIONS:**
 

@@ -24,13 +24,25 @@ auto request = CreateIndexRequest()
 
     Sets the target database name; the default database is used when it is left empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose fields are to be indexed.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
     Sets the list of index descriptions (milvus::IndexDesc) to be created; each description carries the field name, index name, index type, and metric type.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    Set indexes to be created.
 
 - `AddIndex(IndexDesc&& index)`
 
@@ -40,9 +52,17 @@ auto request = CreateIndexRequest()
 
     Sets the sync mode. When true (the default), the call waits until the indexes are ready; when false, it returns immediately regardless of index readiness. Optional.
 
+- `SetSync(bool sync)`
+
+    Set sync mode. Default value is true. True: wait the indexes are ready.
+
 - `WithTimeoutMs(int64_t timeout_ms)`
 
     Sets the timeout in milliseconds for waiting until the indexes are ready; it only applies in sync mode and defaults to 60000 ms. With zero, CreateIndex() polls DescribeIndex() until the index is fully built; with a positive value, it stops polling after the given span and returns a timeout status. Optional.
+
+- `SetTimeoutMs(int64_t timeout_ms)`
+
+    Set timeout in milliseconds. Default value is 60000ms. Only work when Sync() is true. If the TimeoutMs is zero, the CreateIndex() will call DescribeIndex() to loading state,
 
 **RETURNS:**
 

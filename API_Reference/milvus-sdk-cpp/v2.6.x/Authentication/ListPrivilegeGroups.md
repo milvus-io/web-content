@@ -8,9 +8,23 @@ Status ListPrivilegeGroups(const ListPrivilegeGroupsRequest& request, ListPrivil
 
 **RETURNS:**
 
-*Status* with *ListPrivilegeGroupsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the ListPrivilegeGroupsResponse carries the privilege group information.
+
+- **response** (*ListPrivilegeGroupsResponse*) -
+
+    - **Groups** (*const std::vector<PrivilegeGroupInfo>&*) -
+
+        Get informations of privilege groups.
+
+        - **Name** (*const std::string&*) -
+
+            Name of the group.
+
+        - **Privileges** (*const std::vector<std::string>&*) -
+
+            Privileges of the group.
 
 **EXCEPTIONS:**
 

@@ -24,13 +24,25 @@ auto request = CreateIndexRequest()
 
     Sets the name of the target database. The default database is used if the name is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose fields are to be indexed.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
     Sets the indexes to be created. Accepts a std::vector<IndexDesc> rvalue that is moved into the request.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    Set indexes to be created.
 
 - `AddIndex(IndexDesc&& index)`
 
@@ -40,9 +52,17 @@ auto request = CreateIndexRequest()
 
     Sets whether the client waits until the indexes are fully built. Defaults to true; if false, the call returns immediately regardless of index build progress.
 
+- `SetSync(bool sync)`
+
+    Set sync mode. Default value is true. True: wait the indexes are ready. False: return immediately no matter the indexes are ready or not.
+
 - `WithTimeoutMs(int64_t timeout_ms)`
 
     Sets the timeout in milliseconds for waiting on index building. Defaults to 60000 ms and only takes effect in sync mode. A value of zero polls DescribeIndex() until the indexes are fully built; a positive value makes CreateIndex() return a timeout status once the time span elapses.
+
+- `SetTimeoutMs(int64_t timeout_ms)`
+
+    Set timeout in milliseconds. Default value is 60000ms. Only work when Sync() is true. If the TimeoutMs is zero, the CreateIndex() will call DescribeIndex() to loading state, until the index is fully built. If the TimeoutMs is larger than zero, the CreateIndex() will break the loop after a certain of time span and return a status saying the process is timeout.
 
 **RETURNS:**
 

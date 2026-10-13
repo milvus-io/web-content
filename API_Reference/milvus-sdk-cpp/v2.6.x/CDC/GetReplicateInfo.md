@@ -20,7 +20,15 @@ auto request = GetReplicateInfoRequest()
 
     Sets the ID of the source Milvus cluster whose replication information is queried.
 
+- `SetSourceClusterID(const std::string& source_cluster_id)`
+
+    Sets the ID of the source Milvus cluster whose replication information is queried.
+
 - `WithTargetPChannel(const std::string& target_pchannel)`
+
+    Sets the name of the target physical channel (pchannel) to fetch replication information for.
+
+- `SetTargetPChannel(const std::string& target_pchannel)`
 
     Sets the name of the target physical channel (pchannel) to fetch replication information for.
 

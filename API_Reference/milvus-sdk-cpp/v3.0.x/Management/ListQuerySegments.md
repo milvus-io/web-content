@@ -26,35 +26,71 @@ auto request = ListQuerySegmentsRequest()
 
 **RETURNS:**
 
-*Status* with *ListQuerySegmentsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The loaded segment information is carried in the response object.
 
-The response's `Segments()` list contains `QuerySegmentInfo` values. `QuerySegmentInfo` inherits the segment metadata methods from `SegmentInfo` and also exposes memory size for the loaded segment.
+- **response** (*ListQuerySegmentsResponse*) -
 
-**SegmentInfo methods:**
+    - **Result** (*const std::vector<QuerySegmentInfo>&*) -
 
-- `const std::string& CollectionName() const`
+        Get information of segments.
 
-    Returns the collection name.
+        - **CollectionID** (*int64_t*) -
 
-- `SegmentLevel Level() const`
+            Collection ID which the segment belongs to.
 
-    Returns the segment level.
+        - **CollectionName** (*const std::string&*) -
 
-- `int64_t StorageVersion() const`
+            Collection name which the segment belongs to.
 
-    Returns the storage version.
+        - **IndexID** (*int64_t*) -
 
-- `bool IsSorted() const`
+            Index ID of the segment.
 
-    Returns whether the segment is sorted.
+        - **IndexName** (*std::string*) -
 
-**QuerySegmentInfo methods:**
+            Index name of the segment.
 
-- `int64_t MemSize() const`
+        - **IsSorted** (*bool*) -
 
-    Returns the memory size of the query segment.
+            Whether the segment is sorted.
+
+        - **Level** (*SegmentLevel*) -
+
+            Level of the segment.
+
+        - **MemSize** (*int64_t*) -
+
+            Memory size of the segment.
+
+        - **NodeID** (*int64_t*) -
+
+            Node ID of the segment.
+
+        - **NodeIDs** (*const std::vector<int64_t>&*) -
+
+            Node ID list of the segment.
+
+        - **PartitionID** (*int64_t*) -
+
+            Partition ID which the segment belongs to.
+
+        - **RowCount** (*int64_t*) -
+
+            Row count of the segment.
+
+        - **SegmentID** (*int64_t*) -
+
+            ID of the segment.
+
+        - **State** (*SegmentState*) -
+
+            Current state of the segment.
+
+        - **StorageVersion** (*int64_t*) -
+
+            Storage version of the segment.
 
 **EXCEPTIONS:**
 
@@ -82,5 +118,5 @@ status = client->ListQuerySegments(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Segment count: " << response.Segments().size() << std::endl;
+std::cout << "Segment count: " << response.Result().size() << std::endl;
 ```

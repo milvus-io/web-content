@@ -20,9 +20,17 @@ auto request = GetReplicateInfoRequest()
 
     Sets the identifier of the source cluster to report replication progress for.
 
+- `SetSourceClusterID(const std::string& source_cluster_id)`
+
+    Set the source cluster identifier.
+
 - `WithTargetPChannel(const std::string& target_pchannel)`
 
     Sets the name of the target physical channel to report replication progress for.
+
+- `SetTargetPChannel(const std::string& target_pchannel)`
+
+    Set the target Pulsar channel name.
 
 **RETURNS:**
 

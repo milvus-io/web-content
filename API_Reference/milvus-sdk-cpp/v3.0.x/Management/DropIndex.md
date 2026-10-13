@@ -22,13 +22,25 @@ auto request = DropIndexRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithFieldName(const std::string& field_name)`
 
     Sets the name of the field. 
+
+- `SetFieldName(const std::string& field_name)`
+
+    Set name of the field. Note: if both field_name and index_name are specified, it will use index name firstly.
 
 - `WithIndexName(const std::string& index_name)`
 
@@ -39,6 +51,10 @@ auto request = DropIndexRequest()
     If both the field name and the index name are specified, the index name will be used; otherwise, it falls back to the field name.
 
     </div>
+
+- `SetIndexName(const std::string& index_name)`
+
+    Set name of the index. Note: if both field_name and index_name are specified, it will use index name firstly.
 
 **RETURNS:**
 

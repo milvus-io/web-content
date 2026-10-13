@@ -28,9 +28,17 @@ auto request = LoadCollectionRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the target collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithSync(bool sync)`
 
@@ -40,15 +48,27 @@ auto request = LoadCollectionRequest()
 
     - **False**: return immediately no matter the collection is fully loaded or not.
 
+- `SetSync(bool sync)`
+
+    Set sync mode. Default value is true. True: wait the collection to be fully loaded. False: return immediately no matter the collection is fully loaded or not.
+
 - `WithReplicaNum(int64_t replica_num)`
 
     Sets the number of replicas.
+
+- `SetReplicaNum(int64_t replica_num)`
+
+    Set number of replicas.
 
 - `WithTimeoutMs(int64_t timeout_ms)`
 
     Sets the timeout in milliseconds. The default value is 60000 ms. This parameter only works when this operation works in sync mode. 
 
-    If `WaitFlushedMs` is set to 0, this operation repeatedly calls `GetLoadingProgress()` to check the loading state until the collection is fully loaded into memory. If `WaitFlushedMs` is greater than 0, this operation will break the loop after a specified period of time and return a status indicating a timeout.
+    If `TimeoutMs` is set to 0, this operation repeatedly calls `GetLoadingProgress()` to check the loading state until the collection is fully loaded into memory. If `TimeoutMs` is greater than 0, this operation will break the loop after a specified period of time and return a status indicating a timeout.
+
+- `SetTimeoutMs(int64_t timeout_ms)`
+
+    Set timeout in milliseconds. Default value is 60000ms. Only work when Sync() is true. If the WaitFlushedMs is zero, the LoadCollection() will call GetLoadingProgress() to loading state, until the collection is fully loaded into memory. If the WaitFlushedMs is larger than zero, the LoadCollection() will break the loop after a certain of time span and return a status saying the process is timeout.
 
 - `WithRefresh(bool refresh)`
 
@@ -58,9 +78,17 @@ auto request = LoadCollectionRequest()
 
     - **False**: Ignores newly generated segments from the bulk import interface.
 
+- `SetRefresh(bool refresh)`
+
+    Set refresh option. Take effect when there are new segments generaged by bulkimport interface. True: load new segments generaged by bulkimport interface. False: ignore new segments generaged by bulkimport interface.
+
 - `WithLoadFields(const std::set<std::string>& load_fields)`
 
     Sets the load fields.
+
+- `SetLoadFields(const std::set<std::string>& load_fields)`
+
+    Set load fields.
 
 - `AddLoadField(const std::string& field_name)`
 
@@ -70,13 +98,25 @@ auto request = LoadCollectionRequest()
 
     Whether to skip loading the dynamic field. The default value is **False**.
 
+- `SetSkipDynamicField(bool skip_dynamic_field)`
+
+    Set skip dynamic field option.
+
 - `WithTargetResourceGroups(const std::set<std::string>& target_resource_groups)`
 
     Sets the target resource groups.
 
+- `SetTargetResourceGroups(const std::set<std::string>& target_resource_groups)`
+
+    Set target resource groups.
+
 - `WithLoadPriority(const std::string& load_priority)`
 
     Sets the load priority of the collection. Set `"low"` to select low priority; any other value (including `"high"`) defaults to high priority.
+
+- `SetLoadPriority(const std::string& load_priority)`
+
+    Set load priority. The load priority of the collection. Set "low" to select low priority; any other value (including "high") defaults to high priority.
 
 **RETURNS:**
 

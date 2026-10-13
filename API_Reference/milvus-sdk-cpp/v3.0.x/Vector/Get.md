@@ -24,13 +24,25 @@ auto request = GetRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
-    Sets the names of the partitions. If it is empty, the default partition applies.
+    Sets the names of the partitions. If partition names are empty, the entire collection is queried.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -40,6 +52,10 @@ auto request = GetRequest()
 
     Sets the output field names.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Adds an output field.
@@ -48,9 +64,25 @@ auto request = GetRequest()
 
     Sets the consistency level. 
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
-    Sets an ID array.
+    Sets an integer ID array.
+
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set id array. Note: this method will reset the id array.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Sets a string ID array.
+
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set id array. Note: this method will reset the id array.
 
 **RETURNS:**
 
@@ -135,7 +167,7 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
 
 - `int64_t Cost() const`
 
-    Returns the cost of the operation in milliseconds.
+    Returns the execution cost of the operation in cost units, -1 when not reported.
 
 - `int64_t ScannedRemoteBytes() const`
 

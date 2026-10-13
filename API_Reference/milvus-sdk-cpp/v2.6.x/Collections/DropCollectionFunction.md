@@ -21,13 +21,25 @@ auto request = DropCollectionFunctionRequest()
 
     Sets the target database name; if left empty, the database of the current connection is used. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose function is to be dropped.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithFunctionName(std::string function_name)`
 
     Sets the name of the function to remove from the collection's schema; an empty name is rejected locally with INVALID_ARGUMENT.
+
+- `SetFunctionName(std::string function_name)`
+
+    Set the name of the function to drop.
 
 **RETURNS:**
 

@@ -23,17 +23,33 @@ auto request = RefreshLoadRequest()
 
     Sets the collection name to refresh.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithDatabaseName(const std::string& db_name)`
 
     Sets the target database. If omitted, the default database is used.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
 
 - `WithSync(bool sync)`
 
     Controls whether the call blocks until refresh completes. Default is `true`.
 
+- `SetSync(bool sync)`
+
+    Set sync mode. Default value is true. True: wait the collection refresh to complete.
+
 - `WithTimeoutMs(int64_t timeout_ms)`
 
     Sets timeout in milliseconds for synchronous refresh. Default is `60000`.
+
+- `SetTimeoutMs(int64_t timeout_ms)`
+
+    Set timeout in milliseconds. Default value is 60000ms. Only works when Sync() is true.
 
 **RETURNS:**
 

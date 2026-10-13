@@ -70,6 +70,7 @@ auto request = SearchRequest()
     .WithStrictGroupSize(strict_group_size)
     .WithRadius(radius)
     .WithRangeFilter(filter)
+    .SetRange(range_filter, radius)
     .WithRerank(ranker)
     .WithTimezone(timezone)
     .WithHighlighter(highlighter);
@@ -81,13 +82,25 @@ auto request = SearchRequest()
 
     Sets the target database name. The default database is used if the name is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to search.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the names of partitions to search. If the set is empty, the entire collection is searched. Optional.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -97,6 +110,10 @@ auto request = SearchRequest()
 
     Sets the names of the fields to return in the search results. Optional.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Adds a field name to return in the search results. Optional.
@@ -104,6 +121,10 @@ auto request = SearchRequest()
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
     Sets the consistency level of the search, such as ConsistencyLevel::STRONG or ConsistencyLevel::BOUNDED. Optional.
+
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
@@ -255,13 +276,25 @@ auto request = SearchRequest()
 
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
-    Sets the integer or string primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+    Sets the integer primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys whose vectors are used as search targets. Note: IDs and target vectors cannot be specified at the same time.
 
 - `WithIDs(std::vector<std::string>&& id_array)`
 
-    Sets the integer or string primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+    Sets the string primary keys whose stored vectors are used as search targets. IDs and target vectors cannot be specified at the same time.
+
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys whose vectors are used as search targets. Note: IDs and target vectors cannot be specified at the same time.
 
 - `WithMetricType(::milvus::MetricType metric_type)`
+
+    Sets the metric type of the search, such as MetricType::L2, MetricType::IP, or MetricType::COSINE. Optional.
+
+- `SetMetricType(::milvus::MetricType metric_type)`
 
     Sets the metric type of the search, such as MetricType::L2, MetricType::IP, or MetricType::COSINE. Optional.
 
@@ -273,61 +306,125 @@ auto request = SearchRequest()
 
     Sets the search limit (topk), the maximum number of results returned per query target. The value is stored in the extra parameters. Optional.
 
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk).
+
 - `WithFilter(std::string filter)`
 
     Sets the filter expression used to constrain the search scope. Optional.
+
+- `SetFilter(std::string filter)`
+
+    Set filter expression.
 
 - `WithAnnsField(const std::string& ann_field)`
 
     Sets the target vector field of the ann search. Needed when the collection has multiple vector fields; the server infers the field when the collection has only one. Optional.
 
+- `SetAnnsField(const std::string& ann_field)`
+
+    Set target field of ann search.
+
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
     Sets the filter templates as a key-value map. Templates take effect only when the filter expression is not empty. Optional.
+
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates.
 
 - `WithOffset(int64_t offset)`
 
     Sets the number of results to skip. The value is stored in the extra parameters. Optional.
 
+- `SetOffset(int64_t offset)`
+
+    Set offset value. Note: this value is stored in the ExtraParams.
+
 - `WithRoundDecimal(int64_t round_decimal)`
 
     Sets the number of decimal places the returned distances are rounded to. Optional.
+
+- `SetRoundDecimal(int64_t round_decimal)`
+
+    Set round decimal value.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
     Sets whether to ignore growing segments during the search. Optional.
 
+- `SetIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing flag.
+
 - `WithGroupByField(const std::string& field_name)`
 
     Sets the scalar field whose values group the search results. Optional.
+
+- `SetGroupByField(const std::string& field_name)`
+
+    Set group by field value.
 
 - `WithGroupSize(int64_t group_size)`
 
     Sets the group size value used with WithGroupByField. Optional.
 
+- `SetGroupSize(int64_t group_size)`
+
+    Set group size value.
+
 - `WithStrictGroupSize(bool strict_group_size)`
 
     Sets the strict group size flag used with WithGroupByField. Optional.
+
+- `SetStrictGroupSize(bool strict_group_size)`
+
+    Set strict group size flag.
 
 - `WithRadius(double radius)`
 
     Sets the range radius, the outer distance boundary of a range search. The value is stored in the extra parameters. Optional.
 
+- `SetRadius(double value)`
+
+    Set range radius. Note: this value is stored in the ExtraParams.
+
 - `WithRangeFilter(double filter)`
 
     Sets the range filter, the inner distance boundary that together with the radius defines the distance range a match must fall within. The value is stored in the extra parameters. Optional.
+
+- `SetRangeFilter(double value)`
+
+    Set range filter. Note: this value is stored in the ExtraParams.
+
+- `SetRange(double range_filter, double radius)`
+
+    Sets the range filter and radius together. While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches. The value is stored in the extra parameters.
 
 - `WithRerank(const FunctionScorePtr& ranker)`
 
     Sets the reranker of the search. Multiple rerank functions such as Boost, Decay, and Model are supported. Optional.
 
+- `SetRerank(const FunctionScorePtr& ranker)`
+
+    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc.
+
 - `WithTimezone(const std::string& timezone)`
 
     Sets the timezone, which takes effect for Timestamptz fields. Optional.
 
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
     Sets the highlighter used to highlight matched text in the results. Optional.
+
+- `SetHighlighter(const HighlighterPtr& highlighter)`
+
+    Set highlighter.
 
 <table>
    <tr>

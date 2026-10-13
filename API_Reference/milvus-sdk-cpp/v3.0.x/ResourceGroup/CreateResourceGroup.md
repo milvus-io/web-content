@@ -26,9 +26,17 @@ auto request = CreateResourceGroupRequest()
 
     Sets the name of the resource group.
 
+- `SetName(const std::string& name)`
+
+    Set name of the resource group.
+
 - `WithConfig(ResourceGroupConfig&& config)`
 
     Sets resource group configuration.
+
+- `SetConfig(ResourceGroupConfig&& config)`
+
+    Set resource group config.
 
 **RETURNS:**
 

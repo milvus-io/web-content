@@ -22,17 +22,33 @@ auto request = RenameCollectionRequest()
 
     Sets the name of the database that currently contains the collection (the source database, sent as the RPC db_name); the default database is used if left empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the current name of the collection to rename (the old name, sent as the RPC oldname).
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithNewCollectionName(const std::string& collection_name)`
 
     Sets the name the collection will have after the operation (the new name, sent as the RPC newname).
 
+- `SetNewCollectionName(const std::string& collection_name)`
+
+    Set new name of the collection.
+
 - `WithTargetDatabaseName(const std::string& db_name)`
 
     Sets the database to move the collection into; when left empty, the collection is renamed in place within the source database. Optional.
+
+- `SetTargetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
 
 **RETURNS:**
 

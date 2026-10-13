@@ -23,21 +23,41 @@ auto request = CompactRequest()
 
     Sets the name of the database that contains the collection to compact.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to be compacted.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection to be compacted.
 
 - `WithTargetSize(int64_t target_size)`
 
     Sets the target segment size in MB; zero means the server default is used.
 
+- `SetTargetSize(int64_t target_size)`
+
+    Set target segment size in MB. Zero means use server default.
+
 - `WithClusteringCompaction(bool clustering_compaction)`
+
+    Sets the clustering compaction flag. When true, clustering compaction is performed and an error is reported if the collection has no clustering key; when false, normal compaction is performed.
+
+- `SetClusteringCompaction(bool clustering_compaction)`
 
     Sets the clustering compaction flag. When true, clustering compaction is performed and an error is reported if the collection has no clustering key; when false, normal compaction is performed.
 
 - `WithL0Compaction(bool l0_compaction)`
 
     Sets the L0 compaction flag. When true, L0 compaction is performed, which merges L0 segments into other segments; when false, normal compaction is performed.
+
+- `SetL0Compaction(bool l0_compaction)`
+
+    Set L0 compaction flag. True: do L0 compaction, which merges L0 segments into other segments.
 
 **RETURNS:**
 

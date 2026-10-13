@@ -20,9 +20,17 @@ auto request = CreateDatabaseRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets properties of this database.
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set properties of this database.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 

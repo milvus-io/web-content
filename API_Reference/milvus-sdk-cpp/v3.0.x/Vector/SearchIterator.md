@@ -8,7 +8,7 @@ Status SearchIterator(SearchIteratorRequest& request, SearchIteratorPtr& respons
 
 <div class="alert note">
 
-Do not disconnect the MilvusClientV2 when the iterator is in use. The order of the returned entities cannot be guaranteed. Read [this document](https://milvus.io/docs/with-iterators.md)[this document](https://docs.zilliz.com/docs/with-iterators) for more.
+Do not disconnect the MilvusClientV2 when the iterator is in use. The order of the returned entities cannot be guaranteed. Read [this document](https://milvus.io/docs/with-iterators.md) for more.
 
 </div>
 
@@ -55,7 +55,10 @@ auto request = SearchIteratorRequest()
     .WithStrictGroupSize(strict_group_size)
     .WithRadius(radius)
     .WithRangeFilter(filter)
+    .SetRange(range_filter, radius)
     .WithRerank(ranker)
+    .WithFunctionChains(function_chains)
+    .AddFunctionChain(function_chain)
     .WithTimezone(timezone)
     .WithHighlighter(highlighter)
     .WithSearchAggregation(aggregation)
@@ -69,19 +72,35 @@ auto request = SearchIteratorRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Set the partition names. If partition names are empty, will query in the entire collection.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
     Add a partition name.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
 
     Set the output field names.
 
@@ -92,6 +111,10 @@ auto request = SearchIteratorRequest()
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
     Set the consistency level. [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
+
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
 
 - `AddBinaryVector(const std::string& vector)`
 
@@ -161,6 +184,10 @@ auto request = SearchIteratorRequest()
 
     Specifies the metric type.
 
+- `SetMetricType(::milvus::MetricType metric_type)`
+
+    Specifies the metric type.
+
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
     Add extra parameters such as "nlist", "ef".
@@ -173,11 +200,23 @@ auto request = SearchIteratorRequest()
 
     Set search limit(topk). Note: this value is stored in the ExtraParams.
 
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk).
+
 - `WithFilter(std::string filter)`
 
     Set filter expression.
 
+- `SetFilter(std::string filter)`
+
+    Set filter expression.
+
 - `WithAnnsField(const std::string& ann_field)`
+
+    Set target field of ann search.
+
+- `SetAnnsField(const std::string& ann_field)`
 
     Set target field of ann search.
 
@@ -189,7 +228,15 @@ auto request = SearchIteratorRequest()
 
     Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates.
+
 - `WithOffset(int64_t offset)`
+
+    Set offset value. Note: this value is stored in the ExtraParams.
+
+- `SetOffset(int64_t offset)`
 
     Set offset value. Note: this value is stored in the ExtraParams.
 
@@ -197,7 +244,15 @@ auto request = SearchIteratorRequest()
 
     Set round decimal value.
 
+- `SetRoundDecimal(int64_t round_decimal)`
+
+    Set round decimal value.
+
 - `WithIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing flag.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
 
     Set ignore growing flag.
 
@@ -205,7 +260,15 @@ auto request = SearchIteratorRequest()
 
     Set group by field value.
 
+- `SetGroupByField(const std::string& field_name)`
+
+    Set group by field value.
+
 - `WithGroupSize(int64_t group_size)`
+
+    Set group size value.
+
+- `SetGroupSize(int64_t group_size)`
 
     Set group size value.
 
@@ -213,7 +276,15 @@ auto request = SearchIteratorRequest()
 
     Set strict group size flag.
 
+- `SetStrictGroupSize(bool strict_group_size)`
+
+    Set strict group size flag.
+
 - `WithRadius(double radius)`
+
+    Set range radius. Note: this value is stored in the ExtraParams.
+
+- `SetRadius(double value)`
 
     Set range radius. Note: this value is stored in the ExtraParams.
 
@@ -221,15 +292,47 @@ auto request = SearchIteratorRequest()
 
     Set range filter. Note: this value is stored in the ExtraParams.
 
+- `SetRangeFilter(double value)`
+
+    Set range filter. Note: this value is stored in the ExtraParams.
+
+- `SetRange(double range_filter, double radius)`
+
+    Set the range filter and radius together. While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches. Note: this value is stored in the ExtraParams.
+
 - `WithRerank(const FunctionScorePtr& ranker)`
 
     Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read [Boost Ranker](https://milvus.io/docs/boost-ranker.md) and its sibling pages.
+
+- `SetRerank(const FunctionScorePtr& ranker)`
+
+    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc. Read the doc for more info: https://milvus.io/docs/boost-ranker.md
+
+- `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Set the function chains used to post-process search results. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+
+- `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Set function chains. Function chains and rerank cannot be used together.
+
+- `AddFunctionChain(const FunctionChain& function_chain)`
+
+    Add a function chain used to post-process search results. Function chains and rerank cannot be used together.
 
 - `WithTimezone(const std::string& timezone)`
 
     Set timezone, takes effect for Timestamptz field. Read [Temporarily set a timezone](https://milvus.io/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search) for a search for more..
 
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+
 - `WithHighlighter(const HighlighterPtr& highlighter)`
+
+    Set highlighter.
+
+- `SetHighlighter(const HighlighterPtr& highlighter)`
 
     Set highlighter.
 
@@ -237,7 +340,15 @@ auto request = SearchIteratorRequest()
 
     Set search aggregation settings.
 
+- `SetSearchAggregation(const SearchAggregationPtr& aggregation)`
+
+    Set search aggregation settings.
+
 - `WithOrderByFields(std::vector<OrderByField>&& order_by_fields)`
+
+    Set fields used to order search results.
+
+- `SetOrderByFields(std::vector<OrderByField>&& order_by_fields)`
 
     Set fields used to order search results.
 
@@ -530,7 +641,7 @@ using SearchIterator    = Iterator<SingleResult>;
 using SearchIteratorPtr = std::shared_ptr<SearchIterator>;
 ```
 
-Obtained via `MilvusClientV2::SearchIterator(IteratorArguments, SearchIteratorPtr&)`.
+Obtained via `MilvusClientV2::SearchIterator(SearchIteratorRequest&, SearchIteratorPtr&)`.
 
 **ERROR HANDLING:**
 

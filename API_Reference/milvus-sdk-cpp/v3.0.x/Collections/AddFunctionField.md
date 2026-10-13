@@ -23,21 +23,41 @@ auto request = AddFunctionFieldRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithField(FieldSchema&& field_schema)`
 
     Set the schema of the output field produced by the function.
 
+- `SetField(FieldSchema&& field_schema)`
+
+    Set the function output field schema. BM25 requires SPARSE_FLOAT_VECTOR and MinHash requires BINARY_VECTOR.
+
 - `WithFunction(const FunctionPtr& function)`
 
     Set the function that backs the field (for example, a BM25 tokenizer).
 
+- `SetFunction(const FunctionPtr& function)`
+
+    Set the function to be added. AddFunctionField currently supports BM25 and MinHash functions.
+
 - `WithIndex(IndexDesc&& index)`
 
     Set the index descriptor bound to the new field.
+
+- `SetIndex(IndexDesc&& index)`
+
+    Set the index bound to the function output field. The bound index is required and must use an explicit index type.
 
 **RETURNS:**
 

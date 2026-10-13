@@ -23,17 +23,33 @@ auto request = DropCollectionFieldPropertiesRequest()
 
     Sets the target database name; the default database is used if it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection that owns the field.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithFieldName(const std::string& field_name)`
 
     Sets the name of the field whose properties will be dropped.
 
+- `SetFieldName(const std::string& field_name)`
+
+    Set name of the field.
+
 - `WithPropertyKeys(std::set<std::string>&& keys)`
 
     Sets the whole set of property keys to remove from the field, replacing any keys added previously.
+
+- `SetPropertyKeys(std::set<std::string>&& keys)`
+
+    Set deleted keys of this database.
 
 - `AddPropertyKey(const std::string& key)`
 

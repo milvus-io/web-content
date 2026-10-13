@@ -24,9 +24,17 @@ auto request = CompactRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection to be compacted.
 
 - `WithClusteringCompaction(bool clustering_compaction)`
 
@@ -36,23 +44,49 @@ auto request = CompactRequest()
 
     - **False**: Conducts normal compaction.
 
+- `SetClusteringCompaction(bool clustering_compaction)`
+
+    Set the clustering compaction flag.
+
 - `WithTargetSize(int64_t target_size)`
 
-    Sets the target segment size in bytes for compaction planning. Use values greater than 0 to guide output segment sizing.
+    Sets the target segment size for compaction planning, expressed in the unit set by `WithTargetSizeUnit()`. Use values greater than 0 to guide output segment sizing.
+
+- `SetTargetSize(int64_t target_size)`
+
+    Set target segment size, expressed in the unit returned by TargetSizeUnit(). Zero means use server default.
 
 - `WithTargetSizeUnit(const std::string& unit)`
 
     Sets the unit of the target segment size. Supported values: `"b"`, `"kb"`, `"mb"`, `"gb"`, `"tb"`, `"pb"`. Default is `"mb"`.
 
+- `SetTargetSizeUnit(const std::string& unit)`
+
+    Set unit of the target segment size. Supported values: "b", "kb", "mb", "gb", "tb", "pb". Default is "mb".
+
 - `WithIsL0(bool is_l0)`
 
     Sets the L0 compaction flag. When `true`, compacts L0 segments only; when `false`, performs normal compaction.
 
+- `SetIsL0(bool is_l0)`
+
+    Set L0 compaction flag. True: compact L0 segments only. False: normal compaction.
+
 **RETURNS:**
 
-*Status* with *CompactResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The compaction ID and plan count are carried in the response object.
+
+- **response** (*CompactResponse*) -
+
+    - **CompactionID** (*int64_t*) -
+
+        Get ID of the compaction action.
+
+    - **CompactionPlanCount** (*int64_t*) -
+
+        Get number of plans of the compaction.
 
 **EXCEPTIONS:**
 

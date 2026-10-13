@@ -20,9 +20,17 @@ auto request = DescribeRoleRequest()
 
     Sets the name of the role to describe.
 
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
+
 - `WithDatabaseName(const std::string& db_name)`
 
     Sets the name of the database in which the role is scoped. Optional.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name which the role is assigned.
 
 **RETURNS:**
 

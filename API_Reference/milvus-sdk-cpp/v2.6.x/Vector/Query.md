@@ -35,13 +35,25 @@ auto request = QueryRequest()
 
     Sets the target database name to query; the client's default database is used if it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to query, which cannot be empty.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names to constrain the query scope; if empty, the entire collection is queried. Optional.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -51,6 +63,10 @@ auto request = QueryRequest()
 
     Sets the names of the fields to return in the query results. Optional.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Adds a field name to return in the query results. Optional.
@@ -59,17 +75,33 @@ auto request = QueryRequest()
 
     Sets the consistency level used for this query; if unset, the collection's default level applies. Optional.
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
     Sets the primary keys to query, accepting either integer or string IDs. Note: IDs and filter cannot be set at the same time. Optional.
+
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer IDs to query. Note: IDs and filter cannot be set at the same time.
 
 - `WithIDs(std::vector<std::string>&& id_array)`
 
     Sets the primary keys to query, accepting either integer or string IDs. Note: IDs and filter cannot be set at the same time. Optional.
 
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set string IDs to query. Note: IDs and filter cannot be set at the same time.
+
 - `WithFilter(std::string filter)`
 
     Sets the filter expression that matched entities must satisfy.
+
+- `SetFilter(std::string filter)`
+
+    Set filter expression.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
@@ -79,7 +111,15 @@ auto request = QueryRequest()
 
     Sets the filter template values used to substitute placeholders in the filter expression; only take effect when the filter is not empty. Optional.
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates. Read the doc for more info: https://milvus.io/docs/filtering-templating.md#Filter-Templating
+
 - `WithLimit(int64_t limit)`
+
+    Sets the maximum number of entities to return; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
+
+- `SetLimit(int64_t limit)`
 
     Sets the maximum number of entities to return; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
 
@@ -87,9 +127,17 @@ auto request = QueryRequest()
 
     Sets the number of entities to skip; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
 
+- `SetOffset(int64_t offset)`
+
+    Sets the number of entities to skip; only available when the filter expression is empty. Note: this value is stored in the extra params. Optional.
+
 - `WithIgnoreGrowing(bool ignore_growing)`
 
     Sets whether to ignore data in growing segments during the query. Note: this value is stored in the extra params. Optional.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing segments. Note: this value is stored in the ExtraParams.
 
 - `AddExtraParam(const std::string& key, const std::string& value)`
 
@@ -98,6 +146,10 @@ auto request = QueryRequest()
 - `WithTimezone(const std::string& timezone)`
 
     Sets the timezone, which takes effect for Timestamptz fields. Note: this value is stored in the extra params. Optional.
+
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
 
 **RETURNS:**
 

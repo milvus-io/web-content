@@ -10,29 +10,18 @@ Status UnpinSnapshotData(const UnpinSnapshotDataRequest& request)
 
 ```cpp
 auto request = milvus::UnpinSnapshotDataRequest()
-    .WithDatabaseName("default")
-    .WithCollectionName("book")
-    .WithSnapshotName("snapshot_20260617")
     .WithPinID(pin_id);
 ```
 
 **REQUEST METHODS:**
 
-- `WithDatabaseName(const std::string& db_name)`
-
-    Sets the database name.
-
-- `WithCollectionName(const std::string& collection_name)`
-
-    Sets the collection name.
-
-- `WithSnapshotName(const std::string& snapshot_name)`
-
-    Sets the snapshot name.
-
 - `WithPinID(int64_t pin_id)`
 
     Sets the ID of the pin whose data should be unpinned.
+
+- `SetPinID(int64_t pin_id)`
+
+    Set the pin identifier.
 
 **RETURNS:**
 
@@ -55,9 +44,7 @@ if (!status.IsOk()) {
 }
 
 auto request = milvus::UnpinSnapshotDataRequest()
-    .WithDatabaseName("default")
-    .WithCollectionName("book")
-    .WithSnapshotName("snapshot_20260617");
+    .WithPinID(pin_id);
 status = client->UnpinSnapshotData(request);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;

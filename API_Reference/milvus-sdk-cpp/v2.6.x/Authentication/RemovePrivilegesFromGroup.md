@@ -24,6 +24,10 @@ auto request = RemovePrivilegesFromGroupRequest()
 
     Sets the privileges to be removed from the specified group.
 
+- `AddPrivilege(const std::string& privilege)`
+
+    Adds one privilege to be removed from the specified group.
+
 **RETURNS:**
 
 *Status*

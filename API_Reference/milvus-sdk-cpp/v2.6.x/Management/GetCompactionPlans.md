@@ -21,9 +21,23 @@ auto request = GetCompactionPlansRequest()
 
 **RETURNS:**
 
-*Status* with *GetCompactionPlansResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the GetCompactionPlansResponse carries the plans of the compaction job.
+
+- **response** (*GetCompactionPlansResponse*) -
+
+    - **Plans** (*const std::vector<CompactionPlan>&*) -
+
+        Get plans of the compaction.
+
+        - **SourceSegments** (*const std::vector<int64_t>&*) -
+
+            Segment id array to be merged.
+
+        - **DestinySegemnt** (*int64_t*) -
+
+            New generated segment id after merging.
 
 **EXCEPTIONS:**
 

@@ -1,6 +1,6 @@
 # CreateUser()
 
-Create an user with username and password to login milvus.
+Create a user with a username and password to log in to Milvus.
 
 ```cpp
 Status CreateUser(const CreateUserRequest& request)
@@ -21,11 +21,23 @@ auto request = CreateUserRequest()
 
     Set name of the user.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 - `WithPassword(const std::string& password)`
 
     Set password of the user.
 
+- `SetPassword(const std::string& password)`
+
+    Set password of the user.
+
 - `WithDescription(const std::string& description)`
+
+    Set description of the user.
+
+- `SetDescription(const std::string& description)`
 
     Set description of the user.
 

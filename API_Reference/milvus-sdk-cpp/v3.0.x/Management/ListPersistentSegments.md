@@ -26,41 +26,71 @@ auto request = ListPersistentSegmentsRequest()
 
 **RETURNS:**
 
-*Status* with *ListPersistentSegmentsResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. The persisted segment information is carried in the response object.
 
-The response's `Segments()` list contains `SegmentInfo` values. In addition to segment ID, collection ID, partition ID, row count, and state, each `SegmentInfo` value includes collection name, segment level, storage version, and sorted state.
+- **response** (*ListPersistentSegmentsResponse*) -
 
-**SegmentLevel values:**
+    - **Result** (*const std::vector<SegmentInfo>&*) -
 
-- `UNKNOWN = -1`
+        Get information of segments.
 
-- `LEGACY = 0`
+        - **CollectionID** (*int64_t*) -
 
-- `L0 = 1`
+            Collection ID which the segment belongs to.
 
-- `L1 = 2`
+        - **CollectionName** (*const std::string&*) -
 
-- `L2 = 3`
+            Collection name which the segment belongs to.
 
-**SegmentInfo methods:**
+        - **IndexID** (*int64_t*) -
 
-- `const std::string& CollectionName() const`
+            Index ID of the segment.
 
-    Returns the collection name.
+        - **IndexName** (*std::string*) -
 
-- `SegmentLevel Level() const`
+            Index name of the segment.
 
-    Returns the segment level.
+        - **IsSorted** (*bool*) -
 
-- `int64_t StorageVersion() const`
+            Whether the segment is sorted.
 
-    Returns the storage version.
+        - **Level** (*SegmentLevel*) -
 
-- `bool IsSorted() const`
+            Level of the segment.
 
-    Returns whether the segment is sorted.
+        - **MemSize** (*int64_t*) -
+
+            Memory size of the segment.
+
+        - **NodeID** (*int64_t*) -
+
+            Node ID of the segment.
+
+        - **NodeIDs** (*const std::vector<int64_t>&*) -
+
+            Node ID list of the segment.
+
+        - **PartitionID** (*int64_t*) -
+
+            Partition ID which the segment belongs to.
+
+        - **RowCount** (*int64_t*) -
+
+            Row count of the segment.
+
+        - **SegmentID** (*int64_t*) -
+
+            ID of the segment.
+
+        - **State** (*SegmentState*) -
+
+            Current state of the segment.
+
+        - **StorageVersion** (*int64_t*) -
+
+            Storage version of the segment.
 
 **EXCEPTIONS:**
 
@@ -88,5 +118,5 @@ status = client->ListPersistentSegments(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Segment count: " << response.Segments().size() << std::endl;
+std::cout << "Segment count: " << response.Result().size() << std::endl;
 ```

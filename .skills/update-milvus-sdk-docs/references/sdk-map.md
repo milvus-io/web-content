@@ -140,6 +140,23 @@ local directory via this table before editing. Current latest version line is
     Fix in docs; flag (don't silently edit) the code comment.
   - New internal-only headers (e.g. `BloomFilter.h`) are cache types — skip, do
     not create a page unless the symbol surfaces in a public request/response.
+  - **`= delete` methods are hidden, not available.** Some request classes
+    explicitly delete inherited builder methods to hide them, e.g.
+    `QueryIteratorRequest` and `SearchIteratorRequest` both declare
+    `WithIDs(...) = delete` / `SetIDs(...) = delete` (they only support a single
+    target vector). Such methods must NOT be documented, backfilled, or surfaced
+    in reconciliation. Note the declarations often carry a trailing
+    `// NOLINT(modernize-use-equals-delete)` comment on the same line.
+  - **Do not pipe `grep ... | grep -v "//"` when verifying `= delete` methods.**
+    The `// NOLINT(...)` trailing comment on a `= delete` declaration makes
+    `grep -v "//"` drop the whole line, which falsely makes a deleted method look
+    absent (this once caused a page to wrongly document a deleted `WithIDs`).
+    Verify directly against the tag source:
+    `git -C sdk-tmp/sdks/milvus-sdk-cpp show v2.6.7:src/include/milvus/request/dql/SearchIteratorRequest.h | grep -nE "= delete"`.
+  - Deleted methods also trip the gap-report script, which counts any
+    `With*`/`Set*`/`Add*` declaration (including `= delete`) as "present in
+    code" and reports them as MISSING on pages that correctly omit them — treat
+    such findings as false positives and confirm against the header source.
 
 ## pymilvus
 

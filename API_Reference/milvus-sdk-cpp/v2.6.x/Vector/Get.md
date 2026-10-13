@@ -27,13 +27,25 @@ auto request = GetRequest()
 
     Sets the target database name to query against; the default database is used when it is empty. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to fetch entities from.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names to scope the fetch; when empty, the entire collection is queried. Optional.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -43,6 +55,10 @@ auto request = GetRequest()
 
     Sets the names of the fields to return in the response. Optional.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Adds a field name to the set of fields to return in the response. Optional.
@@ -51,13 +67,25 @@ auto request = GetRequest()
 
     Sets the consistency level for this read; it defaults to NONE when not specified. Optional.
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
     Sets the primary keys of the entities to fetch, accepting either int64 or string key values; note that this method resets any previously set id array.
 
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set id array. Note: this method will reset the id array.
+
 - `WithIDs(std::vector<std::string>&& id_array)`
 
     Sets the primary keys of the entities to fetch, accepting either int64 or string key values; note that this method resets any previously set id array.
+
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set id array. Note: this method will reset the id array.
 
 **RETURNS:**
 

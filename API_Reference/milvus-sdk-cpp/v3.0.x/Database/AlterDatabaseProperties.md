@@ -20,9 +20,17 @@ auto request = AlterDatabasePropertiesRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets altered properties of this database. You can find the available database properties on [this page](https://milvus.io/docs/manage_databases.md#Manage-database-properties). 
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set altered properties of this database.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 

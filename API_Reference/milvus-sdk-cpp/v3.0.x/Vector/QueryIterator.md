@@ -36,19 +36,35 @@ auto request = QueryIteratorRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Set the partition names. If partition names are empty, will query in the entire collection.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
     Add a partition name.
 
 - `WithOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
 
     Set the output field names.
 
@@ -60,7 +76,15 @@ auto request = QueryIteratorRequest()
 
     Set the consistency level. [Consistency Level](https://milvus.io/docs/consistency.md#Consistency-Level).
 
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
+
 - `WithFilter(std::string filter)`
+
+    Set filter expression.
+
+- `SetFilter(std::string filter)`
 
     Set filter expression.
 
@@ -72,15 +96,31 @@ auto request = QueryIteratorRequest()
 
     Replaces all placeholder values used by the filter expression. Keys correspond to placeholders such as {age} or {city}; values may be boolean, numeric, string, or array data.
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates. Read the doc for more info: https://milvus.io/docs/filtering-templating.md#Filter-Templating
+
 - `WithLimit(int64_t limit)`
 
-    Set limit value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. Note: this value is stored in the ExtraParams.
+
+- `SetLimit(int64_t limit)`
+
+    Set limit value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
-    Set offset value, only available when expression is empty. \n Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. Note: this value is stored in the ExtraParams.
+
+- `SetOffset(int64_t offset)`
+
+    Set offset value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing segments. Note: this value is stored in the ExtraParams.
+
+- `SetIgnoreGrowing(bool ignore_growing)`
 
     Set ignore growing segments. Note: this value is stored in the ExtraParams.
 
@@ -92,7 +132,15 @@ auto request = QueryIteratorRequest()
 
     Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
 
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+
 - `WithOrderByFields(std::vector<OrderByField>&& order_by_fields)`
+
+    Set fields used to order query results.
+
+- `SetOrderByFields(std::vector<OrderByField>&& order_by_fields)`
 
     Set fields used to order query results.
 
@@ -101,6 +149,10 @@ auto request = QueryIteratorRequest()
     Add a field used to order query results.
 
 - `WithReduceStopForBest(bool reduce_stop_for_best)`
+
+    Set the flag of internal retrieve strategy.
+
+- `SetReduceStopForBest(bool reduce_stop_for_best)`
 
     Set the flag of internal retrieve strategy.
 
@@ -212,7 +264,7 @@ using QueryIterator    = Iterator<QueryResults>;
 using QueryIteratorPtr = std::shared_ptr<QueryIterator>;
 ```
 
-Obtained via `MilvusClientV2::QueryIterator(IteratorArguments, QueryIteratorPtr&)`.
+Obtained via `MilvusClientV2::QueryIterator(QueryIteratorRequest&, QueryIteratorPtr&)`.
 
 **ERROR HANDLING:**
 

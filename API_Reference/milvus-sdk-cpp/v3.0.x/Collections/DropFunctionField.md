@@ -21,13 +21,25 @@ auto request = DropFunctionFieldRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithFunctionName(std::string function_name)`
 
     Set the name of the function to drop.
+
+- `SetFunctionName(std::string function_name)`
+
+    Set the name of the function to drop together with its output fields.
 
 **RETURNS:**
 

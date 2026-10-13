@@ -21,13 +21,25 @@ auto request = AlterAliasRequest()
 
     Sets the name of the database that contains the alias and the target collection; the default database is used if this is left empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the target collection that the alias is reassigned to; after the operation succeeds, the alias points to this collection instead of its previous one.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithAlias(const std::string& alias)`
 
     Sets the name of the alias to change; this alias is detached from its current collection and rebound to the collection set by WithCollectionName.
+
+- `SetAlias(const std::string& alias)`
+
+    Set name of the alias.
 
 **RETURNS:**
 

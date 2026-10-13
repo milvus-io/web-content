@@ -21,13 +21,25 @@ auto request = GetLoadStateRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names. This is optional, and when set, this operation returns the load state of the specified partitions. If this is empty, this operation returns the load state of the specified collection.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set partition names to get load state of the partition. If partition name list is empty, will get load state of the collection.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -35,9 +47,19 @@ auto request = GetLoadStateRequest()
 
 **RETURNS:**
 
-*Status* with *GetLoadStateResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the GetLoadStateResponse carries the load state and loading progress.
+
+- **response** (*GetLoadStateResponse*) -
+
+    - **State** (*LoadState*) -
+
+        Get loading state.
+
+    - **Progress** (*int64_t*) -
+
+        Get percent value of loading progress.
 
 **EXCEPTIONS:**
 

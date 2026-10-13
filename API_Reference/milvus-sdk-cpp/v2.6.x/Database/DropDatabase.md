@@ -19,6 +19,10 @@ auto request = DropDatabaseRequest()
 
     Sets the name of the database to drop. If the name is empty, the database currently used by the connection (the default database unless UseDatabase() was called) is dropped.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 **RETURNS:**
 
 *Status*

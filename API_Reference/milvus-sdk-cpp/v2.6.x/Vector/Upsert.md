@@ -28,17 +28,33 @@ auto request = UpsertRequest()
 
     Sets the database name to target; if empty, the default database is used. Optional.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection to upsert into.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithPartitionName(const std::string& partition_name)`
 
     Sets the name of the target partition; if empty, the entities go into the default partition. Optional.
 
+- `SetPartitionName(const std::string& partition_name)`
+
+    Set the partition name. If partition name is empty, will use the default partition.
+
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
     Sets the column-based field data to upsert as a vector of FieldDataPtr; cannot be combined with row-based data.
+
+- `SetColumnsData(std::vector<FieldDataPtr>&& columns_data)`
+
+    Set fields data. ColumnsData and RowsData cannot both be set.
 
 - `AddColumnData(const FieldDataPtr& column_data)`
 
@@ -48,6 +64,10 @@ auto request = UpsertRequest()
 
     Sets the row-based entities to upsert; each EntityRow is an nlohmann::json object keyed by field name and must carry the primary key. Cannot be combined with column-based data.
 
+- `SetRowsData(EntityRows&& rows_data)`
+
+    Set entity rows. ColumnsData and RowsData cannot both be set.
+
 - `AddRowData(EntityRow&& row_data)`
 
     Adds a single entity row (an nlohmann::json object keyed by field name) to the row-based payload; cannot be combined with column-based data.
@@ -56,9 +76,17 @@ auto request = UpsertRequest()
 
     Sets whether to perform a partial update: if true, only the specified fields are updated while others remain unchanged; default is false. Optional.
 
+- `SetPartialUpdate(bool partial_update)`
+
+    Set partial update. If True, only the specified fields will be updated while others remain unchanged.
+
 - `WithFieldOps(std::vector<FieldPartialUpdateOp>&& field_ops)`
 
     Sets per-field partial update operations (REPLACE, ARRAY_APPEND, ARRAY_REMOVE); ARRAY_APPEND and ARRAY_REMOVE automatically enable partial update semantics. Optional.
+
+- `SetFieldOps(std::vector<FieldPartialUpdateOp>&& field_ops)`
+
+    Set per-field partial update operations. ARRAY_APPEND and ARRAY_REMOVE automatically enable partial update semantics.
 
 - `AddFieldOp(FieldPartialUpdateOp field_op)`
 

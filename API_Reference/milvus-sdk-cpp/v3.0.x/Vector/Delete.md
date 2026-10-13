@@ -24,17 +24,33 @@ auto request = DeleteRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithPartitionName(const std::string& partition_name)`
 
     Sets the names of the partitions. If it is empty, the default partition applies.
 
+- `SetPartitionName(const std::string& partition_name)`
+
+    Set the partition name. If partition name is empty, will use the default partition.
+
 - `WithFilter(const std::string& filter)`
 
     Sets a filter expression.
+
+- `SetFilter(const std::string& filter)`
+
+    Set filter expression.
 
 - `AddFilterTemplate(std::string key, nlohmann::json&& filter_template)`
 
@@ -44,9 +60,25 @@ auto request = DeleteRequest()
 
     Sets filter templates. This takes effect only if `WithFilter()` is set.  Read this page for more about [filter templating](https://milvus.io/docs/filtering-templating.md).
 
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates. Only take effect when filter is not empty.
+
 - `WithIDs(std::vector<int64_t>&& id_array)`
 
     Sets a set of integer primary keys. This takes effect only if `WithFilter()` is empty.
+
+- `SetIDs(std::vector<int64_t>&& id_array)`
+
+    Set integer primary keys to be deleted. Only take effect when filter is empty.
+
+- `WithIDs(std::vector<std::string>&& id_array)`
+
+    Sets a set of string primary keys. This takes effect only if `WithFilter()` is empty.
+
+- `SetIDs(std::vector<std::string>&& id_array)`
+
+    Set string primary keys to be deleted. Only take effect when filter is empty.
 
 **RETURNS:**
 
@@ -86,7 +118,7 @@ const DmlResults& results = response.Results();
 
 - `int64_t Cost() const`
 
-    Returns the cost of the operation in milliseconds.
+    Returns the operation cost in VCU reported by the server, -1 when unavailable.
 
 **EXCEPTIONS:**
 

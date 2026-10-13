@@ -20,15 +20,29 @@ auto request = HasCollectionRequest()
 
     Sets the name of the target database. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the target collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 **RETURNS:**
 
-*Status* with *HasCollectionResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the HasCollectionResponse indicates whether the collection exists.
+
+- **response** (*HasCollectionResponse*) -
+
+    - **Has** (*bool*) -
+
+        Get whether the collection exists or not.
 
 **EXCEPTIONS:**
 

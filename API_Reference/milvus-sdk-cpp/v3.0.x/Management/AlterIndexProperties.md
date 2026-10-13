@@ -23,17 +23,33 @@ auto request = AlterIndexPropertiesRequest()
 
     Sets the name of the target database. The default database is used if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection that contains the index.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithIndexName(const std::string& index_name)`
 
     Sets the name of the index. Currently, this API only supports the index name.
 
+- `SetIndexName(const std::string& index_name)`
+
+    Set name of the index. Currently, this API only supports index_name.
+
 - `WithProperties(std::unordered_map<std::string, std::string>&& properties)`
 
     Sets the properties to alter on the index, moving the given unordered_map of key-value pairs into the request.
+
+- `SetProperties(std::unordered_map<std::string, std::string>&& properties)`
+
+    Set altered properties of this index.
 
 - `AddProperty(const std::string& key, const std::string& property)`
 

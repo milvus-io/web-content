@@ -23,21 +23,41 @@ auto request = DescribeIndexRequest()
 
     Sets the target database name. The default database is used if this is left empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithFieldName(const std::string& field_name)`
 
     Sets the name of the field that the index belongs to.
 
+- `SetFieldName(const std::string& field_name)`
+
+    Set name of the field.
+
 - `WithIndexName(const std::string& index_name)`
 
     Sets the name of the index. If both field_name and index_name are specified, the index name takes precedence.
 
+- `SetIndexName(const std::string& index_name)`
+
+    Set name of the index. Note: if both field_name and index_name are specified, it will use index name firstly.
+
 - `WithTimestamp(int64_t ts)`
 
     Sets a timestamp so that only segments generated before this timestamp are checked. All segments are checked if this value is zero.
+
+- `SetTimestamp(int64_t ts)`
+
+    Set a timestamp so that only segments generated before this timestamp are checked. All segments are checked if this value is zero.
 
 **RETURNS:**
 
@@ -53,7 +73,7 @@ Returns a Status indicating whether the operation succeeded. The index descripti
 
         - **FieldName** (*const std::string&*) -
 
-            Filed name which the index belong to.
+            Field name which the index belong to.
 
         - **IndexName** (*const std::string&*) -
 

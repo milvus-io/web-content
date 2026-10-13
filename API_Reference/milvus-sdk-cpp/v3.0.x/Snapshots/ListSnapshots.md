@@ -20,13 +20,29 @@ auto request = milvus::ListSnapshotsRequest()
 
     Sets the database name.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the collection name.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The snapshot names are carried in the response object.
+
+- **response** (*ListSnapshotsResponse*) -
+
+    - **Snapshots** (*const std::vector<std::string>&*) -
+
+        Get the snapshot names.
 
 **EXCEPTIONS:**
 

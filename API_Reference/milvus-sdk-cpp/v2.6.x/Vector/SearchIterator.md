@@ -74,6 +74,7 @@ auto request = SearchIteratorRequest()
     .WithStrictGroupSize(strict_group_size)
     .WithRadius(radius)
     .WithRangeFilter(filter)
+    .SetRange(range_filter, radius)
     .WithRerank(ranker)
     .WithTimezone(timezone)
     .WithHighlighter(highlighter);
@@ -85,13 +86,25 @@ auto request = SearchIteratorRequest()
 
     Sets the target database name; the default database is used when it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection whose search results are iterated.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionNames(std::set<std::string>&& partition_names)`
 
     Sets the partition names to search; if empty, the entire collection is searched.
+
+- `SetPartitionNames(std::set<std::string>&& partition_names)`
+
+    Set the partition names. If partition names are empty, the entire collection is queried.
 
 - `AddPartitionName(const std::string& partition_name)`
 
@@ -101,6 +114,10 @@ auto request = SearchIteratorRequest()
 
     Sets the names of the output fields to return with each batch.
 
+- `SetOutputFields(std::set<std::string>&& output_field_names)`
+
+    Set the output field names.
+
 - `AddOutputField(const std::string& output_field)`
 
     Sets an additional output field name to return with each batch.
@@ -108,6 +125,10 @@ auto request = SearchIteratorRequest()
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
     Sets the consistency level used for the underlying searches.
+
+- `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
+
+    Set the consistency level.
 
 - `AddFilterTemplate(std::string key, const nlohmann::json& filter_template)`
 
@@ -261,6 +282,10 @@ auto request = SearchIteratorRequest()
 
     Sets the metric type of the vector field; when left as DEFAULT, the SDK derives it from the vector field's index.
 
+- `SetMetricType(::milvus::MetricType metric_type)`
+
+    Sets the metric type of the vector field; when left as DEFAULT, the SDK derives it from the vector field's index.
+
 - `WithExtraParams(const std::unordered_map<std::string, std::string>& params)`
 
     Sets the extra search parameters such as "nlist" or "ef" as a key-value map.
@@ -269,61 +294,125 @@ auto request = SearchIteratorRequest()
 
     Sets the search limit (topk) that bounds how many entities the iterator returns in total; the value is stored in the extra parameters.
 
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk).
+
 - `WithFilter(std::string filter)`
 
     Sets the scalar filtering expression that selects the entities the iterator pages through.
+
+- `SetFilter(std::string filter)`
+
+    Set filter expression.
 
 - `WithAnnsField(const std::string& ann_field)`
 
     Sets the target vector field of the ANN search; it must be specified when the collection has more than one vector field.
 
+- `SetAnnsField(const std::string& ann_field)`
+
+    Set target field of ann search.
+
 - `WithFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
 
     Sets the filter templates bound to placeholders in the filter expression; they take effect only when the filter is not empty.
+
+- `SetFilterTemplates(std::unordered_map<std::string, nlohmann::json>&& filter_templates)`
+
+    Set filter templates.
 
 - `WithOffset(int64_t offset)`
 
     Sets the offset value; the value is stored in the extra parameters.
 
+- `SetOffset(int64_t offset)`
+
+    Set offset value. Note: this value is stored in the ExtraParams.
+
 - `WithRoundDecimal(int64_t round_decimal)`
 
     Sets the number of decimal places to which the returned scores are rounded.
+
+- `SetRoundDecimal(int64_t round_decimal)`
+
+    Set round decimal value.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
     Sets the flag that ignores data in growing segments.
 
+- `SetIgnoreGrowing(bool ignore_growing)`
+
+    Set ignore growing flag.
+
 - `WithGroupByField(const std::string& field_name)`
 
     Sets the field that search results are grouped by.
+
+- `SetGroupByField(const std::string& field_name)`
+
+    Set group by field value.
 
 - `WithGroupSize(int64_t group_size)`
 
     Sets the group size used for grouped search.
 
+- `SetGroupSize(int64_t group_size)`
+
+    Set group size value.
+
 - `WithStrictGroupSize(bool strict_group_size)`
 
     Sets the flag that enforces the group size strictly.
+
+- `SetStrictGroupSize(bool strict_group_size)`
+
+    Set strict group size flag.
 
 - `WithRadius(double radius)`
 
     Sets the radius of the range search; the value is stored in the extra parameters.
 
+- `SetRadius(double value)`
+
+    Set range radius. Note: this value is stored in the ExtraParams.
+
 - `WithRangeFilter(double filter)`
 
     Sets the range filter that narrows the score window of the range search; the value is stored in the extra parameters.
+
+- `SetRangeFilter(double value)`
+
+    Set range filter. Note: this value is stored in the ExtraParams.
+
+- `SetRange(double range_filter, double radius)`
+
+    Sets the range filter and radius together. While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches. The value is stored in the extra parameters.
 
 - `WithRerank(const FunctionScorePtr& ranker)`
 
     Sets the reranker; multiple rerank functions such as Boost, Decay, and Model are supported.
 
+- `SetRerank(const FunctionScorePtr& ranker)`
+
+    Set reranker. Allows multiple rerank functions such as Boost/Decay/Model, etc.
+
 - `WithTimezone(const std::string& timezone)`
 
     Sets the timezone, which takes effect for Timestamptz fields.
 
+- `SetTimezone(const std::string& timezone)`
+
+    Set timezone, takes effect for Timestamptz field. Note: this value is stored in the ExtraParams.
+
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
     Sets the highlighter applied to the search results.
+
+- `SetHighlighter(const HighlighterPtr& highlighter)`
+
+    Set highlighter.
 
 <table>
    <tr>

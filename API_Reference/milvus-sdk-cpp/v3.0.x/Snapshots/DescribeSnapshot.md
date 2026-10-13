@@ -21,17 +21,57 @@ auto request = milvus::DescribeSnapshotRequest()
 
     Sets the database name.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set the target database name.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the collection name.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the target collection name.
 
 - `WithSnapshotName(const std::string& snapshot_name)`
 
     Sets the snapshot name.
 
+- `SetSnapshotName(const std::string& snapshot_name)`
+
+    Set the target snapshot name.
+
 **RETURNS:**
 
 *Status*
+
+Returns a Status indicating whether the operation succeeded. The snapshot metadata is carried in the response object.
+
+- **response** (*DescribeSnapshotResponse*) -
+
+    - **CollectionName** (*const std::string&*) -
+
+        Get the collection the snapshot belongs to.
+
+    - **CreateTs** (*int64_t*) -
+
+        Get the creation timestamp of the snapshot.
+
+    - **Description** (*const std::string&*) -
+
+        Get the snapshot description.
+
+    - **Name** (*const std::string&*) -
+
+        Get the snapshot name.
+
+    - **PartitionNames** (*const std::vector<std::string>&*) -
+
+        Get the partition names covered by the snapshot.
+
+    - **S3Location** (*const std::string&*) -
+
+        Get the S3 storage location of the snapshot.
 
 **EXCEPTIONS:**
 

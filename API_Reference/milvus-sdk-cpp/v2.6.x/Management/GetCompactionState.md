@@ -21,9 +21,35 @@ auto request = GetCompactionStateRequest()
 
 **RETURNS:**
 
-*Status* with *GetCompactionStateResponse*
+*Status*
 
-Check `status.IsOk()` to confirm success.
+Returns a Status indicating whether the operation succeeded. On success, the GetCompactionStateResponse carries the state of the compaction job.
+
+- **response** (*GetCompactionStateResponse*) -
+
+    - **State** (*const CompactionState&*) -
+
+        Get state of the compaction.
+
+        - **State** (*CompactionStateCode*) -
+
+            Compaction state code.
+
+        - **ExecutingPlan** (*int64_t*) -
+
+            The executing plan id.
+
+        - **TimeoutPlan** (*int64_t*) -
+
+            The number of timeout plans.
+
+        - **CompletedPlan** (*int64_t*) -
+
+            The number of completed plans.
+
+        - **FailedPlan** (*int64_t*) -
+
+            The number of failed plans.
 
 **EXCEPTIONS:**
 

@@ -26,9 +26,9 @@ The telemetry manager reports client metrics and heartbeats and handles server-p
 
     Records one operation for the current metrics window.
 
-- `const std::string& LastCommandTimestamp() const`
+- `int64_t LastCommandTimestamp() const`
 
-    Returns the timestamp of the last processed command.
+    Returns the timestamp of the last processed command, or 0 if no command has been processed.
 
 **ERROR HANDLING:**
 

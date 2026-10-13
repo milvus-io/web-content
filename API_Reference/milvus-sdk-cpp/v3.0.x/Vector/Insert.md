@@ -25,17 +25,33 @@ auto request = InsertRequest()
 
     Set target db name, use default database if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, use default database if it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Set name of the collection.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
+
 - `WithPartitionName(const std::string& partition_name)`
+
+    Set the partition name. If partition name is empty, will use the default partition.
+
+- `SetPartitionName(const std::string& partition_name)`
 
     Set the partition name. If partition name is empty, will use the default partition.
 
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
     Set fields data with fluent interface. Not allow to set ColumnsData and RowsData both.
+
+- `SetColumnsData(std::vector<FieldDataPtr>&& columns_data)`
+
+    Set fields data. ColumnsData and RowsData cannot both be set.
 
 - `AddColumnData(const FieldDataPtr& column_data)`
 
@@ -45,9 +61,13 @@ auto request = InsertRequest()
 
     Set entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
 
+- `SetRowsData(EntityRows&& rows_data)`
+
+    Set entity rows. ColumnsData and RowsData cannot both be set.
+
 - `AddRowData(EntityRow&& row_data)`
 
-    Add en entity rows with fluent interface. Not allow to set ColumnsData and RowsData both.
+    Add an entity row with fluent interface. Not allow to set ColumnsData and RowsData both.
 
 ### Column payload types
 
@@ -185,7 +205,7 @@ const DmlResults& results = response.Results();
 
 - `int64_t Cost() const`
 
-    Returns the cost of the operation in milliseconds.
+    Returns the operation cost in VCU reported by the server, -1 when unavailable.
 
 **ERROR HANDLING:**
 
