@@ -24,11 +24,24 @@ let request = ListSnapshotsRequest::builder()
 
     Name of the collection whose snapshots are listed. When empty, all snapshots in the database are returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListSnapshotsResponse\>*
 
-`ListSnapshotsResponse` exposes `snapshots()` returning the snapshot names. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListSnapshotsResponse** containing the names of the snapshots. Returns an `Error` if the operation fails.
+
+```rust
+ListSnapshotsResponse
+    snapshots() // -> &[String]
+```
+
+**METHODS:**
+
+- `snapshots()` (*&[String]*) -
+
+    The names of the snapshots.
 
 ## Example
 

@@ -33,9 +33,11 @@ let request = RenameCollectionRequest::builder()
 
     Database to move the collection to; defaults to the current database.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

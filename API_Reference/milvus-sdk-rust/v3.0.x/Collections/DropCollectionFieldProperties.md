@@ -34,9 +34,11 @@ let request = DropCollectionFieldPropertiesRequest::builder()
 
     Keys of the properties to remove from the field. At least one key is required. Use `property_key()` to add one.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

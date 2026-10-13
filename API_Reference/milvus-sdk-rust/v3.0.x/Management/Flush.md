@@ -28,11 +28,34 @@ let request = FlushRequest::builder()
 
     Maximum time to wait for all returned segments to be flushed. Zero waits indefinitely; negative values are invalid.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<FlushResponse\>*
 
-`FlushResponse` exposes `database_name()`, `segment_ids()` returning the per-collection segment IDs, and `flush_timestamps()` returning the per-collection flush timestamps. Returns an `Error` on failure.
+**RETURNS:**
+
+A **FlushResponse** containing the flushed segment IDs and timestamps. Returns an `Error` if the operation fails.
+
+```rust
+FlushResponse
+    database_name() // -> &str
+    segment_ids() // -> &HashMap<String, Vec<i64>>
+    flush_timestamps() // -> &HashMap<String, u64>
+```
+
+**METHODS:**
+
+- `database_name()` (*&str*) -
+
+    The database that holds the flushed collection.
+
+- `segment_ids()` (*&HashMap<String, Vec<i64>>*) -
+
+    The segment IDs produced for each flushed collection.
+
+- `flush_timestamps()` (*&HashMap<String, u64>*) -
+
+    The flush timestamps per collection.
 
 ## Example
 

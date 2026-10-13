@@ -35,9 +35,11 @@ let request = AddCollectionFieldRequest::builder()
 
     The `FieldSchema` describing the new field. Vector fields added to an existing collection require `nullable(true)`. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

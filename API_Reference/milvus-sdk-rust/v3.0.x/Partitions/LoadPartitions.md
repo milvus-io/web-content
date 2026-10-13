@@ -65,9 +65,11 @@ let request = LoadPartitionsRequest::builder()
 
     Load priority forwarded as the `load_priority` load param; for example, `"low"` uses a lower priority than the default.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

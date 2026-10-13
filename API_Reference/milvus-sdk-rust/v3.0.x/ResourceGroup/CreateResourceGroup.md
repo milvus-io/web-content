@@ -25,9 +25,11 @@ let request = CreateResourceGroupRequest::builder()
 
     Initial configuration of the resource group, including requested nodes and node limits. Optional.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

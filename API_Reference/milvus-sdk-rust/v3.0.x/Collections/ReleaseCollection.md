@@ -24,9 +24,11 @@ let request = ReleaseCollectionRequest::builder()
 
     Name of the collection to release. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

@@ -34,9 +34,11 @@ let request = AlterIndexPropertiesRequest::builder()
 
     Properties to set on the index, such as `mmap.enabled`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or an `Error` on failure.
 

@@ -38,7 +38,7 @@ The `CreateSimpleCollectionRequest` is converted into a `CreateCollectionRequest
 
 - `primary_field_type: DataType`
 
-    Data type of the primary key; must be `Int64` or `VarChar`. Defaults to `Int64`.
+    Data type of the primary key; must be `Int64` or `VarChar`. Defaults to `Int64`. See [DataType](DataType.md).
 
 - `id_type: Option<String>`
 
@@ -62,11 +62,11 @@ The `CreateSimpleCollectionRequest` is converted into a `CreateCollectionRequest
 
 - `consistency_level: ConsistencyLevel`
 
-    Default consistency level for reads on the collection. Defaults to `Bounded`.
+    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](../types/ConsistencyLevel.md).
 
 - `metric_type: MetricType`
 
-    Metric type used by the AutoIndex created on the vector field. Defaults to `Cosine`.
+    Metric type used by the AutoIndex created on the vector field. Defaults to `Cosine`. See [MetricType](../Management/MetricType.md).
 
 - `num_shards: i32`
 
@@ -84,9 +84,11 @@ The `CreateSimpleCollectionRequest` is converted into a `CreateCollectionRequest
 
     Optional description of the collection.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

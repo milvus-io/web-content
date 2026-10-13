@@ -18,11 +18,11 @@ pub struct IndexParam
 
 - `index_type: IndexType`
 
-    Index implementation to use. Defaults to `IndexType::Invalid`.
+    Index implementation to use. Defaults to `IndexType::Invalid`. See [IndexType](../Management/IndexType.md).
 
 - `metric_type: Option<MetricType>`
 
-    Distance or similarity metric for the index.
+    Distance or similarity metric for the index. See [MetricType](../Management/MetricType.md).
 
 - `extra_params: HashMap<String, String>`
 

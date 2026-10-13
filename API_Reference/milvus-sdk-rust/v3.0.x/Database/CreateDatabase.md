@@ -24,9 +24,11 @@ let request = CreateDatabaseRequest::builder()
 
     Properties of the database, for example `database.replica.number`. Optional.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

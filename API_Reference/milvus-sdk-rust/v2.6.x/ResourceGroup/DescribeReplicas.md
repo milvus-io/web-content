@@ -29,11 +29,68 @@ let request = DescribeReplicasRequest::builder()
 
     Whether to include the shard-node details of each replica. Defaults to `false`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeReplicasResponse\>*
 
-`DescribeReplicasResponse` exposes `replicas()` returning a slice of `ReplicaInfo`, each describing one replica of the collection (replica ID, collection ID, partition IDs, and shards). Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeReplicasResponse** containing the replica information. Returns an `Error` if the operation fails.
+
+```rust
+DescribeReplicasResponse
+    replicas() // -> &[ReplicaInfo]
+```
+
+**METHODS:**
+
+- `replicas()` (*&[ReplicaInfo]*) -
+
+    The replica information for the collection.
+
+    - `get_replica_id()` (*i64*) -
+
+        The ID of the replica.
+
+    - `get_collection_id()` (*i64*) -
+
+        The ID of the collection the replica serves.
+
+    - `get_partition_ids()` (*&[i64]*) -
+
+        The IDs of the partitions covered by the replica.
+
+    - `get_shards()` (*&[ShardReplica]*) -
+
+        The shards of the replica.
+
+        - `get_leader_id()` (*i64*) -
+
+            The ID of the leader node of the shard.
+
+        - `get_leader_address()` (*&str*) -
+
+            The address of the leader node of the shard.
+
+        - `get_channel_name()` (*&str*) -
+
+            The name of the channel the shard subscribes to.
+
+        - `get_node_ids()` (*&[i64]*) -
+
+            The IDs of the nodes hosting the shard replica.
+
+    - `get_node_ids()` (*&[i64]*) -
+
+        The IDs of the nodes hosting the replica.
+
+    - `get_resource_group()` (*&str*) -
+
+        The resource group the replica belongs to.
+
+    - `get_outbound_nodes()` (*&HashMap<String, i32>*) -
+
+        The outbound node count per resource group.
 
 ## Example
 

@@ -24,11 +24,36 @@ let request = DescribeUserRequest::builder()
 
     Whether the response includes the roles assigned to the user. Defaults to `true`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeUserResponse\>*
 
-`DescribeUserResponse` exposes `users()` returning a slice of `UserDescription`, each carrying the username, description, and the assigned roles. Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeUserResponse** containing the user descriptions. Returns an `Error` if the operation fails.
+
+```rust
+DescribeUserResponse
+    users() // -> &[UserDescription]
+```
+
+**METHODS:**
+
+- `users()` (*&[UserDescription]*) -
+
+    The user descriptions, including their roles and privileges.
+
+    - `get_username()` (*&str*) -
+
+        The name of the user.
+
+    - `get_description()` (*&str*) -
+
+        The description of the user.
+
+    - `get_roles()` (*&[String]*) -
+
+        The roles assigned to the user.
 
 ## Example
 

@@ -24,9 +24,11 @@ let request = DropCollectionRequest::builder()
 
     Name of the collection to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. This operation is destructive and cannot be undone. Returns `Error` on failure.
 

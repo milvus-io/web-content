@@ -24,11 +24,24 @@ let request = DescribeCollectionRequest::builder()
 
     Name of the collection to describe. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeCollectionResponse\>*
 
-`DescribeCollectionResponse` exposes `description()` returning a `CollectionDesc` with the collection name, description, schema, shard and partition counts, aliases, consistency level, and properties. Returns `Error` on failure.
+**RETURNS:**
+
+A **DescribeCollectionResponse** containing the description of the specified collection. Returns an `Error` if the operation fails.
+
+```rust
+DescribeCollectionResponse
+    description() // -> &CollectionDesc
+```
+
+**METHODS:**
+
+- `description()` (*&CollectionDesc*) -
+
+    The collection description, including its schema, shards, partitions, aliases, consistency level, and properties. See [CollectionDesc](../types/CollectionDesc.md).
 
 ## Example
 

@@ -24,11 +24,58 @@ let request = ListPersistentSegmentsRequest::builder()
 
     Name of the collection whose persisted segments are listed. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListPersistentSegmentsResponse\>*
 
-`ListPersistentSegmentsResponse` exposes `segments()` returning a slice of `PersistentSegmentInfo`, each carrying the segment ID, collection/partition IDs, row count, `SegmentState`, compaction `SegmentLevel`, sort flag, and storage version. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListPersistentSegmentsResponse** containing the persistent segment information. Returns an `Error` if the operation fails.
+
+```rust
+ListPersistentSegmentsResponse
+    segments() // -> &[PersistentSegmentInfo]
+```
+
+**METHODS:**
+
+- `segments()` (*&[PersistentSegmentInfo]*) -
+
+    The persistent segment information.
+
+    - `get_segment_id()` (*i64*) -
+
+        The ID of the segment.
+
+    - `get_collection_id()` (*i64*) -
+
+        The ID of the collection the segment belongs to.
+
+    - `get_partition_id()` (*i64*) -
+
+        The ID of the partition the segment belongs to.
+
+    - `get_row_count()` (*i64*) -
+
+        The number of rows in the segment.
+
+    - `get_state()` (*SegmentState*) -
+
+        The state of the segment.
+
+    - `get_collection_name()` (*&str*) -
+
+        The name of the collection the segment belongs to.
+
+    - `get_level()` (*SegmentLevel*) -
+
+        The compaction level of the segment.
+
+    - `get_sorted()` (*bool*) -
+
+        
+
+    - `get_storage_version()` (*i64*) -
 
 ## Example
 

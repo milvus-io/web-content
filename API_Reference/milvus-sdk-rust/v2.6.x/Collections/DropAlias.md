@@ -24,9 +24,11 @@ let request = DropAliasRequest::builder()
 
     The alias to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

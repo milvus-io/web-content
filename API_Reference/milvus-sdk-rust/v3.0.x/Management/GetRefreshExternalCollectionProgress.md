@@ -20,11 +20,54 @@ let request = GetRefreshExternalCollectionProgressRequest::builder()
 
     Identifier of the refresh job, as returned by [RefreshExternalCollection](RefreshExternalCollection.md). Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetRefreshExternalCollectionProgressResponse\>*
 
-`GetRefreshExternalCollectionProgressResponse` exposes `job_info()` returning a `RefreshExternalCollectionJobInfo` with the job id, collection name, `RefreshExternalCollectionStateCode` state, progress, and reason. Returns an `Error` on failure.
+**RETURNS:**
+
+A **GetRefreshExternalCollectionProgressResponse** containing the refresh job information. Returns an `Error` if the operation fails.
+
+```rust
+GetRefreshExternalCollectionProgressResponse
+    job_info() // -> &RefreshExternalCollectionJobInfo
+```
+
+**METHODS:**
+
+- `job_info()` (*&RefreshExternalCollectionJobInfo*) -
+
+    The refresh job information.
+
+    - `get_job_id()` (*i64*) -
+
+        The ID of the refresh job.
+
+    - `get_collection_name()` (*&str*) -
+
+        The name of the refreshed collection.
+
+    - `get_state()` (*RefreshExternalCollectionStateCode*) -
+
+        The state of the refresh job.
+
+    - `get_progress()` (*i32*) -
+
+        The progress of the refresh job.
+
+    - `get_reason()` (*&str*) -
+
+        The failure reason, when the job failed.
+
+    - `get_external_source()` (*&str*) -
+
+        The external source of the refreshed data.
+
+    - `get_start_time()` (*u64*) -
+
+        The start time of the refresh job.
+
+    - `get_end_time()` (*u64*) -
 
 ## Example
 

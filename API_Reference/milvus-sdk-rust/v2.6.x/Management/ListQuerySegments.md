@@ -24,11 +24,74 @@ let request = ListQuerySegmentsRequest::builder()
 
     Name of the collection whose loaded segments are listed. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListQuerySegmentsResponse\>*
 
-`ListQuerySegmentsResponse` exposes `segments()` returning a slice of `QuerySegmentInfo`, each carrying the segment ID, collection/partition IDs, memory size, row count, index name and ID, serving node IDs, `SegmentState`, compaction `SegmentLevel`, sort flag, and storage version. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListQuerySegmentsResponse** containing the query segment information. Returns an `Error` if the operation fails.
+
+```rust
+ListQuerySegmentsResponse
+    segments() // -> &[QuerySegmentInfo]
+```
+
+**METHODS:**
+
+- `segments()` (*&[QuerySegmentInfo]*) -
+
+    The query segment information.
+
+    - `get_segment_id()` (*i64*) -
+
+        The ID of the segment.
+
+    - `get_collection_id()` (*i64*) -
+
+        The ID of the collection the segment belongs to.
+
+    - `get_partition_id()` (*i64*) -
+
+        The ID of the partition the segment belongs to.
+
+    - `get_memory_size()` (*i64*) -
+
+        The memory size of the segment.
+
+    - `get_row_count()` (*i64*) -
+
+        The number of rows in the segment.
+
+    - `get_index_name()` (*&str*) -
+
+        The name of the index built on the segment.
+
+    - `get_index_id()` (*i64*) -
+
+        The ID of the index built on the segment.
+
+    - `get_node_ids()` (*&[i64]*) -
+
+        
+
+    - `get_state()` (*SegmentState*) -
+
+        
+
+    - `get_collection_name()` (*&str*) -
+
+        
+
+    - `get_level()` (*SegmentLevel*) -
+
+        
+
+    - `get_sorted()` (*bool*) -
+
+        
+
+    - `get_storage_version()` (*i64*) -
 
 ## Example
 

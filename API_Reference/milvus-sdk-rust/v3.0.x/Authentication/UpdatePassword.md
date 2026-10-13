@@ -40,9 +40,11 @@ let request = UpdatePasswordRequest::builder()
 
     Whether to re-establish the connection with the new credentials after the password update. Defaults to `false`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

@@ -83,7 +83,7 @@ let request = HybridSearchRequest::builder()
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the search; the collection default is used when unset.
+    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
 
 ### SubSearchRequest
 
@@ -97,7 +97,7 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
 - `vectors: SearchVectors`
 
-    Query vectors, wrapped in the `SearchVectors` enum matching the field's data type (e.g. `SearchVectors::Float`, `SearchVectors::Sparse`). Required.
+    Query vectors, wrapped in the `SearchVectors` enum matching the field's data type (e.g. `SearchVectors::Float`, `SearchVectors::Sparse`). Required. See [SearchVectors](../types/SearchVectors.md).
 
 - `filter: String`
 
@@ -113,7 +113,7 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
 - `metric_type: Option<MetricType>`
 
-    Metric type for measuring vector similarity; falls back to the index metric when unset.
+    Metric type for measuring vector similarity; falls back to the index metric when unset. See [MetricType](../Management/MetricType.md).
 
 - `extra_params: HashMap<String, String>`
 
@@ -131,11 +131,129 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
     Timezone applied when filtering on Timestamptz fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<SearchResponse\>*
 
-`HybridSearchResponse` is an alias for `SearchResponse`. It exposes `results()` returning a `SearchResults` with one `SingleResult` per query vector after server-side reranking, plus the session timestamp and execution cost statistics. Returns `Error` on failure.
+**RETURNS:**
+
+A **SearchResponse** containing the ranked hits for each query vector. Returns an `Error` if the operation fails.
+
+```rust
+SearchResponse
+    results() // -> &SearchResults
+    session_timestamp() // -> u64
+    cost() // -> i64
+    scanned_remote_bytes() // -> i64
+    scanned_total_bytes() // -> i64
+    cache_hit_ratio() // -> f32
+```
+
+**METHODS:**
+
+- `results()` (*&SearchResults*) -
+
+    The ranked hits, one group per query vector.
+
+    - `get_results()` (*&[SingleResult]*) -
+
+        The hits, one per query vector.
+
+        - `get_ids()` (*&Ids*) -
+
+            The IDs of the hits for one query vector. See [Ids](Ids.md).
+
+        - `get_scores()` (*&[f32]*) -
+
+            The similarity scores of the hits.
+
+        - `get_element_indices()` (*Option<&[i64]>*) -
+
+            The element indices of the hits, when present.
+
+        - `get_output_fields()` (*&[FieldData]*) -
+
+            The output field values of the hits. See [FieldData](FieldData.md).
+
+        - `get_output_field_names()` (*&[String]*) -
+
+            The names of the output fields.
+
+        - `get_primary_field_name()` (*&str*) -
+
+            The name of the primary-key field.
+
+        - `get_score_field_name()` (*&str*) -
+
+            The name of the score field.
+
+        - `get_highlight_results()` (*&[HashMap<String, HighlightResult>]*) -
+
+            The text-highlighting results per hit, when full-text search highlighting was requested.
+
+            - `get_field_name()` (*&str*) -
+
+                The name of the highlighted field.
+
+            - `get_fragments()` (*&[String]*) -
+
+                The highlighted text fragments.
+
+            - `get_scores()` (*&[f32]*) -
+
+                The relevance scores of the fragments.
+
+        - `len()` (*usize*) -
+
+            The number of hits for one query vector.
+
+        - `is_empty()` (*bool*) -
+
+            Whether no hits were returned for the query vector.
+
+        - `get_output_field()` (*Option<&FieldData>*) -
+
+            The value of the named output field for the hit, when present. See [FieldData](FieldData.md).
+
+        - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
+
+            The hits as entity rows. See [EntityRow](../types/EntityRow.md).
+
+        - `get_output_row()` (*Result<EntityRow>*) -
+
+            The hit at the given index as an entity row. See [EntityRow](../types/EntityRow.md).
+
+    - `get_recalls()` (*&[f32]*) -
+
+        The recall rate per query vector.
+
+    - `len()` (*usize*) -
+
+        The number of hit groups returned.
+
+    - `is_empty()` (*bool*) -
+
+        Whether no hits were returned.
+
+- `session_timestamp()` (*u64*) -
+
+    The session timestamp of the search.
+
+- `cost()` (*i64*) -
+
+    The execution cost reported by the server.
+
+- `scanned_remote_bytes()` (*i64*) -
+
+    The number of bytes scanned from remote storage.
+
+- `scanned_total_bytes()` (*i64*) -
+
+    The total number of bytes scanned.
+
+- `cache_hit_ratio()` (*f32*) -
+
+    The ratio of scanned bytes served from the cache.
 
 ## Example
 

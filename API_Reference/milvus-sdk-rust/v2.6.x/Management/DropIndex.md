@@ -34,9 +34,11 @@ let request = DropIndexRequest::builder()
 
     Name of the index to drop. When empty, the index on `field_name` is dropped.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or an `Error` on failure.
 

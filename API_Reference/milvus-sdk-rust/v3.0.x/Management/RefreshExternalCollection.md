@@ -35,11 +35,24 @@ let request = RefreshExternalCollectionRequest::builder()
 
     Optional external-source specification as a JSON object.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<RefreshExternalCollectionResponse\>*
 
-`RefreshExternalCollectionResponse` exposes `job_id()` identifying the refresh job, usable with [GetRefreshExternalCollectionProgress](GetRefreshExternalCollectionProgress.md). Returns an `Error` on failure.
+**RETURNS:**
+
+A **RefreshExternalCollectionResponse** containing the ID of the refresh job. Returns an `Error` if the operation fails.
+
+```rust
+RefreshExternalCollectionResponse
+    job_id() // -> i64
+```
+
+**METHODS:**
+
+- `job_id()` (*i64*) -
+
+    The ID of the refresh job.
 
 ## Example
 

@@ -33,9 +33,11 @@ let request = DropCollectionFieldRequest::builder()
 
     ID of the field to drop. Exactly one of `field_name` or `field_id` must be specified.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

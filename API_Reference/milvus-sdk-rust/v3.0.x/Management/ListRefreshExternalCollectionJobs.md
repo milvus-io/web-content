@@ -24,11 +24,54 @@ let request = ListRefreshExternalCollectionJobsRequest::builder()
 
     Name of the collection whose refresh jobs are listed. When empty, refresh jobs of all collections in the database are returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListRefreshExternalCollectionJobsResponse\>*
 
-`ListRefreshExternalCollectionJobsResponse` exposes `jobs()` returning a slice of `RefreshExternalCollectionJobInfo`, each with the job id, collection name, state, progress, and reason. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListRefreshExternalCollectionJobsResponse** containing the refresh jobs. Returns an `Error` if the operation fails.
+
+```rust
+ListRefreshExternalCollectionJobsResponse
+    jobs() // -> &[RefreshExternalCollectionJobInfo]
+```
+
+**METHODS:**
+
+- `jobs()` (*&[RefreshExternalCollectionJobInfo]*) -
+
+    The refresh jobs.
+
+    - `get_job_id()` (*i64*) -
+
+        The ID of the refresh job.
+
+    - `get_collection_name()` (*&str*) -
+
+        The name of the refreshed collection.
+
+    - `get_state()` (*RefreshExternalCollectionStateCode*) -
+
+        The state of the refresh job.
+
+    - `get_progress()` (*i32*) -
+
+        The progress of the refresh job.
+
+    - `get_reason()` (*&str*) -
+
+        The failure reason, when the job failed.
+
+    - `get_external_source()` (*&str*) -
+
+        The external source of the refreshed data.
+
+    - `get_start_time()` (*u64*) -
+
+        The start time of the refresh job.
+
+    - `get_end_time()` (*u64*) -
 
 ## Example
 

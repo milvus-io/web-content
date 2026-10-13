@@ -36,11 +36,24 @@ let request = PinSnapshotDataRequest::builder()
 
     Number of seconds the pin stays valid before auto-expiring; `0` means the pin never expires. Must not be negative.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<PinSnapshotDataResponse\>*
 
-`PinSnapshotDataResponse` exposes `pin_id()` identifying the data pin, usable with [UnpinSnapshotData](UnpinSnapshotData.md). Returns an `Error` on failure.
+**RETURNS:**
+
+A **PinSnapshotDataResponse** containing the ID of the pin. Returns an `Error` if the operation fails.
+
+```rust
+PinSnapshotDataResponse
+    pin_id() // -> i64
+```
+
+**METHODS:**
+
+- `pin_id()` (*i64*) -
+
+    The ID of the pin.
 
 ## Example
 

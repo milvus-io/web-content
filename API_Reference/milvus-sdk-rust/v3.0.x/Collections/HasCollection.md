@@ -24,11 +24,24 @@ let request = HasCollectionRequest::builder()
 
     Name of the collection to check. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<HasCollectionResponse\>*
 
-`HasCollectionResponse` exposes `exists()` returning whether the collection exists. Returns `Error` on failure.
+**RETURNS:**
+
+A **HasCollectionResponse** indicating whether the collection exists. Returns an `Error` if the operation fails.
+
+```rust
+HasCollectionResponse
+    exists() // -> bool
+```
+
+**METHODS:**
+
+- `exists()` (*bool*) -
+
+    Whether the collection exists.
 
 ## Example
 

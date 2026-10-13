@@ -28,11 +28,29 @@ let request = GetLoadStateRequest::builder()
 
     Partition names to check the load state of. Use `partition_name()` to add one.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetLoadStateResponse\>*
 
-`GetLoadStateResponse` exposes `state()` returning a `LoadState` value (`NotExist`, `NotLoad`, `Loading`, `Loaded`, or `Unknown`) and `progress()` returning the loading progress. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetLoadStateResponse** containing the load state and progress of the target. Returns an `Error` if the operation fails.
+
+```rust
+GetLoadStateResponse
+    state() // -> LoadState
+    progress() // -> i64
+```
+
+**METHODS:**
+
+- `state()` (*LoadState*) -
+
+    The load state of the collection or partition.
+
+- `progress()` (*i64*) -
+
+    The loading progress as a percentage.
 
 ## Example
 

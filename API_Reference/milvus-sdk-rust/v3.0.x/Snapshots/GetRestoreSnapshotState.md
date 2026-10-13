@@ -20,11 +20,58 @@ let request = GetRestoreSnapshotStateRequest::builder()
 
     Identifier of the restore job, as returned by [RestoreSnapshot](RestoreSnapshot.md). Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetRestoreSnapshotStateResponse\>*
 
-`GetRestoreSnapshotStateResponse` exposes `job_info()` returning a `RestoreSnapshotJobInfo` with the job id, snapshot and collection names, `RestoreSnapshotStateCode` state, progress percentage, failure reason, start time, and time cost. Returns an `Error` on failure.
+**RETURNS:**
+
+A **GetRestoreSnapshotStateResponse** containing the restore job information. Returns an `Error` if the operation fails.
+
+```rust
+GetRestoreSnapshotStateResponse
+    job_info() // -> &RestoreSnapshotJobInfo
+```
+
+**METHODS:**
+
+- `job_info()` (*&RestoreSnapshotJobInfo*) -
+
+    The restore job information.
+
+    - `get_job_id()` (*i64*) -
+
+        The ID of the restore job.
+
+    - `get_snapshot_name()` (*&str*) -
+
+        The name of the snapshot being restored.
+
+    - `get_database_name()` (*&str*) -
+
+        The database that holds the restored collection.
+
+    - `get_collection_name()` (*&str*) -
+
+        The collection being restored.
+
+    - `get_state()` (*RestoreSnapshotStateCode*) -
+
+        The state of the restore job.
+
+    - `get_progress()` (*i32*) -
+
+        The progress of the restore job.
+
+    - `get_reason()` (*&str*) -
+
+        The failure reason, when the job failed.
+
+    - `get_start_time()` (*u64*) -
+
+        
+
+    - `get_time_cost()` (*u64*) -
 
 ## Example
 

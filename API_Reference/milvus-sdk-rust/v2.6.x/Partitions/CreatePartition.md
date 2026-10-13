@@ -32,9 +32,11 @@ let request = CreatePartitionRequest::builder()
 
     Name of the partition. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

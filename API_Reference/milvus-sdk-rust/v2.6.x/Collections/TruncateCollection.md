@@ -24,9 +24,11 @@ let request = TruncateCollectionRequest::builder()
 
     Name of the collection to truncate. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

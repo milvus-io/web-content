@@ -35,9 +35,11 @@ let request = AddCollectionFunctionRequest::builder()
 
     The function to add, including its name and type. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

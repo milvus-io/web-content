@@ -25,9 +25,11 @@ let request = AlterRoleRequest::builder()
 
     New description of the role.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

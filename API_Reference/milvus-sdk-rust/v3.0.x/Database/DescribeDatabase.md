@@ -20,11 +20,39 @@ let request = DescribeDatabaseRequest::builder()
 
     Name of the database to describe. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeDatabaseResponse\>*
 
-`DescribeDatabaseResponse` exposes `database_name()`, `database_id()`, `created_timestamp()`, and `properties()` returning the database properties as a `HashMap<String, String>`. Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeDatabaseResponse** containing the database details. Returns an `Error` if the operation fails.
+
+```rust
+DescribeDatabaseResponse
+    database_name() // -> &str
+    database_id() // -> i64
+    created_timestamp() // -> u64
+    properties() // -> &HashMap<String, String>
+```
+
+**METHODS:**
+
+- `database_name()` (*&str*) -
+
+    The name of the database.
+
+- `database_id()` (*i64*) -
+
+    The ID of the database.
+
+- `created_timestamp()` (*u64*) -
+
+    The timestamp when the database was created.
+
+- `properties()` (*&HashMap<String, String>*) -
+
+    The properties of the database.
 
 ## Example
 

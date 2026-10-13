@@ -69,9 +69,11 @@ Each dumped message is passed to the `on_message` callback.
 
     Returns the message properties.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` when the stream is fully consumed, or `Error` on failure. Returning an error from the callback aborts the dump.
 

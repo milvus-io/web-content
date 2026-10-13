@@ -17,11 +17,24 @@ let request = ListUsersRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListUsersResponse\>*
 
-`ListUsersResponse` exposes `usernames()` returning the user names visible to the caller. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListUsersResponse** containing the names of the users. Returns an `Error` if the operation fails.
+
+```rust
+ListUsersResponse
+    usernames() // -> &[String]
+```
+
+**METHODS:**
+
+- `usernames()` (*&[String]*) -
+
+    The names of the users.
 
 ## Example
 

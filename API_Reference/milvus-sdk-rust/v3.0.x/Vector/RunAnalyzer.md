@@ -51,11 +51,52 @@ let request = RunAnalyzerRequest::builder()
 
     Names of the analyzers to run.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<RunAnalyzerResponse\>*
 
-`RunAnalyzerResponse` exposes `results()` returning one `AnalyzerResult` per input text; each result contains the analyzed `AnalyzerToken` list. Returns `Error` on failure.
+**RETURNS:**
+
+A **RunAnalyzerResponse** containing the tokens produced for each analyzed text. Returns an `Error` if the operation fails.
+
+```rust
+RunAnalyzerResponse
+    results() // -> &[AnalyzerResult]
+```
+
+**METHODS:**
+
+- `results()` (*&[AnalyzerResult]*) -
+
+    The analyzer results, one per input text.
+
+    - `get_tokens()` (*&[AnalyzerToken]*) -
+
+        The tokens produced by the analyzer.
+
+        - `get_text()` (*&str*) -
+
+            The token text.
+
+        - `get_start_offset()` (*i64*) -
+
+            The start offset of the token in the input text.
+
+        - `get_end_offset()` (*i64*) -
+
+            The end offset of the token in the input text.
+
+        - `get_position()` (*i64*) -
+
+            The position of the token.
+
+        - `get_position_length()` (*i64*) -
+
+            The number of positions the token spans.
+
+        - `get_hash()` (*u32*) -
+
+            The hash of the token.
 
 ## Example
 

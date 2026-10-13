@@ -28,11 +28,77 @@ let request = GetReplicateInfoRequest::builder()
 
     Physical channel of the target cluster. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetReplicateInfoResponse\>*
 
-`GetReplicateInfoResponse` exposes `checkpoint()`, returning a `ReplicateCheckpoint`, and `salvage_checkpoint()`, returning an optional salvage checkpoint. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetReplicateInfoResponse** containing the replication checkpoints. Returns an `Error` if the operation fails.
+
+```rust
+GetReplicateInfoResponse
+    checkpoint() // -> &ReplicateCheckpoint
+    salvage_checkpoint() // -> Option<&ReplicateCheckpoint>
+```
+
+**METHODS:**
+
+- `checkpoint()` (*&ReplicateCheckpoint*) -
+
+    The replication checkpoint.
+
+    - `get_cluster_id()` (*&str*) -
+
+        The cluster ID of the checkpoint.
+
+    - `get_physical_channel()` (*&str*) -
+
+        The physical channel of the checkpoint.
+
+    - `get_message_id()` (*&ReplicateMessageId*) -
+
+        The message ID of the checkpoint.
+
+        - `get_id()` (*&str*) -
+
+            The message ID.
+
+        - `get_wal_name()` (*WalName*) -
+
+            The WAL name of the message.
+
+    - `get_time_tick()` (*u64*) -
+
+        The time tick of the checkpoint.
+
+- `salvage_checkpoint()` (*Option<&ReplicateCheckpoint>*) -
+
+    The salvage checkpoint, when present.
+
+    - `get_cluster_id()` (*&str*) -
+
+        The cluster ID of the checkpoint.
+
+    - `get_physical_channel()` (*&str*) -
+
+        The physical channel of the checkpoint.
+
+    - `get_message_id()` (*&ReplicateMessageId*) -
+
+        The message ID of the checkpoint.
+
+        - `get_id()` (*&str*) -
+
+            The message ID.
+
+        - `get_wal_name()` (*WalName*) -
+
+            The WAL name of the message.
+
+    - `get_time_tick()` (*u64*) -
+
+        The time tick of the checkpoint.
 
 ## Example
 

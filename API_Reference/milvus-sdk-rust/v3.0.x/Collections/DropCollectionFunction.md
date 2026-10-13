@@ -31,9 +31,11 @@ let request = DropCollectionFunctionRequest::builder()
 
     Name of the function to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

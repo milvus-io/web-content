@@ -40,11 +40,24 @@ let request = RestoreSnapshotRequest::builder()
 
     Name of the new collection to create. Must not already exist. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<RestoreSnapshotResponse\>*
 
-`RestoreSnapshotResponse` exposes `job_id()` identifying the asynchronous restore job, usable with [GetRestoreSnapshotState](GetRestoreSnapshotState.md). Returns an `Error` on failure.
+**RETURNS:**
+
+A **RestoreSnapshotResponse** containing the ID of the restore job. Returns an `Error` if the operation fails.
+
+```rust
+RestoreSnapshotResponse
+    job_id() // -> i64
+```
+
+**METHODS:**
+
+- `job_id()` (*i64*) -
+
+    The ID of the restore job.
 
 ## Example
 

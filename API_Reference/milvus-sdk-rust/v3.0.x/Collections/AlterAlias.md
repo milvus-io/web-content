@@ -29,9 +29,11 @@ let request = AlterAliasRequest::builder()
 
     The alias to repoint. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

@@ -53,9 +53,11 @@ let request = LoadCollectionRequest::builder()
 
     Resource groups that host the loaded replicas.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

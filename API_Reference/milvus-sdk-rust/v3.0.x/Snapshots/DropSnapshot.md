@@ -29,9 +29,11 @@ let request = DropSnapshotRequest::builder()
 
     Name of the snapshot to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

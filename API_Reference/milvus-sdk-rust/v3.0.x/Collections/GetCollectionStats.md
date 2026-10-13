@@ -24,11 +24,34 @@ let request = GetCollectionStatsRequest::builder()
 
     Name of the collection to inspect. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetCollectionStatsResponse\>*
 
-`GetCollectionStatsResponse` exposes `name()` returning the collection name, `row_count()` returning the server-reported row count (when present), and `statistics()` returning the full key-value statistics map. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetCollectionStatsResponse** containing the collection statistics. Returns an `Error` if the operation fails.
+
+```rust
+GetCollectionStatsResponse
+    name() // -> &str
+    row_count() // -> Option<i64>
+    statistics() // -> &HashMap<String, String>
+```
+
+**METHODS:**
+
+- `name()` (*&str*) -
+
+    The name of the collection the statistics describe.
+
+- `row_count()` (*Option<i64>*) -
+
+    The server-reported row count, when present.
+
+- `statistics()` (*&HashMap<String, String>*) -
+
+    The full key-value statistics map, including the server-reported row count when present.
 
 ## Example
 

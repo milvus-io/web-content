@@ -74,7 +74,7 @@ pub struct CollectionDesc
 
 - `consistency_level: ConsistencyLevel`
 
-    Default consistency level of the collection.
+    Default consistency level of the collection. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `properties: HashMap<String, String>`
 

@@ -30,9 +30,11 @@ let request = TransferNodeRequest::builder()
 
     Number of query nodes to transfer. Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

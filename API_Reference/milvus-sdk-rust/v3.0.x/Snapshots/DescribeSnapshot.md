@@ -29,11 +29,49 @@ let request = DescribeSnapshotRequest::builder()
 
     Name of the snapshot to describe. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeSnapshotResponse\>*
 
-`DescribeSnapshotResponse` exposes `name()`, `description()`, `collection_name()`, `partition_names()` returning the partitions included in the snapshot, `create_ts()` returning the create timestamp, and `s3_location()` returning the location of the snapshot meta file when exported. Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeSnapshotResponse** containing the snapshot details. Returns an `Error` if the operation fails.
+
+```rust
+DescribeSnapshotResponse
+    name() // -> &str
+    description() // -> &str
+    collection_name() // -> &str
+    partition_names() // -> &[String]
+    create_ts() // -> i64
+    s3_location() // -> &str
+```
+
+**METHODS:**
+
+- `name()` (*&str*) -
+
+    The name of the snapshot.
+
+- `description()` (*&str*) -
+
+    The description of the snapshot.
+
+- `collection_name()` (*&str*) -
+
+    The collection the snapshot was taken from.
+
+- `partition_names()` (*&[String]*) -
+
+    The partitions covered by the snapshot.
+
+- `create_ts()` (*i64*) -
+
+    The timestamp when the snapshot was created.
+
+- `s3_location()` (*&str*) -
+
+    The S3 location of the snapshot data.
 
 ## Example
 

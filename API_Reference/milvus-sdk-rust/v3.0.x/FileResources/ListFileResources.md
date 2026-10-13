@@ -15,11 +15,32 @@ pub async fn list_file_resources(
 let request = ListFileResourcesRequest::builder().build()?;
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListFileResourcesResponse\>*
 
-`ListFileResourcesResponse` exposes `resources()`, returning a slice of `FileResourceInfo`, each exposing `name()` and `path()`. Returns `Error` on failure.
+**RETURNS:**
+
+A **ListFileResourcesResponse** containing the file resources of the collection. Returns an `Error` if the operation fails.
+
+```rust
+ListFileResourcesResponse
+    resources() // -> &[FileResourceInfo]
+```
+
+**METHODS:**
+
+- `resources()` (*&[FileResourceInfo]*) -
+
+    The file resources associated with the collection.
+
+    - `get_name()` (*&str*) -
+
+        The name of the file resource.
+
+    - `get_path()` (*&str*) -
+
+        The storage path of the file resource.
 
 ## Example
 

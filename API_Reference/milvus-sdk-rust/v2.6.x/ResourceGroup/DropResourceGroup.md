@@ -20,9 +20,11 @@ let request = DropResourceGroupRequest::builder()
 
     Name of the resource group to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

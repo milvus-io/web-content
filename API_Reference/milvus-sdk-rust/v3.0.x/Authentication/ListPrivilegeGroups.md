@@ -17,11 +17,32 @@ let request = ListPrivilegeGroupsRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListPrivilegeGroupsResponse\>*
 
-`ListPrivilegeGroupsResponse` exposes `groups()` returning a slice of `PrivilegeGroupInfo`, each carrying a group name and its privilege list. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListPrivilegeGroupsResponse** containing the privilege groups. Returns an `Error` if the operation fails.
+
+```rust
+ListPrivilegeGroupsResponse
+    groups() // -> &[PrivilegeGroupInfo]
+```
+
+**METHODS:**
+
+- `groups()` (*&[PrivilegeGroupInfo]*) -
+
+    The privilege groups defined in the cluster.
+
+    - `get_group_name()` (*&str*) -
+
+        The name of the privilege group.
+
+    - `get_privileges()` (*&[String]*) -
+
+        The privileges in the group.
 
 ## Example
 

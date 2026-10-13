@@ -45,9 +45,11 @@ let request = GrantPrivilegeRequest::builder()
 
     Legacy v1 object name. Must be paired with `object_type`; mutually exclusive with `collection_name`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

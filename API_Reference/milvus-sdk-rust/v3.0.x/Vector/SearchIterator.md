@@ -37,11 +37,29 @@ let mut iterator = client.search_iterator(request).await?;
 
     Optional total number of hits to iterate before stopping.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<SearchIterator\>*
 
-Returns a `SearchIterator`. Call `next()` to receive the next `SearchResponse` batch (`None` when exhausted) and `close()` when done. Returns `Error` on failure.
+**RETURNS:**
+
+A **SearchIterator** used to page through the search results in batches. Returns an `Error` if the operation fails.
+
+```rust
+SearchIterator
+    next() // -> Result<Option<response::dql::SearchResponse>>
+    close() // -> Result<()>
+```
+
+**METHODS:**
+
+- `next()` (*Result<Option<response::dql::SearchResponse>>*) -
+
+    Fetches the next batch of search results, or `None` when exhausted.
+
+- `close()` (*Result<()>*) -
+
+    Closes the iterator and releases server resources.
 
 ## Example
 

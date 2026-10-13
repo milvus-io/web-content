@@ -17,11 +17,24 @@ let request = ListResourceGroupsRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListResourceGroupsResponse\>*
 
-`ListResourceGroupsResponse` exposes `group_names()` returning the resource-group names visible in the current database. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListResourceGroupsResponse** containing the names of the resource groups. Returns an `Error` if the operation fails.
+
+```rust
+ListResourceGroupsResponse
+    group_names() // -> &[String]
+```
+
+**METHODS:**
+
+- `group_names()` (*&[String]*) -
+
+    The names of the resource groups.
 
 ## Example
 
