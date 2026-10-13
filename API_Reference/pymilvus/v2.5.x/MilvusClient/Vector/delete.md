@@ -71,7 +71,7 @@ A dictionary contains the number of deleted entities.
 
 ```python
 {
-    "delete_cnt": int
+    "delete_count": int
 }
 ```
 
