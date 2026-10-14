@@ -7,7 +7,6 @@ This operation deletes an existing user.
 ```python
 delete_user(
     user: str,
-    password: str,
     using: str,
     timeout: float | None
 )
@@ -20,14 +19,6 @@ delete_user(
     **[REQUIRED]**
 
     The name of the new user to delete.
-
-- **password** (*string*) - 
-
-    **[REQUIRED]**
-
-    The corresponding password to the new user to create.
-
-    Setting this to an incorrect password results in a **MilvusException**.
 
 - **using** (*string*) - 
 
@@ -62,7 +53,7 @@ from pymilvus import connections, utility
 connections.connect()
 
 # Delete an existing user
-user = utility.delete_user(user="admin", password="123456")
+user = utility.delete_user(user="admin")
 ```
 
 ## Related operations

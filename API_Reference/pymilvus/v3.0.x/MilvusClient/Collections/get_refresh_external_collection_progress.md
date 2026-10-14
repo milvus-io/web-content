@@ -109,6 +109,8 @@ A **RefreshExternalCollectionJobInfo** object that records the details of the sp
 ## Example
 
 ```python
+import time
+
 from pymilvus import MilvusClient
 
 # 1. Set up a milvus client
@@ -128,10 +130,10 @@ while True:
     if progress.state == "RefreshCompleted":
         elapsed = progress.end_time - progress.start_time
         print(f"  Completed in {elapsed}ms")
-        return job_id
+        break
     elif progress.state == "RefreshFailed":
         print(f"  Failed: {progress.reason}")
-        return job_id
+        break
 
     time.sleep(2)
 ```

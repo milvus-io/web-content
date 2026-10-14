@@ -54,6 +54,6 @@ Demonstrates dump messages usage.
 from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
-for message in client.dump_messages(pchannel="by-dev-rootcoord-dml_0", start_message_id={"id": "message-id", "wal_name": "default"}, start_timetick=0, timeout=30):
+for message in client.dump_messages(pchannel="by-dev-rootcoord-dml_0", start_message_id={"id": "message-id", "wal_name": "RocksMQ"}, start_timetick=0, timeout=30):
     print(message)
 ```

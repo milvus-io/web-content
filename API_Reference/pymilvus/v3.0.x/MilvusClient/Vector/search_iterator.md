@@ -17,7 +17,9 @@ search_iterator(
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
-    round_decimal: int = -1
+    round_decimal: int = -1,
+    *,
+    external_filter_func: Optional[Callable[[Hits], Union[Hits, List[Hit]]]] = None,
     **kwargs,
 ) -> List[List[dict]]
 ```
@@ -41,10 +43,6 @@ search_iterator(
 - **batch_size** (*int*) -
 
     The number of entities to return each iteration. The default value is 1000.
-
-- **anns_field** (*str*) -
-
-    The name of the target vector field of the current search.
 
 - **filter** (*str*) -
 
@@ -118,13 +116,15 @@ search_iterator(
 
     The number of decimal places for distance values. The default value is -1, which indicates that no rounding is applied.
 
+- **external_filter_func** (*Callable*) -
+
+    A client-side callback that filters each page of search hits.
+
+    The callback receives the `Hits` object of a page and returns the filtered `Hits` object or a list of `Hit` objects. This argument is keyword-only and is supported by Search Iterator V2.
+
 - **kwargs** -
 
-    - **round_decimal** (int) -
-
-        The number of decimal places that Milvus rounds the calculated distances to.
-
-        The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+    Additional arguments to pass to the search operation.
 
 **RETURN TYPE:**
 

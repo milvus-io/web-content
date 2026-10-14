@@ -7,6 +7,7 @@ This operation lists all snapshot names. Optionally filter by collection name to
 ```python
 list_snapshots(
     collection_name: str = "",
+    db_name: str = "",
     timeout: Optional[float] = None,
     **kwargs
 ) -> List[str]
@@ -16,6 +17,9 @@ list_snapshots(
 
 - **collection_name** (*str*) -
 An optional collection name to filter snapshots. If empty, all snapshots are listed.
+
+- **db_name** (*str*) -
+An optional database name to filter snapshots. If empty, the default database is used.
 
 - **timeout** (*Optional[float]*) -
 An optional duration of time in seconds to allow for the RPC.
@@ -46,6 +50,6 @@ snapshots = client.list_snapshots(collection_name="my_collection")
 print(snapshots)
 # ['backup_20260401', 'backup_20260418']
 
-# List all snapshots across all collections
-all_snapshots = client.list_snapshots()
+# List snapshots for another collection
+all_snapshots = client.list_snapshots(collection_name="my_other_collection")
 ```

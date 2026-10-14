@@ -14,7 +14,12 @@ wait_for_loading_complete(
 ```
 
 **PARAMETERS:**
-**collection_name** (*str*) -
+
+- **collection_name** (*str*) -
+
+    **[REQUIRED]**
+
+    The name of the collection to wait on.
 
 - **partition_names** (*list[str]*) -
 
@@ -54,11 +59,7 @@ from pymilvus import connections, utility
 # Connect to localhost:19530
 connections.connect()
 
-# Get an existing collection
-collection = Collection("test_collection")
-
-# Load the collection data
-collection.load()
+# This example assumes that a collection named "test_collection" already exists and has been loaded.
 
 # Wait until the load process completes
 utility.wait_for_loading_complete(

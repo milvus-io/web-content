@@ -6,11 +6,18 @@ This operation returns whether a flush-all operation has completed. Use this aft
 
 ```python
 client.get_flush_all_state(
+    flush_all_ts: int,
     timeout: float = None
 ) -> bool
 ```
 
 **PARAMETERS:**
+
+- **flush_all_ts** (*int*) -
+
+    **[REQUIRED]**
+
+    The timestamp returned by the flush-all operation that identifies the target flush-all round.
 
 - **timeout** (*float* | *None*) -
 
@@ -43,6 +50,6 @@ client = MilvusClient(
 client.flush_all()
 
 # Check if flush completed
-is_done = client.get_flush_all_state()
+is_done = client.get_flush_all_state(flush_all_ts=0)
 print(is_done)  # True or False
 ```

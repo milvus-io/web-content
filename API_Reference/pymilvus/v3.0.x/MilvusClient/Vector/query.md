@@ -10,6 +10,7 @@ query(
     filter: str,
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
+    ids: Optional[Union[List, str, int]] = None,
     partition_names: Optional[List[str]] = None,
     **kwargs,
 ) -> List[dict]
@@ -50,6 +51,12 @@ query(
 - **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+- **ids** (*list* | *str* | *int* | *None*) -
+
+    A list of primary key values of the entities to query directly.
+
+    This parameter is mutually exclusive with **filter**; when set, entities are located by their primary key values instead of a boolean expression.
 
 - **partition_names** (*list[str]* | *None*) -
 

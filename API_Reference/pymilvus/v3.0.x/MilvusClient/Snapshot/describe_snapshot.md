@@ -7,6 +7,8 @@ This operation retrieves detailed metadata about a specific snapshot, including 
 ```python
 describe_snapshot(
     snapshot_name: str,
+    collection_name: str,
+    db_name: str = "",
     timeout: Optional[float] = None,
     **kwargs
 ) -> SnapshotInfo
@@ -17,6 +19,13 @@ describe_snapshot(
 - **snapshot_name** (*str*) -
 **[REQUIRED]**
 The name of the snapshot to describe.
+
+- **collection_name** (*str*) -
+**[REQUIRED]**
+The name of the collection the snapshot belongs to.
+
+- **db_name** (*str*) -
+The name of the database that holds the collection. If this parameter is left empty, the default database is used.
 
 - **timeout** (*Optional[float]*) -
 An optional duration of time in seconds to allow for the RPC.
@@ -79,7 +88,7 @@ from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530")
 
-info = client.describe_snapshot(snapshot_name="backup_20260418")
+info = client.describe_snapshot(snapshot_name="backup_20260418", collection_name="my_collection")
 print(f"Snapshot: {info.name}")
 print(f"Collection: {info.collection_name}")
 print(f"Partitions: {info.partition_names}")

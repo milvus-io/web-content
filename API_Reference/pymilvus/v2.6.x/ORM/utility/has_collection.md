@@ -50,8 +50,8 @@ from pymilvus import connections, utility
 # Connect to localhost:19530
 connections.connect()
 
-# Check whether a partition exists
-collection.has_collection(
+# Check whether a collection exists
+utility.has_collection(
     collection_name="test_collection",
 ) # True
 ```
