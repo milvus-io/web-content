@@ -36,21 +36,23 @@ insert(InsertReq.builder()
 
     The name of the target partition.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *InsertResp*
 
+**RETURNS:**
+
 An **InsertResp** object containing information about the number of inserted entities.
 
-- **InsertCnt** (*long*)
+- `getInsertCnt()` (*long*) -
 
     The number of inserted entities.
 
-- **primaryKeys** (*List\<Object\>*)
+- `getPrimaryKeys()` (*List<Object>*) -
 
     The primary keys of the inserted entities.
 
-- **cost** (*Long*)
+- `getCost()` (*Long*) -
 
     The cost of the operation in milliseconds. Available in v2.6.25 or later.
 

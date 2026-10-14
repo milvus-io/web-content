@@ -6,9 +6,11 @@ This operation returns the name of the database currently being used by this cli
 public String currentUsedDatabase()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *String*
+
+**RETURNS:**
 
 The name of the currently active database.
 

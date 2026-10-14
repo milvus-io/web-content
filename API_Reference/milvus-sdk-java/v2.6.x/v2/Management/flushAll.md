@@ -25,9 +25,17 @@ flushAll(FlushAllReq.builder()
 
     How long to wait for the flush-all operation to finish. Values greater than zero enable synchronous waiting.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *FlushAllResp*
+
+**RETURNS:**
+
+A **FlushAllResp** object that contains the timestamp of the flush-all operation. The object exposes the following getters:
+
+- `getFlushAllTs()` (*Long*) -
+
+    The timestamp of the flush-all operation.
 
 **EXCEPTIONS:**
 

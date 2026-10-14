@@ -23,17 +23,19 @@ getCompactionPlans(GetCompactionPlansReq.builder()
 
     The ID of the compaction job returned by `compact()`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetCompactionPlansResp*
 
-**PARAMETERS:**
+**RETURNS:**
 
-- **state** (*CompactionState*)
+A **GetCompactionPlansResp** object that contains the compaction state and plans of the specified compaction job.
+
+- `getState()` (*CompactionState*) -
 
     The current state of the specified compact operation.
 
-- **plans** (*List\<CompactionPlan\>*)
+- `getPlans()` (*List\<CompactionPlan\>*) -
 
     A list of compaction plans, each of which shows which segments will be combined.
 

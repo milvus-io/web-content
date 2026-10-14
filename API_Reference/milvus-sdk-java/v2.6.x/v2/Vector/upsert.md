@@ -65,19 +65,21 @@ UpsertReq.builder()
 
             Removes every occurrence of each supplied value from an array field. It is a no-op when the base array is empty or no value matches.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *UpsertResp*
 
-- **upsertCnt** (*long*)
+**RETURNS:**
+
+- `getUpsertCnt()` (*long*) -
 
     The number of upserted entities.
 
-- **primaryKeys** (*List\<Object\>*)
+- `getPrimaryKeys()` (*List<Object>*) -
 
     The primary keys of the upserted entities.
 
-- **cost** (*Long*)
+- `getCost()` (*Long*) -
 
     The cost of the operation in milliseconds. Available in v2.6.25 or later.
 

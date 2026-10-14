@@ -28,9 +28,13 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 
     Whether a forced promote is requested when updating the replication configuration.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *UpdateReplicateConfigurationResp*
+
+**RETURNS:**
+
+A **UpdateReplicateConfigurationResp** object that confirms the replication configuration was updated.
 
 **EXCEPTIONS:**
 

@@ -14,9 +14,7 @@ public ListDatabasesResp listDatabases()
 
 A ListDatabasesResp object contains a list of all database names.
 
-**PARAMETERS:**
-
-- **databaseNames** (*List\<String\>*)
+- `getDatabaseNames()` (*List\<String\>*) -
 
     A list of database names.
 

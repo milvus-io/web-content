@@ -1,14 +1,16 @@
 # getServerVersion()
 
-This operation returns the version string of the connected Milvus serverZilliz Cloud cluster.
+This operation returns the version string of the connected Milvus server or Zilliz Cloud cluster.
 
 ```java
 public String getServerVersion()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *String*
+
+**RETURNS:**
 
 The version string of the server (e.g., `"2.6.13"`).
 

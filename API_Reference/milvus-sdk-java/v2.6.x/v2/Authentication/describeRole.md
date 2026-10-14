@@ -28,11 +28,49 @@ DescribeRoleResp resp = client.describeRole(DescribeRoleReq.builder()
 
     The name of the database that holds the target role.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeRoleResp*
 
-The response contains `roleName`, `grantInfos`, and `description`.
+**RETURNS:**
+
+A **DescribeRoleResp** object that contains `roleName`, `grantInfos`, and `description`. The object exposes the following getters:
+
+- `getRoleName()` (*String*) -
+
+    The name of the role.
+
+- `getGrantInfos()` (*List\<GrantInfo\>*) -
+
+    The privilege grants of the role. Each **GrantInfo** has the following getters:
+
+    - `getObjectType()` (*String*) -
+
+        The type of the object to which the privilege applies.
+
+    - `getObjectName()` (*String*) -
+
+        The name of the object to which the privilege applies.
+
+    - `getRoleName()` (*String*) -
+
+        The name of the role.
+
+    - `getGrantor()` (*String*) -
+
+        The name of the user who granted the privilege.
+
+    - `getPrivilege()` (*String*) -
+
+        The name of the privilege.
+
+    - `getDbName()` (*String*) -
+
+        The name of the database in which the privilege applies.
+
+- `getDescription()` (*String*) -
+
+    The description of the role.
 
 **EXCEPTIONS:**
 

@@ -91,9 +91,57 @@ hybridSearch(HybridSearchReq.builder()
 
     **Deprecated.** A Function object used for ranking. Use `functionScore` instead. See [Function](../Collections/Function.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *SearchResp*
+
+**RETURNS:**
+
+A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, and cache hit ratio. The object exposes the following getters:
+
+- `getSearchResults()` (*List\<List\<SearchResult\>\>*) -
+
+    The search results, one list per query vector. Each **SearchResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The retrieved entity data.
+
+    - `getScore()` (*Float*) -
+
+        The similarity score of the result.
+
+    - `getId()` (*Object*) -
+
+        The primary key value of the result.
+
+    - `getPrimaryKey()` (*String*) -
+
+        The primary key value rendered as a string.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the search.
+
+- `getRecalls()` (*List\<Float\>*) -
+
+    The recall values of the search, one per query vector.
+
+- `getCost()` (*Long*) -
+
+    The time cost of the search operation, in milliseconds.
+
+- `getScannedRemoteBytes()` (*Long*) -
+
+    The number of bytes scanned from remote storage.
+
+- `getScannedTotalBytes()` (*Long*) -
+
+    The total number of bytes scanned during the search.
+
+- `getCacheHitRatio()` (*Float*) -
+
+    The cache hit ratio of the search.
 
 **EXCEPTIONS:**
 

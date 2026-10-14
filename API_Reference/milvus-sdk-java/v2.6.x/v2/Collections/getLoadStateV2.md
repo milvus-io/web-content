@@ -30,17 +30,17 @@ getLoadStateV2(GetLoadStateReq.builder()
 
     An optional partition name. Omit it to inspect the collection-level load state.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetLoadStateResp*
 
-**PARAMETERS:**
+**RETURNS:**
 
-- **state** (*LoadState*)
+- `getState()` (*LoadState*) -
 
     The current load state of the collection or partition.
 
-- **progress** (*Long*)
+- `getProgress()` (*Long*) -
 
     The loading progress of the collection or partition.
 
@@ -76,4 +76,8 @@ System.out.println(resp.getProgress());
 
 - [getLoadState()](../Management/getLoadState.md)
 
+    Gets the load state of a collection or partition.
+
 - [loadCollection()](../Management/loadCollection.md)
+
+    Loads a collection into memory.

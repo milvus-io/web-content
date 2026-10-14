@@ -23,11 +23,25 @@ DescribeUserResp resp = client.describeUser(DescribeUserReq.builder()
 
     The name of the user to describe.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeUserResp*
 
-The response contains `userName`, `roles`, and `description`.
+**RETURNS:**
+
+A **DescribeUserResp** object that contains `userName`, `roles`, and `description`. The object exposes the following getters:
+
+- `getUserName()` (*String*) -
+
+    The name of the user.
+
+- `getRoles()` (*List\<String\>*) -
+
+    The roles assigned to the user.
+
+- `getDescription()` (*String*) -
+
+    The description of the user.
 
 **EXCEPTIONS:**
 

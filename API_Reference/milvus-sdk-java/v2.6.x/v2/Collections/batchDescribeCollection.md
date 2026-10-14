@@ -30,89 +30,90 @@ BatchDescribeCollectionReq.builder()
 
     The IDs of the target collections.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *List<DescribeCollectionResp>*
 
+**RETURNS:**
+
+
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
-**PARAMETERS:**
-
-- **collectionName** (*String*)
+- `getCollectionName()` (*String*) -
 
     The name of the current collection.
 
-- **collectionID** (*Long*)
+- `getCollectionID()` (*Long*) -
 
     The ID of the collection.
 
-- **databaseName** (*String*)
+- `getDatabaseName()` (*String*) -
 
     The name of the database to which the current collection belongs.
 
-- **description** (*String*)
+- `getDescription()` (*String*) -
 
     The description of the current collection.
 
-- **numOfPartitions** (*Long*)
+- `getNumOfPartitions()` (*Long*) -
 
     The number of partitions in the current collection.
 
-- **fieldNames** (*List\<String\>*)
+- `getFieldNames()` (*List\<String\>*) -
 
     A list of fields in the current collection.
 
-- **vectorFieldNames** (*List\<String\>*)
+- `getVectorFieldNames()` (*List\<String\>*) -
 
     The names of the vector fields.
 
-- **primaryFieldName** (*String*)
+- `getPrimaryFieldName()` (*String*) -
 
     The name of the primary field.
 
-- **enableDynamicField** (*Boolean*)
+- `getEnableDynamicField()` (*Boolean*) -
 
     Whether to use the reserved JSON field **&#36;meta** to save non-schema-defined fields and their values as key-value pairs.
 
-- **autoID** (*Boolean*)
+- `getAutoID()` (*Boolean*) -
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- **[collectionSchema](CollectionSchema/CollectionSchema.md)** (*CreateCollectionReq.CollectionSchema*)
+- `getCollectionSchema()` (*CreateCollectionReq.CollectionSchema*) -
 
-    The scheme of the collection.
+    The scheme of the collection. See [CollectionSchema](CollectionSchema/CollectionSchema.md).
 
-- **createTime** (*Long*)
+- `getCreateTime()` (*Long*) -
 
     The time when the collection was created.
 
-- **createUtcTime** (*Long*) -
+- `getCreateUtcTime()` (*Long*) -
 
     The time when the collection was created in UTC.
 
-- **[consistencyLevel](ConsistencyLevel.md)** (*[ConsistencyLevel](ConsistencyLevel.md)*) -
+- `getConsistencyLevel()` (*ConsistencyLevel*) -
 
-    The consistency level of the collection.
+    The consistency level of the collection. See [ConsistencyLevel](ConsistencyLevel.md).
 
-- **updateTimestamp** (*Long*)
+- `getUpdateTimestamp()` (*Long*) -
 
     The timestamp of the last metadata update of the collection. Available in v2.6.25 or later.
 
-- **consistencyLevelName** (*String*)
+- `getConsistencyLevelName()` (*String*) -
 
     The name of the consistency level of the collection. Available in v2.6.25 or later.
 
-- **aliases** (*List\<String\>*)
+- `getAliases()` (*List\<String\>*) -
 
     A list of aliases of the collection. Available in v2.6.25 or later.
 
-- **shardsNum** (*Integer*) -
+- `getShardsNum()` (*Integer*) -
 
     The number of shards in the collection.
 
-- **properties** (*Map<String, String>*) -
+- `getProperties()` (*Map<String, String>*) -
 
-    The properties of the current collection. 
+    The properties of the current collection.
 
 **EXCEPTIONS:**
 

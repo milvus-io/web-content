@@ -29,9 +29,12 @@ Collection whose import jobs should be listed.
 - **dbName** (*String*) -
 Database containing the collection.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *String*
+
+**RETURNS:**
+
 
 A JSON response containing the matching import jobs and pagination details.
 

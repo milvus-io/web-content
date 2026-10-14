@@ -41,63 +41,63 @@ describeIndex(DescribeIndexReq.builder()
 
     A timestamp for time-travel queries. Defaults to `0L`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DescribeIndexResp*
 
+**RETURNS:**
+
 A **DescribeIndexResp** object that contains the details of the specified index.
 
-**PARAMETERS:**
+- `getIndexDescriptions()` (*List\<IndexDesc\>*) -
 
-- **indexDescriptions** (*List\<IndexDesc\>*)
+    A list of index descriptions. Each **IndexDesc** object has the following getters:
 
-    A list of index descriptions. Each **IndexDesc** object has the following members:
-
-    - **fieldName** (*String*)
+    - `getFieldName()` (*String*) -
 
         The name of the field the index is built on.
 
-    - **indexName** (*String*)
+    - `getIndexName()` (*String*) -
 
         The name of the index.
 
-    - **id** (*long*)
+    - `getId()` (*long*) -
 
         The ID of the index.
 
-    - **indexType** (*[IndexType](IndexType.md)*)
+    - `getIndexType()` (*IndexType*) -
 
-        The index type.
+        The index type. See [IndexType](IndexType.md).
 
-    - **metricType** (*[MetricType](MetricType.md)*)
+    - `getMetricType()` (*MetricType*) -
 
-        The metric type.
+        The metric type. See [MetricType](MetricType.md).
 
-    - **extraParams** (*Map\<String, String\>*)
+    - `getExtraParams()` (*Map\<String, String\>*) -
 
         Additional index parameters.
 
-    - **indexedRows** (*long*)
+    - `getIndexedRows()` (*long*) -
 
         The number of rows that have been indexed.
 
-    - **totalRows** (*long*)
+    - `getTotalRows()` (*long*) -
 
         The total number of rows in the field.
 
-    - **pendingIndexRows** (*long*)
+    - `getPendingIndexRows()` (*long*) -
 
         The number of rows that are still pending indexing.
 
-    - **indexState** (*IndexBuildState*)
+    - `getIndexState()` (*IndexBuildState*) -
 
         The state of the index build.
 
-    - **indexFailedReason** (*String*)
+    - `getIndexFailedReason()` (*String*) -
 
         The reason for the index build failure, if any.
 
-    - **properties** (*Map\<String, String\>*)
+    - `getProperties()` (*Map\<String, String\>*) -
 
         The properties of the index.
 

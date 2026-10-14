@@ -34,7 +34,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 )
 ```
 
-**BUILDER METHODS**
+**BUILDER METHODS:**
 
 - `fieldName(String fieldName)`
 

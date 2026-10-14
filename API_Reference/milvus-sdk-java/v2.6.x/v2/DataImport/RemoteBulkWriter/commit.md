@@ -24,6 +24,10 @@ remoteBulkWriter.commit(
 
 *void*
 
+**RETURNS:**
+
+This operation returns no value.
+
 ## Examples
 
 ```java

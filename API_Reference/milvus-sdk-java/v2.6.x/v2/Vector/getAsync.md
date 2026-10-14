@@ -19,11 +19,21 @@ CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
 
 For the full list of `GetReq` builder methods, refer to [get()](get.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompletableFuture\<GetResp\>*
 
-A future completed with a `GetResp`, or completed exceptionally when the operation fails.
+**RETURNS:**
+
+A future completed with a `GetResp`, or completed exceptionally when the operation fails. The **GetResp** object exposes the following getters:
+
+- `getGetResults()` (*List\<QueryResp.QueryResult\>*) -
+
+    The queried entities. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The field values of the result.
 
 **EXCEPTIONS:**
 

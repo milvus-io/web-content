@@ -6,9 +6,12 @@ This operation returns the total number of rows written by this LocalBulkWriter 
 public Long getTotalRowCount()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Long*
+
+**RETURNS:**
+
 
 **EXCEPTIONS:**
 

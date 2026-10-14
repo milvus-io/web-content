@@ -43,9 +43,12 @@ Files or file groups stored in the bucket accessible to Milvus.
 - **options** (*Map<String, Object>*) -
 Additional import options passed to the server.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *String*
+
+**RETURNS:**
+
 
 A JSON response whose `data.jobId` identifies the created import job.
 

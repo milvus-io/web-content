@@ -25,9 +25,17 @@ getFlushAllState(GetFlushAllStateReq.builder()
 
     The flush-all timestamp returned by `flushAll`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetFlushAllStateResp*
+
+**RETURNS:**
+
+A **GetFlushAllStateResp** object that indicates whether the flush-all operation has completed. The object exposes the following getters:
+
+- `getFlushed()` (*Boolean*) -
+
+    Whether the flush-all operation has completed.
 
 **EXCEPTIONS:**
 
