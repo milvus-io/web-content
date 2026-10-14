@@ -6,9 +6,10 @@ This operation lists detailed information about a specific collection.
 
 ```python
 describe_collection(
-    collection_name: str, 
+    collection_name: str,
+    timeout: Optional[float] = None,
     **kwargs
-) -> Name
+) -> dict
 ```
 
 **PARAMETERS:**

@@ -55,7 +55,7 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-client.remove_privileges_to_group(
+client.remove_privileges_from_group(
     group_name="my_privilege_group",
     privileges=["ListDatabases", "DescribeDatabase"]
 )

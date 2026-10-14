@@ -84,7 +84,7 @@ client = MilvusClient(
 )
 
 # upsert properties
-properties = {"collection.ttl.seconds": 500, "mmap.enabled": true}
+properties = {"collection.ttl.seconds": 500, "mmap.enabled": True}
 
 client.alter_collection_properties(
     collection_name="collection_name", 

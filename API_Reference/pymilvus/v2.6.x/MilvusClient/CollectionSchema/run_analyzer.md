@@ -10,6 +10,9 @@ run_analyzer(
     analyzer_params: Union[str, Dict, None] = None,
     with_hash: bool = False,
     with_detail: bool = False,
+    collection_name: Optional[str] = None,
+    field_name: Optional[str] = None,
+    analyzer_names: Optional[Union[str, List[str]]] = None,
     timeout: Optional[float] = None,
 )
 ```
@@ -31,6 +34,18 @@ run_analyzer(
 - `with_detail` (*bool*) -
 
     Optional flag indicating whether to return detailed analysis output.
+
+- `collection_name` (*str* | *None*) -
+
+    The name of the collection on which to run the analyzer.
+
+- `field_name` (*str* | *None*) -
+
+    The name of the field whose analyzer settings are used to analyze the input text.
+
+- `analyzer_names` (*str* | *list[str]* | *None*) -
+
+    The name or a list of names of the built-in analyzers to run.
 
 - `timeout` (*float* | *None*) -
 

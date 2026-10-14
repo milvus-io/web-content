@@ -17,7 +17,7 @@ search_iterator(
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
-    round_decimal: int = -1
+    round_decimal: int = -1,
     **kwargs,
 ) -> List[List[dict]]
 ```
@@ -41,10 +41,6 @@ search_iterator(
 - **batch_size** (*int*) -
 
     The number of entities to return each iteration. The default value is 1000.
-
-- **anns_field** (*str*) -
-
-    The name of the target vector field of the current search.
 
 - **filter** (*str*) -
 
@@ -120,11 +116,7 @@ search_iterator(
 
 - **kwargs** -
 
-    - **round_decimal** (int) -
-
-        The number of decimal places that Milvus rounds the calculated distances to.
-
-        The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+    Additional arguments to pass to the search operation.
 
 **RETURN TYPE:**
 

@@ -7,6 +7,7 @@ This operation lists all restore snapshot jobs. Optionally filter by collection 
 ```python
 list_restore_snapshot_jobs(
     collection_name: str = "",
+    db_name: str = "",
     timeout: Optional[float] = None,
     **kwargs
 ) -> List[RestoreSnapshotJobInfo]
@@ -16,6 +17,9 @@ list_restore_snapshot_jobs(
 
 - **collection_name** (*str*) -
 An optional collection name to filter restore jobs. If empty, all restore jobs are listed.
+
+- **db_name** (*str*) -
+An optional database name to filter restore jobs. If empty, the default database is used.
 
 - **timeout** (*Optional[float]*) -
 An optional duration of time in seconds to allow for the RPC.
