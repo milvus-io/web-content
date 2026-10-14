@@ -35,6 +35,14 @@ RenameCollectionReq.builder()
 
     The name of the database to which the collection is moved.
 
+**RETURN TYPE:**
+
+*void*
+
+**RETURNS:**
+
+This operation returns no value.
+
 **EXCEPTIONS:**
 
 - **MilvusClientException**

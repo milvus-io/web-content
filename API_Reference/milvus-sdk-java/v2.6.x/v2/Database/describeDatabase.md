@@ -29,13 +29,11 @@ describeDatabase(DescribeDatabaseReq.builder()
 
 A **DescribeDatabaseResp** object that contains detailed information about the specified database.
 
-**PARAMETERS:**
-
-- **databaseName** (*String*)
+- `getDatabaseName()` (*String*) -
 
     The name of the database.
 
-- **properties** (*Map\<String, String\>*)
+- `getProperties()` (*Map\<String, String\>*) -
 
     The properties of the database.
 

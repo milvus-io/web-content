@@ -12,19 +12,23 @@ public void useDatabase(String dbName)
 useDatabase(String dbName)
 ```
 
-**PARAMETERS**
+**PARAMETERS:**
 
 - **dbName** (*String*) -
 
     The name of the target database.
 
-**RETURNS**
+**RETURN TYPE:**
 
 *void*
 
-**EXCEPTIONS**
+**RETURNS:**
 
-- InterruptedException
+This operation returns no value.
+
+**EXCEPTIONS:**
+
+- **InterruptedException**
 
     This exception will be raised when any error occurs during disconnection from Milvus.
 

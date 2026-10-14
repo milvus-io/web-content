@@ -28,9 +28,12 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 
     Whether to force-promote the local cluster as the primary cluster.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *UpdateReplicateConfigurationResp*
+
+**RETURNS:**
+
 
 **EXCEPTIONS:**
 

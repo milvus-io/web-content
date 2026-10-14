@@ -39,13 +39,11 @@ getPartitionStats(GetPartitionStatsReq.builder()
 
 A **GetPartitionStatsResp** object containing collected statistics on the specified partition.
 
-**PARAMETERS:**
-
-- **numOfEntities** (*Long*)
+- `getNumOfEntities()` (*Long*) -
 
     The count of entities in the partition.
 
-- **stats** (*Map\<String, String\>*)
+- `getStats()` (*Map\<String, String\>*) -
 
     A map of additional statistics collected on the partition.
 

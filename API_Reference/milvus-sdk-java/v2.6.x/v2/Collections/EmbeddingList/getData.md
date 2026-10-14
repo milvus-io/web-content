@@ -6,9 +6,13 @@ This getter returns the raw embedding data contained in this embedding list.
 public Object getData()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Object*
+
+**RETURNS:**
+
+The raw embedding data contained in this embedding list.
 
 **EXCEPTIONS:**
 

@@ -24,7 +24,7 @@ addFunction(
 
 *B extends FunctionScore.FunctionScoreBuilder<C, B>*
 
-**RETURNS**
+**RETURNS:**
 
 A **[FunctionScore](FunctionScore.md)** builder for chaining up multiple `addFunction()` methods.
 

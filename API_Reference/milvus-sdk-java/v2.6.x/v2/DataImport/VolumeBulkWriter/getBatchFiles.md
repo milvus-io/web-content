@@ -16,9 +16,13 @@ volumeBulkWriter.getBatchFiles()
 
 *None*
 
-**RETURNS TYPE:**
+**RETURN TYPE:**
 
 *List\<List\<String>>*
+
+**RETURNS:**
+
+A list of file paths. Each inner list holds the column-based file paths for one batch of data.
 
 ## Example
 

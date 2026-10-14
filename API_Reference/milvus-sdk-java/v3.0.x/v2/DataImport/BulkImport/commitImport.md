@@ -40,9 +40,11 @@ Uses `MilvusDescribeImportRequest` for a Milvus deployment.
 
     The import job identifier to commit.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *String*
+
+**RETURNS:**
 
 The JSON response body returned by the import endpoint.
 

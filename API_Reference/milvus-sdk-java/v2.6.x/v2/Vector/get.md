@@ -49,9 +49,7 @@ get(GetReq.builder()
 
 A **GetResp** object representing one or more queried entities.
 
-**PARAMETERS:**
-
-- **getResults** (*List\<QueryResp.QueryResult\>*)
+- `getGetResults()` (*List<QueryResp.QueryResult>*) -
 
     A list of **QueryResp.QueryResult** objects, each of which represents a queried entity.
 

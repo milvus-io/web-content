@@ -16,9 +16,13 @@ volumeBulkWriter.close()
 
 *None*
 
-**RETURNS TYPE:**
+**RETURN TYPE:**
 
 *void*
+
+**RETURNS:**
+
+This operation returns no value.
 
 ## Example
 

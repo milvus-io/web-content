@@ -6,9 +6,13 @@ This operation returns the total number of rows written by this VolumeBulkWriter
 public Long getTotalRowCount()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Long*
+
+**RETURNS:**
+
+The total number of rows written by this VolumeBulkWriter instance.
 
 **EXCEPTIONS:**
 

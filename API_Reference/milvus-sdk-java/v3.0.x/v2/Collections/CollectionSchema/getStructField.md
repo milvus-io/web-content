@@ -12,9 +12,13 @@ public CreateCollectionReq.StructFieldSchema getStructField(String fieldName)
 
     The name of the struct field.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CreateCollectionReq.StructFieldSchema*
+
+**RETURNS:**
+
+The **StructFieldSchema** with the specified name, or `null` if none is found. See [StructFieldSchema](../StructFieldSchema/StructFieldSchema.md).
 
 **EXCEPTIONS:**
 

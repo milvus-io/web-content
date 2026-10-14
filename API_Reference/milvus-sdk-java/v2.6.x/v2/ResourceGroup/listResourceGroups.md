@@ -22,9 +22,7 @@ listResourceGroups(ListResourceGroupsReq.builder()
 
 A **ListResourceGroupsResp** object is a list of group names in strings.
 
-**PARAMETERS:**
-
-- **groupNames** (*List\<String\>*)
+- `getGroupNames()` (*List\<String\>*) -
 
     A list of resource group names.
 

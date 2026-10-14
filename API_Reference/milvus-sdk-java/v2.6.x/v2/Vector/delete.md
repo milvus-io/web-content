@@ -51,17 +51,19 @@ delete(DeleteReq.builder()
 
     A map of template variable values for parameterized filters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DeleteResp*
 
+**RETURNS:**
+
 A **DeleteResp** object contains the number of deleted entities and the operation cost.
 
-- **deleteCnt** (*long*)
+- `getDeleteCnt()` (*long*) -
 
     The number of deleted entities.
 
-- **cost** (*Long*)
+- `getCost()` (*Long*) -
 
     The cost of the operation in milliseconds. Available in v2.6.25 or later.
 

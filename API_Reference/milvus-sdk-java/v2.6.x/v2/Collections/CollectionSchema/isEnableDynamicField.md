@@ -6,9 +6,13 @@ This getter returns whether the dynamic field is enabled for the collection sche
 public boolean isEnableDynamicField()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *boolean*
+
+**RETURNS:**
+
+Returns **true** if the dynamic field is enabled for the collection schema, **false** otherwise.
 
 **EXCEPTIONS:**
 

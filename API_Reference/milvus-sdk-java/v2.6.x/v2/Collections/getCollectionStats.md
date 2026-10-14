@@ -34,13 +34,11 @@ getCollectionStats(GetCollectionStatsReq.builder()
 
 A **GetCollectionStatsResp** object containing collected statistics on the specified collection.
 
-**PARAMETERS:**
-
-- **numOfEntities** (*Long*)
+- `getNumOfEntities()` (*Long*) -
 
     The count of entities in the collection.
 
-- **stats** (*Map\<String, String\>*)
+- `getStats()` (*Map\<String, String\>*) -
 
     A map of additional statistics collected on the collection.
 

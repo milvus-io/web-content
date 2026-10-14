@@ -6,45 +6,47 @@ This operation gets the current replicate configuration. Use it to inspect confi
 public GetReplicateConfigurationResp getReplicateConfiguration()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *GetReplicateConfigurationResp*
 
-**PARAMETERS:**
+**RETURNS:**
 
-- **replicateConfiguration** (*ReplicateConfiguration*)
+A **GetReplicateConfigurationResp** object that contains the current replication configuration.
 
-    The current replication configuration. It has the following members:
+- `getReplicateConfiguration()` (*ReplicateConfiguration*) -
 
-    - **clusters** (*List\<MilvusCluster\>*)
+    The current replication configuration. It has the following getters:
 
-        The Milvus clusters in the replication topology. Each **MilvusCluster** object has the following members:
+    - `getClusters()` (*List\<MilvusCluster\>*) -
 
-        - **clusterId** (*String*)
+        The Milvus clusters in the replication topology. Each **MilvusCluster** object has the following getters:
+
+        - `getClusterId()` (*String*) -
 
             The ID of the cluster.
 
-        - **uri** (*String*)
+        - `getUri()` (*String*) -
 
             The URI of the cluster.
 
-        - **token** (*String*)
+        - `getToken()` (*String*) -
 
             The access token of the cluster.
 
-        - **pchannels** (*List\<String\>*)
+        - `getPchannels()` (*List\<String\>*) -
 
             The physical channels of the cluster.
 
-    - **crossClusterTopologies** (*List\<CrossClusterTopology\>*)
+    - `getCrossClusterTopologies()` (*List\<CrossClusterTopology\>*) -
 
-        The cross-cluster topologies. Each **CrossClusterTopology** object has the following members:
+        The cross-cluster topologies. Each **CrossClusterTopology** object has the following getters:
 
-        - **sourceClusterId** (*String*)
+        - `getSourceClusterId()` (*String*) -
 
             The ID of the source cluster.
 
-        - **targetClusterId** (*String*)
+        - `getTargetClusterId()` (*String*) -
 
             The ID of the target cluster.
 

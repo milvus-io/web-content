@@ -81,11 +81,25 @@ query(QueryReq.builder()
 
     A map of template variable values for parameterized filters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryResp*
 
-A **QueryResp** object representing specific query results with the specified output fields
+**RETURNS:**
+
+A **QueryResp** object that contains query rows with the specified output fields. The object exposes the following getters:
+
+- `getQueryResults()` (*List\<QueryResult\>*) -
+
+    The query result rows. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The field values of the result row.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the query.
 
 **EXCEPTIONS:**
 

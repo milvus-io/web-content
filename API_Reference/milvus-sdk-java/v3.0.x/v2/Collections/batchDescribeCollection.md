@@ -20,16 +20,22 @@ batchDescribeCollection(BatchDescribeCollectionReq.builder()
 **BUILDER METHODS:**
 
 - `databaseName(String databaseName)` -
-The name of the database. Defaults to the current database if not specified.
+
+    The name of the database. Defaults to the current database if not specified.
 
 - `collectionNames(List<String> collectionNames)` -
 
+    A list of collection names to describe in batch.
+
 - `collectionIds(List<Long> collectionIds)` -
-A list of collection IDs to describe in batch.
+
+    A list of collection IDs to describe in batch.
+
+**RETURN TYPE:**
+
+*List\<DescribeCollectionResp\>*
 
 **RETURNS:**
-
-*List<DescribeCollectionResp>*
 
 A list of **DescribeCollectionResp** objects, one per requested collection. See [describeCollection](describeCollection.md) for the fields of each **DescribeCollectionResp**.
 

@@ -35,23 +35,29 @@ dumpMessages(DumpMessagesReq.builder()
 
     The upper timetick bound. Defaults to `0L`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *DumpMessagesResp*
 
-A **DumpMessagesResp** object that iterates over the dumped messages. Each iterated message is a **DumpMessageInfo** object with the following members:
+**RETURNS:**
 
-- **messageID** (*GetReplicateInfoResp.MessageID*)
+A **DumpMessagesResp** object that iterates over the dumped messages. Each iterated message is a **DumpMessageInfo** object with the following getters:
 
-    The ID of the message.
+- `getMessages()` (*Iterable<DumpMessageInfo>*) -
 
-- **payload** (*byte[]*)
+    The iterable of dumped messages, each of which is a **DumpMessageInfo** object.
 
-    The payload of the message.
+    - `getMessageID()` (*GetReplicateInfoResp.MessageID*) -
 
-- **properties** (*Map\<String, String\>*)
+        The ID of the message.
 
-    The properties of the message.
+    - `getPayload()` (*byte[]*) -
+
+        The payload of the message.
+
+    - `getProperties()` (*Map\<String, String\>*) -
+
+        The properties of the message.
 
 **EXCEPTIONS:**
 

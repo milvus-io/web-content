@@ -20,11 +20,25 @@ CompletableFuture<QueryResp> future = client.queryAsync(QueryReq.builder()
 
 For the full list of `QueryReq` builder methods, refer to [query()](query.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompletableFuture\<QueryResp\>*
 
-A future completed with a `QueryResp`, or completed exceptionally when the operation fails.
+**RETURNS:**
+
+A future completed with a **QueryResp** object that contains query rows with the specified output fields, or completed exceptionally when the operation fails. The **QueryResp** object exposes the following getters:
+
+- `getQueryResults()` (*List\<QueryResult\>*) -
+
+    The query result rows. Each **QueryResult** has the following getters:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The field values of the result row.
+
+- `getSessionTs()` (*long*) -
+
+    The session timestamp used for the query.
 
 **EXCEPTIONS:**
 

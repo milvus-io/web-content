@@ -45,9 +45,17 @@ CompactReq.builder()
 
     The unit of **targetSize**. Supported values are `"b"`, `"kb"`, `"mb"` (default), `"gb"`, `"tb"`, and `"pb"`. Available in v2.6.25 or later.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *CompactResp*
+
+**RETURNS:**
+
+A **CompactResp** object that contains a compaction ID. The object exposes the following getters:
+
+- `getCompactionID()` (*Long*) -
+
+    The ID of the compaction.
 
 **EXCEPTIONS:**
 

@@ -32,45 +32,45 @@ getPersistentSegmentInfo(GetPersistentSegmentInfoReq.builder()
 
 **RETURNS:**
 
-A **GetPersistentSegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following parameters:
+A **GetPersistentSegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following getters:
 
-- **segmentInfos** (*List<PersistentSegmentInfo>*) -
+- `getSegmentInfos()` (*List<PersistentSegmentInfo>*) -
 
-    A list of segments, each represented by a **PersistentSegmentInfo** object, which has the following fields
+    A list of segments, each represented by a **PersistentSegmentInfo** object, which exposes the following getters
 
-    - **segmentID** (*Long*) -
+    - `getSegmentID()` (*Long*) -
 
         The ID of the current segment.
 
-    - **collectionID** (*Long*) -
+    - `getCollectionID()` (*Long*) -
 
         The ID of the collection to which the current segment belongs.
 
-    - **partitionID** (*Long*) -
+    - `getPartitionID()` (*Long*) -
 
         The ID of the partition to which the current segment belongs.
 
-    - **collectionName** (*String*) -
+    - `getCollectionName()` (*String*) -
 
         The name of the collection to which the current segment belongs.
 
-    - **numOfRows** (*Long*) -
+    - `getNumOfRows()` (*Long*) -
 
         The number of entities in the current segment.
 
-    - **state** (*String*) -
+    - `getState()` (*String*) -
 
         The state of the current segment. Possible values are: "Growing", "Sealed", "Flushed", "Flushing", "Dropped", "Importing".
 
-    - **level** (*String*) -
+    - `getLevel()` (*String*) -
 
         The compaction level of the current segment. Possible values are : "Legacy", "L0", "L1", "L2".
 
-    - **storageVersion** (*Long*) -
+    - `getStorageVersion()` (*Long*) -
 
         The storage version of the current segment.
 
-    - **isSorted** (*Boolean*) -   
+    - `getIsSorted()` (*Boolean*) -   
 
         Whether the entities in the current segment are sorted.
 

@@ -56,11 +56,45 @@ runAnalyzer(RunAnalyzerReq.builder()
 
     A list of analyzer names to use.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *RunAnalyzerResp*
 
-A **RunAnalyzerResp** contains a list of **AnalyzerResult** objects, each of which is a list of **AnalyzerToken** objects. 
+**RETURNS:**
+
+A **RunAnalyzerResp** object that contains the analyzer output. The object exposes the following getters:
+
+- `getResults()` (*List\<AnalyzerResult\>*) -
+
+    The analysis results for the input texts. Each **AnalyzerResult** has the following getters:
+
+    - `getTokens()` (*List\<AnalyzerToken\>*) -
+
+        The tokens produced by the analyzer. Each **AnalyzerToken** has the following getters:
+
+        - `getToken()` (*String*) -
+
+            The token text.
+
+        - `getStartOffset()` (*Long*) -
+
+            The start offset of the token in the input text.
+
+        - `getEndOffset()` (*Long*) -
+
+            The end offset of the token in the input text.
+
+        - `getPosition()` (*Long*) -
+
+            The position of the token in the token sequence.
+
+        - `getPositionLength()` (*Long*) -
+
+            The number of positions the token spans.
+
+        - `getHash()` (*Long*) -
+
+            The hash value of the token.
 
 **EXCEPTIONS:**
 
