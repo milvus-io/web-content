@@ -41,7 +41,7 @@ await milvusClient.addCollectionFunction({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 
@@ -66,6 +66,8 @@ A **FunctionObject** defines a server-side function that automatically transform
     **[REQUIRED]**
 
     The function type. Possible values: `FunctionType.BM25` (sparse embeddings from text using BM25), `FunctionType.TEXTEMBEDDING` (dense embeddings from text), `FunctionType.RERANK` (reranking function).
+
+    See [FunctionType](FunctionType.md).
 
 - **input_field_names** (*string[]*) -
 

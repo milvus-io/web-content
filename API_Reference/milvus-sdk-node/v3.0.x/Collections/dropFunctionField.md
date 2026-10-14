@@ -41,7 +41,7 @@ await milvusClient.dropFunctionField({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

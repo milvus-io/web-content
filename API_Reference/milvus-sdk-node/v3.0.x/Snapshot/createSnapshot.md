@@ -49,6 +49,8 @@ A trace ID for request tracking. Optional.
 
 *Promise<ResStatus>*
 
+This method returns a promise that resolves to a **ResStatus** object.
+
 **EXCEPTIONS:**
 
 - **MilvusError**

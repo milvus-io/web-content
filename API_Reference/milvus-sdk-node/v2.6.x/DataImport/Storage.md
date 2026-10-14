@@ -18,7 +18,7 @@ interface Storage
 class S3Storage {
     async write(localPath, remotePath) {
         await uploadToS3(localPath, remotePath);
-        return \`s3://bucket/${remotePath}\`;
+        return `s3://bucket/${remotePath}`;
     }
 }
 ```

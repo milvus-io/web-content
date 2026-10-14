@@ -29,7 +29,7 @@ await milvusClient.removeFileResource({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

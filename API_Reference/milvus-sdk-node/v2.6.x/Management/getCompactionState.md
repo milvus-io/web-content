@@ -29,7 +29,9 @@ await milvusClient.getCompactionState({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise<GetCompactionStateResponse>*
+**RETURNS:**
+
+*Promise<GetCompactionStateResponse>*
 
 This method returns a promise that resolves to a **GetCompactionStateResponse** object.
 

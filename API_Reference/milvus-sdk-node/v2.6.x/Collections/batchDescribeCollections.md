@@ -38,7 +38,7 @@ A trace ID for request tracking. Optional.
 
 **RETURNS:**
 
-*Promise\<BatchDescribeCollectionResponse\>*
+*Promise<BatchDescribeCollectionResponse>*
 
 **EXCEPTIONS:**
 
@@ -57,6 +57,6 @@ const client = new MilvusClient({
 });
 
 const res = await client.batchDescribeCollections({
-    collection_names: ['collection1', 'collection2'],
+    collection_names: ['my_collection', 'hello_milvus'],
 });
 ```

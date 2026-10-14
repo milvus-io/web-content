@@ -22,7 +22,9 @@ await milvusClient.listImportJobs({
 
 **RETURNS:**
 
-*Promise<HttpImportListResponse>*
+*Promise<[HttpImportListResponse](HttpImportListResponse.md)>*
+
+This method returns a promise that resolves to a **HttpImportListResponse** object.
 
 ## Example
 

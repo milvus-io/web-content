@@ -43,7 +43,9 @@ await milvusClient.createImportJobs({
 
 **RETURNS:**
 
-*Promise<HttpImportCreateResponse>*
+*Promise<[HttpImportCreateResponse](HttpImportCreateResponse.md)>*
+
+This method returns a promise that resolves to a **HttpImportCreateResponse** object.
 
 ## Example
 

@@ -1,6 +1,6 @@
 # BulkWriterSchema
 
-This interface describes the collection schema used by `BulkWriter` to validate rows and generate JSON or Parquet files that Milvus can import.
+This interface describes the collection schema used by [`BulkWriter`](BulkWriter.md) to validate rows and generate JSON or Parquet files that Milvus can import.
 
 ```javascript
 interface BulkWriterSchema

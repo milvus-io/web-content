@@ -41,6 +41,8 @@ await milvusClient.updateReplicateConfiguration({
 
 *Promise<ResStatus>*
 
+This method returns a promise that resolves to a **ResStatus** object.
+
 **EXCEPTIONS:**
 
 - **MilvusError**

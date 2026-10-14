@@ -88,7 +88,9 @@ await milvusClient.insert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise<MutationResult>*
+**RETURNS:**
+
+*Promise<MutationResult>*
 
 This method returns a promise that resolves to a **MutationResult** object.
 

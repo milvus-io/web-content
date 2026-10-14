@@ -22,7 +22,7 @@ await milvusClient.use({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

@@ -35,7 +35,9 @@ await milvusClient.getFlushState({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<GetFlushStateResponse>*
+**RETURNS:**
+
+*Promise<GetFlushStateResponse>*
 
 This method returns a promise that resolves to a **GetFlushStateResponse** object.
 

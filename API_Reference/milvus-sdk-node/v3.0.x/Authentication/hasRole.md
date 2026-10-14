@@ -27,7 +27,9 @@ await milvusClient.hasRole({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<HasRoleResponse>*
+**RETURNS:**
+
+*Promise<HasRoleResponse>*
 
 This method returns a promise that resolves to a **HasRoleResponse** object.
 

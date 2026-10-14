@@ -58,7 +58,9 @@ await milvusClient.upsert({
 
     Partial update operations for array fields. Optional.
 
-**RETURNS** *Promise<MutationResult>*
+**RETURNS:**
+
+*Promise<MutationResult>*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
@@ -130,11 +132,9 @@ const milvusClient = new MilvusClient({
 // Upsert a single entity
 const result = await milvusClient.upsert({
     collection_name: 'my_collection',
-    data: {
-        id: 0,
-        vector: [0.62, 0.59, 0.85, 0.93, -0.42],
-        color: 'grass-green',
-    },
+    data: [
+        { id: 0, vector: [0.62, 0.59, 0.85, 0.93, -0.42], color: 'grass-green' },
+    ],
 });
 
 // Upsert multiple entities

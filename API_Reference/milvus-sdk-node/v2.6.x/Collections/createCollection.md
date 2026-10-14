@@ -675,6 +675,8 @@ await milvusClient.createCollection({
 
         Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
 
+        See [DataType](DataType.md).
+
 - **functions** (*list*)
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
@@ -797,7 +799,9 @@ await milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS:**
+
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

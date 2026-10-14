@@ -29,9 +29,9 @@ getPkFieldType({
 
 **RETURNS:**
 
-*Promise\<keyof typeof DataType\>*
+*Promise\<keyof typeof DataType\\>*
 
-The data type of the primary key field (e.g., `"Int64"`, `"VarChar"`).
+The data type of the primary key field (e.g., `"Int64"`, `"VarChar"`). See [DataType](DataType.md).
 
 ## Example
 

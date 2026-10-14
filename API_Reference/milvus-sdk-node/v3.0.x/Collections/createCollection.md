@@ -853,7 +853,9 @@ await milvusClient.createCollection({
 
     The external file resource IDs. This applies to the creation of external collections.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS:**
+
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

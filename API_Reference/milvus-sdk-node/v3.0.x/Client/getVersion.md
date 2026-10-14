@@ -6,7 +6,9 @@ This operation returns version information for the Milvus server.
 await milvusClient.getVersion()
 ```
 
-**RETURNS** *Promise<GetVersionResponse>*
+**RETURNS:**
+
+*Promise<GetVersionResponse>*
 
 This method returns a promise that resolves to a **GetVersionResponse** object.
 

@@ -22,7 +22,9 @@ await milvusClient.listGrants(data)
 
     Setting this to the name of a non-existing role may result in errors.
 
-**RETURNS** *Promise<SelectGrantResponse>*
+**RETURNS:**
+
+*Promise<SelectGrantResponse>*
 
 This method returns a promise that resolves to a **SelectGrantResponse** object.
 

@@ -32,7 +32,9 @@ await milvusClient.listImportTasks({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<ListImportTasksResponse>*
+**RETURNS:**
+
+*Promise<ListImportTasksResponse>*
 
 This method returns a promise that resolves to a **ListImportTasksResponse** object.
 

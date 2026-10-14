@@ -32,7 +32,9 @@ await milvusClient.getQuerySegmentInfo({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<GetQuerySegmentInfoResponse>*
+**RETURNS:**
+
+*Promise<GetQuerySegmentInfoResponse>*
 
 This method returns a promise that resolves to a **GetQuerySegmentInfoResponse** object.
 

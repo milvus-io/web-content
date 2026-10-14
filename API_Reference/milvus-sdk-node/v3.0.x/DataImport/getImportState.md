@@ -25,7 +25,9 @@ await milvusClient.getImportState({
 
     An optional duration of time in milliseconds to allow for the RPC.
 
-**RETURNS** *Promise<GetImportStateResponse>*
+**RETURNS:**
+
+*Promise<GetImportStateResponse>*
 
 This method returns a promise that resolves to a **GetImportStateResponse** object.
 

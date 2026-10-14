@@ -33,61 +33,53 @@ await milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns Promise\<DescribeCollectionResponse>*
+**RETURNS:**
+
+*Promise<DescribeCollectionResponse>*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
 ```javascript
 {
-    aliases: string,
+    status:  ResStatus,
+    schema: object,
     collectionID: string,
+    collection_name: string,
     consistency_level: string,
+    aliases: string[],
+    virtual_channel_names: string[],
+    physical_channel_names: string[],
+    start_positions: string[],
+    properties: KeyValuePair[],
     created_timestamp: string,
     created_utc_timestamp: string,
-    db_name: string,
+    shards_num: number,
     num_partitions: string,
-    physical_channel_names: string,
-    schema: object,
-    shards_num: int,
-    start_positions: string,
-    status: object,
-    virtual_channel_names: string  
+    db_name: string,
+    functions: FunctionObject[],
+    update_timestamp_str: string,
+    update_timestamp: number,
+    anns_fields: Record<string, FieldSchema>,
+    scalar_fields: Record<string, FieldSchema>,
+    function_fields: Record<string, FieldSchema>
 }
 ```
 
 **PARAMETERS:**
 
-- **aliases** (*string*)-
+- **status** (*object*)-
 
-    A list of the aliases of the collection.
+    - **code** (*number*) -
 
-- **collectionID** (*string*)-
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
 
-    The ID of the collection.
+    - **error_code** (*string* | *number*) -
 
-- **consistency_level** (*string*)-
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
 
-    The consistency level of the collection.
+    - **reason** (*string*) -
 
-- **created_timestamp** (*string*)-
-
-    The timestamp indicating the creation time of the collection.
-
-- **created_utc_timestamp** (*string*)-
-
-    The timestamp in UTC indicating the creation time of the collection.
-
-- **db_name** (*string*)-
-
-    The name of the cluster to which the collection belongs.
-
-- **num_partitions** (*string*)-
-
-    The number of partitions in the collection.
-
-- **physical_channel_names** (*string*)-
-
-    A list of the names of the physical channels in this collection.
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 - **schema** (*object*)-
 
@@ -107,37 +99,95 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     - **fields** (*FieldSchema[]*) -
 
-        A list of schema-defined fields. 
+        A list of schema-defined fields.
 
-    - **name** (*string*) -   
+    - **functions** (*FunctionObject[]*) -
+
+        Doc-in / doc-out functions attached to the collection (for example, the BM25 sparse-vector function).
+
+    - **struct_array_fields** (*FieldSchema[]*) -
+
+        All struct and array fields declared on the collection.
+
+    - **name** (*string*) -
 
         The name of **CollectionSchema** object.
 
-- **shards_num** (*string*)-
+- **collectionID** (*string*)-
+
+    The ID of the collection.
+
+- **collection_name** (*string*)-
+
+    The name of the collection.
+
+- **consistency_level** (*string*)-
+
+    The consistency level of the collection.
+
+- **aliases** (*string[]*)-
+
+    A list of the aliases of the collection.
+
+- **virtual_channel_names** (*string[]*)-
+
+    A list of the names of the virtual channels in this collection.
+
+- **physical_channel_names** (*string[]*)-
+
+    A list of the names of the physical channels in this collection.
+
+- **start_positions** (*string[]*)-
+
+    The start positions of the collection at the time it was created.
+
+- **properties** (*KeyValuePair[]*)-
+
+    Collection-level properties (for example, **mmap.enabled**, **collection.ttl.seconds**) declared at creation or set via `alterCollectionProperties()`.
+
+- **created_timestamp** (*string*)-
+
+    The timestamp indicating the creation time of the collection.
+
+- **created_utc_timestamp** (*string*)-
+
+    The timestamp in UTC indicating the creation time of the collection.
+
+- **shards_num** (*number*)-
 
     The number of shards in the collection.
 
-- **virtual_channel_names** (*string*)-
+- **num_partitions** (*string*)-
 
-A list of the names of the virtual channels in this collection.
+    The number of partitions in the collection.
 
-- **status** (*object*)-
+- **db_name** (*string*)-
 
-    - **code** (*number*) -
+    The name of the database to which the collection belongs.
 
-        A code that indicates the operation result. It remains **0** if this operation succeeds.
+- **functions** (*FunctionObject[]*)-
 
-    - **error_code** (*string* | *number*) -
+    A flattened list of doc-in / doc-out functions attached to the collection.
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+- **update_timestamp_str** (*string*)-
 
-    - **reason** (*string*) - 
+    The timestamp indicating the last update time of the collection, formatted as a string.
 
-        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+- **update_timestamp** (*number*)-
 
-- **shards_num** (*string*)-
+    The numeric form of the last-update timestamp.
 
-    The number of shards in the collection.
+- **anns_fields** (*Record<string, FieldSchema>*)-
+
+    A mapping from vector-field name to its **FieldSchema**, covering all vector fields declared on the collection.
+
+- **scalar_fields** (*Record<string, FieldSchema>*)-
+
+    A mapping from scalar-field name to its **FieldSchema**, covering all scalar fields declared on the collection.
+
+- **function_fields** (*Record<string, FieldSchema>*)-
+
+    A mapping from function-output-field name to its **FieldSchema**.
 
 ## Example
 

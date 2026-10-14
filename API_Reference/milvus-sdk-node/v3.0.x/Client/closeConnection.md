@@ -12,11 +12,9 @@ await milvusClient.closeConnection()
 milvusClient.closeConnection()
 ```
 
-**RETURN TYPE:**
-
-*Promise*<*CONNECT_STATUS*>
-
 **RETURNS:**
+
+*Promise<CONNECT_STATUS>*
 
 A promise that resolves to the final status of the current connection to the Milvus server, which should be `SHUTDOWN`.
 

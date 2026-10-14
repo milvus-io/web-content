@@ -41,7 +41,9 @@ await milvusClient.getPartitionStatistics({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<StatisticsResponse>*
+**RETURNS:**
+
+*Promise<StatisticsResponse>*
 
 This method returns a promise that resolves to a **StatisticsResponse** object.
 

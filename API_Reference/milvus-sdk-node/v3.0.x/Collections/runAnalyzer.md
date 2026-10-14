@@ -55,7 +55,9 @@ milvusClient.runAnalyzer({
 
     The names of the analyzers to run on the input text.
 
-**RETURNS** *Promise<RunAnalyzerResponse>*
+**RETURNS:**
+
+*Promise<RunAnalyzerResponse>*
 
 This method returns a promise that resolves to a **RunAnalyzerResponse** object.
 

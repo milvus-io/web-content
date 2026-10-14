@@ -22,7 +22,9 @@ await milvusClient.listResourceGroups({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<ListResourceGroupsResponse>*
+**RETURNS:**
+
+*Promise<ListResourceGroupsResponse>*
 
 This method returns a promise that resolves to a **ListResourceGroupsResponse** object.
 

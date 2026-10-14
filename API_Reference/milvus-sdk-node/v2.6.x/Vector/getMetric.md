@@ -27,7 +27,9 @@ await milvusClient.getMetric({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<GetMetricsResponse>*
+**RETURNS:**
+
+*Promise<GetMetricsResponse>*
 
 This method returns a promise that resolves to a **GetMetricsResponse** object.
 

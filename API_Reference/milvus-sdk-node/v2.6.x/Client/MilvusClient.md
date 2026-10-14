@@ -190,7 +190,9 @@ new MilvusClient(config: ClientConfig)
 
     Additional channel options for gRPC.
 
-**RETURNS** *MilvusClient*
+**RETURNS:**
+
+*MilvusClient*
 
 This method returns a Milvus Client instance that extends GRPC Client and handles communication with Milvus server.
 

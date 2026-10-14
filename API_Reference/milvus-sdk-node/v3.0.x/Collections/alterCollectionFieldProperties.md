@@ -46,13 +46,13 @@ await milvusClient.alterCollectionFieldProperties({
 
         The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
 
-        This is mandatory for a **DataType.VARCHAR** field.
+        This is mandatory for a **DataType.VARCHAR** field. See [DataType](DataType.md).
 
     - **max_capacity** (*number*) -
 
         The number of elements in an Array field value.
 
-        This is mandatory for a **DataType.ARRAY** field.
+        This is mandatory for a **DataType.ARRAY** field. See [DataType](DataType.md).
 
     - **mmap_enabled** (*bool*) -
 
@@ -64,7 +64,9 @@ await milvusClient.alterCollectionFieldProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS:**
+
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

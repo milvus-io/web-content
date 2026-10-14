@@ -116,7 +116,7 @@ await milvusClient.hybridSearch({
 
 **RETURNS:**
 
-*Promise\<SearchResults\>*
+*Promise<SearchResults>*
 
 This method returns a promise that resolves to a `SearchResults` object.
 

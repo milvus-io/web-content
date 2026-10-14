@@ -29,7 +29,9 @@ await milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<DescribeResourceGroupResponse>*
+**RETURNS:**
+
+*Promise<DescribeResourceGroupResponse>*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
@@ -71,7 +73,7 @@ The resource group descriptor.
 
     - **config** (*ResourceGroupConfig*) -
 
-        The capacity, transfer policy, and node-filter configuration of the group.
+        The capacity, transfer policy, and node-filter configuration of the group. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
         - **requests** (*{ node_num: number }*) -
 

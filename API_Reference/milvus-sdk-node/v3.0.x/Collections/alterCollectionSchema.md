@@ -58,7 +58,7 @@ await milvusClient.alterCollectionSchema({
 
 **RETURNS:**
 
-*Promise\<AlterCollectionSchemaResponse\>*
+*Promise<AlterCollectionSchemaResponse>*
 
 **EXCEPTIONS:**
 

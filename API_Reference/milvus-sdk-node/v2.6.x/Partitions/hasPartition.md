@@ -41,7 +41,9 @@ await milvusClient.hasPartition({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<BoolResponse>*
+**RETURNS:**
+
+*Promise<BoolResponse>*
 
 This method returns a promise that resolves to a **BoolResponse** object.
 

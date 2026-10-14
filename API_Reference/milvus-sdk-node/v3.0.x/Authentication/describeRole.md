@@ -34,7 +34,9 @@ await milvusClient.describeRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<SelectRoleResponse>*
+**RETURNS:**
+
+*Promise<SelectRoleResponse>*
 
 This method returns a promise that resolves to a **SelectRoleResponse** object.
 

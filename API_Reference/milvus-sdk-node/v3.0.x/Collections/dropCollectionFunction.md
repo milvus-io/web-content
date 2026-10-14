@@ -49,7 +49,7 @@ dropCollectionFunction({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

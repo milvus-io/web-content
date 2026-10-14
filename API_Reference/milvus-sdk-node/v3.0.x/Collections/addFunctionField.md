@@ -60,7 +60,7 @@ await milvusClient.addFunctionField({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

@@ -12,11 +12,9 @@ await milvusClient.checkHealth()
 milvusClient.checkHealth()
 ```
 
-**RETURN TYPE:**
+**RETURNS:**
 
-*Promise*<*CheckHealthResponse*>
-
-**RETURNS** *Promise<CheckHealthResponse>*
+*Promise<CheckHealthResponse>*
 
 This method returns a promise that resolves to a **CheckHealthResponse** object.
 

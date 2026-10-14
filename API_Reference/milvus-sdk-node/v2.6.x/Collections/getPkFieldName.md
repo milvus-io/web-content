@@ -29,7 +29,7 @@ getPkFieldName({
 
 **RETURNS:**
 
-*Promise\<string\>*
+*Promise<string>*
 
 The name of the primary key field.
 

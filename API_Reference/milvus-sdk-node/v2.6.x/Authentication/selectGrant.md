@@ -42,7 +42,9 @@ await milvusClient.selectGrant({
 
     An optional duration of time in milliseconds to allow for the RPC.
 
-**RETURNS** *Promise<SelectGrantResponse>*
+**RETURNS:**
+
+*Promise<SelectGrantResponse>*
 
 This method returns a promise that resolves to a **SelectGrantResponse** object.
 

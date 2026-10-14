@@ -45,7 +45,9 @@ await milvusClient.listPartitions({
 
         Indicates that only the loaded partitions are to be listed.
 
-**RETURNS** *Promise<ShowPartitionsResponse>*
+**RETURNS:**
+
+*Promise<ShowPartitionsResponse>*
 
 This method returns a promise that resolves to a **ShowPartitionsResponse** object.
 

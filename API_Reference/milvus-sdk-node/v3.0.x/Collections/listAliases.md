@@ -36,7 +36,9 @@ listAliases({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise<ListAliasesResponse>*
+**RETURNS:**
+
+*Promise<ListAliasesResponse>*
 
 This method returns a promise that resolves to a **ListAliasesResponse** object.
 
