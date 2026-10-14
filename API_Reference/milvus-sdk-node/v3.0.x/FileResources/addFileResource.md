@@ -36,7 +36,7 @@ await milvusClient.addFileResource({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

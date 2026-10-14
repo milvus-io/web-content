@@ -26,7 +26,9 @@ milvusClient.compact()
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<CompactionResponse>*
+**RETURNS:**
+
+*Promise<CompactionResponse>*
 
 This method returns a promise that resolves to a **CompactionResponse** object.
 

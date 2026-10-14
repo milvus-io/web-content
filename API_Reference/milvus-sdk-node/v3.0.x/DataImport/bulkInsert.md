@@ -49,11 +49,9 @@ await milvusClient.bulkInsert({
 
     Extra options for the current operation in key-value pairs.
 
-**RETURN TYPE:**
+**RETURNS:**
 
-*Promise*<*ImportResponse*>
-
-**RETURNS** *Promise<ImportResponse>*
+*Promise<ImportResponse>*
 
 This method returns a promise that resolves to a **ImportResponse** object.
 

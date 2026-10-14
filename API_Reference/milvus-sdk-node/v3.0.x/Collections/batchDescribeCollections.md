@@ -36,7 +36,9 @@ An optional duration of time in milliseconds to allow for the RPC. If it is set 
 - **client_request_id** (*string*) -
 A trace ID for request tracking. Optional.
 
-**RETURNS** *Promise<BatchDescribeCollectionResponse>*
+**RETURNS:**
+
+*Promise<BatchDescribeCollectionResponse>*
 
 This method returns a promise that resolves to a **BatchDescribeCollectionResponse** object.
 
@@ -78,6 +80,6 @@ const client = new MilvusClient({
 });
 
 const res = await client.batchDescribeCollections({
-    collection_names: ['collection1', 'collection2'],
+    collection_names: ['my_collection', 'hello_milvus'],
 });
 ```

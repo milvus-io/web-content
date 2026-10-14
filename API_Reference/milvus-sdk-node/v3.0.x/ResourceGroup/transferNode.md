@@ -43,7 +43,7 @@ await milvusClient.transferNode({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

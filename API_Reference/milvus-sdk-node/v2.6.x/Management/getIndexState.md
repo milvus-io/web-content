@@ -42,7 +42,9 @@ await milvusClient.getIndexState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<GetIndexStateResponse>*
+**RETURNS:**
+
+*Promise<GetIndexStateResponse>*
 
 This method returns a promise that resolves to a **GetIndexStateResponse** object.
 

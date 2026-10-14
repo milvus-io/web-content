@@ -22,7 +22,9 @@ await milvusClient.listPrivilegeGroups(data?)
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<ListPrivilegeGroupsResponse>*
+**RETURNS:**
+
+*Promise<ListPrivilegeGroupsResponse>*
 
 This method returns a promise that resolves to a **ListPrivilegeGroupsResponse** object.
 

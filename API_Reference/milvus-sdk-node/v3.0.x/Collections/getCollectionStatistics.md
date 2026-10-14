@@ -34,7 +34,9 @@ await milvusClient.getCollectionStatistics({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise<StatisticsResponse>*
+**RETURNS:**
+
+*Promise<StatisticsResponse>*
 
 This method returns a promise that resolves to a **StatisticsResponse** object.
 

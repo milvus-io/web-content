@@ -40,7 +40,9 @@ await milvusClient.flush({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<FlushResult>*
+**RETURNS:**
+
+*Promise<FlushResult>*
 
 This method returns a promise that resolves to a **FlushResult** object.
 

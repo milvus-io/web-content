@@ -25,11 +25,9 @@ await milvusClient.checkCompatibility({
 
     The error message to throw if the SDK is incompatible.
 
-**RETURN TYPE:**
-
-*Promise*<*any*>
-
 **RETURNS:**
+
+*Promise<any>*
 
 A promise that resolves to the result of the specified checker function.
 

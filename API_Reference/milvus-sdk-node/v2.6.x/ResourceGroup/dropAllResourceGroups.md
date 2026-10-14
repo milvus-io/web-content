@@ -8,7 +8,7 @@ await milvusClient.dropAllResourceGroups()
 
 **RETURNS:**
 
-*Promise\<ResStatus[]\>*
+*Promise<ResStatus[]>*
 
 An array of response statuses, one for each dropped resource group.
 

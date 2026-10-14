@@ -27,7 +27,9 @@ await milvusClient.getCompactionStateWithPlans({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<GetCompactionPlansResponse>*
+**RETURNS:**
+
+*Promise<GetCompactionPlansResponse>*
 
 This method returns a promise that resolves to a **GetCompactionPlansResponse** object.
 

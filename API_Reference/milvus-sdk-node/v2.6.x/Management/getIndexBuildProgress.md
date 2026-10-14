@@ -46,7 +46,9 @@ await milvusClient.getIndexBuildProgress({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<GetIndexBuildProgressResponse>*
+**RETURNS:**
+
+*Promise<GetIndexBuildProgressResponse>*
 
 This method returns a promise that resolves to a **GetIndexBuildProgressResponse** object.
 

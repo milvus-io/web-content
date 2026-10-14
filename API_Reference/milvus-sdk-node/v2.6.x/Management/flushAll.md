@@ -29,7 +29,7 @@ A trace ID for request tracking. Optional.
 
 **RETURNS:**
 
-*Promise\<FlushAllResponse\>*
+*Promise<FlushAllResponse>*
 
 **EXCEPTIONS:**
 

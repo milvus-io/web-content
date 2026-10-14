@@ -22,7 +22,9 @@ await milvusClient.listDatabases({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<ListDatabasesResponse>*
+**RETURNS:**
+
+*Promise<ListDatabasesResponse>*
 
 This method returns a promise that resolves to a **ListDatabasesResponse** object.
 

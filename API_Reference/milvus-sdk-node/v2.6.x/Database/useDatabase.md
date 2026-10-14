@@ -22,7 +22,9 @@ await milvusClient.useDatabase({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-**RETURNS** *Promise |<ResStatus>*
+**RETURNS:**
+
+*Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

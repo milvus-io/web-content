@@ -29,7 +29,9 @@ await milvusClient.getImportJobProgress({
 
 **RETURNS:**
 
-*Promise<HttpImportProgressResponse>*
+*Promise<[HttpImportProgressResponse](HttpImportProgressResponse.md)>*
+
+This method returns a promise that resolves to a **HttpImportProgressResponse** object.
 
 ## Example
 

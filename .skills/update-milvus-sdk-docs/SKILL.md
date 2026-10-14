@@ -1101,13 +1101,16 @@ Rules:
       The name of the collection.
   ````
 
-- **node** — the heading and type share one line, `**RETURNS** *Promise<XxxRes>*`,
-  followed by a sentence, an optional TS interface block, then the interface
-  members under `**PARAMETERS:**` (e.g. `describeCollection` →
+- **node** — the heading is `**RETURNS:**` on its own line and the type follows on
+  the next line (matching the other SDK trees), `**RETURNS:**` then
+  `*Promise<XxxRes>*`, followed by a sentence, an optional TS interface block,
+  then the interface members under `**PARAMETERS:**` (e.g. `describeCollection` →
   `Promise<DescribeCollectionResponse>` with `schema`, `collectionID`, ...).
 
   ````markdown
-  **RETURNS** *Promise<DescribeCollectionResponse>*
+  **RETURNS:**
+
+  *Promise<DescribeCollectionResponse>*
 
   This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 

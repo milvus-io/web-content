@@ -14,7 +14,7 @@ await milvusClient.search({
   collection_name: string,
   partition_names?: string[];
   anns_field?: string; 
-  data?: SearchDataType;
+  data?: SearchData | SearchData[];
   output_fields?: string[];
   limit?: number;
   offset?: number;
@@ -237,7 +237,9 @@ await milvusClient.search({
 
     The fields to order the search results by. Optional.
 
-**RETURNS** *Promise<SearchResults<T>>*
+**RETURNS:**
+
+*Promise<SearchResults<T>>*
 
 This method returns a promise that resolves to a **SearchResults<T>** object.
 

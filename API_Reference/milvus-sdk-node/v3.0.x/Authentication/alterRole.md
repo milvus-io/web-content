@@ -36,7 +36,7 @@ await milvusClient.alterRole({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

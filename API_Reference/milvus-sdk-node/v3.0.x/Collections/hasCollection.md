@@ -34,7 +34,9 @@ await milvusClient.hasCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise<BoolResponse>*
+**RETURNS:**
+
+*Promise<BoolResponse>*
 
 This method returns a promise that resolves to a **BoolResponse** object.
 

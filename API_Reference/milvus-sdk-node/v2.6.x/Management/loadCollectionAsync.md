@@ -59,7 +59,7 @@ await milvusClient.loadCollectionAsync({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

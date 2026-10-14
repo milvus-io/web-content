@@ -1,6 +1,6 @@
 # BulkWriterOptions
 
-This interface configures a `BulkWriter` instance, including schema validation, storage behavior, file format, chunk size, and local output path.
+This interface configures a [`BulkWriter`](BulkWriter.md) instance, including schema validation, storage behavior, file format, chunk size, and local output path.
 
 ```javascript
 interface BulkWriterOptions

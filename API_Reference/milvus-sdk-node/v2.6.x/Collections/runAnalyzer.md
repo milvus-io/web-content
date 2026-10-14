@@ -35,7 +35,9 @@ milvusClient({
 
     Optional flag indicating whether to include hash-based processing.
 
-**RETURNS** *Promise<RunAnalyzerResponse>*
+**RETURNS:**
+
+*Promise<RunAnalyzerResponse>*
 
 This method returns a promise that resolves to a **RunAnalyzerResponse** object.
 

@@ -44,7 +44,7 @@ await milvusClient.dropCollectionField({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

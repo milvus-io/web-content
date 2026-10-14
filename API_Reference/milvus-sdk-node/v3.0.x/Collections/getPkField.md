@@ -29,7 +29,7 @@ getPkField({
 
 **RETURNS:**
 
-*Promise\<FieldSchema\>*
+*Promise<FieldSchema>*
 
 The complete field schema object for the primary key, including name, data type, field ID, and other properties.
 

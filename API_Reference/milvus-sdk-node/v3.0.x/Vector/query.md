@@ -99,7 +99,9 @@ await milvusClient.query(data)
 
     Alias for order_by_fields. Optional.
 
-**RETURNS** *Promise<QueryResults>*
+**RETURNS:**
+
+*Promise<QueryResults>*
 
 This method returns a promise that resolves to a **QueryResults** object.
 

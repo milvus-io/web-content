@@ -33,7 +33,9 @@ await milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise<DescribeCollectionResponse>*
+**RETURNS:**
+
+*Promise<DescribeCollectionResponse>*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
@@ -44,6 +46,9 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
     collection_name: string,
     consistency_level: string,
     aliases: string[],
+    virtual_channel_names: string[],
+    physical_channel_names: string[],
+    start_positions: string[],
     properties: KeyValuePair[],
     created_timestamp: string,
     created_utc_timestamp: string,
@@ -51,10 +56,6 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
     num_partitions: string,
     db_name: string,
     functions: FunctionObject[],
-    external_source?: string,
-    external_spec?: string,
-    do_physical_backfill?: boolean,
-    file_resource_ids?: string[],
     update_timestamp_str: string,
     update_timestamp: number,
     anns_fields: Record<string, FieldSchema>,
@@ -93,6 +94,22 @@ The schema of the collection.
 
         Doc-in / doc-out functions attached to the collection (for example, the BM25 sparse-vector function).
 
+    - **struct_array_fields** (*FieldSchema[]*) -
+
+        All struct and array fields declared on the collection.
+
+    - **external_source** (*string*) -
+
+        The external source path. Optional.
+
+    - **external_spec** (*string*) -
+
+        The external spec configuration. Optional.
+
+    - **file_resource_ids** (*string[]*) -
+
+        The external file resource IDs. Optional.
+
 - **collectionID** (*string*) -
 The internal collection ID assigned by Milvus.
 
@@ -104,6 +121,15 @@ The default consistency level for queries against this collection. Possible valu
 
 - **aliases** (*string[]*) -
 A list of aliases that point to this collection.
+
+- **virtual_channel_names** (*string[]*) -
+The names of the virtual channels assigned to the collection. This value is not useful for now.
+
+- **physical_channel_names** (*string[]*) -
+The names of the physical channels assigned to the collection. This value is not useful for now.
+
+- **start_positions** (*string[]*) -
+The start positions of the collection at the time it was created.
 
 - **properties** (*KeyValuePair[]*) -
 Collection-level properties (for example, **mmap.enabled**, **collection.ttl.seconds**) declared at creation or set via `alterCollectionProperties()`.
@@ -125,22 +151,6 @@ The database that owns this collection.
 
 - **functions** (*FunctionObject[]*) -
 A flattened list of doc-in / doc-out functions attached to the collection.
-
-- **external_source** (*string*) -
-
-    The external source path. Optional.
-
-- **external_spec** (*string*) -
-
-    The external spec configuration. Optional.
-
-- **do_physical_backfill** (*boolean*) -
-
-    Whether to physically backfill external data. Optional.
-
-- **file_resource_ids** (*Array<number | string>*) -
-
-    The external file resource IDs. Optional.
 
 - **update_timestamp_str** (*string*) -
 The hybrid timestamp at which the collection was last updated, formatted as a string.

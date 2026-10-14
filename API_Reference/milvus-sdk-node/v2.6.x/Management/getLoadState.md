@@ -37,7 +37,9 @@ await milvusClient.getLoadState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise<GetLoadStateResponse>*
+**RETURNS:**
+
+*Promise<GetLoadStateResponse>*
 
 This method returns a promise that resolves to a **GetLoadStateResponse** object.
 

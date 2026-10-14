@@ -1,6 +1,6 @@
 # Formatter
 
-Serializes buffered BulkWriter columns into one or more import files through the JSON or Parquet formatter implementation.
+Serializes buffered [`BulkWriter`](BulkWriter.md) columns into one or more import files through the JSON or Parquet formatter implementation.
 
 ```javascript
 interface Formatter

@@ -32,7 +32,9 @@ await milvusClient.getPersistentSegmentInfo({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<GePersistentSegmentInfoResponse>*
+**RETURNS:**
+
+*Promise<GePersistentSegmentInfoResponse>*
 
 This method returns a promise that resolves to a **GePersistentSegmentInfoResponse** object.
 

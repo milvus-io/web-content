@@ -56,7 +56,9 @@ await milvusClient.describeAlias({
 
     The name of the collection that has the specified alias.
 
-**RETURNS** *Promise<DescribeAliasResponse>*
+**RETURNS:**
+
+*Promise<DescribeAliasResponse>*
 
 This method returns a promise that resolves to a **DescribeAliasResponse** object.
 

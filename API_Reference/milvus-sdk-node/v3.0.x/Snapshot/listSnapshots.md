@@ -32,7 +32,9 @@ An optional duration of time in milliseconds to allow for the RPC. If it is set 
 - **client_request_id** (*string*) -
 A trace ID for request tracking. Optional.
 
-**RETURNS** *Promise<ListSnapshotsResponse>*
+**RETURNS:**
+
+*Promise<ListSnapshotsResponse>*
 
 This method returns a promise that resolves to a **ListSnapshotsResponse** object.
 

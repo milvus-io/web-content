@@ -22,7 +22,7 @@ await milvusClient.listFileResources({
 
 **RETURNS:**
 
-*Promise\<ListFileResourcesResponse\>*
+*Promise<ListFileResourcesResponse>*
 
 **EXCEPTIONS:**
 

@@ -39,7 +39,7 @@ await milvusClient.loadBalance({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

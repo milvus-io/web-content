@@ -66,7 +66,7 @@ await milvusClient.queryIterator({
 
 **RETURNS:**
 
-*Promise\<AsyncIterable\<object[]\>\>*
+*Promise<AsyncIterable<object[]>>*
 
 Returns an async iterable. Each iteration yields an array of entities for that batch. Iteration ends when the total result count reaches `limit` or all matching entities are exhausted.
 

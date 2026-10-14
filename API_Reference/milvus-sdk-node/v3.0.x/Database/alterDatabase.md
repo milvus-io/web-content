@@ -46,7 +46,7 @@ await milvusClient.alterDatabase({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

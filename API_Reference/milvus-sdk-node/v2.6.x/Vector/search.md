@@ -14,7 +14,7 @@ await milvusClient.search({
   collection_name: string,
   partition_names?: string[];
   anns_field?: string; 
-  data?: SearchDataType;
+  data?: SearchData | SearchData[];
   output_fields?: string[];
   limit?: number;
   offset?: number;
@@ -283,15 +283,20 @@ await milvusClient.search({
 
                 Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.
 
-**RETURNS** *Promise\<SearchResults>*
+**RETURNS:**
+
+*Promise<SearchResults>*
 
 This method returns a promise that resolves to a **SearchResults** object.
 
 ```javascript
 {
-    status: object,
-    results: list[string],
-    recalls: list[number]
+    status:  ResStatus,
+    results: SearchResultData[] | SearchResultData[][],
+    recalls: number[],
+    session_ts: number,
+    collection_name: string,
+    all_search_count?: number
 }
 ```
 
@@ -307,27 +312,45 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
 
-    - **reason** (*string*) - 
+    - **reason** (*string*) -
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **results** (*list[object]*) -
+- **results** (*SearchResultData[]* | *SearchResultData[][]*) -
+
+    The hits returned for each query vector. When a single query vector is supplied, this is a flat **SearchResultData[]**. When a batch of query vectors is supplied, this is a nested **SearchResultData[][]** with one inner list per query.
 
     Each result object has the following keys:
 
     - **id** (*string*) -
 
-        The ID of the search result
+        The primary key of the matched row.
 
-    - **score**(*number*) -
+    - **score** (*number*) -
 
         The similarity score of the search result.
 
+    - **highlight** (*HighlightResult*) -
+
+        Set when a **highlighter** was supplied on the request; carries the highlighted fragments for matching fields.
+
     - Plus output fields and their values.
 
-- **recalls** (*list[number]*) -
+- **recalls** (*number[]*) -
 
-    Each number indicates the recall rate of a search against a query vector.
+    The estimated recall score for each query, when the search engine produced one.
+
+- **session_ts** (*number*) -
+
+    The session timestamp Milvus used to evaluate the search.
+
+- **collection_name** (*string*) -
+
+    The collection that was searched.
+
+- **all_search_count** (*number*) -
+
+    Optional. Set when the search reports the total candidate count examined.
 
 ## Example
 

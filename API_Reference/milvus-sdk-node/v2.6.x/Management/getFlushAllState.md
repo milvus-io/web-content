@@ -37,7 +37,7 @@ A trace ID for request tracking. Optional.
 
 **RETURNS:**
 
-*Promise\<GetFlushAllStateResponse\>*
+*Promise<GetFlushAllStateResponse>*
 
 **EXCEPTIONS:**
 

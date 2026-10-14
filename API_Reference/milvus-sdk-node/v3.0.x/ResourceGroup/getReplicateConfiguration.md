@@ -24,6 +24,8 @@ await milvusClient.getReplicateConfiguration({
 
 *Promise<GetReplicateConfigurationResponse>*
 
+This method returns a promise that resolves to a **GetReplicateConfigurationResponse** object.
+
 **EXCEPTIONS:**
 
 - **MilvusError**

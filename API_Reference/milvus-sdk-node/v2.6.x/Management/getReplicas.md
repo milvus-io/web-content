@@ -32,7 +32,9 @@ await milvusClient.getReplicas({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<ReplicasResponse>*
+**RETURNS:**
+
+*Promise<ReplicasResponse>*
 
 This method returns a promise that resolves to a **ReplicasResponse** object.
 

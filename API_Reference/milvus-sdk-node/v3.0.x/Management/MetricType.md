@@ -65,7 +65,3 @@ This is an enumeration that provides the following constants.
 - **DTW_IP**
 
     Sets the metric type to DTW_IP. This applies only to embedding lists.
-
-- **DTW_L2**
-
-    Sets the metric type to DTW_L2. This applies only to embedding lists.

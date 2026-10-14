@@ -48,7 +48,7 @@ await milvusClient.alterCollectionFunction({
 
 **RETURNS:**
 
-*Promise\<ResStatus\>*
+*Promise<ResStatus>*
 
 **EXCEPTIONS:**
 

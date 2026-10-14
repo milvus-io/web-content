@@ -52,6 +52,10 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Geometry**.
 
+- Timestamptz = 26
+
+    Sets the data type to **Timestamptz**.
+
 - BinaryVector = 100
 
     Sets the data type to **Binary Vector**.

@@ -22,7 +22,9 @@ connect({
 
     The version of your Node.js SDK.
 
-**RETURNS** *void*
+**RETURNS:**
+
+*void*
 
 This method returns nothing.
 

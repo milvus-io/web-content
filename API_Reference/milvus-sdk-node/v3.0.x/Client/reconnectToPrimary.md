@@ -18,7 +18,7 @@ This operation has no parameters.
 
 **RETURNS:**
 
-*Promise\<boolean\>*
+*Promise<boolean>*
 
 This method returns a promise that resolves to a **boolean** indicating whether the client successfully reconnected to the primary cluster.
 

@@ -27,7 +27,9 @@ await milvusClient.describeDatabase({
 
     RPC timeout in milliseconds. Optional.
 
-**RETURNS** *Promise<DescribeDatabaseResponse>*
+**RETURNS:**
+
+*Promise<DescribeDatabaseResponse>*
 
 This method returns a promise that resolves to a **DescribeDatabaseResponse** object.
 
