@@ -28,7 +28,7 @@ The name of the target collection.
 
 A list of names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

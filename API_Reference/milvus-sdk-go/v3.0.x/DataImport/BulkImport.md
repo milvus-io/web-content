@@ -38,7 +38,7 @@ The fully populated import option created with `NewBulkImportOption()` for self-
 
 A `BulkImportResponse` containing the assigned job ID under `Data.JobID`. Returns an error if the request cannot be marshaled, the HTTP call fails, or the server returns a non-zero status.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

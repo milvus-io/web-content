@@ -76,7 +76,7 @@ type DescribeSnapshotResponse struct {
 
     List of partition names included in the snapshot.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -28,7 +28,7 @@ result, err := client.ListResourceGroups(ctx, option)
 
 The names of all resource groups. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -34,7 +34,7 @@ result, err := client.ListRoles(ctx, option)
 
 A list of role names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

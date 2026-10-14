@@ -42,7 +42,7 @@ result, err := client.Search(ctx, option)
 
     The query vectors for the search.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithPartitions(partitionNames ...string)`
 
@@ -88,7 +88,7 @@ result, err := client.Search(ctx, option)
 
     Skips searching in growing segments for faster but potentially incomplete results.
 
-- `WithAnnParam(ap index.AnnParam)`
+- `WithAnnParam(ap [index.AnnParam](AnnParam/AnnParam.md))`
 
     Sets the approximate nearest neighbor search parameters (e.g., nprobe, ef).
 
@@ -102,13 +102,13 @@ result, err := client.Search(ctx, option)
 
 **RETURN TYPE:**
 
-*[][ResultSet](ResultSet.md), error*
+*[]*[ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 
 The search or query results containing matched entities with scores and fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

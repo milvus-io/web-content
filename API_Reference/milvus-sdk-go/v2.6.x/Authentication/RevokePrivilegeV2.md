@@ -29,7 +29,7 @@ err := client.RevokePrivilegeV2(ctx, option)
 
     The name of the target collection.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithDbName(dbName string)`
 
@@ -43,7 +43,7 @@ err := client.RevokePrivilegeV2(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

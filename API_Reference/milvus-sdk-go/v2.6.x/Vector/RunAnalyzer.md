@@ -26,7 +26,7 @@ result, err := client.RunAnalyzer(ctx, option)
 
     The text.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithAnalyzerParamsStr(params string)`
 
@@ -60,7 +60,7 @@ result, err := client.RunAnalyzer(ctx, option)
 
 The analyzer output showing how the input text is tokenized. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

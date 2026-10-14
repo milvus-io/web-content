@@ -22,13 +22,13 @@ result, err := client.DescribeResourceGroup(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.ResourceGroup, error*
+*entity.ResourceGroup, error*
 
 **RETURNS:**
 
 The resource group description including node configurations and capacity. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

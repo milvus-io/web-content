@@ -14,7 +14,7 @@ func (c *Client) GetPartitionStats(ctx context.Context, opt GetPartitionStatsOpt
 
 A map of statistics key-value pairs. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -14,7 +14,7 @@ func New(ctx context.Context, config *ClientConfig) (*Client, error)
 
 A connected Client instance ready for use. Returns an error if the connection fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

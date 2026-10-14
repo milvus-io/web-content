@@ -22,13 +22,13 @@ result, err := client.DescribeCollection(ctx, option)
 
 **RETURN TYPE:**
 
-*[collection* ](Collection.md)entity.Collection, err error*
+*[entity.Collection](Collection.md), error*
 
 **RETURNS:**
 
 The collection description including schema, fields, and properties. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

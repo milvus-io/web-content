@@ -28,7 +28,7 @@ result, err := client.HasCollection(ctx, option)
 
 A boolean indicating whether the resource exists. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -38,7 +38,7 @@ err := client.DropCollectionField(ctx, option)
 
 Returns nil after the field is dropped. Returns an error when client-side validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

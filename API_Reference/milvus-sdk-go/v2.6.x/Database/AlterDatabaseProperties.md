@@ -21,7 +21,7 @@ err := client.AlterDatabaseProperties(ctx, option)
 
     The name of the database.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithProperty(key string, value any)`
 
@@ -35,7 +35,7 @@ err := client.AlterDatabaseProperties(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

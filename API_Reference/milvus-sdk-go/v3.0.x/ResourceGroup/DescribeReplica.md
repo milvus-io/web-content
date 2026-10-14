@@ -28,7 +28,7 @@ result, err := client.DescribeReplica(ctx, option)
 
 A list of replica details including shard distribution. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

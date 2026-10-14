@@ -22,13 +22,13 @@ result, err := client.Flush(ctx, option)
 
 **RETURN TYPE:**
 
-*\*[FlushTask](FlushTask.md), error*
+*[FlushTask](FlushTask.md), error*
 
 **RETURNS:**
 
-A FlushTask that can be used to wait for the flush to complete. Returns an error if the operation fails.
+A [FlushTask](FlushTask.md) that can be used to wait for the flush to complete. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

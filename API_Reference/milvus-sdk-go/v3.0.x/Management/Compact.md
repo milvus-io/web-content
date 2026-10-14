@@ -28,7 +28,7 @@ result, err := client.Compact(ctx, option)
 
 The numeric result value. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

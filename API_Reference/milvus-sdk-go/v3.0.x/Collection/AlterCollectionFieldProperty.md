@@ -39,7 +39,7 @@ err := client.AlterCollectionFieldProperty(ctx, option)
 
 Returns nil after the field properties are altered. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

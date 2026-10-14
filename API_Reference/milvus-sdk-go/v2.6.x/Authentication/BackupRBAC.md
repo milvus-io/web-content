@@ -14,7 +14,7 @@ func (c *Client) BackupRBAC(ctx context.Context, option BackupRBACOption, callOp
 
 The full RBAC metadata snapshot including users, roles, grants, and privilege groups. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

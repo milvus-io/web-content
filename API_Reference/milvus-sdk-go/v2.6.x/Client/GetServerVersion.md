@@ -14,7 +14,7 @@ func (c *Client) GetServerVersion(ctx context.Context, option GetServerVersionOp
 
 The requested string value. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -22,13 +22,13 @@ result, err := client.DescribeDatabase(ctx, option)
 
 **RETURN TYPE:**
 
-**entity.Database, error*
+*entity.Database, error*
 
 **RETURNS:**
 
 The database description including properties. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

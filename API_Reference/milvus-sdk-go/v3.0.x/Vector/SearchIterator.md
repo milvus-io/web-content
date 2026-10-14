@@ -71,7 +71,7 @@ client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(collectionName, 
 
     The fields to include in the returned entities.
 
-- `WithConsistencyLevel(consistencyLevel entity.ConsistencyLevel)` -
+- `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))` -
 
     The consistency level for the search. Default: `Bounded`.
 
@@ -95,7 +95,7 @@ client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(collectionName, 
 
     Ignores growing segments during the search.
 
-- `WithAnnParam(ap index.AnnParam)` -
+- `WithAnnParam(ap [index.AnnParam](AnnParam/AnnParam.md))` -
 
     Sets the approximate nearest neighbor search parameters (e.g., nprobe, ef).
 
@@ -109,7 +109,7 @@ client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(collectionName, 
 
 The SearchIterator interface provides paginated access to search results. Call `Next()` repeatedly until `io.EOF` is returned.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error** - The specified collection does not exist, the server does not support search iterators, invalid parameters, or the server is unreachable.
 
@@ -164,4 +164,4 @@ The SearchIterator interface returned by the `SearchIterator()` method. It has a
 
 - `Next(ctx context.Context)` -
 
-    Returns the next batch of search results as a `ResultSet`. When all results have been consumed, returns `io.EOF` as the error.
+    Returns the next batch of search results as a [ResultSet](ResultSet.md). When all results have been consumed, returns `io.EOF` as the error.

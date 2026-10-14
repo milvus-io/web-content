@@ -22,7 +22,7 @@ err := client.RestoreRBAC(ctx, option)
 
 **BUILDER METHODS:**
 
-- `NewRestoreRBACOption(meta *entity.RBACMeta)`
+- `NewRestoreRBACOption(meta *[entity.RBACMeta](RBACMeta.md))`
 
     Creates a new option with the RBAC metadata to restore.
 
@@ -34,7 +34,7 @@ err := client.RestoreRBAC(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

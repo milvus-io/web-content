@@ -39,7 +39,7 @@ The list option created with `NewListImportJobsOption()`. Defaults to `CurrentPa
 
 A `ListImportJobsResponse` whose `Data.Records` slice contains one `ImportJobRecord` per job, including job ID, state, and progress. Returns an error if the request cannot be marshaled, the HTTP call fails, or the server returns a non-zero status.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

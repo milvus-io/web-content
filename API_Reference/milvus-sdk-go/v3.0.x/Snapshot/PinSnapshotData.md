@@ -41,7 +41,7 @@ This sets the time-to-live for the pin in seconds.
 
 The pin ID on success, or an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

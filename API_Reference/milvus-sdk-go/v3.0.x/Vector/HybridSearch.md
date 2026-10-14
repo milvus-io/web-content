@@ -47,7 +47,7 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
     Creates an ANN search sub-request for a single vector field.
 
-- `WithConsistencyLevel(cl entity.ConsistencyLevel)`
+- `WithConsistencyLevel(cl [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
     Sets the consistency level for the search.
 
@@ -67,11 +67,11 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
     Sets the reranker used to combine and rank the per-field results. Use `NewRRFReranker()` or `NewWeightedReranker()` to create one.
 
-- `WithFunctionRerankers(functionReranker *entity.Function)`
+- `WithFunctionRerankers(functionReranker *[entity.Function](../Collection/Function.md))`
 
-    Applies a scoring Function to every leg of the hybrid search on the server.
+    Applies a scoring [Function](../Collection/Function.md) to every leg of the hybrid search on the server.
 
-- `WithFunctionScore(fs *entity.FunctionScore)`
+- `WithFunctionScore(fs *[entity.FunctionScore](../Collection/FunctionScore.md))`
 
     Sets the search [FunctionScore](../Collection/FunctionScore.md) (functions plus score options such as boost mode).
 
@@ -81,13 +81,13 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
 **RETURN TYPE:**
 
-*[]ResultSet](ResultSet.md), error*
+*[]*[ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 
 The search results containing matched entities with scores and fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

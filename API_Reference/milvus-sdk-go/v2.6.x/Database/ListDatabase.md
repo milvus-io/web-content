@@ -14,7 +14,7 @@ func (c *Client) ListDatabase(ctx context.Context, option ListDatabaseOption, ca
 
 A list of names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

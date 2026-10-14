@@ -28,6 +28,16 @@ err := client.UpdatePassword(ctx, option)
 
     The new password to set.
 
+**BUILDER METHODS:**
+
+- `NewUpdatePasswordOption(userName string, oldPassword string, newPassword string)`
+
+    Creates an update-password option for the specified user name, old password, and new password.
+
+- `WithDescription(description string)`
+
+    Sets a description for the password update.
+
 **RETURN TYPE:**
 
 *error*
@@ -36,7 +46,7 @@ err := client.UpdatePassword(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

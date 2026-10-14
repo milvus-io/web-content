@@ -34,7 +34,7 @@ err := client.DropIndexProperties(ctx, option)
 
 Returns nil after the index properties are dropped. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

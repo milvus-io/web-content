@@ -9,10 +9,10 @@ func (c *Client) ListSnapshots(ctx context.Context, opt ListSnapshotsOption, cal
 ## Request Syntax
 
 ```go
-option := client.NewListSnapshotsOption(collectionName).
-    WithDbName(dbName string)
+option := milvusclient.NewListSnapshotsOption(collectionName).
+    WithDbName(dbName)
 
-result, err := client.ListSnapshots(option)
+result, err := cli.ListSnapshots(ctx, option)
 ```
 
 **PARAMETERS:**
@@ -22,6 +22,10 @@ result, err := client.ListSnapshots(option)
     The name of the target collection.
 
 **BUILDER METHODS:**
+
+- `WithCollectionName(collectionName string)`
+
+    This sets the name of the target collection.
 
 - `WithDbName(dbName string)`
 
@@ -35,7 +39,7 @@ result, err := client.ListSnapshots(option)
 
 A list of snapshot names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

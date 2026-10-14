@@ -39,7 +39,7 @@ err := client.DropSnapshot(option)
 
 Returns nil on success. Returns an error if the snapshot does not exist or the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

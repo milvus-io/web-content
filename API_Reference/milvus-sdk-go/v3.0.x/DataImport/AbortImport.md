@@ -37,7 +37,7 @@ The abort option created with `NewAbortImportOption()` for self-hosted Milvus or
 
 An `AbortImportResponse` embedding the common `Status` and `Message` fields. Returns an error if the request cannot be marshaled, the HTTP call fails, or the server returns a non-zero status.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -37,7 +37,7 @@ The progress option created with `NewGetImportProgressOption()` for self-hosted 
 
 A `GetImportProgressResponse` whose `Data` field contains an `ImportProgressData` with overall progress, row counts, completion time, and per-file `Details`. Returns an error if the request cannot be marshaled, the HTTP call fails, or the server returns a non-zero status.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

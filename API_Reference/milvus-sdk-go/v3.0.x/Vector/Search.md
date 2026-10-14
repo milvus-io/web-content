@@ -73,7 +73,7 @@ This sets the number of results to skip before returning matches.
 - `WithOutputFields(fieldNames ...string)`
 This specifies which fields to return in the result sets.
 
-- `WithConsistencyLevel(consistencyLevel entity.ConsistencyLevel)`
+- `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 This sets the consistency level for the search.
 
 - `WithANNSField(annsField string)`
@@ -91,30 +91,30 @@ This enforces strict group size limits.
 - `WithIgnoreGrowing(ignoreGrowing bool)`
 This ignores growing segments during the search.
 
-- `WithAnnParam(ap index.AnnParam)`
+- `WithAnnParam(ap [index.AnnParam](AnnParam/AnnParam.md))`
 This sets the approximate nearest neighbor search parameters (e.g., nprobe, ef).
 
 - `WithSearchParam(key, value string)`
 This sets a custom search parameter key-value pair.
 
-- `WithFunctionReranker(fr *entity.Function)`
+- `WithFunctionReranker(fr *[entity.Function](../Collection/Function.md))`
 This applies a function-based reranker to the search results.
 
-- `WithFunctionScore(fs *entity.FunctionScore)`
+- `WithFunctionScore(fs *[entity.FunctionScore](../Collection/FunctionScore.md))`
 This sets the search [FunctionScore](../Collection/FunctionScore.md) (functions plus score options such as boost mode).
 
-- `WithSearchAggregation(agg *SearchAggregation)`
+- `WithSearchAggregation(agg *[SearchAggregation](SearchAggregation.md))`
 This sets a [SearchAggregation](SearchAggregation.md) spec for the search. Mutually exclusive with group-by and offset settings.
 
 **RETURN TYPE:**
 
-*[]ResultSet](ResultSet.md), error*
+*[]*[ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 
 The search or query results containing matched entities with scores and fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

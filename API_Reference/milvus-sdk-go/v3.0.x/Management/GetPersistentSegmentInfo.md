@@ -14,7 +14,7 @@ func (c *Client) GetPersistentSegmentInfo(ctx context.Context, option GetPersist
 
 A list of persistent segment details. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

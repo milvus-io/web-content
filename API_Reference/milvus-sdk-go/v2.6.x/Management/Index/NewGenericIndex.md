@@ -22,6 +22,12 @@ func NewGenericIndex(name string, params map[string]string) GenericIndex
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 
+**BUILDER METHODS:**
+
+- `WithMetricType(metricType [MetricType](../MetricType.md))`
+
+    Sets the metric type of the index.
+
 ## Example
 
 ```go

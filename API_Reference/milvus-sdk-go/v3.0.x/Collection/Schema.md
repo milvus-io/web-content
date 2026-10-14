@@ -115,11 +115,11 @@ entity.NewSchema()
 
             The interval at which Milvus retrieves temporary authentication credentials in seconds.
 
-- `WithField(field *Field) *Schema`
+- `WithField(field *[Field](Field.md)) *Schema`
 
     This appends a field definition to the schema.
 
-- `WithFunction(function *Function) *Schema`
+- `WithFunction(function *[Function](Function.md)) *Schema`
 
     This appends a built-in function definition to the schema.
 
@@ -131,7 +131,7 @@ entity.NewSchema()
 
     This returns the primary-key field name.
 
-- `PKField() *Field`
+- `PKField() *[Field](Field.md)`
 
     This returns the primary-key field definition.
 
@@ -155,7 +155,7 @@ Represents the schema of a collection, including field definitions, functions, a
 
     This indicates whether Milvus automatically generates primary keys.
 
-- **Fields** (*[]*Field*) -
+- **Fields** (*[]*[Field](Field.md)*) -
 
     This contains the collection field definitions.
 
@@ -163,7 +163,7 @@ Represents the schema of a collection, including field definitions, functions, a
 
     This indicates whether the dynamic field is enabled.
 
-- **Functions** (*[]*Function*) -
+- **Functions** (*[]*[Function](Function.md)*) -
 
     This contains the built-in function definitions.
 

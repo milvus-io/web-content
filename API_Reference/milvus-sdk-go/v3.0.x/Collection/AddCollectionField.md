@@ -14,7 +14,7 @@ func (c *Client) AddCollectionField(ctx context.Context, opt AddCollectionFieldO
 
     The name of the collection to which the field is added.
 
-- **field** (**entity.Field*) -
+- **field** (*[entity.Field](Field.md)*) -
 
     **[REQUIRED]**
 

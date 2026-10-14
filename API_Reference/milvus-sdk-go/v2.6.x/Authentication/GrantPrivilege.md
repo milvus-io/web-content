@@ -33,7 +33,7 @@ err := client.GrantPrivilege(ctx, option)
 
     The name of the object the privilege applies to.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithDbName(dbName string)`
 
@@ -47,7 +47,7 @@ err := client.GrantPrivilege(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

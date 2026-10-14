@@ -28,7 +28,7 @@ result, err := client.DescribeCollection(ctx, option)
 
 The collection description including schema, fields, and properties. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

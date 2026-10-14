@@ -44,7 +44,7 @@ err := client.CreateSnapshot(option)
 
 Returns nil on success. Returns an error if the collection does not exist, the snapshot name is already taken, or the operation fails for any other reason.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

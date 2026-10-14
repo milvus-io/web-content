@@ -14,7 +14,7 @@ func (c *Client) GetCollectionStats(ctx context.Context, opt GetCollectionOption
 
 A map of statistics key-value pairs. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -28,7 +28,7 @@ result, err := client.DescribeAlias(ctx, option)
 
 The alias details including the associated collection name. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

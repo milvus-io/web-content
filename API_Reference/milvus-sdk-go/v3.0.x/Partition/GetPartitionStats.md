@@ -34,7 +34,7 @@ result, err := client.GetPartitionStats(ctx, option)
 
 A map of partition statistics key-value pairs. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

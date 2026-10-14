@@ -14,7 +14,7 @@ func (c *Client) DropRole(ctx context.Context, opt DropRoleOption, callOpts ...g
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

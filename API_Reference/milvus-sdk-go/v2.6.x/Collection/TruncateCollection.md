@@ -29,7 +29,7 @@ err := client.TruncateCollection(
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

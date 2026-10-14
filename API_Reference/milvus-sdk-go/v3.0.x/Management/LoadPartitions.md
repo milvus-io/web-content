@@ -29,7 +29,7 @@ result, err := client.LoadPartitions(ctx, option)
 
     The partitions names.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithReplica(num int)`
 
@@ -57,9 +57,9 @@ result, err := client.LoadPartitions(ctx, option)
 
 **RETURNS:**
 
-A LoadTask that can be used to wait for the load operation to complete. Returns an error if the operation fails.
+A [LoadTask](LoadTask.md) that can be used to wait for the load operation to complete. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

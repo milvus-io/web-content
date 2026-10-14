@@ -22,6 +22,12 @@ func NewIvfRabitQIndex(metricType MetricType, nlist int) *ivfRabitQIndex
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 
+**BUILDER METHODS:**
+
+- `WithRefineType(refineType string)`
+
+    Enables refine and sets the type of the refine index used for re-ranking.
+
 ## Example
 
 ```go

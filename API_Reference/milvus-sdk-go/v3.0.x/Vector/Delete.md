@@ -24,7 +24,7 @@ result, err := client.Delete(ctx, option)
 
     The name of the target collection.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithExpr(expr string)`
 
@@ -58,7 +58,7 @@ result, err := client.Delete(ctx, option)
 
 The delete result. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

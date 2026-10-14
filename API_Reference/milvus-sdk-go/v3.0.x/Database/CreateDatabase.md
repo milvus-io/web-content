@@ -39,7 +39,7 @@ err := client.CreateDatabase(ctx, option)
 
 Returns nil after the database is created. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -20,6 +20,16 @@ err := client.CreateRole(ctx, option)
 
     The name of the role.
 
+**BUILDER METHODS:**
+
+- `NewCreateRoleOption(roleName string)`
+
+    Creates a new role option for the specified role name.
+
+- `WithDescription(description string)`
+
+    Sets a description for the role.
+
 **RETURN TYPE:**
 
 *error*
@@ -28,7 +38,7 @@ err := client.CreateRole(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

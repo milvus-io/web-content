@@ -14,7 +14,7 @@ func (c *Client) CreateCollection(ctx context.Context, option CreateCollectionOp
 
     The name of the collection to create.
 
-- **collectionSchema** (**entity.Schema*) -
+- **collectionSchema** (*[entity.Schema](Schema.md)*) -
 
     **[REQUIRED]**
 
@@ -46,11 +46,11 @@ func (c *Client) CreateCollection(ctx context.Context, option CreateCollectionOp
 
     This sets a collection property after converting the value to its string representation.
 
-- `WithConsistencyLevel(cl entity.ConsistencyLevel)`
+- `WithConsistencyLevel(cl [entity.ConsistencyLevel](ConsistencyLevel.md))`
 
     This sets the collection consistency level.
 
-- `WithMetricType(metricType entity.MetricType)`
+- `WithMetricType(metricType [entity.MetricType](../Management/MetricType.md))`
 
     This sets the metric type for the default vector index.
 

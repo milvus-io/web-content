@@ -21,7 +21,7 @@ err := client.AlterCollectionProperties(ctx, option)
 
     The collection.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithProperty(key string, value any)`
 
@@ -35,7 +35,7 @@ err := client.AlterCollectionProperties(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

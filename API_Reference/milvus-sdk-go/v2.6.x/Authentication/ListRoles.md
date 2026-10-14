@@ -14,7 +14,7 @@ func (c *Client) ListRoles(ctx context.Context, opt ListRoleOption, callOpts ...
 
 A list of names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 
