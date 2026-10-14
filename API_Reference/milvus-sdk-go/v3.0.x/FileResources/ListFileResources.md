@@ -28,7 +28,7 @@ resources, err := cli.ListFileResources(ctx, option)
 
 A list of [entity.FileResource](FileResource.md) records, each with `ID`, `Name`, and `Path` fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

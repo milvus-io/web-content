@@ -48,7 +48,7 @@ jobID, err := client.RestoreSnapshot(option)
 
 The restore job ID. Use this ID with `GetRestoreSnapshotState()` to track the restore progress. Returns an error if the snapshot does not exist or the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

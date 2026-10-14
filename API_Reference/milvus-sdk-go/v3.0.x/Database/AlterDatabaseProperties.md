@@ -39,7 +39,7 @@ err := client.AlterDatabaseProperties(ctx, option)
 
 Returns nil after the database properties are altered. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -34,7 +34,7 @@ err := client.DropFunctionField(ctx, option)
 
 Returns nil after the function is dropped. Returns an error when client-side validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

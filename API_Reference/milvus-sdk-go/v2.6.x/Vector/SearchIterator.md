@@ -35,11 +35,11 @@ result, err := client.SearchIterator(ctx, option)
 
     The name of the target collection.
 
-- **[vector](Vector.md)** (*entity.Vector*)
+- **vector** (*entity.Vector*)
 
     The query vectors for similarity search.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithBatchSize(batchSize int)`
 
@@ -109,7 +109,7 @@ result, err := client.SearchIterator(ctx, option)
 
 A SearchIterator for paginating through search results. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

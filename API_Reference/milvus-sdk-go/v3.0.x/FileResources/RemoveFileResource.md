@@ -34,7 +34,7 @@ err := cli.RemoveFileResource(ctx, option)
 
 Returns nil on success, or an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

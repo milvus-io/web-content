@@ -20,7 +20,7 @@ func (c *Client) Close(ctx context.Context) error
 
 Returns nil on success, or an error if the underlying connection failed to close.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

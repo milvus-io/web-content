@@ -29,21 +29,25 @@ result, err := client.CreateIndex(ctx, option)
 
     The index.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithIndexName(indexName string)`
 
     Sets the name of the index.
 
+- `WithExtraParam(key string, value any)`
+
+    Adds an extra index build parameter key-value pair. This method mutates the option in place and does not return the option, so it cannot be chained.
+
 **RETURN TYPE:**
 
-**[CreateIndexTask](CreateIndexTask.md), error*
+*[CreateIndexTask](CreateIndexTask.md), error*
 
 **RETURNS:**
 
 A CreateIndexTask that can be used to wait for the index build to complete. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

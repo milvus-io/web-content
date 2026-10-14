@@ -24,6 +24,16 @@ err := client.CreateUser(ctx, option)
 
     The password for the user.
 
+**BUILDER METHODS:**
+
+- `NewCreateUserOption(userName string, password string)`
+
+    Creates a new user option for the specified user name and password.
+
+- `WithDescription(description string)`
+
+    Sets a description for the user.
+
 **RETURN TYPE:**
 
 *error*
@@ -32,7 +42,7 @@ err := client.CreateUser(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

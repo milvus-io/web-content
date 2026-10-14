@@ -25,7 +25,7 @@ err := client.AlterCollectionFieldProperty(ctx, option)
 
     The name of the field.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithProperty(key string, value any)`
 
@@ -39,7 +39,7 @@ err := client.AlterCollectionFieldProperty(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

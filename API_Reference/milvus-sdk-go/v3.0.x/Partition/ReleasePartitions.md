@@ -34,7 +34,7 @@ err := client.ReleasePartitions(ctx, option)
 
 Returns nil after the partitions are released. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

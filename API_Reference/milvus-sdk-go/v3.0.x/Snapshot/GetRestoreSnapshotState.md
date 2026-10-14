@@ -80,7 +80,7 @@ type RestoreSnapshotInfo struct {
 
     Time cost in milliseconds.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

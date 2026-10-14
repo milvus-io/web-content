@@ -18,6 +18,16 @@ func NewIvfRabitQAnnParam(nprobe int) *ivfRabitQAnnParam
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
+**BUILDER METHODS:**
+
+- `WithRabitQueryBits(rbqQueryBits int)`
+
+    Sets the number of bits used for the RaBitQ query.
+
+- `WithRefineK(refineK int)`
+
+    Sets how many candidates the refine index re-ranks. Only useful on an index built with `WithRefineType`.
+
 ## Example
 
 ```go

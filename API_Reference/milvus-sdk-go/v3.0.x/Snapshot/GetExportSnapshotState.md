@@ -34,7 +34,7 @@ info, err := cli.GetExportSnapshotState(ctx, option)
 
 The durable state of the specified export snapshot job. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

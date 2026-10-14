@@ -8,13 +8,13 @@ func (c *Client) ListPrivilegeGroups(ctx context.Context, option ListPrivilegeGr
 
 **RETURN TYPE:**
 
-*[]*entity.PrivilegeGroup, error*
+*[]*[entity.PrivilegeGroup](PrivilegeGroup.md), error*
 
 **RETURNS:**
 
 A list of privilege groups with their included privileges. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

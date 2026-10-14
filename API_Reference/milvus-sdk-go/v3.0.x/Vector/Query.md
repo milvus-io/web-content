@@ -28,7 +28,7 @@ result, err := client.Query(ctx, option)
 
     The name of the target collection.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithFilter(expr string)`
 
@@ -78,7 +78,7 @@ result, err := client.Query(ctx, option)
 
 The search or query results containing matched entities with scores and fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

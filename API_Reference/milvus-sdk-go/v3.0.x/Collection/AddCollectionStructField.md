@@ -22,7 +22,7 @@ err := client.AddCollectionStructField(ctx, option)
 
 **BUILDER METHODS:**
 
-- `NewAddCollectionStructFieldOption(collectionName string, field *entity.Field)`
+- `NewAddCollectionStructFieldOption(collectionName string, field *[entity.Field](Field.md))`
 
     Creates options to add a struct-array field. The field must use the Array data type with the Struct element type and include a struct schema. `collectionName` specifies the collection, and `field` defines the field to add.
 
@@ -34,7 +34,7 @@ err := client.AddCollectionStructField(ctx, option)
 
 Returns nil after the field is added. Returns an error when client-side validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -852,7 +852,24 @@ whose API semantics are uncertain from the source alone.
 - Operation pages: `## Request Syntax` block shows a chained-builder example; the
   `**REQUEST METHODS:**` list uses `- \`WithXxx(...)\`` + a short description.
 - `**PARAMETERS:**` for constructor/type params; `**RETURNS:**` describes the
-  return type; `**ERROR HANDLING:**` describes exceptions/Status failure.
+  return type.
+- **Error-section heading is language-specific — pick it to match the SDK's
+  error model, never blindly copy `**EXCEPTIONS:**`.** Some languages express
+  failures as returned errors/status instead of throwing, so `**EXCEPTIONS:**`
+  is wrong for them:
+  - **Go** → `**ERROR HANDLING:**`. Go returns `error` values that callers
+    check (`err != nil`); it has no exceptions. The Go tree uses
+    `**ERROR HANDLING:**` on every operation page.
+  - **Rust** → no separate error heading. The `Result<T, Error>` return already
+    carries the failure; state "Returns an `Error` if the operation fails." in
+    `**RETURNS:**` (the rust template below is the model).
+  - **Python (pymilvus) / Java / Node** → `**EXCEPTIONS:**`. These SDKs
+    raise/throw (pymilvus raises, java throws, node throws `MilvusError`), so
+    the heading is accurate.
+  - **C++** → `**ERROR HANDLING:**` — operations return `Status`/`Error`, so the
+    section names error handling even where a method can also throw.
+  - **csharp** → follow the csharp tree's own page format (it has no error
+    heading today).
 - One page per operation / per class. Refer to related types with relative links.
 
 ### Dedicated type pages & cross-links
@@ -1052,7 +1069,9 @@ Rules:
 
 - **go** — `**RETURN TYPE:**` is `*<Type>, error*` (e.g. `*entity.Collection, error*`).
   `**RETURNS:**` is a sentence; show the returned `struct` definition, then list
-  the exported fields under `**PARAMETERS:**`.
+  the exported fields under `**PARAMETERS:**`. Failure is documented under
+  `**ERROR HANDLING:**` (not `**EXCEPTIONS:**` — Go returns `error` values, it
+  does not throw exceptions).
 
   ````markdown
   **RETURN TYPE:**

@@ -14,7 +14,7 @@ func (c *Client) UseDatabase(ctx context.Context, option UseDatabaseOption) erro
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

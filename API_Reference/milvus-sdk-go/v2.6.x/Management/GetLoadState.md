@@ -32,7 +32,7 @@ result, err := client.GetLoadState(ctx, option)
 
 The current load state of the collection or partitions. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

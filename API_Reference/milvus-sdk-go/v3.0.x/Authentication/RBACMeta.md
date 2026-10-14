@@ -17,7 +17,7 @@ type RBACMeta struct {
 
     The users.
 
-- **Roles** (*[]*Role*)
+- **Roles** (*[]*[Role](Role.md)*)
 
     The list of assigned roles.
 
@@ -25,6 +25,6 @@ type RBACMeta struct {
 
     The role grants.
 
-- **PrivilegeGroups** (*[]*PrivilegeGroup*)
+- **PrivilegeGroups** (*[]*[PrivilegeGroup](PrivilegeGroup.md)*)
 
     The privilege groups.

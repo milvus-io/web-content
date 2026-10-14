@@ -34,7 +34,7 @@ result, err := client.ListAliases(ctx, option)
 
 A list of alias names for the collection. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -3,7 +3,7 @@
 This operation lists the external collection refresh jobs of all or specified collections.
 
 ```go
-func (c *Client) ListRefreshExternalCollectionJobs(ctx context.Context, option ListRefreshExternalCollectionJobsOption, callOptions ...grpc.CallOption) ([]*entity.RefreshExternalCollectionJobInfo, error) {
+func (c *Client) ListRefreshExternalCollectionJobs(ctx context.Context, option ListRefreshExternalCollectionJobsOption, callOptions ...grpc.CallOption) ([]*entity.RefreshExternalCollectionJobInfo, error)
 ```
 
 ## Request Syntax
@@ -22,11 +22,11 @@ result, err := client.ListRefreshExternalCollectionJobs(option)
 
 **RETURN TYPE:**
 
-*[]&ast;[entity.RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md)*
+*[]*[entity.RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md), error*
 
 **RETURNS:**
 
-A list of *entity.RefreshExternalCollectionJobInfo* struct, each recording the details of the an external collection refresh job.
+A list of [entity.RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md) struct, each recording the details of an external collection refresh job.
 
 ## Example
 

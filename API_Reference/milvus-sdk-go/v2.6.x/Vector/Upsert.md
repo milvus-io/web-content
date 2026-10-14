@@ -100,7 +100,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*UpsertResult, error*
+*[UpsertResult](UpsertResult.md), error*
 
 **RETURNS:**
 

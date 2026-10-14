@@ -34,7 +34,7 @@ result, err := client.DescribeAlias(ctx, option)
 
 The alias description including the alias name, the target collection, and the database name. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

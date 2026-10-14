@@ -21,7 +21,7 @@ result, err := client.DescribeRole(ctx, option)
 
     The name of the role.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithDbName(dbName string)`
 
@@ -35,7 +35,7 @@ result, err := client.DescribeRole(ctx, option)
 
 The role details including granted privileges. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

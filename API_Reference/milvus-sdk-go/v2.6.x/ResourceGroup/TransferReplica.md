@@ -33,7 +33,7 @@ err := client.TransferReplica(ctx, option)
 
     The replica num value.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithDBName(dbName string)`
 
@@ -47,7 +47,7 @@ err := client.TransferReplica(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -32,7 +32,7 @@ result, err := client.DescribeIndex(ctx, option)
 
 The index details including type, metric, and parameters. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

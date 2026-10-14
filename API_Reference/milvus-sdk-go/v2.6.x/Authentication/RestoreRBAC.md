@@ -14,7 +14,7 @@ func (c *Client) RestoreRBAC(ctx context.Context, option RestoreRBACOption, call
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

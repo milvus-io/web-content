@@ -16,7 +16,7 @@ type Index interface {
 
     Returns the name of the index.
 
-- `IndexType() IndexType`
+- `IndexType() [IndexType](../IndexType.md)`
 
     Returns the index algorithm type.
 

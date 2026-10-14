@@ -100,7 +100,7 @@ func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*InsertResult, error*
+*[InsertResult](InsertResult.md), error*
 
 **RETURNS:**
 

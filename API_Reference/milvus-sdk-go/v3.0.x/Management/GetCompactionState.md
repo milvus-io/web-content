@@ -28,7 +28,7 @@ result, err := client.GetCompactionState(ctx, option)
 
 The current state of the compaction operation. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

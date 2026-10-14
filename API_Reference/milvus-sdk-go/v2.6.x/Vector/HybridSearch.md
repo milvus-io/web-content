@@ -35,7 +35,7 @@ result, err := client.HybridSearch(ctx, option)
 
     The ann requests.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithConsistencyLevel(cl [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
@@ -67,13 +67,13 @@ result, err := client.HybridSearch(ctx, option)
 
 **RETURN TYPE:**
 
-*[][ResultSet](ResultSet.md), error*
+*[]*[ResultSet](ResultSet.md), error*
 
 **RETURNS:**
 
 The search or query results containing matched entities with scores and fields. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

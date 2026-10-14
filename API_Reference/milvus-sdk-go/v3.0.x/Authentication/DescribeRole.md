@@ -39,7 +39,7 @@ result, err := client.DescribeRole(ctx, option)
 
 The role description including the role name, description, and privileges. Returns an error if the role is not found or the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

@@ -22,13 +22,13 @@ result, err := client.RefreshLoad(ctx, option)
 
 **RETURN TYPE:**
 
-*LoadTask, error*
+*[LoadTask](LoadTask.md), error*
 
 **RETURNS:**
 
-A LoadTask that can be used to wait for the load operation to complete. Returns an error if the operation fails.
+A [LoadTask](LoadTask.md) that can be used to wait for the load operation to complete. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

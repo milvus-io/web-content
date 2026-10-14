@@ -43,7 +43,7 @@ task, err := client.CreateIndex(ctx, option)
 
 A CreateIndexTask that can be used to wait for the index build to complete. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

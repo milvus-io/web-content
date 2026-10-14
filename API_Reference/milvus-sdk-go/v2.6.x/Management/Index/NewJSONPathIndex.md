@@ -26,6 +26,12 @@ func NewJSONPathIndex(indexType IndexType, jsonCastType string, jsonPath string)
 
 An index configuration instance. Pass this to `CreateIndex()` via the index option.
 
+**BUILDER METHODS:**
+
+- `WithIndexName(name string)`
+
+    Sets the name of the index.
+
 ## Example
 
 ```go

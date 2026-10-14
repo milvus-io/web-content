@@ -57,7 +57,7 @@ jobID, err := cli.ExportSnapshot(ctx, option)
 
 The export job ID on success. Use this ID with `GetExportSnapshotState()` to track the export progress. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

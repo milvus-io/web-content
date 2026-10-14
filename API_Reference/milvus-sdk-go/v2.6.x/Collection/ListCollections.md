@@ -22,7 +22,7 @@ result, err := client.ListCollections(ctx, option)
 
 A list of names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

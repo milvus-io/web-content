@@ -28,7 +28,7 @@ result, err := client.DescribeUser(ctx, option)
 
 The user description including assigned roles. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

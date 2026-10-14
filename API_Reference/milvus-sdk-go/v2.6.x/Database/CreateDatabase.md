@@ -21,7 +21,7 @@ err := client.CreateDatabase(ctx, option)
 
     The name of the database.
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `WithProperty(key string, val any)`
 
@@ -35,7 +35,7 @@ err := client.CreateDatabase(ctx, option)
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

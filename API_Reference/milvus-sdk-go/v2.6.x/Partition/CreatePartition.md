@@ -14,7 +14,7 @@ func (c *Client) CreatePartition(ctx context.Context, opt CreatePartitionOption,
 
 Returns nil on success, or an error describing what went wrong.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

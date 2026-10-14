@@ -53,7 +53,7 @@ jobID, err := cli.RestoreExternalSnapshot(ctx, option)
 
 The restore job ID on success. Use this ID with `GetRestoreSnapshotState()` to track the restore progress. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

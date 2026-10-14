@@ -34,7 +34,7 @@ err := client.TruncateCollection(ctx, option)
 
 Returns nil after the collection is truncated. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

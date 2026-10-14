@@ -19,7 +19,7 @@ client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
 )
 ```
 
-**OPTION METHODS:**
+**BUILDER METHODS:**
 
 - `NewQueryIteratorOption(collectionName string)` -
 
@@ -43,7 +43,7 @@ client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
 
     The fields to include in the returned entities. If not specified, only the primary key field is returned.
 
-- `WithConsistencyLevel(consistencyLevel entity.ConsistencyLevel)` -
+- `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))` -
 
     The consistency level for the query. Default: `Bounded`.
 
@@ -57,7 +57,7 @@ client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
 
 The QueryIterator interface provides paginated access to query results. Call `Next()` repeatedly until `io.EOF` is returned.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error** - The specified collection does not exist, invalid parameters, or the server is unreachable.
 
@@ -102,4 +102,4 @@ The QueryIterator interface returned by the `QueryIterator()` method. It has a s
 
 - `Next(ctx context.Context)` -
 
-    Returns the next batch of query results as a `ResultSet`. When all results have been consumed, returns `io.EOF` as the error.
+    Returns the next batch of query results as a [ResultSet](ResultSet.md). When all results have been consumed, returns `io.EOF` as the error.

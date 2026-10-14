@@ -22,13 +22,13 @@ result, err := client.GetCompactionState(ctx, option)
 
 **RETURN TYPE:**
 
-*entity.CompactionState, error*
+*[entity.CompactionState](CompactionState.md), error*
 
 **RETURNS:**
 
 The current state of the compaction operation. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

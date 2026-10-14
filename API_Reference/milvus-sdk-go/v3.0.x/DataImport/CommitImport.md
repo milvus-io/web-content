@@ -37,7 +37,7 @@ The commit option created with `NewCommitImportOption()` for self-hosted Milvus 
 
 A `CommitImportResponse` embedding the common `Status` and `Message` fields. Returns an error if the request cannot be marshaled, the HTTP call fails, or the server returns a non-zero status.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

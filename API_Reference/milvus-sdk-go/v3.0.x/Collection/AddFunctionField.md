@@ -23,7 +23,7 @@ err := client.AddFunctionField(ctx, option)
 
 **BUILDER METHODS:**
 
-- `NewAddFunctionFieldOption(collectionName string, field *entity.Field, function *entity.Function, boundIndex index.Index)`
+- `NewAddFunctionFieldOption(collectionName string, field *[entity.Field](Field.md), function *[entity.Function](Function.md), boundIndex [index.Index](../Management/Index/Index.md))`
 
     Creates options to add a function field. `field` defines the function output field, `function` describes the built-in function (BM25 or MinHash), and `boundIndex` is the index bound to the output field.
 
@@ -39,7 +39,7 @@ err := client.AddFunctionField(ctx, option)
 
 Returns nil after the function field is added. Returns an error when client-side validation or the RPC fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 

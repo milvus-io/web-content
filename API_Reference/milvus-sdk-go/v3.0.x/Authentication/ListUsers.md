@@ -14,7 +14,7 @@ func (c *Client) ListUsers(ctx context.Context, opt ListUserOption, callOpts ...
 
 A list of names. Returns an error if the operation fails.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **error**
 
