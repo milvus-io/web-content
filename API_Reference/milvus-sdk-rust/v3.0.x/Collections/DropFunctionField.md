@@ -29,9 +29,11 @@ let request = DropFunctionFieldRequest::builder()
 
     Name of the function to drop. Its output fields are dropped together with it. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

@@ -20,11 +20,37 @@ let request = GetCompactionPlansRequest::builder()
 
     Identifier of the compaction action, as returned by [Compact](Compact.md). Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetCompactionPlansResponse\>*
 
-`GetCompactionPlansResponse` exposes `state()` returning the `CompactionStateCode` and `merges()` returning the list of `CompactionMerge` plans produced for the compaction. Returns an `Error` on failure.
+**RETURNS:**
+
+A **GetCompactionPlansResponse** containing the compaction state and merge plans. Returns an `Error` if the operation fails.
+
+```rust
+GetCompactionPlansResponse
+    state() // -> CompactionStateCode
+    merges() // -> &[CompactionMerge]
+```
+
+**METHODS:**
+
+- `state()` (*CompactionStateCode*) -
+
+    The state of the compaction action.
+
+- `merges()` (*&[CompactionMerge]*) -
+
+    The compaction merge plans produced by the action.
+
+    - `get_source_segment_ids()` (*&[i64]*) -
+
+        The IDs of the source segments being merged.
+
+    - `get_target_segment_id()` (*i64*) -
+
+        The ID of the target segment produced by the merge.
 
 ## Example
 

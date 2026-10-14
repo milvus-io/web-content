@@ -28,11 +28,24 @@ let request = BatchDescribeCollectionsRequest::builder()
 
     Collection IDs to describe, as an alternative to names. Use `collection_id()` to add one; each ID must be positive.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<BatchDescribeCollectionsResponse\>*
 
-`BatchDescribeCollectionsResponse` exposes `descriptions()` returning one `CollectionDesc` per described collection. Returns `Error` on failure.
+**RETURNS:**
+
+A **BatchDescribeCollectionsResponse** containing the descriptions of the collections. Returns an `Error` if the operation fails.
+
+```rust
+BatchDescribeCollectionsResponse
+    descriptions() // -> &[CollectionDesc]
+```
+
+**METHODS:**
+
+- `descriptions()` (*&[CollectionDesc]*) -
+
+    The descriptions of the collections. See [CollectionDesc](../types/CollectionDesc.md).
 
 ## Example
 

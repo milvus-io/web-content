@@ -23,9 +23,11 @@ let request = RemoveFileResourceRequest::builder()
 
     Name of the resource to remove. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

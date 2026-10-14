@@ -20,11 +20,44 @@ let request = GetCompactionStateRequest::builder()
 
     Identifier of the compaction action, as returned by [Compact](Compact.md). Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetCompactionStateResponse\>*
 
-`GetCompactionStateResponse` exposes `state()` returning the `CompactionStateCode`, and `executing_plans()`, `timed_out_plans()`, `completed_plans()`, and `failed_plans()` with the per-plan tallies. Returns an `Error` on failure.
+**RETURNS:**
+
+A **GetCompactionStateResponse** containing the compaction state and plan counts. Returns an `Error` if the operation fails.
+
+```rust
+GetCompactionStateResponse
+    state() // -> CompactionStateCode
+    executing_plans() // -> i64
+    timed_out_plans() // -> i64
+    completed_plans() // -> i64
+    failed_plans() // -> i64
+```
+
+**METHODS:**
+
+- `state()` (*CompactionStateCode*) -
+
+    The state of the compaction action.
+
+- `executing_plans()` (*i64*) -
+
+    The number of compaction plans still executing.
+
+- `timed_out_plans()` (*i64*) -
+
+    The number of compaction plans that timed out.
+
+- `completed_plans()` (*i64*) -
+
+    The number of compaction plans completed.
+
+- `failed_plans()` (*i64*) -
+
+    The number of compaction plans that failed.
 
 ## Example
 

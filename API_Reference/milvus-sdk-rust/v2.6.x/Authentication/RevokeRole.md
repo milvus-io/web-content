@@ -25,9 +25,11 @@ let request = RevokeRoleRequest::builder()
 
     Name of the role to remove. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

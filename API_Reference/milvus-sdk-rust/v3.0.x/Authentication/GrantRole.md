@@ -25,9 +25,11 @@ let request = GrantRoleRequest::builder()
 
     Name of the role to assign. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

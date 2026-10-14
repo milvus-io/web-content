@@ -24,11 +24,58 @@ let request = ListRestoreSnapshotJobsRequest::builder()
 
     Name of the collection whose restore jobs are listed. When empty, restore jobs of all collections in the database are returned.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListRestoreSnapshotJobsResponse\>*
 
-`ListRestoreSnapshotJobsResponse` exposes `jobs()` returning a slice of `RestoreSnapshotJobInfo`, each with the job id, snapshot and collection names, state, progress, reason, start time, and time cost. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListRestoreSnapshotJobsResponse** containing the restore jobs. Returns an `Error` if the operation fails.
+
+```rust
+ListRestoreSnapshotJobsResponse
+    jobs() // -> &[RestoreSnapshotJobInfo]
+```
+
+**METHODS:**
+
+- `jobs()` (*&[RestoreSnapshotJobInfo]*) -
+
+    The restore jobs.
+
+    - `get_job_id()` (*i64*) -
+
+        The ID of the restore job.
+
+    - `get_snapshot_name()` (*&str*) -
+
+        The name of the snapshot being restored.
+
+    - `get_database_name()` (*&str*) -
+
+        The database that holds the restored collection.
+
+    - `get_collection_name()` (*&str*) -
+
+        The collection being restored.
+
+    - `get_state()` (*RestoreSnapshotStateCode*) -
+
+        The state of the restore job.
+
+    - `get_progress()` (*i32*) -
+
+        The progress of the restore job.
+
+    - `get_reason()` (*&str*) -
+
+        The failure reason, when the job failed.
+
+    - `get_start_time()` (*u64*) -
+
+        
+
+    - `get_time_cost()` (*u64*) -
 
 ## Example
 

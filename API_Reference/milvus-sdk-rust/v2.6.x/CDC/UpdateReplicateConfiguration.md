@@ -39,9 +39,11 @@ let request = UpdateReplicateConfigurationRequest::builder()
 
     Whether the update should force promotion during replication configuration changes. Defaults to `false`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

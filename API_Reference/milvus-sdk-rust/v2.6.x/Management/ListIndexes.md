@@ -36,11 +36,29 @@ let request = ListIndexesRequest::builder()
 
     Timestamp (in microseconds) used to locate the index metadata at a point in time.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListIndexesResponse\>*
 
-`ListIndexesResponse` exposes `index_names()` returning the names of the indexes on the collection. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListIndexesResponse** containing the names and descriptions of the indexes. Returns an `Error` if the operation fails.
+
+```rust
+ListIndexesResponse
+    index_names() // -> &[String]
+    indexes() // -> &[IndexDesc]
+```
+
+**METHODS:**
+
+- `index_names()` (*&[String]*) -
+
+    The names of the indexes.
+
+- `indexes()` (*&[IndexDesc]*) -
+
+    The index descriptions. See [IndexDesc](../types/IndexDesc.md).
 
 ## Example
 

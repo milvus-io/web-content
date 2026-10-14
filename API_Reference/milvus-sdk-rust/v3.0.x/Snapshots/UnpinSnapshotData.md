@@ -20,9 +20,11 @@ let request = UnpinSnapshotDataRequest::builder()
 
     Identifier of the data pin to release, as returned by [PinSnapshotData](PinSnapshotData.md). Must be greater than zero.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

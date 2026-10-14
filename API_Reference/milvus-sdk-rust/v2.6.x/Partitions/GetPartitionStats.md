@@ -32,11 +32,24 @@ let request = GetPartitionStatsRequest::builder()
 
     Name of the partition. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetPartitionStatsResponse\>*
 
-`GetPartitionStatsResponse` exposes `row_count()`, returning the server-reported row count when present, and `statistics()`, returning the raw statistics map. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetPartitionStatsResponse** containing the partition statistics. Returns an `Error` if the operation fails.
+
+```rust
+GetPartitionStatsResponse
+    statistics() // -> &HashMap<String, String>
+```
+
+**METHODS:**
+
+- `statistics()` (*&HashMap<String, String>*) -
+
+    The full key-value statistics map, including the server-reported row count when present.
 
 ## Example
 
@@ -46,5 +59,5 @@ let request = GetPartitionStatsRequest::builder()
     .partition_name("partitionA")
     .build()?;
 let resp = client.get_partition_stats(request).await?;
-println!("row_count: {:?}", resp.row_count());
+println!("row_count: {:?}", resp.statistics().get("row_count"));
 ```

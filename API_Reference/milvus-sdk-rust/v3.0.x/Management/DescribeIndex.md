@@ -37,11 +37,24 @@ let request = DescribeIndexRequest::builder()
 
     Timestamp (in microseconds) used to locate the index metadata at a point in time.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeIndexResponse\>*
 
-`DescribeIndexResponse` exposes `indexes()` returning a slice of [`IndexDesc`](../types/IndexDesc.md), each describing one index's configuration and build state. Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeIndexResponse** containing the descriptions of the indexes. Returns an `Error` if the operation fails.
+
+```rust
+DescribeIndexResponse
+    indexes() // -> &[IndexDesc]
+```
+
+**METHODS:**
+
+- `indexes()` (*&[IndexDesc]*) -
+
+    The index descriptions. See [IndexDesc](../types/IndexDesc.md).
 
 ## Example
 

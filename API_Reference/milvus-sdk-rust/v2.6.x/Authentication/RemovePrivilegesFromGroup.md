@@ -25,9 +25,11 @@ let request = RemovePrivilegesFromGroupRequest::builder()
 
     Privileges to remove from the group. At least one non-empty privilege is required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

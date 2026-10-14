@@ -40,21 +40,69 @@ let request = OptimizeRequest::builder()
 
     Overall task timeout in milliseconds. A value less than or equal to zero means no overall timeout.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<OptimizeTask\>*
 
-Returns a handle for monitoring or cancelling the asynchronous optimization task:
+**RETURNS:**
 
-- `pub async fn get_result(&self, timeout_ms: i64) -> Result<OptimizeResponse>` — waits for the optimization result; a timeout less than or equal to zero waits indefinitely.
-- `pub fn cancel(&self) -> bool` — cooperatively cancels the task; in-flight RPCs are allowed to finish.
-- `pub fn is_done(&self) -> bool` — returns whether the optimization task has finished.
-- `pub fn is_cancelled(&self) -> bool` — returns whether cancellation has been requested.
-- `pub fn current_progress(&self) -> Option<String>` — returns the latest optimization progress message.
-- `pub fn progress_history(&self) -> Vec<String>` — returns all optimization progress messages recorded so far.
-- `pub fn task_status(&self) -> Result<()>` — returns the final task status, or success while the task is still running.
+An **OptimizeTask** handle used to monitor or cancel the asynchronous optimization task. Returns an `Error` if the operation fails.
 
-`OptimizeResponse` exposes `status_text()`, `collection_name()`, `compaction_id()`, `target_size()`, and `progress_history()`. Returns an `Error` on failure.
+```rust
+OptimizeTask
+    get_result() // -> Result<response::utility::OptimizeResponse>
+    cancel() // -> bool
+    is_done() // -> bool
+    is_cancelled() // -> bool
+    current_progress() // -> Option<String>
+    progress_history() // -> Vec<String>
+```
+
+**METHODS:**
+
+- `get_result()` (*Result<response::utility::OptimizeResponse>*) -
+
+    Waits for the optimization result, blocking until it completes or the timeout elapses.
+
+    - `status_text()` (*&str*) -
+
+        The status text of the completed optimization.
+
+    - `collection_name()` (*&str*) -
+
+        The name of the optimized collection.
+
+    - `compaction_id()` (*i64*) -
+
+        The ID of the compaction action.
+
+    - `target_size()` (*&str*) -
+
+        The target segment size used for the optimization.
+
+    - `progress_history()` (*&[String]*) -
+
+        The optimization progress messages recorded so far.
+
+- `cancel()` (*bool*) -
+
+    Requests cooperative cancellation of the optimization task.
+
+- `is_done()` (*bool*) -
+
+    Whether the optimization task has finished.
+
+- `is_cancelled()` (*bool*) -
+
+    Whether cancellation of the task has been requested.
+
+- `current_progress()` (*Option<String>*) -
+
+    The latest optimization progress message.
+
+- `progress_history()` (*Vec<String>*) -
+
+    All optimization progress messages recorded so far.
 
 ## Example
 

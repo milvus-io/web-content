@@ -24,11 +24,34 @@ let request = ListAliasesRequest::builder()
 
     Name of the collection whose aliases are listed.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListAliasesResponse\>*
 
-`ListAliasesResponse` exposes `database_name()`, `collection_name()`, and `aliases()` returning the alias list. Returns `Error` on failure.
+**RETURNS:**
+
+A **ListAliasesResponse** containing the aliases of the collection. Returns an `Error` if the operation fails.
+
+```rust
+ListAliasesResponse
+    database_name() // -> &str
+    collection_name() // -> &str
+    aliases() // -> &[String]
+```
+
+**METHODS:**
+
+- `database_name()` (*&str*) -
+
+    The database that holds the aliased collection.
+
+- `collection_name()` (*&str*) -
+
+    The collection the aliases refer to.
+
+- `aliases()` (*&[String]*) -
+
+    The aliases of the collection.
 
 ## Example
 

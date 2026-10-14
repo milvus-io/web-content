@@ -23,11 +23,24 @@ let request = FlushAllRequest::builder()
 
     Maximum time to wait for the cluster-wide flush to complete. Zero waits indefinitely; negative values are invalid.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<FlushAllResponse\>*
 
-`FlushAllResponse` exposes `flush_all_timestamp()` returning the timestamp identifying the flush-all operation, usable with [GetFlushAllState](GetFlushAllState.md). Returns an `Error` on failure.
+**RETURNS:**
+
+A **FlushAllResponse** containing the flush-all timestamp. Returns an `Error` if the operation fails.
+
+```rust
+FlushAllResponse
+    flush_all_timestamp() // -> u64
+```
+
+**METHODS:**
+
+- `flush_all_timestamp()` (*u64*) -
+
+    The timestamp of the flush-all operation.
 
 ## Example
 

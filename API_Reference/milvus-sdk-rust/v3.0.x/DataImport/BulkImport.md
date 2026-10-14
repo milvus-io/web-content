@@ -20,9 +20,11 @@ pub fn new(config: &BulkImportConfig) -> Result<Self>
 
     Connection settings for the bulk-import REST client. The `url` must be a valid `http` or `https` URL containing a host and no query string or fragment. TLS-related fields are validated together.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<BulkImport\>*
+
+**RETURNS:**
 
 Returns a `BulkImport` client on success, or `Error` when the configuration is invalid.
 
@@ -142,25 +144,59 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
     Additional import options, such as `auto_commit`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<BulkImportResponse\>*
 
-`BulkImportResponse` exposes `code()`, `message()`, `data()`, and the convenience accessors `job_id()`, `state()`, `progress()`, and `reason()`. Returns `Error` on failure.
+**RETURNS:**
 
-**Example**
+A **BulkImportResponse** containing the bulk-import endpoint response. Returns an `Error` if the operation fails.
 
 ```rust
-let request = BulkImportRequest::builder()
-    .database_name("books_db")
-    .collection_name("books")
-    .file("one.parquet")
-    .file_group(["id.npy", "embedding.npy"])
-    .option("auto_commit", serde_json::json!(false))
-    .build()?;
-let resp = bulk.bulk_import(request).await?;
-println!("job_id: {:?}", resp.job_id());
+BulkImportResponse
+    code() // -> i64
+    message() // -> &str
+    data() // -> &Value
+    get_data_field() // -> Option<&Value>
+    job_id() // -> Option<&str>
+    state() // -> Option<&str>
+    progress() // -> Option<i64>
+    reason() // -> Option<&str>
 ```
+
+**METHODS:**
+
+- `code()` (*i64*) -
+
+    The response status code.
+
+- `message()` (*&str*) -
+
+    The response message.
+
+- `data()` (*&Value*) -
+
+    The raw response data payload.
+
+- `get_data_field()` (*Option<&Value>*) -
+
+    A named field from the response data, when present.
+
+- `job_id()` (*Option<&str>*) -
+
+    The job ID reported by the endpoint, when present.
+
+- `state()` (*Option<&str>*) -
+
+    The job state reported by the endpoint, when present.
+
+- `progress()` (*Option<i64>*) -
+
+    The job progress reported by the endpoint, when present.
+
+- `reason()` (*Option<&str>*) -
+
+    The failure reason reported by the endpoint, when present.
 
 ## Example
 

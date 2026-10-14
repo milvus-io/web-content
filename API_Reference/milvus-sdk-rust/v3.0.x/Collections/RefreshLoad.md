@@ -32,9 +32,11 @@ let request = RefreshLoadRequest::builder()
 
     Overall refresh wait timeout in milliseconds; values less than or equal to zero wait indefinitely. Defaults to `60000`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Use this after new data or index changes when the existing loaded view must be updated. Returns `Error` on failure.
 

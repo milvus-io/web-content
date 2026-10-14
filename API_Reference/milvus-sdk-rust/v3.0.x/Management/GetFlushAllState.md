@@ -28,11 +28,24 @@ let request = GetFlushAllStateRequest::builder()
 
     Per-channel timestamps to query instead of the aggregate `flush_all_timestamp`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetFlushAllStateResponse\>*
 
-`GetFlushAllStateResponse` exposes `is_flushed()` returning whether the flush-all operation has completed. Returns an `Error` on failure.
+**RETURNS:**
+
+A **GetFlushAllStateResponse** indicating whether all data has been flushed. Returns an `Error` if the operation fails.
+
+```rust
+GetFlushAllStateResponse
+    is_flushed() // -> bool
+```
+
+**METHODS:**
+
+- `is_flushed()` (*bool*) -
+
+    Whether all data has been flushed.
 
 ## Example
 

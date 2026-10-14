@@ -34,9 +34,11 @@ let request = AlterCollectionFieldPropertiesRequest::builder()
 
     Properties to set or update on the field. At least one property is required. Use `property()` to add one.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

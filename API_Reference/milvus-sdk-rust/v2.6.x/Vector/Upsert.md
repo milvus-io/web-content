@@ -35,13 +35,61 @@ let request = UpsertRequest::builder()
 
 - `field_ops: Vec<FieldPartialUpdateOp>`
 
-    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name.
+    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. See [FieldPartialUpdateOp](../types/FieldPartialUpdateOp.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<UpsertResponse\>*
 
-`UpsertResponse` is an alias for `DmlResponse`, which contains the assigned primary keys (`ids`), per-row success or failure indices, the upsert count, and the mutation timestamp. Returns `Error` on failure.
+**RETURNS:**
+
+The mutation result, including the assigned primary keys and per-row status. Returns an `Error` if the operation fails.
+
+```rust
+DmlResponse
+    ids() // -> &Ids
+    succeeded_indices() // -> &[u32]
+    failed_indices() // -> &[u32]
+    is_acknowledged() // -> bool
+    insert_count() // -> i64
+    delete_count() // -> i64
+    upsert_count() // -> i64
+    timestamp() // -> u64
+```
+
+**METHODS:**
+
+- `ids()` (*&Ids*) -
+
+    The primary keys assigned to the mutated rows. See [Ids](Ids.md).
+
+- `succeeded_indices()` (*&[u32]*) -
+
+    The row indices that succeeded.
+
+- `failed_indices()` (*&[u32]*) -
+
+    The row indices that failed.
+
+- `is_acknowledged()` (*bool*) -
+
+    Whether the mutation was acknowledged by the server.
+
+- `insert_count()` (*i64*) -
+
+    The number of rows inserted.
+
+- `delete_count()` (*i64*) -
+
+    The number of rows deleted.
+
+- `upsert_count()` (*i64*) -
+
+    The number of rows upserted.
+
+- `timestamp()` (*u64*) -
+
+    The mutation timestamp.
 
 ## Example
 

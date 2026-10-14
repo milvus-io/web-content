@@ -39,9 +39,11 @@ let request = CreateSnapshotRequest::builder()
 
     Number of seconds the referenced segments are protected from compaction; `0` disables the protection. Must not be negative.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

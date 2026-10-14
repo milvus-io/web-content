@@ -23,9 +23,11 @@ let request = UpdateResourceGroupsRequest::builder()
 
     Mapping of resource-group name to its new configuration. At least one resource group is required, and resource group names must not be empty.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

@@ -32,9 +32,11 @@ let request = ReleasePartitionsRequest::builder()
 
     Names of the partitions to release. Must contain at least one value. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

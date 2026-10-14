@@ -20,9 +20,11 @@ let request = DropPrivilegeGroupRequest::builder()
 
     Name of the privilege group to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

@@ -24,11 +24,34 @@ let request = DescribeAliasRequest::builder()
 
     The alias to resolve. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeAliasResponse\>*
 
-`DescribeAliasResponse` exposes `database_name()`, `alias()`, and `collection_name()` describing the alias and the collection it points to. Returns `Error` on failure.
+**RETURNS:**
+
+A **DescribeAliasResponse** containing the collection the alias points to. Returns an `Error` if the operation fails.
+
+```rust
+DescribeAliasResponse
+    database_name() // -> &str
+    alias() // -> &str
+    collection_name() // -> &str
+```
+
+**METHODS:**
+
+- `database_name()` (*&str*) -
+
+    The database that holds the alias.
+
+- `alias()` (*&str*) -
+
+    The alias name.
+
+- `collection_name()` (*&str*) -
+
+    The collection the alias points to.
 
 ## Example
 

@@ -32,11 +32,24 @@ let request = HasPartitionRequest::builder()
 
     Name of the partition. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<HasPartitionResponse\>*
 
-`HasPartitionResponse` exposes `exists()`, returning `true` when the partition exists. Returns `Error` on failure.
+**RETURNS:**
+
+A **HasPartitionResponse** indicating whether the partition exists. Returns an `Error` if the operation fails.
+
+```rust
+HasPartitionResponse
+    exists() // -> bool
+```
+
+**METHODS:**
+
+- `exists()` (*bool*) -
+
+    Whether the partition exists.
 
 ## Example
 

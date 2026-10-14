@@ -28,9 +28,11 @@ let request = AddFileResourceRequest::builder()
 
     File path for the resource. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

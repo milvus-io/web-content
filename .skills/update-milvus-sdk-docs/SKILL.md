@@ -504,6 +504,14 @@ grep -rn "3\.0\.1" API_Reference/<sdk>/<version-line>/   # adjust for the actual
 # signature consistency: every WithXxx/SetXxx that exists in the new tag and is
 # documented on the page appears exactly once; page mentions nothing that does
 # not exist in the new tag
+
+# structural format compliance (every operation page, esp. after a full-tree
+# RETURNS reformat):
+#  - has **RETURN TYPE:** + **RETURNS:** + accessor code block + **METHODS:**
+#  - no '*Result<' as the first RETURNS line
+#  - no empty member bullets (bullet whose next non-blank line is another bullet)
+#  - bare mentions of dedicated-page types are linked (grep \bDataType\b etc.
+#    outside code fences, inline spans, existing links, and (*...*) headers)
 ```
 
 Report results explicitly. Fix anything flagged before proceeding.
@@ -702,6 +710,23 @@ than once on a page (e.g. the same `WithXxx` method in both a brief
 finding, but do not auto-delete the longer copy — compare both occurrences and
 keep the better one (see the **Duplicate content** rule in Pass 2).
 
+**Format-compliance audit**: Pass 1 must ALSO verify each operation page's
+*structure* against the canonical template in the Doc style guide, not just its
+API surface. Hand-written or drifted pages commonly deviate while staying
+factually correct, so a pure API diff misses them:
+- every operation page has a `**RETURN TYPE:**` heading, a `**RETURNS:**`
+  one-sentence intro, an accessor-shape code block, and a `**METHODS:**`
+  (or `**PARAMETERS:**`) member list; `Result<()>` pages split out
+  `**RETURN TYPE:**`;
+- no leftover `*Result<...>*` line as the first line of `**RETURNS:**`
+  (the return type must move to `**RETURN TYPE:**`);
+- no empty member bullets — a bullet whose next non-blank line is another
+  bullet instead of an indented description (a plain "bullet followed by
+  bullet" scan is needed; a naive "next non-empty line" check misses these);
+- every reference to a dedicated-page type is linked (see the **Dedicated type
+  pages & cross-links** section) — run a whole-tree bare-mention scan that
+  skips code fences, inline code spans, existing links, and `(*Type*)` headers.
+
 #### Response surface (output members)
 
 Pass 1 must ALSO reconcile the **response side**: for every operation page,
@@ -884,6 +909,14 @@ set and the placement.**
   "…See [ConsistencyLevel](ConsistencyLevel.md)". pymilvus's
   `create_collection` (links `DataType`/`CollectionSchema`) is the reference;
   do not leave a referenced enum/class as bare text when its page exists.
+- **Where the link goes**: keep the type as code in parameter/member *headers*
+  (`` - `field: Type` `` and `` - `member()` (*Type*) - ``) — do NOT wrap the
+  `` `field: Type` `` code span or the `` (*Type*) `` return-type header in a
+  link. Add the link in the following description as "See [Type](relative.md)."
+  (java `IndexParam` → "…See [IndexType](IndexType.md)" and pymilvus
+  `create_collection` are the model). In plain prose, replace the bare type name
+  directly with the link (`[DataType](DataType.md)`); skip code fences, inline
+  code spans, existing links, and the type page's own name.
 - **Create missing pages on the way**: when a referenced type has no page yet,
   create its dedicated type page (see Step 3), then link to it.
 
@@ -989,6 +1022,17 @@ Rules:
   `CollectionInfo`, `ReplicaInfo`), list that type's own members/functions
   underneath it, indented further — down the whole chain, not just one level. Do
   this for every SDK, not only C++.
+- **Bound the recursion so it terminates while still covering the whole chain**:
+  - **Cycle guard**: if a member/function's type is an ancestor already in the
+    current expansion chain (self-referential, e.g. Rust `AggregationBucket` has
+    `sub_groups() -> &[AggregationBucket]`), stop at a one-sentence description
+    and do not recurse into it again.
+  - **Leaf-stop types**: do not expand types whose surface is mostly data-access
+    conversion or generic containers — e.g. Rust `FieldData` (≈40 `as_*`
+    accessors), `Ids` (enum), `HashMap`/`String`/`Value`. Keep a one-sentence
+    description. Dedicated-page types are linked, not expanded (see below).
+  - Expand until every leaf is a scalar, an enum variant, a std container, or a
+    dedicated-page type.
 - **Always link a member/function type that has a dedicated type page** — a leaf
   enum or scalar (e.g. cpp `([DataType](...))`, go `*[entity.Collection](Collection.md)`),
   **or a schema/record type such as `CollectionSchema`/`FieldSchema`** — with a

@@ -34,9 +34,11 @@ let request = DropIndexPropertiesRequest::builder()
 
     Keys of the properties to remove from the index.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or an `Error` on failure.
 

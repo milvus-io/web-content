@@ -25,11 +25,60 @@ let request = DescribeRoleRequest::builder()
 
     Database scope used to resolve the role's grants.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<DescribeRoleResponse\>*
 
-`DescribeRoleResponse` exposes `description()` returning a `RoleDescription` with the role name, description, and its granted `GrantItem` list (each carrying the object type, object name, database name, privilege, and grantor). Returns an `Error` on failure.
+**RETURNS:**
+
+A **DescribeRoleResponse** containing the role description. Returns an `Error` if the operation fails.
+
+```rust
+DescribeRoleResponse
+    description() // -> &RoleDescription
+```
+
+**METHODS:**
+
+- `description()` (*&RoleDescription*) -
+
+    The role description, including its grants.
+
+    - `get_role_name()` (*&str*) -
+
+        The name of the role.
+
+    - `get_description()` (*&str*) -
+
+        The description of the role.
+
+    - `get_grant_items()` (*&[GrantItem]*) -
+
+        The privileges granted to the role.
+
+        - `get_object_type()` (*&str*) -
+
+            The type of the object the privilege applies to.
+
+        - `get_object_name()` (*&str*) -
+
+            The name of the object the privilege applies to.
+
+        - `get_database_name()` (*&str*) -
+
+            The database scope of the grant.
+
+        - `get_role_name()` (*&str*) -
+
+            The role the grant belongs to.
+
+        - `get_privilege()` (*&str*) -
+
+            The granted privilege.
+
+        - `get_grantor_name()` (*&str*) -
+
+            The user who granted the privilege.
 
 ## Example
 

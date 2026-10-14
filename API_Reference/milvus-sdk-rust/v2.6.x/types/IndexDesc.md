@@ -22,11 +22,11 @@ pub struct IndexDesc
 
 - `index_type: IndexType`
 
-    Index implementation used. Defaults to `IndexType::Invalid`.
+    Index implementation used. Defaults to `IndexType::Invalid`. See [IndexType](../Management/IndexType.md).
 
 - `metric_type: MetricType`
 
-    Distance or similarity metric used. Defaults to `MetricType::Default`.
+    Distance or similarity metric used. Defaults to `MetricType::Default`. See [MetricType](../Management/MetricType.md).
 
 - `extra_params: HashMap<String, String>`
 

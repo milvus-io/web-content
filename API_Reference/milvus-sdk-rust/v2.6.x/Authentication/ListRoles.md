@@ -17,11 +17,24 @@ let request = ListRolesRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListRolesResponse\>*
 
-`ListRolesResponse` exposes `role_names()` returning the role names visible to the caller. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListRolesResponse** containing the names of the roles. Returns an `Error` if the operation fails.
+
+```rust
+ListRolesResponse
+    role_names() // -> &[String]
+```
+
+**METHODS:**
+
+- `role_names()` (*&[String]*) -
+
+    The names of the roles.
 
 ## Example
 

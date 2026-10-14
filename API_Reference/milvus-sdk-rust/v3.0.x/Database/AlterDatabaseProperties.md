@@ -25,9 +25,11 @@ let request = AlterDatabasePropertiesRequest::builder()
 
     Mutable properties to set on the database. At least one property is required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

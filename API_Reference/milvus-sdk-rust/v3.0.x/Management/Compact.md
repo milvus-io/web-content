@@ -40,11 +40,29 @@ let request = CompactRequest::builder()
 
     Whether to run an L0 compaction. Defaults to `false`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<CompactResponse\>*
 
-`CompactResponse` exposes `compaction_id()` identifying the compaction action and `plan_count()` with the number of compaction plans produced. Returns an `Error` on failure.
+**RETURNS:**
+
+A **CompactResponse** containing the ID and plan count of the compaction action. Returns an `Error` if the operation fails.
+
+```rust
+CompactResponse
+    compaction_id() // -> i64
+    plan_count() // -> i64
+```
+
+**METHODS:**
+
+- `compaction_id()` (*i64*) -
+
+    The ID of the compaction action.
+
+- `plan_count()` (*i64*) -
+
+    The number of compaction plans produced.
 
 ## Example
 

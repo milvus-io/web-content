@@ -31,9 +31,11 @@ let request = CreateUserRequest::builder()
 
     Optional description of the user.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

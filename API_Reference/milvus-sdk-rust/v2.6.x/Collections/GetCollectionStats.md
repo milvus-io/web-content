@@ -24,11 +24,24 @@ let request = GetCollectionStatsRequest::builder()
 
     Name of the collection to inspect. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetCollectionStatsResponse\>*
 
-`GetCollectionStatsResponse` exposes `name()` returning the collection name, `row_count()` returning the server-reported row count (when present), and `statistics()` returning the full key-value statistics map. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetCollectionStatsResponse** containing the collection statistics. Returns an `Error` if the operation fails.
+
+```rust
+GetCollectionStatsResponse
+    statistics() // -> &HashMap<String, String>
+```
+
+**METHODS:**
+
+- `statistics()` (*&HashMap<String, String>*) -
+
+    The full key-value statistics map, including the server-reported row count when present.
 
 ## Example
 
@@ -37,5 +50,5 @@ let request = GetCollectionStatsRequest::builder()
     .collection_name("books")
     .build()?;
 let resp = client.get_collection_stats(request).await?;
-println!("row count: {:?}", resp.row_count());
+println!("row count: {:?}", resp.statistics().get("row_count"));
 ```

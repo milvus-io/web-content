@@ -32,11 +32,34 @@ let request = GetPartitionStatsRequest::builder()
 
     Name of the partition. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<GetPartitionStatsResponse\>*
 
-`GetPartitionStatsResponse` exposes `row_count()`, returning the server-reported row count when present, and `statistics()`, returning the raw statistics map. Returns `Error` on failure.
+**RETURNS:**
+
+A **GetPartitionStatsResponse** containing the partition statistics. Returns an `Error` if the operation fails.
+
+```rust
+GetPartitionStatsResponse
+    name() // -> &str
+    row_count() // -> Option<i64>
+    statistics() // -> &HashMap<String, String>
+```
+
+**METHODS:**
+
+- `name()` (*&str*) -
+
+    The name of the partition the statistics describe.
+
+- `row_count()` (*Option<i64>*) -
+
+    The server-reported row count, when present.
+
+- `statistics()` (*&HashMap<String, String>*) -
+
+    The full key-value statistics map, including the server-reported row count when present.
 
 ## Example
 

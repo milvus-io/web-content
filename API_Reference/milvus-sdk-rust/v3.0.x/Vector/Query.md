@@ -33,7 +33,7 @@ let request = QueryRequest::builder()
 
 - `ids: Ids`
 
-    Primary keys of the entities to retrieve. Mutually exclusive with `filter`.
+    Primary keys of the entities to retrieve. Mutually exclusive with `filter`. See [Ids](Ids.md).
 
 - `filter: String`
 
@@ -41,7 +41,7 @@ let request = QueryRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression.
+    Placeholder values referenced by the filter expression. See [FilterTemplateValue](../types/FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -65,21 +65,71 @@ let request = QueryRequest::builder()
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the query; the collection default is used when unset.
+    Consistency guarantee for the query; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
 
 - `order_by_fields: Vec<OrderByField>`
 
-    Scalar fields used to order the query results.
+    Scalar fields used to order the query results. See [OrderByField](../types/OrderByField.md).
 
 - `extra_params: HashMap<String, String>`
 
     Additional query parameters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<QueryResponse\>*
 
-`QueryResponse` exposes `results()` returning a column-oriented `QueryResults` with the requested output fields. Iterate rows with `results().rows()` or materialize them with `get_output_rows()`. The response also carries the session timestamp. Returns `Error` on failure.
+**RETURNS:**
+
+A **QueryResponse** containing the rows matched by the query. Returns an `Error` if the operation fails.
+
+```rust
+QueryResponse
+    results() // -> &QueryResults
+    session_timestamp() // -> u64
+```
+
+**METHODS:**
+
+- `results()` (*&QueryResults*) -
+
+    The rows matched by the query.
+
+    - `get_output_fields()` (*&[FieldData]*) -
+
+        The output field values of the returned rows. See [FieldData](FieldData.md).
+
+    - `get_output_field_names()` (*&[String]*) -
+
+        The names of the output fields.
+
+    - `get_output_field()` (*Option<&FieldData>*) -
+
+        The value of the named output field for the returned rows, when present. See [FieldData](FieldData.md).
+
+    - `get_row_count()` (*u64*) -
+
+        The number of rows returned.
+
+    - `get_element_indices()` (*&[Vec<i64>]*) -
+
+        The element indices of the matched rows.
+
+    - `is_empty()` (*bool*) -
+
+        Whether no rows were returned.
+
+    - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
+
+        The returned rows as entity values. See [EntityRow](../types/EntityRow.md).
+
+    - `get_output_row()` (*Result<EntityRow>*) -
+
+        The row at the given index as an entity value. See [EntityRow](../types/EntityRow.md).
+
+- `session_timestamp()` (*u64*) -
+
+    The session timestamp of the query.
 
 ## Example
 

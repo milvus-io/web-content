@@ -6,7 +6,7 @@ Changes an existing user's password.
 pub async fn update_password(&self, request: UpdatePasswordRequest) -> Result<()>
 ```
 
-When the request sets `reset_connection`, the client re-establishes its connection using the updated username/password credentials so subsequent requests authenticate with the new password. The password change is applied server-side before the connection is reset; if the reset fails, the returned error states that the password was changed but the connection could not be re-established.
+The password change is applied server-side; subsequent requests authenticate with the new password.
 
 ## Request Syntax
 
@@ -32,9 +32,11 @@ let request = UpdatePasswordRequest::builder()
 
     New password of the user. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

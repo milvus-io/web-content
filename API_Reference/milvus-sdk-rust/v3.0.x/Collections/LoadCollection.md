@@ -57,9 +57,11 @@ let request = LoadCollectionRequest::builder()
 
     Load priority forwarded as the `load_priority` load param, such as `low`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

@@ -17,11 +17,24 @@ let request = ListDatabasesRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListDatabasesResponse\>*
 
-`ListDatabasesResponse` exposes `database_names()` returning the database names visible to the authenticated user. Returns an `Error` on failure.
+**RETURNS:**
+
+A **ListDatabasesResponse** containing the names of the databases. Returns an `Error` if the operation fails.
+
+```rust
+ListDatabasesResponse
+    database_names() // -> &[String]
+```
+
+**METHODS:**
+
+- `database_names()` (*&[String]*) -
+
+    The names of the databases.
 
 ## Example
 

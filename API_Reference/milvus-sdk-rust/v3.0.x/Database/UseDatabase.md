@@ -20,9 +20,11 @@ client.use_database("my_database").await?;
 
     Name of the database to select. An empty value resets the selection to the `default` database.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

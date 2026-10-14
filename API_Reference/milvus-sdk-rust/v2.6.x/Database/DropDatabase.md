@@ -20,9 +20,11 @@ let request = DropDatabaseRequest::builder()
 
     Name of the database to drop. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

@@ -24,9 +24,11 @@ let request = DropRoleRequest::builder()
 
     Whether to force the drop even when the role is still assigned to users. Defaults to `false`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

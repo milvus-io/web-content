@@ -36,11 +36,29 @@ let mut iterator = client.query_iterator(request).await?;
 
     Whether the iterator stops fetching a page as soon as the best result is found. Defaults to `true`.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<QueryIterator\>*
 
-Returns a `QueryIterator`. Call `next()` to receive the next `QueryResponse` batch (`None` when exhausted) and `close()` when done. Returns `Error` on failure.
+**RETURNS:**
+
+A **QueryIterator** used to page through the query results in batches. Returns an `Error` if the operation fails.
+
+```rust
+QueryIterator
+    next() // -> Result<Option<response::dql::QueryResponse>>
+    close() // -> Result<()>
+```
+
+**METHODS:**
+
+- `next()` (*Result<Option<response::dql::QueryResponse>>*) -
+
+    Fetches the next batch of query results, or `None` when exhausted.
+
+- `close()` (*Result<()>*) -
+
+    Closes the iterator and releases server resources.
 
 ## Example
 

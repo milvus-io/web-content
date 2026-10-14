@@ -17,11 +17,34 @@ let request = CheckHealthRequest::builder()
 
 This request takes no fields.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<CheckHealthResponse\>*
 
-`CheckHealthResponse` exposes `is_healthy()`, `reasons()` returning any health failure reasons, and `quota_states()` returning the per-component quota states. Returns an `Error` on failure.
+**RETURNS:**
+
+A **CheckHealthResponse** containing the server health and quota state. Returns an `Error` if the operation fails.
+
+```rust
+CheckHealthResponse
+    is_healthy() // -> bool
+    reasons() // -> &[String]
+    quota_states() // -> &[String]
+```
+
+**METHODS:**
+
+- `is_healthy()` (*bool*) -
+
+    Whether the server is healthy.
+
+- `reasons()` (*&[String]*) -
+
+    The health-check reasons, including any failures.
+
+- `quota_states()` (*&[String]*) -
+
+    The current quota states reported by the server.
 
 ## Example
 

@@ -61,9 +61,11 @@ let request = LoadPartitionsRequest::builder()
 
     Resource groups the partitions are loaded into; the default resource group is used when empty.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or `Error` on failure.
 

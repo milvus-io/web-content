@@ -138,6 +138,10 @@ local directory via this table before editing. Current latest version line is
   - Existing docs were transcribed from code comments, so typos flow from code
     into docs (e.g. "avaiable" in both `QueryRequest.h` and `Vector/Query.md`).
     Fix in docs; flag (don't silently edit) the code comment.
+  - `FieldData` is a shared cpp/rust-only leaf data-container type. It is NOT on
+    the generic SKILL.md dedicated-page list; if a page for it is added, keep it
+    scoped to this section (cpp) and the rust section — e.g. rust documents it at
+    `Vector/FieldData.md`.
   - New internal-only headers (e.g. `BloomFilter.h`) are cache types — skip, do
     not create a page unless the symbol surfaces in a public request/response.
   - **`= delete` methods are hidden, not available.** Some request classes
@@ -444,11 +448,25 @@ local directory via this table before editing. Current latest version line is
 ## milvus-sdk-rust
 
 - **SDK repo**: `milvus-sdk-rust` (cloned into `sdk-tmp/sdks/milvus-sdk-rust/`)
-- **Online URL**: `https://milvus.io/api-reference/rust/<version-line>/` (route `rust`; no doc tree yet — bootstrap)
+- **Online URL**: `https://milvus.io/api-reference/rust/<version-line>/` (route `rust`; lines `v2.6.x` and `v3.0.x` exist and are maintained)
 - **Public API surface**: crate `milvus-sdk-rust`, `src/v2/` (`ClientV2` at
   `src/v2/client.rs`; types/requests under `src/v2/`); examples under `examples/v2/`.
-- **Doc tree**: none yet — created via the **New SDK bootstrap mode** using
-  `milvus-sdk-cpp` or `milvus-sdk-java` as the structure template.
+- **Doc tree**: `API_Reference/milvus-sdk-rust/<version-line>/` with categories
+  Authentication, CDC, Client, Collections, Database, DataImport, FileResources,
+  Management, Partitions, ResourceGroup, Snapshots, Vector, and `types/`.
+  (If a brand-new line is ever added, use the **New SDK bootstrap mode** with
+  `milvus-sdk-cpp` or `milvus-sdk-java` as the structure template.)
+- **Dedicated type pages (per-SDK)**: `FieldData` and `Ids` are leaf data
+  types with dedicated rust pages — `Vector/FieldData.md` and `Vector/Ids.md`
+  — kept scoped to this SDK section (and the cpp section where they overlap),
+  never in the generic SKILL.md list. (Other SDKs only surface the `milvus.proto`
+  messages `FieldData`/`Ids` — e.g. java V1 legacy pages, node search responses
+  — which are the wire-protocol types, not SDK public APIs, and need no page.)
+  `FunctionType` IS on the generic list (it exists in java/cpp too) and rust
+  documents it at `Collections/FunctionType.md`. References to these types from
+  request fields (`columns: Vec<FieldData>`, `ids: Ids`) and response members
+  (`get_output_fields()`, `get_ids()`) link the corresponding `Vector/*.md`
+  page.
 - **Tags**: plain `vX.Y.Z` (e.g. `v3.0.1`, `v3.0.2`, `v2.6.1`).
 - **Conventions**: import via `use milvus::v2::prelude::*;`; connect with
   `ClientV2::new(&ConnectConfig::new().uri(uri).token("root:Milvus")).await?`;
@@ -464,14 +482,26 @@ local directory via this table before editing. Current latest version line is
 
 - **Response surface** (see SKILL.md Pass 1): response structs live in
   `src/v2/response/<category>.rs` (`DescribeCollectionResponse`,
-  `SearchResponse`, ...). Reconcile each operation page's return section against
-  them:
+  `SearchResponse`, ...) plus `src/v2/bulk_import.rs` and task types in
+  `src/v2/client/utility.rs` (e.g. `OptimizeTask`). Reconcile each operation
+  page's return section against them. Extract the **accessor methods with
+  return types** from the `impl XxxResponse` block — NOT the raw struct fields
+  (the RETURNS/METHODS list documents getters only). Brace-balance the impl
+  block; a naive "cut at the first `\n}`" conflates methods of the *next* impl
+  (this corrupted Rust `SingleResult` with `QueryResults`' getters). Resolve
+  type aliases first: `InsertResponse = UpsertResponse = DeleteResponse =
+  DmlResponse`, `GetResponse = QueryResponse`, `HybridSearchResponse =
+  SearchResponse`. Nested member types without their own getters (e.g. the enums
+  `WalName`, `AggregationBucketValue`, `AggregationMetricValue`) are leaf
+  descriptions or links, not expanded:
 
   ```bash
-  # side A: pub members of a response struct at a tag
+  # side A: public getter accessors (name + return type) of a response struct
   git -C sdk-tmp/sdks/milvus-sdk-rust show v3.0.2:src/v2/response/collection.rs | \
-    grep -oE "^pub [a-z_]+:" | sed -E 's/^pub //;s/:$//' | sort -u
-  # side B: members documented on the page (nested members are indented)
-  grep -oE "^\s*- \*\*[a-z_]+\*\*" API_Reference/milvus-sdk-rust/v3.0.x/Collections/describeCollection.md 2>/dev/null | \
-    sed -E 's/^\s*- \*\*([a-z_]+)\*\*/\1/' | sort -u
+    sed -n '/^impl DescribeCollectionResponse/,/^}/p' | \
+    grep -oE "pub (async )?fn [a-z_0-9]+\([^)]*\) -> [^\{]+" | sed -E 's/pub (async )?fn //'
+  # side B: accessors documented on the page under **METHODS:** (nested members
+  # are indented, so allow leading whitespace)
+  grep -oE "^\s*- \`[a-z_0-9]+\(\)\`" API_Reference/milvus-sdk-rust/v3.0.x/Collections/DescribeCollection.md | \
+    sed -E 's/^\s*- \`([a-z_0-9]+)\(\)\`/\1/' | sort -u
   ```

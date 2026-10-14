@@ -30,7 +30,7 @@ let request = SearchRequest::builder()
 
 - `ids: Ids`
 
-    Primary keys whose stored vectors are used as search targets. Mutually exclusive with `vectors`.
+    Primary keys whose stored vectors are used as search targets. Mutually exclusive with `vectors`. See [Ids](Ids.md).
 
 - `vector_field: String`
 
@@ -38,7 +38,7 @@ let request = SearchRequest::builder()
 
 - `vectors: SearchVectors`
 
-    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs.
+    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs. See [SearchVectors](../types/SearchVectors.md).
 
 - `partition_names: Vec<String>`
 
@@ -50,7 +50,7 @@ let request = SearchRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression.
+    Placeholder values referenced by the filter expression. See [FilterTemplateValue](../types/FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -94,11 +94,11 @@ let request = SearchRequest::builder()
 
 - `metric_type: Option<MetricType>`
 
-    Distance or similarity metric for the search; the server default is used when unset.
+    Distance or similarity metric for the search; the server default is used when unset. See [MetricType](../Management/MetricType.md).
 
 - `order_by_fields: Vec<OrderByField>`
 
-    Scalar fields used to order the search results.
+    Scalar fields used to order the search results. See [OrderByField](../types/OrderByField.md).
 
 - `extra_params: HashMap<String, String>`
 
@@ -106,7 +106,7 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. Mutually exclusive with `function_chains`.
+    Reranking configuration for single-vector search. Mutually exclusive with `function_chains`. See [FunctionScore](../types/FunctionScore.md).
 
 - `timezone: String`
 
@@ -114,25 +114,203 @@ let request = SearchRequest::builder()
 
 - `highlighter: Option<Highlighter>`
 
-    Text-highlighting configuration for full-text search.
+    Text-highlighting configuration for full-text search. See [Highlighter](../types/Highlighter.md).
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the search; the collection default is used when unset.
+    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
 
 - `function_chains: Vec<FunctionChain>`
 
-    Function chains used to post-process the search results. Mutually exclusive with `rerank`.
+    Function chains used to post-process the search results. Mutually exclusive with `rerank`. See [FunctionChain](../types/FunctionChain.md).
 
 - `search_aggregation: Option<SearchAggregation>`
 
-    Hierarchical bucket aggregation settings for the search.
+    Hierarchical bucket aggregation settings for the search. See [SearchAggregation](../types/SearchAggregation.md).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<SearchResponse\>*
 
-`SearchResponse` exposes `results()` returning a `SearchResults`, which holds one `SingleResult` per query vector; each `SingleResult` carries the hit IDs, scores, and requested output fields. The response also reports the session timestamp and execution cost statistics. Returns `Error` on failure.
+**RETURNS:**
+
+A **SearchResponse** containing the ranked hits for each query vector. Returns an `Error` if the operation fails.
+
+```rust
+SearchResponse
+    results() // -> &SearchResults
+    session_timestamp() // -> u64
+    cost() // -> i64
+    scanned_remote_bytes() // -> i64
+    scanned_total_bytes() // -> i64
+    cache_hit_ratio() // -> f32
+```
+
+**METHODS:**
+
+- `results()` (*&SearchResults*) -
+
+    The ranked hits, one group per query vector.
+
+    - `get_results()` (*&[SingleResult]*) -
+
+        The hits, one per query vector.
+
+        - `get_ids()` (*&Ids*) -
+
+            The IDs of the hits for one query vector. See [Ids](Ids.md).
+
+        - `get_scores()` (*&[f32]*) -
+
+            The similarity scores of the hits.
+
+        - `get_element_indices()` (*Option<&[i64]>*) -
+
+            The element indices of the hits, when present.
+
+        - `get_output_fields()` (*&[FieldData]*) -
+
+            The output field values of the hits. See [FieldData](FieldData.md).
+
+        - `get_output_field_names()` (*&[String]*) -
+
+            The names of the output fields.
+
+        - `get_primary_field_name()` (*&str*) -
+
+            The name of the primary-key field.
+
+        - `get_score_field_name()` (*&str*) -
+
+            The name of the score field.
+
+        - `get_highlight_results()` (*&[HashMap<String, HighlightResult>]*) -
+
+            The text-highlighting results per hit, when full-text search highlighting was requested.
+
+            - `get_field_name()` (*&str*) -
+
+                The name of the highlighted field.
+
+            - `get_fragments()` (*&[String]*) -
+
+                The highlighted text fragments.
+
+            - `get_scores()` (*&[f32]*) -
+
+                The relevance scores of the fragments.
+
+        - `len()` (*usize*) -
+
+            The number of hits for one query vector.
+
+        - `is_empty()` (*bool*) -
+
+            Whether no hits were returned for the query vector.
+
+        - `get_output_field()` (*Option<&FieldData>*) -
+
+            The value of the named output field for the hit, when present. See [FieldData](FieldData.md).
+
+        - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
+
+            The hits as entity rows. See [EntityRow](../types/EntityRow.md).
+
+        - `get_output_row()` (*Result<EntityRow>*) -
+
+            The hit at the given index as an entity row. See [EntityRow](../types/EntityRow.md).
+
+    - `get_recalls()` (*&[f32]*) -
+
+        The recall rate per query vector.
+
+    - `len()` (*usize*) -
+
+        The number of hit groups returned.
+
+    - `is_empty()` (*bool*) -
+
+        Whether no hits were returned.
+
+    - `get_agg_buckets()` (*&[Vec<AggregationBucket>]*) -
+
+        The aggregation buckets produced by the search.
+
+        - `get_key()` (*&[BucketKeyEntry]*) -
+
+            The bucket keys, one entry per grouped field.
+
+            - `get_field_id()` (*i64*) -
+
+                The ID of the field the key belongs to.
+
+            - `get_field_name()` (*&str*) -
+
+                The name of the field the key belongs to.
+
+            - `get_value()` (*&AggregationBucketValue*) -
+
+                The value of the bucket key.
+
+        - `get_count()` (*i64*) -
+
+            The number of rows in the bucket.
+
+        - `get_metrics()` (*&HashMap<String, AggregationMetricValue>*) -
+
+            The metric values computed for the bucket. See [AggregationMetricValue](../types/AggregationMetricValue.md).
+
+        - `get_hits()` (*&[AggregationHit]*) -
+
+            The representative hits of the bucket.
+
+            - `get_pk()` (*Option<&AggregationHitPk>*) -
+
+                The primary key of the representative hit.
+
+            - `get_score()` (*f32*) -
+
+                The score of the representative hit.
+
+            - `get_fields()` (*&[AggregationHitField]*) -
+
+                The field values of the representative hit.
+
+                - `get_field_id()` (*i64*) -
+
+                    The ID of the field.
+
+                - `get_field_name()` (*&str*) -
+
+                    The name of the field.
+
+                - `get_value()` (*&AggregationHitFieldValue*) -
+
+                    The value of the field.
+
+        - `get_sub_groups()` (*&[AggregationBucket]*) -
+
+            The nested sub-buckets of the bucket.
+
+- `session_timestamp()` (*u64*) -
+
+    The session timestamp of the search.
+
+- `cost()` (*i64*) -
+
+    The execution cost reported by the server.
+
+- `scanned_remote_bytes()` (*i64*) -
+
+    The number of bytes scanned from remote storage.
+
+- `scanned_total_bytes()` (*i64*) -
+
+    The total number of bytes scanned.
+
+- `cache_hit_ratio()` (*f32*) -
+
+    The ratio of scanned bytes served from the cache.
 
 ## Example
 

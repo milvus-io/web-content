@@ -27,11 +27,45 @@ let request = ListPartitionsRequest::builder()
 
     Name of the collection. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<ListPartitionsResponse\>*
 
-`ListPartitionsResponse` exposes `partition_names()`, returning the names of all partitions in the collection. Returns `Error` on failure.
+**RETURNS:**
+
+A **ListPartitionsResponse** containing the names and information of the partitions. Returns an `Error` if the operation fails.
+
+```rust
+ListPartitionsResponse
+    partition_names() // -> &[String]
+    partitions() // -> &[PartitionInfo]
+```
+
+**METHODS:**
+
+- `partition_names()` (*&[String]*) -
+
+    The names of the partitions.
+
+- `partitions()` (*&[PartitionInfo]*) -
+
+    Detailed information about each partition.
+
+    - `get_name()` (*&str*) -
+
+        The name of the partition.
+
+    - `get_id()` (*i64*) -
+
+        The ID of the partition.
+
+    - `get_created_timestamp()` (*u64*) -
+
+        The creation timestamp of the partition.
+
+    - `get_created_utc_timestamp()` (*u64*) -
+
+        The UTC creation timestamp of the partition.
 
 ## Example
 

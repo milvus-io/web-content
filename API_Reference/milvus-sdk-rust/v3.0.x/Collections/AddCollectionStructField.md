@@ -39,9 +39,11 @@ let request = AddCollectionStructFieldRequest::builder()
 
     The `StructFieldSchema` describing the new struct field. Adding a struct field to an existing collection requires `nullable(true)`. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. Returns `Error` on failure.
 

@@ -20,9 +20,11 @@ let request = CreatePrivilegeGroupRequest::builder()
 
     Name of the privilege group to create. Required.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success; returns an `Error` on failure.
 

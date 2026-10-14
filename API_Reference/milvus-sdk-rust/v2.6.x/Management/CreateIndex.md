@@ -32,7 +32,7 @@ let request = CreateIndexRequest::builder()
 
 - `index_params: Vec<IndexParam>`
 
-    Index configurations, one per vector field to index. Each `IndexParam` names the field, the index implementation, the metric type, and optional extra parameters. At least one is required.
+    Index configurations, one per vector field to index. Each `IndexParam` names the field, the index implementation, the metric type, and optional extra parameters. At least one is required. See [IndexParam](../types/IndexParam.md).
 
 - `sync: bool`
 
@@ -42,9 +42,11 @@ let request = CreateIndexRequest::builder()
 
     Timeout in milliseconds applied to the operation. Zero means the client default is used.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns `Ok(())` on success, or an `Error` on failure.
 

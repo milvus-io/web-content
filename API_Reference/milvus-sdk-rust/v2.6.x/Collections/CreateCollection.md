@@ -47,19 +47,21 @@ let request = CreateCollectionRequest::builder()
 
 - `consistency_level: ConsistencyLevel`
 
-    Default consistency level for reads on the collection. Defaults to `Bounded`.
+    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](../types/ConsistencyLevel.md).
 
 - `index_params: Vec<IndexParam>`
 
-    Index parameters created together with the collection. Use `index_param()` to add one.
+    Index parameters created together with the collection. Use `index_param()` to add one. See [IndexParam](../types/IndexParam.md).
 
 - `properties: HashMap<String, String>`
 
     Collection properties, such as TTL settings.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *Result\<()\>*
+
+**RETURNS:**
 
 Returns an empty result indicating success. When index parameters are supplied, index creation and loading continue as asynchronous follow-up operations. Returns `Error` on failure.
 
