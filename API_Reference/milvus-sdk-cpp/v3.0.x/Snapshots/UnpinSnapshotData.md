@@ -29,9 +29,9 @@ auto request = milvus::UnpinSnapshotDataRequest()
 
 **EXCEPTIONS:**
 
-- **std::exception**
+- **Status**
 
-    This exception can be raised if the request cannot be sent or the response cannot be parsed.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

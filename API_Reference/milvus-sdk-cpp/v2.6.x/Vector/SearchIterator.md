@@ -600,7 +600,7 @@ request.WithMetricType(milvus::MetricType::L2);
 request.WithFilter("word_count > 10");
 request.AddOutputField("book_id");
 std::vector<float> query_vector{0.1f, 0.2f};
-request.AddFloatVector("book_intro", query_vector);
+request.AddFloatVector(query_vector);
 
 milvus::SearchIteratorPtr iterator;
 status = client->SearchIterator(request, iterator);

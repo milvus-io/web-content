@@ -57,7 +57,7 @@ if (!status.IsOk()) {
 }
 
 auto request = milvus::UpdateReplicateConfigurationRequest()
-    .WithConfiguration(configuration)
+    .WithConfiguration(std::move(configuration))
     .WithForcePromote(force_promote);
 status = client->UpdateReplicateConfiguration(request);
 if (!status.IsOk()) {

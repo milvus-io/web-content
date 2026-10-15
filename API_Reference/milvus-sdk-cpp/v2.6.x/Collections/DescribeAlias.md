@@ -82,6 +82,6 @@ status = client->DescribeAlias(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Alias: " << response.Alias()
-          << ", Collection: " << response.Collection() << std::endl;
+std::cout << "Alias: " << response.Desc().Name()
+          << ", Collection: " << response.Desc().CollectionName() << std::endl;
 ```

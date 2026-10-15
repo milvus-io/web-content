@@ -58,8 +58,9 @@ A JSON object describing job progress, or `nullptr` on failure. Includes fields 
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
+#include "milvus/BulkImport.h"
 auto client = milvus::MilvusClientV2::Create();
-milvus::ConnectParam connect_param{"http://localhost:19530", "root", "Milvus"};
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;

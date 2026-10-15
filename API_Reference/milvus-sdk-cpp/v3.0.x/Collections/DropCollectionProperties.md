@@ -54,9 +54,9 @@ Returns a Status indicating whether the collection properties were dropped succe
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

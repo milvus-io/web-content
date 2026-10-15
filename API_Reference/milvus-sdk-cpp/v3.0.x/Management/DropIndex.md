@@ -83,7 +83,7 @@ if (!status.IsOk()) {
 status = client->DropIndex(
     milvus::DropIndexRequest()
         .WithCollectionName(collection_name)
-        .WithFieldName(field_face)
+        .WithFieldName(field_name)
 );
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;

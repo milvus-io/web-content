@@ -28,7 +28,7 @@ client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"))
 
 DescribeUserResponse response;
 auto status = client->DescribeUser(
-    DescribeUserRequest().WithUsername("alice"),
+    DescribeUserRequest().WithUserName("alice"),
     response);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;

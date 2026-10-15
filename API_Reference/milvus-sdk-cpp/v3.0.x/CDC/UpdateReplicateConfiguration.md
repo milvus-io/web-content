@@ -40,9 +40,9 @@ Returns a status indicating whether the update succeeded.
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 
@@ -57,7 +57,7 @@ if (!status.IsOk()) {
 }
 
 auto request = milvus::UpdateReplicateConfigurationRequest()
-    .WithConfiguration(configuration)
+    .WithConfiguration(std::move(configuration))
     .WithForcePromote(force_promote);
 status = client->UpdateReplicateConfiguration(request);
 if (!status.IsOk()) {
