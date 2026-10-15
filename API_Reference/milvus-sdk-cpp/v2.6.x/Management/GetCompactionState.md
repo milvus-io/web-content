@@ -79,5 +79,5 @@ status = client->GetCompactionState(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "State: " << static_cast<int>(response.State()) << std::endl;
+std::cout << "State: " << static_cast<int>(response.State().State()) << std::endl;
 ```

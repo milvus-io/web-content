@@ -45,8 +45,8 @@ client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"))
 
 auto status = client->CreateResourceGroup(
     CreateResourceGroupRequest()
-        .WithGroupName("gpu_group")
-        .WithConfig(config));
+        .WithName("gpu_group")
+        .WithConfig(std::move(config)));
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

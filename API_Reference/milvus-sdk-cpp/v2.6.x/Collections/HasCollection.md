@@ -70,5 +70,5 @@ status = client->HasCollection(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Collection exists: " << response.HasCollection() << std::endl;
+std::cout << "Collection exists: " << response.Has() << std::endl;
 ```

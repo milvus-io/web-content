@@ -89,9 +89,9 @@ Returns a status indicating whether the operation succeeded.
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 
@@ -109,7 +109,8 @@ auto request = milvus::RunAnalyzerRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
     .WithFieldName(field_name);
-status = client->RunAnalyzer(request);
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

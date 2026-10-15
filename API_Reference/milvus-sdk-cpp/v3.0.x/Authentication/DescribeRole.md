@@ -82,9 +82,9 @@ Returns a status indicating whether the operation succeeded.
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 
@@ -101,7 +101,8 @@ if (!status.IsOk()) {
 auto request = milvus::DescribeRoleRequest()
     .WithRoleName(name)
     .WithDatabaseName(db_name);
-status = client->DescribeRole(request);
+milvus::DescribeRoleResponse response;
+status = client->DescribeRole(request, response);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

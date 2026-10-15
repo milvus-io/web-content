@@ -80,5 +80,5 @@ status = client->HasPartition(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Partition exists: " << response.HasPartition() << std::endl;
+std::cout << "Partition exists: " << response.Has() << std::endl;
 ```

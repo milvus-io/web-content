@@ -63,7 +63,6 @@ milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
-    return;
 }
 
 auto request = milvus::DropCollectionFunctionRequest()

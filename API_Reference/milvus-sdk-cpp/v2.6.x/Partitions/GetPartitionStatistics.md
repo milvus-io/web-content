@@ -76,5 +76,5 @@ status = client->GetPartitionStatistics(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "Row count: " << response.RowCount() << std::endl;
+std::cout << "Row count: " << response.Stats().RowCount() << std::endl;
 ```

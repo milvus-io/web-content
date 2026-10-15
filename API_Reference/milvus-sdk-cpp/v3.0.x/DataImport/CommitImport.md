@@ -18,13 +18,14 @@ Returns the JSON response from the bulk-import endpoint.
 
 - **std::exception**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or returned Status for failure details.
+    Thrown if the HTTP request fails or the response cannot be parsed. Check the return value for `nullptr` to detect failures.
 
 ## Example
 
 Demonstrates CommitImport() with the C++ SDK.
 
 ```cpp
+#include "milvus/BulkImport.h"
 auto response = milvus::BulkImport::CommitImport(
     "http://localhost:19530", "import-job-id", "default", "root:Milvus");
 ```

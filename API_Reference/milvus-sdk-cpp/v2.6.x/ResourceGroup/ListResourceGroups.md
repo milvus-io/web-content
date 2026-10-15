@@ -43,7 +43,7 @@ status = client->ListResourceGroups(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-for (const auto& name : response.ResourceGroups()) {
+for (const auto& name : response.GroupNames()) {
     std::cout << "Resource group: " << name << std::endl;
 }
 ```

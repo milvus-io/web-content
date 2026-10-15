@@ -144,7 +144,7 @@ auto sub1 = SubSearchRequest()
 auto sub2 = SubSearchRequest()
     .WithAnnsField("sparse_vec")
     .WithLimit(10)
-    .AddSparseVector({{0, 0.3f}, {5, 0.7f}});
+    .AddSparseVector(std::map<uint32_t, float>{{0, 0.3f}, {5, 0.7f}});
 
 SearchResponse response;
 auto status = client->HybridSearch(
