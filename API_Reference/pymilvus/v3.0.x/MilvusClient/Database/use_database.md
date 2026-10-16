@@ -43,9 +43,13 @@ None
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
-# Switch to a different database
+# Create a database if it does not exist
+if "my_database" not in client.list_databases():
+    client.create_database(db_name="my_database")
+
+# Switch to the database
 client.use_database(db_name="my_database")
 
 # Subsequent operations will use "my_database"

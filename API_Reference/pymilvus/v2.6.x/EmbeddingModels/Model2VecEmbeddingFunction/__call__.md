@@ -8,7 +8,7 @@ The **\_\_call\_\_()** method of Model2VecEmbeddingFunction shares the same func
 
 ```python
 # Instance created
-model2vec_ef = Model2VecEmbeddingFunction()
+model2vec_ef = model.dense.Model2VecEmbeddingFunction()
 
 # __call__ method will be called
 model2vec_ef(
@@ -41,7 +41,7 @@ A list where each element is a NumPy array.
 ```python
 from pymilvus import model
 
-model2vec_ef = Model2VecEmbeddingFunction(
+model2vec_ef = model.dense.Model2VecEmbeddingFunction(
     model_source="minishlab/potion-base-8M" # Specify the model source (loads from Hugging Face or local path)
 )
 

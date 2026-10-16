@@ -71,6 +71,9 @@ from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
+# Create the database
+client.create_database("my_db")
+
 client.drop_database_properties(
     db_name="my_db",
     property_keys=["database.replica.number", "database.diskQuota.mb"]

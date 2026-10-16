@@ -86,7 +86,7 @@ A dataclass containing snapshot metadata with the following fields:
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 info = client.describe_snapshot(snapshot_name="backup_20260418", collection_name="my_collection")
 print(f"Snapshot: {info.name}")

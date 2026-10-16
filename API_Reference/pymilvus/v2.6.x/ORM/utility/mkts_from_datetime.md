@@ -5,7 +5,7 @@ This operation makes a hybrid timestamp from a Python's **datetime.datetime** ob
 ## Request Syntax
 
 ```python
-mkts_from_datetime(
+utility.mkts_from_datetime(
     d_time: datetime,
     milliseconds: float = 0.0,
     delta: datetime.timedelta | None,
@@ -38,7 +38,7 @@ A hybrid timestamp, which is a non-negative integer ranging from **0** to **1844
 from datetime import datetime, timedelta
 from pymilvus import utility
 
-ts = mkts_from_datetime(
+ts = utility.mkts_from_datetime(
     d_time=datetime.now(),
     milliseconds=0.0,
     delta=None,

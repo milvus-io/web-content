@@ -208,22 +208,12 @@ A **[CollectionSchema](CollectionSchema.md)** object contains the fields that ha
 ```python
 from pymilvus import DataType, FieldSchema, CollectionSchema
 
+# Create the primary key field and the vector field
+primary_key = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True)
+vector = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=768)
+
 schema = CollectionSchema(
-    fields = [primary_key, vector]
-)
-
-# Add the primary key field
-schema.add_field(
-    field_name="id",
-    datatype=DataType.INT64,
-    is_primary=True
-)
-
-# Add the vector field
-schema.add_field(
-    field_name="vector",
-    datatype=FLOAT_VECTOR,
-    dim=768
+    fields=[primary_key, vector]
 )
 
 # Add a scalar field to the schema

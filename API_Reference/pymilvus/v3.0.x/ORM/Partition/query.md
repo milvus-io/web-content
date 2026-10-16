@@ -172,7 +172,8 @@ res = partition.query(
     expr="",
     consistency_level=3,
     graceful_time=6
-)```
+)
+```
 
 ## Related operations
 

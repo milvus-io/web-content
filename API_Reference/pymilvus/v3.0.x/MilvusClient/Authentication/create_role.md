@@ -49,5 +49,12 @@ This operation returns no value.
 ## Examples
 
 ```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
 client.create_role(role_name="analytics_reader")
 ```

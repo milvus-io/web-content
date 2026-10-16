@@ -216,7 +216,7 @@ while True:
         break
         
     for hit in result:
-        results.append(hit.to_dict())
+        results.append(hit)
     
 ```
 

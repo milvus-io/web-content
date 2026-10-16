@@ -33,14 +33,15 @@ A `Function` object.
 ## Examples
 
 ```python
-from pymilvus import Function  
+from pymilvus import Function, FunctionType
 
 function_dict = {  
     "name": "bm25",  
-    "type": "BM25",  
+    "type": FunctionType.BM25,  
     "input_field_names": ["text"],  
     "output_field_names": ["score"],  
     "description": "BM25 text search function",  
+    "params": {},  
 }  
 
 function = Function.construct_from_dict(function_dict)  

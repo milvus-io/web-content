@@ -52,11 +52,11 @@ The **GrantItem** objects contains the following fields:
 from pymilvus import Role
 
 # Get an existing role
-role = Role(name="root")
+role = Role(name="admin")
 
 # List all privileges granted to the current role.
-res = list_grants(
-    db_name="test_db"
+res = role.list_grants(
+    db_name="default"
 )
 ```
 

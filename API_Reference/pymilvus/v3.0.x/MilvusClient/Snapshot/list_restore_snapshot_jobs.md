@@ -95,7 +95,7 @@ A list of RestoreSnapshotJobInfo objects, each containing restore job informatio
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # List all restore jobs
 jobs = client.list_restore_snapshot_jobs()

@@ -79,9 +79,18 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a role and grant a privilege to it
+client.create_role(role_name="read_only")
+client.grant_privilege(
+    role_name="read_only",
+    object_type="Collection",
+    privilege="Insert",
+    object_name="my_collection"
+)
+
 # Revoke insert privilege on a collection from a role
 client.revoke_privilege(
-    role_name="readOnly",
+    role_name="read_only",
     object_type="Collection",
     privilege="Insert",
     object_name="my_collection"

@@ -78,6 +78,7 @@ A *ResourceGroupConfig* instance
 
 ```python
 from pymilvus.client.constants import DEFAULT_RESOURCE_GROUP
+from pymilvus.client.types import ResourceGroupConfig
 
 ResourceGroupConfig(
     requests={"node_num": 1},

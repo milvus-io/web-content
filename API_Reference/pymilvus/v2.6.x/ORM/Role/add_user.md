@@ -38,23 +38,23 @@ add_user(
 from pymilvus import Role, utility
 
 # Create a user
-user = utility.create_user(user="admin", password="123456")
+user = utility.create_user(user="user_1", password="123456")
 
 # Create a role
-role=Role(
-    name="admin",
+role = Role(
+    name="read_only",
 )
 
 role.create()
 
 # Add the user to the role
-role.add_user(username="admin")
+role.add_user(username="user_1")
 
 # List role information
 utility.list_roles(include_user_info=True)
 
 # RoleInfo groups:
-# - RoleItem: <role_name:admin>, <users:('admin',)>
+# - RoleItem: <role_name:read_only>, <users:('user_1',)>
 # - RoleItem: <role_name:public>, <users:()>
 ```
 

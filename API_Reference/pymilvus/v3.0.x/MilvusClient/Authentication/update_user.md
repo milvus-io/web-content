@@ -54,6 +54,12 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a user
+client.create_user(
+    user_name="user_1",
+    password="password"
+)
+
 client.update_user(
     user_name="user_1",
     description="Data engineer with full access",

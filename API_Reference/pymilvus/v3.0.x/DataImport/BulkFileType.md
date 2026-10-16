@@ -23,7 +23,17 @@ This is an enumeration that provides the following constants.
 ## Examples
 
 ```python
-from pymilvus import LocalBulkWriter, BulkFileType
+from pathlib import Path
+from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus.bulk_writer import LocalBulkWriter, BulkFileType
+
+OUTPUT_PATH = "/tmp/output"
+
+# Set up a schema
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=5),
+])
 
 local_writer = LocalBulkWriter(
     schema=schema,
