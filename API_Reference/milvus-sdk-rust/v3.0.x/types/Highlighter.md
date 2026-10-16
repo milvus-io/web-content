@@ -29,5 +29,5 @@ pub struct Highlighter
 ```rust
 let highlighter = Highlighter::new()
     .highlight_type(HighlightType::Lexical)
-    .params(HashMap::from([("pre_tags".to_owned(), "<b>".to_owned())]));
+    .params(HashMap::from([("pre_tags".to_owned(), "[\"<b>\"]".to_owned())]));
 ```

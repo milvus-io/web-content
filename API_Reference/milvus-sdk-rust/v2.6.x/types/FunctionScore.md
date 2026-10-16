@@ -27,5 +27,5 @@ pub struct FunctionScore
 
 ```rust
 let rerank = FunctionScore::new()
-    .add_function(RRFRerank::new().k(60));
+    .add_function(BoostRerank::new().name("boost on year").filter("year >= 2000").weight(5.0));
 ```

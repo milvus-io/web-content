@@ -6,6 +6,8 @@ Alters a function attached to a collection schema.
 pub async fn alter_collection_function(&self, request: AlterCollectionFunctionRequest) -> Result<()>
 ```
 
+This request type is **deprecated**: Milvus 3.0 and later do not support altering a function separately. Use `AddFunctionFieldRequest` and `DropFunctionFieldRequest` instead.
+
 ## Request Syntax
 
 ```rust

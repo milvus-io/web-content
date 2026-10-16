@@ -12,7 +12,7 @@ pub async fn drop_collection_field_properties(&self, request: DropCollectionFiel
 let request = DropCollectionFieldPropertiesRequest::builder()
     .collection_name("books")
     .field_name("vector")
-    .property_key("nlist")
+    .property_key("mmap.enabled")
     .build()?;
 ```
 
@@ -48,7 +48,7 @@ Returns an empty result indicating success. Returns `Error` on failure.
 let request = DropCollectionFieldPropertiesRequest::builder()
     .collection_name("books")
     .field_name("vector")
-    .property_key("nlist")
+    .property_key("mmap.enabled")
     .build()?;
 client.drop_collection_field_properties(request).await?;
 ```

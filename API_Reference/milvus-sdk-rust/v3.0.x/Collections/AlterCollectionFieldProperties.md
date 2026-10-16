@@ -12,7 +12,7 @@ pub async fn alter_collection_field_properties(&self, request: AlterCollectionFi
 let request = AlterCollectionFieldPropertiesRequest::builder()
     .collection_name("books")
     .field_name("vector")
-    .property("nlist", "1024")
+    .property("mmap.enabled", "true")
     .build()?;
 ```
 
@@ -48,7 +48,7 @@ Returns an empty result indicating success. Returns `Error` on failure.
 let request = AlterCollectionFieldPropertiesRequest::builder()
     .collection_name("books")
     .field_name("vector")
-    .property("nlist", "1024")
+    .property("mmap.enabled", "true")
     .build()?;
 client.alter_collection_field_properties(request).await?;
 ```
