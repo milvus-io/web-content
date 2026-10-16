@@ -14,6 +14,7 @@ let request = CreateIndexRequest::builder()
     .index_params(vec![
         IndexParam::new()
             .field_name("embedding")
+            .index_name("embedding_idx")
             .index_type(IndexType::AutoIndex)
             .metric_type(MetricType::Cosine),
     ])
@@ -58,6 +59,7 @@ let request = CreateIndexRequest::builder()
     .index_params(vec![
         IndexParam::new()
             .field_name("embedding")
+            .index_name("embedding_idx")
             .index_type(IndexType::AutoIndex)
             .metric_type(MetricType::Cosine),
     ])

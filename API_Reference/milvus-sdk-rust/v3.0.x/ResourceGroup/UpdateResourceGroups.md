@@ -12,7 +12,7 @@ pub async fn update_resource_groups(&self, request: UpdateResourceGroupsRequest)
 let request = UpdateResourceGroupsRequest::builder()
     .groups(HashMap::from([(
         "group_1".to_string(),
-        ResourceGroupConfig::new().requested_nodes(3),
+        ResourceGroupConfig::new().requested_nodes(3).node_limit(3),
     )]))
     .build()?;
 ```
@@ -37,7 +37,7 @@ Returns `Ok(())` on success; returns an `Error` on failure.
 let request = UpdateResourceGroupsRequest::builder()
     .groups(HashMap::from([(
         "group_1".to_string(),
-        ResourceGroupConfig::new().requested_nodes(3),
+        ResourceGroupConfig::new().requested_nodes(3).node_limit(3),
     )]))
     .build()?;
 client.update_resource_groups(request).await?;

@@ -14,6 +14,7 @@ let request = AddCollectionStructFieldRequest::builder()
     .struct_field(
         StructFieldSchema::new()
             .name("events")
+            .max_capacity(16)
             .nullable(true)
             .add_field(
                 FieldSchema::new()
@@ -55,6 +56,7 @@ let request = AddCollectionStructFieldRequest::builder()
     .struct_field(
         StructFieldSchema::new()
             .name("events")
+            .max_capacity(16)
             .nullable(true)
             .add_field(
                 FieldSchema::new()

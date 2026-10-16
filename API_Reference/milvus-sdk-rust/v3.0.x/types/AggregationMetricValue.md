@@ -28,5 +28,6 @@ match metric_value {
     AggregationMetricValue::Double(v) => println!("double: {v}"),
     AggregationMetricValue::String(v) => println!("string: {v}"),
     AggregationMetricValue::Bool(v) => println!("bool: {v}"),
+    _ => println!("unsupported aggregation metric value"),
 }
 ```

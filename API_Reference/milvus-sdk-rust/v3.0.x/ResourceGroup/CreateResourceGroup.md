@@ -11,7 +11,7 @@ pub async fn create_resource_group(&self, request: CreateResourceGroupRequest) -
 ```rust
 let request = CreateResourceGroupRequest::builder()
     .name("group_1")
-    .config(ResourceGroupConfig::new().requested_nodes(2))
+    .config(ResourceGroupConfig::new().requested_nodes(2).node_limit(2))
     .build()?;
 ```
 
@@ -38,7 +38,7 @@ Returns `Ok(())` on success; returns an `Error` on failure.
 ```rust
 let request = CreateResourceGroupRequest::builder()
     .name("group_1")
-    .config(ResourceGroupConfig::new().requested_nodes(2))
+    .config(ResourceGroupConfig::new().requested_nodes(2).node_limit(2))
     .build()?;
 client.create_resource_group(request).await?;
 ```
