@@ -111,6 +111,10 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a collection and insert some data
+client.create_collection(collection_name="my_collection", dimension=5)
+client.insert(collection_name="my_collection", data=[{"id": i, "vector": [0.1] * 5} for i in range(10)])
+
 job_id = client.compact(collection_name="my_collection")
 plans = client.get_compaction_plans(job_id=job_id)
 print(plans)

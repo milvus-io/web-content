@@ -70,7 +70,7 @@ create_database(
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri, token) # db = "default" 
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus") # db = "default" 
 
 client.create_database(
     db_name="my_db"

@@ -43,7 +43,7 @@ It is recommended that you wait for Milvus to seal all segments before conductin
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import Collection, CollectionSchema, FieldSchema, DataType, Partition
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),

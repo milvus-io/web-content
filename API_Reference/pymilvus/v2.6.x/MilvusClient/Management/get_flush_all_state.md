@@ -50,6 +50,6 @@ client = MilvusClient(
 client.flush_all()
 
 # Check if flush completed
-is_done = client.get_flush_all_state(flush_all_ts=0)
+is_done = client.get_flush_all_state(flush_all_ts=1)
 print(is_done)  # True or False
 ```

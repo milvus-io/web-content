@@ -73,7 +73,7 @@ The restore job ID. Use this ID with `get_restore_snapshot_state()` to track the
 from pymilvus import MilvusClient
 import time
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # Start restore and get the job ID
 job_id = client.restore_snapshot(

@@ -62,7 +62,7 @@ from pymilvus.client.types import (
     ResourceGroupConfig,
 )
 
-client = MilvusClient(uri, token)
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # Create a resource group
 client.create_resource_group("rg1", config=ResourceGroupConfig(

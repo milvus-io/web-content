@@ -61,7 +61,7 @@ delta = timedelta(
 )
 
 # Get a hybrid timestamp
-mkts_from_hybridts(
+utility.mkts_from_hybridts(
     hybridts=ts,
     milliseconds=1000,
     delta=delta,

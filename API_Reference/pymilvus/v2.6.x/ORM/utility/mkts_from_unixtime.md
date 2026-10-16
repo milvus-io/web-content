@@ -68,7 +68,7 @@ delta = timedelta(
 )
 
 # Get a hybrid timestamp
-mkts_from_unixtime(
+utility.mkts_from_unixtime(
     epoch=epoch1,
     milliseconds=1000,
     delta=delta,

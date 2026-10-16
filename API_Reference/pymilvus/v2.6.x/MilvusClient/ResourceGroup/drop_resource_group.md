@@ -54,7 +54,7 @@ from pymilvus.client.types import (
     ResourceGroupConfig,
 )
 
-client = MilvusClient("http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 ## create resource group
 print("create resource group")

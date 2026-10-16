@@ -64,5 +64,6 @@ client.create_role(role_name="read_only")
 client.drop_role(role_name="read_only")
 
 # Force drop a role with assigned privileges
+client.create_role(role_name="custom_role")
 client.drop_role(role_name="custom_role", force_drop=True)
 ```

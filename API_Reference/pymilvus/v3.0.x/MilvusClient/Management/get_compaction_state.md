@@ -48,7 +48,11 @@ The state name of the compaction job. Possible values are `"UndefiedState"`, `"E
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection and insert some data
+client.create_collection(collection_name="my_collection", dimension=4)
+client.insert(collection_name="my_collection", data=[{"id": i, "vector": [0.1] * 4} for i in range(10)])
 
 # Start compaction and check its state
 job_id = client.compact(collection_name="my_collection")

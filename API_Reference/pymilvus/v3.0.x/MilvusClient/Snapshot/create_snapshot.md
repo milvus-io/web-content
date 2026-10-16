@@ -64,7 +64,7 @@ None
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # Recommended: flush before creating snapshot to persist in-memory data
 client.flush(collection_name="my_collection")

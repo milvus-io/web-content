@@ -54,6 +54,9 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a role
+client.create_role(role_name="analytics_reader")
+
 client.alter_role(
     role_name="analytics_reader",
     description="Read-only access for the analytics team",

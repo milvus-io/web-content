@@ -45,6 +45,7 @@ connect_param = RemoteBulkWriter.ConnectParam(
 # Set up a remote bulk writer
 writer = RemoteBulkWriter(
     schema=schema,
+    remote_path="/path/to/bucket/prefix", # Set the object path in the bucket
     connect_param=connect_param,
     local_path="/tmp/output",
 )

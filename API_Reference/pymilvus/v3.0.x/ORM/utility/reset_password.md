@@ -80,7 +80,7 @@ connections.connect()
 user = utility.create_user(user="admin", password="123456")
 
 # Reset the password for the user.
-reset_password(
+utility.reset_password(
     user="admin",
     old_password="123456",
     new_password="123456Abc*",

@@ -56,7 +56,7 @@ schema_dict = {
 }  
 
 # Reconstruct schema from dictionary 
-schema = StructFieldSchema(name="struct_schema", fields=[vector]).construct_from_dict(schema_dict)  
+schema = StructFieldSchema().construct_from_dict(schema_dict)  
 
 print(schema)
 

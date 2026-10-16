@@ -96,6 +96,16 @@ add_collection_field(
 **Example 1:** Add a basic nullable field
 
 ```python
+from pymilvus import MilvusClient, DataType
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection
+client.create_collection(
+    collection_name="product_catalog",
+    dimension=4,
+)
+
 client.add_collection_field(
     collection_name="product_catalog",
     field_name="created_timestamp",
@@ -107,8 +117,18 @@ client.add_collection_field(
 **Example 2:** Add a field with default value
 
 ```python
+from pymilvus import MilvusClient, DataType
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection
+client.create_collection(
+    collection_name="product_catalog_2",
+    dimension=4,
+)
+
 client.add_collection_field(
-    collection_name="product_catalog",
+    collection_name="product_catalog_2",
     field_name="priority_level",
     data_type=DataType.VARCHAR,
     max_length=20,

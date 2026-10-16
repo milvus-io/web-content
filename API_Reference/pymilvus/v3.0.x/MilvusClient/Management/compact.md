@@ -74,10 +74,14 @@ A compaction job ID, which can be used to get the compaction status.
 from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection and insert some data
+client.create_collection(collection_name="book_catalog", dimension=4)
+client.insert(collection_name="book_catalog", data=[{"id": i, "vector": [0.1] * 4} for i in range(10)])
+
 job_id = client.compact(
     collection_name="book_catalog",
-    is_clustering=True,
-    target_size=512,
+    target_size=1024,
     target_size_unit="mb",
 )
 
