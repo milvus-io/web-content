@@ -72,7 +72,7 @@ A dictionary that contains detailed information about the specified collection.
      'collection_id': 446738261026541332,
      'consistency_level': 2,
      'properties': {},
-     'num_partitions': 1，
+     'num_partitions': 1,
      'enable_dynamic_field': True,
      'created_timestamp': 461643298319106049,
      'update_timestamp': 461643298319106049
@@ -255,7 +255,7 @@ client.describe_collection(collection_name="test_collection")
 #      'num_partitions': 1,
 #      'enable_dynamic_field': True,
 #      'created_timestamp': 461643298319106049,
-#      'updated_timestamp': 461643298319106049
+#      'update_timestamp': 461643298319106049
 # }
 ```
 

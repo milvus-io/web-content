@@ -40,7 +40,7 @@ A list of database names.
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri, token) # db = "default" 
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus") # db = "default" 
 
 db_list = client.list_databases()
 print(db_list)

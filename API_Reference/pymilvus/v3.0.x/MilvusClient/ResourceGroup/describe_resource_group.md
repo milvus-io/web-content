@@ -100,7 +100,7 @@ from pymilvus.client.types import (
 )
 
 collection_name = "hello_milvus"
-client = MilvusClient("http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 ## create resource group
 print("create resource group")

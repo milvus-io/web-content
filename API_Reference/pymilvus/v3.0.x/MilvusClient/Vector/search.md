@@ -371,7 +371,7 @@ res = client.search(
 
 # Conduct a range search
 search_params = {
-    "metric_type": "IP",
+    "metric_type": "COSINE",
     "params": {
         "radius": 0.1,
         "range_filter": 0.8

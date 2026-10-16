@@ -54,12 +54,20 @@ client.drop_collection_function(
 ## Example
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import MilvusClient, Function, FunctionType, DataType
 
 client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"
 )
+
+# Create a collection with a BM25 function
+schema = client.create_schema(auto_id=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=512, enable_analyzer=True, enable_match=True)
+schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_function(Function(name="bm25", function_type=FunctionType.BM25, input_field_names=["text"], output_field_names=["sparse_vector"]))
+client.create_collection(collection_name="my_collection", schema=schema)
 
 client.drop_collection_function(
     collection_name="my_collection",

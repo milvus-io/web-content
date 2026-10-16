@@ -55,12 +55,18 @@ However, note that the displayed row count may not match the number of records i
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection
+client.create_collection(
+    collection_name="my_collection",
+    dimension=5,
+)
 
 stats = client.get_collection_stats(
     collection_name="my_collection"
 )
 
 print(stats)
-# Output: {'row_count': 100}
+# Output: {'row_count': 0}
 ```

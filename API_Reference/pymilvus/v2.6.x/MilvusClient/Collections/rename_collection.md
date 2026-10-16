@@ -70,6 +70,10 @@ client.create_collection(
     dimension=5
 )
 
+# Create the target database if it does not exist
+if "my_database" not in client.list_databases():
+    client.create_database(db_name="my_database")
+
 # Rename the collection
 client.rename_collection(
     old_name="test_collection",

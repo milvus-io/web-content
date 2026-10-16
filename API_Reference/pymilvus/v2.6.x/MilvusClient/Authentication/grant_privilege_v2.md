@@ -86,7 +86,7 @@ client.create_privilege_group(
 
 client.add_privileges_to_group(
     group_name="my_privilege_group",
-    privileges=["ListDatabases", "DescribeDatabase"]
+    privileges=["CreateDatabase", "DropDatabase"]
 ) 
 
 # 2. Create a role
@@ -94,9 +94,10 @@ client.create_role(role_name="read_only")
 
 # 3. Grant privileges
 client.grant_privilege_v2(
-    role_name="db_read_only",
+    role_name="read_only",
     privilege="my_privilege_group",
-    collection_name="*"
+    collection_name="*",
+    db_name="*"
 )
 ```
 

@@ -33,9 +33,33 @@ None
 ## Examples
 
 ```python
-from pymilvus import Collection
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
 
-collection = Collection("test")
+# Connect to localhost:19530
+connections.connect()
 
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+])
+
+# Create a collection
+collection = Collection(
+    name="test",
+    schema=schema
+)
+
+# Insert some data
+collection.insert(
+    data=[
+        [0, 1],
+        [
+            [0.1, 0.2, -0.3, -0.4, 0.5],
+            [0.3, -0.1, -0.2, -0.6, 0.7],
+        ],
+    ]
+)
+
+# Truncate the collection
 collection.truncate()
 ```

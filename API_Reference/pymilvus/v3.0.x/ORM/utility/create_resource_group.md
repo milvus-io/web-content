@@ -51,7 +51,7 @@ create_resource_group(
 
         A ResourceGroupConfig object that represents the configuration of the resource group.
 
-        ```python
+```text
         ├── ResourceGroupConfig
         │   ├── requests
         │   │   └── node_num

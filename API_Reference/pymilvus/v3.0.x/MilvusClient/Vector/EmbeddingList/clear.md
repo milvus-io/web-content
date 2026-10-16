@@ -19,7 +19,7 @@ An empty **[EmbeddingList](EmbeddingList.md)** instance.
 ## Examples
 
 ```python
-from pymilvus import EmbeddingList
+from pymilvus.client.embedding_list import EmbeddingList
 
 # create an empty embedding list
 embeddingList = EmbeddingList()

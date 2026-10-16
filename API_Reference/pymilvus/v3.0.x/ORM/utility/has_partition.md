@@ -53,10 +53,22 @@ A boolean value indicates whether the specified partition exists.
 ## Examples
 
 ```python
-from pymilvus import connections, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connect to localhost:19530
 connections.connect()
+
+# Create a collection
+collection = Collection(
+    name="test_collection",
+    schema=CollectionSchema([
+        FieldSchema("id", DataType.INT64, is_primary=True),
+        FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+    ])
+)
+
+# Create a partition
+collection.create_partition("test_partition")
 
 # Check whether a partition exists
 utility.has_partition(

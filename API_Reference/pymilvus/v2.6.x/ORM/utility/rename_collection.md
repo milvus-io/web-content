@@ -72,10 +72,19 @@ None
 ## Examples
 
 ```python
-from pymilvus import connections, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connect to localhost:19530
 connections.connect()
+
+# Create a collection
+collection = Collection(
+    name="test_collection_1",
+    schema=CollectionSchema([
+        FieldSchema("id", DataType.INT64, is_primary=True),
+        FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+    ])
+)
 
 # Renames a collection
 utility.rename_collection(
@@ -83,10 +92,13 @@ utility.rename_collection(
     new_collection_name="test_collection_2",
 )
 
-# Renames a collection and moves it to a new database
+# Create a new database and rename the collection back
+from pymilvus import db
+db.create_database("new_database")
+
 utility.rename_collection(
-    old_collection_name="test_collection_1",
-    new_collection_name="test_collection_2",
+    old_collection_name="test_collection_2",
+    new_collection_name="test_collection_1",
     new_db_name="new_database"
 )
 ```

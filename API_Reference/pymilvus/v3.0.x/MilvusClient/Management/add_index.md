@@ -57,8 +57,11 @@ None
 ```python
 from pymilvus import MilvusClient, DataType
 
-# 1. Create schema
-schema = MilvusClient.create_schema(
+# 1. Create a client
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# 2. Create schema
+schema = client.create_schema(
     auto_id=False,
     enable_dynamic_field=False,
 )

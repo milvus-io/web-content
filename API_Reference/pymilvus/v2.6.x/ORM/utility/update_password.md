@@ -66,11 +66,20 @@ This operation returns no value.
 ## Examples
 
 ```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+client.create_user(
+    user_name="analyst_user",
+    password="P@ssw0rd!",
+    description="Read-only analyst account",
+)
+
 client.update_password(
     user_name="analyst_user",
     old_password="P@ssw0rd!",
     new_password="N3wP@ssw0rd!",
-    reset_connection=True,
+    reset_connection=False,
     description="Read-only analyst account",
 )
 ```

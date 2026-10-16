@@ -58,13 +58,18 @@ None
 ## Examples
 
 ```python
-from pymilvus import connections, Collection, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connection to localhost:19530
 connections.connect()
 
-# Get an existing collection
-collection_1 = Collection("collection_1")
+# Create a collection
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5),
+])
+
+collection_1 = Collection("collection_1", schema)
 
 # Create an alias for collection_1
 utility.create_alias(collection_name="collection_1", alias="bob")
@@ -79,7 +84,7 @@ utility.create_alias(collection_name="collection_1", alias="tom")
 utility.list_aliases(collection_name="collection_1") # ['bob', 'tom']
 
 # Drop the alias bob
-utility.drop_alise(alias="bob")
+utility.drop_alias(alias="bob")
 
 # List aliases for the collection
 utility.list_aliases(collection_name="collection_1") # ['tom']

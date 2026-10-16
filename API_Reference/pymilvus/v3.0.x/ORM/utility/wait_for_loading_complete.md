@@ -54,12 +54,32 @@ None
 ## Examples
 
 ```python
-from pymilvus import connections, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connect to localhost:19530
 connections.connect()
 
-# This example assumes that a collection named "test_collection" already exists and has been loaded.
+# Create a collection
+collection = Collection(
+    name="test_collection",
+    schema=CollectionSchema([
+        FieldSchema("id", DataType.INT64, is_primary=True),
+        FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+    ])
+)
+
+# Create an index and a partition
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
+)
+collection.create_partition("test_partition")
+
+# Load the partition
+collection.load(partition_names=["test_partition"])
 
 # Wait until the load process completes
 utility.wait_for_loading_complete(

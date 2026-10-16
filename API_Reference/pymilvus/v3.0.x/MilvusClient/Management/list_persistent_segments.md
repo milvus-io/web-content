@@ -98,6 +98,13 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a collection and insert some data
+client.create_collection(collection_name="my_collection", dimension=5)
+client.insert(collection_name="my_collection", data=[{"id": i, "vector": [0.1] * 5} for i in range(10)])
+
+# Flush the data so that the inserted segments are persisted and become listable
+client.flush(collection_name="my_collection")
+
 segments = client.list_persistent_segments(collection_name="my_collection")
 for seg in segments:
     print(f"Segment {seg.segment_id}: {seg.num_rows} rows, level={seg.level}")

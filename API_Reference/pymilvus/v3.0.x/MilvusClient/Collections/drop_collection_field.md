@@ -54,9 +54,16 @@ This operation does not return data.
 ## Example
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import MilvusClient, DataType
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection that contains the field to drop
+schema = client.create_schema(auto_id=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=3)
+schema.add_field(field_name="legacy_score", datatype=DataType.FLOAT)
+client.create_collection(collection_name="products", schema=schema)
 
 client.drop_collection_field(
     collection_name="products",

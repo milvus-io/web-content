@@ -56,7 +56,7 @@ collection = Collection(
     name="test_collection_flush", 
     schema=CollectionSchema(fields=[
         FieldSchema("film_id", DataType.INT64, is_primary=True),
-        FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=128)
+        FieldSchema("films", dtype=DataType.FLOAT_VECTOR, dim=2)
     ])
 )
 

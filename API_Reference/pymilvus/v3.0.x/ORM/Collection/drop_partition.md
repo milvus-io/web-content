@@ -4,7 +4,7 @@ This operation drops a specified partition from the current collection.
 
 ```python
 drop_partition(
-    partition_name: str
+    partition_name: str,
     timeout: float | None
 )
 ```
@@ -12,7 +12,10 @@ drop_partition(
 ## Request Syntax
 
 ```python
-from pymilvus import Collection
+from pymilvus import connections, Collection
+
+# Connect to localhost:19530
+connections.connect()
 
 # Get an existing collection
 collection = Collection(name="string")
@@ -50,7 +53,10 @@ None
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),

@@ -92,7 +92,7 @@ A dataclass containing restore job information with the following fields:
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 state = client.get_restore_snapshot_state(job_id=12345)
 print(f"State: {state.state}")

@@ -29,7 +29,10 @@ N/A
 ## Examples
 
 ```python
-from pymilvus import Role, utility
+from pymilvus import connections, Role, utility
+
+# Connect to localhost:19530
+connections.connect()
 
 # Create a new role
 role = Role(name="test")

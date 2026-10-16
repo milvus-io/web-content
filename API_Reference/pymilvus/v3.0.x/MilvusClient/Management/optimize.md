@@ -96,10 +96,13 @@ import time
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
+# Create a collection
+client.create_collection(collection_name="book", dimension=5)
+
 # Wait for completion
 result = client.optimize(
     collection_name="book",
-    target_size="512MB",
+    target_size="1024MB",
     wait=True,
 )
 print(result)

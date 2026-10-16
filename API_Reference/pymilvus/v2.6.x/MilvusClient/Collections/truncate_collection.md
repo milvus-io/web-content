@@ -49,6 +49,16 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a collection and insert some data
+client.create_collection(
+    collection_name="my_collection",
+    dimension=5
+)
+client.insert(
+    collection_name="my_collection",
+    data=[{"id": i, "vector": [0.1] * 5} for i in range(10)]
+)
+
 client.truncate_collection(
     collection_name="my_collection"
 )

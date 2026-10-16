@@ -49,7 +49,7 @@ None
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 client.drop_snapshot(snapshot_name="backup_20260401", collection_name="my_collection")
 ```

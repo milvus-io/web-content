@@ -38,7 +38,7 @@ list_users(
 
 A **UserInfo** object that contains contains the user information.
 
-```python
+```text
 ├── UserInfo
 │   └── groups  
 │       └── UserItem

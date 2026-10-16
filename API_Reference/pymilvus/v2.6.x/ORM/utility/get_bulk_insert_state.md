@@ -50,7 +50,7 @@ RETURN TYPE:
 **RETURNS:**
 A **[BulkInsertState](BulkInsertState.md)** that contains information about the state of the specified bulk-insert task.
 
-```python
+```text
 ├── BulkInsertState
 │   ├── task_id 
 │   ├── state 

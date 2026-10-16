@@ -43,7 +43,7 @@ A list of snapshot names.
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 # List all snapshots for a specific collection
 snapshots = client.list_snapshots(collection_name="my_collection")

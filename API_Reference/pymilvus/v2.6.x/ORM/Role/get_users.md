@@ -23,7 +23,10 @@ A tuple that contains the names of all users added to the current role.
 ## Examples
 
 ```python
-from pymilvus import Role
+from pymilvus import connections, Role
+
+# Connect to localhost:19530
+connections.connect()
 
 # Get an existing role
 role = Role(name="admin")

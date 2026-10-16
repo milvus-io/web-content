@@ -76,7 +76,10 @@ A **QueryIterator** for you to iterate over the query result.
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -88,6 +91,18 @@ collection = Collection(
     name="test_collection",
     schema=schema
 )
+
+# Create an index on the vector field
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
+)
+
+# Load the collection
+collection.load()
 
 # Insert a list of columns
 res = collection.insert(
@@ -121,7 +136,7 @@ while True:
     res = iterator.next()
     
     if not res:
-        res.close()
+        iterator.close()
         break
 ```
 

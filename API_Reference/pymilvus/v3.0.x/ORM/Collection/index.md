@@ -43,7 +43,10 @@ An Index object of the current collection.
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -78,7 +81,7 @@ collection.create_index(
 )
 
 # Check the index
-collection.has_index() # True
+collection.has_index(index_name="vector") # True
 
 # list all index names
 collection.indexes
@@ -87,7 +90,7 @@ collection.indexes
 # <pymilvus.orm.index.Index at 0x12045d0d0>]
 
 # Get a specific index object
-collection.index(index_name="_default_idex_101")
+collection.index(index_name="vector")
 
 # <pymilvus.orm.index.Index at 0x1205b8690>
 ```

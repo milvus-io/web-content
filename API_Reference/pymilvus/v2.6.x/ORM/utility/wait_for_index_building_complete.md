@@ -111,12 +111,12 @@ collection.create_index(
 # List all indexes
 utility.list_indexes(
     collection_name="test_collection"
-) # ['_default_idx_101', '_default_idx_100']
+) # ['vector', 'id']
 
 # Wait for the index being built
 utility.wait_for_index_building_complete(
     collection_name="test_collection",
-    index_name="_default_idx_100",
+    index_name="vector",
 )
 ```
 

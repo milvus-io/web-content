@@ -69,10 +69,21 @@ A **Partition** object.
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
 
-# Get an existing collection
-collection = Collection("book")
+# Connect to localhost:19530
+connections.connect()
+
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+])
+
+# Create a collection
+collection = Collection(
+    name="book",
+    schema=schema
+)
 
 # Create a partition object in the current collection
 partition = Partition(collection, "novel", "")

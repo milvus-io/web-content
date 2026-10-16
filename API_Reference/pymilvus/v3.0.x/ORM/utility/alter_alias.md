@@ -87,14 +87,19 @@ None
 ## Examples
 
 ```python
-from pymilvus import connections, Collection, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connection to localhost:19530
 connections.connect()
 
-# Get two existing collections
-collection_1 = Collection("collection_1")
-collection_2 = Collection("collection_2")
+# Create two collections
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5),
+])
+
+collection_1 = Collection("collection_1", schema)
+collection_2 = Collection("collection_2", schema)
 
 # Create an alias for collection_1
 utility.create_alias(collection_name="collection_1", alias="bob")
@@ -104,7 +109,7 @@ utility.list_aliases(collection_name="collection_1") # ['bob']
 utility.list_aliases(collection_name="collection_2") # []
         
 # Reassigns the alias to collection_2
-utility.alter_alias(collection_name="test_collection_2", alias="bob")
+utility.alter_alias(collection_name="collection_2", alias="bob")
 
 # List aliases for both collections
 utility.list_aliases(collection_name="collection_1") # []

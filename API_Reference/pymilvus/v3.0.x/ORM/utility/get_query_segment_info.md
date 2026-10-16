@@ -45,13 +45,19 @@ N/A
 ## Examples
 
 ```python
-from pymilvus import connections, Collection, utility
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility
 
 # Connect to localhost:19530
 connections.connect()
 
-# Get an existing collection
-collection = Collection("test_collection")
+# Create a collection
+collection = Collection(
+    name="test_collection",
+    schema=CollectionSchema([
+        FieldSchema("id", DataType.INT64, is_primary=True),
+        FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+    ])
+)
 
 # Get the query segment info
 res = utility.get_query_segment_info(collection_name="test_collection")

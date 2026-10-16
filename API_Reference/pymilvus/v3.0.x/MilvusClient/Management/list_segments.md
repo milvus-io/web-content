@@ -95,12 +95,20 @@ A list of segment information objects with the following members:
 ## Example
 
 ```python
-from pymilvus import MilvusClient, SegmentState
+from pymilvus import MilvusClient, DataType, SegmentState
 
 client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"
 )
+
+# Create a collection and insert data so that segments are created
+schema = client.create_schema(auto_id=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=3)
+client.create_collection(collection_name="my_collection", schema=schema)
+client.insert(collection_name="my_collection", data=[{"id": 1, "vector": [0.1, 0.2, 0.3]}])
+client.flush(collection_name="my_collection")
 
 segments = client.list_segments(collection_name="my_collection")
 for seg in segments:
