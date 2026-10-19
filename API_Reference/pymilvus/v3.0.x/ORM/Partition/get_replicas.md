@@ -67,9 +67,21 @@ None
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
 
-collection = Collection(name="test_collection")
+# Connect to localhost:19530
+connections.connect()
+
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+])
+
+# Create a collection
+collection = Collection(
+    name="test_collection",
+    schema=schema
+)
 
 # Get an existing partition
 partition = Partition(collection, name="test_partition")

@@ -60,10 +60,7 @@ A **[StructFieldSchema](StructFieldSchema.md)** object contains the fields that 
 ```python
 from pymilvus import DataType, FieldSchema, StructFieldSchema
 
-schema = StructFieldSchema(
-    name="struct_schema",
-    fields=[vector, varchar]
-)
+schema = StructFieldSchema()
 
 # Add the vector field
 schema.add_field(

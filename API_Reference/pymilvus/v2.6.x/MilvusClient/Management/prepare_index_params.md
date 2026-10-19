@@ -24,7 +24,7 @@ An **IndexParams** contains a list of **IndexParam** objects.
 
     A list of **IndexParam** objects.
 
-    ```python
+```text
     ├── IndexParams 
     │       └── add_index()
     ```

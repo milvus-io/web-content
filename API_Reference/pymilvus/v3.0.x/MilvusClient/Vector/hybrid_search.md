@@ -96,9 +96,22 @@ Raised when the server rejects the request or the RPC fails. Inspect the server 
 The example constructs an ANN request and runs a hybrid search.
 
 ```python
-from pymilvus import AnnSearchRequest, MilvusClient
+from pymilvus import AnnSearchRequest, MilvusClient, DataType
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a collection, insert data, and load it
+schema = client.create_schema(auto_id=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=3)
+schema.add_field(field_name="category", datatype=DataType.VARCHAR, max_length=32)
+client.create_collection(collection_name="book_chunks", schema=schema)
+index_params = client.prepare_index_params()
+index_params.add_index(field_name="vector", index_type="AUTOINDEX", metric_type="COSINE")
+client.create_index(collection_name="book_chunks", index_params=index_params)
+client.insert(collection_name="book_chunks", data=[{"id": 1, "vector": [0.1, 0.2, 0.3], "category": "paper"}])
+client.load_collection(collection_name="book_chunks")
+
 request = AnnSearchRequest(
     data=[[0.1, 0.2, 0.3]],
     anns_field="vector",

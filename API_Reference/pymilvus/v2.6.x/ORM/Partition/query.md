@@ -106,7 +106,10 @@ A list of the query results.
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -118,6 +121,16 @@ collection = Collection(
     name="test_collection",
     schema=schema
 )
+
+# Create an index on the vector field and load the collection
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
+)
+collection.load()
 
 # Create a partition
 partition = Partition(collection, name="test_collection")
@@ -170,6 +183,7 @@ res = partition.query(
 # Query with a customized consistency level
 res = partition.query(
     expr="",
+    limit=5,
     consistency_level=3,
     graceful_time=6
 )

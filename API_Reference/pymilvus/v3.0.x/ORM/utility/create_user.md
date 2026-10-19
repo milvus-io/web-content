@@ -49,8 +49,13 @@ This operation returns no value.
 ## Examples
 
 ```python
-client.create_user(
-    user_name="analyst_user",
+from pymilvus import connections, utility
+
+# Connect to localhost:19530
+connections.connect()
+
+utility.create_user(
+    user="analyst_user",
     password="P@ssw0rd!",
 )
 ```

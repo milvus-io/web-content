@@ -18,7 +18,10 @@ upsert(
 ```
 
 ```python
-from pymilvus import Collection, Partition
+from pymilvus import connections, Collection, Partition
+
+# Connect to localhost:19530
+connections.connect()
 
 # Get an existing collection
 collection = Collection(name="string")
@@ -155,7 +158,10 @@ A **MutationResult** object that contains the following fields:
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition, FieldSchema, CollectionSchema, DataType
+from pymilvus import connections, Collection, Partition, FieldSchema, CollectionSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 # Define collection schema    
 schema = CollectionSchema([

@@ -103,7 +103,10 @@ A **MutationResult** object contains the following fields:
 
 ```python
 import pandas as pd
-from pymilvus import Collection
+from pymilvus import connections, Collection
+
+# Connect to localhost:19530
+connections.connect()
 
 collection, results = Collection.construct_from_dataframe(
     name="test_collection",

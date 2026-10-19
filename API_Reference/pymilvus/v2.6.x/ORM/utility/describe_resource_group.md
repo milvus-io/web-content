@@ -40,7 +40,7 @@ describe_resource_group(
 
 A **ResourceGroupInfo** object that contains the detailed description of a resource group.
 
-```python
+```text
 ├── ResourceGroupInfo 
 │   ├── name
 │   ├── capacity

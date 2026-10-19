@@ -136,7 +136,10 @@ A dictionary that contains detailed information about the specified collection.
 ## Example
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),

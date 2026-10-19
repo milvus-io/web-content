@@ -45,9 +45,16 @@ varchar = FieldSchema(
 
 # Create a StructFieldSchema with field schemas
 
-schema = StructFieldSchema(
-    name="struct_schema",
-    fields = [vector, varchar]
+schema = StructFieldSchema()
+schema.add_field(
+    field_name="vector",
+    datatype=DataType.FLOAT_VECTOR,
+    dim=768,
+)
+schema.add_field(
+    field_name="varchar",
+    datatype=DataType.VARCHAR,
+    max_length=512
 )
 
 # Call to_dict() to get a dictionary representation of the schema 

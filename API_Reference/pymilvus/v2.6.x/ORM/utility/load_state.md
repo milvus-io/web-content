@@ -98,9 +98,6 @@ collection = Collection(
 index_params = {
     "index_type": "AUTOINDEX",
     "metric_type": "COSINE",
-    "params": {
-        "nprobe": 10
-    }
 }
 
 # Create an index on the vector field
@@ -121,8 +118,6 @@ partition2 = collection.create_partition("partition2")
 utility.load_state(
     collection_name="test_collection",
     partition_names=["partition1", "partition2"],
-    using=using,
-    timeout=timeout,
 ) # <LoadState: Loaded>
 
 # Release a partition

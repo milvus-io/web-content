@@ -83,11 +83,20 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-# upsert properties
+# 2. Create a collection
+client.create_collection(
+    collection_name="my_collection",
+    dimension=5
+)
+
+# 3. Release the collection before altering its properties
+client.release_collection(collection_name="my_collection")
+
+# 4. Upsert properties
 properties = {"collection.ttl.seconds": 500, "mmap.enabled": True}
 
 client.alter_collection_properties(
-    collection_name="collection_name", 
+    collection_name="my_collection", 
     properties = properties
 )
 ```

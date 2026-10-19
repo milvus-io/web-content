@@ -27,8 +27,8 @@ None
 ## Examples
 
 ```python
-from pymilvus.pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer
-from pymilvus.pymilvus.model.sparse import BM25EmbeddingFunction
+from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer
+from pymilvus.model.sparse import BM25EmbeddingFunction
 
 # there are some built-in analyzers for several languages, now we use 'en' for English.
 analyzer = build_default_analyzer(language="en")

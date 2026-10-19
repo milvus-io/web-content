@@ -123,12 +123,12 @@ collection.create_index(
 # List all indexes
 utility.list_indexes(
     collection_name="test_collection"
-) # ['_default_idx_101', '_default_idx_100']
+) # ['vector', 'id']
 
 # Get the building progress of a specific index
 utility.index_building_progress(
     collection_name="test_collection",
-    index_name="_default_idx_101"
+    index_name="vector"
 )
 ```
 

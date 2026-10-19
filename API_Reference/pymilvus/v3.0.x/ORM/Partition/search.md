@@ -121,7 +121,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
     </div>
 
-    ```python
+```text
     ├── SearchResult
     │   └── Hits  
     │       ├── ids
@@ -177,13 +177,53 @@ A **SearchResult** object that contains a list of **Hits** objects.
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
 
-# Get an existing collection
-collection = Collection(name="test_collection")
+# Connect to localhost:19530
+connections.connect()
 
-# Get an existing partition
-partition = Partition(name="test_partition")
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+])
+
+# Create a collection
+collection = Collection(
+    name="test_collection",
+    schema=schema
+)
+
+# Create an index on the vector field and load the collection
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
+)
+collection.load()
+
+# Create a partition
+partition = Partition(collection, name="test_partition")
+
+# Insert a list of columns
+partition.insert(
+    data=[
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],     # id
+        [                                    # vector
+            [0.1, 0.2, -0.3, -0.4, 0.5],
+            [0.3, -0.1, -0.2, -0.6, 0.7],
+            [-0.6, -0.3, 0.2, 0.8, 0.7],
+            [0.6, 0.2, -0.3, -0.8, 0.5],
+            [0.3, 0.1, -0.2, -0.6, -0.7],
+            [0.1, 0.2, -0.3, -0.4, 0.5],
+            [0.3, -0.1, -0.2, -0.6, 0.7],
+            [-0.6, -0.3, 0.2, 0.8, 0.7],
+            [0.6, 0.2, -0.3, -0.8, 0.5],
+            [0.3, 0.1, -0.2, -0.6, -0.7],
+        ],
+    ]
+)
 
 BATCH_SIZE = 2
 LIMIT = 10

@@ -55,9 +55,18 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# Create a privilege group and add privileges to it
+client.create_privilege_group(
+    group_name="my_privilege_group"
+)
+client.add_privileges_to_group(
+    group_name="my_privilege_group",
+    privileges=["CreateDatabase", "DropDatabase"]
+)
+
 client.remove_privileges_from_group(
     group_name="my_privilege_group",
-    privileges=["ListDatabases", "DescribeDatabase"]
+    privileges=["CreateDatabase", "DropDatabase"]
 )
 ```
 

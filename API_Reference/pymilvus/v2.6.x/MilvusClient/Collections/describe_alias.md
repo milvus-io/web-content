@@ -37,9 +37,9 @@ A dictionary containing the alias details.
 
 ```python
 {
-    alias: 'string',
-    collection_name: 'string',
-    db_name: 'default'
+    'alias': 'string',
+    'collection_name': 'string',
+    'db_name': 'default'
 }
 ```
 

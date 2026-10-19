@@ -62,7 +62,7 @@ alter_collection_field(
 ## Example
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import MilvusClient, DataType
 
 # 1. Create a milvus client
 client = MilvusClient(
@@ -70,11 +70,18 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-# upsert properties
+# 2. Create a collection with a VARCHAR field
+schema = client.create_schema(auto_id=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="my_varchar", datatype=DataType.VARCHAR, max_length=1000)
+schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+client.create_collection(collection_name="my_collection", schema=schema)
+
+# 3. Alter the field parameters
 field_params = {"max_length": 1500}
 
 client.alter_collection_field(
-    collection_name="collection_name", 
+    collection_name="my_collection", 
     field_name="my_varchar",
     field_params=field_params
 )

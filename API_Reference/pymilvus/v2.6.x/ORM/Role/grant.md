@@ -76,11 +76,12 @@ grant(
 ```python
 from pymilvus import Role
 
-# Get an existing role
-role = Role(role_name)
+# Create a role
+role = Role("read_only")
+role.create()
 
-# Grant a privilege to the current role 
-role.grant("Collection", collection_name, "Insert")
+# Grant a privilege to the role
+role.grant("Collection", "test_collection", "Insert")
 ```
 
 ## Related operations

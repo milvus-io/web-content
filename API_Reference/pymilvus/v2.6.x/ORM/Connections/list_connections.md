@@ -30,7 +30,7 @@ None
 from pymilvus import connections
 
 connections.connect(
-    uri='https://localhost:19530',
+    uri='http://localhost:19530',
     token='root:Milvus'
 )
 connections.list_connections()

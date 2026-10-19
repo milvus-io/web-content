@@ -39,7 +39,10 @@ A `CompactionPlans` object containing **compaction_id**, **collection_name**, **
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -51,6 +54,28 @@ collection = Collection(
     name="test_collection",
     schema=schema
 )
+
+# Insert some data
+collection.insert(
+    data=[
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],     # id
+        [                                    # vector
+            [0.1, 0.2, -0.3, -0.4, 0.5],
+            [0.3, -0.1, -0.2, -0.6, 0.7],
+            [-0.6, -0.3, 0.2, 0.8, 0.7],
+            [0.6, 0.2, -0.3, -0.8, 0.5],
+            [0.3, 0.1, -0.2, -0.6, -0.7],
+            [0.1, 0.2, -0.3, -0.4, 0.5],
+            [0.3, -0.1, -0.2, -0.6, 0.7],
+            [-0.6, -0.3, 0.2, 0.8, 0.7],
+            [0.6, 0.2, -0.3, -0.8, 0.5],
+            [0.3, 0.1, -0.2, -0.6, -0.7],
+        ],
+    ]
+)
+
+# Flush the data so that the inserted segments are sealed and become compactable
+collection.flush()
 
 # Compact small segments
 collection.compact()

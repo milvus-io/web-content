@@ -87,7 +87,10 @@ If you try to load a collection that is not indexed, you will receive a **Milvus
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -104,9 +107,6 @@ collection = Collection(
 index_params = {
     "index_type": "AUTOINDEX",
     "metric_type": "COSINE",
-    "params": {
-        "nprobe": 10
-    }
 }
 
 # Create an index on the vector field

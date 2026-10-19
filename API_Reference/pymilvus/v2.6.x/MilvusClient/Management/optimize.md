@@ -80,11 +80,13 @@ from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
+# Create a collection
+client.create_collection(collection_name="book", dimension=5)
+
 # Wait for completion
 result = client.optimize(
     collection_name="book",
-    target_size=512,
-    target_size_unit="mb",
+    target_size="1024MB",
     wait=True,
 )
 print(result)
@@ -93,9 +95,8 @@ print(result)
 task = client.optimize(
     collection_name="book",
     is_clustering=True,
-    target_size=1,
-    target_size_unit="gb",
+    target_size="1GB",
     wait=False,
 )
-print(task.job_id)
+print(task.result())
 ```

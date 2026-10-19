@@ -50,8 +50,14 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
+# 2. Create a collection
+client.create_collection(
+    collection_name="my_collection",
+    dimension=5
+)
+
 client.flush(
-    collection_name="collection_name"
+    collection_name="my_collection"
 )
 ```
 

@@ -85,9 +85,6 @@ collection = Collection(
 index_params = {
     "index_type": "AUTOINDEX",
     "metric_type": "COSINE",
-    "params": {
-        "nprobe": 10
-    }
 }
 
 # Create an index on the vector field

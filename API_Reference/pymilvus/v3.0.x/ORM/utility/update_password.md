@@ -74,7 +74,7 @@ connections.connect()
 user = utility.create_user(user="admin", password="123456")
 
 # Update the password for the user.
-update_password(
+utility.update_password(
     user="admin",
     old_password="123456",
     new_password="123456Abc*",

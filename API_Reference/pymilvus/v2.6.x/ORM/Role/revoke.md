@@ -76,11 +76,13 @@ revoke(
 ```python
 from pymilvus import Role
 
-# Get an existing role
-role = Role(role_name)
+# Create a role and grant a privilege to it
+role = Role("read_only")
+role.create()
+role.grant("Collection", "test_collection", "Insert")
 
-# Grant a privilege to the current role 
-role.revoke("Collection", collection_name, "Insert")
+# Revoke the privilege from the role
+role.revoke("Collection", "test_collection", "Insert")
 ```
 
 ## Related operations

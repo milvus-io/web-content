@@ -31,7 +31,10 @@ drop_index(timeout: float | None)
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -55,7 +58,7 @@ index_params = {
 
 # Create an index
 collection.create_index(
-    field_name="test_collection", 
+    field_name="vector", 
     index_params=index_params, 
     timeout=None
 )

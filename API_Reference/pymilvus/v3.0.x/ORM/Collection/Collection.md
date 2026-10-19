@@ -95,7 +95,10 @@ A collection object.
 ## Examples
 
 ```python
-from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 # Create a collection using the user-defined schema
 primary_key = FieldSchema(

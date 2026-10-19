@@ -25,7 +25,7 @@ A flattened NumPy array containing all vector embeddings concatenated.
 ## Examples
 
 ```python
-from pymilvus import EmbeddingList
+from pymilvus.client.embedding_list import EmbeddingList
 
 # create an empty embedding list
 embeddingList = EmbeddingList()

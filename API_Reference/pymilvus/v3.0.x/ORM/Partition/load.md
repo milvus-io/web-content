@@ -68,7 +68,10 @@ load(
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -79,6 +82,15 @@ schema = CollectionSchema([
 collection = Collection(
     name="test_collection",
     schema=schema
+)
+
+# Create an index on the vector field
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
 )
 
 # Create a partition

@@ -44,7 +44,7 @@ list_bulk_insert_tasks(
 **RETURNS:**
 A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
-```python
+```text
 ├── BulkInsertState
 │   ├── task_id 
 │   ├── state 

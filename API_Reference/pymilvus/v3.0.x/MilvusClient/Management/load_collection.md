@@ -85,7 +85,7 @@ client = MilvusClient(
 )
 
 # 1. Create schema
-schema = MilvusClient.create_schema(
+schema = client.create_schema(
     auto_id=False,
     enable_dynamic_field=False,
 )
@@ -162,7 +162,7 @@ client.create_index(
 # 7. Load indexes
 client.load_collection(
     collection_name="customized_setup",
-    replica_number=2
+    replica_number=1
 )
 ```
 

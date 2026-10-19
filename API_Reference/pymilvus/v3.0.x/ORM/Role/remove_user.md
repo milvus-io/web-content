@@ -36,14 +36,20 @@ remove_user(
 
 ```python
 from pymilvus import Role
+from pymilvus import utility
 
-# Get an existing role
-role = Role(name=role_name)
+# Create a user
+utility.create_user(user="user_1", password="password")
 
-# Remove the specified user from the current role
-role.remove_user(username)
+# Create a role and add the user to it
+role = Role("read_only")
+role.create()
+role.add_user("user_1")
 
-# List all users of the current role
+# Remove the specified user from the role
+role.remove_user("user_1")
+
+# List all users of the role
 users = role.get_users()
 ```
 

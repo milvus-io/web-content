@@ -92,13 +92,13 @@ A **GrantItem** object contains the following fields:
 from pymilvus import Role
 
 # Get an existing role
-role = Role(name="root")
+role = Role(name="admin")
 
 # List the relationship between the current role and the specified object.
-res = list_grant(
+res = role.list_grant(
     object="Collection",
     object_name="test_collection",
-    db_name="test_db"
+    db_name="default"
 )
 ```
 

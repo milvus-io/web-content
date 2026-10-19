@@ -47,10 +47,34 @@ None
 ## Examples
 
 ```python
-from pymilvus import Collection
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType
 
-collection = Collection("test")
+# Connect to localhost:19530
+connections.connect()
 
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("vector", DataType.FLOAT_VECTOR, dim=5)
+])
+
+# Create a collection
+collection = Collection(
+    name="test",
+    schema=schema
+)
+
+# Create an index
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "IVF_FLAT",
+        "metric_type": "COSINE",
+        "params": {"nlist": 128},
+    },
+    index_name="vector_idx",
+)
+
+# Alter the index
 collection.alter_index(
     index_name="vector_idx",
     extra_params={"mmap.enabled": True},

@@ -24,7 +24,7 @@ hybrid_search(
 
     - **ANNSearchRequest**: A class representing an ANN search request.
 
-        ```python
+```text
         ├── AnnSearchRequest
         │   └── data  
         │   └── anns_field
@@ -99,7 +99,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
     </div>
 
-    ```python
+```text
     ├── SearchResult
     │   └── Hits  
     │       ├── ids
@@ -155,27 +155,57 @@ A **SearchResult** object that contains a list of **Hits** objects.
 ## Examples
 
 ```python
-collection = Collection(name='{your_collection_name}') # Replace with the actual name of your collection
+from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, AnnSearchRequest, WeightedRanker
+
+# Connect to localhost:19530
+connections.connect()
+
+# Create a collection with two vector fields
+schema = CollectionSchema([
+    FieldSchema("id", DataType.INT64, is_primary=True),
+    FieldSchema("text_vector", DataType.FLOAT_VECTOR, dim=3),
+    FieldSchema("image_vector", DataType.FLOAT_VECTOR, dim=3),
+])
+
+collection = Collection(
+    name="test_collection",
+    schema=schema,
+)
+
+# Create indexes on both vector fields
+collection.create_index("text_vector", {"index_type": "AUTOINDEX", "metric_type": "IP"})
+collection.create_index("image_vector", {"index_type": "AUTOINDEX", "metric_type": "IP"})
+
+# Insert data and load the collection
+collection.insert(
+    data=[
+        [0, 1],
+        [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]],
+        [[0.3, 0.2, 0.1], [0.6, 0.5, 0.4]],
+    ]
+)
+collection.load()
 
 res = collection.hybrid_search(
     reqs=[
         AnnSearchRequest(
-            data=[['{your_text_query_vector}']],  # Replace with your text vector data
-            anns_field='{text_vector_field_name}',  # Textual data vector field
-            param={"metric_type": "IP", "params": {"nprobe": 10}}, # Search parameters
-            limit=2
+            data=[[0.1, 0.2, 0.3]],
+            anns_field="text_vector",
+            param={"metric_type": "IP"},
+            limit=2,
         ),
         AnnSearchRequest(
-            data=[['{your_image_query_vector}']],  # Replace with your image vector data
-            anns_field='{image_vector_field_name}',  # Image data vector field
-            param={"metric_type": "IP", "params": {"nprobe": 10}}, # Search parameters
-            limit=2
-        )
+            data=[[0.3, 0.2, 0.1]],
+            anns_field="image_vector",
+            param={"metric_type": "IP"},
+            limit=2,
+        ),
     ],
     # Use WeightedRanker to combine results with specified weights
     rerank=WeightedRanker(0.8, 0.2), # Assign weights of 0.8 to text search and 0.2 to image search
     # Alternatively, use RRFRanker for reciprocal rank fusion reranking
     # rerank=RRFRanker(),
-    limit=2
+    limit=2,
 )
+print(res)
 ```

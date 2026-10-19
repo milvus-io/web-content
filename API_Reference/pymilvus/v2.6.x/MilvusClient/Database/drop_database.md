@@ -41,7 +41,10 @@ drop_database(
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri, token) # db = "default" 
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus") # db = "default" 
+
+# Create the database
+client.create_database("my_db")
 
 client.drop_database("my_db")
 ```

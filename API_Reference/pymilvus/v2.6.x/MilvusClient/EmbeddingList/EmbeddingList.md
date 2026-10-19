@@ -55,14 +55,15 @@ An **EmbeddingList** instance.
 ## Examples
 
 ```python
-from pymilvus import EmbeddingList
+import numpy as np
+from pymilvus.client.embedding_list import EmbeddingList
 
 # create an empty embedding list
 embeddingList1 = EmbeddingList()
 
 # create an embedding list with a single vector embedding of 5 dimensions
 embeddingList2 = EmbeddingList(
-    embeddings=[0.1, 0.2, 0.3, 0.4, 0.5],
+    embeddings=np.array([0.1, 0.2, 0.3, 0.4, 0.5]),
     dim=5
 )
 

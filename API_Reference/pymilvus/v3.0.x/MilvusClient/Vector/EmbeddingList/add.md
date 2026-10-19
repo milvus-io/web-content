@@ -34,7 +34,7 @@ The current **[EmbeddingList](EmbeddingList.md)** instance itself for method cha
 ## Examples
 
 ```python
-from pymilvus import EmbeddingList
+from pymilvus.client.embedding_list import EmbeddingList
 
 # create an empty embedding list
 embeddingList = EmbeddingList()

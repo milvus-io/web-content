@@ -42,8 +42,8 @@ ts = utility.mkts_from_unixtime(epoch1)
 # Converts the hybrid timestamp to a UNIX epoch timestamp
 epoch2 = utility.hybridts_to_unixtime(ts)
 
-# Asserts the equation
-assert epoch1 == epoch2
+# Asserts the equation with millisecond precision
+assert int(epoch1 * 1000) == int(epoch2 * 1000)
 ```
 
 ## Related operations

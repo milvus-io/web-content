@@ -25,7 +25,7 @@ A 2D NumPy array containing all vector embeddings in the shape **(num_embeddings
 ## Examples
 
 ```python
-from pymilvus import EmbeddingList
+from pymilvus.client.embedding_list import EmbeddingList
 
 # create an empty embedding list
 embeddingList = EmbeddingList()
