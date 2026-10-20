@@ -8,6 +8,41 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.25
+
+Release date: September 29, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.25         | 2.6.17             | 2.6.17              | 2.6.25           | 2.6.5          |
+
+We are excited to announce the release of Milvus v2.6.25! This release tightens security with stricter RBAC checks, a new `ImportBinlog` privilege, and masking of sensitive configuration values. It also adds snappy and s2 gRPC compression, and fixes stability issues around shard leader movement, scalar index replacement, and Pulsar channel takeover.
+
+### Improvements
+
+- Added per-resource-group load config convergence reporting to the management API, covering replica distribution, serviceability, query visibility, and residual resources ([#53518](https://github.com/milvus-io/milvus/pull/53518))
+- Added snappy and s2 gRPC compression, made the zstd codec configurable (`grpc.client.compressionAlgorithm`, `compressionLevel`, `compressionCRC`, `compressionConcurrency`), and hardened zstd decompression against oversized messages ([#53599](https://github.com/milvus-io/milvus/pull/53599))
+- Masked sensitive values and omitted undeclared keys in configuration views and diagnostic logs, so credentials and unrelated environment variables are no longer exposed ([#53613](https://github.com/milvus-io/milvus/pull/53613))
+- Required the new cluster-level `ImportBinlog` privilege for binlog (`backup=true`) and L0 imports, and rejected regular imports whose file paths point into Milvus's internal storage directories ([#53681](https://github.com/milvus-io/milvus/pull/53681))
+- Sped up writing Tantivy index results into bitsets, up to 7x faster per doc ID for contiguous IDs in microbenchmarks ([#53701](https://github.com/milvus-io/milvus/pull/53701))
+- Hardened RBAC enforcement by disabling the Dummy RPC's query mode, which bypassed authorization and rate limiting, and by requiring Search privilege on the collection for RunAnalyzer requests that specify one ([#53812](https://github.com/milvus-io/milvus/pull/53812))
+- Reduced redundant DescribeCollection RPCs from Proxy to the coordinator during insert, delete, and upsert by resolving collection channels from the Proxy metadata cache ([#53793](https://github.com/milvus-io/milvus/pull/53793))
+
+### Bug fixes
+
+- Fixed a DataNode memory leak where a fully built index or analyze result was never released if its task was canceled during the build ([#53349](https://github.com/milvus-io/milvus/pull/53349))
+- Fixed an issue where loading segments with FLAT or BIN_FLAT indexes could fail during incremental index loading, especially under restrictive resource limits ([#53383](https://github.com/milvus-io/milvus/pull/53383))
+- Fixed an issue where index builds on segments containing malformed JSON retried indefinitely; such tasks now fail fast with a permanent error instead of looping across workers ([#53429](https://github.com/milvus-io/milvus/pull/53429))
+- Fixed an issue where replacing a scalar index on a loaded collection could leave the old index loaded indefinitely and cause repeated reloads; both QueryCoord and QueryNode must be upgraded for the complete fix ([#53537](https://github.com/milvus-io/milvus/pull/53537))
+- Fixed an issue where a StreamingNode could keep writing to a Pulsar-backed channel after another node took it over; `pulsar.producerAccessMode` now defaults to `exclusive` (enforcement requires Pulsar 2.8.0+; set it to `shared` to keep the previous behavior) ([#53540](https://github.com/milvus-io/milvus/pull/53540))
+- Fixed an issue where sustained GIS query load could stall inserts into growing segments when the geometry cache (`enableGeometryCache`) was enabled ([#53610](https://github.com/milvus-io/milvus/pull/53610))
+- Fixed an issue where Milvus components could hang during shutdown or block on logging when the async log output was stuck ([#53626](https://github.com/milvus-io/milvus/pull/53626))
+- Fixed a QueryNode crash when a LIKE filter on an NGRAM-indexed field contained a literal with fewer than `min_gram` multi-byte characters, such as a single full-width punctuation mark ([#53668](https://github.com/milvus-io/milvus/pull/53668))
+- Fixed an issue where search, query, and statistics requests kept failing with "collection not loaded" for an extended period after QueryCoord moved a shard leader to another QueryNode ([#53810](https://github.com/milvus-io/milvus/pull/53810))
+- Fixed a crash that could occur when Arrow data passed through the C Data interface contained zero-length buffers, such as all-null string columns, by upgrading the Arrow Go dependency to v17.0.2 ([#53738](https://github.com/milvus-io/milvus/pull/53738))
+- Fixed an issue where a restarting node reported ready on `/healthz` before all of its components had registered, causing requests routed to it during startup to fail with connection refused ([#53736](https://github.com/milvus-io/milvus/pull/53736))
+- Fixed an issue where Parquet import stored NULL instead of the default value for null rows in Timestamptz fields that define a default value ([#53809](https://github.com/milvus-io/milvus/pull/53809))
+
 ## v2.6.24
 
 Release date: September 16, 2026
