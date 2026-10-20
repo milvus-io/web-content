@@ -1,5 +1,13 @@
 # get_bulk_insert_state()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation returns the state of a specified bulk-insert task.
 
 ## Request syntax

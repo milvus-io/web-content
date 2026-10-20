@@ -1,5 +1,13 @@
 # Collection
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 A **Collection** instance represents a Milvus collection.
 
 ```python
@@ -57,6 +65,12 @@ Collection(
     By default, a collection contains one shard.
 
     </div>
+
+- **shards_num** (*int*)
+
+    **Deprecated.** Use **num_shards** instead.
+
+    The number of shards to create along with the creation of this collection.
 
 - **consistency_level** (*int* | *str*)
 

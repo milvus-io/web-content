@@ -1,5 +1,13 @@
 # list_database()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation returns a list of database names from the connected Milvus instance.
 
 ```python

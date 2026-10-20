@@ -1,5 +1,13 @@
 # transfer_replica()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation transfers a specific number of replicas between resource groups.
 
 ## Request Syntax

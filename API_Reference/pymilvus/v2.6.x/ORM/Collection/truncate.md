@@ -1,5 +1,13 @@
 # truncate()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation truncates the current collection, removing all its data. It has the same effect as `utility.truncate_collection()`.
 
 ## Request Syntax

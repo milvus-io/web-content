@@ -1,5 +1,13 @@
 # index()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation gets the specified index of the current collection.
 
 ## Request Syntax
@@ -29,6 +37,14 @@ index(
 **RETURNS:**
 
 An Index object of the current collection.
+
+<div class="alert warning">
+
+**Deprecated.**
+
+The returned `Index` object is deprecated and will be removed in PyMilvus 3.1. Use `MilvusClient` index operations instead.
+
+</div>
 
 **EXCEPTIONS:**
 

@@ -1,5 +1,13 @@
 # add_connection()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation adds [connections](Connections.md) to multiple Milvus instances for different purposes in a batch. 
 
 ## Request Syntax

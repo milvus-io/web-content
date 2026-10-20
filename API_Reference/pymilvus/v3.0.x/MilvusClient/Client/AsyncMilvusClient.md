@@ -10,6 +10,16 @@ pymilvus.AsyncMilvusClient
 
 Constructs a client for common use cases.
 
+<div class="alert warning">
+
+**Deprecated methods.**
+
+- `using_database()` is deprecated and will be removed in PyMilvus 3.1. Use `use_database()` instead.
+- `add_collection_function()` is unsupported by Milvus 3.0 and later. Use `add_function_field()` instead.
+- `drop_collection_function()` is unsupported by Milvus 3.0 and later. Use `drop_function_field()` instead.
+
+</div>
+
 <div class="alert note">
 
 - This interface is still in its early stage and may change significantly in future releases. You are advised not to use it in production.

@@ -1,5 +1,13 @@
 # wait_for_index_building_complete()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation blocks the current process until the specified index has been built.
 
 ## Request syntax

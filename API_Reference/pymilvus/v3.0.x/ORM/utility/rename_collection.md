@@ -1,5 +1,13 @@
 # rename_collection()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation renames an existing collection and optionally moves the collection to a new database.
 
 <div class="alert note">
