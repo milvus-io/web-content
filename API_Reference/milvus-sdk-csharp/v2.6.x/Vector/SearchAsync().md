@@ -14,7 +14,7 @@ var request = new SearchReq
     CollectionName = "my_collection",
     VectorFieldName = "embedding",
     Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-    MetricType = SimilarityMetricType.L2,
+    MetricType = MetricType.L2,
     Limit = 5,
     Parameters = new SearchParameters { OutputFields = { "title" } }
 };
@@ -72,9 +72,9 @@ SearchResp results = await client.SearchAsync(request);
 
     The primary keys to search for, as an alternative to query vectors. When set, `Vectors`, `SparseVectors` and `Float16Vectors` must be empty.
 
-- `MetricType` (*SimilarityMetricType*) -
+- `MetricType` (*MetricType*) -
 
-    The metric type used to measure the distance between vectors. See [SimilarityMetricType](SimilarityMetricType.md).
+    The metric type used to measure the distance between vectors. See [MetricType](MetricType.md).
 
 - `Limit` (*int*) -
 
@@ -209,7 +209,7 @@ SearchResp results = await client.SearchAsync(new SearchReq
     CollectionName = "my_collection",
     VectorFieldName = "embedding",
     Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-    MetricType = SimilarityMetricType.L2,
+    MetricType = MetricType.L2,
     Limit = 5,
     Parameters = new SearchParameters
     {

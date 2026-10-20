@@ -16,7 +16,7 @@ var request = new CreateIndexReq
     CollectionName = "my_collection",
     Indexes =
     [
-        new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: SimilarityMetricType.Cosine)
+        new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: MetricType.Cosine)
     ],
     Sync = true,
     TimeoutMs = 60000
@@ -75,7 +75,7 @@ await client.CreateIndexAsync(new CreateIndexReq
     CollectionName = "my_collection",
     Indexes =
     [
-        new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: SimilarityMetricType.Cosine)
+        new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: MetricType.Cosine)
     ]
 });
 ```

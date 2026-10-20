@@ -340,6 +340,12 @@ Categorize each changed symbol:
 - **Enum values**: added/removed enum entries (e.g. `IndexType`, `DataType`).
 - **Doc-comment changes**: only prose was rewritten — decide whether the page
   description should be refreshed.
+- **Severe incompatibilities**: removed or renamed public symbols, changed public
+  signatures/return shapes, changed default behavior that requires callers to
+  modify code/configuration, broken wire/server compatibility, and mandatory
+  dependency or runtime changes. Record these for the `About.md` **Breaking
+  Changes** section (see Step 3). Do not list additions, internal changes, or
+  deprecations that remain callable.
 - **Internal-only additions**: new symbols not exposed through public request/response
   or client methods (e.g. C++ `BloomFilter.h` is an internal cache type) — **skip**,
   do not create a page unless it surfaces in a public API.
@@ -379,7 +385,8 @@ machinery.
 
 Follow the page-mapping rules for the SDK in `.skills/update-milvus-sdk-docs/references/sdk-map.md`. The general
 shape: operation pages ↔ request/operation classes; type pages ↔ public types;
-`About.md` ↔ version stamp + compatibility table + install commands.
+`About.md` ↔ version stamp + compatibility table + install commands + severe
+incompatibilities.
 
 Produce a change list: `page → what changed`.
 
@@ -398,6 +405,15 @@ When an operation/request/response page references a type that has a dedicated
 page (e.g. `CollectionSchema`, `DataType`, `IndexType`), the change list must
 include adding the relative link to that type page (see **Dedicated type pages &
 cross-links** under the Doc style guide).
+
+**Severe incompatibilities → `About.md` Breaking Changes.** If the diff or
+PR review found a severe incompatibility, map it to the `## Breaking Changes`
+section in `About.md`; create the section immediately after `## Compatibility`
+if it is absent. Group entries by the release that introduced the break. Keep the
+section action-oriented: name the breaking change, the version that introduced it,
+the affected API or behavior, and the required caller update. Routine additions,
+internal changes, performance improvements, and still-callable deprecations do
+not belong in this section.
 
 **Follow the SDK's directory convention for new type pages.** The convention
 differs per SDK — always match the SDK's existing tree (see the per-SDK
@@ -441,6 +457,10 @@ For each affected page:
     existing convention; skip if the SDK pages don't use such notes).
  7. For a new builder method, also update the `## Request Syntax` chain block to
     match reality.
+ 8. For each severe incompatibility, update the `## Breaking Changes` section as
+    specified in Step 3. Keep API pages and this summary consistent: if a public
+    symbol is renamed or removed, the dedicated page and all cross-links must move
+    or be updated, and the required caller update must be stated in `About.md`.
 
 ### Step 4b — Compile-verify the code snippets (mandatory)
 
@@ -1287,6 +1307,13 @@ with earlier Milvus servers, because the protocol only ever adds fields and
 never removes them; the table lists the recommended SDK version validated for
 each Milvus version.
 
+## Breaking Changes   <!-- conditional; include only for severe incompatibilities -->
+
+### <release>
+
+- <What changed, which public API or behavior it affects, and how callers must
+  update their code/configuration.>
+
 ## Contributing (optional)
 
 Short community/feedback section with links (Slack, GitHub issues,
@@ -1306,14 +1333,21 @@ Notes:
   differs. Do not drop or reorder steps (e.g. do not omit Insert just because
   a search-only snippet is shorter). (The node About page was previously a
   200+-line tutorial — do not reproduce that.)
-- **Order matters**: Installation → Quick Start → Compatibility → Contributing →
-  License. Compatibility comes after Quick Start because getting the reader
-  running is more important than the version matrix.
+- **Order matters**: Installation → Quick Start → Compatibility → Breaking
+  Changes (conditional) → Contributing → License. Compatibility comes after
+  Quick Start because getting the reader running is more important than the
+  version matrix; Breaking Changes belong immediately after Compatibility so an
+  upgrade-bound reader sees required changes before community details.
 - **Keep it consistent**: the same section headings (wording, casing) across all
   SDK trees; only the language-specific code blocks and package manager differ.
 - `## Dependencies` is only needed where the SDK has notable runtime
   prerequisites (e.g. node needs `Node: v14+`); omit when there is nothing to
   list.
+- `## Breaking Changes` is conditional. Add it only when one or more releases in
+  the documented version line contain severe incompatibilities; omit it when
+  they do not. When present, place it immediately after `## Compatibility` and
+  use an `### <release>` subsection for each affected release. Do not include
+  minor non-breaking changes there.
 - Watch the `v`-prefix convention per SDK (e.g. pymilvus uses `==v3.0.1` with a
   `v`; go links use `tree/client/v3.0.0/client`).
 

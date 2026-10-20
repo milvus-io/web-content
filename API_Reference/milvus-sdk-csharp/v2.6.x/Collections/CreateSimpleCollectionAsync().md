@@ -17,7 +17,7 @@ var request = new CreateSimpleCollectionReq
     VectorFieldName = "embedding",
     Dimension = 4,
     ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
-    MetricType = SimilarityMetricType.Cosine
+    MetricType = MetricType.Cosine
 };
 
 await client.CreateCollectionAsync(request);
@@ -57,9 +57,9 @@ await client.CreateCollectionAsync(request);
 
     The consistency level of the collection. Defaults to `ConsistencyLevel.BoundedStaleness`. See [ConsistencyLevel](ConsistencyLevel.md).
 
-- `MetricType` (*SimilarityMetricType*) -
+- `MetricType` (*MetricType*) -
 
-    The metric type used for the vector index and search. Defaults to `SimilarityMetricType.Cosine`. See [SimilarityMetricType](../Vector/SimilarityMetricType.md).
+    The metric type used for the vector index and search. Defaults to `MetricType.Cosine`. See [MetricType](../Vector/MetricType.md).
 
 - `AutoID` (*bool*) -
 
@@ -99,6 +99,6 @@ await client.CreateCollectionAsync(new CreateSimpleCollectionReq
     PrimaryFieldType = DataType.Int64,
     VectorFieldName = "embedding",
     Dimension = 4,
-    MetricType = SimilarityMetricType.L2
+    MetricType = MetricType.L2
 });
 ```

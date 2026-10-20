@@ -42,6 +42,7 @@ ListCollectionsResp
     CreatedTimestamps    // -> IReadOnlyList<ulong>
     CreatedUtcTimestamps // -> IReadOnlyList<ulong>
     InMemoryPercentages  // -> IReadOnlyList<long>
+    ShardsNums           // -> IReadOnlyList<int>
 ```
 
 **PARAMETERS:**
@@ -65,6 +66,10 @@ ListCollectionsResp
 - **InMemoryPercentages** (*IReadOnlyList\<long\>*) -
 
     The percentage of each collection loaded into memory, aligned with `CollectionNames`.
+
+- **ShardsNums** (*IReadOnlyList\<int\>*) -
+
+    The number of shards of each collection, aligned with `CollectionNames`. A value of zero means the collection predates stored shard counts; the server derives the value from its virtual channels.
 
 ## Example
 

@@ -7,7 +7,7 @@ The .NET SDK of Milvus, provided by the `Milvus.Client.V2` NuGet package. Its so
 You can use [.NET CLI](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-using-the-dotnet-cli) to install and use the SDK.
 
 ```shell
-dotnet add package Milvus.Client.V2 --version 2.6.0
+dotnet add package Milvus.Client.V2 --version 2.6.1
 ```
 
 ## Quick Start
@@ -59,7 +59,7 @@ await client.InsertAsync(new InsertReq
 await client.CreateIndexAsync(new CreateIndexReq
 {
     CollectionName = "my_collection",
-    Indexes = [new IndexParam("vector", indexType: IndexType.AutoIndex, metricType: SimilarityMetricType.Cosine)]
+    Indexes = [new IndexParam("vector", indexType: IndexType.AutoIndex, metricType: MetricType.Cosine)]
 });
 
 // 4. Load the collection.
@@ -71,7 +71,7 @@ SearchResp results = await client.SearchAsync(new SearchReq
     CollectionName = "my_collection",
     VectorFieldName = "vector",
     Vectors = [new[] { 1.0f, 2.0f, 3.0f }],
-    MetricType = SimilarityMetricType.Cosine,
+    MetricType = MetricType.Cosine,
     Limit = 1,
     Parameters = new SearchParameters { ConsistencyLevel = ConsistencyLevel.Strong }
 });
@@ -86,9 +86,15 @@ Milvus proto is backward compatible — later SDK versions can work with earlier
 
 | Milvus version | NuGet package | Recommended version |
 | --- | --- | --- |
-| 2.6.x | Milvus.Client.V2 | 2.6.0 |
+| 2.6.x | Milvus.Client.V2 | 2.6.1 |
 | 2.3.x | Milvus.Client (V1) | 2.3.0-preview.1 |
 | 2.2.x | Milvus.Client (V1) | 2.2.2-preview.6 |
+
+## Breaking Changes
+
+### 2.6.1
+
+- Renamed the `SimilarityMetricType` enum to `MetricType`. The old type is removed. When upgrading from 2.6.0 or earlier, replace all references and recompile. Metric values and their wire representations are unchanged.
 
 ## Contributing
 

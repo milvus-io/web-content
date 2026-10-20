@@ -58,7 +58,7 @@ MutationResp result = await client.UpsertAsync(request);
 
 **RETURNS:**
 
-A **MutationResp** object that contains the result of the upsert operation.
+A **MutationResp** object that contains the result of the upsert operation. If `RowsData` and `ColumnsData` are both empty, an empty result is returned without issuing the RPC.
 
 ```csharp
 MutationResp

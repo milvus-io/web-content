@@ -14,7 +14,7 @@ var request = new SearchIteratorReq
     CollectionName = "my_collection",
     VectorFieldName = "embedding",
     Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-    MetricType = SimilarityMetricType.L2,
+    MetricType = MetricType.L2,
     Limit = 100,
     BatchSize = 20
 };
@@ -64,9 +64,13 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 
     The text query strings to search for (embedded-text / BM25 targets). When set, `Vectors` must be empty.
 
-- `MetricType` (*SimilarityMetricType*) -
+- `EmbeddingLists` (*IReadOnlyList\<EmbeddingList\>?*) -
 
-    The metric type used to measure the distance between vectors. See [SimilarityMetricType](SimilarityMetricType.md).
+    The embedding lists to search for, used for Array-of-Struct vector sub-fields such as `"clips[vector]"` with a MAX_SIM metric. The search iterator accepts a single query, so provide exactly one embedding list. See [EmbeddingList](EmbeddingList.md).
+
+- `MetricType` (*MetricType*) -
+
+    The metric type used to measure the distance between vectors. See [MetricType](MetricType.md).
 
 - `Limit` (*int*) -
 
@@ -79,6 +83,10 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 - `BatchSize` (*int*) -
 
     The number of rows to fetch per batch. Defaults to 1000.
+
+- `ExternalFilterFunc` (*Func\<SingleResult, IReadOnlyList\<int\>\>?*) -
+
+    An optional client-side per-page filter that receives each page as a `SingleResult` and returns the zero-based row indices to keep, in the desired order. Filtered rows are accumulated and returned in batches of `BatchSize`, with a final partial batch when no more results remain.
 
 **RETURN TYPE:**
 
@@ -108,7 +116,7 @@ await foreach (SingleResult batch in client.SearchIteratorAsync(new SearchIterat
     CollectionName = "my_collection",
     VectorFieldName = "embedding",
     Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-    MetricType = SimilarityMetricType.L2,
+    MetricType = MetricType.L2,
     Limit = 100,
     BatchSize = 20
 }))

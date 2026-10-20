@@ -5,11 +5,11 @@ Describes an index to create as part of `CreateCollectionAsync`; the index is cr
 ```csharp
 public sealed class IndexParam
 {
-    public IndexParam(string fieldName, string? indexName = null, IndexType? indexType = null, SimilarityMetricType? metricType = null) { ... }
+    public IndexParam(string fieldName, string? indexName = null, IndexType? indexType = null, MetricType? metricType = null) { ... }
     public string FieldName { get; }
     public string? IndexName { get; }
     public IndexType? IndexType { get; }
-    public SimilarityMetricType? MetricType { get; }
+    public MetricType? MetricType { get; }
     public IDictionary<string, object> ExtraParams { get; }
 }
 ```
@@ -28,9 +28,9 @@ public sealed class IndexParam
 
     The index type. When unset, the index type is omitted from the request and the server picks its default. See [IndexType](IndexType.md).
 
-- `MetricType` (*SimilarityMetricType?*) -
+- `MetricType` (*MetricType?*) -
 
-    The metric type. For vector fields, must match the metric used for search. See [SimilarityMetricType](../Vector/SimilarityMetricType.md).
+    The metric type. For vector fields, must match the metric used for search. See [MetricType](../Vector/MetricType.md).
 
 - `ExtraParams` (*IDictionary\<string, object\>*) -
 
@@ -38,6 +38,6 @@ public sealed class IndexParam
 
 **METHODS:**
 
-- `IndexParam(string fieldName, string? indexName = null, IndexType? indexType = null, SimilarityMetricType? metricType = null)` (*constructor*) -
+- `IndexParam(string fieldName, string? indexName = null, IndexType? indexType = null, MetricType? metricType = null)` (*constructor*) -
 
     Creates an index descriptor.
