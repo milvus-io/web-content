@@ -46,9 +46,16 @@ A future completed with a `GetResp`, or completed exceptionally when the operati
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.vector.request.GetReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.response.GetResp;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
@@ -58,6 +65,32 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .build();
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// Insert a row
+JsonObject row = new JsonObject();
+row.addProperty("id", 0L);
+row.add("vector", new Gson().toJsonTree(new float[]{1.0f, 2.0f}));
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(row))
+        .build());
+
+// Load the collection
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
 
 CompletableFuture<GetResp> future = client.getAsync(GetReq.builder()
         .collectionName("my_collection")

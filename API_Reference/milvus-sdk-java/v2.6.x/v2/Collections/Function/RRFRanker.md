@@ -53,6 +53,7 @@ A RRF ranker instance.
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.RRFRanker;
+import io.milvus.common.clientenum.FunctionType;
 import java.util.Collections;
 
 // use the RRFRanker class

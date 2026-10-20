@@ -46,8 +46,10 @@ A **ListPrivilegeGroupsResp** object contains the following getters:
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.rbac.PrivilegeGroup;
+import io.milvus.v2.service.rbac.request.CreatePrivilegeGroupReq;
 import io.milvus.v2.service.rbac.request.ListPrivilegeGroupsReq;
 import io.milvus.v2.service.rbac.response.ListPrivilegeGroupsResp;
+import java.util.List;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -57,7 +59,12 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. List privilege groups
+
+
+// 2. Create a privilege group
+client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder().groupName("read_only").build());
+
+// 3. List privilege groups
 ListPrivilegeGroupsReq listPrivilegeGroupsReq = ListPrivilegeGroupsReq.builder()
         .build();
         

@@ -31,6 +31,9 @@ io.milvus.v2.service.vector.request.FunctionChainArg
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChainArg;
+
+// Build column and literal arguments
 FunctionChainArg arg = FunctionChainArg.col("$score");
 FunctionChainArg literal = FunctionChainArg.literal(0.7);
 ```

@@ -44,14 +44,30 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.cdc.request.CrossClusterTopology;
 import io.milvus.v2.service.cdc.request.MilvusCluster;
 import io.milvus.v2.service.cdc.request.ReplicateConfiguration;
 import io.milvus.v2.service.cdc.request.UpdateReplicateConfigurationReq;
-
 import java.util.ArrayList;
+import java.util.List;
 
-// Define source and target Milvus clusters
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+
+
+// 2. Define the message channels to replicate
+List<String> pchannelList = new ArrayList<>();
+pchannelList.add("by-dev-rootcoord-dml_0_123v0");
+
+// 3. Define source and target Milvus clusters
 MilvusCluster sourceCluster = MilvusCluster.builder()
         .clusterId("upstream-cluster")
         .uri("http://192.168.1.1:19530")
@@ -63,13 +79,13 @@ MilvusCluster targetCluster = MilvusCluster.builder()
         .pchannels(pchannelList)
         .build();
 
-// Define cross-cluster replication topology
+// 4. Define cross-cluster replication topology
 CrossClusterTopology topology = CrossClusterTopology.builder()
         .sourceClusterId("upstream-cluster")
         .targetClusterId("downstream-cluster")
         .build();
 
-// Build and apply replication configuration
+// 5. Build and apply replication configuration
 ReplicateConfiguration configuration = ReplicateConfiguration.builder()
         .clusters(new ArrayList<MilvusCluster>() {{
             add(sourceCluster);

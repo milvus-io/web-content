@@ -41,10 +41,11 @@ removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.AddPrivilegesToGroupReq;
+import io.milvus.v2.service.rbac.request.CreatePrivilegeGroupReq;
 import io.milvus.v2.service.rbac.request.RemovePrivilegesFromGroupReq;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -54,7 +55,19 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Remove privileges from a group
+
+
+// 2. Create a privilege group and add privileges to it
+client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder().groupName("read_only").build());
+List<String> initPrivileges = new ArrayList<>();
+initPrivileges.add("Query");
+initPrivileges.add("Search");
+client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
+        .groupName("read_only")
+        .privileges(initPrivileges)
+        .build());
+
+// 3. Remove privileges from the group
 List<String> privileges = new ArrayList<>();
 privileges.add("Query");
 privileges.add("Search");

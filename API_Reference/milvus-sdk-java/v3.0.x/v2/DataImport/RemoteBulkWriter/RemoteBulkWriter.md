@@ -186,46 +186,57 @@ S3ConnectParam.newBuilder()
 ## Example
 
 ```java
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import io.milvus.bulkwriter.RemoteBulkWriter;
 import io.milvus.bulkwriter.RemoteBulkWriterParam;
 import io.milvus.bulkwriter.common.clientenum.BulkFileType;
 import io.milvus.bulkwriter.common.clientenum.CloudStorage;
 import io.milvus.bulkwriter.connect.S3ConnectParam;
 import io.milvus.bulkwriter.connect.StorageConnectParam;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
-import java.util.List;
 
-private static List<List<String>> callRemoteWriter(CreateCollectionReq.CollectionSchema collectionSchema,
-                                                   List<JsonObject> data) throws Exception {
-    StorageConnectParam connectParam = S3ConnectParam.newBuilder()
-                .withEndpoint(STORAGE_ENDPOINT)
-                .withCloudName(CloudStorage.MINIO.getCloudName())
-                .withBucketName(STORAGE_BUCKET)
-                .withAccessKey(STORAGE_ACCESS_KEY)
-                .withSecretKey(STORAGE_SECRET_KEY)
-                .withRegion(STORAGE_REGION)
-                .build();
-    
-    RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
-            .withCollectionSchema(collectionSchema)
-            .withRemotePath("bulk_data")
-            .withFileType(BulkFileType.CSV)
-            .withChunkSize(512 * 1024 * 1024)
-            .withConnectParam(connectParam)
-            .withConfig("sep", "|") // only take effect for CSV file
-            .build();
-    
-    try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) {
-        for (JsonObject rowObject : data) {
-            remoteBulkWriter.appendRow(rowObject);
-        }
-        remoteBulkWriter.commit(false);
+// 1. Define the collection schema
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder().build();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(4).build());
 
-        return remoteBulkWriter.getBatchFiles();
-    } catch (Exception e) {
-        throw e;
+// 2. Configure the storage connection
+StorageConnectParam connectParam = S3ConnectParam.newBuilder()
+        .withEndpoint("http://localhost:9000")
+        .withCloudName(CloudStorage.MINIO.getCloudName())
+        .withBucketName("a-bucket")
+        .withAccessKey("minioadmin")
+        .withSecretKey("minioadmin")
+        .withRegion("us-east-1")
+        .build();
+
+// 3. Configure the RemoteBulkWriter
+RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
+        .withCollectionSchema(collectionSchema)
+        .withRemotePath("bulk_data")
+        .withFileType(BulkFileType.PARQUET)
+        .withChunkSize(512 * 1024 * 1024)
+        .withConnectParam(connectParam)
+        .withConfig("sep", "|") // only take effect for CSV file
+        .build();
+
+try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) {
+    // 4. Append rows
+    Gson gson = new Gson();
+    for (int i = 0; i < 100; i++) {
+        JsonObject row = new JsonObject();
+        row.addProperty("id", (long) i);
+        row.add("vector", gson.toJsonTree(new float[]{i * 0.1f, i * 0.2f, i * 0.3f, i * 0.4f}));
+        remoteBulkWriter.appendRow(row);
     }
+
+    // 5. Commit and collect the remote files
+    remoteBulkWriter.commit(false);
+    java.util.List<java.util.List<String>> batchFiles = remoteBulkWriter.getBatchFiles();
+    System.out.println("Remote writer done! output remote files: " + batchFiles);
 }
+
 ```

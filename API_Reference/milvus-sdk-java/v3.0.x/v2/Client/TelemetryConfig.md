@@ -71,6 +71,10 @@ TelemetryConfig.builder()
 ## Example
 
 ```java
+import io.milvus.telemetry.TelemetryConfig;
+import io.milvus.v2.client.ConnectConfig;
+
+// Configure the client telemetry
 ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")

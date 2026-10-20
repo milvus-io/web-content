@@ -74,9 +74,69 @@ A **UpsertResp** object that contains the result of this operation.
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.request.UpsertReq;
+import io.milvus.v2.service.vector.response.UpsertResp;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field, a "vector" field, and a "tags" array field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("tags").dataType(DataType.Array).elementType(DataType.VarChar).maxCapacity(8).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("books")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert a row with a tags array
+JsonObject row = new JsonObject();
+row.addProperty("id", 0L);
+row.add("vector", new Gson().toJsonTree(new float[]{1.0f, 2.0f}));
+JsonArray tags = new JsonArray();
+tags.add("fiction");
+tags.add("classic");
+row.add("tags", tags);
+client.insert(InsertReq.builder()
+        .collectionName("books")
+        .data(Collections.singletonList(row))
+        .build());
+
+// 4. Upsert with a partial field update that appends to the "tags" array
+List<JsonObject> rows = Collections.singletonList(row);
 UpsertResp response = client.upsert(UpsertReq.builder()
+    .databaseName("default")
     .collectionName("books")
     .data(rows)
-    .fieldOps(fieldOps)
+    .partialUpdate(true)
+    .fieldOps(Collections.singletonList(
+        UpsertReq.FieldPartialUpdateOp.builder()
+            .fieldName("tags")
+            .opType(UpsertReq.FieldPartialUpdateOp.OpType.ARRAY_APPEND)
+            .build()))
     .build());
 ```

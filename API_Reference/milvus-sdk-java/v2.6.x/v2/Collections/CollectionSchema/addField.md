@@ -198,12 +198,14 @@ The updated **CollectionSchema** object.
 ## Example
 
 ```java
+import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
-// add two field, id and vector
+// Define a Collection Schema and add two fields, id and vector
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```

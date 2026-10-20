@@ -88,36 +88,42 @@ import com.google.gson.JsonObject;
 import io.milvus.bulkwriter.LocalBulkWriter;
 import io.milvus.bulkwriter.LocalBulkWriterParam;
 import io.milvus.bulkwriter.common.clientenum.BulkFileType;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import java.util.List;
 
-private static void localWriter(CreateCollectionReq.CollectionSchema collectionSchema) throws Exception {
-    LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()
-            .withCollectionSchema(collectionSchema)
-            .withLocalPath("/tmp/bulk_writer")
-            .withFileType(BulkFileType.PARQUET)
-            .withChunkSize(128 * 1024 * 1024)
-            .build();
+// 1. Define the collection schema
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder().build();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(4).build());
 
-    try (LocalBulkWriter localBulkWriter = new LocalBulkWriter(bulkWriterParam)) {
-        // append rows
-        Gson GSON_INSTANCE = new Gson();
-        for (int i = 0; i < 10000; i++) {
-            JsonObject row = new JsonObject();
-            row.addProperty("path", "path_" + i);
-            row.add("vector", GSON_INSTANCE.toJsonTree(GeneratorUtils.genFloatVector(DIM)));
-            row.addProperty("label", "label_" + i);
+// 2. Configure the LocalBulkWriter
+LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()
+        .withCollectionSchema(collectionSchema)
+        .withLocalPath("/tmp/bulk_writer")
+        .withFileType(BulkFileType.PARQUET)
+        .withChunkSize(128 * 1024 * 1024)
+        .build();
 
-            localBulkWriter.appendRow(row);
-        }
+try (LocalBulkWriter localBulkWriter = new LocalBulkWriter(bulkWriterParam)) {
+    // 3. Append rows
+    Gson GSON_INSTANCE = new Gson();
+    for (int i = 0; i < 100; i++) {
+        JsonObject row = new JsonObject();
+        row.addProperty("id", (long) i);
+        row.add("vector", GSON_INSTANCE.toJsonTree(new float[]{i * 0.1f, i * 0.2f, i * 0.3f, i * 0.4f}));
 
-        localBulkWriter.commit(false);
-        List<List<String>> batchFiles = localBulkWriter.getBatchFiles();
-        System.out.printf("Local writer done! output local files: %s%n", batchFiles);
-    } catch (Exception e) {
-        System.out.println("Local writer catch exception: " + e);
-        throw e;
+        localBulkWriter.appendRow(row);
     }
+
+    // 4. Commit and collect the batch files
+    localBulkWriter.commit(false);
+    List<List<String>> batchFiles = localBulkWriter.getBatchFiles();
+    System.out.printf("Local writer done! output local files: %s%n", batchFiles);
+} catch (Exception e) {
+    System.out.println("Local writer catch exception: " + e);
+    throw e;
 }
 ```
 

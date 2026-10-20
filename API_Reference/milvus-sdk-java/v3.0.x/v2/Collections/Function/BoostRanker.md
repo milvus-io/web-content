@@ -82,11 +82,13 @@ A boost ranker instance.
 ## Examples:
 
 ```java
-import io.milvus.common.clientenum.FunctionType;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.BoostRanker;
+import io.milvus.common.clientenum.FunctionType;
+import java.util.Collections;
+import java.util.Map;
 
-// use the BoostRanker class
+// use the ModelRanker class
 BoostRanker boost = BoostRanker.builder()
     .name("xxx_boost")
     .description("boost on xxx")
@@ -95,9 +97,9 @@ BoostRanker boost = BoostRanker.builder()
     .randomScoreSeed(123L)
     .randomScoreField("id")
     .build();
-
+    
 // Instead, you can use the Function class as well
-CreateCollectionReq.Function boostFn = CreateCollectionReq.Function.builder()
+Function boostFunc = Function.builder()
     .functionType(FunctionType.RERANK)
     .name("xxx_boost")
     .description("boost on xxx")

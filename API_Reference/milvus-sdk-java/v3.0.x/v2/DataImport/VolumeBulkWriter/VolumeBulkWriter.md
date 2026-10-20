@@ -59,12 +59,27 @@ A **VolumeBulkWriter** object intends to rewrite your raw data to a Zilliz Cloud
 Configures a VolumeBulkWriter, including its collection schema, output path, and volume connection.
 
 ```java
-VolumeBulkWriterParam params = VolumeBulkWriterParam.newBuilder()
+import com.google.gson.JsonObject;
+import io.milvus.bulkwriter.VolumeBulkWriter;
+import io.milvus.bulkwriter.VolumeBulkWriterParam;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+// 1. Define the collection schema
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder().build();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(4).build());
+
+// 2. Configure the VolumeBulkWriter (requires a Zilliz Cloud volume)
+VolumeBulkWriterParam config = VolumeBulkWriterParam.newBuilder()
     .withCollectionSchema(collectionSchema)
     .withRemotePath("imports/books")
-    .withCloudEndpoint(CLOUD_ENDPOINT)
-    .withApiKey(API_KEY)
+    .withCloudEndpoint("https://api.cloud.zilliz.com")
+    .withApiKey("your-api-key")
     .withVolumeName("bulk-data")
     .build();
-VolumeBulkWriter writer = new VolumeBulkWriter(params);
+
+VolumeBulkWriter writer = new VolumeBulkWriter(config);
+
 ```

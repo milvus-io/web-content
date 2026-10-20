@@ -158,28 +158,69 @@ A **QueryResp** object that contains query rows ordered according to `orderByFie
 
 ## Example
 
-Demonstrates query() against Milvus.
-
 ```java
-// include-start milvus
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
-// include-start zilliz
-QueryResp response = client.query(QueryReq.builder()
-    .collectionName("books")
-    .clusterId(CLUSTER_ID)
-    .orderByFields(Collections.singletonList(OrderByField.builder()
-        .fieldName("published_year")
-        .direction(AggDirection.DESC)
-        .build()))
-    .limit(10)
-    .build());
-// include-end
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert data
+List<JsonObject> rows = new ArrayList<>();
+for (long id = 0; id < 10; id++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", id);
+    row.add("vector", new Gson().toJsonTree(new float[]{id * 0.1f, id * 0.2f}));
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("test")
+        .data(rows)
+        .build());
+
+// 4. Load the collection
+client.loadCollection(LoadCollectionReq.builder().collectionName("test").build());
+
+// 5. Query by filter "id < 10"
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("test")
+        .filter("id < 10")
+        .build();
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```

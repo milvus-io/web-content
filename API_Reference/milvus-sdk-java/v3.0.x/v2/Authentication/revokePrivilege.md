@@ -70,8 +70,9 @@ revokePrivilege(RevokePrivilegeReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
+import io.milvus.v2.service.rbac.request.GrantPrivilegeReq;
 import io.milvus.v2.service.rbac.request.RevokePrivilegeReq;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -81,7 +82,17 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Revoke a privilege
+
+// 2. Create a role and grant a privilege
+client.createRole(CreateRoleReq.builder().roleName("db_rw").build());
+client.grantPrivilege(GrantPrivilegeReq.builder()
+        .roleName("db_rw")
+        .objectType("Global")
+        .objectName("*")
+        .privilege("DescribeCollection")
+        .build());
+
+// 3. Revoke the privilege
 RevokePrivilegeReq revokePrivilegeReq = RevokePrivilegeReq.builder()
         .roleName("db_rw")
         .privilege("DescribeCollection")

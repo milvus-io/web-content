@@ -46,19 +46,32 @@ A **GetFlushAllStateResp** object that indicates whether the flush-all operation
 ## Example
 
 ```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.FlushAllReq;
+import io.milvus.v2.service.utility.request.GetFlushAllStateReq;
+import io.milvus.v2.service.utility.response.FlushAllResp;
+import io.milvus.v2.service.utility.response.GetFlushAllStateResp;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 FlushAllResp flush = client.flushAll(FlushAllReq.builder()
-    .databaseName("default")
-    .build());
+        .databaseName("default")
+        .build());
 GetFlushAllStateResp state = client.getFlushAllState(GetFlushAllStateReq.builder()
-    .databaseName("default")
-    .flushAllTs(flush.getFlushAllTs())
-    .build());
+        .databaseName("default")
+        .flushAllTs(flush.getFlushAllTs())
+        .build());
 System.out.println(state.getFlushed());
 ```
 
-<!-- category: Management; action: CREATE; addedSince: v3.0.x -->
+## Related operations
+
+- [flushAll()](flushAll.md)
+
+- [flush()](flush.md)

@@ -90,14 +90,59 @@ A **SemanticHighlighter** instance.
 Highlight semantically relevant text in dense vector search:
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.SemanticHighlighter;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "dense" vector field and a "document" text field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("dense").dataType(DataType.FloatVector).dimension(4).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("document").dataType(DataType.VarChar).maxLength(512).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("dense")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("your_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert a row and load the collection
+JsonObject row = new JsonObject();
+row.addProperty("id", 1L);
+row.add("dense", new Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+row.addProperty("document", "Artificial intelligence was founded as an academic discipline in 1956.");
+client.insert(InsertReq.builder()
+        .collectionName("your_collection")
+        .data(Collections.singletonList(row))
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("your_collection").build());
+
+// 4. Configure a SemanticHighlighter (requires a Zilliz Cloud model deployment) and run a search
 List<String> queries = new ArrayList<>();
 queries.add("When was artificial intelligence founded");
 queries.add("Where was Alan Turing born?");
@@ -131,7 +176,7 @@ SearchResp searchR = client.search(SearchReq.builder()
 
 The search results include a `highlight` field containing the highlighted fragments and their confidence scores:
 
-```java
+```text
 # Example output:
 # hit: {
 #     'id': 1,
@@ -149,14 +194,59 @@ The search results include a `highlight` field containing the highlighted fragme
 Use `threshold` to filter low-confidence highlights:
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.SemanticHighlighter;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "dense" vector field and a "document" text field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("dense").dataType(DataType.FloatVector).dimension(4).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("document").dataType(DataType.VarChar).maxLength(512).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("dense")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("your_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert a row and load the collection
+JsonObject row = new JsonObject();
+row.addProperty("id", 1L);
+row.add("dense", new Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+row.addProperty("document", "Artificial intelligence was founded as an academic discipline in 1956.");
+client.insert(InsertReq.builder()
+        .collectionName("your_collection")
+        .data(Collections.singletonList(row))
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("your_collection").build());
+
+// 4. Configure a SemanticHighlighter with a confidence threshold (requires a Zilliz Cloud model deployment)
 List<String> queries = new ArrayList<>();
 queries.add("When was artificial intelligence founded");
 queries.add("Where was Alan Turing born?");
@@ -184,7 +274,7 @@ SearchResp searchR = client.search(SearchReq.builder()
     .data(Collections.singletonList(new EmbeddedText("machine learning applications")))
     .annsField("dense")
     .topK(10)
-    .outputFields(Collections.singletonList("content"))
+    .outputFields(Collections.singletonList("document"))
     .highlighter(highlighter)
     .build());
 ```

@@ -105,15 +105,66 @@ A **QueryIterator** object that iterates over the query results in batches.
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.request.QueryIteratorReq;
 import io.milvus.orm.iterator.QueryIterator;
 import io.milvus.response.QueryResultsWrapper;
-import io.milvus.v2.service.vector.request.QueryIteratorReq;
-import io.milvus.v2.common.ConsistencyLevel;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-// Create a query iterator to retrieve results in batches
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with "id", "userID", and "userAge" fields
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("userID").dataType(DataType.Int64).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("userAge").dataType(DataType.Int64).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+for (long i = 1; i <= 5; i++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", i);
+    row.addProperty("userID", i * 100L);
+    row.addProperty("userAge", 20L + i);
+    row.add("vector", new Gson().toJsonTree(new float[]{i * 0.1f, i * 0.2f}));
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
+
+// 4. Create a query iterator to retrieve results in batches
 QueryIterator queryIterator = client.queryIterator(QueryIteratorReq.builder()
         .collectionName("my_collection")
         .expr("userID < 3000")
@@ -124,7 +175,7 @@ QueryIterator queryIterator = client.queryIterator(QueryIteratorReq.builder()
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build());
 
-// Iterate through all results
+// 5. Iterate through all results
 int counter = 0;
 while (true) {
     List<QueryResultsWrapper.RowRecord> res = queryIterator.next();

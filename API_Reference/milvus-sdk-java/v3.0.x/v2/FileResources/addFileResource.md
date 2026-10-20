@@ -43,8 +43,20 @@ addFileResource(AddFileResourceReq.builder()
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.utility.request.AddFileResourceReq;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+
+// 2. Add a file resource from a path on the server
 client.addFileResource(AddFileResourceReq.builder()
     .name("stopwords")
     .path("/data/stopwords-en.txt")

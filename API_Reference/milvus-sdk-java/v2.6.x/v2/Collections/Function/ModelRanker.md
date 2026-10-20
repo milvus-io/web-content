@@ -72,15 +72,16 @@ A model ranker instance.
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.ModelRanker;
+import io.milvus.common.clientenum.FunctionType;
+import java.util.Arrays;
 import java.util.Collections;
 
 // use the ModelRanker class
 ModelRanker.builder()
-    .function("tei")
     .name("TEI ranker")
     .inputFieldNames(Collections.singletonList("document"))
     .provider("tei")
-    .queries("[\"machine learning for time series\"]")
+    .queries(Arrays.asList("machine learning for time series"))
     .endpoint("http://model-service:8080")
     .build();
     

@@ -57,6 +57,12 @@ A **ListAliasResp** object containing a list of aliases for the specified collec
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
+import io.milvus.v2.service.utility.request.CreateAliasReq;
 import io.milvus.v2.service.utility.request.ListAliasesReq;
 import io.milvus.v2.service.utility.response.ListAliasResp;
 
@@ -68,9 +74,28 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. List aliases
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Create an alias "test_alias" for collection "my_collection"
+client.createAlias(CreateAliasReq.builder()
+        .collectionName("my_collection")
+        .alias("test_alias")
+        .build());
+
+// 4. List aliases
 ListAliasesReq listAliasesReq = ListAliasesReq.builder()
-        .databaseName("my_database")
         .collectionName("my_collection")
         .build();
 ListAliasResp listAliasResp = client.listAliases(listAliasesReq);

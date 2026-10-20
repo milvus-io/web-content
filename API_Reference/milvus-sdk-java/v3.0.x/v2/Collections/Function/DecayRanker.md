@@ -84,14 +84,13 @@ A decay ranker instance.
 ## Examples:
 
 ```java
-import io.milvus.common.clientenum.FunctionType;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
-
+import io.milvus.common.clientenum.FunctionType;
 import java.util.Collections;
 
 // use the DecayRanker class
-DecayRanker decay = DecayRanker.builder()
+DecayRanker.builder()
     .function("gauss")
     .name("time decay")
     .inputFieldNames(Collections.singletonList("timestamp"))
@@ -100,7 +99,7 @@ DecayRanker decay = DecayRanker.builder()
     .offset(24)
     .decay(0.5)
     .build();
-
+    
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)

@@ -41,6 +41,7 @@ dropRole(DropRoleReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
 import io.milvus.v2.service.rbac.request.DropRoleReq;
 
 // 1. Set up a client
@@ -51,7 +52,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop a role
+
+// 2. Create a role
+client.createRole(CreateRoleReq.builder()
+        .roleName("test")
+        .build());
+
+// 3. Drop the role
 DropRoleReq dropRoleReq = DropRoleReq.builder()
         .roleName("test")
         .build();

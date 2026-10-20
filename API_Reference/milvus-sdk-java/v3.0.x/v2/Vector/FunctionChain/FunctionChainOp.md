@@ -79,6 +79,10 @@ FunctionChainOp.builder()
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChainOp;
+import java.util.Collections;
+
+// Build a FunctionChainOp
 FunctionChainOp op = FunctionChainOp.builder()
         .op(FunctionChainOp.OP_SORT)
         .inputs(Collections.singletonList("$score"))

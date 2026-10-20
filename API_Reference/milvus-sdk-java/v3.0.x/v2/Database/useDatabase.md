@@ -37,7 +37,7 @@ This operation returns no value.
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import java.util.Set;
+import io.milvus.v2.service.database.request.CreateDatabaseReq;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -47,6 +47,10 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Switch the client to another database
+
+// 2. Create a database
+client.createDatabase(CreateDatabaseReq.builder().databaseName("my_database").build());
+
+// 3. Switch the client to another database
 client.useDatabase("my_database");
 ```

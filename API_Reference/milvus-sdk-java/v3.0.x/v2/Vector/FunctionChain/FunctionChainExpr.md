@@ -53,6 +53,10 @@ FunctionChainExpr.builder()
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChainArg;
+import io.milvus.v2.service.vector.request.FunctionChainExpr;
+
+// Build a FunctionChainExpr with arguments
 FunctionChainExpr expr = FunctionChainExpr.builder()
         .name("num_combine")
         .arg(FunctionChainArg.col("$score"))

@@ -71,10 +71,19 @@ A future completed with a **QueryResp** object that contains query rows and exec
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.QueryReq;
 import io.milvus.v2.service.vector.response.QueryResp;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -83,6 +92,40 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .build();
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// Create a collection with "id", "vector", "name", and "age" fields
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("name").dataType(DataType.VarChar).maxLength(128).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("age").dataType(DataType.Int64).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Arrays.asList(indexParam))
+        .build());
+
+// Insert rows
+List<JsonObject> rows = new ArrayList<>();
+for (long id = 0; id < 3; id++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", id);
+    row.add("vector", new Gson().toJsonTree(new float[]{id * 0.1f, id * 0.2f}));
+    row.addProperty("name", "name_" + id);
+    row.addProperty("age", 20L + id);
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(rows)
+        .build());
+
+// Load the collection
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
 
 CompletableFuture<QueryResp> future = client.queryAsync(QueryReq.builder()
         .collectionName("my_collection")

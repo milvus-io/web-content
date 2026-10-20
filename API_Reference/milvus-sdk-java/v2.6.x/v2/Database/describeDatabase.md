@@ -46,11 +46,13 @@ A **DescribeDatabaseResp** object that contains detailed information about the s
 ## Example
 
 ```java
-import io.milvus.param.Constant;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.param.Constant;
+import io.milvus.v2.service.database.request.CreateDatabaseReq;
 import io.milvus.v2.service.database.request.DescribeDatabaseReq;
 import io.milvus.v2.service.database.response.DescribeDatabaseResp;
+import java.util.Map;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -60,7 +62,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Describe database
+
+
+// 2. Create a database
+String databaseName = "my_database";
+client.createDatabase(CreateDatabaseReq.builder().databaseName(databaseName).build());
+
+// 3. Describe the database
 DescribeDatabaseResp descResp = client.describeDatabase(DescribeDatabaseReq.builder()
         .databaseName(databaseName)
         .build());

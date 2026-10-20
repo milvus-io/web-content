@@ -92,19 +92,49 @@ An **OptimizeTask** that tracks progress and provides the optimization result.
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.utility.request.OptimizeReq;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
 import io.milvus.v2.service.utility.OptimizeTask;
+import io.milvus.v2.service.utility.request.OptimizeReq;
+import java.util.Collections;
 
+// 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-
+        
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .build());
+
+
+
+// 3. Create an index for the field "vector"
+IndexParam indexParam = IndexParam.builder()
+        .metricType(IndexParam.MetricType.COSINE)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .fieldName("vector")
+        .build();
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("test")
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 4. Optimize the collection
 OptimizeTask task = client.optimize(OptimizeReq.builder()
-        .collectionName("my_collection")
-        .targetSize("512MB")
+        .collectionName("test")
+        .targetSize("2048MB")
         .build());
 ```
 

@@ -48,7 +48,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2 Quickly create a collectionSchema
-CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```

@@ -117,19 +117,67 @@ A **SearchIteratorV2** object that iterates over the search results in batches.
 
 ```java
 import io.milvus.orm.iterator.SearchIteratorV2;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchIteratorReqV2;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.common.ConsistencyLevel;
-import io.milvus.v2.common.IndexParam;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-// Create a SearchIteratorV2 for paginated vector search.
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "userFace" vector field and a "userAge" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("userFace").dataType(DataType.FloatVector).dimension(4).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("userAge").dataType(DataType.Int64).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("userFace")
+        .metricType(IndexParam.MetricType.L2)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+for (long i = 1; i <= 5; i++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", i);
+    row.add("userFace", new Gson().toJsonTree(new float[]{i * 0.1f, i * 0.2f, i * 0.3f, i * 0.4f}));
+    row.addProperty("userAge", 15L + i);
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
+
+// 4. Create a SearchIteratorV2 for paginated vector search.
 // V2 is recommended over V1: 20-30% faster with better recall.
+List<Float> queryVector = Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f);
 SearchIteratorV2 searchIterator = client.searchIteratorV2(SearchIteratorReqV2.builder()
         .collectionName("my_collection")
         .outputFields(Arrays.asList("userAge"))
@@ -143,7 +191,7 @@ SearchIteratorV2 searchIterator = client.searchIteratorV2(SearchIteratorReqV2.bu
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build());
 
-// Iterate through search results
+// 5. Iterate through search results
 int counter = 0;
 while (true) {
     List<SearchResp.SearchResult> res = searchIterator.next();

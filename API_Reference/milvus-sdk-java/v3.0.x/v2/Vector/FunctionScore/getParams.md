@@ -19,8 +19,13 @@ public Map<String, String> getParams()
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionScore;
+import java.util.Collections;
+import java.util.Map;
+
+// Build a FunctionScore with parameters
 FunctionScore score = FunctionScore.builder()
-    .params(Map.of("weight", "0.8"))
+    .params(Collections.singletonMap("weight", "0.8"))
     .build();
 Map<String, String> params = score.getParams();
 ```

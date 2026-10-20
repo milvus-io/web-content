@@ -54,6 +54,7 @@ A weighted ranker instance.
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
+import io.milvus.common.clientenum.FunctionType;
 import java.util.Arrays;
 import java.util.Collections;
 

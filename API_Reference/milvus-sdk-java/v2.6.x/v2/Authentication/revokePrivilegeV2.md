@@ -51,7 +51,14 @@ revokePrivilegeV2(RevokePrivilegeReqV2.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
+import io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2;
 import io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2;
+import java.util.Collections;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -61,10 +68,31 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Revoke privilege or privilege group
+// 2. Create a database, a collection, and a role
+client.createDatabase(io.milvus.v2.service.database.request.CreateDatabaseReq.builder().databaseName("my_db").build());
+client.useDatabase("my_db");
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(IndexParam.builder().fieldName("vector").metricType(IndexParam.MetricType.COSINE).build()))
+        .build());
+client.createRole(CreateRoleReq.builder().roleName("my_role").build());
+
+// 3. Grant a privilege to the role
+client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
+    .roleName("my_role")
+    .privilege("Search")
+    .dbName("my_db")
+    .collectionName("my_collection")
+    .build());
+
+// 4. Revoke privilege or privilege group
 RevokePrivilegeReqV2 revokePrivilegeReqV2 = RevokePrivilegeReqV2.builder()
     .roleName("my_role")
-    .privilege("read_only")
+    .privilege("Search")
     .dbName("my_db")
     .collectionName("my_collection")
     .build();

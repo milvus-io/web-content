@@ -68,8 +68,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. List collections
-ListCollectionReq listCollectionReq = ListCollectionReq.builder()
-    .databaseName("my_database")
+ListCollectionsReq listCollectionReq = ListCollectionsReq.builder()
+    .databaseName("default")
     .build();
 
 ListCollectionsResp listAliasResp = client.listCollectionsV2(listCollectionReq);

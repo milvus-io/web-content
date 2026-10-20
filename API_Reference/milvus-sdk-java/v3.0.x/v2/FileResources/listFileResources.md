@@ -43,14 +43,26 @@ A **ListFileResourcesResp** object that contains the result of this operation.
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.utility.request.ListFileResourcesReq;
 import io.milvus.v2.service.utility.response.ListFileResourcesResp;
 import io.milvus.v2.service.utility.response.FileResourceInfo;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+
+// 2. List the file resources
 ListFileResourcesResp resp = client.listFileResources(
     ListFileResourcesReq.builder().build()
 );
 for (FileResourceInfo res : resp.getResources()) {
-    System.out.println(res.getName() + " → " + res.getPath());
+    System.out.println(res.getName() + " -> " + res.getPath());
 }
 ```

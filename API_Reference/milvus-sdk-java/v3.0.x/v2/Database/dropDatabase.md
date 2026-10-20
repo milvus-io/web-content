@@ -36,8 +36,8 @@ dropDatabase(DropDatabaseReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.database.request.CreateDatabaseReq;
 import io.milvus.v2.service.database.request.DropDatabaseReq;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -47,7 +47,12 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop a database
+
+// 2. Create a database
+String databaseName = "my_database";
+client.createDatabase(CreateDatabaseReq.builder().databaseName(databaseName).build());
+
+// 3. Drop the database
 DropDatabaseReq dropDatabaseReq = DropDatabaseReq.builder()
         .databaseName(databaseName)
         .build();

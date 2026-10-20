@@ -59,7 +59,15 @@ alterIndexProperties(AlterIndexPropertiesReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+import java.util.Collections;
 import io.milvus.v2.service.index.request.AlterIndexPropertiesReq;
+import java.util.HashMap;
+import java.util.Map;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -69,7 +77,27 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the \`mmap.enabled\` property
+// 2. Create a collection and an index for the "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .build());
+IndexParam indexParam = IndexParam.builder()
+        .metricType(IndexParam.MetricType.COSINE)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .fieldName("vector")
+        .build();
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("test")
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+
+
+// 3. Alter the `mmap.enabled` property
 Map<String, String> properties = new HashMap<>();
 properties.put("mmap.enabled", "true");
 

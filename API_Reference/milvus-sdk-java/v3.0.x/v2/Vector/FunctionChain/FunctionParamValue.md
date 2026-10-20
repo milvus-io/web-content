@@ -47,6 +47,12 @@ io.milvus.v2.service.vector.request.FunctionParamValue
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChainArg;
+import io.milvus.v2.service.vector.request.FunctionChainExpr;
+import io.milvus.v2.service.vector.request.FunctionParamValue;
+import java.util.Arrays;
+
+// Build a FunctionChainExpr with literal parameter values
 FunctionChainExpr expr = FunctionChainExpr.builder()
         .name("num_combine")
         .arg(FunctionChainArg.col("$score"))

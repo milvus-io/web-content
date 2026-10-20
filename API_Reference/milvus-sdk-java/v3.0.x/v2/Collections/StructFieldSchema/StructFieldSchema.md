@@ -21,12 +21,13 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-String STRUCT_FIELD = "clips";
-String FRAME_FIELD = "frame_id";
-String CLIP_VECTOR_FIELD = "clip_embedding";
-String DESC_FIELD = "description";
-String DESC_VECTOR_FIELD = "desc_embedding";
-int VECTOR_DIM = 768;
+// Define a Collection Schema that contains an Array of Struct field
+String STRUCT_FIELD = "struct_field";
+String FRAME_FIELD = "frame_field";
+String CLIP_VECTOR_FIELD = "clip_vector_field";
+String DESC_FIELD = "desc_field";
+String DESC_VECTOR_FIELD = "desc_vector_field";
+int VECTOR_DIM = 4;
 
 CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
         .build();

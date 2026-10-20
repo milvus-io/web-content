@@ -129,7 +129,6 @@ import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import java.util.Collections;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -140,7 +139,9 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with schema, when indexParams is specified, it will create index as well
-CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
+int dim = 2;
+String collectionName = "test";
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 

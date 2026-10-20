@@ -58,8 +58,6 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.collection.request.ListCollectionsReq;
 import io.milvus.v2.service.collection.response.ListCollectionsResp;
-import java.util.List;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -71,7 +69,7 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. List collections
 ListCollectionsReq listCollectionReq = ListCollectionsReq.builder()
-    .databaseName("my_database")
+    .databaseName("default")
     .build();
 
 ListCollectionsResp listAliasResp = client.listCollectionsV2(listCollectionReq);

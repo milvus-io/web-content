@@ -70,9 +70,9 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.database.request.AlterDatabasePropertiesReq;
+import io.milvus.v2.service.database.request.CreateDatabaseReq;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -82,13 +82,19 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter database properties
+
+
+// 2. Create a database
+String databaseName = "my_database";
+client.createDatabase(CreateDatabaseReq.builder().databaseName(databaseName).build());
+
+// 3. Alter database properties
 Map<String, String> properties = new HashMap<>();
 properties.put("database.replica.number", "1");
 AlterDatabasePropertiesReq alterDatabasePropertiesReq = AlterDatabasePropertiesReq.builder()
         .databaseName(databaseName)
         .properties(properties)
         .build();
-client.alterDatabaseProperties(alterDatabaseReq);
+client.alterDatabaseProperties(alterDatabasePropertiesReq);
 ```
 

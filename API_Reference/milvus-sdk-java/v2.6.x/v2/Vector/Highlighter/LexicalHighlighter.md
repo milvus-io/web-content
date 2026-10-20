@@ -99,14 +99,70 @@ A **LexicalHighlighter** instance.
 Highlight search terms in BM25 full text search:
 
 ```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "text" field and a BM25 output field "sparse_vector"
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("text").dataType(DataType.VarChar).maxLength(512).enableAnalyzer(Boolean.TRUE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("sparse_vector").dataType(DataType.SparseFloatVector).build());
+collectionSchema.addFunction(CreateCollectionReq.Function.builder()
+        .functionType(FunctionType.BM25)
+        .name("text_bm25")
+        .inputFieldNames(Collections.singletonList("text"))
+        .outputFieldNames(Collections.singletonList("sparse_vector"))
+        .build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("sparse_vector")
+        .metricType(IndexParam.MetricType.BM25)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("your_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+JsonObject row1 = new JsonObject();
+row1.addProperty("id", 1L);
+row1.addProperty("text", "this is a test document about the test keyword");
+rows.add(row1);
+JsonObject row2 = new JsonObject();
+row2.addProperty("id", 2L);
+row2.addProperty("text", "my doc about the test");
+rows.add(row2);
+client.insert(InsertReq.builder()
+        .collectionName("your_collection")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("your_collection").build());
+
+// 4. Configure a LexicalHighlighter and run a BM25 search
 List<String> preTags = new ArrayList<>();
 preTags.add("{");
 
@@ -123,6 +179,7 @@ SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("test")))
     .annsField("sparse_vector")
+    .metricType(IndexParam.MetricType.BM25)
     .topK(10)
     .outputFields(Collections.singletonList("text"))
     .highlighter(highlighter)
@@ -132,13 +189,70 @@ SearchResp searchR = client.search(SearchReq.builder()
 Highlight query terms in Text Match:
 
 ```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "text" field and a BM25 output field "sparse_vector"
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("text").dataType(DataType.VarChar).maxLength(512).enableAnalyzer(Boolean.TRUE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("sparse_vector").dataType(DataType.SparseFloatVector).build());
+collectionSchema.addFunction(CreateCollectionReq.Function.builder()
+        .functionType(FunctionType.BM25)
+        .name("text_bm25")
+        .inputFieldNames(Collections.singletonList("text"))
+        .outputFieldNames(Collections.singletonList("sparse_vector"))
+        .build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("sparse_vector")
+        .metricType(IndexParam.MetricType.BM25)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("your_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+JsonObject row1 = new JsonObject();
+row1.addProperty("id", 1L);
+row1.addProperty("text", "this is a my doc about test");
+rows.add(row1);
+JsonObject row2 = new JsonObject();
+row2.addProperty("id", 2L);
+row2.addProperty("text", "another my doc here");
+rows.add(row2);
+client.insert(InsertReq.builder()
+        .collectionName("your_collection")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("your_collection").build());
+
+// 4. Configure a LexicalHighlighter with a TextMatch query and run a BM25 search
 LexicalHighlighter.HighlightQuery q = new LexicalHighlighter.HighlightQuery(
     "TextMatch",
     "text",
@@ -164,6 +278,7 @@ SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("my doc")))
     .annsField("sparse_vector")
+    .metricType(IndexParam.MetricType.BM25)
     .topK(10)
     .outputFields(Collections.singletonList("text"))
     .highlighter(highlighter)

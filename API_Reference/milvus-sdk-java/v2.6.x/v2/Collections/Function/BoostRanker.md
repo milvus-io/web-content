@@ -89,8 +89,9 @@ A boost ranker instance.
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.BoostRanker;
-import io.milvus.v2.common.FunctionType;
+import io.milvus.common.clientenum.FunctionType;
 import java.util.Collections;
+import java.util.Map;
 
 // use the ModelRanker class
 BoostRanker boost = BoostRanker.builder()

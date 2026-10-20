@@ -63,10 +63,12 @@ A **CollectionSchema** object.
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.client.MilvusClientV2;
 
-// define a Collection Schema
-CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
-// add two fileds, id and vector
+// 2. Define a Collection Schema
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+int dim = 2;
+// add two fields, id and vector
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```

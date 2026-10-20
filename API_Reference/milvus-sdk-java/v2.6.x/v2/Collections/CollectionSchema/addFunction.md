@@ -68,11 +68,20 @@ A `Function` object
 
 ```java
 import io.milvus.common.clientenum.FunctionType;
-import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
-
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import java.util.Collections;
 
-schema.addFunction(Function.builder()
+// 2. Define a Collection Schema with a "text" field and add a BM25 function
+CreateCollectionReq.CollectionSchema schema = MilvusClientV2.CreateSchema();
+schema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+schema.addField(AddFieldReq.builder().fieldName("text").dataType(DataType.VarChar).maxLength(512).enableAnalyzer(Boolean.TRUE).build());
+schema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.SparseFloatVector).build());
+
+// 3. Add a BM25 function to the schema
+schema.addFunction(CreateCollectionReq.Function.builder()
         .functionType(FunctionType.BM25)
         .name("text_bm25_emb")
         .inputFieldNames(Collections.singletonList("text"))

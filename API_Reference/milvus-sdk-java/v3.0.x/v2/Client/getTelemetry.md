@@ -21,6 +21,11 @@ The telemetry manager for the connected client, or `null` when telemetry is not 
 ## Example
 
 ```java
+import io.milvus.grpc.CommandReply;
+import io.milvus.telemetry.ClientTelemetryManager;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
@@ -30,7 +35,7 @@ ClientTelemetryManager telemetry = client.getTelemetry();
 if (telemetry != null && telemetry.isSupported()) {
     telemetry.registerCommandHandler("custom_command", command -> {
         // Handle a server-pushed telemetry command.
-        return TelemetryCommandReply.of(command);
+        return CommandReply.newBuilder().setSuccess(true).build();
     });
 }
 ```

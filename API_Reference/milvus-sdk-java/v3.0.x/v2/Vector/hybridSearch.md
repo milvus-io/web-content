@@ -231,18 +231,78 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.AnnSearchReq;
 import io.milvus.v2.service.vector.request.HybridSearchReq;
 import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.common.ConsistencyLevel;
-
+import io.milvus.v2.service.vector.request.data.BaseVector;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.request.data.BinaryVec;
+import io.milvus.v2.service.vector.request.data.SparseFloatVec;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
-// Build ANN search requests for multiple vector fields
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with float, binary, and sparse vector fields
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("float_vector").dataType(DataType.FloatVector).dimension(4).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("binary_vector").dataType(DataType.BinaryVector).dimension(32).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("sparse_vector").dataType(DataType.SparseFloatVector).build());
+List<IndexParam> indexParams = Arrays.asList(
+        IndexParam.builder().fieldName("float_vector").metricType(IndexParam.MetricType.COSINE).build(),
+        IndexParam.builder().fieldName("binary_vector").metricType(IndexParam.MetricType.HAMMING).build(),
+        IndexParam.builder().fieldName("sparse_vector").metricType(IndexParam.MetricType.IP).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(indexParams)
+        .build());
+
+// 3. Insert a row and load the collection
+JsonObject row = new JsonObject();
+row.addProperty("id", 1L);
+row.add("float_vector", new Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+row.add("binary_vector", new Gson().toJsonTree(new int[]{1, 2, 3, 4}));
+JsonObject sparse = new JsonObject();
+sparse.addProperty("1", 0.2);
+sparse.addProperty("2", 0.8);
+row.add("sparse_vector", sparse);
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(row))
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
+
+// 4. Build ANN search requests for the multiple vector fields
+List<BaseVector> floatVectors = Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+List<BaseVector> binaryVectors = Collections.singletonList(new BinaryVec(new byte[]{1, 2, 3, 4}));
+List<BaseVector> sparseVectors = Collections.singletonList(new SparseFloatVec(new TreeMap<Long, Float>() {{
+    put(1L, 0.2f);
+}}));
+
 List<AnnSearchReq> searchRequests = new ArrayList<>();
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName("float_vector")
@@ -261,7 +321,7 @@ searchRequests.add(AnnSearchReq.builder()
         .limit(100)
         .build());
 
-// Hybrid search with WeightedRanker via FunctionScore
+// 5. Hybrid search with WeightedRanker via FunctionScore
 SearchResp searchResp = client.hybridSearch(HybridSearchReq.builder()
         .collectionName("my_collection")
         .searchRequests(searchRequests)

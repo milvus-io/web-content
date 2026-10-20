@@ -63,11 +63,49 @@ A **InsertResp** object that contains the result of this operation.
 
 ## Example
 
-Demonstrates insert() with the reviewed v3.0.x API.
-
 ```java
-InsertResp response = client.insert(InsertReq.builder()
-    .collectionName("books")
-    .data(rows)
-    .build());
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert one row
+JsonObject row = new JsonObject();
+row.addProperty("id", 0L);
+row.add("vector", new Gson().toJsonTree(new float[]{1.0f, 2.0f}));
+client.insert(InsertReq.builder()
+        .collectionName("test")
+        .data(Collections.singletonList(row))
+        .build());
 ```
