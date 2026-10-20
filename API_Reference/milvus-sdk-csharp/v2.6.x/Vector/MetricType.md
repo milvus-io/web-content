@@ -1,9 +1,9 @@
-# SimilarityMetricType
+# MetricType
 
 The metric type used to measure the distance/similarity between vectors.
 
 ```csharp
-public enum SimilarityMetricType
+public enum MetricType
 {
     Invalid = 0,
     L2 = 1,

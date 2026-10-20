@@ -102,9 +102,9 @@ DescribeIndexResp
 
         The typed index type, parsed from `Parameters`' `index_type` entry, or `null` when absent or unrecognized. See [IndexType](IndexType.md).
 
-    - **MetricType** (*SimilarityMetricType?*) -
+    - **MetricType** (*MetricType?*) -
 
-        The typed metric type, parsed from `Parameters`' `metric_type` entry, or `null` when absent or unrecognized (e.g. scalar indexes have no metric). See [SimilarityMetricType](../Vector/SimilarityMetricType.md).
+        The typed metric type, parsed from `Parameters`' `metric_type` entry, or `null` when absent or unrecognized (e.g. scalar indexes have no metric). See [MetricType](../Vector/MetricType.md).
 
 **METHODS:**
 

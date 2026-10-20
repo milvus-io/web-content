@@ -55,7 +55,7 @@ GetResp results = await client.GetAsync(request);
 
 **RETURNS:**
 
-A **GetResp** object that contains the fetched rows.
+A **GetResp** object that contains the fetched rows. If `Ids` is empty, an empty result is returned without issuing the RPC.
 
 ```csharp
 GetResp

@@ -18,7 +18,7 @@ var request = new HybridSearchReq
         {
             VectorFieldName = "embedding",
             Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-            MetricType = SimilarityMetricType.L2,
+            MetricType = MetricType.L2,
             Limit = 10,
             Expression = "pages > 300"
         },
@@ -91,9 +91,9 @@ SearchResp results = await client.HybridSearchAsync(request);
 
         The maximum number of results to return for this leg, also known as `topk`. The sum of `Limit` and `Offset` must be in [1, 16384].
 
-    - `MetricType` (*SimilarityMetricType*) -
+    - `MetricType` (*MetricType*) -
 
-        The metric type used to measure the distance between vectors for this leg. Defaults to `SimilarityMetricType.Invalid`, letting the server infer it from the index. See [SimilarityMetricType](SimilarityMetricType.md).
+        The metric type used to measure the distance between vectors for this leg. Defaults to `MetricType.Invalid`, letting the server infer it from the index. See [MetricType](MetricType.md).
 
     - `Expression` (*string?*) -
 
@@ -300,7 +300,7 @@ SearchResp results = await client.HybridSearchAsync(new HybridSearchReq
         {
             VectorFieldName = "embedding",
             Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
-            MetricType = SimilarityMetricType.L2,
+            MetricType = MetricType.L2,
             Limit = 10
         },
         new AnnSearchReq
