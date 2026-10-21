@@ -1,5 +1,14 @@
 # getIndexState()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This method may be removed in a future release.
+
+</div>
+
+
 This operation gets the status of the specified index.
 
 ```javascript
