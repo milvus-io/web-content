@@ -45,7 +45,7 @@ add_collection_field(
 
     **[REQUIRED]**
 
-    The data type of the new field. See DataType for supported types.
+    The data type of the new field. See [DataType](DataType.md) for supported types.
 
 - **desc** *(string, optional)* –
 

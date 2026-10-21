@@ -2,7 +2,7 @@
 
 <div class="alert warning">
 
-**Deprecated in PyMilvus v3.0.2 or later.**
+**Deprecated in PyMilvus v3.0.1 or later.**
 
 This method is deprecated because Milvus 3.0 and later do not support adding a function separately. Use [`add_function_field()`](add_function_field.md) instead, which adds the function together with its output field and index.
 

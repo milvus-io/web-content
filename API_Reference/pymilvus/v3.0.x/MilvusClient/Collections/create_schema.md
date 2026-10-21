@@ -232,5 +232,3 @@ A **[CollectionSchema](CollectionSchema/CollectionSchema.md)** object.
         external_field="vector"
     )
     ```
-
-    

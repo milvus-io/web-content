@@ -22,7 +22,7 @@ remove_privileges_from_group(
 
 - **privileges** (*List[str]*) -
 
-    The privilages to remove in a list.
+    The privileges to remove in a list.
 
 - **timeout** (*Optional[float]*) - 
 

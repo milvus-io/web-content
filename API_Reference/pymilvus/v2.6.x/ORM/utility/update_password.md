@@ -43,21 +43,15 @@ update_password(
 
     The new password for the user. Provide this together with `old_password` when changing the password.
 
-- **reset_connection** (*bool*) -
-
-    Whether to reset the client connection with the new password after the password is updated.
-
 - **timeout** (*float*) -
 
     The timeout duration for this operation.
 
-- **description** (*str*) -
-
-    An optional new description for the user.
-
 **RETURN TYPE:**
 
 *None*
+
+**RETURNS:**
 
 This operation returns no value.
 

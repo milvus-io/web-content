@@ -13,12 +13,6 @@ list_databases(
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
-
-    **[REQUIRED]**
-
-    Name of the database to drop.
-
 - **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. Setting this to *None* indicates that it timeouts when a response arrives or an error occurs.

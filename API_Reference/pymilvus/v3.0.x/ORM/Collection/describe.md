@@ -101,7 +101,7 @@ A dictionary that contains detailed information about the specified collection.
 
     - **type** (*int*)
 
-        The type of the current field. For details, refer to DataType.
+        The type of the current field. For details, refer to [DataType](../../MilvusClient/Collections/DataType.md).
 
     - **params** (*dict*)
 

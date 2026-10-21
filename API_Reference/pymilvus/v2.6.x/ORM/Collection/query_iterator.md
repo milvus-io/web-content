@@ -116,11 +116,16 @@ res = collection.insert(
 )
 
 # Create a query iterator
+# NOTE: Set the consistency level to Strong so that the entities inserted
+# above are immediately visible and the example returns results. In
+# production, choose a consistency level (for example, Bounded) that fits
+# your scenario.
 iterator = collection.query_iterator(
     batch_size=2,
     limit=10,
     expr="id > 3",
-    output_fields=["id", "vector"]
+    output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 # Start iterating

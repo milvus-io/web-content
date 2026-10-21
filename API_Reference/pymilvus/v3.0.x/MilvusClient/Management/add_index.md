@@ -18,7 +18,7 @@ IndexParams.add_index(
 
 - **field_name** (*str*) -
 
-    The name of the target file to apply this object applies.
+    The name of the field on which to build the index.
 
 - **index_name** (*str*) -
 

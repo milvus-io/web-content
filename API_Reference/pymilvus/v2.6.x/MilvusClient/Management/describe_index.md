@@ -28,7 +28,7 @@ describe_index(
 
     The name of the index to describe.
 
-    Setting this to a non-existing collection results in **MilvusException**.
+    Setting this to a non-existing index results in **MilvusException**.
 
 - **timeout** (*float* | *None*)  
 

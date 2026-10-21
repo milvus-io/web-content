@@ -42,7 +42,7 @@ has_collection(
 *bool*
 
 **RETURNS:**
-A boolean value indicates whether the specified partition exists.
+A boolean value indicates whether the specified collection exists.
 
 **EXCEPTIONS:**
 

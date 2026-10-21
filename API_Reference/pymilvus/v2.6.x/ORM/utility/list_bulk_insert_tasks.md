@@ -29,11 +29,11 @@ list_bulk_insert_tasks(
 
     The value defaults to **0**, indicating that no limit applies. 
 
-- **collection_name** (*list[str]*) -
+- **collection_name** (*str*) -
 
-    A list of collection names.
+    The name of a collection.
 
-    The value defaults to **None**, indicating that all collections are included.
+    The value defaults to **None**, indicating that this operation lists tasks of all collections.
 
 - **using** (*str*) - 
 
@@ -110,7 +110,7 @@ A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
     - **Completed**: Indicates that the task has been completed.
 
-    - **FailedAndCleaned**: Indicates that the task failed and the data has been cleaned up.
+    - **Failed and cleaned**: Indicates that the task failed and the data has been cleaned up.
 
     - **Unknown**: Indicates that the task is in an unknown state.
 

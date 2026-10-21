@@ -14,7 +14,7 @@ This operation creates a user and optionally stores a description for that user.
 
 ```python
 create_user(
-    user_name: str,
+    user: str,
     password: str,
     timeout: Optional[float] = None,
     description: Optional[str] = None
@@ -23,7 +23,7 @@ create_user(
 
 **PARAMETERS:**
 
-- **user_name** (*str*) -
+- **user** (*str*) -
 
     **[REQUIRED]**
 
@@ -39,13 +39,11 @@ create_user(
 
     The timeout duration for this operation. If set to `None`, the client waits until the server responds or an error occurs.
 
-- **description** (*str*) -
-
-    An optional description of the user.
-
 **RETURN TYPE:**
 
 *None*
+
+**RETURNS:**
 
 This operation returns no value.
 

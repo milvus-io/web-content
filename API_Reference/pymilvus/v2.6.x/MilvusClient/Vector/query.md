@@ -70,7 +70,7 @@ query(
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
         <div class="alert note">
         
@@ -200,6 +200,11 @@ client.insert(
 # {'insert_count': 10}
 
 # 4. Conduct queries
+#
+# NOTE: Set the consistency level to Strong in the queries below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
 
 # Query without any scalar filtering condition
 # This query returns entities with their ids from 0 to 4.
@@ -207,6 +212,7 @@ res = client.query(
     collection_name="test_collection",
     filter="",
     limit=5,
+    consistency_level="Strong",
 ) 
 
 print(res)
@@ -233,7 +239,8 @@ res = client.query(
     collection_name="test_collection",
     filter="",
     offset=5,
-    limit=5
+    limit=5,
+    consistency_level="Strong",
 )
 
 print(res)
@@ -258,6 +265,7 @@ print(res)
 res = client.query(
     collection_name="test_collection",
     filter="id in [6,7,8]",
+    consistency_level="Strong",
 )
 
 print(res)
@@ -277,6 +285,7 @@ res = client.query(
     collection_name="test_collection",
     filter="id in [6,7,8]",
     partition_names=["partitionA"],
+    consistency_level="Strong",
 )
 
 print(res)
@@ -288,6 +297,7 @@ res = client.query(
     collection_name="test_collection",
     filter="id in [6,7,8]",
     output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 print(res)
@@ -304,8 +314,7 @@ res = client.query(
     collection_name="test_collection",
     filter="",
     limit=5,
-    consistency_level=3,
-    graceful_time=6
+    consistency_level="Strong",
 )
 
 print(res)
@@ -330,7 +339,8 @@ print(res)
 res = client.query(
     collection_name="test_collection",
     filter="id < 5",
-    output_fields=["*"]
+    output_fields=["*"],
+    consistency_level="Strong",
 )
 
 # [{'vector': [0.35803765, -0.6023496, 0.18414013, -0.26286206, 0.90294385],
@@ -353,7 +363,8 @@ res = client.query(
 res = client.query(
     collection_name="test_collection",
     filter="color like \"red_%\"",
-    output_fields=["count(*)"]
+    output_fields=["count(*)"],
+    consistency_level="Strong",
 )
 
 # [{'count(*)': 3}]

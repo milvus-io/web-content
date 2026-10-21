@@ -186,6 +186,10 @@ param = {
 }
 
 # Create a search iterator
+# NOTE: Set the consistency level to Strong so that the entities inserted
+# above are immediately visible and the example returns results. In
+# production, choose a consistency level (for example, Bounded) that fits
+# your scenario.
 iterator = collection.search_iterator(
     data=[[0.1,0.2,-0.3,-0.4,0.5]],
     anns_field="vector",
@@ -193,7 +197,8 @@ iterator = collection.search_iterator(
     batch_size=BATCH_SIZE,
     limit=LIMIT,
     expr="id > 3",
-    output_fields=["id", "vector"]
+    output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 while True:

@@ -184,6 +184,12 @@ client.insert(
 # {'insert_count': 10}
 
 # 4. Conduct a search
+#
+# NOTE: Set the consistency level to Strong in the search below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
+
 search_params = {
     "params": {}
 }
@@ -194,7 +200,8 @@ iterator = client.search_iterator(
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     batch_size=1000,
     output_fields=["vector", "color"],
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
 results = []

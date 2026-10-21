@@ -36,7 +36,71 @@ get_compaction_plans(
 
 **RETURNS:**
 
-A `CompactionPlans` object containing **compaction_id**, **collection_name**, **state**, and **plans**. Each plan includes **sources**, **target**, **targets**, **plan_id**, **trigger_id**, **collection_id**, **partition_id**, **channel**, **compaction_type**, **state**, and **failure_reason**.
+A `CompactionPlans` object with the following members:
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction job.
+
+- **collection_name** (*str*) -
+
+    The name of the collection that the compaction job runs on. Available in PyMilvus v3.0.2 or later. When retrieved through `get_compaction_plans()`, this member is empty; use `list_compaction_tasks()` to obtain it.
+
+- **state** (*State*) -
+
+    The overall state of the compaction job. Possible values are **UndefiedState**, **Executing**, and **Completed**.
+
+- **plans** (*List[Plan]*) -
+
+    The merge plans of the compaction job. Each `Plan` object has the following members:
+
+    - **plan_id** (*int*) -
+
+        The ID of this compaction plan.
+
+    - **task_id** (*int*) -
+
+        An alias of **plan_id**.
+
+    - **trigger_id** (*int*) -
+
+        The ID of the compaction trigger.
+
+    - **collection_id** (*int*) -
+
+        The ID of the collection being compacted.
+
+    - **partition_id** (*int*) -
+
+        The ID of the partition being compacted.
+
+    - **channel** (*str*) -
+
+        The insert channel that the segments belong to.
+
+    - **compaction_type** (*CompactionType*) -
+
+        The type of this compaction.
+
+    - **state** (*CompactionTaskState*) -
+
+        The state of this compaction plan.
+
+    - **failure_reason** (*str*) -
+
+        The reason why this plan failed, or an empty string.
+
+    - **sources** (*list*) -
+
+        The IDs of the source segments to merge.
+
+    - **target** (*int*) -
+
+        The ID of the target segment.
+
+    - **targets** (*List[int]*) -
+
+        The IDs of the target segments. Falls back to **target** when the server does not return multiple targets.
 
 **EXCEPTIONS:**
 

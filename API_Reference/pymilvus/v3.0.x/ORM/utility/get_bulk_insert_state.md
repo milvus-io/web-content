@@ -51,7 +51,7 @@ res = utility.get_bulk_insert_state(task_id=task_id)
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-RETURN TYPE:
+**RETURN TYPE:**
 
 *[BulkInsertState](BulkInsertState.md)*
 
@@ -118,7 +118,7 @@ A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
     - **Completed**: Indicates that the task has been completed.
 
-    - **FailedAndCleaned**: Indicates that the task failed and the data has been cleaned up.
+    - **Failed and cleaned**: Indicates that the task failed and the data has been cleaned up.
 
     - **Unknown**: Indicates that the task is in an unknown state.
 

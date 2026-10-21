@@ -30,7 +30,7 @@ create_resource_group(
 
     Name of the resource group to create.
 
-- **configs** (*ResourceGroupConfig*) - 
+- **config** (*ResourceGroupConfig*) - 
 
     A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 

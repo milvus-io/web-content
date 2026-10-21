@@ -1,6 +1,5 @@
 # StructFieldSchema
 
-Constructor behavior changed. New nullable property documented on the existing class page.
 
 ## Request Syntax
 

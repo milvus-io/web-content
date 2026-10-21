@@ -122,4 +122,3 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 #     ]
 # }
 ```
-

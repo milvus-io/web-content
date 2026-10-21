@@ -24,6 +24,20 @@ release(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+**RETURN TYPE:**
+
+*NoneType*
+
+**RETURNS:**
+
+None
+
+**EXCEPTIONS:**
+
+- **MilvusException**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Examples
 
 ```python

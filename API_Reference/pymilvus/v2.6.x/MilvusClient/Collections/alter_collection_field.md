@@ -15,7 +15,6 @@ alter_collection_field(
     collection_name: str, 
     field_name: str, 
     field_params: Dict,
-    db_name="",
     timeout: Optional[float] = None,
     **kwargs,
 )

@@ -14,7 +14,8 @@ This operation blocks the current session until the compaction request is comple
 
 ```python
 wait_for_compaction_completed(
-    timeout: float | None
+    timeout: float | None,
+    is_clustering: bool
 )
 ```
 
@@ -24,13 +25,41 @@ wait_for_compaction_completed(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **is_clustering** (*bool*) -
+
+    Whether to wait for the clustering compaction job to complete. The value defaults to **False**.
+
 **RETURN TYPE:**
 
-*NoneType*
+*CompactionState*
 
 **RETURNS:**
 
-None
+A `CompactionState` object with the following members:
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction job.
+
+- **state** (*State*) -
+
+    The overall state of the compaction job. Possible values are **UndefiedState**, **Executing**, and **Completed**.
+
+- **state_name** (*str*) -
+
+    The name of the current state.
+
+- **in_executing** (*int*) -
+
+    The number of plans currently executing.
+
+- **in_timeout** (*int*) -
+
+    The number of plans that failed due to timeout.
+
+- **completed** (*int*) -
+
+    The number of plans that completed successfully.
 
 **EXCEPTIONS:**
 

@@ -30,6 +30,10 @@ client.update_replicate_configuration(
 
 *Status*
 
+**RETURNS:**
+
+The status of the operation.
+
 **EXCEPTIONS:**
 
 - **ParamError**
