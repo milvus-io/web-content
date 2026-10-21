@@ -116,11 +116,28 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*[UpsertResult](UpsertResult.md), error*
+*UpsertResult, error*
 
 **RETURNS:**
 
-Returns the affected row count and primary keys, plus an error when request construction or the RPC fails.
+Contains the result of an Upsert operation including the count and IDs of affected entities.
+
+```go
+type UpsertResult struct {
+    UpsertCount int64
+    IDs column.Column
+}
+```
+
+**FIELDS:**
+
+- **UpsertCount** (*int64*)
+
+    The number of affected entities.
+
+- **IDs** (*column.Column*)
+
+    The IDs of the affected entities.
 
 **ERROR HANDLING:**
 

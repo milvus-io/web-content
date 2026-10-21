@@ -55,6 +55,10 @@ resultSets, err := cli.HybridSearch(ctx, option)
 
     Restricts the search to the specified partitions.
 
+- `WithPartitons(partitions ...string)`
+
+    Deprecated: typo, use WithPartitions instead
+
 - `WithNamespace(namespace string)`
 
     Specifies the namespace to search in.

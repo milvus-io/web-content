@@ -124,6 +124,15 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.6.x | [2.6.5](https://github.com/milvus-io/milvus/tree/client/v2.6.5/client) |
 | 3.0.x | [3.0.0](https://github.com/milvus-io/milvus/tree/client/v3.0.0/client) |
 
+## Breaking Changes
+
+### 3.0.0
+
+- The Go module path changed from `github.com/milvus-io/milvus/client/v2` to `github.com/milvus-io/milvus/client/v3`. Update all SDK imports.
+- Generated proto types moved from `milvus-proto/go-api/v2` to `milvus-proto/go-api/v3`. These protobuf types are not interchangeable with the v2 types.
+- The module requires Go 1.24.9 or later.
+- `ExportSnapshot()` now returns an `int64` export job ID instead of a snapshot path string. Poll the result with `GetExportSnapshotState()`.
+
 ## Contributing
 
 We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to the Milvus GO SDK are welcome from everyone. Refer to the [Contributing Guideline](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus/issues/new/choose) if you need any assistance or want to propose your ideas.

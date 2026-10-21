@@ -22,6 +22,14 @@ func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ..
 
 **BUILDER METHODS:**
 
+- `NewColumnBasedInsertOption(collName string, columns ...column.Column)`
+
+    This creates an insert option from columns. Build the request with the `With*Column` methods below.
+
+- `NewRowBasedInsertOption(collName string, rows ...any)`
+
+    This creates an insert option from row values. Chain `WithPartition`, `WithPartialUpdate`, `WithArrayAppend`, `WithArrayRemove`, `WithFieldPartialOp`, or `WithKeepAutoIDPk`.
+
 - `WithColumns(columns ...column.Column)`
 
     This appends the supplied columns to the write request.
@@ -100,11 +108,28 @@ func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*[InsertResult](InsertResult.md), error*
+*InsertResult, error*
 
 **RETURNS:**
 
-Returns the inserted row count and generated or supplied primary keys, plus an error when request construction or the RPC fails.
+Contains the result of an Insert operation including the count and IDs of inserted entities.
+
+```go
+type InsertResult struct {
+    InsertCount int64
+    IDs column.Column
+}
+```
+
+**FIELDS:**
+
+- **InsertCount** (*int64*)
+
+    The number of affected entities.
+
+- **IDs** (*column.Column*)
+
+    The IDs of the affected entities.
 
 **ERROR HANDLING:**
 

@@ -406,12 +406,19 @@ own new page automatically (no need to ask the user). Exceptions:
 - **new enum values** → add to the existing enum page (do NOT create a page per
   enum value);
 - **new request parameters/fields** → add to the existing operation page;
+- **operation response/result wrappers** → document the wrapper and its members
+  under the operation page's `**RETURN TYPE:**` / `**RETURNS:**`; do NOT create
+  a standalone page merely because the operation returns it. This includes
+  `XxxResponse`, `XxxResult`, and async task-handle types such as `XxxTask`.
+  A wrapper member may reference an important reusable domain/model type (for
+  example `FieldData`, `CollectionSchema`, or `FieldSchema`); that referenced
+  type may get its own dedicated page and must be linked.
 - **internal-only symbols** → skip (no page);
 - **blacklisted symbols** (per-SDK blacklist in `references/sdk-map.md`, e.g. Go
   `Client.GetService()`) → skip (no page);
 - only ask the user when a new symbol does not fit the one-page-per-API shape.
 
-When an operation/request/response page references a type that has a dedicated
+When an operation/request page references a type that has a dedicated
 page (e.g. `CollectionSchema`, `DataType`, `IndexType`), the change list must
 include adding the relative link to that type page (see **Dedicated type pages &
 cross-links** under the Doc style guide).
@@ -781,9 +788,11 @@ and confirm with the user before deleting it.
   header; fix to match the code.
 
 Also check: enum values missing from type pages, stale version pins, missing
-`@deprecated` markers, **missing dedicated type pages** (important classes/structs/
-enums that surface in request params, return types, or response members but have
-no page — create one), **missing cross-links** (references to a type whose
+`@deprecated` markers, **response wrappers documented as standalone pages**
+(fold them into the operation's `**RETURNS:**` and remove the wrapper page),
+**missing dedicated domain-type pages** (important reusable classes/structs/
+enums that surface in request params or as the return type of a response/result
+member but have no page — create one), **missing cross-links** (references to a type whose
 page exists but is not linked — add the relative `.md` link), and **misplaced
 type pages** (a type page sitting outside its owning category directory — move
 it into the correct category, e.g. `MilvusClient/FunctionScore.md` →
@@ -1010,16 +1019,18 @@ search distances, which differ by metric type (e.g. COSINE vs IP).
 
 ### Dedicated type pages & cross-links
 
-Every important class, struct, or enum gets its own dedicated type page, and
-every reference to it links to that page. **java is the model for both the page
-set and the placement.**
+Every important reusable domain/model class, struct, or enum gets its own
+dedicated type page, and every reference to it links to that page. Operation
+response/result wrappers are the exception: they are documented inline in the
+operation's `**RETURN TYPE:**` / `**RETURNS:**` and do not get standalone pages.
+**java is the model for both the domain-type page set and the placement.**
 
 - **Dedicated type pages** — each of these gets a one-page-per-type page:
   `CollectionSchema`, `FieldSchema`, `StructFieldSchema`, `Function`,
   `FunctionType`, `DataType`, `IndexType`, `MetricType`, `SegmentState`,
   `CompactionState` / `CompactionType` / `CompactionTaskState`,
   `ResourceGroupConfig`, `Highlighter`, `LexicalHighlighter`, `SemanticHighlighter`,
-  `FunctionScore`, `EmbeddingList`, `CollectionDesc`, `LoadState`,
+  `FunctionScore`, `EmbeddingList`, `LoadState`,
   `ConsistencyLevel`, `IndexParam`, `FieldOp`, `FieldOpType`, `BulkFileType`,
   `BulkInsertState`, `LocalBulkWriter`, `RemoteBulkWriter`, `VolumeBulkWriter`,
   `AggregationBucket`, `AggregationHit`, `SearchAggregation`, `TopHits`,
@@ -1028,6 +1039,8 @@ set and the placement.**
   `ModelRanker`, `RRFRanker`, `WeightedRanker`, and the ORM classes `Collection`,
   `Partition`, `Role`. Enum values live in the one enum page — do NOT create a
   page per enum value.
+  Per-SDK reusable data models may also qualify; for example, C++ and Rust can
+  give the shared `FieldData` data-container type its own page.
 - **Place type pages in their owning category directory** (java model): the page
   lives under the category the type belongs to, e.g.
   `Collections/CollectionSchema/CollectionSchema.md`, `Collections/DataType.md`,
@@ -1075,15 +1088,20 @@ set and the placement.**
   `create_collection` are the model). In plain prose, replace the bare type name
   directly with the link (`[DataType](DataType.md)`); skip code fences, inline
   code spans, existing links, and the type page's own name.
-- **Create missing pages on the way**: when a referenced type has no page yet,
-  create its dedicated type page (see Step 3), then link to it.
+- **Create missing pages on the way**: when an important reusable domain/model
+  type is referenced by a request or by a response/result member, and it has no
+  page yet, create its dedicated type page (see Step 3), then link to it. Do not
+  use this rule to create a page for the response/result wrapper itself.
 
 ### Response/output member description format
 
 Every operation page documents its return in two steps: a `**RETURN TYPE:**`
 heading that names the type, and a `**RETURNS:**` block that describes the value
 and — when the return is a compound object (struct / dict / response class) —
-lists its members. The four SDK example docs (pymilvus / java / go / cpp
+lists its members. Do not move this material to a standalone response/result
+page. If a response/result member returns an important reusable domain/model
+type, link that type's dedicated page instead of duplicating its full members
+inline. The four SDK example docs (pymilvus / java / go / cpp
 `describeCollection`) are the canonical reference. **Pick the list style by how
 the returned type exposes its state:**
 

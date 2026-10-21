@@ -49,11 +49,22 @@ result, err := client.LoadCollection(ctx, option)
 
 **RETURN TYPE:**
 
-*[LoadTask](LoadTask.md), error*
+*LoadTask, error*
 
 **RETURNS:**
 
-A [LoadTask](LoadTask.md) that can be used to wait for the load operation to complete. Returns an error if the operation fails.
+An async task returned by LoadCollection/LoadPartitions. Call Await() to block until loading completes.
+
+```go
+type LoadTask struct {
+}
+```
+
+**METHODS:**
+
+- `Await(ctx context.Context) error`
+
+    Blocks until the async operation completes or the context is cancelled. Returns an error if the operation fails.
 
 **ERROR HANDLING:**
 
