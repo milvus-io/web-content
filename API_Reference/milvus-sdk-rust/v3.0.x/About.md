@@ -114,6 +114,18 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.6.x | v2.6.1 |
 | 3.0.x | v3.0.2 |
 
+## Breaking Changes
+
+### 3.0.1
+
+- `use_database()` is now asynchronous and validates that the target database exists. Await the call and handle a validation error when the database does not exist.
+- `AddCollectionFieldRequest` requires `FieldSchema.nullable(true)` when adding a vector field to an existing collection.
+- `RunAnalyzerRequest.analyzer_params` accepts an optional `serde_json::Value` object instead of a pre-serialized JSON string.
+
+### 3.0.0
+
+- `CompactRequest` rejects `target_size = 0`. Omit `target_size` to request the server default.
+
 ## Contributing
 
 We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to the Milvus Rust SDK are welcome from everyone. Refer to the [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-rust/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-rust/issues/new) if you need any assistance or want to propose your ideas.
