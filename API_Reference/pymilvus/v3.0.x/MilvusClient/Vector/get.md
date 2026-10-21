@@ -101,11 +101,17 @@ client.insert(
 # {'insert_count': 10}
 
 # 4. Get entities
+#
+# NOTE: Set the consistency level to Strong in the get calls below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
 
 # Get an entity by its ID
 res = client.get(
     collection_name="test_collection",
-    ids=1
+    ids=1,
+    consistency_level="Strong",
 )
 
 # [
@@ -119,7 +125,8 @@ res = client.get(
 # Get a list of entities by their IDs
 res = client.get(
     collection_name="test_collection",
-    ids=[2, 5, 8]
+    ids=[2, 5, 8],
+    consistency_level="Strong",
 )
 
 # [

@@ -247,6 +247,12 @@ client.insert(
 # {'insert_count': 10}
 
 # 4. Conduct a search
+#
+# NOTE: Set the consistency level to Strong in the searches below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
+
 search_params = {
     "metric_type": "COSINE",
     "params": {}
@@ -257,12 +263,13 @@ res = client.search(
     collection_name="test_collection",
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     limit=3,
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
-# [[{'id': 7, 'distance': 0.4801957309246063, 'entity': {}},
-#   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
-#   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
+# [[{'id': 7, 'distance': 0.6179510354995728, 'entity': {}},
+#   {'id': 1, 'distance': 0.4960488975048065, 'entity': {}},
+#   {'id': 2, 'distance': 0.4810235798358917, 'entity': {}}]]
 
 # Search with filter
 res = client.search(
@@ -270,12 +277,13 @@ res = client.search(
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     limit=3,
     filter='color like "red%"',
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
-# [[{'id': 1, 'distance': 0.2993225157260895, 'entity': {}},
-#   {'id': 4, 'distance': 0.12666261196136475, 'entity': {}},
-#   {'id': 6, 'distance': -0.3535143733024597, 'entity': {}}]]
+# [[{'id': 1, 'distance': 0.4960488975048065, 'entity': {}},
+#   {'id': 4, 'distance': 0.17158332467079163, 'entity': {}},
+#   {'id': 6, 'distance': -0.4822116792201996, 'entity': {}}]]
 
 # Search with an offset
 res = client.search(
@@ -283,12 +291,13 @@ res = client.search(
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     limit=3,
     offset=3,
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
-# [[{'id': 4, 'distance': 0.12666261196136475, 'entity': {}},
-#   {'id': 3, 'distance': 0.11930042505264282, 'entity': {}},
-#   {'id': 5, 'distance': -0.05843167006969452, 'entity': {}}]]
+# [[{'id': 4, 'distance': 0.17158332467079163, 'entity': {}},
+#   {'id': 3, 'distance': 0.14759507775306702, 'entity': {}},
+#   {'id': 5, 'distance': -0.0768386647105217, 'entity': {}}]]
 
 # Search with output fields
 res = client.search(
@@ -296,33 +305,34 @@ res = client.search(
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     limit=3,
     output_fields=["vector", "color"],
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
 # [[{'id': 7,
-#    'distance': 0.4801957309246063,
+#    'distance': 0.6179510354995728,
 #    'entity': {'color': 'grey_8510',
 #     'vector': [-0.33445146679878235,
 #      -0.25671350955963135,
 #      0.8987540006637573,
 #      0.9402995705604553,
 #      0.537806510925293]}},
-#   {'id': 2,
-#    'distance': 0.3205878734588623,
-#    'entity': {'color': 'orange_6781',
-#     'vector': [0.4374213218688965,
-#      -0.5597502589225769,
-#      0.6457887887954712,
-#      0.789405882358551,
-#      0.20785793662071228]}},
 #   {'id': 1,
-#    'distance': 0.2993225157260895,
+#    'distance': 0.4960488975048065,
 #    'entity': {'color': 'red_7025',
 #     'vector': [0.19886812567710876,
 #      0.060235604643821716,
 #      0.697696328163147,
 #      0.2614474594593048,
-#      0.8387295007705688]}}]]
+#      0.8387295007705688]}},
+#   {'id': 2,
+#    'distance': 0.4810235798358917,
+#    'entity': {'color': 'orange_6781',
+#     'vector': [0.4374213218688965,
+#      -0.5597502589225769,
+#      0.6457887887954712,
+#      0.789405882358551,
+#      0.20785793662071228]}}]]
 
 # Conduct a range search
 search_params = {
@@ -337,11 +347,12 @@ res = client.search(
     collection_name="test_collection",
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
     limit=3,
-    search_params=search_params
+    search_params=search_params,
+    consistency_level="Strong",
 )
 
-# [[{'id': 7, 'distance': 0.4801957309246063, 'entity': {}},
-#   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
-#   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
+# [[{'id': 7, 'distance': 0.6179510354995728, 'entity': {}},
+#   {'id': 1, 'distance': 0.4960488975048065, 'entity': {}},
+#   {'id': 2, 'distance': 0.4810235798358917, 'entity': {}}]]
 ```
 

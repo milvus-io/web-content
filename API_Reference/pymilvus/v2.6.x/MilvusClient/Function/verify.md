@@ -1,6 +1,6 @@
 # verify()
 
-This operation validates the input and output fields of a function defined in the CollectionSchema.
+This operation validates the input and output fields of a function defined in the [CollectionSchema](../CollectionSchema/CollectionSchema.md).
 
 ## Request Syntax
 

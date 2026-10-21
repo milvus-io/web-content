@@ -51,7 +51,7 @@ loading_progress(
 
 **RETURNS:**
 
-A dictionary that contains information about the index_building progress.
+A dictionary that contains the loading progress, for example `{'loading_progress': '100%'}`.
 
 The dictionary has the following keys:
 

@@ -124,7 +124,7 @@ create_collection(
 
         The name of the field that serves as the partition key. Each collection can have one partition key.
 
-        This parameter is ignored if **schema** is not **None** and a field in the schema has its **is_parition_key** set to **True**.
+        This parameter is ignored if **schema** is not **None** and a field in the schema has its **is_partition_key** set to **True**.
 
         This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 

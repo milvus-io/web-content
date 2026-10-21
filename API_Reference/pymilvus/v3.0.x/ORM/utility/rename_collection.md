@@ -49,7 +49,7 @@ rename_collection(
 
     The name of the database to which the collection belongs after this operation.
 
-    The value defaults to **default**. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.
+    The value defaults to an empty string, indicating that the collection stays in the current database. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.
 
     Setting this to a non-existing database results in a **MilvusException**.
 

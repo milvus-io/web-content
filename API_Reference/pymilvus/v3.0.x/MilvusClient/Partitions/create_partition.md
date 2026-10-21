@@ -34,11 +34,11 @@ create_partition(
 
 **RETURN TYPE:**
 
-*[Partition](../../ORM/Partition/Partition.md)*
+*None*
 
 **RETURNS:**
 
-A partition object.
+None.
 
 **EXCEPTIONS:**
 

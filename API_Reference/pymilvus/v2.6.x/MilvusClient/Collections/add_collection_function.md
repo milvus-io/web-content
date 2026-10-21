@@ -45,6 +45,10 @@ client.add_collection_function(
 
 *NoneType*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **MilvusException**

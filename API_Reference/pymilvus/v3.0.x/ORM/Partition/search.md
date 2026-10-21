@@ -39,9 +39,9 @@ search(
 
 - **anns_field** (str) -
 
-    The name of the target vector field of the current search.
+    **[REQUIRED]**
 
-    This parameter defaults to an empty string. If this parameter is left unspecified, the default value applies, indicating that the only vector field in the collection will be used as the search target.
+    The name of the vector field to search.
 
 - **param** (dict) -
 
@@ -246,6 +246,10 @@ param = {
 }
 
 # Create a search request
+# NOTE: Set the consistency level to Strong so that the entities inserted
+# above are immediately visible and the example returns results. In
+# production, choose a consistency level (for example, Bounded) that fits
+# your scenario.
 res = partition.search(
     data=[[0.1,0.2,-0.3,-0.4,0.5]],
     anns_field="vector",
@@ -253,7 +257,8 @@ res = partition.search(
     batch_size=BATCH_SIZE,
     limit=LIMIT,
     expr="id > 3",
-    output_fields=["id", "vector"]
+    output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 for hits in res:

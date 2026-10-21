@@ -28,6 +28,10 @@ client.use_database(
 
 *NoneType*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **MilvusException**

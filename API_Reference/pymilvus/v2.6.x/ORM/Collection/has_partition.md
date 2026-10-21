@@ -23,7 +23,7 @@ has_partition(
 
 - **partition_name** (*str*) -
 
-    The name of the partition to drop.
+    The name of the partition to check.
 
 - **timeout** (*float* | *None*)  
 

@@ -30,13 +30,11 @@ list_indexes(
 
     Setting this to a non-existing collection leads to a **CollectionNotExistException**.
 
-- **index_name** (*str*) -
+- **field_name** (*str*) -
 
-    The name of the target index of this operation.
+    The name of the field on which the indexes are built.
 
-    If left unspecified, the default index applies. If the collection has multiple indexes, this parameter is mandatory.
-
-    Setting this to a non-existing index leads to an **IndexNotExistException**.
+    If left unspecified, this operation returns all indexes of the collection.
 
 - **using** (*str*) - 
 

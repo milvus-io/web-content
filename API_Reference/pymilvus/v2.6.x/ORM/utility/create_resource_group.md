@@ -57,7 +57,7 @@ create_resource_group(
 
     - **config** (*ResourceGroupConfig*) -
 
-        A ResourceGroupConfig object that represents the configuration of the resource group.
+        A [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md) object that represents the configuration of the resource group.
 
 ```text
         ├── ResourceGroupConfig

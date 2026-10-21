@@ -22,7 +22,7 @@ add_privileges_to_group(
 
 - **privileges** (*List[str]*) -
 
-    The privilages to add in a list.
+    The privileges to add in a list.
 
 - **timeout** (*Optional[float]*) - 
 

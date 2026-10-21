@@ -1,6 +1,6 @@
 # upsert()
 
-Adds field_ops support for partial array updates. Async variant shares the sync method parameter contract.
+This operation updates existing entities and inserts new entities into a collection.
 
 ## Request Syntax
 

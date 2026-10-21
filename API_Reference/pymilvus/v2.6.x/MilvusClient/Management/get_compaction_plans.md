@@ -27,6 +27,30 @@ client.get_compaction_plans(
 
 *CompactionPlans*
 
+**RETURNS:**
+
+A `CompactionPlans` object with the following members:
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction job.
+
+- **state** (*State*) -
+
+    The overall state of the compaction job. Possible values are **UndefiedState**, **Executing**, and **Completed**.
+
+- **plans** (*List[Plan]*) -
+
+    The merge plans of the compaction job. Each `Plan` object has the following members:
+
+    - **sources** (*list*) -
+
+        The IDs of the source segments to merge.
+
+    - **target** (*int*) -
+
+        The ID of the target segment.
+
 **EXCEPTIONS:**
 
 - **MilvusException**

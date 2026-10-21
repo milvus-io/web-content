@@ -1,6 +1,6 @@
 # hybrid_search()
 
-Update the embedded AnnSearchRequest parameter documentation and examples. Async variant shares the sync parameter contract. Document filter as an alias for expr and the mutual-exclusion validation. Document the read-only filter property inline; it is accessed as request.filter, not request.filter().
+This operation conducts a hybrid vector search across multiple vector fields, combining and reranking the results of several ANN searches.
 
 ## Request Syntax
 
@@ -119,11 +119,16 @@ request = AnnSearchRequest(
     limit=10,
     filter='category == "paper"',
 )
+
+# NOTE: Set the consistency level to Strong so that the entity inserted above
+# is immediately visible and the example returns results. In production,
+# choose a consistency level (for example, Bounded) that fits your scenario.
 results = client.hybrid_search(
     collection_name="book_chunks",
     reqs=[request],
     ranker=None,
     limit=10,
+    consistency_level="Strong",
 )
 print(request.filter)
 print(results)

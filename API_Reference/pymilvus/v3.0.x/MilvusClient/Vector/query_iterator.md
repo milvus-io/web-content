@@ -73,7 +73,7 @@ query_iterator(
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
         <div class="alert note">
         
@@ -199,12 +199,18 @@ client.insert(
 # {'insert_count': 10}
 
 # 4. Conduct queries
+#
+# NOTE: Set the consistency level to Strong in the query below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
 
 # Query with query iterator
 iterator = client.query_iterator(
     collection_name="test_collection",
     batch_size=1000,
     filter="id in [6,7,8]",
+    consistency_level="Strong",
 )
 
 results = []

@@ -14,7 +14,8 @@ This operation gets the current compaction plans.
 
 ```python
 get_compaction_plans(
-    timeout: float | None
+    timeout: float | None,
+    is_clustering: bool
 )
 ```
 
@@ -24,13 +25,37 @@ get_compaction_plans(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **is_clustering** (*bool*) -
+
+    Whether to get the plans of the clustering compaction job. The value defaults to **False**.
+
 **RETURN TYPE:**
 
-*NoneType*
+*CompactionPlans*
 
 **RETURNS:**
 
-None
+A `CompactionPlans` object with the following members:
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction job.
+
+- **state** (*State*) -
+
+    The overall state of the compaction job. Possible values are **UndefiedState**, **Executing**, and **Completed**.
+
+- **plans** (*List[Plan]*) -
+
+    The merge plans of the compaction job. Each `Plan` object has the following members:
+
+    - **sources** (*list*) -
+
+        The IDs of the source segments to merge.
+
+    - **target** (*int*) -
+
+        The ID of the target segment.
 
 **EXCEPTIONS:**
 

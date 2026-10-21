@@ -14,7 +14,7 @@ This operation creates a user with a password.
 
 ```python
 create_user(
-    user_name: str,
+    user: str,
     password: str,
     timeout: Optional[float] = None
 ) -> None
@@ -22,7 +22,7 @@ create_user(
 
 **PARAMETERS:**
 
-- **user_name** (*str*) -
+- **user** (*str*) -
 
     **[REQUIRED]**
 
@@ -41,6 +41,8 @@ create_user(
 **RETURN TYPE:**
 
 *None*
+
+**RETURNS:**
 
 This operation returns no value.
 

@@ -96,7 +96,7 @@ A **ResourceGroupInfo** object contains the following fields:
 
 - **config** (*ResourceGroupConfig*)
 
-    A ResourceGroupConfig object that represents the configuration of the resource group.
+    A [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md) object that represents the configuration of the resource group.
 
     - **requests** (*dict*) -
 

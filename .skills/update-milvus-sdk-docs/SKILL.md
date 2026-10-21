@@ -490,6 +490,12 @@ For each affected page:
     response/result object's `**METHODS:**` (or language-equivalent accessor
     list). Do not promote response/result deprecations to the top of an
     operation page.
+ 10. **DQL examples** that insert data and then immediately query/search/get: pass
+    `consistency_level="Strong"` to the DQL call so the freshly inserted data is
+    visible and the example returns results, with a comment noting Strong is used
+    to guarantee output and that production can use Bounded etc. Do NOT use
+    `flush()` for this (see "Example code: DQL insert-then-query must use Strong
+    consistency" under the Doc style guide).
 
 ### Step 4b — Compile-verify the code snippets (mandatory)
 
@@ -967,6 +973,40 @@ whose API semantics are uncertain from the source alone.
   the prelude's imports and the body's imports merged into a single leading
   import block — do not leave the body's imports after the prelude's statements.
 
+
+### Example code: DQL insert-then-query must use Strong consistency
+
+Examples that insert data and then immediately query/search/get (any DQL
+interface — `query`, `get`, `search`, `hybrid_search`, `query_iterator`,
+`search_iterator`, and the ORM equivalents) must return the just-inserted data.
+Under the default **Bounded** consistency level, a query issued right after an
+insert is not guaranteed to see the new rows, so a copy-pasted example prints an
+empty result — which contradicts the documented expected output.
+
+Rule: in these examples, pass **`consistency_level="Strong"`** to the DQL call
+that follows the insert, and add a short comment noting that Strong is used so
+the freshly inserted data is immediately visible and the example returns
+results, and that in production you can choose a consistency level (for example,
+**Bounded**) that fits your scenario. Do **not** call `flush()` (or
+`flush_all()`) to force the data to disk just to make a DQL example produce
+output — `flush()` belongs only on pages that are specifically about
+`flush()`/`flush_all()`/`get_flush_state`/`get_flush_all_state`.
+
+Affected pages (apply in every version line directory, e.g. pymilvus `v2.6.x`
+and `v3.0.x`):
+- `MilvusClient/Vector/query.md`, `get.md`, `search.md`, `hybrid_search.md`,
+  `query_iterator.md`, `search_iterator.md`;
+- `ORM/Collection/query.md`, `search.md`, `hybrid_search.md`,
+  `query_iterator.md`, `search_iterator.md`;
+- `ORM/Partition/query.md`, `search.md`.
+
+Where the DQL call's signature documents `consistency_level` as a named
+parameter (e.g. ORM `search()`), pass it as a named argument; where it is
+accepted through `**kwargs**` (e.g. MilvusClient `query()`/`get()`/`search()`,
+iterators, `hybrid_search`), pass it as a keyword argument. Also update any
+hard-coded expected-output comments so they match what actually runs with Strong
+consistency (verify against a live Milvus server — see Step 4b/5), including
+search distances, which differ by metric type (e.g. COSINE vs IP).
 
 ### Dedicated type pages & cross-links
 

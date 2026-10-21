@@ -14,7 +14,8 @@ This operation gets the current compaction state.
 
 ```python
 get_compaction_state(
-    timeout: float | None
+    timeout: float | None,
+    is_clustering: bool
 )
 ```
 
@@ -24,13 +25,41 @@ get_compaction_state(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **is_clustering** (*bool*) -
+
+    Whether to get the state of the clustering compaction job. The value defaults to **False**.
+
 **RETURN TYPE:**
 
-*NoneType*
+*CompactionState*
 
 **RETURNS:**
 
-None
+A `CompactionState` object with the following members:
+
+- **compaction_id** (*int*) -
+
+    The ID of the compaction job.
+
+- **state** (*State*) -
+
+    The overall state of the compaction job. Possible values are **UndefiedState**, **Executing**, and **Completed**.
+
+- **state_name** (*str*) -
+
+    The name of the current state.
+
+- **in_executing** (*int*) -
+
+    The number of plans currently executing.
+
+- **in_timeout** (*int*) -
+
+    The number of plans that failed due to timeout.
+
+- **completed** (*int*) -
+
+    The number of plans that completed successfully.
 
 **EXCEPTIONS:**
 

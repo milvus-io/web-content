@@ -23,7 +23,12 @@ hybridts_to_datetime(
 
     A **datetime.timezone** object.
 
+**RETURN TYPE:**
+
+*datetime.datetime*
+
 **RETURNS:**
+
 A **datetime.datetime** object.
 
 **EXCEPTIONS:**

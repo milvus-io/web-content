@@ -45,7 +45,7 @@ query(
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
         <div class="alert note">
         
@@ -114,7 +114,10 @@ A list of the query results.
 ## Examples
 
 ```python
-from pymilvus import Collection, Partition, CollectionSchema, FieldSchema, DataType
+from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType
+
+# Connect to localhost:19530
+connections.connect()
 
 schema = CollectionSchema([
     FieldSchema("id", DataType.INT64, is_primary=True),
@@ -126,6 +129,16 @@ collection = Collection(
     name="test_collection",
     schema=schema
 )
+
+# Create an index on the vector field and load the collection
+collection.create_index(
+    field_name="vector",
+    index_params={
+        "index_type": "AUTOINDEX",
+        "metric_type": "COSINE",
+    },
+)
+collection.load()
 
 # Create a partition
 partition = Partition(collection, name="test_collection")
@@ -151,9 +164,14 @@ res = partition.insert(
 
 # Query without any scalar filtering condition
 # This query returns entities with their ids from 0 to 4.
+# NOTE: Set the consistency level to Strong in the queries below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
 res = partition.query(
     expr="",
     limit=5,
+    consistency_level="Strong",
 ) 
 
 # Query with pagination
@@ -161,25 +179,28 @@ res = partition.query(
 res = partition.query(
     expr="",
     offset=5,
-    limit=5
+    limit=5,
+    consistency_level="Strong",
 )
 
 # Query with a scalar filtering condition
 res = partition.query(
     expr="id in [6,7,8]",
+    consistency_level="Strong",
 )
 
 # Query with specified output fields
 res = partition.query(
     expr="id in [6,7,8]",
     output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 # Query with a customized consistency level
 res = partition.query(
     expr="",
-    consistency_level=3,
-    graceful_time=6
+    limit=5,
+    consistency_level="Strong",
 )
 ```
 

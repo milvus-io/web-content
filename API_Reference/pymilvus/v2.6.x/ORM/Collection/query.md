@@ -56,7 +56,7 @@ query(
 
         The consistency level of the target collection.
 
-        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+        The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
         <div class="alert note">
         
@@ -181,9 +181,14 @@ res = collection.insert(
 
 # Query without any scalar filtering condition
 # This query returns entities with their ids from 0 to 4.
+# NOTE: Set the consistency level to Strong in the queries below so that the
+# entities inserted above are immediately visible and the example returns
+# results. In production, choose a consistency level (for example, Bounded)
+# that fits your scenario.
 res = collection.query(
     expr="",
     limit=5,
+    consistency_level="Strong",
 ) 
 
 # Query with pagination
@@ -191,32 +196,35 @@ res = collection.query(
 res = collection.query(
     expr="",
     offset=5,
-    limit=5
+    limit=5,
+    consistency_level="Strong",
 )
 
 # Query with a scalar filtering condition
 res = collection.query(
     expr="id in [6,7,8]",
+    consistency_level="Strong",
 )
 
 # Query within a partition
 res = collection.query(
     expr="id in [6,7,8]",
     partition_names=["partitionA"],
+    consistency_level="Strong",
 )
 
 # Query with specified output fields
 res = collection.query(
     expr="id in [6,7,8]",
     output_fields=["id", "vector"],
+    consistency_level="Strong",
 )
 
 # Query with a customized consistency level
 res = collection.query(
     expr="",
     limit=5,
-    consistency_level=3,
-    graceful_time=6
+    consistency_level="Strong",
 )
 ```
 

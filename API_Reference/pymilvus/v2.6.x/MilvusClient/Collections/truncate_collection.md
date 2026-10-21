@@ -33,6 +33,10 @@ truncate_collection(
 
 *None*
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **CollectionNotExists**

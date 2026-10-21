@@ -194,6 +194,10 @@ collection.insert(
 )
 collection.load()
 
+# NOTE: Set the consistency level to Strong so that the entities inserted
+# above are immediately visible and the example returns results. In
+# production, choose a consistency level (for example, Bounded) that fits
+# your scenario.
 res = collection.hybrid_search(
     reqs=[
         AnnSearchRequest(
@@ -214,6 +218,7 @@ res = collection.hybrid_search(
     # Alternatively, use RRFRanker for reciprocal rank fusion reranking
     # rerank=RRFRanker(),
     limit=2,
+    consistency_level="Strong",
 )
 print(res)
 ```
