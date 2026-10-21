@@ -160,6 +160,8 @@ auto request = HybridSearchRequest()
 
     Set strict group size flag.
 
+Vector request payloads use [FieldData](FieldData.md) instances.
+
 <table>
    <tr>
      <th><p>Schema DataType</p></th>

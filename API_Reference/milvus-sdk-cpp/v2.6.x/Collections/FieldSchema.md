@@ -54,6 +54,18 @@ FieldSchema(name, data_type)
 
 **REQUEST METHODS:**
 
+- `FieldSchema& WithName(std::string name)`
+
+    Sets the field name.
+
+- `FieldSchema& WithDataType(DataType data_type)`
+
+    Sets the logical field type. See [DataType](DataType.md).
+
+- `FieldSchema& WithDescription(std::string description)`
+
+    Sets the optional field description.
+
 - `WithPrimaryKey(bool is_primary_key)`
 
     Marks this field as the primary key. Only `INT64` and `VARCHAR` fields can be primary keys.

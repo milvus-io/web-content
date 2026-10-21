@@ -61,6 +61,8 @@ auto request = RefreshLoadRequest()
 
     Check `status.Code()` and `status.Message()` for invalid collection names, load-state issues, or timeout failures.
 
+ See [StatusCode](../Client/StatusCode.md).
+
 ## Example
 
 ```cpp

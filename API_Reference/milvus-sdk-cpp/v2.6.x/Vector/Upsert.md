@@ -1,6 +1,6 @@
 # Upsert()
 
-This operation upserts entities into a collection: rows whose primary keys already exist are replaced, while rows with new primary keys are inserted. Data can be supplied either column-based (FieldData columns) or row-based (nlohmann::json entity rows).
+This operation upserts entities into a collection: rows whose primary keys already exist are replaced, while rows with new primary keys are inserted. Data can be supplied either column-based ([FieldData](FieldData.md) columns) or row-based (nlohmann::json entity rows).
 
 ```cpp
 Status Upsert(const UpsertRequest& request, UpsertResponse& response)
@@ -91,6 +91,8 @@ auto request = UpsertRequest()
 - `AddFieldOp(FieldPartialUpdateOp field_op)`
 
     Adds a single per-field partial update operation for partial upserts. Optional.
+
+Column payloads are concrete instances of [FieldData](FieldData.md).
 
 <table>
    <tr>

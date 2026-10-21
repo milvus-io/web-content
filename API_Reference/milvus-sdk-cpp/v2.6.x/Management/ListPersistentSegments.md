@@ -52,7 +52,7 @@ Returns a Status indicating whether the operation succeeded. On success, the Lis
 
             Row count of the segment.
 
-        - **State** (*SegmentState*) -
+        - **State** (*[SegmentState](SegmentState.md)*) -
 
             Current state of the segment.
 
@@ -60,7 +60,7 @@ Returns a Status indicating whether the operation succeeded. On success, the Lis
 
             The collection name which this segment belongs to.
 
-        - **Level** (*SegmentLevel*) -
+        - **Level** (*[SegmentLevel](SegmentLevel.md)*) -
 
             Level of the segment.
 
@@ -76,7 +76,7 @@ Returns a Status indicating whether the operation succeeded. On success, the Lis
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

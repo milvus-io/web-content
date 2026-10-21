@@ -122,6 +122,8 @@ const ShardReplica& shard = replica.ShardReplicas()[0];
 
     Check `status.Code()` and `status.Message()` for invalid collection names or unavailable replica metadata.
 
+ See [StatusCode](../Client/StatusCode.md).
+
 ## Example
 
 ```cpp

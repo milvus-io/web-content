@@ -56,7 +56,7 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
             Whether the segment is sorted.
 
-        - **Level** (*SegmentLevel*) -
+        - **Level** (*[SegmentLevel](SegmentLevel.md)*) -
 
             Level of the segment.
 
@@ -66,7 +66,7 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
         - **NodeID** (*int64_t*) -
 
-            Node ID of the segment.
+            **Deprecated.** Since v2.4 a segment can load on multiple nodes. Use `NodeIDs()` instead.
 
         - **NodeIDs** (*const std::vector<int64_t>&*) -
 
@@ -84,7 +84,7 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
             ID of the segment.
 
-        - **State** (*SegmentState*) -
+        - **State** (*[SegmentState](SegmentState.md)*) -
 
             Current state of the segment.
 
@@ -96,7 +96,7 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

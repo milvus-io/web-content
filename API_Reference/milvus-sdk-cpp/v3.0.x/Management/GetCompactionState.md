@@ -43,7 +43,7 @@ Returns a Status indicating whether the operation succeeded. The compaction stat
 
             Number of failed plans.
 
-        - **State** (*CompactionStateCode*) -
+        - **State** (*[CompactionStateCode](CompactionStateCode.md)*) -
 
             Compaction state code.
 
@@ -55,7 +55,7 @@ Returns a Status indicating whether the operation succeeded. The compaction stat
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

@@ -48,7 +48,7 @@ Returns a Status indicating whether the operation succeeded. On success, the Has
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

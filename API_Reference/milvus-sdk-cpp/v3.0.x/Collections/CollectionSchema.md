@@ -37,6 +37,10 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 
     Appends a regular field to the schema. Returns `true` on success. Use `FieldSchema` to specify the field name, `DataType`, and type-specific settings (e.g., `WithDimension()` for vector fields, `WithMaxLength()` for VARCHAR fields, `WithPrimaryKey(true)` for the primary key).
 
+- `bool AddField(FieldSchema&& field_schema)`
+
+    Appends a regular field by moving the field schema into the collection. Returns `true` on success.
+
 - `const std::vector<FieldSchema>& Fields() const`
 
     Returns the list of field schemas added so far.
@@ -44,6 +48,10 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 - `bool AddStructField(const StructFieldSchema& field_schema)`
 
     Appends a struct field (multi-vector type). Returns `true` on success.
+
+- `bool AddStructField(StructFieldSchema&& field_schema)`
+
+    Appends a struct field by moving the struct field schema into the collection. Returns `true` on success.
 
 - `const std::vector<StructFieldSchema>& StructFields() const`
 
@@ -56,6 +64,32 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 - `const std::vector<FunctionPtr>& Functions() const`
 
     Returns the list of functions attached to the schema.
+
+**External collection:**
+
+- `const std::string& ExternalSource() const`
+
+    Returns the external collection source path, such as an S3 path.
+
+- `void SetExternalSource(std::string external_source)`
+
+    Sets the external collection source path.
+
+- `CollectionSchema& WithExternalSource(std::string external_source)`
+
+    Sets the external collection source path and returns this schema for chaining.
+
+- `const nlohmann::json& ExternalSpec() const`
+
+    Returns the external file specification, such as the file format and external filesystem connection settings.
+
+- `void SetExternalSpec(const nlohmann::json& external_spec)`
+
+    Sets the external file specification.
+
+- `CollectionSchema& WithExternalSpec(const nlohmann::json& external_spec)`
+
+    Sets the external file specification and returns this schema for chaining.
 
 **Dynamic field:**
 
@@ -76,6 +110,12 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 - `std::unordered_set<std::string> AnnsFieldNames() const`
 
     Returns the names of all vector (ANNS) fields in the schema.
+
+**Deprecated compatibility methods.**
+
+- `Name()` / `SetName()` - Deprecated. Pass the collection name through `CreateCollectionRequest::WithCollectionName()`.
+- `Description()` / `SetDescription()` - Deprecated. Pass the description through `CreateCollectionRequest::WithDescription()`.
+- `ShardsNum()` / `SetShardsNum()` - Deprecated. Pass the shard count through `CreateCollectionRequest::WithNumShards()`.
 
 ## Example
 

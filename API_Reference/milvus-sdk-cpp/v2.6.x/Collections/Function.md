@@ -17,7 +17,7 @@ using FunctionPtr = std::shared_ptr<Function>;
 
 - **function_type** (*FunctionType*)
 
-    Type of function. Values: `UNKNOWN=0`, `BM25=1`, `TEXTEMBEDDING=2`, `RERANK=3`.
+    Type of function. Values: `UNKNOWN=0`, `BM25=1`, `TEXTEMBEDDING=2`, `RERANK=3`. See [FunctionType](FunctionType.md).
 
 - **description** (*std::string*)
 
@@ -29,9 +29,13 @@ using FunctionPtr = std::shared_ptr<Function>;
 
     Gets or sets the function name.
 
+- `const std::string& Description() const` / `Status SetDescription(std::string description)`
+
+    Gets or sets the optional function description.
+
 - `FunctionType GetFunctionType() const` / `virtual Status SetFunctionType(FunctionType ft)`
 
-    Gets or sets the function type.
+    Gets or sets the function type. See [FunctionType](FunctionType.md).
 
 - `const std::vector<std::string>& InputFieldNames() const` / `Status AddInputFieldName(std::string name)`
 

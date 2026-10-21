@@ -1,5 +1,7 @@
 # Search()
 
+**Deprecated overloads.** Vector `Add*` overloads that take a leading `field_name` are deprecated. Set `AnnsField()` once and use the corresponding overload without `field_name`.
+
 This operation performs an approximate nearest neighbor (ANN) search on a collection with the query vectors, primary keys, or texts carried in the SearchRequest, and returns the matched results through the SearchResponse parameter. The request is validated before it is sent, and the call fails if no query targets are provided.
 
 ```cpp
@@ -184,45 +186,67 @@ auto request = SearchRequest()
 
 - `AddBinaryVector(std::string field_name, const std::string& vector)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
 
 - `AddBinaryVector(std::string field_name, const BinaryVecFieldData::ElementT& vector)`
+
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
 
     Adds a binary vector to search as a query target. The std::string overload automatically converts the string to a uint8 array.
 
 - `AddFloatVector(std::string field_name, const FloatVecFieldData::ElementT& vector)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds a float vector to search as a query target.
 
 - `AddSparseVector(std::string field_name, const SparseFloatVecFieldData::ElementT& vector)`
+
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
 
     Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
 
 - `AddSparseVector(std::string field_name, const nlohmann::json& vector)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds a sparse vector to search as a query target. Supported forms are a JSON dict such as {"1": 0.1, "5": 0.2, "8": 0.15} or a JSON dict with "indices" and "values" arrays.
 
 - `AddFloat16Vector(std::string field_name, const Float16VecFieldData::ElementT& vector)`
+
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
 
     Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
 
 - `AddFloat16Vector(std::string field_name, const std::vector<float>& vector)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds a float16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to float16 binary.
 
 - `AddBFloat16Vector(std::string field_name, const BFloat16VecFieldData::ElementT& vector)`
+
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
 
     Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
 
 - `AddBFloat16Vector(std::string field_name, const std::vector<float>& vector)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds a bfloat16 vector to search as a query target. The std::vector<float> overload automatically converts the float array to bfloat16 binary.
 
 - `AddEmbeddedText(std::string field_name, const std::string& text)`
 
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
+
     Adds query text to search on a collection with a BM25 function.
 
 - `AddInt8Vector(std::string field_name, const Int8VecFieldData::ElementT& vector)`
+
+    **Deprecated.** Set `AnnsField()` and use the overload without `field_name`.
 
     Adds an int8 vector to search as a query target.
 
@@ -425,6 +449,8 @@ auto request = SearchRequest()
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
     Set highlighter.
+
+Vector request payloads use [FieldData](FieldData.md) instances.
 
 <table>
    <tr>

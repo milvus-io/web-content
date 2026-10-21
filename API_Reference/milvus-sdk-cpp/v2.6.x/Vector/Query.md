@@ -221,6 +221,18 @@ Returns a Status indicating whether the query succeeded, with the matching recor
 
     - **SessionTs** (*uint64_t*) -
 
+### QueryResults
+
+**METHODS:**
+
+- `FieldDataPtr GetFieldByName(const std::string& name)`
+
+    **Deprecated.** Returns the named output field. Use `OutputField()` instead.
+
+- `FieldDataPtr OutputField(const std::string& name) const`
+
+    Returns the named output field as a `FieldDataPtr`. See [FieldData](FieldData.md).
+
 **ERROR HANDLING:**
 
 - **std::exception**

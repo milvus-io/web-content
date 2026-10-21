@@ -58,11 +58,11 @@ Returns a Status indicating whether the operation succeeded. The list of partiti
 
         - **InMemoryPercentage** (*int64_t*) -
 
-            Partition loading percentage.
+            **Deprecated.** Always returns `0`. Use `GetLoadState()` for the load state.
 
         - **Loaded** (*bool*) -
 
-            Whether the partition has been loaded completely.
+            **Deprecated.** Always returns `false`. Use `GetLoadState()` for the load state.
 
     - **PartitionsNames** (*const std::vector<std::string>&*) -
 
@@ -72,7 +72,7 @@ Returns a Status indicating whether the operation succeeded. The list of partiti
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

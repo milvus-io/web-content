@@ -23,7 +23,7 @@ auto request = GetCompactionPlansRequest()
 
 *Status*
 
-Returns a Status indicating whether the operation succeeded. The compaction state and merge plans are carried in the response: call Plans() to get the list of plans, each mapping its source segments to the merged target segment, and State() for the CompactionStateCode.
+Returns a Status indicating whether the operation succeeded. The compaction state and merge plans are carried in the response: call Plans() to get the list of plans, each mapping its source segments to the merged target segment, and State() for the [CompactionStateCode](CompactionStateCode.md).
 
 - **response** (*GetCompactionPlansResponse*) -
 
@@ -43,7 +43,7 @@ Returns a Status indicating whether the operation succeeded. The compaction stat
 
         Get the id of the compaction.
 
-    - **State** (*CompactionStateCode*) -
+    - **State** (*[CompactionStateCode](CompactionStateCode.md)*) -
 
         Get the state of the compaction.
 
