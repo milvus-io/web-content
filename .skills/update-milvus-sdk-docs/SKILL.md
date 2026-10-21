@@ -349,12 +349,13 @@ Categorize each changed symbol:
 - **Enum values**: added/removed enum entries (e.g. `IndexType`, `DataType`).
 - **Doc-comment changes**: only prose was rewritten — decide whether the page
   description should be refreshed.
-- **Severe incompatibilities**: removed or renamed public symbols, changed public
-  signatures/return shapes, changed default behavior that requires callers to
-  modify code/configuration, broken wire/server compatibility, and mandatory
-  dependency or runtime changes. Record these for the `About.md` **Breaking
-  Changes** section (see Step 3). Do not list additions, internal changes, or
-  deprecations that remain callable.
+- **Client-code breaking changes**: removed or renamed public symbols, changed
+  input/builder parameter types or requiredness, removed/renamed result accessors
+  or result shapes, and sync-to-async changes. Record these for the `About.md`
+  **Breaking Changes** section (see Step 3) only when existing calls require
+  code changes or now fail. Do not list additions, internal changes,
+  performance improvements, deprecations that remain callable, or behavior
+  changes that leave previously valid calls valid.
 - **Internal-only additions**: new symbols not exposed through public request/response
   or client methods (e.g. C++ `BloomFilter.h` is an internal cache type) — **skip**,
   do not create a page unless it surfaces in a public API.
@@ -395,7 +396,7 @@ machinery.
 Follow the page-mapping rules for the SDK in `.skills/update-milvus-sdk-docs/references/sdk-map.md`. The general
 shape: operation pages ↔ request/operation classes; type pages ↔ public types;
 `About.md` ↔ version stamp + compatibility table + install commands + severe
-incompatibilities.
+client-code breaking changes.
 
 Produce a change list: `page → what changed`.
 
@@ -422,14 +423,19 @@ Do not decorate names inside code fences or Request Syntax blocks; if a code-onl
 example introduces the type, link the nearest markdown description that explains
 the parameter or response member.
 
-**Severe incompatibilities → `About.md` Breaking Changes.** If the diff or
-PR review found a severe incompatibility, map it to the `## Breaking Changes`
-section in `About.md`; create the section immediately after `## Compatibility`
-if it is absent. Group entries by the release that introduced the break. Keep the
-section action-oriented: name the breaking change, the version that introduced it,
-the affected API or behavior, and the required caller update. Routine additions,
-internal changes, performance improvements, and still-callable deprecations do
-not belong in this section.
+**Client-code breaking changes → `About.md` Breaking Changes.** Map a change to
+the `## Breaking Changes` section only when upgrading requires callers to modify
+existing client code or handle a new failure for code that previously worked.
+Examples include input/builder parameter types changing, a parameter becoming
+required or newly rejected, a public method/class/type being renamed or deleted,
+sync methods becoming async, and consumed result accessors or shapes being
+removed or renamed. Create the section immediately after `## Compatibility` if
+it is absent. Group entries by the release that introduced the break. Keep the
+section action-oriented: name the breaking change, the version that introduced
+it, the affected public API or input contract, and the required caller update.
+Routine additions, internal changes, performance improvements, still-callable
+deprecations, relaxed validation, and behavior changes that leave existing calls
+valid do not belong in this section.
 
 **Follow the SDK's directory convention for new type pages.** The convention
 differs per SDK — always match the SDK's existing tree (see the per-SDK
@@ -1393,12 +1399,12 @@ with earlier Milvus servers, because the protocol only ever adds fields and
 never removes them; the table lists the recommended SDK version validated for
 each Milvus version.
 
-## Breaking Changes   <!-- conditional; include only for severe incompatibilities -->
+## Breaking Changes   <!-- conditional; include only for client-code breaking changes -->
 
 ### <release>
 
-- <What changed, which public API or behavior it affects, and how callers must
-  update their code/configuration.>
+- <What changed, which public API or input contract it affects, and how existing
+  callers must update their code.>
 
 ## Contributing (optional)
 
@@ -1429,11 +1435,14 @@ Notes:
 - `## Dependencies` is only needed where the SDK has notable runtime
   prerequisites (e.g. node needs `Node: v14+`); omit when there is nothing to
   list.
-- `## Breaking Changes` is conditional. Add it only when one or more releases in
-  the documented version line contain severe incompatibilities; omit it when
-  they do not. When present, place it immediately after `## Compatibility` and
-  use an `### <release>` subsection for each affected release. Do not include
-  minor non-breaking changes there.
+- `## Breaking Changes` is conditional. Add it only when an upgrade requires
+  callers to modify existing client code or handle a new failure for code that
+  previously worked—for example, an input parameter type changed, a parameter
+  became required or newly rejected, or a method/class/type was renamed or
+  deleted. Omit it when they do not. When present, place it immediately after
+  `## Compatibility` and use an `### <release>` subsection for each affected
+  release. Do not include non-breaking behavior changes, minor changes, or new
+  features there.
 - Watch the `v`-prefix convention per SDK (e.g. pymilvus uses `==v3.0.1` with a
   `v`; go links use `tree/client/v3.0.0/client`).
 

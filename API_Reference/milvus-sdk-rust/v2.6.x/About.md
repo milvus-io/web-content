@@ -113,6 +113,12 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 |:-----:|:-----:|
 | 2.6.x | v2.6.1 |
 
+## Breaking Changes
+
+### 2.6.1
+
+- `CompactRequest` rejects `target_size = 0`. If you previously passed `0` to request the server default, omit `target_size` instead.
+
 ## Contributing
 
 We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to the Milvus Rust SDK are welcome from everyone. Refer to the [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-rust/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-rust/issues/new) if you need any assistance or want to propose your ideas.
