@@ -31,7 +31,7 @@ refreshLoad(RefreshLoadReq.builder()
 
 - `async(Boolean async)` -
 
-    Whether to run the operation asynchronously. Defaults to `Boolean.TRUE`.
+    **Deprecated.** Whether to run the operation asynchronously. Defaults to `Boolean.TRUE`. Use `sync(Boolean sync)` instead.
 
 - `sync(Boolean sync)` -
 

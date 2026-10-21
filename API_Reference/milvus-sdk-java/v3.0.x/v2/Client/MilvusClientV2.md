@@ -20,6 +20,15 @@ This client serves as an easy-to-use alternative for the current set of APIs tha
 MilvusClientV2(ConnectConfig connectConfig);
 ```
 
+## Deprecated methods
+
+The following methods are deprecated.
+
+- `alterDatabase(AlterDatabaseReq)` - Deprecated since SDK v2.5.3. Use `alterDatabaseProperties(AlterDatabasePropertiesReq)`.
+- `createSchema()` - Deprecated since SDK v2.5.9. Use the static `CreateSchema()` method.
+- `alterCollection(AlterCollectionReq)` - Deprecated since SDK v2.5.3. Use `alterCollectionProperties(AlterCollectionPropertiesReq)`.
+- `alterIndex(AlterIndexReq)` - Deprecated since SDK v2.5.3. Use `alterIndexProperties(AlterIndexPropertiesReq)`.
+
 ## [ConnectConfig](ConnectConfig.md)
 
 **[ConnectConfig](ConnectConfig.md)** allows you to configure the connection properties in one place so that **MilvusClientV2** can reference it to create and manage the connection pool.

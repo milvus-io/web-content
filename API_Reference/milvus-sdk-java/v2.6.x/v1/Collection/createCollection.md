@@ -45,12 +45,12 @@ Methods of `CreateCollectionParam.Builder`:
     </tr>
     <tr>
         <td><p>withFieldTypes(List&lt;FieldType> fieldTypes)</p></td>
-        <td><p>Sets the collection schema. The collection schema cannot be empty.</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withSchema(CollectionSchemaParam)</code> instead. Sets the collection schema. The collection schema cannot be empty.</p></td>
         <td><p>fieldTypes: a list of FieldType objects, each representing a field schema.</p></td>
     </tr>
     <tr>
         <td><p>addFieldType(FieldType fieldType)</p></td>
-        <td><p>Adds a field schema.</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withSchema(CollectionSchemaParam)</code> instead. Adds a field schema.</p></td>
         <td><p>fieldType: The schema of a field to add in the collection.</p></td>
     </tr>
     <tr>
@@ -193,12 +193,12 @@ Methods of `CollectionSchemaParam.Builder`:
    </tr>
    <tr>
      <td><p>withEnableDynamicField(boolean enableDynamicField)</p></td>
-     <td><p>Sets the collection if enableDynamicField.</p></td>
+     <td><p><strong>Deprecated.</strong> Use <code>withSchema(CollectionSchemaParam)</code> instead. Sets the collection if enableDynamicField.</p></td>
      <td><p>enableDynamicField: enableDynamicField of the collection</p></td>
    </tr>
    <tr>
      <td><p>withFieldTypes(List&lt;FieldType> fieldTypes)</p></td>
-     <td><p>Sets the fieldTypes of the schema. The fieldTypes cannot be empty or null.</p></td>
+     <td><p><strong>Deprecated.</strong> Use <code>withSchema(CollectionSchemaParam)</code> instead. Sets the fieldTypes of the schema. The fieldTypes cannot be empty or null.</p></td>
      <td><p>fieldTypes: A list of FieldType to defines the fields.</p></td>
    </tr>
    <tr>

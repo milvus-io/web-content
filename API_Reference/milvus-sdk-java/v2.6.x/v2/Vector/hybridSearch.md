@@ -119,9 +119,36 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
         The primary key value rendered as a string.
 
+    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
+
+        Highlighting results keyed by field name.
+
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
+
+        The highlighting result for one requested field, or `null` when no result exists.
+
+    - `getElementOffset()` (*Long*) -
+
+        The element offset for array-of-struct subfield search. `null` for ordinary searches.
+
 - `getSessionTs()` (*long*) -
 
     The session timestamp used for the search.
+
+    Each `HighlightResult` exposes the following getters:
+
+    - `getFieldName()` (*String*) -
+
+        The field name used for highlighting.
+
+    - `getFragments()` (*List\<String\>*) -
+
+        The highlighted text fragments.
+
+    - `getScores()` (*List\<Float\>*) -
+
+        The relevance scores for the fragments.
+
 
 - `getRecalls()` (*List\<Float\>*) -
 

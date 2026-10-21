@@ -8,6 +8,8 @@ public class RRFRanker extends CreateCollectionReq.Function
 
 ## Request Syntax
 
+**Note.** The `RRFRanker(int k)` constructor is deprecated. Use `RRFRanker.builder().k(int k)` instead.
+
 ```java
 RRFRanker.builder()
     .name(String name)

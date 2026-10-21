@@ -8,6 +8,8 @@ public class WeightedRanker extends CreateCollectionReq.Function
 
 ## Request Syntax
 
+**Note.** The `WeightedRanker(List<Float> weights)` constructor is deprecated. Use `WeightedRanker.builder().weights(List<Float> weights)` instead.
+
 ```java
 WeightedRanker.builder()
     .name(String name)

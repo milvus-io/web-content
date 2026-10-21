@@ -35,12 +35,12 @@ Methods of `GetFlushStateParam.Builder`:
     </tr>
     <tr>
         <td><p>withSegmentIDs(List&lt;Long> segmentIDs)</p></td>
-        <td><p>Set an ID list of segments to be tested. Typically the ID is returned by flush() method.</p></td>
+        <td><p><strong>Deprecated.</strong> Set an ID list of segments to be tested. Typically the ID is returned by flush() method.</p></td>
         <td><p>segmentIDs: An ID list of segments.</p></td>
     </tr>
     <tr>
         <td><p>addSegmentID(Long segmentID)</p></td>
-        <td><p>Add a segment ID to be tested. Typically the ID is returned by flush() method.</p></td>
+        <td><p><strong>Deprecated.</strong> Add a segment ID to be tested. Typically the ID is returned by flush() method.</p></td>
         <td><p>segmentID: A segment ID.</p></td>
     </tr>
     <tr>

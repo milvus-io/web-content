@@ -35,7 +35,7 @@ Methods of `DescribeIndexParam.Builder`:
     </tr>
     <tr>
         <td><p>withIndexName(String indexName)</p></td>
-        <td><p>Set the target index name. If no index name is specified, the default index name is empty string which means let the server determine it.</p></td>
+        <td><p><strong>Deprecated.</strong> Set the target index name. If no index name is specified, the default index name is empty string which means let the server determine it.</p></td>
         <td><p>indexName: The name of the index.</p></td>
     </tr>
     <tr>

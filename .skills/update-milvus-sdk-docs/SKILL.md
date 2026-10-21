@@ -819,7 +819,10 @@ with its `RoleDesc`/`GrantItem` members). The response class lives in a
   (e.g. `DescribeCollectionResp.java`). Lombok `@Data` means an added/removed
   `private` field = an added/removed output member. **Document response members
   as getter methods only** (`` `getXxx()` ``), never the raw Lombok fields —
-  users access response data exclusively through getters.
+  users access response data exclusively through getters. For deprecation,
+  audit the public getter declaration: a `@Deprecated` private backing field is
+  not sufficient to mark its public getter as deprecated unless the getter also
+  carries `@Deprecated` or its Javadoc explicitly says it is deprecated.
 - **rust** → `src/v2/response/<category>.rs` (`pub struct XxxResponse`).
 - **csharp** → `Milvus.Client/` result classes (`SearchResults.cs`,
   `MutationResult.cs`, `RoleResult.cs`, `UserResult.cs`, ...). Extract public
@@ -1058,7 +1061,9 @@ the method itself as deprecated and state the replacement. Do not put this
 deprecation at the top of the operation page unless the operation itself is
 deprecated. For example, in a `Query()` page, a deprecated `QueryResults`
 method belongs under the `QueryResults` methods, not beside the `# Query()`
-title.
+title. For Java, deprecation must be present on the public getter declaration
+or in that getter's Javadoc; a deprecated private backing field alone is not
+enough.
 
 Canonical template — exposed members (go model):
 

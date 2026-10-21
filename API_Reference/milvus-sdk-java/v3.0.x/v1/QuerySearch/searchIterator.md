@@ -75,12 +75,12 @@ Methods of `SearchIteratorParam.Builder`:
     </tr>
     <tr>
         <td><p>withTopK(Integer topK)</p></td>
-        <td><p>Set topK value of ANN search.<br/>Avaiable range: [1, 16384]</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withLimit(Long)</code> instead. Set topK value of ANN search.<br/>Available range: [1, 16384]</p></td>
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
         <td><p>withVectors(List&lt;?> vectors)</p></td>
-        <td><p>Set the target vectors. Up to 16384 vectors allowed.<br/>Note: this method works for FloatVector/BinaryVector/SparseFloatVector, but it doesn't work for Float16Vector/BFloat16Vector.<br/>It is recommended to use withFloatVectors/withBinaryVectors/withFloat16Vectors/withBFloat16Vectors/withSparseFloatVectors to input vectors expilicitly.</p></td>
+        <td><p><strong>Deprecated.</strong> Since v2.4.0, use typed builders such as <code>withFloatVectors</code>, <code>withBinaryVectors</code>, <code>withFloat16Vectors</code>, <code>withBFloat16Vectors</code>, or <code>withSparseFloatVectors</code> instead. Set the target vectors. Up to 16384 vectors allowed.<br/>Note: this method works for FloatVector/BinaryVector/SparseFloatVector, but it doesn't work for Float16Vector/BFloat16Vector.<br/>It is recommended to use withFloatVectors/withBinaryVectors/withFloat16Vectors/withBFloat16Vectors/withSparseFloatVectors to input vectors explicitly.</p></td>
         <td><p>vectors: <br/>- If target field type is FloatVector, List&lt; List&lt;Float>gt; is required.<br/>- If target field type is BinaryVector, List&lt;ByteBuffer> is required.<br/>- If target field type is SparseFloatVector, List&lt;SortedMap[Long, Float]> is required.</p></td>
     </tr>
     <tr>
@@ -110,7 +110,7 @@ Methods of `SearchIteratorParam.Builder`:
     </tr>
     <tr>
         <td><p>withRoundDecimal(Integer decimal)</p></td>
-        <td><p>Specifies the decimal place for returned distance.<br/>Avaiable range: [-1, 6]<br/>Default value is -1, return all digits.</p></td>
+        <td><p>Specifies the decimal place for returned distance.<br/>Available range: [-1, 6]<br/>Default value is -1, return all digits.</p></td>
         <td><p>decimal: How many digits are reserved after the decimal point.</p></td>
     </tr>
     <tr>
