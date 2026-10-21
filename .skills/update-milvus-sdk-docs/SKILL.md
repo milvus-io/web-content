@@ -80,6 +80,7 @@ run with a clarification instead of downgrading.
     pages, validating. Do these with shell commands, not by guessing.
   - Generative: writing/rewriting the prose, descriptions, examples. Use the exact
     diff hunks as the factual basis — never invent signatures, parameters, or defaults.
+- Keep deprecated API guidance scoped to the API generation documented by the page.
 - Unless the user says otherwise, always confirm before changing. Keep every edit
   reviewable; produce a per-page change summary.
 
@@ -331,6 +332,14 @@ git -C sdk-tmp/sdks/<sdk-repo> diff <old-tag>..<new-tag> -- <public-api-path>
 
 Categorize each changed symbol:
 
+- **Deprecated API generation scope**: before adding deprecated descriptions,
+  resolve which API generation the source symbol and target page belong to. Scan
+  only the client/request/response surface documented by that page. For example,
+  a current `MilvusClientV2` reference must not describe deprecated methods from
+  the legacy C++ `MilvusClient`; a Java `v2/` page must not describe deprecated
+  legacy Java V1 methods. If the doc tree has explicit `v1/` and `v2/` subtrees,
+  audit each subtree against its own generation. If the tree documents only V2,
+  skip V1-only deprecated symbols instead of adding them as aliases or notes.
 - **Builder/getter surface**: new/changed request parameters and methods. The
   naming pattern differs **per SDK** — C++ uses `WithXxx`/`SetXxx`/`AddXxx`,
   java uses Lombok `@Builder` (an added `private` field = a new builder method),
@@ -406,6 +415,13 @@ page (e.g. `CollectionSchema`, `DataType`, `IndexType`), the change list must
 include adding the relative link to that type page (see **Dedicated type pages &
 cross-links** under the Doc style guide).
 
+When reconciliation creates a new dedicated type/enum page, immediately run a
+whole-tree reference sweep for that type and add links to every markdown
+description, parameter type, return type, or response member that names it.
+Do not decorate names inside code fences or Request Syntax blocks; if a code-only
+example introduces the type, link the nearest markdown description that explains
+the parameter or response member.
+
 **Severe incompatibilities → `About.md` Breaking Changes.** If the diff or
 PR review found a severe incompatibility, map it to the `## Breaking Changes`
 section in `About.md`; create the section immediately after `## Compatibility`
@@ -461,6 +477,13 @@ For each affected page:
     specified in Step 3. Keep API pages and this summary consistent: if a public
     symbol is renamed or removed, the dedicated page and all cross-links must move
     or be updated, and the required caller update must be stated in `About.md`.
+ 9. Place deprecated descriptions at the scope of the deprecated symbol. Put a
+    page-top warning only when the operation or primary API documented by the
+    page is itself deprecated. A deprecated request method belongs in the request
+    method list; a deprecated response/result method or member belongs in that
+    response/result object's `**METHODS:**` (or language-equivalent accessor
+    list). Do not promote response/result deprecations to the top of an
+    operation page.
 
 ### Step 4b — Compile-verify the code snippets (mandatory)
 
@@ -975,6 +998,11 @@ set and the placement.**
   `[DataType](DataType.md)`; go `*[entity.Collection](Collection.md), error*`;
   cpp `[DataType](DataType.md)`). Do not leave a referenced type as bare text
   when its page exists.
+- **Creating a type page triggers a reference sweep**: after adding a dedicated
+  class/struct/enum page, search the SDK tree for the type name outside code
+  fences. Link markdown parameter descriptions, response member descriptions,
+  getter/setter descriptions, and prose mentions to the new page. Code fences stay
+  as plain code.
 - **Link request-parameter types too.** When a request's parameter/member
   (documented under `**BUILDER METHODS:**` / `**REQUEST METHODS:**` /
   `**PARAMETERS:**`) uses an enum or class that has a dedicated type page, link
@@ -1022,6 +1050,15 @@ the returned type exposes its state:**
   `` - `<member>()` (*<type>*) - `` bullets. For java, list the `*Resp*` getter
   methods directly under `**RETURNS:**` as `` `getXxx()` `` bullets (no
   `**METHODS:**` heading; see the java (V2) template below).
+
+**Placement of deprecated response/result members:** document a deprecated
+getter/accessor in the same member list as its replacement — cpp/rust
+`**METHODS:**`, Java getter bullets, or the equivalent direct-member list. Mark
+the method itself as deprecated and state the replacement. Do not put this
+deprecation at the top of the operation page unless the operation itself is
+deprecated. For example, in a `Query()` page, a deprecated `QueryResults`
+method belongs under the `QueryResults` methods, not beside the `# Query()`
+title.
 
 Canonical template — exposed members (go model):
 
@@ -1399,6 +1436,9 @@ Notes:
 
 - **Removed/deprecated API**: mark as deprecated on the page, or delete the page?
   Ask.
+- **V1/V2 deprecation scope**: when updating a V2 reference, never import
+  deprecated V1-only methods as aliases or warnings. Audit the V2 surface only;
+  audit an explicit V1 reference separately if requested.
 - **New API placement**: new public APIs get a **new page by default** (one page
   per API); new enum values go into the existing enum page. Only ask the user
   when a symbol does not fit the one-page-per-API shape.

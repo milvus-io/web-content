@@ -282,7 +282,7 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type.
+                    Function type. See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 

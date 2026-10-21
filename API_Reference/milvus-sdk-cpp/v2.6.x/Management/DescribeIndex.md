@@ -95,7 +95,7 @@ Returns a Status, with the DescribeIndexResponse output parameter populated with
 
             Get extra param. Note: this method was redefined in v2.4, which may affect older client code.
 
-        - **StateCode** (*milvus::IndexStateCode*) -
+        - **StateCode** (*[IndexStateCode](IndexStateCode.md)*) -
 
             Get index state.
 

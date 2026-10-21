@@ -287,7 +287,7 @@ Returns one collection description (CollectionDesc) per requested collection nam
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type.
+                    Function type. See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 

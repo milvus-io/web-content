@@ -47,7 +47,7 @@ auto request = InsertRequest()
 
 - `WithColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
-    Sets the column-based field data to insert, one FieldData entry per field; ColumnsData and RowsData cannot both be set.
+    Sets the column-based field data to insert, one [FieldData](FieldData.md) entry per field; ColumnsData and RowsData cannot both be set.
 
 - `SetColumnsData(std::vector<FieldDataPtr>&& columns_data)`
 
@@ -68,6 +68,8 @@ auto request = InsertRequest()
 - `AddRowData(EntityRow&& row_data)`
 
     Adds a single entity row as an nlohmann::json object keyed by field name; ColumnsData and RowsData cannot both be set.
+
+Column payloads are concrete instances of [FieldData](FieldData.md).
 
 <table>
    <tr>

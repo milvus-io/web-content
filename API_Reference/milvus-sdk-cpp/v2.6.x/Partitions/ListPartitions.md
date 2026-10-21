@@ -62,17 +62,17 @@ Returns a Status indicating whether the operation succeeded. On success, the Lis
 
         - **InMemoryPercentage** (*int64_t*) -
 
-            Get partition loading percentage.
+            **Deprecated.** Always returns `0`. Use `GetLoadState()` for the load state.
 
         - **Loaded** (*bool*) -
 
-            Indicates whether the partition has been loaded completely.
+            **Deprecated.** Always returns `false`. Use `GetLoadState()` for the load state.
 
 **EXCEPTIONS:**
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

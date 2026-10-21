@@ -301,7 +301,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type.
+                    Function type. See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 

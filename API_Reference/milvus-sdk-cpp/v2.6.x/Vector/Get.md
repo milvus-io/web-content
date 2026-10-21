@@ -163,6 +163,8 @@ Returns a Status indicating whether the operation succeeded, and on success popu
 
     When request construction, transport to the server, or response processing fails. Inspect the exception message or the returned Status for failure details.
 
+Field payloads are instances of [FieldData](FieldData.md).
+
 <table>
    <tr>
      <th><p>Category</p></th>

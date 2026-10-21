@@ -162,7 +162,7 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
 
         - **OutputField** (*FieldDataPtr*) -
 
-            Get an output field by name.
+            Get an output field by name. See [FieldData](FieldData.md).
 
             - **Name** (*const std::string&*) -
 

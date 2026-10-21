@@ -67,7 +67,7 @@ IndexDesc(std::string field_name, std::string index_name,
 
 - `milvus::IndexStateCode StateCode() const`
 
-    Current build state: `NONE`, `UNISSUED`, `IN_PROGRESS`, `FINISHED`, `FAILED`, or `RETRY`.
+    Current build state: `NONE`, `UNISSUED`, `IN_PROGRESS`, `FINISHED`, `FAILED`, or `RETRY`. See [IndexStateCode](IndexStateCode.md).
 
 - `std::string FailReason() const`
 

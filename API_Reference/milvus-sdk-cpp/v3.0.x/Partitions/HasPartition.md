@@ -57,7 +57,7 @@ Returns a Status indicating whether the operation succeeded. Whether the partiti
 
 - **StatusCode**
 
-    Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
 
 ## Example
 

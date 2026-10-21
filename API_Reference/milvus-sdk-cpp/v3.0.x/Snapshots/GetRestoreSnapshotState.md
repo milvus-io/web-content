@@ -63,7 +63,7 @@ Returns a Status indicating whether the operation succeeded. The restore job inf
 
             Start timestamp of the restore job.
 
-        - **State** (*RestoreSnapshotStateCode*) -
+        - **State** (*[RestoreSnapshotStateCode](RestoreSnapshotStateCode.md)*) -
 
             Current state of the restore job.
 

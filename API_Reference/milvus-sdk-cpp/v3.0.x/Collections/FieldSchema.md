@@ -54,6 +54,18 @@ FieldSchema(name, data_type)
 
 **REQUEST METHODS:**
 
+- `FieldSchema& WithName(std::string name)`
+
+    Sets the field name.
+
+- `FieldSchema& WithDataType(DataType data_type)`
+
+    Sets the logical field type. See [DataType](DataType.md).
+
+- `FieldSchema& WithDescription(std::string description)`
+
+    Sets the optional field description.
+
 - `WithPrimaryKey(bool is_primary_key)`
 
     Marks this field as the primary key. Only `INT64` and `VARCHAR` fields can be primary keys.
@@ -109,6 +121,10 @@ FieldSchema(name, data_type)
 - `WithMultiAnalyzerParams(const nlohmann::json& params)`
 
     Sets per-language analyzer configuration for multi-language text fields. Cannot be used together with `WithAnalyzerParams()`.
+
+- `FieldSchema& WithExternalField(std::string field_name)`
+
+    Maps this schema field to the corresponding field in an external source. Used with external collections.
 
 ## Example
 
