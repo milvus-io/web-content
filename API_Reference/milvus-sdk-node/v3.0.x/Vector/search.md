@@ -30,6 +30,7 @@ await milvusClient.search({
   round_decimal?: number;
   transformers?: OutputTransformers;
   rerank?: RankerObj | FunctionObject | FunctionScore;
+  search_aggregation?: SearchAggregation;
 })
 ```
 
@@ -237,6 +238,11 @@ await milvusClient.search({
 
     The fields to order the search results by. Optional.
 
+
+- **search_aggregation** (*SearchAggregation*) -
+
+    Optional bucket aggregation configuration. See [SearchAggregation](../types/SearchAggregation.md).
+
 **RETURNS:**
 
 *Promise<SearchResults<T>>*
@@ -294,6 +300,9 @@ The collection that was searched.
 
 - **all_search_count** (*number*) -
 Optional. Set when the search reports the total candidate count examined.
+
+- **agg_buckets** (*AggregationBucket[]* | *undefined*) -
+Optional. Set when **search_aggregation** was supplied; contains aggregation buckets, nested metrics, top hits, and sub-groups.
 
 - **ResStatus**
 A **ResStatus** object.

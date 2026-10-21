@@ -93,6 +93,12 @@ The following table shows the recommended @zilliz/milvus2-sdk-node versions for 
 |    v2.6.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 |    v3.0.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 
+## Breaking Changes
+
+### 3.0.0
+
+- In the raw `SearchRes` response type, `results.group_by_field_value` changed from a required string to optional structured `SearchFieldData | null` data.
+
 ## Contributing
 
 We are committed to building a collaborative, exuberant open-source community for Milvus. Therefore, contributions to the Milvus Node.js SDK are welcome from everyone. Refer to the [Contributing Guideline](https://github.com/milvus-io/milvus-sdk-node/blob/master/CONTRIBUTING.md) before making contributions to this project. You can [file an issue](https://github.com/milvus-io/milvus-sdk-node/issues/new) if you need any assistance or want to propose your ideas.
