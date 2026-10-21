@@ -198,7 +198,7 @@ SearchReq.builder()
 
 - `searchAggregation(SearchAggregation searchAggregation)`
 
-    Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration.
+    Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration. See [SearchAggregation](SearchAggregation.md).
 
 **RETURN TYPE:**
 

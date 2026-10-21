@@ -64,6 +64,8 @@ This method catches all the exceptions and returns an `R<DeleteResponse>` object
 
 - If the API succeeds, it returns a valid `DeleteResponse` held by the `R` template.
 
+- `getDeleteIds()` is **Deprecated**. Since v2.3.2 it returns an empty list and does not return the deleted primary keys.
+
 #### Example
 
 ```java

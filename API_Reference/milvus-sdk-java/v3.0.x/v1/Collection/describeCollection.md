@@ -132,6 +132,18 @@ Methods of `DescCollResponseWrapper`:
      <td><p>N/A</p></td>
      <td><p>FieldType</p></td>
    </tr>
+   <tr>
+     <td><p>getEnableDynamicField()</p></td>
+     <td><p><strong>Deprecated.</strong> Use <code>isDynamicFieldEnabled()</code> instead.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>boolean</p></td>
+   </tr>
+   <tr>
+     <td><p>getVectorField()</p></td>
+     <td><p><strong>Deprecated.</strong> Milvus supports multiple vector fields from v2.4. Use <code>getVectorFields()</code> instead.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>FieldType</p></td>
+   </tr>
 </table>
 
 #### Example

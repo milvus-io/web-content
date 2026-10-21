@@ -29,6 +29,18 @@ Methods of MilvusClient for connection:
      <td><p>MilvusClient</p></td>
    </tr>
    <tr>
+     <td><p>withRetry(int retryTimes)</p></td>
+     <td><p><strong>Deprecated.</strong> Sets the number of retry attempts. Use <code>withRetry(RetryParam)</code> to configure retries.</p></td>
+     <td><p>retryTimes: The number of retry attempts.</p></td>
+     <td><p>MilvusClient</p></td>
+   </tr>
+   <tr>
+     <td><p>withRetryInterval(long interval, TimeUnit timeUnit)</p></td>
+     <td><p><strong>Deprecated.</strong> Sets the interval between retry attempts. Use <code>withRetry(RetryParam)</code> to configure retry timing.</p></td>
+     <td><p>interval: The interval between retries.<br/>timeUnit: The unit of the interval.</p></td>
+     <td><p>MilvusClient</p></td>
+   </tr>
+   <tr>
      <td><p>close(long maxWaitSeconds)</p></td>
      <td><p>Disconnects from a Milvus server with a configurable timeout value. Call this method before the application terminates.This method throws an <code>InterruptedException</code> exception if it is interrupted.</p></td>
      <td><p>maxWaitSeconds: The timeout period to wait for the RPC channel to close.</p></td>
@@ -106,7 +118,7 @@ Methods of `ConnectParam.Builder`:
     </tr>
     <tr>
         <td><p>secure(boolean enable)<br/>withSecure(boolean enable)</p></td>
-        <td><p>Enables security for the client channel.</p></td>
+        <td><p><strong>Deprecated since v2.3.6.</strong> TLS is detected automatically; do not specify this flag. Enables security for the client channel.</p></td>
         <td><p>enable: Security is enabled if the value is set to true.</p></td>
     </tr>
     <tr>

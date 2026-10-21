@@ -60,12 +60,12 @@ Methods of `HybridSearchParam.Builder`:
     </tr>
     <tr>
         <td><p>withTopK(Integer topK)</p></td>
-        <td><p>Set topK value of ANN search.<br/>Avaiable range: [1, 16384]</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withLimit(Long)</code> instead. Set topK value of ANN search.<br/>Available range: [1, 16384]</p></td>
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
         <td><p>withRoundDecimal(Integer decimal)</p></td>
-        <td><p>Specifies the decimal place for returned distance.<br/>Avaiable range: [-1, 6]<br/>Default value is -1, return all digits.</p></td>
+        <td><p>Specifies the decimal place for returned distance.<br/>Available range: [-1, 6]<br/>Default value is -1, return all digits.</p></td>
         <td><p>decimal: How many digits reserved after the decimal point.</p></td>
     </tr>
     <tr>
@@ -125,7 +125,7 @@ Methods of `AnnSearchParam.Builder`:
     </tr>
     <tr>
         <td><p>withTopK(Integer topK)</p></td>
-        <td><p>Set topK value of ANN search.<br/>Avaiable range: [1, 16384]</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withLimit(Long)</code> instead. Set topK value of ANN search.<br/>Available range: [1, 16384]</p></td>
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>

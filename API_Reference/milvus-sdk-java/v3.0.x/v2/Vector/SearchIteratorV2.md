@@ -12,6 +12,7 @@ public SearchIteratorV2 searchIteratorV2(SearchIteratorReqV2 request)
 searchIteratorV2(SearchIteratorReqV2.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
+    .clusterId(String clusterId)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
     .topK(int topK)
@@ -37,6 +38,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
     The name of the database. Defaults to the current database if not specified.
 
+- `clusterId(String clusterId)`
+
+    **Deprecated.** Request-level cluster routing is no longer used. Pass the cluster ID through `MilvusClientV2Session` instead.
+
 - `collectionName(String collectionName)`
 
     The name of the target collection.
@@ -50,6 +55,8 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     The name of the vector field to search.
 
 - `topK(int topK)`
+
+    **Deprecated.** Use `limit(long limit)` instead.
 
     The number of top results to return.
 

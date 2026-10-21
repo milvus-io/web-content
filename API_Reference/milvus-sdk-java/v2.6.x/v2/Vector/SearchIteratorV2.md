@@ -56,6 +56,8 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 - `topK(int topK)` -
 
+    **Deprecated.** Use `limit(long limit)` instead.
+
     The number of top results to return.
 
 - `limit(long limit)` -

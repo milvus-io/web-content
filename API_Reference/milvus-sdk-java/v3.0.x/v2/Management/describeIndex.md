@@ -99,7 +99,7 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getProperties()` (*Map\<String, String\>*) -
 
-        **Deprecated.** The properties of the index. Use `extraParams` instead.
+        Legacy properties of the index. Newer index settings are exposed through `extraParams`.
 
 - `getIndexDescByFieldName(String fieldName)` (*IndexDesc*) -
 
