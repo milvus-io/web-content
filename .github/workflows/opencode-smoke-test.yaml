@@ -1,0 +1,102 @@
+name: OpenCode smoke test
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/opencode-smoke-test.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Verify OpenCode provider
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      OPENCODE_BASE_URL: ${{ secrets.OPENCODE_BASE_URL }}
+      OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+      OPENCODE_MODEL: ${{ secrets.OPENCODE_MODEL }}
+
+    steps:
+      - name: Check required secrets
+        run: |
+          set -euo pipefail
+
+          for secret_name in OPENCODE_BASE_URL OPENCODE_API_KEY OPENCODE_MODEL; do
+            if [[ -z "${!secret_name:-}" ]]; then
+              echo "::error::${secret_name} is not configured"
+              exit 1
+            fi
+          done
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install opencode
+        run: |
+          npm install -g opencode-ai
+          opencode --version
+
+      - name: Run simple opencode interaction
+        run: |
+          set -euo pipefail
+
+          # These are defensive masks: GitHub already masks each secret's original
+          # value, and these cover the values as they are read in this shell.
+          printf '::add-mask::%s\n' "$OPENCODE_BASE_URL"
+          printf '::add-mask::%s\n' "$OPENCODE_API_KEY"
+          printf '::add-mask::%s\n' "$OPENCODE_MODEL"
+
+          # Build the provider config as structured JSON so secret values are
+          # escaped correctly. Keep it in a shell variable and do not print it.
+          CFG=$(python3 - <<'PY'
+          import json
+          import os
+
+          model = os.environ["OPENCODE_MODEL"]
+          provider = "aistation"
+
+          cfg = {
+              "provider": {
+                  provider: {
+                      "npm": "@ai-sdk/openai-compatible",
+                      "name": "AI Station",
+                      "options": {
+                          "baseURL": os.environ["OPENCODE_BASE_URL"],
+                          "apiKey": os.environ["OPENCODE_API_KEY"],
+                      },
+                      "models": {
+                          model: {
+                              "name": model,
+                          },
+                      },
+                  },
+              },
+              "model": f"{provider}/{model}",
+          }
+
+          print(json.dumps(cfg, ensure_ascii=False, separators=(",", ":")))
+          PY
+          )
+
+          export OPENCODE_CONFIG_CONTENT="$CFG"
+          export OPENCODE_FULL_MODEL="aistation/${OPENCODE_MODEL}"
+
+          RESPONSE=$(timeout 120 opencode run \
+            --dir "$GITHUB_WORKSPACE" \
+            --model "$OPENCODE_FULL_MODEL" \
+            "Do not read or write files. Do not call tools. Reply with exactly this token: OPENCODE_SMOKE_OK")
+
+          printf '%s\n' "$RESPONSE"
+
+          if ! grep -q "OPENCODE_SMOKE_OK" <<<"$RESPONSE"; then
+            echo "::error::OpenCode did not return the expected smoke-test token"
+            exit 1
+          fi
