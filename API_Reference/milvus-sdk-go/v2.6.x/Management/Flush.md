@@ -30,6 +30,7 @@ An async task returned by Flush. Call Await() to block until flushing completes.
 
 ```go
 type FlushTask struct {
+    // contains unexported task state
 }
 ```
 

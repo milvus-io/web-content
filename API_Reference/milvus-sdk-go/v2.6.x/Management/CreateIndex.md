@@ -49,6 +49,7 @@ An async task returned by CreateIndex. Call Await() to block until the index bui
 
 ```go
 type CreateIndexTask struct {
+    // contains unexported task state
 }
 ```
 

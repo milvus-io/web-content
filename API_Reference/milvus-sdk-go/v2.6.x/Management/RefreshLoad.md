@@ -30,6 +30,7 @@ An async task returned by LoadCollection/LoadPartitions. Call Await() to block u
 
 ```go
 type LoadTask struct {
+    // contains unexported task state
 }
 ```
 
