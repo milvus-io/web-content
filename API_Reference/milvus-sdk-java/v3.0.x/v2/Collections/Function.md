@@ -67,11 +67,10 @@ A `Function` object that can be registered with a Milvus collection, facilitatin
 
 ```java
 import io.milvus.common.clientenum.FunctionType;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
-
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import java.util.Collections;
 
-CreateCollectionReq.Function function = CreateCollectionReq.Function.builder()
+CreateCollectionReq.Function.builder()
     .functionType(FunctionType.BM25)
     .name("text_bm25_emb")
     .inputFieldNames(Collections.singletonList("text"))

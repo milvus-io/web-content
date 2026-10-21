@@ -59,10 +59,41 @@ A **RefreshExternalCollectionResp** object that carries the newly started refres
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
 import com.google.gson.JsonObject;
 import io.milvus.v2.service.utility.request.RefreshExternalCollectionReq;
 import io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+
+// 3. Refresh an external collection backed by S3 storage
 JsonObject spec = new JsonObject();
 spec.addProperty("endpoint", "https://s3.amazonaws.com");
 spec.addProperty("bucket", "my-bucket");

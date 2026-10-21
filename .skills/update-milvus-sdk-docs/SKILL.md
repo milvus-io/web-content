@@ -685,6 +685,37 @@ the local edits and present them for review.
    For a fork-based PR, use `--head <fork-owner>:sdk/milvus-sdk-cpp-3.0.2-doc`.
    Return the PR URL.
 
+### Step 8 — Clean up task artifacts (run at the end of every task)
+
+Before finishing, remove the temporary files **this run created**, while
+**keeping reusable caches** so future runs stay fast. This is mandatory for
+every run, whether or not the user asked for a push/PR.
+
+- **Remove per-run clones and scaffolding** — anything this run created that
+  another run cannot reuse:
+  - the SDK clones from Step 0b: `rm -rf sdk-tmp/sdks/<sdk-repo>`;
+  - per-run verification projects created by your own harness / runner
+    (e.g. a `sdk-tmp/<sdk>-verify/` Maven project, `sdk-tmp/venv-pymilvus-<ver>/`,
+    extracted example `.src` files, results `.tsv`/logs) — delete them unless
+    you deliberately left a named reusable harness;
+  - intermediate scratch files you wrote during the run (draft payloads,
+    temp scripts, extracted-snippet dumps) — if they live under `sdk-tmp/`
+    and are not meant to be reused, remove them.
+- **Keep reusable caches** so the next run is not slower:
+  - `sdk-tmp/sdks/` itself (the parent dir and any OTHER SDK clones not touched
+    this run) — only remove the per-SDK clones this run fetched/used;
+  - `sdk-tmp/snippet-verify/` — the Step 4b verifier's setup dir is explicitly
+    reused (`...is reused so subsequent runs are fast`), leave it;
+  - toolchain/cache dirs created outside the repo (e.g. `~/.m2`, `~/.cache`)
+    are outside the repo and are left untouched.
+- **Verify before stopping**: `git status --short` must show **only** the
+  intended doc changes (plus skill/AGENTS files if on a skill branch) and no
+  stray files; `git check-ignore sdk-tmp/` confirms leftovers are ignored, but
+  clean them anyway since they consume disk.
+- **Never delete other users' or unrelated run artifacts** that you did not
+  create in this task. When in doubt about whether a `sdk-tmp/` entry is
+  yours to remove, leave it and mention it in the run summary instead.
+
 ## Reconciliation mode (audit and backfill existing pages)
 
 Use when the user wants the existing pages verified against a tag — e.g. before
@@ -891,6 +922,19 @@ whose API semantics are uncertain from the source alone.
   - **csharp** → follow the csharp tree's own page format (it has no error
     heading today).
 - One page per operation / per class. Refer to related types with relative links.
+- **Imports/includes/dependencies go at the very top of an example.** Any
+  statement that pulls in a dependency — Java/Python/Node `import`, Go `import`,
+  C++ `#include`, Rust `use`, csharp `using`, etc. — must appear at the top of
+  the example block, before any executable code (client setup, variable
+  declarations, comments that introduce them, or the operation itself). Never
+  interleave `import`/`include`/`using`/`use` lines with statements in the middle
+  of an example. In Java and other languages that require imports before type
+  declarations, a mid-block `import` is a compile error for anyone who copies
+  the snippet, and the same problem breaks snippet verifiers that hoist imports.
+  When assembling an example from a setup prelude plus an operation body, keep
+  the prelude's imports and the body's imports merged into a single leading
+  import block — do not leave the body's imports after the prelude's statements.
+
 
 ### Dedicated type pages & cross-links
 

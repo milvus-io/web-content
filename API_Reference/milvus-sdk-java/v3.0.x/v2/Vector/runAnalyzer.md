@@ -114,7 +114,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()

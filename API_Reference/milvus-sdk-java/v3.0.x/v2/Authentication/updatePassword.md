@@ -57,14 +57,35 @@ This operation returns no value.
 
 ## Example
 
+Updates a user password and optionally resets connections or changes the user description.
+
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.CreateUserReq;
 import io.milvus.v2.service.rbac.request.UpdatePasswordReq;
 
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+
+// 2. Create a user
+client.createUser(CreateUserReq.builder()
+    .userName("alice")
+    .password("Milvus-Password-123")
+    .description("Analytics user")
+    .build());
+
+// 3. Update the password
 client.updatePassword(UpdatePasswordReq.builder()
-    .userName("analyst_user")
-    .password("P@ssw0rd!")
-    .newPassword("N3wP@ssw0rd!")
+    .userName("alice")
+    .password("Milvus-Password-123")
+    .newPassword("Milvus-Password-456")
     .resetConnection(true)
-    .description("Read-only analyst account")
     .build());
 ```

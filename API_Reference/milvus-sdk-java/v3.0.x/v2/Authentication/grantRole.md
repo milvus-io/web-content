@@ -41,8 +41,9 @@ grantRole(GrantRoleReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
+import io.milvus.v2.service.rbac.request.CreateUserReq;
 import io.milvus.v2.service.rbac.request.GrantRoleReq;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -52,7 +53,12 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Grant role to a user
+
+// 2. Create a role and a user
+client.createRole(CreateRoleReq.builder().roleName("db_ro").build());
+client.createUser(CreateUserReq.builder().userName("test").password("Milvus-Password-123").build());
+
+// 3. Grant the role to the user
 GrantRoleReq grantRoleReq = GrantRoleReq.builder()
         .roleName("db_ro")
         .userName("test")

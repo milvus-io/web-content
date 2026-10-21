@@ -55,6 +55,9 @@ A **GetCompactionStateResp** instance, which comprises the following parameters:
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.utility.request.CompactReq;
 import io.milvus.v2.service.utility.request.GetCompactionStateReq;
 import io.milvus.v2.service.utility.response.CompactResp;
@@ -68,13 +71,23 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Compact a collection
-client.compact(CompactReq.builder()
-    .collectionName("my_collection")
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .build());
+
+
+// 3. Compact a collection and get the compaction ID
+CompactResp compactResp = client.compact(CompactReq.builder()
+    .collectionName("test")
     .build());
 
-// 3. Get the compaction status
+// 4. Get the compaction status
 client.getCompactionState(GetCompactionStateReq.builder()
-    .compactionID(3431948932481L)
+    .compactionID(compactResp.getCompactionID())
     .build());
 ```

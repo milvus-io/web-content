@@ -36,10 +36,14 @@ updateResourceGroups(UpdateResourceGroupsReq.builder()
 ## Example
 
 ```java
-import io.milvus.common.resourcegroup.*;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.common.resourcegroup.ResourceGroupConfig;
+import io.milvus.common.resourcegroup.ResourceGroupLimit;
+import io.milvus.v2.service.resourcegroup.request.CreateResourceGroupReq;
 import io.milvus.v2.service.resourcegroup.request.UpdateResourceGroupsReq;
+import java.util.HashMap;
+import java.util.Map;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -49,19 +53,32 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Prepare resource group config
+
+
+// 2. Create a resource group
 ResourceGroupLimit requests = new ResourceGroupLimit(1);
 ResourceGroupLimit limits = new ResourceGroupLimit(1);
-
 ResourceGroupConfig config = ResourceGroupConfig.newBuilder()
     .withRequests(requests)
     .withLimits(limits)
     .build();
+client.createResourceGroup(CreateResourceGroupReq.builder()
+    .groupName("rg1")
+    .config(config)
+    .build());
+
+// 3. Prepare the updated resource group config
+ResourceGroupLimit zeroRequests = new ResourceGroupLimit(0);
+ResourceGroupLimit zeroLimits = new ResourceGroupLimit(0);
+ResourceGroupConfig updatedConfig = ResourceGroupConfig.newBuilder()
+    .withRequests(zeroRequests)
+    .withLimits(zeroLimits)
+    .build();
 
 Map<String, ResourceGroupConfig> resourceGroups = new HashMap<>();
-resourceGroups.put("rg1", config);
+resourceGroups.put("rg1", updatedConfig);
 
-// 3. Update resource groups
+// 4. Update resource groups
 UpdateResourceGroupsReq updateResourceGroupsReq = UpdateResourceGroupsReq.builder()
     .resourceGroups(resourceGroups)
     .build();

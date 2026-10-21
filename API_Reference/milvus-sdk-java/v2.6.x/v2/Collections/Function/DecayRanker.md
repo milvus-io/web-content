@@ -91,6 +91,7 @@ A decay ranker instance.
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
+import io.milvus.common.clientenum.FunctionType;
 import java.util.Collections;
 
 // use the DecayRanker class

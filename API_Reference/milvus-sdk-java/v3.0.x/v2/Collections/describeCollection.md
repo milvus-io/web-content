@@ -127,12 +127,18 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 ## Example
 
+Returns metadata for a collection selected by name or ID.
+
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.collection.request.DescribeCollectionReq;
 import io.milvus.v2.service.collection.response.DescribeCollectionResp;
-import java.util.Set;
+import java.util.Collections;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -142,10 +148,24 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Get the collection detail
-DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
-        .collectionName("test")
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
         .build();
-DescribeCollectionResp describeCollectionResp = client.describeCollection(describeCollectionReq);
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("books")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
 
+// 3. Describe the collection
+DescribeCollectionResp collection = client.describeCollection(
+    DescribeCollectionReq.builder()
+        .databaseName("default")
+        .collectionName("books")
+        .build());
 ```

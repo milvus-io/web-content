@@ -72,6 +72,14 @@ A **FunctionChain** instance.
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChain;
+import io.milvus.v2.service.vector.request.FunctionChainArg;
+import io.milvus.v2.service.vector.request.FunctionChainExpr;
+import io.milvus.v2.service.vector.request.FunctionChainStage;
+import java.util.Arrays;
+import java.util.Collections;
+
+// Build a FunctionChain that reranks and reorders search results
 FunctionChain chain = FunctionChain.builder()
         .stage(FunctionChainStage.L2_RERANK)
         .name("fresh_popular_rerank")
@@ -85,13 +93,6 @@ FunctionChain chain = FunctionChain.builder()
         .sort("$score", true, "$id")
         .limit(10)
         .build();
-
-SearchResp response = client.search(SearchReq.builder()
-        .collectionName("my_collection")
-        .data(Collections.singletonList(queryVector))
-        .annsField("vector")
-        .functionChains(Collections.singletonList(chain))
-        .build());
 ```
 
 <!-- category: Vector; action: CREATE; addedSince: v3.0.x -->

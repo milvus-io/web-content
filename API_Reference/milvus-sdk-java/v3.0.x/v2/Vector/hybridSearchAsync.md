@@ -160,14 +160,27 @@ A future completed with a **SearchResp** object that contains search results, re
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.HybridSearchReq;
 import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.data.BaseVector;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.request.data.SparseFloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
 
+// 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
@@ -175,17 +188,53 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+// 2. Create a collection with dense and sparse vector fields
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("dense_vector").dataType(DataType.FloatVector).dimension(4).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("sparse_vector").dataType(DataType.SparseFloatVector).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Arrays.asList(
+                IndexParam.builder().fieldName("dense_vector").metricType(IndexParam.MetricType.COSINE).build(),
+                IndexParam.builder().fieldName("sparse_vector").metricType(IndexParam.MetricType.IP).build()))
+        .build());
+
+// 3. Insert a row and load the collection
+JsonObject row = new JsonObject();
+row.addProperty("id", 1L);
+row.add("dense_vector", new Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+JsonObject sparse = new JsonObject();
+sparse.addProperty("1", 0.2);
+sparse.addProperty("2", 0.8);
+row.add("sparse_vector", sparse);
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(row))
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
+
+// 4. Run a hybrid search asynchronously
+List<BaseVector> queryVector = Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+List<BaseVector> sparseVector = Collections.singletonList(new SparseFloatVec(new TreeMap<Long, Float>() {{
+    put(1L, 0.2f);
+}}));
+
 CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.builder()
         .collectionName("my_collection")
         .searchRequests(Arrays.asList(
                 AnnSearchReq.builder()
                         .vectorFieldName("dense_vector")
-                        .vectors(Collections.singletonList(queryVector))
+                        .vectors(queryVector)
+                        .limit(10)
                         .build(),
                 AnnSearchReq.builder()
                         .vectorFieldName("sparse_vector")
-                        .vectors(Collections.singletonList(sparseVector))
+                        .vectors(sparseVector)
+                        .limit(10)
                         .build()))
+        .limit(5)
         .build());
 SearchResp response = future.get();
 ```

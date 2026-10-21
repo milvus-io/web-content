@@ -43,16 +43,12 @@ This exception will be raised when any error occurs during this operation.
 
 ```java
 import io.milvus.v2.common.IndexParam;
-
-import java.util.HashMap;
+import java.util.Collections;
 
 IndexParam indexParam = IndexParam.builder()
     .fieldName("vector")
     .indexType(IndexParam.IndexType.HNSW)
     .metricType(IndexParam.MetricType.COSINE)
-    .extraParams(new HashMap<String, Object>() {{
-        put("M", 16);
-        put("efConstruction", 256);
-    }})
+    .extraParams(Collections.singletonMap("M", "16"))
     .build();
 ```

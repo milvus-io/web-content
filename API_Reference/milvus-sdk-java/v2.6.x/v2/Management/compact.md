@@ -68,10 +68,35 @@ A **CompactResp** object that contains a compaction ID. The object exposes the f
 Starts compaction for a collection, with optional clustering, L0, and target-size controls.
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.utility.request.CompactReq;
+import io.milvus.v2.service.utility.response.CompactResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .build());
+
+
+// 3. Compact the collection
 CompactResp response = client.compact(CompactReq.builder()
     .databaseName("default")
-    .collectionName("books")
-    .isClustering(true)
-    .targetSize(512L * 1024 * 1024)
+    .collectionName("test")
     .build());
 ```

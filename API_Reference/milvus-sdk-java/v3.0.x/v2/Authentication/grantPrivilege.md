@@ -68,8 +68,8 @@ grantPrivilege(GrantPrivilegeReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
 import io.milvus.v2.service.rbac.request.GrantPrivilegeReq;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -79,12 +79,16 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Grant privileges
+
+// 2. Create a role
+client.createRole(CreateRoleReq.builder().roleName("db_rw").build());
+
+// 3. Grant privileges
 GrantPrivilegeReq grantPrivilegeReq = GrantPrivilegeReq.builder()
         .roleName("db_rw")
-        .objectType("User")
-        .objectName("user_1")
-        .privilege("SelectUser")
+        .objectType("Global")
+        .objectName("*")
+        .privilege("DescribeCollection")
         .build();
 client.grantPrivilege(grantPrivilegeReq);
 ```

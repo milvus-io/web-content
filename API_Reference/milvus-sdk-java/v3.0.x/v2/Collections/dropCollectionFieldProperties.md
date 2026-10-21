@@ -49,9 +49,11 @@ None
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.DropCollectionFieldPropertiesReq;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import java.util.Collections;
-import java.util.Set;
+import io.milvus.v2.service.collection.request.DropCollectionFieldPropertiesReq;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -61,10 +63,20 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Drop field's properties
+// 2. Create a collection with an "id" field and a "vector" field
+String collectionName = "test";
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(collectionName)
+        .collectionSchema(collectionSchema)
+        .build());
+
+// 3. Drop field properties
 client.dropCollectionFieldProperties(DropCollectionFieldPropertiesReq.builder()
         .collectionName(collectionName)
-        .fieldName("fieldName")
-        .propertyKeys(Collections.singletonList(Constant.MMAP_ENABLED))
+        .fieldName("vector")
+        .propertyKeys(Collections.singletonList("mmap.enabled"))
         .build());
 ```

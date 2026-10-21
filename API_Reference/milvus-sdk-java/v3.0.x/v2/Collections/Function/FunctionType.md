@@ -41,8 +41,10 @@ An enum value describing the server-side function type.
 ## Example
 
 ```java
-FunctionType byName = FunctionType.fromName("MinHash");
-FunctionType byCode = FunctionType.fromCode(5);
+import io.milvus.common.clientenum.FunctionType;
+
+FunctionType byName = FunctionType.fromName("BM25");
+FunctionType byCode = FunctionType.fromCode(1);
 
 int code = byName.getCode();
 String name = byCode.getName();

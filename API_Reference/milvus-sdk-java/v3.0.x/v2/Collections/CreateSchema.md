@@ -9,7 +9,7 @@ public static CreateCollectionReq.CollectionSchema CreateSchema()
 ## Request Syntax
 
 ```java
-MilvusClientV2.createSchema()
+MilvusClientV2.CreateSchema()
 ```
 
 **PARAMETERS:**
@@ -32,7 +32,6 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -43,7 +42,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2 Quickly create a collectionSchema
-CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```

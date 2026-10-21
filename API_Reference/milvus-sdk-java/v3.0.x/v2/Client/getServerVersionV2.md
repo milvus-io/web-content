@@ -57,16 +57,25 @@ A **GetServerVersionResp** object that contains the version information of the c
 ## Example
 
 ```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.GetServerVersionReq;
+import io.milvus.v2.service.utility.response.GetServerVersionResp;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 GetServerVersionResp version = client.getServerVersionV2(GetServerVersionReq.builder()
-    .detail(true)
-    .build());
+        .detail(true)
+        .build());
 System.out.println(version.getVersion());
 System.out.println(version.getGitCommit());
 ```
 
-<!-- category: Client; action: CREATE; addedSince: v3.0.x -->
+## Related operations
+
+- [getServerVersion()](../Management/getServerVersion.md)

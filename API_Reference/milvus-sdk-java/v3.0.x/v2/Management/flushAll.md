@@ -46,16 +46,27 @@ A **FlushAllResp** object that contains the flush-all timestamp.
 ## Example
 
 ```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-    .uri("http://localhost:19530")
-    .token("root:Milvus")
-    .build());
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.FlushAllReq;
+import io.milvus.v2.service.utility.response.FlushAllResp;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 FlushAllResp resp = client.flushAll(FlushAllReq.builder()
-    .databaseName("default")
-    .waitFlushedTimeoutMs(60000L)
-    .build());
+        .databaseName("default")
+        .waitFlushedTimeoutMs(60000L)
+        .build());
 System.out.println(resp.getFlushAllTs());
 ```
 
-<!-- category: Management; action: CREATE; addedSince: v3.0.x -->
+## Related operations
+
+- [getFlushAllState()](getFlushAllState.md)
+
+- [flush()](flush.md)

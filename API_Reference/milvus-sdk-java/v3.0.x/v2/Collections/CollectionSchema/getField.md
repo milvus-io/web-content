@@ -35,7 +35,15 @@ A [FieldSchema](../FieldSchema.md) object containing details of the field.
 ## Example
 
 ```java
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+// 2. Define a Collection Schema with an "id" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+
+// 3. Get the field by name
 CreateCollectionReq.FieldSchema fieldSchema = collectionSchema.getField("id");
 ```

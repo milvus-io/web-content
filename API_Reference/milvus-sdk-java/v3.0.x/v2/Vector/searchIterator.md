@@ -120,14 +120,21 @@ import io.milvus.response.QueryResultsWrapper;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.DataType;
 import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchIteratorReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -137,8 +144,36 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Iterator search
-List<Float> vector = generateFloatVector();
+// 2. Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.L2)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+for (long i = 0; i < 200; i++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", i);
+    row.add("vector", new Gson().toJsonTree(new float[]{i * 0.01f, i * 0.02f}));
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("test")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("test").build());
+
+// 4. Iterator search
+List<Float> vector = Arrays.asList(0.1f, 0.2f);
 SearchIterator searchIterator = client.searchIterator(SearchIteratorReq.builder()
         .collectionName("test")
         .outputFields(Lists.newArrayList("vector"))

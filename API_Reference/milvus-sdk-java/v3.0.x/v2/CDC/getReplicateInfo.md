@@ -74,11 +74,21 @@ A **GetReplicateInfoResp** object that contains the checkpoint and salvage check
 ## Example
 
 ```java
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.cdc.request.GetReplicateInfoReq;
+import io.milvus.v2.service.cdc.response.GetReplicateInfoResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
     .uri("http://localhost:19530")
     .token("root:Milvus")
-    .build());
+    .build();
 
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+
+// 2. Get replication info for a cluster and channel
 GetReplicateInfoResp resp = client.getReplicateInfo(GetReplicateInfoReq.builder()
     .sourceClusterId("cluster-a")
     .targetPchannel("by-dev-rootcoord-dml_0_123v0")

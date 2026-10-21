@@ -115,6 +115,42 @@ This operation does not return a value.
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.AddFunctionFieldReq;
+import java.util.Collections;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("books")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+
+
+// 3. Add a BM25 function field (requires StorageV3 enabled on the server)
 CreateCollectionReq.Function bm25Function = CreateCollectionReq.Function.builder()
     .name("bm25")
     .functionType(FunctionType.BM25)

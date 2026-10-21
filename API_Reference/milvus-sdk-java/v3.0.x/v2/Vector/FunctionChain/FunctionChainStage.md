@@ -39,6 +39,10 @@ io.milvus.v2.service.vector.request.FunctionChainStage
 ## Example
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionChain;
+import io.milvus.v2.service.vector.request.FunctionChainStage;
+
+// Build a FunctionChain with a rerank stage
 FunctionChain chain = FunctionChain.builder()
         .stage(FunctionChainStage.L2_RERANK)
         .name("fresh_popular_rerank")

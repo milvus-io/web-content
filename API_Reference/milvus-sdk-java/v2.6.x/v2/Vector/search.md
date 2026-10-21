@@ -206,17 +206,79 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 ## Example
 
 ```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
 import io.milvus.v2.service.vector.response.SearchResp;
-
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-// Build a DecayRanker to rerank results by field value proximity
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create a collection with a "text" field, a BM25 output field "sparse_vector",
+// and "birth_year"/"lifespan" fields used for reranking
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("text").dataType(DataType.VarChar).maxLength(512).enableAnalyzer(Boolean.TRUE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("sparse_vector").dataType(DataType.SparseFloatVector).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("birth_year").dataType(DataType.Int64).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("lifespan").dataType(DataType.Int64).build());
+collectionSchema.addFunction(CreateCollectionReq.Function.builder()
+        .functionType(FunctionType.BM25)
+        .name("text_bm25")
+        .inputFieldNames(Collections.singletonList("text"))
+        .outputFieldNames(Collections.singletonList("sparse_vector"))
+        .build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("sparse_vector")
+        .metricType(IndexParam.MetricType.BM25)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+JsonObject row1 = new JsonObject();
+row1.addProperty("id", 1L);
+row1.addProperty("text", "Albert Darwin was born in 1809 and died in 1882");
+row1.addProperty("birth_year", 1809L);
+row1.addProperty("lifespan", 73L);
+rows.add(row1);
+JsonObject row2 = new JsonObject();
+row2.addProperty("id", 2L);
+row2.addProperty("text", "Artificial intelligence was founded as an academic discipline in 1956");
+row2.addProperty("birth_year", 1956L);
+row2.addProperty("lifespan", 0L);
+rows.add(row2);
+client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
+
+// 4. Build a DecayRanker to rerank results by field value proximity
 DecayRanker decay = DecayRanker.builder()
         .name("birth_year_decay")
         .inputFieldNames(Collections.singletonList("birth_year"))
@@ -227,7 +289,7 @@ DecayRanker decay = DecayRanker.builder()
         .decay(0.1)
         .build();
 
-// Search with FunctionScore for reranking
+// 5. Search with FunctionScore for reranking
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(new EmbeddedText("Albert Darwin")))

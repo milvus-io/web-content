@@ -77,10 +77,14 @@ alterCollectionField(AlterCollectionFieldReq.builder()
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.AlterCollectionFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -90,7 +94,22 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Alter the \`max_length\` property of a VarChar field named \`varchar\`
+// 2. Create a collection with an "id" field, a "vector" field, and a "varchar" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("varchar").dataType(DataType.VarChar).maxLength(256).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Alter the `max_length` property of a VarChar field named `varchar`
 Map<String, String> properties = new HashMap<>();
 properties.put("max_length", "512");
 

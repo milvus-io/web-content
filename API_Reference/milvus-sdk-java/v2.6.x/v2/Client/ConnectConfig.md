@@ -158,6 +158,7 @@ import io.milvus.v2.client.MilvusClientV2;
 // Connect to a local Milvus instance
 ConnectConfig config = ConnectConfig.builder()
     .uri("http://localhost:19530")
+    .token("root:Milvus") // replace this with your token
     .build();
 
 // Connect to Zilliz Cloud with an API key

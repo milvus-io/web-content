@@ -78,8 +78,19 @@ A **DeleteResp** object contains the number of deleted entities and the operatio
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.vector.request.DeleteReq;
+import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.response.DeleteResp;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -89,7 +100,35 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Delete entities with filter "id > 10"
+// 2. Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 3. Insert rows and load the collection
+List<JsonObject> rows = new ArrayList<>();
+for (long id = 0; id < 20; id++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", id);
+    row.add("vector", new Gson().toJsonTree(new float[]{id * 0.1f, id * 0.2f}));
+    rows.add(row);
+}
+client.insert(InsertReq.builder()
+        .collectionName("test")
+        .data(rows)
+        .build());
+client.loadCollection(LoadCollectionReq.builder().collectionName("test").build());
+
+// 4. Delete entities with filter "id > 10"
 DeleteReq deleteReq = DeleteReq.builder()
         .collectionName("test")
         .filter("id > 10")

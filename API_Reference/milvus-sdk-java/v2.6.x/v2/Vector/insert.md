@@ -65,10 +65,19 @@ An **InsertResp** object containing information about the number of inserted ent
 ## Example
 
 ```java
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
 import io.milvus.v2.service.vector.request.InsertReq;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -78,18 +87,26 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Add one row to the collection, the collection has an "id" field
-// and a "vector" field with dimension 2
-JsonObject row = new JsonObject();
-List<Float> vectorList = new ArrayList<>();
-vectorList.add(1.0f);
-vectorList.add(2.0f);
-row.add("vector", gson.toJsonTree(vectorList));
-row.addProperty("id", 0L);
+// 2. Create a collection with an "id" field and a "vector" field with dimension 2
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
 
-InsertReq insertReq = InsertReq.builder()
+// 3. Insert one row
+JsonObject row = new JsonObject();
+row.addProperty("id", 0L);
+row.add("vector", new Gson().toJsonTree(new float[]{1.0f, 2.0f}));
+client.insert(InsertReq.builder()
         .collectionName("test")
         .data(Collections.singletonList(row))
-        .build();
-client.insert(insertReq);
+        .build());
 ```

@@ -110,9 +110,11 @@ A **DescribeResourceGroupResp** object contains the following getters:.
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.common.resourcegroup.ResourceGroupConfig;
+import io.milvus.common.resourcegroup.ResourceGroupLimit;
+import io.milvus.v2.service.resourcegroup.request.CreateResourceGroupReq;
 import io.milvus.v2.service.resourcegroup.request.DescribeResourceGroupReq;
 import io.milvus.v2.service.resourcegroup.response.DescribeResourceGroupResp;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -122,7 +124,20 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Describe the resource group  
+
+// 2. Create a resource group
+ResourceGroupLimit requests = new ResourceGroupLimit(1);
+ResourceGroupLimit limits = new ResourceGroupLimit(1);
+ResourceGroupConfig config = ResourceGroupConfig.newBuilder()
+    .withRequests(requests)
+    .withLimits(limits)
+    .build();
+client.createResourceGroup(CreateResourceGroupReq.builder()
+    .groupName("rg1")
+    .config(config)
+    .build());
+
+// 3. Describe the resource group  
 DescribeResourceGroupReq describeResourceGroupReq = DescribeResourceGroupReq.builder()
     .groupName("rg1")
     .build();

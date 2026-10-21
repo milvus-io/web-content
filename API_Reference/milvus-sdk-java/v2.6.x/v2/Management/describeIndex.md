@@ -112,8 +112,14 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
 import io.milvus.v2.service.index.request.DescribeIndexReq;
 import io.milvus.v2.service.index.response.DescribeIndexResp;
+import java.util.Collections;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -123,7 +129,29 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Describe the index for the field "vector"
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .build());
+
+
+
+// 3. Create an index for the field "vector"
+IndexParam indexParam = IndexParam.builder()
+        .metricType(IndexParam.MetricType.COSINE)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .fieldName("vector")
+        .build();
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("test")
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+// 4. Describe the index for the field "vector"
 DescribeIndexReq describeIndexReq = DescribeIndexReq.builder()
         .collectionName("test")
         .fieldName("vector")

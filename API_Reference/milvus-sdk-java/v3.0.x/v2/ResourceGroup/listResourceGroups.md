@@ -44,7 +44,6 @@ import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.resourcegroup.request.ListResourceGroupsReq;
 import io.milvus.v2.service.resourcegroup.response.ListResourceGroupsResp;
 import java.util.List;
-import java.util.Set;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -54,9 +53,12 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+
+
 // 2. List resource groups    
 ListResourceGroupsReq listResourceGroupsReq = ListResourceGroupsReq.builder()
     .build();
-ListResourceGroupsResp groupNames = client.listResourceGroups(listResourceGroupsReq);
+ListResourceGroupsResp listResp = client.listResourceGroups(listResourceGroupsReq);
+List<String> groupNames = listResp.getGroupNames();
 ```
 

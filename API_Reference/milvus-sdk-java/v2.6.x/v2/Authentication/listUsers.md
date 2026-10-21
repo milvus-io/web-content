@@ -31,6 +31,7 @@ A list of strings containing the user names.
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import java.util.List;
 
 // 1. Set up a client
 ConnectConfig connectConfig = ConnectConfig.builder()
@@ -39,6 +40,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .build();
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
 
 // 2. List users
 List<String> resp = client.listUsers();

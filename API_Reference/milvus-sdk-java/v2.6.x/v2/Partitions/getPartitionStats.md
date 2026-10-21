@@ -58,6 +58,12 @@ A **GetPartitionStatsResp** object containing collected statistics on the specif
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Collections;
+import io.milvus.v2.service.partition.request.CreatePartitionReq;
 import io.milvus.v2.service.partition.request.GetPartitionStatsReq;
 import io.milvus.v2.service.partition.response.GetPartitionStatsResp;
 
@@ -69,10 +75,31 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-// 2. Get partition stats
+// 2. Create a collection with an "id" field and a "vector" field
+CreateCollectionReq.CollectionSchema collectionSchema = MilvusClientV2.CreateSchema();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("test")
+        .collectionSchema(collectionSchema)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+
+// 3. Create a partition
+client.createPartition(CreatePartitionReq.builder()
+        .collectionName("test")
+        .partitionName("test_partition")
+        .build());
+
+// 4. Get partition stats
 GetPartitionStatsReq getPartitionStatsReq = GetPartitionStatsReq.builder()
         .collectionName("test")
-        .partitionName("default")
+        .partitionName("test_partition")
         .build();
 GetPartitionStatsResp getPartitionStatsResp = client.getPartitionStats(getPartitionStatsReq);
 ```
