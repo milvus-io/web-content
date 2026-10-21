@@ -1,5 +1,13 @@
 # has_connection()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation checks if a connection with the given alias has already been established.
 
 ## Request Syntax

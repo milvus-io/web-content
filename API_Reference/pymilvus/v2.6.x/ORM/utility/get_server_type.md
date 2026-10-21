@@ -1,5 +1,13 @@
 # get_server_type()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation checks the type of the Milvus instance.
 
 ## Request syntax

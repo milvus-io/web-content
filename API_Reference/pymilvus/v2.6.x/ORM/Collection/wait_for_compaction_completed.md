@@ -1,5 +1,13 @@
 # wait_for_compaction_completed()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation blocks the current session until the compaction request is completed.
 
 ## Request Syntax

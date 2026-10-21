@@ -1,5 +1,13 @@
 # hybrid_search()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation performs multi-vector search on a collection and returns search results after reranking.
 
 ## Request Syntax

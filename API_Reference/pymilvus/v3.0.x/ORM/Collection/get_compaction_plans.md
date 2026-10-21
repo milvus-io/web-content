@@ -1,5 +1,13 @@
 # get_compaction_plans()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation gets the current compaction plans.
 
 ## Request Syntax

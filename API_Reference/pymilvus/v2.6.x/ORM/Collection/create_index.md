@@ -1,5 +1,13 @@
 # create_index()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This creates a named index for a target field, which can either be a vector field or a scalar field.
 
 <div class="alert note">

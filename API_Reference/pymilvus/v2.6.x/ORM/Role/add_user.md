@@ -1,5 +1,13 @@
 # add_user()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation adds an existing user to the current role. Once added, the user gets permissions allowed for the current role and can perform certain operations.
 
 ## Request Syntax

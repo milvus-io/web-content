@@ -1,5 +1,13 @@
 # list_connections()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation returns a list of all connection names and handler objects.
 
 ## Request Syntax

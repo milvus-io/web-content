@@ -1,5 +1,13 @@
 # get_replicas()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation gets information about the current loaded replica.
 
 ## Request Syntax
@@ -23,6 +31,14 @@ get_replicas(
 **RETURNS:**
 
 A **Replica** object that contains the following fields:
+
+<div class="alert warning">
+
+**Deprecated.**
+
+The `Replica` and `Group` response classes are deprecated. Use `ReplicaInfo` objects or a `List[ReplicaInfo]` instead.
+
+</div>
 
 - **groups** (*list*)
 

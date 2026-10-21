@@ -1,5 +1,13 @@
 # query()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation conducts a scalar filtering with a specified boolean expression.
 
 ## Request Syntax

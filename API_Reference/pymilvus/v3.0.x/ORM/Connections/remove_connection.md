@@ -1,5 +1,13 @@
 # remove_connection()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation removes the connection from the registry by the given alias and disconnects if connected.
 
 ## Request Syntax

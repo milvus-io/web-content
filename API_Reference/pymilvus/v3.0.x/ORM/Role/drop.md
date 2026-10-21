@@ -1,5 +1,13 @@
 # drop()
 
+<div class="alert warning">
+
+**Deprecated.**
+
+This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `MilvusClient` instead.
+
+</div>
+
 This operation drops an existing role. The operation will succeed if the specified role exists. Otherwise, this operation will fail.
 
 ## Request Syntax

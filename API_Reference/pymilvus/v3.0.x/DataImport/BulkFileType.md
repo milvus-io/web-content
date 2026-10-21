@@ -4,13 +4,25 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
+- **NUMPY** = 1
+
+    Sets the file type to **NumPy** (*.npy*).
+
 - **NPY** = 1
+
+    **Deprecated.** Use **NUMPY** instead.
 
     Sets the file type to **NumPy** (*.npy*).
 
 - **JSON** = 2
 
-    Sets the file type to **JSON** (*.json*). 
+    Sets the file type to **JSON** (*.json*).
+
+- **JSON_RB** = 2
+
+    **Deprecated.** Use **JSON** instead.
+
+    Sets the file type to row-based **JSON** (*.json*).
 
 - **PARQUET** = 3
 
@@ -19,6 +31,10 @@ This is an enumeration that provides the following constants.
 - **CSV** = 4
 
     Sets the file type to **CSV** (*.csv*).
+
+- **JSONL** = 5
+
+    Sets the file type to JSON Lines (*.jsonl*).
 
 ## Examples
 

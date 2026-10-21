@@ -10,6 +10,14 @@ pymilvus.AsyncMilvusClient
 
 Constructs a client for common use cases.
 
+<div class="alert warning">
+
+**Deprecated method.**
+
+`using_database()` is deprecated and will be removed in PyMilvus 3.1. Use `use_database()` instead.
+
+</div>
+
 <div class="alert note">
 
 - This interface is still in its early stage and may change significantly in future releases. You are advised not to use it in production.

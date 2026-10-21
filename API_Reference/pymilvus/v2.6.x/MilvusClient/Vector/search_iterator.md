@@ -54,6 +54,14 @@ search_iterator(
 
     The total number of entities to return.
 
+    <div class="alert warning">
+
+    **Deprecated.**
+
+    The `limit` parameter is deprecated and will be removed in a future release. Control the result volume with `batch_size` instead.
+
+    </div>
+
     The `offset` parameter is not supported by this operation.
 
 - **output_fields** (l*ist[str]*) -
