@@ -115,7 +115,9 @@ local directory via this table before editing. Current latest version line is
 - **Response surface** (see SKILL.md Pass 1): response classes live in
   `src/include/milvus/response/<category>/XxxResponse.h`; nested output types in
   `src/include/milvus/types/*.h`. Reconcile each operation page's
-  `**RETURNS:**` block against these:
+  `**RETURNS:**` block against them. Response wrapper getters stay inline in the
+  operation page, while reusable domain types returned by those getters may have
+  dedicated pages.
 
   ```bash
   # side A: public getters on the response class (getter return type may be on
@@ -138,10 +140,11 @@ local directory via this table before editing. Current latest version line is
   - Existing docs were transcribed from code comments, so typos flow from code
     into docs (e.g. "avaiable" in both `QueryRequest.h` and `Vector/Query.md`).
     Fix in docs; flag (don't silently edit) the code comment.
-  - `FieldData` is a shared cpp/rust-only leaf data-container type. It is NOT on
-    the generic SKILL.md dedicated-page list; if a page for it is added, keep it
-    scoped to this section (cpp) and the rust section — e.g. rust documents it at
-    `Vector/FieldData.md`.
+  - `FieldData` is a shared cpp/rust-only leaf data-container type. It is an
+    exception to inline response-wrapper documentation because it is a reusable
+    public data model, not an operation response wrapper; its dedicated page is
+    scoped to cpp and rust — e.g. rust documents it at `Vector/FieldData.md`.
+    Do not expand its large accessor surface recursively; link the page instead.
   - New internal-only headers (e.g. `BloomFilter.h`) are cache types — skip, do
     not create a page unless the symbol surfaces in a public request/response.
   - **`= delete` methods are hidden, not available.** Some request classes
@@ -335,14 +338,17 @@ local directory via this table before editing. Current latest version line is
   git -C sdk-tmp/sdks/milvus show client/v3.0.0:client/milvusclient/results.go | \
     grep -oE "^type (ResultSet|InsertResult|UpsertResult|DeleteResult) struct" 
   git -C sdk-tmp/sdks/milvus grep -n "ResultCount\|^type ResultSet struct" client/v3.0.0 -- client/milvusclient/results.go
-  # side B: members documented on the page (nested members are indented)
-  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-go/v3.0.x/Vector/ResultSet.md | \
+  # side B: members documented inline in the operation's RETURNS block
+  # (nested members are indented)
+  grep -oE "^\s*- \*\*[A-Za-z_]+\*\*" API_Reference/milvus-sdk-go/v3.0.x/Vector/Insert.md | \
     sed -E 's/^\s*- \*\*([A-Za-z_]+)\*\*/\1/' | sort -u
   ```
-  Go pages document result types either as a dedicated `<Type>.md` page
-  (`Vector/ResultSet.md`, `Vector/InsertResult.md`, ...) or as a nested member
-  list under the operation's `**RETURNS:**` — match whichever the tree already
-  uses for that operation.
+  Go operation response/result wrappers (`ResultSet`, `InsertResult`,
+  `UpsertResult`, `DeleteResult`, task handles, and bulk-writer response
+  structs) are documented inline under the operation's `**RETURN TYPE:**` /
+  `**RETURNS:**`; do not create or preserve standalone wrapper pages during
+  reconciliation. Reusable domain types reached through wrapper members (for
+  example `entity.Collection`) may have dedicated pages and must be linked.
 
 - **Blacklist**: `Client.GetService()` (returns the raw gRPC
   `milvuspb.MilvusServiceClient`) is a test/trusted backdoor and is **blacklisted**
@@ -428,7 +434,9 @@ local directory via this table before editing. Current latest version line is
 - **Response surface** (see SKILL.md Pass 1): result classes live flat in
   `Milvus.Client/` (`SearchResults.cs`, `MutationResult.cs`, `RoleResult.cs`,
   `UserResult.cs`, `FlushResult.cs`, `GrantResult.cs`, `QuerySegmentResult.cs`,
-  ...). Reconcile each operation page's return section against them:
+  ...). Reconcile each operation page's return section against them. Result
+  wrappers stay inline under `**RETURN TYPE:**` / `**RETURNS:**`, and reusable
+  domain types returned by their properties may have dedicated pages.
 
   ```bash
   # side A: public getter properties of a result class at a tag
@@ -486,7 +494,9 @@ local directory via this table before editing. Current latest version line is
   `src/v2/client/utility.rs` (e.g. `OptimizeTask`). Reconcile each operation
   page's return section against them. Extract the **accessor methods with
   return types** from the `impl XxxResponse` block — NOT the raw struct fields
-  (the RETURNS/METHODS list documents getters only). Brace-balance the impl
+  Response wrappers stay inline under `**RETURN TYPE:**` / `**RETURNS:**`;
+  reusable domain types such as `FieldData` keep dedicated pages and are linked.
+  Brace-balance the impl
   block; a naive "cut at the first `\n}`" conflates methods of the *next* impl
   (this corrupted Rust `SingleResult` with `QueryResults`' getters). Resolve
   type aliases first: `InsertResponse = UpsertResponse = DeleteResponse =

@@ -123,6 +123,16 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.5.x | [2.5.6](https://github.com/milvus-io/milvus/tree/client/v2.5.6/client) |
 | 2.6.x | [2.6.5](https://github.com/milvus-io/milvus/tree/client/v2.6.5/client) |
 
+## Breaking Changes
+
+### 2.6.4
+
+- The Go module requires Go 1.25.8 or later. Upgrade the Go toolchain before updating the dependency.
+
+### 2.6.5
+
+- `AddCollectionField` rejects vector fields added to an existing collection unless the field is marked nullable. Set `nullable=true` on the vector field schema before adding it.
+
 Note: Milvus and GO SDK are NOT compatible across major versions.
 
 ## Contributing

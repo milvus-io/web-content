@@ -53,9 +53,9 @@ result, err := client.HybridSearch(ctx, option)
 
     Specifies which fields to include in the returned results.
 
-- `WithReranker(reranker Reranker)`
+- `WithReranker(reranker [Reranker](Reranker.md))`
 
-    Sets the reranker for the operation.
+    Sets the reranker used to combine and rank the per-field results. Use `NewRRFReranker()` or `NewWeightedReranker()` to create one.
 
 - `WithFunctionRerankers(functionReranker *[entity.Function](../Collection/Function.md))`
 

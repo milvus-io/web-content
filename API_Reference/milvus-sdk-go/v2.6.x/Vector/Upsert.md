@@ -22,6 +22,14 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **BUILDER METHODS:**
 
+- `NewColumnBasedInsertOption(collName string, columns ...column.Column)`
+
+    This creates an upsert option from columns. Build the request with the `With*Column` methods below.
+
+- `NewRowBasedInsertOption(collName string, rows ...any)`
+
+    This creates an upsert option from row values. Chain `WithPartition`, `WithPartialUpdate`, `WithArrayAppend`, `WithArrayRemove`, `WithFieldPartialOp`, or `WithKeepAutoIDPk`.
+
 - `WithColumns(columns ...column.Column)`
 
     This appends the supplied columns to the write request.
@@ -100,11 +108,28 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **RETURN TYPE:**
 
-*[UpsertResult](UpsertResult.md), error*
+*UpsertResult, error*
 
 **RETURNS:**
 
-Returns the affected row count and primary keys, plus an error when request construction or the RPC fails.
+Contains the result of an Upsert operation including the count and IDs of affected entities.
+
+```go
+type UpsertResult struct {
+    UpsertCount int64
+    IDs column.Column
+}
+```
+
+**FIELDS:**
+
+- **UpsertCount** (*int64*)
+
+    The number of affected entities.
+
+- **IDs** (*column.Column*)
+
+    The IDs of the affected entities.
 
 **ERROR HANDLING:**
 

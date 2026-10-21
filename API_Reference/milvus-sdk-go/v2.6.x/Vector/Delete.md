@@ -44,11 +44,23 @@ result, err := client.Delete(ctx, option)
 
 **RETURN TYPE:**
 
-*[DeleteResult](DeleteResult.md), error*
+*DeleteResult, error*
 
 **RETURNS:**
 
-The delete result. Returns an error if the operation fails.
+Contains the result of a Delete operation including the count of deleted entities.
+
+```go
+type DeleteResult struct {
+    DeleteCount int64
+}
+```
+
+**FIELDS:**
+
+- **DeleteCount** (*int64*)
+
+    The number of affected entities.
 
 **ERROR HANDLING:**
 
