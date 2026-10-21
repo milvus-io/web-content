@@ -2,175 +2,110 @@
 id: roadmap.md
 title: Milvus Roadmap
 related_key: Milvus roadmap
-summary: Milvus is an open-source vector database built to power AI applications. Here is our roadmap to guide our development.
+summary: Explore the Milvus roadmap for search, analytics, schema evolution, lake integration, and performance across the 3.0 and 3.1 releases.
 ---
 
 # Milvus Roadmap
 
-## 🌌 Toward the Next-Gen Multimodal Database and Data Lake
+Milvus 3.0 brings together multi-vector retrieval, SQL-style querying, flexible schemas, and access to data in lake storage. The next stages build on that foundation with richer queries, broader data models, and improvements to performance and scale. This roadmap outlines those priorities for open-source Milvus.
 
-**Milvus Product Roadmap**  
+Milvus 3.0 is generally available starting with **v3.0.1**. The released capabilities below were introduced in **v3.0.0**; preview features and opt-in capabilities are identified where they appear. The **3.0.x** series extends these capabilities, while **3.1 targets December 2026**. Planned features and target dates may change as development progresses.
 
-Welcome to the Milvus Roadmap!  
+## Search and retrieval
 
-We are ushering Milvus into a new era — the next-generation multimodal database — spanning **structured to unstructured data**, **real-time retrieval to offline analytics**, and **single-cluster performance to a global data lake architecture**.  
+The retrieval roadmap focuses on combining more relevance signals within Milvus, from text matching and multi-vector representations to reranking and search-result facets.
 
-This roadmap outlines the core objectives for **Milvus v2.6 (in progress)**, **Milvus v3.0 (targeted for late 2026)**, and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Vector Lake (data lake / Loon)**.
+**Available in 3.0**
 
-## 🧩 Milvus v2.6 (In Progress)
+- **Multi-vector retrieval:** StructArray search supports Muvera and Lemur, with `element_filter` for element-level filtering. Match policies include `MATCH_ANY`, `MATCH_ALL`, `MATCH_LEAST`, `MATCH_MOST`, and `MATCH_EXACT`.
+- **Text matching and similarity:** Custom dictionaries and synonyms adapt text retrieval to application needs. Regex filtering supports pattern matching, and MinHash supports near-duplicate detection.
+- **Reranking and inference:** Milvus 3.0 introduces an initial set of Function Chain reranking capabilities, along with the Hugging Face Inference Provider. The remaining Function Chain capabilities are planned for 3.0.x.
+- **Search aggregation:** Search aggregation provides facets over search results.
 
-**Timeline: Mid-2025 – End of 2025**  
+**Planned for 3.0.x**
 
-Focus: **Upgrading the data model**, **refactoring the streaming architecture**, **building hot/cold tiering capabilities**, and launching the **Vector Lake Prototype (v0.1)**.
+The 3.0.x series is planned to add fuzzy matching and global statistics, and complete Function Chain support.
 
-### 🎯 Key Highlights
+**Planned for 3.1**
 
-#### 🔹 **Data Model Upgrade**
+Plans include Grep-based retrieval, tighter integration of approximate nearest neighbor (ANN) search and filtering through ANN-filter fusion, and improvements to sparse retrieval.
 
-- Introduce a unified **Tensor / StructList** data type to support multi-vector embedding structures, enabling compatibility with *ColBERT*, *CoLQwen*, *video*, and *multimodal vectors*.
+## Analytics and SQL-style querying
 
-- Add **Geo Data** support, including points, regions, and spatial indexing (based on *libspatial*), to expand use cases in LBS and GIS.
+Milvus is extending its query engine so applications can sort and aggregate data alongside retrieval. The next stage adds joins, materialized views, and custom computation.
 
-- Support for **Timestamp with Timezone** data type.
+**Available in 3.0**
 
-#### 🔹 **StreamNode Architecture Refactor**
+Query and search support sorting with `ORDER BY`. Query Aggregation adds `GROUP BY` for computing grouped statistics.
 
-- Rewrite the streaming ingestion pipeline to optimize incremental writes and real-time computation.
+**Planned for 3.1**
 
-- Significantly improve concurrency performance and stability, laying the foundation for unified real-time and offline processing.
+- **Richer queries:** Introduce joins, starting with semi-joins, and Materialized View Collections.
+- **Data updates and integrity:** Support in-place updates and primary-key deduplication during ingestion.
+- **Query iteration and JSON semantics:** Add a stateful query iterator, JSON `GROUP BY`, and SQL / JSON NULL semantics.
+- **Custom computation:** Support Python user-defined functions (UDFs).
 
-- Introduce a new message queue engine: **Woodpecker**.
+## Flexible schema and data types
 
-#### 🔹 **Hot/Cold Tiering & Storage Architecture (StorageV2)**
+Schema work focuses on evolving existing collections and representing a wider range of data. It covers field changes, multi-vector structures, long text, and entity expiration.
 
-- Support dual storage formats: **Parquet** and **Vortex**, enhancing concurrency and memory efficiency.
+**Available in 3.0**
 
-- Implement tiered storage with automatic hot/cold data separation and intelligent scheduling.
+- **Online schema changes:** Existing collections support online field addition, including vector and `Array<Struct>` fields. Dropping fields is available in **preview** and may have limitations.
+- **Backfill for existing data:** External backfill uses the Spark Connector. Internal backfill attaches a BM25 or MinHash function to a collection and computes its output over existing data.
+- **Text and multi-vector data:** The `TEXT` type stores long text, while StructArray supports late-interaction retrieval through `MAX_SIM`. `TEXT` requires opt-in Storage V3.
+- **NULL values and expiration:** Vector fields accept NULL values, and entity-level time to live (TTL) controls expiration.
 
-#### 🔹 **Vector Lake Prototype (v0.1)**
+**Planned for 3.0.x**
 
-- Integrate with **Spark** / **DuckDB** / **DataFusion** via FFI, enabling offline schema evolution and KNN queries.
+Planned schema enhancements expand StructArray support for types, NULL values, and field addition and removal. They also add molecular formula support and `IS NULL` / `IS NOT NULL` filters for vector fields.
 
-- Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.
+**Planned for 3.1**
 
-## 🌠 Milvus v3.0 (Targeted for Early 2026)
+The next data-model extensions include nested JSON and Struct, composite primary keys, collections without vector fields, and sparse vectors in StructList.
 
-**Timeline: Late 2025 – Early 2026**  
+## Lake integration and data versioning
 
-Focus: Comprehensive enhancements to **search experience**, **schema flexibility**, and **unstructured data support**, along with the release of **Vector Lake (v0.2)**.
+Milvus is developing closer integration with lake storage and batch processing. External collections provide access to data where it resides, while snapshots provide a foundation for data versioning.
 
-### 🎯 Key Highlights
+**Available in 3.0**
 
-#### 🔹 **Search Experience Overhaul**
+- **External data access:** External Collection supports Lance, Parquet, and Iceberg data.
+- **Snapshots and batch integration:** Snapshot captures a version of collection data, and the Spark Connector supports batch workflows.
+- **Storage foundation:** Storage V3 (Loon) provides opt-in Vortex and Lance support. It is disabled by default and is enabled through `common.storage.useLoonFFI`. Both Snapshot and `TEXT` depend on it.
 
-- Introduce **More Like This (MLT)** similarity search with support for searches with position or negative examples.
+**Planned for 3.0.x**
 
-- Add semantic search capabilities such as **highlighting** and **boosting**.
+Planned enhancements allow a Milvus collection snapshot to serve as an external collection. External-table support also expands to JSON shredding, function-field addition, and field removal.
 
-- Support **custom dictionaries** and **synonym tables**, enabling lexical and semantic rule definitions at the Analyzer layer.
+**Planned for 3.1**
 
-- Introduce **aggregation** capabilities for queries.
+Plans include S3-based sparse and scalar indexes, along with deletion through import.
 
-#### 🔹 **Multi-Tenancy & Resource Management**
+## Performance, indexing, and scale
 
-- Enable multi-tenant deletion, statistics, and hot/cold tiering.
+The performance roadmap covers retrieval indexes, query execution, and cluster growth. It also addresses recovery and queries that must read data from object storage.
 
-- Improve resource isolation and scheduling strategies to support millions of tables in a single cluster.
+**Available in 3.0**
 
-#### 🔹 **Schema & Primary Key Enhancements**
+- **Sparse indexing:** The sparse index overhaul introduces SINDI.
+- **Index choice:** The `FAISS` passthrough index accepts Faiss index-factory strings, with options including SVS, Panorama, PQ, IVFPQ, and ScaNN. DiskANN indexing is also available for embedding lists (EmbList).
+- **Compaction:** Force Merge provides explicit control over segment merging.
 
-- Implement **Global Primary Key Deduplication (Global PK Dedup)** to guarantee data consistency and uniqueness.
+**Planned for 3.1**
 
-- Support **flexible schema management** (adding/dropping columns, backup fill).
+- **Storage-aware queries:** Add predicate pushdown for Vortex, including page-level pruning and skip indexes.
+- **Cluster growth and tenancy:** Support shard splitting, custom sharding keys, and multi-tenancy optimizations.
+- **Query execution and indexing:** Develop QueryView, improve support for wide collections, stream result reduction, and support multiple indexes.
+- **Write reliability:** Support idempotent writes.
+- **Object-storage caching:** Use Talon as an S3 cache to improve failure recovery and cold-query performance.
 
-- Allow **NULL values** in vector fields.
+## Beyond 3.1
 
-#### 🔹 **Expanded Unstructured Data Types (BLOB / Text)**
+Longer-term work includes time-travel and snapshot rollback. Their scope and release timing remain to be confirmed.
 
-- Introduce the **BLOB type**, which provides native storage and referencing for binary data such as files, images, and videos.
+## Help shape the roadmap
 
-- Introduce **TEXT type**, which provides enhanced full-text and content-based search capabilities.
+Share the workloads, limitations, and feature requests that matter to your applications in [GitHub Discussions](https://github.com/milvus-io/milvus/discussions). Report bugs through [GitHub Issues](https://github.com/milvus-io/milvus/issues).
 
-#### 🔹 **Enterprise-Grade Capabilities**
-
-- Support **Snapshot-based backup and recovery**.
-
-- Provide **end-to-end tracing** and **audit logging**.
-
-- Implement **Active-Standby High Availability (HA)** across multi-cluster deployments.
-
-#### 🔹 **Vector Lake (v0.2)**
-
-- Support **TEXT / BLOB storage** and **multi-version snapshot management**.
-
-- Integrate Spark for offline indexing, clustering, deduplication, and dimensionality reduction tasks.
-
-- Deliver **ChatPDF cold-query and offline benchmark demos**.
-
-## 🪐 Milvus v3.1 (Long-Term Vision)
-
-**Timeline: Mid-2026**  
-
-Focus: **User-defined functions (UDF)**, **distributed computing integration**, **scalar query optimization**, **dynamic sharding**, and the official release of **Vector Lake (v1.0)**.
-
-### 🎯 Key Highlights
-
-#### 🔹 **UDF & Distributed Computing Ecosystem**
-
-- Support **User-Defined Functions (UDFs)**, allowing developers to inject custom logic into retrieval and computation workflows.
-
-- Deep integration with **Ray Dataset / Daft** for distributed UDF execution and multimodal data processing.
-
-#### 🔹 **Scalar Query & Local Format Evolution**
-
-- Optimize filtering and aggregation performance for scalar fields.
-
-- Enhance expression evaluation and index-accelerated execution.
-
-- Support **in-place updates** for local file formats.
-
-#### 🔹 **Advanced Search Capabilities**
-
-- Add the following features: **RankBy**, **OrderBy**, **Facet**, and **Fuzzy match** queries.
-
-- Enhance text retrieval with support for:  
-
-    - `match_phrase_prefix`
-
-    - `Completion Suggester`
-
-    - `Term Suggester`
-
-    - `Phrase Suggester`
-
-#### 🔹 **Dynamic Sharding & Scalability**
-
-- Enable **automatic shard splitting** and **load balancing** for seamless scaling.
-
-- Improve **global index building** and ensure **distributed search performance**.
-
-#### 🔹 **Vector Lake V1.0**
-
-- Deep integration with **Ray / Daft / PyTorch** to support distributed UDFs and Context Engineering use cases.
-
-- Provide **RAG (Retrieval-Augmented Generation) demos** **and import from Iceberg tables**.
-
-## 🤝 Co-Building the Future of Milvus
-
-Milvus is an open-source project driven by a global community of developers.  
-
-We warmly invite all community members to help shape the next-generation multimodal database:
-
-- 💬 **Share feedback**: Propose new features or optimization ideas
-
-- 🐛 **Report issues**: File bugs via GitHub Issues
-
-- 🔧 **Contribute code**: Submit PRs and help build core features  
-
-    - **Pull requests**: Contribute directly to our [codebase](https://github.com/milvus-io/milvus/pulls). Whether it's fixing bugs, adding features, or improving documentation, your contributions are welcome.
-
-    - **Development guide**: Check our [Contributor's Guide](https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md) for guidelines on code contributions.
-
-- ⭐ **Spread the word**: Share best practices and success stories
-
-👉 **GitHub:** [milvus-io/milvus](https://github.com/milvus-io/milvus)
+To contribute code or documentation, start with the [Contributor's Guide](https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md).
