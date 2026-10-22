@@ -32,7 +32,7 @@ Returns a Status indicating whether the operation succeeded. The list of registe
 
             File path of the resource.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

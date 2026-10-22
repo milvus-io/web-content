@@ -44,7 +44,7 @@ Returns a Status indicating whether the operation succeeded. The snapshot names 
 
         Get the snapshot names.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

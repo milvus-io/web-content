@@ -63,9 +63,9 @@ Returns a Status indicating whether the collection field properties were altered
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When request construction, transport, or response processing fails. the SDK reports the failure through the returned Status (for example NOT_CONNECTED when no connection is established); inspect the status message for failure details.
+    Failures are reported through the returned Status (for example NOT_CONNECTED when no connection is established); inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

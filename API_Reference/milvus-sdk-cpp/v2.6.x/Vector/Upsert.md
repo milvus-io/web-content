@@ -205,9 +205,9 @@ Returns a Status indicating whether the operation succeeded; on success the resp
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details, such as a schema mismatch or an unknown collection.
+    Failures are reported through the returned Status, for example a schema mismatch or an unknown collection. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

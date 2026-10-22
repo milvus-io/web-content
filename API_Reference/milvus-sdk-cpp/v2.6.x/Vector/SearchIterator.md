@@ -603,9 +603,9 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details; the call also reports an error status when IDs are set as search targets, the collection has no vector field, the ANN field is unspecified while several vector fields exist, or no index is found on the ANN field, and it reports an error status with the underlying reason when iterator initialization fails.
+    Failures are reported through the returned Status, for example when IDs are set as search targets, the collection has no vector field, the ANN field is unspecified while several vector fields exist, or no index is found on the ANN field; iterator initialization failures are reported with the underlying reason. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

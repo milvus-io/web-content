@@ -68,11 +68,9 @@ auto resp = milvus::BulkImport::CreateImportJobs(
 
 A JSON object containing the job ID on success, or `nullptr` on failure. The `jobId` field in the response can be passed to `GetImportJobProgress()`.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **std::exception**
-
-    Thrown if the HTTP request fails or the response cannot be parsed. Check the return value for `nullptr` to detect failures.
+The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
 
 ## Example
 

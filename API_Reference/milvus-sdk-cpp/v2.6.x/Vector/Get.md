@@ -157,12 +157,6 @@ Returns a Status indicating whether the operation succeeded, and on success popu
 
     - **SessionTs** (*uint64_t*) -
 
-**ERROR HANDLING:**
-
-- **std::exception**
-
-    When request construction, transport to the server, or response processing fails. Inspect the exception message or the returned Status for failure details.
-
 Field payloads are instances of [FieldData](FieldData.md).
 
 <table>
@@ -192,6 +186,12 @@ Field payloads are instances of [FieldData](FieldData.md).
      <td><p>Each concrete field-data type has a corresponding <code>std::shared_ptr&lt;XxxFieldData&gt;</code> alias.</p></td>
    </tr>
 </table>
+
+**ERROR HANDLING:**
+
+- **Status**
+
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

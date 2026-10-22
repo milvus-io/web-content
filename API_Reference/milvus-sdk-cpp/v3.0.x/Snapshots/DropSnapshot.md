@@ -45,7 +45,7 @@ auto request = milvus::DropSnapshotRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

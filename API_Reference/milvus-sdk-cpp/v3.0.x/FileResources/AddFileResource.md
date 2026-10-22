@@ -32,7 +32,7 @@ auto request = milvus::AddFileResourceRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

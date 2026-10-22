@@ -49,9 +49,9 @@ Returns a Status indicating whether the function was successfully added to the c
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When request construction, transport, or response processing fails. Inspect the returned Status or exception message for details; a null function pointer or an empty function name is also rejected locally with an invalid-argument Status before any request is sent.
+    Failures are reported through the returned Status; a null function pointer or an empty function name is also rejected locally with an invalid-argument Status before any request is sent. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
 
 ## Example
 

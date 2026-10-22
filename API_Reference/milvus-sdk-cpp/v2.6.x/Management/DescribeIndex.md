@@ -117,9 +117,9 @@ Returns a Status, with the DescribeIndexResponse output parameter populated with
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details; a field with no matching index is reported through the returned Status rather than a thrown exception.
+    Failures are reported through the returned Status rather than a thrown exception; a field with no matching index is reported this way. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

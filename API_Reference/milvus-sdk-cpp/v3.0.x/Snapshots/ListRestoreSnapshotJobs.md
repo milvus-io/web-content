@@ -80,7 +80,7 @@ Returns a Status indicating whether the operation succeeded. The restore job lis
 
             Elapsed time of the restore job in milliseconds.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

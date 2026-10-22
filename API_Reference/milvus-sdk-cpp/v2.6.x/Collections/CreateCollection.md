@@ -113,9 +113,9 @@ Returns a Status indicating whether the collection was created successfully; an 
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details, including the INVALID_ARGUMENT status returned when the collection schema is null.
+    Failures are reported through the returned Status, including the INVALID_ARGUMENT status returned when the collection schema is null. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

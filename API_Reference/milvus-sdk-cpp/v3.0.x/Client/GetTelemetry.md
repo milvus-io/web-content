@@ -32,9 +32,7 @@ The telemetry manager reports client metrics and heartbeats and handles server-p
 
 **ERROR HANDLING:**
 
-- **Status**
-
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+Returns `nullptr` when telemetry is not available for the connected client.
 
 ## Example
 

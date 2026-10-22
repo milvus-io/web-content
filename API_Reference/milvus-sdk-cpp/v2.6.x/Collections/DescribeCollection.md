@@ -304,9 +304,9 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When the RPC transport fails or the server returns an error for the describe request. Inspect the returned Status message for the failure details.
+    Failures are reported through the returned Status when the RPC transport fails or the server returns an error for the describe request; inspect `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

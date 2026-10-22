@@ -44,7 +44,7 @@ Returns a Status indicating whether the operation succeeded. Whether the flush-a
 
         Whether the flush-all action has finished.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

@@ -23,7 +23,7 @@ auto request = milvus::RemoveFileResourceRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

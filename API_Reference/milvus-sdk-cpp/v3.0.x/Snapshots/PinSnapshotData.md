@@ -62,7 +62,7 @@ Returns a Status indicating whether the operation succeeded. The pin ID is carri
 
         Get the pin identifier of the pinned data.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

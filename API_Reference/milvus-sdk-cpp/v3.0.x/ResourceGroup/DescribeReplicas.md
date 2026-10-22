@@ -116,13 +116,11 @@ const ShardReplica& shard = replica.ShardReplicas()[0];
 
     Returns all nodes serving this shard replica.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **Status**
 
-    Check `status.Code()` and `status.Message()` for invalid collection names or unavailable replica metadata.
-
- See [StatusCode](../Client/StatusCode.md).
+    Failures are reported through the returned Status; check `status.Code()` and `status.Message()` for invalid collection names or unavailable replica metadata. See [Status](../Client/Status.md).
 
 ## Example
 

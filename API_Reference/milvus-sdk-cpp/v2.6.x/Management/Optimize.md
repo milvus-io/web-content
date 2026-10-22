@@ -117,9 +117,9 @@ Returns a Status indicating whether the operation succeeded: in synchronous mode
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When the optimization fails, such as an empty collection name, an invalid target size, RPC transport errors, a failed compaction, an index failure, or the overall timeout being exceeded. Inspect the returned Status (or, for asynchronous runs, the task's TaskStatus and progress messages) for failure details.
+    Failures are reported through the returned Status, for example an empty collection name, an invalid target size, RPC transport errors, a failed compaction, an index failure, or the overall timeout being exceeded. For asynchronous runs, inspect the task's TaskStatus and progress messages instead. See [Status](../Client/Status.md).
 
 ## Example
 

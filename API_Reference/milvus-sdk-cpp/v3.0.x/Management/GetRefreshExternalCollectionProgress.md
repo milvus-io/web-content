@@ -71,7 +71,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job inf
 
             Current state of the refresh job.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

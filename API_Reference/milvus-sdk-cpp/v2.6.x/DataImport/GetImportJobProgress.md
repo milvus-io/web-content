@@ -48,11 +48,9 @@ auto resp = milvus::BulkImport::GetImportJobProgress(
 
 A JSON object describing job progress, or `nullptr` on failure. Includes fields such as `state` (`"Pending"`, `"InProgress"`, `"Completed"`, `"Failed"`), `progress` (0–100), and `importedRows`.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **std::exception**
-
-    Thrown if the HTTP request fails or the response cannot be parsed. Check the return value for `nullptr` to detect failures.
+The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
 
 ## Example
 

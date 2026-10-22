@@ -49,9 +49,9 @@ Returns a Status indicating whether the function was dropped from the collection
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When request construction, connection setup, transport, or response processing fails. The error details are reported through the returned Status or the exception message; inspect both for the failure cause.
+    Failures are reported through the returned Status when request construction, connection setup, transport, or response processing fails; inspect `status.IsOk()` and `status.Message()` for the failure cause. See [Status](../Client/Status.md).
 
 ## Example
 

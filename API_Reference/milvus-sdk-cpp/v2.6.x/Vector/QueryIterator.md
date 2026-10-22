@@ -218,9 +218,9 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Request preparation, transport, or iterator initialization fails, including when the request carries ID-based criteria. Inspect the returned Status code and message for failure details; ID-based input is rejected outright because the query iterator does not support IDs, and failures inside the iterator constructor are reported as an 'Unable to create query iterator' error.
+    Failures are reported through the returned Status when request preparation, transport, or iterator initialization fails, including when the request carries ID-based criteria, which is rejected outright because the query iterator does not support IDs. Iterator-construction failures surface as an "Unable to create query iterator" error. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 
