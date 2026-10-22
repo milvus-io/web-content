@@ -27,7 +27,7 @@ For the full list of `SearchReq` builder methods, refer to [search()](search.md)
 
 **RETURNS:**
 
-A future completed with a **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets, or completed exceptionally when the operation fails. The **SearchResp** object exposes the following getters:
+A future completed with a **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets, or completed exceptionally when the operation fails. The **SearchResp** object exposes the following getters (the per-query results include [AggregationBucket](AggregationBucket.md) entries when the request used bucket aggregation):
 
 - `getSearchResults()` (*List\<List\<SearchResult\>\>*) -
 

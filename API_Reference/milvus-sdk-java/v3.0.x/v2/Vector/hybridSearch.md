@@ -100,7 +100,7 @@ hybridSearch(HybridSearchReq.builder()
 
 **RETURNS:**
 
-A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets.
+A **SearchResp** object that contains search results, recalls, cost, scanned byte counts, cache hit ratio, and aggregation buckets. See [AggregationBucket](AggregationBucket.md).
 
 - `getSearchResults()` (*List\<List\<SearchResult\>\>*) -
 

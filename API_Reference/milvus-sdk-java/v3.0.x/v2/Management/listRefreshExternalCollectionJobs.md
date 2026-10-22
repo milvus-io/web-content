@@ -36,7 +36,7 @@ A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExter
 
 - `getJobs()` (*List\<RefreshExternalCollectionJobInfo\>*) -
 
-    The refresh jobs that match the request filter. Each **RefreshExternalCollectionJobInfo** has the same shape as the entry returned by `getRefreshExternalCollectionProgress()`:
+    The refresh jobs that match the request filter. Each **RefreshExternalCollectionJobInfo** has the same shape as the entry returned by `getRefreshExternalCollectionProgress()`. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md):
 
     - `getJobId()` (*long*) -
 

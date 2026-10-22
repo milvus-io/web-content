@@ -33,7 +33,7 @@ A **GetRefreshExternalCollectionProgressResp** object that wraps a single **Refr
 
 - `getJobInfo()` (*RefreshExternalCollectionJobInfo*) -
 
-    The refresh job information. Each **RefreshExternalCollectionJobInfo** has the following getters:
+    The refresh job information. Each **RefreshExternalCollectionJobInfo** has the following getters (see [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md)):
 
     - `getJobId()` (*long*) -
 

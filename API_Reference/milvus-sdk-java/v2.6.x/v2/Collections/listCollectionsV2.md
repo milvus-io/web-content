@@ -35,7 +35,7 @@ A **ListCollectionsResp** object containing a list of collection names. If there
 
 - `getCollectionInfos()` (*List<CollectionInfo>*) -
 
-    A list of **CollectionInfo** objects. A **CollectionInfo** object exposes the following getters:
+    A list of **CollectionInfo** objects. See [CollectionInfo](CollectionInfo.md). A **CollectionInfo** object has the following getters:
 
     - `getCollectionName()` (*String*) -
 
