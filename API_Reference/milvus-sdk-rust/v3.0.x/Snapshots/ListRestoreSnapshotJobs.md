@@ -39,7 +39,7 @@ ListRestoreSnapshotJobsResponse
 
 **METHODS:**
 
-- `jobs()` (*&[RestoreSnapshotJobInfo]*) -
+- `jobs()` (*&[RestoreSnapshotJobInfo]*) - See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
     The restore jobs.
 
@@ -59,7 +59,7 @@ ListRestoreSnapshotJobsResponse
 
         The collection being restored.
 
-    - `get_state()` (*RestoreSnapshotStateCode*) -
+    - `get_state()` (*RestoreSnapshotStateCode*) - See [RestoreSnapshotStateCode](RestoreSnapshotStateCode.md).
 
         The state of the restore job.
 

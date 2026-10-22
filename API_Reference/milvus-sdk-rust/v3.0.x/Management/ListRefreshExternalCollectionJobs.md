@@ -41,7 +41,7 @@ ListRefreshExternalCollectionJobsResponse
 
 - `jobs()` (*&[RefreshExternalCollectionJobInfo]*) -
 
-    The refresh jobs.
+    The refresh jobs. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
     - `get_job_id()` (*i64*) -
 
@@ -51,7 +51,7 @@ ListRefreshExternalCollectionJobsResponse
 
         The name of the refreshed collection.
 
-    - `get_state()` (*RefreshExternalCollectionStateCode*) -
+    - `get_state()` (*RefreshExternalCollectionStateCode*) - See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
         The state of the refresh job.
 
