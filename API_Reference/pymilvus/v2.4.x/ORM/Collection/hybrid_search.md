@@ -57,7 +57,7 @@ hybrid_search(
 
     You can use this parameter in combination with `offset` in **param** to enable pagination.
 
-    The sum of this value and `offset` in **param** should be less than 16,384.
+    The sum of this value and `offset` in **param** should be less than or equal to 16,384.
 
 - **partition_names** (*List&#91;str&#93;*) -
 

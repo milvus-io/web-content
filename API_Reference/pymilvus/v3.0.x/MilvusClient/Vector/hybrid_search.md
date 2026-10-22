@@ -76,7 +76,11 @@ Default: `None`
 The names of the partitions to search.
 
 - **kwargs** (*Any*) -
-The additional search options, including the pagination offset and consistency level.
+The additional search options, including the top-level `offset` for pagination and the `consistency_level` for the search.
+
+    The top-level `offset` is applied to the final results after candidate fusion and reranking. Note that the `offset` inside the `param` of an **AnnSearchRequest** is not supported in hybrid search and is ignored by Milvus.
+
+    To make pagination work as expected, the `limit` of each **AnnSearchRequest** in **reqs** should cover the pagination window, that is, the sum of the top-level `offset` and `limit`. The sum of these two values should be less than or equal to 16,384.
 
 **RETURN TYPE:**
 
@@ -93,7 +97,7 @@ Raised when the server rejects the request or the RPC fails. Inspect the server 
 
 ## Examples
 
-The example constructs an ANN request and runs a hybrid search.
+The example runs a hybrid search with pagination. The top-level `offset` is applied to the final results after candidate fusion and reranking, so each `AnnSearchRequest.limit` covers the pagination window (`offset + limit`).
 
 ```python
 from pymilvus import AnnSearchRequest, MilvusClient, DataType
@@ -103,33 +107,44 @@ client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 # Create a collection, insert data, and load it
 schema = client.create_schema(auto_id=False)
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
-schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=3)
-schema.add_field(field_name="category", datatype=DataType.VARCHAR, max_length=32)
+schema.add_field(field_name="text_vector", datatype=DataType.FLOAT_VECTOR, dim=3)
+schema.add_field(field_name="image_vector", datatype=DataType.FLOAT_VECTOR, dim=3)
 client.create_collection(collection_name="book_chunks", schema=schema)
 index_params = client.prepare_index_params()
-index_params.add_index(field_name="vector", index_type="AUTOINDEX", metric_type="COSINE")
+index_params.add_index(field_name="text_vector", index_type="AUTOINDEX", metric_type="IP")
+index_params.add_index(field_name="image_vector", index_type="AUTOINDEX", metric_type="IP")
 client.create_index(collection_name="book_chunks", index_params=index_params)
-client.insert(collection_name="book_chunks", data=[{"id": 1, "vector": [0.1, 0.2, 0.3], "category": "paper"}])
+client.insert(collection_name="book_chunks", data=[
+    {"id": i, "text_vector": [0.1, 0.2, 0.3], "image_vector": [0.3, 0.2, 0.1]}
+    for i in range(30)
+])
 client.load_collection(collection_name="book_chunks")
 
-request = AnnSearchRequest(
-    data=[[0.1, 0.2, 0.3]],
-    anns_field="vector",
-    param={"metric_type": "COSINE"},
-    limit=10,
-    filter='category == "paper"',
-)
+requests = [
+    AnnSearchRequest(
+        data=[[0.1, 0.2, 0.3]],
+        anns_field="text_vector",
+        param={"metric_type": "IP"},
+        limit=30,  # cover the pagination window (offset 20 + limit 10)
+    ),
+    AnnSearchRequest(
+        data=[[0.3, 0.2, 0.1]],
+        anns_field="image_vector",
+        param={"metric_type": "IP"},
+        limit=30,
+    ),
+]
 
-# NOTE: Set the consistency level to Strong so that the entity inserted above
-# is immediately visible and the example returns results. In production,
+# NOTE: Set the consistency level to Strong so that the entities inserted above
+# are immediately visible and the example returns results. In production,
 # choose a consistency level (for example, Bounded) that fits your scenario.
 results = client.hybrid_search(
     collection_name="book_chunks",
-    reqs=[request],
+    reqs=requests,
     ranker=None,
     limit=10,
+    offset=20,  # return the third page of the fused and reranked results
     consistency_level="Strong",
 )
-print(request.filter)
 print(results)
 ```

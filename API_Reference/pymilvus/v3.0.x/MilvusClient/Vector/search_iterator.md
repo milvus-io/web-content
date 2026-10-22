@@ -66,7 +66,7 @@ search_iterator(
 
     The `offset` parameter is not supported by this operation.
 
-- **output_fields** (l*ist[str]*) -
+- **output_fields** (*list[str]*) -
 
     A list of field names to include in each entity in return.
 

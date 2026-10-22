@@ -53,7 +53,7 @@ __PARAMETERS:__
 
     You can use this parameter in combination with __offset__ in __param__ to enable pagination.
 
-    The sum of this value and __offset__ in __param__ should be less than 16,384. 
+    The sum of this value and __offset__ in __param__ should be less than or equal to 16,384. 
 
 - __output_fields__ (l_ist[str]_) -
 
@@ -103,7 +103,7 @@ __PARAMETERS:__
 
         You can use this parameter in combination with `limit` to enable pagination.
 
-        The sum of this value and `limit` should be less than 16,384. 
+        The sum of this value and `limit` should be less than or equal to 16,384. 
 
     - __round_decimal__ (int) -
 

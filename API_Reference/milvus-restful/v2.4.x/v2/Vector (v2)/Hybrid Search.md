@@ -160,7 +160,7 @@ Possible response is similar to the following.
 | `search[].params.radius`  | __integer__<br/>Determines the threshold of least similarity. When setting metric_type to L2, ensure that this value is greater than that of range_filter. Otherwise, this value should be lower than that of range_filter.  |
 | `search[].params.range_filter`  | __integer__<br/>Refines the search to vectors within a specific similarity range. When setting metric_type to IP or COSINE, ensure that this value is greater than that of radius. Otherwise, this value should be lower than that of radius.  |
 | `rerank` <span style="color:red">*</span> | __string__<br/>  |
-| `limit`  | __integer__<br/>The total number of entities to return.<br/>You can use this parameter in combination with **offset** in **param** to enable pagination.<br/>The sum of this value and **offset** in **param** should be less than 16,384.  |
+| `limit`  | __integer__<br/>The total number of entities to return.<br/>You can use this parameter in combination with **offset** in **param** to enable pagination.<br/>The sum of this value and **offset** in **param** should be less than or equal to 16,384.  |
 | `outputFields` | __array__<br/>An array of fields to return along with the search results. |
 | `outputFields[]`  | __string__<br/>A field name  |
 

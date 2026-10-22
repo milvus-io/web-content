@@ -31,7 +31,7 @@ query_iterator(
 
 - **limit** (*int*) -
 
-    The total number of entities to return. The parameter value should be less than 16,384. 
+    The total number of entities to return. The parameter value should be less than or equal to 16,384. 
 
 - **filter** (*str*) -
 
@@ -115,7 +115,7 @@ query_iterator(
 
         You can use this parameter in combination with `limit` to enable pagination.
 
-        The sum of this value and `limit` should be less than 16,384. 
+        The sum of this value and `limit` should be less than or equal to 16,384. 
 
     - **limit** (*int*) -
 
@@ -123,7 +123,7 @@ query_iterator(
 
         You can use this parameter in combination with `offset` to enable pagination.
 
-        The sum of this value and `offset` should be less than 16,384. 
+        The sum of this value and `offset` should be less than or equal to 16,384. 
 
 **RETURN TYPE:**
 

@@ -56,7 +56,7 @@ search(
 
             You can use this parameter in combination with `limit` to enable pagination.
 
-            The sum of this value and `limit` should be less than 16,384. 
+            The sum of this value and `limit` should be less than or equal to 16,384. 
 
         - **radius** (float) -
 
@@ -74,7 +74,7 @@ search(
 
     You can use this parameter in combination with `offset` in **param** to enable pagination.
 
-    The sum of this value and `offset` in **param** should be less than 16,384. 
+    The sum of this value and `offset` in **param** should be less than or equal to 16,384. 
 
 - **expr** (*str*) -
 

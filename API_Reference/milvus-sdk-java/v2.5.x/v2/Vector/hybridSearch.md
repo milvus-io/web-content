@@ -108,7 +108,7 @@ hybridSearch(HybridSearchReq.builder()
 
 - `offset(long offset)`
 
-    The number of entities to skip before the search results returns. The sum of `offset` and `limit` should be less than 16,384.
+    The number of entities to skip before the search results returns. The sum of `offset` and `limit` should be less than or equal to 16,384.
 
 - `roundDecimal(int roundDecimal)`
 
