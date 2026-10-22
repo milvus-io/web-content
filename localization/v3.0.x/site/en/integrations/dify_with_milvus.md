@@ -127,14 +127,14 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h3><p>Edit the <code translate="no">.env</code> file with the following Milvus configuration:</p>
-<pre><code translate="no">VECTOR_STORE=milvus
-MILVUS_URI=http://host.docker.internal:19530
-MILVUS_TOKEN=
+<pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
+<span class="hljs-attr">MILVUS_URI</span>=http://host.docker.internal:<span class="hljs-number">19530</span>
+<span class="hljs-attr">MILVUS_TOKEN</span>=root:Milvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
 <li>The <code translate="no">MILVUS_URI</code> uses <code translate="no">host.docker.internal:19530</code> which allows Docker containers to access Milvus running on the host machine through Docker’s internal network.</li>
-<li><code translate="no">MILVUS_TOKEN</code> can be left empty for local Milvus deployments.</li>
+<li>Dify’s Docker Compose configuration enables Milvus authentication by default. Set <code translate="no">MILVUS_TOKEN</code> to <code translate="no">username:password</code>; <code translate="no">root:Milvus</code> uses the initial credentials. If you have changed the credentials, replace this value accordingly.</li>
 </ul>
 </div>
 <h3 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
