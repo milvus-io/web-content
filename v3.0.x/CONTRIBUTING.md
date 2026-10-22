@@ -40,7 +40,7 @@ For detailed information on this workflow, see [Make Your First Contribution](ht
 
 ## Editing docs with an AI agent
 
-This repository ships an agent skill, **edit-docs**, that lets AI coding agents such as ZCode, Claude Code, Codex, and OpenCode edit the docs on your behalf while following the conventions on this page. The canonical files live in `.skills/edit-docs/` and are mirrored for tool discovery into the `.agents/`, `.claude/`, `.codex/`, and `.opencode/` skills directories.
+This repository ships an agent skill, **edit-docs**, that lets AI coding agents such as Claude Code, Codex, and OpenCode edit the docs on your behalf while following the conventions on this page. The canonical files live in `.skills/edit-docs/` and are mirrored for tool discovery into the `.agents/`, `.claude/`, `.codex/`, and `.opencode/` skills directories.
 
 - **Modify an existing page** — give the agent the page (URL, title, or filename) and the change you want; it asks back only when the request is genuinely ambiguous.
 - **Add a new page** — supply the content and where it belongs in the navigation (e.g. "under User Guide, after the analyzer page"); the agent completes the front matter and inserts the sidebar entry in `menuStructure/en.json` via the bundled `nav.py` script (surgical insertion with automatic sibling-order bumping, plus a `verify.py` post-edit checker).
