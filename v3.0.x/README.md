@@ -28,20 +28,20 @@ Have a new topic that you want to include in the docs? Need additional instructi
 
 Want to be a contributor to the docs? See [CONTRIBUTING](CONTRIBUTING.md) for details about setting yourself up and getting started.
 
+You can also edit the docs with an AI coding agent: this repository ships the **edit-docs** agent skill, which guides agents through modifying or adding pages (including sidebar placement and doc-standard conformance) and always delivers changes as a pull request. See [Editing docs with an AI agent](CONTRIBUTING.md#editing-docs-with-an-ai-agent) for details.
+
 ## Active Milvus releases
 
 Currently, we are maintaining the following versions of Milvus documentation in different branches:
 
-| `v2.1.x` branch | 2.1.x version (the default and latest branch) |
+| `v3.0.x` branch | 3.0.x version (the default and latest branch) |
 | --------------- | --------------------------------------------- |
-| `v2.0.x` branch | 2.0.x version                                 |
-| `v1.1.1` branch | 1.1.1 version                                 |
-| `v1.1.0` branch | 1.1.0 version                                 |
-| `v1.0.0` branch | 1.0.0 version (first with long-term support)  |
+| `v2.6.x` branch | 2.6.x version                                 |
+| `v2.5.x` branch | 2.5.x version                                 |
 
 > **Note:**
 > The latest branch is set as the default working branch.
-> Milvus releases prior to v1.0.0 are no longer supported, but you can still find their documentation in the corresponding branch.
+> Milvus releases prior to v2.5 are no longer actively maintained, but you can still find their documentation in the corresponding branch.
 
 ## Other contributing channels
 

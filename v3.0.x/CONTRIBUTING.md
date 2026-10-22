@@ -38,6 +38,16 @@ For more substantial changes, please follow the following steps:
 
 For detailed information on this workflow, see [Make Your First Contribution](https://milvus.io/community/making_your_first_contributions.md).
 
+## Editing docs with an AI agent
+
+This repository ships an agent skill, **edit-docs**, that lets AI coding agents such as ZCode, Claude Code, Codex, and OpenCode edit the docs on your behalf while following the conventions on this page. The canonical files live in `.skills/edit-docs/` and are mirrored for tool discovery into the `.agents/`, `.claude/`, `.codex/`, and `.opencode/` skills directories.
+
+- **Modify an existing page** — give the agent the page (URL, title, or filename) and the change you want; it asks back only when the request is genuinely ambiguous.
+- **Add a new page** — supply the content and where it belongs in the navigation (e.g. "under User Guide, after the analyzer page"); the agent completes the front matter and inserts the sidebar entry in `menuStructure/en.json` via the bundled `nav.py` script (surgical insertion with automatic sibling-order bumping, plus a `verify.py` post-edit checker).
+- **Import from bootcamp** — give a link into the [bootcamp repository](https://github.com/milvus-io/bootcamp) (a notebook or a directory); the agent converts it into an integration or tutorial page.
+
+Every change the skill makes is delivered as a pull request — it never pushes to a version branch directly.
+
 ## Docs structure
 
 ![Folders](assets/folder-structure.png)
@@ -54,9 +64,9 @@ All documentation is written in English, which is the official language supporte
 
 ### Pages
 
-We provide documentation for each major version of Milvus. The pages for each version can be found in a directory named for the version. For example, docs for Milvus v2.0 are in the `v2.0.x` directory, whereas docs for Milvus v1.1.0 are in the `v1.1.0` directory.
+Documentation is versioned by git branch: each Milvus release line lives on a branch named for it (`v3.0.x`, `v2.6.x`, ...), and on every branch the English documentation lives under `site/en/`. To work on a different release line, switch to the corresponding branch.
 
-Within each version's directory, every page must be an **.md** file written in Markdown. File names should be lowercase with an underscore between words and should be brief but descriptive.
+Within `site/en/`, every page must be an **.md** file written in Markdown. File names should be lowercase with hyphens or underscores between words and should be brief but descriptive.
 
 Example:
 
@@ -84,7 +94,7 @@ group: major_page.md
 | ------------------------ | ------------------------------------------------------------ |
 | `id`                     | The unique ID assigned to each page.                         |
 | `title` (optional)       | Used as the h1 header and written in title-case.             |
-| `summary` (optional)     | Used as the page's `meta description` for SEO. Keep this under 143 characters. Consider using the first sentence of the page, or something similar. |
+| `summary` (optional)     | Used as the page's `meta description` for SEO. Aim for under ~143 characters (a guideline, not an enforced limit). Consider using the first sentence of the page, or something similar. |
 | `related_key` (optional) | Used as the keyword to pull related questions from the FAQ database to show at the bottom of the page. |
 | `group` (optional) | Add the leading page appeared on the sidenav if this page is a part of a page group. |
 
@@ -101,7 +111,7 @@ Follow any of these templates when you draft a document, but remember to be flex
 
 #### Images
 
-*Images* are housed under the **/assets** folder and can be referenced with `![ImageName]({{images.assets/ImageName.jpg/png "This is a caption"}})`.
+*Images* are housed under the **/assets** folder at the repository root and are referenced from a page by their relative path, e.g. `![Name](../../../../../assets/name.png)` (the depth depends on the page's location). Many older pages reference images by their hosted URL under `https://milvus-docs.s3.us-west-2.amazonaws.com/assets/`; when reusing an existing image, keep the form used by the surrounding pages.
 
 #### Fragments
 
@@ -119,84 +129,78 @@ For each documented version of Milvus, the JSON file in the **menuStructure** di
 
 If you're adding a page that you think should appear in the sidebar, please mention this in your pull request and follow the established practice when changing the **en.json** file.
 
-In the JSON file for a version's sidebar, there are six possible fields:
+The JSON file is a nested tree of entries. Each entry has the following fields:
 
 | Field | Type | Description |
 | ------|------|------------ |
-| `id` | String | The unique ID (within the **en** folder) that is given to a section or a page (defined in the front-matter of the corresponding Markdown file). |
-| `title` | String | The title for an entry in the sidenav, e.g., "Get Started" (section), "Install Milvus" (subsection), or "Milvus Standalone" (page). See the [JSON Example](#json-example) below for more clarity. |
-| `label<n>` (e.g., label1, label2, label3) | String | The hierarchical structure of pages and sections.  |
-| `order` | Integar | The sorting order of pages and sections under the current label, starting from 0. |
-| `isMenu` | Boolean | Set as `true` if the entry is a section/subsection of the sidenav. |
-| `outlink` | Array of strings | The URL of a page that is not rendered by any Markdown file in the **milvus-docs** repository. |
+| `label` | String | The sidebar text for the entry. May be shorter than the page's `title`. |
+| `id` | String | Pages: the markdown filename including `.md`, identical to the page's front-matter `id`. Sections: a short slug without `.md` (e.g. `install_milvus`). Ids must be unique across the whole tree. |
+| `order` | Integer | The sorting order of entries under the same parent, starting from 0. Keep sibling orders contiguous. |
+| `isMenu` | Boolean | Set as `true` if the entry is a section/subsection of the sidenav. Pages have no `isMenu`. |
+| `children` | Array | The nested entries of a section. `[]` for pages. |
+
+CI validates this file on every pull request (`node check-link.js`): a page's front-matter `id` must equal its filename, every sidebar `.md` id must resolve to an existing markdown file, and internal links are checked.
 
 #### JSON Example
 
-This example shows some of the "Get Started" section of the sidenav:
+This example shows part of the "Get Started" section of the sidenav:
 
 ```json
-{
-     "menuList": [
-     ...,
-     {
-      "id": "getstarted",
-      "title": "Get Started",
-      "label1": "",
-      "label2": null,
-      "label3": null,
-      "order": 1,
-      "isMenu": true
-     },
-     {
-       "id": "prerequisite-docker.md",
-       "title": "Before you Begin",
-       "label1": "getstarted",
-       "label2": null,
-       "label3": null,
-       "order": 0
-     },  
-     {
-      "id": "installmilvus",
-      "title": "Install Milvus",
-      "label1": "getstarted",
-      "label2": null,
-      "label3": null,
-      "order": 1,
-      "isMenu": true
-    },
-    {
-      "id": "install_standalone-docker.md",
-      "title": "Milvus Standalone",
-      "label1": "getstarted",
-      "label2": "installmilvus",
-      "label3": null,
-      "order": 0
-    },
-    {
-      "id": "install_cluster-docker.md",
-      "title": "Milvus Cluster",
-      "label1": "getstarted",
-      "label2": "installmilvus",
-      "label3": null,
-      "order": 1
-    }, 
-    {
-      "id": "install_offline-docker.md",
-      "title": "Install Offline",
-      "label1": "getstarted",
-      "label2": "installmilvus",
-      "label3": null,
-      "order": 2
-    }, 
-    {
-      "id": "example_code.md",
-      "title": "Hello Milvus",
-      "label1": "getstarted",
-      "label2": "",
-      "label3": "",
-      "order": 2
-    },
-     ...
-     ]
-}
+[
+  ...,
+  {
+    "id": "getstarted",
+    "label": "Get Started",
+    "isMenu": true,
+    "order": 1,
+    "children": [
+      {
+        "id": "quickstart.md",
+        "label": "Quickstart",
+        "order": 0,
+        "children": []
+      },
+      {
+        "id": "install_milvus",
+        "label": "Install Milvus",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "id": "install-overview.md",
+            "label": "Overview",
+            "order": 0,
+            "children": []
+          },
+          {
+            "id": "milvus_lite.md",
+            "label": "Run Milvus Lite",
+            "order": 1,
+            "children": []
+          },
+          {
+            "id": "run_milvus_docker",
+            "label": "Run Milvus Standalone",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "id": "prerequisite-docker.md",
+                "label": "Requirements",
+                "order": 0,
+                "children": []
+              },
+              {
+                "id": "install_standalone-docker.md",
+                "label": "Docker (Linux)",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
 ```
