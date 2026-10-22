@@ -16,7 +16,7 @@ The total number of rows written by this LocalBulkWriter instance.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

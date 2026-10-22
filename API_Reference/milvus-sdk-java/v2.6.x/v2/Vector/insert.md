@@ -58,7 +58,7 @@ An **InsertResp** object containing information about the number of inserted ent
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

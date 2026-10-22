@@ -178,7 +178,7 @@ SearchReq.builder()
 
 - `ranker(CreateCollectionReq.Function ranker)`
 
-    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`. See [Function](../Collections/Function.md).
+    A single rerank function applied to the search results. Do not use together with `functionScore()` or `functionChains()`. See [Function](../Collections/Function/Function.md).
 
 - `functionChains(List<FunctionChain> functionChains)`
 
@@ -330,7 +330,7 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 

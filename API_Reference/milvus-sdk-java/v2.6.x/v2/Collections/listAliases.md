@@ -48,7 +48,7 @@ A **ListAliasResp** object containing a list of aliases for the specified collec
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -59,7 +59,7 @@ A **CompactResp** object that contains a compaction ID. The object exposes the f
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 

@@ -74,6 +74,8 @@ local directory via this table before editing. Current latest version line is
     (e.g. `QueryRequest` → `Vector/Query.md`).
   - `types/*.h` → matching `<Category>/<Type>.md` page when one exists.
   - `MilvusClient.h` / `MilvusClientV2.h` → pages under `Client/`.
+  - `Status.h` (with its `StatusCode` member enum) → `Client/Status.md` — the
+    shared status type page documenting the return code/status of every operation.
   - **C++ groups related types in ONE page**: when a header declares a primary
     type plus related classes (e.g. `Function.h` has `Function` +
     `RRFRerank`/`WeightedRerank`/`BoostRerank`/`DecayRerank`/`ModelRerank`;
@@ -180,6 +182,9 @@ local directory via this table before editing. Current latest version line is
 - **Doc tree**: `API_Reference/pymilvus/<version-line>/` with categories
   MilvusClient, DataImport, EmbeddingModels, FileResource, ORM, Rerankers,
   Volume. Method pages are named `<method>.md` (e.g. `MilvusClient/Collections/create_collection.md`).
+- **Shared exception type**: `MilvusException` (thrown by operations across the
+  tree) has a dedicated page in the top-level `Exceptions/` category
+  (`Exceptions/MilvusException.md`).
 - **Page mapping**:
   - `MilvusClient.*` methods → `MilvusClient/<Group>/<method>.md`
     (Groups = Database, Collections, Vector, ...).
@@ -230,6 +235,8 @@ local directory via this table before editing. Current latest version line is
   `Vector/Highlighter/Highlighter.md`, `Collections/Function/`); single types are
   flat (`Vector/DataType.md`). New type clusters (e.g. `FunctionChain` +
   `FunctionChainArg/Expr/Op/Stage`) must follow this subdirectory convention.
+  The shared exception type `MilvusClientException` is placed at
+  `v2/Client/MilvusClientException.md`.
 - **Legacy enum values**: `DataType.String` (value 20) exists in the SDK but is
   legacy/internal — do **not** document it; readers should use `DataType.VarChar`.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
@@ -374,6 +381,8 @@ local directory via this table before editing. Current latest version line is
   Partitions, ResourceGroup, Snapshot, Vector.
 - **Page mapping**: client methods (e.g. `createCollection`) → category pages;
   types under `milvus/types/` → the page documenting that type.
+  The shared error type `MilvusError` (used in the error-handling sections of
+  operation pages) is placed at `Client/MilvusError.md`.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
   rather than hard-coding a patch number here).
 - **Version pins**: NONE — `About.md` uses `v3.0.0+` → `**latest**` rows and

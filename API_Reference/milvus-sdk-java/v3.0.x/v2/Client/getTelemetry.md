@@ -14,7 +14,7 @@ The telemetry manager for the connected client, or `null` when telemetry is not 
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

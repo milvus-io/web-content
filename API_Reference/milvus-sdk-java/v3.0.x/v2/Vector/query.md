@@ -152,7 +152,7 @@ A **QueryResp** object that contains query rows ordered according to `orderByFie
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 

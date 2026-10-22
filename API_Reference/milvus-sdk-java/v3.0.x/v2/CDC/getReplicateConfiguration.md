@@ -52,7 +52,7 @@ A **GetReplicateConfigurationResp** object that contains the replication configu
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 

@@ -92,7 +92,7 @@ hybridSearch(HybridSearchReq.builder()
 
 - `ranker(CreateCollectionReq.Function ranker)`
 
-    **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`. See [Function](../Collections/Function.md).
+    **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`. See [Function](../Collections/Function/Function.md).
 
 **RETURN TYPE:**
 
@@ -224,7 +224,7 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

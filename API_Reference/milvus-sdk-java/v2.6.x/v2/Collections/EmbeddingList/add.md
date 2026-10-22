@@ -22,7 +22,7 @@ None.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception arises if different types of vector embeddings are provided.
 

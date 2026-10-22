@@ -26,7 +26,7 @@ public void appendRow(JsonObject rowData) throws IOException, InterruptedExcepti
 
     Raised when the operation is interrupted while buffering the row.
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -39,7 +39,7 @@ A **GetFlushAllStateResp** object that indicates whether the flush-all operation
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 

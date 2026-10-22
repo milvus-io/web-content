@@ -37,7 +37,7 @@ A future completed with a `GetResp`, or completed exceptionally when the operati
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when request validation, transport, or server execution fails.
 

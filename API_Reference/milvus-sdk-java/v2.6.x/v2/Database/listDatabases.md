@@ -20,7 +20,7 @@ A ListDatabasesResp object contains a list of all database names.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

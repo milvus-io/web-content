@@ -89,7 +89,7 @@ hybridSearch(HybridSearchReq.builder()
 
 - `ranker(CreateCollectionReq.Function ranker)` -
 
-    **Deprecated.** A Function object used for ranking. Use `functionScore` instead. See [Function](../Collections/Function.md).
+    **Deprecated.** A Function object used for ranking. Use `functionScore` instead. See [Function](../Collections/Function/Function.md).
 
 **RETURN TYPE:**
 
@@ -172,7 +172,7 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

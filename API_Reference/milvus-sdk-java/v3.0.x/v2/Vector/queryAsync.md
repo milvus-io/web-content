@@ -62,7 +62,7 @@ A future completed with a **QueryResp** object that contains query rows and exec
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when request validation, transport, or server execution fails.
 

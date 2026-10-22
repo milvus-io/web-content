@@ -27,7 +27,7 @@ dropPrivilegeGroup(DropPrivilegeGroupReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

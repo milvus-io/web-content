@@ -103,7 +103,7 @@ A **QueryResp** object that contains query rows with the specified output fields
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

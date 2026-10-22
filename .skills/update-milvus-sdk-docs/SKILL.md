@@ -447,6 +447,15 @@ valid do not belong in this section.
 **Follow the SDK's directory convention for new type pages.** The convention
 differs per SDK — always match the SDK's existing tree (see the per-SDK
 page-mapping rules in `references/sdk-map.md`):
+- **Shared exception / status / return-code types** (a type thrown or returned
+  by many operations, e.g. java `MilvusClientException`, cpp `Status`,
+  pymilvus `MilvusException`): give it a **dedicated type page** placed in the
+  SDK's `Client/` category when one exists (java `v2/Client/`, cpp `Client/`);
+  for SDKs without a `Client/` category (e.g. pymilvus, whose tree is
+  `MilvusClient`/`ORM`/...), use a dedicated top-level category such as
+  `Exceptions/`. Every reference to the type across the tree — `**EXCEPTIONS:**`
+  bullets, error-handling sections, and parameter/prose mentions — must
+  cross-link to this page (skip inline code spans and code fences).
 - **java**: related-type clusters go in a **subdirectory named after the primary
   type**, main type at `<Type>/<Type>.md` (e.g.
   `Vector/FunctionScore/FunctionScore.md`, `Vector/Highlighter/Highlighter.md`,

@@ -33,7 +33,7 @@ addCollectionFunction(AddCollectionFunctionReq.builder()
 
     **[REQUIRED]**
 
-    The function to add. Use `CreateCollectionReq.Function.builder()` to construct it with name, description, functionType, inputFieldNames, outputFieldNames, and params. See [Function](Function.md).
+    The function to add. Use `CreateCollectionReq.Function.builder()` to construct it with name, description, functionType, inputFieldNames, outputFieldNames, and params. See [Function](Function/Function.md).
 
 **RETURNS:**
 
@@ -41,7 +41,7 @@ addCollectionFunction(AddCollectionFunctionReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -31,7 +31,7 @@ AlterRoleReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when any error occurs during this operation. Inspect the exception message for the exact failure reason.
 

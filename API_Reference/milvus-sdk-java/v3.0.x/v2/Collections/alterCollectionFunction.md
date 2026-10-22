@@ -33,7 +33,7 @@ alterCollectionFunction(AlterCollectionFunctionReq.builder()
 
     **[REQUIRED]**
 
-    The new function definition to replace the existing one. See [Function](Function.md).
+    The new function definition to replace the existing one. See [Function](Function/Function.md).
 
 **RETURNS:**
 
@@ -41,7 +41,7 @@ alterCollectionFunction(AlterCollectionFunctionReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

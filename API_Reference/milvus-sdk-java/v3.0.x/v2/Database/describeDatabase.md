@@ -43,7 +43,7 @@ A **DescribeDatabaseResp** object that contains detailed information about the s
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 
