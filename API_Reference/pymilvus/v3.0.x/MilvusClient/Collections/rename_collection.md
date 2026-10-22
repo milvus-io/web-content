@@ -22,7 +22,7 @@ rename_collection(
 
     The name of an existing collection.
 
-    Setting this to a non-existing collection results in a **MilvusException**.
+    Setting this to a non-existing collection results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **new_name** (*str*) -
 
@@ -30,7 +30,7 @@ rename_collection(
 
     The name of the target collection after this operation.
 
-    Setting this to the value of **old_name** results in a **MilvusException**.
+    Setting this to the value of **old_name** results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **target_db** (*Optional[str]*) -
 
@@ -50,7 +50,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

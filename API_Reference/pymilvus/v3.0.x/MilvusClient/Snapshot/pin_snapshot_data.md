@@ -52,7 +52,7 @@ The `pin_id` used to release this pin with `unpin_snapshot_data()`.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when the snapshot cannot be pinned or the request fails.
 

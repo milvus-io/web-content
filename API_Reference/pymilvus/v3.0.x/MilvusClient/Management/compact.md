@@ -64,7 +64,7 @@ A compaction job ID, which can be used to get the compaction status.
 
     Raised when `target_size` is not an integer or when `target_size_unit` is invalid.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

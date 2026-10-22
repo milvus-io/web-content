@@ -35,7 +35,7 @@ rename_collection(
     **[REQUIRED]**
     The original name of the target collection.
 
-    Setting this to a non-existing collection results in a **MilvusException**.
+    Setting this to a non-existing collection results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **new_collection_name** (*str*) -
 
@@ -43,7 +43,7 @@ rename_collection(
 
     The name of the target collection after this operation.
 
-    Setting this to the value of **old_collection_name** results in a **MilvusException**.
+    Setting this to the value of **old_collection_name** results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **new_db_name** (*str*) -
 
@@ -51,7 +51,7 @@ rename_collection(
 
     The value defaults to an empty string, indicating that the collection stays in the current database. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.
 
-    Setting this to a non-existing database results in a **MilvusException**.
+    Setting this to a non-existing database results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **using** (*str*) - 
 
@@ -73,7 +73,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation, especially when the specified alias does not exist.
 

@@ -59,7 +59,7 @@ A dictionary containing the list of aliases assigned to the specified collection
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

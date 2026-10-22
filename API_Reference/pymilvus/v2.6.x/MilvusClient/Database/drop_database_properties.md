@@ -60,7 +60,7 @@ drop_database_properties(
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

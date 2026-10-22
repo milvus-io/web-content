@@ -40,7 +40,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     If the snapshot does not exist or the operation fails.
 

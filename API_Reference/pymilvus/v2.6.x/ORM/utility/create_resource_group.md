@@ -39,7 +39,7 @@ create_resource_group(
 
     The name of the resource group to create.
 
-    Setting this to the name of an existing resource group results in a **MilvusException**.
+    Setting this to the name of an existing resource group results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **using** (*str*) - 
 
@@ -89,7 +89,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

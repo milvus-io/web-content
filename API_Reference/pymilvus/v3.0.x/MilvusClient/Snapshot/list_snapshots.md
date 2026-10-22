@@ -34,7 +34,7 @@ A list of snapshot names.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     If the operation fails.
 

@@ -59,7 +59,7 @@ A dictionary containing the alias details.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation, especially when you set `alias` to a non-existing alias.
 

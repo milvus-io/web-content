@@ -66,7 +66,7 @@ A generator yielding one dictionary per message with the following members:
 
     Raised when **pchannel** or **start_message_id** is missing or invalid at call time.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the server reports an error during iteration.
 

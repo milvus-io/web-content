@@ -20,7 +20,7 @@ describe_collection(
 
     The name of an existing collection.
 
-    Setting this to a non-existing collection results in **MilvusException**.
+    Setting this to a non-existing collection results in **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **kwargs** -
 

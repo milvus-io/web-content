@@ -28,7 +28,7 @@ describe_resource_group(
 
     The name of the resource group to describe.
 
-    If the specified resource group does not exist, a **MilvusException** will be raised.
+    If the specified resource group does not exist, a **[MilvusException](../../Exceptions/MilvusException.md)** will be raised.
 
 - **using** (*str*) - 
 
@@ -122,7 +122,7 @@ A **ResourceGroupInfo** object contains the following fields:
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

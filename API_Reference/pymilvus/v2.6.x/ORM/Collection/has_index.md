@@ -32,7 +32,7 @@ A boolean value indicating whether the current collection has a built index or n
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -200,7 +200,7 @@ None
 
     This exception will be raised if the data type of the primary field is not an integer or a string.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

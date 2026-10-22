@@ -85,7 +85,7 @@ HTTP response containing the matching import jobs and pagination information.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

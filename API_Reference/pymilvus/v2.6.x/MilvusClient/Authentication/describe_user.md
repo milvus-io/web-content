@@ -44,7 +44,7 @@ Description stored for the user account.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

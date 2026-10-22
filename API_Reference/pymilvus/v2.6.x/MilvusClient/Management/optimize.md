@@ -69,7 +69,7 @@ When `wait=True`, returns an **OptimizeResult** with status, collection_name, co
 
     This exception will be raised when `collection_name` is invalid or `target_size` format is incorrect.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when index build fails, compaction fails, or timeout occurs.
 

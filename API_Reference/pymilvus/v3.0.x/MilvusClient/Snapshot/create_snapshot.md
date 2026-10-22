@@ -55,7 +55,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the collection does not exist, the snapshot name is already taken, or the operation fails for any other reason.
 

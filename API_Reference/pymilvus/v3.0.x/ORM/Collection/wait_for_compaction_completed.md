@@ -63,7 +63,7 @@ A `CompactionState` object with the following members:
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This arises when any error occurs during this operation.
 

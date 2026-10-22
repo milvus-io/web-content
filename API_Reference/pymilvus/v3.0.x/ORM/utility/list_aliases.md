@@ -48,7 +48,7 @@ A list of aliases for the specified collection. If the collection has no aliases
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

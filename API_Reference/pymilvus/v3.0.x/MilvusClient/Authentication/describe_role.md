@@ -74,7 +74,7 @@ A list of dictionaries containing the permissions assigned to the role. The stru
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

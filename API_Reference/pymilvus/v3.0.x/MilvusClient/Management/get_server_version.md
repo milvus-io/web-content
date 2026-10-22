@@ -31,7 +31,7 @@ When `detail=False`, a version string (e.g., `"2.6.6"`). When `detail=True`, a d
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

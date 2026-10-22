@@ -37,7 +37,7 @@ This operation does not return data.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when the pin does not exist, has already expired, or the request fails.
 

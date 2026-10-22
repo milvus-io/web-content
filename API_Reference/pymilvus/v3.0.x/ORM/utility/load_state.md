@@ -66,7 +66,7 @@ The possible states are as follows:
 
     Indicates that the specified collection does not exist. 
 
-    Including a non-existing partition in **partition_names** results in a **MilvusException**.
+    Including a non-existing partition in **partition_names** results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **NotLoad**
 
@@ -74,7 +74,7 @@ The possible states are as follows:
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 
