@@ -102,6 +102,13 @@ API_Reference/<sdk>/<version-line>/
   <Category>/<Type>.md              # class/struct pages, e.g. Collections/CollectionSchema.md
 ```
 
+Type, enum, and class pages always live in the **business-domain category**
+that surfaces them — never in a standalone `types/` directory. Place a type
+page next to the operations that return or consume it (e.g.
+`CompactionStateCode` → `Management/`, `LoadState` → `Collections/`,
+`Highlighter` → `Vector/`). If a tree still has a legacy `types/` directory,
+migrate the pages out instead of adding to it.
+
 Operation page format (C++ example):
 
 ````markdown

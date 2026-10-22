@@ -33,7 +33,7 @@ let request = CreateIndexRequest::builder()
 
 - `index_params: Vec<IndexParam>`
 
-    Index configurations, one per vector field to index. Each `IndexParam` names the field, the index implementation, the metric type, and optional extra parameters. At least one is required. See [IndexParam](../types/IndexParam.md).
+    Index configurations, one per vector field to index. Each `IndexParam` names the field, the index implementation, the metric type, and optional extra parameters. At least one is required. See [IndexParam](../Collections/IndexParam.md).
 
 - `sync: bool`
 

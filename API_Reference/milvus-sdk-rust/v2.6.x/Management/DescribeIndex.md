@@ -54,7 +54,7 @@ DescribeIndexResponse
 
 - `indexes()` (*&[IndexDesc]*) -
 
-    The index descriptions. See [IndexDesc](../types/IndexDesc.md).
+    The index descriptions. See [IndexDesc](IndexDesc.md).
 
 ## Example
 

@@ -35,7 +35,7 @@ let request = UpsertRequest::builder()
 
 - `field_ops: Vec<FieldPartialUpdateOp>`
 
-    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. See [FieldPartialUpdateOp](../types/FieldPartialUpdateOp.md).
+    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. See [FieldPartialUpdateOp](FieldPartialUpdateOp.md).
 
 **RETURN TYPE:**
 

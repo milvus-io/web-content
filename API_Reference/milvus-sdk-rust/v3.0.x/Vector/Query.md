@@ -41,7 +41,7 @@ let request = QueryRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression. See [FilterTemplateValue](../types/FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -65,11 +65,11 @@ let request = QueryRequest::builder()
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the query; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Consistency guarantee for the query; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `order_by_fields: Vec<OrderByField>`
 
-    Scalar fields used to order the query results. See [OrderByField](../types/OrderByField.md).
+    Scalar fields used to order the query results. See [OrderByField](OrderByField.md).
 
 - `extra_params: HashMap<String, String>`
 
@@ -121,11 +121,11 @@ QueryResponse
 
     - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
 
-        The returned rows as entity values. See [EntityRow](../types/EntityRow.md).
+        The returned rows as entity values. See [EntityRow](EntityRow.md).
 
     - `get_output_row()` (*Result<EntityRow>*) -
 
-        The row at the given index as an entity value. See [EntityRow](../types/EntityRow.md).
+        The row at the given index as an entity value. See [EntityRow](EntityRow.md).
 
 - `session_timestamp()` (*u64*) -
 

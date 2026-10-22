@@ -241,7 +241,7 @@ await milvusClient.search({
 
 - **search_aggregation** (*SearchAggregation*) -
 
-    Optional bucket aggregation configuration. See [SearchAggregation](../types/SearchAggregation.md).
+    Optional bucket aggregation configuration. See [SearchAggregation](SearchAggregation.md).
 
 **RETURNS:**
 

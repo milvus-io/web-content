@@ -30,7 +30,7 @@ let request = CompactRequest::builder()
 
 - `target_size_unit: TargetSizeUnit`
 
-    Unit of `target_size`; the value is converted to MB before being sent to Milvus. Defaults to `TargetSizeUnit::MB`.
+    Unit of `target_size`; the value is converted to MB before being sent to Milvus. Defaults to `TargetSizeUnit::MB`. See [TargetSizeUnit](TargetSizeUnit.md).
 
 - `clustering_compaction: bool`
 

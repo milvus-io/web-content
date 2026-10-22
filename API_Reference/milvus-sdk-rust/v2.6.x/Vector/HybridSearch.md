@@ -83,7 +83,7 @@ let request = HybridSearchRequest::builder()
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 ### SubSearchRequest
 
@@ -97,7 +97,7 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
 - `vectors: SearchVectors`
 
-    Query vectors, wrapped in the `SearchVectors` enum matching the field's data type (e.g. `SearchVectors::Float`, `SearchVectors::Sparse`). Required. See [SearchVectors](../types/SearchVectors.md).
+    Query vectors, wrapped in the `SearchVectors` enum matching the field's data type (e.g. `SearchVectors::Float`, `SearchVectors::Sparse`). Required. See [SearchVectors](SearchVectors.md).
 
 - `filter: String`
 
@@ -217,11 +217,11 @@ SearchResponse
 
         - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
 
-            The hits as entity rows. See [EntityRow](../types/EntityRow.md).
+            The hits as entity rows. See [EntityRow](EntityRow.md).
 
         - `get_output_row()` (*Result<EntityRow>*) -
 
-            The hit at the given index as an entity row. See [EntityRow](../types/EntityRow.md).
+            The hit at the given index as an entity row. See [EntityRow](EntityRow.md).
 
     - `get_recalls()` (*&[f32]*) -
 

@@ -47,11 +47,11 @@ let request = CreateCollectionRequest::builder()
 
 - `consistency_level: ConsistencyLevel`
 
-    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `index_params: Vec<IndexParam>`
 
-    Index parameters created together with the collection. Use `index_param()` to add one. See [IndexParam](../types/IndexParam.md).
+    Index parameters created together with the collection. Use `index_param()` to add one. See [IndexParam](IndexParam.md).
 
 - `properties: HashMap<String, String>`
 

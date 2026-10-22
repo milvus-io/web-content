@@ -41,7 +41,7 @@ GetCompactionStateResponse
 
 - `state()` (*CompactionStateCode*) -
 
-    The state of the compaction action.
+    The state of the compaction action. See [CompactionStateCode](CompactionStateCode.md).
 
 - `executing_plans()` (*i64*) -
 

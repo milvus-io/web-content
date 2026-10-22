@@ -35,7 +35,7 @@ let request = DeleteRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression, such as `{minimum}`. See [FilterTemplateValue](../types/FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression, such as `{minimum}`. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `ids: Ids`
 

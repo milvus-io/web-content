@@ -383,6 +383,9 @@ local directory via this table before editing. Current latest version line is
   types under `milvus/types/` → the page documenting that type.
   The shared error type `MilvusError` (used in the error-handling sections of
   operation pages) is placed at `Client/MilvusError.md`.
+  (Per the SKILL.md placement rule there is no standalone `types/` directory:
+  the legacy `types/SearchAggregation.md` was moved to `Vector/SearchAggregation.md`;
+  place new type pages in their business-domain category.)
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
   rather than hard-coding a patch number here).
 - **Version pins**: NONE — `About.md` uses `v3.0.0+` → `**latest**` rows and
@@ -470,9 +473,18 @@ local directory via this table before editing. Current latest version line is
   `src/v2/client.rs`; types/requests under `src/v2/`); examples under `examples/v2/`.
 - **Doc tree**: `API_Reference/milvus-sdk-rust/<version-line>/` with categories
   Authentication, CDC, Client, Collections, Database, DataImport, FileResources,
-  Management, Partitions, ResourceGroup, Snapshots, Vector, and `types/`.
+  Management, Partitions, ResourceGroup, Snapshots, and Vector.
   (If a brand-new line is ever added, use the **New SDK bootstrap mode** with
   `milvus-sdk-cpp` or `milvus-sdk-java` as the structure template.)
+- **Type page placement**: type/enum pages live in the business-domain category
+  that surfaces them — never in a standalone `types/` directory (the legacy
+  `types/` directory was dissolved; do not recreate it). Placement:
+  `IndexDesc`/`IndexStateCode`/`CompactionStateCode`/`SegmentLevel`/
+  `SegmentState`/`TargetSizeUnit` → `Management/`; `CollectionDesc`/
+  `ConsistencyLevel`/`IndexParam`/`LoadState` → `Collections/`;
+  `EntityRow`/`FieldPartialUpdateOp`/`FilterTemplateValue`/`FunctionChain`/
+  `FunctionScore`/`Highlighter`/`OrderByField`/`SearchAggregation`/
+  `SearchVectors` → `Vector/`.
 - **Dedicated type pages (per-SDK)**: `FieldData` and `Ids` are leaf data
   types with dedicated rust pages — `Vector/FieldData.md` and `Vector/Ids.md`
   — kept scoped to this SDK section (and the cpp section where they overlap),
