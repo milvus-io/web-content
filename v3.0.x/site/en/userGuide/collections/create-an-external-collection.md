@@ -122,12 +122,12 @@ To create the schema for an external collection, you need to specify the source 
    </tr>
    <tr>
      <td><p><code>format</code></p></td>
-     <td><p>Format of the target source data files.</p></td>
+     <td><p>Format of the target source data. Use <code>parquet</code> for Parquet files or <code>iceberg-table</code> for an Iceberg table. For Iceberg, <code>external_source</code> must point to the table's metadata JSON file.</p></td>
      <td><p><code>parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code>snapshot_id</code></p></td>
-     <td><p>A valid Iceberg table snapshot ID. This parameter applies only when you set <code>format</code> to <code>iceberg_table</code>.</p></td>
+     <td><p>A valid snapshot ID from the Iceberg table's metadata. This parameter applies only when you set <code>format</code> to <code>iceberg-table</code>.</p></td>
      <td><p><code>473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -136,6 +136,28 @@ To create the schema for an external collection, you need to specify the source 
      <td><p>--</p></td>
    </tr>
 </table>
+
+<details summary="Iceberg table example">
+
+For an Iceberg table on AWS S3, the following `external_spec` uses IAM authentication. The Milvus deployment must already have access to the metadata JSON and the manifest and data files it references.
+
+Set `external_source` to your metadata file, such as `s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json`. Replace `snapshot_id` with an existing snapshot ID from that file and adjust `extfs` for your storage environment.
+
+```json
+{
+    "format": "iceberg-table",
+    "snapshot_id": "473984310232959286",
+    "extfs": {
+        "cloud_provider": "aws",
+        "region": "us-west-2",
+        "use_iam": "true"
+    }
+}
+```
+
+For supported storage providers and Iceberg restrictions, see [Storage V3](storage-v3.md).
+
+</details>
 
 <details summary="Authentication Options">
 

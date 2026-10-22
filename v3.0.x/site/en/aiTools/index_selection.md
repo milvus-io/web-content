@@ -107,13 +107,15 @@ Start here
 | Index | Best for | Key parameters | Tradeoffs |
 |---|---|---|---|
 | **AUTOINDEX** | General use | `metric_type` | Milvus selects the optimal index. Easiest to use. |
-| **HNSW** | High recall, in-memory | `M` (4-64, default 16), `efConstruction` (8-512, default 200) | High recall, high memory usage. Best for datasets that fit in RAM. |
+| **HNSW** | High recall, in-memory | `M` (range [2, 2048], stock default 30), `efConstruction` (range [1, int_max], stock default 360) | High recall, high memory usage. Best for datasets that fit in RAM. |
 | **HNSW_SQ** | Reduced memory HNSW | Same as HNSW + scalar quantization | ~70% memory of HNSW, slight recall loss. |
 | **HNSW_PQ** | Further reduced memory | Same as HNSW + product quantization | ~30% memory of HNSW, more recall loss. |
 | **DiskANN** | Larger-than-RAM datasets | `search_list` (100-300) | Uses disk + memory. Slower than HNSW but handles huge datasets. |
 | **IVF_FLAT** | Memory-constrained | `nlist` (128-4096) | Partition-based. Search uses `nprobe` (1-nlist). |
 | **IVF_PQ** | Very memory-constrained | `nlist`, `m` (subquantizer count) | Lowest memory, lowest recall. |
 | **FLAT** | Small datasets, exact search | None | Brute-force. 100% recall but O(n) search time. |
+
+If you omit HNSW parameters, Milvus uses the stock defaults unless the server is configured with different values.
 
 ## Metric type reference
 
@@ -124,7 +126,9 @@ Start here
 | `IP` | Inner product; sparse vectors, pre-normalized data | (-∞, ∞) (higher = more similar) |
 | `BM25` | Full-text search with BM25 function | Score-based (higher = more relevant) |
 
-## Complete example: HNSW index with tuning
+## Example: HNSW index with tuning
+
+This example uses an existing collection named `my_collection` with entities in a `dense_vector` field. Define `query_vector` with the same dimension as that field before running the example.
 
 ```python
 from pymilvus import MilvusClient
@@ -140,12 +144,14 @@ index_params.add_index(
     index_type="HNSW",
     metric_type="COSINE",
     params={
-        "M": 16,                # Connections per node (higher = better recall, more memory)
-        "efConstruction": 200,  # Build-time search width (higher = better quality, slower build)
+        "M": 30,                # Connections per node (higher = better recall, more memory)
+        "efConstruction": 360,  # Build-time search width (higher = better quality, slower build)
     },
 )
 
 client.create_index(collection_name="my_collection", index_params=index_params)
+
+client.load_collection(collection_name="my_collection")
 
 # At search time, tune ef for recall vs speed:
 results = client.search(
@@ -158,6 +164,8 @@ results = client.search(
     },
 )
 ```
+
+The build settings use the stock defaults. The search setting `ef=100` is an example override; adjust it based on your recall and latency requirements.
 
 ## Complete example: multiple indexes (dense + sparse + scalar)
 
@@ -196,5 +204,7 @@ Before finishing, verify:
 - [ ] AUTOINDEX is used unless there is a specific reason for a different index
 - [ ] `metric_type` matches what the embedding model expects (usually COSINE)
 - [ ] Sparse vector fields use `SPARSE_INVERTED_INDEX`, not dense vector indexes
-- [ ] Index parameters are reasonable (e.g., HNSW M=16, efConstruction=200 are good defaults)
+- [ ] Index parameters are reasonable (e.g., HNSW stock defaults are M=30 and efConstruction=360; tune explicit overrides for the workload)
 ````
+
+For HNSW defaults, accepted ranges, and search constraints, see [HNSW index params](hnsw.md#Index-params).

@@ -38,13 +38,15 @@ For details on how to adjust these settings to suit your needs, refer to [Index 
 
 ## Build index
 
-To build an `HNSW` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
+This example uses a connected client named `client` and an existing collection named `your_collection_name`. The collection has a five-dimensional vector field named `your_vector_field_name`.
+
+Define the index parameters with `add_index()`, then build the index with `create_index()`.
 
 ```python
 from pymilvus import MilvusClient
 
 # Prepare index building params
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name="your_vector_field_name", # Name of the vector field to be indexed
@@ -55,6 +57,11 @@ index_params.add_index(
         "M": 64, # Maximum number of neighbors each node can connect to in the graph
         "efConstruction": 100 # Number of candidate neighbors considered for connection during index construction
     } # Index building params
+)
+
+client.create_index(
+    collection_name="your_collection_name",
+    index_params=index_params
 )
 ```
 
@@ -70,13 +77,13 @@ In this configuration:
 
     - `efConstruction`: Number of candidate neighbors considered for connection during index construction.
 
-    To learn more building parameters available for the `HNSW` index, refer to [Index building params](hnsw.md#Index-building-params).
+    The example sets `M=64` and `efConstruction=100` as tuning overrides. For defaults and accepted ranges, see [Index building params](hnsw.md#Index-building-params).
 
-Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
+To create a collection and its index together, pass the index parameters to `create_collection()`. For details, see [Create Collection](create-collection.md).
 
 ## Search on index
 
-Once the index is built and entities are inserted, you can perform similarity searches on the index.
+After building the index and inserting entities, load the collection and search its vector field. For ordinary kNN searches, set `ef` to at least `limit`.
 
 ```python
 search_params = {
@@ -85,9 +92,11 @@ search_params = {
     }
 }
 
-res = MilvusClient.search(
+client.load_collection(collection_name="your_collection_name")
+
+res = client.search(
     collection_name="your_collection_name", # Collection name
-    anns_field="vector_field", # Vector field name
+    anns_field="your_vector_field_name", # Vector field name
     data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  # Query vector
     limit=10,  # TopK results to return
     search_params=search_params
@@ -104,7 +113,7 @@ In this configuration:
 
 ## Index params
 
-This section provides an overview of the parameters used for building an index and performing searches on the index.
+The tables below list the parameters for index building and search. Server settings can override the defaults for parameters you omit.
 
 ### Index building params
 
@@ -145,7 +154,7 @@ The following table lists the parameters that can be configured in `search_param
    <tr>
      <td><p><code>ef</code></p></td>
      <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors.  This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <code>max(limit, 16)</code> for ordinary kNN search; <code>512</code> for range search.</p><p>For ordinary kNN search, an explicit <code>ef</code> must be greater than or equal to <code>limit</code> (the number of nearest neighbors to return).</p></td>
      <td><p>A larger <code>ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>. Consider increasing <code>ef</code> when achieving high recall is critical and search speed is less of a concern.</p><p>Consider decreasing <code>ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p><p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
    </tr>
 </table>

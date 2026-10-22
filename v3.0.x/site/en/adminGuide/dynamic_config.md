@@ -117,7 +117,7 @@ Currently, you can change the following configuration items on the fly.
  | proxy.maxNameLength                                                     | 255                 |
  | proxy.maxUsernameLength                                                 | 32                  |
  | proxy.minPasswordLength                                                 | 6                   |
- | proxy.maxPasswordLength                                                 | 256                 |
+ | proxy.maxPasswordLength                                                 | 72                  |
  | proxy.maxFieldNum                                                       | 64                  |
  | proxy.maxShardNum                                                       | 256                 |
  | proxy.maxDimension                                                      | 32768               |

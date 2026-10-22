@@ -16,11 +16,11 @@ For daily operations, we recommend creating users instead of using the root user
 
 ### Create a user
 
-The following example shows how to create a user with the username `user_1` and the password `P@ssw0rd`. The username and password for the user must follow these rules:
+Connect as `root` and create a user with the username `user_1` and password `P@ssw0rd`. When choosing credentials, follow these rules:
 
 - Username: Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores.
 
-- Password: Must be 8-64 characters long and must include three of the following: uppercase letters, lowercase letters, numbers, and special characters.
+- Password: Must be 6–72 UTF-8 bytes long by default. Your deployment may configure different [password length limits](authenticate.md#Password-requirements).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -119,13 +119,7 @@ curl --request POST \
 
 ### Update password
 
-After creating a user, you can update the password if you forget.
-
-The new password must also follow the following rule:
-
-- Must be 8-64 characters long and include three of the following: uppercase letters, lowercase letters, numbers, and special characters.
-
-The following example shows how to update the password for user `user_1` to `NewP@ssw0rd`.
+Reuse the connection from the create-user example to update `user_1`'s password from `P@ssw0rd` to `NewP@ssw0rd`. Provide the current password and choose a new password that meets the same [password requirements](authenticate.md#Password-requirements).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -169,8 +163,8 @@ const { MilvusClient, DataType } = require("@zilliz/milvus2-sdk-node")
 
 await client.updateUser({
    username: 'user_1',
-   newPassword: 'P@ssw0rd',
-   oldPassword: 'NewP@ssw0rd',
+   newPassword: 'NewP@ssw0rd',
+   oldPassword: 'P@ssw0rd',
 });
 ```
 
@@ -181,11 +175,13 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d '{
-    "newPassword": "P@ssw0rd!",
+    "newPassword": "NewP@ssw0rd",
     "userName": "user_1",
     "password": "P@ssw0rd"
 }'
 ```
+
+If you have forgotten the current password, a configured super user can reset it. See [Update user password](authenticate.md#Update-user-password).
 
 ### List users
 

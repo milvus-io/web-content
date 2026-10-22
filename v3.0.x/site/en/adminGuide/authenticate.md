@@ -98,7 +98,7 @@ If you fail to provide a valid token when connecting to Milvus with authenticati
 
 ## Create a new user
 
-Once connected as the default `root` user, you can create and authenticate a new user as follows:
+While connected as `root`, create a user with `create_user()`. Choose a password of 6–72 UTF-8 bytes, unless your deployment uses custom [password length limits](authenticate.md#Password-requirements).
 
 ```python
 # create a user
@@ -133,7 +133,7 @@ client = MilvusClient(
 
 ## Update user password
 
-Change the password for an existing user with the following code:
+To change a user's password, provide the current password and a new password that meets the same [password requirements](authenticate.md#Password-requirements).
 
 ```python
 # update password
@@ -183,8 +183,15 @@ client.list_users()
 
 ## Limitations
 
-1. Username must not be empty, and must not exceed 32 characters in length. It must start with a letter, and only contains underscores, letters, or numbers.
-2. Password must have at least 6 characters and must not exceed 256 characters in length.
+### Username requirements
+
+Usernames must not be empty or exceed 32 characters. They must start with a letter and contain only letters, numbers, or underscores.
+
+### Password requirements
+
+Passwords must be 6–72 UTF-8 bytes long by default. ASCII characters each occupy one byte; multibyte characters occupy more than one. Milvus does not require a specific mix of uppercase letters, lowercase letters, numbers, or special characters.
+
+To change the length limits, configure `proxy.minPasswordLength` and `proxy.maxPasswordLength`. The maximum cannot exceed 72 bytes. A `proxy.maxPasswordLength` value of zero or less, or above 72, is treated as 72. For configuration instructions, see [Configure Milvus on the Fly](dynamic_config.md).
 
 ## What's next
 - You might also want to learn how to:

@@ -189,7 +189,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-sq.md#Search-on-index). Server settings can override the defaults for parameters you omit.
 
 <table>
    <tr>
@@ -203,7 +203,7 @@ The following table lists the parameters that can be configured in `search_param
      <td><p>HNSW</p></td>
      <td><p><code>ef</code></p></td>
      <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors. </p><p>This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
-     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
+     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <code>max(limit, 16)</code> for ordinary kNN search; <code>512</code> for range search.</p><p>For ordinary kNN search, an explicit <code>ef</code> must be greater than or equal to <code>limit</code> (the number of nearest neighbors to return).</p></td>
      <td><p>A larger <code>ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>.</p><p>Consider increasing <code>ef</code> when achieving high recall is critical and search speed is less of a concern.</p><p>Consider decreasing <code>ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p><p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
    </tr>
    <tr>
