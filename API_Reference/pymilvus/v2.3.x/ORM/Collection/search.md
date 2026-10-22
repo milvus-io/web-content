@@ -57,7 +57,7 @@ __PARAMETERS:__
 
             You can use this parameter in combination with `limit` to enable pagination.
 
-            The sum of this value and `limit` should be less than 16,384. 
+            The sum of this value and `limit` should be less than or equal to 16,384. 
 
         - __radius__ (float) -
 
@@ -75,7 +75,7 @@ __PARAMETERS:__
 
     You can use this parameter in combination with `offset` in __param__ to enable pagination.
 
-    The sum of this value and `offset` in __param__ should be less than 16,384. 
+    The sum of this value and `offset` in __param__ should be less than or equal to 16,384. 
 
 - __expr__ (_str_) -
 

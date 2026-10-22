@@ -77,7 +77,7 @@ queryIterator(data): Promise<any>
 
     You can use this parameter in combination with `limit` to enable pagination.
 
-    The sum of this value and `limit` should be less than 16,384. 
+    The sum of this value and `limit` should be less than or equal to 16,384. 
 
 - **limit** (*number*) -
 
@@ -85,7 +85,7 @@ queryIterator(data): Promise<any>
 
     You can use this parameter in combination with `offset` to enable pagination.
 
-    The sum of this value and `offset` should be less than 16,384. 
+    The sum of this value and `offset` should be less than or equal to 16,384. 
 
 - **partition_names** (*string&#91;&#93;*) -
 

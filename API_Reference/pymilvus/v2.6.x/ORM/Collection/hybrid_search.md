@@ -45,7 +45,7 @@ hybrid_search(
 
         - **anns_field** (*str*): The vector field to use in the request.
 
-        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to [Search parameters](https://milvus.io/docs/single-vector-search#search-parameters).
+        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to [Search parameters](https://milvus.io/docs/single-vector-search#search-parameters). Note that the `offset` set here is not supported in hybrid search and is ignored by Milvus.
 
         - **limit** (*int*): The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **limit** from each request will be combined and re-ranked before returning the final search results.
 
@@ -63,9 +63,11 @@ hybrid_search(
 
     The total number of entities to return.
 
-    You can use this parameter in combination with `offset` in **param** to enable pagination.
+    You can use this parameter in combination with the top-level `offset` search option to enable pagination. The top-level `offset` is applied to the final results after candidate fusion and reranking.
 
-    The sum of this value and `offset` in **param** should be less than 16,384.
+    To make pagination work as expected, the `limit` of each **AnnSearchRequest** in **reqs** should cover the pagination window, that is, the sum of the top-level `offset` and this value.
+
+    The sum of this value and the top-level `offset` should be less than or equal to 16,384.
 
 - **partition_names** (*List[str]*) -
 

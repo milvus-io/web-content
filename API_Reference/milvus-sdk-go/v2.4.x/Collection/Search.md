@@ -184,11 +184,11 @@ Each of the following methods instantiates a `client.SearchQueryOptionFunc` type
    </tr>
    <tr>
      <td><p><code>WithLimit(limit int64)</code></p></td>
-     <td><p>Specifies the number of returned entities.</p><p>The sum of <code>limit</code> and <code>offset</code> should be less than 16,384.</p></td>
+     <td><p>Specifies the number of returned entities.</p><p>The sum of <code>limit</code> and <code>offset</code> should be less than or equal to 16,384.</p></td>
    </tr>
    <tr>
      <td><p><code>WithOffset(offset int64)</code></p></td>
-     <td><p>Specifies the number of entities to skip within the return.</p><p>The sum of <code>limit</code> and <code>offset</code> should be less than 16,384.</p></td>
+     <td><p>Specifies the number of entities to skip within the return.</p><p>The sum of <code>limit</code> and <code>offset</code> should be less than or equal to 16,384.</p></td>
    </tr>
    <tr>
      <td><p><code>WithSearchQueryConsistencyLevel(cl entity.ConsistencyLevel)</code></p></td>

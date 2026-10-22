@@ -12,7 +12,7 @@ list_database(
 ## Request Syntax
 
 ```python
-from pymilvs import db
+from pymilvus import db
 
 db.list_database()
 ```

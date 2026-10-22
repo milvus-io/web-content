@@ -48,11 +48,11 @@ await milvusClient.hybridSearch({
 
 - **limit** (*number*) -
 
-    The total number of entities to return. The sum of this value and `offset` must be less than 16,384.
+    The total number of entities to return. The sum of this value and `offset` must be less than or equal to 16,384.
 
 - **offset** (*number*) -
 
-    The number of records to skip in the search result. The sum of this value and `limit` must be less than 16,384.
+    The number of records to skip in the search result. The sum of this value and `limit` must be less than or equal to 16,384.
 
 - **output_fields** (*string[]*) -
 

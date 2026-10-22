@@ -50,7 +50,7 @@ search(SearchReq.builder()
 
     You can use this parameter in combination with `offset` to enable pagination.
 
-    The sum of this value and `offset` should be less than 16,384. 
+    The sum of this value and `offset` should be less than or equal to 16,384. 
 
 - `filter(String filter)`
 
@@ -76,7 +76,7 @@ search(SearchReq.builder()
 
     You can use this parameter in combination with `limit` to enable pagination.
 
-    The sum of this value and `limit` should be less than 16,384. 
+    The sum of this value and `limit` should be less than or equal to 16,384. 
 
 - `limit(long limit)`
 
@@ -84,7 +84,7 @@ search(SearchReq.builder()
 
     You can use this parameter in combination with `offset` to enable pagination.
 
-    The sum of this value and `offset` should be less than 16,384. 
+    The sum of this value and `offset` should be less than or equal to 16,384. 
 
 - `roundDecimal(int roundDecimal)`
 

@@ -384,7 +384,7 @@ func (r *AnnRequest) WithOffset(offset int) *AnnRequest
    </tr>
    <tr>
      <td><p><code>offset</code></p></td>
-     <td><p>The number of results to skip from the search results.</p><p>The value of this parameter and that of <code>limit</code> should be less than 16,384.</p></td>
+     <td><p>The number of results to skip from the search results.</p><p>The value of this parameter and that of <code>limit</code> should be less than or equal to 16,384.</p></td>
      <td><p><code>int</code></p></td>
    </tr>
 </table>

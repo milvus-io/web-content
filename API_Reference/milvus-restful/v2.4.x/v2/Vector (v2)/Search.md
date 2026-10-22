@@ -101,8 +101,8 @@ Possible response is similar to the following.
 | `data[]`  | __number<float32>__<br/>A vector embedding  |
 | `annsField` <span style="color:red">*</span> | __string__<br/>The name of the vector field.  |
 | `filter`  | __string__<br/>The filter used to find matches for the search.  |
-| `limit`  | __integer__<br/>The total number of entities to return.<br/>You can use this parameter in combination with **offset** in **param** to enable pagination.<br/>The sum of this value and **offset** in **param** should be less than 16,384.  |
-| `offset`  | __integer__<br/>The number of records to skip in the search result.      You can use this parameter in combination with limit to enable pagination.     The sum of this value and limit should be less than 16,384.  |
+| `limit`  | __integer__<br/>The total number of entities to return.<br/>You can use this parameter in combination with **offset** in **param** to enable pagination.<br/>The sum of this value and **offset** in **param** should be less than or equal to 16,384.  |
+| `offset`  | __integer__<br/>The number of records to skip in the search result.      You can use this parameter in combination with limit to enable pagination.     The sum of this value and limit should be less than or equal to 16,384.  |
 | `groupingField`  | __string__<br/>The name of the field that serves as the aggregation criteria.  |
 | `outputFields` | __array__<br/>An array of fields to return along with the search results. |
 | `outputFields[]`  | __string__<br/>A field name  |

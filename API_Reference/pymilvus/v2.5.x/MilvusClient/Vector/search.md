@@ -58,11 +58,11 @@ search(
 
     You can use this parameter in combination with **offset** in **param** to enable pagination.
 
-    The sum of this value and **offset** in **param** should be less than 16,384. 
+    The sum of this value and **offset** in **param** should be less than or equal to 16,384. 
 
     In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
 
-- **output_fields** (l*ist&#91;str&#93;*) -
+- **output_fields** (*list&#91;str&#93;*) -
 
     A list of field names to include in each entity in return.
 
@@ -156,7 +156,7 @@ search(
 
         You can use this parameter in combination with `limit` to enable pagination.
 
-        The sum of this value and `limit` should be less than 16,384. 
+        The sum of this value and `limit` should be less than or equal to 16,384. 
 
     - **round_decimal** (int) -
 
