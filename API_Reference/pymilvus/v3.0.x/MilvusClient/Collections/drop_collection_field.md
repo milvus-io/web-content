@@ -47,7 +47,7 @@ This operation does not return data.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when the collection does not exist, the field cannot be resolved, or the request fails.
 

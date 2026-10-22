@@ -31,7 +31,7 @@ transfer_replica(
 
     The name of the source resource group from which the query nodes are moved.
 
-    Setting this to a resource group that does not exist results in a **MilvusException**.
+    Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **target_group** (*str*) -
 
@@ -39,7 +39,7 @@ transfer_replica(
 
     The name of the source resource group to which the query nodes are moved.
 
-    Setting this to a resource group that does not exist results in a **MilvusException**.
+    Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **num_replicas** (*int*) -
 
@@ -77,7 +77,7 @@ None.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -20,7 +20,7 @@ describe_index(
 
     The name of an existing collection.
 
-    Setting this to a non-existing collection results in **MilvusException**.
+    Setting this to a non-existing collection results in **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **index_name** (*str*) -
 
@@ -28,7 +28,7 @@ describe_index(
 
     The name of the index to describe.
 
-    Setting this to a non-existing index results in **MilvusException**.
+    Setting this to a non-existing index results in **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **timeout** (*float* | *None*)  
 
@@ -96,7 +96,7 @@ A dictionary that contains the details of the specified index.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

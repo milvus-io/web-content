@@ -32,7 +32,7 @@ The current replication configuration, including cluster definitions and cross-c
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when replication metadata cannot be fetched or the request fails.
 

@@ -40,7 +40,7 @@ The status of the operation.
 
     This exception will be raised when neither `clusters` nor `cross_cluster_topology` is provided.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the operation fails.
 

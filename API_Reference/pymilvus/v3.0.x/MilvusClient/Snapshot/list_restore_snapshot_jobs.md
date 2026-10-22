@@ -86,7 +86,7 @@ A list of RestoreSnapshotJobInfo objects, each containing restore job informatio
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     If the operation fails.
 

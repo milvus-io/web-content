@@ -82,13 +82,13 @@ This operation is non-blocking. You can call `utility.wait_for_loading_complete(
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception is to be raised when any error occurs during this operation.
 
 <div class="alert warning">
 
-If you try to load a collection that is not indexed, you will receive a **MilvusException**.
+If you try to load a collection that is not indexed, you will receive a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 </div>
 

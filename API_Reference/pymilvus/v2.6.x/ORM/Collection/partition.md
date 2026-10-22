@@ -36,7 +36,7 @@ A **Partition** object. If the current collection does not have a partition of t
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

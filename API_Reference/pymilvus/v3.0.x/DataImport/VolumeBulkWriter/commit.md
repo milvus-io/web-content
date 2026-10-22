@@ -30,7 +30,7 @@ This method does not return a value.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when the flush or upload operation fails.
 

@@ -27,7 +27,7 @@ This method does not return a value.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     Raised when the row data fails validation against the collection schema (e.g., type mismatch, missing required fields, vector dimension mismatch).
 

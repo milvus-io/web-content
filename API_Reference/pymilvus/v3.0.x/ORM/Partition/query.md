@@ -107,7 +107,7 @@ A list of the query results.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This arises when any error occurs during this operation.
 

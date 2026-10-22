@@ -28,7 +28,7 @@ has_partition(
     **[REQUIRED]**
     The name of an existing collection.
 
-    Setting this to a non-existing collection results in a **MilvusException**.
+    Setting this to a non-existing collection results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **partition_name** (*str*) -
 
@@ -54,7 +54,7 @@ A boolean value indicates whether the specified partition exists.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation, especially when the specified alias does not exist.
 

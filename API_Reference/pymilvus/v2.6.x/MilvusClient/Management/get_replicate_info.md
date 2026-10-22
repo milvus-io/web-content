@@ -43,7 +43,7 @@ Dictionary containing `checkpoint` and `salvage_checkpoint` entries. Each checkp
 - **ParamError**
 Raised when `source_cluster_id` or `target_pchannel` is empty. Provide both source identifiers.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

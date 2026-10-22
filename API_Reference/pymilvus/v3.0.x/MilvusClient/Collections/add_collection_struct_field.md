@@ -69,7 +69,7 @@ None
 
     Raised when **struct_schema** is not a `StructFieldSchema` instance or when **nullable** is not set to **True**.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -77,7 +77,7 @@ A dataclass containing snapshot metadata with the following fields:
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     If the snapshot does not exist or the operation fails.
 

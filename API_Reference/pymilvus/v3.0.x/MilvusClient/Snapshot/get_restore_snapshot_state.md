@@ -83,7 +83,7 @@ A dataclass containing restore job information with the following fields:
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     If the job ID is invalid or the operation fails.
 

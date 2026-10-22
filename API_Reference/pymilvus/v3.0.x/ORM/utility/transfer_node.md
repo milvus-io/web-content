@@ -30,7 +30,7 @@ transfer_node(
 
     The name of the source resource group from which the query nodes are moved.
 
-    Setting this to a resource group that does not exist results in a **MilvusException**.
+    Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **target_group** (*str*) -
 
@@ -38,7 +38,7 @@ transfer_node(
 
     The name of the source resource group to which the query nodes are moved.
 
-    Setting this to a resource group that does not exist results in a **MilvusException**.
+    Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **num_nodes** (*int*) -
 
@@ -46,7 +46,7 @@ transfer_node(
 
     The number of query nodes to move between the source and target resource groups.
 
-    Setting this to an integer greater than the actual number of query nodes in the current Milvus instance results in a **MilvusException**.
+    Setting this to an integer greater than the actual number of query nodes in the current Milvus instance results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **using** (*str*) - 
 
@@ -68,7 +68,7 @@ None.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -45,7 +45,7 @@ Returns no value after the user is created successfully.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

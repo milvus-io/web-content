@@ -65,7 +65,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the role does not exist, the privilege is invalid, or the server encounters an error.
 

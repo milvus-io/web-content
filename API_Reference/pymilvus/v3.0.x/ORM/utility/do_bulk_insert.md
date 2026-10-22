@@ -69,7 +69,7 @@ do_bulk_insert(
 
     Setting this makes Milvus bulk-insert the data into the specified partition.
 
-    Setting this to the name of a partition that does not exist results in a **MilvusException**.
+    Setting this to the name of a partition that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **using** (*str*) - 
 
@@ -90,7 +90,7 @@ A bulk-insert task ID.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

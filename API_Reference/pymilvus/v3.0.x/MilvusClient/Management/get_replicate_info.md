@@ -70,7 +70,7 @@ Each non-**None** checkpoint dictionary has the following keys:
 
     Raised when **source_cluster_id** or **target_pchannel** is empty.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the RPC fails.
 

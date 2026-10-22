@@ -36,7 +36,7 @@ update_password(
 
     The original password for the specified user.
 
-    Setting this to an incorrect password results in a **MilvusException**.
+    Setting this to an incorrect password results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
 - **new_password** (*str*) - 
 
@@ -66,7 +66,7 @@ None
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

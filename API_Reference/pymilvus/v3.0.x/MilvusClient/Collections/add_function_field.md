@@ -66,7 +66,7 @@ None
 
     Raised when a required parameter is missing or invalid.
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the schema change fails.
 

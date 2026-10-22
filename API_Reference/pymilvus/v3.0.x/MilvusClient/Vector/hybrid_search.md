@@ -92,7 +92,7 @@ Search results for the combined ANN requests after applying each request's expre
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

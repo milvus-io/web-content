@@ -34,7 +34,7 @@ release(
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This arises when any error occurs during this operation.
 
