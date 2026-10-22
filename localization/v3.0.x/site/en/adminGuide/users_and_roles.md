@@ -56,10 +56,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following example shows how to create a user with the username <code translate="no">user_1</code> and the password <code translate="no">P@ssw0rd</code>. The username and password for the user must follow these rules:</p>
+    </button></h3><p>Connect as <code translate="no">root</code> and create a user with the username <code translate="no">user_1</code> and password <code translate="no">P@ssw0rd</code>. When choosing credentials, follow these rules:</p>
 <ul>
 <li><p>Username: Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores.</p></li>
-<li><p>Password: Must be 8-64 characters long and must include three of the following: uppercase letters, lowercase letters, numbers, and special characters.</p></li>
+<li><p>Password: Must be 6–72 UTF-8 bytes long by default. Your deployment may configure different <a href="/docs/authenticate.md#Password-requirements">password length limits</a>.</p></li>
 </ul>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -160,12 +160,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>After creating a user, you can update the password if you forget.</p>
-<p>The new password must also follow the following rule:</p>
-<ul>
-<li>Must be 8-64 characters long and include three of the following: uppercase letters, lowercase letters, numbers, and special characters.</li>
-</ul>
-<p>The following example shows how to update the password for user <code translate="no">user_1</code> to <code translate="no">NewP@ssw0rd</code>.</p>
+    </button></h3><p>Reuse the connection from the create-user example to update <code translate="no">user_1</code>'s password from <code translate="no">P@ssw0rd</code> to <code translate="no">NewP@ssw0rd</code>. Provide the current password and choose a new password that meets the same <a href="/docs/authenticate.md#Password-requirements">password requirements</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -200,8 +195,8 @@ client.updatePassword(updatePasswordReq);
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">updateUser</span>({
    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
-   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -210,11 +205,12 @@ client.updatePassword(updatePasswordReq);
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
+    &quot;newPassword&quot;: &quot;NewP@ssw0rd&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>If you have forgotten the current password, a configured super user can reset it. See <a href="/docs/authenticate.md#Update-user-password">Update user password</a>.</p>
 <h3 id="List-users" class="common-anchor-header">List users<button data-href="#List-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

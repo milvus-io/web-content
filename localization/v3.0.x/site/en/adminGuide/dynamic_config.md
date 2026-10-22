@@ -176,7 +176,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>proxy.maxNameLength</td><td>255</td></tr>
 <tr><td>proxy.maxUsernameLength</td><td>32</td></tr>
 <tr><td>proxy.minPasswordLength</td><td>6</td></tr>
-<tr><td>proxy.maxPasswordLength</td><td>256</td></tr>
+<tr><td>proxy.maxPasswordLength</td><td>72</td></tr>
 <tr><td>proxy.maxFieldNum</td><td>64</td></tr>
 <tr><td>proxy.maxShardNum</td><td>256</td></tr>
 <tr><td>proxy.maxDimension</td><td>32768</td></tr>
