@@ -48,11 +48,9 @@ auto resp = milvus::BulkImport::ListImportJobs(
 
 A JSON object containing an array of import job records, or `nullptr` on failure. Each record includes the job ID, state, and creation time.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **std::exception**
-
-    Thrown if the HTTP request fails or the response cannot be parsed. Check the return value for `nullptr` to detect failures.
+The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
 
 ## Example
 

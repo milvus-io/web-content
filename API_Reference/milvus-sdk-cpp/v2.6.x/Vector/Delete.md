@@ -141,9 +141,9 @@ Returns a Status indicating whether the operation succeeded. On success, the Del
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Request construction, transport, or response processing fails. Inspect the returned Status or the exception message for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

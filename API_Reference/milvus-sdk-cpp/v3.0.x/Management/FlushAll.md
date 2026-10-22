@@ -44,7 +44,7 @@ Returns a Status indicating whether the operation succeeded. The flush-all times
 
         Get flush-all timestamp.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

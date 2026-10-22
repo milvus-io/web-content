@@ -55,13 +55,11 @@ auto request = RefreshLoadRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **Status**
 
-    Check `status.Code()` and `status.Message()` for invalid collection names, load-state issues, or timeout failures.
-
- See [StatusCode](../Client/StatusCode.md).
+    Failures are reported through the returned Status; check `status.Code()` and `status.Message()` for invalid collection names, load-state issues, or timeout failures. See [Status](../Client/Status.md).
 
 ## Example
 

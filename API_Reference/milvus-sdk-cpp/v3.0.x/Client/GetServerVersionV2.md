@@ -49,11 +49,11 @@ Check `status.IsOk()` to confirm success.
 
     Returns the server deploy mode. Populated when the request sets `WithDetail(true)`.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **Status**
 
-    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](StatusCode.md).
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
 
 ## Example
 

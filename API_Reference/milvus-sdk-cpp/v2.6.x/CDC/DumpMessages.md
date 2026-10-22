@@ -58,9 +58,9 @@ Returns a Status indicating whether the requested messages were all dumped and a
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when an unexpected error occurs while building the request or streaming the dumped messages from the server. The SDK reports these failures through the returned Status (for example an empty callback, an unknown WAL name in the start message ID, or a lost connection) rather than by throwing; inspect the exception message or returned Status for failure details.
+    An unexpected error can occur while building the request or streaming the dumped messages from the server. The SDK reports these failures through the returned Status (for example an empty callback, an unknown WAL name in the start message ID, or a lost connection) rather than by throwing; inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

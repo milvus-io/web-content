@@ -49,9 +49,9 @@ Returns a Status reporting whether the operation succeeded, and fills the respon
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When the client is not connected, or the underlying RPC to the server fails or times out. the returned Status carries the error code and message; check it with IsOk() before reading the response.
+    Failures are reported through the returned Status when the client is not connected, or the underlying RPC to the server fails or times out; the Status carries the error code and message. Check it with `IsOk()` before reading the response. See [Status](Status.md).
 
 ## Example
 

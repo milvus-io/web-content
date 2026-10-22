@@ -73,7 +73,7 @@ Returns a Status indicating whether the operation succeeded. The snapshot metada
 
         Get the S3 storage location of the snapshot.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

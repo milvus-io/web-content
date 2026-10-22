@@ -14,9 +14,9 @@ Returns a Status indicating whether the connection was established successfully;
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When URI parsing, gRPC channel creation, or the connection handshake fails, for example because the URI is invalid, the server is unreachable, or the connect timeout expires. reported through the returned Status (NOT_CONNECTED, TIMEOUT, or RPC_FAILED) carrying the underlying error message; exceptions raised while creating the gRPC channel are caught internally and converted to a failed Status rather than propagating.
+    Failures are reported through the returned Status (NOT_CONNECTED, TIMEOUT, or RPC_FAILED) carrying the underlying error message; for example when URI parsing, gRPC channel creation, or the connection handshake fails, such as an invalid URI, an unreachable server, or an expired connect timeout. Exceptions raised while creating the gRPC channel are caught internally and converted to a failed Status rather than propagating. Inspect `status.IsOk()`, `Code()`, and `Message()` for details. See [Status](Status.md).
 
 ## Example
 

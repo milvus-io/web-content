@@ -71,7 +71,7 @@ Returns a Status indicating whether the operation succeeded. The restore job ID 
 
         Get the restore job identifier.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

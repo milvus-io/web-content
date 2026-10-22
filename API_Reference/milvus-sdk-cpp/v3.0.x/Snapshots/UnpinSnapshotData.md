@@ -27,7 +27,7 @@ auto request = milvus::UnpinSnapshotDataRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

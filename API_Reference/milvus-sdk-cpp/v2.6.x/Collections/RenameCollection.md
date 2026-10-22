@@ -58,9 +58,9 @@ Returns a Status indicating whether the collection was renamed successfully; che
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    When request construction, transport, or response processing fails. the returned Status carries the error code and message; inspect the exception message or the Status to determine the cause, such as a source collection that does not exist under the given database.
+    Failures are reported through the returned Status; the Status carries the error code and message, for example when the source collection does not exist under the given database. Inspect `status.IsOk()` and `status.Message()` to determine the cause. See [Status](../Client/Status.md).
 
 ## Example
 

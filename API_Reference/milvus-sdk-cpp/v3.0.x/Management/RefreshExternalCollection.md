@@ -62,7 +62,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job ID 
 
         Get the refresh job identifier.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

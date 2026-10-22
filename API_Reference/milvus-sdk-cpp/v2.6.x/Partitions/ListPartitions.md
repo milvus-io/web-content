@@ -68,11 +68,11 @@ Returns a Status indicating whether the operation succeeded. On success, the Lis
 
             **Deprecated.** Always returns `false`. Use `GetLoadState()` for the load state.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **Status**
 
-    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

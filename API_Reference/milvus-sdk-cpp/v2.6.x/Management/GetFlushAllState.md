@@ -44,11 +44,11 @@ Returns a Status indicating whether the operation succeeded. On success, the Get
 
         Whether the flush-all action has finished.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    This exception can be raised if the request cannot be sent or the response cannot be parsed.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

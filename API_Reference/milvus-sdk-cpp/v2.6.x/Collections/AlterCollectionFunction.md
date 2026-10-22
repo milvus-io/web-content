@@ -49,9 +49,9 @@ Returns a Status indicating whether the function was altered successfully; it al
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when request construction, transport, or response processing fails. Inspect the exception message or the returned Status for failure details; a null Function or an empty function name is rejected locally with an INVALID_ARGUMENT status.
+    Failures are reported through the returned Status; a null Function or an empty function name is rejected locally with an INVALID_ARGUMENT status. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
 
 ## Example
 

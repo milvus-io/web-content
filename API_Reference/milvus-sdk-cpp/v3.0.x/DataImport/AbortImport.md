@@ -16,9 +16,7 @@ Returns the JSON response from the bulk-import endpoint.
 
 **ERROR HANDLING:**
 
-- **std::exception**
-
-    Thrown if the HTTP request fails or the response cannot be parsed. Check the return value for `nullptr` to detect failures.
+The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
 
 ## Example
 

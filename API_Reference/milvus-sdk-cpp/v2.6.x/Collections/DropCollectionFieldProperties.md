@@ -63,9 +63,9 @@ Returns a Status indicating whether the specified property keys were removed fro
 
 **ERROR HANDLING:**
 
-- **std::exception**
+- **Status**
 
-    Thrown when the request cannot be constructed, the RPC transport fails, or the server rejects the drop. Inspect Status::IsOk() and Status::Message() (or the exception message) for the failure reason.
+    Failures are reported through the returned Status when the request cannot be constructed, the RPC transport fails, or the server rejects the drop; inspect `IsOk()` and `Message()` for the failure reason. See [Status](../Client/Status.md).
 
 ## Example
 

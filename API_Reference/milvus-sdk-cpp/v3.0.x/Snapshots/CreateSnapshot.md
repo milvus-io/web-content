@@ -63,7 +63,7 @@ auto request = milvus::CreateSnapshotRequest()
 
 *Status*
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
 - **Status**
 

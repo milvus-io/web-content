@@ -150,11 +150,11 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
 
     Returns the cache hit ratio as a value between 0.0 and 1.0.
 
-**EXCEPTIONS:**
+**ERROR HANDLING:**
 
-- **StatusCode**
+- **Status**
 
-    Check `status.Code()` and `status.Message()` for error details. See [StatusCode](../Client/StatusCode.md).
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Field-data type aliases
 
