@@ -37,7 +37,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `functionList(List<CreateCollectionReq.Function> functionList)` -
 
-    Attaches functions (e.g., BM25, JSON-path extraction) that derive values from existing fields at insert time. Each `Function` declares its inputs, outputs, and parameters. See [Function](../Function.md).
+    Attaches functions (e.g., BM25, JSON-path extraction) that derive values from existing fields at insert time. Each `Function` declares its inputs, outputs, and parameters. See [Function](../Function/Function.md).
 
 - `externalSource(String externalSource)` -
 

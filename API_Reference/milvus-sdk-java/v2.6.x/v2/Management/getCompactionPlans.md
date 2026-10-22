@@ -33,7 +33,7 @@ A **GetCompactionPlansResp** object that contains the compaction state and plans
 
 - `getState()` (*CompactionState*) -
 
-    The current state of the specified compact operation.
+    The current state of the specified compact operation. See [CompactionState](CompactionState.md).
 
 - `getPlans()` (*List\<CompactionPlan\>*) -
 

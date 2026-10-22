@@ -89,8 +89,9 @@ run with a clarification instead of downgrading.
 - **Diff mode** (default): update only the pages affected by changes between two
   SDK tags (old version → new version). Fast; does NOT touch pre-existing issues.
 - **Reconciliation mode**: audit the whole doc tree against one target tag and fix
-  omissions, errors, and drift (missing methods, wrong signatures, typos, stale
-  descriptions). Use when the user wants existing pages verified, not just bumped.
+  omissions, errors, and drift (missing type/enum pages, missing methods, wrong
+  signatures, typos, stale descriptions). Use when the user wants existing pages
+  verified, not just bumped.
   See [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages).
 
 ## Repo layout & page conventions
@@ -420,6 +421,23 @@ own new page automatically (no need to ask the user). Exceptions:
   A wrapper member may reference an important reusable domain/model type (for
   example `FieldData`, `CollectionSchema`, or `FieldSchema`); that referenced
   type may get its own dedicated page and must be linked.
+  This applies even when the same wrapper is returned by several operations —
+  sharing alone does not make a response wrapper eligible. Only **global,
+  cross-cutting response/status types** surfaced across the API surface (for
+  example the C++ `Status`) earn a standalone page, placed in `Client/` or
+  their owning category.
+- **third-party / shared-library types** → skip (no page). Only types **defined
+  in the SDK's own source code** are eligible for standalone pages. Protobuf/grpc
+  generated types, pandas/numpy containers, `nlohmann::json`, JDK/.NET stdlib
+  classes, ORM framework types, etc. appear only as plain type annotations and
+  are never documented as pages;
+- **single-page types** → expand inline. A type/enum/struct referenced by only
+  ONE operation page does not get a standalone page — document its members
+  nested inside that page's `**RETURNS:**` / `**PARAMETERS:**` sections instead.
+  Standalone type pages are reserved for types **defined in SDK source** that
+  are either **global/cross-cutting response or status types** (see the wrapper
+  rule above) or **domain data types shared across multiple pages** — and never
+  for API-specific response wrappers;
 - **internal-only symbols** → skip (no page);
 - **blacklisted symbols** (per-SDK blacklist in `references/sdk-map.md`, e.g. Go
   `Client.GetService()`) → skip (no page);
@@ -806,9 +824,14 @@ and confirm with the user before deleting it.
 Also check: enum values missing from type pages, stale version pins, missing
 `@deprecated` markers, **response wrappers documented as standalone pages**
 (fold them into the operation's `**RETURNS:**` and remove the wrapper page),
-**missing dedicated domain-type pages** (important reusable classes/structs/
-enums that surface in request params or as the return type of a response/result
-member but have no page — create one), **missing cross-links** (references to a type whose
+**missing dedicated domain-type pages** (classes/structs/enums **defined in the
+SDK's own source code** and shared across **two or more pages** — via request
+params or as the return type of a response/result member — but have no page:
+create one in the owning business-domain category; **API-specific response
+wrappers stay inline in their operation pages even when shared across several
+of them**; types defined outside the SDK, or referenced by only a single page,
+stay as inline annotations and must NOT get a page), **missing cross-links**
+(references to a type whose
 page exists but is not linked — add the relative `.md` link), and **misplaced
 type pages** (a type page sitting outside its owning category directory — move
 it into the correct category, e.g. `MilvusClient/FunctionScore.md` →

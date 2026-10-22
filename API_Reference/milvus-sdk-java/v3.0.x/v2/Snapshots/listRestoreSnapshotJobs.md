@@ -36,7 +36,7 @@ A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs th
 
 - `getJobs()` (*List\<RestoreSnapshotJobInfo\>*) -
 
-    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following getters:
+    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following getters (see [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md)):
 
     - `getJobId()` (*Long*) -
 

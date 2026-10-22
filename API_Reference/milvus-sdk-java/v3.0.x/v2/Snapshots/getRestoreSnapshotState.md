@@ -31,7 +31,7 @@ A **GetRestoreSnapshotStateResp** object containing restore job state, progress,
 
 - `getJobInfo()` (*RestoreSnapshotJobInfo*) -
 
-    The restore job information. Each **RestoreSnapshotJobInfo** has the following getters:
+    The restore job information. Each **RestoreSnapshotJobInfo** has the following getters (see [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md)):
 
     - `getJobId()` (*Long*) -
 

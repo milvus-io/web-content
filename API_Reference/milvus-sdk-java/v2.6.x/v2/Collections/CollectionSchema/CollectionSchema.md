@@ -41,7 +41,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `functionList(List<CreateCollectionReq.Function>)`
 
-    A list of **[Function](../Function.md)** objects that define the functions of the collection schema.
+    A list of **[Function](../Function/Function.md)** objects that define the functions of the collection schema.
 
 **RETURN TYPE:**
 
