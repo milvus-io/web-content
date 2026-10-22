@@ -23,21 +23,20 @@ The RAG system combines a retrieval system with a generative model to generate n
 
 ## Prerequisites
 
-Before running this notebook, make sure you have the following dependencies installed:
+This tutorial requires Python 3.10 or later. Install the Haystack integration for Milvus together with current PyMilvus and Milvus Lite packages:
 
-
-```python
-! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
+```shell
+pip install --upgrade --quiet "milvus-haystack>=0.1.0" "pymilvus>=3.0.2" "milvus-lite>=3.2.2" "nltk>=3.9.1" markdown-it-py mdit_plain
 ```
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
-We will use the models from OpenAI. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
 
+We will use the models from OpenAI. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
 
 ```python
 import os
@@ -50,7 +49,6 @@ os.environ["OPENAI_API_KEY"] = "sk-***********"
 We use an online content about [Leonardo Da Vinci](https://www.gutenberg.org/cache/epub/7785/pg7785.txt) as a store of private knowledge for our RAG pipeline, which is a good data source for a simple RAG pipeline.
 
 Download it and save it as a local text file.
-
 
 ```python
 import os
@@ -67,7 +65,6 @@ if not os.path.exists(file_path):
 
 Create an indexing pipeline that converts the text into documents, splits them into sentences, and embeds them. The documents are then written to the Milvus document store.
 
-
 ```python
 from haystack import Pipeline
 from haystack.components.converters import MarkdownToDocument
@@ -76,15 +73,14 @@ from haystack.components.preprocessors import DocumentSplitter
 from haystack.components.writers import DocumentWriter
 from haystack.utils import Secret
 
-from milvus_haystack import MilvusDocumentStore
-from milvus_haystack.milvus_embedding_retriever import MilvusEmbeddingRetriever
-
+from milvus_haystack import MilvusDocumentStore, MilvusEmbeddingRetriever
 
 document_store = MilvusDocumentStore(
+    collection_name="haystack_rag_demo",
     connection_args={"uri": "./milvus.db"},
     # connection_args={"uri": "http://localhost:19530"},
-    # connection_args={"uri": YOUR_ZILLIZ_CLOUD_URI, "token": Secret.from_env_var("ZILLIZ_CLOUD_API_KEY")},
-    drop_old=False,
+    # connection_args={"uri": os.environ["MILVUS_URI"], "token": Secret.from_env_var("MILVUS_TOKEN")},
+    drop_old=True,
 )
 ```
 
@@ -93,7 +89,7 @@ document_store = MilvusDocumentStore(
 For the connection_args:
 - Setting the `uri` as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
 - If you have large scale of data, you can set up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.`http://localhost:19530`, as your `uri`.
-- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud.
+- If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, set `MILVUS_URI` and `MILVUS_TOKEN` to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) shown in the Zilliz Cloud console.
 
 </div>
 
@@ -114,98 +110,84 @@ indexing_pipeline.run({"converter": {"sources": [file_path]}})
 print("Number of documents:", document_store.count_documents())
 ```
 
-    Converting markdown files to Documents: 100%|█| 1/
-    Calculating embeddings: 100%|█| 9/9 [00:05<00:00, 
-    E20240516 10:40:32.945937 5309095 milvus_local.cpp:189] [SERVER][GetCollection][] Collecton HaystackCollection not existed
-    E20240516 10:40:32.946677 5309095 milvus_local.cpp:189] [SERVER][GetCollection][] Collecton HaystackCollection not existed
-    E20240516 10:40:32.946704 5309095 milvus_local.cpp:189] [SERVER][GetCollection][] Collecton HaystackCollection not existed
-    E20240516 10:40:32.946725 5309095 milvus_local.cpp:189] [SERVER][GetCollection][] Collecton HaystackCollection not existed
-
-
-    Number of documents: 277
-
+    Number of documents: 134
 
 ## Create the retrieval pipeline
 
 Create a retrieval pipeline that retrieves documents from the Milvus document store using a vector similarity search engine.
 
-
 ```python
-question = 'Where is the painting "Warrior" currently stored?'
+question = "Where is Leonardo's earliest dated work kept?"
 
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component("embedder", OpenAITextEmbedder())
 retrieval_pipeline.add_component(
     "retriever", MilvusEmbeddingRetriever(document_store=document_store, top_k=3)
 )
-retrieval_pipeline.connect("embedder", "retriever")
+retrieval_pipeline.connect("embedder.embedding", "retriever.query_embedding")
 
 retrieval_results = retrieval_pipeline.run({"embedder": {"text": question}})
 
-for doc in retrieval_results["retriever"]["documents"]:
-    print(doc.content)
-    print("-" * 10)
+print(retrieval_results["retriever"]["documents"][0].content)
 ```
 
-    ). The
-    composition of this oil-painting seems to have been built up on the
-    second cartoon, which he had made some eight years earlier, and which
-    was apparently taken to France in 1516 and ultimately lost.
-    ----------
-    
-    This "Baptism of Christ," which is now in the Accademia in Florence
-    and is in a bad state of preservation, appears to have been a
-    comparatively early work by Verrocchio, and to have been painted
-    in 1480-1482, when Leonardo would be about thirty years of age.
-    
-    To about this period belongs the superb drawing of the "Warrior," now
-    in the Malcolm Collection in the British Museum.
-    ----------
-    " Although he
-    completed the cartoon, the only part of the composition which he
-    eventually executed in colour was an incident in the foreground
-    which dealt with the "Battle of the Standard." One of the many
-    supposed copies of a study of this mural painting now hangs on the
-    south-east staircase in the Victoria and Albert Museum.
-    ----------
+    This
+    small picture, which has been considerably repainted, and is perhaps
+    by Andrea del Verrocchio, Leonardo's master, is the subject of Plate
+    II.
 
+    To January 1473 belongs Leonardo's earliest dated work, a pen-and-ink
+    drawing--"A Wide View over a Plain," now in the Uffizi. The
+    inscription together with the date in the top left-hand corner is
+    reversed, and proves a remarkable characteristic of Leonardo's
+    handwriting--viz., that he wrote from right to left; indeed, it has
+    been suggested that he did this in order to make it difficult for any
+    one else to read the words, which were frequently committed to paper
+    by the aid of peculiar abbreviations.
+
+    Leonardo continued to work in his master's studio till about 1477.
 
 ## Create the RAG pipeline
 
-Create a RAG pipeline that combines the MilvusEmbeddingRetriever and the OpenAIGenerator to answer the question using the retrieved documents.
-
+Create a RAG pipeline that combines `MilvusEmbeddingRetriever` and `OpenAIChatGenerator` to answer the question using the retrieved documents.
 
 ```python
-from haystack.utils import Secret
-from haystack.components.builders import PromptBuilder
-from haystack.components.generators import OpenAIGenerator
+from haystack.components.builders import ChatPromptBuilder
+from haystack.components.generators.chat import OpenAIChatGenerator
+from haystack.dataclasses import ChatMessage
 
-prompt_template = """Answer the following query based on the provided context. If the context does
-                     not include an answer, reply with 'I don't know'.\n
-                     Query: {{query}}
-                     Documents:
-                     {% for doc in documents %}
-                        {{ doc.content }}
-                     {% endfor %}
-                     Answer:
-                  """
+prompt_template = [
+    ChatMessage.from_user(
+        """Answer the following query based on the provided context. If the context does
+        not include an answer, reply with 'I don't know'.
+
+        Query: {{query}}
+        Documents:
+        {% for doc in documents %}
+            {{ doc.content }}
+        {% endfor %}
+        Answer:
+        """
+    )
+]
 
 rag_pipeline = Pipeline()
 rag_pipeline.add_component("text_embedder", OpenAITextEmbedder())
 rag_pipeline.add_component(
     "retriever", MilvusEmbeddingRetriever(document_store=document_store, top_k=3)
 )
-rag_pipeline.add_component("prompt_builder", PromptBuilder(template=prompt_template))
+rag_pipeline.add_component(
+    "prompt_builder", ChatPromptBuilder(template=prompt_template)
+)
 rag_pipeline.add_component(
     "generator",
-    OpenAIGenerator(
-        api_key=Secret.from_token(os.getenv("OPENAI_API_KEY")),
-        generation_kwargs={"temperature": 0},
+    OpenAIChatGenerator(
+        api_key=Secret.from_env_var("OPENAI_API_KEY"),
     ),
 )
 rag_pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
 rag_pipeline.connect("retriever.documents", "prompt_builder.documents")
-rag_pipeline.connect("prompt_builder", "generator")
+rag_pipeline.connect("prompt_builder.prompt", "generator.messages")
 
 results = rag_pipeline.run(
     {
@@ -213,10 +195,11 @@ results = rag_pipeline.run(
         "prompt_builder": {"query": question},
     }
 )
-print("RAG answer:", results["generator"]["replies"][0])
+print("RAG answer:", results["generator"]["replies"][0].text)
 ```
 
-    RAG answer: The painting "Warrior" is currently stored in the Malcolm Collection in the British Museum.
+    RAG answer: Leonardo's earliest dated work is kept in the Uffizi Gallery (the Uffizi).
 
+## Conclusion
 
-For more information about how to use milvus-haystack, please refer to the [milvus-haystack Readme](https://github.com/milvus-io/milvus-haystack).
+You have built an indexing pipeline, a semantic retrieval pipeline, and a RAG pipeline with Haystack and Milvus. For more integration options, refer to the [milvus-haystack README](https://github.com/milvus-io/milvus-haystack).
