@@ -112,7 +112,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation, including when a vector field is added with `isNullable(false)` or without setting `isNullable(true)`.
 

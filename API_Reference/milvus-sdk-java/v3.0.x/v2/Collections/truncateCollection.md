@@ -33,7 +33,7 @@ TruncateCollectionReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientException** - The specified collection does not exist or the server is unreachable.
+- **[MilvusClientException](../Client/MilvusClientException.md)** - The specified collection does not exist or the server is unreachable.
 
 ## Example
 

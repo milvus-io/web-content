@@ -22,7 +22,7 @@ An **EmbeddingList** instance that can be used again to chain up other `add()` m
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception arises if different types of vector embeddings are provided.
 

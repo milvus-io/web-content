@@ -33,9 +33,9 @@ CreateCollectionReq.Function.builder()
 
 - `functionType(FunctionType functionType)`
 
-    The type of function for processing raw data. Possible values: See [FunctionType](Function/FunctionType.md).
+    The type of function for processing raw data. Possible values:
 
-    - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
+    - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field. See [FunctionType](FunctionType.md).
 
 - `inputFieldNames(List<String> inputFieldNames)`
 
@@ -49,10 +49,6 @@ CreateCollectionReq.Function.builder()
 
     A set of key-value pairs that configures the function properties.
 
-- `param(String key, String value)`
-
-    Adds a single key-value pair to the function properties.
-
 **RETURN TYPE:**
 
 *Function*
@@ -63,7 +59,7 @@ A `Function` object that can be registered with a Milvus collection, facilitatin
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

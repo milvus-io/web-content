@@ -48,7 +48,7 @@ A **GetPartitionStatsResp** object that contains `numOfEntities` and the complet
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 

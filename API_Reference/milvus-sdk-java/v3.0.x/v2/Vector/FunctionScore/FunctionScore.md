@@ -21,7 +21,7 @@ FunctionScore.builder()
 
 - `functions(List<CreateCollectionReq.Function> functions)`
 
-    A list of `Function` instances. See [Function](../../Collections/Function.md).
+    A list of `Function` instances. See [Function](../../Collections/Function/Function.md).
 
 - `params(Map<String, String> params)`
 

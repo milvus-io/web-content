@@ -43,7 +43,7 @@ A **GetCollectionStatsResp** object that contains `numOfEntities` and the comple
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 

@@ -52,7 +52,7 @@ A **GetLoadStateResp** object that indicates the load state of the collection.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 

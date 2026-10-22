@@ -94,7 +94,7 @@ AddFunctionFieldReq.builder()
 
 - `function(CreateCollectionReq.Function function)`
 
-    The function definition. It must have exactly one output matching fieldName. See [Function](Function.md).
+    The function definition. It must have exactly one output matching fieldName. See [Function](Function/Function.md).
 
 - `indexParam(IndexParam indexParam)`
 
@@ -108,7 +108,7 @@ This operation does not return a value.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 

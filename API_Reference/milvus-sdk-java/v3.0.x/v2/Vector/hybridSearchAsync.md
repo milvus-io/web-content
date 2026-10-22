@@ -151,7 +151,7 @@ A future completed with a **SearchResp** object that contains search results, re
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when request validation, transport, or server execution fails.
 

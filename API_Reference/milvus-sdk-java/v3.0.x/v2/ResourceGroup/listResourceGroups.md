@@ -32,7 +32,7 @@ A **ListResourceGroupsResp** object that contains a list of group names.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

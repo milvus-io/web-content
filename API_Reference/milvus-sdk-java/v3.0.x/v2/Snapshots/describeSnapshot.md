@@ -65,7 +65,7 @@ A **DescribeSnapshotResp** object containing snapshot metadata.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception is raised when required parameters are missing, numeric parameters are out of range, or the server returns an error for this operation.
 

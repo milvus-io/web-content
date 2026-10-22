@@ -50,7 +50,7 @@ A **GetServerVersionResp** object that contains the version information of the c
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 

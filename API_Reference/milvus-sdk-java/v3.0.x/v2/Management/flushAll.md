@@ -39,7 +39,7 @@ A **FlushAllResp** object that contains the flush-all timestamp.
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 

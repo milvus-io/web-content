@@ -14,7 +14,7 @@ This method is useful when the client was created with a deferred telemetry star
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

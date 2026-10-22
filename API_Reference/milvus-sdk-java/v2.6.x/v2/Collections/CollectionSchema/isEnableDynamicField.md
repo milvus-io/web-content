@@ -16,7 +16,7 @@ Returns **true** if the dynamic field is enabled for the collection schema, **fa
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../../Client/MilvusClientException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -67,7 +67,7 @@ A **GetReplicateInfoResp** object that contains the checkpoint and salvage check
 
 **EXCEPTIONS:**
 
-- **MilvusClientException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
     This exception will be raised when validation fails or the server returns an error for this operation.
 
