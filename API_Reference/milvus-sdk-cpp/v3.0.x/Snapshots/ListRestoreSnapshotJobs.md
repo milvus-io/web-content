@@ -40,7 +40,7 @@ Returns a Status indicating whether the operation succeeded. The restore job lis
 
 - **response** (*ListRestoreSnapshotJobsResponse*) -
 
-    - **Jobs** (*const std::vector<RestoreSnapshotJobInfo>&*) -
+    - **Jobs** (*const std::vector<RestoreSnapshotJobInfo>&*) - See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
         Get the restore jobs.
 

@@ -40,7 +40,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job lis
 
 - **response** (*ListRefreshExternalCollectionJobsResponse*) -
 
-    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*) -
+    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*) - See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
         Get the refresh jobs.
 
@@ -76,7 +76,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job lis
 
             Start timestamp of the refresh job.
 
-        - **State** (*RefreshExternalCollectionStateCode*) -
+        - **State** (*RefreshExternalCollectionStateCode*) - See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
             Current state of the refresh job.
 

@@ -31,7 +31,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job inf
 
 - **response** (*GetRefreshExternalCollectionProgressResponse*) -
 
-    - **JobInfo** (*const RefreshExternalCollectionJobInfo&*) -
+    - **JobInfo** (*const RefreshExternalCollectionJobInfo&*) - See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
         Get the refresh job information.
 
@@ -67,7 +67,7 @@ Returns a Status indicating whether the operation succeeded. The refresh job inf
 
             Start timestamp of the refresh job.
 
-        - **State** (*RefreshExternalCollectionStateCode*) -
+        - **State** (*RefreshExternalCollectionStateCode*) - See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
             Current state of the refresh job.
 
