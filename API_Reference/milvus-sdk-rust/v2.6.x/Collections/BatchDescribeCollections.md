@@ -45,7 +45,7 @@ BatchDescribeCollectionsResponse
 
 - `descriptions()` (*&[CollectionDesc]*) -
 
-    The descriptions of the collections. See [CollectionDesc](../types/CollectionDesc.md).
+    The descriptions of the collections. See [CollectionDesc](CollectionDesc.md).
 
 ## Example
 

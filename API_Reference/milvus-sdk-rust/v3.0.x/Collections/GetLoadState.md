@@ -46,7 +46,7 @@ GetLoadStateResponse
 
 - `state()` (*LoadState*) -
 
-    The load state of the collection or partition.
+    The load state of the collection or partition. See [LoadState](LoadState.md).
 
 - `progress()` (*i64*) -
 

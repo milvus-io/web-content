@@ -62,7 +62,7 @@ The `CreateSimpleCollectionRequest` is converted into a `CreateCollectionRequest
 
 - `consistency_level: ConsistencyLevel`
 
-    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Default consistency level for reads on the collection. Defaults to `Bounded`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `metric_type: MetricType`
 

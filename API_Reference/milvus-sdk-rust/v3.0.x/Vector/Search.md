@@ -38,7 +38,7 @@ let request = SearchRequest::builder()
 
 - `vectors: SearchVectors`
 
-    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs. See [SearchVectors](../types/SearchVectors.md).
+    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs. See [SearchVectors](SearchVectors.md).
 
 - `partition_names: Vec<String>`
 
@@ -50,7 +50,7 @@ let request = SearchRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression. See [FilterTemplateValue](../types/FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -98,7 +98,7 @@ let request = SearchRequest::builder()
 
 - `order_by_fields: Vec<OrderByField>`
 
-    Scalar fields used to order the search results. See [OrderByField](../types/OrderByField.md).
+    Scalar fields used to order the search results. See [OrderByField](OrderByField.md).
 
 - `extra_params: HashMap<String, String>`
 
@@ -106,7 +106,7 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. Mutually exclusive with `function_chains`. See [FunctionScore](../types/FunctionScore.md).
+    Reranking configuration for single-vector search. Mutually exclusive with `function_chains`. See [FunctionScore](FunctionScore.md).
 
 - `timezone: String`
 
@@ -114,19 +114,19 @@ let request = SearchRequest::builder()
 
 - `highlighter: Option<Highlighter>`
 
-    Text-highlighting configuration for full-text search. See [Highlighter](../types/Highlighter.md).
+    Text-highlighting configuration for full-text search. See [Highlighter](Highlighter.md).
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 - `function_chains: Vec<FunctionChain>`
 
-    Function chains used to post-process the search results. Mutually exclusive with `rerank`. See [FunctionChain](../types/FunctionChain.md).
+    Function chains used to post-process the search results. Mutually exclusive with `rerank`. See [FunctionChain](FunctionChain.md).
 
 - `search_aggregation: Option<SearchAggregation>`
 
-    Hierarchical bucket aggregation settings for the search. See [SearchAggregation](../types/SearchAggregation.md).
+    Hierarchical bucket aggregation settings for the search. See [SearchAggregation](SearchAggregation.md).
 
 **RETURN TYPE:**
 
@@ -214,11 +214,11 @@ SearchResponse
 
         - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
 
-            The hits as entity rows. See [EntityRow](../types/EntityRow.md).
+            The hits as entity rows. See [EntityRow](EntityRow.md).
 
         - `get_output_row()` (*Result<EntityRow>*) -
 
-            The hit at the given index as an entity row. See [EntityRow](../types/EntityRow.md).
+            The hit at the given index as an entity row. See [EntityRow](EntityRow.md).
 
     - `get_recalls()` (*&[f32]*) -
 
@@ -258,7 +258,7 @@ SearchResponse
 
         - `get_metrics()` (*&HashMap<String, AggregationMetricValue>*) -
 
-            The metric values computed for the bucket. See [AggregationMetricValue](../types/AggregationMetricValue.md).
+            The metric values computed for the bucket. See [AggregationMetricValue](AggregationMetricValue.md).
 
         - `get_hits()` (*&[AggregationHit]*) -
 

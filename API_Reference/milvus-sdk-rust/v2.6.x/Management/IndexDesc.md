@@ -22,11 +22,11 @@ pub struct IndexDesc
 
 - `index_type: IndexType`
 
-    Index implementation used. Defaults to `IndexType::Invalid`. See [IndexType](../Management/IndexType.md).
+    Index implementation used. Defaults to `IndexType::Invalid`. See [IndexType](IndexType.md).
 
 - `metric_type: MetricType`
 
-    Distance or similarity metric used. Defaults to `MetricType::Default`. See [MetricType](../Management/MetricType.md).
+    Distance or similarity metric used. Defaults to `MetricType::Default`. See [MetricType](MetricType.md).
 
 - `extra_params: HashMap<String, String>`
 
@@ -46,7 +46,7 @@ pub struct IndexDesc
 
 - `state: IndexStateCode`
 
-    Build state of the index. Defaults to `IndexStateCode::None`.
+    Build state of the index. Defaults to `IndexStateCode::None`. See [IndexStateCode](IndexStateCode.md).
 
 - `failure_reason: String`
 

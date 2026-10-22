@@ -51,7 +51,7 @@ let request = AddFunctionFieldRequest::builder()
 
 - `index: Option<IndexParam>`
 
-    Index bound to the output field, with an explicit index type. The bound index must target the output field. Required. See [IndexParam](../types/IndexParam.md).
+    Index bound to the output field, with an explicit index type. The bound index must target the output field. Required. See [IndexParam](IndexParam.md).
 
 **RETURN TYPE:**
 

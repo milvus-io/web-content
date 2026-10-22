@@ -40,7 +40,7 @@ let request = GetRequest::builder()
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the read; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Consistency guarantee for the read; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 **RETURN TYPE:**
 
@@ -84,11 +84,11 @@ QueryResponse
 
     - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
 
-        The returned rows as entity values. See [EntityRow](../types/EntityRow.md).
+        The returned rows as entity values. See [EntityRow](EntityRow.md).
 
     - `get_output_row()` (*Result<EntityRow>*) -
 
-        The row at the given index as an entity value. See [EntityRow](../types/EntityRow.md).
+        The row at the given index as an entity value. See [EntityRow](EntityRow.md).
 
 - `session_timestamp()` (*u64*) -
 

@@ -38,7 +38,7 @@ GetCompactionPlansResponse
 
 - `state()` (*CompactionStateCode*) -
 
-    The state of the compaction action.
+    The state of the compaction action. See [CompactionStateCode](CompactionStateCode.md).
 
 - `merges()` (*&[CompactionMerge]*) -
 

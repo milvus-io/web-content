@@ -38,7 +38,7 @@ let request = SearchRequest::builder()
 
 - `vectors: SearchVectors`
 
-    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs. See [SearchVectors](../types/SearchVectors.md).
+    Query vectors, one per query. Supports dense float, binary, float16, bfloat16, sparse, int8, embedded-text, and struct embedding-list inputs. See [SearchVectors](SearchVectors.md).
 
 - `partition_names: Vec<String>`
 
@@ -102,7 +102,7 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. See [FunctionScore](../types/FunctionScore.md).
+    Reranking configuration for single-vector search. See [FunctionScore](FunctionScore.md).
 
 - `timezone: String`
 
@@ -110,11 +110,11 @@ let request = SearchRequest::builder()
 
 - `highlighter: Option<Highlighter>`
 
-    Text-highlighting configuration for full-text search. See [Highlighter](../types/Highlighter.md).
+    Text-highlighting configuration for full-text search. See [Highlighter](Highlighter.md).
 
 - `consistency_level: Option<ConsistencyLevel>`
 
-    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../types/ConsistencyLevel.md).
+    Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
 **RETURN TYPE:**
 
@@ -202,11 +202,11 @@ SearchResponse
 
         - `get_output_rows()` (*Result<Vec<EntityRow>>*) -
 
-            The hits as entity rows. See [EntityRow](../types/EntityRow.md).
+            The hits as entity rows. See [EntityRow](EntityRow.md).
 
         - `get_output_row()` (*Result<EntityRow>*) -
 
-            The hit at the given index as an entity row. See [EntityRow](../types/EntityRow.md).
+            The hit at the given index as an entity row. See [EntityRow](EntityRow.md).
 
     - `get_recalls()` (*&[f32]*) -
 

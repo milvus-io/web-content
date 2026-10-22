@@ -41,7 +41,7 @@ DescribeCollectionResponse
 
 - `description()` (*&CollectionDesc*) -
 
-    The collection description, including its schema, shards, partitions, aliases, consistency level, and properties. See [CollectionDesc](../types/CollectionDesc.md).
+    The collection description, including its schema, shards, partitions, aliases, consistency level, and properties. See [CollectionDesc](CollectionDesc.md).
 
 ## Example
 

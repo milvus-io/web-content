@@ -61,7 +61,7 @@ ListPersistentSegmentsResponse
 
     - `get_state()` (*SegmentState*) -
 
-        The state of the segment.
+        The state of the segment. See [SegmentState](SegmentState.md).
 
     - `get_collection_name()` (*&str*) -
 
@@ -69,7 +69,7 @@ ListPersistentSegmentsResponse
 
     - `get_level()` (*SegmentLevel*) -
 
-        The compaction level of the segment.
+        The compaction level of the segment. See [SegmentLevel](SegmentLevel.md).
 
     - `get_sorted()` (*bool*) -
 
