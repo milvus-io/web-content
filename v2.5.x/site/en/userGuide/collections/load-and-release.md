@@ -215,7 +215,7 @@ The following code snippet assumes that you have created a collection named **my
 client.load_collection(
     collection_name="my_collection",
     # highlight-next-line
-    load_fields=["my_id", "my_vector"] # Load only the specified fields
+    load_fields=["my_id", "my_vector"], # Load only the specified fields
     skip_load_dynamic_field=True # Skip loading the dynamic field
 )
 
