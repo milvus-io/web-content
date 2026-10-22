@@ -50,7 +50,21 @@ MutationResp result = await client.UpsertAsync(request);
 
 - `FieldOps` (*IReadOnlyList\<FieldPartialUpdateOp\>*) -
 
-    Per-field partial-update operations describing how each field is merged during a partial upsert. A non-replace operation implies `PartialUpdate` regardless of the flag.
+    Per-field partial-update operations describing how each field is merged during a partial upsert. A non-replace operation implies `PartialUpdate` regardless of the flag. Each **FieldPartialUpdateOp** is constructed from a field name and an operation type, with these members:
+
+    - `FieldName` (*string*) -
+
+        The name of the field the operation applies to.
+
+    - `OpType` (*FieldPartialUpdateOpType*) -
+
+        How the field is merged into the existing row. Defaults to `FieldPartialUpdateOpType.Replace`. Supported values:
+
+        - `Replace` (0) - Replace the stored field value with the upserted value.
+
+        - `ArrayAppend` (1) - Append the upserted elements to the stored array field.
+
+        - `ArrayRemove` (2) - Remove the upserted elements from the stored array field.
 
 **RETURN TYPE:**
 
