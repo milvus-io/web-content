@@ -498,6 +498,10 @@ the parameter or response member.
 **Client-code breaking changes → `About.md` Breaking Changes.** Map a change to
 the `## Breaking Changes` section only when upgrading requires callers to modify
 existing client code or handle a new failure for code that previously worked.
+The SDK repository's `CHANGELOG.md` is the **authoritative source** for what
+counts as a breaking change in a given release: document the releases whose
+CHANGELOG entries list breaking changes, and add no Breaking Changes entry for
+a release whose CHANGELOG lists none. Do not ask the user to adjudicate.
 Examples include input/builder parameter types changing, a parameter becoming
 required or newly rejected, a public method/class/type being renamed or deleted,
 sync methods becoming async, and consumed result accessors or shapes being
@@ -1595,8 +1599,11 @@ Notes:
 
 ## Edge cases & decisions to confirm with the user
 
-- **Removed/deprecated API**: mark as deprecated on the page, or delete the page?
-  Ask.
+- **Removed/deprecated API**: an API **removed from the SDK source** is a
+  breaking change by definition — **delete its page** and record the removal in
+  `About.md` Breaking Changes (per the CHANGELOG rule above). An API still
+  present but marked deprecated/`[Obsolete]` keeps its page with a deprecation
+  note naming the replacement. Do not ask the user to choose.
 - **V1/V2 deprecation scope**: when updating a V2 reference, never import
   deprecated V1-only methods as aliases or warnings. Audit the V2 surface only;
   audit an explicit V1 reference separately if requested.
