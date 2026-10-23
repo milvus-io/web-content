@@ -21,7 +21,7 @@ PinSnapshotDataResp result = await client.PinSnapshotDataAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `SnapshotName` (*string*) -
+- `Name` (*string*) -
 
     The name of the snapshot to pin.
 

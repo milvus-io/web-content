@@ -26,7 +26,7 @@ public sealed class ConnectConfig
 
     The URI to connect to. This can be a cloud instance endpoint or an address such as `"http://localhost:19530"`. If the scheme is omitted, `http://` is assumed.
 
-- `Username` (*string?*) -
+- `UserName` (*string?*) -
 
     The username to authenticate with.
 

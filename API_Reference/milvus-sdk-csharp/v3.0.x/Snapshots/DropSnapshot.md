@@ -20,7 +20,7 @@ await client.DropSnapshotAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `SnapshotName` (*string*) -
+- `Name` (*string*) -
 
     The name of the snapshot to drop.
 

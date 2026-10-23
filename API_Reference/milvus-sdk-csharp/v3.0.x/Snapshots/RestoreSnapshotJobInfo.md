@@ -23,7 +23,7 @@ public sealed class RestoreSnapshotJobInfo
 
     The ID of the restore job.
 
-- `SnapshotName` (*string*) -
+- `Name` (*string*) -
 
     The name of the snapshot being restored.
 
