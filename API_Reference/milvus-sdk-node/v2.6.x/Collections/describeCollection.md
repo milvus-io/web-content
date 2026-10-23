@@ -101,7 +101,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
         A list of schema-defined fields.
 
-    - **functions** (*FunctionObject[]*) -
+    - **functions** ([FunctionObject](FunctionObject.md)[]) -
 
         Doc-in / doc-out functions attached to the collection (for example, the BM25 sparse-vector function).
 
@@ -165,7 +165,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     The name of the database to which the collection belongs.
 
-- **functions** (*FunctionObject[]*)-
+- **functions** ([FunctionObject](FunctionObject.md)[])-
 
     A flattened list of doc-in / doc-out functions attached to the collection.
 

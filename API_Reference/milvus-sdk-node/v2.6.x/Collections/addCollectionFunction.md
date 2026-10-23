@@ -25,7 +25,7 @@ await milvusClient.addCollectionFunction({
 
     The name of the collection to add the function to.
 
-- **function** (*FunctionObject*) -
+- **function** ([FunctionObject](FunctionObject.md)) -
 
     **[REQUIRED]**
 

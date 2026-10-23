@@ -66,11 +66,11 @@ A list of segment-level descriptors for segments persisted to object storage.
 
         The number of rows in the segment.
 
-    - **state** (*SegmentState*) -
+    - **state** (*[SegmentState](SegmentState.md)*) -
 
         The segment state. For the full list of possible values, refer to the `getQuerySegmentInfo()` doc.
 
-    - **level** (*SegmentLevel*) -
+    - **level** (*[SegmentLevel](SegmentLevel.md)*) -
 
         The segment level. Possible values are **Legacy**, **L0**, **L1**, and **L2**.
 

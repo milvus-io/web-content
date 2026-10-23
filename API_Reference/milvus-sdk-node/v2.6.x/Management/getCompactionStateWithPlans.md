@@ -43,7 +43,8 @@ This method returns a promise that resolves to a **GetCompactionPlansResponse** 
 
 **PARAMETERS:**
 
-- **state** (*CompactionState*) -
+- **state** ([CompactionState](CompactionState.md)) -
+
 The aggregate state of the compaction. Possible values are **UndefiedState**, **Executing**, and **Completed**.
 
 - **mergeInfos** (*{ sources: string[], target: string }[]*) -

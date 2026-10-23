@@ -58,53 +58,9 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 **PARAMETERS:**
 
-- **entities** (*GrantEntity[]*) -
+- **entities** ([GrantEntity](GrantEntity.md)[]) -
 
-    A list of grant entities, each of which is shaped as follows:
-
-    - **db_name** (*string*) -
-
-        The name of the database in which the privilege has been granted.
-
-    - **grantor** (*Grantor*) -
-
-        A **Grantor** object that is shaped as follows:
-
-        - **privilege** (*PrivilegeEntity*) -
-
-            A **PrivilegeEntity** object that is shaped as follows:
-
-            - **name** (*string*) - 
-
-                The name of the granted privilege.
-
-        - **user** (*User*) - 
-
-            A **User** object that is shaped as follows:
-
-            - **name** (*string*) - 
-
-                The name of the user that grants the above privilege to the role. 
-
-    - **object** (*ObjectEntity*) -
-
-        An **ObjectEntity** object that is shaped as follows:
-
-        - **name** (*string*) - 
-
-            The name of the object entity.
-
-    - **object_name** (*string*) -
-
-        The name of a specific object within the above object entity.
-
-    - **role** (*RoleEntity*) -   
-
-        A **RoleEntity** object that is shaped as follows:
-
-        - **name** (*string*) - 
-
-            The name of the role to which the privilege has been granted.
+    A list of grant entities, each of which is shaped as follows.
 
 - **status** (*ResStatus*) -
 

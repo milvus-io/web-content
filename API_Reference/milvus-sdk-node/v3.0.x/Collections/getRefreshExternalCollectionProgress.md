@@ -43,7 +43,8 @@ This method returns a promise that resolves to a **GetRefreshExternalCollectionP
 
 **PARAMETERS:**
 
-- **job_info** (*RefreshExternalCollectionJobInfo*) -
+- **job_info** (*[RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md)*) -
+
 The current state of the refresh job.
 
     - **job_id** (*string*) -

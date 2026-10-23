@@ -43,7 +43,8 @@ This method returns a promise that resolves to a **GetRestoreSnapshotStateRespon
 
 **PARAMETERS:**
 
-- **info** (*RestoreSnapshotJobInfo*) -
+- **info** (*[RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md)*) -
+
 The current state of the restore job.
 
     - **job_id** (*string*) -

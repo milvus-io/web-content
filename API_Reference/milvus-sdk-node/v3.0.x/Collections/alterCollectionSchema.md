@@ -28,13 +28,13 @@ await milvusClient.alterCollectionSchema({
 
     The name of the collection to alter.
 
-- **field** (*FieldType*) -
+- **field** (*[FieldType](FieldType.md)*) -
 
     **[REQUIRED]**
 
     The schema of the function output field to add.
 
-- **function** (*FunctionObject*) -
+- **function** (*[FunctionObject](FunctionObject.md)*) -
 
     **[REQUIRED]**
 

@@ -90,7 +90,7 @@ The schema of the collection.
 
         All scalar and vector fields declared on the collection. For the full **FieldSchema** field reference, refer to the `FieldSchema` class doc.
 
-    - **functions** (*FunctionObject[]*) -
+    - **functions** (*[FunctionObject](FunctionObject.md)[]*) -
 
         Doc-in / doc-out functions attached to the collection (for example, the BM25 sparse-vector function).
 
@@ -149,7 +149,8 @@ The number of partitions configured on the collection. This value is meaningful 
 - **db_name** (*string*) -
 The database that owns this collection.
 
-- **functions** (*FunctionObject[]*) -
+- **functions** (*[FunctionObject](FunctionObject.md)[]*) -
+
 A flattened list of doc-in / doc-out functions attached to the collection.
 
 - **update_timestamp_str** (*string*) -

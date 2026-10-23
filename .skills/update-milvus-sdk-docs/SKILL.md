@@ -83,6 +83,35 @@ run with a clarification instead of downgrading.
 - Keep deprecated API guidance scoped to the API generation documented by the page.
 - Unless the user says otherwise, always confirm before changing. Keep every edit
   reviewable; produce a per-page change summary.
+- **Branch discipline**: in a shared checkout sitting on `master`/upstream,
+  create the per-SDK work branch (Step 7) BEFORE starting edits. Verify
+  `git branch --show-current` before every commit or amend — running
+  `git commit --amend` while on `master` rewrites upstream history.
+
+## Scripted batch edits (type-page and dedup sweeps)
+
+Type-coverage and dedup sweeps (creating standalone type pages, replacing
+inline expansions with links) are mechanical but fragile. Follow this
+discipline:
+
+- **Enumerate targets explicitly.** Derive the exact list of target pages and
+  types from the audit output (added files, matched annotations) — never from
+  a loose pattern over all tree pages. A pass that reports zero matches is a
+  bug: verify the target set is non-empty before writing anything.
+- **Test extraction on real samples first.** Annotation formats vary per SDK
+  and per page: `(*T*)`, `(*A* | *B*)`, `(*T[]*)`, nested member blocks, and
+  flush-left paragraphs between a bullet and its nested expansion. Run the
+  parser on representative pages and eyeball the matches before any write.
+- **Small batches, immediate validation.** Apply one batch, then run the
+  structural checks — broken-link scan, paren balance on annotation lines, no
+  self-links inside type pages, no bare `([T](path))` forms — before the next
+  batch. Never stack multiple passes without validating between them.
+- **Watch for known pitfalls.** Indent-based parsing terminates at flush-left
+  paragraphs between a bullet and its nested expansion (dedup silently skips
+  the block); replacing `(*T*)` forms drops the italic markers unless the
+  replacement re-wraps them (`(*[T](path)*)`, not `([T](path))`); and per-tree
+  key mismatches (e.g. keys carrying a version prefix the lookup omits)
+  silently empty the target set.
 
 ## Two modes
 
@@ -430,7 +459,10 @@ own new page automatically (no need to ask the user). Exceptions:
   in the SDK's own source code** are eligible for standalone pages. Protobuf/grpc
   generated types, pandas/numpy containers, `nlohmann::json`, JDK/.NET stdlib
   classes, ORM framework types, etc. appear only as plain type annotations and
-  are never documented as pages;
+  are never documented as pages. The same applies to **pure type aliases over
+  stdlib/generic containers** (e.g. `type Properties = Record<string, string |
+  number | boolean>`) — an alias that adds no SDK-specific structure has no
+  standalone-page value and stays inline as a plain annotation;
 - **single-page types** → expand inline. A type/enum/struct referenced by only
   ONE operation page does not get a standalone page — document its members
   nested inside that page's `**RETURNS:**` / `**PARAMETERS:**` sections instead.
@@ -438,6 +470,14 @@ own new page automatically (no need to ask the user). Exceptions:
   are either **global/cross-cutting response or status types** (see the wrapper
   rule above) or **domain data types shared across multiple pages** — and never
   for API-specific response wrappers;
+- **deduplicate inline expansions** → when a standalone page is created for a
+  type that operation pages previously expanded inline, replace those inline
+  member expansions with a link to the new page and delete the expanded
+  content. Keeping both duplicates the same information and lets the two
+  copies drift apart. This applies to the type's own member documentation
+  only — **operation-specific value lists** (valid property keys, enum values
+  valid for a given call, per-operation defaults) stay in the operation page
+  even when a standalone type page exists;
 - **internal-only symbols** → skip (no page);
 - **blacklisted symbols** (per-SDK blacklist in `references/sdk-map.md`, e.g. Go
   `Client.GetService()`) → skip (no page);
@@ -836,7 +876,9 @@ page exists but is not linked — add the relative `.md` link), and **misplaced
 type pages** (a type page sitting outside its owning category directory — move
 it into the correct category, e.g. `MilvusClient/FunctionScore.md` →
 `MilvusClient/Vector/FunctionScore.md`, and update every relative link to and
-from the moved page).
+from the moved page), and **stale inline expansions** (a type with its own
+standalone page still fully expanded inside operation pages — replace the
+inline expansion with a link to the page and delete the expanded content).
 
 **Duplicated symbols on a page**: also flag when the same symbol appears more
 than once on a page (e.g. the same `WithXxx` method in both a brief

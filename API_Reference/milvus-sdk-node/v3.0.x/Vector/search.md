@@ -142,102 +142,19 @@ await milvusClient.search({
 
     The number of decimal places to keep in the final results.
 
-- **transformers** (*OutputTransformers*) -
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
 
-    A custom function to convert data for the following data types:
+    A custom function to convert data for the following data types.
 
-    - BFloat16Vector (`(bf16bytes: Uint8Array) => BFloat16Vector;`)
-
-    - Float16Vector (`(f16: Uint8Array) => Float16Vector;`)
-
-    - SparseFloatVector (`(sparse: SparseVectorDic) => SparseFloatVector;`)
-
-- **rerank** (*RerankerObj* | *FunctionObject \ FunctionScore*) -
+- **rerank** (*RerankerObj* | *FunctionObject \ [FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**.
 
-    A **RerankerObj** has the following parameters:
+    A **RerankerObj** has the following parameters.
 
-    - **strategy** (*string*) -
-
-        A re-ranking strategy. Possible values are:
-
-        - **RRF** ("rrf")
-
-            This strategy is recommended when there is no specific emphasis. The RRF can effectively balance the importance of each vector field.
-
-        - **WEIGHTED** ("weighted")
-
-            This strategy is recommended if you require the results to emphasize a particular vector field. The WeightedRanker allows you to assign higher weights to certain vector fields, emphasizing them more. For instance, in multimodal searches, textual descriptions of an image might be considered more important than the colors in this image.
-
-    - **params** (*keyValueObj*) -
-
-        The parameters are specific to reranking strategies.
-
-        - When using the RRFRanker strategy, you need to input the parameter value `k` into the RRFRanker. The default value of `k` is 60. This parameter helps to determine how the ranks are combined from different ANN searches, aiming to balance and blend the importance across all searches.
-
-        - When using the WeightedRanker strategy, you need to input weight values into the `WeightedRanker` function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range [0,1], with values closer to 1 indicating greater importance.
-
-    A **FunctionObject** has the following structure.
-
-    - **name** (*string*)
-
-        The name of the function. This identifier is used to reference the function within queries and collections.
-
-    - **description** (*string*)
-
-        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
-
-    - **type** (*[FunctionType](../Collections/FunctionType.md)*)
-
-        The type of function for processing raw data. Possible values for this parameter is`FunctionType.RERANK`.
-
-    - **input_field_names** (*string[]*)
-
-        Leave this parameter value as an empty array.
-
-    A **FunctionScore** has the following structure.
-
-    - **functions** (*FunctionObject[]*) -
-
-        A list of **FunctionObject** objects.
-
-    - **params** (*keyValueObj*) -  
-
-        Specifies how the specified functions work together. It has the following structure:
-
-        - **boost_mode** (*string*) -
-
-            Specifies how the specified weights influence the scores of any matching entities. Possible values are:
-
-            - `Multiply`
-
-                Indicates that the weighted value is equal to the original score of a matching entity multiplied by the specified weight.
-
-                This is the default value.
-
-            - `Sum`
-
-                Indicates that the weighted value is equal to the sum of the original score of a matching entity and the specified weight
-
-        - **function_mode** (*string*) -
-
-            Specifies how the weighted values from various Boost Rankers are processed. Possible values are:
-
-            - `Multiply`
-
-                Indicates that the final score of a matching entity is equal to the product of the weighted values from all Boost Rankers.
-
-                This is the default value.
-
-            - `Sum`
-
-                Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.
-
-- **order_by_fields** (*OrderByFields*) -
+- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
 
     The fields to order the search results by. Optional.
-
 
 - **search_aggregation** (*SearchAggregation*) -
 

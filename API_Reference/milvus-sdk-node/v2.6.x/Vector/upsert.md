@@ -33,7 +33,7 @@ await milvusClient.upsert({
 
     The name of the existing collection.
 
-- **data** (*RowData[]*) -
+- **data** ([RowData](RowData.md)[]) -
 
     **[REQUIRED]**
 

@@ -28,7 +28,7 @@ await milvusClient.upsert({
 
     The name of an existing collection.
 
-- **data** (*RowData[]*) -
+- **data** (*[RowData](RowData.md)[]*) -
 
     **[REQUIRED]**
 
@@ -101,7 +101,8 @@ The total number of rows upserted by this operation.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the write became visible.
 
-- **IDs** (*StringArrayId* | *NumberArrayId*) -
+- **IDs** (*StringArrayId* | *[NumberArrayId](NumberArrayId.md)*) -
+
 The primary keys carried in the upserted rows. For the full field reference, refer to the `insert()` doc.
 
 - **ResStatus**

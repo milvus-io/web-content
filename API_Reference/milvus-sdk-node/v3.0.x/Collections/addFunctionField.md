@@ -28,13 +28,13 @@ await milvusClient.addFunctionField({
 
     The name of the collection to add the function-backed field to.
 
-- **field** (*FieldType*) -
+- **field** (*[FieldType](FieldType.md)*) -
 
     **[REQUIRED]**
 
     The schema of the function output field. For the full field reference, see the FieldType section in [createCollection](createCollection.md).
 
-- **function** (*FunctionObject*) -
+- **function** (*[FunctionObject](FunctionObject.md)*) -
 
     **[REQUIRED]**
 

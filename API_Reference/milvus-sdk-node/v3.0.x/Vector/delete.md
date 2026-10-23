@@ -100,7 +100,8 @@ Always **"0"** for `delete()`.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the delete became visible.
 
-- **IDs** (*StringArrayId* | *NumberArrayId*) -
+- **IDs** (*StringArrayId* | *[NumberArrayId](NumberArrayId.md)*) -
+
 The primary keys that were targeted by this delete. For the full field reference, refer to the `insert()` doc.
 
 - **ResStatus**

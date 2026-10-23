@@ -48,7 +48,8 @@ This method returns a promise that resolves to a **GetCompactionStateResponse** 
 
 **PARAMETERS:**
 
-- **state** (*CompactionState*) -
+- **state** ([CompactionState](CompactionState.md)) -
+
 The aggregate state of the compaction. Possible values are **UndefiedState**, **Executing**, and **Completed**.
 
 - **executingPlanNo** (*string*) -

@@ -52,29 +52,13 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 - **results** (*UserResult[]*) -
 A list of **UserResult** objects. For `describeUser()`, this list contains a single entry describing the requested user.
 
-    - **user** (*User*) -
+    - **user** ([User](User.md)) -
 
         A **User** object identifying the user.
 
-        - **name** (*string*) -
-
-        The username.
-
-        - **name** (*string*) -
-
-            The username.
-
-    - **roles** (*RoleEntity[]*) -
+    - **roles** ([RoleEntity](RoleEntity.md)[]) -
 
         A list of roles assigned to this user.
-
-        - **name** (*string*) -
-
-        The role name.
-
-        - **name** (*string*) -
-
-            The role name.
 
 - **ResStatus**
 A **ResStatus** object.

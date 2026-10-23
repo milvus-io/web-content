@@ -57,7 +57,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 **PARAMETERS:**
 
-- **entities** (*GrantEntity[]*) -
+- **entities** (**[GrantEntity](GrantEntity.md)[]**) -
 
     A list of grant entities describing the privileges granted to the role.
 

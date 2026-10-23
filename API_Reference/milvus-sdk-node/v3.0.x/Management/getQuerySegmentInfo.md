@@ -78,7 +78,7 @@ A list of segment-level descriptors for the segments currently held by query nod
 
         The internal identifier of the loaded index.
 
-    - **state** (*SegmentState*) -
+    - **state** (*[SegmentState](SegmentState.md)*) -
 
         The segment state. Possible values are **SegmentStateNone**, **NotExist**, **Growing**, **Sealed**, **Flushed**, **Flushing**, **Dropped**, and **Importing**.
 
@@ -86,7 +86,7 @@ A list of segment-level descriptors for the segments currently held by query nod
 
         The query nodes that hold this segment.
 
-    - **level** (*SegmentLevel*) -
+    - **level** (*[SegmentLevel](SegmentLevel.md)*) -
 
         The segment level. Possible values are **Legacy**, **L0**, **L1**, and **L2**.
 
