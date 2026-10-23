@@ -57,7 +57,8 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 **PARAMETERS:**
 
-- **index_descriptions** (*IndexDescription[]*) -
+- **index_descriptions** ([IndexDescription](IndexDescription.md)[]) -
+
 A list of index descriptions for the requested index. Each entry includes **indexed_rows** and **total_rows**.
 
 - **ResStatus**

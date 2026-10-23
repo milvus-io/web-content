@@ -30,7 +30,7 @@ await milvusClient.insert({
 
     The name of an existing collection.
 
-- **data** (*RowData[]*) -
+- **data** ([RowData](RowData.md)[]) -
 
     The data to insert into the current collection.
 
@@ -131,7 +131,8 @@ The number of rows upserted by this operation. For `insert()` this remains **"0"
 - **timestamp** (*string*) -
 The hybrid timestamp at which the write became visible. Use this value for time-travel queries.
 
-- **IDs** (*StringArrayId* | *NumberArrayId*) -
+- **IDs** (StringArrayId* | *[NumberArrayId](NumberArrayId.md)) -
+
 The primary keys assigned to the inserted rows. For autoID collections, Milvus generates these values; otherwise, they echo the input keys.
 
     - **int_id** (*{ data: number[] }*) -

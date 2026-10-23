@@ -37,26 +37,12 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
 **PARAMETERS:**
 
-- **RBAC_meta** (*RBACMeta*) -
-A snapshot of all RBAC metadata in the current Milvus instance. Pass this value to `restoreRBAC()` to recreate the same users, roles, grants, and privilege groups in another instance.
+- **RBAC_meta** ([RBACMeta](RBACMeta.md)) -
 
-    - **users** (*User[]*) -
-
-        All users defined in the instance.
-
-    - **roles** (*RoleEntity[]*) -
-
-        All roles defined in the instance.
-
-    - **grants** (*GrantEntity[]*) -
-
-        All grants attached to the instance's roles. For the full **GrantEntity** field reference, refer to the `describeRole()` doc.
-
-    - **privilege_groups** (*PrivelegeGroup[]*) -
-
-        All privilege groups defined in the instance. For the full **PrivelegeGroup** field reference, refer to the `listPrivilegeGroups()` doc.
+A snapshot of all RBAC metadata in the current Milvus instance. Pass this value to `restoreRBAC()` to recreate the same users, roles, grants, and privilege groups in another instance. See [RBACMeta](RBACMeta.md) for the field reference.
 
 - **ResStatus**
+
 A **ResStatus** object.
 
     - **code** (*number*) -

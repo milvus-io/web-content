@@ -52,97 +52,17 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 - **results** (*RoleResult[]*) -
 A list of **RoleResult** objects. For `describeRole()`, this list contains a single entry describing the requested role.
 
-    - **role** (*RoleEntity*) -
+    - **role** (*[RoleEntity](RoleEntity.md)*) -
 
         A **RoleEntity** object describing the role.
 
-        - **name** (*string*) -
-
-        The role name.
-
-        - **name** (*string*) -
-
-            The role name.
-
-    - **users** (*User[]*) -
+    - **users** (*[User](User.md)[]*) -
 
         A list of users that hold this role.
 
-        - **name** (*string*) -
-
-        The username.
-
-        - **name** (*string*) -
-
-            The username.
-
-    - **entities** (*GrantEntity[]*) -
+    - **entities** (*[GrantEntity](GrantEntity.md)[]*) -
 
         A list of grants attached to this role. Each entry includes the granted privilege, the target object, and the user who granted it.
-
-        - **role** (*RoleEntity*) -
-
-        The role to which the privilege is granted.
-
-        - **object** (*ObjectEntity*) -
-
-        The object type the privilege applies to (for example, **Collection**, **Global**, **User**).
-
-        - **object_name** (*string*) -
-
-        The specific object name to which the privilege applies. Use `*` for all objects.
-
-        - **grantor** (*Grantor*) -
-
-        The principal that granted this privilege.
-
-          - **user** (*User*) -
-
-          The user who granted the privilege.
-
-          - **privilege** (*PrivilegeEntity*) -
-
-          The privilege that was granted.
-
-        - **db_name** (*string*) -
-
-        The database the grant applies to. Use `*` for all databases.
-
-        - **role** (*RoleEntity*) -
-
-            The role to which the privilege is granted.
-
-        - **object** (*ObjectEntity*) -
-
-            The object type the privilege applies to (for example, **Collection**, **Global**, **User**).
-
-        - **object_name** (*string*) -
-
-            The specific object name to which the privilege applies. Use `*` for all objects.
-
-        - **grantor** (*Grantor*) -
-
-            The principal that granted this privilege.
-
-            - **user** (*User*) -
-
-            The user who granted the privilege.
-
-            - **privilege** (*PrivilegeEntity*) -
-
-            The privilege that was granted.
-
-            - **user** (*User*) -
-
-                The user who granted the privilege.
-
-            - **privilege** (*PrivilegeEntity*) -
-
-                The privilege that was granted.
-
-        - **db_name** (*string*) -
-
-            The database the grant applies to. Use `*` for all databases.
 
 - **ResStatus**
 A **ResStatus** object.

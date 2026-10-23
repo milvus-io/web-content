@@ -39,7 +39,7 @@ await milvusClient.searchIterator({
 
     The name of the collection to search.
 
-- **data** (*SearchData | SearchData[]*) -
+- **data** (*[SearchData](SearchData.md) | SearchData[]*) -
 
     **[REQUIRED]**
 
@@ -95,11 +95,11 @@ await milvusClient.searchIterator({
 
     Placeholder values for a templated filter expression.
 
-- **rerank** (*RerankerObj | FunctionObject | FunctionScore*) -
+- **rerank** (*RerankerObj | FunctionObject | [FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy and its parameters. See `search()` for details on supported reranker types.
 
-- **transformers** (*OutputTransformers*) -
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
 
     Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 

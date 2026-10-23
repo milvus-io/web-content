@@ -50,7 +50,7 @@ This method returns a promise that resolves to a **ListImportTasksResponse** obj
 - **tasks** (*GetImportStateResponse[]*) -
 A list of import-task descriptors. Each entry carries the task's state, row count, segment IDs, and creation timestamp.
 
-    - **state** (*ImportState*) -
+    - **state** ([ImportState](ImportState.md)) -
 
         The task state. Possible values are **ImportPending**, **ImportFailed**, **ImportStarted**, **ImportPersisted**, **ImportCompleted**, and **ImportFailedAndCleaned**.
 

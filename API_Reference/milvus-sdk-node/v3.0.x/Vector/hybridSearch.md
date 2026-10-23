@@ -61,7 +61,7 @@ await milvusClient.hybridSearch({
 
     A top-level scalar filtering condition applied after the hybrid search results are merged. Defaults to an empty string.
 
-- **rerank** (*RerankerObj \| FunctionObject \| FunctionScore*) -
+- **rerank** (*RerankerObj \| FunctionObject \| [FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy for combining results from multiple sub-searches. See `search()` for the full rerank parameter schema.
 
@@ -97,7 +97,7 @@ await milvusClient.hybridSearch({
 
     The number of decimal places to keep in the final scores.
 
-- **transformers** (*OutputTransformers*) -
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
 
     Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 
@@ -109,7 +109,7 @@ await milvusClient.hybridSearch({
 
     The timeout duration for this operation in milliseconds.
 
-- **order_by_fields** (*OrderByFields*) -
+- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
 
     The fields to order the search results by. Optional.
 
@@ -131,7 +131,7 @@ Each element in the `data` array is a **HybridSearchSingleReq** object that defi
 
 **PARAMETERS:**
 
-- **data** (*SearchData*) -
+- **data** (*[SearchData](SearchData.md)*) -
 
     **[REQUIRED]**
 
@@ -163,7 +163,7 @@ Each element in the `data` array is a **HybridSearchSingleReq** object that defi
 
     Groups results by the specified field to ensure diversity within this sub-search.
 
-- **transformers** (*OutputTransformers*) -
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
 
     Custom transformers for special vector types such as BFloat16Vector and Float16Vector.
 

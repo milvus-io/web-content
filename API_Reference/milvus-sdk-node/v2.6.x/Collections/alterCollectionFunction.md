@@ -32,7 +32,7 @@ await milvusClient.alterCollectionFunction({
 
     The name of the function to alter.
 
-- **function** (*FunctionObject*) -
+- **function** ([FunctionObject](FunctionObject.md)) -
 
     **[REQUIRED]**
 

@@ -91,11 +91,11 @@ await milvusClient.query(data)
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **order_by_fields** (*OrderByFields*) -
+- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
 
     The fields to order the query results by. Optional.
 
-- **order_by** (*OrderByFields*) -
+- **order_by** (*[OrderByFields](OrderByFields.md)*) -
 
     Alias for order_by_fields. Optional.
 
