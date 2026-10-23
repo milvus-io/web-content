@@ -7,9 +7,9 @@ beta: Milvus 3.0.x
 
 # Snapshots
 
-A snapshot is a point-in-time image of a Milvus collection, ideal for quick rollbacks, versioning, and testing. It captures the collection's state at a specific timestamp and stores only metadata and manifest files, such as the schema, indexes, and vector data files (binlogs), for efficient storage and restoration.
+A snapshot is a point-in-time image of a Milvus collection. It captures the collection's state at a specific timestamp and stores only metadata and manifest files, such as the schema, indexes, and vector data files (binlogs), for efficient storage and restoration.
 
-Snapshots are quick, point-in-time images of data, suitable for fast rollbacks or testing (**days to weeks**). At the same time, backups are independent, complete copies stored separately for long-term disaster recovery (**weeks to years**) and for better protection against total storage failure.
+Snapshots are not a substitute for backups. They are quick to create and restore, making them suitable for short-term needs such as fast rollbacks, versioning, and testing (**days to weeks**), whereas backups are independent, complete copies stored separately for long-term disaster recovery (**weeks to years**) and better protection against total storage failure.
 
 To create backups, refer to [Milvus Backup](milvus_backup_overview.md).
 
