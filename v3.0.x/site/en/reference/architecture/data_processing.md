@@ -12,7 +12,7 @@ This article provides a detailed description of the implementation of data inser
 
 You can choose how many shards a collection uses in Milvus—each shard maps to a virtual channel (*vchannel*). As illustrated below, Milvus then assigns every *vchannel* to a physical channel (*pchannel*), and each *pchannel* is bound to a specific Streaming Node.
 
-![VChannel PChannel and StreamingNode](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png "VChannel, PChannel and StreamingNode.")
+![VChannel, PChannel, and Streaming Node](../../../../assets/pvchannel_wal.png "VChannel, PChannel, and Streaming Node.")
 
 After data verification, the proxy will split the written message into various data package of shards according to the specified shard routing rules. 
 

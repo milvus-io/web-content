@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2280" height="1404" viewBox="0 0 2280 1404" role="img" aria-labelledby="diagram-title diagram-description">
+  <title id="diagram-title">VChannel, PChannel, and Streaming Node relationships</title>
+  <desc id="diagram-description">Two example groups show a WAL in WAL Storage connected to a Streaming Node and a PChannel inside Milvus. Each PChannel has a 1:N relationship with VChannels, illustrated by three VChannels. Each VChannel connects to a stack of two Message boxes and an ellipsis, representing additional messages. The two groups and three VChannels per group are examples, not fixed limits.</desc>
+  <defs>
+    <marker id="message-arrow" viewBox="0 0 12 22" refX="11" refY="11" markerWidth="12" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M 1 1 L 11 11 L 1 21" fill="none" stroke="#9CA6B4" stroke-width="3" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect id="background" width="2280" height="1404" fill="#F6F8FA"/>
+  <g id="group-boundaries" fill="none" stroke="#AEAEBB" stroke-width="1.5" stroke-dasharray="4 4">
+    <rect id="wal-storage-boundary" x="120" y="152" width="375" height="1130" rx="14"/>
+    <rect id="milvus-boundary" x="560" y="146" width="1598" height="1136" rx="14"/>
+  </g>
+  <g id="group-labels" font-family="Arial, Helvetica, sans-serif" fill="#010E29" font-size="28" font-weight="700">
+    <rect x="165" y="130" width="211" height="44" fill="#F6F8FA"/>
+    <rect x="605" y="130" width="134" height="44" fill="#F6F8FA"/>
+    <rect x="168" y="132" width="5" height="40" fill="#804DFF"/>
+    <rect x="608" y="132" width="5" height="40" fill="#00B3FF"/>
+    <text x="185" y="164">WAL Storage</text>
+    <text x="628" y="164">Milvus</text>
+  </g>
+  <g id="example-group-1" font-family="Arial, Helvetica, sans-serif">
+    <g id="relationships-1" fill="none" stroke="#9CA6B4" stroke-width="3">
+      <line x1="442" y1="446" x2="613" y2="446"/>
+      <line x1="845" y1="445" x2="937" y2="445"/>
+      <line x1="1169" y1="445" x2="1505" y2="445"/>
+      <path d="M 1358 445 Q 1379 445 1379 423 L 1379 288 Q 1379 268 1399 268 L 1505 268"/>
+      <path d="M 1358 445 Q 1379 445 1379 467 L 1379 602 Q 1379 622 1399 622 L 1505 622"/>
+    </g>
+    <rect id="wal-1" x="173" y="405" width="269" height="80" rx="6" fill="#DFD7FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="307.5" y="455" text-anchor="middle" font-size="28" fill="#010E29">WAL</text>
+    <rect id="streaming-node-1" x="613" y="405" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="729" y="438" text-anchor="middle" font-size="28" fill="#010E29"><tspan x="729">Streaming</tspan><tspan x="729" dy="34">Node</tspan></text>
+    <rect id="pchannel-1" x="937" y="405" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="1053" y="455" text-anchor="middle" font-size="28" fill="#010E29">PChannel</text>
+    <rect x="1240" y="421" width="52" height="48" fill="#F6F8FA"/>
+    <text x="1266" y="455" text-anchor="middle" font-size="28" fill="#010E29">1:N</text>
+    <g id="vchannel-1-1">
+      <rect id="vchannel-box-1-1" x="1505" y="225" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="275" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="263" x2="1850" y2="263" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-1-1-1" x="1864" y="183" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="219" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-1-1-2" x="1864" y="249" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="285" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="328" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="328" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="328" r="2.5" fill="#010E29"/>
+    </g>
+    <g id="vchannel-1-2">
+      <rect id="vchannel-box-1-2" x="1505" y="404" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="454" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="442" x2="1850" y2="442" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-1-2-1" x="1864" y="361" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="397" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-1-2-2" x="1864" y="427" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="463" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="506" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="506" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="506" r="2.5" fill="#010E29"/>
+    </g>
+    <g id="vchannel-1-3">
+      <rect id="vchannel-box-1-3" x="1505" y="582" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="632" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="620" x2="1850" y2="620" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-1-3-1" x="1864" y="540" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="576" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-1-3-2" x="1864" y="606" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="642" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="685" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="685" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="685" r="2.5" fill="#010E29"/>
+    </g>
+  </g>
+  <g id="example-group-2" font-family="Arial, Helvetica, sans-serif">
+    <g id="relationships-2" fill="none" stroke="#9CA6B4" stroke-width="3">
+      <line x1="442" y1="996" x2="613" y2="996"/>
+      <line x1="845" y1="995" x2="937" y2="995"/>
+      <line x1="1169" y1="995" x2="1505" y2="995"/>
+      <path d="M 1358 995 Q 1379 995 1379 973 L 1379 838 Q 1379 818 1399 818 L 1505 818"/>
+      <path d="M 1358 995 Q 1379 995 1379 1017 L 1379 1152 Q 1379 1172 1399 1172 L 1505 1172"/>
+    </g>
+    <rect id="wal-2" x="173" y="955" width="269" height="80" rx="6" fill="#DFD7FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="307.5" y="1005" text-anchor="middle" font-size="28" fill="#010E29">WAL</text>
+    <rect id="streaming-node-2" x="613" y="955" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="729" y="988" text-anchor="middle" font-size="28" fill="#010E29"><tspan x="729">Streaming</tspan><tspan x="729" dy="34">Node</tspan></text>
+    <rect id="pchannel-2" x="937" y="955" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+    <text x="1053" y="1005" text-anchor="middle" font-size="28" fill="#010E29">PChannel</text>
+    <rect x="1240" y="971" width="52" height="48" fill="#F6F8FA"/>
+    <text x="1266" y="1005" text-anchor="middle" font-size="28" fill="#010E29">1:N</text>
+    <g id="vchannel-2-1">
+      <rect id="vchannel-box-2-1" x="1505" y="775" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="825" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="813" x2="1850" y2="813" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-2-1-1" x="1864" y="733" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="769" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-2-1-2" x="1864" y="799" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="835" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="878" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="878" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="878" r="2.5" fill="#010E29"/>
+    </g>
+    <g id="vchannel-2-2">
+      <rect id="vchannel-box-2-2" x="1505" y="954" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="1004" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="992" x2="1850" y2="992" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-2-2-1" x="1864" y="911" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="947" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-2-2-2" x="1864" y="977" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="1013" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="1056" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="1056" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="1056" r="2.5" fill="#010E29"/>
+    </g>
+    <g id="vchannel-2-3">
+      <rect id="vchannel-box-2-3" x="1505" y="1132" width="232" height="80" rx="6" fill="#C2E6FC" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1621" y="1182" text-anchor="middle" font-size="28" fill="#010E29">VChannel</text>
+      <line x1="1754" y1="1170" x2="1850" y2="1170" stroke="#9CA6B4" stroke-width="3" marker-end="url(#message-arrow)"/>
+      <rect id="message-2-3-1" x="1864" y="1090" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="1126" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <rect id="message-2-3-2" x="1864" y="1156" width="240" height="54" rx="6" fill="#FFFFFF" stroke="#AEAEBB" stroke-width="1.5"/>
+      <text x="1984" y="1192" text-anchor="middle" font-size="24" fill="#010E29">Message</text>
+      <circle cx="1970" cy="1235" r="2.5" fill="#010E29"/>
+      <circle cx="1984" cy="1235" r="2.5" fill="#010E29"/>
+      <circle cx="1998" cy="1235" r="2.5" fill="#010E29"/>
+    </g>
+  </g>
+</svg>
