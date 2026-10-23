@@ -68,6 +68,7 @@ A factory string describes a Faiss index as a sequence of components. The follow
 | `IVF64,PQ8x4,RFlat` | `FLOAT_VECTOR` | `L2` | `nprobe`, `k_factor` | Uses a flat refiner after PQ candidate retrieval. |
 | `PQ8x4` | `FLOAT_VECTOR` | `L2` | None | Builds in release tests. Scalar-filtered search fails because the index rejects the selector; validate unfiltered use separately. |
 | `BFlat` | `BINARY_VECTOR` | `HAMMING` | None | Exact search for binary vectors. |
+| `SVSVamana64,LeanVec4x8` | `FLOAT_VECTOR` | `L2`, `IP`, `COSINE` | `search_window_size`, `search_buffer_capacity` | SVS Vamana graph index with LeanVec compression. Requires a Milvus build with SVS enabled and an Intel CPU for LeanVec storage. See [Search with SVS Vamana and Milvus](search_with_svs_vamana.md). |
 
 The `COSINE` entries indicate build and search smoke coverage. For Milvus 3.0.0, they do not establish score or range-search correctness after an index reload. See [Limits](#limits).
 
@@ -262,6 +263,7 @@ Set factory-specific search parameters inside `search_params.params`. The follow
 | `nprobe` | `IVF64,Flat` | Number of inverted lists to search. |
 | `efSearch` | `HNSW16,Flat` | Size of the HNSW search candidate list. |
 | `k_factor` | `IVF64,PQ8x4,RFlat` | Number of candidates supplied to the refiner relative to the requested top-K. |
+| `search_window_size`, `search_buffer_capacity` | `SVSVamana64,LeanVec4x8` | SVS Vamana search window size and buffer capacity. See [Search with SVS Vamana and Milvus](search_with_svs_vamana.md). |
 
 Milvus forwards only adapter-recognized additional parameters. Unknown build keys and search keys that the concrete factory family does not support are rejected. Milvus does not maintain a universal parameter schema for every possible factory. Check the Faiss documentation for the selected factory, then validate the complete build and search flow against the exact Milvus version and image that you plan to deploy.
 

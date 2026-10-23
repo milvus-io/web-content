@@ -3097,6 +3097,12 @@
             "id": "search_with_jev.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
+            "children": []
           }
         ]
       }
