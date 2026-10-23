@@ -19,7 +19,7 @@ ListSnapshotsResp result = await client.ListSnapshotsAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `CollectionName` (*string*) -
+- `CollectionName` (*string*) - [REQUIRED]
 
     The name of the collection to list snapshots for. When empty, all snapshots are listed.
 

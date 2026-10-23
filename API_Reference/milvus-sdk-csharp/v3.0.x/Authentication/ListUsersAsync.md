@@ -20,7 +20,7 @@ ListUsersResp resp = await client.ListUsersAsync(request);
 
 **RETURNS:**
 
-A **ListUsersResp** object that contains the names of the users.
+A *`Users` (*IReadOnlyList\<string\>*)* object that contains the names of the users.
 
 ```csharp
 ListUsersResp

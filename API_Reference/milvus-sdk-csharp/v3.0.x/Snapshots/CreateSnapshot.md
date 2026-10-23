@@ -22,7 +22,7 @@ await client.CreateSnapshotAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `SnapshotName` (*string*) -
+- `Name` (*string*) -
 
     The name of the snapshot to create. Must be unique.
 

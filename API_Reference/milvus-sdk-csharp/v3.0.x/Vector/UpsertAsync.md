@@ -144,6 +144,8 @@ MutationResp
 
     Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
 
+> **Note:** `UpsertAsync()` requires an explicit primary-key value in each row. On collections created with `autoId: true`, upsert fails with "Field 'id' is not provided and has no default value or nullable flag." Use a non-autoID primary key for upsert workflows.
+
 ## Example
 
 ```csharp

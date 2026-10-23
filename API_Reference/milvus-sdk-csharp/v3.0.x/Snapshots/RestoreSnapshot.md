@@ -20,7 +20,7 @@ RestoreSnapshotResp result = await client.RestoreSnapshotAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `SnapshotName` (*string*) -
+- `Name` (*string*) -
 
     The name of the snapshot to restore.
 
