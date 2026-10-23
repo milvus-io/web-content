@@ -461,9 +461,14 @@ local directory via this table before editing. Current latest version line is
   For the future `Milvus.Client.V2/` line, apply the same check against the V2
   result types instead.
 
-- **Known quirks**: csharp docs are a single 2.2.x line; if the user asks to add
-  a new version line, confirm the target tag's compatibility before creating a
-  new directory.
+- **Known quirks**: csharp docs today exist for the `v2.6.x` line (built from
+  `Milvus.Client.V2/`, namespace `Milvus.Client.V2`) alongside the legacy
+  `v2.2.x` line (`Milvus.Client/`). Page naming: operation-page filenames carry
+  the method name **without** a trailing `()` (e.g. `CreateAliasAsync.md`, not
+  `CreateAliasAsync().md`). Every RPC operation page includes an
+  `**EXCEPTIONS:**` section linking `Client/MilvusException.md` (see the
+  shared exception/status/return-code rule in SKILL.md); `MilvusException` and
+  `MilvusErrorCode` each have a dedicated page under `Client/`.
 
 ## milvus-sdk-rust
 

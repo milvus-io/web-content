@@ -23,7 +23,7 @@ public sealed record HealthState(
 
 - `ErrorCode` (*MilvusErrorCode*) -
 
-    The error code reported by the server. See the **MilvusErrorCode** values below.
+    The error code reported by the server. For the values of the `MilvusErrorCode` enumeration, refer to [MilvusErrorCode](MilvusErrorCode.md).
 
 - `Reasons` (*IReadOnlyList\<string\>?*) -
 
@@ -55,38 +55,3 @@ public enum QuotaState
 - **DenyToRead** (4) - Reads are denied.
 
 - **DenyToWrite** (5) - Writes are denied.
-
-```csharp
-public enum MilvusErrorCode
-{
-    Success = 0,
-    UnexpectedError = 1,
-    RateLimit = 8,
-    ServiceQuotaExceeded = 9,
-    LegacyRateLimit = 49,
-    CollectionNotFound = 100,
-    SchemaMismatch = 109,
-    SegmentNotFound = 600,
-    IndexNotFound = 700
-}
-```
-
-**VALUES:**
-
-- **Success** (0) - The server reported no error.
-
-- **UnexpectedError** (1) - An unexpected server-side error occurred.
-
-- **RateLimit** (8) - The server rejected or throttled the request because a rate limit was hit.
-
-- **ServiceQuotaExceeded** (9) - The server's service quota was exceeded.
-
-- **LegacyRateLimit** (49) - A rate limit reported by an older server version.
-
-- **CollectionNotFound** (100) - The requested collection does not exist.
-
-- **SchemaMismatch** (109) - The request schema does not match the collection schema.
-
-- **SegmentNotFound** (600) - The requested segment does not exist.
-
-- **IndexNotFound** (700) - The requested index does not exist.
