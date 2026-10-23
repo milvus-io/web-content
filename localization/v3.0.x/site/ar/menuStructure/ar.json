@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "أنواع المقاييس",
+        "label": "أنواع الوحدات المترية",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -352,7 +352,7 @@
             "children": []
           },
           {
-            "label": "تعيين مدة صلاحية مجموعة TTL",
+            "label": "تعيين مدة صلاحية مجموعة (TTL)",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "إنشاء حقل StructArray",
+                "label": "إنشاء حقل من نوع StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -773,7 +773,7 @@
             "order": 19,
             "children": [
               {
-                "label": "تصميم نموذج البيانات للبحث",
+                "label": "تصميم نموذج البيانات لعملية البحث",
                 "id": "schema-hands-on.md",
                 "order": 0,
                 "children": []
@@ -1487,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "إجبار الضغط بالدمج",
+            "label": "إجباري ضغط الدمج",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1981,7 +1981,7 @@
             "children": []
           },
           {
-            "label": "ترقية Milvus المستقل",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2292,7 +2292,7 @@
             "children": []
           },
           {
-            "label": "الاستيراد الجماعي في عملية النسخ المتماثل لـ CDC",
+            "label": "الاستيراد الجماعي في عملية النسخ المتماثل في CDC",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -2434,7 +2434,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال آي آي",
+                "label": "ميسترال أي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
@@ -3096,6 +3096,12 @@
             "label": "جيف",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS فامانا",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Ricerca di base con reti neurali artificiali (ANN)",
+            "label": "Ricerca di base con reti neurali artificiali",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1625,7 +1625,7 @@
         ]
       },
       {
-        "label": "Abilità di Milvus",
+        "label": "Abilità Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1639,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Server MCP per il codice Claude",
+        "label": "Server MCP per Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2210,7 +2210,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un'unica istanza",
+                "label": "Backup e ripristino in un’unica istanza",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2222,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in diversi bucket",
+                "label": "Migrazione tra istanze in bucket diversi",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -3096,6 +3096,12 @@
             "label": "Jev",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

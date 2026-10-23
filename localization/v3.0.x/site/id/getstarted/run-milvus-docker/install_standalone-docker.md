@@ -63,9 +63,9 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v3.0.2:</strong></p>
+<p><strong>Apa yang baru di v3.0.3:</strong></p>
 <ul>
-<li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
+<li><strong>Node Streaming</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
 <li><strong>Woodpecker MQ (default)</strong>: Penyebaran Docker ini menjalankan Woodpecker sebagai antrian pesan dengan <strong>sistem berkas lokal</strong> sebagai backend WAL-nya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</li>
 <li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang dikonsolidasikan untuk kinerja yang lebih baik</li>
 </ul>
@@ -127,14 +127,14 @@ EOF
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Perintah upgrade secara otomatis:</p>
+<p>Perintah pembaruan secara otomatis:</p>
 <ul>
-<li>Mengunduh skrip instalasi terbaru dengan konfigurasi yang telah diperbarui</li>
+<li>Mengunduh skrip instalasi terbaru dengan konfigurasi yang diperbarui</li>
 <li>Mengunduh gambar Docker Milvus terbaru</li>
 <li>Memulai ulang kontainer dengan versi baru</li>
 <li>Menjaga data dan konfigurasi yang sudah ada</li>
 </ul>
-<p>Ini adalah cara yang disarankan untuk meng-upgrade deployment Milvus standalone Anda.</p>
+<p>Ini adalah cara yang disarankan untuk melakukan pembaruan pada deployment Milvus standalone Anda.</p>
 </div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Hentikan dan hapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -21,8 +21,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ein Snapshot ist eine Momentaufnahme einer Milvus-Sammlung, die sich ideal für schnelle Rollbacks, die Versionsverwaltung und Tests eignet. Er erfasst den Zustand der Sammlung zu einem bestimmten Zeitpunkt und speichert ausschließlich Metadaten und Manifestdateien wie das Schema, Indizes und Vektordatendateien (Binlogs), um eine effiziente Speicherung und Wiederherstellung zu gewährleisten.</p>
-<p>Snapshots sind schnelle Momentaufnahmen von Daten, die sich für schnelle Rollbacks oder Tests eignen (<strong>Tage bis Wochen</strong>). Im Gegensatz dazu sind Backups eigenständige, vollständige Kopien, die separat für die langfristige Notfallwiederherstellung (<strong>Wochen bis Jahre</strong>) und zum besseren Schutz vor einem vollständigen Speicherausfall gespeichert werden.</p>
+    </button></h1><p>Ein Snapshot ist eine Momentaufnahme einer Milvus-Sammlung. Er erfasst den Zustand der Sammlung zu einem bestimmten Zeitpunkt und speichert ausschließlich Metadaten und Manifestdateien, wie beispielsweise das Schema, Indizes und Vektordatendateien (Binlogs), um eine effiziente Speicherung und Wiederherstellung zu gewährleisten.</p>
+<p>Snapshots sind kein Ersatz für Backups. Sie lassen sich schnell erstellen und wiederherstellen und eignen sich daher für kurzfristige Anforderungen wie schnelle Rollbacks, Versionierung und Tests (<strong>Tage bis Wochen</strong>), während Backups eigenständige, vollständige Kopien sind, die separat für die langfristige Notfallwiederherstellung (<strong>Wochen bis Jahre</strong>) und einen besseren Schutz vor einem vollständigen Speicherausfall gespeichert werden.</p>
 <p>Informationen zum Erstellen von Backups finden Sie unter <a href="/docs/de/milvus_backup_overview.md">„Milvus Backup</a>“.</p>
 <h2 id="Snapshot-anatomy" class="common-anchor-header">Aufbau eines Snapshots<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,13 +80,13 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p>Sobald Milvus auf ein Segment oder eine Indexdatei in einem Snapshot verweist, werden diese Dateien nicht mehr durch die Garbage Collection entfernt, es sei denn, Sie löschen den Snapshot. Snapshots beanspruchen Speicherplatz proportional zur Größe der Zielsammlungen, und für die Aufbewahrungsdauer der Snapshots fallen Objektspeicherkosten an. In extremen Fällen kann ein einzelner Snapshot Ihre Objektspeicherkosten sogar verdoppeln. Es wird empfohlen,</p>
 <ul>
-<li>Entfernen Sie regelmäßig alte Snapshots, um Speicherplatz zu sparen.</li>
+<li>alte Snapshots regelmäßig zu entfernen, um Speicherplatz zu sparen.</li>
 <li>beschreibende Namen und Beschreibungen für spätere Referenzzwecke zu verwenden.</li>
 <li>die Ergebnisse der Snapshot-Erstellung und -Wiederherstellung stets zu überprüfen.</li>
 <li>die Zeitstempel der Snapshot-Erstellung und die Speichernutzung zur Überwachung und Fehlerbehebung zu verfolgen.</li>
 <li>speichern Sie die IDs der Wiederherstellungsaufträge zur Überwachung und Fehlerbehebung.</li>
 </ul>
-<h2 id="Limits-and-restrictions" class="common-anchor-header">Beschränkungen und Einschränkungen<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
+<h2 id="Limits-and-restrictions" class="common-anchor-header">Grenzen und Einschränkungen<button data-href="#Limits-and-restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,10 +102,10 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Snapshots sind nach ihrer Erstellung unveränderbar.</li>
+<li>Snapshots sind nach ihrer Erstellung unveränderlich.</li>
 <li>Sie können einen Snapshot nur in einer neuen Sammlung innerhalb desselben Clusters wie das Original wiederherstellen.</li>
 <li>Wiederhergestellte Sammlungen behalten dasselbe Schema, dieselbe Anzahl an Shards und dieselbe Partitionsanzahl bei.</li>
-<li>Wiederhergestellte historische Daten können mit TTL-Richtlinien in Konflikt geraten. Es wird empfohlen, TTL zu deaktivieren oder die TTL-Einstellungen anzupassen, bevor Sie Snapshots erstellen.</li>
+<li>Wiederhergestellte historische Daten können mit TTL-Richtlinien in Konflikt stehen. Es wird empfohlen, TTL zu deaktivieren oder die TTL-Einstellungen anzupassen, bevor Sie Snapshots erstellen.</li>
 <li>Um einen Snapshot als externe Quelle für „ <code translate="no">milvus-table</code> “ zu verwenden, muss der Quell-Snapshot aus einer normalen StorageV3-Milvus-Sammlung stammen. Snapshots externer Sammlungen werden nicht als „ <code translate="no">milvus-table</code> “-Quellen unterstützt.</li>
 </ul>
 <h2 id="Further-readings" class="common-anchor-header">Weiterführende Informationen<button data-href="#Further-readings" class="anchor-icon" translate="no">
@@ -126,5 +126,5 @@ beta: Milvus 3.0.x
     </button></h2><ul>
 <li><a href="/docs/de/manage-snapshots.md">Snapshots verwalten</a> – Snapshots erstellen, auflisten, beschreiben, anheften, wiederherstellen und löschen.</li>
 <li><a href="/docs/de/snapshot-use-cases.md">Anwendungsfälle für Snapshots</a> – gängige Muster und Arbeitsabläufe.</li>
-<li><a href="/docs/de/milvus_backup_overview.md">Milvus-Backup</a> – Langzeit-Backup und -Wiederherstellung clusterübergreifend.</li>
+<li><a href="/docs/de/milvus_backup_overview.md">Milvus-Sicherung</a> – Langzeitsicherung und -wiederherstellung über Cluster hinweg.</li>
 </ul>

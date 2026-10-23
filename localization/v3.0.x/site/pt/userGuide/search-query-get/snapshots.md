@@ -21,10 +21,10 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um instantâneo é uma imagem de uma coleção do Milvus num determinado momento, ideal para reversões rápidas, controlo de versões e testes. Capta o estado da coleção num momento específico e armazena apenas metadados e ficheiros de manifesto, tais como o esquema, os índices e os ficheiros de dados vetoriais (binlogs), para um armazenamento e restauração eficientes.</p>
-<p>Os instantâneos são imagens rápidas dos dados num momento específico, adequadas para reversões rápidas ou testes (<strong>de dias a semanas</strong>). Por outro lado, as cópias de segurança são cópias completas e independentes, armazenadas separadamente para recuperação de desastres a longo prazo (<strong>de semanas a anos</strong>) e para uma melhor proteção contra falhas totais de armazenamento.</p>
-<p>Para criar cópias de segurança, consulte <a href="/docs/pt/milvus_backup_overview.md">«Milvus Backup</a>».</p>
-<h2 id="Snapshot-anatomy" class="common-anchor-header">Anatomia do instantâneo<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
+    </button></h1><p>Um instantâneo é uma imagem de uma coleção do Milvus num determinado momento. Capta o estado da coleção num momento específico e armazena apenas metadados e ficheiros de manifesto, tais como o esquema, os índices e os ficheiros de dados vetoriais (binlogs), para um armazenamento e restauração eficientes.</p>
+<p>Os instantâneos não substituem os cópias de segurança. São rápidos de criar e restaurar, tornando-os adequados para necessidades de curto prazo, tais como reversões rápidas, controlo de versões e testes (<strong>de dias a semanas</strong>), enquanto as cópias de segurança são cópias independentes e completas, armazenadas separadamente para recuperação de desastres a longo prazo (<strong>de semanas a anos</strong>) e para uma melhor proteção contra falhas totais de armazenamento.</p>
+<p>Para criar cópias de segurança, consulte <a href="/docs/pt/milvus_backup_overview.md">Milvus Backup</a>.</p>
+<h2 id="Snapshot-anatomy" class="common-anchor-header">Anatomia de um instantâneo<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +82,7 @@ beta: Milvus 3.0.x
 <ul>
 <li>Remova regularmente os instantâneos antigos para poupar espaço de armazenamento.</li>
 <li>Utilizar nomes e descrições descritivos para referência futura.</li>
-<li>Verifique sempre os resultados da criação e restauração dos instantâneos.</li>
+<li>Verifique sempre os resultados da criação e restauração de instantâneos.</li>
 <li>Acompanhar os carimbos de data e hora da criação dos instantâneos e a utilização de armazenamento para monitorização e resolução de problemas.</li>
 <li>Armazene os IDs das tarefas de restauração para monitorização e resolução de problemas.</li>
 </ul>

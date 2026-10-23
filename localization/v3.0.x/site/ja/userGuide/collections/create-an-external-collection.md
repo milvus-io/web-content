@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>外部コレクションとは、Milvusにおけるデータコレクションの一種であり、AWS S3やIcebergなどの外部ストレージシステムやデータベーステーブルから、データをMilvusにコピーすることなくアクセスするものです。これは、Milvusのクエリインターフェースとの互換性を維持しつつ、データレイク上のクエリレイヤーとして機能します。</p>
+    </button></h1><p>外部コレクションとは、Milvusにおけるデータコレクションの一種であり、AWS S3やIcebergなどの外部ストレージシステムやデータベーステーブルから、データをMilvusにコピーすることなくアクセスするものです。データレイク上のクエリ層として機能しつつ、Milvusのクエリインターフェースとの互換性を維持します。</p>
 <div class="alert note">
 <p>この機能を利用するには、Storage V3が必要です。有効化の手順や互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
@@ -41,14 +41,14 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>一般的なAIデータパイプラインでは、ユーザーはすでにAWS S3などのストレージシステム上に、Parquetやその他の形式でデータを保存している場合があります。Milvusがこの外部に保存されたデータを利用できるようにするには、通常、ETL（Extract-Transform-Load）パイプラインを使用して、Milvus独自のストレージにデータをインポートする必要があります。</p>
-<p>この「データをMilvusに持ち込む」というワークフローでは、同期が困難な冗長なデータが生成され、データの一貫性を確保するためのエンジニアリング上のメンテナンス負担が増大します。</p>
+<p>この「データをMilvusに持ち込む」というワークフローでは、同期が困難な冗長なデータが生成され、データの整合性を確保するためのエンジニアリング上のメンテナンス負担が増大します。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
    </span>「<span class="img-wrapper"> <span>データをコンピュート環境に持ち込む」ワークフロー</span>
   
  </span></p>
-<p>これらの問題を解決するため、Milvusは外部コレクション機能を提供しており、データの同期やETLパイプラインを気にすることなく、Milvusから外部に保存されたデータにアクセスできるようになります。</p>
+<p>これらの課題を解決するため、Milvusは「外部コレクション」機能を提供しています。これにより、データの同期やETLパイプラインを気にすることなく、Milvusから外部に保存されたデータにアクセスできるようになります。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
@@ -57,7 +57,7 @@ beta: Milvus 3.0.x
  </span></p>
 <p>外部コレクションを作成すると、データに直接アクセスでき、データを保存している場所のまま保持できます。バックグラウンドで、Milvusはマニフェストファイルを作成し、Milvusのメタデータと外部データファイル内の行とのマッピングを記録します。マニフェストファイルの準備が整ったら、通常のマネージドコレクションと同様に、外部コレクション内でインデックスを作成できます。</p>
 <p>データが変更された場合、手動で1秒未満の更新をトリガーすることでメタデータが更新され、Milvusは常に最新の状態を維持します。</p>
-<h2 id="Step-1-Create-schema" class="common-anchor-header">ステップ1：スキーマの作成<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
+<h2 id="Step-1-Create-schema" class="common-anchor-header">ステップ 1: スキーマの作成<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,23 +147,38 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>ターゲットとなるソースデータファイルの形式。</p></td>
+     <td><p>ターゲットとなるソースデータの形式。Parquet ファイルの場合は `<code translate="no">parquet</code> `、Iceberg テーブルの場合は `<code translate="no">iceberg-table</code> ` を使用します。Iceberg の場合、`<code translate="no">external_source</code> ` はテーブルのメタデータ JSON ファイルを指す必要があります。</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>有効な Iceberg テーブルのスナップショット ID。このパラメータは、<code translate="no">format</code> を<code translate="no">iceberg_table</code> に設定した場合にのみ適用されます。</p></td>
+     <td><p>Iceberg テーブルのメタデータから取得した有効なスナップショット ID。このパラメータは、<code translate="no">format</code> を<code translate="no">iceberg-table</code> に設定した場合にのみ適用されます。</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>文字列化された JSON 構造の外部ファイルシステム設定。</p></td>
+     <td><p>文字列化されたJSON構造の外部ファイルシステム設定。</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>AWS S3上のIcebergテーブルの場合、以下の<code translate="no">external_spec</code> はIAM認証を使用します。Milvusのデプロイメントは、メタデータJSONおよびそれが参照するマニフェストファイルとデータファイルへのアクセス権を既に持っている必要があります。</p>
+<p><code translate="no">external_source</code> を、<code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> などのメタデータファイルに設定してください。<code translate="no">snapshot_id</code> をそのファイル内の既存のスナップショット ID に置き換え、<code translate="no">extfs</code> をストレージ環境に合わせて調整してください。</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>サポートされているストレージプロバイダーおよび Iceberg の制限については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
-<p>認証設定には、以下のオプションがあります：</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">AWS AK/SKを使用<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<p>認証設定を行うには、以下のオプションがあります。</p>
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">AWS AK/SK を使用する<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -219,7 +234,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>接続の確立に SSL を使用するかどうか。</p></td>
+     <td><p>接続の確立にSSLを使用するかどうか。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -258,7 +273,7 @@ schema := entity.NewSchema().
 <table>
    <tr>
      <th><p>パラメータ名</p></th>
-     <th><p>パラメータ名</p></th>
+     <th><p>パラメータ名説明</p></th>
      <th><p>値の例</p></th>
    </tr>
    <tr>
@@ -328,10 +343,10 @@ schema := entity.NewSchema().
     </button></h3><p>このオプションは、組織が Milvus クラスターと、対象のデータファイルを格納するバケットの管理に異なる AWS アカウントを使用している場合に適用されます。</p>
 <p>この場合、バケットの所有者は、以下の条件を満たす IAM ロールを作成する必要があります。</p>
 <ul>
-<li><p><code translate="no">AmazonS3FullAccess</code> 、またはバケットへのアクセスに関するよりきめ細かいポリシーをアタッチします。</p></li>
+<li><p><code translate="no">AmazonS3FullAccess</code> 、またはバケットへのアクセスに関するよりきめ細かなポリシーをアタッチします。</p></li>
 <li><p>ロールのトラストポリシーの [Condition] フィールドに、独自に定義した<code translate="no">sts:ExternalId</code> を含める。</p></li>
 </ul>
-<p>その後、バケットの所有者は、IAM ロールの ARN と外部 ID をあなたに提供する必要があります。そうすることで、あなたはそれらの値を使用して `<code translate="no">sts:AssumeRole</code> ` を呼び出し、IAM ロールをアサインすることができます。</p>
+<p>その後、バケットの所有者は、IAM ロールの ARN と外部 ID をあなたに提供する必要があります。そうすれば、それらの値を使用して<code translate="no">sts:AssumeRole</code> を呼び出し、IAM ロールをアサインすることができます。</p>
 <p>以下は、許可された権限を持つ IAM ロールに紐付ける権限ポリシーの例です。要件に合わせて調整してください。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
@@ -356,7 +371,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>また、IAM ロールに関連付けられたトラストポリシーにより、そのロールをアサームできるユーザーが定義されます。</p>
+<p>また、IAM ロールに関連付けられたトラスト ポリシーは、そのロールをアサームできるユーザーを定義します。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -836,8 +851,8 @@ jobID := refreshResult.JobID
 <ul>
 <li><p>更新処理では、データファイルのメタデータをスキャンし、それに応じてマニフェストファイルを生成します。通常、この処理には150～250ミリ秒かかります。</p></li>
 <li><p>マニフェストファイルには、Milvus内のメタデータと外部ファイルの行との対応関係が記録されます。</p></li>
-<li><p>ソースデータに更新があった場合は、Milvusを最新の状態に保つために、手動でリフレッシュを再度呼び出す必要があります。</p></li>
-<li><p>挿入を行わずにすべてのアクティブなメタデータを削除する必要があるリフレッシュは、拒否されます。</p></li>
+<li><p>ソースデータが更新された場合は、Milvusを最新の状態に保つために、手動でリフレッシュを再度呼び出す必要があります。</p></li>
+<li><p>挿入を伴わず、すべてのアクティブなメタデータを削除する必要があるリフレッシュは、拒否されます。</p></li>
 </ul>
 </div>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -855,6 +870,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>外部コレクションのリフレッシュが完了したら、コレクションのロードおよびリリースを行い、オンデマンドコンピューティング用のデータベース内のコレクションは検索やクエリを行うためにオンデマンドクラスタにアタッチする必要がある点を除き、管理対象コレクションと同様に、外部コレクションで類似性検索やクエリを実行できます。</p>
+    </button></h2><p>外部コレクションのリフレッシュが完了したら、コレクションのロードおよびリリースを行い、オンデマンドコンピューティング用のデータベース内のコレクションは検索やクエリを行うためにオンデマンドクラスタにアタッチする必要がある点を除き、他の管理対象コレクションと同様に、外部コレクションで類似性検索やクエリを実行できます。</p>
 <p>検索、クエリ、取得、ハイブリッド検索などの DQL 操作を実行する前に、オンデマンドクラスタのコンピューティングリソースをアタッチするためのセッションを作成する必要があります。</p>
 <p>後で、外部データソースに Milvus で公開したい別のフィールドが含まれるようになった場合は、外部コレクションのスキーマにフィールドを追加し、外部コレクションを再度更新してください。詳細については、「<a href="/docs/ja/alter-external-collection-schema.md">外部コレクションのスキーマの変更</a>」を参照してください。</p>

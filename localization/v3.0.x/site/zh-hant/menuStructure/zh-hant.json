@@ -261,7 +261,7 @@
         "children": []
       },
       {
-        "label": "多租戶架構",
+        "label": "多租戶",
         "id": "multi_tenancy.md",
         "order": 3,
         "children": []
@@ -1409,7 +1409,7 @@
                 ]
               },
               {
-                "label": "模特排名榜",
+                "label": "模特評分系統",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1599,7 +1599,7 @@
             "children": []
           },
           {
-            "label": "資料庫結構設計",
+            "label": "資料庫架構設計",
             "id": "schema_design.md",
             "order": 2,
             "children": []
@@ -1956,7 +1956,7 @@
             "children": []
           },
           {
-            "label": "透過 HPA 實現擴展",
+            "label": "透過 HPA 擴展規模",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -2292,7 +2292,7 @@
             "children": []
           },
           {
-            "label": "CDC 複製中的批次匯入",
+            "label": "CDC 複製中的批量匯入",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -3008,7 +3008,7 @@
             "children": []
           },
           {
-            "label": "個人識別資訊（PII）遮罩工具",
+            "label": "個人識別資訊（PII）遮罩",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3097,6 +3097,12 @@
             "id": "search_with_jev.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "SVS 瓦馬納",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
+            "children": []
           }
         ]
       }
@@ -3151,7 +3157,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 建立圖形 RAG",
+        "label": "使用 Milvus 進行圖 RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []

@@ -2,7 +2,7 @@
 id: create-an-external-collection.md
 title: Externe Sammlung erstellenCompatible with Milvus 3.0.x
 summary: >-
-  Eine externe Sammlung ist eine Art der Datensammlung in Milvus, die auf Daten
+  Eine externe Sammlung ist eine Art der Datenerfassung in Milvus, die auf Daten
   aus externen Speichersystemen oder Datenbanktabellen wie AWS S3 und Iceberg
   zugreift, ohne diese in Milvus zu kopieren. Sie fungiert als Abfrageebene über
   Data Lakes und gewährleistet dabei die Kompatibilität mit den
@@ -24,7 +24,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Eine externe Sammlung ist eine Art der Datensammlung in Milvus, die auf Daten aus externen Speichersystemen oder Datenbanktabellen wie AWS S3 und Iceberg zugreift, ohne diese in Milvus zu kopieren. Sie fungiert als Abfrageebene über Data Lakes und gewährleistet gleichzeitig die Kompatibilität mit den Abfrage-Schnittstellen von Milvus.</p>
+    </button></h1><p>Eine externe Sammlung ist eine Art der Datensammlung in Milvus, die auf Daten aus externen Speichersystemen oder Datenbanktabellen wie AWS S3 und Iceberg zugreift, ohne diese in Milvus zu kopieren. Sie fungiert als Abfrageebene über Data Lakes und gewährleistet gleichzeitig die Kompatibilität mit den Milvus-Abfrage-Schnittstellen.</p>
 <div class="alert note">
 <p>Für diese Funktion ist Storage V3 erforderlich. Anweisungen zur Aktivierung und Hinweise zur Kompatibilität finden Sie unter <a href="/docs/de/storage-v3.md">Storage V3</a>.</p>
 </div>
@@ -43,22 +43,22 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In einer typischen KI-Datenpipeline haben Nutzer ihre Daten möglicherweise bereits im Parquet-Format oder anderen Formaten auf ihrem Speichersystem, wie z. B. AWS S3, gespeichert. Damit Milvus diese extern gespeicherten Daten verarbeiten kann, müssen Nutzer sie in der Regel mithilfe von ETL-Pipelines (Extract-Transform-Load) in den Milvus-eigenen Speicher importieren.</p>
+    </button></h2><p>In einer typischen KI-Datenpipeline haben Nutzer ihre Daten möglicherweise bereits im Parquet-Format oder anderen Formaten auf ihrem Speichersystem, wie z. B. AWS S3, gespeichert. Damit Milvus diese extern gespeicherten Daten nutzen kann, müssen Nutzer sie in der Regel mithilfe von ETL-Pipelines (Extract-Transform-Load) in den Milvus-eigenen Speicher importieren.</p>
 <p>Dieser „Bring-your-Data-to-Milvus“-Workflow erzeugt redundante Daten, die schwer zu synchronisieren sind, und erhöht den Wartungsaufwand für die Techniker, um die Datenkonsistenz sicherzustellen.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
-   <span>Workflow „Daten zur Verarbeitung bringen</span> </span>“ <span class="img-wrapper">
+   <span>Workflow „Daten zur Berechnung bringen</span> </span>“ <span class="img-wrapper">
   
  </span></p>
 <p>Um diese Probleme zu lösen, bietet Milvus externe Sammlungen an, mit denen Sie von Milvus aus auf Ihre extern gespeicherten Daten zugreifen können, ohne sich um Datensynchronisation und ETL-Pipelines kümmern zu müssen.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
-   <span>„Rechenleistung zu den Daten bringen“-Workflow</span>
+   <span>„Compute to Data“-Workflow</span>
   
  </span></p>
-<p>Sobald eine externe Sammlung erstellt ist, kann sie direkt auf Ihre Daten zugreifen und diese an demselben Ort belassen, an dem Sie sie speichern. Im Hintergrund erstellt Milvus Manifestdateien, um die Zuordnungen zwischen den Milvus-Metadaten und den Zeilen in externen Datendateien zu erfassen. Sobald die Manifestdateien bereitstehen, können Sie in der externen Sammlung Indizes erstellen, genau wie in jeder verwalteten Sammlung.</p>
+<p>Sobald eine externe Sammlung erstellt ist, kann sie direkt auf Ihre Daten zugreifen und diese an demselben Ort belassen, an dem Sie sie speichern. Im Hintergrund erstellt Milvus Manifestdateien, um die Zuordnungen zwischen den Milvus-Metadaten und den Zeilen in den externen Datendateien zu erfassen. Sobald die Manifestdateien bereitstehen, können Sie in der externen Sammlung Indizes erstellen, genau wie in jeder verwalteten Sammlung.</p>
 <p>Wenn sich Ihre Daten ändern, werden die Metadaten durch manuelles Auslösen einer Aktualisierung innerhalb von weniger als einer Sekunde aktualisiert, sodass Milvus stets auf dem neuesten Stand bleibt.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">Schritt 1: Schema erstellen<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,20 +150,35 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Format der Quelldatendateien des Ziels.</p></td>
+     <td><p>Format der Quelldaten. Verwenden Sie „ <code translate="no">parquet</code> “ für Parquet-Dateien oder „ <code translate="no">iceberg-table</code> “ für eine Iceberg-Tabelle. Bei Iceberg muss „ <code translate="no">external_source</code> “ auf die JSON-Metadatendatei der Tabelle verweisen.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Eine gültige Iceberg-Tabellen-Snapshot-ID. Dieser Parameter gilt nur, wenn Sie „ <code translate="no">format</code> “ auf „ <code translate="no">iceberg_table</code> “ setzen.</p></td>
+     <td><p>Eine gültige Snapshot-ID aus den Metadaten der Iceberg-Tabelle. Dieser Parameter gilt nur, wenn Sie „ <code translate="no">format</code> “ auf „ <code translate="no">iceberg-table</code> “ setzen.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Einstellungen für das externe Dateisystem in einer als Zeichenkette dargestellten JSON-Struktur.</p></td>
+     <td><p>Einstellungen für das externe Dateisystem in einer als String dargestellten JSON-Struktur.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>Für eine Iceberg-Tabelle auf AWS S3 verwendet der folgende ` <code translate="no">external_spec</code> ` die IAM-Authentifizierung. Die Milvus-Bereitstellung muss bereits Zugriff auf die Metadaten-JSON-Datei sowie auf die darin referenzierten Manifest- und Datendateien haben.</p>
+<p>Setzen Sie „ <code translate="no">external_source</code> “ auf Ihre Metadatendatei, z. B. „ <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> “. Ersetzen Sie „ <code translate="no">snapshot_id</code> “ durch eine vorhandene Snapshot-ID aus dieser Datei und passen Sie „ <code translate="no">extfs</code> “ an Ihre Speicherumgebung an.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Informationen zu unterstützten Speicheranbietern und Iceberg-Einschränkungen finden Sie unter <a href="/docs/de/storage-v3.md">„Storage V3</a>“.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
 <p>Sie haben folgende Möglichkeiten, die Authentifizierungseinstellungen festzulegen:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">AWS AK/SK verwenden<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
@@ -217,12 +232,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
-     <td><p>Cloud-Anbieter-ID</p></td>
+     <td><p>ID des Cloud-Anbieters</p></td>
      <td><p><code translate="no">aws</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Ob SSL zum Aufbau von Verbindungen verwendet wird.</p></td>
+     <td><p>Gibt an, ob SSL zum Aufbau von Verbindungen verwendet wird.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -378,7 +393,7 @@ schema := entity.NewSchema().
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Sie die IAM-Rollen-ARN und die externe ID erhalten haben, können Sie den Parameter „ <code translate="no">external_spec</code> “ wie folgt einrichten:</p>
+<p>Sobald Sie die ARN der IAM-Rolle und die externe ID erhalten haben, können Sie den Parameter „ <code translate="no">external_spec</code> “ wie folgt einrichten:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -421,7 +436,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>IAM-Rollen-ARN, die vom Bucket-Besitzer bereitgestellt wurde.</p></td>
+     <td><p>IAM-Rollen-ARN, die vom Bucket-Eigentümer bereitgestellt wurde.</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
@@ -837,10 +852,10 @@ jobID := refreshResult.JobID
 <p>Der Aktualisierungsvorgang läuft asynchron ab, daher müssen Sie eine Schleife einrichten, um den Fortschritt zu überwachen.</p>
 <div class="alert note">
 <ul>
-<li><p>Der Aktualisierungsvorgang scannt die Metadaten der Datendateien und generiert entsprechend die Manifestdateien. Dies dauert in der Regel 150–250 ms.</p></li>
+<li><p>Der Aktualisierungsvorgang durchsucht die Metadaten der Datendateien und generiert entsprechend die Manifestdateien. Dies dauert in der Regel 150–250 ms.</p></li>
 <li><p>Die Manifestdateien dokumentieren die Zuordnung zwischen den Metadaten in Milvus und den Zeilen in externen Dateien.</p></li>
 <li><p>Wenn Ihre Quelldaten aktualisiert werden, müssen Sie den Aktualisierungsvorgang manuell erneut aufrufen, um Milvus auf dem neuesten Stand zu halten.</p></li>
-<li><p>Eine Aktualisierung, bei der alle aktiven Metadaten entfernt werden müssen, ohne dass neue Einträge hinzugefügt werden, führt zu einer Ablehnung.</p></li>
+<li><p>Eine Aktualisierung, bei der alle aktiven Metadaten entfernt werden müssen, ohne dass neue hinzugefügt werden, führt zu einer Ablehnung.</p></li>
 </ul>
 </div>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -860,4 +875,4 @@ jobID := refreshResult.JobID
       </svg>
     </button></h2><p>Nachdem Sie die externe Sammlung aktualisiert haben, können Sie die Sammlung laden und freigeben sowie Ähnlichkeitssuchen und Abfragen in der externen Sammlung durchführen, wie Sie es bei jeder verwalteten Sammlung tun würden – mit der Ausnahme, dass Sammlungen in einer Datenbank für On-Demand-Computing für Suchvorgänge und Abfragen an einen On-Demand-Cluster angehängt werden müssen.</p>
 <p>Bevor Sie DQL-Operationen wie Suche, Abfrage, Abruf und hybride Suche durchführen, müssen Sie eine Sitzung erstellen, um die Rechenressourcen eines On-Demand-Clusters zuzuweisen.</p>
-<p>Falls die externe Datenquelle später ein weiteres Feld enthält, das Sie in Milvus verfügbar machen möchten, fügen Sie dem Schema der externen Sammlung ein Feld hinzu und aktualisieren Sie die externe Sammlung erneut. Weitere Informationen finden Sie unter <a href="/docs/de/alter-external-collection-schema.md">„Schema der externen Sammlung ändern</a>“.</p>
+<p>Falls die externe Datenquelle später ein weiteres Feld enthält, das Sie in Milvus verfügbar machen möchten, fügen Sie ein Feld zum Schema der externen Sammlung hinzu und aktualisieren Sie die externe Sammlung erneut. Weitere Informationen finden Sie unter <a href="/docs/de/alter-external-collection-schema.md">„Schema der externen Sammlung ändern</a>“.</p>

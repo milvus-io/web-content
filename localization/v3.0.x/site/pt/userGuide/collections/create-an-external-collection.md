@@ -48,7 +48,7 @@ beta: Milvus 3.0.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
-   <span>Fluxo de trabalho «Trazer dados para a computação</span> </span>» <span class="img-wrapper">
+   <span>Fluxo de trabalho «Trazer os dados para a computação</span> </span>» <span class="img-wrapper">
   
  </span></p>
 <p>Para resolver estas questões, o Milvus disponibiliza coleções externas que lhe permitem aceder aos seus dados armazenados externamente a partir do Milvus, sem se preocupar com a sincronização de dados e com os pipelines ETL.</p>
@@ -150,12 +150,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Formato dos ficheiros de dados de origem de destino.</p></td>
+     <td><p>Formato dos dados de origem de destino. Utilize <code translate="no">parquet</code> para ficheiros Parquet ou <code translate="no">iceberg-table</code> para uma tabela Iceberg. No caso do Iceberg, <code translate="no">external_source</code> deve apontar para o ficheiro JSON de metadados da tabela.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Um ID válido de instantâneo de tabela do Iceberg. Este parâmetro aplica-se apenas quando define « <code translate="no">format</code> » como « <code translate="no">iceberg_table</code> ».</p></td>
+     <td><p>Um ID de instantâneo válido proveniente dos metadados da tabela Iceberg. Este parâmetro aplica-se apenas quando define <code translate="no">format</code> como <code translate="no">iceberg-table</code>.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -164,6 +164,21 @@ schema := entity.NewSchema().
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>Para uma tabela Iceberg no AWS S3, o seguinte <code translate="no">external_spec</code> utiliza autenticação IAM. A implementação do Milvus deve já ter acesso ao ficheiro JSON de metadados e aos ficheiros de manifesto e de dados a que este faz referência.</p>
+<p>Defina ` <code translate="no">external_source</code> ` para o seu ficheiro de metadados, como por exemplo <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code>. Substitua <code translate="no">snapshot_id</code> por um ID de instantâneo existente nesse ficheiro e ajuste <code translate="no">extfs</code> de acordo com o seu ambiente de armazenamento.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para conhecer os fornecedores de armazenamento suportados e as restrições do Iceberg, consulte <a href="/docs/pt/storage-v3.md">Armazenamento V3</a>.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
 <p>Tem as seguintes opções para definir as configurações de autenticação:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">Utilizar AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
@@ -181,7 +196,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opção aplica-se ao MinIO auto-hospedado ou ao cenário em que dispõe de AK/SK para trabalhar.</p>
+    </button></h3><p>Esta opção aplica-se ao MinIO auto-hospedado ou ao cenário em que dispõe de AK/SK para o seu trabalho.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -266,7 +281,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Se deve utilizar o AWS IAM.</p><p>Defina este parâmetro como « <code translate="no">"true"</code> » para esta opção.</p></td>
+     <td><p>Indica se se deve utilizar o AWS IAM.</p><p>Defina este parâmetro como « <code translate="no">"true"</code> » para esta opção.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -331,11 +346,11 @@ schema := entity.NewSchema().
     </button></h3><p>Esta opção aplica-se quando a sua organização utiliza contas AWS diferentes para gerir o cluster do Milvus e o bucket que contém os ficheiros de dados de destino.</p>
 <p>Neste caso, o proprietário do bucket deve criar uma função IAM que</p>
 <ul>
-<li><p>associe a política <code translate="no">AmazonS3FullAccess</code> ou uma política mais detalhada para o acesso ao bucket.</p></li>
-<li><p>Inclua um « <code translate="no">sts:ExternalId</code> » definido pelo próprio no campo «Condição» da «Política de Confiança» da função.</p></li>
+<li><p>associe a política « <code translate="no">AmazonS3FullAccess</code> » ou uma política mais detalhada para o acesso ao bucket.</p></li>
+<li><p>Inclua uma « <code translate="no">sts:ExternalId</code> » definida pelo próprio no campo «Condition» da «Trust Policy» da função.</p></li>
 </ul>
 <p>Em seguida, o proprietário do bucket deve fornecer-lhe o ARN da função IAM e o ID externo para que possa chamar ` <code translate="no">sts:AssumeRole</code> ` com esses valores para assumir a função IAM.</p>
-<p>Segue-se um exemplo de política de permissões a ser associada à função IAM com as permissões autorizadas. Pode ajustá-la de acordo com os seus requisitos.</p>
+<p>Segue-se um exemplo de política de permissões a ser associada à função IAM com as permissões permitidas. Pode ajustar esta política de acordo com os seus requisitos.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -416,17 +431,17 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>Se deve ser utilizado o AWS IAM.</p><p>Defina esta opção como « <code translate="no">"true"</code> ».</p></td>
+     <td><p>Se deve ser utilizado o AWS IAM.</p><p>Defina isto como « <code translate="no">"true"</code> » para esta opção.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.role_arn</code></p></td>
-     <td><p>ARN da função IAM obtido junto do proprietário do bucket.</p></td>
+     <td><p>ARN da função IAM obtida junto do proprietário do bucket.</p></td>
      <td><p><code translate="no">arn:aws:iam::306787000000:role/...</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>ID externo obtido junto do proprietário do bucket.</p></td>
+     <td><p>ID externo obtido do proprietário do bucket.</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>

@@ -125,6 +125,7 @@ beta: Milvus 3.0.0+
 <tr><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td><code translate="no">nprobe</code>, <code translate="no">k_factor</code></td><td>Uses a flat refiner after PQ candidate retrieval.</td></tr>
 <tr><td><code translate="no">PQ8x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>None</td><td>Builds in release tests. Scalar-filtered search fails because the index rejects the selector; validate unfiltered use separately.</td></tr>
 <tr><td><code translate="no">BFlat</code></td><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HAMMING</code></td><td>None</td><td>Exact search for binary vectors.</td></tr>
+<tr><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td>SVS Vamana graph index with LeanVec compression. Requires a Milvus build with SVS enabled and an Intel CPU for LeanVec storage. See <a href="/docs/search_with_svs_vamana.md">Search with SVS Vamana and Milvus</a>.</td></tr>
 </tbody>
 </table>
 <p>The <code translate="no">COSINE</code> entries indicate build and search smoke coverage. For Milvus 3.0.0, they do not establish score or range-search correctness after an index reload. See <a href="#limits">Limits</a>.</p>
@@ -378,6 +379,7 @@ results = client.search(
 <tr><td><code translate="no">nprobe</code></td><td><code translate="no">IVF64,Flat</code></td><td>Number of inverted lists to search.</td></tr>
 <tr><td><code translate="no">efSearch</code></td><td><code translate="no">HNSW16,Flat</code></td><td>Size of the HNSW search candidate list.</td></tr>
 <tr><td><code translate="no">k_factor</code></td><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td>Number of candidates supplied to the refiner relative to the requested top-K.</td></tr>
+<tr><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td>SVS Vamana search window size and buffer capacity. See <a href="/docs/search_with_svs_vamana.md">Search with SVS Vamana and Milvus</a>.</td></tr>
 </tbody>
 </table>
 <p>Milvus forwards only adapter-recognized additional parameters. Unknown build keys and search keys that the concrete factory family does not support are rejected. Milvus does not maintain a universal parameter schema for every possible factory. Check the Faiss documentation for the selected factory, then validate the complete build and search flow against the exact Milvus version and image that you plan to deploy.</p>

@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan antrian pesan untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Mulai dari Milvus 3.0.x, Woodpecker menjadi antrian pesan yang direkomendasikan secara default; topik ini menjelaskan cara mengonfigurasi Pulsar atau Kafka menggunakan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau di K8s, serta mengonfigurasi Kafka di K8s.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0.2, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Beralih antar sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0.3, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengonfigurasi Pulsar dengan Docker Compose, masukkan nilai-nilai Anda pada bagian ` <code translate="no">pulsar</code> ` di berkas ` <code translate="no">milvus.yaml</code> ` yang terletak di jalur `milvus/configs`.</p>
+    </button></h3><p>Untuk mengonfigurasi Pulsar dengan Docker Compose, masukkan nilai-nilai Anda untuk bagian ` <code translate="no">pulsar</code> ` dalam berkas ` <code translate="no">milvus.yaml</code> ` di jalur `milvus/configs`.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
@@ -98,7 +98,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Pulsar dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Pulsar menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.
+<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +149,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Woodpecker dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Woodpecker menggunakan berkas <code translate="no">values.yml</code> di jalur /charts/milvus dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail mengenai item konfigurasi yang terkait dengan Woodpecker, lihat <a href="/docs/id/woodpecker.md">konfigurasi terkait Woodpecker</a>.
+<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail mengenai item konfigurasi terkait Woodpecker, lihat <a href="/docs/id/woodpecker.md">konfigurasi terkait Woodpecker</a>.
 |</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Mengubah penyimpanan pesan tidak disarankan. Jika Anda tetap ingin melakukannya, hentikan semua operasi DDL, lalu panggil API FlushAll untuk membersihkan semua koleksi, dan akhirnya hentikan Milvus sebelum benar-benar mengubah penyimpanan pesan.</p>
+<p>Mengganti penyimpanan pesan tidak disarankan. Jika Anda tetap ingin melakukannya, hentikan semua operasi DDL, lalu panggil API FlushAll untuk mengosongkan semua koleksi, dan akhirnya hentikan Milvus sebelum benar-benar mengganti penyimpanan pesan.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Langkah selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

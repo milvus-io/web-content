@@ -1,11 +1,11 @@
 ---
 id: index_selection.md
-title: 'Prompt : Sélection de l''indice Milvus'
+title: 'Invite : Sélection dans l''index Milvus'
 summary: >-
-  Règles pour le choix et la configuration des index Milvus par les assistants
-  de codage IA.
+  Règles à suivre par les assistants de codage IA pour choisir et configurer les
+  index Milvus.
 ---
-<h1 id="Index-Selection" class="common-anchor-header">Sélection d'index<button data-href="#Index-Selection" class="anchor-icon" translate="no">
+<h1 id="Index-Selection" class="common-anchor-header">Sélection des index<button data-href="#Index-Selection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Guides de décision et règles de configuration pour le choix et le réglage des index Milvus, y compris AUTOINDEX, HNSW, DiskANN, IVF et les index épars. Copiez l'invite complète ci-dessous dans votre outil AI pour appliquer ces règles automatiquement. Pour une présentation de toutes les invites, voir <a href="/docs/fr/milvus_for_agents.md">Invites AI</a>.</p>
+    </button></h1><p>Guides de décision et règles de configuration pour choisir et optimiser les index Milvus, notamment AUTOINDEX, HNSW, DiskANN, IVF et les index clairsemés. Copiez l'invite complète ci-dessous dans votre outil d'IA pour appliquer automatiquement ces règles. Pour un aperçu de toutes les invites, consultez la <a href="/docs/fr/milvus_for_agents.md">section</a> « <a href="/docs/fr/milvus_for_agents.md">Invites d'IA</a> ».</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Comment utiliser cette invite<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Copiez</strong> l'invite complète de la section Invite <a href="#full-prompt">complète</a> ci-dessous.</li>
-<li><strong>Enregistrez-la</strong> à l'emplacement prévu par votre outil d'IA (voir le <a href="/docs/fr/milvus_for_agents.md">tableau des environnements</a> pour plus de détails sur l'emplacement).</li>
+<li><strong>Copiez</strong> l’invite complète à partir de la section « <a href="#full-prompt">Invite complète</a> » ci-dessous.</li>
+<li><strong>Enregistrez</strong> -la à l’emplacement prévu par votre outil d’IA — consultez le <a href="/docs/fr/milvus_for_agents.md">tableau des environnements</a> pour plus de détails sur l’emplacement.</li>
 <li>Votre assistant IA appliquera automatiquement ces règles lors de la génération ou de la révision du code Milvus.</li>
 </ol>
-<p>Pour les utilisateurs de <strong>Cursor</strong>: copiez l'invite de la section Invite <a href="#full-prompt">complète</a> et enregistrez-la sous <code translate="no">.cursor/rules/</code> dans votre projet.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Invite complète<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Pour les utilisateurs <strong>de Cursor</strong>: copiez la commande dans la section « <a href="#full-prompt">Commande complète</a> » et enregistrez-la dans le répertoire « <code translate="no">.cursor/rules/</code> » de votre projet.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Prompt complet<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -144,13 +144,15 @@ Start here
 | Index | Best for | Key parameters | Tradeoffs |
 |---|---|---|---|
 | **AUTOINDEX** | General use | `metric_type` | Milvus selects the optimal index. Easiest to use. |
-| **HNSW** | High recall, in-memory | `M` (4-64, default 16), `efConstruction` (8-512, default 200) | High recall, high memory usage. Best for datasets that fit in RAM. |
+| **HNSW** | High recall, in-memory | `M` (range [2, 2048], stock default 30), `efConstruction` (range [1, int_max], stock default 360) | High recall, high memory usage. Best for datasets that fit in RAM. |
 | **HNSW_SQ** | Reduced memory HNSW | Same as HNSW + scalar quantization | ~70% memory of HNSW, slight recall loss. |
 | **HNSW_PQ** | Further reduced memory | Same as HNSW + product quantization | ~30% memory of HNSW, more recall loss. |
 | **DiskANN** | Larger-than-RAM datasets | `search_list` (100-300) | Uses disk + memory. Slower than HNSW but handles huge datasets. |
 | **IVF_FLAT** | Memory-constrained | `nlist` (128-4096) | Partition-based. Search uses `nprobe` (1-nlist). |
 | **IVF_PQ** | Very memory-constrained | `nlist`, `m` (subquantizer count) | Lowest memory, lowest recall. |
 | **FLAT** | Small datasets, exact search | None | Brute-force. 100% recall but O(n) search time. |
+
+If you omit HNSW parameters, Milvus uses the stock defaults unless the server is configured with different values.
 
 ## Metric type reference
 
@@ -161,7 +163,9 @@ Start here
 | `IP` | Inner product; sparse vectors, pre-normalized data | (-∞, ∞) (higher = more similar) |
 | `BM25` | Full-text search with BM25 function | Score-based (higher = more relevant) |
 
-## Complete example: HNSW index with tuning
+## Example: HNSW index with tuning
+
+This example uses an existing collection named `my_collection` with entities in a `dense_vector` field. Define `query_vector` with the same dimension as that field before running the example.
 
 ```python
 from pymilvus import MilvusClient
@@ -177,12 +181,14 @@ index_params.add_index(
     index_type=&quot;HNSW&quot;,
     metric_type=&quot;COSINE&quot;,
     params={
-        &quot;M&quot;: 16,                # Connections per node (higher = better recall, more memory)
-        &quot;efConstruction&quot;: 200,  # Build-time search width (higher = better quality, slower build)
+        &quot;M&quot;: 30,                # Connections per node (higher = better recall, more memory)
+        &quot;efConstruction&quot;: 360,  # Build-time search width (higher = better quality, slower build)
     },
 )
 
 client.create_index(collection_name=&quot;my_collection&quot;, index_params=index_params)
+
+client.load_collection(collection_name=&quot;my_collection&quot;)
 
 # At search time, tune ef for recall vs speed:
 results = client.search(
@@ -195,6 +201,8 @@ results = client.search(
     },
 )
 ```
+
+The build settings use the stock defaults. The search setting `ef=100` is an example override; adjust it based on your recall and latency requirements.
 
 ## Complete example: multiple indexes (dense + sparse + scalar)
 
@@ -233,5 +241,6 @@ Before finishing, verify:
 - [ ] AUTOINDEX is used unless there is a specific reason for a different index
 - [ ] `metric_type` matches what the embedding model expects (usually COSINE)
 - [ ] Sparse vector fields use `SPARSE_INVERTED_INDEX`, not dense vector indexes
-- [ ] Index parameters are reasonable (e.g., HNSW M=16, efConstruction=200 are good defaults)
+- [ ] Index parameters are reasonable (e.g., HNSW stock defaults are M=30 and efConstruction=360; tune explicit overrides for the workload)
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour connaître les valeurs par défaut de HNSW, les plages acceptées et les contraintes de recherche, consultez <a href="/docs/fr/hnsw.md#Index-params">les paramètres d’index HNSW</a>.</p>

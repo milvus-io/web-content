@@ -2,7 +2,7 @@
 id: install_standalone-windows.md
 label: Docker
 related_key: Docker
-summary: Windows 版 Docker Desktop を使用して Milvus スタンドアロンをインストールする方法について学びましょう。
+summary: Windows版 Docker Desktop を使用して、Milvus スタンドアロンをインストールする方法について学びましょう。
 title: Docker で Milvus を実行する（Windows）
 ---
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Docker で Milvus を実行する（Windows）<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
@@ -91,8 +91,8 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>インストールスクリプトの実行後：​</p>
 <ul>
-<li><p><strong>milvus-standalone</strong>という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。​</p></li>
-<li><p>Milvus とともに、同じコンテナ内に埋め込み型の etcd がインストールされ、ポート<strong>2379</strong> でサービスを提供しています。その設定ファイルは、現在のフォルダ内の `<strong>embedEtcd.yaml</strong>` にマッピングされています。​</p></li>
+<li><p>「<strong>milvus-standalone</strong>」という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。​</p></li>
+<li><p>Milvus とともに、同じコンテナ内に埋め込み型の etcd がインストールされ、ポート<strong>2379</strong> でサービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。​</p></li>
 <li><p>Milvusのデータボリュームは、現在のフォルダ内の<strong>volumes/milvusに</strong>マッピングされています。​</p></li>
 </ul>
 <p>以下のコマンドを使用して、Milvusコンテナおよび保存されたデータを管理できます。​</p>
@@ -172,7 +172,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Microsoft Windows に Docker Desktop をインストールすると、<strong>管理者モードの</strong>PowerShell または Windows コマンドプロンプトから Docker CLI にアクセスできます。PowerShell、Windows コマンドプロンプト、または WSL 2 のいずれかで Docker Compose を実行し、Milvus を起動できます。​</p>
+    </button></h2><p>Microsoft Windows に Docker Desktop をインストールすると、<strong>管理者モードの</strong>PowerShell または Windows コマンドプロンプトから Docker CLI にアクセスできるようになります。PowerShell、Windows コマンドプロンプト、または WSL 2 のいずれかで Docker Compose を実行して、Milvus を起動できます。​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell または Windows コマンドプロンプトから​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ Delete successfully.​
 <li><p>Docker Desktopを右クリックし、「<strong>管理者として実行</strong>」を選択して、管理者モードで開きます。​</p></li>
 <li><p>PowerShell または Windows コマンドプロンプトで以下のコマンドを実行し、Milvus Standalone 用の Docker Compose 設定ファイルをダウンロードして、Milvus を起動します。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -208,7 +208,7 @@ Creating milvus-standalone ... done​
 <li><p><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルのポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングします。​</p></li>
 </ul></li>
 </ol>
-<p>WSL 2 がインストールされている場合は、Docker Compose コマンドの Linux 版を実行することもできます。​</p>
+<p>WSL 2 がインストールされている場合は、Linux 版の Docker Compose コマンドを実行することもできます。​</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">WSL 2 から​<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +233,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Milvusの設定ファイルをダウンロードします。​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusを起動します。​</p>
@@ -285,8 +285,8 @@ Creating milvus-standalone ... done​
    <span>タスクマネージャーでの仮想化設定</span>
   
  </span></p>
-<p>仮想化が無効になっている場合は、マザーボードのファームウェアのBIOS設定を確認する必要があるかもしれません。BIOS設定で仮想化を有効にする方法は、マザーボードのメーカーによって異なります。例えば、ASUSのマザーボードの場合は、仮想化を<a href="https://www.asus.com/support/faq/1043786/">有効にする方法についてこちらの記事を</a>参照してください。​</p>
-<p>その後、コンピュータを再起動して Hyper-V を有効にする必要があります。詳細については、<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft のこの記事を</a>参照してください。​</p></li>
+<p>仮想化が無効になっている場合は、マザーボードのファームウェアのBIOS設定を確認する必要があるかもしれません。BIOS設定で仮想化を有効にする方法は、マザーボードのメーカーによって異なります。例えば、ASUSのマザーボードの場合は、仮想化を有効にする方法について、<a href="https://www.asus.com/support/faq/1043786/">こちらの記事を</a>参照してください。​</p>
+<p>その後、コンピュータを再起動して Hyper-V を有効にする必要があります。詳細については、こちらの<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft の記事をご</a>参照ください。​</p></li>
 <li><p>Docker Desktop サービスが起動しているか確認してください。​</p>
 <p>次のコマンドを実行して、Docker Desktop サービスを起動できます。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
@@ -332,7 +332,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2 から Milvus を実行中に WSL 関連の問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているか、次のように確認する必要があります。​</p>
+    </button></h3><p>WSL 2 から Milvus を実行中に WSL に関連する問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているかどうかを、次のように確認する必要がある場合があります：​</p>
 <ol>
 <li><p><strong>[設定]</strong>&gt;<strong>[全般]</strong> で、「WSL 2 ベースのエンジンを使用する」にチェックが入っていることを確認してください。​</p>
 <p><span class="img-wrapper">
@@ -341,7 +341,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Docker Desktopの設定でWSL 2ベースのエンジンを使用する</span>
   
  </span></p></li>
-<li><p><strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合</strong>] に移動し、インストール済みの WSL 2 ディストリビューションの中から、Docker 統合を有効にしたいものを選択してください。​</p>
+<li><p><strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合</strong>] に移動し、Docker 統合を有効にしたいインストール済みの WSL 2 ディストリビューションを選択してください。​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -349,7 +349,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時に「<code translate="no">Read config failed</code> 」というボリューム関連のエラーが表示された場合、どのように対処すればよいですか？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時に表示される「<code translate="no">Read config failed</code> 」というボリューム関連のエラーにはどのように対処すればよいですか？​<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -367,10 +367,10 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
     </button></h3><p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" /> 
-   <span>Milvusの起動時に表示される「Read config failed」エラー</span>
+   <span>Milvusの起動時に表示される「Read config failed」エラーメッセージ</span>
   
  </span></p>
-<p>Milvusの起動時に「Read config failed」というエラーが表示された場合は、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内に移動し、次のように<strong>/milvus/configs</strong>フォルダの一覧を表示できます：​</p>
+<p>Milvusの起動時に「Read config failed」というエラーが表示された場合は、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームがコンテナに正しくマウントされている場合は、<code translate="no">docker exec</code> コマンドを使用してコンテナ内に移動し、次<strong>のように/milvus/configsフォルダ</strong>の一覧を表示できます：​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 
@@ -396,9 +396,9 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DockerにMilvusをインストールしたら、次のことができます:</p>
+    </button></h2><p>Docker に Milvus をインストールしたら、次のことができます:</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">「クイックスタート」を</a>参照して、Milvusで何ができるかを確認してください。</p></li>
+<li><p><a href="/docs/ja/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作方法を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>

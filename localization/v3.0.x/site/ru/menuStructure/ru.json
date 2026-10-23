@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Поля массива структур в индексе",
+                "label": "Поля массива структур в Index",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Устройство для удаления смеси",
+                    "label": "Декомпоундер",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Объекты с функцией «Upsert»",
+            "label": "Объекты с операцией «upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1353,7 +1353,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Рейтинг с взвешиванием",
+                "label": "Рейтинг по взвешенным оценкам",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1415,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор модели ранжирования",
+                    "label": "Обзор Model Ranker",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2216,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном бакете",
+                "label": "Перенос данных между экземплярами в одном хранилище",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2597,13 +2597,13 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "Async API Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Поиск по полному тексту",
+                "label": "Полнотекстовый поиск",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
                 "children": []
@@ -3096,6 +3096,12 @@
             "label": "Джев",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS Вамана",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

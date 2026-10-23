@@ -177,12 +177,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Assim que o pod do Milvus Operator estiver a funcionar, pode implementar um cluster do Milvus da seguinte forma.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v3.0.2) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
+<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v3.0.3) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
 <p><strong>Destaques da arquitetura nesta implementação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/woodpecker.md">utiliza o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>
 <li><strong>Nó de streaming</strong>: ativado para um processamento de dados melhorado</li>
-<li><strong>Mix Coordinator</strong>: Componentes do coordenador consolidados para maior eficiência</li>
+<li><strong>Coordenador Mix</strong>: Componentes de coordenação consolidados para maior eficiência</li>
 </ul>
 <p>Para personalizar estas definições, recomendamos que utilize a <a href="https://milvus.io/tools/sizing">Ferramenta de Dimensionamento do Milvus</a> para ajustar as configurações com base no tamanho real dos seus dados e, em seguida, descarregue o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte <a href="https://milvus.io/docs/system_configuration.md">a Lista de Verificação de Configurações do Sistema Milvus</a>.</p>
 <div class="alert note">
@@ -275,7 +275,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <div class="alert note">
 <p>Se tiver implementado o Milvus no modo autónomo, altere o nome do pod de « <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> » para « <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> ».</p>
 </div>
-<p>Em seguida, execute o comando seguinte para reencaminhar uma porta local para a porta em que o Milvus está a funcionar.</p>
+<p>Em seguida, execute o comando seguinte para redirecionar uma porta local para a porta em que o Milvus está a funcionar.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -314,7 +314,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Aceder à interface web do Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Aceda à Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -330,7 +330,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
         ></path>
       </svg>
     </button></h2><p>O Milvus inclui uma ferramenta GUI integrada chamada Milvus WebUI, à qual pode aceder através do seu navegador. A Milvus WebUI melhora a observabilidade do sistema com uma interface simples e intuitiva. Pode utilizar a Milvus WebUI para observar as estatísticas e métricas dos componentes e dependências do Milvus, verificar detalhes da base de dados e da recolha de dados e listar configurações detalhadas do Milvus. Para mais detalhes sobre a Milvus WebUI, consulte <a href="/docs/pt/milvus-webui.md">Milvus WebUI</a></p>
-<p>Para ativar o acesso à Milvus WebUI, é necessário fazer o encaminhamento de portas do pod proxy para uma porta local.</p>
+<p>Para ativar o acesso à Milvus WebUI, é necessário redirecionar as portas do pod proxy para uma porta local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
@@ -355,7 +355,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Quando se elimina o cluster do Milvus utilizando a configuração predefinida, as dependências como o etcd e o MinIO não são eliminadas. Por conseguinte, da próxima vez que instalar a mesma instância do cluster do Milvus, estas dependências serão utilizadas novamente.</li>
+<li>Quando elimina o cluster Milvus utilizando a configuração predefinida, as dependências como o etcd e o MinIO não são eliminadas. Por conseguinte, da próxima vez que instalar a mesma instância do cluster Milvus, estas dependências serão utilizadas novamente.</li>
 <li>Para eliminar as dependências e as reivindicações de volume persistente (PVCs) juntamente com o cluster do Milvus, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">o ficheiro de configuração</a>.</li>
 </ul>
 </div>
@@ -424,7 +424,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Depois de instalar o Milvus no Docker, pode:</p>
 <ul>
-<li><p>Consultar <a href="/docs/pt/quickstart.md">o «Hello Milvus»</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consulte <a href="/docs/pt/quickstart.md">«Hello Milvus</a> » para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>

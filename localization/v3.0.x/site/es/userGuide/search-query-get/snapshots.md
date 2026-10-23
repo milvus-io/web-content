@@ -21,8 +21,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una instantánea es una imagen de una colección de Milvus en un momento determinado, ideal para reversiones rápidas, control de versiones y pruebas. Captura el estado de la colección en una marca de tiempo específica y almacena únicamente metadatos y archivos de manifiesto, como el esquema, los índices y los archivos de datos vectoriales (binlogs), para un almacenamiento y una restauración eficientes.</p>
-<p>Las instantáneas son imágenes rápidas de los datos en un momento determinado, adecuadas para reversiones rápidas o pruebas (<strong>de días a semanas</strong>). Por su parte, las copias de seguridad son copias independientes y completas que se almacenan por separado para la recuperación ante desastres a largo plazo (<strong>de semanas a años</strong>) y para una mayor protección frente a un fallo total del almacenamiento.</p>
+    </button></h1><p>Una instantánea es una imagen de una colección de Milvus en un momento determinado. Captura el estado de la colección en una fecha y hora concretas y almacena únicamente metadatos y archivos de manifiesto, como el esquema, los índices y los archivos de datos vectoriales (binlogs), para garantizar un almacenamiento y una restauración eficientes.</p>
+<p>Las instantáneas no sustituyen a las copias de seguridad. Se crean y restauran rápidamente, lo que las hace adecuadas para necesidades a corto plazo, como reversiones rápidas, control de versiones y pruebas (<strong>de días a semanas</strong>), mientras que las copias de seguridad son copias independientes y completas que se almacenan por separado para la recuperación ante desastres a largo plazo (<strong>de semanas a años</strong>) y ofrecen una mayor protección frente a un fallo total del almacenamiento.</p>
 <p>Para crear copias de seguridad, consulta <a href="/docs/es/milvus_backup_overview.md">«Copia de seguridad</a> de <a href="/docs/es/milvus_backup_overview.md">Milvus</a>».</p>
 <h2 id="Snapshot-anatomy" class="common-anchor-header">Anatomía de una instantánea<button data-href="#Snapshot-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementa una arquitectura de instantáneas basada en manifiestos para la captura, el almacenamiento y la restauración eficientes de datos en un momento determinado sin duplicar los datos vectoriales reales. La arquitectura separa la gestión de metadatos del almacenamiento físico de datos, lo que permite crear instantáneas ligeras que hacen referencia a archivos de segmentos existentes en el almacenamiento de objetos.</p>
+    </button></h2><p>Milvus implementa una arquitectura de instantáneas basada en manifiestos para la captura, el almacenamiento y la restauración eficientes de datos en un momento determinado, sin duplicar los datos vectoriales reales. La arquitectura separa la gestión de metadatos del almacenamiento físico de datos, lo que permite crear instantáneas ligeras que hacen referencia a archivos de segmentos existentes en el almacenamiento de objetos.</p>
 <p>Al crear una instantánea para una colección, Milvus recopila lo siguiente:</p>
 <ul>
 <li><p><strong>Metadatos de la instantánea</strong></p>
@@ -82,7 +82,7 @@ beta: Milvus 3.0.x
 <ul>
 <li>Eliminar las instantáneas antiguas con regularidad para ahorrar espacio de almacenamiento.</li>
 <li>Utilizar nombres y descripciones descriptivos para futuras consultas.</li>
-<li>Verificar siempre los resultados de la creación y restauración de instantáneas.</li>
+<li>Verifique siempre los resultados de la creación y la restauración de instantáneas.</li>
 <li>Realizar un seguimiento de las marcas de tiempo de creación de las instantáneas y del uso del almacenamiento para la supervisión y la resolución de problemas.</li>
 <li>Almacenar los ID de los trabajos de restauración para la supervisión y la resolución de problemas.</li>
 </ul>
@@ -106,7 +106,7 @@ beta: Milvus 3.0.x
 <li>Solo se puede restaurar una instantánea en una nueva colección dentro del mismo clúster que la original.</li>
 <li>Las colecciones restauradas conservan el mismo esquema, número de fragmentos y número de particiones.</li>
 <li>Los datos históricos restaurados pueden entrar en conflicto con las políticas de TTL. Se recomienda desactivar el TTL o ajustar la configuración del TTL antes de crear instantáneas.</li>
-<li>Para utilizar una instantánea como fuente externa de « <code translate="no">milvus-table</code> », la instantánea de origen debe proceder de una colección normal de StorageV3 Milvus. Las instantáneas de colecciones externas no son compatibles como fuentes de « <code translate="no">milvus-table</code> ».</li>
+<li>Para utilizar una instantánea como fuente externa de « <code translate="no">milvus-table</code> », la instantánea de origen debe proceder de una colección normal de Milvus en StorageV3. Las instantáneas de colecciones externas no son compatibles como fuentes de « <code translate="no">milvus-table</code> ».</li>
 </ul>
 <h2 id="Further-readings" class="common-anchor-header">Más información<button data-href="#Further-readings" class="anchor-icon" translate="no">
       <svg translate="no"

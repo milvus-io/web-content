@@ -149,20 +149,35 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>تنسيق ملفات البيانات المصدر المستهدفة.</p></td>
+     <td><p>تنسيق بيانات المصدر المستهدفة. استخدم <code translate="no">parquet</code> لملفات Parquet أو <code translate="no">iceberg-table</code> لجدول Iceberg. بالنسبة لـ Iceberg، يجب أن يشير <code translate="no">external_source</code> إلى ملف JSON الخاص ببيانات تعريف الجدول.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>معرف لقطة جدول Iceberg صالح. لا ينطبق هذا المعامل إلا عند تعيين " <code translate="no">format</code> " إلى " <code translate="no">iceberg_table</code>".</p></td>
+     <td><p>معرف لقطة صالح من بيانات تعريف جدول Iceberg. لا ينطبق هذا المعامل إلا عند تعيين <code translate="no">format</code> إلى <code translate="no">iceberg-table</code>.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>إعدادات نظام الملفات الخارجية في بنية JSON محولة إلى سلسلة نصية.</p></td>
+     <td><p>إعدادات نظام الملفات الخارجي في بنية JSON محولة إلى سلسلة نصية.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>بالنسبة لجدول Iceberg على AWS S3، يستخدم <code translate="no">external_spec</code> التالي مصادقة IAM. يجب أن يكون لنشر Milvus بالفعل حق الوصول إلى ملف JSON الخاص بالبيانات الوصفية وملفات البيان والبيانات التي يشير إليها.</p>
+<p>اضبط <code translate="no">external_source</code> على ملف البيانات الوصفية الخاص بك، مثل <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code>. استبدل <code translate="no">snapshot_id</code> بمعرف لقطة موجود في ذلك الملف وقم بتعديل <code translate="no">extfs</code> وفقًا لبيئة التخزين الخاصة بك.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>للاطلاع على مزودي التخزين المدعومين وقيود Iceberg، راجع <a href="/docs/ar/storage-v3.md">التخزين V3</a>.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
 <p>تتوفر لك الخيارات التالية لتعيين إعدادات المصادقة:</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">استخدام AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
@@ -330,10 +345,10 @@ schema := entity.NewSchema().
     </button></h3><p>ينطبق هذا الخيار عندما تستخدم مؤسستك حسابات AWS مختلفة لإدارة مجموعة Milvus وحاوية البيانات التي تحتوي على ملفات البيانات المستهدفة.</p>
 <p>في هذه الحالة، يجب على مالك الحاوية إنشاء دور IAM يقوم بما يلي</p>
 <ul>
-<li><p>يربط سياسة « <code translate="no">AmazonS3FullAccess</code> » أو سياسة أكثر تفصيلاً للوصول إلى الحاوية.</p></li>
+<li><p>يربط <code translate="no">AmazonS3FullAccess</code> أو سياسة أكثر دقة للوصول إلى الحاوية.</p></li>
 <li><p>يتضمن سياسة " <code translate="no">sts:ExternalId</code> " محددة ذاتيًا في حقل "Condition" (الشرط) في سياسة الثقة الخاصة بالدور.</p></li>
 </ul>
-<p>بعد ذلك، يجب على مالك الحاوية تزويدك برقم تعريف دور IAM (ARN) والمعرف الخارجي (External ID) حتى تتمكن من استدعاء <code translate="no">sts:AssumeRole</code> باستخدام هذه القيم لتولي دور IAM.</p>
+<p>بعد ذلك، يجب على مالك الحاوية تزويدك برقم تعريف دور IAM (ARN) والمعرف الخارجي (External ID) حتى تتمكن من استدعاء <code translate="no">sts:AssumeRole</code> باستخدام تلك القيم لتولي دور IAM.</p>
 <p>فيما يلي مثال على سياسة أذونات تُرفق بدور IAM مع الأذونات المسموح بها. يمكنك تعديلها لتلبية متطلباتك.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
@@ -396,7 +411,7 @@ schema := entity.NewSchema().
    <tr>
      <th><p>اسم المعلمة</p></th>
      <th><p>وصف المعلمة</p></th>
-     <th><p>قيمة مثال</p></th>
+     <th><p>مثال على القيمة</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">extfs.cloud_provider</code></p></td>
@@ -838,8 +853,8 @@ jobID := refreshResult.JobID
 <ul>
 <li><p>تقوم عملية التحديث بمسح البيانات الوصفية لملفات البيانات وإنشاء ملفات البيان وفقًا لذلك. وعادةً ما تستغرق هذه العملية ما بين 150 و250 مللي ثانية.</p></li>
 <li><p>تسجل ملفات البيان التعيين بين البيانات الوصفية في Milvus والصفوف في الملفات الخارجية.</p></li>
-<li><p>إذا كان هناك تحديث لبياناتك المصدرية، فستحتاج إلى استدعاء عملية التحديث يدويًا مرة أخرى للحفاظ على تحديث Milvus.</p></li>
-<li><p>يؤدي التحديث الذي يتطلب إزالة جميع البيانات الوصفية النشطة دون أي إدخالات إلى رفض الطلب.</p></li>
+<li><p>في حالة وجود تحديث لبياناتك المصدرية، يتعين عليك استدعاء عملية التحديث يدويًّا مرة أخرى للحفاظ على تحديث Milvus.</p></li>
+<li><p>يؤدي التحديث الذي يتطلب إزالة جميع البيانات الوصفية النشطة دون أي إدخالات إلى الرفض.</p></li>
 </ul>
 </div>
 <h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -857,6 +872,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تحديث المجموعة الخارجية، يمكنك تحميل المجموعة وإطلاقها وإجراء عمليات البحث عن التشابه والاستعلامات في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة، باستثناء أن المجموعات الموجودة في قاعدة بيانات للحوسبة عند الطلب يجب أن تكون مرفقة بمجموعة عند الطلب لإجراء عمليات البحث والاستعلامات.</p>
+    </button></h2><p>بمجرد تحديث المجموعة الخارجية، يمكنك تحميل المجموعة وإطلاقها وإجراء عمليات البحث عن التشابه والاستعلامات في المجموعة الخارجية كما تفعل في أي مجموعة مُدارة، باستثناء أن المجموعات الموجودة في قاعدة بيانات للحوسبة حسب الطلب يجب أن تكون مرفقة بمجموعة حسب الطلب لإجراء عمليات البحث والاستعلامات.</p>
 <p>قبل إجراء عمليات DQL، مثل البحث والاستعلام والحصول والبحث المختلط، تحتاج إلى إنشاء جلسة عمل لربط موارد الحوسبة الخاصة بمجموعة عند الطلب.</p>
 <p>إذا احتوى مصدر البيانات الخارجي لاحقًا على حقل آخر تريد عرضه في Milvus، فقم بإضافة حقل إلى مخطط المجموعة الخارجية وقم بتحديث المجموعة الخارجية مرة أخرى. للحصول على التفاصيل، راجع <a href="/docs/ar/alter-external-collection-schema.md">«تعديل مخطط المجموعة الخارجية</a>».</p>

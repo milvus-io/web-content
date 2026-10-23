@@ -65,7 +65,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Vor der Installation von Milvus wird empfohlen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen basierend auf Ihrer Datenmenge abzuschätzen. Dies trägt dazu bei, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation sicherzustellen.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Milvus-Helm-Chart installieren<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,22 +127,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Benötigen Sie stattdessen eine eigenständige Bereitstellung?</strong></p>
 <p>Wenn Sie Milvus für Entwicklungs- oder Testzwecke lieber im Standalone-Modus (einzelner Knoten) bereitstellen möchten, verwenden Sie diesen Befehl:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Streaming-Node-Komponente aktiviert. Bei Standalone-Bereitstellungen wird Woodpecker in den Milvus-Pod <strong>eingebettet</strong>; der dedizierte Woodpecker <strong>-Dienst</strong> (separate Pods) wird ausschließlich für <strong>verteilte/Cluster</strong> -Bereitstellungen verwendet. Weitere Informationen finden Sie unter <a href="/docs/de/architecture_overview.md">„Architekturübersicht“</a> und <a href="/docs/de/woodpecker.md">„Woodpecker</a>“.</p>
+<p><strong>Hinweis</strong>: Im Standalone-Modus wird Woodpecker standardmäßig als Nachrichtenwarteschlange verwendet und die Streaming-Node-Komponente aktiviert. Bei Standalone-Bereitstellungen wird Woodpecker in den Milvus-Pod <strong>eingebettet</strong>; der dedizierte Woodpecker <strong>-Dienst</strong> (separate Pods) wird nur für <strong>verteilte/Cluster</strong> -Bereitstellungen verwendet. Weitere Informationen finden Sie unter <a href="/docs/de/architecture_overview.md">„Architekturübersicht“</a> und <a href="/docs/de/woodpecker.md">„Woodpecker</a>“.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
 <div class="alert note">
 <p>Für den Woodpecker-Dienstmodus empfehlen wir die Verwendung von Milvus 3.0.3 oder höher in Kombination mit Woodpecker v0.1.46 oder höher.</p>
 </div>
-<p>Der folgende Befehl stellt einen Milvus-Cluster mit optimierten Einstellungen für v3.0.2 bereit und verwendet Woodpecker als empfohlene Nachrichtenwarteschlange:</p>
+<p>Der folgende Befehl stellt einen Milvus-Cluster mit optimierten Einstellungen für v3.0.3 bereit und verwendet Woodpecker als empfohlene Nachrichtenwarteschlange:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -151,10 +151,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Funktionsweise dieses Befehls:</strong></p>
 <ul>
-<li>Verwendet <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für reduzierten Wartungsaufwand)</li>
+<li>Verwendet <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für geringeren Wartungsaufwand)</li>
 <li>Führt <strong>Woodpecker als dedizierten Dienst</strong> (ein separates StatefulSet) aus, der nicht in den Streaming-Knoten eingebettet ist</li>
-<li>Aktiviert die neue <strong>Streaming-Node</strong> -Komponente für verbesserte Leistung</li>
-<li>Deaktiviert den alten <strong>Index-Knoten</strong> (die Funktionalität wird nun vom Datenknoten übernommen)</li>
+<li>Aktiviert die neue <strong>Streaming-Node</strong> -Komponente für eine verbesserte Leistung</li>
+<li>Deaktiviert den veralteten <strong>Index-Knoten</strong> (die Funktionalität wird nun vom Datenknoten übernommen)</li>
 </ul>
 <div class="alert note">
 <p><strong>Architekturänderungen in Milvus 2.6.x:</strong></p>
@@ -167,7 +167,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Alternative Nachrichtenwarteschlangen:</strong> Informationen zur Bereitstellung mit Pulsar, Kafka oder RocksMQ anstelle von Woodpecker finden Sie unter <a href="#Optional-dependencies">„Optionale Abhängigkeiten</a>“.</p>
 <p><strong>Nächste Schritte:</strong>
-Der obige Befehl stellt Milvus mit den empfohlenen Konfigurationen bereit. Für den produktiven Einsatz:</p>
+Der obige Befehl stellt Milvus mit den empfohlenen Konfigurationen bereit. Für den Produktiveinsatz:</p>
 <ul>
 <li>Verwenden Sie das <a href="https://milvus.io/tools/sizing">Milvus-Dimensionierungstool</a>, um die Einstellungen basierend auf Ihrer Datenmenge zu optimieren</li>
 <li>Lesen Sie <a href="https://milvus.io/docs/system_configuration.md">die „Milvus-Checkliste</a> für <a href="https://milvus.io/docs/system_configuration.md">Systemkonfigurationen“</a>, um erweiterte Konfigurationsoptionen zu erfahren</li>
@@ -197,7 +197,7 @@ Der obige Befehl stellt Milvus mit den empfohlenen Konfigurationen bereit. Für 
     </button></h3><p>Überprüfen Sie, ob Ihre Bereitstellung erfolgreich war, indem Sie den Pod-Status überprüfen:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v3.0.2 sollten Sie Pods sehen, die in etwa so aussehen:</p>
+<p><strong>Warten Sie, bis alle Pods den Status „Running“ anzeigen.</strong> Bei der Konfiguration v3.0.3 sollten Sie Pods sehen, die in etwa wie folgt aussehen:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Abhängigkeiten</strong>: <code translate="no">etcd</code> (Metadaten), <code translate="no">minio</code> (Objektspeicher), <code translate="no">woodpecker</code> (Nachrichtenwarteschlange)</li>
 </ul>
 <div class="alert note">
-<p>Mit <code translate="no">streaming.woodpecker.embedded=false</code> läuft Woodpecker als <strong>dediziertes StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, standardmäßig 4 Replikate – ein Quorum von 3 Knoten plus einem Reserveknoten zur Fehlertoleranz; <code translate="no">woodpecker.replicaCount</code> nicht auf einen Wert unter 3 setzen) und wird von einem Headless-Service gesteuert, der MinIO als Speicher-Backend nutzt – der Cluster verfügt also über einen separaten <code translate="no">woodpecker</code> -Pod-Satz, der vom Streaming-Knoten getrennt ist.</p>
+<p>Mit <code translate="no">streaming.woodpecker.embedded=false</code> läuft Woodpecker als <strong>dediziertes StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, standardmäßig 4 Replikate – ein Quorum von 3 Knoten plus einem Reserveknoten zur Fehlertoleranz; <code translate="no">woodpecker.replicaCount</code> nicht auf einen Wert unter 3 setzen) und wird von einem Headless-Dienst gesteuert, der MinIO als Speicher-Backend nutzt – der Cluster verfügt also über einen separaten <code translate="no">woodpecker</code> -Pod-Satz, der vom Streaming-Knoten getrennt ist.</p>
 </div>
 <p>Sie können auch auf die <strong>Milvus-WebUI</strong> unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, sobald die Portweiterleitung eingerichtet ist (siehe nächster Schritt). Weitere Informationen finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus-WebUI</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Verbindung zu Milvus herstellen<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -255,7 +255,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p><strong>Optionen für die Portweiterleitung:</strong></p>
 <ul>
-<li><strong>Lokalen Port automatisch zuweisen</strong>: Verwenden Sie „ <code translate="no">:19530</code> “ anstelle von „ <code translate="no">27017:19530</code> “, damit kubectl einen verfügbaren Port auswählt</li>
+<li><strong>Lokalen Port automatisch zuweisen</strong>: Verwenden Sie <code translate="no">:19530</code> anstelle von <code translate="no">27017:19530</code>, damit kubectl einen verfügbaren Port auswählt</li>
 <li><strong>Auf allen Schnittstellen lauschen</strong>: Fügen Sie <code translate="no">--address 0.0.0.0</code> hinzu, um Verbindungen von anderen Rechnern zuzulassen:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
@@ -534,7 +534,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung in Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

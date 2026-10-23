@@ -667,7 +667,7 @@
                     "children": []
                   },
                   {
-                    "label": "Nur Cnalphanum",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -832,7 +832,7 @@
             "children": []
           },
           {
-            "label": "Gleitkomma-Vektorindizes",
+            "label": "Gleitkommavektorindizes",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -2255,7 +2255,7 @@
             "children": []
           },
           {
-            "label": "Anwendungshinweise",
+            "label": "Anleitungen",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
@@ -2347,7 +2347,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Größenauswahl-Tool",
+        "label": "Milvus-Größenrechner",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2777,7 +2777,7 @@
         ]
       },
       {
-        "label": "Auswertung und Beobachtbarkeit",
+        "label": "Bewertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -3096,6 +3096,12 @@
             "label": "Jev",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

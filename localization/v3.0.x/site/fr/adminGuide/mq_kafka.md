@@ -2,7 +2,7 @@
 id: mq_kafka.md
 title: Kafka
 ---
-<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">Utiliser Kafka comme file d'attente de messages pour Milvus<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
+<h1 id="Use-Kafka-as-the-Milvus-Message-Queue" class="common-anchor-header">Utiliser Kafka comme file d'attente de messages Milvus<button data-href="#Use-Kafka-as-the-Milvus-Message-Queue" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +34,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus prend en charge uniquement <strong>Kafka 2.x et 3.x</strong>.</li>
+<li>Milvus prend uniquement en charge les versions <strong>2.x et 3.x de Kafka</strong>.</li>
 <li>Kafka est configuré pour Milvus Distributed (cluster) via Helm ou Milvus Operator.</li>
 </ul>
 <h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="common-anchor-header">Déployer un cluster Milvus avec Kafka à l’aide de Helm<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Helm" class="anchor-icon" translate="no">
@@ -67,7 +67,7 @@ title: Kafka
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour utiliser un service Kafka externe, désactivez Pulsar intégré et activez <code translate="no">externalKafka</code> dans une redéfinition de ` <code translate="no">values.yaml</code> `, puis installez Milvus avec ce service :</p>
+    </button></h3><p>Pour utiliser un service Kafka externe, désactivez Pulsar (fourni avec Milvus) et activez <code translate="no">externalKafka</code> dans une surcouche d'<code translate="no">values.yaml</code>, puis installez Milvus avec ce service :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalKafka:</span>
@@ -99,7 +99,7 @@ title: Kafka
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Déployer un cluster Milvus avec Kafka à l'aide de Milvus Operator<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="common-anchor-header">Déployer un cluster Milvus avec Kafka à l’aide de Milvus Operator<button data-href="#Deploy-a-Milvus-cluster-with-Kafka-using-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,7 +154,7 @@ title: Kafka
         <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;kafkaBrokerAddr2:9092&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Les configurations SASL sont prises en charge dans Milvus Operator v0.8.5 ou une version ultérieure.</p>
+<p>Les configurations SASL sont prises en charge dans Milvus Operator v0.8.5 ou version ultérieure.</p>
 </div>
 <h3 id="Internal-in-cluster-Kafka" class="common-anchor-header">Kafka interne (au sein du cluster)<button data-href="#Internal-in-cluster-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -186,7 +186,7 @@ title: Kafka
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Appliquez la configuration (en supposant que le fichier soit <code translate="no">milvuscluster.yaml</code>) :</p>
+<p>Appliquez la configuration (en supposant que le fichier s'appelle <code translate="no">milvuscluster.yaml</code>) :</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Uninstall" class="common-anchor-header">Désinstallation<button data-href="#Uninstall" class="anchor-icon" translate="no">
@@ -222,8 +222,8 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.2, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
-Si vous utilisez Kafka et souhaitez le conserver, ne modifiez pas la file d’attente de messages pendant la mise à niveau.</li>
+<li><strong>Mise à niveau de la version 2.5.x vers la version 2.6.x :</strong> <strong>limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.3, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.
+Si vous utilisez Kafka et souhaitez le conserver, ne modifiez pas la file d'attente de messages pendant la mise à niveau.</li>
 <li>Seules les versions <strong>2.x et 3.x de Kafka</strong> sont prises en charge.</li>
 <li>Pour la connectivité SASL/SSL, consultez la section « <a href="/docs/fr/connect_kafka_ssl.md">Se connecter à Kafka avec SASL/SSL</a> ».</li>
 </ul>

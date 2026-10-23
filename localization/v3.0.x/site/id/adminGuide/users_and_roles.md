@@ -2,11 +2,12 @@
 id: users_and_roles.md
 title: Membuat Pengguna & Peran
 summary: >-
-  Milvus mencapai kontrol akses yang halus melalui RBAC. Anda bisa mulai dengan
-  membuat pengguna dan peran, kemudian menetapkan hak istimewa atau grup hak
-  istimewa untuk peran, dan akhirnya mengelola kontrol akses dengan memberikan
-  peran kepada pengguna. Metode ini memastikan efisiensi dan keamanan manajemen
-  akses. Halaman ini memperkenalkan cara membuat pengguna dan peran di Milvus.
+  Milvus menerapkan kontrol akses yang terperinci melalui RBAC. Anda dapat
+  memulainya dengan membuat pengguna dan peran, kemudian menetapkan hak akses
+  atau kelompok hak akses ke peran-peran tersebut, dan akhirnya mengelola
+  kontrol akses dengan memberikan peran kepada pengguna. Metode ini menjamin
+  efisiensi dan keamanan pengelolaan akses. Halaman ini menjelaskan cara membuat
+  pengguna dan peran di Milvus.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Membuat Pengguna &amp; Peran<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus mencapai kontrol akses yang halus melalui RBAC. Anda bisa mulai dengan membuat pengguna dan peran, kemudian menetapkan hak istimewa atau grup hak istimewa untuk peran, dan akhirnya mengelola kontrol akses dengan memberikan peran kepada pengguna. Metode ini memastikan efisiensi dan keamanan manajemen akses. Halaman ini memperkenalkan cara membuat pengguna dan peran di Milvus.</p>
+    </button></h1><p>Milvus menerapkan kontrol akses yang terperinci melalui RBAC. Anda dapat memulainya dengan membuat pengguna dan peran, kemudian menetapkan hak akses atau grup hak akses ke peran-peran tersebut, dan akhirnya mengelola kontrol akses dengan memberikan peran kepada pengguna. Metode ini memastikan efisiensi dan keamanan pengelolaan akses. Halaman ini menjelaskan cara membuat pengguna dan peran di Milvus.</p>
 <h2 id="User" class="common-anchor-header">Pengguna<button data-href="#User" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,9 +40,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menginisialisasi instans Milvus, pengguna root secara otomatis dibuat untuk autentikasi saat terhubung ke Milvus untuk pertama kalinya. Nama pengguna root adalah <code translate="no">root</code> dan kata sandinya adalah <code translate="no">Milvus</code>. Peran default dari pengguna root adalah <code translate="no">admin</code>, yang memiliki akses ke semua sumber daya. Untuk memastikan keamanan data, simpanlah kredensial pengguna root Anda dengan aman untuk mencegah akses yang tidak sah.</p>
-<p>Untuk operasi harian, kami sarankan untuk membuat pengguna daripada menggunakan pengguna root.</p>
-<h3 id="Create-a-user" class="common-anchor-header">Membuat pengguna<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+    </button></h2><p>Setelah menginisialisasi instance Milvus, pengguna root akan dibuat secara otomatis untuk otentikasi saat terhubung ke Milvus untuk pertama kalinya. Nama pengguna root adalah <code translate="no">root</code> dan kata sandinya adalah <code translate="no">Milvus</code>. Peran default pengguna root adalah <code translate="no">admin</code>, yang memiliki akses ke semua sumber daya. Untuk memastikan keamanan data, harap simpan kredensial pengguna root Anda dengan aman untuk mencegah akses yang tidak sah.</p>
+<p>Untuk operasi sehari-hari, kami menyarankan Anda membuat pengguna baru daripada menggunakan pengguna root.</p>
+<h3 id="Create-a-user" class="common-anchor-header">Buat pengguna<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,13 +57,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Contoh berikut ini menunjukkan cara membuat pengguna dengan nama pengguna <code translate="no">user_1</code> dan kata sandi <code translate="no">P@ssw0rd</code>. Nama pengguna dan kata sandi untuk pengguna harus mengikuti aturan berikut:</p>
+    </button></h3><p>Masuk sebagai <code translate="no">root</code> dan buat pengguna dengan nama pengguna <code translate="no">user_1</code> dan kata sandi <code translate="no">P@ssw0rd</code>. Saat memilih kredensial, ikuti aturan berikut:</p>
 <ul>
-<li><p>Nama pengguna: Harus dimulai dengan huruf dan hanya boleh terdiri dari huruf besar atau huruf kecil, angka, dan garis bawah.</p></li>
-<li><p>Kata sandi: Harus terdiri dari 8-64 karakter dan harus menyertakan tiga hal berikut: huruf besar, huruf kecil, angka, dan karakter khusus.</p></li>
+<li><p>Nama pengguna: Harus dimulai dengan huruf dan hanya boleh berisi huruf besar atau kecil, angka, dan garis bawah.</p></li>
+<li><p>Kata sandi: Secara default, panjangnya harus 6–72 byte UTF-8. Deployment Anda mungkin mengonfigurasi <a href="/docs/id/authenticate.md#Password-requirements">batasan panjang kata sandi</a> yang berbeda.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -140,7 +146,7 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">Memperbarui kata sandi<button data-href="#Update-password" class="anchor-icon" translate="no">
+<h3 id="Update-password" class="common-anchor-header">Perbarui kata sandi<button data-href="#Update-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,14 +161,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah membuat pengguna, Anda dapat memperbarui kata sandi jika Anda lupa.</p>
-<p>Kata sandi yang baru juga harus mengikuti aturan berikut:</p>
-<ul>
-<li>Harus terdiri dari 8-64 karakter dan mencakup tiga hal berikut ini: huruf besar, huruf kecil, angka, dan karakter khusus.</li>
-</ul>
-<p>Contoh berikut ini menunjukkan cara memperbarui kata sandi untuk pengguna <code translate="no">user_1</code> menjadi <code translate="no">NewP@ssw0rd</code>.</p>
+    </button></h3><p>Gunakan kembali koneksi dari contoh create-user untuk memperbarui kata sandi <code translate="no">user_1</code> dari <code translate="no">P@ssw0rd</code> menjadi <code translate="no">NewP@ssw0rd</code>. Masukkan kata sandi saat ini dan pilih kata sandi baru yang memenuhi <a href="/docs/id/authenticate.md#Password-requirements">persyaratan kata sandi</a> yang sama.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.update_password(
@@ -190,8 +196,8 @@ client.updatePassword(updatePasswordReq);
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">updateUser</span>({
    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
-   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -200,12 +206,13 @@ client.updatePassword(updatePasswordReq);
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
+    &quot;newPassword&quot;: &quot;NewP@ssw0rd&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">Membuat daftar pengguna<button data-href="#List-users" class="anchor-icon" translate="no">
+<p>Jika Anda lupa kata sandi saat ini, pengguna super yang telah dikonfigurasi dapat meresetnya. Lihat <a href="/docs/id/authenticate.md#Update-user-password">Memperbarui kata sandi pengguna</a>.</p>
+<h3 id="List-users" class="common-anchor-header">Daftar pengguna<button data-href="#List-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,9 +227,14 @@ client.updatePassword(updatePasswordReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah membuat beberapa pengguna, Anda dapat membuat daftar dan melihat semua pengguna yang ada.</p>
+    </button></h3><p>Setelah membuat beberapa pengguna, Anda dapat menampilkan daftar dan melihat semua pengguna yang ada.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_users()
@@ -244,7 +256,7 @@ client.list_users()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di bawah ini adalah contoh keluaran. <code translate="no">root</code> adalah pengguna default yang dibuat secara otomatis di Milvus. <code translate="no">user_1</code> adalah pengguna baru yang baru saja dibuat.</p>
+<p>Berikut adalah contoh hasilnya. <code translate="no">root</code> adalah pengguna default yang dibuat secara otomatis di Milvus. <code translate="no">user_1</code> adalah pengguna baru yang baru saja dibuat.</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-string">&#x27;user_1&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Role" class="common-anchor-header">Peran<button data-href="#Role" class="anchor-icon" translate="no">
@@ -262,7 +274,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan peran bawaan yang disebut <code translate="no">admin</code>, yang merupakan peran administrator yang dapat mengakses sumber daya di bawah semua instans dan memiliki hak istimewa untuk semua operasi. Untuk manajemen akses yang lebih baik dan keamanan data yang lebih baik, Anda disarankan untuk membuat role khusus berdasarkan kebutuhan Anda.</p>
+    </button></h2><p>Milvus menyediakan peran bawaan bernama <code translate="no">admin</code>, yang merupakan peran administrator yang dapat mengakses sumber daya di bawah semua instance dan memiliki hak istimewa untuk semua operasi. Untuk manajemen akses yang lebih terperinci dan keamanan data yang ditingkatkan, disarankan agar Anda membuat peran khusus berdasarkan kebutuhan Anda.</p>
 <h3 id="Create-a-role" class="common-anchor-header">Membuat peran<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,13 +290,18 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Contoh berikut ini menunjukkan cara membuat peran bernama <code translate="no">role_a</code>.</p>
-<p>Nama peran harus mengikuti aturan berikut ini:</p>
+    </button></h3><p>Contoh berikut menunjukkan cara membuat peran bernama <code translate="no">role_a</code>.</p>
+<p>Nama peran harus mengikuti aturan berikut:</p>
 <ul>
-<li>Harus dimulai dengan huruf dan hanya dapat menyertakan huruf besar atau huruf kecil, angka, dan garis bawah.</li>
+<li>Harus dimulai dengan huruf dan hanya boleh berisi huruf besar atau kecil, angka, dan garis bawah.</li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -315,7 +332,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">Membuat daftar peran<button data-href="#List-roles" class="anchor-icon" translate="no">
+<h3 id="List-roles" class="common-anchor-header">Daftar peran<button data-href="#List-roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -330,9 +347,14 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah membuat beberapa peran, Anda dapat membuat daftar dan melihat semua peran yang ada.</p>
+    </button></h3><p>Setelah membuat beberapa peran, Anda dapat menampilkan daftar dan melihat semua peran yang ada.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_roles()
@@ -356,6 +378,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di bawah ini adalah contoh keluaran. <code translate="no">admin</code> adalah role default di Milvus. <code translate="no">role_a</code> adalah role yang baru saja dibuat.</p>
+<p>Di bawah ini adalah contoh hasilnya. ` <code translate="no">admin</code> ` adalah peran default di Milvus. ` <code translate="no">role_a</code> ` adalah peran baru yang baru saja dibuat.</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

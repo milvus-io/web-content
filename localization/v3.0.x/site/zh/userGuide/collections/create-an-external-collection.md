@@ -2,7 +2,7 @@
 id: create-an-external-collection.md
 title: 创建外部CollectionCompatible with Milvus 3.0.x
 summary: >-
-  外部数据集是 Milvus 中的 Collection 类型之一，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和
+  外部 Collection 是 Milvus 中的 Collection 类型之一，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和
   Iceberg）的数据，而无需将数据复制到 Milvus 中。它作为数据湖之上的查询层，同时保持与 Milvus 查询接口的兼容性。
 beta: Milvus 3.0.x
 ---
@@ -21,7 +21,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>外部 Collection 是 Milvus 中的一种数据 Collection，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和 Iceberg）的数据，而无需将数据复制到 Milvus 中。它作为数据湖上的查询层，同时保持与 Milvus 查询接口的兼容性。</p>
+    </button></h1><p>外部 Collection 是 Milvus 中的一种数据 Collection，它可直接访问来自外部存储系统或数据库表（如 AWS S3 和 Iceberg）的数据，而无需将数据复制到 Milvus 中。它作为数据湖之上的查询层，同时保持与 Milvus 查询接口的兼容性。</p>
 <div class="alert note">
 <p>此功能需要 Storage V3 支持。有关启用说明和兼容性注意事项，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
 </div>
@@ -147,22 +147,37 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>目标源数据文件的格式。</p></td>
+     <td><p>目标源数据的格式。对于 Parquet 文件，请使用<code translate="no">parquet</code> ；对于 Iceberg 表，请使用<code translate="no">iceberg-table</code> 。对于 Iceberg，<code translate="no">external_source</code> 必须指向该表的元数据 JSON 文件。</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>一个有效的 Iceberg 表快照 ID。此参数仅在将 `<code translate="no">format</code> ` 设置为 `<code translate="no">iceberg_table</code>` 时适用。</p></td>
+     <td><p>来自 Iceberg 表元数据的有效快照 ID。此参数仅在将<code translate="no">format</code> 设置为<code translate="no">iceberg-table</code> 时适用。</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>以字符串形式的 JSON 结构表示的外部文件系统设置。</p></td>
+     <td><p>以字符串化 JSON 结构表示的外部文件系统设置。</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>对于位于 AWS S3 上的 Iceberg 表，以下 `<code translate="no">external_spec</code> ` 配置使用 IAM 身份验证。Milvus 部署必须已具备访问元数据 JSON 文件及其引用的清单和数据文件的权限。</p>
+<p>将<code translate="no">external_source</code> 设置为您对应的元数据文件，例如<code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> 。将<code translate="no">snapshot_id</code> 替换为该文件中的现有快照 ID，并根据您的存储环境调整<code translate="no">extfs</code> 。</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>有关受支持的存储提供商和 Iceberg 限制，请参阅<a href="/docs/zh/storage-v3.md">Storage V3</a>。</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
-<p>您可以通过以下选项设置身份验证设置：</p>
+<p>您可通过以下方式设置身份验证选项：</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS 访问密钥/安全密钥<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +193,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此选项适用于自托管的 MinIO，或您已拥有用于工作的 AK/SK 的场景。</p>
+    </button></h3><p>此选项适用于自托管的 MinIO，或您已拥有工作所需的 AK/SK 的场景。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -194,7 +209,7 @@ schema := entity.NewSchema().
 <table>
    <tr>
      <th><p>参数名称</p></th>
-     <th><p>参数说明</p></th>
+     <th><p>参数描述</p></th>
      <th><p>示例值</p></th>
    </tr>
    <tr>
@@ -224,7 +239,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_virtual_host</code></p></td>
-     <td><p>是否使用虚拟托管访问您的存储桶。</p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">这篇文章</a>。</p></td>
+     <td><p>是否使用虚拟主机访问您的存储桶。</p><p>有关详细信息，请参阅<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">这篇文章</a>。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -356,7 +371,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，与该 IAM 角色关联的信任策略定义了谁被允许承担该角色。</p>
+<p>而与该 IAM 角色关联的信任策略则定义了谁被允许承担该角色。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -413,7 +428,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>请将此选项设置为<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>对于此选项，请将其设置为<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -836,11 +851,11 @@ jobID := refreshResult.JobID
 <ul>
 <li><p>刷新操作会扫描数据文件的元数据，并据此生成清单文件。该过程通常需要 150-250 毫秒。</p></li>
 <li><p>清单文件记录了 Milvus 中的元数据与外部文件中行之间的映射关系。</p></li>
-<li><p>如果源数据发生更新，您需要手动再次调用刷新操作，以保持 Milvus 的数据最新。</p></li>
+<li><p>如果源数据发生更新，您需要手动再次调用刷新操作，以保持 Milvus 的数据同步。</p></li>
 <li><p>如果刷新操作需要删除所有活跃元数据且不插入任何新数据，则该操作将被拒绝。</p></li>
 </ul>
 </div>
-<h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -856,5 +871,5 @@ jobID := refreshResult.JobID
         ></path>
       </svg>
     </button></h2><p>刷新外部集合后，您可以加载和释放该 Collection，并在外部 Collection 中执行相似度搜索和查询，就像在任何托管 Collection 中一样，但需注意：用于按需计算的数据库中的 Collection 必须附加到按需集群上才能进行搜索和查询。</p>
-<p>在执行 DQL 操作（如搜索、查询、获取和混合搜索）之前，您需要创建一个会话以挂载按需计算集群的计算资源。</p>
+<p>在执行 DQL 操作（如搜索、查询、获取和混合搜索）之前，您需要创建一个会话以挂接按需集群的计算资源。</p>
 <p>如果外部数据源后续包含另一个您希望在 Milvus 中暴露的字段，请向外部 Collection Schema 添加该字段，并再次刷新外部 Collection。有关详细信息，请参阅《<a href="/docs/zh/alter-external-collection-schema.md">修改外部 Collection Schema</a>》。</p>

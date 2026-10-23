@@ -41,23 +41,23 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>일반적인 AI 데이터 파이프라인에서 사용자는 이미 AWS S3와 같은 스토리지 시스템에 Parquet 또는 기타 형식으로 데이터를 저장해 놓은 경우가 많습니다. Milvus가 이러한 외부 저장 데이터를 활용할 수 있도록 하려면, 사용자는 일반적으로 ETL(Extract-Transform-Load) 파이프라인을 사용하여 해당 데이터를 Milvus 자체 스토리지로 가져와야 합니다.</p>
-<p>이러한 ‘데이터를 Milvus로 가져오기’ 워크플로우는 동기화하기 어려운 중복 데이터를 생성하며, 데이터 일관성을 보장하기 위한 엔지니어링 유지 관리 부담을 가중시킵니다.</p>
+    </button></h2><p>일반적인 AI 데이터 파이프라인에서 사용자는 이미 AWS S3와 같은 스토리지 시스템에 데이터를 Parquet 또는 기타 형식으로 저장해 둔 경우가 많습니다. Milvus가 이러한 외부 저장 데이터를 활용할 수 있도록 하려면, 사용자는 일반적으로 ETL(Extract-Transform-Load) 파이프라인을 사용하여 해당 데이터를 Milvus 자체 스토리지로 가져와야 합니다.</p>
+<p>이러한 ‘데이터를 Milvus로 가져오기’ 워크플로는 동기화하기 어려운 중복 데이터를 생성하며, 데이터 일관성을 보장하기 위한 엔지니어링 유지 관리 부담을 가중시킵니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
    <span>데이터를 컴퓨팅 워크플로우로 가져오기</span>
   
  </span></p>
-<p>이러한 문제를 해결하기 위해 Milvus는 데이터 동기화나 ETL 파이프라인에 대한 걱정 없이 Milvus에서 외부 저장 데이터를 직접 액세스할 수 있는 ‘외부 컬렉션’ 기능을 제공합니다.</p>
+<p>이러한 문제를 해결하기 위해 Milvus는 데이터 동기화나 ETL 파이프라인에 대한 걱정 없이 Milvus에서 외부 저장 데이터에 액세스할 수 있는 ‘외부 컬렉션’ 기능을 제공합니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
-   <span>'데이터로 컴퓨팅을 가져오는' 워크플로우</span>
+   <span>‘데이터로 컴퓨팅을 가져오는’ 워크플로우</span>
   
  </span></p>
-<p>외부 컬렉션을 생성하면 해당 컬렉션이 데이터에 직접 액세스할 수 있으며, 데이터는 사용자가 저장해 둔 위치 그대로 유지됩니다. 백그라운드에서 Milvus는 Milvus 메타데이터와 외부 데이터 파일의 행 간의 매핑을 기록하는 매니페스트 파일을 생성합니다. 매니페스트 파일이 준비되면, 관리형 컬렉션에서와 마찬가지로 외부 컬렉션에 인덱스를 생성할 수 있습니다.</p>
-<p>데이터가 변경되면 1초 미만의 시간 내에 수동으로 새로 고침을 실행하여 메타데이터를 업데이트함으로써 Milvus를 항상 최신 상태로 유지할 수 있습니다.</p>
+<p>외부 컬렉션을 생성하면 해당 컬렉션이 데이터에 직접 액세스할 수 있으며, 데이터는 사용자가 저장한 위치 그대로 유지됩니다. 백그라운드에서 Milvus는 Milvus 메타데이터와 외부 데이터 파일의 행 간의 매핑을 기록하는 매니페스트 파일을 생성합니다. 매니페스트 파일이 준비되면, 관리형 컬렉션에서와 마찬가지로 외부 컬렉션에 인덱스를 생성할 수 있습니다.</p>
+<p>데이터가 변경되면 1초 미만의 시간 내에 수동으로 새로 고침을 트리거하여 메타데이터를 업데이트함으로써 Milvus를 항상 최신 상태로 유지할 수 있습니다.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">1단계: 스키마 생성<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,12 +148,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>대상 소스 데이터 파일의 형식.</p></td>
+     <td><p>대상 소스 데이터의 형식. Parquet 파일의 경우 <code translate="no">parquet</code> 을, Iceberg 테이블의 경우 <code translate="no">iceberg-table</code> 을 사용합니다. Iceberg의 경우, <code translate="no">external_source</code> 은 해당 테이블의 메타데이터 JSON 파일을 가리켜야 합니다.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>유효한 Iceberg 테이블 스냅샷 ID입니다. 이 매개 변수는 <code translate="no">format</code> 를 <code translate="no">iceberg_table</code> 로 설정했을 때만 적용됩니다.</p></td>
+     <td><p>Iceberg 테이블 메타데이터의 유효한 스냅샷 ID입니다. 이 매개변수는 <code translate="no">format</code> 을 <code translate="no">iceberg-table</code> 로 설정했을 때만 적용됩니다.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -162,8 +162,23 @@ schema := entity.NewSchema().
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>AWS S3에 있는 Iceberg 테이블의 경우, 다음 ` <code translate="no">external_spec</code> `는 IAM 인증을 사용합니다. Milvus 배포 환경은 이미 메타데이터 JSON 및 해당 메타데이터가 참조하는 매니페스트 및 데이터 파일에 대한 액세스 권한을 가지고 있어야 합니다.</p>
+<p><code translate="no">external_source</code> 를 <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> 와 같은 메타데이터 파일로 설정하십시오. <code translate="no">snapshot_id</code> 를 해당 파일의 기존 스냅샷 ID로 대체하고, <code translate="no">extfs</code> 를 사용 중인 스토리지 환경에 맞게 조정하십시오.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>지원되는 스토리지 제공업체 및 Iceberg 제한 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
-<p>인증 설정을 구성하려면 다음 옵션을 사용할 수 있습니다:</p>
+<p>인증 설정을 구성하려면 다음 옵션을 사용할 수 있습니다.</p>
 <h3 id="Use-AWS-AKSK" class="common-anchor-header">AWS AK/SK 사용<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,7 +194,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>이 옵션은 자체 호스팅 MinIO 또는 업무용으로 AK/SK를 보유하고 있는 경우에 적용됩니다.</p>
+    </button></h3><p>이 옵션은 자체 호스팅형 MinIO 또는 업무용으로 AK/SK를 보유하고 있는 경우에 적용됩니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -220,7 +235,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>연결 설정에 SSL을 사용할지 여부.</p></td>
+     <td><p>연결 설정 시 SSL을 사용할지 여부.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -284,7 +299,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>연결 설정에 SSL을 사용할지 여부.</p></td>
+     <td><p>연결을 설정할 때 SSL을 사용할지 여부.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
@@ -330,7 +345,7 @@ schema := entity.NewSchema().
 <p>이 경우, 버킷 소유자는 다음을 수행하는 IAM 역할을 생성해야 합니다.</p>
 <ul>
 <li><p><code translate="no">AmazonS3FullAccess</code> 또는 버킷 액세스를 위한 보다 세분화된 정책을 연결해야 합니다.</p></li>
-<li><p>역할의 신뢰 정책(Trust Policy)의 조건(Condition) 필드에 자체 정의한 <code translate="no">sts:ExternalId</code> 를 포함합니다.</p></li>
+<li><p>역방향 권한 부여( <code translate="no">sts:ExternalId</code> ) 또는 버킷 액세스를 위한 보다 세분화된 정책을 적용합니다.</p></li>
 </ul>
 <p>그런 다음, 버킷 소유자는 귀하에게 IAM 역할 ARN과 외부 ID를 제공해야 하며, 귀하는 해당 값을 사용하여 <code translate="no">sts:AssumeRole</code> 를 호출함으로써 IAM 역할을 인수할 수 있습니다.</p>
 <p>다음은 허용된 권한이 포함된 IAM 역할에 첨부할 권한 정책의 예시입니다. 요구 사항에 맞게 조정할 수 있습니다.</p>
@@ -835,7 +850,7 @@ jobID := refreshResult.JobID
 <p>새로 고침 작업은 비동기식으로 수행되므로 진행 상황을 모니터링하기 위해 반복 처리를 설정해야 합니다.</p>
 <div class="alert note">
 <ul>
-<li><p>갱신 작업은 데이터 파일의 메타데이터를 스캔하고 이에 따라 매니페스트 파일을 생성합니다. 일반적으로 150~250ms가 소요됩니다.</p></li>
+<li><p>갱신 작업은 데이터 파일의 메타데이터를 스캔하고 그에 따라 매니페스트 파일을 생성합니다. 일반적으로 150~250ms가 소요됩니다.</p></li>
 <li><p>매니페스트 파일은 Milvus의 메타데이터와 외부 파일의 행 간의 매핑 관계를 기록합니다.</p></li>
 <li><p>소스 데이터가 업데이트된 경우, Milvus를 최신 상태로 유지하려면 수동으로 새로 고침 작업을 다시 호출해야 합니다.</p></li>
 <li><p>삽입 작업 없이 모든 활성 메타데이터를 제거해야 하는 새로고침 요청은 거부됩니다.</p></li>
@@ -856,6 +871,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>외부 컬렉션을 새로 고친 후에는 컬렉션을 로드 및 해제하고, 온디맨드 컴퓨팅용 데이터베이스에 있는 컬렉션은 검색 및 쿼리를 위해 온디맨드 클러스터에 연결되어야 한다는 점을 제외하면, 관리형 컬렉션에서와 마찬가지로 외부 컬렉션에서 유사도 검색 및 쿼리를 수행할 수 있습니다.</p>
+    </button></h2><p>외부 컬렉션을 새로 고침한 후에는 컬렉션을 로드 및 해제하고, 관리형 컬렉션에서와 마찬가지로 외부 컬렉션에서 유사도 검색 및 쿼리를 수행할 수 있습니다. 단, 온디맨드 컴퓨팅용 데이터베이스에 있는 컬렉션은 검색 및 쿼리를 위해 온디맨드 클러스터에 연결되어야 한다는 점이 다릅니다.</p>
 <p>검색, 쿼리, 가져오기 및 하이브리드 검색과 같은 DQL 작업을 수행하기 전에, 온디맨드 클러스터의 컴퓨팅 리소스를 연결하기 위해 세션을 생성해야 합니다.</p>
 <p>나중에 외부 데이터 소스에 Milvus에서 노출하고자 하는 다른 필드가 포함된 경우, 외부 컬렉션 스키마에 필드를 추가하고 외부 컬렉션을 다시 새로 고침하십시오. 자세한 내용은 <a href="/docs/ko/alter-external-collection-schema.md">‘외부 컬렉션 스키마 변경’을</a> 참조하십시오.</p>

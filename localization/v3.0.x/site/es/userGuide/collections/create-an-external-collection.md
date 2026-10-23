@@ -48,7 +48,7 @@ beta: Milvus 3.0.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
-   <span>Flujo de trabajo «traer los datos al sistema de cálculo</span> </span>» <span class="img-wrapper">
+   <span>Flujo de trabajo «Traer datos al sistema de cálculo</span> </span>» <span class="img-wrapper">
   
  </span></p>
 <p>Para resolver estos problemas, Milvus ofrece colecciones externas que te permiten acceder a tus datos almacenados externamente desde Milvus sin tener que preocuparte por la sincronización de datos ni por los flujos de trabajo ETL.</p>
@@ -150,12 +150,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Formato de los archivos de datos de origen de destino.</p></td>
+     <td><p>Formato de los datos de origen de destino. Utiliza <code translate="no">parquet</code> para archivos Parquet o <code translate="no">iceberg-table</code> para una tabla de Iceberg. En el caso de Iceberg, <code translate="no">external_source</code> debe apuntar al archivo JSON de metadatos de la tabla.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Un identificador de instantánea de tabla de Iceberg válido. Este parámetro solo se aplica cuando se establece « <code translate="no">format</code> » en « <code translate="no">iceberg_table</code> ».</p></td>
+     <td><p>Un ID de instantánea válido procedente de los metadatos de la tabla de Iceberg. Este parámetro solo se aplica cuando se establece <code translate="no">format</code> en <code translate="no">iceberg-table</code>.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -164,9 +164,24 @@ schema := entity.NewSchema().
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>Para una tabla Iceberg en AWS S3, el siguiente <code translate="no">external_spec</code> utiliza autenticación IAM. La implementación de Milvus debe tener ya acceso al JSON de metadatos y a los archivos de manifiesto y de datos a los que hace referencia.</p>
+<p>Establece <code translate="no">external_source</code> en tu archivo de metadatos, como <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code>. Sustituye <code translate="no">snapshot_id</code> por un ID de instantánea existente de ese archivo y adapta <code translate="no">extfs</code> a tu entorno de almacenamiento.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para conocer los proveedores de almacenamiento compatibles y las restricciones de Iceberg, consulta <a href="/docs/es/storage-v3.md">Almacenamiento V3</a>.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
-<p>Dispones de las siguientes opciones para configurar los ajustes de autenticación:</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">Usar AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<p>Dispone de las siguientes opciones para configurar los ajustes de autenticación:</p>
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">Utilizar AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +196,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Esta opción se aplica a MinIO autohospedado o al caso en el que dispongas de AK/SK para tu trabajo.</p>
+    </button></h3><p>Esta opción se aplica a MinIO autohospedado o al caso en el que dispongas de una clave de acceso (AK) y una clave secreta (SK) para tu trabajo.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -290,7 +305,7 @@ schema := entity.NewSchema().
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">Usar credenciales globales de Milvus<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
+<h3 id="Use-Milvus-global-credentials" class="common-anchor-header">Utilizar credenciales globales de Milvus<button data-href="#Use-Milvus-global-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -331,10 +346,10 @@ schema := entity.NewSchema().
     </button></h3><p>Esta opción es aplicable cuando su organización utiliza diferentes cuentas de AWS para gestionar el clúster de Milvus y el depósito que contiene los archivos de datos de destino.</p>
 <p>En este caso, el propietario del depósito debe crear un rol de IAM que</p>
 <ul>
-<li><p>asigne <code translate="no">AmazonS3FullAccess</code> o una política más detallada para el acceso al bucket.</p></li>
-<li><p>Incluya una « <code translate="no">sts:ExternalId</code> » definida por el usuario en el campo «Condición» de la política de confianza del rol.</p></li>
+<li><p>asigne <code translate="no">AmazonS3FullAccess</code> o una política más detallada para el acceso al depósito.</p></li>
+<li><p>Incluya una política « <code translate="no">sts:ExternalId</code> » definida por el propio usuario en el campo «Condición» de la política de confianza del rol.</p></li>
 </ul>
-<p>A continuación, el propietario del bucket deberá proporcionarte el ARN del rol de IAM y el ID externo para que puedas llamar a <code translate="no">sts:AssumeRole</code> con esos valores y asumir el rol de IAM.</p>
+<p>A continuación, el propietario del bucket deberá facilitarte el ARN del rol de IAM y el ID externo para que puedas llamar a <code translate="no">sts:AssumeRole</code> con esos valores y asumir el rol de IAM.</p>
 <p>A continuación se muestra un ejemplo de política de permisos que debe adjuntarse al rol de IAM con los permisos permitidos. Puede adaptarla a sus necesidades.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
@@ -426,7 +441,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.external_id</code></p></td>
-     <td><p>ID externo obtenido del propietario del bucket.</p></td>
+     <td><p>ID externo obtenido del propietario del depósito.</p></td>
      <td><p>--</p></td>
    </tr>
    <tr>
@@ -858,6 +873,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez que haya actualizado la colección externa, puede cargarla y liberarla, así como realizar búsquedas de similitud y consultas en la colección externa tal y como lo haría en cualquier colección gestionada, salvo que las colecciones de una base de datos para computación bajo demanda deben estar asociadas a un clúster bajo demanda para poder realizar búsquedas y consultas.</p>
-<p>Antes de realizar operaciones DQL, como búsquedas, consultas, operaciones «get» y búsquedas híbridas, debe crear una sesión para asociar los recursos de computación de un clúster bajo demanda.</p>
+    </button></h2><p>Una vez que hayas actualizado la colección externa, puedes cargarla y liberarla, así como realizar búsquedas de similitud y consultas en la colección externa tal y como lo harías en cualquier colección gestionada, salvo que las colecciones de una base de datos para computación bajo demanda deben estar asociadas a un clúster bajo demanda para poder realizar búsquedas y consultas.</p>
+<p>Antes de realizar operaciones DQL, como búsquedas, consultas, recuperaciones y búsquedas híbridas, debe crear una sesión para asociar los recursos de computación de un clúster bajo demanda.</p>
 <p>Si posteriormente la fuente de datos externa contiene otro campo que desee exponer en Milvus, añada un campo al esquema de la colección externa y actualice de nuevo la colección externa. Para obtener más información, consulte <a href="/docs/es/alter-external-collection-schema.md">«Modificar el esquema de una colección externa</a>».</p>

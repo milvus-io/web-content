@@ -74,10 +74,10 @@ title: Docker Compose를 사용하여 GPU를 지원하는 Milvus 실행하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 파일을 다운로드하여 수동으로 또는 다음 명령어를 사용하여 docker-compose.yml로 저장하십시오.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose-gpu.yaml"><code translate="no">milvus-standalone-docker-compose-gpu.yaml</code></a> 파일을 다운로드하여 수동으로 또는 다음 명령어를 사용하여 docker-compose.yml로 저장하십시오.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose-gpu.yaml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>YAML 파일 내의 독립형 서비스 환경 변수를 다음과 같이 약간 수정해야 합니다.</p>
+<p>YAML 파일 내의 독립형 서비스 환경 변수를 다음과 같이 약간 수정해야 합니다:</p>
 <ul>
 <li>Milvus에 특정 GPU 장치를 할당하려면, ` <code translate="no">standalone</code> ` 서비스 정의에서 ` <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 필드를 찾아 해당 값을 원하는 GPU의 ID로 변경하십시오. NVIDIA GPU 디스플레이 드라이버에 포함된 ` <code translate="no">nvidia-smi</code> ` 도구를 사용하여 GPU 장치의 ID를 확인할 수 있습니다. Milvus는 여러 GPU 장치를 지원합니다.</li>
 </ul>
@@ -94,7 +94,7 @@ title: Docker Compose를 사용하여 GPU를 지원하는 Milvus 실행하기
             <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&quot;0&quot;</span>]
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus에 여러 GPU 장치를 할당하려면:</p>
+<p>Milvus에 여러 GPU 장치 할당:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-string">...</span>
@@ -138,10 +138,10 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-etcd</strong> 컨테이너는 호스트에 포트를 노출하지 않으며, 데이터를 현재 폴더의 <strong>volumes/etcd에</strong> 매핑합니다.</li>
 <li><strong>milvus-minio</strong> 컨테이너는 기본 인증 자격 증명을 사용하여 로컬에서 <strong>9090</strong> 및 <strong>9091</strong> 포트를 제공하며, 데이터를 현재 폴더의 <strong>volumes/minio에</strong> 매핑합니다.</li>
-<li><strong>milvus-standalone</strong> 컨테이너는 기본 설정으로 로컬에서 <strong>19530번</strong> 포트를 제공하며, 데이터를 현재 폴더의 <strong>volumes/milvus에</strong> 매핑합니다.</li>
+<li><strong>milvus-standalone</strong> 컨테이너는 기본 설정으로 로컬에서 <strong>19530</strong> 포트를 제공하며, 데이터를 현재 폴더의 <strong>volumes/milvus에</strong> 매핑합니다.</li>
 </ul></li>
 </ul>
-<p>다음 명령어를 사용하여 컨테이너가 정상적으로 실행 중인지 확인할 수 있습니다.</p>
+<p>다음 명령어를 사용하여 컨테이너가 정상적으로 실행 중인지 확인할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -151,7 +151,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>또한 <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 Milvus WebUI에 접속하여 Milvus 인스턴스에 대한 자세한 정보를 확인할 수 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
-<p>docker-compose.yml에서 Milvus에 여러 개의 GPU 장치를 할당한 경우, 어떤 GPU 장치를 표시하거나 사용할 수 있도록 할지 지정할 수 있습니다.</p>
+<p>docker-compose.yml에서 Milvus에 여러 개의 GPU 장치를 할당했다면, 어떤 GPU 장치를 표시하거나 사용할 수 있도록 할지 지정할 수 있습니다.</p>
 <p>Milvus에서 GPU 장치 <code translate="no">0</code> 를 표시하도록 설정:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -182,11 +182,11 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Milvus가 실행된 후, ` <code translate="no">milvus.yaml</code> ` 파일에서 ` <code translate="no">initMemSize</code> ` 및 ` <code translate="no">maxMemSize</code> ` 설정을 수정하여 메모리 풀을 사용자 정의할 수 있습니다.</p>
 <div class="alert note">
-<p><code translate="no">milvus.yaml</code> 파일은 Milvus 컨테이너 내부의 <code translate="no">/milvus/configs/</code> 디렉터리에 있습니다.</p>
+<p><code translate="no">milvus.yaml</code> 파일은 Milvus 컨테이너 내의 <code translate="no">/milvus/configs/</code> 디렉터리에 있습니다.</p>
 </div>
 <p>메모리 풀을 구성하려면 <code translate="no">milvus.yaml</code> 파일 내의 <code translate="no">initMemSize</code> 및 <code translate="no">maxMemSize</code> 설정을 다음과 같이 수정하십시오.</p>
 <ol>
-<li><p>다음 명령어를 사용하여 Milvus 컨테이너의 <code translate="no">milvus.yaml</code> 파일을 로컬 컴퓨터로 복사하십시오. <code translate="no">&lt;milvus_container_id&gt;</code> 부분은 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
+<li><p>다음 명령어를 사용하여 Milvus 컨테이너의 <code translate="no">milvus.yaml</code> 파일을 로컬 컴퓨터로 복사하십시오. <code translate="no">&lt;milvus_container_id&gt;</code> 는 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>복사한 <code translate="no">milvus.yaml</code> 파일을 선호하는 텍스트 편집기로 엽니다. 예를 들어, vim을 사용하는 경우:</p>
@@ -203,7 +203,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><code translate="no">initMemSize</code>: 메모리 풀의 초기 크기입니다. 기본값은 1024입니다.</li>
 <li><code translate="no">maxMemSize</code>: 메모리 풀의 최대 크기입니다. 기본값은 2048입니다.</li>
 </ul></li>
-<li><p>다음 명령어를 사용하여 수정된 ` <code translate="no">milvus.yaml</code> ` 파일을 Milvus 컨테이너로 다시 복사하십시오. ` <code translate="no">&lt;milvus_container_id&gt;</code> `을 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
+<li><p>다음 명령어를 사용하여 수정된 <code translate="no">milvus.yaml</code> 파일을 Milvus 컨테이너로 다시 복사하십시오. <code translate="no">&lt;milvus_container_id&gt;</code> 을 실제 Milvus 컨테이너 ID로 대체하십시오.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>변경 사항을 적용하려면 Milvus 컨테이너를 다시 시작하십시오:</p>
@@ -212,7 +212,7 @@ docker start &lt;milvus_container_id&gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <div class="alert note">
-<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 활성화하십시오. 요구 사항 및 호환성 고려 사항에 대해서는 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
+<p>Storage V3는 기본적으로 비활성화되어 있습니다. Storage V3에 의존하는 기능을 사용하기 전에 이를 활성화하십시오. 요구 사항 및 호환성 관련 사항은 <a href="/docs/ko/storage-v3.md">Storage V3를</a> 참조하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,8 +242,8 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a></p></li>
+<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
+<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/eks.md">Amazon EKS</a></li>

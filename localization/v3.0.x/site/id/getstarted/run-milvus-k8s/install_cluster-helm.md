@@ -36,7 +36,7 @@ title: Menginstal Milvus Cluster dengan Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm menggunakan format pengemasan yang disebut chart. Chart adalah kumpulan berkas yang mendeskripsikan sekumpulan sumber daya Kubernetes yang saling terkait. Milvus menyediakan serangkaian chart untuk membantu Anda menerapkan dependensi dan komponen Milvus.</p>
+    </button></h2><p>Helm menggunakan format pengemasan yang disebut chart. Chart adalah kumpulan berkas yang mendeskripsikan sekumpulan sumber daya Kubernetes yang saling terkait. Milvus menyediakan serangkaian chart untuk membantu Anda melakukan deployment terhadap dependensi dan komponen Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Persyaratan<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,10 +124,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
       </svg>
     </button></h3><p>Setelah Anda menginstal chart Helm, Anda dapat menjalankan Milvus di Kubernetes. Bagian ini memandu Anda dalam menyebarkan kluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
-<p><strong>Perlu penyebaran mandiri?</strong></p>
+<p><strong>Butuh penyebaran mandiri?</strong></p>
 <p>Jika Anda lebih memilih untuk menyebarkan Milvus dalam mode mandiri (satu node) untuk pengembangan atau pengujian, gunakan perintah ini:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -140,9 +140,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p>Untuk mode layanan Woodpecker, kami merekomendasikan penggunaan Milvus 3.0.3 atau yang lebih baru dengan Woodpecker v0.1.46 atau yang lebih baru.</p>
 </div>
-<p>Perintah berikut ini menerapkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v3.0.2, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
+<p>Perintah berikut ini menerapkan kluster Milvus dengan pengaturan yang dioptimalkan untuk v3.0.3, menggunakan Woodpecker sebagai antrian pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -152,7 +152,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Fungsi perintah ini:</strong></p>
 <ul>
 <li>Menggunakan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk mengurangi beban pemeliharaan)</li>
-<li>Menjalankan <strong>Woodpecker sebagai layanan khusus</strong> (StatefulSet terpisah), bukan tertanam dalam node streaming</li>
+<li>Menjalankan <strong>Woodpecker sebagai layanan khusus</strong> (StatefulSet terpisah), bukan tertanam di dalam node streaming</li>
 <li>Mengaktifkan komponen <strong>Streaming Node</strong> baru untuk meningkatkan kinerja</li>
 <li>Menonaktifkan <strong>Index Node</strong> versi lama (fungsionalitasnya kini ditangani oleh Data Node)</li>
 </ul>
@@ -194,10 +194,10 @@ Perintah di atas menerapkan Milvus dengan konfigurasi yang direkomendasikan. Unt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pastikan deployment Anda berhasil dengan memeriksa status pod:</p>
+    </button></h3><p>Pastikan penyebaran Anda berhasil dengan memeriksa status pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Tunggu hingga semua pod menampilkan status “Running”.</strong> Dengan konfigurasi v3.0.2, Anda seharusnya melihat pod yang mirip dengan:</p>
+<p><strong>Tunggu hingga semua pod menampilkan status “Running”.</strong> Dengan konfigurasi v3.0.3, Anda seharusnya melihat pod yang mirip dengan:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -380,7 +380,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. Unduh dan simpan gambar<button data-href="#3-Pull-and-save-images" class="anchor-icon" translate="no">
+<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. Mengunduh dan menyimpan gambar<button data-href="#3-Pull-and-save-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -395,7 +395,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jalankan perintah berikut untuk mengambil dan menyimpan gambar yang diperlukan.</p>
+    </button></h3><p>Jalankan perintah berikut untuk mengunduh dan menyimpan gambar yang diperlukan.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -473,7 +473,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h2><p>Jalankan perintah berikut untuk menghapus instalasi Milvus.</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Optional-dependencies" class="common-anchor-header">Dependensi opsional<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
+<h2 id="Optional-dependencies" class="common-anchor-header">Ketergantungan opsional<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -520,7 +520,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/manage-partitions.md">Mengelola partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
+<li><a href="/docs/id/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>

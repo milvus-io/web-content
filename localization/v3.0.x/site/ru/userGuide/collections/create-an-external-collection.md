@@ -48,17 +48,17 @@ beta: Milvus 3.0.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
-   <span>Рабочий процесс «Перенос данных для обработки</span> </span>» <span class="img-wrapper">
+   <span>Рабочий процесс «Перенос данных для</span> </span>обработки» <span class="img-wrapper">
   
  </span></p>
 <p>Для решения этих проблем Milvus предоставляет внешние коллекции, которые позволяют получать доступ к данным, хранящимся во внешних системах, прямо из Milvus, не беспокоясь о синхронизации данных и конвейерах ETL.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-compute-to-data.png" alt="Bring compute to data workflow" class="doc-image" id="bring-compute-to-data-workflow" /> 
-   <span>Рабочий процесс «Перенос вычислений к данным</span> </span>» <span class="img-wrapper">
+   <span>Рабочий процесс «перенос вычислений к данным»</span>
   
  </span></p>
-<p>После создания внешняя коллекция может получать прямой доступ к вашим данным и хранить их в том же месте, где вы их храните. В фоновом режиме Milvus создает манифест-файлы для записи сопоставлений между метаданными Milvus и строками во внешних файлах данных. После того как манифест-файлы будут готовы, вы сможете создавать индексы во внешней коллекции так же, как и в любой управляемой коллекции.</p>
+<p>После создания внешняя коллекция может напрямую обращаться к вашим данным и хранить их в том же месте, где вы их храните. В фоновом режиме Milvus создает манифест-файлы для записи сопоставлений между метаданными Milvus и строками во внешних файлах данных. После того как манифест-файлы будут готовы, вы сможете создавать индексы во внешней коллекции так же, как и в любой управляемой коллекции.</p>
 <p>При изменении данных ручной запуск обновления, занимающий менее секунды, обновляет метаданные, благодаря чему Milvus всегда остается актуальным.</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">Шаг 1: Создание схемы<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,23 +150,38 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Формат целевых файлов исходных данных.</p></td>
+     <td><p>Формат исходных данных. Для файлов Parquet используйте <code translate="no">parquet</code>, а для таблицы Iceberg — <code translate="no">iceberg-table</code>. Для Iceberg параметр <code translate="no">external_source</code> должен указывать на файл метаданных таблицы в формате JSON.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Допустимый идентификатор моментальной копии таблицы Iceberg. Этот параметр применяется только в том случае, если для параметра « <code translate="no">format</code> » установлено значение « <code translate="no">iceberg_table</code> ».</p></td>
+     <td><p>Допустимый идентификатор моментального снимка из метаданных таблицы Iceberg. Этот параметр применяется только в том случае, если для параметра <code translate="no">format</code> установлено значение <code translate="no">iceberg-table</code>.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">extfs</code></p></td>
-     <td><p>Настройки внешней файловой системы в виде JSON-строки.</p></td>
+     <td><p>Настройки внешней файловой системы в виде JSON-структуры, преобразованной в строку.</p></td>
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>Для таблицы Iceberg в AWS S3 при указанном ниже значении параметра ` <code translate="no">external_spec</code> ` используется аутентификация IAM. Развертывание Milvus должно уже иметь доступ к файлу метаданных в формате JSON, а также к файлам манифеста и данных, на которые он ссылается.</p>
+<p>Укажите в параметре <code translate="no">external_source</code> путь к вашему файлу метаданных, например <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code>. Замените <code translate="no">snapshot_id</code> на существующий идентификатор моментального снимка из этого файла и настройте <code translate="no">extfs</code> в соответствии с вашей средой хранения.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Информацию о поддерживаемых поставщиках хранилищ и ограничениях Iceberg см. в разделе <a href="/docs/ru/storage-v3.md">«Хранилище V3</a>».</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
 <p>Для настройки параметров аутентификации доступны следующие варианты:</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">Использовать AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">Использование AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +196,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Этот вариант применим к MinIO, развернутому на собственном хостинге, или к сценарию, в котором у вас есть AK/SK для работы.</p>
+    </button></h3><p>Этот вариант подходит для самостоятельно развернутого MinIO или для сценария, в котором у вас есть AK/SK для работы.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -328,13 +343,13 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Этот вариант применим, если ваша организация использует разные учетные записи AWS для управления кластером Milvus и бакетом, в котором хранятся целевые файлы данных.</p>
+    </button></h3><p>Этот вариант применим, если ваша организация использует разные учетные записи AWS для управления кластером Milvus и корзиной, в которой хранятся целевые файлы данных.</p>
 <p>В этом случае владелец корзины должен создать роль IAM, которая</p>
 <ul>
-<li><p>привязывает политику <code translate="no">AmazonS3FullAccess</code> или более детализированную политику доступа к бакету.</p></li>
+<li><p>привязывает политику <code translate="no">AmazonS3FullAccess</code> или более детализированную политику доступа к корзине.</p></li>
 <li><p>включает самостоятельно определенную политику « <code translate="no">sts:ExternalId</code> » в поле «Condition» политики доверия роли.</p></li>
 </ul>
-<p>Затем владелец бакета должен предоставить вам ARN роли IAM и внешний идентификатор (External ID), чтобы вы могли вызвать функцию ` <code translate="no">sts:AssumeRole</code> ` с этими значениями для принятия роли IAM.</p>
+<p>Затем владелец корзины должен предоставить вам ARN роли IAM и внешний идентификатор (External ID), чтобы вы могли вызвать функцию ` <code translate="no">sts:AssumeRole</code> ` с этими значениями для принятия роли IAM.</p>
 <p>Ниже приведен пример политики разрешений, которую необходимо привязать к роли IAM с разрешенными правами. Вы можете настроить её в соответствии со своими требованиями.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
@@ -359,7 +374,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Политика доверия, связанная с ролью IAM, определяет, кому разрешено принять эту роль.</p>
+<p>Политика доверия, связанная с ролью IAM, определяет, кому разрешено принимать эту роль.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -451,7 +466,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После подготовки схемы можно добавить поля следующим образом:</p>
+    </button></h2><p>Как только схема будет готова, вы сможете добавить поля следующим образом:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -834,13 +849,13 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Операция обновления выполняется асинхронно, поэтому необходимо настроить цикл для отслеживания ее хода.</p>
+<p>Операция обновления выполняется асинхронно, поэтому необходимо настроить цикл для отслеживания её хода.</p>
 <div class="alert note">
 <ul>
 <li><p>Операция обновления сканирует метаданные файлов данных и генерирует соответствующие манифест-файлы. Обычно это занимает 150–250 мс.</p></li>
 <li><p>Файлы манифеста фиксируют сопоставление между метаданными в Milvus и строками во внешних файлах.</p></li>
 <li><p>Если в исходных данных произошли изменения, необходимо вручную повторно вызвать обновление, чтобы Milvus оставался актуальным.</p></li>
-<li><p>Операция обновления, требующая удаления всех активных метаданных без вставки новых, приводит к отказу.</p></li>
+<li><p>Операция обновления, требующая удаления всех активных метаданных без добавления новых, приводит к отказу.</p></li>
 </ul>
 </div>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -858,6 +873,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После обновления внешней коллекции вы можете загрузить и освободить коллекцию, а также выполнять поиск по схожести и запросы во внешней коллекции так же, как и в любой управляемой коллекции, за исключением того, что коллекции в базе данных для вычислений по требованию должны быть присоединены к кластеру по требованию для выполнения поиска и запросов.</p>
-<p>Перед выполнением операций DQL, таких как поиск, запрос, получение данных и гибридный поиск, необходимо создать сессию для присоединения вычислительных ресурсов кластера по требованию.</p>
+    </button></h2><p>После обновления внешней коллекции вы можете загрузить и освободить коллекцию, а также выполнять поиск по схожести и запрашивать данные во внешней коллекции так же, как и в любой управляемой коллекции, за исключением того, что коллекции в базе данных для вычислений по требованию должны быть присоединены к кластеру по требованию для выполнения поиска и запросов.</p>
+<p>Перед выполнением операций DQL, таких как поиск, запрос, получение и гибридный поиск, необходимо создать сессию для присоединения вычислительных ресурсов кластера по требованию.</p>
 <p>Если впоследствии внешний источник данных будет содержать другое поле, которое вы хотите сделать доступным в Milvus, добавьте поле в схему внешней коллекции и снова обновите внешнюю коллекцию. Подробности см. в разделе <a href="/docs/ru/alter-external-collection-schema.md">«Изменение схемы внешней коллекции</a>».</p>

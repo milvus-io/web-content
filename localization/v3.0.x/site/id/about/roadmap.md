@@ -3,9 +3,8 @@ id: roadmap.md
 title: Peta Jalan Milvus
 related_key: Milvus roadmap
 summary: >-
-  Milvus adalah basis data vektor sumber terbuka yang dirancang untuk mendukung
-  aplikasi kecerdasan buatan. Berikut adalah peta jalan kami yang akan menjadi
-  panduan dalam proses pengembangan.
+  Pelajari peta jalan Milvus terkait pencarian, analitik, evolusi skema,
+  integrasi data lake, dan kinerja pada rilis 3.0 dan 3.1.
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Peta Jalan Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="common-anchor-header">🌌 Menuju Basis Data Multimodal Generasi Berikutnya dan Vector Lakebase<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 3.0 menggabungkan pencarian multi-vektor, kueri bergaya SQL, skema yang fleksibel, dan akses ke data di penyimpanan data lake. Tahap-tahap berikutnya akan dikembangkan berdasarkan fondasi tersebut dengan kueri yang lebih kaya, model data yang lebih luas, serta peningkatan kinerja dan skalabilitas. Peta jalan ini menguraikan prioritas-prioritas tersebut untuk Milvus open-source.</p>
+<p>Milvus 3.0 telah tersedia secara umum mulai dari <strong>versi v3.0.1</strong>. Fitur-fitur yang telah dirilis di bawah ini diperkenalkan pada <strong>v3.0.0</strong>; fitur pratinjau dan fitur yang dapat diaktifkan secara opsional ditandai pada bagian yang bersangkutan. Seri <strong>3.0.x</strong> memperluas kemampuan ini, sedangkan versi <strong>3.1 ditargetkan rilis pada Desember 2026</strong>. Fitur yang direncanakan dan tanggal target dapat berubah seiring berjalannya proses pengembangan.</p>
+<h2 id="Search-and-retrieval" class="common-anchor-header">Pencarian dan pengambilan<button data-href="#Search-and-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,138 +38,156 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Peta Jalan Produk Milvus</strong></p>
-<p>Selamat datang di Peta Jalan Milvus!</p>
-<p>Kami membawa Milvus ke era baru — basis data multimodal generasi berikutnya — <strong>yang mencakup data terstruktur hingga tidak terstruktur, mulai dari pengambilan data secara real-time hingga analisis offline, serta kinerja satu kluster hingga</strong> <strong>arsitektur Vector Lakebase</strong> <strong>global</strong> <strong>.</strong></p>
-<p>Peta jalan ini menguraikan tujuan inti untuk <strong>Milvus v3.0</strong> dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, beserta rencana evolusi untuk <strong>Zilliz Vector Lakebase</strong>.</p>
-<h2 id="🌠-Milvus-v30" class="common-anchor-header">🌠 Milvus v3.0<button data-href="#🌠-Milvus-v30" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Fokus: Membangun <strong>mesin kueri semantik-native</strong> dengan penyortiran, agregasi, dan pengambilan multi-vektor di dalam mesin, serta <strong>fondasi lake-native dari Zilliz Vector Lakebase</strong> sehingga komputasi dapat menjangkau data tanpa migrasi.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Sorotan Utama<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Schema--Data-Type-Evolution" class="common-anchor-header">🔹 <strong>Evolusi Skema &amp; Tipe Data</strong></h4><ul>
-<li>Mendukung ALTER COLLECTION ADD COLUMN dan DROP COLUMN saat runtime tanpa perlu membangun ulang indeks atau mengganggu layanan.</li>
-<li>Menyediakan <strong>dua jalur pengisian ulang</strong> untuk kolom baru: eksternal melalui Spark Connector, dan internal dengan vektor sparse BM25 yang dihasilkan secara otomatis pada saat penulisan.</li>
-<li>Memperkenalkan <strong>TEXT</strong> sebagai tipe data kelas satu yang menyimpan teks asli bersama vektor dengan dukungan BM25 dan pencocokan teks.</li>
-</ul>
-<h4 id="🔹-Query-Execution-Overhaul" class="common-anchor-header">🔹 <strong>Perombakan Eksekusi</strong> <strong>Kueri</strong> </h4><ul>
-<li>Memasukkan <strong>Order By</strong> ke dalam mesin dengan penyortiran per-segmen dan penyortiran gabungan di seluruh node kueri.</li>
-<li>Menambahkan <strong>agregasi</strong> <strong>kueri</strong> bergaya SQL (GROUP BY dengan COUNT, SUM, AVG, MIN, MAX) yang dihitung di kernel.</li>
-<li>Perkenalkan <strong>facet pencarian</strong> pada hasil ANN dengan statistik per-bucket dan sub-facet bersarang di sisi server.</li>
-<li>Mendukung <strong>kamus khusus</strong> dan tabel sinonim yang terdaftar di sisi klaster untuk meningkatkan recall CJK dan domain-spesifik.</li>
-</ul>
-<h4 id="🔹-Multi-Vector--Late-Interaction-Support" class="common-anchor-header">🔹 <strong>Dukungan Multi-Vektor &amp; Interaksi Terlambat</strong></h4><ul>
-<li>Perkenalkan <strong>StructList</strong> untuk merepresentasikan satu entitas sebagai satu baris dengan banyak vektor, dengan dukungan interaksi terlambat bawaan (ColBERT, ColPali) melalui MAX_SIM.</li>
-<li>Mendukung <strong>pencarian tingkat elemen dan tingkat entitas</strong> pada bidang StructList, dengan kebijakan pencocokan yang dapat dikonfigurasi untuk hasil tingkat entitas.</li>
-<li>Menambahkan tiga <strong>strategi pengambilan multi-vektor</strong>: TokenANN (menyeluruh), Muvera (berbasis proyeksi, tanpa pelatihan), dan Lemur (kompresi yang dipelajari).</li>
-</ul>
-<h4 id="🔹-Retrieval--Index-Overhaul" class="common-anchor-header">🔹 <strong>Perombakan Pencarian &amp; Indeks</strong></h4><ul>
-<li>Perbaikan <strong>indeks terbalik spars</strong> dengan kompresi blok, kuantisasi bobot, dan format yang disimpan; memperkenalkan <strong>SINDI</strong> sebagai algoritma IP spars default.</li>
-<li>Memperluas cakupan indeks dengan seluruh <strong>keluarga Faiss</strong> (SVS, Panorama, PQ, IVFPQ, ScaNN) dan <strong>MinHash DIDO</strong> untuk deteksi duplikat yang hampir sama.</li>
-<li>Mendukung <strong>bidang vektor yang dapat bernilai nol</strong> untuk embedding asinkron dan modalitas yang hilang, dengan penyaringan otomatis pada saat pencarian.</li>
-</ul>
-<h4 id="🔹-Vector-Lakebase-Storage--Compute-Architecture" class="common-anchor-header">🔹 <strong>Arsitektur Penyimpanan &amp; Komputasi Vector Lakebase</strong></h4><ul>
-<li>Memperkenalkan <strong>Koleksi Eksternal</strong> untuk mengindeks dan menanyakan data di S3 / GCS / Azure di tempat, dengan dukungan untuk format tabel Lance, Parquet, Iceberg, dan Vortex.</li>
-<li>Menambahkan <strong>Vortex</strong>, format kolom terbuka, dan <strong>Loon (Storage V3)</strong>, lapisan penyimpanan format campuran untuk pembacaan titik yang efisien dari penyimpanan objek.</li>
-<li>Mendukung <strong>snapshot pada titik waktu tertentu</strong> dengan isolasi bergaya MVCC untuk pemrosesan batch sementara layanan tetap menulis.</li>
-<li>Integrasikan sebagai <strong>Spark DataSource v2</strong> untuk membaca dari dan menulis ke Milvus secara langsung dalam pipa Spark / Databricks / EMR.</li>
-</ul>
-<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1 (Visi Jangka Panjang)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><strong>Jadwal: Akhir 2026 dan seterusnya</strong></p>
-<p>Fokus: <strong>Kecerdasan penyimpanan</strong>, <strong>integritas jalur penulisan</strong>, <strong>skalabilitas komputasi</strong>, dan <strong>interoperabilitas</strong> <strong>Vector Lakebase</strong> <strong>yang diperluas</strong>.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Sorotan Utama<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Storage--Write-Path" class="common-anchor-header">🔹 <strong>Penyimpanan &amp; Jalur Penulisan</strong></h4><ul>
-<li>Menambahkan <strong>predikat pushdown</strong> dengan pemangkasan indeks halaman dan bloom-filter di lapisan penyimpanan.</li>
-<li>Menerapkan <strong>deduplikasi kunci utama</strong> pada saat pengambilan data untuk mencegah duplikat saat penulisan.</li>
-</ul>
-<h4 id="🔹-Compute--Elasticity" class="common-anchor-header">🔹 <strong>Komputasi &amp; Elastisitas</strong></h4><ul>
-<li>Mendukung <strong>Fungsi yang Didefinisikan Pengguna (UDF)</strong> untuk menjalankan logika khusus di dalam mesin, pada data plane.</li>
-<li>Aktifkan <strong>pemisahan shard</strong> untuk membagi ulang shard seiring pertumbuhan data, dengan dukungan kunci sharding kustom.</li>
-</ul>
-<h4 id="🔹-Spark--Vector-Lakebase-Expansion" class="common-anchor-header">🔹 <strong>Perluasan</strong> <strong>Spark &amp;</strong> <strong>Vector Lakebase</strong> </h4><ul>
-<li>Perluas konektor Spark dengan pustaka <strong>operator batch asli</strong> yang lebih lengkap.</li>
-<li>Menambahkan kemampuan <strong>format tabel</strong> termasuk time-travel, evolusi skema, dan rollback snapshot.</li>
-<li>Memperluas interoperabilitas Vector Lakebase dengan <strong>indeks eksternal CDC-fresh</strong>, dukungan Apache Paimon, dan format data tambahan.</li>
-</ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Bersama-sama Membangun Masa Depan Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus adalah proyek sumber terbuka yang digerakkan oleh komunitas pengembang global. Kami mengundang seluruh anggota komunitas untuk turut membentuk basis data multimodal generasi berikutnya:</p>
+    </button></h2><p>Peta jalan pengambilan berfokus pada penggabungan lebih banyak sinyal relevansi di dalam Milvus, mulai dari pencocokan teks dan representasi multi-vektor hingga penataan ulang peringkat dan aspek hasil pencarian.</p>
+<p><strong>Tersedia di versi 3.0</strong></p>
 <ul>
-<li><p>💬 <strong>Berikan masukan</strong>: Usulkan fitur baru atau ide optimasi di <a href="https://github.com/milvus-io/milvus/discussions">GitHub Discussions</a>.</p></li>
-<li><p>🐛 <strong>Laporkan masalah</strong>: Laporkan bug melalui <a href="https://github.com/milvus-io/milvus/issues">GitHub Issues</a>.</p></li>
-<li><p>🔧 <strong>Berkontribusi dengan kode</strong>: Kirimkan PR dan bantu membangun fitur inti.</p>
-<ul>
-<li><strong>Pull request</strong>: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik Anda memperbaiki bug, menambahkan fitur, atau menyempurnakan dokumentasi, kontribusi Anda sangat kami hargai.</li>
-<li><strong>Panduan pengembangan</strong>: Lihat <a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">Panduan Kontributor</a> kami untuk panduan mengenai kontribusi kode.</li>
-</ul></li>
-<li><p>🗣️ <strong>Bergabunglah dalam percakapan</strong>: Ajukan pertanyaan dan temui pengelola di <a href="https://milvus.io/discord">Discord</a>, di <a href="https://meetings.hubspot.com/chloe-williams1/milvus-meeting">Milvus Office Hours</a>, atau di <a href="https://milvus.io/community">seluruh saluran komunitas</a>.</p></li>
-<li><p>⭐ <strong>Sebarkan kabar ini</strong>: Bagikan praktik terbaik dan kisah sukses, serta ikuti Milvus di <a href="https://twitter.com/milvusio">X</a>, <a href="https://www.linkedin.com/company/the-milvus-project/">LinkedIn</a>, dan <a href="https://www.youtube.com/c/MilvusVectorDatabase">YouTube</a>.</p></li>
+<li><strong>Pencarian multi-vektor:</strong> Pencarian StructArray mendukung Muvera dan Lemur, dengan " <code translate="no">element_filter</code> " untuk penyaringan tingkat elemen. Kebijakan pencocokan meliputi " <code translate="no">MATCH_ANY</code>", " <code translate="no">MATCH_ALL</code>", " <code translate="no">MATCH_LEAST</code>", " <code translate="no">MATCH_MOST</code>", dan " <code translate="no">MATCH_EXACT</code>".</li>
+<li><strong>Pencocokan dan kesamaan teks:</strong> Kamus khusus dan sinonim menyesuaikan pencarian teks dengan kebutuhan aplikasi. Penyaringan Regex mendukung pencocokan pola, dan MinHash mendukung deteksi duplikat yang hampir sama.</li>
+<li><strong>Penilaian ulang dan inferensi:</strong> Milvus 3.0 memperkenalkan serangkaian kemampuan penilaian ulang Function Chain awal, bersama dengan Hugging Face Inference Provider. Kemampuan Function Chain lainnya direncanakan untuk versi 3.0.x.</li>
+<li><strong>Agregasi pencarian:</strong> Agregasi pencarian menyediakan facet pada hasil pencarian.</li>
 </ul>
-<p>👉 <strong>GitHub:</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>
+<p><strong>Direncanakan untuk versi 3.0.x</strong></p>
+<p>Seri 3.0.x direncanakan untuk menambahkan pencocokan kabur dan statistik global, serta dukungan Function Chain yang lengkap.</p>
+<p><strong>Direncanakan untuk versi 3.1</strong></p>
+<p>Rencana tersebut mencakup pencarian berbasis Grep, integrasi yang lebih erat antara pencarian tetangga terdekat (ANN) dan penyaringan melalui fusi ANN-filter, serta peningkatan pada pencarian spars.</p>
+<h2 id="Analytics-and-SQL-style-querying" class="common-anchor-header">Analitik dan kueri bergaya SQL<button data-href="#Analytics-and-SQL-style-querying" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus sedang memperluas mesin kuerinya sehingga aplikasi dapat mengurutkan dan mengagregasi data bersamaan dengan proses pencarian. Tahap berikutnya akan menambahkan join, tampilan termaterialisasi, dan komputasi khusus.</p>
+<p><strong>Tersedia di versi 3.0</strong></p>
+<p>Kueri dan pencarian mendukung penyortiran dengan <code translate="no">ORDER BY</code>. Aggregasi Kueri menambahkan <code translate="no">GROUP BY</code> untuk menghitung statistik berkelompok.</p>
+<p><strong>Direncanakan untuk versi 3.1</strong></p>
+<ul>
+<li><strong>Kueri yang lebih kaya:</strong> Memperkenalkan join, dimulai dengan semi-join, dan Koleksi Tampilan Materialized.</li>
+<li><strong>Pembaruan data dan integritas:</strong> Mendukung pembaruan di tempat (in-place updates) dan deduplikasi kunci utama selama proses pengambilan data.</li>
+<li><strong>Iterasi kueri dan semantik JSON:</strong> Menambahkan iterator kueri berstatus, JSON <code translate="no">GROUP BY</code>, serta semantik NULL SQL / JSON.</li>
+<li><strong>Komputasi khusus:</strong> Mendukung fungsi yang ditentukan pengguna (UDF) Python.</li>
+</ul>
+<h2 id="Flexible-schema-and-data-types" class="common-anchor-header">Skema dan tipe data yang fleksibel<button data-href="#Flexible-schema-and-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Pekerjaan skema berfokus pada pengembangan koleksi yang ada dan merepresentasikan rentang data yang lebih luas. Hal ini mencakup perubahan bidang, struktur multi-vektor, teks panjang, dan kedaluwarsa entitas.</p>
+<p><strong>Tersedia di versi 3.0</strong></p>
+<ul>
+<li><strong>Perubahan skema online:</strong> Koleksi yang ada mendukung penambahan bidang secara online, termasuk bidang vektor dan <code translate="no">Array&lt;Struct&gt;</code>. Penghapusan bidang tersedia dalam <strong>versi pratinjau</strong> dan mungkin memiliki batasan.</li>
+<li><strong>Pengisian ulang (backfill) untuk data yang sudah ada:</strong> Pengisian ulang eksternal menggunakan Spark Connector. Pengisian ulang internal melampirkan fungsi BM25 atau MinHash ke suatu koleksi dan menghitung hasilnya berdasarkan data yang sudah ada.</li>
+<li><strong>Data teks dan multi-vektor:</strong> Tipe ` <code translate="no">TEXT</code> ` menyimpan teks panjang, sedangkan `StructArray` mendukung pengambilan data interaksi terlambat melalui ` <code translate="no">MAX_SIM</code>`. ` <code translate="no">TEXT</code> ` memerlukan aktivasi Storage V3.</li>
+<li><strong>Nilai NULL dan masa berlaku:</strong> Bidang vektor menerima nilai NULL, dan masa berlaku (TTL) tingkat entitas mengontrol masa berlakunya.</li>
+</ul>
+<p><strong>Direncanakan untuk 3.0.x</strong></p>
+<p>Peningkatan skema yang direncanakan memperluas dukungan StructArray untuk tipe, nilai NULL, serta penambahan dan penghapusan bidang. Peningkatan ini juga menambahkan dukungan rumus molekul serta filter " <code translate="no">IS NULL</code> " dan " <code translate="no">IS NOT NULL</code> " untuk bidang vektor.</p>
+<p><strong>Direncanakan untuk versi 3.1</strong></p>
+<p>Perluasan model data berikutnya mencakup JSON dan Struct bersarang, kunci utama gabungan, koleksi tanpa bidang vektor, serta vektor jarang dalam StructList.</p>
+<h2 id="Lake-integration-and-data-versioning" class="common-anchor-header">Integrasi Lake dan versi data<button data-href="#Lake-integration-and-data-versioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus sedang mengembangkan integrasi yang lebih erat dengan penyimpanan lake dan pemrosesan batch. Koleksi eksternal menyediakan akses ke data di tempat asalnya, sementara snapshot menjadi dasar untuk versi data.</p>
+<p><strong>Tersedia di versi 3.0</strong></p>
+<ul>
+<li><strong>Akses data eksternal:</strong> Koleksi Eksternal mendukung data Lance, Parquet, dan Iceberg.</li>
+<li><strong>Snapshot dan integrasi batch:</strong> Snapshot menangkap versi data koleksi, dan Spark Connector mendukung alur kerja batch.</li>
+<li><strong>Fondasi penyimpanan:</strong> Storage V3 (Loon) menyediakan dukungan Vortex dan Lance yang dapat diaktifkan secara opsional. Fitur ini dinonaktifkan secara default dan dapat diaktifkan melalui <code translate="no">common.storage.useLoonFFI</code>. Baik Snapshot maupun <code translate="no">TEXT</code> bergantung padanya.</li>
+</ul>
+<p><strong>Direncanakan untuk 3.0.x</strong></p>
+<p>Peningkatan yang direncanakan memungkinkan snapshot koleksi Milvus berfungsi sebagai koleksi eksternal. Dukungan tabel eksternal juga diperluas ke pemecahan JSON, penambahan bidang fungsi, dan penghapusan bidang.</p>
+<p><strong>Direncanakan untuk versi 3.1</strong></p>
+<p>Rencana tersebut mencakup indeks sparse dan skalar berbasis S3, serta penghapusan melalui impor.</p>
+<h2 id="Performance-indexing-and-scale" class="common-anchor-header">Kinerja, pengindeksan, dan skalabilitas<button data-href="#Performance-indexing-and-scale" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Peta jalan kinerja mencakup indeks pengambilan, eksekusi kueri, dan pertumbuhan kluster. Peta jalan ini juga membahas pemulihan dan kueri yang harus membaca data dari penyimpanan objek.</p>
+<p><strong>Tersedia di versi 3.0</strong></p>
+<ul>
+<li><strong>Pengindeksan spars:</strong> Perombakan indeks spars memperkenalkan SINDI.</li>
+<li><strong>Pilihan indeks:</strong> Indeks passthrough " <code translate="no">FAISS</code> " menerima string pabrik indeks Faiss, dengan opsi termasuk SVS, Panorama, PQ, IVFPQ, dan ScaNN. Pengindeksan DiskANN juga tersedia untuk daftar tertanam (EmbList).</li>
+<li><strong>Pemadatan:</strong> Force Merge memberikan kontrol eksplisit atas penggabungan segmen.</li>
+</ul>
+<p><strong>Direncanakan untuk versi 3.1</strong></p>
+<ul>
+<li><strong>Kueri yang sadar penyimpanan:</strong> Tambahkan predikat pushdown untuk Vortex, termasuk pemangkasan tingkat halaman dan indeks lompatan.</li>
+<li><strong>Pertumbuhan kluster dan multi-tenancy:</strong> Mendukung pemisahan shard, kunci sharding kustom, dan optimasi multi-tenancy.</li>
+<li><strong>Eksekusi kueri dan pengindeksan:</strong> Mengembangkan QueryView, meningkatkan dukungan untuk koleksi luas, pengurangan hasil aliran, dan mendukung beberapa indeks.</li>
+<li><strong>Keandalan penulisan:</strong> Mendukung penulisan idempoten.</li>
+<li><strong>Caching penyimpanan objek:</strong> Gunakan Talon sebagai cache S3 untuk meningkatkan pemulihan kegagalan dan kinerja kueri yang jarang diakses.</li>
+</ul>
+<h2 id="Beyond-31" class="common-anchor-header">Melampaui versi 3.1<button data-href="#Beyond-31" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Pekerjaan jangka panjang mencakup perjalanan waktu dan rollback snapshot. Ruang lingkup serta jadwal rilisnya masih akan dikonfirmasi.</p>
+<h2 id="Help-shape-the-roadmap" class="common-anchor-header">Bantu bentuk peta jalan<button data-href="#Help-shape-the-roadmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Bagikan beban kerja, batasan, dan permintaan fitur yang penting bagi aplikasi Anda di <a href="https://github.com/milvus-io/milvus/discussions">GitHub Discussions</a>. Laporkan bug melalui <a href="https://github.com/milvus-io/milvus/issues">GitHub Issues</a>.</p>
+<p>Untuk berkontribusi pada kode atau dokumentasi, mulailah dengan <a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">Panduan Kontributor</a>.</p>

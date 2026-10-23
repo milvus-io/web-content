@@ -2,7 +2,7 @@
 id: roadmap.md
 title: Milvus 로드맵
 related_key: Milvus roadmap
-summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈소스 벡터 데이터베이스입니다. 다음은 개발 방향을 제시하는 로드맵입니다.
+summary: '3.0 및 3.1 릴리스에 걸친 검색, 분석, 스키마 진화, 데이터 레이크 통합 및 성능에 대한 Milvus 로드맵을 살펴보세요.'
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 로드맵<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,9 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="common-anchor-header">🌌 차세대 멀티모달 데이터베이스 및 벡터 레이크베이스를 향하여<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 3.0은 다중 벡터 검색, SQL 스타일 쿼리, 유연한 스키마, 데이터 레이크 저장소 내 데이터 접근 기능을 통합합니다. 다음 단계에서는 이러한 기반을 바탕으로 더욱 풍부한 쿼리, 확장된 데이터 모델, 성능 및 확장성 향상을 실현할 예정입니다. 이 로드맵은 오픈소스 Milvus의 우선순위를 개괄적으로 설명합니다.</p>
+<p>Milvus 3.0 <strong>은 v3.0.1부터</strong> 정식 출시되었습니다. 아래에 소개된 출시된 기능들은 <strong>v3.0.0에서</strong> 도입되었으며, 미리보기 기능 및 선택적 적용 기능은 해당 항목에서 별도로 명시되어 있습니다. <strong>3.0.x</strong> 시리즈는 이러한 기능을 확장하며, <strong>3.1</strong> 버전은 <strong>2026년 12월 출시를 목표로 하고 있습니다</strong>. 계획된 기능 및 목표 일정은 개발 진행 상황에 따라 변경될 수 있습니다.</p>
+<h2 id="Search-and-retrieval" class="common-anchor-header">검색 및 결과 추출<button data-href="#Search-and-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,138 +36,156 @@ summary: Milvus는 AI 애플리케이션을 지원하기 위해 구축된 오픈
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Milvus 제품 로드맵</strong></p>
-<p>Milvus 로드맵에 오신 것을 환영합니다!</p>
-<p>저희는 Milvus를 <strong>구조화 데이터에서 비구조화 데이터에 이르기까지, 실시간 검색에서 오프라인 분석에 이르기까지, 단일 클러스터 성능에서 글로벌</strong> <strong>벡터 레이크베이스 아키텍처에</strong> <strong>이르기까지 아우르는</strong> 차세대 멀티모달 데이터베이스의 새로운 시대로 이끌고 있습니다 <strong>.</strong></p>
-<p>이 로드맵은 <strong>Milvus v3.0</strong> 및 <strong>Milvus v3.1(장기 개발)</strong>의 핵심 목표와 <strong>Zilliz 벡터 레이크베이스의</strong> 진화 계획을 개괄적으로 설명합니다.</p>
-<h2 id="🌠-Milvus-v30" class="common-anchor-header">🌠 Milvus v3.0<button data-href="#🌠-Milvus-v30" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>중점: 엔진 내 정렬, 집계 및 다중 벡터 검색 기능을 갖춘 <strong>시맨틱 네이티브 쿼리 엔진</strong> 구축과, 데이터 마이그레이션 없이도 컴퓨팅이 데이터에 직접 접근할 수 있도록 하는 <strong>Zilliz Vector Lakebase의 레이크 네이티브 기반</strong> 구축.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 특징<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Schema--Data-Type-Evolution" class="common-anchor-header">🔹 <strong>스키마 및 데이터 유형 진화</strong></h4><ul>
-<li>인덱스를 재구축하거나 서비스 제공을 중단하지 않고 런타임에 ALTER COLLECTION ADD COLUMN 및 DROP COLUMN을 지원합니다.</li>
-<li>새 컬럼에 대해 <strong>두 가지 백필 경로를</strong> 제공합니다: Spark 커넥터를 통한 외부 경로와, 쓰기 시점에 자동 생성되는 BM25 스파스 벡터를 활용한 내부 경로입니다.</li>
-<li>BM25 및 텍스트 일치 기능을 지원하며, 벡터와 함께 원본 텍스트를 저장하는 일류 데이터 유형으로 <strong>TEXT를</strong> 도입했습니다.</li>
-</ul>
-<h4 id="🔹-Query-Execution-Overhaul" class="common-anchor-header">🔹 <strong>쿼리</strong> <strong>실행 방식 전면 개편</strong></h4><ul>
-<li>세그먼트별 정렬 및 쿼리 노드 간 병합 정렬을 통해 <strong>Order By를</strong> 엔진 내부로 통합합니다.</li>
-<li>커널 내에서 계산되는 SQL 스타일의 <strong>쿼리</strong> <strong>집계</strong> (COUNT, SUM, AVG, MIN, MAX를 포함한 GROUP BY)를 추가합니다.</li>
-<li>버킷별 통계 및 서버 측 중첩 하위 패싯을 지원하는 ANN 결과에 대한 <strong>검색 패싯을</strong> 도입합니다.</li>
-<li>클러스터 측에 등록된 <strong>사용자 정의 사전</strong> 및 동의어 테이블을 지원하여 CJK 및 도메인별 리콜률을 개선했습니다.</li>
-</ul>
-<h4 id="🔹-Multi-Vector--Late-Interaction-Support" class="common-anchor-header">🔹 <strong>다중 벡터 및 후기 상호작용 지원</strong></h4><ul>
-<li><strong>StructList를</strong> 도입하여 하나의 엔티티를 여러 벡터가 포함된 단일 행으로 표현하며, MAX_SIM을 통해 네이티브 지연 상호작용(ColBERT, ColPali)을 지원합니다.</li>
-<li>StructList 필드에 대한 <strong>요소 수준 및 엔티티 수준 검색을</strong> 지원하며, 엔티티 수준 결과에 대해 구성 가능한 일치 정책을 제공합니다.</li>
-<li>세 가지 <strong>다중 벡터 검색 전략인</strong> TokenANN(전면 검색), Muvera(투영 기반, 훈련 불필요), Lemur(학습된 압축)를 추가했습니다.</li>
-</ul>
-<h4 id="🔹-Retrieval--Index-Overhaul" class="common-anchor-header">🔹 <strong>검색 및 인덱스 전면 개편</strong></h4><ul>
-<li>블록 압축, 가중치 양자화 및 영구 저장 형식을 적용하여 <strong>스파스 역색인을</strong> 전면 개편하고, <strong>SINDI를</strong> 기본 스파스 역색인 알고리즘으로 도입했습니다.</li>
-<li><strong>Faiss 제품군</strong> 전체(SVS, Panorama, PQ, IVFPQ, ScaNN) 및 근사 중복 감지를 위한 <strong>MinHash DIDO를</strong> 통해 인덱스 적용 범위를 확장했습니다.</li>
-<li>비동기 임베딩 및 누락된 모달리티를 위해 <strong>null 허용 벡터 필드를</strong> 지원하며, 검색 시 자동 필터링 기능을 제공합니다.</li>
-</ul>
-<h4 id="🔹-Vector-Lakebase-Storage--Compute-Architecture" class="common-anchor-header">🔹 <strong>벡터 Lakebase 스토리지 및 컴퓨팅 아키텍처</strong></h4><ul>
-<li>Lance, Parquet, Iceberg 및 Vortex 테이블 형식을 지원하여 S3 / GCS / Azure 내의 데이터를 그대로 색인화하고 쿼리할 수 있는 <strong>External Collection을</strong> 도입합니다.</li>
-<li>오브젝트 스토리지에서 효율적인 포인트 읽기를 위한 혼합 형식 스토리지 레이어인 <strong>Loon(Storage V3)</strong>과 개방형 열 기반 형식인 <strong>Vortex를</strong> 추가했습니다.</li>
-<li>서비스가 계속 쓰기 작업을 수행하는 동안 배치 처리를 위해 MVCC 방식의 격리 기능을 갖춘 <strong>특정 시점 스냅샷을</strong> 지원합니다.</li>
-<li>Spark / Databricks / EMR 파이프라인에서 Milvus로 직접 읽고 쓸 수 있도록 <strong>Spark DataSource v2</strong> 로 통합되었습니다.</li>
-</ul>
-<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1 (장기 비전)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><strong>일정: 2026년 말 및 그 이후</strong></p>
-<p>중점: <strong>스토리지 인텔리전스</strong>, <strong>쓰기 경로 무결성</strong>, <strong>컴퓨팅 확장성</strong>, 그리고 <strong>Vector Lakebase와의</strong> <strong>상호 운용성</strong> <strong>확대</strong>.</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 주요 특징<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Storage--Write-Path" class="common-anchor-header">🔹 <strong>스토리지 및 쓰기 경로</strong></h4><ul>
-<li>스토리지 계층에서 페이지 인덱스 및 블룸 필터 프루닝을 활용한 <strong>술어 푸시다운을</strong> 추가합니다.</li>
-<li>쓰기 시 중복을 방지하기 위해 데이터 수집 시 <strong>기본 키</strong> 중복 <strong>제거를</strong> 구현합니다.</li>
-</ul>
-<h4 id="🔹-Compute--Elasticity" class="common-anchor-header">🔹 <strong>컴퓨팅 및 탄력성</strong></h4><ul>
-<li>데이터 플레인에서 엔진 내에서 사용자 <strong>정의</strong> 로직을 실행할 수 있도록 <strong>사용자 정의 함수(UDF)를</strong> 지원합니다.</li>
-<li>사용자 정의 샤딩 키를 지원하여 데이터가 증가함에 따라 샤드를 재분할할 수 있도록 <strong>샤드 분할 기능을</strong> 활성화합니다.</li>
-</ul>
-<h4 id="🔹-Spark--Vector-Lakebase-Expansion" class="common-anchor-header">🔹 <strong>Spark 및</strong> <strong>Vector Lakebase</strong> <strong>확장</strong></h4><ul>
-<li>더 풍부한 <strong>네이티브 배치 연산자</strong> 라이브러리를 통해 Spark 커넥터를 확장합니다.</li>
-<li>타임 트래블, 스키마 진화, 스냅샷 롤백을 포함한 <strong>테이블 형식</strong> 기능을 추가합니다.</li>
-<li><strong>CDC 기반의 최신 외부 인덱스</strong>, Apache Paimon 지원 및 추가 데이터 형식을 통해 Vector Lakebase의 상호 운용성을 확장합니다.</li>
-</ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Milvus의 미래를 함께 만들어 갑시다<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus는 전 세계 개발자 커뮤니티가 주도하는 오픈소스 프로젝트입니다. 모든 커뮤니티 구성원들이 차세대 멀티모달 데이터베이스를 함께 만들어 가실 것을 초대합니다:</p>
+    </button></h2><p>검색 결과 추출 로드맵은 텍스트 매칭 및 다중 벡터 표현부터 재순위 지정 및 검색 결과 패싯에 이르기까지, Milvus 내에서 더 많은 관련성 신호를 결합하는 데 중점을 둡니다.</p>
+<p><strong>3.0에서 사용 가능</strong></p>
 <ul>
-<li><p>💬 <strong>피드백 공유</strong>: <a href="https://github.com/milvus-io/milvus/discussions">GitHub</a> Discussions에서 새로운 기능이나 최적화 아이디어를 제안해 주세요.</p></li>
-<li><p>🐛 <strong>문제 보고</strong>: <a href="https://github.com/milvus-io/milvus/issues">GitHub Issues를</a> 통해 버그를 신고해 주세요.</p></li>
-<li><p>🔧 <strong>코드 기여</strong>: PR을 제출하고 핵심 기능 개발에 기여해 주세요.</p>
-<ul>
-<li><strong>풀 리퀘스트</strong>(<strong>PR)</strong>: <a href="https://github.com/milvus-io/milvus/pulls">코드베이스</a>에 직접 기여해 주세요. 버그 수정, 기능 추가, 문서 개선 등 어떤 형태의 기여라도 환영합니다.</li>
-<li><strong>개발 가이드</strong>: 코드 기여에 대한 지침은 <a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">기여자 가이드를</a> 확인해 주세요.</li>
-</ul></li>
-<li><p>🗣️ <strong>대화에 참여하세요</strong>: <a href="https://milvus.io/discord">Discord</a>, <a href="https://meetings.hubspot.com/chloe-williams1/milvus-meeting">Milvus Office Hours</a> 또는 <a href="https://milvus.io/community">모든 커뮤니티 채널에서</a> 질문을 하고 유지보수 담당자들을 만나보세요.</p></li>
-<li><p>⭐ <strong>소문 내기</strong>: 모범 사례와 성공 사례를 공유하고, <a href="https://twitter.com/milvusio">X</a>, <a href="https://www.linkedin.com/company/the-milvus-project/">LinkedIn</a>, <a href="https://www.youtube.com/c/MilvusVectorDatabase">YouTube에서</a> Milvus를 팔로우해 주세요.</p></li>
+<li><strong>다중 벡터 검색:</strong> StructArray 검색은 Muvera 및 Lemur를 지원하며, 요소 수준 필터링을 위한 <code translate="no">element_filter</code> 를 제공합니다. 일치 정책에는 <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> 및 <code translate="no">MATCH_EXACT</code> 가 포함됩니다.</li>
+<li><strong>텍스트 매칭 및 유사도:</strong> 사용자 정의 사전과 동의어를 통해 애플리케이션 요구 사항에 맞게 텍스트 검색을 조정할 수 있습니다. 정규식(Regex) 필터링은 패턴 매칭을 지원하며, MinHash는 준중복 감지를 지원합니다.</li>
+<li><strong>재순위 지정 및 추론:</strong> Milvus 3.0은 Hugging Face 추론 제공자와 함께 초기 기능 체인(Function Chain) 재순위 지정 기능 세트를 도입합니다. 나머지 기능 체인 기능은 3.0.x 버전에서 제공될 예정입니다.</li>
+<li><strong>검색 집계:</strong> 검색 집계는 검색 결과에 대한 패싯 기능을 제공합니다.</li>
 </ul>
-<p>👉 <strong>GitHub:</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>
+<p><strong>3.0.x 버전에서 예정된 기능</strong></p>
+<p>3.0.x 시리즈에서는 퍼지 매칭 및 전역 통계 기능을 추가하고, Function Chain 지원을 완료할 예정입니다.</p>
+<p><strong>3.1 버전에서 계획된 기능</strong></p>
+<p>Grep 기반 검색, 근사 최인접 이웃(ANN) 검색과 ANN-필터 융합을 통한 필터링의 긴밀한 통합, 스파스 검색 개선 등이 계획되어 있습니다.</p>
+<h2 id="Analytics-and-SQL-style-querying" class="common-anchor-header">분석 및 SQL 스타일 쿼리<button data-href="#Analytics-and-SQL-style-querying" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus는 애플리케이션이 검색과 함께 데이터를 정렬하고 집계할 수 있도록 쿼리 엔진을 확장하고 있습니다. 다음 단계에서는 조인, 물질화된 뷰 및 사용자 정의 계산 기능이 추가될 예정입니다.</p>
+<p><strong>3.0에서 제공</strong></p>
+<p>쿼리 및 검색 기능은 ` <code translate="no">ORDER BY</code>`을 통한 정렬을 지원합니다. 쿼리 집계(Query Aggregation) 기능에는 그룹별 통계를 계산하기 위한 ` <code translate="no">GROUP BY</code> `이 추가됩니다.</p>
+<p><strong>3.1 버전 계획</strong></p>
+<ul>
+<li><strong>더 풍부한 쿼리:</strong> 세미 조인(semi-joins)을 시작으로 조인 기능과 물화 뷰 컬렉션(Materialized View Collections)을 도입합니다.</li>
+<li><strong>데이터 업데이트 및 무결성:</strong> 인플레이스 업데이트와 데이터 수집 시 기본 키 중복 제거를 지원합니다.</li>
+<li><strong>쿼리 반복 및 JSON 의미론:</strong> 상태 저장 쿼리 반복기, JSON <code translate="no">GROUP BY</code> 및 SQL/JSON NULL 의미론을 추가합니다.</li>
+<li><strong>사용자 정의 계산:</strong> Python 사용자 정의 함수(UDF)를 지원합니다.</li>
+</ul>
+<h2 id="Flexible-schema-and-data-types" class="common-anchor-header">유연한 스키마 및 데이터 유형<button data-href="#Flexible-schema-and-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>스키마 작업은 기존 컬렉션을 발전시키고 더 광범위한 데이터를 표현하는 데 중점을 둡니다. 여기에는 필드 변경, 다중 벡터 구조, 긴 텍스트 및 엔티티 만료 기간이 포함됩니다.</p>
+<p><strong>3.0에서 사용 가능</strong></p>
+<ul>
+<li><strong>온라인 스키마 변경:</strong> 기존 컬렉션은 벡터 및 <code translate="no">Array&lt;Struct&gt;</code> 필드를 포함한 온라인 필드 추가를 지원합니다. 필드 삭제는 <strong>미리 보기</strong> 버전으로 제공되며 일부 제한 사항이 있을 수 있습니다.</li>
+<li><strong>기존 데이터에 대한 백필(backfill):</strong> 외부 백필은 Spark 커넥터를 사용합니다. 내부 백필은 컬렉션에 BM25 또는 MinHash 함수를 적용하여 기존 데이터에 대해 출력을 계산합니다.</li>
+<li><strong>텍스트 및 다중 벡터 데이터:</strong> ` <code translate="no">TEXT</code> ` 유형은 긴 텍스트를 저장하며, `StructArray`는 ` <code translate="no">MAX_SIM</code>`을 통해 지연 상호작용 검색을 지원합니다. ` <code translate="no">TEXT</code> `는 Storage V3를 선택적으로 활성화해야 합니다.</li>
+<li><strong>NULL 값 및 만료:</strong> 벡터 필드는 NULL 값을 허용하며, 엔티티 수준의 유효 기간(TTL)이 만료를 제어합니다.</li>
+</ul>
+<p><strong>3.0.x 버전에서 계획된 사항</strong></p>
+<p>계획된 스키마 개선 사항에는 타입, NULL 값, 필드 추가 및 제거에 대한 StructArray 지원 확장이 포함됩니다. 또한 분자식 지원과 벡터 필드에 대한 <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> 필터가 추가됩니다.</p>
+<p><strong>3.1 버전 계획</strong></p>
+<p>다음 데이터 모델 확장 기능에는 중첩된 JSON 및 Struct, 복합 기본 키, 벡터 필드가 없는 컬렉션, StructList 내의 스파스 벡터가 포함됩니다.</p>
+<h2 id="Lake-integration-and-data-versioning" class="common-anchor-header">레이크 통합 및 데이터 버전 관리<button data-href="#Lake-integration-and-data-versioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus는 레이크 스토리지 및 배치 처리와의 긴밀한 통합을 개발 중입니다. 외부 컬렉션을 통해 데이터가 저장된 위치에서 직접 액세스할 수 있으며, 스냅샷은 데이터 버전 관리의 기반을 제공합니다.</p>
+<p><strong>3.0에서 사용 가능</strong></p>
+<ul>
+<li><strong>외부 데이터 액세스:</strong> 외부 컬렉션은 Lance, Parquet 및 Iceberg 데이터를 지원합니다.</li>
+<li><strong>스냅샷 및 배치 통합:</strong> 스냅샷은 컬렉션 데이터의 특정 버전을 캡처하며, Spark 커넥터는 배치 워크플로를 지원합니다.</li>
+<li><strong>스토리지 기반:</strong> 스토리지 V3(Loon)는 선택적 Vortex 및 Lance 지원을 제공합니다. 이 기능은 기본적으로 비활성화되어 있으며, ` <code translate="no">common.storage.useLoonFFI</code>`를 통해 활성화할 수 있습니다. 스냅샷과 <code translate="no">TEXT</code> 모두 이 기능에 의존합니다.</li>
+</ul>
+<p><strong>3.0.x 버전에서 계획된 기능</strong></p>
+<p>계획된 개선 사항을 통해 Milvus 수집 스냅샷을 외부 수집으로 활용할 수 있게 됩니다. 또한 외부 테이블 지원이 JSON 분할, 함수 필드 추가 및 필드 제거로 확대됩니다.</p>
+<p><strong>3.1 버전 계획</strong></p>
+<p>S3 기반의 스파스(sparse) 및 스칼라(scalar) 인덱스와, 가져오기(import)를 통한 삭제 기능이 계획되어 있습니다.</p>
+<h2 id="Performance-indexing-and-scale" class="common-anchor-header">성능, 인덱싱 및 확장성<button data-href="#Performance-indexing-and-scale" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>성능 로드맵은 검색 인덱스, 쿼리 실행 및 클러스터 확장을 다룹니다. 또한 복구 및 오브젝트 스토리지에서 데이터를 읽어야 하는 쿼리에 대해서도 다루고 있습니다.</p>
+<p><strong>3.0에서 제공</strong></p>
+<ul>
+<li><strong>스파스 인덱싱:</strong> 스파스 인덱스 개편을 통해 SINDI가 도입됩니다.</li>
+<li><strong>인덱스 선택:</strong> <code translate="no">FAISS</code> 패스스루 인덱스는 Faiss 인덱스 팩토리 문자열을 수용하며, SVS, Panorama, PQ, IVFPQ 및 ScaNN 등의 옵션을 제공합니다. 임베딩 목록(EmbList)의 경우 DiskANN 인덱싱도 사용할 수 있습니다.</li>
+<li><strong>압축:</strong> Force Merge는 세그먼트 병합을 명시적으로 제어할 수 있게 해줍니다.</li>
+</ul>
+<p><strong>3.1 버전에서 예정된 기능</strong></p>
+<ul>
+<li><strong>스토리지 인식 쿼리:</strong> 페이지 수준 프루닝 및 스킵 인덱스를 포함하여 Vortex에 술어 푸시다운을 추가합니다.</li>
+<li><strong>클러스터 확장 및 테넌시:</strong> 샤드 분할, 사용자 정의 샤딩 키 및 멀티 테넌시 최적화를 지원합니다.</li>
+<li><strong>쿼리 실행 및 인덱싱:</strong> QueryView를 개발하고, 광범위한 컬렉션에 대한 지원을 개선하며, 스트림 결과 축소 기능을 강화하고, 다중 인덱스를 지원합니다.</li>
+<li><strong>쓰기 안정성:</strong> 항등적 쓰기를 지원합니다.</li>
+<li><strong>오브젝트 스토리지 캐싱:</strong> Talon을 S3 캐시로 사용하여 장애 복구 및 콜드 쿼리 성능을 개선합니다.</li>
+</ul>
+<h2 id="Beyond-31" class="common-anchor-header">3.1 이후<button data-href="#Beyond-31" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>장기적인 작업으로는 타임 트래블 및 스냅샷 롤백이 포함됩니다. 해당 기능의 범위와 출시 시기는 아직 확정되지 않았습니다.</p>
+<h2 id="Help-shape-the-roadmap" class="common-anchor-header">로드맵 수립에 기여해 주세요<button data-href="#Help-shape-the-roadmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/discussions">GitHub 토론</a>에서 애플리케이션에 중요한 워크로드, 제한 사항 및 기능 요청을 공유해 주세요. <a href="https://github.com/milvus-io/milvus/issues">GitHub 이슈를</a> 통해 버그를 보고해 주세요.</p>
+<p>코드나 문서를 기여하려면 <a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">기여자 가이드</a>부터 시작하세요.</p>

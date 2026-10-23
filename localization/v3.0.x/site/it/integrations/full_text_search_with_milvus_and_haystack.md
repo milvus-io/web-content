@@ -1,8 +1,8 @@
 ---
 id: full_text_search_with_milvus_and_haystack.md
 summary: >-
-  Questo tutorial mostra come implementare la ricerca full-text e ibrida nella
-  vostra applicazione utilizzando Haystack e Milvus.
+  Questo tutorial illustra come implementare la ricerca full-text e ibrida nella
+  propria applicazione utilizzando Haystack e Milvus.
 title: Ricerca full-text con Milvus e Haystack
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
@@ -26,15 +26,14 @@ title: Ricerca full-text con Milvus e Haystack
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">ricerca full-text</a> è un metodo tradizionale per recuperare i documenti attraverso la corrispondenza di parole chiave o frasi specifiche nel testo. Classifica i risultati in base a punteggi di rilevanza calcolati da fattori come la frequenza dei termini. Mentre la ricerca semantica è in grado di comprendere meglio il significato e il contesto, la ricerca full-text eccelle nella corrispondenza precisa delle parole chiave, rendendola un utile complemento alla ricerca semantica. L'algoritmo BM25 è ampiamente utilizzato per la classificazione nella ricerca full-text e svolge un ruolo chiave nella Retrieval-Augmented Generation (RAG).</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> introduce funzionalità native di ricerca full-text utilizzando BM25. Questo approccio converte il testo in vettori sparsi che rappresentano i punteggi BM25. È possibile inserire semplicemente il testo grezzo e Milvus genererà e memorizzerà automaticamente i vettori sparsi, senza bisogno di generare manualmente l'incorporazione sparsa.</p>
-<p><a href="https://haystack.deepset.ai/">Haystack</a> supporta ora questa funzione di Milvus, semplificando l'aggiunta della ricerca full-text alle applicazioni RAG. È possibile combinare la ricerca full-text con la ricerca semantica vettoriale densa, per un approccio ibrido che trae vantaggio dalla comprensione semantica e dalla precisione della corrispondenza delle parole chiave. Questa combinazione migliora l'accuratezza della ricerca e fornisce risultati migliori agli utenti.</p>
-<p>Questo tutorial mostra come implementare la ricerca full-text e ibrida nella vostra applicazione utilizzando Haystack e Milvus.</p>
-<p>Per utilizzare l'archivio vettoriale Milvus, specificare il server Milvus <code translate="no">URI</code> (e facoltativamente con <code translate="no">TOKEN</code>). Per avviare un server Milvus, è possibile configurarlo seguendo la <a href="https://milvus.io/docs/install-overview.md">guida all'installazione di Milvus</a> o semplicemente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">provando</a> gratuitamente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>(Milvus completamente gestito).</p>
+    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">La ricerca full-text</a> è un metodo tradizionale per recuperare documenti tramite la corrispondenza di parole chiave o frasi specifiche presenti nel testo. Classifica i risultati in base a punteggi di rilevanza calcolati a partire da fattori quali la frequenza dei termini. Mentre la ricerca semantica è più efficace nel comprendere il significato e il contesto, la ricerca full-text eccelle nella corrispondenza precisa delle parole chiave, rendendola un utile complemento alla ricerca semantica. L’algoritmo BM25 è ampiamente utilizzato per il ranking nella ricerca full-text e svolge un ruolo chiave nella Retrieval-Augmented Generation (RAG).</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> introduce funzionalità native di ricerca full-text basate su BM25. Questo approccio converte il testo in vettori sparsi che rappresentano i punteggi BM25. È sufficiente inserire il testo grezzo e Milvus genererà e memorizzerà automaticamente i vettori sparsi, senza che sia necessaria la generazione manuale di embedding sparsi.</p>
+<p><a href="https://haystack.deepset.ai/">Haystack</a> ora supporta questa funzionalità di Milvus, rendendo semplice l’aggiunta della ricerca full-text alle applicazioni RAG. È possibile combinare la ricerca full-text con la ricerca semantica a vettori densi per un approccio ibrido che sfrutta sia la comprensione semantica sia la precisione nella corrispondenza delle parole chiave. Questa combinazione migliora l’accuratezza della ricerca e offre risultati migliori agli utenti.</p>
+<p>Questo tutorial illustra come implementare la ricerca full-text e quella ibrida nella propria applicazione utilizzando Haystack e Milvus.</p>
+<p>È possibile eseguire questo tutorial localmente con Milvus Lite, connettersi a un server Milvus oppure utilizzare <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a>, il servizio Milvus completamente gestito.</p>
 <div class="alert note">
 <ul>
-<li>La ricerca full-text è attualmente disponibile in Milvus Standalone, Milvus Distributed e Zilliz Cloud, anche se non è ancora supportata in Milvus Lite (la cui implementazione è prevista per il futuro). Per ulteriori informazioni, contattare support@zilliz.com.</li>
-<li>Prima di procedere con questo tutorial, assicuratevi di avere una conoscenza di base della <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">ricerca full-text</a> e dell'<a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">utilizzo di base</a> dell'integrazione di Haystack Milvus.</li>
+<li>Prima di procedere con questo tutorial, assicurati di avere una conoscenza di base <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">della ricerca full-text</a> e <a href="https://github.com/milvus-io/milvus-haystack/blob/main/README.md">dell’utilizzo fondamentale</a> dell’integrazione tra Haystack e Milvus.</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -52,18 +51,18 @@ title: Ricerca full-text con Milvus e Haystack
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di eseguire questo notebook, assicuratevi di aver installato le seguenti dipendenze:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet pymilvus milvus-haystack</span>
+    </button></h2><p>Questo tutorial richiede Python 3.10 o versioni successive. Installa l’integrazione Haystack per Milvus insieme ai pacchetti PyMilvus e Milvus Lite aggiornati:</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade --quiet &quot;milvus-haystack&gt;=0.1.0&quot; &quot;pymilvus&gt;=3.0.2&quot; &quot;milvus-lite&gt;=3.2.2&quot;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
+<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate, potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu “Runtime” nella parte superiore dello schermo e selezionare “Riavvia sessione” dal menu a discesa).</p>
 </div>
-<p>Utilizzeremo i modelli di OpenAI. È necessario preparare la <a href="https://platform.openai.com/docs/quickstart">chiave api</a> <code translate="no">OPENAI_API_KEY</code> come variabile d'ambiente.</p>
+<p>Utilizzeremo i modelli di OpenAI. È necessario preparare la <a href="https://platform.openai.com/docs/quickstart">chiave API</a> <code translate="no">OPENAI_API_KEY</code> come variabile d’ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparazione dei dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,21 +77,24 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Importare i pacchetti necessari in questo blocco note. Preparate poi alcuni documenti di esempio.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Pipeline
-<span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
-<span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
-<span class="hljs-keyword">from</span> haystack.utils <span class="hljs-keyword">import</span> Secret
-<span class="hljs-keyword">from</span> milvus_haystack <span class="hljs-keyword">import</span> MilvusDocumentStore, MilvusSparseEmbeddingRetriever
-<span class="hljs-keyword">from</span> haystack.document_stores.types <span class="hljs-keyword">import</span> DuplicatePolicy
-<span class="hljs-keyword">from</span> milvus_haystack.function <span class="hljs-keyword">import</span> BM25BuiltInFunction
-<span class="hljs-keyword">from</span> milvus_haystack <span class="hljs-keyword">import</span> MilvusDocumentStore
-<span class="hljs-keyword">from</span> milvus_haystack.milvus_embedding_retriever <span class="hljs-keyword">import</span> MilvusHybridRetriever
+    </button></h3><p>Importate i pacchetti necessari in questo notebook. Quindi preparate alcuni documenti di esempio.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
+<span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Document, Pipeline
+<span class="hljs-keyword">from</span> haystack.components.builders <span class="hljs-keyword">import</span> ChatPromptBuilder
+<span class="hljs-keyword">from</span> haystack.components.embedders <span class="hljs-keyword">import</span> OpenAIDocumentEmbedder, OpenAITextEmbedder
+<span class="hljs-keyword">from</span> haystack.components.generators.chat <span class="hljs-keyword">import</span> OpenAIChatGenerator
+<span class="hljs-keyword">from</span> haystack.components.writers <span class="hljs-keyword">import</span> DocumentWriter
+<span class="hljs-keyword">from</span> haystack.dataclasses <span class="hljs-keyword">import</span> ChatMessage
+<span class="hljs-keyword">from</span> haystack.document_stores.types <span class="hljs-keyword">import</span> DuplicatePolicy
 <span class="hljs-keyword">from</span> haystack.utils <span class="hljs-keyword">import</span> Secret
-<span class="hljs-keyword">from</span> haystack.components.builders <span class="hljs-keyword">import</span> PromptBuilder
-<span class="hljs-keyword">from</span> haystack.components.generators <span class="hljs-keyword">import</span> OpenAIGenerator
-<span class="hljs-keyword">from</span> haystack <span class="hljs-keyword">import</span> Document
+
+<span class="hljs-keyword">from</span> milvus_haystack <span class="hljs-keyword">import</span> (
+    MilvusDocumentStore,
+    MilvusHybridRetriever,
+    MilvusSparseEmbeddingRetriever,
+)
+<span class="hljs-keyword">from</span> milvus_haystack.function <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
 documents = [
     Document(content=<span class="hljs-string">&quot;Alice likes this apple&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
@@ -100,8 +102,8 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>L'integrazione della ricerca full-text in un sistema RAG bilancia la ricerca semantica con un recupero preciso e prevedibile basato sulle parole chiave. Si può anche scegliere di utilizzare solo la ricerca full-text, anche se si consiglia di combinare la ricerca full-text con la ricerca semantica per ottenere risultati migliori. A scopo dimostrativo mostreremo la ricerca full text da sola e la ricerca ibrida.</p>
-<h2 id="BM25-search-without-embedding" class="common-anchor-header">Ricerca BM25 senza inclusione<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+<p>L’integrazione della ricerca full-text in un sistema RAG bilancia la ricerca semantica con un recupero preciso e prevedibile basato su parole chiave. È anche possibile scegliere di utilizzare solo la ricerca full-text, sebbene sia consigliabile combinarla con la ricerca semantica per ottenere risultati migliori. Qui, a scopo dimostrativo, mostreremo sia la ricerca full-text da sola che la ricerca ibrida.</p>
+<h2 id="BM25-search-without-embedding" class="common-anchor-header">Ricerca BM25 senza embedding<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,11 +133,13 @@ documents = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per la ricerca full-text Milvus MilvusDocumentStore accetta un parametro <code translate="no">builtin_function</code>. Attraverso questo parametro, è possibile passare un'istanza di <code translate="no">BM25BuiltInFunction</code>, che implementa l'algoritmo BM25 sul lato server di Milvus. Impostare il parametro <code translate="no">builtin_function</code> specificato come istanza della funzione BM25. Ad esempio:</p>
-<pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>}
-<span class="hljs-comment"># connection_args = {&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)}</span>
+    </button></h3><p>Per la ricerca full-text, <code translate="no">MilvusDocumentStore</code> accetta un parametro <code translate="no">builtin_function</code>. Passare un'istanza di <code translate="no">BM25BuiltInFunction</code> per consentire a Milvus di generare vettori sparsi BM25 sul lato server. Ad esempio:</p>
+<pre><code translate="no" class="language-python">connection_args = {<span class="hljs-string">&quot;uri&quot;</span>: os.getenv(<span class="hljs-string">&quot;MILVUS_URI&quot;</span>, <span class="hljs-string">&quot;./milvus_full_text.db&quot;</span>)}
+<span class="hljs-keyword">if</span> os.getenv(<span class="hljs-string">&quot;MILVUS_TOKEN&quot;</span>):
+    connection_args[<span class="hljs-string">&quot;token&quot;</span>] = Secret.from_env_var(<span class="hljs-string">&quot;MILVUS_TOKEN&quot;</span>)
 
 document_store = MilvusDocumentStore(
+    collection_name=<span class="hljs-string">&quot;haystack_bm25_demo&quot;</span>,
     connection_args=connection_args,
     sparse_vector_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,  <span class="hljs-comment"># The sparse vector field.</span>
     text_field=<span class="hljs-string">&quot;text&quot;</span>,
@@ -145,23 +149,29 @@ document_store = MilvusDocumentStore(
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
-    drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection if it exists and recreate it.</span>
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,  # Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Per gli argomenti_connessione:</p>
+<div class="alert note">
+<p>Per il parametro ` <code translate="no">connection_args</code>`:</p>
 <ul>
-<li>È possibile configurare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. In questa configurazione, utilizzare l'indirizzo del server, ad esempio<code translate="no">http://localhost:19530</code>, come <code translate="no">uri</code>.</li>
-<li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, regolare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
+<li>Il file locale predefinito, <code translate="no">./milvus_full_text.db</code>, utilizza <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>.</li>
+<li>Per un server Milvus su <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>, impostare ` <code translate="no">MILVUS_URI</code> ` sull'indirizzo del server, ad esempio ` <code translate="no">http://localhost:19530</code>`.</li>
+<li>Per <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, impostare <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code> <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">sull'endpoint pubblico e sulla chiave API</a> indicati nella console.</li>
 </ul>
+</div>
 <p>Creare una pipeline di indicizzazione per scrivere i documenti nell'archivio documenti di Milvus.</p>
 <pre><code translate="no" class="language-python">writer = DocumentWriter(document_store=document_store, policy=DuplicatePolicy.NONE)
 
 indexing_pipeline = Pipeline()
 indexing_pipeline.add_component(<span class="hljs-string">&quot;writer&quot;</span>, writer)
-indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<span class="hljs-string">&quot;documents&quot;</span>: documents}})
+_ = indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<span class="hljs-string">&quot;documents&quot;</span>: documents}})
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of documents:&quot;</span>, document_store.count_documents())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'writer': {'documents_written': 3}}
+<pre><code translate="no">Number of documents: 3
 </code></pre>
 <h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Creare la pipeline di recupero<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -178,7 +188,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;writer&quot;</span>: {<sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Creare una pipeline di recupero che recuperi i documenti dal Milvus document store utilizzando <code translate="no">MilvusSparseEmbeddingRetriever</code>, che è un wrapper attorno a <code translate="no">document_store</code>.</p>
+    </button></h3><p>Creare una pipeline di recupero che recuperi i documenti dall’archivio di Milvus utilizzando <code translate="no">MilvusSparseEmbeddingRetriever</code>, che è un wrapper attorno a <code translate="no">document_store</code>.</p>
 <pre><code translate="no" class="language-python">retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusSparseEmbeddingRetriever(document_store=document_store)
@@ -188,9 +198,9 @@ question = <span class="hljs-string">&quot;Who likes swimming?&quot;</span>
 
 retrieval_results = retrieval_pipeline.run({<span class="hljs-string">&quot;retriever&quot;</span>: {<span class="hljs-string">&quot;query_text&quot;</span>: question}})
 
-retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span class="hljs-string">&quot;documents&quot;</span>][<span class="hljs-number">0</span>]
+<span class="hljs-built_in">print</span>(retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span class="hljs-string">&quot;documents&quot;</span>][<span class="hljs-number">0</span>].content)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Document(id=bd334348dd2087c785e99b5a0009f33d9b8b8198736f6415df5d92602d81fd3e, content: 'Bob likes swimming', meta: {'category': 'sport'}, score: 1.2039074897766113)
+<pre><code translate="no">Bob likes swimming
 </code></pre>
 <h2 id="Hybrid-Search-with-semantic-search-and-full-text-search" class="common-anchor-header">Ricerca ibrida con ricerca semantica e ricerca full-text<button data-href="#Hybrid-Search-with-semantic-search-and-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -207,7 +217,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Creare la pipeline di indicizzazione<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Create-the-indexing-Pipeline" class="common-anchor-header">Creazione della pipeline di indicizzazione<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,8 +232,18 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nella ricerca ibrida, utilizziamo la funzione BM25 per eseguire la ricerca full-text e specifichiamo il campo vettoriale denso <code translate="no">vector</code>, per eseguire la ricerca semantica.</p>
-<pre><code translate="no" class="language-python">document_store = MilvusDocumentStore(
+    </button></h3><p>Nella ricerca ibrida, utilizziamo la funzione BM25 per eseguire la ricerca full-text e specifichiamo il campo vettoriale denso <code translate="no">vector</code> per eseguire la ricerca semantica. Questa collezione utilizza anche un analizzatore personalizzato, in modo da poter esaminarne lo schema più avanti nel tutorial.</p>
+<pre><code translate="no" class="language-python">analyzer_params_custom = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        <span class="hljs-string">&quot;lowercase&quot;</span>,
+        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>, <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>},
+        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>]},
+    ],
+}
+
+document_store = MilvusDocumentStore(
+    collection_name=<span class="hljs-string">&quot;haystack_hybrid_demo&quot;</span>,
     connection_args=connection_args,
     vector_field=<span class="hljs-string">&quot;vector&quot;</span>,  <span class="hljs-comment"># The dense vector field.</span>
     sparse_vector_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,  <span class="hljs-comment"># The sparse vector field.</span>
@@ -232,13 +252,16 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
         BM25BuiltInFunction(  <span class="hljs-comment"># The BM25 function converts the text into a sparse vector.</span>
             input_field_names=<span class="hljs-string">&quot;text&quot;</span>,
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+            analyzer_params=analyzer_params_custom,
+            enable_match=<span class="hljs-literal">True</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
-    drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection and recreate it.</span>
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,  # Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Creare una pipeline di indicizzazione che converta i documenti in embeddings. I documenti vengono poi scritti nell'archivio documenti di Milvus.</p>
+<p>Creare una pipeline di indicizzazione che converta i documenti in embedding. I documenti vengono quindi scritti nell’archivio documenti di Milvus.</p>
 <pre><code translate="no" class="language-python">writer = DocumentWriter(document_store=document_store, policy=DuplicatePolicy.NONE)
 
 indexing_pipeline = Pipeline()
@@ -249,12 +272,9 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of documents:&quot;</span>, document_store.count_documents())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Calculating embeddings: 100%|██████████| 1/1 [00:01&lt;00:00,  1.15s/it]
-
-
-Number of documents: 3
+<pre><code translate="no">Number of documents: 3
 </code></pre>
-<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Creare la pipeline di recupero<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
+<h3 id="Create-the-retrieval-pipeline" class="common-anchor-header">Creazione della pipeline di recupero<button data-href="#Create-the-retrieval-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,7 +289,7 @@ Number of documents: 3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Creare una pipeline di recupero che recuperi i documenti dall'archivio documenti di Milvus utilizzando <code translate="no">MilvusHybridRetriever</code>, che contiene <code translate="no">document_store</code> e riceve parametri sulla ricerca ibrida.</p>
+    </button></h3><p>Creare una pipeline di recupero che recuperi i documenti dall’archivio di Milvus utilizzando <code translate="no">MilvusHybridRetriever</code>, che contiene l’ <code translate="no">document_store</code> e e riceve i parametri relativi alla ricerca ibrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from pymilvus import WeightedRanker</span>
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;dense_text_embedder&quot;</span>, OpenAITextEmbedder())
@@ -282,17 +302,12 @@ retrieval_pipeline.add_component(
     ),
 )
 
-retrieval_pipeline.connect(<span class="hljs-string">&quot;dense_text_embedder.embedding&quot;</span>, <span class="hljs-string">&quot;retriever.query_embedding&quot;</span>)
+_ = retrieval_pipeline.connect(
+    <span class="hljs-string">&quot;dense_text_embedder.embedding&quot;</span>, <span class="hljs-string">&quot;retriever.query_embedding&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">&lt;haystack.core.pipeline.pipeline.Pipeline object at 0x3383ad990&gt;
-🚅 Components
-  - dense_text_embedder: OpenAITextEmbedder
-  - retriever: MilvusHybridRetriever
-🛤️ Connections
-  - dense_text_embedder.embedding -&gt; retriever.query_embedding (List[float])
-</code></pre>
-<p>Quando si esegue la ricerca ibrida usando <code translate="no">MilvusHybridRetriever</code>, si possono impostare facoltativamente i parametri topK e reranker. Il sistema gestirà automaticamente le incorporazioni vettoriali e le funzioni integrate e infine utilizzerà un reranker per affinare i risultati. I dettagli dell'implementazione del processo di ricerca sono nascosti all'utente.</p>
-<p>Per ulteriori informazioni sulla ricerca ibrida, è possibile consultare l'<a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introduzione</a> alla <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">ricerca ibrida</a>.</p>
+<p>Quando si esegue una ricerca ibrida utilizzando <code translate="no">MilvusHybridRetriever</code>, è possibile impostare facoltativamente i parametri topK e reranker. Il sistema gestirà automaticamente gli embedding vettoriali e le funzioni integrate e, infine, utilizzerà un reranker per affinare i risultati. I dettagli di implementazione sottostanti del processo di ricerca sono nascosti all’utente.</p>
+<p>Per ulteriori informazioni sulla ricerca ibrida, è possibile consultare <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">l’introduzione</a> alla <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">ricerca ibrida</a>.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;Who likes swimming?&quot;</span>
 
 retrieval_results = retrieval_pipeline.run(
@@ -302,11 +317,11 @@ retrieval_results = retrieval_pipeline.run(
     }
 )
 
-retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span class="hljs-string">&quot;documents&quot;</span>][<span class="hljs-number">0</span>]
+<span class="hljs-built_in">print</span>(retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span class="hljs-string">&quot;documents&quot;</span>][<span class="hljs-number">0</span>].content)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Document(id=bd334348dd2087c785e99b5a0009f33d9b8b8198736f6415df5d92602d81fd3e, content: 'Bob likes swimming', meta: {'category': 'sport'}, score: 0.032786883413791656, embedding: vector of size 1536)
+<pre><code translate="no">Bob likes swimming
 </code></pre>
-<h2 id="Customize-analyzer" class="common-anchor-header">Personalizzare l'analizzatore<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
+<h2 id="Customize-analyzer" class="common-anchor-header">Personalizzazione dell’analizzatore<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,60 +336,18 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gli analizzatori sono essenziali nella ricerca full-text, in quanto suddividono la frase in token ed eseguono l'analisi lessicale, come lo stemming e la rimozione delle stop word. Gli analizzatori sono solitamente specifici per la lingua. Per saperne di più sugli analizzatori in Milvus, si può consultare <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">questa guida</a>.</p>
-<p>Milvus supporta due tipi di analizzatori: <strong>Analizzatori integrati</strong> e <strong>Analizzatori personalizzati</strong>. Per impostazione predefinita, <code translate="no">BM25BuiltInFunction</code> utilizzerà l'<a href="https://milvus.io/docs/standard-analyzer.md">analizzatore standard incorporato</a>, che è l'analizzatore più elementare e che tokenizza il testo con la punteggiatura.</p>
-<p>Se si vuole usare un analizzatore diverso o personalizzare l'analizzatore, si può passare il parametro <code translate="no">analyzer_params</code> nell'inizializzazione di <code translate="no">BM25BuiltInFunction</code>.</p>
-<pre><code translate="no" class="language-python">analyzer_params_custom = {
-    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;lowercase&quot;</span>,  <span class="hljs-comment"># Built-in filter</span>
-        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>, <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>},  <span class="hljs-comment"># Custom filter</span>
-        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>]},  <span class="hljs-comment"># Custom filter</span>
-    ],
-}
-
-document_store = MilvusDocumentStore(
-    connection_args=connection_args,
-    vector_field=<span class="hljs-string">&quot;vector&quot;</span>,
-    sparse_vector_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    text_field=<span class="hljs-string">&quot;text&quot;</span>,
-    builtin_function=[
-        BM25BuiltInFunction(
-            input_field_names=<span class="hljs-string">&quot;text&quot;</span>,
-            output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-            analyzer_params=analyzer_params_custom,  <span class="hljs-comment"># Custom analyzer parameters.</span>
-            enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Whether to enable match.</span>
-        )
-    ],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
-)
-
-<span class="hljs-comment"># write documents to the document store</span>
-writer = DocumentWriter(document_store=document_store, policy=DuplicatePolicy.NONE)
-indexing_pipeline = Pipeline()
-indexing_pipeline.add_component(<span class="hljs-string">&quot;dense_doc_embedder&quot;</span>, OpenAIDocumentEmbedder())
-indexing_pipeline.add_component(<span class="hljs-string">&quot;writer&quot;</span>, writer)
-indexing_pipeline.connect(<span class="hljs-string">&quot;dense_doc_embedder&quot;</span>, <span class="hljs-string">&quot;writer&quot;</span>)
-indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;</span>: {<span class="hljs-string">&quot;documents&quot;</span>: documents}})
+    </button></h2><p>Gli analizzatori sono fondamentali nella ricerca full-text poiché suddividono la frase in token ed eseguono analisi lessicali quali lo stemming e la rimozione delle parole vuote. Gli analizzatori sono solitamente specifici per ogni lingua. È possibile consultare <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">questa guida</a> per saperne di più sugli analizzatori in Milvus.</p>
+<p>Milvus supporta due tipi di analizzatori: <strong>analizzatori integrati</strong> e <strong>analizzatori personalizzati</strong>. Per impostazione predefinita, l’ <code translate="no">BM25BuiltInFunction</code> e utilizzerà <a href="https://milvus.io/docs/standard-analyzer.md">l’analizzatore standard integrato</a>, che è l’analizzatore più basilare che tokenizza il testo con la punteggiatura.</p>
+<p>L’archivio di documenti ibrido sopra riportato passa ` <code translate="no">analyzer_params_custom</code> ` a ` <code translate="no">BM25BuiltInFunction</code> ` e abilita la corrispondenza del testo. In questo modo, la definizione dell’analizzatore rimane associata alla collezione che lo utilizza.</p>
+<p>Possiamo dare un’occhiata allo schema della collezione Milvus e assicurarci che l’analizzatore personalizzato sia configurato correttamente.</p>
+<pre><code translate="no" class="language-python">collection = document_store.client.describe_collection(document_store.collection_name)
+text_field = <span class="hljs-built_in">next</span>(field <span class="hljs-keyword">for</span> field <span class="hljs-keyword">in</span> collection[<span class="hljs-string">&quot;fields&quot;</span>] <span class="hljs-keyword">if</span> field[<span class="hljs-string">&quot;name&quot;</span>] == <span class="hljs-string">&quot;text&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer:&quot;</span>, text_field[<span class="hljs-string">&quot;params&quot;</span>][<span class="hljs-string">&quot;analyzer_params&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Calculating embeddings: 100%|██████████| 1/1 [00:00&lt;00:00,  1.39it/s]
-
-
-
-
-
-{'dense_doc_embedder': {'meta': {'model': 'text-embedding-ada-002-v2',
-   'usage': {'prompt_tokens': 11, 'total_tokens': 11}}},
- 'writer': {'documents_written': 3}}
+<pre><code translate="no">Custom analyzer: {&quot;tokenizer&quot;: &quot;standard&quot;, &quot;filter&quot;: [&quot;lowercase&quot;, {&quot;type&quot;: &quot;length&quot;, &quot;max&quot;: 40}, {&quot;type&quot;: &quot;stop&quot;, &quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]}]}
 </code></pre>
-<p>Si può dare un'occhiata allo schema della collezione Milvus e verificare che l'analizzatore personalizzato sia impostato correttamente.</p>
-<pre><code translate="no" class="language-python">document_store.col.schema
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase', {'type': 'length', 'max': 40}, {'type': 'stop', 'stop_words': ['of', 'to']}]}}}, {'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535}, 'is_primary': True, 'auto_id': False}, {'name': 'vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}], 'enable_dynamic_field': True, 'functions': [{'name': 'bm25_function_7b6e15a4', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['text'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
-</code></pre>
-<p>Per ulteriori dettagli sui concetti, ad esempio <code translate="no">analyzer</code>, <code translate="no">tokenizer</code>, <code translate="no">filter</code>, <code translate="no">enable_match</code>, <code translate="no">analyzer_params</code>, consultare la <a href="https://milvus.io/docs/analyzer-overview.md">documentazione</a> dell'<a href="https://milvus.io/docs/analyzer-overview.md">analizzatore</a>.</p>
-<h2 id="Using-Hybrid-Search-in-RAG-pipeline" class="common-anchor-header">Uso della ricerca ibrida nella pipeline RAG<button data-href="#Using-Hybrid-Search-in-RAG-pipeline" class="anchor-icon" translate="no">
+<p>Per ulteriori dettagli concettuali, ad esempio <code translate="no">analyzer</code>, <code translate="no">tokenizer</code>, <code translate="no">filter</code>, <code translate="no">enable_match</code>, <code translate="no">analyzer_params</code>, si prega di fare riferimento alla <a href="https://milvus.io/docs/analyzer-overview.md">documentazione</a> relativa <a href="https://milvus.io/docs/analyzer-overview.md">agli analizzatori</a>.</p>
+<h2 id="Using-Hybrid-Search-in-RAG-pipeline" class="common-anchor-header">Utilizzo della ricerca ibrida nella pipeline RAG<button data-href="#Using-Hybrid-Search-in-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -389,42 +362,48 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Abbiamo imparato a usare la funzione di base di BM25 in Haystack e Milvus e abbiamo preparato un sito <code translate="no">document_store</code>. Introduciamo un'implementazione ottimizzata di RAG con la ricerca ibrida.</p>
+    </button></h2><p>Abbiamo appreso come utilizzare la funzione integrata di base BM25 in Haystack e Milvus e abbiamo preparato un file <code translate="no">document_store</code> già caricato. Presentiamo ora un’implementazione ottimizzata di RAG con ricerca ibrida.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/pics/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>Questo diagramma mostra il processo di Hybrid Retrieve &amp; Reranking, che combina BM25 per la corrispondenza delle parole chiave e la ricerca vettoriale densa per il recupero semantico. I risultati di entrambi i metodi vengono uniti, riclassificati e passati a un LLM per generare la risposta finale.</p>
-<p>La ricerca ibrida bilancia la precisione e la comprensione semantica, migliorando l'accuratezza e la robustezza per query diverse. Recupera i candidati con la ricerca full-text e la ricerca vettoriale di BM25, garantendo un recupero semantico, consapevole del contesto e accurato.</p>
-<p>Proviamo un'implementazione ottimizzata di RAG con ricerca ibrida.</p>
-<pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
-                     not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n
-                     Query: {{query}}
-                     Documents:
-                     {% for doc in documents %}
-                        {{ doc.content }}
-                     {% endfor %}
-                     Answer:
-                  &quot;&quot;&quot;</span>
+<p>Questo diagramma illustra il processo di recupero e riclassificazione ibrido (Hybrid Retrieve &amp; Reranking), che combina BM25 per la corrispondenza delle parole chiave e la ricerca vettoriale densa per il recupero semantico. I risultati di entrambi i metodi vengono uniti, riclassificati e trasmessi a un LLM per generare la risposta finale.</p>
+<p>La ricerca ibrida bilancia precisione e comprensione semantica, migliorando l’accuratezza e la robustezza per query diverse. Recupera i risultati candidati tramite la ricerca full-text BM25 e la ricerca vettoriale, garantendo un recupero semantico, sensibile al contesto e accurato.</p>
+<p>Proviamo un’implementazione RAG ottimizzata con ricerca ibrida.</p>
+<pre><code translate="no" class="language-python">prompt_template = [
+    ChatMessage.from_user(
+        <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
+        not include an answer, reply with &#x27;I don&#x27;t know&#x27;.
+
+        Query: {{query}}
+        Documents:
+        {% for doc in documents %}
+            {{ doc.content }}
+        {% endfor %}
+        Answer:
+        &quot;&quot;&quot;</span>
+    )
+]
 
 rag_pipeline = Pipeline()
 rag_pipeline.add_component(<span class="hljs-string">&quot;text_embedder&quot;</span>, OpenAITextEmbedder())
 rag_pipeline.add_component(
     <span class="hljs-string">&quot;retriever&quot;</span>, MilvusHybridRetriever(document_store=document_store, top_k=<span class="hljs-number">1</span>)
 )
-rag_pipeline.add_component(<span class="hljs-string">&quot;prompt_builder&quot;</span>, PromptBuilder(template=prompt_template))
+rag_pipeline.add_component(
+    <span class="hljs-string">&quot;prompt_builder&quot;</span>, ChatPromptBuilder(template=prompt_template)
+)
 rag_pipeline.add_component(
     <span class="hljs-string">&quot;generator&quot;</span>,
-    OpenAIGenerator(
-        api_key=Secret.from_token(os.getenv(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>)),
-        generation_kwargs={<span class="hljs-string">&quot;temperature&quot;</span>: <span class="hljs-number">0</span>},
+    OpenAIChatGenerator(
+        api_key=Secret.from_env_var(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>),
     ),
 )
 rag_pipeline.connect(<span class="hljs-string">&quot;text_embedder.embedding&quot;</span>, <span class="hljs-string">&quot;retriever.query_embedding&quot;</span>)
 rag_pipeline.connect(<span class="hljs-string">&quot;retriever.documents&quot;</span>, <span class="hljs-string">&quot;prompt_builder.documents&quot;</span>)
-rag_pipeline.connect(<span class="hljs-string">&quot;prompt_builder&quot;</span>, <span class="hljs-string">&quot;generator&quot;</span>)
+rag_pipeline.connect(<span class="hljs-string">&quot;prompt_builder.prompt&quot;</span>, <span class="hljs-string">&quot;generator.messages&quot;</span>)
 
 results = rag_pipeline.run(
     {
@@ -433,8 +412,23 @@ results = rag_pipeline.run(
         <span class="hljs-string">&quot;prompt_builder&quot;</span>: {<span class="hljs-string">&quot;query&quot;</span>: question},
     }
 )
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;RAG answer:&quot;</span>, results[<span class="hljs-string">&quot;generator&quot;</span>][<span class="hljs-string">&quot;replies&quot;</span>][<span class="hljs-number">0</span>])
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;RAG answer:&quot;</span>, results[<span class="hljs-string">&quot;generator&quot;</span>][<span class="hljs-string">&quot;replies&quot;</span>][<span class="hljs-number">0</span>].text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">RAG answer: Bob likes swimming.
+<pre><code translate="no">RAG answer: Bob
 </code></pre>
-<p>Per ulteriori informazioni su come utilizzare milvus-haystack, consultare il <a href="https://github.com/milvus-io/milvus-haystack">repository ufficiale di milvus-haystack</a>.</p>
+<h2 id="Conclusion" class="common-anchor-header">Conclusione<button data-href="#Conclusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Avete utilizzato la ricerca BM25 nativa di Milvus, il recupero ibrido e un analizzatore personalizzato nelle pipeline Haystack. Per ulteriori opzioni di integrazione, consultate il <a href="https://github.com/milvus-io/milvus-haystack">repository milvus-haystack</a>.</p>

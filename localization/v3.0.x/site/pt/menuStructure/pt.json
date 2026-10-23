@@ -229,7 +229,7 @@
             "children": []
           },
           {
-            "label": "Tratamento de dados",
+            "label": "Processamento de dados",
             "id": "data_processing.md",
             "order": 3,
             "children": []
@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e AutoID",
+            "label": "Campo principal e identificação automática",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -1487,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "Forçar a compactação por fusão",
+            "label": "Forçar a compactação da fusão",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -2861,7 +2861,7 @@
             "children": []
           },
           {
-            "label": "Jina AI",
+            "label": "Jina IA",
             "id": "integrate_with_jina.md",
             "order": 11,
             "children": []
@@ -3097,6 +3097,12 @@
             "id": "search_with_jev.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
+            "children": []
           }
         ]
       }
@@ -3115,7 +3121,7 @@
         "children": []
       },
       {
-        "label": "Criar um RAG com o Milvus",
+        "label": "Criar o RAG com o Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []

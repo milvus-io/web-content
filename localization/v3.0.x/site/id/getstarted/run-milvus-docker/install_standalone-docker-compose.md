@@ -57,7 +57,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Untuk menginstal Milvus menggunakan Docker Compose, cukup jalankan</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,16 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Penerapan default (v3.0.2):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan menggunakan <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
+<p><strong>Penerapan default (v3.0.3):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan menggunakan <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
 <p><strong>Antrian pesan default berdasarkan versi:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — antrian pesan default adalah <strong>RocksMQ</strong>.</li>
 <li><strong>2.6.x dan seterusnya</strong> — antrian pesan default adalah <strong>Woodpecker (terintegrasi)</strong>.</li>
 </ul>
-<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur v3.0.2.</p>
+<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur v3.0.3.</p>
 <ul>
-<li><p>Jika Anda gagal menjalankan perintah di atas, silakan periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
-<li><p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail masalahnya, dan kami akan memberikan dukungan yang diperlukan.</p></li>
+<li><p>Jika Anda gagal menjalankan perintah di atas, silakan periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan pada <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
+<li><p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p></li>
 </ul>
 </div>
 <p>Setelah Milvus dimulai,</p>
@@ -114,7 +114,7 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
       </svg>
     </button></h2><p>Untuk memperbarui konfigurasi Milvus agar sesuai dengan kebutuhan Anda, Anda perlu memodifikasi berkas ` <code translate="no">/milvus/configs/user.yaml</code> ` di dalam kontainer ` <code translate="no">milvus-standalone</code> `.</p>
 <ol>
-<li><p>Akses kontainer ` <code translate="no">milvus-standalone</code> `.</p>
+<li><p>Akses kontainer <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tambahkan konfigurasi tambahan untuk menggantikan konfigurasi default.
@@ -144,14 +144,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat menghentikan dan menghapus wadah ini sebagai berikut</p>
+    </button></h2><p>Anda dapat menghentikan dan menghapus kontainer ini sebagai berikut</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Meningkatkan versi dari Milvus 2.5.x ke 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
+<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Memperbarui dari Milvus 2.5.x ke 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +166,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Batasan Antrian Pesan</strong>: Saat melakukan peningkatan ke Milvus v3.0.2, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih di antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
+    </button></h2><p><strong>Batasan Antrian Pesan</strong>: Saat melakukan pembaruan ke Milvus v3.0.3, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
 <p>Karena versi 2.6.x mengubah antrian pesan default menjadi Woodpecker, sebuah instance yang menjalankan <strong>RocksMQ</strong> pada versi 2.5.x harus <strong>secara eksplisit mengunci (pin) RocksMQ sebelum melakukan pembaruan</strong> — jika tidak, proses pembaruan akan mencoba mengubah antrian pesan, yang tidak didukung. Setelah mengunduh berkas Docker Compose versi 2.6.x, atur kembali jenis antrian pesan menjadi ` <code translate="no">rocksmq</code> ` dalam file ` <code translate="no">user.yaml</code> ` Anda, lalu lakukan pembaruan:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
 <span class="hljs-attr">mq:</span>
@@ -191,7 +191,7 @@ EOF
     </button></h2><p>Penerapan ini menjalankan <strong>Woodpecker</strong> (terintegrasi, backend MinIO WAL) untuk pengiriman pesan, <strong>etcd</strong> untuk metadata, dan <strong>MinIO</strong> untuk penyimpanan objek. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek/metadata eksternal, lihat:</p>
 <ul>
 <li>Antrian pesan: <a href="/docs/id/woodpecker.md">Woodpecker</a> (default) · <a href="/docs/id/mq_pulsar.md">Pulsar</a> · <a href="/docs/id/mq_kafka.md">Kafka</a> · <a href="/docs/id/mq_rocksmq.md">RocksMQ</a></li>
-<li>Penyimpanan objek: <a href="/docs/id/deploy_s3.md">MinIO</a> (default) · <a href="/docs/id/deploy_s3.md">AWS S3</a> · <a href="/docs/id/abs.md">Azure Blob</a> · <a href="/docs/id/gcs.md">GCP Cloud Storage</a> · <a href="/docs/id/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/id/deploy_s3.md">Tencent COS</a> · <a href="/docs/id/deploy_s3.md">Huawei OBS</a> · <a href="/docs/id/deploy_s3.md">S3-compatible</a></li>
+<li>Penyimpanan objek: <a href="/docs/id/deploy_s3.md">MinIO</a> (default) · <a href="/docs/id/deploy_s3.md">AWS S3</a> · <a href="/docs/id/abs.md">Azure Blob</a> · <a href="/docs/id/gcs.md">GCP Cloud Storage</a> · <a href="/docs/id/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/id/deploy_s3.md">Tencent COS</a> · <a href="/docs/id/deploy_s3.md">Huawei OBS</a> · <a href="/docs/id/deploy_s3.md">Kompatibel dengan S3</a></li>
 <li>Metadata: <a href="/docs/id/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
@@ -232,7 +232,7 @@ EOF
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

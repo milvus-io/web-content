@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本系列 Collection",
+            "label": "About the Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -334,13 +334,13 @@
             "children": []
           },
           {
-            "label": "查看 Collections",
+            "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Modify Collection",
+            "label": "修改 Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "解合器",
+                    "label": "解聚机",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改集合 Schema",
+            "label": "修改Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1359,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名器",
+                "label": "RRF 排名系统",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1415,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "模型排名概览",
+                    "label": "模型排名概述",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1427,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名工具",
+                    "label": "TEI 排名器",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1587,7 +1587,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 版 Agents.md",
+            "label": "Milvus 的 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1639,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Claude Code 的 MCP 服务器",
+        "label": "Claude 代码的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2181,7 +2181,7 @@
         "children": []
       },
       {
-        "label": "Milvus Backup",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -2274,7 +2274,7 @@
             "children": []
           },
           {
-            "label": "配置 CDC 复制",
+            "label": "设置 CDC 复制",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -3096,6 +3096,12 @@
             "label": "Jev",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS 瓦马纳",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -2,7 +2,7 @@
 id: roadmap.md
 title: Milvus 路线图
 related_key: Milvus roadmap
-summary: Milvus 是一个专为支持人工智能应用而构建的开源向量数据库。以下是我们的路线图，用于指导我们的开发工作。
+summary: 了解 Milvus 在 3.0 和 3.1 版本中关于搜索、分析、模式演进、数据湖集成以及性能方面的路线图。
 ---
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 路线图<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,9 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="common-anchor-header">🌌 迈向新一代多模态数据库和向量 Lakebase<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Vector-Lakebase" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 3.0 整合了多向量检索、SQL 风格查询、灵活的 Schema 以及对数据湖存储中数据的访问功能。后续阶段将在此基础上，提供更丰富的查询功能、更广泛的数据模型，并提升性能和可扩展性。本路线图概述了开源版 Milvus 的优先发展方向。</p>
+<p>Milvus 3.0 自<strong>v3.0.1</strong> 版本起正式发布。下文所述的已发布功能均在<strong>v3.0.0</strong> 版本中引入；预览功能和需主动启用的功能将在相关位置予以标注。<strong>3.0.x</strong>系列在此基础上进一步扩展了这些功能，而<strong>3.1 版本计划于 2026 年 12 月发布</strong>。随着开发进程的推进，计划中的功能和目标日期可能会发生变化。</p>
+<h2 id="Search-and-retrieval" class="common-anchor-header">搜索与检索<button data-href="#Search-and-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,138 +36,156 @@ summary: Milvus 是一个专为支持人工智能应用而构建的开源向量�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Milvus 产品路线图</strong></p>
-<p>欢迎阅读 Milvus 路线图！</p>
-<p>我们正引领 Milvus 迈入一个新时代——新一代多模态数据库<strong>——其覆盖范围从结构化数据到非结构化数据，从实时检索到离线分析，从单集群性能到全球化的</strong> <strong>Vector Lakebase 架构。</strong></p>
-<p>本路线图概述了<strong>Milvus v3.0</strong>和<strong>Milvus v3.1（长期发展）</strong>的核心目标，以及<strong>Zilliz Vector Lakebase</strong> 的演进计划。</p>
-<h2 id="🌠-Milvus-v30" class="common-anchor-header">🌠 Milvus v3.0<button data-href="#🌠-Milvus-v30" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>重点：构建具备引擎内排序、聚合和多向量检索能力的<strong>语义原生查询引擎</strong>，以及<strong>Zilliz Vector Lakebase 的湖原生基础架构</strong>，使计算无需数据迁移即可直接访问数据。</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 主要亮点<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Schema--Data-Type-Evolution" class="common-anchor-header">🔹<strong>Schema与数据类型演进</strong></h4><ul>
-<li>支持运行时执行 ALTER Collection ADD COLUMN 和 删除 Collection 操作，无需重建索引或中断服务。</li>
-<li>为新列提供<strong>两种补全路径</strong>：通过 Spark Connector 进行的外部补全，以及在写入时自动生成 BM25 稀疏向量进行的内部补全。</li>
-<li>引入<strong>TEXT</strong>作为一等数据类型，可在存储原始文本的同时存储向量，并支持 BM25 和文本匹配。</li>
-</ul>
-<h4 id="🔹-Query-Execution-Overhaul" class="common-anchor-header">🔹<strong>查询</strong> <strong>执行全面优化</strong></h4><ul>
-<li>将<strong>Order By</strong>推入引擎，支持按分段排序以及跨查询节点的归并排序。</li>
-<li>添加在内核中计算的 SQL 风格<strong>查询</strong> <strong>聚合</strong>（带 COUNT、SUM、AVG、MIN、MAX 的 GROUP BY）。</li>
-<li>在 ANN 结果上引入<strong>搜索维度</strong>，支持按桶统计以及服务器端的嵌套子维度。</li>
-<li>支持在集群端注册<strong>自定义词典</strong>和同义词表，以提升中日韩（CJK）及特定领域的召回率。</li>
-</ul>
-<h4 id="🔹-Multi-Vector--Late-Interaction-Support" class="common-anchor-header">🔹<strong>多向量与延迟交互支持</strong></h4><ul>
-<li>引入<strong>StructList，</strong>将一个实体表示为包含多个向量的单行，并通过 MAX_SIM 原生支持延迟交互（ColBERT、ColPali）。</li>
-<li>支持对 StructList 字段进行<strong>元素级和实体级搜索</strong>，并为实体级结果提供可配置的匹配策略。</li>
-<li>新增三种<strong>多向量检索策略</strong>：TokenANN（穷举式）、Muvera（基于投影，无需训练）和 Lemur（基于学习压缩）。</li>
-</ul>
-<h4 id="🔹-Retrieval--Index-Overhaul" class="common-anchor-header">🔹<strong>检索与索引全面改造</strong></h4><ul>
-<li>对<strong>稀疏倒排索引</strong>进行了全面改造，采用了块压缩、权重量化及持久化格式；引入<strong>SINDI</strong>作为默认的稀疏倒排索引算法。</li>
-<li>通过完整的<strong>Faiss 系列</strong>（SVS、Panorama、PQ、IVFPQ、ScaNN）以及用于近似重复项检测的<strong>MinHash DIDO，</strong>扩展索引覆盖范围。</li>
-<li>支持<strong>可为空的向量字段</strong>，以处理异步Embeddings和缺失模态，并在搜索时进行自动过滤。</li>
-</ul>
-<h4 id="🔹-Vector-Lakebase-Storage--Compute-Architecture" class="common-anchor-header">🔹<strong>Vector Lakebase 存储与计算架构</strong></h4><ul>
-<li>引入<strong>External Collection</strong>，可在 S3 / GCS / Azure 中原地对数据进行索引和查询，支持 Lance、Parquet、Iceberg 和 Vortex 表格式。</li>
-<li>新增<strong>Vortex</strong>（一种开放的列式格式）以及<strong>Loon（Storage V3）</strong>——一种混合格式存储层，用于从对象存储中高效读取单个数据点。</li>
-<li>支持采用 MVCC 风格隔离的<strong>特定时间点快照</strong>，可在服务持续写入的同时进行批处理。</li>
-<li>作为<strong>Spark DataSource v2</strong>集成，可在 Spark / Databricks / EMR 管道中直接读写 Milvus 数据。</li>
-</ul>
-<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1（长期愿景）<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><strong>时间表：2026 年末及以后</strong></p>
-<p>重点：<strong>存储智能</strong>、<strong>写入路径完整性</strong>、<strong>计算可扩展性</strong>，以及<strong>扩展</strong> <strong>Vector Lakebase</strong> <strong>的互操作性</strong>。</p>
-<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 主要亮点<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><h4 id="🔹-Storage--Write-Path" class="common-anchor-header">🔹<strong>存储与写入路径</strong></h4><ul>
-<li>在存储层添加<strong>谓词下推功能</strong>，并结合页索引和布隆过滤器进行数据修剪。</li>
-<li>在数据摄入时实现<strong>主键去重</strong>，以防止写入时的重复数据。</li>
-</ul>
-<h4 id="🔹-Compute--Elasticity" class="common-anchor-header">🔹<strong>计算与弹性</strong></h4><ul>
-<li>支持<strong>用户定义函数（UDF）</strong>，可在引擎的数据平面中运行自定义逻辑。</li>
-<li>启用<strong>分片拆分</strong>功能，可在数据增长时重新划分分片，并支持自定义分片键。</li>
-</ul>
-<h4 id="🔹-Spark--Vector-Lakebase-Expansion" class="common-anchor-header">🔹<strong>Spark 与</strong> <strong>Vector Lakebase</strong> <strong>扩展</strong></h4><ul>
-<li>通过更丰富的<strong>原生批处理操作符</strong>库扩展 Spark 连接器。</li>
-<li>新增<strong>表格式</strong>功能，包括时间回溯、Schema演进和快照回滚。</li>
-<li>通过<strong>CDC 实时外部索引</strong>、对 Apache Paimon 的支持以及更多数据格式，扩展 Vector Lakebase 的互操作性。</li>
-</ul>
-<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 携手共建 Milvus 的未来<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus 是一个由全球开发者社区驱动的开源项目。我们诚邀所有社区成员共同塑造下一代多模态数据库：</p>
+    </button></h2><p>检索路线图的重点在于将更多相关性信号整合到 Milvus 中，涵盖文本匹配、多向量表示、重新排序以及搜索结果分面等功能。</p>
+<p><strong>3.0版本中已提供</strong></p>
 <ul>
-<li><p>💬<strong>分享反馈</strong>：在<a href="https://github.com/milvus-io/milvus/discussions">GitHub 讨论区</a>提出新功能或优化建议。</p></li>
-<li><p>🐛<strong>报告问题</strong>：通过<a href="https://github.com/milvus-io/milvus/issues">GitHub Issues</a> 提交 bug 报告。</p></li>
-<li><p>🔧<strong>贡献代码</strong>：提交 PR 并协助构建核心功能。</p>
-<ul>
-<li><strong>拉取请求</strong>：直接为我们的<a href="https://github.com/milvus-io/milvus/pulls">代码库</a>做出贡献。无论是修复 bug、添加功能还是完善文档，我们都欢迎您的贡献。</li>
-<li><strong>开发指南</strong>：请查阅我们的<a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">《贡献者指南》</a>，了解代码贡献的相关规范。</li>
-</ul></li>
-<li><p>🗣️<strong>加入讨论</strong>：在<a href="https://milvus.io/discord">Discord</a>、<a href="https://meetings.hubspot.com/chloe-williams1/milvus-meeting">Milvus 办公时间</a>或<a href="https://milvus.io/community">所有社区频道</a>中提问并结识维护者。</p></li>
-<li><p>⭐<strong>广而告之</strong>：分享最佳实践和成功案例，并在<a href="https://twitter.com/milvusio">X</a>、<a href="https://www.linkedin.com/company/the-milvus-project/">LinkedIn</a> 和<a href="https://www.youtube.com/c/MilvusVectorDatabase">YouTube</a> 上关注 Milvus。</p></li>
+<li><strong>多向量检索：</strong>StructArray搜索支持Muvera和Lemur，并提供<code translate="no">element_filter</code> 用于元素级过滤。匹配策略包括<code translate="no">MATCH_ANY</code> 、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 以及<code translate="no">MATCH_EXACT</code> 。</li>
+<li><strong>文本匹配与相似度：</strong>自定义词典和同义词可将文本检索功能适配至应用需求。正则表达式过滤支持模式匹配，而 MinHash 支持近似重复检测。</li>
+<li><strong>重新排序与推理：</strong>Milvus 3.0 引入了首批“函数链”（Function Chain）重新排序功能，并搭载了 Hugging Face 推理提供程序。其余“函数链”功能计划在 3.0.x 版本中推出。</li>
+<li><strong>搜索聚合：</strong>搜索聚合功能为搜索结果提供分面筛选。</li>
 </ul>
-<p>👉<strong>GitHub：</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>
+<p><strong>计划在 3.0.x 版本中实现</strong></p>
+<p>3.0.x 系列计划新增模糊匹配和全局统计功能，并全面支持 Function Chain。</p>
+<p><strong>计划在 3.1 版本中实现</strong></p>
+<p>计划包括基于 Grep 的检索、通过 ANN-filter 融合实现近似最近邻 (ANN) 搜索与过滤的更紧密集成，以及对稀疏检索的改进。</p>
+<h2 id="Analytics-and-SQL-style-querying" class="common-anchor-header">分析和 SQL 风格查询<button data-href="#Analytics-and-SQL-style-querying" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 正在扩展其查询引擎，以便应用程序在检索的同时对数据进行排序和聚合。下一阶段将添加连接、物化视图和自定义计算功能。</p>
+<p><strong>3.0 版本已支持</strong></p>
+<p>查询和搜索功能支持使用<code translate="no">ORDER BY</code> 进行排序。查询聚合功能新增了<code translate="no">GROUP BY</code> ，用于计算分组统计数据。</p>
+<p><strong>计划在 3.1 版本中推出</strong></p>
+<ul>
+<li><strong>更丰富的查询功能：</strong>引入连接操作（首先支持半连接）以及物化视图 Collections。</li>
+<li><strong>数据更新与完整性：</strong>支持就地更新，以及在数据摄入过程中对主键进行去重。</li>
+<li><strong>查询迭代和 JSON 语义：</strong>添加有状态查询迭代器、JSON<code translate="no">GROUP BY</code> 以及 SQL / JSON NULL 语义。</li>
+<li><strong>自定义计算：</strong>支持 Python 用户定义函数 (UDF)。</li>
+</ul>
+<h2 id="Flexible-schema-and-data-types" class="common-anchor-header">灵活的Schema和数据类型<button data-href="#Flexible-schema-and-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Schema方面的开发重点在于演进现有Collection，并支持表示更广泛的数据类型。这包括字段变更、多向量结构、长文本以及实体过期机制。</p>
+<p><strong>3.0 版本中可用</strong></p>
+<ul>
+<li><strong>在线模式变更：</strong>现有 Collections 支持在线字段添加，包括向量和<code translate="no">Array&lt;Struct&gt;</code> 字段。删除字段功能处于<strong>预览</strong>阶段，可能存在限制。</li>
+<li><strong>现有数据的回填：</strong>外部回填使用 Spark 连接器。内部回填将 BM25 或 MinHash 函数附加到 Collection 上，并针对现有数据计算其输出结果。</li>
+<li><strong>文本和多向量数据：</strong> <code translate="no">TEXT</code> 类型用于存储长文本，而 StructArray 支持通过 `<code translate="no">MAX_SIM</code>` 进行延迟交互检索。<code translate="no">TEXT</code> 需要启用 Storage V3。</li>
+<li><strong>NULL 值和过期：</strong>向量字段接受 NULL 值，实体级生存时间 (TTL) 控制过期。</li>
+</ul>
+<p><strong>3.0.x 版本计划功能</strong></p>
+<p>计划中的 Schema 增强功能将扩展 StructArray 对类型、NULL 值以及字段添加和删除的支持。此外，还将为向量字段添加分子式支持以及<code translate="no">IS NULL</code> /<code translate="no">IS NOT NULL</code> 过滤器。</p>
+<p><strong>计划在 3.1 版本中实现</strong></p>
+<p>下一阶段的数据模型扩展将包括嵌套 JSON 和 Struct、复合主键、不含向量字段的 Collection，以及 StructList 中的稀疏向量。</p>
+<h2 id="Lake-integration-and-data-versioning" class="common-anchor-header">湖存储集成与数据版本控制<button data-href="#Lake-integration-and-data-versioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 正在推进与数据湖存储及批处理的深度集成。外部 Collections 可直接访问数据所在位置，而快照则为数据版本控制提供了基础。</p>
+<p><strong>已在 3.0 版本中提供</strong></p>
+<ul>
+<li><strong>外部数据访问：</strong>外部 Collection 支持 Lance、Parquet 和 Iceberg 数据。</li>
+<li><strong>快照与批处理集成：</strong>快照可捕获 Collection 数据的某个版本，而 Spark 连接器支持批处理工作流。</li>
+<li><strong>存储基础：</strong>Storage V3（Loon）提供可选的 Vortex 和 Lance 支持。该功能默认处于禁用状态，可通过<code translate="no">common.storage.useLoonFFI</code> 启用。快照和<code translate="no">TEXT</code> 均依赖于此功能。</li>
+</ul>
+<p><strong>3.0.x 版本计划功能</strong></p>
+<p>计划中的增强功能将允许 Milvus 采集快照充当外部采集源。外部表支持还将扩展至 JSON 分片、函数字段添加以及字段移除。</p>
+<p><strong>3.1 版本计划</strong></p>
+<p>计划包括基于 S3 的稀疏索引和标量索引，以及通过导入实现的删除功能。</p>
+<h2 id="Performance-indexing-and-scale" class="common-anchor-header">性能、索引和扩展性<button data-href="#Performance-indexing-and-scale" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>性能路线图涵盖检索索引、查询执行和集群扩展。此外，还涉及恢复以及必须从对象存储读取数据的查询。</p>
+<p><strong>3.0 版本已支持</strong></p>
+<ul>
+<li><strong>稀疏索引：</strong>稀疏索引的全面改造引入了 SINDI。</li>
+<li><strong>索引选择：</strong> <code translate="no">FAISS</code> 直通索引支持Faiss索引生成器字符串，可选方案包括SVS、Panorama、PQ、IVFPQ和ScaNN。DiskANN索引也可用于嵌入列表（EmbList）。</li>
+<li><strong>压缩：</strong>Force Merge 提供了对分段合并的显式控制。</li>
+</ul>
+<p><strong>计划在 3.1 版本中实现</strong></p>
+<ul>
+<li><strong>存储感知查询：</strong>为 Vortex 添加谓词下推功能，包括页面级剪枝和跳过索引。</li>
+<li><strong>集群扩展和多租户：</strong>支持分片拆分、自定义分片键和多租户优化。</li>
+<li><strong>查询执行和索引：</strong>开发 QueryView，改进对宽 Collection 的支持、流结果缩减，并支持多个索引。</li>
+<li><strong>写入可靠性：</strong>支持幂等写入。</li>
+<li><strong>对象存储缓存：</strong>将 Talon 用作 S3 缓存，以改善故障恢复和冷查询性能。</li>
+</ul>
+<h2 id="Beyond-31" class="common-anchor-header">3.1 版本之后<button data-href="#Beyond-31" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>长期工作包括时间旅行和快照回滚。其范围和发布时间尚待确认。</p>
+<h2 id="Help-shape-the-roadmap" class="common-anchor-header">共同规划路线图<button data-href="#Help-shape-the-roadmap" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>请在<a href="https://github.com/milvus-io/milvus/discussions">GitHub 讨论区</a>分享对您的应用程序至关重要的工作负载、限制条件和功能需求。通过<a href="https://github.com/milvus-io/milvus/issues">GitHub 问题提交</a> bug 报告。</p>
+<p>如需贡献代码或文档，请从《<a href="https://github.com/milvus-io/milvus/blob/master/CONTRIBUTING.md">贡献者指南</a>》开始。</p>

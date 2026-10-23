@@ -63,10 +63,10 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.24:</strong></p>
+<p><strong>Apa yang baru di v2.6.25:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
-<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah, lihat <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> untuk detailnya</li>
+<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat " <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> " untuk detailnya</li>
 <li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang dikonsolidasikan untuk kinerja yang lebih baik</li>
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
@@ -103,11 +103,11 @@ proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian, jalankan ulang layanan sebagai berikut:</p>
+<p>Kemudian, mulai ulang layanan sebagai berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/v2.6.x/system_configuration.md">Konfigurasi Sistem</a>.</p>
-<h2 id="Upgrade-Milvus" class="common-anchor-header">Meningkatkan Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
+<h2 id="Upgrade-Milvus" class="common-anchor-header">Memperbarui Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,14 +127,14 @@ EOF
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Perintah upgrade secara otomatis:</p>
+<p>Perintah pembaruan secara otomatis:</p>
 <ul>
 <li>Mengunduh skrip instalasi terbaru dengan konfigurasi yang diperbarui</li>
 <li>Mengunduh gambar Docker Milvus terbaru</li>
 <li>Memulai ulang kontainer dengan versi baru</li>
 <li>Menjaga data dan konfigurasi yang sudah ada</li>
 </ul>
-<p>Ini adalah cara yang disarankan untuk memperbarui deployment Milvus standalone Anda.</p>
+<p>Ini adalah cara yang disarankan untuk melakukan pembaruan pada deployment Milvus standalone Anda.</p>
 </div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Hentikan dan hapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +181,7 @@ EOF
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, dan Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
@@ -193,7 +193,7 @@ EOF
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

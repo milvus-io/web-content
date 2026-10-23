@@ -22,7 +22,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O tipo de índice « <code translate="no">FAISS</code> » é um passthrough de nível avançado disponível no Milvus 3.0.0 e versões posteriores. Permite-lhe fornecer uma <a href="https://github.com/facebookresearch/faiss/wiki/The-index-factory">cadeia de caracteres da fábrica de índices Faiss</a> em vez de selecionar um tipo de índice Milvus fixo.</p>
+    </button></h1><p>O tipo de índice « <code translate="no">FAISS</code> » é uma funcionalidade de nível avançado disponível no Milvus 3.0.0 e versões posteriores. Permite-lhe fornecer uma <a href="https://github.com/facebookresearch/faiss/wiki/The-index-factory">cadeia de caracteres da fábrica de índices Faiss</a>, em vez de selecionar um tipo de índice Milvus fixo.</p>
 <p>Utilize o <code translate="no">FAISS</code> quando já tiver uma receita Faiss testada e precisar de controlo direto sobre a sua composição. Para receitas comuns com um tipo de índice Milvus dedicado, opte pelo tipo dedicado, uma vez que este possui um contrato de parâmetros estável e documentado.</p>
 <div class="alert note">
 <p>Uma string de fábrica aceite pelo Faiss upstream não é automaticamente suportada pelo Milvus. A compatibilidade depende do tipo de campo vetorial, da métrica, da dimensão, dos módulos Faiss compilados na imagem do Milvus e do facto de o índice resultante suportar as operações exigidas pelo Milvus.</p>
@@ -47,12 +47,12 @@ beta: Milvus 3.0.0+
 <li><p>O adaptador genérico « <code translate="no">FAISS</code> » é executado na CPU. Não se trata de um tipo de índice Faiss para GPU.</p></li>
 <li><p>O parâmetro de compilação « <code translate="no">faiss_index_name</code> » é obrigatório. O Milvus transmite o seu valor ao Faiss sem converter a receita num tipo de índice dedicado do Milvus.</p></li>
 <li><p>Os parâmetros de compilação e pesquisa são específicos de cada fábrica. Um parâmetro suportado por uma fábrica pode ser rejeitado por outra.</p></li>
-<li><p>A filtragem escalar requer que o índice Faiss subjacente suporte um seletor de ID. Os testes do Milvus 3.0.0 abrangem a pesquisa filtrada com as fábricas de tipo float « <code translate="no">Flat</code> », « <code translate="no">IVF64,Flat</code> » e « <code translate="no">HNSW16,Flat</code> ». Não se deve presumir que todas as fábricas suportam filtros ou que os índices binários « <code translate="no">FAISS</code> » suportam filtragem escalar.</p></li>
+<li><p>A filtragem escalar requer que o índice Faiss subjacente suporte um seletor de ID. Os testes do Milvus 3.0.0 abrangem a pesquisa filtrada com as fábricas de tipo float « <code translate="no">Flat</code> », « <code translate="no">IVF64,Flat</code> » e « <code translate="no">HNSW16,Flat</code> ». Não se deve assumir que todas as fábricas suportam filtros ou que os índices binários « <code translate="no">FAISS</code> » suportam filtragem escalar.</p></li>
 <li><p>Os iteradores de pesquisa não são suportados.</p></li>
 <li><p>O adaptador não fornece recuperação de vetores em bruto.</p></li>
 <li><p>O suporte à pesquisa por intervalo depende da fábrica. O `float` <code translate="no">Flat</code> tem cobertura de versão. Não utilize a pesquisa por intervalo com índices binários <code translate="no">FAISS</code>.</p></li>
 <li><p>Uma fábrica pode ser compilada com sucesso, mas ainda assim rejeitar algumas operações de pesquisa do Milvus. Por exemplo, o <code translate="no">PQ8x4</code> autónomo rejeita o seletor utilizado pela pesquisa com filtragem escalar. Valide a utilização sem filtragem separadamente.</p></li>
-<li><p>No Milvus 3.0.0, valide os resultados do <code translate="no">COSINE</code> e os limiares da pesquisa por intervalo após uma recarga do índice. O Knowhere v3.0.6 não restaura o estado de normalização cosseno do adaptador <code translate="no">FAISS</code> durante a desserialização.</p></li>
+<li><p>No Milvus 3.0.0, valide os resultados do <code translate="no">COSINE</code> e os limiares de pesquisa por intervalo após uma recarga do índice. O Knowhere v3.0.6 não restaura o estado de normalização cosseno do adaptador <code translate="no">FAISS</code> durante a desserialização.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ beta: Milvus 3.0.0+
    <span>Fluxo de trabalho de passagem do índice FAISS</span>
   
  </span></p>
-<p>Para a construção do índice, o Milvus encaminha o ` <code translate="no">faiss_index_name</code>`, o tipo de campo vetorial, a métrica e outros parâmetros de construção para o adaptador Knowhere FAISS. O adaptador chama ` <code translate="no">faiss::index_factory()</code> ` para campos ` <code translate="no">FLOAT_VECTOR</code> ` ou ` <code translate="no">faiss::index_binary_factory()</code> ` para campos ` <code translate="no">BINARY_VECTOR</code> `. O objeto resultante é um índice Faiss nativo gerido através do ciclo de vida normal do índice do Milvus.</p>
+<p>Para a construção do índice, o Milvus encaminha <code translate="no">faiss_index_name</code>, o tipo de campo vetorial, a métrica e outros parâmetros de construção para o adaptador Knowhere FAISS. O adaptador chama <code translate="no">faiss::index_factory()</code> para campos <code translate="no">FLOAT_VECTOR</code> ou <code translate="no">faiss::index_binary_factory()</code> para campos <code translate="no">BINARY_VECTOR</code>. O objeto resultante é um índice Faiss nativo gerido através do ciclo de vida normal do índice do Milvus.</p>
 <p>Para a pesquisa, o adaptador converte os parâmetros específicos da fábrica fornecidos no objeto « <code translate="no">SearchParameters</code> » correspondente do Faiss. Para as fábricas de tipo «float» suportadas, também passa o conjunto de bits do filtro do Milvus como um seletor do Faiss. O suporte ao seletor é específico de cada fábrica, e os testes disponibilizados não estabelecem filtragem escalar para índices binários <code translate="no">FAISS</code>. É por isso que uma receita pode ser válida no Faiss autónomo, mas rejeitar uma operação exigida pelo caminho de pesquisa do Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ beta: Milvus 3.0.0+
 <li>Familiaridade com a sintaxe da fábrica de índices do Faiss e com os requisitos de treino da fábrica selecionada</li>
 </ul>
 <p>Para obter instruções de instalação, consulte <a href="/docs/pt/install-pymilvus.md">Instalar o PyMilvus</a>.</p>
-<h2 id="Choose-a-factory-string" class="common-anchor-header">Escolha uma cadeia de caracteres de fábrica<button data-href="#Choose-a-factory-string" class="anchor-icon" translate="no">
+<h2 id="Choose-a-factory-string" class="common-anchor-header">Escolha uma cadeia de caracteres da fábrica<button data-href="#Choose-a-factory-string" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,22 +113,23 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma string de fábrica descreve um índice Faiss como uma sequência de componentes. Os exemplos seguintes têm cobertura de teste da versão Milvus 3.0.0. Esta lista não é exaustiva.</p>
+    </button></h2><p>Uma cadeia de fábrica descreve um índice Faiss como uma sequência de componentes. Os exemplos seguintes têm cobertura de testes da versão Milvus 3.0.0. Esta lista não é exaustiva.</p>
 <table>
 <thead>
-<tr><th>String de fábrica</th><th>Tipo de campo</th><th>Métricas testadas nos testes de lançamento</th><th>Parâmetros de pesquisa</th><th>Notas</th></tr>
+<tr><th>String da fábrica</th><th>Tipo de campo</th><th>Métricas testadas nos testes de lançamento</th><th>Parâmetros de pesquisa</th><th>Notas</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Nenhuma</td><td>Pesquisa exata.</td></tr>
 <tr><td><code translate="no">IVF64,Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">nprobe</code></td><td>IVF com 64 listas invertidas e vetores não comprimidos.</td></tr>
-<tr><td><code translate="no">HNSW16,Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">efSearch</code></td><td>Grafo HNSW com armazenamento de vetores em formato plano.</td></tr>
+<tr><td><code translate="no">HNSW16,Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">efSearch</code></td><td>Grafo HNSW com armazenamento de vetores planos.</td></tr>
 <tr><td><code translate="no">OPQ16,IVF64,PQ16x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Específico da fábrica</td><td>Combina OPQ, IVF e PQ. Valide a dimensão do treino e a taxa de recuperação com os seus dados.</td></tr>
 <tr><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td><code translate="no">nprobe</code>, <code translate="no">k_factor</code></td><td>Utiliza um refinador plano após a recuperação de candidatos do PQ.</td></tr>
-<tr><td><code translate="no">PQ8x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Nenhum</td><td>Inclui testes de lançamento. A pesquisa com filtragem escalar falha porque o índice rejeita o seletor; valide a utilização sem filtragem separadamente.</td></tr>
+<tr><td><code translate="no">PQ8x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Nenhum</td><td>Incorpora testes de lançamento. A pesquisa com filtragem escalar falha porque o índice rejeita o seletor; valide a utilização sem filtragem separadamente.</td></tr>
 <tr><td><code translate="no">BFlat</code></td><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HAMMING</code></td><td>Nenhum</td><td>Pesquisa exata para vetores binários.</td></tr>
+<tr><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td>Índice gráfico SVS Vamana com compressão LeanVec. Requer uma compilação do Milvus com o SVS ativado e um processador Intel para o armazenamento LeanVec. Consulte <a href="/docs/pt/search_with_svs_vamana.md">«Pesquisa com SVS Vamana e Milvus</a>».</td></tr>
 </tbody>
 </table>
-<p>As entradas « <code translate="no">COSINE</code> » indicam a cobertura dos testes de compilação e de pesquisa. No Milvus 3.0.0, estas não garantem a correção da pontuação ou da pesquisa por intervalo após uma recarga do índice. Consulte <a href="#limits">«Limites</a>».</p>
+<p>As entradas « <code translate="no">COSINE</code> » indicam a cobertura de testes de desempenho na compilação e na pesquisa. Para o Milvus 3.0.0, estas não determinam a pontuação nem a correção da pesquisa por intervalo após uma recarga do índice. Consulte <a href="#limits">«Limites</a>».</p>
 <h2 id="Build-and-search-a-float-index" class="common-anchor-header">Compilar e pesquisar um índice de tipo float<button data-href="#Build-and-search-a-float-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,7 +196,7 @@ client.flush(collection_name=collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Defina « <code translate="no">index_type</code> » para « <code translate="no">FAISS</code> » e utilize « <code translate="no">faiss_index_name</code> » para selecionar a receita de fábrica nativa do Faiss.</p>
+    </button></h3><p>Defina « <code translate="no">index_type</code> » como « <code translate="no">FAISS</code> » e utilize « <code translate="no">faiss_index_name</code> » para selecionar a receita de fábrica nativa do Faiss.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -259,7 +260,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para campos do tipo « <code translate="no">BINARY_VECTOR</code> », utilize uma cadeia de fábrica binária, como « <code translate="no">BFlat</code> », e uma métrica binária compatível. Expanda o bloco de configuração e execute-o antes de criar e pesquisar o índice.</p>
+    </button></h2><p>Para campos « <code translate="no">BINARY_VECTOR</code> », utilize uma cadeia de fábrica binária, como « <code translate="no">BFlat</code> », e uma métrica binária compatível. Expanda o bloco de configuração e execute-o antes de criar e pesquisar o índice.</p>
 <p><details></p>
 <p><summary>Preparar a coleção de vetores binários</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -370,7 +371,7 @@ results = client.search(
 <tr><td><code translate="no">faiss_index_name</code></td><td><code translate="no">params</code> em <code translate="no">add_index()</code></td><td>A cadeia de caracteres da fábrica de índices Faiss. Por exemplo, <code translate="no">IVF64,Flat</code>.</td></tr>
 </tbody>
 </table>
-<p>Defina os parâmetros de pesquisa específicos da fábrica dentro de <code translate="no">search_params.params</code>. A tabela seguinte apresenta exemplos comuns e não é exaustiva.</p>
+<p>Defina os parâmetros de pesquisa específicos da fábrica dentro de <code translate="no">search_params.params</code>. A tabela seguinte apresenta exemplos comuns, não sendo exaustiva.</p>
 <table>
 <thead>
 <tr><th>Parâmetro</th><th>Exemplo de fábrica</th><th>Descrição</th></tr>
@@ -379,10 +380,11 @@ results = client.search(
 <tr><td><code translate="no">nprobe</code></td><td><code translate="no">IVF64,Flat</code></td><td>Número de listas invertidas a pesquisar.</td></tr>
 <tr><td><code translate="no">efSearch</code></td><td><code translate="no">HNSW16,Flat</code></td><td>Tamanho da lista de candidatos à pesquisa HNSW.</td></tr>
 <tr><td><code translate="no">k_factor</code></td><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td>Número de candidatos fornecidos ao refinador em relação ao top-K solicitado.</td></tr>
+<tr><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td>Tamanho da janela de pesquisa do SVS Vamana e capacidade do buffer. Consulte <a href="/docs/pt/search_with_svs_vamana.md">«Pesquisa com o SVS Vamana e o Milvus</a>».</td></tr>
 </tbody>
 </table>
-<p>O Milvus encaminha apenas os parâmetros adicionais reconhecidos pelo adaptador. Chaves de compilação e chaves de pesquisa desconhecidas, que a família de fábricas específica não suporta, são rejeitadas. O Milvus não mantém um esquema de parâmetros universal para todas as fábricas possíveis. Consulte a documentação do Faiss relativa à fábrica selecionada e, em seguida, valide todo o fluxo de compilação e pesquisa em relação à versão e imagem exatas do Milvus que pretende implementar.</p>
-<h2 id="Handle-errors-and-unsupported-operations" class="common-anchor-header">Lidar com erros e operações não suportadas<button data-href="#Handle-errors-and-unsupported-operations" class="anchor-icon" translate="no">
+<p>O Milvus encaminha apenas os parâmetros adicionais reconhecidos pelo adaptador. As chaves de compilação e de pesquisa desconhecidas que a família de fábricas específica não suporta são rejeitadas. O Milvus não mantém um esquema de parâmetros universal para todas as fábricas possíveis. Consulte a documentação do Faiss relativa à fábrica selecionada e, em seguida, valide todo o fluxo de compilação e pesquisa em relação à versão e imagem exatas do Milvus que pretende implementar.</p>
+<h2 id="Handle-errors-and-unsupported-operations" class="common-anchor-header">Tratar erros e operações não suportadas<button data-href="#Handle-errors-and-unsupported-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -398,10 +400,10 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Se a cadeia de caracteres da fábrica for inválida ou não estiver disponível na compilação do Milvus, a criação do índice falha. Verifique o estado do índice e o motivo da falha antes de carregar a coleção.</p></li>
+<li><p>Se a cadeia de caracteres da fábrica for inválida ou estiver indisponível na compilação do Milvus, a criação do índice falha. Verifique o estado do índice e o motivo da falha antes de carregar a coleção.</p></li>
 <li><p>Se um parâmetro tiver o tipo errado, a pesquisa falha. Por exemplo, « <code translate="no">nprobe=&quot;invalid&quot;</code> » é rejeitado porque « <code translate="no">nprobe</code> » deve ser numérico.</p></li>
 <li><p>Se um parâmetro não se aplicar à fábrica criada, o adaptador rejeita-o por não ser suportado.</p></li>
-<li><p>Se uma fábrica não suportar o seletor do Milvus, a pesquisa filtrada pode falhar, mesmo que a mesma fábrica consiga efetuar pesquisas no Faiss autónomo.</p></li>
+<li><p>Se uma fábrica não suportar o seletor do Milvus, a pesquisa filtrada pode falhar, mesmo que a mesma fábrica consiga pesquisar no Faiss autónomo.</p></li>
 <li><p>Não utilize <code translate="no">search_iterator()</code> com um índice <code translate="no">FAISS</code>.</p></li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Próximos passos<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -420,7 +422,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba como os índices do Milvus estão organizados em <a href="/docs/pt/index-explained.md">«Explicação do Índice</a>».</li>
+<li>Saiba como os índices do Milvus estão organizados em <a href="/docs/pt/index-explained.md">«Índice Explicado</a>».</li>
 <li>Compare os tipos de índice dedicados <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a> e <a href="/docs/pt/hnsw.md">HNSW</a>.</li>
 <li>Consulte <a href="/docs/pt/metric.md">«Tipos de métricas</a> » antes de escolher uma métrica para a fábrica.</li>
 </ul>

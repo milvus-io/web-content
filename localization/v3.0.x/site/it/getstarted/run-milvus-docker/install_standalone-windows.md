@@ -26,7 +26,7 @@ title: Eseguire Milvus in Docker (Windows)
 <p>Per impostazione predefinita, questa distribuzione utilizza <strong>Woodpecker</strong> (filesystem locale) come coda dei messaggi, pertanto non è necessario alcun servizio esterno di coda dei messaggi. Vedi <a href="/docs/it/woodpecker.md">Woodpecker</a>.</p>
 </blockquote>
 <p>Questa pagina illustra come eseguire Milvus su Windows utilizzando Docker Desktop per Windows.</p>
-<h2 id="Prerequisites​" class="common-anchor-header">Prerequisiti​<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
+<h2 id="Prerequisites​" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,7 +44,7 @@ title: Eseguire Milvus in Docker (Windows)
     </button></h2><ul>
 <li><p><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Installare Docker Desktop</a>.</p></li>
 <li><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Installare Windows Subsystem for Linux 2 (WSL 2)</a>.​</p></li>
-<li><p>Installare Python 3.8+.</p></li>
+<li><p>Installare Python 3.8 o versioni successive.</p></li>
 </ul>
 <h2 id="Run-Milvus-in-Docker​" class="common-anchor-header">Eseguire Milvus in Docker​<button data-href="#Run-Milvus-in-Docker​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,7 +126,7 @@ Delete successfully. # Data has been removed.​
       </svg>
     </button></h3><p>Se si preferisce avviare Milvus utilizzando comandi Linux e script di shell su Windows, assicurarsi di aver già installato WSL 2. Per i dettagli su come installare WSL 2, è possibile fare riferimento a questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.​</p>
 <ol>
-<li><p>Avviare WSL 2.</p>
+<li><p>Avvia WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
@@ -191,10 +191,10 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h3><ol>
-<li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il tasto destro del mouse e selezionando " <strong>Esegui come amministratore</strong>".​</p></li>
-<li><p>Eseguire i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.</p>
+<li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il tasto destro del mouse e selezionando <strong>«Esegui come amministratore</strong>».​</p></li>
+<li><p>Eseguire i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -205,8 +205,8 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>A seconda della connessione di rete, il download delle immagini per l’installazione di Milvus potrebbe richiedere un po’ di tempo. Una volta che i container denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, è possibile notare che ​</p>
 <ul>
-<li><p>il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella cartella <strong>volumes/etcd</strong> nella cartella corrente​</p></li>
-<li><p>Il container <strong>milvus-minio</strong> espone localmente le porte <strong>9000</strong> e <strong>9001</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella <strong>cartella volumes/minio</strong> nella directory corrente.​</p></li>
+<li><p>il container <strong>milvus-etcd</strong> non espone alcuna porta all’host e mappa i propri dati nella <strong>cartella volumes/etcd</strong> all’interno della cartella corrente.​</p></li>
+<li><p>Il container <strong>milvus-minio</strong> serve localmente le porte <strong>9000</strong> e <strong>9001</strong> con le credenziali di autenticazione predefinite e mappa i propri dati nella <strong>cartella volumes/minio</strong> nella directory corrente.​</p></li>
 <li><p>Il container <strong>milvus-standalone</strong> espone localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i propri dati nella cartella <strong>volumes/milvus</strong> nella directory corrente.​</p></li>
 </ul></li>
 </ol>
@@ -235,7 +235,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Scaricare il file di configurazione di Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.2/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Avviare Milvus.</p>
@@ -303,7 +303,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>Verificare se il daemon di Docker è stato avviato.​</p>
+<li><p>Verificare che il daemon di Docker sia stato avviato.​</p>
 <p>Per avviare il daemon di Docker, è necessario accedere alla directory di installazione di Docker Desktop ed eseguire il comando ` <code translate="no">.\DockerCli.exe -SwitchDaemon</code> `.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
@@ -340,10 +340,10 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
-   <span>Utilizza il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span>
+   <span>Utilizzare il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span>
   
  </span></p></li>
-<li><p>Seleziona tra le distribuzioni WSL 2 installate quella su cui desideri abilitare l’integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
+<li><p>Seleziona tra le distribuzioni WSL 2 installate quelle su cui desideri abilitare l’integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -410,7 +410,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/it/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/it/upgrade_milvus_cluster-helm.md">Aggiornamento di Milvus tramite Helm Chart</a>.</p></li>
+<li><p><a href="/docs/it/upgrade_milvus_cluster-helm.md">Eseguire l'aggiornamento di Milvus utilizzando Helm Chart</a>.</p></li>
 <li><p><a href="/docs/it/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>

@@ -96,5 +96,6 @@ title: Integrations Overview
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Semantic Search with ZeroEntropy and Milvus</a></td><td>Semantic Search</td><td>Milvus, ZeroEntropy</td></tr>
 <tr><td><a href="/docs/langchain_milvus_dido.md">Integrating Milvus Text Embedding Function with LangChain</a></td><td>Text Embedding</td><td>Milvus, LangChain</td></tr>
 <tr><td>[Building a Dual-Source RAG Agent with Exa and Milvus]</td><td>Data Sources</td><td>Milvus, Exa</td></tr>
+<tr><td><a href="/docs/search_with_svs_vamana.md">Search with SVS Vamana and Milvus</a></td><td>Semantic Search</td><td>Milvus, Intel SVS</td></tr>
 </tbody>
 </table>

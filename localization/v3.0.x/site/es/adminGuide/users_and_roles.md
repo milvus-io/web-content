@@ -2,12 +2,12 @@
 id: users_and_roles.md
 title: Crear usuarios y roles
 summary: >-
-  Milvus logra un control de acceso de grano fino a través de RBAC. Puede
-  empezar creando usuarios y roles, luego asignar privilegios o grupos de
-  privilegios a los roles y, por último, gestionar el control de acceso
-  concediendo roles a los usuarios. Este método garantiza la eficacia y la
-  seguridad de la gestión de accesos. Esta página presenta cómo crear usuarios y
-  roles en Milvus.
+  Milvus permite un control de acceso detallado mediante el modelo RBAC. Puedes
+  empezar creando usuarios y roles, asignar a continuación privilegios o grupos
+  de privilegios a los roles y, por último, gestionar el control de acceso
+  otorgando roles a los usuarios. Este método garantiza la eficiencia y la
+  seguridad de la gestión de accesos. En esta página se explica cómo crear
+  usuarios y roles en Milvus.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Crear usuarios y roles<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus logra un control de acceso de grano fino a través de RBAC. Puede empezar creando usuarios y roles, luego asignar privilegios o grupos de privilegios a los roles, y finalmente gestionar el control de acceso concediendo roles a los usuarios. Este método garantiza la eficacia y la seguridad de la gestión de accesos. Esta página presenta cómo crear usuarios y roles en Milvus.</p>
+    </button></h1><p>Milvus logra un control de acceso detallado mediante el modelo RBAC. Puedes empezar creando usuarios y roles, a continuación asignar privilegios o grupos de privilegios a los roles y, por último, gestionar el control de acceso otorgando roles a los usuarios. Este método garantiza la eficiencia y la seguridad de la gestión de accesos. En esta página se explica cómo crear usuarios y roles en Milvus.</p>
 <h2 id="User" class="common-anchor-header">Usuario<button data-href="#User" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,8 +40,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Después de inicializar una instancia de Milvus, se genera automáticamente un usuario raíz para la autenticación cuando se conecta a Milvus por primera vez. El nombre de usuario del usuario raíz es <code translate="no">root</code> y la contraseña es <code translate="no">Milvus</code>. El rol por defecto del usuario raíz es <code translate="no">admin</code>, que tiene acceso a todos los recursos. Para garantizar la seguridad de los datos, mantenga a salvo las credenciales del usuario raíz para evitar accesos no autorizados.</p>
-<p>Para las operaciones diarias, recomendamos crear usuarios en lugar de utilizar el usuario root.</p>
+    </button></h2><p>Tras inicializar una instancia de Milvus, se genera automáticamente un usuario root para la autenticación al conectarse a Milvus por primera vez. El nombre de usuario del usuario root es <code translate="no">root</code> y la contraseña es <code translate="no">Milvus</code>. El rol predeterminado del usuario root es <code translate="no">admin</code>, que tiene acceso a todos los recursos. Para garantizar la seguridad de los datos, mantén a buen recaudo las credenciales de tu usuario root para evitar el acceso no autorizado.</p>
+<p>Para las operaciones diarias, recomendamos crear usuarios en lugar de utilizar el usuario «root».</p>
 <h3 id="Create-a-user" class="common-anchor-header">Crear un usuario<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,13 +57,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente ejemplo muestra cómo crear un usuario con el nombre de usuario <code translate="no">user_1</code> y la contraseña <code translate="no">P@ssw0rd</code>. El nombre de usuario y la contraseña del usuario deben seguir las siguientes reglas:</p>
+    </button></h3><p>Inicia sesión como <code translate="no">root</code> y crea un usuario con el nombre de usuario <code translate="no">user_1</code> y la contraseña <code translate="no">P@ssw0rd</code>. A la hora de elegir las credenciales, sigue estas reglas:</p>
 <ul>
-<li><p>Nombre de usuario: debe empezar por una letra y sólo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</p></li>
-<li><p>Contraseña: Debe tener entre 8 y 64 caracteres y debe incluir tres de los siguientes: letras mayúsculas, letras minúsculas, números y caracteres especiales.</p></li>
+<li><p>Nombre de usuario: debe comenzar con una letra y solo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</p></li>
+<li><p>Contraseña: debe tener una longitud de entre 6 y 72 bytes UTF-8 de forma predeterminada. Es posible que su implementación configure <a href="/docs/es/authenticate.md#Password-requirements">límites de longitud de contraseña</a> diferentes.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -156,14 +161,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Después de crear un usuario, puede actualizar la contraseña si la olvida.</p>
-<p>La nueva contraseña también debe seguir la siguiente regla:</p>
-<ul>
-<li>Debe tener entre 8 y 64 caracteres e incluir tres de los siguientes: letras mayúsculas, letras minúsculas, números y caracteres especiales.</li>
-</ul>
-<p>El siguiente ejemplo muestra cómo actualizar la contraseña del usuario <code translate="no">user_1</code> a <code translate="no">NewP@ssw0rd</code>.</p>
+    </button></h3><p>Reutilice la conexión del ejemplo «create-user» para actualizar la contraseña de <code translate="no">user_1</code> de <code translate="no">P@ssw0rd</code> a <code translate="no">NewP@ssw0rd</code>. Introduzca la contraseña actual y elija una nueva que cumpla los mismos <a href="/docs/es/authenticate.md#Password-requirements">requisitos</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.update_password(
@@ -191,8 +196,8 @@ client.updatePassword(updatePasswordReq);
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">updateUser</span>({
    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
-   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">newPassword</span>: <span class="hljs-string">&#x27;NewP@ssw0rd&#x27;</span>,
+   <span class="hljs-attr">oldPassword</span>: <span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -201,11 +206,12 @@ client.updatePassword(updatePasswordReq);
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,
+    &quot;newPassword&quot;: &quot;NewP@ssw0rd&quot;,
     &quot;userName&quot;: &quot;user_1&quot;,
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Si has olvidado la contraseña actual, un superusuario configurado puede restablecerla. Consulta <a href="/docs/es/authenticate.md#Update-user-password">Actualizar la contraseña de un usuario</a>.</p>
 <h3 id="List-users" class="common-anchor-header">Listar usuarios<button data-href="#List-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,9 +227,14 @@ client.updatePassword(updatePasswordReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Después de crear varios usuarios, puede listar y ver todos los usuarios existentes.</p>
+    </button></h3><p>Tras crear varios usuarios, puedes listar y ver todos los usuarios existentes.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_users()
@@ -245,7 +256,7 @@ client.list_users()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestra un ejemplo de salida. <code translate="no">root</code> es el usuario por defecto generado automáticamente en Milvus. <code translate="no">user_1</code> es el nuevo usuario que se acaba de crear.</p>
+<p>A continuación se muestra un ejemplo de resultado. <code translate="no">root</code> es el usuario predeterminado generado automáticamente en Milvus. <code translate="no">user_1</code> es el nuevo usuario que se acaba de crear.</p>
 <pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-string">&#x27;user_1&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Role" class="common-anchor-header">Rol<button data-href="#Role" class="anchor-icon" translate="no">
@@ -263,8 +274,8 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus proporciona un rol incorporado llamado <code translate="no">admin</code>, que es un rol de administrador que puede acceder a recursos bajo todas las instancias y tiene privilegios para todas las operaciones. Para una gestión de acceso más detallada y una mayor seguridad de los datos, se recomienda crear roles personalizados en función de sus necesidades.</p>
-<h3 id="Create-a-role" class="common-anchor-header">Creación de un rol<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus proporciona un rol integrado denominado « <code translate="no">admin</code> », que es un rol de administrador con acceso a los recursos de todas las instancias y con privilegios para todas las operaciones. Para una gestión del acceso más detallada y una mayor seguridad de los datos, se recomienda crear roles personalizados en función de tus necesidades.</p>
+<h3 id="Create-a-role" class="common-anchor-header">Crear un rol<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -279,13 +290,18 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente ejemplo muestra cómo crear un rol denominado <code translate="no">role_a</code>.</p>
-<p>El nombre del rol debe seguir la siguiente regla</p>
+    </button></h3><p>El siguiente ejemplo muestra cómo crear un rol denominado « <code translate="no">role_a</code> ».</p>
+<p>El nombre del rol debe cumplir la siguiente regla:</p>
 <ul>
-<li>Debe empezar por una letra y sólo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</li>
+<li>Debe comenzar con una letra y solo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -331,9 +347,14 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Después de crear varios roles, puede listar y ver todos los roles existentes.</p>
+    </button></h3><p>Tras crear varios roles, puedes enumerar y ver todos los roles existentes.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.list_roles()
@@ -357,6 +378,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestra un ejemplo de salida. <code translate="no">admin</code> es el rol por defecto en Milvus. <code translate="no">role_a</code> es el nuevo rol que se acaba de crear.</p>
+<p>A continuación se muestra un ejemplo de resultado. « <code translate="no">admin</code> » es el rol predeterminado en Milvus. « <code translate="no">role_a</code> » es el nuevo rol que se acaba de crear.</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

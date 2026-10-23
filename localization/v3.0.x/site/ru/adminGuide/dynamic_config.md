@@ -1,7 +1,7 @@
 ---
 id: dynamic_config.md
 related_key: configure
-summary: Узнайте о динамической конфигурации Milvus.
+summary: Узнайте о динамической настройке Milvus.
 title: Настройка Milvus на лету
 ---
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Настройка Milvus на лету<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
@@ -19,8 +19,8 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus позволяет изменять некоторые конфигурации "на лету".</p>
-<h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus позволяет изменять некоторые параметры конфигурации на лету.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Перед началом<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,16 +35,16 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вам необходимо убедиться, что：</p>
+    </button></h2><p>Необходимо убедиться, что:</p>
 <ul>
-<li>У вас установлен Birdwatcher. Подробнее см. в разделе <a href="/docs/ru/birdwatcher_install_guides.md">Установка Birdwatcher</a>,</li>
-<li>У вас установлен etcdctl. Подробнее см. в разделе <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Взаимодействие с etcd</a>, или</li>
-<li>У вас установлены другие клиенты etcd, например, клиент Python.</li>
+<li>у вас установлен Birdwatcher. Подробности см. в разделе <a href="/docs/ru/birdwatcher_install_guides.md">«Установка Birdwatcher</a>»,</li>
+<li>У вас установлен etcdctl. Подробности см. в разделе <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">«Взаимодействие с etcd»</a>, или</li>
+<li>У вас установлены другие клиенты etcd, например, клиент на Python.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>В примерах этого руководства значение <code translate="no">proxy.minPasswordLength</code> заменено на <code translate="no">8</code>. Вы можете заменить эти ключи на подходящие, перечисленные в разделе <a href="/docs/ru/dynamic_config.md#Applicable-configuration-items">Применяемые элементы конфигурации</a>.</li>
-<li>В примерах этого руководства предполагается, что корневой путь вашего Milvus - <code translate="no">by-dev</code>. Все конфигурации перечислены по пути <code translate="no">by-dev/config</code>. Корневой путь Milvus зависит от способа установки. Для экземпляров, установленных с помощью диаграмм Helm, корневой путь по умолчанию равен <code translate="no">by-dev</code>. Если вы не знаете корневой путь, обратитесь к разделу <a href="/docs/ru/birdwatcher_usage_guides.md#Connect-to-etcd">Подключение к etcd</a>.</li>
+<li>В примерах данного руководства значение <code translate="no">proxy.minPasswordLength</code> заменяется на <code translate="no">8</code>. Вы можете заменить этот ключ на соответствующие ключи, перечисленные в разделе <a href="/docs/ru/dynamic_config.md#Applicable-configuration-items">«Применимые элементы конфигурации</a>».</li>
+<li>В примерах данного руководства предполагается, что корневой путь вашего Milvus — <code translate="no">by-dev</code>. Все конфигурации находятся по пути <code translate="no">by-dev/config</code>. Корневой путь Milvus зависит от способа установки. Для экземпляров, установленных с помощью диаграмм Helm, корневым путем по умолчанию является <code translate="no">by-dev</code>. Если вы не знаете корневой путь, обратитесь к <a href="/docs/ru/birdwatcher_usage_guides.md#Connect-to-etcd">разделу «Подключение к etcd</a>».</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Изменение конфигураций<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -62,15 +62,15 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В Milvus значение <code translate="no">proxy.minPasswordLength</code> по умолчанию установлено на <code translate="no">6</code>. Чтобы изменить это значение, вы можете сделать следующее:</p>
+    </button></h2><p>В Milvus параметр ` <code translate="no">proxy.minPasswordLength</code> ` по умолчанию установлен в значение ` <code translate="no">6</code> `. Чтобы изменить это значение, выполните следующие действия:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl put by-dev/config/proxy/minPasswordLength 8</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,set config-etcd --key by-dev/config/proxy/minPasswordLength --value 8&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Затем вы можете проверить конфигурацию следующим образом:</p>
+<p>Затем вы можете проверить настройки следующим образом:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Roll-back-configurations" class="common-anchor-header">Откат конфигураций<button data-href="#Roll-back-configurations" class="anchor-icon" translate="no">
+<h2 id="Roll-back-configurations" class="common-anchor-header">Откат настроек<button data-href="#Roll-back-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,15 +85,15 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus также позволяет откатить конфигурацию, если измененное значение больше не подходит.</p>
+    </button></h2><p>Milvus также позволяет откатить настройки, если измененное значение больше не актуально.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl del by-dev/config/proxy/minPasswordLength</span> 
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span> 
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,remove config-etcd --key by-dev/config/proxy/minPasswordLength&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Затем вы можете проверить конфигурации следующим образом:</p>
+<p>Затем вы можете проверить настройки следующим образом:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="View-configurations" class="common-anchor-header">Просмотр конфигураций<button data-href="#View-configurations" class="anchor-icon" translate="no">
+<h2 id="View-configurations" class="common-anchor-header">Просмотр настроек<button data-href="#View-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,12 +108,12 @@ title: Настройка Milvus на лету
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вместо просмотра значения конкретного элемента конфигурации можно также вывести список всех элементов.</p>
+    </button></h2><p>Вместо просмотра значения конкретного элемента конфигурации вы также можете отобразить их список.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get --prefix by-dev/config</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,show config-etcd&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы просмотреть конфигурации определенного узла:</p>
+<p>Чтобы просмотреть конфигурации конкретного узла:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd ip:port 
 Milvus(by-dev) &gt; show session          # List all nodes with their server ID
 Milvus(by-dev) &gt; visit querycoord 1    # Visit a node by server ID
@@ -134,7 +134,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В настоящее время можно изменять следующие элементы конфигурации "на лету".</p>
+    </button></h2><p>В настоящее время вы можете изменять следующие элементы конфигурации в режиме реального времени.</p>
 <table>
 <thead>
 <tr><th>Элемент конфигурации</th><th>Значение по умолчанию</th></tr>
@@ -143,8 +143,8 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>pulsar.maxMessageSize</td><td>5242880</td></tr>
 <tr><td>common.retentionDuration</td><td>86400</td></tr>
 <tr><td>common.entityExpiration</td><td>-1</td></tr>
-<tr><td>common.gracefulTime</td><td>5000</td></tr>
-<tr><td>common.gracefulStopTimeout</td><td>30</td></tr>
+<tr><td>общий.период.отсрочки</td><td>5000</td></tr>
+<tr><td>общий.тайм-аут плавного остановки</td><td>30</td></tr>
 <tr><td>quotaAndLimits.ddl.enabled</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.indexRate.enabled</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.flushRate.enabled</td><td>FALSE</td></tr>
@@ -156,10 +156,10 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.limitWriting.ttProtection.enabled</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</td><td>9223372036854775807</td></tr>
 <tr><td>quotaAndLimits.limitWriting.memProtection.enabled</td><td>TRUE</td></tr>
-<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</td><td>0.85</td></tr>
-<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</td><td>0.95</td></tr>
-<tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</td><td>0.85</td></tr>
-<tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</td><td>0.95</td></tr>
+<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</td><td>0,85</td></tr>
+<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</td><td>0,95</td></tr>
+<tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</td><td>0,85</td></tr>
+<tr><td>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</td><td>0,95</td></tr>
 <tr><td>quotaAndLimits.limitWriting.diskProtection.enabled</td><td>TRUE</td></tr>
 <tr><td>quotaAndLimits.limitWriting.diskProtection.diskQuota</td><td>+INF</td></tr>
 <tr><td>quotaAndLimits.limitReading.forceDeny</td><td>FALSE</td></tr>
@@ -168,15 +168,15 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</td><td>+INF</td></tr>
 <tr><td>quotaAndLimits.limitReading.resultProtection.enabled</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.limitReading.resultProtection.maxReadResultRate</td><td>+INF</td></tr>
-<tr><td>quotaAndLimits.limitReading.coolOffSpeed</td><td>0.9</td></tr>
+<tr><td>quotaAndLimits.limitReading.coolOffSpeed</td><td>0,9</td></tr>
 <tr><td>autoIndex.enable</td><td>FALSE</td></tr>
-<tr><td>autoIndex.params.build</td><td>""</td></tr>
-<tr><td>autoIndex.params.extra</td><td>""</td></tr>
-<tr><td>autoIndex.params.search</td><td>""</td></tr>
+<tr><td>autoIndex.params.build</td><td>“”</td></tr>
+<tr><td>autoIndex.params.extra</td><td>“”</td></tr>
+<tr><td>autoIndex.params.search</td><td>“”</td></tr>
 <tr><td>proxy.maxNameLength</td><td>255</td></tr>
 <tr><td>proxy.maxUsernameLength</td><td>32</td></tr>
 <tr><td>proxy.minPasswordLength</td><td>6</td></tr>
-<tr><td>proxy.maxPasswordLength</td><td>256</td></tr>
+<tr><td>proxy.maxPasswordLength</td><td>72</td></tr>
 <tr><td>proxy.maxFieldNum</td><td>64</td></tr>
 <tr><td>proxy.maxShardNum</td><td>256</td></tr>
 <tr><td>proxy.maxDimension</td><td>32768</td></tr>
@@ -203,6 +203,6 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте больше о <a href="/docs/ru/system_configuration.md">системных конфигурациях</a>.</li>
+<li>Узнайте больше о <a href="/docs/ru/system_configuration.md">системных настройках</a>.</li>
 <li>Узнайте, как настроить Milvus, установленный с помощью <a href="/docs/ru/configure_operator.md">Milvus Operator</a>, <a href="/docs/ru/configure-helm.md">диаграмм Helm</a> и <a href="/docs/ru/configure-docker.md">Docker</a>.</li>
 </ul>

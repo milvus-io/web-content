@@ -3,7 +3,7 @@ id: create-an-external-collection.md
 title: 建立外部資料集Compatible with Milvus 3.0.x
 summary: >-
   外部資料集是 Milvus 中的資料集類型之一，可直接從外部儲存系統或資料庫表（例如 AWS S3 和 Iceberg）存取資料，而無需將資料複製到
-  Milvus 中。它作為資料湖上的查詢層運作，同時維持與 Milvus 查詢介面的相容性。
+  Milvus 中。它作為資料湖上的查詢層，同時維持與 Milvus 查詢介面的相容性。
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">建立外部資料集<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -21,9 +21,9 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>外部集合是 Milvus 中的資料集合類型之一，可直接存取來自外部儲存系統或資料庫表（例如 AWS S3 和 Iceberg）的資料，而無需將資料複製到 Milvus 中。它作為資料湖上的查詢層運作，同時維持與 Milvus 查詢介面的相容性。</p>
+    </button></h1><p>外部集合是 Milvus 中的資料集合類型之一，可直接存取來自外部儲存系統或資料庫表（例如 AWS S3 和 Iceberg）的資料，而無需將資料複製至 Milvus。它作為資料湖上的查詢層，同時維持與 Milvus 查詢介面的相容性。</p>
 <div class="alert note">
-<p>此功能需搭配 Storage V3 使用。有關啟用說明及相容性考量，請參閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>。</p>
+<p>此功能需要 Storage V3 版本。有關啟用說明及相容性考量，請參閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>在典型的 AI 資料管線中，使用者可能已將資料以 Parquet 或其他格式儲存於其儲存系統（例如 AWS S3）中。為了讓 Milvus 能使用這些外部儲存的資料，使用者通常需要透過萃取-轉換-載入（ETL）管線，將資料匯入 Milvus 自身的儲存系統中。</p>
-<p>這種「將資料帶入 Milvus」的工作流程會產生難以同步的冗餘資料，並增加工程團隊為確保資料一致性所須承擔的維護負擔。</p>
+<p>這種「將資料帶入 Milvus」的工作流程會產生難以同步的冗餘資料，並增加工程維護負擔，以確保資料的一致性。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
@@ -55,7 +55,7 @@ beta: Milvus 3.0.x
    </span>「<span class="img-wrapper"> <span>將運算帶到資料」工作流程</span>
   
  </span></p>
-<p>外部集合建立後，即可直接存取您的資料，並將其保留在您原始儲存的位置。在後台，Milvus 會建立清單檔案，用以記錄 Milvus 元資料與外部資料檔案中各列之間的對應關係。待清單檔案準備就緒後，您便能如同在任何受管集合中一樣，於外部集合中建立索引。</p>
+<p>外部集合一旦建立，即可直接存取您的資料，並將其保留在您原始儲存的位置。在後台，Milvus 會建立清單檔案，用以記錄 Milvus 元資料與外部資料檔案中各列之間的對應關係。當清單檔案準備就緒後，您便能如同在任何受管集合中一樣，於外部集合中建立索引。</p>
 <p>當您的資料發生變更時，只需手動觸發不到一秒的刷新操作，即可更新元資料，確保 Milvus 始終保持最新狀態。</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">步驟 1：建立資料結構<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與建立受管集合相同，您在建立外部集合前也需先建立模式。不過，此模式與受管集合的模式略有不同。</p>
+    </button></h2><p>與建立受管集合相同，您在建立外部集合前也需先建立資料結構。不過，此資料結構與受管集合的略有不同。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -147,12 +147,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>目標來源資料檔案的格式。</p></td>
+     <td><p>目標來源資料的格式。對於 Parquet 檔案，請使用<code translate="no">parquet</code> ；對於 Iceberg 資料表，請使用<code translate="no">iceberg-table</code> 。若為 Iceberg，<code translate="no">external_source</code> 必須指向該資料表的 JSON 元資料檔案。</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>有效的 Iceberg 資料表快照 ID。此參數僅在您將 `<code translate="no">format</code> ` 設定為 `<code translate="no">iceberg_table</code>` 時適用。</p></td>
+     <td><p>來自 Iceberg 資料表元資料的有效快照 ID。此參數僅在將<code translate="no">format</code> 設定為<code translate="no">iceberg-table</code> 時適用。</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -161,9 +161,24 @@ schema := entity.NewSchema().
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>對於位於 AWS S3 上的 Iceberg 資料表，以下<code translate="no">external_spec</code> 會使用 IAM 驗證。Milvus 部署必須已具備存取權限，才能讀取該資料表的元資料 JSON 檔案，以及其所引用的清單檔和資料檔。</p>
+<p>將<code translate="no">external_source</code> 設定為您的元資料檔案，例如<code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> 。將<code translate="no">snapshot_id</code> 替換為該檔案中的現有快照 ID，並根據您的儲存環境調整<code translate="no">extfs</code> 。</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>有關受支援的儲存供應商及 Iceberg 限制，請參閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>。</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
-<p>您可以透過以下選項設定驗證設定：</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS 存取金鑰/秘密金鑰<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<p>您可透過以下選項設定驗證設定：</p>
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">使用 AWS 存取金鑰 (AK)/安全金鑰 (SK)<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -263,7 +278,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>若要使用此選項，請將此參數設定為<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>請將此選項設定為<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -326,12 +341,12 @@ schema := entity.NewSchema().
         ></path>
       </svg>
     </button></h3><p>當您的組織使用不同的 AWS 帳戶來管理 Milvus 叢集以及存放目標資料檔案的儲存桶時，此選項適用。</p>
-<p>在此情況下，儲存桶擁有者應建立一個 IAM 角色，該角色需</p>
+<p>在此情況下，儲存桶擁有者應建立一個 IAM 角色，該角色</p>
 <ul>
-<li><p>該角色應附加<code translate="no">AmazonS3FullAccess</code> 或更細粒度的儲存桶存取政策。</p></li>
+<li><p>將<code translate="no">AmazonS3FullAccess</code> 或更細粒度的儲存桶存取政策附加至該角色。</p></li>
 <li><p>在該角色的「信任政策」的「條件」欄位中，包含一個自定義的<code translate="no">sts:ExternalId</code> 。</p></li>
 </ul>
-<p>接著，儲存桶擁有者應向您提供該 IAM 角色的 ARN 及外部 ID，以便您能使用這些值呼叫 `<code translate="no">sts:AssumeRole</code> ` 來承接該 IAM 角色。</p>
+<p>接著，儲存桶擁有者應向您提供該 IAM 角色的 ARN 及外部識別碼 (External ID)，以便您能使用這些值呼叫 `<code translate="no">sts:AssumeRole</code> ` 來承接該 IAM 角色。</p>
 <p>以下是一個範例權限政策，可附加至 IAM 角色並包含允許的權限。您可以根據需求調整此政策。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
@@ -356,7 +371,7 @@ schema := entity.NewSchema().
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，與該 IAM 角色相關聯的信任政策會定義哪些使用者被允許承接該角色。</p>
+<p>而與該 IAM 角色相關聯的信任政策，則定義了哪些使用者被允許承接該角色。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -413,7 +428,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_iam</code></p></td>
-     <td><p>是否使用 AWS IAM。</p><p>請將此選項設定為<code translate="no">"true"</code> 。</p></td>
+     <td><p>是否使用 AWS IAM。</p><p>若要使用此選項，請將此設定設為<code translate="no">"true"</code> 。</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -448,7 +463,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當資料結構準備就緒後，您可以依照以下方式新增欄位：</p>
+    </button></h2><p>當資料結構準備就緒後，您可以按照以下方式新增欄位：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -545,7 +560,7 @@ schema = schema.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將所有欄位新增至資料結構後，即可建立外部集合。</p>
+    </button></h2><p>將所有欄位新增至架構後，即可建立外部集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -831,16 +846,16 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>刷新操作為非同步，因此您需要設定一個迴圈來監控其進度。</p>
+<p>刷新操作屬非同步處理，因此您需要設定一個迴圈來監控其進度。</p>
 <div class="alert note">
 <ul>
 <li><p>刷新操作會掃描資料檔案的元資料，並據此產生清單檔案。此過程通常需時 150 至 250 毫秒。</p></li>
 <li><p>清單檔案會記錄 Milvus 中的元資料與外部檔案中各列之間的對應關係。</p></li>
 <li><p>若來源資料有更新，您需要手動再次呼叫刷新操作，以確保 Milvus 保持最新狀態。</p></li>
-<li><p>若刷新操作需移除所有活躍的元資料且不進行任何新增，系統將拒絕該請求。</p></li>
+<li><p>若刷新操作需移除所有活躍的元資料且不進行任何插入，系統將拒絕該請求。</p></li>
 </ul>
 </div>
-<h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -855,6 +870,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>刷新外部集合後，您可以載入並釋放該集合，並在外部集合中執行相似度搜尋和查詢，操作方式與任何受管集合相同，惟用於隨需運算的資料庫中的集合，必須附加至隨需運算叢集才能進行搜尋和查詢。</p>
+    </button></h2><p>刷新外部集合後，您可以載入並釋放該集合，並在外部集合中執行相似度搜尋和查詢，其操作方式與任何受管集合相同，惟用於隨需運算的資料庫中的集合，必須附加至隨需運算叢集才能進行搜尋和查詢。</p>
 <p>在執行 DQL 操作（例如搜尋、查詢、取得及混合搜尋）之前，您需要建立一個工作階段，以附加隨需運算叢集的運算資源。</p>
 <p>若外部資料來源日後包含您希望在 Milvus 中公開的另一個欄位，請在外部集合的資料結構中新增該欄位，並再次刷新外部集合。詳細資訊請參閱《<a href="/docs/zh-hant/alter-external-collection-schema.md">變更外部集合資料結構》</a>。</p>

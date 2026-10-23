@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Vous préférez un déploiement autonome ?</strong></p>
 <p>Si vous préférez déployer Milvus en mode autonome (un seul nœud) à des fins de développement ou de test, utilisez cette commande :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -140,9 +140,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p>Pour le mode de service Woodpecker, nous recommandons d’utiliser Milvus 3.0.3 ou une version ultérieure avec Woodpecker v0.1.46 ou une version ultérieure.</p>
 </div>
-<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.2, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
+<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.3, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -154,7 +154,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li>Utilise <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour réduire la maintenance)</li>
 <li>Exécute <strong>Woodpecker en tant que service dédié</strong> (un StatefulSet distinct), et non intégré au nœud de streaming</li>
 <li>Active le nouveau composant « <strong>Streaming Node</strong> » pour améliorer les performances</li>
-<li>Désactive l’ancien <strong>nœud d’index</strong> (cette fonctionnalité est désormais gérée par le nœud de données)</li>
+<li>Désactive l'ancien <strong>nœud d'index</strong> (cette fonctionnalité est désormais gérée par le nœud de données)</li>
 </ul>
 <div class="alert note">
 <p><strong>Changements d'architecture dans Milvus 2.6.x :</strong></p>
@@ -170,7 +170,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 La commande ci-dessus déploie Milvus avec les configurations recommandées. Pour une utilisation en production :</p>
 <ul>
 <li>Utilisez <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour optimiser les paramètres en fonction du volume de vos données</li>
-<li>Consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système de Milvus</a> pour connaître les options de configuration avancées</li>
+<li>Consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système de Milvus</a> pour découvrir les options de configuration avancées</li>
 </ul>
 <div class="alert note">
 <p><strong>Remarques importantes :</strong></p>
@@ -194,10 +194,10 @@ La commande ci-dessus déploie Milvus avec les configurations recommandées. Pou
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vérifiez que votre déploiement a bien abouti en vérifiant l’état des pods :</p>
+    </button></h3><p>Vérifiez que votre déploiement s'est bien déroulé en vérifiant l'état des pods :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v3.0.2, vous devriez voir des pods similaires à ceux-ci :</p>
+<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v3.0.3, vous devriez voir des pods similaires à ceux-ci :</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,9 +222,9 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Dépendances</strong>: <code translate="no">etcd</code> (métadonnées), <code translate="no">minio</code> (stockage d’objets), <code translate="no">woodpecker</code> (file d’attente de messages)</li>
 </ul>
 <div class="alert note">
-<p>Avec <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker s’exécute en tant que <strong>StatefulSet dédié</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 répliques par défaut — un quorum de 3 nœuds plus un nœud de secours pour la tolérance aux pannes ; ne définissez pas <code translate="no">woodpecker.replicaCount</code> sur une valeur inférieure à 3) géré par un service sans interface utilisateur, utilisant MinIO comme backend de stockage — le cluster dispose donc d’un ensemble de pods <code translate="no">woodpecker</code> distinct, séparé du nœud de streaming.</p>
+<p>Avec <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker s’exécute en tant que <strong>StatefulSet dédié</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 répliques par défaut — un quorum de 3 nœuds plus un nœud de secours pour la tolérance aux pannes ; ne définissez pas <code translate="no">woodpecker.replicaCount</code> sur une valeur inférieure à 3) mis en avant par un service sans interface graphique, utilisant MinIO comme backend de stockage — le cluster dispose donc d’un ensemble de pods <code translate="no">woodpecker</code> distinct, séparé du nœud de streaming.</p>
 </div>
-<p>Vous pouvez également accéder à <strong>l’interface Web de Milvus</strong> à l’adresse <code translate="no">http://127.0.0.1:9091/webui/</code> une fois la redirection de port configurée (voir l’étape suivante). Pour plus de détails, consultez la documentation sur <a href="/docs/fr/milvus-webui.md">l’interface Web de Milvus</a>.</p>
+<p>Vous pouvez également accéder à <strong>l’interface Web de Milvus</strong> à l’adresse <code translate="no">http://127.0.0.1:9091/webui/</code> une fois la redirection de port configurée (voir l’étape suivante). Pour plus de détails, consultez la documentation relative à <a href="/docs/fr/milvus-webui.md">l’interface Web de Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Se connecter à Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -514,7 +514,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Une fois Milvus installé dans Docker, vous pouvez :</p>
 <ul>
-<li><p>Consulter la page « <a href="/docs/fr/quickstart.md">Hello Milvus</a> » pour découvrir les capacités de Milvus.</p></li>
+<li><p>Consulter <a href="/docs/fr/quickstart.md">Hello Milvus</a> pour découvrir les capacités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>

@@ -358,7 +358,7 @@
             "children": []
           },
           {
-            "label": "Tentukan Tingkat Konsistensi",
+            "label": "Tetapkan Tingkat Konsistensi",
             "id": "tune_consistency.md",
             "order": 7,
             "children": []
@@ -1243,7 +1243,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi dan Model",
+        "label": "Inferensi Fungsi &amp; Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1639,7 +1639,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Claude Code",
+        "label": "Server MCP untuk Kode Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2082,7 +2082,7 @@
         "order": 9,
         "children": [
           {
-            "label": "Kelola Kelompok Sumber Daya",
+            "label": "Kelola Grup Sumber Daya",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -2132,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Peran Pemberian Dana",
+                "label": "Peran Pemberian Hibah",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2216,7 +2216,7 @@
                 "children": []
               },
               {
-                "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
+                "label": "Migrasi Antar Instansi dalam Satu Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2490,7 +2490,7 @@
                 "children": []
               },
               {
-                "label": "Encoder Silang",
+                "label": "Enkoder Silang",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
@@ -3097,6 +3097,12 @@
             "id": "search_with_jev.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
+            "children": []
           }
         ]
       }
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Gunakan AsyncMilvusClient bersama asyncio",
+        "label": "Gunakan AsyncMilvusClient dengan asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []

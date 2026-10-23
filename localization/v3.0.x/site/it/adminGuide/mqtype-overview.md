@@ -3,7 +3,7 @@ id: mqtype-overview.md
 title: Panoramica sulla coda dei messaggi
 summary: >-
   Panoramica delle opzioni relative alla coda dei messaggi (mqType) supportate
-  da Milvus e di quale utilizzare per le implementazioni standalone rispetto a
+  da Milvus e di quale utilizzare per le distribuzioni standalone rispetto a
   quelle distribuite.
 ---
 <h1 id="Message-Queue-Overview" class="common-anchor-header">Panoramica sulla coda dei messaggi<button data-href="#Message-Queue-Overview" class="anchor-icon" translate="no">
@@ -51,8 +51,8 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Ogni istanza di Milvus utilizza esattamente una coda di messaggi.</p></li>
-<li><p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v3.0.2, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di code dei messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per il cambio di sistema di code dei messaggi sarà disponibile nelle versioni future.</p></li>
-<li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-mq-type.md">la sezione "Cambio della coda dei messaggi"</a>. La funzione "Cambio della coda dei messaggi" è disponibile <strong>a partire da Milvus 3.0:</strong> eseguire prima l'aggiornamento a Milvus 3.0 o <strong>versioni successive</strong>.</p></li>
+<li><p><strong>Limiti della coda dei messaggi</strong>: quando si esegue l'aggiornamento a Milvus v3.0.3, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio da un sistema di code dei messaggi a un altro durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p></li>
+<li><p>Per modificare la coda dei messaggi di un'istanza in esecuzione, consultare <a href="/docs/it/switch-mq-type.md">la sezione "Cambio della coda dei messaggi"</a>. La funzionalità "Cambio della coda dei messaggi" è disponibile in <strong>Milvus 3.0 e versioni successive</strong>: eseguire prima l'aggiornamento a Milvus 3.0 o versioni successive.</p></li>
 </ul>
 </div>
 <h2 id="Choosing-a-message-queue" class="common-anchor-header">Scelta di una coda di messaggi<button data-href="#Choosing-a-message-queue" class="anchor-icon" translate="no">

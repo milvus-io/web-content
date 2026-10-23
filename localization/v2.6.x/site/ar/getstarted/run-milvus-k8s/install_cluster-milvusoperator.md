@@ -36,7 +36,7 @@ title: تثبيت Milvus Cluster باستخدام Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator هو حل يساعدك على نشر وإدارة مجموعة خدمات Milvus الكاملة لاستهداف مجموعات Kubernetes (K8s). تتضمن المجموعة جميع مكونات Milvus والتبعيات ذات الصلة مثل etcd و Pulsar و MinIO.</p>
+    </button></h2><p>Milvus Operator هو حل يساعدك على نشر وإدارة مجموعة خدمات Milvus الكاملة لاستهداف مجموعات Kubernetes (K8s). تتضمن المجموعة جميع مكونات Milvus والتبعيات ذات الصلة مثل etcd وPulsar وMinIO.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق <a href="/docs/ar/v2.6.x/prerequisite-helm.md">من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
-<li><p>قبل تثبيت Milvus، يوصى باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool</a> ) لتقدير متطلبات الأجهزة بناءً على حجم البيانات لديك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
+<li><p>قبل تثبيت Milvus، يُنصح باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool</a> ) لتقدير متطلبات الأجهزة بناءً على حجم البيانات لديك. يساعد ذلك في ضمان الأداء الأمثل وتخصيص الموارد بشكل مثالي لتثبيت Milvus الخاص بك.</p></li>
 </ul>
 <div class="alert note">
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُعرِّف Milvus Operator الموارد المخصصة لمجموعة Milvus استنادًا إلى <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">الموارد المخصصة لـ Kubernetes</a>. عند تعريف الموارد المخصصة، يمكنك استخدام واجهات برمجة تطبيقات K8s بطريقة إعلانية وإدارة مكدس نشر Milvus لضمان قابليته للتوسع وتوافره العالي.</p>
+    </button></h2><p>يُعرّف Milvus Operator الموارد المخصصة لمجموعة Milvus استنادًا إلى <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">الموارد المخصصة لـ Kubernetes</a>. عند تعريف الموارد المخصصة، يمكنك استخدام واجهات برمجة تطبيقات K8s بطريقة إعلانية وإدارة مكدس نشر Milvus لضمان قابليته للتوسع وتوافره العالي.</p>
 <div class="filter">
  <a href="#helm">Helm</a>
  <a href="#kubectl"> Kubectl</a>
@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك التحقق مما إذا كان pod Milvus Operator قيد التشغيل على النحو التالي:</p>
+<p>يمكنك التحقق مما إذا كان بود Milvus Operator قيد التشغيل على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -175,14 +175,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.24) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v2.6.25) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/v2.6.x/use-woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
 <li><strong>عقدة البث (Streaming Node</strong>): تم تمكينها لتحسين معالجة البيانات</li>
-<li><strong>منسق المزج</strong>: مكونات منسق مدمجة لتحسين الكفاءة</li>
+<li><strong>منسق المزج (Mix Coordinator</strong>): مكونات منسق مدمجة لتحسين الكفاءة</li>
 </ul>
-<p>لتخصيص هذه الإعدادات، نوصيك باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool</a> ) لتعديل التكوينات بناءً على حجم البيانات الفعلي لديك، ثم تنزيل ملف YAML المقابل. لمعرفة المزيد عن معلمات التكوين، راجع <a href="https://milvus.io/docs/system_configuration.md">قائمة مراجعة تكوينات نظام Milvus</a>.</p>
+<p>لتخصيص هذه الإعدادات، نوصيك باستخدام <a href="https://milvus.io/tools/sizing">أداة تحديد حجم Milvus (Milvus Sizing Tool)</a> لضبط التكوينات بناءً على حجم البيانات الفعلي لديك، ثم تنزيل ملف YAML المقابل. لمعرفة المزيد عن معلمات التكوين، راجع <a href="https://milvus.io/docs/system_configuration.md">قائمة مراجعة تكوينات نظام Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>يجب أن يحتوي اسم الإصدار على أحرف وأرقام وشرطات فقط. لا يُسمح باستخدام النقاط في اسم الإصدار.</li>
@@ -287,7 +287,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>الآن، يمكنك الاتصال بـ Milvus باستخدام المنفذ المُحوَّل.</p>
+<p>الآن، يمكنك الاتصال بـ Milvus باستخدام المنفذ المعاد توجيهه.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,8 +305,8 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>يمكنك عرض تحديث تكوينات مجموعة Milvus الخاصة بك عن طريق استدعاء الأمر <code translate="no">patch</code> كما يلي:</p>
 <ol>
-<li><p>قم بتشغيل الأمر التالي لمعاينة التكوينات المقترحة.</p>
-<p>يفترض ما يلي أنك تريد تحديث المعلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
+<li><p>قم بتشغيل الأمر التالي لمعاينة الإعدادات المقترحة.</p>
+<p>يفترض ما يلي أنك تريد تحديث معلمة <code translate="no">spec.components.disableMetric</code> إلى <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
@@ -317,7 +317,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">الوصول إلى واجهة المستخدم الرسومية لـ Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">الوصول إلى واجهة المستخدم على الويب لـ Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -332,7 +332,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعمل واجهة Milvus Web UI على تحسين قابلية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والتجميعات، وعرض قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم الرسومية لـ Milvus على الويب، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم الرسومية لـ Milvus على الويب</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة المستخدم على الويب لـ Milvus إمكانية مراقبة النظام بفضل واجهة بسيطة وسهلة الاستخدام. يمكنك استخدام واجهة المستخدم على الويب لـ Milvus لمراقبة الإحصائيات والمقاييس الخاصة بمكونات Milvus وتبعياته، والتحقق من تفاصيل قاعدة البيانات والتجميعات، وإدراج قائمة بالتكوينات التفصيلية لـ Milvus. للحصول على تفاصيل حول واجهة المستخدم على الويب لـ Milvus، راجع <a href="/docs/ar/v2.6.x/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a></p>
 <p>لتمكين الوصول إلى واجهة المستخدم على الويب لـ Milvus، تحتاج إلى إعادة توجيه منفذ pod الوكيل إلى منفذ محلي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -403,7 +403,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>بعد تثبيت Milvus في Docker، يمكنك:</p>
 <ul>
-<li><p>تصفح " <a href="/docs/ar/v2.6.x/quickstart.md">Hello Milvus</a> " لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
+<li><p>تصفح <a href="/docs/ar/v2.6.x/quickstart.md">Hello Milvus</a> لمعرفة ما يمكن لـ Milvus القيام به.</p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
 <li><a href="/docs/ar/v2.6.x/manage_databases.md">إدارة قواعد البيانات</a></li>
@@ -411,7 +411,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
 <li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج والتحديث والحذف</a></li>
 <li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث أحادي المتجه</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p><a href="/docs/ar/v2.6.x/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
 <li><p><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
@@ -421,7 +421,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ar/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/ar/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
+<li><p>استكشف <a href="/docs/ar/v2.6.x/milvus-webui.md">Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>، وهي أداة مفتوحة المصدر لنسخ بيانات Milvus احتياطيًا.</p></li>
 <li><p>اكتشف <a href="/docs/ar/v2.6.x/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء Milvus وتحديثات التكوين الديناميكية.</p></li>
 <li><p>اكتشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة واجهة مستخدم رسومية مفتوحة المصدر لإدارة Milvus بطريقة بديهية.</p></li>

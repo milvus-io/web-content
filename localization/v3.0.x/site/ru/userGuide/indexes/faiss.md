@@ -22,8 +22,8 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Тип индекса « <code translate="no">FAISS</code> » — это пропускной механизм экспертного уровня, доступный в Milvus версии 3.0.0 и более поздних. Он позволяет предоставить <a href="https://github.com/facebookresearch/faiss/wiki/The-index-factory">строку фабрики индексов Faiss</a> вместо выбора фиксированного типа индекса Milvus.</p>
-<p>Используйте <code translate="no">FAISS</code>, если у вас уже есть проверенный рецепт Faiss и вам требуется прямой контроль над его составом. Для типичных рецептов, имеющих специальный тип индекса Milvus, предпочтительнее использовать этот специальный тип, поскольку он обладает стабильным и задокументированным набором параметров.</p>
+    </button></h1><p>Тип индекса « <code translate="no">FAISS</code> » — это пропускной механизм экспертного уровня, доступный в Milvus 3.0.0 и более поздних версиях. Он позволяет предоставить <a href="https://github.com/facebookresearch/faiss/wiki/The-index-factory">строку фабрики индексов Faiss</a> вместо выбора фиксированного типа индекса Milvus.</p>
+<p>Используйте <code translate="no">FAISS</code>, если у вас уже есть проверенный рецепт Faiss и вам требуется прямой контроль над его составом. Для типовых рецептов, имеющих специальный тип индекса Milvus, предпочтительнее использовать этот специальный тип, поскольку он имеет стабильный и задокументированный набор параметров.</p>
 <div class="alert note">
 <p>Строка фабрики, поддерживаемая исходным проектом Faiss, не всегда автоматически поддерживается Milvus. Совместимость зависит от типа векторного поля, метрики, размерности, модулей Faiss, скомпилированных в образ Milvus, а также от того, поддерживает ли результирующий индекс операции, требуемые Milvus.</p>
 </div>
@@ -50,7 +50,7 @@ beta: Milvus 3.0.0+
 <li><p>Для скалярной фильтрации необходимо, чтобы базовый индекс Faiss поддерживал селектор ID. Тесты Milvus 3.0.0 охватывают фильтрованный поиск с использованием фабрик с плавающей запятой: <code translate="no">Flat</code>, <code translate="no">IVF64,Flat</code> и <code translate="no">HNSW16,Flat</code>. Не следует предполагать, что каждая фабрика поддерживает фильтры или что двоичные индексы <code translate="no">FAISS</code> поддерживают скалярную фильтрацию.</p></li>
 <li><p>Итераторы поиска не поддерживаются.</p></li>
 <li><p>Адаптер не обеспечивает извлечение необработанных векторов.</p></li>
-<li><p>Поддержка поиска по диапазону зависит от фабрики. Float <code translate="no">Flat</code> имеет покрытие релизом. Не используйте поиск по диапазону с бинарными индексами <code translate="no">FAISS</code>.</p></li>
+<li><p>Поддержка поиска по диапазону зависит от фабрики. Поиск по диапазону с плавающей запятой ( <code translate="no">Flat</code> ) имеет полное покрытие в релизе. Не используйте поиск по диапазону с бинарными индексами ( <code translate="no">FAISS</code> ).</p></li>
 <li><p>Фабрика может успешно скомпилироваться, но при этом отклонять некоторые операции поиска Milvus. Например, автономная фабрика <code translate="no">PQ8x4</code> отклоняет селектор, используемый при поиске со скалярной фильтрацией. Проверяйте использование без фильтрации отдельно.</p></li>
 <li><p>В Milvus 3.0.0 проверяйте оценки <code translate="no">COSINE</code> и пороговые значения для поиска по диапазону после перезагрузки индекса. Knowhere v3.0.6 не восстанавливает состояние косинусной нормализации адаптера <code translate="no">FAISS</code> во время десериализации.</p></li>
 </ul>
@@ -122,13 +122,14 @@ beta: Milvus 3.0.0+
 <tr><td><code translate="no">Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td>Нет</td><td>Точный поиск.</td></tr>
 <tr><td><code translate="no">IVF64,Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">nprobe</code></td><td>ЭКО с 64 инвертированными списками и несжатыми векторами.</td></tr>
 <tr><td><code translate="no">HNSW16,Flat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">efSearch</code></td><td>Граф HNSW с плоским хранением векторов.</td></tr>
-<tr><td><code translate="no">OPQ16,IVF64,PQ16x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Специфично для фабрики</td><td>Объединяет OPQ, IVF и PQ. Проверьте размер обучающей выборки и коэффициент восстановления на ваших данных.</td></tr>
+<tr><td><code translate="no">OPQ16,IVF64,PQ16x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Специфично для Factory</td><td>Объединяет OPQ, IVF и PQ. Проверьте размер обучающей выборки и коэффициент восстановления на ваших данных.</td></tr>
 <tr><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td><code translate="no">nprobe</code>, <code translate="no">k_factor</code></td><td>Использует плоский рефайнер после извлечения кандидатов PQ.</td></tr>
 <tr><td><code translate="no">PQ8x4</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code></td><td>Нет</td><td>Встроены тесты на выпуск. Поиск со скалярной фильтрацией завершается сбоем, поскольку индекс отклоняет селектор; проверьте использование без фильтрации отдельно.</td></tr>
-<tr><td><code translate="no">BFlat</code></td><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HAMMING</code></td><td>Нет</td><td>Точный поиск по бинарным векторам.</td></tr>
+<tr><td><code translate="no">BFlat</code></td><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HAMMING</code></td><td>Нет</td><td>Точный поиск по двоичным векторам.</td></tr>
+<tr><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td>Графовый индекс SVS Vamana с сжатием LeanVec. Требуется сборка Milvus с включенной поддержкой SVS и процессор Intel для хранилища LeanVec. См. раздел <a href="/docs/ru/search_with_svs_vamana.md">«Поиск с использованием SVS Vamana и Milvus</a>».</td></tr>
 </tbody>
 </table>
-<p>Записи « <code translate="no">COSINE</code> » указывают на покрытие тестами сборки и поиска. В Milvus 3.0.0 они не подтверждают правильность оценки или поиска по диапазону после перезагрузки индекса. См. раздел <a href="#limits">«Ограничения</a>».</p>
+<p>Записи « <code translate="no">COSINE</code> » указывают на охват тестами сборки и поиска. Для Milvus 3.0.0 они не подтверждают правильность оценки или поиска по диапазону после перезагрузки индекса. См. раздел <a href="#limits">«Ограничения</a>».</p>
 <h2 id="Build-and-search-a-float-index" class="common-anchor-header">Сборка и поиск по индексу с плавающей запятой<button data-href="#Build-and-search-a-float-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +145,7 @@ beta: Milvus 3.0.0+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующем примере создаются 3 000 векторов размером 128. Этого достаточно для обучения рецепта « <code translate="no">IVF64,Flat</code> », используемого в примере. Разверните блок настройки и запустите его перед сборкой и поиском по индексу.</p>
+    </button></h2><p>В следующем примере создается 3 000 векторов размером 128. Этого достаточно для обучения алгоритма « <code translate="no">IVF64,Flat</code> », используемого в примере. Разверните блок настройки и запустите его перед сборкой и поиском по индексу.</p>
 <p><details></p>
 <p><summary>Подготовка коллекции векторов с плавающей запятой</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -208,7 +209,7 @@ index_params.add_index(
 client.create_index(collection_name=collection_name, index_params=index_params)
 client.load_collection(collection_name=collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Строка фабрики <code translate="no">IVF64,Flat</code> создает индекс IVF с 64 инвертированными списками и сохраняет несжатые векторы в каждом списке.</p>
+<p>Строка фабрики <code translate="no">IVF64,Flat</code> создаёт индекс IVF с 64 инвертированными списками и сохраняет несжатые векторы в каждом списке.</p>
 <h3 id="Search-the-index" class="common-anchor-header">Поиск по индексу<button data-href="#Search-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,7 +244,7 @@ results = client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(hit)
 <button class="copy-code-btn"></button></code></pre>
-<p>Запрос использует <code translate="no">nprobe=8</code>, поэтому Faiss просматривает 8 из 64 инвертированных списков. Фильтр ограничивает результаты сущностями, у которых значение <code translate="no">category</code> равно <code translate="no">reference</code>.</p>
+<p>Запрос использует <code translate="no">nprobe=8</code>, поэтому Faiss просматривает 8 из 64 инвертированных списков. Фильтр ограничивает результаты сущностями, значение <code translate="no">category</code> которых равно <code translate="no">reference</code>.</p>
 <h2 id="Build-and-search-a-binary-index" class="common-anchor-header">Создание и поиск по двоичному индексу<button data-href="#Build-and-search-a-binary-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -361,7 +362,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Тип индекса « <code translate="no">FAISS</code> » имеет один обязательный проходной параметр сборки.</p>
+    </button></h2><p>Тип индекса « <code translate="no">FAISS</code> » имеет один обязательный параметр сборки типа «passthrough».</p>
 <table>
 <thead>
 <tr><th>Параметр</th><th>Расположение</th><th>Описание</th></tr>
@@ -378,10 +379,11 @@ results = client.search(
 <tbody>
 <tr><td><code translate="no">nprobe</code></td><td><code translate="no">IVF64,Flat</code></td><td>Количество инвертированных списков для поиска.</td></tr>
 <tr><td><code translate="no">efSearch</code></td><td><code translate="no">HNSW16,Flat</code></td><td>Размер списка кандидатов для поиска HNSW.</td></tr>
-<tr><td><code translate="no">k_factor</code></td><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td>Количество кандидатов, передаваемых рефинеру, относительно запрошенного top-K.</td></tr>
+<tr><td><code translate="no">k_factor</code></td><td><code translate="no">IVF64,PQ8x4,RFlat</code></td><td>Количество кандидатов, передаваемых в рефайнер, относительно запрошенного top-K.</td></tr>
+<tr><td><code translate="no">search_window_size</code>, <code translate="no">search_buffer_capacity</code></td><td><code translate="no">SVSVamana64,LeanVec4x8</code></td><td>Размер окна поиска SVS Vamana и емкость буфера. См. раздел <a href="/docs/ru/search_with_svs_vamana.md">«Поиск с помощью SVS Vamana и Milvus</a>».</td></tr>
 </tbody>
 </table>
-<p>Milvus передает только дополнительные параметры, распознаваемые адаптером. Неизвестные ключи сборки и ключи поиска, которые не поддерживаются конкретным семейством фабрик, отклоняются. Milvus не поддерживает универсальную схему параметров для всех возможных фабрик. Ознакомьтесь с документацией Faiss для выбранного фабрика, а затем проверьте весь процесс сборки и поиска на соответствие той версии и тому образу Milvus, которые вы планируете развернуть.</p>
+<p>Milvus передаёт только дополнительные параметры, распознаваемые адаптером. Неизвестные ключи сборки и ключи поиска, которые конкретное семейство фабрик не поддерживает, отбрасываются. Milvus не поддерживает универсальную схему параметров для каждой возможной фабрики. Ознакомьтесь с документацией Faiss для выбранного фабрика, а затем проверьте весь процесс сборки и поиска на соответствие именно той версии и тому образу Milvus, которые вы планируете развернуть.</p>
 <h2 id="Handle-errors-and-unsupported-operations" class="common-anchor-header">Обработка ошибок и неподдерживаемых операций<button data-href="#Handle-errors-and-unsupported-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -398,10 +400,10 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Если строка фабрики неверна или недоступна в сборке Milvus, построение индекса завершается сбоем. Перед загрузкой коллекции проверьте состояние индекса и причину сбоя.</p></li>
-<li><p>Если тип параметра указан неверно, поиск завершится сбоем. Например, запрос <code translate="no">nprobe=&quot;invalid&quot;</code> отклоняется, поскольку параметр <code translate="no">nprobe</code> должен быть числовым.</p></li>
-<li><p>Если параметр не относится к используемому фабричному модулю, адаптер отклоняет его как неподдерживаемый.</p></li>
-<li><p>Если фабрика не поддерживает селектор Milvus, фильтрованный поиск может завершиться сбоем, даже если та же фабрика может выполнять поиск в автономной версии Faiss.</p></li>
+<li><p>Если строка фабрики неверна или недоступна в сборке Milvus, создание индекса завершается сбоем. Перед загрузкой коллекции проверьте состояние индекса и причину сбоя.</p></li>
+<li><p>Если тип параметра указан неверно, поиск завершается сбоем. Например, запрос <code translate="no">nprobe=&quot;invalid&quot;</code> отклоняется, поскольку параметр <code translate="no">nprobe</code> должен быть числовым.</p></li>
+<li><p>Если параметр не относится к сформированному фабричному модулю, адаптер отклоняет его как неподдерживаемый.</p></li>
+<li><p>Если фабрика не поддерживает селектор Milvus, фильтрованный поиск может завершиться сбоем, даже если та же фабрика может выполнять поиск в автономном Faiss.</p></li>
 <li><p>Не используйте <code translate="no">search_iterator()</code> с индексом <code translate="no">FAISS</code>.</p></li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">

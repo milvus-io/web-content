@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Usuarios de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -1235,7 +1235,7 @@
             "children": []
           },
           {
-            "label": "Utilizar clave de partición",
+            "label": "Utilizar la clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1371,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de la descomposición",
+                "label": "Clasificación de descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -3096,6 +3096,12 @@
             "label": "Jev",
             "id": "search_with_jev.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SVS Vamana",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
             "children": []
           }
         ]

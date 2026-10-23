@@ -22,7 +22,7 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf dieser Seite wird erläutert, wie Sie Milvus Standalone mit einem vorgefertigten RPM/DEB-Paket installieren.</p>
+    </button></h1><p>Auf dieser Seite wird erläutert, wie Sie Milvus Standalone mit einem vorgefertigten RPM-/DEB-Paket installieren.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,12 +57,12 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können das RPM-/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.24">Seite „Milvus Releases“</a> herunterladen.</p>
+    </button></h2><p>Sie können das RPM-/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">Seite „Milvus Releases“</a> herunterladen.</p>
 <ul>
 <li>Für x86_64/amd64 laden Sie das Paket <strong>„milvus_2.6.24-1_amd64.deb“</strong> oder <strong>„milvus_2.6.24-1_amd64.rpm“</strong> herunter.</li>
 <li>Für ARM64 laden Sie das Paket <strong>„milvus_2.6.24-1_arm64.deb“</strong> oder <strong>„milvus_2.6.24-1_arm64.rpm“</strong> herunter.</li>
 </ul>
-<p>Der folgende Befehl geht davon aus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen werden.</p>
+<p>Der folgende Befehl setzt voraus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen.</p>
 <pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.24/milvus_2.6.24-1_amd64.rpm -O milvus_2.6.24-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installieren Sie das RPM-/DEB-Paket<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -85,7 +85,7 @@ title: Milvus Standalone mit RPM-/DEB-Paket installieren
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.24-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) installieren Sie das Paket mit dem Befehl „ <code translate="no">apt</code> “.</p>
+<p>Bei DEB-basierten Systemen (wie Ubuntu und Debian) verwenden Sie den Befehl „ <code translate="no">apt</code> “, um das Paket zu installieren.</p>
 <pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.24-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -199,13 +199,13 @@ dpkg -l | grep milvus
 <li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
 <li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert und Löschen</a></li>
 <li><a href="/docs/de/v2.6.x/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Milvus mit Helm-Chart aktualisieren</a>.</p></li>
 <li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
-<li><p>Stellen Sie Ihren Milvus-Cluster in der Cloud bereit:</p>
+<li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/de/v2.6.x/gcp.md">Google Cloud</a></li>
@@ -213,7 +213,7 @@ dpkg -l | grep milvus
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">„Birdwatcher“</a>, ein Open-Source-Tool zum Debuggen von Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

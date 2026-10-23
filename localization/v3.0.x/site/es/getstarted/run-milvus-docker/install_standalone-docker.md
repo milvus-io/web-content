@@ -63,22 +63,22 @@ title: Ejecutar Milvus en Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novedades de la versión 3.0.2:</strong></p>
+<p><strong>Novedades de la versión 3.0.3:</strong></p>
 <ul>
-<li><strong>Nodo de streaming</strong>: capacidades de procesamiento de datos mejoradas</li>
-<li><strong>Woodpecker MQ (por defecto)</strong>: esta implementación en Docker ejecuta Woodpecker como cola de mensajes con el <strong>sistema de archivos local</strong> como backend WAL, por lo que no se requiere ningún servicio externo de cola de mensajes. Véase <a href="/docs/es/woodpecker.md">Woodpecker</a>.</li>
+<li><strong>Nodo de streaming</strong>: capacidades mejoradas de procesamiento de datos</li>
+<li><strong>Woodpecker MQ (predeterminado)</strong>: esta implementación en Docker ejecuta Woodpecker como cola de mensajes con el <strong>sistema de archivos local</strong> como backend WAL, por lo que no se requiere ningún servicio externo de cola de mensajes. Véase <a href="/docs/es/woodpecker.md">Woodpecker</a>.</li>
 <li><strong>Arquitectura optimizada</strong>: componentes consolidados para un mejor rendimiento</li>
 </ul>
 <p>Descarga siempre el script más reciente para asegurarte de obtener las configuraciones y mejoras de arquitectura más actuales.</p>
 <p>Si deseas utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en modo de implementación independiente, se recomienda utilizar el método de implementación <a href="https://milvus.io/docs/install_standalone-docker-compose.md">de Docker Compose</a>.</p>
-<p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la asistencia necesaria.</p>
+<p>Si tiene algún problema al descargar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y le proporcionaremos la asistencia necesaria.</p>
 </div>
 <p>Tras ejecutar el script de instalación:</p>
 <ul>
 <li>Se ha iniciado un contenedor de Docker denominado «milvus-standalone» en el puerto <strong>19530</strong>.</li>
 <li>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asociado a <strong>embedEtcd.yaml</strong> en la carpeta actual.</li>
 <li>Para modificar la configuración predeterminada de Milvus, añade tus ajustes al archivo <strong>user.yaml</strong> de la carpeta actual y, a continuación, reinicia el servicio.</li>
-<li>El volumen de datos de Milvus está asignado a <strong>volumes/milvus</strong> en la carpeta actual.</li>
+<li>El volumen de datos de Milvus está asignado a <strong>«volumes/milvus»</strong> en la carpeta actual.</li>
 </ul>
 <p>Puede acceder a la interfaz web de Milvus en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Actualizar las configuraciones de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -96,7 +96,7 @@ title: Ejecutar Milvus en Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede modificar la configuración de Milvus en el archivo <strong>user.yaml</strong> de la carpeta actual. Por ejemplo, para cambiar la dirección <code translate="no">proxy.healthCheckTimeout</code> por <code translate="no">1000</code> ms, puede modificar el archivo de la siguiente manera:</p>
+    </button></h2><p>Puede modificar la configuración de Milvus en el archivo <strong>user.yaml</strong> de la carpeta actual. Por ejemplo, para cambiar la dirección <code translate="no">proxy.healthCheckTimeout</code> por <code translate="no">1000</code>, puede modificar el archivo de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -173,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por defecto, esta implementación ejecuta <strong>Woodpecker</strong> (WAL en el sistema de archivos local) como cola de mensajes y un <strong>etcd integrado</strong> para los metadatos; no hay que instalar nada más. Para utilizar una cola de mensajes diferente o conectar almacenamiento de objetos externo o metadatos, consulta:</p>
+    </button></h2><p>Por defecto, esta implementación ejecuta <strong>Woodpecker</strong> (WAL en el sistema de archivos local) como cola de mensajes y un <strong>etcd integrado</strong> para los metadatos; no es necesario instalar nada más. Para utilizar una cola de mensajes diferente o conectar almacenamiento de objetos externo o metadatos, consulta:</p>
 <ul>
 <li>Cola de mensajes: <a href="/docs/es/woodpecker.md">Woodpecker</a> (predeterminado) · <a href="/docs/es/mq_pulsar.md">Pulsar</a> · <a href="/docs/es/mq_kafka.md">Kafka</a> · <a href="/docs/es/mq_rocksmq.md">RocksMQ</a></li>
 <li>Almacenamiento de objetos: <a href="/docs/es/deploy_s3.md">MinIO</a> (predeterminado) · <a href="/docs/es/deploy_s3.md">AWS S3</a> · <a href="/docs/es/abs.md">Azure Blob</a> · <a href="/docs/es/gcs.md">GCP Cloud Storage</a> · <a href="/docs/es/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/es/deploy_s3.md">Tencent COS</a> · <a href="/docs/es/deploy_s3.md">Huawei OBS</a> · <a href="/docs/es/deploy_s3.md">Compatible con S3</a></li>
@@ -205,7 +205,7 @@ EOF
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o eliminar</a></li>
 <li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>

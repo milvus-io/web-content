@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p>Затем загрузите диаграммы Milvus из репозитория следующим образом:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы всегда можете выполнить эту команду, чтобы загрузить последние диаграммы Milvus Helm.</p>
+<p>Вы всегда можете выполнить эту команду, чтобы загрузить последние версии диаграмм Milvus Helm.</p>
 <h2 id="Online-install" class="common-anchor-header">Установка через Интернет<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Вам нужно автономное развертывание?</strong></p>
 <p>Если вы предпочитаете развернуть Milvus в автономном режиме (на одном узле) для разработки или тестирования, используйте следующую команду:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -140,9 +140,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p>Для режима службы Woodpecker рекомендуется использовать Milvus версии 3.0.3 или более поздней с Woodpecker версии v0.1.46 или более поздней.</p>
 </div>
-<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 3.0.2, используя Woodpecker в качестве рекомендуемой очереди сообщений:</p>
+<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 3.0.3, используя Woodpecker в качестве рекомендуемой очереди сообщений:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -154,7 +154,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li>Использует <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для упрощения обслуживания)</li>
 <li>Запускает <strong>Woodpecker в качестве отдельного сервиса</strong> (отдельного StatefulSet), а не встроенного в узел потоковой обработки</li>
 <li>Включает новый компонент <strong>Streaming Node</strong> для повышения производительности</li>
-<li>Отключает устаревший <strong>узел индексации</strong> (эту функциональность теперь обеспечивает узел данных)</li>
+<li>Отключает устаревший <strong>узел индексации</strong> (его функции теперь выполняет узел данных)</li>
 </ul>
 <div class="alert note">
 <p><strong>Изменения в архитектуре Milvus 2.6.x:</strong></p>
@@ -197,7 +197,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Убедитесь, что развертывание прошло успешно, проверив статус подов:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Дождитесь, пока все поды не перейдут в состояние «Running».</strong> При конфигурации v3.0.2 вы должны увидеть поды, похожие на следующие:</p>
+<p><strong>Дождитесь, пока все поды не покажут статус «Running».</strong> При конфигурации v3.0.3 вы должны увидеть поды, похожие на следующие:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -281,7 +281,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
     </button></h2><p>Вы можете обновить конфигурации своего кластера Milvus, отредактировав файл <code translate="no">values.yaml</code> и применив его заново.</p>
 <ol>
 <li><p>Создайте файл <code translate="no">values.yaml</code> с нужными настройками.</p>
-<p>Ниже предполагается, что вы хотите включить <code translate="no">proxy.http</code>.</p>
+<p>Ниже приведено описание того, как включить <code translate="no">proxy.http</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     proxy:

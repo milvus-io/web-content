@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース",
+        "label": "リリース情報",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -491,7 +491,7 @@
                 "children": []
               },
               {
-                "label": "Index StructArray のフィールド",
+                "label": "インデックス、構造体、配列のフィールド",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "内蔵アナライザ",
+                "label": "組み込みアナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -749,7 +749,7 @@
             ]
           },
           {
-            "label": "コレクションフィールドの変更",
+            "label": "コレクションのフィールドを変更する",
             "id": "alter-collection-field.md",
             "order": 16,
             "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "Upsert エンティティ",
+            "label": "アップサートされるエンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1223,7 +1223,7 @@
             ]
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1401,7 +1401,7 @@
                     "children": []
                   },
                   {
-                    "label": "チュートリアル：Milvusでの時間ベースのランキングの実装",
+                    "label": "チュートリアル：Milvusでの時間軸に基づくランキングの実装",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1487,7 +1487,7 @@
             "children": []
           },
           {
-            "label": "強制マージ・コンパクテーション",
+            "label": "強制マージ・コンパクション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1981,7 +1981,7 @@
             "children": []
           },
           {
-            "label": "Milvus スタンドアロンのアップグレード",
+            "label": "Milvus Standalone のアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2238,7 +2238,7 @@
         ]
       },
       {
-        "label": "バードウォッチャー",
+        "label": "野鳥観察者",
         "id": "birdwatcher",
         "order": 3,
         "children": [
@@ -2440,7 +2440,7 @@
                 "children": []
               },
               {
-                "label": "Nomic",
+                "label": "ノミック",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []
@@ -2512,7 +2512,7 @@
         ]
       },
       {
-        "label": "SDKコードヘルパー（MCP）",
+        "label": "SDK コードヘルパー (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
         "order": 11,
         "children": []
@@ -3097,6 +3097,12 @@
             "id": "search_with_jev.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "SVS ヴァマナ",
+            "id": "search_with_svs_vamana.md",
+            "order": 3,
+            "children": []
           }
         ]
       }
@@ -3293,7 +3299,7 @@
         "children": []
       },
       {
-        "label": "Milvus Limits",
+        "label": "Milvus リミッツ",
         "id": "limitations.md",
         "order": 3,
         "children": []

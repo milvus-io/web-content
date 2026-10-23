@@ -19,6 +19,84 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2625" class="common-anchor-header">v2.6.25<button data-href="#v2625" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: September 29, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.25</td><td>2.6.17</td><td>2.6.17</td><td>2.6.25</td><td>2.6.5</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.25! This release tightens security with stricter RBAC checks, a new <code translate="no">ImportBinlog</code> privilege, and masking of sensitive configuration values. It also adds snappy and s2 gRPC compression, and fixes stability issues around shard leader movement, scalar index replacement, and Pulsar channel takeover.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Added per-resource-group load config convergence reporting to the management API, covering replica distribution, serviceability, query visibility, and residual resources (<a href="https://github.com/milvus-io/milvus/pull/53518">#53518</a>)</li>
+<li>Added snappy and s2 gRPC compression, made the zstd codec configurable (<code translate="no">grpc.client.compressionAlgorithm</code>, <code translate="no">compressionLevel</code>, <code translate="no">compressionCRC</code>, <code translate="no">compressionConcurrency</code>), and hardened zstd decompression against oversized messages (<a href="https://github.com/milvus-io/milvus/pull/53599">#53599</a>)</li>
+<li>Masked sensitive values and omitted undeclared keys in configuration views and diagnostic logs, so credentials and unrelated environment variables are no longer exposed (<a href="https://github.com/milvus-io/milvus/pull/53613">#53613</a>)</li>
+<li>Required the new cluster-level <code translate="no">ImportBinlog</code> privilege for binlog (<code translate="no">backup=true</code>) and L0 imports, and rejected regular imports whose file paths point into Milvus’s internal storage directories (<a href="https://github.com/milvus-io/milvus/pull/53681">#53681</a>)</li>
+<li>Sped up writing Tantivy index results into bitsets, up to 7x faster per doc ID for contiguous IDs in microbenchmarks (<a href="https://github.com/milvus-io/milvus/pull/53701">#53701</a>)</li>
+<li>Hardened RBAC enforcement by disabling the Dummy RPC’s query mode, which bypassed authorization and rate limiting, and by requiring Search privilege on the collection for RunAnalyzer requests that specify one (<a href="https://github.com/milvus-io/milvus/pull/53812">#53812</a>)</li>
+<li>Reduced redundant DescribeCollection RPCs from Proxy to the coordinator during insert, delete, and upsert by resolving collection channels from the Proxy metadata cache (<a href="https://github.com/milvus-io/milvus/pull/53793">#53793</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed a DataNode memory leak where a fully built index or analyze result was never released if its task was canceled during the build (<a href="https://github.com/milvus-io/milvus/pull/53349">#53349</a>)</li>
+<li>Fixed an issue where loading segments with FLAT or BIN_FLAT indexes could fail during incremental index loading, especially under restrictive resource limits (<a href="https://github.com/milvus-io/milvus/pull/53383">#53383</a>)</li>
+<li>Fixed an issue where index builds on segments containing malformed JSON retried indefinitely; such tasks now fail fast with a permanent error instead of looping across workers (<a href="https://github.com/milvus-io/milvus/pull/53429">#53429</a>)</li>
+<li>Fixed an issue where replacing a scalar index on a loaded collection could leave the old index loaded indefinitely and cause repeated reloads; both QueryCoord and QueryNode must be upgraded for the complete fix (<a href="https://github.com/milvus-io/milvus/pull/53537">#53537</a>)</li>
+<li>Fixed an issue where a StreamingNode could keep writing to a Pulsar-backed channel after another node took it over; <code translate="no">pulsar.producerAccessMode</code> now defaults to <code translate="no">exclusive</code> (enforcement requires Pulsar 2.8.0+; set it to <code translate="no">shared</code> to keep the previous behavior) (<a href="https://github.com/milvus-io/milvus/pull/53540">#53540</a>)</li>
+<li>Fixed an issue where sustained GIS query load could stall inserts into growing segments when the geometry cache (<code translate="no">enableGeometryCache</code>) was enabled (<a href="https://github.com/milvus-io/milvus/pull/53610">#53610</a>)</li>
+<li>Fixed an issue where Milvus components could hang during shutdown or block on logging when the async log output was stuck (<a href="https://github.com/milvus-io/milvus/pull/53626">#53626</a>)</li>
+<li>Fixed a QueryNode crash when a LIKE filter on an NGRAM-indexed field contained a literal with fewer than <code translate="no">min_gram</code> multi-byte characters, such as a single full-width punctuation mark (<a href="https://github.com/milvus-io/milvus/pull/53668">#53668</a>)</li>
+<li>Fixed an issue where search, query, and statistics requests kept failing with “collection not loaded” for an extended period after QueryCoord moved a shard leader to another QueryNode (<a href="https://github.com/milvus-io/milvus/pull/53810">#53810</a>)</li>
+<li>Fixed a crash that could occur when Arrow data passed through the C Data interface contained zero-length buffers, such as all-null string columns, by upgrading the Arrow Go dependency to v17.0.2 (<a href="https://github.com/milvus-io/milvus/pull/53738">#53738</a>)</li>
+<li>Fixed an issue where a restarting node reported ready on <code translate="no">/healthz</code> before all of its components had registered, causing requests routed to it during startup to fail with connection refused (<a href="https://github.com/milvus-io/milvus/pull/53736">#53736</a>)</li>
+<li>Fixed an issue where Parquet import stored NULL instead of the default value for null rows in Timestamptz fields that define a default value (<a href="https://github.com/milvus-io/milvus/pull/53809">#53809</a>)</li>
+</ul>
 <h2 id="v2624" class="common-anchor-header">v2.6.24<button data-href="#v2624" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

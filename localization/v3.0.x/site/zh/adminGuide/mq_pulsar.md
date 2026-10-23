@@ -75,13 +75,13 @@ title: 脉冲星
       </svg>
     </button></h3><p>若要部署使用捆绑版 Pulsar（而非 Woodpecker）的 Milvus 集群，请安装启用了流式处理节点（Streaming Node）的 Helm 图表：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.2 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Kubernetes v1.25 及更高版本中，若因捆绑的 Pulsar 子图引发 PodDisruptionBudget（PDB）API 问题，请禁用 Pulsar 的 PDB 策略：</p>
+<p>在 Kubernetes v1.25 及更高版本中，若因捆绑的 Pulsar 子图引发 PodDisruptionBudget API 问题，请禁用 Pulsar 的 PDB 策略：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
@@ -133,7 +133,7 @@ title: 脉冲星
       </svg>
     </button></h3><pre><code translate="no" class="language-bash">helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>若您使用了内置的 Pulsar 并希望删除其持久化数据，请删除 Pulsar PVC（名称为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
+<p>若您使用了内置的 Pulsar 并希望清除其持久化数据，请删除 Pulsar PVC（名称为<code translate="no">my-release-pulsarv3-*</code> ）：</p>
 <pre><code translate="no" class="language-bash">kubectl get pvc | grep my-release-pulsarv3
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
@@ -263,11 +263,11 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>从 2.5.x 升级至 2.6.x：</strong> <strong>消息队列限制</strong>：升级至 Milvus v3.0.2 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
-如果您正在运行 Pulsar 且希望保留它，请在升级过程中不要更改消息队列。</li>
-<li><strong>Pulsar v2 → v3：</strong>请参阅<a href="/docs/zh/upgrade-pulsar-v3.md">《将 Pulsar 从 v2 升级到 v3》</a>；若要继续<a href="/docs/zh/use-pulsar-v2.md">使用</a> v2，请参阅《<a href="/docs/zh/use-pulsar-v2.md">继续使用 Pulsar v2</a>》。</li>
+<li><strong>从 2.5.x 升级到 2.6.x：</strong> <strong>消息队列限制</strong>：升级到 Milvus v3.0.3 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。
+如果您正在运行 Pulsar 且希望继续使用，请在升级过程中不要更改消息队列。</li>
+<li><strong>Pulsar v2 → v3：</strong>请参阅<a href="/docs/zh/upgrade-pulsar-v3.md">《将 Pulsar 从 v2 升级至 v3》</a>；若要继续<a href="/docs/zh/use-pulsar-v2.md">使用</a> v2，请参阅《<a href="/docs/zh/use-pulsar-v2.md">继续使用 Pulsar v2</a>》。</li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">后续步骤<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

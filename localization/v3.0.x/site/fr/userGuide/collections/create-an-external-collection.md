@@ -44,11 +44,11 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>Dans un pipeline de données d’IA classique, les utilisateurs ont peut-être déjà stocké leurs données au format Parquet ou dans d’autres formats sur leur système de stockage, tel qu’AWS S3. Pour permettre à Milvus d’exploiter ces données stockées en externe, les utilisateurs doivent généralement les importer dans le stockage propre à Milvus à l’aide de pipelines ETL (Extract-Transform-Load).</p>
-<p>Ce workflow consistant à « apporter ses données vers Milvus » génère des données redondantes difficiles à synchroniser et alourdit la charge de maintenance technique nécessaire pour garantir la cohérence des données.</p>
+<p>Ce workflow consistant à « apporter ses données dans Milvus » génère des données redondantes difficiles à synchroniser et alourdit la charge de maintenance technique nécessaire pour garantir la cohérence des données.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
-   <span>Workflow « Amener les données vers le système de calcul</span> </span>» <span class="img-wrapper">
+   <span>Workflow « Amener les données vers le calcul</span> </span>» <span class="img-wrapper">
   
  </span></p>
 <p>Pour résoudre ces problèmes, Milvus propose des collections externes qui vous permettent d’accéder à vos données stockées en externe depuis Milvus sans vous soucier de la synchronisation des données ni des pipelines ETL.</p>
@@ -75,7 +75,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tout comme pour la création d’une collection gérée, vous devez également créer un schéma avant de créer une collection externe. Cependant, ce schéma est légèrement différent de celui d’une collection gérée.</p>
+    </button></h2><p>Comme pour la création d’une collection gérée, vous devez également créer un schéma avant de créer une collection externe. Cependant, ce schéma est légèrement différent de celui d’une collection gérée.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -150,12 +150,12 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">format</code></p></td>
-     <td><p>Format des fichiers de données source cibles.</p></td>
+     <td><p>Format des données source cibles. Utilisez <code translate="no">parquet</code> pour les fichiers Parquet ou <code translate="no">iceberg-table</code> pour une table Iceberg. Pour Iceberg, <code translate="no">external_source</code> doit pointer vers le fichier JSON de métadonnées de la table.</p></td>
      <td><p><code translate="no">parquet</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">snapshot_id</code></p></td>
-     <td><p>Un identifiant de snapshot de table Iceberg valide. Ce paramètre s’applique uniquement lorsque vous définissez « <code translate="no">format</code> » sur « <code translate="no">iceberg_table</code> ».</p></td>
+     <td><p>Un ID de snapshot valide issu des métadonnées de la table Iceberg. Ce paramètre s’applique uniquement lorsque vous définissez <code translate="no">format</code> sur <code translate="no">iceberg-table</code>.</p></td>
      <td><p><code translate="no">473984310232959286</code></p></td>
    </tr>
    <tr>
@@ -164,9 +164,24 @@ schema := entity.NewSchema().
      <td><p>--</p></td>
    </tr>
 </table>
+<p><details summary="Iceberg table example"></p>
+<p>Pour une table Iceberg sur AWS S3, l’ <code translate="no">external_spec</code> suivante utilise l’authentification IAM. Le déploiement Milvus doit déjà avoir accès au fichier JSON de métadonnées ainsi qu’aux fichiers de manifeste et de données auxquels il fait référence.</p>
+<p>Définissez ` <code translate="no">external_source</code> ` sur votre fichier de métadonnées, par exemple ` <code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code>`. Remplacez ` <code translate="no">snapshot_id</code> ` par un ID de snapshot existant issu de ce fichier et adaptez ` <code translate="no">extfs</code> ` à votre environnement de stockage.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;snapshot_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;473984310232959286&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;cloud_provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;aws&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;region&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;us-west-2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;use_iam&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pour connaître les fournisseurs de stockage pris en charge et les restrictions d’Iceberg, consultez la section <a href="/docs/fr/storage-v3.md">Stockage V3</a>.</p>
+<p></details></p>
 <p><details summary="Authentication Options"></p>
 <p>Vous disposez des options suivantes pour définir les paramètres d’authentification :</p>
-<h3 id="Use-AWS-AKSK" class="common-anchor-header">Utiliser AWS AK/SK<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
+<h3 id="Use-AWS-AKSK" class="common-anchor-header">Utiliser un AK/SK AWS<button data-href="#Use-AWS-AKSK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +196,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cette option s'applique à MinIO auto-hébergé ou au cas où vous disposez d'un AK/SK pour votre travail.</p>
+    </button></h3><p>Cette option s’applique à MinIO auto-hébergé ou au cas où vous disposez d’un AK/SK pour votre travail.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -305,7 +320,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Cette option s'applique lorsque vous stockez des données externes dans le compartiment Milvus, et les paramètres globaux de MinIO spécifiés dans <code translate="no">milvus.yaml</code> peuvent être utilisés directement pour accéder aux données.</p>
+    </button></h3><p>Cette option s'applique lorsque vous stockez des données externes dans le compartiment Milvus et que les paramètres globaux de MinIO spécifiés dans <code translate="no">milvus.yaml</code> peuvent être utilisés directement pour accéder aux données.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -331,11 +346,11 @@ schema := entity.NewSchema().
     </button></h3><p>Cette option s'applique lorsque votre organisation utilise différents comptes AWS pour gérer le cluster Milvus et le compartiment contenant les fichiers de données cibles.</p>
 <p>Dans ce cas, le propriétaire du compartiment doit créer un rôle IAM qui</p>
 <ul>
-<li><p>associe la politique « <code translate="no">AmazonS3FullAccess</code> » ou une politique plus précise pour l’accès au compartiment.</p></li>
+<li><p>associe la politique « <code translate="no">AmazonS3FullAccess</code> » ou une politique plus détaillée pour l’accès au compartiment.</p></li>
 <li><p>inclut une politique « <code translate="no">sts:ExternalId</code> » personnalisée dans le champ « Condition » de la politique de confiance du rôle.</p></li>
 </ul>
 <p>Ensuite, le propriétaire du compartiment doit vous fournir l’ARN du rôle IAM et l’identifiant externe afin que vous puissiez appeler ` <code translate="no">sts:AssumeRole</code> ` avec ces valeurs pour assumer le rôle IAM.</p>
-<p>Voici un exemple de politique d’autorisation à associer au rôle IAM avec les autorisations accordées. Vous pouvez l’adapter en fonction de vos besoins.</p>
+<p>Voici un exemple de politique d’autorisation à associer au rôle IAM avec les autorisations accordées. Vous pouvez l’adapter à vos besoins.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -411,7 +426,7 @@ schema := entity.NewSchema().
    </tr>
    <tr>
      <td><p><code translate="no">extfs.use_ssl</code></p></td>
-     <td><p>Indique si le protocole SSL est utilisé pour établir les connexions.</p></td>
+     <td><p>Indique si le protocole SSL est utilisé pour établir des connexions.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
    <tr>
@@ -837,7 +852,7 @@ jobID := refreshResult.JobID
 <p>L'opération d'actualisation est asynchrone ; vous devez donc mettre en place une boucle pour surveiller sa progression.</p>
 <div class="alert note">
 <ul>
-<li><p>L'opération d'actualisation analyse les métadonnées des fichiers de données et génère les fichiers de manifeste en conséquence. Elle prend généralement entre 150 et 250 ms.</p></li>
+<li><p>L'opération d'actualisation analyse les métadonnées des fichiers de données et génère les fichiers manifestes en conséquence. Elle dure généralement entre 150 et 250 ms.</p></li>
 <li><p>Les fichiers de manifeste enregistrent le mappage entre les métadonnées dans Milvus et les lignes des fichiers externes.</p></li>
 <li><p>En cas de mise à jour de vos données sources, vous devez relancer manuellement l’opération de rafraîchissement pour maintenir Milvus à jour.</p></li>
 <li><p>Une opération de rafraîchissement nécessitant la suppression de toutes les métadonnées actives sans aucune insertion entraîne un refus.</p></li>
@@ -858,6 +873,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois la collection externe actualisée, vous pouvez charger et valider la collection, puis effectuer des recherches de similarité et des requêtes dans la collection externe comme vous le feriez dans n’importe quelle collection gérée, à cette exception près que les collections d’une base de données destinée au calcul à la demande doivent être associées à un cluster à la demande pour les recherches et les requêtes.</p>
+    </button></h2><p>Une fois la collection externe actualisée, vous pouvez charger et valider la collection, puis effectuer des recherches de similarité et des requêtes dans la collection externe comme vous le feriez dans n’importe quelle collection gérée, à cette exception près que les collections stockées dans une base de données pour le calcul à la demande doivent être associées à un cluster à la demande pour les recherches et les requêtes.</p>
 <p>Avant d’effectuer des opérations DQL, telles que la recherche, la requête, la récupération et la recherche hybride, vous devez créer une session pour associer les ressources de calcul d’un cluster à la demande.</p>
 <p>Si la source de données externe contient ultérieurement un autre champ que vous souhaitez exposer dans Milvus, ajoutez un champ au schéma de la collection externe et actualisez à nouveau la collection externe. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/alter-external-collection-schema.md">Modifier le schéma d’une collection externe</a>.</p>
