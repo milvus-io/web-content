@@ -37,8 +37,8 @@ title: Data Processing
     </button></h2><p>You can choose how many shards a collection uses in Milvus—each shard maps to a virtual channel (<em>vchannel</em>). As illustrated below, Milvus then assigns every <em>vchannel</em> to a physical channel (<em>pchannel</em>), and each <em>pchannel</em> is bound to a specific Streaming Node.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
-    <span>VChannel PChannel and StreamingNode</span>
+    <img translate="no" src="/docs/v3.0.x/assets/pvchannel_wal.png" alt="VChannel, PChannel, and Streaming Node" class="doc-image" id="vchannel,-pchannel,-and-streaming-node" />
+    <span>VChannel, PChannel, and Streaming Node</span>
   </span>
 </p>
 <p>After data verification, the proxy will split the written message into various data package of shards according to the specified shard routing rules.</p>
