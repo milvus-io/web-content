@@ -1047,8 +1047,16 @@ whose API semantics are uncertain from the source alone.
     the heading is accurate.
   - **C++** → `**ERROR HANDLING:**` — operations return `Status`/`Error`, so the
     section names error handling even where a method can also throw.
-  - **csharp** → follow the csharp tree's own page format (it has no error
-    heading today).
+  - **csharp** → `**EXCEPTIONS:**` linking `Client/MilvusException.md`.
+- **Reconciliation: every operation page whose API can throw must carry the
+  language-appropriate error section** (`**EXCEPTIONS:**` or `**ERROR HANDLING:**`,
+  per the bullet above). If a reconciliation audit finds an operation page with
+  no error section while the underlying API can fail (an RPC method that throws
+  or returns an error), add the section and link the SDK's shared
+  exception/status/return-code type page (see the shared-type rule above).
+  Exceptions to the rule: pure-local, non-failing methods (e.g. an SDK version
+  getter), class/constructor pages, and type pages. In C# the error section
+  appears before `## Example` on every RPC operation page.
 - One page per operation / per class. Refer to related types with relative links.
 - **Imports/includes/dependencies go at the very top of an example.** Any
   statement that pulls in a dependency — Java/Python/Node `import`, Go `import`,
