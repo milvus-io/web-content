@@ -37,7 +37,7 @@ GetRefreshExternalCollectionProgressResponse
 
 - `job_info()` (*&RefreshExternalCollectionJobInfo*) -
 
-    The refresh job information.
+    The refresh job information. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
     - `get_job_id()` (*i64*) -
 
@@ -47,7 +47,7 @@ GetRefreshExternalCollectionProgressResponse
 
         The name of the refreshed collection.
 
-    - `get_state()` (*RefreshExternalCollectionStateCode*) -
+    - `get_state()` (*RefreshExternalCollectionStateCode*) - See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
         The state of the refresh job.
 

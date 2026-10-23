@@ -37,7 +37,7 @@ GetRestoreSnapshotStateResponse
 
 - `job_info()` (*&RestoreSnapshotJobInfo*) -
 
-    The restore job information.
+    The restore job information. See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
     - `get_job_id()` (*i64*) -
 
@@ -55,7 +55,7 @@ GetRestoreSnapshotStateResponse
 
         The collection being restored.
 
-    - `get_state()` (*RestoreSnapshotStateCode*) -
+    - `get_state()` (*RestoreSnapshotStateCode*) - See [RestoreSnapshotStateCode](RestoreSnapshotStateCode.md).
 
         The state of the restore job.
 
