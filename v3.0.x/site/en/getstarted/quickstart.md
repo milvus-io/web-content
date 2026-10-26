@@ -56,7 +56,7 @@ In the above setup,
 
 - The primary key and vector fields use their default names ("id" and "vector").
 - The metric type (vector distance definition) is set to its default value ([COSINE](https://milvus.io/docs/metric.md#Cosine-Similarity)).
-- The primary key field accepts integers and does not automatically increments (namely not using [auto-id feature](https://milvus.io/docs/schema.md))
+- The primary key field accepts integers and does not automatically increment (namely, not using [auto-id feature](https://milvus.io/docs/schema.md)).
   Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md).
 
 ## Prepare Data
