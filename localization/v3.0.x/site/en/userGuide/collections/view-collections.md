@@ -119,6 +119,9 @@ fmt.Println(collectionNames)
 <p>If you have already created a collection named <code translate="no">quick_setup</code>, the result of the above example should be similar to the following.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p><code translate="no">list_collections()</code> returns the names of all collections in the currently connected database and is not intended for existence checks. To check whether a specific collection exists, use <code translate="no">has_collection()</code> instead (e.g. <code translate="no">client.has_collection(&quot;quick_setup&quot;)</code> returns a boolean), or its equivalent in other SDKs.</p>
+</div>
 <h2 id="Describe-Collection" class="common-anchor-header">Describe Collection<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
