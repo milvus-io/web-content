@@ -34,7 +34,28 @@ DescribeSnapshotResp result = await client.DescribeSnapshotAsync(request);
 
 **RETURNS:**
 
-A **DescribeSnapshotResp** object returned by the operation.
+A **DescribeSnapshotResp** object.
+
+- `Name` (*string*) -
+
+    The name of the snapshot.
+
+- `Description` (*string*) -
+
+    The description of the snapshot.
+
+- `CollectionName` (*string*) -
+
+    The name of the collection the snapshot belongs to.
+
+- `PartitionNames` (*IReadOnlyList\<string\>*) -
+
+    The names of the partitions included in the snapshot.
+
+- `CreateTs` (*long*) -
+
+    The creation timestamp of the snapshot.
+
 ## Example
 
 {example_call and '```csharp

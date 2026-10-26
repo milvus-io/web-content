@@ -29,7 +29,12 @@ ListSnapshotsResp result = await client.ListSnapshotsAsync(request);
 
 **RETURNS:**
 
-A **ListSnapshotsResp** object returned by the operation.
+A **ListSnapshotsResp** object.
+
+- `Snapshots` (*IReadOnlyList\<string\>*) -
+
+    The names of the snapshots of the collection (or all snapshots when no collection filter is given).
+
 ## Example
 
 {example_call and '```csharp

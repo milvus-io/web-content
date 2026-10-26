@@ -34,7 +34,12 @@ RestoreSnapshotResp result = await client.RestoreSnapshotAsync(request);
 
 **RETURNS:**
 
-A **RestoreSnapshotResp** object returned by the operation.
+A **RestoreSnapshotResp** object.
+
+- `JobId` (*long*) -
+
+    The restore job ID, which can be passed to `GetRestoreSnapshotStateAsync()` to poll progress.
+
 ## Example
 
 {example_call and '```csharp

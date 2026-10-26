@@ -39,7 +39,12 @@ PinSnapshotDataResp result = await client.PinSnapshotDataAsync(request);
 
 **RETURNS:**
 
-A **PinSnapshotDataResp** object returned by the operation.
+A **PinSnapshotDataResp** object.
+
+- `PinId` (*long*) -
+
+    The pin ID, which can be passed to `UnpinSnapshotDataAsync()` to release the pin.
+
 ## Example
 
 {example_call and '```csharp

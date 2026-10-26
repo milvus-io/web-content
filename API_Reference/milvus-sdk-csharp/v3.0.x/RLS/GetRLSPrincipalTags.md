@@ -44,7 +44,12 @@ var resp = await client.GetRLSPrincipalTagsAsync(new GetRLSPrincipalTagsReq
 
 **RETURNS:**
 
-A **GetRLSPrincipalTagsResp** object returned by the operation.
+A **GetRLSPrincipalTagsResp** object.
+
+- `Tags` (*IReadOnlyDictionary\<string, object?\>*) -
+
+    The principal's tag keys and values.
+
 ## Example
 
 ```csharp

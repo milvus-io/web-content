@@ -30,7 +30,18 @@ var resp = await client.ListCompactionTasksAsync(new ListCompactionTasksReq
 
 **RETURNS:**
 
-A **GetCompactionPlansResp** object returned by the operation.
+A **GetCompactionPlansResp** object.
+
+- `CompactionId` (*long?*) -
+
+    The overall compaction ID.
+
+- `State` - The compaction state. See [CompactionState](CompactionState.md).
+
+- `MergeInfos` (*IReadOnlyList\<CompactionMergeInfo\>*) -
+
+    The per-task metadata. See [GetCompactionPlansAsync](GetCompactionPlansAsync.md) for the full response shape.
+
 ## Example
 
 ```csharp

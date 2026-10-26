@@ -106,4 +106,4 @@ We welcome and encourage the community's contributions to the C# SDK. If you enc
 
 ## License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](https://github.com/milvus-io/milvus-sdk-csharp/blob/master/LICENSE)

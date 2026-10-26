@@ -38,7 +38,12 @@ var resp = await client.ListRefreshExternalCollectionJobsAsync(new ListRefreshEx
 
 **RETURNS:**
 
-A **ListRefreshExternalCollectionJobsResp** object returned by the operation.
+A **ListRefreshExternalCollectionJobsResp** object.
+
+- `Jobs` (*IReadOnlyList\<RefreshExternalCollectionJobInfo\>*) -
+
+    The list of external-collection refresh jobs. Each entry is a [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
+
 ## Example
 
 ```csharp

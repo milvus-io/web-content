@@ -108,4 +108,4 @@ We are committed to building a collaborative, exuberant open-source community fo
 
 ## License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](https://github.com/milvus-io/milvus-sdk-cpp/blob/master/LICENSE)

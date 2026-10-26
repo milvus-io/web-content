@@ -32,7 +32,12 @@ var resp = await client.GetRefreshExternalCollectionProgressAsync(new GetRefresh
 
 **RETURNS:**
 
-A **GetRefreshExternalCollectionProgressResp** object returned by the operation.
+A **GetRefreshExternalCollectionProgressResp** object.
+
+- `JobInfo` (*RefreshExternalCollectionJobInfo*) -
+
+    The refresh job's progress information. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
+
 ## Example
 
 ```csharp
