@@ -47,7 +47,7 @@ $ conda activate stack
 $ pip install -e .
 ```  
 
-Modify the content in `llama_stack/llama_stack/template/together/run.yaml`, changing the vector_io section to the relevant Milvus configuration. For example, add:
+Modify the content in `llama_stack/llama_stack/templates/together/run.yaml`, changing the vector_io section to the relevant Milvus configuration. For example, add:
 
 ```yaml
 vector_io:
