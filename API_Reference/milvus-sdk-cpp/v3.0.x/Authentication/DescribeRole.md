@@ -137,11 +137,13 @@ if (!status.IsOk()) {
 }
 
 const RoleDesc& desc = response.Desc();
-std::cout << "Role: " << desc.Name() << "\n";
+std::cout << "Role: " << desc.Name() << "
+";
 for (const auto& item : desc.GrantItems()) {
     std::cout << "  " << item.privilege_
               << " on " << item.object_type_ << "/" << item.object_name_
-              << " (db=" << item.db_name_ << ")\n";
+              << " (db=" << item.db_name_ << ")
+";
 }
 ```
 

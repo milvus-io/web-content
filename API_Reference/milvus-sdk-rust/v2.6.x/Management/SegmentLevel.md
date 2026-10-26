@@ -12,7 +12,7 @@ pub enum SegmentLevel {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown`
 

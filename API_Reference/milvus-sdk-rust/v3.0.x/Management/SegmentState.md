@@ -14,7 +14,7 @@ pub enum SegmentState {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown`
 

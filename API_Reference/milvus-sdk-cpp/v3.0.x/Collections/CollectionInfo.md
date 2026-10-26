@@ -46,8 +46,11 @@ if (!status.IsOk()) {
 
 const CollectionsInfo& infos = response.CollectionInfos();
 for (const auto& info : infos) {
-    std::cout << "Name:    " << info.Name() << "\n"
-              << "ID:      " << info.ID() << "\n"
-              << "Created: " << info.CreatedTime() << "\n";
+    std::cout << "Name:    " << info.Name() << "
+"
+              << "ID:      " << info.ID() << "
+"
+              << "Created: " << info.CreatedTime() << "
+";
 }
 ```

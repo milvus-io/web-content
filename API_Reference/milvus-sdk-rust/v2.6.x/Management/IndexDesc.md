@@ -46,11 +46,37 @@ pub struct IndexDesc
 
 - `state: IndexStateCode`
 
-    Build state of the index. Defaults to `IndexStateCode::None`. See [IndexStateCode](IndexStateCode.md).
+    Build state of the index. Defaults to `IndexStateCode::None`.
+
+**Constants:**
+
+    - `None`
+
+    No index has been created for the field. This is the default.
+
+    - `Unissued`
+
+    The index build task has been created but has not started running.
+
+    - `InProgress`
+
+    The index build is currently in progress.
+
+    - `Finished`
+
+    The index build has completed successfully.
+
+    - `Failed`
+
+    The index build failed.
+
+    - `Retry`
+
+    The index build failed but will be retried.the index build failed.
 
 - `failure_reason: String`
 
-    Reason for failure when the index build failed.
+    Reason for failure when 
 
 - `min_version: i32`
 

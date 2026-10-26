@@ -218,6 +218,6 @@ if (!status.IsOk()) {
 }
 std::cout << "Get results:" << std::endl;
 for (const auto& row : output_rows) {
-    std::cout << "\t" << row << std::endl;
+    std::cout << "	" << row << std::endl;
 }
 ```

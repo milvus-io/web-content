@@ -74,9 +74,11 @@ if (!status.IsOk()) {
 }
 
 const UserDesc& desc = response.Desc();
-std::cout << "User: " << desc.Name() << "\n";
+std::cout << "User: " << desc.Name() << "
+";
 for (const auto& role : desc.Roles()) {
-    std::cout << "  role: " << role << "\n";
+    std::cout << "  role: " << role << "
+";
 }
 ```
 

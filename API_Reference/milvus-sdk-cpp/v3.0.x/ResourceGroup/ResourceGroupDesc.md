@@ -74,12 +74,16 @@ if (!status.IsOk()) {
 }
 
 const ResourceGroupDesc& desc = response.Desc();
-std::cout << "Name:      " << desc.Name() << "\n"
-          << "Capacity:  " << desc.Capacity() << "\n"
-          << "Available: " << desc.AvailableNodesNum() << "\n";
+std::cout << "Name:      " << desc.Name() << "
+"
+          << "Capacity:  " << desc.Capacity() << "
+"
+          << "Available: " << desc.AvailableNodesNum() << "
+";
 
 for (const auto& node : desc.Nodes()) {
     std::cout << "  Node id=" << node.id_
-              << " addr=" << node.address_ << "\n";
+              << " addr=" << node.address_ << "
+";
 }
 ```

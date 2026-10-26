@@ -92,8 +92,9 @@ status = client->ListPartitions(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "\nPartitions of " << collection_name << ":" << std::endl;
+std::cout << "
+Partitions of " << collection_name << ":" << std::endl;
 for (auto& info : resp_list_part.PartitionInfos()) {
-    std::cout << "\t" << info.Name() << std::endl;
+    std::cout << "	" << info.Name() << std::endl;
 }
 ```

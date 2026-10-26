@@ -9,7 +9,7 @@ pub enum Ids {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Int64`
 

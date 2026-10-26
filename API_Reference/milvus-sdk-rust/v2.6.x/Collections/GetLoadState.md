@@ -46,11 +46,33 @@ GetLoadStateResponse
 
 - `state()` (*LoadState*) -
 
-    The load state of the collection or partition. See [LoadState](LoadState.md).
+    The load state of the collection or partition.
+
+    **Constants:**
+
+    - `NotExist`
+
+    The collection does not exist on the server. This is the default.
+
+    - `NotLoad`
+
+    The collection exists but its data is not loaded.
+
+    - `Loading`
+
+    The collection is currently being loaded.
+
+    - `Loaded`
+
+    The collection is fully loaded and available for queries.
+
+    - `Unknown`
+
+    The load state could not be determined.
 
 - `progress()` (*i64*) -
 
-    The loading progress as a percentage.
+    The loading prog
 
 ## Example
 

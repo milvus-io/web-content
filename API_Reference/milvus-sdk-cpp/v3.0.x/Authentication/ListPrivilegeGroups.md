@@ -58,9 +58,11 @@ if (!status.IsOk()) {
 
 const PrivilegeGroupInfos& groups = response.Groups();
 for (const auto& group : groups) {
-    std::cout << "Group: " << group.Name() << "\n";
+    std::cout << "Group: " << group.Name() << "
+";
     for (const auto& priv : group.Privileges()) {
-        std::cout << "  " << priv << "\n";
+        std::cout << "  " << priv << "
+";
     }
 }
 ```

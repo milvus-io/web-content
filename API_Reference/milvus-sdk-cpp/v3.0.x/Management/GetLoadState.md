@@ -133,5 +133,5 @@ status = client->GetLoadState(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "\tCollection load state: " << std::to_string(load_response.State()) << std::endl;
+std::cout << "	Collection load state: " << std::to_string(load_response.State()) << std::endl;
 ```

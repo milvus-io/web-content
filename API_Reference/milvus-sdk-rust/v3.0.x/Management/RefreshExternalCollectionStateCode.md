@@ -12,7 +12,7 @@ pub enum RefreshExternalCollectionStateCode {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown` - The refresh state is unknown. This is the default.
 

@@ -92,8 +92,9 @@ status = client->ListCollections(
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-std::cout << "\nCollections:" << std::endl;
+std::cout << "
+Collections:" << std::endl;
 for (auto& name : resp_list_coll.CollectionNames()) {
-    std::cout << "\t" << name << std::endl;
+    std::cout << "	" << name << std::endl;
 }
 ```

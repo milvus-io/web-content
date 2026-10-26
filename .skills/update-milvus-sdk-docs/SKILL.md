@@ -34,6 +34,7 @@ line), the **mode** (below), and — if you want the result on the remote — th
 | **Latest** — resolve from the repo's newest release tag | "Update the Java SDK docs to latest" / "更新 java sdk 到 latest 版本" | resolves latest tag; skips if already current |
 | **All SDKs to latest** | "Update all SDKs to latest" / "更新所有sdk到latest"（可加"except go sdk"/"除了go sdk之外"排除；加"对账/纠错"则同时审计错漏） | per-SDK: create a **per-SDK branch** only for SDKs with actual changes; skip SDKs already current (or, if reconciliation was requested, those with no omissions/errors to fix) |
 | **Reconciliation only** — audit existing pages | "Audit the cpp API_Reference against v3.0.2 for missing methods or errors" / "对账一下 cpp 的 API_Reference 文档，补遗漏、纠错" | no version bump; backfill + correct |
+| **Format check** — audit formatting rules only | "检查 cpp API_Reference 的格式" / "check formatting of the rust API reference" | no version bump, no content changes; run the format-rule checklist below and fix violations |
 
 ### Pushing (only when you ask for it)
 
@@ -469,6 +470,13 @@ own new page automatically (no need to ask the user). Exceptions:
 - **single-page types** → expand inline. A type/enum/struct referenced by only
   ONE operation page does not get a standalone page — document its members
   nested inside that page's `**RETURNS:**` / `**PARAMETERS:**` sections instead.
+  Place the expansion **where the type is referenced**: request-field types
+  expand as nested bullets directly under the referencing field's bullet
+  (no separate `##` section, no own `## Example`, no `**METHODS:**` header —
+  just the member bullets); response types expand as nested bullets directly
+  under the response member that returns the type (e.g. under
+  `- \`policies()\` (*&[RowPolicy]*)`), same as request-field types —
+  no separate `##` section and no own `## Example`.
   Standalone type pages are reserved for types **defined in SDK source** that
   are either **global/cross-cutting response or status types** (see the wrapper
   rule above) or **domain data types shared across multiple pages** — and never
@@ -887,8 +895,24 @@ from the moved page), and **stale inline expansions** (a type with its own
 standalone page still fully expanded inside operation pages — replace the
 inline expansion with a link to the page and delete the expanded content),
 and **unnecessary standalone pages** (a type page whose only referencer is a
-single operation page — fold the type's members into that operation page's
-`**RETURNS:**` section and delete the standalone page), and
+single operation page — fold the type's members into the operation page and
+delete the standalone page). When folding, place the expansion **where the
+type is referenced**: if referenced from a **request field** (a
+`- \`field_name: Option<TypeName>\`` bullet in `**REQUEST PARAMETERS:**`),
+expand as nested bullets directly under that field's description — do NOT
+create a separate `##` section, no `**METHODS:**` header, and no own
+`## Example` section — just the plain member bullets. When folding a type
+page into an operation page, **strip the type page's `## Example` section
+entirely** — the operation page must keep exactly ONE `## Example`; if the
+folded type's usage is worth demonstrating, incorporate it into the
+operation's existing example as input; if referenced from a
+**response return** (the `**RETURNS:**` section), expand as **nested bullets
+directly under the response member that returns the type** (e.g. under
+`- \`policies()\` (*&[RowPolicy]*)`), not as a separate `##` section — the
+reader sees the accessor, its description, and the type's members in one
+place. After folding, remove any
+"See [TypeName](#typename) section below" cross-references — the content
+is now at the reference point itself), and
 **undocumented return types** (an operation page's `**RETURNS:**` names a
 type that has neither a standalone page nor an inline expansion — add the
 inline expansion). **"Inline expansion" means enumerating each member with
@@ -896,7 +920,18 @@ its name, source type, and description** (bullet list or code block showing
 the response shape) — a summary sentence like "each entry exposes its name
 and path" is **not** an expansion. After adding expansions, verify every
 `**RETURNS:**` section contains at least one actual member entry per
-response type, not just prose.
+response type, not just prose. For **inlined enums**, use `**Constants:**`
+as the section header (not `**VARIANTS:**`), with each value as
+`- **ValueName**` bullet followed by its description.
+
+
+**Format check mode**: when the user's instruction includes "检查格式" or
+"check formatting", the checklist above becomes the primary scope. Run every
+item against the target tree and fix all violations found. This mode does not
+bump versions or add missing operations — it only audits and corrects
+formatting inconsistencies (wrong property names, missing Constants headers,
+stale inline expansions, misplaced type pages, missing cross-links, 3+
+consecutive blank lines, etc.).
 
 **Duplicated symbols on a page**: also flag when the same symbol appears more
 than once on a page (e.g. the same `WithXxx` method in both a brief

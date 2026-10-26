@@ -35,8 +35,23 @@ let request = UpsertRequest::builder()
 
 - `field_ops: Vec<FieldPartialUpdateOp>`
 
-    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. See [FieldPartialUpdateOp](FieldPartialUpdateOp.md).
+    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name.
 
+    ```rust
+    pub enum FieldPartialUpdateOpType {
+    Replace,
+    ArrayAppend,
+    ArrayRemove,
+    }
+    ```
+
+    - `Replace` - Overwrite the existing field value. This is the default.
+    - `ArrayAppend` - Append the supplied elements to an existing array field.
+    - `ArrayRemove` - Remove every occurrence of the supplied elements from an existing array field.
+
+    - `new()` - Creates a value initialized with its SDK defaults.
+    - `field_name(value)` / `set_field_name(value)` / `get_field_name()` - Sets or returns the field name.
+    - `op_type(value)` / `set_op_type(value)` / `get_op_type()` - Sets or returns the operation type.
 - `rls_principal: Option<String>`
 
     Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.

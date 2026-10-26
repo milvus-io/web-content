@@ -92,9 +92,12 @@ if (!status.IsOk()) {
 }
 
 const AliasDesc& desc = response.Desc();
-std::cout << "Alias:      " << desc.Name() << "\n"
-          << "Collection: " << desc.CollectionName() << "\n"
-          << "Database:   " << desc.DatabaseName() << "\n";
+std::cout << "Alias:      " << desc.Name() << "
+"
+          << "Collection: " << desc.CollectionName() << "
+"
+          << "Database:   " << desc.DatabaseName() << "
+";
 ```
 
 **ERROR HANDLING:**

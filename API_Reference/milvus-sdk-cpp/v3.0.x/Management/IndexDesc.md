@@ -118,10 +118,15 @@ client->DescribeIndex(
     resp);
 
 for (const auto& desc : resp.Descs()) {
-    std::cout << "IndexName:   " << desc.IndexName()   << "\n"
-              << "IndexType:   " << std::to_string(desc.IndexType())  << "\n"
-              << "State:       " << std::to_string(desc.StateCode())  << "\n"
-              << "IndexedRows: " << desc.IndexedRows() << "\n"
-              << "TotalRows:   " << desc.TotalRows()   << "\n";
+    std::cout << "IndexName:   " << desc.IndexName()   << "
+"
+              << "IndexType:   " << std::to_string(desc.IndexType())  << "
+"
+              << "State:       " << std::to_string(desc.StateCode())  << "
+"
+              << "IndexedRows: " << desc.IndexedRows() << "
+"
+              << "TotalRows:   " << desc.TotalRows()   << "
+";
 }
 ```

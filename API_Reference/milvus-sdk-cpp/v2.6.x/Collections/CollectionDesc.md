@@ -67,8 +67,12 @@ if (!status.IsOk()) {
 }
 
 const CollectionDesc& desc = response.Desc();
-std::cout << "Name:   " << desc.CollectionName() << "\n"
-          << "ID:     " << desc.ID() << "\n"
-          << "Shards: " << desc.NumShards() << "\n"
-          << "Fields: " << desc.Schema().Fields().size() << "\n";
+std::cout << "Name:   " << desc.CollectionName() << "
+"
+          << "ID:     " << desc.ID() << "
+"
+          << "Shards: " << desc.NumShards() << "
+"
+          << "Fields: " << desc.Schema().Fields().size() << "
+";
 ```

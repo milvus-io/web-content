@@ -15,8 +15,23 @@ pub struct CompactionMerge
 - `get_collection_id()` (*i64*) - The ID of the collection containing the task.
 - `get_partition_id()` (*i64*) - The ID of the partition containing the task.
 - `get_channel()` (*&str*) - The channel processed by the task.
-- `get_compaction_type()` (*CompactionType*) - The type of compaction. See [CompactionType](CompactionType.md).
-- `get_state()` (*CompactionTaskState*) - The lifecycle state of the task. See [CompactionTaskState](CompactionTaskState.md).
+- `get_compaction_type()`
+
+    **Constants:**
+
+    - `Undefined` - Unspecified or unrecognized compaction type. This is the default.
+    - `Merge` - Merge compaction over sealed segments.
+    - `Mix` - Mixed compaction.
+    - `Single` - Single-segment compaction.
+    - `Minor` - Minor compaction.
+    - `Major` - Major compaction.
+    - `Level0Delete` - Level-0 delete compaction.
+    - `Clustering` - Clustering compaction.
+    - `Sort` - Sort compaction.
+    - `PartitionKeySort` - Partition-key sort compaction.
+    - `ClusteringPartitionKeySort` - Combined clustering and partition-key sort compaction.
+    - `BumpSchemaVersion` - Compaction that bumps the schema version. (*CompactionType*) - The type of compaction.
+- `get_state()` (*CompactionTaskState*) - The lifecycle state of the task.
 - `get_failure_reason()` (*&str*) - The failure reason, or an empty string when the task has not failed.
 - `get_target_segment_ids()` (*&[i64]*) - The target segment IDs produced by the task.
 
@@ -24,6 +39,20 @@ pub struct CompactionMerge
 
 ```rust
 for task in resp.merges() {
-    println!("{}: {:?}", task.get_plan_id(), task.get_state());
+    println!("{}: 
+
+    **Constants:**
+
+    - `Unknown` - The task state is unknown. This is the default.
+    - `Executing` - The task is running.
+    - `Pipelining` - The task is waiting in the pipeline.
+    - `Completed` - The task completed.
+    - `Failed` - The task failed.
+    - `Timeout` - The task timed out.
+    - `Analyzing` - The task is analyzing segments.
+    - `Indexing` - The task is building indexes.
+    - `Cleaned` - The task has been cleaned up.
+    - `MetaSaved` - The task metadata has been saved.
+    - `Statistic` - The task is collecting statistics.{:?}", task.get_plan_id(), task.get_state());
 }
 ```

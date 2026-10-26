@@ -13,7 +13,7 @@ pub enum FunctionType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown`
 

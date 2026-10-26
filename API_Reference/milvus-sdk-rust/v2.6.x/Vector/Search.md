@@ -102,16 +102,25 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. See [FunctionScore](FunctionScore.md).
+    Reranking configuration for single-vector search.
 
+    - `new()` - Creates a value initialized with its SDK defaults.
+    - `functions(value)` / `set_functions(value)` / `get_functions()` - Sets or returns the functions.
+    - `add_function(value)` - Adds one function to the existing values.
+    - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the params.
 - `timezone: String`
 
     Timezone applied when searching or filtering Timestamptz fields.
 
 - `highlighter: Option<Highlighter>`
 
-    Text-highlighting configuration for full-text search. See [Highlighter](Highlighter.md).
+    Text-highlighting configuration for full-text search.
 
+    - `new()` - Creates a value initialized with its SDK defaults.
+    - `highlight_type(value)` / `set_highlight_type(value)` / `get_highlight_type()` - Sets or returns the highlight type.
+    - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the highlighting parameters.
+
+    `Highlighter` also implements `From<LexicalHighlighter>` and `From<SemanticHighlighter>` to convert a typed highlighter into its parameterized form.
 - `consistency_level: Option<ConsistencyLevel>`
 
     Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
