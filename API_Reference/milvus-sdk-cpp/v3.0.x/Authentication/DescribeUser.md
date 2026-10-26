@@ -43,6 +43,43 @@ Returns a status indicating whether the operation succeeded.
 
             Get role names of the user.
 
+
+UserDesc members:
+
+**METHODS:**
+
+- `const std::string& Name() const`
+
+    The username.
+
+- `const std::vector<std::string>& Roles() const`
+
+    List of role names assigned to the user.
+
+## Example
+
+```cpp
+#include <milvus/MilvusClientV2.h>
+using namespace milvus;
+
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+DescribeUserResponse response;
+auto status = client->DescribeUser(
+    DescribeUserRequest().WithUserName("alice"),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+const UserDesc& desc = response.Desc();
+std::cout << "User: " << desc.Name() << "\n";
+for (const auto& role : desc.Roles()) {
+    std::cout << "  role: " << role << "\n";
+}
+```
+
 **ERROR HANDLING:**
 
 - **Status**
