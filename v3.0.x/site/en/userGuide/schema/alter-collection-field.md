@@ -20,7 +20,7 @@ This page covers field property changes, not schema-shape changes such as adding
 
 ## Alter VarChar field
 
-A VarChar field has a property named `max_length`, which constrains the maximum number of characters the field values can contain. You can change the `max_length` property.
+A VarChar field has a property named `max_length`, which defines the maximum number of bytes allowed for each field value. You can change the `max_length` property.
 
 The following example assumes the collection has a VarChar field named `varchar` and sets its `max_length` property.
 

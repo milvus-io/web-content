@@ -67,7 +67,7 @@ schema.add_field(
 schema.add_field(
     field_name='text',                 # Name of the field
     datatype=DataType.VARCHAR,         # Field data type set as VARCHAR (string)
-    max_length=1000,                   # Maximum length of the string
+    max_length=1000,                   # Maximum length of the string in bytes
     enable_analyzer=True,              # Enables text analysis (tokenization)
     enable_match=True                  # Enables inverted indexing for phrase matching
 )
@@ -97,7 +97,7 @@ schema.addField(AddFieldReq.builder()
 schema.addField(AddFieldReq.builder()
         .fieldName("text")              // Name of the field
         .dataType(DataType.VarChar)     // Field data type set as VARCHAR (string)
-        .maxLength(1000)                // Maximum length of the string
+        .maxLength(1000)                // Maximum length of the string in bytes
         .enableAnalyzer(true)           // Enables text analysis (tokenization)
         .enableMatch(true)              // Enables inverted indexing for phrase matching
         .build());
@@ -121,7 +121,7 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName("text").                      // Name of the field
     WithDataType(entity.FieldTypeVarChar). // Field data type set as VARCHAR (string)
-    WithMaxLength(1000).                   // Maximum length of the string
+    WithMaxLength(1000).                   // Maximum length of the string in bytes
     WithEnableAnalyzer(true).              // Enables text analysis (tokenization)
     WithEnableMatch(true),                 // Enables inverted indexing for phrase matching
 ).WithField(entity.NewField().
@@ -146,7 +146,7 @@ const schema = [
   {
     name: "text", // Name of the field
     data_type: DataType.VarChar, // Field data type set as VARCHAR (string)
-    max_length: 1000, // Maximum length of the string
+    max_length: 1000, // Maximum length of the string in bytes
     enable_analyzer: true, // Enables text analysis (tokenization)
     enable_match: true, // Enables inverted indexing for phrase matching
   },
@@ -197,7 +197,7 @@ schema.SetEnableDynamicField(false);
 schema.AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
 // Add a VARCHAR field configured for phrase matching
 schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
-                    .WithMaxLength(1000)    // Maximum length of the string
+                    .WithMaxLength(1000)    // Maximum length of the string in bytes
                     .EnableAnalyzer(true)   // Enables text analysis (tokenization)
                     .EnableMatch(true));    // Enables inverted indexing for phrase matching
 schema.AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
@@ -231,7 +231,7 @@ analyzer_params = {
 schema.add_field(
     field_name='text',                 # Name of the field
     datatype=DataType.VARCHAR,         # Field data type set as VARCHAR
-    max_length=1000,                   # Maximum length of the string
+    max_length=1000,                   # Maximum length of the string in bytes
     enable_analyzer=True,              # Enables text analysis
     analyzer_params=analyzer_params,   # Specifies the analyzer configuration
     enable_match=True                  # Enables inverted indexing for phrase matching
@@ -247,7 +247,7 @@ analyzerParams.put("type", "english");
 schema.addField(AddFieldReq.builder()
         .fieldName("text")              // Name of the field
         .dataType(DataType.VarChar)     // Field data type set as VARCHAR
-        .maxLength(1000)                // Maximum length of the string
+        .maxLength(1000)                // Maximum length of the string in bytes
         .enableAnalyzer(true)           // Enables text analysis
         .analyzerParams(analyzerParams) // Specifies the analyzer configuration
         .enableMatch(true)              // Enables inverted indexing for phrase matching
@@ -262,7 +262,7 @@ analyzerParams := map[string]any{"type": "english"}
 schema.WithField(entity.NewField().
     WithName("text").                      // Name of the field
     WithDataType(entity.FieldTypeVarChar). // Field data type set as VARCHAR
-    WithMaxLength(1000).                   // Maximum length of the string
+    WithMaxLength(1000).                   // Maximum length of the string in bytes
     WithEnableAnalyzer(true).              // Enables text analysis
     WithAnalyzerParams(analyzerParams).    // Specifies the analyzer configuration
     WithEnableMatch(true),                 // Enables inverted indexing for phrase matching
@@ -278,7 +278,7 @@ const schema = [
   {
     name: "text", // Name of the field
     data_type: DataType.VarChar, // Field data type set as VARCHAR
-    max_length: 1000, // Maximum length of the string
+    max_length: 1000, // Maximum length of the string in bytes
     enable_analyzer: true, // Enables text analysis
     analyzer_params: analyzer_params, // Specifies the analyzer configuration
     enable_match: true, // Enables inverted indexing for phrase matching
@@ -311,7 +311,7 @@ nlohmann::json analyzer_params = {{"type", "english"}};
 
 // Add the VARCHAR field with the English analyzer enabled
 schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
-                    .WithMaxLength(1000)                // Maximum length of the string
+                    .WithMaxLength(1000)                // Maximum length of the string in bytes
                     .EnableAnalyzer(true)               // Enables text analysis
                     .WithAnalyzerParams(analyzer_params) // Specifies the analyzer configuration
                     .EnableMatch(true));                // Enables inverted indexing for phrase matching

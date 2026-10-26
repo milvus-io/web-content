@@ -14,7 +14,9 @@ When you define a `VARCHAR` field, two parameters are mandatory:
 
 - Set the `datatype` to `DataType.VARCHAR`.
 
-- Specify the `max_length`, which defines the maximum number of bytes the `VARCHAR` field can store. The valid range for `max_length` is from 1 to 65,535.
+- Specify the `max_length`, which defines the maximum number of UTF-8 bytes allowed for each field value. The valid range for `max_length` is from 1 to 65,535.
+
+The number of bytes can differ from the number of characters. For example, with `max_length=10`, `"abcdefghij"` fits within the limit because it uses 10 UTF-8 bytes. The string `"一二三四五六七八九十"` also has 10 characters, but uses 30 UTF-8 bytes and exceeds the limit.
 
 <div class="alert note">
 
