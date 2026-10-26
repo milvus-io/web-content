@@ -38,7 +38,7 @@ The name of a resource such the collection name, partition name, or index name c
 | Entity   | unlimited        |
 
 ## Length of a string 
-| Data type      | Limit  |
+| Data type      | Limit (bytes) |
 | ----------- | ----------- |
 | VARCHAR      | 65,535       |
 

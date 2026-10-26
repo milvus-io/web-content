@@ -58,7 +58,7 @@ schema.add_field(
 schema.add_field(
     field_name='text',                 # Name of the field
     datatype=DataType.VARCHAR,         # Field data type set as VARCHAR (string)
-    max_length=1000,                   # Maximum length of the string
+    max_length=1000,                   # Maximum length of the string in bytes
     enable_analyzer=True,              # Enables text analysis (tokenization)
     enable_match=True                  # Enables inverted indexing for phrase matching
 )
@@ -87,7 +87,7 @@ analyzer_params = {
 schema.add_field(
     field_name='text',                 # Name of the field
     datatype=DataType.VARCHAR,         # Field data type set as VARCHAR
-    max_length=1000,                   # Maximum length of the string
+    max_length=1000,                   # Maximum length of the string in bytes
     enable_analyzer=True,              # Enables text analysis
     analyzer_params=analyzer_params,   # Specifies the analyzer configuration
     enable_match=True                  # Enables inverted indexing for phrase matching

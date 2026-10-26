@@ -87,7 +87,7 @@ At this point, we are going to begin setting up Milvus. The steps are as follows
     # Create collection which includes the id, filepath of the image, and image embedding
     fields = [
         FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name='filepath', dtype=DataType.VARCHAR, max_length=200),  # VARCHARS need a maximum length, so for this example they are set to 200 characters
+        FieldSchema(name='filepath', dtype=DataType.VARCHAR, max_length=200),  # Each file path can contain up to 200 bytes
         FieldSchema(name='image_embedding', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
     ]
     schema = CollectionSchema(fields=fields)
