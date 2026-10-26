@@ -19,7 +19,7 @@ An ARRAY field stores an ordered set of elements of the same data type. Here's a
 
 - **Default Values**: ARRAY fields do not support default values. However, you can set the `nullable` attribute to `True` to allow null values. For details, refer to [Nullable & Default](nullable-and-default.md).
 
-- **Data Type:** All elements in an ARRAY field must share the same data type, which is defined by the `element_type` parameter. When `element_type` is set to `VARCHAR`, you must also specify the `max_length` for array elements. The `element_type` accepts any scalar data type supported by Milvus, with the exception of `JSON`.
+- **Data Type:** All elements in an ARRAY field must share the same data type, which is defined by the `element_type` parameter. When `element_type` is set to `VARCHAR`, you must also specify `max_length`, which defines the maximum number of bytes allowed for each array element. The `element_type` accepts any scalar data type supported by Milvus, with the exception of `JSON`.
 
 - **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
 

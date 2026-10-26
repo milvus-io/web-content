@@ -275,14 +275,14 @@ schema.add_field(
 schema.add_field(
     field_name="language",       # Field name
     datatype=DataType.VARCHAR,   # String data type
-    max_length=255               # Maximum length (adjust as needed)
+    max_length=255               # Maximum length in bytes (adjust as needed)
 )
 
 # Step 2.3: Add text content field with multi-language analysis capability
 schema.add_field(
     field_name="text",                           # Field name
     datatype=DataType.VARCHAR,                   # String data type
-    max_length=8192,                             # Maximum length (adjust based on expected text size)
+    max_length=8192,                             # Maximum length in bytes (adjust based on expected text size)
     enable_analyzer=True,                        # Enable text analysis
     multi_analyzer_params=multi_analyzer_params  # Connect with our language analyzers
 )
