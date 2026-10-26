@@ -38,6 +38,8 @@ SearchReq.builder()
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 // include-end
 // include-start zilliz
@@ -70,6 +72,8 @@ SearchReq.builder()
     .filterTemplateValues(filterTemplateValues)
     .highlighter(highlighter)
     .searchAggregation(searchAggregation)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 // include-end
 ```
@@ -199,6 +203,14 @@ SearchReq.builder()
 - `searchAggregation(SearchAggregation searchAggregation)`
 
     Aggregation fields, metrics, ordering, top hits, and nested aggregation configuration. See [SearchAggregation](SearchAggregation.md).
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the search runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the search explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 
