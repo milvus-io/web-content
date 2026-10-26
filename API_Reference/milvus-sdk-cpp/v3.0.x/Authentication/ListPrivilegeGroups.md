@@ -26,6 +26,45 @@ Returns a Status indicating whether the operation succeeded. The list of privile
 
             Privileges of the privilege group.
 
+
+PrivilegeGroupInfo members:
+
+**METHODS:**
+
+- `const std::string& Name() const`
+
+    Name of the privilege group.
+
+- `const std::vector<std::string>& Privileges() const`
+
+    List of privilege names included in this group.
+
+## Example
+
+```cpp
+#include <milvus/MilvusClientV2.h>
+using namespace milvus;
+
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+ListPrivilegeGroupsResponse response;
+auto status = client->ListPrivilegeGroups(
+    ListPrivilegeGroupsRequest(),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+const PrivilegeGroupInfos& groups = response.Groups();
+for (const auto& group : groups) {
+    std::cout << "Group: " << group.Name() << "\n";
+    for (const auto& priv : group.Privileges()) {
+        std::cout << "  " << priv << "\n";
+    }
+}
+```
+
 **ERROR HANDLING:**
 
 - **Status**

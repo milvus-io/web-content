@@ -1,6 +1,6 @@
 # Create()
 
-This operation creates a new MilvusClientV2 instance and returns it as a std::shared_ptr<MilvusClientV2>. It is a static factory method that performs no network communication; call Connect() on the returned instance to establish a connection.
+This operation creates a new [MilvusClientV2](MilvusClientV2.md) instance and returns it as a std::shared_ptr<MilvusClientV2>. It is a static factory method that performs no network communication; call Connect() on the returned instance to establish a connection.
 
 ```cpp
 static std::shared_ptr<MilvusClientV2> Create()
