@@ -1,11 +1,11 @@
 ---
 id: set-collection-ttl.md
-title: 設定集合 TTL
+title: 設定集合的 TTL
 summary: >-
-  一旦資料插入到集合中，預設情況下會保留在集合中。然而，在某些情況下，您可能想要在某段時間後移除或清理資料。在這種情況下，您可以設定集合的
-  Time-to-Live (TTL) 屬性，讓 Milvus 在 TTL 過期後自動刪除資料。
+  資料一旦插入集合中，預設情況下便會保留在該處。然而，在某些情況下，您可能希望在經過一段時間後移除或清理資料。此時，您可以設定集合的「有效期限」（Time-to-Live，TTL）屬性，讓
+  Milvus 在 TTL 到期後自動刪除資料。
 ---
-<h1 id="Set-Collection-TTL" class="common-anchor-header">設定集合 TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+<h1 id="Set-Collection-TTL" class="common-anchor-header">設定集合的 TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>一旦資料插入到集合中，預設會保留在集合中。然而，在某些情況下，您可能想要在某段時間後移除或清理資料。在這種情況下，您可以設定資料集的 Time-to-Live (TTL) 屬性，讓 Milvus 在 TTL 過期後自動刪除資料。</p>
+    </button></h1><p>資料一旦插入集合中，預設情況下便會保留在該處。然而，在某些情境下，您可能希望在經過一段時間後移除或清理資料。在此類情況下，您可以設定集合的「有效期限 (TTL)」屬性，讓 Milvus 在 TTL 到期後自動刪除資料。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,15 +36,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Time-to-Live (TTL) 通常用於資料庫中，在插入或修改資料後，資料只能維持有效或可存取一段時間。之後，資料就會自動移除。</p>
-<p>舉例來說，如果您每天擷取資料，但只需要保留 14 天的記錄，您可以設定 Milvus，將資料集的 TTL 設定為<strong>14 × 24 × 3600 = 1209600</strong>秒，以自動移除任何超過此期限的資料。這可確保只有最近 14 天的資料保留在資料集中。</p>
+    </button></h2><p>存活時間 (TTL) 常用於資料庫中，適用於資料在插入或修改後，僅應在特定期間內保持有效或可存取的情境。此後，資料即可被自動移除。</p>
+<p>舉例來說，若您每天導入資料，但僅需保留紀錄 14 天，您可以將集合的 TTL 設定為<strong>14 × 24 × 3600 = 1209600</strong>秒，讓 Milvus 自動移除任何超過此期限的資料。 這可確保集合中僅保留最近 14 天的資料。</p>
 <div class="alert note">
-<p>過期的實體不會出現在任何搜尋或查詢結果中。不過，它們可能會留在儲存中，直到隨後的資料壓縮為止，而資料壓縮應該在未來 24 小時內進行。</p>
-<p>您可以在 Milvus 配置檔中設定<code translate="no">dataCoord.compaction.expiry.tolerance</code> 配置項目，以控制何時觸發資料壓縮。</p>
-<p>此配置項的預設值為<code translate="no">-1</code> ，表示現有的資料壓縮間隔適用。但是，當您將其值變更為正整數，如<code translate="no">12</code> 時，資料壓縮將在任何實體過期後的指定小時數觸發。</p>
+<p>已過期的實體將不會出現在任何搜尋或查詢結果中。不過，它們可能會保留在儲存空間中，直到下一次資料壓縮為止，而該次壓縮應會在接下來 24 小時內執行。</p>
+<p>您可以透過在 Milvus 配置檔案中設定 `<code translate="no">dataCoord.compaction.expiry.tolerance</code> ` 配置項目，來控制何時觸發資料壓縮。</p>
+<p>此設定項預設值為 `<code translate="no">-1</code>`，表示適用現有的資料壓縮間隔。然而，當您將其值變更為正整數（例如 `<code translate="no">12</code>`）時，資料壓縮將在任何實體過期後指定的小時數內觸發。</p>
 </div>
-<p>Milvus 集合中的 TTL 屬性指定為以秒為單位的整數。一旦設定，任何超過其 TTL 的資料都會自動從資料集中刪除。</p>
-<p>由於刪除過程是非同步的，資料可能不會在指定的 TTL 過後才從搜尋結果中移除。相反，可能會有延遲，因為刪除取決於垃圾收集 (GC) 和壓縮過程，而這些過程會以非確定的間隔發生。</p>
+<p>Milvus 集合中的 TTL 屬性以秒為單位的整數指定。一旦設定，任何超過其 TTL 的資料都會自動從集合中刪除。</p>
+<p>過期的實體會在 TTL 到期後立即從搜尋和查詢結果中過濾掉。然而，從儲存空間中移除底層資料是異步進行的：資料回收取決於垃圾回收 (GC) 和壓縮流程，而這些流程發生於非確定性的間隔。</p>
 <h2 id="Set-TTL" class="common-anchor-header">設定 TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,10 +60,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在以下情況設定 TTL 屬性</p>
+    </button></h2><p>您可以在以下情況下設定 TTL 屬性：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">建立一個集合。</a></p></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">更改現有集合的 TTL 屬性。</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">建立集合時。</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">變更現有集合的 TTL 屬性時。</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">建立集合時設定 TTL<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,9 +80,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下程式碼片段示範如何在建立集合時設定 TTL 屬性。</p>
+    </button></h3><p>以下程式碼片段示範了在建立集合時如何設定 TTL 屬性。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># With TTL</span>
@@ -141,7 +146,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">設定現有集合的 TTL<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">為現有集合設定 TTL<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,9 +161,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下程式碼片段示範如何在現有的集合中變更 TTL 屬性。</p>
+    </button></h3><p>以下程式碼片段示範如何變更現有集合中的 TTL 屬性。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>}
@@ -200,7 +210,7 @@ client.alterCollection(alterCollectionReq);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-TTL-setting" class="common-anchor-header">刪除 TTL 設定<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
+<h2 id="Drop-TTL-setting" class="common-anchor-header">移除 TTL 設定<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -215,9 +225,14 @@ client.alterCollection(alterCollectionReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您決定無限期地保留集合中的資料，您可以簡單地從該集合中刪除 TTL 設定。</p>
+    </button></h2><p>若您決定將集合中的資料永久保留，只需移除該集合的 TTL 設定即可。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]

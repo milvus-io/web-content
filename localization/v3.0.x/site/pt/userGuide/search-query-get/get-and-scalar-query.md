@@ -51,7 +51,7 @@ summary: >-
    <tr>
      <td><p>Cenários aplicáveis</p></td>
      <td><p>Para encontrar entidades que possuam as chaves primárias especificadas.</p></td>
-     <td><p>Para encontrar todas as entidades ou um número específico de entidades que satisfaçam as condições de filtragem personalizadas</p></td>
+     <td><p>Para encontrar todas as entidades ou um número especificado de entidades que cumpram as condições de filtragem personalizadas</p></td>
      <td><p>Para encontrar todas as entidades que cumprem as condições de filtragem personalizadas em consultas paginadas.</p></td>
    </tr>
    <tr>
@@ -525,7 +525,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginação com ordenação</h4><p>Utilize <code translate="no">order_by</code> em conjunto com <code translate="no">limit</code> e <code translate="no">offset</code> para paginar os resultados ordenados. Por exemplo, para apresentar uma lista de produtos ordenada por preço ao longo de várias páginas, cada página mostra o lote seguinte de itens na ordem correta de preço, sem duplicados nem lacunas.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginação com ordenação</h4><p>Utilize <code translate="no">order_by</code> em conjunto com <code translate="no">limit</code> e <code translate="no">offset</code> para paginar os resultados ordenados. Por exemplo, para apresentar uma lista de produtos ordenada por preço em várias páginas, cada página mostra o lote seguinte de itens na ordem correta de preço, sem duplicados nem lacunas.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -858,7 +858,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">Utilize o QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">Utilizar o QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -966,7 +966,7 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Também é possível realizar consultas numa ou em várias partições, incluindo os nomes das partições na solicitação Get, Query ou QueryIterator. Os exemplos de código a seguir pressupõem que existe uma partição chamada <strong>PartitionA</strong> na coleção.</p>
+    </button></h2><p>Também é possível efetuar consultas numa ou em várias partições, incluindo os nomes das partições no pedido Get, Query ou QueryIterator. Os exemplos de código seguintes partem do princípio de que existe uma partição denominada <strong>PartitionA</strong> na coleção.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -977,14 +977,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1324,8 +1324,8 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se a sua coleção tiver um campo ` <code translate="no">TIMESTAMPTZ</code> `, pode substituir temporariamente o fuso horário predefinido da base de dados ou da coleção para uma única operação, definindo o parâmetro ` <code translate="no">timezone</code> ` na chamada da consulta. Isto controla a forma como os valores ` <code translate="no">TIMESTAMPTZ</code> ` são apresentados e comparados durante a operação.</p>
-<p>O valor de ` <code translate="no">timezone</code> ` deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Para obter detalhes sobre como utilizar o campo ` <code translate="no">TIMESTAMPTZ</code> `, consulte <a href="/docs/pt/timestamptz-field.md">o campo `TIMESTAMPTZ</a>`.</p>
+    </button></h2><p>Se a sua coleção tiver um campo « <code translate="no">TIMESTAMPTZ</code> », pode substituir temporariamente o fuso horário predefinido da base de dados ou da coleção para uma única operação, definindo o parâmetro « <code translate="no">timezone</code> » na chamada da consulta. Isto controla a forma como os valores « <code translate="no">TIMESTAMPTZ</code> » são apresentados e comparados durante a operação.</p>
+<p>O valor de <code translate="no">timezone</code> deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Para obter detalhes sobre como utilizar o campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/pt/timestamptz-field.md">o campo TIMESTAMPTZ</a>.</p>
 <p>O exemplo abaixo mostra como definir temporariamente um fuso horário para uma operação de consulta:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

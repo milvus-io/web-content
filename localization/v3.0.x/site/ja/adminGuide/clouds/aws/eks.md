@@ -1,10 +1,10 @@
 ---
 id: eks.md
-title: EKSへのMilvusクラスタのデプロイ
+title: EKS への Milvus クラスターのデプロイ
 related_key: cluster
-summary: EKS上でMilvusクラスタをデプロイする方法を学びます。
+summary: EKS上にMilvusクラスターをデプロイする方法について学ぶ
 ---
-<h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">EKSへのMilvusクラスタのデプロイ<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
+<h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">EKS への Milvus クラスターのデプロイ<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: EKS上でMilvusクラスタをデプロイする方法を学びます�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、<a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS</a>上にMilvusクラスタをデプロイする方法について説明します。</p>
+    </button></h1><p>このトピックでは、<a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS</a> 上に Milvus クラスターをデプロイする方法について説明します。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,17 +36,20 @@ summary: EKS上でMilvusクラスタをデプロイする方法を学びます�
         ></path>
       </svg>
     </button></h2><ul>
-<li>ローカルPCまたはAmazon EC2にAWS CLIがインストールされていること。Amazon Linux 2またはAmazon Linux 2023の場合、AWS CLIツールは既にインストールされています。ローカルPCにAWS CLiをインストールする。<a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLIのインストール方法</a>」を参照してください。</li>
-<li>優先するエンドポイントデバイスにKubernetesとEKSツールがインストールされている：<ul>
+<li>ローカルPCまたはAmazon EC2にAWS CLIがインストールされていること。これらは、このドキュメントで説明する操作を行うためのエンドポイントとして機能します。Amazon Linux 2またはAmazon Linux 2023の場合、AWS CLIツールはすでにインストールされています。ローカルPCにAWS CLIをインストールするには、<a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">「AWS CLIのインストール方法」</a>を参照してください。</li>
+<li>優先するエンドポイントデバイスに、Kubernetes および EKS ツールがインストールされていること。これには以下が含まれます。
+<ul>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html"><code translate="no">kubectl</code></a></li>
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>AWS IAMパーミッションが適切に付与されている。使用しているIAMセキュリティプリンシパルが、Amazon EKS IAMロール、サービス関連ロール、AWS CloudFormation、VPC、およびその他の関連リソースを使用する権限を持っている必要があります。プリンシパルに適切な権限を付与するには、以下のいずれかの方法を実行します。<ul>
-<li>(推奨しない) 単純に、使用したユーザー/ロールの関連付けポリシーを AWS managed policy<code translate="no">AdministratorAccess</code> に設定する。</li>
-<li>(強く推奨) 最小特権の原則を実装するには、以下のようにする：<ul>
-<li><p><code translate="no">eksctl</code> の権限を設定するには、<a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> の最小権限を</a>参照してください。</p></li>
-<li><p>AWS S3 バケットの作成/削除の権限を設定するには、以下の権限設定を参照してください：</p>
+<li>AWS IAM 権限が適切に付与されていること。使用する IAM セキュリティプリンシパルは、Amazon EKS IAM ロール、サービス関連ロール、AWS CloudFormation、VPC、およびその他の関連リソースを使用する権限を持っている必要があります。プリンシパルに適切な権限を付与するには、以下のいずれかの方法に従ってください。
+<ul>
+<li>（推奨されません）使用したユーザー/ロールのアソシエーションポリシーを、AWS管理ポリシー「<code translate="no">AdministratorAccess</code> 」に設定するだけです。</li>
+<li>(強く推奨) 最小権限の原則を実装するには、次のように操作してください。
+<ul>
+<li><p><code translate="no">eksctl</code> の権限を設定するには、「<a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> の最小権限</a>」を参照してください。</p></li>
+<li><p>AWS S3 バケットの作成/削除に関する権限を設定するには、以下の権限設定を参照してください：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -66,7 +69,7 @@ summary: EKS上でMilvusクラスタをデプロイする方法を学びます�
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>IAM ポリシーの作成/削除の権限を設定するには、以下の権限設定を参照してください。<code translate="no">YOUR_ACCOUNT_ID</code> を自分のものに置き換えてください。</p>
+<li><p>IAMポリシーの作成・削除に関する権限を設定するには、以下の権限設定を参照してください。「<code translate="no">YOUR_ACCOUNT_ID</code> 」を実際の値に置き換えてください。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -100,8 +103,8 @@ summary: EKS上でMilvusクラスタをデプロイする方法を学びます�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AWS Management Console、AWS CLI、TerraformなどのIaCツールのいずれかを使用して、AWS S3バケットやEKSクラスタなど、必要なAWSリソースを設定できます。このドキュメントでは、AWS CLIを使用してAWSリソースのセットアップ方法を説明します。</p>
-<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Amazon S3バケットの作成<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
+    </button></h2><p>AWS S3 バケットや EKS クラスターなど、必要な AWS リソースは、AWS Management Console、AWS CLI、または Terraform などの IaC ツールのいずれかを使用して設定できます。このドキュメントでは、AWS リソースの設定方法を説明するために、AWS CLI を推奨します。</p>
+<h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Amazon S3 バケットの作成<button data-href="#Create-an-Amazon-S3-Bucket" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,7 +121,7 @@ summary: EKS上でMilvusクラスタをデプロイする方法を学びます�
       </svg>
     </button></h3><ul>
 <li><p>AWS S3バケットを作成します。</p>
-<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket Naming Rulesを</a>読み、AWS S3バケットに名前を付ける際の命名ルールを守りましょう。</p>
+<p>「<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">バケットの命名規則</a>」を確認し、AWS S3 バケットに名前を付ける際は、その命名規則に従ってください。</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
 
 aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;us-east-2&#x27; --acl private  --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=&#x27;us-east-2&#x27;
@@ -128,7 +131,7 @@ aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;
 <span class="hljs-meta prompt_">#</span><span class="language-bash">
 <span class="hljs-comment"># &quot;Location&quot;: &quot;http://milvus-bucket-039dd013c0712f085d60e21f.s3.amazonaws.com/&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>上記で作成したバケット内のオブジェクトを読み書きするためのIAMポリシーを作成します。<strong>バケット名は自分の名前に置き換えてください。</strong></p>
+<li><p>上記で作成したバケット内のオブジェクトを読み書きするための IAM ポリシーを作成します。<strong>バケット名は、ご自身のものに置き換えてください。</strong></p>
 <pre><code translate="no" class="language-shell">echo &#x27;{
   &quot;Version&quot;: &quot;2012-10-17&quot;,
   &quot;Statement&quot;: [
@@ -167,11 +170,11 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
 <span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>    
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>ポリシーをAWS Userにアタッチします。</p>
+<li><p>そのポリシーをAWSユーザーにアタッチします。</p>
 <pre><code translate="no" class="language-shell">aws iam attach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot;arn:aws:iam::&lt;your-iam-account-id&gt;:policy/MilvusS3ReadWrite&quot;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Amazon EKSクラスタの作成<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
+<h3 id="Create-an-Amazon-EKS-Cluster" class="common-anchor-header">Amazon EKS クラスターを作成する<button data-href="#Create-an-Amazon-EKS-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,7 +190,7 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>以下のようにクラスタ設定ファイルを用意し、名前を<code translate="no">eks_cluster.yaml</code> とします。</p>
+<li><p>次のようにクラスター構成ファイルを作成し、ファイル名を `<code translate="no">eks_cluster.yaml</code>` とします。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">eksctl.io/v1alpha5</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterConfig</span>
 
@@ -227,19 +230,19 @@ aws iam create-policy --policy-name MilvusS3ReadWrite --policy-document file://m
   <span class="hljs-attr">wellKnownPolicies:</span>
     <span class="hljs-attr">ebsCSIController:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>以下のコマンドを実行してEKSクラスタを作成します。</p>
+<li><p>次のコマンドを実行して、EKSクラスターを作成してください。</p>
 <pre><code translate="no" class="language-bash">eksctl create cluster -f eks_cluster.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>kubeconfigファイルを取得します。</p>
+<li><p>kubeconfig ファイルを取得します。</p>
 <pre><code translate="no" class="language-bash">aws eks update-kubeconfig --region <span class="hljs-string">&#x27;us-east-2&#x27;</span> --name <span class="hljs-string">&#x27;milvus-eks-cluster&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>EKSクラスタを検証します。</p>
+<li><p>EKS クラスタを確認します。</p>
 <pre><code translate="no" class="language-bash">kubectl cluster-info
 
 kubectl get nodes -A -o wide
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Create-a-StorageClass" class="common-anchor-header">StorageClassを作成する。<button data-href="#Create-a-StorageClass" class="anchor-icon" translate="no">
+<h2 id="Create-a-StorageClass" class="common-anchor-header">StorageClass を作成する<button data-href="#Create-a-StorageClass" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,7 +257,7 @@ kubectl get nodes -A -o wide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはメタストレージとして<code translate="no">etcd</code> 。PVCの作成と管理には<code translate="no">gp3</code> StorageClassに依存する必要があります。</p>
+    </button></h2><p>Milvus は<code translate="no">etcd</code> をメタストレージとして使用しており、PVC を作成および管理するには<code translate="no">gp3</code> StorageClass を利用する必要があります。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">cat</span> <span class="hljs-string">&lt;&lt;EOF</span> <span class="hljs-string">|</span> <span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-bullet">-</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">storage.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">StorageClass</span>
@@ -268,10 +271,10 @@ kubectl get nodes -A -o wide
   <span class="hljs-attr">type:</span> <span class="hljs-string">gp3</span>
 <span class="hljs-string">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>オリジナルのgp2 StorageClassをnon-defaultに設定する。</p>
+<p>元の gp2 StorageClass を非デフォルトに設定します。</p>
 <pre><code translate="no" class="language-shell">kubectl patch storageclass gp2 -p &#x27;{&quot;metadata&quot;: {&quot;annotations&quot;:{&quot;storageclass.kubernetes.io/is-default-class&quot;:&quot;false&quot;}}}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">AWS LoadBalancer Controllerのインストール<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
+<h3 id="Install-AWS-LoadBalancer-Controller" class="common-anchor-header">AWS LoadBalancer Controllerをインストールします。<button data-href="#Install-AWS-LoadBalancer-Controller" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -287,7 +290,7 @@ kubectl get nodes -A -o wide
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Helm chars repoを追加します。</p>
+<li><p>Helmチャートのリポジトリを追加します。</p>
 <pre><code translate="no" class="language-shell">helm repo add eks https://aws.github.io/eks-charts
 helm repo update
 <button class="copy-code-btn"></button></code></pre></li>
@@ -298,11 +301,11 @@ helm repo update
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>インストールの確認</p>
+<li><p>インストールを確認します</p>
 <pre><code translate="no" class="language-shell">kubectl get deployment -n kube-system aws-load-balancer-controller
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus" class="common-anchor-header">Milvusのデプロイ<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus" class="common-anchor-header">Milvusをデプロイします<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -317,17 +320,17 @@ helm repo update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このガイドでは、Milvus Helm Chartsを使ってMilvusクラスタをデプロイします。チャートは<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">こちらに</a>あります。</p>
+    </button></h2><p>このガイドでは、Milvus Helmチャートを使用してMilvusクラスターをデプロイします。チャート<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">はこちらから</a>入手できます。</p>
 <ul>
-<li><p>Milvus Helm Chartレポを追加します。</p>
+<li><p>Milvus Helm Chart リポジトリを追加します。</p>
 <pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvusの設定ファイル<code translate="no">milvus.yaml</code> を用意し、<code translate="no">&lt;bucket-name&gt; &lt;s3-access-key&gt; &lt;s3-secret-key&gt;</code> を独自のものに置き換えます。</p>
+<li><p>Milvusの設定ファイル `<code translate="no">milvus.yaml</code>` を準備し、<code translate="no">&lt;bucket-name&gt; &lt;s3-access-key&gt; &lt;s3-secret-key&gt;</code> を自身の値に置き換えてください。</p>
 <p><div class="alert note"></p>
 <ul>
-<li>MilvusにHAを設定するには、<a href="https://milvus.io/tools/sizing/">こちらの計算機を</a>参照してください。MinIO関連の設定は削除してください。</li>
-<li>コーディネータのマルチレプリカ配置を実装するには、<code translate="no">xxCoordinator.activeStandby.enabled</code> を<code translate="no">true</code> に設定します。</li>
+<li>MilvusのHA（高可用性）を設定するには、<a href="https://milvus.io/tools/sizing/">こちらの計算ツールを</a>参照してください。関連する設定は計算ツールから直接ダウンロードできますが、MinIO関連の設定は削除してください。</li>
+<li>コーディネーターのマルチレプリカ展開を実装するには、<code translate="no">xxCoordinator.activeStandby.enabled</code> を<code translate="no">true</code> に設定してください。</li>
 </ul>
 <p></div></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
@@ -405,17 +408,17 @@ helm repo update
 <li><p>Milvusをインストールします。</p>
 <pre><code translate="no" class="language-shell">helm install milvus-demo milvus/milvus -n milvus -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>すべてのポッドが<code translate="no">Running</code> になるまで待ちます。</p>
+<li><p>すべてのポッドが「<code translate="no">Running</code> 」状態になるまで待ちます。</p>
 <pre><code translate="no" class="language-shell">kubectl get pods -n milvus
 <button class="copy-code-btn"></button></code></pre>
 <p><div class="alert note"></p>
-<p>Helmはサービス作成順序のスケジューリングをサポートしていません。初期段階では、<code translate="no">etcd</code> と<code translate="no">pulsar</code> が立ち上がる前に、ビジネスポッドが1回か2回再起動するのが普通です。</p>
+<p>Helmでは、サービス作成の順序を指定することはできません。初期段階では、<code translate="no">etcd</code> および<code translate="no">pulsar</code> が稼働するまでに、ビジネス用ポッドが1～2回再起動するのは正常な動作です。</p>
 <p></div></p></li>
-<li><p>Milvusサービスアドレスを取得する。</p>
+<li><p>Milvusサービスのアドレスを取得します。</p>
 <pre><code translate="no" class="language-shell">kubectl get svc -n milvus
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Verify-the-installation" class="common-anchor-header">インストールの確認<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
+<h2 id="Verify-the-installation" class="common-anchor-header">インストールを確認する<button data-href="#Verify-the-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -430,84 +433,22 @@ helm repo update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の簡単なガイドに従って、インストールを確認することができます。詳細については、<a href="https://milvus.io/docs/v2.3.x/example_code.md">この例を</a>参照してください。</p>
+    </button></h2><p>以下の簡単なガイドに従って、インストールを確認できます。詳細については、pymilvusリポジトリ内の<a href="https://github.com/milvus-io/pymilvus/tree/master/examples">サンプルスクリプトを</a>参照してください。</p>
 <ul>
-<li><p>サンプルコードをダウンロードする。</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
+<li><p>サンプルコードをダウンロードします。</p>
+<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/simple.py
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>サンプルコードの引数<code translate="no">host</code> を上記のMilvusサービスアドレスに変更してください。</p></li>
-</ul>
-<pre><code translate="no">```python
+<li><p>サンプルコード内の接続 URI を、上記の Milvus サービスアドレスに変更します。</p>
+<pre><code translate="no" class="language-python">...
+milvus_client = MilvusClient(<span class="hljs-string">&quot;http://milvus-service-06b515b1ce9ad10.elb.us-east-2.amazonaws.com:19530&quot;</span>)
 ...
-connections.connect(&quot;default&quot;, host=&quot;milvus-service-06b515b1ce9ad10.elb.us-east-2.amazonaws.com&quot;, port=&quot;19530&quot;)
-...
-```
-</code></pre>
-<ul>
-<li><p>サンプルコードを実行する。</p>
-<pre><code translate="no" class="language-shell">python3 hello_milvus.py
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>サンプルコードを実行します。</p>
+<pre><code translate="no" class="language-shell">python3 simple.py
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになるはずです：</p>
-<pre><code translate="no" class="language-shell">=== start connecting to Milvus     ===
-
-Does collection hello_milvus exist in Milvus: False
-
-=== Create collection `hello_milvus` ===
-
-
-=== Start inserting entities       ===
-
-Number of entities in Milvus: 3000
-
-=== Start Creating index IVF_FLAT  ===
-
-
-=== Start loading                  ===
-
-
-=== Start searching based on vector similarity ===
-
-hit: id: 2998, distance: 0.0, entity: {&#x27;random&#x27;: 0.9728033590489911}, random field: 0.9728033590489911
-hit: id: 1262, distance: 0.08883658051490784, entity: {&#x27;random&#x27;: 0.2978858685751561}, random field: 0.2978858685751561
-hit: id: 1265, distance: 0.09590047597885132, entity: {&#x27;random&#x27;: 0.3042039939240304}, random field: 0.3042039939240304
-hit: id: 2999, distance: 0.0, entity: {&#x27;random&#x27;: 0.02316334456872482}, random field: 0.02316334456872482
-hit: id: 1580, distance: 0.05628091096878052, entity: {&#x27;random&#x27;: 0.3855988746044062}, random field: 0.3855988746044062
-hit: id: 2377, distance: 0.08096685260534286, entity: {&#x27;random&#x27;: 0.8745922204004368}, random field: 0.8745922204004368
-search latency = 0.4693s
-
-=== Start querying with `random &gt; 0.5` ===
-
-query result:
--{&#x27;embeddings&#x27;: [0.20963514, 0.39746657, 0.12019053, 0.6947492, 0.9535575, 0.5454552, 0.82360446, 0.21096309], &#x27;pk&#x27;: &#x27;0&#x27;, &#x27;random&#x27;: 0.6378742006852851}
-search latency = 0.9407s
-query pagination(limit=4):
-        [{&#x27;random&#x27;: 0.6378742006852851, &#x27;pk&#x27;: &#x27;0&#x27;}, {&#x27;random&#x27;: 0.5763523024650556, &#x27;pk&#x27;: &#x27;100&#x27;}, {&#x27;random&#x27;: 0.9425935891639464, &#x27;pk&#x27;: &#x27;1000&#x27;}, {&#x27;random&#x27;: 0.7893211256191387, &#x27;pk&#x27;: &#x27;1001&#x27;}]
-query pagination(offset=1, limit=3):
-        [{&#x27;random&#x27;: 0.5763523024650556, &#x27;pk&#x27;: &#x27;100&#x27;}, {&#x27;random&#x27;: 0.9425935891639464, &#x27;pk&#x27;: &#x27;1000&#x27;}, {&#x27;random&#x27;: 0.7893211256191387, &#x27;pk&#x27;: &#x27;1001&#x27;}]
-
-=== Start hybrid searching with `random &gt; 0.5` ===
-
-hit: id: 2998, distance: 0.0, entity: {&#x27;random&#x27;: 0.9728033590489911}, random field: 0.9728033590489911
-hit: id: 747, distance: 0.14606499671936035, entity: {&#x27;random&#x27;: 0.5648774800635661}, random field: 0.5648774800635661
-hit: id: 2527, distance: 0.1530652642250061, entity: {&#x27;random&#x27;: 0.8928974315571507}, random field: 0.8928974315571507
-hit: id: 2377, distance: 0.08096685260534286, entity: {&#x27;random&#x27;: 0.8745922204004368}, random field: 0.8745922204004368
-hit: id: 2034, distance: 0.20354536175727844, entity: {&#x27;random&#x27;: 0.5526117606328499}, random field: 0.5526117606328499
-hit: id: 958, distance: 0.21908017992973328, entity: {&#x27;random&#x27;: 0.6647383716417955}, random field: 0.6647383716417955
-search latency = 0.4652s
-
-=== Start deleting with expr `pk in [&quot;0&quot; , &quot;1&quot;]` ===
-
-query before delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
--{&#x27;random&#x27;: 0.6378742006852851, &#x27;embeddings&#x27;: [0.20963514, 0.39746657, 0.12019053, 0.6947492, 0.9535575, 0.5454552, 0.82360446, 0.21096309], &#x27;pk&#x27;: &#x27;0&#x27;}
--{&#x27;random&#x27;: 0.43925103574669633, &#x27;embeddings&#x27;: [0.52323616, 0.8035404, 0.77824664, 0.80369574, 0.4914803, 0.8265614, 0.6145269, 0.80234545], &#x27;pk&#x27;: &#x27;1&#x27;}
-
-query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result: []
-
-
-=== Drop collection `hello_milvus` ===
-<button class="copy-code-btn"></button></code></pre></li>
+<p>このスクリプトは、<code translate="no">hello_milvus</code> という名前のコレクションを作成し、数行のデータを挿入し、いくつかのクエリとベクトル検索を実行し、最後にコレクションを削除します。エラーなく完了すれば、Milvusクラスタは期待通りに動作しています。</p></li>
 </ul>
-<h2 id="Clean-up-works" class="common-anchor-header">クリーンアップ成功<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
+<h2 id="Clean-up-works" class="common-anchor-header">クリーンアップ作業<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -522,16 +463,16 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusをアンインストールし、EKSクラスタを破棄し、AWS S3バケットと関連するIAMポリシーを削除して環境を復元する必要がある場合。</p>
+    </button></h2><p>Milvus をアンインストールし、EKS クラスターを破棄し、AWS S3 バケットおよび関連する IAM ポリシーを削除して、環境を復元する必要がある場合。</p>
 <ul>
 <li><p>Milvusをアンインストールします。</p>
 <pre><code translate="no" class="language-shell">helm uninstall milvus-demo -n milvus
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>EKSクラスタを破棄します。</p>
+<li><p>EKSクラスターを破棄します。</p>
 <pre><code translate="no" class="language-shell">eksctl delete cluster --name milvus-eks-cluster --region us-east-2
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>AWS S3バケットと関連するIAMポリシーを削除します。</p>
-<p><strong>バケット名とポリシーのARNは自分のものに置き換えてください。</strong></p>
+<li><p>AWS S3バケットおよび関連するIAMポリシーを削除します。</p>
+<p><strong>バケット名とポリシーのARNは、各自の環境に合わせて置き換えてください。</strong></p>
 <pre><code translate="no" class="language-shell">aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
 
 aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2
@@ -541,7 +482,7 @@ aws iam detach-user-policy --user-name &lt;your-user-name&gt; --policy-arn &quot
 aws iam delete-policy --policy-arn &#x27;arn:aws:iam::12345678901:policy/MilvusS3ReadWrite&#x27;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -556,8 +497,8 @@ aws iam delete-policy --policy-arn &#x27;arn:aws:iam::12345678901:policy/MilvusS
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合：</p>
+    </button></h2><p>他のクラウド環境で Milvus をデプロイする方法については、以下をご覧ください：</p>
 <ul>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCP上にMilvus Clusterをデプロイする</a></li>
-<li><a href="/docs/ja/azure.md">KubernetesでAzureにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/gcp.md">Kubernetes を使用して GCP に Milvus クラスターをデプロイする</a></li>
+<li><a href="/docs/ja/azure.md">Kubernetes を使用して Azure に Milvus クラスターをデプロイする</a></li>
 </ul>

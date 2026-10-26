@@ -20,7 +20,7 @@ title: 快速入门
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>向量作为神经网络模型的输出数据格式，能够高效地编码信息，并在知识库、语义搜索、检索增强生成（RAG）等人工智能应用中发挥关键作用。</p>
+<p>向量作为神经网络模型的输出数据格式，能够有效编码信息，并在知识库、语义搜索、检索增强生成（RAG）等人工智能应用中发挥关键作用。</p>
 <p>Milvus 是一款开源向量数据库，适用于各种规模的 AI 应用，从在 Jupyter Notebook 中运行演示版聊天机器人，到构建服务数十亿用户的 Web 级搜索系统。在本指南中，我们将带您了解如何在几分钟内完成 Milvus 的本地部署，并使用 Python 客户端库来生成、存储和搜索向量。</p>
 <h2 id="Install-Milvus" class="common-anchor-header">安装 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,12 +86,12 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo has 768 dimensions</span>
+    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo have 768 dimensions</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述配置中，</p>
 <ul>
-<li>主键和向量字段均使用其默认名称（“id”和“向量”）。</li>
+<li>主键和向量字段均使用默认名称（“id”和“向量”）。</li>
 <li>度量类型（向量距离定义）设置为默认值（<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>）。</li>
 <li>主键字段接受整数，且不自动递增（即不使用<a href="https://milvus.io/docs/schema.md">auto-id 功能</a>）。
 此外，您还可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collection 的 Schema。</li>
@@ -111,7 +111,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本指南中，我们将使用向量对文本进行语义搜索。我们需要通过下载 Embeddings 模型来为文本生成向量。这可以通过使用<code translate="no">pymilvus[model]</code> 库中的实用函数轻松实现。</p>
+    </button></h2><p>在本指南中，我们将使用向量对文本进行语义搜索。我们需要通过下载Embeddings模型来为文本生成向量。这可以通过使用<code translate="no">pymilvus[model]</code> 库中的实用函数轻松实现。</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">用向量表示文本<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ client.create_collection(
     </button></h2><p>首先，安装模型库。该包包含 PyTorch 等必要的机器学习工具。如果您的本地环境从未安装过 PyTorch，则下载该包可能需要一些时间。</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用默认模型生成向量嵌入。Milvus 要求数据以字典列表的形式插入，其中每个字典代表一条数据记录，称为实体。</p>
+<p>使用默认模型生成向量Embeddings。Milvus 要求数据以字典列表的形式输入，其中每个字典代表一条数据记录，称为实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># If connection to https://huggingface.co/ failed, uncomment the following path</span>
@@ -180,7 +180,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若因网络问题无法下载模型，作为临时解决方案，您可以使用随机向量来表示文本，并仍可完成本示例。请注意，由于这些向量是虚拟的，因此搜索结果将无法反映语义相似性。</p>
+    </button></h2><p>如果因网络问题无法下载模型，作为临时解决方案，您可以使用随机向量来表示文本，并仍可完成本示例。请注意，由于这些向量是虚拟的，因此搜索结果将无法反映语义相似性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -271,7 +271,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果是一个结果列表，其中每一项都映射到一个向量搜索查询。每个查询包含一个结果列表，每个结果包含实体的主键、与查询向量的距离，以及通过指定<code translate="no">output_fields</code> 获取的实体详细信息。</p>
+<p>输出结果是一个结果列表，其中每一项都映射到一个向量搜索查询。每个查询包含一个结果列表，每个结果包含实体的主键、与查询向量的距离，以及通过指定的<code translate="no">output_fields</code> 获取的实体详细信息。</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">带元数据过滤的向量搜索<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -287,7 +287,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您还可以结合元数据值（在 Milvus 中称为“标量”字段，因为标量指非向量数据）进行向量搜索。这通过指定特定条件的过滤表达式来实现。让我们通过以下示例了解如何使用 `<code translate="no">subject</code> ` 字段进行搜索和过滤。</p>
+    </button></h2><p>您还可以结合元数据值（在 Milvus 中称为“标量”字段，因为标量指非向量数据）进行向量搜索。这通过指定特定条件的过滤表达式来实现。让我们通过以下示例了解如何使用<code translate="no">subject</code> 字段进行搜索和过滤。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -433,7 +433,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 非常适合用于本地 Python 程序的入门开发。如果您拥有大规模数据，或者希望在生产环境中使用 Milvus，可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式均采用相同的 API，因此若切换至其他部署模式，客户端代码无需做太大改动。只需指定任意位置部署的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
+    </button></h2><p>Milvus Lite 非常适合用于本地 Python 程序的入门开发。如果您拥有大规模数据，或者希望在生产环境中使用 Milvus，可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式均采用相同的 API，因此若切换至其他部署模式，客户端代码无需进行大幅修改。只需指定任意位置部署的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>若要将数据从 Milvus Lite 迁移到部署在 Docker 或 Kubernetes 上的 Milvus，请参阅《<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">从 Milvus Lite 迁移数据</a>》。</p>

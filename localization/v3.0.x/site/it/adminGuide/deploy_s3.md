@@ -61,7 +61,17 @@ summary: Scopri come configurare lo storage S3 per Milvus con Docker Compose o H
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/configure_minio.md">Configurazioni MinIO/S3</a>.</p>
-<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Modifica docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
+<p>È possibile specificare in modo statico una chiave di accesso e una chiave segreta, ma se si esegue Milvus su un host o un cluster che supporta l’identità del carico di lavoro (ad esempio, un profilo di istanza EC2 o IRSA su EKS), si consiglia di utilizzare invece un ruolo IAM. Impostare ` <code translate="no">useIAM</code> ` su ` <code translate="no">true</code> ` e rimuovere ` <code translate="no">accessKeyID</code> ` e ` <code translate="no">secretAccessKey</code>`:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus otterrà quindi le credenziali temporanee dal ruolo IAM associato al carico di lavoro. <code translate="no">cloudProvider</code> accetta <code translate="no">aws</code>, <code translate="no">gcp</code> o <code translate="no">aliyun</code>, mentre <code translate="no">iamEndpoint</code> può specificare facoltativamente un endpoint personalizzato per il recupero delle credenziali del ruolo IAM.</p>
+<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Modifica il file docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +86,8 @@ summary: Scopri come configurare lo storage S3 per Milvus con Docker Compose o H
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È inoltre necessario rimuovere la variabile d’ambiente <code translate="no">MINIO_ADDRESS</code> per il servizio milvus nel file <code translate="no">docker-compose.yaml</code>. Per impostazione predefinita, milvus utilizzerà MinIO locale anziché S3 esterno.</p>
-<h3 id="3-Run-Milvus" class="common-anchor-header">3. Avviare Milvus<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
+    </button></h3><p>È inoltre necessario rimuovere la variabile d’ambiente ` <code translate="no">MINIO_ADDRESS</code> ` per il servizio Milvus all’indirizzo <code translate="no">docker-compose.yaml</code>. Per impostazione predefinita, Milvus utilizzerà Minio locale anziché S3 esterno.</p>
+<h3 id="3-Run-Milvus" class="common-anchor-header">3. Eseguire Milvus<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +102,7 @@ summary: Scopri come configurare lo storage S3 per Milvus con Docker Compose o H
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Eseguire il comando seguente per avviare Milvus utilizzando le configurazioni S3.</p>
+    </button></h3><p>Eseguire il seguente comando per avviare Milvus utilizzando le configurazioni S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Le configurazioni hanno effetto solo dopo l’avvio di Milvus. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Avvio di Milvus</a>.</div>
@@ -127,8 +137,12 @@ summary: Scopri come configurare lo storage S3 per Milvus con Docker Compose o H
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>La chiave di accesso segreta per S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>Il nome del bucket S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Se utilizzare SSL durante la connessione</td><td>I valori predefiniti sono <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>Se utilizzare un ruolo IAM al posto delle chiavi di accesso e segrete per accedere a S3.</td><td>Il valore predefinito è <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>Fornitore di servizi cloud che emette le credenziali del ruolo IAM.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code> o <code translate="no">aliyun</code>; il valore predefinito è <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>Endpoint personalizzato per il recupero delle credenziali del ruolo IAM.</td><td>Lasciare vuoto per utilizzare l’impostazione predefinita del provider.</td></tr>
 </tbody>
 </table>
+<p>Se il cluster supporta l’identità del carico di lavoro (ad esempio, IRSA su EKS), impostare <code translate="no">externalS3.useIAM</code> su <code translate="no">true</code> e rimuovere <code translate="no">externalS3.accessKey</code> e <code translate="no">externalS3.secretKey</code> — Milvus otterrà le credenziali temporanee dal ruolo IAM associato al carico di lavoro.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Utilizzo del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

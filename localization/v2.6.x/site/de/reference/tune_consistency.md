@@ -1,14 +1,14 @@
 ---
 id: tune_consistency.md
-title: Konsistenz-Ebene
+title: Konsistenzstufe
 summary: >-
   Als verteilte Vektordatenbank bietet Milvus mehrere Konsistenzstufen, um
-  sicherzustellen, dass jeder Knoten oder jedes Replikat bei Lese- und
+  sicherzustellen, dass jeder Knoten oder jede Replik bei Lese- und
   Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden die
-  Konsistenzstufen Strong, Bounded, Eventually und Session unterstützt, wobei
-  Bounded die standardmäßig verwendete Konsistenzstufe ist.
+  Konsistenzstufen „Strong“, „Bounded“, „Eventually“ und „Session“ unterstützt,
+  wobei „Bounded“ die standardmäßig verwendete Konsistenzstufe ist.
 ---
-<h1 id="Consistency-Level" class="common-anchor-header">Konsistenz-Ebene<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
+<h1 id="Consistency-Level" class="common-anchor-header">Konsistenzstufe<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Als verteilte Vektordatenbank bietet Milvus mehrere Konsistenzstufen, um sicherzustellen, dass jeder Knoten oder jede Replik bei Lese- und Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden die Konsistenzstufen <strong>Strong</strong>, <strong>Bounded</strong>, <strong>Eventually</strong> und <strong>Session</strong> unterstützt, wobei <strong>Bounded</strong> die standardmäßig verwendete Konsistenzstufe ist.</p>
-<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Als verteilte Vektordatenbank bietet Milvus mehrere Konsistenzstufen, um sicherzustellen, dass jeder Knoten oder jede Replik bei Lese- und Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden die Konsistenzstufen <strong>„Strong“</strong>, <strong>„Bounded“</strong>, <strong>„Eventually“</strong> und <strong>„Session“</strong> unterstützt, wobei <strong>„Bounded“</strong> die standardmäßig verwendete Konsistenzstufe ist.</p>
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,37 +39,35 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind <strong>DataNodes</strong> für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. <strong>QueryNodes</strong> übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von <strong>Stapeldaten</strong> als auch von <strong>Streaming-Daten</strong>. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die Durchführung einer Suche direkt auf Streaming-Daten zum Verlust zahlreicher unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
-<p>Milvus Commercial Edition ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind die DataNodes für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. QueryNodes übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von Stapeldaten als auch von Streaming-Daten. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die direkte Durchführung einer Suche auf Streaming-Daten zum Verlust vieler unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
-<p>
+    </button></h2><p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. <strong>Streaming-Knoten</strong> fügen alle Schreibvorgänge dem Write-Ahead-Log (WAL) hinzu und speichern die <strong>wachsenden Daten</strong> – also Daten, die sich noch im WAL befinden und noch nicht dauerhaft gespeichert wurden. Ein Wiederherstellungsprozess wandelt die wachsenden Daten in <strong>historische Daten</strong> um (versiegelte Segmente, die in Objektspeichern wie MinIO/S3 dauerhaft gespeichert werden), die von <strong>Abfrageknoten</strong> bereitgestellt werden. Jede Such- oder Abfrageanforderung wird von einem <strong>Abfrage-Delegator</strong> auf dem Streaming-Knoten empfangen, der das WAL der Sammlung hostet: Der Delegator generiert den Abfrageplan, führt den Teil mit den wachsenden Daten lokal aus, leitet den Teil mit den historischen Daten an die entsprechenden Abfrageknoten weiter und führt die Ergebnisse zusammen, bevor er sie zurückgibt. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/streaming_service.md">„Streaming-Dienst</a>“.</p>
+<p>Um Konsistenz zu gewährleisten, weist Milvus jeder Nachricht einen Timestamp-Oracle-Zeitstempel (TSO) zu, der ihre Reihenfolge im WAL bestimmt, und fügt neben den Datennachrichten kontinuierlich Synchronisationszeitstempel in das WAL ein. Sobald ein Synchronisationszeitstempel (syncTs) empfangen wird, wird dieser als „ServiceTime“ erfasst, was bedeutet, dass alle Daten vor dieser „ServiceTime“ für Abfragen sichtbar sind. Basierend auf der „ServiceTime“ stellt Milvus Garantiezeitstempel (GuaranteeTs) bereit, um unterschiedliche Anforderungen der Benutzer an Konsistenz und Verfügbarkeit zu erfüllen. Benutzer können dem Delegator mitteilen, dass Daten vor einem bestimmten Zeitpunkt in den Suchbereich einbezogen werden sollen, indem sie in ihren Suchanfragen GuaranteeTs angeben.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
-   </span> <span class="img-wrapper"> <span>Batch-Daten und Streaming-Daten</span> </span></p>
-<p>Wie in der obigen Abbildung dargestellt, können QueryNodes nach dem Empfang einer Suchanfrage sowohl Streaming-Daten als auch Batch-Daten gleichzeitig empfangen. Aufgrund der Netzwerklatenz können die von QueryNodes erhaltenen Streaming-Daten jedoch unvollständig sein.</p>
-<p>Um dieses Problem zu lösen, versieht Milvus jeden Datensatz in der Datenwarteschlange mit einem Zeitstempel und fügt kontinuierlich Synchronisationszeitstempel in die Datenwarteschlange ein. Wann immer ein Synchronisationszeitstempel (syncTs) empfangen wird, setzt QueryNodes diesen als ServiceTime, was bedeutet, dass QueryNodes alle Daten vor dieser ServiceTime sehen kann. Auf der Grundlage der ServiceTime kann Milvus Garantiezeitstempel (GuaranteeTs) bereitstellen, um verschiedene Benutzeranforderungen an Konsistenz und Verfügbarkeit zu erfüllen. Benutzer können QueryNodes über die Notwendigkeit informieren, Daten vor einem bestimmten Zeitpunkt in den Suchbereich aufzunehmen, indem sie GuaranteeTs in ihren Suchanfragen angeben.</p>
-<p>
+   <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
+   <span>Service-Zeit und Garantiezeit</span>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
-   </span> <span class="img-wrapper"> <span>Servicezeit und Garantiezeit</span> </span></p>
-<p>Wie in der obigen Abbildung dargestellt, bedeutet GuaranteeTs, wenn es kleiner als ServiceTime ist, dass alle Daten vor dem angegebenen Zeitpunkt vollständig auf die Festplatte geschrieben wurden, so dass die QueryNodes den Suchvorgang sofort durchführen können. Wenn GuaranteeTs größer als ServiceTime ist, müssen QueryNodes warten, bis ServiceTime GuaranteeTs überschreitet, bevor sie den Suchvorgang ausführen können.</p>
-<p>Die Benutzer müssen einen Kompromiss zwischen Abfragegenauigkeit und Abfragelatenz eingehen. Wenn Benutzer hohe Anforderungen an die Konsistenz haben und nicht auf die Abfragelatenz achten, können sie GuaranteeTs auf einen möglichst großen Wert setzen; wenn Benutzer Suchergebnisse schnell erhalten möchten und toleranter gegenüber der Abfragegenauigkeit sind, kann GuaranteeTs auf einen kleineren Wert gesetzt werden.</p>
-<p>
+ </span></p>
+<p>Wie in der obigen Abbildung dargestellt, bedeutet ein GuaranteeT-Wert, der kleiner als die ServiceTime ist, dass alle Daten vor dem angegebenen Zeitpunkt bereits sichtbar sind, sodass die Suche sofort ausgeführt werden kann. Ist der GuaranteeT-Wert größer als die ServiceTime, muss die Suche warten, bis die ServiceTime den GuaranteeT-Wert überschreitet, bevor sie ausgeführt werden kann.</p>
+<p>Benutzer müssen einen Kompromiss zwischen Abfragegenauigkeit und Abfragelatenz finden. Wenn Benutzer hohe Konsistenzanforderungen haben und nicht empfindlich auf Abfragelatenz reagieren, können sie „GuaranteeTs“ auf einen möglichst großen Wert setzen; wenn Benutzer Suchergebnisse schnell erhalten möchten und bei der Abfragegenauigkeit toleranter sind, kann „GuaranteeTs“ auf einen kleineren Wert gesetzt werden.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
-   </span> <span class="img-wrapper"> <span>Veranschaulichte Konsistenzstufe</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
+   <span>Veranschaulichung der Konsistenzstufen</span>
+  
+ </span></p>
 <p>Milvus bietet vier Arten von Konsistenzstufen mit unterschiedlichen GuaranteeTs.</p>
 <ul>
 <li><p><strong>Stark</strong></p>
-<p>Der letzte Zeitstempel wird als GuaranteeTs verwendet, und QueryNodes müssen warten, bis die ServiceTime die GuaranteeTs erfüllt, bevor sie Suchanfragen ausführen.</p></li>
-<li><p><strong>Eventuell</strong></p>
-<p>Die GuaranteeTs wird auf einen extrem kleinen Wert, z. B. 1, gesetzt, um Konsistenzprüfungen zu vermeiden, so dass QueryNodes sofort Suchanfragen für alle Batch-Daten ausführen können.</p></li>
-<li><p><strong>Bounded Staleness</strong></p>
-<p>GuranteeTs wird auf einen Zeitpunkt gesetzt, der vor dem letzten Zeitstempel liegt, damit die QueryNodes Suchanfragen mit einer gewissen Toleranz gegenüber Datenverlusten durchführen können.</p></li>
+<p>Der aktuellste Zeitstempel wird als „GuaranteeTs“ verwendet, und die Suche muss warten, bis die „ServiceTime“ den „GuaranteeTs“-Wert erreicht hat, bevor sie ausgeführt wird.</p></li>
+<li><p><strong>Eventual</strong></p>
+<p>Der GuaranteeTs-Wert wird auf einen extrem kleinen Wert, beispielsweise 1, gesetzt, um Konsistenzprüfungen zu vermeiden, sodass die Suche sofort anhand der aktuell sichtbaren Daten ausgeführt wird.</p></li>
+<li><p><strong>Begrenzte Veralterung</strong></p>
+<p>Der „GuaranteeTs“-Wert wird auf einen Zeitpunkt vor dem aktuellsten Zeitstempel gesetzt, sodass die Suche mit der Toleranz ausgeführt wird, dass bestimmte aktuelle Daten möglicherweise noch nicht sichtbar sind.</p></li>
 <li><p><strong>Sitzung</strong></p>
-<p>Der letzte Zeitpunkt, zu dem der Client Daten einfügt, wird als GuaranteeTs verwendet, damit QueryNodes alle vom Client eingefügten Daten durchsuchen kann.</p></li>
+<p>Der aktuellste Zeitpunkt, zu dem der Client Daten einfügt, wird als „GuaranteeTs“ verwendet, damit Suchvorgänge alle vom Client eingefügten Daten abdecken können.</p></li>
 </ul>
-<p>Milvus verwendet Bounded Staleness als Standard-Konsistenzstufe. Wenn die GuaranteeTs nicht angegeben werden, wird die letzte ServiceTime als GuaranteeTs verwendet.</p>
-<h2 id="Set-Consistency-Level" class="common-anchor-header">Konsistenzlevel festlegen<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+<p>Milvus verwendet „Bounded Staleness“ als Standardkonsistenzstufe. Wird der „GuaranteeTs“-Wert nicht angegeben, wird der aktuellste „ServiceTime“-Wert als „GuaranteeTs“ verwendet.</p>
+<h2 id="Set-Consistency-Level" class="common-anchor-header">Konsistenzstufe festlegen<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,8 +82,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können verschiedene Konsistenzstufen festlegen, wenn Sie eine Sammlung erstellen sowie Suchen und Abfragen durchführen.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Erstellung einer Sammlung<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Sie können beim Erstellen einer Sammlung sowie bei der Durchführung von Suchvorgängen und Abfragen verschiedene Konsistenzstufen festlegen.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Konsistenzstufe beim Erstellen einer Sammlung festlegen<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,9 +98,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Im folgenden Codebeispiel wird die Konsistenzstufe auf <strong>Bounded</strong> gesetzt.</p>
+    </button></h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchvorgänge und Abfragen innerhalb der Sammlung festlegen. Das folgende Codebeispiel legt die Konsistenzstufe auf <strong>„Bounded“</strong> fest.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -166,8 +168,8 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Konsistenzlevel in der Suche festlegen<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<p>Mögliche Werte für den Parameter „ <code translate="no">consistency_level</code> “ sind „ <code translate="no">Strong</code> “, „ <code translate="no">Bounded</code> “, „ <code translate="no">Eventually</code> “ und „ <code translate="no">Session</code> “.</p>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Suche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,9 +184,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe zurück auf " <strong>Bounded"</strong>. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
+    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Codebeispiel setzt die Konsistenzstufe wieder auf <strong>„Bounded“</strong> zurück. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -228,8 +234,8 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dieser Parameter ist auch bei hybriden Suchen und dem Such-Iterator verfügbar. Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Konsistenzstufe in der Abfrage festlegen<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
+<p>Dieser Parameter ist auch bei hybriden Suchvorgängen und im Such-Iterator verfügbar. Mögliche Werte für den Parameter „ <code translate="no">consistency_level</code> “ sind „ <code translate="no">Strong</code> “, „ <code translate="no">Bounded</code> “, „ <code translate="no">Eventually</code> “ und „ <code translate="no">Session</code> “.</p>
+<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Festlegen der Konsistenzstufe in der Abfrage<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,9 +250,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe auf den Wert <strong>Eventually</strong>. Die Einstellung gilt nur für die aktuelle Suchanfrage.</p>
+    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Codebeispiel legt die Konsistenzstufe auf <strong>„Eventually“</strong> fest. Die Einstellung gilt nur für die aktuelle Abfrageanforderung.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -287,4 +297,4 @@ curl --request POST \
     &quot;limit&quot;: 3
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dieser Parameter ist auch im Abfrage-Iterator verfügbar. Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
+<p>Dieser Parameter ist auch im Abfrage-Iterator verfügbar. Mögliche Werte für den Parameter „ <code translate="no">consistency_level</code> “ sind „ <code translate="no">Strong</code> “, „ <code translate="no">Bounded</code> “, „ <code translate="no">Eventually</code> “ und „ <code translate="no">Session</code> “.</p>

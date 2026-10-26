@@ -1,14 +1,14 @@
 ---
 id: set-collection-ttl.md
-title: Establecer TTL de la colección
+title: Configurar el TTL de una colección
 summary: >-
-  Una vez que los datos se insertan en una colección, permanecen allí por
-  defecto. Sin embargo, en algunos escenarios, es posible que desee eliminar o
-  limpiar los datos después de un cierto período. En tales casos, puede
-  configurar la propiedad Tiempo de vida (TTL) de la colección para que Milvus
-  elimine automáticamente los datos una vez que expire el TTL.
+  Una vez que los datos se insertan en una colección, permanecen allí de forma
+  predeterminada. Sin embargo, en algunos casos, es posible que desees eliminar
+  o depurar los datos tras un periodo determinado. En tales casos, puedes
+  configurar la propiedad «Time-to-Live» (TTL) de la colección para que Milvus
+  elimine automáticamente los datos una vez que caduque el TTL.
 ---
-<h1 id="Set-Collection-TTL" class="common-anchor-header">Establecer TTL de la colección<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+<h1 id="Set-Collection-TTL" class="common-anchor-header">Configurar el TTL de una colección<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una vez que los datos se insertan en una colección, permanecen allí por defecto. Sin embargo, en algunos escenarios, es posible que desee eliminar o limpiar los datos después de un cierto período. En tales casos, puede configurar la propiedad Tiempo de vida (TTL) de la colección para que Milvus elimine automáticamente los datos una vez que expire el TTL.</p>
-<h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Una vez que los datos se insertan en una colección, permanecen allí de forma predeterminada. Sin embargo, en algunos casos, es posible que desees eliminar o limpiar los datos tras un periodo determinado. En tales casos, puedes configurar la propiedad «Time-to-Live» (TTL) de la colección para que Milvus elimine automáticamente los datos una vez que caduque el TTL.</p>
+<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,16 +39,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Time-to-Live (TTL) se utiliza comúnmente en bases de datos para escenarios donde los datos sólo deben permanecer válidos o accesibles durante un cierto período después de cualquier inserción o modificación. Después, los datos pueden eliminarse automáticamente.</p>
-<p>Por ejemplo, si ingiere datos diariamente pero sólo necesita retener registros durante 14 días, puede configurar Milvus para que elimine automáticamente cualquier dato anterior a ese periodo estableciendo el TTL de la colección en <strong>14 × 24 × 3600 = 1209600</strong> segundos. Esto garantiza que sólo permanezcan en la colección los datos de los 14 días más recientes.</p>
+    </button></h2><p>El tiempo de vida (TTL) se utiliza habitualmente en bases de datos para situaciones en las que los datos solo deben permanecer válidos o accesibles durante un periodo determinado tras su inserción o modificación. Transcurrido ese tiempo, los datos pueden eliminarse automáticamente.</p>
+<p>Por ejemplo, si se importan datos a diario pero solo es necesario conservar los registros durante 14 días, se puede configurar Milvus para que elimine automáticamente cualquier dato más antiguo estableciendo el TTL de la colección en <strong>14 × 24 × 3600 = 1 209 600</strong> segundos. Esto garantiza que solo permanezcan en la colección los datos correspondientes a los últimos 14 días.</p>
 <div class="alert note">
-<p>Las entidades caducadas no aparecerán en ningún resultado de búsqueda o consulta. Sin embargo, pueden permanecer en el almacenamiento hasta la posterior compactación de datos, que debe realizarse en las próximas 24 horas.</p>
-<p>Puede controlar cuándo se activa la compactación de datos estableciendo el elemento de configuración <code translate="no">dataCoord.compaction.expiry.tolerance</code> en su archivo de configuración de Milvus.</p>
-<p>Este elemento de configuración tiene por defecto el valor <code translate="no">-1</code>, lo que indica que se aplica el intervalo de compactación de datos existente. Sin embargo, cuando cambie su valor a un número entero positivo, como <code translate="no">12</code>, la compactación de datos se activará el número de horas especificado después de que caduquen las entidades.</p>
+<p>Las entidades caducadas no aparecerán en ningún resultado de búsqueda o consulta. Sin embargo, pueden permanecer en el almacenamiento hasta la siguiente compactación de datos, que debería llevarse a cabo en las próximas 24 horas.</p>
+<p>Puedes controlar cuándo se activa la compactación de datos configurando el elemento de configuración « <code translate="no">dataCoord.compaction.expiry.tolerance</code> » en tu archivo de configuración de Milvus.</p>
+<p>El valor predeterminado de este elemento de configuración es « <code translate="no">-1</code> », lo que indica que se aplica el intervalo de compactación de datos existente. Sin embargo, al cambiar su valor a un número entero positivo, como « <code translate="no">12</code> », la compactación de datos se activará el número de horas especificado después de que las entidades caduquen.</p>
 </div>
-<p>La propiedad TTL en una colección Milvus se especifica como un entero en segundos. Una vez establecida, cualquier dato que supere su TTL se borrará automáticamente de la colección.</p>
-<p>Debido a que el proceso de eliminación es asíncrono, los datos pueden no ser eliminados de los resultados de búsqueda exactamente una vez que el TTL especificado ha transcurrido. En su lugar, puede haber un retraso, ya que la eliminación depende de la recolección de basura (GC) y los procesos de compactación, que se producen en intervalos no deterministas.</p>
-<h2 id="Set-TTL" class="common-anchor-header">Establecer TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
+<p>La propiedad TTL de una colección de Milvus se especifica como un número entero en segundos. Una vez establecida, cualquier dato que supere su TTL se eliminará automáticamente de la colección.</p>
+<p>Las entidades caducadas se filtran y se excluyen de los resultados de búsqueda y consulta tan pronto como transcurre el TTL. Sin embargo, la eliminación de los datos subyacentes del almacenamiento es asíncrona: su recuperación depende de los procesos de recolección de basura (GC) y de compactación, que tienen lugar a intervalos no deterministas.</p>
+<h2 id="Set-TTL" class="common-anchor-header">Configurar el TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,12 +63,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede establecer la propiedad TTL cuando</p>
+    </button></h2><p>Puedes configurar la propiedad TTL al</p>
 <ul>
-<li><p><a href="/docs/es/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Crear una colección.</a></p></li>
-<li><p><a href="/docs/es/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Modificar la propiedad TTL de una colección existente.</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">crea una colección.</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Modifica la propiedad TTL de una colección existente.</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Establecer TTL al crear una colección<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Configurar el TTL al crear una colección<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,9 +83,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente fragmento de código muestra cómo establecer la propiedad TTL al crear una colección.</p>
+    </button></h3><p>El siguiente fragmento de código muestra cómo configurar la propiedad TTL al crear una colección.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># With TTL</span>
@@ -144,7 +149,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">Establecer TTL para una colección existente<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">Establecer el TTL de una colección existente<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,9 +164,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente fragmento de código demuestra cómo modificar la propiedad TTL en una colección existente.</p>
+    </button></h3><p>El siguiente fragmento de código muestra cómo modificar la propiedad TTL en una colección existente.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>}
@@ -203,7 +213,7 @@ client.alterCollection(alterCollectionReq);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-TTL-setting" class="common-anchor-header">Eliminar TTL<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
+<h2 id="Drop-TTL-setting" class="common-anchor-header">Eliminar la configuración de TTL<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,9 +228,14 @@ client.alterCollection(alterCollectionReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si decides mantener los datos en una colección indefinidamente, puedes simplemente eliminar la configuración TTL de esa colección.</p>
+    </button></h2><p>Si decides conservar los datos de una colección de forma indefinida, basta con eliminar la configuración de TTL de dicha colección.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]

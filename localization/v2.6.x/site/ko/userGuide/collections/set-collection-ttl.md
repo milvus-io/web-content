@@ -2,9 +2,9 @@
 id: set-collection-ttl.md
 title: 컬렉션 TTL 설정
 summary: >-
-  데이터가 컬렉션에 삽입되면 기본적으로 컬렉션에 그대로 유지됩니다. 그러나 일부 시나리오에서는 특정 기간이 지나면 데이터를 제거하거나 정리하고
-  싶을 수 있습니다. 이러한 경우, 컬렉션의 TTL(Time-to-Live) 속성을 구성하여 TTL이 만료되면 Milvus가 자동으로 데이터를
-  삭제하도록 할 수 있습니다.
+  데이터가 컬렉션에 삽입되면 기본적으로 해당 컬렉션에 그대로 유지됩니다. 하지만 일부 상황에서는 일정 기간이 지난 후 데이터를 삭제하거나
+  정리해야 할 수도 있습니다. 이러한 경우, 컬렉션의 TTL(Time-to-Live) 속성을 구성하여 TTL이 만료되면 Milvus가 데이터를
+  자동으로 삭제하도록 할 수 있습니다.
 ---
 <h1 id="Set-Collection-TTL" class="common-anchor-header">컬렉션 TTL 설정<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>데이터가 컬렉션에 삽입되면 기본적으로 해당 데이터는 그대로 유지됩니다. 그러나 일부 시나리오에서는 일정 기간이 지나면 데이터를 제거하거나 정리하고 싶을 수 있습니다. 이러한 경우, 컬렉션의 TTL(Time-to-Live) 속성을 구성하여 TTL이 만료되면 Milvus가 자동으로 데이터를 삭제하도록 할 수 있습니다.</p>
+    </button></h1><p>데이터가 컬렉션에 삽입되면 기본적으로 해당 컬렉션에 그대로 유지됩니다. 그러나 일부 상황에서는 일정 기간이 지난 후 데이터를 제거하거나 정리해야 할 수도 있습니다. 이러한 경우, 컬렉션의 TTL(Time-to-Live) 속성을 구성하여 TTL이 만료되면 Milvus가 데이터를 자동으로 삭제하도록 할 수 있습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,15 +37,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>TTL(Time-to-Live)은 일반적으로 데이터베이스에서 데이터를 삽입하거나 수정한 후 일정 기간 동안만 유효하거나 액세스할 수 있어야 하는 시나리오에 사용됩니다. 그러면 데이터가 자동으로 제거될 수 있습니다.</p>
-<p>예를 들어, 매일 데이터를 수집하지만 14일 동안만 기록을 보관해야 하는 경우, 컬렉션의 TTL을 <strong>14 × 24 × 3600 = 1209600초로</strong> 설정하여 그보다 오래된 데이터를 자동으로 제거하도록 Milvus를 구성할 수 있습니다. 이렇게 하면 가장 최근 14일 분량의 데이터만 컬렉션에 남게 됩니다.</p>
+    </button></h2><p>유효 기간(TTL)은 데이터가 삽입되거나 수정된 후 특정 기간 동안만 유효하거나 접근 가능해야 하는 시나리오에서 데이터베이스에 일반적으로 사용됩니다. 이후 데이터는 자동으로 제거될 수 있습니다.</p>
+<p>예를 들어, 매일 데이터를 수집하지만 레코드를 14일 동안만 보관해야 하는 경우, 컬렉션의 TTL을 <strong>14 × 24 × 3600 = 1209600초로</strong> 설정하여 그보다 오래된 데이터를 Milvus가 자동으로 제거하도록 구성할 수 있습니다. 이렇게 하면 컬렉션에는 가장 최근 14일 분량의 데이터만 남게 됩니다.</p>
 <div class="alert note">
-<p>만료된 엔티티는 검색 또는 쿼리 결과에 표시되지 않습니다. 그러나 다음 24시간 이내에 수행해야 하는 후속 데이터 압축이 수행될 때까지 스토리지에 남아있을 수 있습니다.</p>
-<p>Milvus 구성 파일에서 <code translate="no">dataCoord.compaction.expiry.tolerance</code> 구성 항목을 설정하여 데이터 압축을 트리거할 시기를 제어할 수 있습니다.</p>
-<p>이 구성 항목의 기본값은 <code translate="no">-1</code> 으로, 기존 데이터 압축 간격이 적용됨을 나타냅니다. 그러나 <code translate="no">12</code> 과 같이 값을 양의 정수로 변경하면 엔티티가 만료된 후 지정된 시간만큼 데이터 압축이 트리거됩니다.</p>
+<p>만료된 엔티티는 어떤 검색이나 쿼리 결과에도 나타나지 않습니다. 그러나 다음 24시간 이내에 수행될 다음 데이터 압축이 이루어질 때까지 스토리지에는 남아 있을 수 있습니다.</p>
+<p>Milvus 구성 파일에서 <code translate="no">dataCoord.compaction.expiry.tolerance</code> 구성 항목을 설정하여 데이터 압축을 트리거할 시점을 제어할 수 있습니다.</p>
+<p>이 구성 항목의 기본값은 ` <code translate="no">-1</code>`이며, 이는 기존 데이터 압축 간격이 적용됨을 의미합니다. 그러나 값을 ` <code translate="no">12</code>`과 같이 양의 정수로 변경하면, 엔티티의 유효 기간이 만료된 후 지정된 시간(시간 단위)이 지나면 데이터 압축이 트리거됩니다.</p>
 </div>
-<p>Milvus 컬렉션의 TTL 속성은 초 단위 정수로 지정됩니다. 일단 설정되면 해당 TTL을 초과하는 모든 데이터는 컬렉션에서 자동으로 삭제됩니다.</p>
-<p>삭제 프로세스는 비동기식이기 때문에 지정된 TTL이 경과한 후 데이터가 검색 결과에서 정확히 제거되지 않을 수 있습니다. 대신, 비결정적 간격으로 발생하는 가비지 컬렉션(GC) 및 압축 프로세스에 따라 제거가 달라지므로 지연이 발생할 수 있습니다.</p>
+<p>Milvus 컬렉션의 TTL 속성은 초 단위의 정수로 지정됩니다. 일단 설정되면, TTL을 초과한 모든 데이터는 컬렉션에서 자동으로 삭제됩니다.</p>
+<p>만료된 엔티티는 TTL이 경과하는 즉시 검색 및 쿼리 결과에서 제외됩니다. 그러나 스토리지에서 기본 데이터를 제거하는 작업은 비동기적으로 이루어집니다. 데이터 회수는 비결정적인 간격으로 발생하는 가비지 컬렉션(GC) 및 압축 프로세스에 따라 달라집니다.</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTL 설정<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,12 +61,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같은 경우 TTL 속성을 설정할 수 있습니다.</p>
+    </button></h2><p>다음과 같은 경우에 TTL 속성을 설정할 수 있습니다.</p>
 <ul>
-<li><p><a href="/docs/ko/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">컬렉션을 만듭니다.</a></p></li>
-<li><p><a href="/docs/ko/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">기존 컬렉션의 TTL 속성을 변경합니다.</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">컬렉션을 생성할 때.</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">기존 컬렉션의 TTL 속성을 수정할 때.</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">컬렉션을 만들 때 TTL 설정하기<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">컬렉션 생성 시 TTL 설정<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,9 +81,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 코드 스니펫은 컬렉션을 만들 때 TTL 속성을 설정하는 방법을 보여줍니다.</p>
+    </button></h3><p>다음 코드 예제는 컬렉션을 생성할 때 TTL 속성을 설정하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># With TTL</span>
@@ -157,9 +162,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 코드 스니펫은 기존 컬렉션의 TTL 속성을 변경하는 방법을 보여줍니다.</p>
+    </button></h3><p>다음 코드 예제는 기존 컬렉션의 TTL 속성을 변경하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>}
@@ -201,7 +211,7 @@ client.alterCollection(alterCollectionReq);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-TTL-setting" class="common-anchor-header">TTL 설정 삭제<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
+<h2 id="Drop-TTL-setting" class="common-anchor-header">TTL 설정 제거<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,9 +226,14 @@ client.alterCollection(alterCollectionReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션의 데이터를 무기한 보관하기로 결정한 경우 해당 컬렉션에서 TTL 설정을 삭제하면 됩니다.</p>
+    </button></h2><p>컬렉션의 데이터를 무기한으로 보관하기로 결정한 경우, 해당 컬렉션에서 TTL 설정을 제거하기만 하면 됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]

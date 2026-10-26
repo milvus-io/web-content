@@ -86,7 +86,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo has 768 dimensions</span>
+    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo have 768 dimensions</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Na configuração acima,</p>
@@ -165,7 +165,7 @@ data = [
 Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
 Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Alternativamente] Utilize uma representação fictícia com vetores aleatórios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
+<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Em alternativa] Utilize uma representação fictícia com vetores aleatórios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,7 +271,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>O resultado é uma lista de resultados, cada um correspondendo a uma consulta de pesquisa vetorial. Cada consulta contém uma lista de resultados, em que cada resultado contém a chave primária da entidade, a distância em relação ao vetor de consulta e os detalhes da entidade com o parâmetro « <code translate="no">output_fields</code> » especificado.</p>
+<p>O resultado é uma lista de resultados, cada um correspondendo a uma consulta de pesquisa vetorial. Cada consulta contém uma lista de resultados, em que cada resultado contém a chave primária da entidade, a distância em relação ao vetor de consulta e os detalhes da entidade com o atributo « <code translate="no">output_fields</code> » especificado.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">Pesquisa vetorial com filtragem de metadados<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +433,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Lite é excelente para dar os primeiros passos com um programa Python local. Se tiver dados em grande escala ou pretender utilizar o Milvus em produção, pode informar-se sobre como implementar o Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">no Kubernetes</a>. Todos os modos de implementação do Milvus partilham a mesma API, pelo que o seu código do lado do cliente não precisa de sofrer grandes alterações se mudar para outro modo de implementação. Basta especificar a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e o token</a> de um servidor Milvus implementado em qualquer lugar:</p>
+    </button></h2><p>O Milvus Lite é excelente para dar os primeiros passos com um programa Python local. Se tiver dados em grande escala ou pretender utilizar o Milvus em produção, pode informar-se sobre como implementar o Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">no Kubernetes</a>. Todos os modos de implementação do Milvus partilham a mesma API, pelo que o seu código do lado do cliente não precisa de sofrer grandes alterações se mudar para outro modo de implementação. Basta especificar a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e o token</a> de um servidor Milvus implementado em qualquer local:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Para migrar dados do Milvus Lite para o Milvus implementado no Docker ou no Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">«Migrar dados do Milvus Lite</a>».</p>

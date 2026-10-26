@@ -1,13 +1,13 @@
 ---
 id: set-collection-ttl.md
-title: تعيين TTL للمجموعة
+title: تعيين مدة صلاحية المجموعة (TTL)
 summary: >-
-  بمجرد إدراج البيانات في مجموعة، تظل هناك بشكل افتراضي. ومع ذلك، في بعض
-  السيناريوهات، قد ترغب في إزالة البيانات أو تنظيفها بعد فترة معينة. في مثل هذه
-  الحالات، يمكنك تكوين خاصية وقت بقاء المجموعة حية (TTL) بحيث يقوم Milvus
-  تلقائيًا بحذف البيانات بمجرد انتهاء وقت بقاء المجموعة حية.
+  بمجرد إدراج البيانات في مجموعة ما، فإنها تظل فيها بشكل افتراضي. ومع ذلك، في
+  بعض الحالات، قد ترغب في إزالة البيانات أو تنظيفها بعد فترة معينة. في مثل هذه
+  الحالات، يمكنك تكوين خاصية «مدة الصلاحية» (TTL) للمجموعة بحيث يقوم Milvus بحذف
+  البيانات تلقائيًا بمجرد انتهاء صلاحية TTL.
 ---
-<h1 id="Set-Collection-TTL" class="common-anchor-header">تعيين TTL للمجموعة<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+<h1 id="Set-Collection-TTL" class="common-anchor-header">تعيين مدة صلاحية المجموعة (TTL)<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>بمجرد إدراج البيانات في مجموعة، تظل هناك بشكل افتراضي. ومع ذلك، في بعض السيناريوهات، قد ترغب في إزالة البيانات أو تنظيفها بعد فترة معينة. في مثل هذه الحالات، يمكنك تكوين خاصية وقت الصلاحية للمجموعة (TTL) بحيث يقوم Milvus تلقائيًا بحذف البيانات بمجرد انتهاء وقت الصلاحية.</p>
+    </button></h1><p>بمجرد إدراج البيانات في مجموعة ما، تظل موجودة فيها بشكل افتراضي. ومع ذلك، في بعض الحالات، قد ترغب في إزالة البيانات أو تنظيفها بعد فترة معينة. في مثل هذه الحالات، يمكنك تكوين خاصية مدة الصلاحية (TTL) للمجموعة بحيث يقوم Milvus بحذف البيانات تلقائيًا بمجرد انتهاء صلاحية TTL.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,15 +38,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتم استخدام Time-to-Live (TTL) بشكل شائع في قواعد البيانات للسيناريوهات التي يجب أن تظل فيها البيانات صالحة أو يمكن الوصول إليها لفترة معينة فقط بعد أي إدراج أو تعديل. بعد ذلك، يمكن إزالة البيانات تلقائيًا.</p>
-<p>على سبيل المثال، إذا كنت تقوم بإدخال البيانات يوميًا ولكنك تحتاج فقط إلى الاحتفاظ بالسجلات لمدة 14 يومًا، يمكنك تكوين Milvus لإزالة أي بيانات أقدم من ذلك تلقائيًا عن طريق تعيين TTL TTL للمجموعة إلى <strong>14 × 24 × 3600 = 1209600</strong> ثانية. وهذا يضمن بقاء بيانات ال 14 يومًا الأخيرة فقط في المجموعة.</p>
+    </button></h2><p>يُستخدم "مدة الصلاحية" (TTL) بشكل شائع في قواعد البيانات في الحالات التي يجب أن تظل فيها البيانات صالحة أو متاحة لفترة معينة فقط بعد أي عملية إدراج أو تعديل. بعد ذلك، يمكن إزالة البيانات تلقائيًا.</p>
+<p>على سبيل المثال، إذا كنت تقوم باستيعاب البيانات يوميًا ولكنك تحتاج فقط إلى الاحتفاظ بالسجلات لمدة 14 يومًا، فيمكنك تكوين Milvus لإزالة أي بيانات أقدم من ذلك تلقائيًا عن طريق تعيين TTL للمجموعة على <strong>14 × 24 × 3600 = 1209600</strong> ثانية. وهذا يضمن بقاء بيانات آخر 14 يومًا فقط في المجموعة.</p>
 <div class="alert note">
-<p>لن تظهر الكيانات منتهية الصلاحية في أي نتائج بحث أو استعلام. ومع ذلك، قد تبقى في المخزن حتى يتم ضغط البيانات اللاحق، والذي يجب أن يتم في غضون الـ 24 ساعة القادمة.</p>
-<p>يمكنك التحكم في وقت تشغيل ضغط البيانات عن طريق تعيين عنصر التكوين <code translate="no">dataCoord.compaction.expiry.tolerance</code> في ملف تكوين Milvus الخاص بك.</p>
-<p>يتم تعيين عنصر التكوين هذا افتراضيًا إلى <code translate="no">-1</code> ، مما يشير إلى تطبيق الفاصل الزمني الحالي لضغط البيانات. ومع ذلك، عندما تقوم بتغيير قيمته إلى عدد صحيح موجب، مثل <code translate="no">12</code> ، سيتم تشغيل ضغط البيانات بعدد الساعات المحددة بعد انتهاء صلاحية أي كيانات.</p>
+<p>لن تظهر الكيانات منتهية الصلاحية في أي نتائج بحث أو استعلام. ومع ذلك، قد تظل في التخزين حتى عملية ضغط البيانات التالية، والتي يجب أن تتم في غضون الـ 24 ساعة التالية.</p>
+<p>يمكنك التحكم في وقت تشغيل عملية ضغط البيانات عن طريق ضبط عنصر التكوين « <code translate="no">dataCoord.compaction.expiry.tolerance</code> » في ملف تكوين Milvus الخاص بك.</p>
+<p>يتم تعيين عنصر التكوين هذا افتراضيًا على <code translate="no">-1</code> ، مما يشير إلى تطبيق الفاصل الزمني الحالي لضغط البيانات. ومع ذلك، عند تغيير قيمته إلى عدد صحيح موجب، مثل <code translate="no">12</code> ، سيتم تشغيل ضغط البيانات بعد العدد المحدد من الساعات من انتهاء صلاحية أي كيانات.</p>
 </div>
-<p>يتم تحديد خاصية TTL في مجموعة Milvus كعدد صحيح بالثواني. وبمجرد تعيينها، سيتم حذف أي بيانات تتجاوز مدة صلاحيتها المحددة تلقائيًا من المجموعة.</p>
-<p>نظرًا لأن عملية الحذف غير متزامنة، فقد لا تتم إزالة البيانات من نتائج البحث بالضبط بمجرد انقضاء فترة الاختبار المحددة. وبدلاً من ذلك، قد يكون هناك تأخير، حيث تعتمد عملية الحذف على عمليتي تجميع البيانات المهملة (GC) والضغط، اللتين تحدثان على فترات غير محددة.</p>
+<p>يتم تحديد خاصية TTL في مجموعة Milvus كعدد صحيح بالثواني. بمجرد تعيينها، سيتم حذف أي بيانات تتجاوز مدة صلاحيتها (TTL) تلقائيًا من المجموعة.</p>
+<p>يتم تصفية الكيانات منتهية الصلاحية من نتائج البحث والاستعلام بمجرد انقضاء مدة صلاحية (TTL). ومع ذلك، فإن إزالة البيانات الأساسية من التخزين تتم بشكل غير متزامن: حيث تعتمد عملية استردادها على عمليات جمع القمامة (GC) وضغط البيانات، والتي تحدث على فترات غير محددة.</p>
 <h2 id="Set-TTL" class="common-anchor-header">تعيين TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,12 +62,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تعيين خاصية TTL عندما تقوم بما يلي</p>
+    </button></h2><p>يمكنك تعيين خاصية TTL عند</p>
 <ul>
 <li><p><a href="/docs/ar/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">إنشاء مجموعة.</a></p></li>
-<li><p><a href="/docs/ar/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">تغيير خاصية TTL TTL لمجموعة موجودة.</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">تعديل خاصية TTL لمجموعة موجودة.</a></p></li>
 </ul>
-<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">تعيين TTL TTL عند إنشاء مجموعة<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">تعيين TTL عند إنشاء مجموعة<button data-href="#Set-TTL-when-creating-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,9 +82,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوضح مقتطف الشيفرة التالي كيفية تعيين خاصية TTL عند إنشاء مجموعة.</p>
+    </button></h3><p>يوضح مقتطف الشفرة التالي كيفية تعيين خاصية TTL عند إنشاء مجموعة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># With TTL</span>
@@ -143,7 +148,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">تعيين TTL TTL لمجموعة موجودة<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
+<h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">تعيين TTL لمجموعة موجودة<button data-href="#Set-TTL-for-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,9 +163,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوضح مقتطف الشيفرة التالي كيفية تغيير خاصية TTL في مجموعة موجودة.</p>
+    </button></h3><p>يوضح المقتطف البرمجي التالي كيفية تعديل خاصية TTL في مجموعة موجودة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيز</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>}
@@ -202,7 +212,7 @@ client.alterCollection(alterCollectionReq);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-TTL-setting" class="common-anchor-header">إسقاط إعداد TTL<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
+<h2 id="Drop-TTL-setting" class="common-anchor-header">إلغاء إعداد TTL<button data-href="#Drop-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,9 +227,14 @@ client.alterCollection(alterCollectionReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا قررت الاحتفاظ بالبيانات في مجموعة إلى أجل غير مسمى، يمكنك ببساطة إسقاط إعداد TTL من تلك المجموعة.</p>
+    </button></h2><p>إذا قررت الاحتفاظ بالبيانات في المجموعة إلى أجل غير مسمى، فيمكنك ببساطة إلغاء إعداد TTL من تلك المجموعة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيز</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]

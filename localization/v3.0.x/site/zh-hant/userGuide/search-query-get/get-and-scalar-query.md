@@ -18,9 +18,9 @@ summary: 在 Milvus 中，可使用 Query、Get 和 QueryIterator 來擷取實�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>除了人工神經網路 (ANN) 搜尋外，Milvus 亦支援透過查詢進行元資料篩選。本頁將介紹如何使用 Query、Get 及 QueryIterators 來擷取實體、篩選元資料、對查詢結果進行排序，以及彙總標量值。</p>
+    </button></h1><p>除了人工神經網路 (ANN) 搜尋外，Milvus 亦支援透過查詢進行元資料篩選。本頁將介紹如何使用 Query、Get 及 QueryIterators 來擷取實體、篩選元資料、排序查詢結果，以及彙總標量值。</p>
 <div class="alert note">
-<p>若在建立集合後新增欄位，包含這些欄位的查詢會針對尚未明確定義值的實體，回傳預設值或 `<code translate="no">NULL</code> `。詳細資訊請參閱「<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">變更集合架構</a>」。</p>
+<p>若在建立集合後新增欄位，包含這些欄位的查詢會針對未明確設定值的實體，返回已定義的預設值或 `<code translate="no">NULL</code> `。詳細資訊請參閱「<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">變更集合架構</a>」。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,9 +71,9 @@ summary: 在 Milvus 中，可使用 Query、Get 和 QueryIterator 來擷取實�
    </tr>
    <tr>
      <td><p>回傳</p></td>
-     <td><p>回傳指定集合或分區中包含指定主鍵的實體。</p></td>
-     <td><p>回傳在指定集合或分區中，符合自訂篩選條件的所有實體或指定數量之實體。</p></td>
-     <td><p>透過分頁查詢，回傳指定集合或分區中符合自訂篩選條件的所有實體。</p></td>
+     <td><p>回傳指定集合或分區中持有指定主鍵的實體。</p></td>
+     <td><p>回傳在指定集合或分區中，符合自訂篩選條件的所有實體，或指定數量的實體。</p></td>
+     <td><p>透過分頁查詢，回傳指定集合或區段中符合自訂篩選條件的所有實體。</p></td>
    </tr>
 </table>
 <p>有關元資料篩選的更多資訊，請參閱「<a href="/docs/zh-hant/basic-operators.md">布林運算式規則</a>」。</p>
@@ -276,7 +276,7 @@ status = client-&gt;<span class="hljs-built_in">Get</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當您需要根據自訂篩選條件查找實體時，請使用<strong>Query</strong>方法。以下程式碼範例假設集合中存在三個名為<code translate="no">id</code> 、<code translate="no">vector</code> 及<code translate="no">color</code> 的欄位，並會回傳指定數量、且其<code translate="no">color</code> 值以<code translate="no">red</code> 開頭的實體。</p>
+    </button></h3><p>當您需要根據自訂篩選條件查找實體時，請使用<strong>Query</strong>方法。以下程式碼範例假設集合中存在三個名為<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的欄位，並會回傳指定數量、且其<code translate="no">color</code> 值以<code translate="no">red</code> 開頭的實體。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -407,9 +407,9 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <ul>
 <li><p><code translate="no">order_by</code> 必須與 `<code translate="no">limit</code>` 參數一併使用。</p></li>
 <li><p>支援的欄位類型：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 以及<code translate="no">VARCHAR</code> 。不支援依向量、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 欄位進行排序。</p></li>
-<li><p>當依可為空欄位進行排序時，在升序排序下（NULLS LAST），NULL 值會置於末尾；在降序排序下（NULLS FIRST），則會置於開頭。</p></li>
+<li><p>當依可為空欄位排序時，在升序排序下，NULL 值會置於末尾（NULLS LAST）；在降序排序下，則置於開頭（NULLS FIRST）。</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">基本排序</h4><p>將一組<code translate="no">&quot;field_name:direction&quot;</code> 字串傳遞給<code translate="no">order_by</code> 參數，其中<code translate="no">direction</code> 的值可設定為<code translate="no">asc</code> （升序）或<code translate="no">desc</code> （降序）。請注意，<code translate="no">asc</code> 和<code translate="no">desc</code> 會區分大小寫。</p>
+<h4 id="Basic-Sort" class="common-anchor-header">基本排序</h4><p>將一組<code translate="no">&quot;field_name:direction&quot;</code> 字串傳遞給<code translate="no">order_by</code> 參數，其中<code translate="no">direction</code> 的值可為<code translate="no">asc</code> （升序）或<code translate="no">desc</code> （降序）。請注意，<code translate="no">asc</code> 和<code translate="no">desc</code> 會區分大小寫。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -522,7 +522,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">帶排序的分頁</h4><p>請將 `<code translate="no">order_by</code> ` 與 `<code translate="no">limit</code> ` 及 `<code translate="no">offset</code> ` 搭配使用，以對已排序的結果進行分頁。例如，若要顯示按價格排序且分多頁呈現的產品清單，每頁將依正確的價格順序顯示下一批商品，且不會出現重複或缺漏的情況。</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">帶排序的分頁</h4><p>請將 `<code translate="no">order_by</code> ` 與 `<code translate="no">limit</code> ` 及 `<code translate="no">offset</code> ` 搭配使用，以對已排序的結果進行分頁。例如，若要顯示按價格排序且橫跨多頁的商品清單，每頁將依正確的價格順序顯示下一批商品，且不會出現重複或缺漏。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -617,14 +617,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以根據一個或多個標量欄位對查詢結果進行分組，並針對各組計算彙總結果。支援的彙總運算子包括<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 以及<code translate="no">avg</code> 。</p>
+    </button></h3><p>您可以根據一個或多個標量欄位對查詢結果進行分組，並針對各組計算彙總值。支援的彙總運算子包括<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 以及<code translate="no">avg</code> 。</p>
 <p>使用 `<code translate="no">group_by_fields</code>` 時，請注意：</p>
 <ul>
 <li><p><code translate="no">group_by_fields</code> 支援的欄位類型包括：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> 以及<code translate="no">TIMESTAMPTZ</code> 。若依<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、vector、<code translate="no">JSON</code> 或<code translate="no">ARRAY</code> 欄位進行分組，將會產生錯誤。</p></li>
-<li><p><code translate="no">sum</code> 以及<code translate="no">avg</code> 僅限數值型別。您可以將它們套用至數值型別欄位，包括<code translate="no">FLOAT</code> 與<code translate="no">DOUBLE</code> ，但若將其套用至<code translate="no">VARCHAR</code> 欄位，則會產生錯誤。</p></li>
+<li><p><code translate="no">sum</code> 以及<code translate="no">avg</code> 僅限數值型別。您可以將其套用至數值型別欄位，包括<code translate="no">FLOAT</code> 和<code translate="no">DOUBLE</code> ，但若套用至<code translate="no">VARCHAR</code> 欄位，則會產生錯誤。</p></li>
 </ul>
-<p>若要啟用彙總功能，請將 `<code translate="no">group_by_fields</code> ` 傳遞至 `<code translate="no">query()</code> `，並將彙總表達式（`<code translate="no">count(*)</code>`、`<code translate="no">count(&lt;field&gt;)</code>`、`<code translate="no">min(&lt;field&gt;)</code>`、`<code translate="no">max(&lt;field&gt;)</code>`、`<code translate="no">sum(&lt;field&gt;)</code>`、`<code translate="no">avg(&lt;field&gt;)</code>`）新增至 `<code translate="no">output_fields</code>`。</p>
-<p>以下範例根據「<code translate="no">color</code> 」欄位將實體分組，並回傳各顏色組別中的實體數量：</p>
+<p>若要啟用彙總功能，請將 `<code translate="no">group_by_fields</code> ` 傳遞給 `<code translate="no">query()</code> `，並將彙總表達式（`<code translate="no">count(*)</code>`、`<code translate="no">count(&lt;field&gt;)</code>`、`<code translate="no">min(&lt;field&gt;)</code>`、`<code translate="no">max(&lt;field&gt;)</code>`、`<code translate="no">sum(&lt;field&gt;)</code>`、`<code translate="no">avg(&lt;field&gt;)</code>`）新增至 `<code translate="no">output_fields</code>`。</p>
+<p>以下範例會根據「<code translate="no">color</code> 」欄位將實體分組，並回傳各顏色組別中的實體數量：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -798,7 +798,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以將 `<code translate="no">group_by_fields</code> ` 與 `<code translate="no">limit</code> ` 結合使用，以限制返回的群組數量。當某個欄位具有高基數，而您僅需部分群組樣本時，此方法便相當實用：</p>
+<p>您也可以將 `<code translate="no">group_by_fields</code> ` 與 `<code translate="no">limit</code> ` 結合使用，以限制返回的分組數量。當某個欄位具有高基數，而您僅需部分分組樣本時，此方法特別有用：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -870,7 +870,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您需要透過分頁查詢，根據自訂篩選條件查找實體時，請建立<strong>一個 QueryIterator</strong>，並使用其<strong>next()</strong>方法遍歷所有實體，以找出符合篩選條件的實體。以下程式碼範例假設有三個名為<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的欄位，並會回傳所有<code translate="no">color</code> 欄位值以<code translate="no">red</code> 開頭的實體。</p>
+    </button></h2><p>當您需要透過分頁查詢，依據自訂篩選條件查找實體時，請建立<strong>一個 QueryIterator</strong>，並使用其<strong>next()</strong>方法遍歷所有實體，以找出符合篩選條件的實體。以下程式碼範例假設有三個名為<code translate="no">id</code> 、<code translate="no">vector</code> 及<code translate="no">color</code> 的欄位，並會回傳所有<code translate="no">color</code> 值以<code translate="no">red</code> 開頭的實體。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -963,7 +963,7 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您也可以透過在 Get、Query 或 QueryIterator 請求中包含分區名稱，對一個或多個分區進行查詢。以下程式碼範例假設集合中存在一個名為<strong>PartitionA</strong>的分區。</p>
+    </button></h2><p>您也可以透過在 Get、Query 或 QueryIterator 請求中包含分區名稱，來對一個或多個分區執行查詢。以下程式碼範例假設集合中存在一個名為<strong>PartitionA</strong>的分區。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -974,14 +974,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1321,7 +1321,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若您的集合具有<code translate="no">TIMESTAMPTZ</code> 欄位，您可透過在查詢呼叫中設定<code translate="no">timezone</code> 參數，針對單一操作暫時覆寫資料庫或集合的預設時區。此設定會控制操作過程中<code translate="no">TIMESTAMPTZ</code> 值的顯示與比對方式。</p>
+    </button></h2><p>若您的集合具有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以透過在查詢呼叫中設定<code translate="no">timezone</code> 參數，針對單一操作暫時覆寫資料庫或集合的預設時區。此設定將控制操作過程中<code translate="no">TIMESTAMPTZ</code> 值的顯示與比對方式。</p>
 <p><code translate="no">timezone</code> 的值必須為有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱「<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>」。</p>
 <p>以下範例展示如何為查詢操作暫時設定時區：</p>
 <div class="multipleCode">

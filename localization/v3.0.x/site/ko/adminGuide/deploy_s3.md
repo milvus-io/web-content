@@ -51,7 +51,7 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://min.io/product/overview">MinIO는</a> S3와 호환됩니다. Docker Compose를 사용하여 S3를 구성하려면 milvus/configs 경로에 있는 <code translate="no">milvus.yaml</code> 파일의 <code translate="no">minio</code> 섹션에 값을 지정하십시오.</p>
+    </button></h3><p><a href="https://min.io/product/overview">MinIO는</a> S3와 호환됩니다. Docker Compose를 사용하여 S3를 구성하려면 milvus/configs 경로에 있는 <code translate="no">milvus.yaml</code> 파일의 <code translate="no">minio</code> 섹션에 해당 값을 지정하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
@@ -60,8 +60,18 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
   <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>자세한 내용은 <a href="/docs/ko/configure_minio.md">MinIO/S3 구성</a> 문서를 참조하십시오.</p>
-<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. docker-compose.yaml 조정<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
+<p>자세한 내용은 <a href="/docs/ko/configure_minio.md">MinIO/S3 구성을</a> 참조하십시오.</p>
+<p>액세스 키와 시크릿 키를 하드코딩해도 작동하지만, 워크로드 ID를 지원하는 호스트나 클러스터(예: EC2 인스턴스 프로필 또는 EKS의 IRSA)에서 Milvus를 실행하는 경우, 대신 IAM 역할을 사용하는 것을 권장합니다. <code translate="no">useIAM</code> 를 <code translate="no">true</code> 로 설정하고 <code translate="no">accessKeyID</code> 및 <code translate="no">secretAccessKey</code> 를 제거하십시오:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>그러면 Milvus는 워크로드에 연결된 IAM 역할에서 임시 자격 증명을 가져옵니다. <code translate="no">cloudProvider</code> 은 <code translate="no">aws</code>, <code translate="no">gcp</code> 또는 <code translate="no">aliyun</code> 을 허용하며, <code translate="no">iamEndpoint</code> 을 통해 IAM 역할 자격 증명을 가져오기 위한 사용자 지정 엔드포인트를 선택적으로 지정할 수 있습니다.</p>
+<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. docker-compose.yaml 수정<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +86,7 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>또한 <code translate="no">docker-compose.yaml</code> 파일에서 milvus 서비스에 대한 <code translate="no">MINIO_ADDRESS</code> 환경 변수를 제거해야 합니다. 기본적으로 milvus는 외부 S3 대신 로컬 MinIO를 사용합니다.</p>
+    </button></h3><p>또한 <code translate="no">docker-compose.yaml</code> 에서 milvus 서비스에 대한 <code translate="no">MINIO_ADDRESS</code> 환경 변수를 제거해야 합니다. 기본적으로 milvus는 외부 S3 대신 로컬 Minio를 사용합니다.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Milvus 실행<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,7 +105,7 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
     </button></h3><p>다음 명령어를 실행하여 S3 구성을 사용하는 Milvus를 시작하십시오.</p>
 <pre><code translate="no" class="language-shell">docker compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">구성은 Milvus가 시작된 후에만 적용됩니다. 자세한 내용은 <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvus 시작을</a> 참조하십시오.</div>
+<div class="alert note">구성은 Milvus가 시작된 후에만 적용됩니다. 자세한 내용은 <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvus 시작하기를</a> 참조하십시오.</div>
 <h2 id="Configure-S3-on-K8s" class="common-anchor-header">K8s에서 S3 구성<button data-href="#Configure-S3-on-K8s" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,8 +137,12 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>S3의 시크릿 액세스 키.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>S3 버킷의 이름.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>연결 시 SSL을 사용할지 여부</td><td>기본값은 다음과 같습니다. <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>S3에 액세스할 때 액세스 키/비밀 키 대신 IAM 역할을 사용할지 여부.</td><td>기본값은 <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>IAM 역할 자격 증명을 발급하는 클라우드 공급자입니다.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code> 또는 <code translate="no">aliyun</code>; 기본값은 <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>IAM 역할 자격 증명을 가져오기 위한 사용자 지정 엔드포인트입니다.</td><td>공백으로 두면 공급자의 기본값을 사용합니다.</td></tr>
 </tbody>
 </table>
+<p>클러스터가 워크로드 ID(예: EKS의 IRSA)를 지원하는 경우, <code translate="no">externalS3.useIAM</code> 을 <code translate="no">true</code> 으로 설정하고 <code translate="no">externalS3.accessKey</code> 및 <code translate="no">externalS3.secretKey</code> 을 제거하십시오. 그러면 Milvus는 워크로드에 연결된 IAM 역할에서 임시 자격 증명을 가져옵니다.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,13 +159,13 @@ summary: Docker Compose 또는 Helm을 사용하여 Milvus용 S3 스토리지를
         ></path>
       </svg>
     </button></h3><ol>
-<li><code translate="no">values.yaml</code> 파일의 <code translate="no">minio</code> 섹션을 구성하십시오.</li>
+<li><code translate="no">values.yaml</code> 파일의 <code translate="no">minio</code> 섹션을 구성합니다.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li><code translate="no">values.yaml</code> 파일에서 값을 사용하여 <code translate="no">externalS3</code> 섹션을 구성합니다.</li>
+<li><code translate="no">values.yaml</code> 파일에서 사용자 값을 사용하여 <code translate="no">externalS3</code> 섹션을 구성하십시오.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">externalS3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>

@@ -63,6 +63,16 @@ summary: >-
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Lihat <a href="/docs/id/configure_minio.md">Konfigurasi MinIO/S3</a> untuk informasi lebih lanjut.</p>
+<p>Mencantumkan kunci akses dan kunci rahasia secara langsung memang bisa, tetapi jika Anda menjalankan Milvus di host atau kluster yang mendukung identitas beban kerja (misalnya, profil instans EC2, atau IRSA di EKS), kami menyarankan untuk menggunakan peran IAM sebagai gantinya. Atur ` <code translate="no">useIAM</code> ` ke ` <code translate="no">true</code> ` dan hapus ` <code translate="no">accessKeyID</code> ` serta ` <code translate="no">secretAccessKey</code>`:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus kemudian memperoleh kredensial sementara dari peran IAM yang terhubung ke beban kerja. <code translate="no">cloudProvider</code> menerima <code translate="no">aws</code>, <code translate="no">gcp</code>, atau <code translate="no">aliyun</code>, dan <code translate="no">iamEndpoint</code> dapat secara opsional menentukan titik akhir khusus untuk mengambil kredensial peran IAM.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Sesuaikan docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +88,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda juga perlu menghapus variabel lingkungan ` <code translate="no">MINIO_ADDRESS</code> ` untuk layanan milvus di ` <code translate="no">docker-compose.yaml</code>`. Secara default, milvus akan menggunakan MinIO lokal alih-alih S3 eksternal.</p>
+    </button></h3><p>Anda juga perlu menghapus variabel lingkungan ` <code translate="no">MINIO_ADDRESS</code> ` untuk layanan Milvus di ` <code translate="no">docker-compose.yaml</code>`. Secara default, Milvus akan menggunakan Minio lokal alih-alih S3 eksternal.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Jalankan Milvus<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -129,8 +139,12 @@ summary: >-
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>Kunci akses rahasia untuk S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>Nama bucket S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Apakah akan menggunakan SSL saat terhubung</td><td>Nilai defaultnya adalah <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>Apakah akan menggunakan peran IAM sebagai pengganti kunci akses/rahasia untuk mengakses S3.</td><td>Nilai defaultnya adalah <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>Penyedia layanan cloud yang menerbitkan kredensial peran IAM.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code>, atau <code translate="no">aliyun</code>; nilai defaultnya adalah <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>Titik akhir khusus untuk mengambil kredensial peran IAM.</td><td>Biarkan kosong untuk menggunakan pengaturan default penyedia.</td></tr>
 </tbody>
 </table>
+<p>Jika kluster Anda mendukung identitas beban kerja (misalnya, IRSA pada EKS), atur <code translate="no">externalS3.useIAM</code> menjadi <code translate="no">true</code> dan hapus <code translate="no">externalS3.accessKey</code> serta <code translate="no">externalS3.secretKey</code> — Milvus akan memperoleh kredensial sementara dari peran IAM yang terhubung ke beban kerja tersebut.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +161,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Konfigurasikan bagian ` <code translate="no">minio</code> ` dalam berkas ` <code translate="no">values.yaml</code> `.</li>
+<li>Konfigurasikan bagian <code translate="no">minio</code> dalam berkas <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>

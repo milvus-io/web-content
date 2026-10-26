@@ -21,7 +21,7 @@ title: 빠른 시작
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>신경망 모델의 출력 데이터 형식인 벡터는 정보를 효과적으로 인코딩할 수 있으며, 지식 기반, 시맨틱 검색, RAG(Retrieval Augmented Generation) 등 다양한 AI 애플리케이션에서 핵심적인 역할을 수행합니다.</p>
-<p>Milvus는 Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모의 검색 시스템을 구축하는 것까지, 모든 규모의 AI 애플리케이션에 적합한 오픈소스 벡터 데이터베이스입니다. 이 가이드에서는 몇 분 만에 로컬에 Milvus를 설정하고, Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 단계별로 안내해 드립니다.</p>
+<p>Milvus는 Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모의 검색 시스템을 구축하는 것까지, 모든 규모의 AI 애플리케이션에 적합한 오픈소스 벡터 데이터베이스입니다. 이 가이드에서는 단 몇 분 만에 로컬에 Milvus를 설정하고, Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 단계별로 안내해 드립니다.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo has 768 dimensions</span>
+    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo have 768 dimensions</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 설정에서,</p>
@@ -287,7 +287,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>메타데이터의 값(Milvus에서는 ‘스칼라’ 필드라고 함. 스칼라는 벡터가 아닌 데이터를 의미함)을 고려하여 벡터 검색을 수행할 수도 있습니다. 이는 특정 기준을 지정하는 필터 표현식을 통해 이루어집니다. 다음 예제에서 <code translate="no">subject</code> 필드를 사용하여 검색하고 필터링하는 방법을 살펴보겠습니다.</p>
+    </button></h2><p>메타데이터의 값(Milvus에서는 ‘스칼라’ 필드라고 함. 스칼라는 벡터가 아닌 데이터를 의미함)을 고려하여 벡터 검색을 수행할 수도 있습니다. 이는 특정 기준을 지정하는 필터 표현식을 통해 이루어집니다. 다음 예제를 통해 <code translate="no">subject</code> 필드를 사용하여 검색하고 필터링하는 방법을 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -394,7 +394,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite의 모든 데이터는 로컬 파일에 저장되므로, 기존 파일을 사용하여 ` <code translate="no">MilvusClient</code> `를 생성하면 프로그램이 종료된 후에도 모든 데이터를 메모리에 불러올 수 있습니다. 예를 들어, 다음 코드는 “milvus_demo.db” 파일의 컬렉션을 복원하고 해당 파일에 데이터를 계속 기록합니다.</p>
+    </button></h2><p>Milvus Lite의 모든 데이터는 로컬 파일에 저장되므로, 기존 파일을 사용하여 ` <code translate="no">MilvusClient</code> `를 생성하면 프로그램이 종료된 후에도 모든 데이터를 메모리에 불러올 수 있습니다. 예를 들어, 다음 코드는 “milvus_demo.db” 파일에서 컬렉션을 복원하고 해당 파일에 데이터를 계속 기록합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -433,7 +433,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite는 로컬 파이썬 프로그램을 시작하기에 매우 적합합니다. 대규모 데이터를 보유하고 있거나 Milvus를 프로덕션 환경에서 사용하고자 하는 경우, <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes에</a> Milvus를 배포하는 방법에 대해 알아볼 수 있습니다. Milvus의 모든 배포 모드는 동일한 API를 사용하므로, 다른 배포 모드로 전환하더라도 클라이언트 측 코드를 크게 변경할 필요가 없습니다. 어디에 배포된 Milvus 서버의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI와 토큰만</a> 지정하면 됩니다:</p>
+    </button></h2><p>Milvus Lite는 로컬 파이썬 프로그램을 시작하기에 매우 적합합니다. 대규모 데이터를 보유하고 있거나 프로덕션 환경에서 Milvus를 사용하고자 하는 경우, <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes에</a> Milvus를 배포하는 방법에 대해 알아볼 수 있습니다. Milvus의 모든 배포 모드는 동일한 API를 사용하므로, 다른 배포 모드로 전환하더라도 클라이언트 측 코드를 크게 변경할 필요가 없습니다. 어디에 배포된 Milvus 서버의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI와 토큰만</a> 지정하면 됩니다:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Lite에서 Docker 또는 Kubernetes에 배포된 Milvus로 데이터를 마이그레이션하려면 <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">‘Milvus Lite에서 데이터 마이그레이션’을</a> 참조하십시오.</p>

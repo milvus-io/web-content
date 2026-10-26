@@ -2,8 +2,9 @@
 id: get-and-scalar-query.md
 title: Query
 summary: >-
-  Utilizza Query, Get e QueryIterator per recuperare entità, filtrare metadati,
-  ordinare i risultati delle query e aggregare valori scalari in Milvus.
+  Utilizza Query, Get e QueryIterator per recuperare entità, filtrare i
+  metadati, ordinare i risultati delle query e aggregare valori scalari in
+  Milvus.
 ---
 <h1 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Oltre alle ricerche ANN, Milvus supporta anche il filtraggio dei metadati tramite query. Questa pagina illustra come utilizzare Query, Get e QueryIterators per recuperare entità, filtrare metadati, ordinare i risultati delle query e aggregare valori scalari.</p>
 <div class="alert note">
-<p>Se si aggiungono nuovi campi dopo la creazione della collezione, le query che includono tali campi restituiscono i valori predefiniti o " <code translate="no">NULL</code> " per le entità che non hanno valori esplicitamente impostati. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/add-fields-to-an-existing-collection.md">"Modifica dello schema della collezione</a>".</p>
+<p>Se si aggiungono nuovi campi dopo la creazione della collezione, le query che includono tali campi restituiscono i valori predefiniti o " <code translate="no">NULL</code> " per le entità che non hanno valori impostati esplicitamente. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/add-fields-to-an-existing-collection.md">Modifica dello schema della collezione</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,12 +68,12 @@ summary: >-
    </tr>
    <tr>
      <td><p>Parametri opzionali</p></td>
-     <td><ul><li><p>Nome della partizione</p></li><li><p>Campi di output</p></li></ul></td>
+     <td><ul><li><p>Nome partizione</p></li><li><p>Campi di output</p></li></ul></td>
      <td><ul><li><p>Nome della partizione</p></li><li><p>Numero di entità da restituire</p></li><li><p>Campi di output</p></li></ul></td>
      <td><ul><li><p>Nome della partizione</p></li><li><p>Numero totale di entità da restituire</p></li><li><p>Campi di output</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>Risultati</p></td>
+     <td><p>Restituisce</p></td>
      <td><p>Restituisce le entità che contengono le chiavi primarie specificate nella raccolta o nella partizione specificata.</p></td>
      <td><p>Restituisce tutte le entità o un numero specificato di entità che soddisfano le condizioni di filtraggio personalizzate nella raccolta o nella partizione specificata.</p></td>
      <td><p>Restituisce tutte le entità che soddisfano le condizioni di filtraggio personalizzate nella raccolta o nella partizione specificata tramite query paginate.</p></td>
@@ -94,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando è necessario individuare le entità in base alle loro chiavi primarie, è possibile utilizzare il metodo <strong>Get</strong>. Gli esempi di codice riportati di seguito presuppongono che nella collezione siano presenti tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code>.</p>
+    </button></h2><p>Quando è necessario individuare le entità in base alle loro chiavi primarie, è possibile utilizzare il metodo <strong>Get</strong>. Gli esempi di codice riportati di seguito presuppongono che nella raccolta siano presenti tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -278,7 +279,7 @@ status = client-&gt;<span class="hljs-built_in">Get</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando è necessario individuare le entità in base a condizioni di filtraggio personalizzate, utilizzare il metodo <strong>Query</strong>. Gli esempi di codice riportati di seguito presuppongono la presenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> e restituiscono il numero specificato di entità che contengono un valore <code translate="no">color</code> che inizia con <code translate="no">red</code>.</p>
+    </button></h3><p>Quando è necessario trovare entità in base a condizioni di filtraggio personalizzate, utilizzare il metodo <strong>Query</strong>. Gli esempi di codice seguenti presuppongono la presenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> e restituiscono il numero specificato di entità che contengono un valore <code translate="no">color</code> che inizia con <code translate="no">red</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -409,7 +410,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <ul>
 <li><p><code translate="no">order_by</code> deve essere utilizzato insieme a ` <code translate="no">limit</code>`.</p></li>
 <li><p>Tipi di campo supportati: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> e <code translate="no">VARCHAR</code>. L'ordinamento in base a campi vettoriali, <code translate="no">JSON</code> o <code translate="no">ARRAY</code> non è supportato.</p></li>
-<li><p>Quando si esegue l’ordinamento in base a un campo che può assumere valori NULL, i valori NULL vengono posizionati alla fine in ordine crescente (NULLS LAST) e all’inizio in ordine decrescente (NULLS FIRST).</p></li>
+<li><p>Quando si ordina in base a un campo che può assumere valori NULL, i valori NULL vengono posizionati alla fine in ordine crescente (NULLS LAST) e all’inizio in ordine decrescente (NULLS FIRST).</p></li>
 </ul>
 <h4 id="Basic-Sort" class="common-anchor-header">Ordinamento di base</h4><p>Passare un elenco di stringhe di tipo <code translate="no">&quot;field_name:direction&quot;</code> al parametro <code translate="no">order_by</code>, dove <code translate="no">direction</code> può essere <code translate="no">asc</code> (ascendente) o <code translate="no">desc</code> (discendente). Si noti che <code translate="no">asc</code> e <code translate="no">desc</code> distinguono tra maiuscole e minuscole.</p>
 <div class="multipleCode">
@@ -470,7 +471,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">Ordinamento su più campi</h4><p>È possibile ordinare in base a più campi contemporaneamente. I risultati vengono ordinati innanzitutto in base al primo campo dell’elenco. Quando due righe presentano lo stesso valore in quel campo, è il secondo campo a determinare l’ordine, e così via.</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">Ordinamento su più campi</h4><p>È possibile ordinare in base a più campi contemporaneamente. I risultati vengono ordinati innanzitutto in base al primo campo dell’elenco. Quando due righe presentano lo stesso valore in quel campo, il secondo campo determina il loro ordine, e così via.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -524,7 +525,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Impaginazione con ordinamento</h4><p>Utilizza <code translate="no">order_by</code> insieme a <code translate="no">limit</code> e <code translate="no">offset</code> per impaginare i risultati ordinati. Ad esempio, per visualizzare un elenco di prodotti ordinato per prezzo su più pagine, ogni pagina mostra il gruppo successivo di articoli nell’ordine corretto in base al prezzo, senza duplicati né lacune.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Impaginazione con ordinamento</h4><p>Utilizza <code translate="no">order_by</code> insieme a <code translate="no">limit</code> e <code translate="no">offset</code> per impaginare i risultati ordinati. Ad esempio, per visualizzare un elenco di prodotti ordinato per prezzo su più pagine, ogni pagina mostra il gruppo successivo di articoli nell'ordine corretto in base al prezzo, senza duplicati né lacune.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -619,14 +620,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È possibile raggruppare i risultati della query in base a uno o più campi scalari e calcolare le aggregazioni per ciascun gruppo. Gli operatori di aggregazione supportati sono <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> e <code translate="no">avg</code>.</p>
+    </button></h3><p>È possibile raggruppare i risultati delle query in base a uno o più campi scalari e calcolare le aggregazioni per ciascun gruppo. Gli operatori di aggregazione supportati sono <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> e <code translate="no">avg</code>.</p>
 <p>Quando si utilizza ` <code translate="no">group_by_fields</code>`, tenere presente che:</p>
 <ul>
 <li><p>Tipi di campo supportati per <code translate="no">group_by_fields</code>: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code> e <code translate="no">TIMESTAMPTZ</code>. Il raggruppamento in base ai campi <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, vector, <code translate="no">JSON</code> o <code translate="no">ARRAY</code> restituisce un errore.</p></li>
 <li><p><code translate="no">sum</code> e <code translate="no">avg</code> sono solo numerici. È possibile applicarli a campi numerici, inclusi <code translate="no">FLOAT</code> e <code translate="no">DOUBLE</code>, ma applicarli a un campo <code translate="no">VARCHAR</code> restituisce un errore.</p></li>
 </ul>
-<p>Per abilitare l’aggregazione, passare ` <code translate="no">group_by_fields</code> ` a ` <code translate="no">query()</code> ` e aggiungere espressioni di aggregazione (`<code translate="no">count(*)</code>`, ` <code translate="no">count(&lt;field&gt;)</code>`, ` <code translate="no">min(&lt;field&gt;)</code>`, ` <code translate="no">max(&lt;field&gt;)</code>`, ` <code translate="no">sum(&lt;field&gt;)</code>`, ` <code translate="no">avg(&lt;field&gt;)</code>`) a ` <code translate="no">output_fields</code>`.</p>
-<p>L'esempio seguente raggruppa le entità in base al campo <code translate="no">color</code> e restituisce il numero di entità in ciascun gruppo di colore:</p>
+<p>Per abilitare l’aggregazione, passare <code translate="no">group_by_fields</code> a <code translate="no">query()</code> e aggiungere espressioni di aggregazione (<code translate="no">count(*)</code>, <code translate="no">count(&lt;field&gt;)</code>, <code translate="no">min(&lt;field&gt;)</code>, <code translate="no">max(&lt;field&gt;)</code>, <code translate="no">sum(&lt;field&gt;)</code>, <code translate="no">avg(&lt;field&gt;)</code>) a <code translate="no">output_fields</code>.</p>
+<p>L'esempio seguente raggruppa le entità in base al campo <code translate="no">color</code> e restituisce il numero di entità in ciascun gruppo di colori:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -743,7 +744,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Passare più di un campo a ` <code translate="no">group_by_fields</code> ` per calcolare gruppi compositi. L’esempio seguente raggruppa in base a ` <code translate="no">(color, rating)</code> ` e calcola la fascia di prezzo in ciascun gruppo:</p>
+<p>Passare più di un campo a ` <code translate="no">group_by_fields</code> ` per calcolare gruppi compositi. L’esempio seguente raggruppa per ` <code translate="no">(color, rating)</code> ` e calcola la fascia di prezzo in ciascun gruppo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -872,7 +873,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando è necessario individuare entità in base a condizioni di filtraggio personalizzate tramite query impaginate, creare un <strong>QueryIterator</strong> e utilizzare il suo metodo <strong>next()</strong> per iterare su tutte le entità e individuare quelle che soddisfano le condizioni di filtraggio. Gli esempi di codice seguenti presuppongono l’esistenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> e restituiscono tutte le entità che contengono un valore <code translate="no">color</code> che inizia con <code translate="no">red</code>.</p>
+    </button></h2><p>Quando è necessario individuare entità in base a condizioni di filtraggio personalizzate tramite query paginate, creare un <strong>QueryIterator</strong> e utilizzare il suo metodo <strong>next()</strong> per iterare su tutte le entità e individuare quelle che soddisfano le condizioni di filtraggio. Gli esempi di codice seguenti presuppongono l’esistenza di tre campi denominati <code translate="no">id</code>, <code translate="no">vector</code> e <code translate="no">color</code> e restituiscono tutte le entità che contengono un valore <code translate="no">color</code> che inizia con <code translate="no">red</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -976,14 +977,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1182,7 +1183,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per estrarre un sottoinsieme rappresentativo di dati dalla propria collezione a scopo di esplorazione dei dati o di test di sviluppo, utilizzare l'espressione ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, dove ` <code translate="no">sampling_factor</code> ` è un valore float compreso tra 0 e 1 che rappresenta la percentuale di dati da campionare.</p>
+    </button></h2><p>Per estrarre un sottoinsieme rappresentativo di dati dalla propria collezione a scopo di esplorazione dei dati o di test di sviluppo, utilizzare l’espressione ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, dove ` <code translate="no">sampling_factor</code> ` è un valore float compreso tra 0 e 1 che rappresenta la percentuale di dati da campionare.</p>
 <div class="alert note">
 <p>Per informazioni dettagliate sull’utilizzo, esempi avanzati e best practice, consultare <a href="/docs/it/random-sampling.md">Campionamento casuale</a>.</p>
 </div>
@@ -1323,8 +1324,8 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se la propria raccolta dispone di un campo ` <code translate="no">TIMESTAMPTZ</code> `, è possibile sovrascrivere temporaneamente il fuso orario predefinito del database o della raccolta per una singola operazione impostando il parametro ` <code translate="no">timezone</code> ` nella chiamata della query. Ciò controlla il modo in cui i valori ` <code translate="no">TIMESTAMPTZ</code> ` vengono visualizzati e confrontati durante l’operazione.</p>
-<p>Il valore di ` <code translate="no">timezone</code> ` deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>`Asia/Shanghai`</strong>, <strong>`America/Chicago</strong>` o <strong>`UTC`</strong>). Per ulteriori dettagli su come utilizzare il campo ` <code translate="no">TIMESTAMPTZ</code> `, consultare <a href="/docs/it/timestamptz-field.md">la sezione Campo `TIMESTAMPTZ`</a>.</p>
+    </button></h2><p>Se la propria raccolta dispone di un campo ` <code translate="no">TIMESTAMPTZ</code> `, è possibile sovrascrivere temporaneamente il fuso orario predefinito del database o della raccolta per una singola operazione impostando il parametro ` <code translate="no">timezone</code> ` nella chiamata alla query. Ciò determina la modalità di visualizzazione e confronto dei valori ` <code translate="no">TIMESTAMPTZ</code> ` durante l’operazione.</p>
+<p>Il valore di ` <code translate="no">timezone</code> ` deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>`Asia/Shanghai`</strong>, <strong>`America/Chicago</strong>` o <strong>`UTC`</strong>). Per ulteriori dettagli su come utilizzare il campo ` <code translate="no">TIMESTAMPTZ</code> `, consultare <a href="/docs/it/timestamptz-field.md">il campo `TIMESTAMPTZ</a>`.</p>
 <p>L'esempio seguente mostra come impostare temporaneamente un fuso orario per un'operazione di query:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

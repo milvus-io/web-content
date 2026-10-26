@@ -2,9 +2,9 @@
 id: get-and-scalar-query.md
 title: Consulta
 summary: >-
-  Además de las búsquedas RNA, Milvus también soporta el filtrado de metadatos a
-  través de consultas. Esta página presenta cómo utilizar Query, Get y
-  QueryIterators para realizar el filtrado de metadatos.
+  Además de las búsquedas en redes neuronales artificiales (ANN), Milvus también
+  permite filtrar metadatos mediante consultas. En esta página se explica cómo
+  utilizar Query, Get y QueryIterators para aplicar filtros a los metadatos.
 ---
 <h1 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Además de las búsquedas RNA, Milvus también soporta el filtrado de metadatos a través de consultas. Esta página presenta cómo utilizar Query, Get y QueryIterators para realizar el filtrado de metadatos.</p>
+    </button></h1><p>Además de las búsquedas ANN, Milvus también admite el filtrado de metadatos mediante consultas. En esta página se explica cómo utilizar Query, Get y QueryIterators para realizar el filtrado de metadatos.</p>
 <div class="alert note">
-<p>Si añade dinámicamente nuevos campos después de haber creado la colección, las consultas que incluyan estos campos devolverán los valores por defecto definidos o NULL para las entidades que no hayan establecido valores explícitamente. Para obtener más información, consulte <a href="/docs/es/v2.6.x/add-fields-to-an-existing-collection.md">Añadir campos a una colección existente</a>.</p>
+<p>Si se añaden nuevos campos de forma dinámica después de haber creado la colección, las consultas que incluyan dichos campos devolverán los valores predeterminados definidos o NULL para aquellas entidades que no tengan valores establecidos explícitamente. Para obtener más información, consulta <a href="/docs/es/v2.6.x/add-fields-to-an-existing-collection.md">«Añadir campos a una colección existente</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,19 +40,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una Colección puede almacenar varios tipos de campos escalares. Puede hacer que Milvus filtre Entidades basándose en uno o más campos escalares. Milvus ofrece tres tipos de consultas: Query, Get y QueryIterator. La siguiente tabla compara estos tres tipos de consulta.</p>
+    </button></h2><p>Una colección puede almacenar diversos tipos de campos escalares. Puede hacer que Milvus filtre entidades en función de uno o varios campos escalares. Milvus ofrece tres tipos de consultas: «Query», «Get» y «QueryIterator». La tabla siguiente compara estos tres tipos de consultas.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Obtener</p></th>
-     <th><p>Consulta</p></th>
+     <th><p>Get</p></th>
+     <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Escenarios aplicables</p></td>
      <td><p>Para encontrar entidades que contengan las claves primarias especificadas.</p></td>
-     <td><p>Para encontrar todas o un número determinado de entidades que cumplan las condiciones de filtrado personalizadas.</p></td>
-     <td><p>Para encontrar todas las entidades que cumplen las condiciones de filtrado personalizadas en consultas paginadas.</p></td>
+     <td><p>Para encontrar todas las entidades o un número determinado de ellas que cumplan las condiciones de filtrado personalizadas</p></td>
+     <td><p>Para encontrar todas las entidades que cumplan las condiciones de filtrado personalizadas en consultas paginadas.</p></td>
    </tr>
    <tr>
      <td><p>Método de filtrado</p></td>
@@ -64,22 +64,22 @@ summary: >-
      <td><p>Parámetros obligatorios</p></td>
      <td><ul><li><p>Nombre de la colección</p></li><li><p>Claves primarias</p></li></ul></td>
      <td><ul><li><p>Nombre de la colección</p></li><li><p>Expresiones de filtrado</p></li></ul></td>
-     <td><ul><li><p>Nombre de la colección</p></li><li><p>Expresiones de filtrado</p></li><li><p>Número de entidades a devolver por consulta</p></li></ul></td>
+     <td><ul><li><p>Nombre de la colección</p></li><li><p>Expresiones de filtrado</p></li><li><p>Número de entidades que se deben devolver por consulta</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Parámetros opcionales</p></td>
      <td><ul><li><p>Nombre de la partición</p></li><li><p>Campos de salida</p></li></ul></td>
-     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número de entidades a devolver</p></li><li><p>Campos de salida</p></li></ul></td>
-     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número de entidades a devolver en total</p></li><li><p>Campos de salida</p></li></ul></td>
+     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número de entidades que se deben devolver</p></li><li><p>Campos de salida</p></li></ul></td>
+     <td><ul><li><p>Nombre de la partición</p></li><li><p>Número total de entidades que se van a devolver</p></li><li><p>Campos de salida</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Devuelve</p></td>
-     <td><p>Devuelve las entidades que tienen las claves primarias especificadas en la colección o partición especificada.</p></td>
-     <td><p>Devuelve todas o un número especificado de entidades que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada.</p></td>
+     <td><p>Devuelve las entidades que contienen las claves primarias especificadas en la colección o partición indicada.</p></td>
+     <td><p>Devuelve todas las entidades, o un número específico de ellas, que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada.</p></td>
      <td><p>Devuelve todas las entidades que cumplen las condiciones de filtrado personalizadas en la colección o partición especificada mediante consultas paginadas.</p></td>
    </tr>
 </table>
-<p>Para obtener más información sobre el filtrado de metadatos, consulte .</p>
+<p>Para obtener más información sobre el filtrado de metadatos, consulta .</p>
 <h2 id="Use-Get" class="common-anchor-header">Uso de Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cuando necesite encontrar entidades por sus claves primarias, puede utilizar el método <strong>Get</strong>. Los siguientes ejemplos de código suponen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> en su colección.</p>
+    </button></h2><p>Cuando necesites buscar entidades por sus claves primarias, puedes utilizar el método <strong>Get</strong>. Los siguientes ejemplos de código dan por hecho que en tu colección hay tres campos denominados <code translate="no">id</code>, <code translate="no">vector</code> y <code translate="no">color</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -109,9 +109,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Puedes obtener entidades por sus IDs de la siguiente manera.</p>
+<p>Puede obtener entidades por sus ID de la siguiente manera.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -220,7 +225,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Utilizar la consulta<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Utilizar Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,9 +240,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cuando necesites encontrar entidades mediante condiciones de filtrado personalizadas, utiliza el método <strong>Query</strong>. Los siguientes ejemplos de código asumen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> y devuelven el número especificado de entidades que tienen un valor <code translate="no">color</code> empezando por <code translate="no">red</code>.</p>
+    </button></h2><p>Cuando necesites buscar entidades mediante condiciones de filtrado personalizadas, utiliza el método <strong>«Query</strong> ». Los siguientes ejemplos de código dan por hecho que hay tres campos denominados « <code translate="no">id</code> », « <code translate="no">vector</code> » y « <code translate="no">color</code> », y devuelven el número especificado de entidades que contienen un valor « <code translate="no">color</code> » que comience por « <code translate="no">red</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -331,9 +341,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cuando necesites encontrar entidades por condiciones de filtrado personalizadas a través de consultas paginadas, crea un <strong>QueryIterator</strong> y utiliza su método <strong>next()</strong> para iterar sobre todas las entidades y encontrar aquellas que cumplan las condiciones de filtrado. Los siguientes ejemplos de código asumen que hay tres campos llamados <code translate="no">id</code>, <code translate="no">vector</code>, y <code translate="no">color</code> y devuelven todas las entidades que tienen un valor <code translate="no">color</code> empezando por <code translate="no">red</code>.</p>
+    </button></h2><p>Cuando necesites buscar entidades mediante condiciones de filtrado personalizadas a través de consultas paginadas, crea un <strong>QueryIterator</strong> y utiliza su método <strong>next()</strong> para recorrer todas las entidades y encontrar aquellas que cumplan las condiciones de filtrado. Los siguientes ejemplos de código dan por hecho que hay tres campos denominados <code translate="no">id</code>, <code translate="no">vector</code> y <code translate="no">color</code>, y devuelven todas las entidades que contengan un valor <code translate="no">color</code> que comience por <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -425,9 +440,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>También puedes realizar consultas dentro de una o múltiples particiones incluyendo los nombres de las particiones en la petición Get, Query o QueryIterator. Los siguientes ejemplos de código asumen que hay una partición llamada <strong>PartitionA</strong> en la colección.</p>
+    </button></h2><p>También puedes realizar consultas dentro de una o varias particiones incluyendo los nombres de las particiones en la solicitud Get, Query o QueryIterator. Los siguientes ejemplos de código dan por hecho que existe una partición llamada <strong>PartitionA</strong> en la colección.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
@@ -436,7 +456,7 @@ client = MilvusClient(
 
 res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
@@ -450,7 +470,7 @@ client = MilvusClient(
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -624,12 +644,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para extraer un subconjunto representativo de datos de su colección para la exploración de datos o pruebas de desarrollo, utilice la expresión <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, donde <code translate="no">sampling_factor</code> es un valor flotante entre 0 y 1 que representa el porcentaje de datos a muestrear.</p>
+    </button></h2><p>Para extraer un subconjunto representativo de datos de tu colección con fines de exploración de datos o pruebas de desarrollo, utiliza la expresión « <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> », donde « <code translate="no">sampling_factor</code> » es un número flotante entre 0 y 1 que representa el porcentaje de datos que se van a muestrear.</p>
 <div class="alert note">
-<p>Para un uso detallado, ejemplos avanzados y mejores prácticas, consulte <a href="/docs/es/v2.6.x/random-sampling.md">Muestreo aleatorio</a>.</p>
+<p>Para obtener información detallada sobre su uso, ejemplos avanzados y prácticas recomendadas, consulta <a href="/docs/es/v2.6.x/random-sampling.md">Muestreo aleatorio</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -746,11 +771,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si su colección tiene un campo <code translate="no">TIMESTAMPTZ</code>, puede anular temporalmente la zona horaria predeterminada de la base de datos o de la colección para una sola operación estableciendo el parámetro <code translate="no">timezone</code> en la llamada a la consulta. Esto controla cómo se muestran y comparan los valores de <code translate="no">TIMESTAMPTZ</code> durante la operación.</p>
-<p>El valor de <code translate="no">timezone</code> debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+    </button></h2><p>Si su colección tiene un campo « <code translate="no">TIMESTAMPTZ</code> », puede anular temporalmente la zona horaria predeterminada de la base de datos o de la colección para una única operación configurando el parámetro « <code translate="no">timezone</code> » en la llamada de consulta. Esto controla cómo se muestran y comparan los valores de « <code translate="no">TIMESTAMPTZ</code> » durante la operación.</p>
+<p>El valor de ` <code translate="no">timezone</code> ` debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria</a> válido <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">de la IANA</a> (por ejemplo, <strong>`Asia/Shanghai</strong>`, <strong>`America/Chicago</strong>` o ` <strong>UTC</strong>`). Para obtener más información sobre cómo utilizar el campo ` <code translate="no">TIMESTAMPTZ</code> `, consulta el apartado <a href="/docs/es/v2.6.x/timestamptz-field.md">«Campo TIMESTAMPTZ</a>».</p>
 <p>El siguiente ejemplo muestra cómo establecer temporalmente una zona horaria para una operación de consulta:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     collection_name,

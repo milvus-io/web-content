@@ -63,7 +63,17 @@ summary: >-
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/configure_minio.md">MinIO/S3-Konfigurationen</a>.</p>
-<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. „docker-compose.yaml“ anpassen<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
+<p>Das Festschreiben eines Zugriffsschlüssels und eines geheimen Schlüssels funktioniert zwar, aber wenn Sie Milvus auf einem Host oder Cluster ausführen, der Workload-Identität unterstützt (z. B. ein EC2-Instanzprofil oder IRSA auf EKS), empfehlen wir stattdessen die Verwendung einer IAM-Rolle. Setzen Sie „ <code translate="no">useIAM</code> “ auf „ <code translate="no">true</code> “ und entfernen Sie „ <code translate="no">accessKeyID</code> “ sowie „ <code translate="no">secretAccessKey</code> “:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus bezieht dann temporäre Anmeldeinformationen von der der Workload zugeordneten IAM-Rolle. <code translate="no">cloudProvider</code> akzeptiert <code translate="no">aws</code>, <code translate="no">gcp</code> oder <code translate="no">aliyun</code>, und unter <code translate="no">iamEndpoint</code> kann optional ein benutzerdefinierter Endpunkt zum Abrufen der IAM-Rollen-Anmeldeinformationen angegeben werden.</p>
+<h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Passen Sie die Datei „docker-compose.yaml“ an<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,8 +88,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Entfernen Sie außerdem die Umgebungsvariable „ <code translate="no">MINIO_ADDRESS</code> “ für den Milvus-Dienst in der Datei „ <code translate="no">docker-compose.yaml</code> “. Standardmäßig verwendet Milvus das lokale MinIO anstelle von externem S3.</p>
-<h3 id="3-Run-Milvus" class="common-anchor-header">3. Milvus starten<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
+    </button></h3><p>Außerdem sollten Sie die Umgebungsvariable „ <code translate="no">MINIO_ADDRESS</code> “ für den Milvus-Dienst unter <code translate="no">docker-compose.yaml</code> entfernen. Standardmäßig verwendet Milvus lokales Minio anstelle von externem S3.</p>
+<h3 id="3-Run-Milvus" class="common-anchor-header">3. Milvus ausführen<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,8 +139,12 @@ summary: >-
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>Der geheime Zugriffsschlüssel für S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>Der Name des S3-Buckets.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Ob bei der Verbindung SSL verwendet werden soll</td><td>Die Standardwerte lauten <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>Ob für den Zugriff auf S3 eine IAM-Rolle anstelle von Zugriffs- und geheimen Schlüsseln verwendet werden soll.</td><td>Der Standardwert ist <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>Cloud-Anbieter, der die Anmeldedaten für die IAM-Rolle ausstellt.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code> oder <code translate="no">aliyun</code>; Standardwert ist <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>Benutzerdefinierter Endpunkt zum Abrufen der Anmeldedaten der IAM-Rolle.</td><td>Lassen Sie das Feld leer, um die Standardeinstellung des Anbieters zu verwenden.</td></tr>
 </tbody>
 </table>
+<p>Wenn Ihr Cluster Workload-Identitäten unterstützt (z. B. IRSA auf EKS), setzen Sie „ <code translate="no">externalS3.useIAM</code> “ auf „ <code translate="no">true</code> “ und entfernen Sie „ <code translate="no">externalS3.accessKey</code> “ sowie „ <code translate="no">externalS3.secretKey</code> “ – Milvus bezieht dann temporäre Anmeldeinformationen von der der Workload zugeordneten IAM-Rolle.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Verwendung der YAML-Datei<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +167,7 @@ summary: >-
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Konfigurieren Sie den Abschnitt „ <code translate="no">externalS3</code> “ mit Ihren Werten in der Datei „ <code translate="no">values.yaml</code> “.</li>
+<li>Konfigurieren Sie den Abschnitt „ <code translate="no">externalS3</code> “ in der Datei „ <code translate="no">values.yaml</code> “ mit Ihren Werten.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">externalS3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>

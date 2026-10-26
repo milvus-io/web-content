@@ -1,7 +1,7 @@
 ---
 id: view-collections.md
 title: 컬렉션 보기
-summary: 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 가져오고 특정 컬렉션의 세부 정보를 확인할 수 있습니다.
+summary: '현재 연결된 데이터베이스에 있는 모든 컬렉션의 목록을 확인하고, 특정 컬렉션의 세부 정보를 조회할 수 있습니다.'
 ---
 <h1 id="View-Collections" class="common-anchor-header">컬렉션 보기<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 확인하고 특정 컬렉션의 세부 정보를 확인할 수 있습니다.</p>
-<h2 id="List-Collections" class="common-anchor-header">컬렉션 목록 보기<button data-href="#List-Collections" class="anchor-icon" translate="no">
+    </button></h1><p>현재 연결된 데이터베이스에 있는 모든 컬렉션의 목록을 확인하고, 특정 컬렉션의 세부 정보를 조회할 수 있습니다.</p>
+<h2 id="List-Collections" class="common-anchor-header">컬렉션 나열<button data-href="#List-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +34,14 @@ summary: 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음은 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 조회하는 예제입니다.</p>
+    </button></h2><p>다음 예제는 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 가져오는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -109,9 +114,12 @@ fmt.Println(collectionNames)
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이미 <code translate="no">quick_setup</code> 라는 이름의 컬렉션을 만든 경우 위 예제의 결과는 다음과 비슷할 것입니다.</p>
+<p><code translate="no">quick_setup</code> 라는 이름의 컬렉션을 이미 생성한 경우, 위 예제의 결과는 다음과 유사할 것입니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p><code translate="no">list_collections()</code> 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름을 반환하며, 존재 여부 확인을 위한 용도는 아닙니다. 특정 컬렉션이 존재하는지 확인하려면 대신 <code translate="no">has_collection()</code> 을 사용하십시오(예: <code translate="no">client.has_collection(&quot;quick_setup&quot;)</code> 는 부울 값을 반환함). 또는 다른 SDK에서 이에 상응하는 기능을 사용하십시오.</p>
+</div>
 <h2 id="Describe-Collection" class="common-anchor-header">컬렉션 설명<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,9 +135,14 @@ fmt.Println(collectionNames)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>특정 컬렉션의 세부 정보를 얻을 수도 있습니다. 다음 예제에서는 이미 quick_setup이라는 컬렉션을 만들었다고 가정합니다.</p>
+    </button></h2><p>특정 컬렉션의 세부 정보를 가져올 수도 있습니다. 다음 예제는 quick_setup이라는 이름의 컬렉션을 이미 생성했다고 가정합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )

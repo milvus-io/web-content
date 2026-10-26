@@ -2,7 +2,7 @@
 id: tune_consistency.md
 title: 一貫性レベル
 summary: >-
-  分散ベクトルデータベースとして、Milvusは各ノードまたはレプリカが読み書きの際に同じデータにアクセスできることを保証するために、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、Strong、Bounded、Eventually、Sessionがあり、Boundedはデフォルトで使用される一貫性レベルです。
+  分散ベクトルデータベースであるMilvusは、読み取りおよび書き込み操作の際に各ノードやレプリカが同一のデータにアクセスできるよう、複数の整合性レベルを提供しています。現在、サポートされている整合性レベルには「Strong」、「Bounded」、「Eventually」、「Session」があり、デフォルトでは「Bounded」が使用されます。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一貫性レベル<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>分散ベクタデータベースとして、Milvusは各ノードやレプリカが読み書きの際に同じデータにアクセスできるように、複数の一貫性レベルを提供しています。現在サポートされている一貫性レベルには、<strong>Strong</strong>、<strong>Bounded</strong>、<strong>Eventually</strong>、<strong>Sessionが</strong>あり、<strong>Boundedは</strong>デフォルトの一貫性レベルです。</p>
+    </button></h1><p>分散ベクトルデータベースであるMilvusは、読み取りおよび書き込み操作の際に各ノードまたはレプリカが同一のデータにアクセスできるようにするため、複数の整合性レベルを提供しています。現在、サポートされている整合性レベルには<strong>「Strong」</strong>、<strong>「Bounded」</strong>、<strong>「Eventually」</strong>、「<strong>Session</strong>」があり、デフォルトでは<strong>「Bounded」</strong>が使用されます。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,36 +35,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはストレージと計算を分離したシステムである。このシステムでは、<strong>DataNodesが</strong>データの永続化を担当し、最終的にMinIO/S3などの分散オブジェクトストレージに格納します。<strong>QueryNodeは</strong>検索などの計算タスクを処理する。これらのタスクは、<strong>バッチ</strong>データと<strong>ストリーミングデータの</strong>両方を処理する。簡単に言えば、バッチデータはオブジェクトストレージに既に格納されているデータとして理解でき、ストリーミングデータはオブジェクトストレージにまだ格納されていないデータを指す。ネットワーク遅延のため、QueryNodeは最新のストリーミング・データを保持していないことが多い。追加のセーフガードなしにストリーミングデータを直接検索すると、コミットされていない多くのデータポイントが失われ、検索結果の精度に影響を与える可能性があります。</p>
-<p>Milvusコマーシャルエディションは、ストレージと計算を分離したシステムです。このシステムでは、DataNodesがデータの永続化を担当し、最終的にMinIO/S3などの分散オブジェクトストレージに格納します。QueryNodeは検索などの計算タスクを処理します。これらのタスクは、バッチデータとストリーミングデータの両方を処理する。簡単に言えば、バッチデータとはオブジェクトストレージに既に格納されているデータのことであり、ストリーミングデータとはオブジェクトストレージにまだ格納されていないデータのことである。ネットワークの待ち時間のため、QueryNode は最新のストリーミング・データを保持していないことが多い。追加のセーフガードなしにストリーミング・データを直接検索すると、コミットされていない多くのデータ・ポイントが失われ、検索結果の精度に影響する可能性があります。</p>
-<p>
+    </button></h2><p>Milvusは、ストレージと演算を分離したシステムです。<strong>ストリーミングノードは</strong>、すべての書き込み操作をWrite-Ahead Log（WAL）に追加し、<strong>増え続けるデータ</strong>（WAL内にあり、まだ永続化されていないデータ）を保持します。 リカバリ処理により、成長中のデータは<strong>履歴データ</strong>（MinIOやS3などのオブジェクトストレージに永続化されたシール済みセグメント）に変換され、<strong>クエリノード</strong>によって提供されます。 各検索またはクエリリクエストは、コレクションのWALをホストするストリーミングノード上の<strong>クエリデリゲーター</strong>によって受信されます。デリゲーターはクエリプランを生成し、増大中のデータ部分をローカルで実行し、履歴データ部分を関連するクエリノードに転送し、結果をマージしてから返します。詳細については、<a href="/docs/ja/v2.6.x/streaming_service.md">「ストリーミングサービス」</a>を参照してください。</p>
+<p>一貫性を保証するため、Milvusはすべてのメッセージに、WAL内での順序を決定するタイムスタンプ・オラクル（TSO）タイムスタンプを割り当て、データメッセージとともに同期タイムスタンプをWALに継続的に挿入します。 同期タイムスタンプ（syncTs）を受信するたびに、それは ServiceTime として記録されます。つまり、その ServiceTime より前のすべてのデータがクエリから参照可能になります。Milvus は、ServiceTime に基づいて、一貫性と可用性に関するさまざまなユーザー要件を満たすために、保証タイムスタンプ（GuaranteeTs）を提供します。 ユーザーは、検索リクエストでGuaranteeTsを指定することにより、指定された時点以前のデータを検索範囲に含める必要があることをデリゲーターに通知できます。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
-   </span> <span class="img-wrapper"> <span>バッチ・データとストリーミング・データ</span> </span></p>
-<p>上図に示すように、QueryNode は Search リクエストを受け取った後、ストリーミング・データとバッチ・データの両方を同時に受け取ることができる。しかし、ネットワークの遅延により、QueryNodeが取得したストリーミングデータは不完全な場合がある。</p>
-<p>この問題に対処するため、Milvusはデータキュー内の各レコードにタイムスタンプを付与し、データキューに同期タイムスタンプを継続的に挿入します。同期タイムスタンプ(syncTs)を受信するたびに、QueryNodesはそれをServiceTimeとして設定し、QueryNodesはそのServiceTime以前のすべてのデータを見ることができるようになります。ServiceTimeに基づき、Milvusは保証タイムスタンプ（GuaranteeTs）を提供し、一貫性と可用性に関する様々なユーザー要件を満たすことができます。ユーザは検索リクエストにGuaranteeTsを指定することで、指定した時点より前のデータを検索スコープに含める必要性をQueryNodeに通知することができます。</p>
-<p>
+   <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
+   <span>ServiceTime と GuaranteeTime</span>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
-   </span> <span class="img-wrapper"> <span>サービス時間と保証時間</span> </span></p>
-<p>上図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点より前のすべてのデータがディスクに完全に書き込まれていることを意味し、QueryNodeは直ちにSearchオペレーションを実行することができる。GuaranteeTsがServiceTimeより大きい場合、QueryNodeはServiceTimeがGuaranteeTsを超えるまで待ってからSearchオペレーションを実行しなければならない。</p>
-<p>ユーザは、クエリの精度とクエリの待ち時間をトレードオフする必要があります。ユーザが高い一貫性を要求し、クエリのレイテンシに敏感でない場合、GuaranteeTsを可能な限り大きな値に設定することができます。ユーザが検索結果を迅速に受信することを望み、クエリの精度に寛容である場合、GuaranteeTsを小さな値に設定することができます。</p>
-<p>
+ </span></p>
+<p>上の図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点以前のすべてのデータはすでに可視化されていることを意味し、検索は直ちに実行されます。GuaranteeTsがServiceTimeより大きい場合、検索はServiceTimeがGuaranteeTsを超えるまで待機してから実行されます。</p>
+<p>ユーザーは、クエリの精度とクエリのレイテンシの間でトレードオフを行う必要があります。一貫性に対する要件が高く、クエリのレイテンシを気にしない場合は、GuaranteeTsを可能な限り大きな値に設定できます。一方、検索結果を迅速に取得したい場合で、クエリの精度に対する許容度が高い場合は、GuaranteeTsを小さい値に設定できます。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
-   </span> <span class="img-wrapper"> <span>整合性レベル図解</span> </span></p>
-<p>Milvusでは、異なるGuaranteeTsを持つ4種類の一貫性レベルを提供している。</p>
+   <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
+   <span>一貫性レベルの解説</span>
+  
+ </span></p>
+<p>Milvusは、GuaranteeTsが異なる4種類の整合性レベルを提供しています。</p>
 <ul>
-<li><p><strong>強い</strong></p>
-<p>最新のタイムスタンプがGuaranteeTsとして使用され、QueryNodeはServiceTimeがGuaranteeTsを満たすまで待ってからSearchリクエストを実行しなければならない。</p></li>
+<li><p><strong>Strong</strong></p>
+<p>最新のタイムスタンプが GuaranteeTs として使用され、検索は ServiceTime が GuaranteeTs に達するまで待機してから実行されます。</p></li>
 <li><p><strong>Eventual</strong></p>
-<p>QueryNodeがすべてのバッチデータに対して即座にSearchリクエストを実行できるように一貫性チェックを避けるため、GuaranteeTsは1など極端に小さい値に設定される。</p></li>
-<li><p><strong>制約付き冗長性（Bounded Staleness</strong></p>
-<p>GuranteeTs を最新のタイムスタンプよりも早い時点に設定することで、QueryNode が一定のデータ損失を許容しながら検索を実行できるようにする。</p></li>
+<p>GuaranteeTs は 1 などの極めて小さな値に設定され、一貫性チェックを回避することで、検索は現在表示されているデータに対して即座に実行されます。</p></li>
+<li><p><strong>Bounded Staleness</strong></p>
+<p>GuaranteeTs は最新のタイムスタンプよりも前の時点に設定されるため、検索は、一部の最近のデータがまだ表示されていないという許容範囲内で実行されます。</p></li>
 <li><p><strong>セッション</strong></p>
-<p>QueryNodesがクライアントによって挿入された全てのデータに対して検索を実行できるように、クライアントがデータを挿入した最新のタイムポイントがGuaranteeTsとして使用される。</p></li>
+<p>クライアントがデータを挿入した最新の時点を GuaranteeTs として使用し、クライアントによって挿入されたすべてのデータを検索の対象に含めるようにします。</p></li>
 </ul>
-<p>milvusはデフォルトの一貫性レベルとしてBounded Stalenessを使用します。GuaranteeTs が指定されていない場合、最新の ServiceTime が GuaranteeTs として使用されます。</p>
+<p>Milvus は、デフォルトの一貫性レベルとして「Bounded Staleness」を使用します。GuaranteeTs が指定されていない場合、最新の ServiceTime が GuaranteeTs として使用されます。</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,8 +78,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>検索やクエリを実行するときだけでなく、コレクションを作成するときにも異なる一貫性レベルを設定できます。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">コレクション作成時の一貫性レベルの設定<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>コレクションの作成時、および検索やクエリの実行時に、さまざまな一貫性レベルを設定できます。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">コレクション作成時の整合性レベルの設定<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,9 +94,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションの作成時に、コレクション内の検索とクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを<strong>Bounded</strong> に設定しています。</p>
+    </button></h3><p>コレクションを作成する際、そのコレクション内での検索やクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを「<strong>Bounded</strong>」に設定しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -162,8 +164,8 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">consistency_level</code> パラメータに指定できる値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索での一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<p><code translate="no">consistency_level</code> パラメータに指定可能な値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索における一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,9 +180,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>特定の検索の一貫性レベルはいつでも変更できる。以下のコード例では、一貫性レベルを「<strong>Bounded</strong>」に戻しています。この変更は現在の検索リクエストにのみ適用される。</p>
+    </button></h3><p>特定の検索の一貫性レベルはいつでも変更できます。次のコード例では、一貫性レベルを「<strong>Bounded</strong>」に戻しています。この変更は、現在の検索リクエストにのみ適用されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -224,8 +230,8 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>このパラメータは、ハイブリッド検索と検索イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>,<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">クエリーの一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
+<p>このパラメータは、ハイブリッド検索や検索イテレータでも利用可能です。<code translate="no">consistency_level</code> パラメータの有効な値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
+<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">クエリでの一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -240,9 +246,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は、現在のクエリ・リクエストにのみ適用される。</p>
+    </button></h3><p>特定の検索について、いつでも一貫性レベルを変更できます。次のコード例では、一貫性レベルを「<strong>Eventually</strong>」に設定しています。この設定は、現在のクエリリクエストにのみ適用されます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -283,4 +293,4 @@ curl --request POST \
     &quot;limit&quot;: 3
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>このパラメータは、クエリ・イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
+<p>このパラメータは、クエリイテレータでも使用できます。<code translate="no">consistency_level</code> パラメータの有効な値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>

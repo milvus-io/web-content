@@ -81,12 +81,12 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將其視為傳統 SQL 資料庫中的資料表。建立集合時，您可以定義模式和索引參數，以配置向量規格，例如維度、索引類型和距離度量。 此外，還有一些複雜的概念可用於優化索引以提升向量搜尋效能。目前，我們先專注於基礎內容，並盡可能使用預設值。至少，您只需設定集合名稱以及該集合中向量欄位的維度。</p>
+    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將其視為傳統 SQL 資料庫中的資料表。建立集合時，您可以定義模式和索引參數，以設定向量規格，例如維度、索引類型和距離度量。 此外，還有一些複雜的概念可用於優化索引以提升向量搜尋效能。目前，我們先專注於基礎內容，並盡可能使用預設值。至少，您只需設定集合名稱以及該集合中向量欄位的維度。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo has 768 dimensions</span>
+    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo have 768 dimensions</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述設定中，</p>
@@ -271,7 +271,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>輸出結果為一組結果清單，每項結果皆對應至一個向量搜尋查詢。每個查詢包含一組結果清單，其中每項結果包含實體的主鍵、與查詢向量的距離，以及透過指定<code translate="no">output_fields</code> 所取得的實體詳細資訊。</p>
+<p>輸出結果為一個結果清單，每個結果對應一個向量搜尋查詢。每個查詢包含一個結果清單，其中每個結果包含實體的主鍵、與查詢向量的距離，以及透過指定<code translate="no">output_fields</code> 所取得的實體詳細資訊。</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">結合元資料篩選的向量搜尋<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,7 @@ id: get-and-scalar-query.md
 title: クエリ
 summary: >-
   Milvus では、Query、Get、QueryIterator
-  を使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、およびスカラー値の集計を行います。
+  を使用して、エンティティの取得、メタデータのフィルタリング、クエリ結果のソート、スカラー値の集計を行います。
 ---
 <h1 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションには、さまざまなタイプのスカラーフィールドを格納できます。Milvus では、1 つまたは複数のスカラーフィールドに基づいてエンティティをフィルタリングできます。Milvus では、Query、Get、QueryIterator の 3 種類のクエリが提供されています。以下の表に、これら 3 種類のクエリの比較を示します。</p>
+    </button></h2><p>コレクションには、さまざまなタイプのスカラーフィールドを格納できます。Milvus では、1 つまたは複数のスカラーフィールドに基づいてエンティティをフィルタリングできます。Milvus では、Query、Get、QueryIterator の 3 種類のクエリが提供されています。以下の表は、これら 3 種類のクエリを比較したものです。</p>
 <table>
    <tr>
      <th></th>
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>プライマリキーでエンティティを検索する必要がある場合は、<strong>Get</strong>メソッドを使用できます。以下のコード例では、コレクションに「<code translate="no">id</code> 」、「<code translate="no">vector</code> 」、および「<code translate="no">color</code> 」という 3 つのフィールドが存在することを前提としています。</p>
+    </button></h2><p>プライマリキーでエンティティを検索する必要がある場合は、<strong>Get</strong>メソッドを使用できます。以下のコード例では、コレクション内に「<code translate="no">id</code> 」、「<code translate="no">vector</code> 」、「<code translate="no">color</code> 」という 3 つのフィールドが存在することを前提としています。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -405,13 +405,13 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>デフォルトでは、Queryは結果を順不同で返します。<code translate="no">order_by</code> パラメータを使用すると、1つまたは複数のスカラーフィールドに基づいて結果を並べ替えることができます。<code translate="no">order_by</code> を使用する際は、以下の点に注意してください:</p>
+    </button></h3><p>デフォルトでは、Queryは結果を順不同で返します。<code translate="no">order_by</code> パラメータを使用すると、1つ以上のスカラーフィールドに基づいて結果を並べ替えることができます。<code translate="no">order_by</code> を使用する際は、以下の点に注意してください：</p>
 <ul>
 <li><p><code translate="no">order_by</code> <code translate="no">limit</code> と組み合わせて使用する必要があります。</p></li>
 <li><p>サポートされているフィールド型：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、および<code translate="no">VARCHAR</code> 。ベクトル、<code translate="no">JSON</code> 、または<code translate="no">ARRAY</code> フィールドによるソートはサポートされていません。</p></li>
 <li><p>NULL 許容フィールドでソートする場合、昇順（NULLS LAST）では NULL 値が末尾に、降順（NULLS FIRST）では先頭に配置されます。</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">基本的なソート</h4><p><code translate="no">order_by</code> パラメータに、<code translate="no">&quot;field_name:direction&quot;</code> 形式の文字列のリストを渡します。この際、<code translate="no">direction</code> には<code translate="no">asc</code> （昇順）または<code translate="no">desc</code> （降順）を指定します。なお、<code translate="no">asc</code> および<code translate="no">desc</code> は大文字と小文字が区別されます。</p>
+<h4 id="Basic-Sort" class="common-anchor-header">基本的なソート</h4><p>`<code translate="no">&quot;field_name:direction&quot;</code> ` 形式の文字列のリストを `<code translate="no">order_by</code> ` パラメータに渡し、`<code translate="no">direction</code> ` には `<code translate="no">asc</code> `（昇順）または `<code translate="no">desc</code> `（降順）を指定します。なお、`<code translate="no">asc</code> ` および `<code translate="no">desc</code> ` は大文字と小文字が区別されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -470,7 +470,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Multi-field-Sort" class="common-anchor-header">複数フィールドによるソート</h4><p>複数のフィールドを一度に指定して並べ替えることができます。結果はまず、リストの最初のフィールドに基づいて並べ替えられます。そのフィールドの値が同じ行が2つある場合、2番目のフィールドによって順序が決まり、以下同様に処理されます。</p>
+<h4 id="Multi-field-Sort" class="common-anchor-header">複数フィールドによるソート</h4><p>複数のフィールドを同時に基準にして並べ替えることができます。結果はまず、リストの最初のフィールドに基づいて並べ替えられます。そのフィールドの値が同じ行が2つある場合、2番目のフィールドによって順序が決まり、以下同様に処理されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -619,13 +619,13 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>クエリ結果を1つ以上のスカラーフィールドでグループ化し、グループごとの集計を計算できます。サポートされている集計演算子は、<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 、および<code translate="no">avg</code> です。</p>
+    </button></h3><p>クエリ結果を1つ以上のスカラーフィールドでグループ化し、グループごとに集計を行うことができます。サポートされている集計演算子は、<code translate="no">count</code> 、<code translate="no">min</code> 、<code translate="no">max</code> 、<code translate="no">sum</code> 、および<code translate="no">avg</code> です。</p>
 <p><code translate="no">group_by_fields</code> を使用する際は、以下の点に注意してください。</p>
 <ul>
 <li><p><code translate="no">group_by_fields</code> でサポートされているフィールド型は、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> 、および<code translate="no">TIMESTAMPTZ</code> です。<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、vector、<code translate="no">JSON</code> 、または<code translate="no">ARRAY</code> フィールドによるグループ化を行うと、エラーが返されます。</p></li>
 <li><p><code translate="no">sum</code> および<code translate="no">avg</code> は数値型のみです。これらは、<code translate="no">FLOAT</code> や<code translate="no">DOUBLE</code> を含む数値型フィールドに適用できますが、<code translate="no">VARCHAR</code> フィールドに適用するとエラーが返されます。</p></li>
 </ul>
-<p>集計を有効にするには、`<code translate="no">group_by_fields</code> ` を `<code translate="no">query()</code> ` に渡し、集計式（`<code translate="no">count(*)</code>`、`<code translate="no">count(&lt;field&gt;)</code>`、`<code translate="no">min(&lt;field&gt;)</code>`、`<code translate="no">max(&lt;field&gt;)</code>`、`<code translate="no">sum(&lt;field&gt;)</code>`、`<code translate="no">avg(&lt;field&gt;)</code>`）を `<code translate="no">output_fields</code>` に追加します。</p>
+<p>集計を有効にするには、<code translate="no">group_by_fields</code> を<code translate="no">query()</code> に渡し、集計式（<code translate="no">count(*)</code> 、<code translate="no">count(&lt;field&gt;)</code> 、<code translate="no">min(&lt;field&gt;)</code> 、<code translate="no">max(&lt;field&gt;)</code> 、<code translate="no">sum(&lt;field&gt;)</code> 、<code translate="no">avg(&lt;field&gt;)</code> ）を<code translate="no">output_fields</code> に追加します。</p>
 <p>次の例では、<code translate="no">color</code> フィールドに基づいてエンティティをグループ化し、各色グループに含まれるエンティティの数を返します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -687,7 +687,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>1回の呼び出しで複数の集計式を指定できます。次の例では、<code translate="no">color</code> に基づいてグループ化し、各グループのエンティティ数、平均価格、および最高評価を返します：</p>
+<p>1回の呼び出しで複数の集計式を指定できます。次の例では、<code translate="no">color</code> に基づいてグループ化し、各グループのエンティティ数、平均価格、および最高評価を返します:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -743,7 +743,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">group_by_fields</code> に複数のフィールドを渡すことで、複合グループを計算できます。次の例では、<code translate="no">(color, rating)</code> でグループ化し、各グループの価格帯を計算しています:</p>
+<p><code translate="no">group_by_fields</code> に複数のフィールドを渡して、複合グループを計算できます。次の例では、<code translate="no">(color, rating)</code> でグループ化し、各グループの価格帯を計算しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -872,7 +872,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ページネーションされたクエリを通じて、カスタムフィルタリング条件に基づいてエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、<strong>そのnext()</strong>メソッドを使用してすべてのエンティティを反復処理し、フィルタリング条件を満たすエンティティを見つけます。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という3つのフィールドが存在することを前提としており、<code translate="no">red</code> で始まる<code translate="no">color</code> の値を持つすべてのエンティティを返します。</p>
+    </button></h2><p>ページネーションされたクエリを通じて、カスタムフィルタリング条件に基づいてエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用してすべてのエンティティを反復処理し、フィルタリング条件を満たすエンティティを見つけます。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドが存在することを前提としており、<code translate="no">red</code> で始まる<code translate="no">color</code> の値を持つすべてのエンティティを返します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -976,14 +976,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1167,7 +1167,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Query を使用したランダムサンプリング<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">クエリによるランダムサンプリング<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1182,7 +1182,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データ探索や開発テストのためにコレクションから代表的なデータサブセットを抽出するには、<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 式を使用します。ここで、<code translate="no">sampling_factor</code> は、サンプリングするデータの割合を表す0から1までの浮動小数点数です。</p>
+    </button></h2><p>データ探索や開発テストのためにコレクションから代表的なデータサブセットを抽出するには、<code translate="no">RANDOM_SAMPLE(sampling_factor)</code> 式を使用します。ここで、<code translate="no">sampling_factor</code> は、サンプリングするデータの割合を表す0から1の間の浮動小数点数です。</p>
 <div class="alert note">
 <p>詳細な使用方法、高度な例、およびベストプラクティスについては、「<a href="/docs/ja/random-sampling.md">ランダムサンプリング</a>」を参照してください。</p>
 </div>
@@ -1323,7 +1323,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、クエリ呼び出しで<code translate="no">timezone</code> パラメータを設定することで、単一の操作においてデータベースまたはコレクションのデフォルトタイムゾーンを一時的に上書きできます。これにより、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかが制御されます。</p>
+    </button></h2><p>コレクションに `<code translate="no">TIMESTAMPTZ</code> ` フィールドがある場合、クエリ呼び出しで `<code translate="no">timezone</code> ` パラメータを設定することで、単一の操作においてデータベースまたはコレクションのデフォルトのタイムゾーンを一時的に上書きできます。これにより、操作中に `<code translate="no">TIMESTAMPTZ</code> ` 値の表示および比較方法が制御されます。</p>
 <p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/timestamptz-field.md">「TIMESTAMPTZフィールド</a>」を参照してください。</p>
 <p>以下の例は、クエリ操作に対してタイムゾーンを一時的に設定する方法を示しています。</p>
 <div class="multipleCode">

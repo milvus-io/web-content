@@ -1,9 +1,9 @@
 ---
 id: milvus_lite.md
 summary: 开始使用 Milvus Lite。
-title: 本地运行 Milvus Lite
+title: 在本地运行 Milvus Lite
 ---
-<h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">本地运行 Milvus Lite<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">在本地运行 Milvus Lite<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +18,7 @@ title: 本地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页介绍如何使用 Milvus Lite 在本地运行 Milvus。Milvus Lite 是<a href="https://github.com/milvus-io/milvus">Milvus</a> 的轻量级版本，Milvus 是一个开源向量数据库，通过向量嵌入和相似性搜索为人工智能应用提供支持。</p>
+    </button></h1><p>本页面介绍了如何使用 Milvus Lite 在本地运行 Milvus。Milvus Lite 是<a href="https://github.com/milvus-io/milvus">Milvus</a> 的精简版<a href="https://github.com/milvus-io/milvus">，Milvus</a> 是一个开源向量数据库，通过向量嵌入和相似度搜索为人工智能应用提供支持。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,14 +34,14 @@ title: 本地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 可导入您的 Python 应用程序，提供 Milvus 的核心向量搜索功能。Milvus Lite 已包含在<a href="https://github.com/milvus-io/pymilvus">Milvus 的 Python SDK</a> 中。它可以通过<code translate="no">pip install pymilvus</code> 简单地部署。</p>
-<p>使用 Milvus Lite，您可以在几分钟内开始构建具有向量相似性搜索功能的人工智能应用程序！Milvus Lite 适合在以下环境中运行：</p>
+    </button></h2><p>Milvus Lite 可导入到您的 Python 应用程序中，提供 Milvus 的核心向量搜索功能。Milvus Lite 已包含在<a href="https://github.com/milvus-io/pymilvus">Milvus 的 Python SDK</a> 中，只需运行 `<code translate="no">pip install pymilvus</code>` 即可轻松部署。</p>
+<p>借助 Milvus Lite，您可以在几分钟内开始构建具有向量相似度搜索功能的 AI 应用程序！Milvus Lite 适用于以下环境：</p>
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
 <li>笔记本电脑</li>
 <li>边缘设备</li>
 </ul>
-<p>Milvus Lite 与 Milvus Standalone 和 Distributed 共享相同的 API，涵盖了向量数据持久化和管理、向量 CRUD 操作、稀疏和密集向量搜索、元数据过滤、多向量和混合搜索（hybrid_search）等大部分功能。它们共同为不同类型的环境提供了一致的体验，从边缘设备到云中的集群，适合不同规模的使用案例。使用相同的客户端代码，您可以在笔记本电脑或 Jupyter Notebook 上使用 Milvus Lite 运行 GenAI 应用程序，或在 Docker 容器上使用 Milvus Standalone 运行 GenAI 应用程序，或在大规模 Kubernetes 集群上使用 Milvus Distributed 运行 GenAI 应用程序，为生产提供数十亿向量。</p>
+<p>Milvus Lite 与 Milvus Standalone 和 Milvus Distributed 共享相同的 API，并涵盖了大多数功能，例如向量数据的持久化与管理、向量 CRUD 操作、稀疏和稠密向量搜索、元数据过滤、多向量搜索以及混合搜索。 这些功能共同为从边缘设备到云端集群的各类环境提供了一致的体验，可满足不同规模的应用场景。 使用相同的客户端代码，您可以在笔记本电脑或 Jupyter Notebook 上运行基于 Milvus Lite 的 GenAI 应用，也可以在 Docker 容器中运行 Milvus Standalone，或者在处理数十亿向量的大规模 Kubernetes 集群上运行 Milvus Distributed（该集群已在生产环境中投入使用）。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,10 +60,10 @@ title: 本地运行 Milvus Lite
     </button></h2><p>Milvus Lite 目前支持以下环境：</p>
 <ul>
 <li>Ubuntu &gt;= 20.04（x86_64 和 arm64）</li>
-<li>MacOS &gt;= 11.0（苹果硅 M1/M2 和 x86_64）</li>
+<li>MacOS &gt;= 11.0（Apple Silicon M1/M2 和 x86_64）</li>
 </ul>
-<p>请注意，Milvus Lite 仅适用于小规模向量搜索使用案例。对于大规模用例，我们建议使用<a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a>或<a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>。您也可以考虑在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上使用完全托管的 Milvus。</p>
-<h2 id="Set-up-Milvus-Lite" class="common-anchor-header">设置 Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
+<p>请注意，Milvus Lite 仅适用于小规模向量搜索用例。对于大规模用例，我们建议使用<a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a>或<a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>。您也可以考虑在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上使用全托管版的 Milvus。</p>
+<h2 id="Set-up-Milvus-Lite" class="common-anchor-header">配置 Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,8 +80,8 @@ title: 本地运行 Milvus Lite
       </svg>
     </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus[milvus-lite]
 <button class="copy-code-btn"></button></code></pre>
-<p>我们建议使用<code translate="no">pymilvus</code> 。你可以通过<code translate="no">pip install</code> 与<code translate="no">-U</code> 强制更新到最新版本，<code translate="no">milvus-lite</code> 会自动安装。</p>
-<p>如果你想明确安装<code translate="no">milvus-lite</code> 软件包，或者你已经安装了旧版本的<code translate="no">milvus-lite</code> 并想更新它，可以使用<code translate="no">pip install -U milvus-lite</code> 。</p>
+<p>我们建议使用<code translate="no">pymilvus</code> 。您可以通过<code translate="no">pip install</code> 并使用<code translate="no">-U</code> 强制更新至最新版本，此时<code translate="no">milvus-lite</code> 将自动安装。</p>
+<p>如果您希望显式安装<code translate="no">milvus-lite</code> 软件包，或者您已安装了旧版本的<code translate="no">milvus-lite</code> 并希望将其更新，可以执行<code translate="no">pip install -U milvus-lite</code> 命令。</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接到 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,13 +97,14 @@ title: 本地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<code translate="no">pymilvus</code> 中，指定一个本地文件名作为 MilvusClient 的 uri 参数将使用 Milvus Lite。</p>
+    </button></h2><p>在<code translate="no">pymilvus</code> 中，将本地文件名指定为 MilvusClient 的 uri 参数，即可使用 Milvus Lite。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>运行上述代码段后，将在当前文件夹下生成名为<strong>milvus_demo.db 的</strong>数据库文件。</p>
+<p>运行上述代码片段后，当前文件夹中将生成一个名为<strong>milvus_demo.db</strong>的数据库文件。</p>
 <blockquote>
-<p><strong><em>注意：</em></strong>请注意，同样的 API 也适用于 Milvus Standalone、Milvus Distributed 和 Zilliz Cloud，唯一的区别是将本地文件名替换为远程服务器端点和凭据，例如<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code> 。</p>
+<p><strong><em>注意：</em></strong>请注意，相同的 API 也适用于 Milvus Standalone、Milvus Distributed 和 Zilliz Cloud，唯一的区别是将本地文件名替换为远程服务器端点和凭据，例如：
+<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code> 。</p>
 </blockquote>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -120,14 +121,15 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下是如何使用 Milvus Lite 进行文本搜索的简单演示。还有更多使用 Milvus Lite 构建<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>、<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">图像搜索</a>等应用程序的综合<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>，以及在<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a>和<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a> 等流行 RAG 框架中使用 Milvus Lite 的<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>！</p>
+    </button></h2><p>以下是一个简单的演示，展示了如何使用 Milvus Lite 进行文本搜索。还有更多关于使用 Milvus Lite 构建应用程序的综合<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">示例</a>，
+例如<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>、<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">图像搜索，</a>以及在<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a>和<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a> 等流行的 RAG 框架中使用 Milvus Lite！</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
+    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo have 384 dimensions</span>
 )
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -186,7 +188,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>运行 Milvus Lite 时，请注意某些功能不受支持。下表总结了 Milvus Lite 的使用限制。</p>
-<h3 id="Collection" class="common-anchor-header">Collections<button data-href="#Collection" class="anchor-icon" translate="no">
+<h3 id="Collection" class="common-anchor-header">Collection<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +205,14 @@ res = client.delete(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>方法/参数</th><th>Milvus Lite 支持</th></tr>
+<tr><th>方法/参数</th><th>Milvus Lite 是否支持</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">创建集合()</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a></td><td>支持，但参数受限</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">dimension</code></td><td>Y</td></tr>
-<tr><td><code translate="no">primary_field_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">id_type</code></td><td>Y</td></tr>
+<tr><td><code translate="no">primary_field_name</code></td><td>是</td></tr>
+<tr><td><code translate="no">id_type</code></td><td>是</td></tr>
 <tr><td><code translate="no">vector_field_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">metric_type</code></td><td>Y</td></tr>
 <tr><td><code translate="no">auto_id</code></td><td>Y</td></tr>
@@ -221,22 +223,22 @@ res = client.delete(
 <tr><td><code translate="no">partition_key_field</code></td><td>N</td></tr>
 <tr><td><code translate="no">num_partitions</code></td><td>N</td></tr>
 <tr><td><code translate="no">consistency_level</code></td><td>N（仅支持<code translate="no">Strong</code> ；任何配置都将被视为<code translate="no">Strong</code> 。）</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a></td><td>支持获取 Collections 统计信息。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a></td><td>支持获取Collection统计信息。</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a></td><td><code translate="no">num_shards</code>、<code translate="no">consistency_level</code> 和<code translate="no">collection_id</code> 响应无效。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a></td><td><code translate="no">num_shards</code>，响应中的<code translate="no">consistency_level</code> 和<code translate="no">collection_id</code> 均无效。</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md">has_collection()</a></td><td>支持检查集合是否存在。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md">has_collection()</a></td><td>支持检查Collection是否存在。</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections()</a></td><td>支持列出所有 Collections。</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>支持删除 Collections。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>支持删除一个 Collection。</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>不支持重命名 Collections。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>不支持重命名 Collection。</td></tr>
 </tbody>
 </table>
-<h3 id="Field--Schema" class="common-anchor-header">字段和 Schema<button data-href="#Field--Schema" class="anchor-icon" translate="no">
+<h3 id="Field--Schema" class="common-anchor-header">字段与Schema<button data-href="#Field--Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -253,26 +255,26 @@ res = client.delete(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>方法/参数</th><th>Milvus Lite 支持</th></tr>
+<tr><th>方法 / 参数</th><th>Milvus Lite 支持</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">创建模式</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema()</a></td><td>支持，但参数有限</td></tr>
 <tr><td><code translate="no">auto_id</code></td><td>Y</td></tr>
 <tr><td><code translate="no">enable_dynamic_field</code></td><td>Y</td></tr>
-<tr><td><code translate="no">primary_field</code></td><td>Y</td></tr>
-<tr><td><code translate="no">partition_key_field</code></td><td>N</td></tr>
+<tr><td><code translate="no">primary_field</code></td><td>是</td></tr>
+<tr><td><code translate="no">partition_key_field</code></td><td>否</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">field_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">datatype</code></td><td>Y</td></tr>
-<tr><td><code translate="no">is_primary</code></td><td>Y</td></tr>
-<tr><td><code translate="no">max_length</code></td><td>Y</td></tr>
+<tr><td><code translate="no">datatype</code></td><td>是</td></tr>
+<tr><td><code translate="no">is_primary</code></td><td>是</td></tr>
+<tr><td><code translate="no">max_length</code></td><td>是</td></tr>
 <tr><td><code translate="no">element_type</code></td><td>Y</td></tr>
 <tr><td><code translate="no">max_capacity</code></td><td>Y</td></tr>
 <tr><td><code translate="no">dim</code></td><td>Y</td></tr>
 <tr><td><code translate="no">is_partition_key</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Insert--Search" class="common-anchor-header">插入和搜索<button data-href="#Insert--Search" class="anchor-icon" translate="no">
+<h3 id="Insert--Search" class="common-anchor-header">插入与搜索<button data-href="#Insert--Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,51 +291,51 @@ res = client.delete(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>方法/参数</th><th>Milvus Lite 支持</th></tr>
+<tr><th>方法 / 参数</th><th>Milvus Lite 支持</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">搜索()</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">data</code></td><td>Y</td></tr>
-<tr><td><code translate="no">filter</code></td><td>Y</td></tr>
-<tr><td><code translate="no">limit</code></td><td>Y</td></tr>
+<tr><td><code translate="no">filter</code></td><td>是</td></tr>
+<tr><td><code translate="no">limit</code></td><td>是</td></tr>
 <tr><td><code translate="no">output_fields</code></td><td>Y</td></tr>
 <tr><td><code translate="no">search_params</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
 <tr><td><code translate="no">anns_field</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询()</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">query()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">filter</code></td><td>Y</td></tr>
-<tr><td><code translate="no">output_fields</code></td><td>Y</td></tr>
-<tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
+<tr><td><code translate="no">filter</code></td><td>是</td></tr>
+<tr><td><code translate="no">output_fields</code></td><td>是</td></tr>
+<tr><td><code translate="no">timeout</code></td><td>是</td></tr>
 <tr><td><code translate="no">ids</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md">获取()</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md">get()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">ids</code></td><td>Y</td></tr>
+<tr><td><code translate="no">ids</code></td><td>是</td></tr>
 <tr><td><code translate="no">output_fields</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md">删除()</a></td><td>支持有限参数</td></tr>
+<tr><td><code translate="no">partition_names</code></td><td>否</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md">delete()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">ids</code></td><td>Y</td></tr>
-<tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><code translate="no">filter</code></td><td>Y</td></tr>
+<tr><td><code translate="no">ids</code></td><td>是</td></tr>
+<tr><td><code translate="no">timeout</code></td><td>是</td></tr>
+<tr><td><code translate="no">filter</code></td><td>是</td></tr>
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md">插入()</a></td><td>支持有限参数</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md">insert()</a></td><td>支持有限参数</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">data</code></td><td>Y</td></tr>
+<tr><td><code translate="no">data</code></td><td>是</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md">upsert()</a></td><td>支持有限参数</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td>否</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md">upsert()</a></td><td>支持，但参数有限</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
-<tr><td><code translate="no">data</code></td><td>Y</td></tr>
+<tr><td><code translate="no">data</code></td><td>是</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td>否</td></tr>
 </tbody>
 </table>
-<h3 id="Load--Release" class="common-anchor-header">加载和释放<button data-href="#Load--Release" class="anchor-icon" translate="no">
+<h3 id="Load--Release" class="common-anchor-header">加载与释放<button data-href="#Load--Release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -350,7 +352,7 @@ res = client.delete(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>方法/参数</th><th>Milvus Lite 支持</th></tr>
+<tr><th>方法 / 参数</th><th>Milvus Lite 支持</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md">load_collection()</a></td><td>Y</td></tr>
@@ -360,7 +362,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>不支持获取加载状态。</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>不支持加载已加载集合的未加载数据。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>不支持加载已加载 Collection 中已卸载的数据。</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
@@ -381,13 +383,13 @@ res = client.delete(
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>方法/参数</th><th>Milvus Lite 支持</th></tr>
+<tr><th>方法 / 参数</th><th>在 Milvus Lite 中受支持</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_indexes()</a></td><td>支持列出索引。</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">field_name</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">创建索引</a></td><td>仅支持<code translate="no">FLAT</code> 索引类型。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index()</a></td><td>仅支持<code translate="no">FLAT</code> 索引类型。</td></tr>
 <tr><td><code translate="no">index_params</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md">drop_index()</a></td><td>支持删除索引。</td></tr>
@@ -415,7 +417,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Lite 仅支持<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>索引类型。无论在 Collections 中指定了哪种索引类型，它都使用 FLAT 类型。</p>
+    </button></h3><p>Milvus Lite 仅支持<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>索引类型。无论 Collection 中指定了何种索引类型，它都会使用 FLAT 类型。</p>
 <h3 id="Search-Features" class="common-anchor-header">搜索功能<button data-href="#Search-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -447,8 +449,8 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Lite 不支持分区和与分区相关的方法。</p>
-<h3 id="Users--Roles" class="common-anchor-header">用户和角色<button data-href="#Users--Roles" class="anchor-icon" translate="no">
+    </button></h3><p>Milvus Lite 不支持分区及与分区相关的方法。</p>
+<h3 id="Users--Roles" class="common-anchor-header">用户与角色<button data-href="#Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -463,7 +465,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Lite 不支持用户和角色及相关方法。</p>
+    </button></h3><p>Milvus Lite 不支持用户和角色以及相关方法。</p>
 <h3 id="Alias" class="common-anchor-header">别名<button data-href="#Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -479,7 +481,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Lite 不支持别名和与别名相关的方法。</p>
+    </button></h3><p>Milvus Lite 不支持别名及与别名相关的方法。</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">从 Milvus Lite 迁移数据<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -495,8 +497,8 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>所有存储在 Milvus Lite 中的数据都可以轻松导出并加载到其他类型的 Milvus 部署中，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus。</p>
-<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
+    </button></h2><p>存储在 Milvus Lite 中的所有数据均可轻松导出，并加载到其他类型的 Milvus 部署环境中，例如基于 Docker 的 Milvus Standalone、基于 K8s 的 Milvus Distributed，或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus 服务。</p>
+<p>Milvus Lite 提供了一个命令行工具，可将数据导出为 JSON 文件，该文件可导入到<a href="https://github.com/milvus-io/milvus">milvus</a>以及<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务）中。milvus-lite 命令将随 milvus-lite Python 包一同安装</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 
@@ -512,14 +514,14 @@ optional arguments:
                         collection that need to be dumped
   -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
-<p>下面的示例转储了<code translate="no">demo_collection</code> Collections 中的所有数据，这些数据存储在<code translate="no">./milvus_demo.db</code> （Milvus Lite 数据库文件）中。</p>
-<p>导出数据：</p>
+<p>以下示例将<code translate="no">demo_collection</code> Collection 中的所有数据导出到<code translate="no">./milvus_demo.db</code> （Milvus Lite 数据库文件）中</p>
+<p>要导出数据：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
 <span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
 <span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有了转储文件，你可以通过<a href="https://docs.zilliz.com/docs/data-import">数据导入</a>将数据上传到 Zilliz Cloud，或通过<a href="https://milvus.io/docs/import-data.md">批量插入</a>将数据上传到 Milvus 服务器。</p>
+<p>获得导出文件后，您可以通过<a href="https://docs.zilliz.com/docs/data-import">“数据导入”功能</a>将数据上传至 Zilliz Cloud，或通过<a href="https://milvus.io/docs/import-data.md">“批量插入”</a>功能将数据上传至 Milvus 服务器。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -535,28 +537,28 @@ optional arguments:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>连接 Milvus Lite 后，您可以</p>
+    </button></h2><p>连接到 Milvus Lite 后，您可以：</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
 <li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/insert-update-delete.md">插入、Upsert 和删除</a></li>
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
-<li><p>在云上部署你的 Milvus 集群：</p>
+<li><p><a href="/docs/zh/scaleout.md">扩展您的 Milvus 集群</a>。</p></li>
+<li><p>在云端部署您的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/zh/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/zh/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>了解<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>——一款用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于 Milvus 调试和动态配置更新的开源工具。</p></li>
+<li><p>了解<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

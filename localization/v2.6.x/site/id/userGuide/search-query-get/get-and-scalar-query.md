@@ -1,12 +1,12 @@
 ---
 id: get-and-scalar-query.md
-title: Kueri
+title: Pencarian
 summary: >-
-  Selain pencarian ANN, Milvus juga mendukung pemfilteran metadata melalui
-  kueri. Halaman ini memperkenalkan cara menggunakan Query, Get, dan
-  QueryIterators untuk melakukan penyaringan metadata.
+  Selain pencarian ANN, Milvus juga mendukung penyaringan metadata melalui
+  kueri. Halaman ini menjelaskan cara menggunakan Query, Get, dan QueryIterators
+  untuk melakukan penyaringan metadata.
 ---
-<h1 id="Query" class="common-anchor-header">Kueri<button data-href="#Query" class="anchor-icon" translate="no">
+<h1 id="Query" class="common-anchor-header">Pencarian<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Selain pencarian ANN, Milvus juga mendukung pemfilteran metadata melalui kueri. Halaman ini memperkenalkan cara menggunakan Query, Get, dan QueryIterator untuk melakukan pemfilteran metadata.</p>
+    </button></h1><p>Selain pencarian ANN, Milvus juga mendukung penyaringan metadata melalui kueri. Halaman ini menjelaskan cara menggunakan Query, Get, dan QueryIterators untuk melakukan penyaringan metadata.</p>
 <div class="alert note">
-<p>Jika Anda secara dinamis menambahkan bidang baru setelah koleksi dibuat, kueri yang menyertakan bidang-bidang ini akan mengembalikan nilai default yang ditentukan atau NULL untuk entitas yang belum secara eksplisit menetapkan nilai. Untuk detailnya, lihat Menambahkan <a href="/docs/id/v2.6.x/add-fields-to-an-existing-collection.md">Bidang ke Koleksi yang Sudah Ada</a>.</p>
+<p>Jika Anda menambahkan bidang baru secara dinamis setelah koleksi dibuat, kueri yang menyertakan bidang-bidang tersebut akan mengembalikan nilai default yang telah ditentukan atau NULL untuk entitas yang belum secara eksplisit menetapkan nilainya. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/add-fields-to-an-existing-collection.md">Menambahkan Bidang ke Koleksi yang Sudah Ada</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,47 +40,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Koleksi dapat menyimpan berbagai jenis bidang skalar. Anda bisa membuat Milvus memfilter Entitas berdasarkan satu atau beberapa field skalar. Milvus menawarkan tiga jenis kueri: Query, Get, dan QueryIterator. Tabel di bawah ini membandingkan ketiga jenis kueri tersebut.</p>
+    </button></h2><p>Sebuah Koleksi dapat menyimpan berbagai jenis bidang skalar. Anda dapat meminta Milvus untuk memfilter Entitas berdasarkan satu atau lebih bidang skalar. Milvus menawarkan tiga jenis kueri: Kueri, Get, dan QueryIterator. Tabel di bawah ini membandingkan ketiga jenis kueri tersebut.</p>
 <table>
    <tr>
      <th></th>
-     <th><p>Dapatkan</p></th>
+     <th><p>Get</p></th>
      <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Skenario yang berlaku</p></td>
      <td><p>Untuk menemukan entitas yang memiliki kunci utama yang ditentukan.</p></td>
-     <td><p>Untuk menemukan semua atau sejumlah entitas tertentu yang memenuhi kondisi pemfilteran kustom</p></td>
-     <td><p>Untuk menemukan semua entitas yang memenuhi kondisi pemfilteran khusus dalam kueri berpaginasi.</p></td>
+     <td><p>Untuk menemukan semua atau sejumlah entitas tertentu yang memenuhi kondisi penyaringan khusus</p></td>
+     <td><p>Untuk menemukan semua entitas yang memenuhi kondisi penyaringan khusus dalam kueri berhalaman.</p></td>
    </tr>
    <tr>
-     <td><p>Metode pemfilteran</p></td>
-     <td><p>Dengan kunci primer</p></td>
-     <td><p>Dengan memfilter ekspresi.</p></td>
-     <td><p>Dengan memfilter ekspresi.</p></td>
+     <td><p>Metode penyaringan</p></td>
+     <td><p>Berdasarkan kunci utama</p></td>
+     <td><p>Berdasarkan ekspresi penyaringan.</p></td>
+     <td><p>Berdasarkan ekspresi penyaringan.</p></td>
    </tr>
    <tr>
      <td><p>Parameter wajib</p></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Kunci primer</p></li></ul></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Memfilter ekspresi</p></li></ul></td>
-     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi pemfilteran</p></li><li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Kunci utama</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi penyaringan</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi penyaringan</p></li><li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Parameter opsional</p></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Bidang keluaran</p></li></ul></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan</p></li><li><p>Bidang keluaran</p></li></ul></td>
-     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan secara total</p></li><li><p>Bidang keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Kolom keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan</p></li><li><p>Kolom keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan secara keseluruhan</p></li><li><p>Kolom keluaran</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>Pengembalian</p></td>
-     <td><p>Mengembalikan entitas yang menyimpan kunci utama yang ditentukan dalam koleksi atau partisi yang ditentukan.</p></td>
-     <td><p>Mengembalikan semua atau sejumlah entitas tertentu yang memenuhi kondisi pemfilteran khusus dalam koleksi atau partisi yang ditentukan.</p></td>
-     <td><p>Mengembalikan semua entitas yang memenuhi kondisi pemfilteran khusus dalam koleksi atau partisi yang ditentukan melalui kueri ber-halaman.</p></td>
+     <td><p>Mengembalikan</p></td>
+     <td><p>Mengembalikan entitas yang memiliki kunci utama yang ditentukan dalam koleksi atau partisi yang ditentukan.</p></td>
+     <td><p>Mengembalikan semua atau sejumlah entitas yang ditentukan yang memenuhi kondisi penyaringan khusus dalam koleksi atau partisi yang ditentukan.</p></td>
+     <td><p>Mengembalikan semua entitas yang memenuhi kondisi penyaringan khusus dalam koleksi atau partisi yang ditentukan melalui kueri berhalaman.</p></td>
    </tr>
 </table>
-<p>Untuk mengetahui lebih lanjut tentang pemfilteran metadata, lihat .</p>
-<h2 id="Use-Get" class="common-anchor-header">Menggunakan Mendapatkan<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Untuk informasi lebih lanjut mengenai penyaringan metadata, lihat .</p>
+<h2 id="Use-Get" class="common-anchor-header">Gunakan Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat Anda perlu mencari entitas berdasarkan kunci utamanya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut ini mengasumsikan bahwa ada tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dalam koleksi Anda.</p>
+    </button></h2><p>Saat Anda perlu mencari entitas berdasarkan kunci utamanya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut mengasumsikan bahwa terdapat tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dalam koleksi Anda.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -109,9 +109,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda bisa mendapatkan entitas berdasarkan ID-nya sebagai berikut.</p>
+<p>Anda dapat mengambil entitas berdasarkan ID-nya sebagai berikut.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -220,7 +225,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Menggunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Gunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,9 +240,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda perlu menemukan entitas dengan kondisi pemfilteran khusus, gunakan metode <strong>Query</strong>. Contoh kode berikut ini mengasumsikan ada tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dan mengembalikan jumlah entitas tertentu yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
+    </button></h2><p>Jika Anda perlu mencari entitas berdasarkan kondisi penyaringan khusus, gunakan metode <strong>Query</strong>. Contoh kode berikut mengasumsikan adanya tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code>, serta mengembalikan jumlah entitas yang ditentukan yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -331,9 +341,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika Anda perlu menemukan entitas dengan kondisi pemfilteran khusus melalui kueri berpaginasi, buat <strong>QueryIterator</strong> dan gunakan metode <strong>next()</strong> untuk mengulang semua entitas untuk menemukan entitas yang memenuhi kondisi pemfilteran. Contoh kode berikut ini mengasumsikan bahwa ada tiga field bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dan mengembalikan semua entitas yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
+    </button></h2><p>Saat Anda perlu menemukan entitas berdasarkan kondisi penyaringan khusus melalui kueri berhalaman, buatlah <strong>QueryIterator</strong> dan gunakan metode <strong>next()</strong> -nya untuk mengiterasi semua entitas guna menemukan entitas yang memenuhi kondisi penyaringan tersebut. Contoh kode berikut mengasumsikan bahwa terdapat tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code>, serta mengembalikan semua entitas yang memiliki nilai <code translate="no">color</code> yang dimulai dengan <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -425,9 +440,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda juga dapat melakukan kueri dalam satu atau beberapa partisi dengan menyertakan nama partisi dalam permintaan Get, Query, atau QueryIterator. Contoh kode berikut ini mengasumsikan bahwa ada partisi bernama <strong>PartitionA</strong> di dalam koleksi.</p>
+    </button></h2><p>Anda juga dapat melakukan kueri di dalam satu atau beberapa partisi dengan menyertakan nama partisi dalam permintaan Get, Query, atau QueryIterator. Contoh kode berikut mengasumsikan bahwa terdapat partisi bernama <strong>PartitionA</strong> dalam koleksi.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
@@ -436,7 +456,7 @@ client = MilvusClient(
 
 res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
@@ -450,7 +470,7 @@ client = MilvusClient(
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -624,12 +644,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengekstrak subset data yang representatif dari koleksi Anda untuk eksplorasi data atau pengujian pengembangan, gunakan ekspresi <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, di mana <code translate="no">sampling_factor</code> adalah float antara 0 dan 1 yang mewakili persentase data yang akan diambil sampelnya.</p>
+    </button></h2><p>Untuk mengekstrak subset data yang representatif dari koleksi Anda untuk eksplorasi data atau pengujian pengembangan, gunakan ekspresi ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, di mana ` <code translate="no">sampling_factor</code> ` adalah bilangan desimal antara 0 dan 1 yang mewakili persentase data yang akan diambil sampelnya.</p>
 <div class="alert note">
-<p>Untuk penggunaan yang lebih rinci, contoh tingkat lanjut, dan praktik terbaik, lihat <a href="/docs/id/v2.6.x/random-sampling.md">Pengambilan Sampel Acak</a>.</p>
+<p>Untuk penggunaan terperinci, contoh lanjutan, dan praktik terbaik, lihat <a href="/docs/id/v2.6.x/random-sampling.md">Pengambilan Sampel Acak</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -731,7 +756,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Mengatur zona waktu untuk sementara untuk sebuah kueri<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Menetapkan zona waktu sementara untuk sebuah kueri<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -746,11 +771,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti zona waktu default basis data atau koleksi untuk sementara waktu untuk satu operasi dengan menyetel parameter <code translate="no">timezone</code> dalam panggilan kueri. Ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
-<p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi kueri:</p>
+    </button></h2><p>Jika koleksi Anda memiliki bidang ` <code translate="no">TIMESTAMPTZ</code> `, Anda dapat mengganti zona waktu default basis data atau koleksi secara sementara untuk satu operasi dengan mengatur parameter ` <code translate="no">timezone</code> ` dalam panggilan kueri. Hal ini mengontrol cara nilai ` <code translate="no">TIMESTAMPTZ</code> ` ditampilkan dan dibandingkan selama operasi.</p>
+<p>Nilai ` <code translate="no">timezone</code> ` harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> `, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Contoh di bawah ini menunjukkan cara mengatur zona waktu secara sementara untuk operasi kueri:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     collection_name,

@@ -2,8 +2,8 @@
 id: embed-with-bgm-m3.md
 order: 4
 summary: >-
-  BGE-M3 debe su nombre a sus capacidades multilingües, multifuncionales y
-  multigranulares.
+  El nombre «BGE-M3» hace referencia a sus capacidades en materia de
+  multilingüismo, multifuncionalidad y multigranularidad.
 title: BGE M3
 ---
 <h1 id="BGE-M3" class="common-anchor-header">BGE M3<button data-href="#BGE-M3" class="anchor-icon" translate="no">
@@ -21,13 +21,13 @@ title: BGE M3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> debe su nombre a sus capacidades de multilingüismo, multifuncionalidad y multigranularidad. Con capacidad para más de 100 idiomas, BGE-M3 establece nuevos hitos en tareas de recuperación multilingüe y multilingüe cruzada. Su capacidad única para realizar recuperación densa, recuperación multivectorial y recuperación dispersa dentro de un mismo marco lo convierte en la opción ideal para una amplia gama de aplicaciones de recuperación de información (RI).</p>
-<p>Milvus se integra con el modelo BGE M3 mediante la clase <strong>BGEM3EmbeddingFunction</strong>. Esta clase gestiona el cálculo de las incrustaciones y las devuelve en un formato compatible con Milvus para la indexación y la búsqueda. Para utilizar esta función, es necesario instalar FlagEmbedding.</p>
-<p>Para utilizar esta función, instale las dependencias necesarias:</p>
+    </button></h1><p>El nombre<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> hace referencia a sus capacidades en materia de multilingüismo, multifuncionalidad y multigranularidad. Capaz de admitir más de 100 idiomas, el BGE-M3 establece nuevos estándares en tareas de recuperación multilingüe e interlingüística. Su capacidad única para realizar búsquedas densas, multivectoriales y dispersas dentro de un único marco lo convierte en la opción ideal para una amplia gama de aplicaciones de recuperación de información (IR).</p>
+<p>Milvus se integra con el modelo BGE-M3 mediante la clase <strong>`BGEM3EmbeddingFunction</strong> `. Esta clase se encarga del cálculo de las representaciones y las devuelve en un formato compatible con Milvus para su indexación y búsqueda.</p>
+<p>Para utilizar esta función, instala las dependencias necesarias:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, instancie la <strong>función BGEM3EmbeddingFunction</strong>:</p>
+<p>A continuación, crea una instancia de <strong>BGEM3EmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 bge_m3_ef = BGEM3EmbeddingFunction(
@@ -38,14 +38,14 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Parámetros</strong>:</p>
 <ul>
-<li><p><strong>nombre_modelo</strong><em>(cadena</em>)</p>
-<p>Nombre del modelo que se utilizará para la codificación. El valor por defecto es <strong>BAAI/bge-m3</strong>.</p></li>
-<li><p><strong>dispositivo</strong><em>(cadena</em>)</p>
-<p>El dispositivo a utilizar, con <strong>cpu</strong> para la CPU y <strong>cuda:n</strong> para el enésimo dispositivo GPU.</p></li>
-<li><p><strong>use_fp16</strong><em>(bool</em>)</p>
-<p>Si se utiliza precisión de punto flotante de 16 bits (fp16). Especifique <strong>False</strong> cuando <strong>el dispositivo</strong> sea <strong>cpu</strong>.</p></li>
+<li><p><strong>model_name</strong> (<em>cadena de caracteres</em>)</p>
+<p>El nombre del modelo que se va a utilizar para la codificación. El valor por defecto es <strong>BAAI/bge-m3</strong>.</p></li>
+<li><p><strong>device</strong> (<em>cadena de caracteres</em>)</p>
+<p>El dispositivo que se va a utilizar; <strong>«cpu</strong> » para la CPU y <strong>«cuda:n»</strong> para el enésimo dispositivo GPU.</p></li>
+<li><p><strong>use_fp16</strong> (<em>booleano</em>)</p>
+<p>Indica si se debe utilizar precisión de coma flotante de 16 bits (fp16). Especifica <strong>False</strong> cuando <strong>el dispositivo</strong> es <strong>«cpu</strong>».</p></li>
 </ul>
-<p>Para crear incrustaciones para documentos, utilice el método <strong>encode_documents()</strong>:</p>
+<p>Para crear representaciones de documentos, utiliza el método <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -70,7 +70,7 @@ docs_embeddings = bge_m3_ef.encode_documents(docs)
 Dense document dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse document dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Para crear incrustaciones para consultas, utilice el método <strong>encode_queries()</strong>:</p>
+<p>Para crear representaciones para consultas, utiliza el método <strong>encode_queries()</strong>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

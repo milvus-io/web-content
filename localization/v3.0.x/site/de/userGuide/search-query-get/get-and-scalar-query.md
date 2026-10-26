@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Neben der ANN-Suche unterstützt Milvus auch die Filterung von Metadaten mithilfe von Abfragen. Auf dieser Seite wird erläutert, wie Sie mit den Funktionen „Query“, „Get“ und „QueryIterators“ Entitäten abrufen, Metadaten filtern, Abfrageergebnisse sortieren und Skalarwerte aggregieren können.</p>
+    </button></h1><p>Neben der ANN-Suche unterstützt Milvus auch die Filterung von Metadaten mithilfe von Abfragen. Auf dieser Seite wird erläutert, wie Sie mit den Funktionen „Query“, „Get“ und „QueryIterators“ Entitäten abrufen, Metadaten filtern, Abfrageergebnisse sortieren und skalare Werte aggregieren können.</p>
 <div class="alert note">
 <p>Wenn Sie nach der Erstellung der Sammlung neue Felder hinzufügen, geben Abfragen, die diese Felder enthalten, für Entitäten, für die keine Werte explizit festgelegt wurden, die definierten Standardwerte oder „ <code translate="no">NULL</code> “ zurück. Weitere Informationen finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">„Alter Collection Schema</a>“.</p>
 </div>
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine Sammlung kann verschiedene Arten von Skalarfeldern speichern. Sie können Milvus anweisen, Entitäten anhand eines oder mehrerer Skalarfelder zu filtern. Milvus bietet drei Abfragetypen an: „Query“, „Get“ und „QueryIterator“. Die folgende Tabelle vergleicht diese drei Abfragetypen.</p>
+    </button></h2><p>Eine Sammlung kann verschiedene Arten von Skalarfeldern speichern. Sie können Milvus anweisen, Entitäten anhand eines oder mehrerer Skalarfelder zu filtern. Milvus bietet drei Arten von Abfragen: „Query“, „Get“ und „QueryIterator“. Die folgende Tabelle vergleicht diese drei Abfragetypen.</p>
 <table>
    <tr>
      <th></th>
@@ -52,7 +52,7 @@ summary: >-
      <td><p>Anwendbare Szenarien</p></td>
      <td><p>Zum Auffinden von Entitäten, die die angegebenen Primärschlüssel enthalten.</p></td>
      <td><p>Um alle oder eine bestimmte Anzahl von Entitäten zu finden, die die benutzerdefinierten Filterbedingungen erfüllen</p></td>
-     <td><p>Um in paginierten Abfragen alle Entitäten zu finden, die die benutzerdefinierten Filterbedingungen erfüllen.</p></td>
+     <td><p>Um alle Entitäten zu finden, die die benutzerdefinierten Filterbedingungen in paginierten Abfragen erfüllen.</p></td>
    </tr>
    <tr>
      <td><p>Filtermethode</p></td>
@@ -79,7 +79,7 @@ summary: >-
      <td><p>Gibt alle Entitäten zurück, die die benutzerdefinierten Filterbedingungen in der angegebenen Sammlung oder Partition erfüllen, und zwar über paginierte Abfragen.</p></td>
    </tr>
 </table>
-<p>Weitere Informationen zur Metadatenfilterung finden Sie unter <a href="/docs/de/basic-operators.md">„Regeln für boolesche Ausdrücke</a>“.</p>
+<p>Weitere Informationen zur Metadatenfilterung finden Sie unter <a href="/docs/de/basic-operators.md">„Boolesche Ausdrucksregeln</a>“.</p>
 <h2 id="Use-Get" class="common-anchor-header">Verwenden Sie „Get“<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen möchten, können Sie die <strong>„Get“-Methode</strong> verwenden. Die folgenden Code-Beispiele gehen davon aus, dass Ihre Sammlung drei Felder mit den Namen „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ enthält.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen möchten, können Sie die <strong>„Get“-Methode</strong> verwenden. Die folgenden Codebeispiele gehen davon aus, dass Ihre Sammlung drei Felder namens „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ enthält.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -279,7 +279,7 @@ status = client-&gt;<span class="hljs-built_in">Get</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterbedingungen suchen möchten, verwenden Sie die Methode <strong>„Query</strong> “. Die folgenden Code-Beispiele gehen davon aus, dass drei Felder mit den Namen „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ vorhanden sind, und geben die angegebene Anzahl von Entitäten zurück, die einen Wert für „ <code translate="no">color</code> “ enthalten, der mit „ <code translate="no">red</code> “ beginnt.</p>
+    </button></h3><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterbedingungen suchen möchten, verwenden Sie die Methode <strong>„Query</strong> “. Die folgenden Code-Beispiele gehen davon aus, dass drei Felder mit den Namen „ <code translate="no">id</code> “, „ <code translate="no">vector</code> “ und „ <code translate="no">color</code> “ vorhanden sind, und geben die angegebene Anzahl von Entitäten zurück, deren Wert für „ <code translate="no">color</code> “ mit „ <code translate="no">red</code> “ beginnt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -410,9 +410,9 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <ul>
 <li><p><code translate="no">order_by</code> muss zusammen mit „ <code translate="no">limit</code> “ verwendet werden.</p></li>
 <li><p>Unterstützte Feldtypen: „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “ und „ <code translate="no">VARCHAR</code> “. Das Sortieren nach Vektor-, „ <code translate="no">JSON</code> “- oder „ <code translate="no">ARRAY</code> “-Feldern wird nicht unterstützt.</p></li>
-<li><p>Beim Sortieren nach einem Feld, das NULL-Werte zulässt, werden NULL-Werte in aufsteigender Reihenfolge am Ende (NULLS LAST) und in absteigender Reihenfolge am Anfang (NULLS FIRST) platziert.</p></li>
+<li><p>Beim Sortieren nach einem Feld, das NULL-Werte zulässt, werden NULL-Werte bei aufsteigender Reihenfolge am Ende (NULLS LAST) und bei absteigender Reihenfolge am Anfang (NULLS FIRST) platziert.</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">Einfache Sortierung</h4><p>Übergeben Sie eine Liste von „ <code translate="no">&quot;field_name:direction&quot;</code> “-Zeichenfolgen an den Parameter „ <code translate="no">order_by</code> “, wobei „ <code translate="no">direction</code> “ entweder „ <code translate="no">asc</code> “ (aufsteigend) oder „ <code translate="no">desc</code> “ (absteigend) ist. Beachten Sie, dass bei „ <code translate="no">asc</code> “ und „ <code translate="no">desc</code> “ die Groß-/Kleinschreibung beachtet werden muss.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">Einfache Sortierung</h4><p>Übergeben Sie eine Liste von Zeichenfolgen vom Typ „ <code translate="no">&quot;field_name:direction&quot;</code> “ an den Parameter „ <code translate="no">order_by</code> “, wobei „ <code translate="no">direction</code> “ entweder „ <code translate="no">asc</code> “ (aufsteigend) oder „ <code translate="no">desc</code> “ (absteigend) ist. Beachten Sie, dass bei „ <code translate="no">asc</code> “ und „ <code translate="no">desc</code> “ die Groß-/Kleinschreibung beachtet werden muss.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -525,7 +525,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginierung mit Sortierung</h4><p>Verwenden Sie „ <code translate="no">order_by</code> “ zusammen mit „ <code translate="no">limit</code> “ und „ <code translate="no">offset</code> “, um sortierte Ergebnisse zu paginieren. Wenn Sie beispielsweise eine nach Preis sortierte Produktliste über mehrere Seiten hinweg anzeigen möchten, zeigt jede Seite die nächste Gruppe von Artikeln in der korrekten Preisreihenfolge an, ohne Duplikate oder Lücken.</p>
+<h4 id="Pagination-with-Sort" class="common-anchor-header">Paginierung mit Sortierung</h4><p>Verwenden Sie „ <code translate="no">order_by</code> “ zusammen mit „ <code translate="no">limit</code> “ und „ <code translate="no">offset</code> “, um sortierte Ergebnisse zu paginieren. Wenn Sie beispielsweise eine nach Preis sortierte Produktliste über mehrere Seiten hinweg anzeigen möchten, zeigt jede Seite die nächste Gruppe von Artikeln in der richtigen Preisreihenfolge an, ohne Duplikate oder Lücken.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -621,7 +621,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
         ></path>
       </svg>
     </button></h3><p>Sie können Abfrageergebnisse nach einem oder mehreren skalaren Feldern gruppieren und Aggregationen pro Gruppe berechnen. Die unterstützten Aggregationsoperatoren sind <code translate="no">count</code>, <code translate="no">min</code>, <code translate="no">max</code>, <code translate="no">sum</code> und <code translate="no">avg</code>.</p>
-<p>Beachten Sie bei der Verwendung von „ <code translate="no">group_by_fields</code> “, dass:</p>
+<p>Bei der Verwendung von „ <code translate="no">group_by_fields</code> “ ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Unterstützte Feldtypen für „ <code translate="no">group_by_fields</code> “: „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “, „ <code translate="no">VARCHAR</code> “ und „ <code translate="no">TIMESTAMPTZ</code> “. Eine Gruppierung nach Feldern vom Typ „ <code translate="no">FLOAT</code> “, „ <code translate="no">DOUBLE</code> “, „vector“, „ <code translate="no">JSON</code> “ oder „ <code translate="no">ARRAY</code> “ führt zu einem Fehler.</p></li>
 <li><p><code translate="no">sum</code> und „ <code translate="no">avg</code> “ sind ausschließlich numerisch. Sie können sie auf numerische Felder anwenden, einschließlich „ <code translate="no">FLOAT</code> “ und „ <code translate="no">DOUBLE</code> “, doch die Anwendung auf ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ führt zu einem Fehler.</p></li>
@@ -688,7 +688,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können mehrere Aggregationsausdrücke in einem einzigen Aufruf abfragen. Das folgende Beispiel gruppiert nach „ <code translate="no">color</code> “ und gibt die Entitätsanzahl, den Durchschnittspreis und die maximale Bewertung für jede Gruppe zurück:</p>
+<p>Sie können mehrere Aggregationsausdrücke in einem einzigen Aufruf anfordern. Das folgende Beispiel gruppiert nach „ <code translate="no">color</code> “ und gibt die Entitätsanzahl, den Durchschnittspreis und die maximale Bewertung für jede Gruppe zurück:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -744,7 +744,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Übergeben Sie mehr als ein Feld an „ <code translate="no">group_by_fields</code> “, um zusammengesetzte Gruppen zu berechnen. Das folgende Beispiel gruppiert nach „ <code translate="no">(color, rating)</code> “ und berechnet die Preisspanne in jeder Gruppe:</p>
+<p>Übergeben Sie mehr als ein Feld an ` <code translate="no">group_by_fields</code> `, um zusammengesetzte Gruppen zu berechnen. Das folgende Beispiel gruppiert nach ` <code translate="no">(color, rating)</code> ` und berechnet die Preisspanne in jeder Gruppe:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -801,7 +801,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können „ <code translate="no">group_by_fields</code> “ auch mit „ <code translate="no">limit</code> “ kombinieren, um die Anzahl der zurückgegebenen Gruppen zu begrenzen. Dies ist nützlich, wenn ein Feld eine hohe Kardinalität aufweist und Sie nur eine Stichprobe der Gruppen benötigen:</p>
+<p>Sie können „ <code translate="no">group_by_fields</code> “ auch mit „ <code translate="no">limit</code> “ kombinieren, um die Anzahl der zurückgegebenen Gruppen zu begrenzen. Dies ist nützlich, wenn ein Feld eine hohe Kardinalität aufweist und Sie nur eine Stichprobe von Gruppen benötigen:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -873,7 +873,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterbedingungen über paginierte Abfragen finden möchten, erstellen Sie einen <strong>`QueryIterator`</strong> und verwenden Sie dessen <strong>`next()`</strong> -Methode, um alle Entitäten zu durchlaufen und diejenigen zu finden, die den Filterbedingungen entsprechen. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder namens ` <code translate="no">id</code>`, ` <code translate="no">vector</code>` und ` <code translate="no">color</code> ` gibt, und geben alle Entitäten zurück, deren ` <code translate="no">color</code> `-Wert mit ` <code translate="no">red</code>` beginnt.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand benutzerdefinierter Filterbedingungen über paginierte Abfragen finden müssen, erstellen Sie einen <strong>`QueryIterator`</strong> und verwenden Sie dessen <strong>`next()`</strong> -Methode, um alle Entitäten zu durchlaufen und diejenigen zu finden, die den Filterbedingungen entsprechen. Die folgenden Codebeispiele gehen davon aus, dass es drei Felder namens ` <code translate="no">id</code>`, ` <code translate="no">vector</code>` und ` <code translate="no">color</code> ` gibt, und geben alle Entitäten zurück, die einen Wert für ` <code translate="no">color</code> ` enthalten, der mit ` <code translate="no">red</code>` beginnt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -966,7 +966,7 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können Abfragen auch innerhalb einer oder mehrerer Partitionen durchführen, indem Sie die Partitionsnamen in die Get-, Query- oder QueryIterator-Anfrage aufnehmen. Die folgenden Code-Beispiele gehen davon aus, dass sich in der Sammlung eine Partition namens <strong>„PartitionA“</strong> befindet.</p>
+    </button></h2><p>Sie können Abfragen auch innerhalb einer oder mehrerer Partitionen durchführen, indem Sie die Partitionsnamen in die Get-, Query- oder QueryIterator-Anfrage aufnehmen. Die folgenden Codebeispiele gehen davon aus, dass sich in der Sammlung eine Partition namens <strong>„PartitionA“</strong> befindet.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -977,14 +977,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1183,7 +1183,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um eine repräsentative Teilmenge von Daten aus Ihrer Sammlung für die Datenexploration oder Entwicklungstests zu extrahieren, verwenden Sie den Ausdruck „ <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> “, wobei „ <code translate="no">sampling_factor</code> “ ein Float-Wert zwischen 0 und 1 ist, der den Prozentsatz der zu stichprobenartig ausgewählten Daten angibt.</p>
+    </button></h2><p>Um eine repräsentative Teilmenge von Daten aus Ihrer Sammlung für die Datenauswertung oder Entwicklungstests zu extrahieren, verwenden Sie den Ausdruck „ <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> “, wobei „ <code translate="no">sampling_factor</code> “ ein Float-Wert zwischen 0 und 1 ist, der den Prozentsatz der zu stichprobenartig entnommenen Daten angibt.</p>
 <div class="alert note">
 <p>Ausführliche Informationen zur Verwendung, fortgeschrittene Beispiele und Best Practices finden Sie unter <a href="/docs/de/random-sampling.md">„Zufällige Stichproben</a>“.</p>
 </div>

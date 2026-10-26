@@ -2,8 +2,8 @@
 id: get-and-scalar-query.md
 title: الاستعلام
 summary: >-
-  استخدم وظائف Query و Get و QueryIterator لاسترداد الكيانات، وتصفية البيانات
-  الوصفية، وفرز نتائج الاستعلام، وتجميع القيم العددية في Milvus.
+  استخدم كل من «Query» و«Get» و«QueryIterator» لاسترداد الكيانات، وتصفية
+  البيانات الوصفية، وفرز نتائج الاستعلام، وتجميع القيم العددية في Milvus.
 ---
 <h1 id="Query" class="common-anchor-header">الاستعلام<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,13 +39,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن للمجموعة تخزين أنواع مختلفة من الحقول القياسية. يمكنك جعل Milvus يقوم بتصفية الكيانات بناءً على حقل قياسي واحد أو أكثر. يقدم Milvus ثلاثة أنواع من الاستعلامات: Query وGet وQueryIterator. يقارن الجدول أدناه بين أنواع الاستعلامات الثلاثة هذه.</p>
+    </button></h2><p>يمكن للمجموعة تخزين أنواع مختلفة من الحقول العددية. يمكنك جعل Milvus يقوم بتصفية الكيانات بناءً على حقل عددي واحد أو أكثر. يوفر Milvus ثلاثة أنواع من الاستعلامات: Query وGet وQueryIterator. يقارن الجدول أدناه بين أنواع الاستعلامات الثلاثة هذه.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Get</p></th>
-     <th><p>Query</p></th>
-     <th><p>QueryIterator</p></th>
+     <th><p>الاستعلام</p></th>
+     <th><p>مكرر الاستعلام</p></th>
    </tr>
    <tr>
      <td><p>السيناريوهات القابلة للتطبيق</p></td>
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عند الحاجة إلى البحث عن الكيانات باستخدام مفاتيحها الأساسية، يمكنك استخدام طريقة <strong>Get</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك.</p>
+    </button></h2><p>عندما تحتاج إلى البحث عن الكيانات باستخدام مفاتيحها الأساسية، يمكنك استخدام طريقة <strong>Get</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -278,7 +278,7 @@ status = client-&gt;<span class="hljs-built_in">Get</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما تحتاج إلى البحث عن الكيانات باستخدام شروط تصفية مخصصة، استخدم طريقة <strong>الاستعلام (Query)</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> ، وتُرجع العدد المحدد من الكيانات التي تحتوي على قيمة <code translate="no">color</code> تبدأ بـ <code translate="no">red</code>.</p>
+    </button></h3><p>عندما تحتاج إلى البحث عن الكيانات باستخدام شروط تصفية مخصصة، استخدم طريقة <strong>الاستعلام</strong>. تفترض أمثلة الكود التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> ، وتُرجع العدد المحدد من الكيانات التي تحتوي على قيمة <code translate="no">color</code> تبدأ بـ <code translate="no">red</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -405,13 +405,13 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بشكل افتراضي، تعرض "Query" النتائج بترتيب غير محدد. استخدم المعلمة <code translate="no">order_by</code> لفرز النتائج حسب حقل أو أكثر من الحقول القياسية. عند استخدام <code translate="no">order_by</code> ، لاحظ ما يلي:</p>
+    </button></h3><p>بشكل افتراضي، تعرض "Query" النتائج بترتيب غير محدد. استخدم المعلمة <code translate="no">order_by</code> لفرز النتائج حسب حقل قياسي واحد أو أكثر. عند استخدام <code translate="no">order_by</code> ، لاحظ ما يلي:</p>
 <ul>
 <li><p><code translate="no">order_by</code> يجب استخدامها مع <code translate="no">limit</code>.</p></li>
-<li><p>أنواع الحقول المدعومة: <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code> و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code>. لا يُدعم الترتيب حسب الحقول المتجهة (vector) أو الحقول ذات القيم الثابتة ( <code translate="no">JSON</code>) أو الحقول ذات القيم المتغيرة ( <code translate="no">ARRAY</code> ).</p></li>
-<li><p>عند الفرز حسب حقل قابل للقيمة NULL، تُوضع القيم NULL في النهاية في حالة الترتيب التصاعدي (NULLS LAST) وفي البداية في حالة الترتيب التنازلي (NULLS FIRST).</p></li>
+<li><p>أنواع الحقول المدعومة: <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code> و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code>. لا يُدعم الترتيب حسب الحقول المتجهة أو <code translate="no">JSON</code> أو <code translate="no">ARRAY</code>.</p></li>
+<li><p>عند الفرز حسب حقل قابل للقيمة «NULL»، تُوضع قيم «NULL» في النهاية في حالة الترتيب التصاعدي (NULLS LAST) وفي البداية في حالة الترتيب التنازلي (NULLS FIRST).</p></li>
 </ul>
-<h4 id="Basic-Sort" class="common-anchor-header">الفرز الأساسي</h4><p>قم بتمرير قائمة من سلاسل <code translate="no">&quot;field_name:direction&quot;</code> إلى المعلمة <code translate="no">order_by</code> ، حيث تكون <code translate="no">direction</code> إما <code translate="no">asc</code> (تصاعدي) أو <code translate="no">desc</code> (تنازلي). لاحظ أن <code translate="no">asc</code> و <code translate="no">desc</code> حساسة لحالة الأحرف.</p>
+<h4 id="Basic-Sort" class="common-anchor-header">الفرز الأساسي</h4><p>قم بتمرير قائمة من سلاسل <code translate="no">&quot;field_name:direction&quot;</code> إلى المعلمة <code translate="no">order_by</code> ، حيث يكون <code translate="no">direction</code> إما <code translate="no">asc</code> (تصاعدي) أو <code translate="no">desc</code> (تنازلي). لاحظ أن <code translate="no">asc</code> و <code translate="no">desc</code> حساسة لحالة الأحرف.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -619,14 +619,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request2, response2
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك تجميع نتائج الاستعلام حسب حقل عدداني واحد أو أكثر وحساب التجميعات لكل مجموعة. عوامل التجميع المدعومة هي <code translate="no">count</code> و <code translate="no">min</code> و <code translate="no">max</code> و <code translate="no">sum</code> و <code translate="no">avg</code>.</p>
-<p>عند استخدام ` <code translate="no">group_by_fields</code>`، يرجى ملاحظة ما يلي:</p>
+    </button></h3><p>يمكنك تجميع نتائج الاستعلام حسب حقل قياسي واحد أو أكثر وحساب التجميعات لكل مجموعة. عوامل التجميع المدعومة هي <code translate="no">count</code> و <code translate="no">min</code> و <code translate="no">max</code> و <code translate="no">sum</code> و <code translate="no">avg</code>.</p>
+<p>عند استخدام <code translate="no">group_by_fields</code> ، يرجى ملاحظة ما يلي:</p>
 <ul>
 <li><p>أنواع الحقول المدعومة لـ <code translate="no">group_by_fields</code>: <code translate="no">INT8</code> ، و <code translate="no">INT16</code> ، و <code translate="no">INT32</code> ، و <code translate="no">INT64</code> ، و <code translate="no">VARCHAR</code> ، و <code translate="no">TIMESTAMPTZ</code>. يؤدي التجميع حسب الحقول <code translate="no">FLOAT</code> ، و <code translate="no">DOUBLE</code> ، وvector، و <code translate="no">JSON</code> ، أو <code translate="no">ARRAY</code> إلى ظهور خطأ.</p></li>
-<li><p><code translate="no">sum</code> و« <code translate="no">avg</code> » هي حقول رقمية فقط. يمكنك تطبيقها على الحقول الرقمية، بما في ذلك « <code translate="no">FLOAT</code> » و« <code translate="no">DOUBLE</code> »، لكن تطبيقها على حقل « <code translate="no">VARCHAR</code> » يؤدي إلى ظهور خطأ.</p></li>
+<li><p><code translate="no">sum</code> و <code translate="no">avg</code> هي حقول رقمية فقط. يمكنك تطبيقها على الحقول الرقمية، بما في ذلك <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> ، لكن تطبيقها على حقل <code translate="no">VARCHAR</code> يؤدي إلى ظهور خطأ.</p></li>
 </ul>
 <p>لتمكين التجميع، قم بتمرير <code translate="no">group_by_fields</code> إلى <code translate="no">query()</code> وأضف تعبيرات التجميع (<code translate="no">count(*)</code> ، <code translate="no">count(&lt;field&gt;)</code> ، <code translate="no">min(&lt;field&gt;)</code> ، <code translate="no">max(&lt;field&gt;)</code> ، <code translate="no">sum(&lt;field&gt;)</code> ، <code translate="no">avg(&lt;field&gt;)</code>) إلى <code translate="no">output_fields</code>.</p>
-<p>يُجمّع المثال التالي الكيانات حسب الحقل « <code translate="no">color</code> » ويعرض عدد الكيانات في كل مجموعة لونية:</p>
+<p>المثال التالي يجمع الكيانات حسب حقل « <code translate="no">color</code> » ويعرض عدد الكيانات في كل مجموعة لونية:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -976,14 +976,14 @@ results = []
 </div>
 <pre><code translate="no" class="language-python">res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -1167,7 +1167,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">الأخذ العشوائي للعينات باستخدام الاستعلام<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">الأخذ العشوائي للعينات باستخدام Query<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1184,7 +1184,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(queryRequest, query
       </svg>
     </button></h2><p>لاستخراج مجموعة فرعية تمثيلية من البيانات من مجموعتك لاستكشاف البيانات أو اختبار التطوير، استخدم التعبير <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> ، حيث يمثل <code translate="no">sampling_factor</code> عددًا عائمًا بين 0 و1 يمثل النسبة المئوية للبيانات المراد أخذ عينات منها.</p>
 <div class="alert note">
-<p>للاطلاع على تفاصيل الاستخدام والأمثلة المتقدمة وأفضل الممارسات، راجع <a href="/docs/ar/random-sampling.md">«العينة العشوائية</a>».</p>
+<p>للاطلاع على تفاصيل الاستخدام والأمثلة المتقدمة وأفضل الممارسات، راجع <a href="/docs/ar/random-sampling.md">«الأخذ العشوائي للعينات</a>».</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://min.io/product/overview">MinIO</a> est compatible avec S3. Pour configurer S3 avec Docker Compose, indiquez vos valeurs dans la section « <code translate="no">minio</code> » du fichier « <code translate="no">milvus.yaml</code> » situé dans le répertoire « milvus/configs ».</p>
+    </button></h3><p><a href="https://min.io/product/overview">MinIO</a> est compatible avec S3. Pour configurer S3 avec Docker Compose, indiquez vos valeurs dans la section « <code translate="no">minio</code> » du fichier « <code translate="no">milvus.yaml</code> » situé dans le chemin milvus/configs.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
@@ -63,6 +63,16 @@ summary: >-
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Consultez la section « <a href="/docs/fr/configure_minio.md">Configurations MinIO/S3</a> » pour plus d’informations.</p>
+<p>Le codage en dur d’une clé d’accès et d’une clé secrète fonctionne, mais si vous exécutez Milvus sur un hôte ou un cluster prenant en charge l’identité de charge de travail (par exemple, un profil d’instance EC2 ou IRSA sur EKS), nous vous recommandons d’utiliser un rôle IAM à la place. Définissez ` <code translate="no">useIAM</code> ` sur ` <code translate="no">true</code> ` et supprimez ` <code translate="no">accessKeyID</code> ` et ` <code translate="no">secretAccessKey</code>` :</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus obtient alors des identifiants temporaires à partir du rôle IAM associé à la charge de travail. <code translate="no">cloudProvider</code> accepte <code translate="no">aws</code>, <code translate="no">gcp</code> ou <code translate="no">aliyun</code>, et <code translate="no">iamEndpoint</code> permet, de manière facultative, de spécifier un point de terminaison personnalisé pour récupérer les identifiants du rôle IAM.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Modifier le fichier docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +88,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous devez également supprimer la variable d’environnement ` <code translate="no">MINIO_ADDRESS</code> ` pour le service milvus dans le fichier ` <code translate="no">docker-compose.yaml</code>`. Par défaut, milvus utilise MinIO local plutôt que S3 externe.</p>
+    </button></h3><p>Vous devez également supprimer la variable d’environnement ` <code translate="no">MINIO_ADDRESS</code> ` pour le service Milvus accessible à l’adresse <code translate="no">docker-compose.yaml</code>. Par défaut, Milvus utilisera Minio local plutôt que S3 externe.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Lancer Milvus<button data-href="#3-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +107,7 @@ summary: >-
     </button></h3><p>Exécutez la commande suivante pour démarrer Milvus en utilisant les configurations S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Les configurations ne prennent effet qu’après le démarrage de Milvus. Consultez la section « <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Démarrer Milvus</a> » pour plus d’informations.</div>
+<div class="alert note">Les configurations ne prennent effet qu’après le démarrage de Milvus. Consultez la section <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Démarrer Milvus</a> pour plus d’informations.</div>
 <h2 id="Configure-S3-on-K8s" class="common-anchor-header">Configurer S3 sur K8s<button data-href="#Configure-S3-on-K8s" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -129,8 +139,12 @@ summary: >-
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>La clé d'accès secrète pour S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>Le nom du compartiment S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Indique s'il faut utiliser SSL lors de la connexion</td><td>Les valeurs par défaut sont les suivantes : <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>Indique s'il faut utiliser un rôle IAM à la place des clés d'accès et secrètes pour accéder à S3.</td><td>La valeur par défaut est <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>Fournisseur de cloud émettant les identifiants du rôle IAM.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code> ou <code translate="no">aliyun</code>; la valeur par défaut est <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>Point de terminaison personnalisé pour récupérer les informations d’identification du rôle IAM.</td><td>Laissez ce champ vide pour utiliser la valeur par défaut du fournisseur.</td></tr>
 </tbody>
 </table>
+<p>Si votre cluster prend en charge l’identité de charge de travail (par exemple, IRSA sur EKS), définissez <code translate="no">externalS3.useIAM</code> sur <code translate="no">true</code> et supprimez <code translate="no">externalS3.accessKey</code> et <code translate="no">externalS3.secretKey</code> — Milvus obtiendra des identifiants temporaires à partir du rôle IAM associé à la charge de travail.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Utilisation du fichier YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,13 +161,13 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Configurez la section « <code translate="no">minio</code> » dans le fichier « <code translate="no">values.yaml</code> ».</li>
+<li>Configurez la section <code translate="no">minio</code> dans le fichier <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Configurez la section « <code translate="no">externalS3</code> » en indiquant vos valeurs dans le fichier « <code translate="no">values.yaml</code> ».</li>
+<li>Configurez la section « <code translate="no">externalS3</code> » en utilisant vos valeurs dans le fichier « <code translate="no">values.yaml</code> ».</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">externalS3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
@@ -165,7 +179,7 @@ summary: >-
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>Après avoir configuré les sections précédentes et enregistré le fichier <code translate="no">values.yaml</code>, exécutez la commande suivante pour installer Milvus en utilisant les configurations S3.</li>
+<li>Après avoir configuré les sections précédentes et enregistré le fichier ` <code translate="no">values.yaml</code> `, exécutez la commande suivante pour installer Milvus en utilisant les configurations S3.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>

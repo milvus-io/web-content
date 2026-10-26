@@ -21,7 +21,7 @@ title: Guida rapida
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>I vettori, il formato di output dei modelli di reti neurali, sono in grado di codificare efficacemente le informazioni e svolgono un ruolo fondamentale nelle applicazioni di intelligenza artificiale quali le basi di conoscenza, la ricerca semantica, la Retrieval Augmented Generation (RAG) e altro ancora.</p>
-<p>Milvus è un database vettoriale open source adatto ad applicazioni di intelligenza artificiale di qualsiasi dimensione, dall’esecuzione di un chatbot dimostrativo in Jupyter Notebook alla creazione di motori di ricerca su scala web al servizio di miliardi di utenti. In questa guida vi illustreremo come configurare Milvus localmente in pochi minuti e come utilizzare la libreria client Python per generare, archiviare ed effettuare ricerche sui vettori.</p>
+<p>Milvus è un database vettoriale open source adatto ad applicazioni di intelligenza artificiale di qualsiasi dimensione, dall’esecuzione di un chatbot dimostrativo in Jupyter Notebook alla creazione di motori di ricerca su scala web che servono miliardi di utenti. In questa guida ti spiegheremo come configurare Milvus localmente in pochi minuti e come utilizzare la libreria client Python per generare, archiviare ed effettuare ricerche sui vettori.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Installazione di Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo has 768 dimensions</span>
+    dimension=<span class="hljs-number">768</span>,  <span class="hljs-comment"># The vectors we will use in this demo have 768 dimensions</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Nella configurazione sopra riportata,</p>
@@ -127,7 +127,7 @@ In alternativa, è possibile definire formalmente lo schema della collezione seg
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per prima cosa, installare la libreria dei modelli. Questo pacchetto include strumenti essenziali per l’apprendimento automatico (ML) come PyTorch. Il download del pacchetto potrebbe richiedere un po’ di tempo se PyTorch non è mai stato installato nell’ambiente locale.</p>
+    </button></h2><p>Per prima cosa, installare la libreria dei modelli. Questo pacchetto include strumenti essenziali per il machine learning, come PyTorch. Il download del pacchetto potrebbe richiedere un po’ di tempo se PyTorch non è mai stato installato nell’ambiente locale.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Generare embedding vettoriali con il modello predefinito. Milvus richiede che i dati vengano inseriti organizzati come un elenco di dizionari, in cui ogni dizionario rappresenta un record di dati, denominato entità.</p>
@@ -414,7 +414,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se si desidera eliminare tutti i dati di una collezione, è possibile eliminarla con</p>
+    </button></h2><p>Se si desidera eliminare tutti i dati presenti in una collezione, è possibile eliminarla con</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Drop collection</span>
 client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

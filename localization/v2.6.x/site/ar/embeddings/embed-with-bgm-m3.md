@@ -1,7 +1,9 @@
 ---
 id: embed-with-bgm-m3.md
 order: 4
-summary: سُمي BGE-M3 نظرًا لقدراته في تعدد اللغات وتعدد الوظائف وتعدد الحبيبات.
+summary: >-
+  سُمي نظام BGE-M3 تيمناً بقدراته في مجالات التعدد اللغوي، والتعدد الوظيفي،
+  والتعدد في مستويات التفصيل.
 title: BGE M3
 ---
 <h1 id="BGE-M3" class="common-anchor-header">BGE M3<button data-href="#BGE-M3" class="anchor-icon" translate="no">
@@ -19,13 +21,13 @@ title: BGE M3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>سُمي<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> نظرًا لقدراته في تعدد اللغات وتعدد الوظائف وتعدد الحبيبات. وبفضل قدرته على دعم أكثر من 100 لغة، يضع BGE-M3 معايير جديدة في مهام الاسترجاع متعدد اللغات واللغات. إن قدرتها الفريدة على إجراء الاسترجاع الكثيف والاسترجاع متعدد النواقل والاسترجاع المتناثر في إطار واحد يجعلها خيارًا مثاليًا لمجموعة واسعة من تطبيقات استرجاع المعلومات (IR).</p>
-<p>يتكامل ميلفوس مع نموذج BGE M3 باستخدام فئة <strong>BGEM3EmbeddingFunction</strong>. تتعامل هذه الفئة مع حساب التضمينات وتعيدها بتنسيق متوافق مع Milvus للفهرسة والبحث. لاستخدام هذه الميزة، يجب تثبيت FlagEmbedding.</p>
-<p>لاستخدام هذه الميزة، قم بتثبيت التبعيات اللازمة:</p>
+    </button></h1><p>سمي<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> بهذا الاسم نظراً لقدراته في التعدد اللغوي، والتعدد الوظيفي، والتعدد الدرجاتي. وبفضل قدرته على دعم أكثر من 100 لغة، يضع BGE-M3 معايير جديدة في مهام الاسترجاع متعدد اللغات وعبر اللغات. وتجعله قدرته الفريدة على إجراء عمليات الاسترجاع الكثيف، والاسترجاع متعدد المتجهات، والاسترجاع المتفرق ضمن إطار عمل واحد خيارًا مثاليًا لمجموعة واسعة من تطبيقات استرجاع المعلومات (IR).</p>
+<p>يتكامل Milvus مع نموذج BGE M3 باستخدام فئة <strong>BGEM3EmbeddingFunction</strong>. تتولى هذه الفئة حساب التضمينات وتُرجعها بتنسيق متوافق مع Milvus من أجل الفهرسة والبحث.</p>
+<p>لاستخدام هذه الميزة، قم بتثبيت التبعيات الضرورية:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ثم، قم بإنشاء <strong>دالة BGEM3EmbeddingFunction</strong>:</p>
+<p>ثم قم بإنشاء مثيل لـ <strong>BGEM3EmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 bge_m3_ef = BGEM3EmbeddingFunction(
@@ -36,14 +38,14 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>المعلمات</strong>:</p>
 <ul>
-<li><p><strong>اسم_النموذج</strong><em>(سلسلة</em>)</p>
-<p>اسم النموذج المراد استخدامه للترميز. القيمة الافتراضية إلى <strong>BAAI/bge-m3</strong>.</p></li>
-<li><p><strong>الجهاز</strong><em>(سلسلة</em>)</p>
-<p>الجهاز المراد استخدامه، مع استخدام <strong>cpu</strong> لوحدة المعالجة المركزية و <strong>cuda:n</strong> لجهاز وحدة معالجة الرسومات رقم n.</p></li>
-<li><p><strong>use_fp16</strong><em>(bool</em>)</p>
-<p>ما إذا كان يجب استخدام دقة الفاصلة العائمة 16 بت (fp16). حدد <strong>خطأ</strong> عندما يكون <strong>الجهاز</strong> هو <strong>وحدة المعالجة المركزية</strong>.</p></li>
+<li><p><strong>model_name</strong> (<em>سلسلة</em>)</p>
+<p>اسم النموذج المراد استخدامه للترميز. القيمة الافتراضية هي <strong>BAAI/bge-m3</strong>.</p></li>
+<li><p><strong>device</strong> (<em>سلسلة</em>)</p>
+<p>الجهاز المراد استخدامه، حيث يمثل <strong>cpu</strong> وحدة المعالجة المركزية (CPU) ويمثل <strong>cuda:n</strong> جهاز GPU رقم n.</p></li>
+<li><p><strong>use_fp16</strong> (<em>منطقية</em>)</p>
+<p>تحديد ما إذا كان سيتم استخدام دقة العدد العائم 16 بت (fp16). حدد <strong>False</strong> عندما يكون <strong>الجهاز</strong> هو <strong>cpu</strong>.</p></li>
 </ul>
-<p>لإنشاء تضمينات للمستندات، استخدم الأسلوب <strong>encode_documents()</strong>:</p>
+<p>لإنشاء التضمينات للمستندات، استخدم الطريقة <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -68,7 +70,7 @@ docs_embeddings = bge_m3_ef.encode_documents(docs)
 Dense document dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse document dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>لإنشاء تضمينات للاستعلامات، استخدم الأسلوب <strong>encode_queries()</strong>:</p>
+<p>لإنشاء التضمينات للاستعلامات، استخدم الأسلوب <strong>encode_queries()</strong>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

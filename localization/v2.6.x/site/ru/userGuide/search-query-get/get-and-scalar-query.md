@@ -2,9 +2,9 @@
 id: get-and-scalar-query.md
 title: Запрос
 summary: >-
-  В дополнение к поиску по ANN, Milvus также поддерживает фильтрацию метаданных
-  с помощью запросов. На этой странице рассказывается, как использовать Query,
-  Get и QueryIterators для выполнения фильтрации метаданных.
+  Помимо поиска с помощью нейронных сетей (ANN), Milvus также поддерживает
+  фильтрацию метаданных с помощью запросов. На этой странице рассказывается, как
+  использовать Query, Get и QueryIterators для фильтрации метаданных.
 ---
 <h1 id="Query" class="common-anchor-header">Запрос<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Помимо поиска по ANN, Milvus также поддерживает фильтрацию метаданных с помощью запросов. На этой странице описано, как использовать запросы Query, Get и QueryIterators для выполнения фильтрации метаданных.</p>
+    </button></h1><p>Помимо поиска с помощью ANN, Milvus также поддерживает фильтрацию метаданных с помощью запросов. На этой странице описано, как использовать Query, Get и QueryIterators для фильтрации метаданных.</p>
 <div class="alert note">
-<p>Если вы динамически добавляете новые поля после создания коллекции, запросы, включающие эти поля, будут возвращать определенные значения по умолчанию или NULL для сущностей, которые не задали значения явно. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
+<p>Если вы динамически добавляете новые поля после создания коллекции, запросы, включающие эти поля, будут возвращать заданные значения по умолчанию или NULL для сущностей, для которых значения явно не заданы. Подробности см. в разделе <a href="/docs/ru/v2.6.x/add-fields-to-an-existing-collection.md">«Добавление полей в существующую коллекцию</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,19 +40,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Коллекция может хранить различные типы скалярных полей. Вы можете заставить Milvus фильтровать сущности на основе одного или нескольких скалярных полей. Milvus предлагает три типа запросов: Query, Get и QueryIterator. В таблице ниже приведено сравнение этих трех типов запросов.</p>
+    </button></h2><p>Коллекция может хранить различные типы скалярных полей. Вы можете настроить Milvus на фильтрацию сущностей на основе одного или нескольких скалярных полей. Milvus предлагает три типа запросов: Query, Get и QueryIterator. В таблице ниже приведено сравнение этих трех типов запросов.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Get</p></th>
-     <th><p>Запрос</p></th>
+     <th><p>Query</p></th>
      <th><p>QueryIterator</p></th>
    </tr>
    <tr>
      <td><p>Применимые сценарии</p></td>
-     <td><p>Поиск сущностей, содержащих указанные первичные ключи.</p></td>
-     <td><p>Чтобы найти все или определенное количество сущностей, удовлетворяющих пользовательским условиям фильтрации.</p></td>
-     <td><p>Для поиска всех сущностей, удовлетворяющих пользовательским условиям фильтрации, в постраничных запросах.</p></td>
+     <td><p>Для поиска сущностей, имеющих указанные первичные ключи.</p></td>
+     <td><p>Для поиска всех или заданного количества сущностей, удовлетворяющих пользовательским условиям фильтрации</p></td>
+     <td><p>Для поиска всех сущностей, удовлетворяющих пользовательским условиям фильтрации в запросах с пагинацией.</p></td>
    </tr>
    <tr>
      <td><p>Метод фильтрации</p></td>
@@ -64,23 +64,23 @@ summary: >-
      <td><p>Обязательные параметры</p></td>
      <td><ul><li><p>Имя коллекции</p></li><li><p>Первичные ключи</p></li></ul></td>
      <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li></ul></td>
-     <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li><li><p>Количество сущностей, возвращаемых по запросу</p></li></ul></td>
+     <td><ul><li><p>Имя коллекции</p></li><li><p>Выражения фильтрации</p></li><li><p>Количество сущностей, возвращаемых за один запрос</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Необязательные параметры</p></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Выходные поля</p></li></ul></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Количество возвращаемых сущностей</p></li><li><p>Поля вывода</p></li></ul></td>
-     <td><ul><li><p>Имя раздела</p></li><li><p>Общее количество возвращаемых сущностей</p></li><li><p>Выходные поля</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Поля вывода</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Количество сущностей для возврата</p></li><li><p>Поля вывода</p></li></ul></td>
+     <td><ul><li><p>Имя раздела</p></li><li><p>Общее количество сущностей для возврата</p></li><li><p>Поля вывода</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Возвращает</p></td>
-     <td><p>Возвращает сущности, содержащие указанные первичные ключи в указанной коллекции или разделе.</p></td>
-     <td><p>Возвращает все или определенное количество сущностей, удовлетворяющих пользовательским условиям фильтрации, в указанной коллекции или разделе.</p></td>
-     <td><p>Возвращает все сущности, удовлетворяющие пользовательским условиям фильтрации, в указанной коллекции или разделе с помощью постраничных запросов.</p></td>
+     <td><p>Возвращает сущности, содержащие указанные первичные ключи в указанной коллекции или разделах.</p></td>
+     <td><p>Возвращает все или указанное количество сущностей, соответствующих пользовательским условиям фильтрации в указанной коллекции или разделах.</p></td>
+     <td><p>Возвращает все сущности, соответствующие пользовательским условиям фильтрации в указанной коллекции или разделах, посредством запросов с пагинацией.</p></td>
    </tr>
 </table>
-<p>Дополнительные сведения о фильтрации метаданных см. в разделе .</p>
-<h2 id="Use-Get" class="common-anchor-header">Использование Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
+<p>Дополнительные сведения о фильтрации по метаданным см. в .</p>
+<h2 id="Use-Get" class="common-anchor-header">Использование метода Get<button data-href="#Use-Get" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда вам нужно найти сущности по их первичным ключам, вы можете использовать метод <strong>Get</strong>. В следующих примерах кода предполагается, что в вашей коллекции есть три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по их первичным ключам, можно использовать метод <strong>Get</strong>. В приведенных ниже примерах кода предполагается, что в вашей коллекции имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -109,9 +109,14 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы можете получить сущности по их идентификаторам следующим образом.</p>
+<p>Получить сущности по их ID можно следующим образом.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -220,7 +225,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Использование запросов<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Использование метода Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,9 +240,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>Query</strong>. Следующие примеры кода предполагают наличие трех полей с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code> и возвращают указанное количество сущностей, имеющих значение <code translate="no">color</code>, начиная с <code translate="no">red</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации, используйте метод <strong>`Query`</strong>. В приведенных ниже примерах кода предполагается, что в коллекции имеются три поля с именами ` <code translate="no">id</code>`, ` <code translate="no">vector</code>` и ` <code translate="no">color</code> `, и возвращается указанное количество сущностей, содержащих значение ` <code translate="no">color</code> `, начинающееся с ` <code translate="no">red</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -316,7 +326,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator" class="common-anchor-header">Использование QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator" class="common-anchor-header">Используйте QueryIterator<button data-href="#Use-QueryIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -331,9 +341,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью постраничных запросов, создайте <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong> для итерации по всем сущностям, чтобы найти те, которые удовлетворяют условиям фильтрации. В следующих примерах кода предполагается, что есть три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, имеющие значение <code translate="no">color</code>, начиная с <code translate="no">red</code>.</p>
+    </button></h2><p>Если вам нужно найти сущности по пользовательским условиям фильтрации с помощью запросов с пагинацией, создайте объект <strong>QueryIterator</strong> и используйте его метод <strong>next()</strong>, чтобы пройти по всем сущностям и найти те, которые соответствуют условиям фильтрации. В приведенных ниже примерах кода предполагается, что имеются три поля с именами <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>, и возвращаются все сущности, содержащие значение <code translate="no">color</code>, начинающееся с <code translate="no">red</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -425,9 +440,14 @@ results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы также можете выполнять запросы в одном или нескольких разделах, включив имена разделов в запрос Get, Query или QueryIterator. В следующих примерах кода предполагается, что в коллекции есть раздел с именем <strong>PartitionA</strong>.</p>
+    </button></h2><p>Вы также можете выполнять запросы в пределах одного или нескольких разделах, указав имена разделов в запросах Get, Query или QueryIterator. В приведенных ниже примерах кода предполагается, что в коллекции имеется раздел с именем <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
@@ -436,7 +456,7 @@ client = MilvusClient(
 
 res = client.get(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     ids=[<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>]
 )
@@ -450,7 +470,7 @@ client = MilvusClient(
 
 res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-<span class="highlighted-wrapper-line">    partitionNames=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>
@@ -609,7 +629,7 @@ curl --request POST \
     &quot;id&quot;: [0, 1, 2]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Случайная выборка с помощью запроса Query<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
+<h2 id="Random-Sampling-with-Query" class="common-anchor-header">Случайная выборка с помощью запроса<button data-href="#Random-Sampling-with-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -624,12 +644,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из коллекции для исследования данных или тестирования разработок, используйте выражение <code translate="no">RANDOM_SAMPLE(sampling_factor)</code>, где <code translate="no">sampling_factor</code> - это плавающая величина от 0 до 1, представляющая процент данных для выборки.</p>
+    </button></h2><p>Чтобы извлечь репрезентативное подмножество данных из вашей коллекции для исследования данных или тестирования разработки, используйте выражение ` <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> `, где ` <code translate="no">sampling_factor</code> ` — это число с плавающей запятой от 0 до 1, представляющее процент данных, которые необходимо отобрать.</p>
 <div class="alert note">
-<p>Подробную информацию об использовании, расширенные примеры и лучшие практики см. в разделе <a href="/docs/ru/v2.6.x/random-sampling.md">"Случайная выборка</a>".</p>
+<p>Подробные сведения об использовании, примеры для продвинутых пользователей и рекомендации см. в разделе <a href="/docs/ru/v2.6.x/random-sampling.md">«Случайная выборка</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -731,7 +756,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Временная установка часового пояса для запроса<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Временная настройка часового пояса для запроса<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -746,11 +771,16 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если в вашей коллекции есть поле <code translate="no">TIMESTAMPTZ</code>, вы можете временно изменить часовой пояс базы данных или коллекции по умолчанию для одной операции, установив параметр <code translate="no">timezone</code> в вызове запроса. Это позволяет контролировать отображение и сравнение значений <code translate="no">TIMESTAMPTZ</code> во время выполнения операции.</p>
-<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/v2.6.x/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p>
+    </button></h2><p>Если в вашей коллекции есть поле ` <code translate="no">TIMESTAMPTZ</code> `, вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр ` <code translate="no">timezone</code> ` в вызове запроса. Это определяет, как значения ` <code translate="no">TIMESTAMPTZ</code> ` будут отображаться и сравниваться во время операции.</p>
+<p>Значение <code translate="no">timezone</code> должно быть допустимым <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в <a href="/docs/ru/v2.6.x/timestamptz-field.md">разделе «Поле TIMESTAMPTZ</a>».</p>
 <p>В примере ниже показано, как временно установить часовой пояс для операции запроса:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
 results = client.query(
     collection_name,
