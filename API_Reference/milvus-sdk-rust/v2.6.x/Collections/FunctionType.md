@@ -11,21 +11,21 @@ pub enum FunctionType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Unknown`
+- **Unknown**
 
     Unspecified or unrecognized function type. This is the default.
 
-- `Bm25`
+- **Bm25**
 
     BM25 ranking function that turns an input text field into a sparse vector output field.
 
-- `TextEmbedding`
+- **TextEmbedding**
 
     Text-embedding function that turns an input text field into a dense vector output field.
 
-- `Rerank`
+- **Rerank**
 
     Reranking function that applies a configured reranking strategy to a candidate set.
 

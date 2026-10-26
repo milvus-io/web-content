@@ -10,17 +10,17 @@ pub enum CompactionStateCode {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Unknown`
+- **Unknown**
 
     The compaction state is unknown. This is the default.
 
-- `Executing`
+- **Executing**
 
     A compaction task is currently running.
 
-- `Completed`
+- **Completed**
 
     A compaction task has completed.
 

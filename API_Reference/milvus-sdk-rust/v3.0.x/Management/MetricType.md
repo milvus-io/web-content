@@ -20,57 +20,57 @@ pub enum MetricType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Default`
+- **Default**
 
     Lets the Milvus server determine the metric type. This is the default.
 
-- `L2`
+- **L2**
 
     Euclidean distance; Milvus returns the squared value `sum((a_i - b_i)^2)`. Smaller is more similar.
 
-- `Ip`
+- **Ip**
 
     Inner product, `sum(a_i * b_i)`. Larger is more similar.
 
-- `Cosine`
+- **Cosine**
 
     Cosine similarity, `cos(a, b)`. Larger is more similar.
 
-- `Hamming`
+- **Hamming**
 
     Hamming distance, the number of positions at which two binary vectors differ. Smaller is more similar.
 
-- `Jaccard`
+- **Jaccard**
 
     Jaccard distance, `1 - |A ∩ B| / |A ∪ B|`. Smaller is more similar.
 
-- `MhJaccard`
+- **MhJaccard**
 
     MinHash Jaccard distance over binary MinHash signatures, `1 - estimated similarity`. Smaller is more similar.
 
-- `Bm25`
+- **Bm25**
 
     BM25 relevance score for full-text search over sparse vectors.
 
-- `MaxSimCosine`
+- **MaxSimCosine**
 
     MaxSim Cosine, used to search embedding lists stored in array-of-structs vector fields.
 
-- `MaxSimIp`
+- **MaxSimIp**
 
     MaxSim Inner Product, used to search embedding lists stored in array-of-structs vector fields.
 
-- `MaxSimL2`
+- **MaxSimL2**
 
     MaxSim L2, used to search embedding lists stored in array-of-structs vector fields.
 
-- `MaxSimJaccard`
+- **MaxSimJaccard**
 
     MaxSim Jaccard, used to search embedding lists stored in array-of-structs vector fields.
 
-- `MaxSimHamming`
+- **MaxSimHamming**
 
     MaxSim Hamming, used to search embedding lists stored in array-of-structs vector fields.
 

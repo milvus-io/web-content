@@ -12,25 +12,25 @@ pub enum SegmentLevel {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Unknown`
+- **Unknown**
 
     The segment level is unknown. This is the default.
 
-- `Legacy`
+- **Legacy**
 
     A legacy segment written before level-based segmentation.
 
-- `L0`
+- **L0**
 
     Level-0 segment holding uncommitted or delta data.
 
-- `L1`
+- **L1**
 
     Level-1 segment holding committed data.
 
-- `L2`
+- **L2**
 
     Level-2 segment holding sealed, queryable data.
 

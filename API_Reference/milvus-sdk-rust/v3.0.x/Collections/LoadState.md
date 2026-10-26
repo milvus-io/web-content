@@ -12,25 +12,25 @@ pub enum LoadState {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `NotExist`
+- **NotExist**
 
     The collection does not exist on the server. This is the default.
 
-- `NotLoad`
+- **NotLoad**
 
     The collection exists but its data is not loaded.
 
-- `Loading`
+- **Loading**
 
     The collection is currently being loaded.
 
-- `Loaded`
+- **Loaded**
 
     The collection is fully loaded and available for queries.
 
-- `Unknown`
+- **Unknown**
 
     The load state could not be determined.
 

@@ -4,7 +4,7 @@ This enum specifies the unit of the `target_size` parameter in `Compact()`.
 
 ```rust
 pub enum TargetSizeUnit {
-    B,
+    Bytes,
     KB,
     MB,
     GB,
@@ -13,29 +13,29 @@ pub enum TargetSizeUnit {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `B`
+- **Bytes**
 
     Bytes.
 
-- `KB`
+- **KB**
 
     Kilobytes.
 
-- `MB`
+- **MB**
 
     Megabytes.
 
-- `GB`
+- **GB**
 
     Gigabytes.
 
-- `TB`
+- **TB**
 
     Terabytes.
 
-- `PB`
+- **PB**
 
     Petabytes.
 

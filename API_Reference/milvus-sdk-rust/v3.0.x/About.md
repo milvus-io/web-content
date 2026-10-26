@@ -12,7 +12,7 @@ cargo add milvus-sdk-rust@3.0.3
 
 ## Quick Start
 
-The following example connects to Milvus, creates a collection, and runs a vector search using the V2 client API, which is the current API of this SDK.
+The following example connects to Milvus, creates a collection, inserts one entity, and runs a vector search using the V2 client API, which is the current API of this SDK.
 
 ```rust
 use milvus::v2::prelude::*;
@@ -35,7 +35,7 @@ async fn main() -> Result<()> {
         )
         .add_field(
             FieldSchema::new()
-                .name("embedding")
+                .name("vector")
                 .data_type(DataType::FloatVector)
                 .dimension(3),
         );
@@ -56,8 +56,8 @@ async fn main() -> Result<()> {
                 values: vec![1],
             },
             FieldData::FloatVector {
-                name: "embedding".into(),
-                values: vec![vec![0.1f32, 0.2, 0.3]],
+                name: "vector".into(),
+                values: vec![vec![1.0f32, 2.0, 3.0]],
             },
         ])
         .build()?;
@@ -68,7 +68,7 @@ async fn main() -> Result<()> {
             CreateIndexRequest::builder()
                 .collection_name("hello_milvus")
                 .index_params(vec![IndexParam::new()
-                    .field_name("embedding")
+                    .field_name("vector")
                     .index_type(IndexType::AutoIndex)
                     .metric_type(MetricType::Cosine)])
                 .build()?,
@@ -86,9 +86,10 @@ async fn main() -> Result<()> {
         .search(
             SearchRequest::builder()
                 .collection_name("hello_milvus")
-                .vector_field("embedding")
-                .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3]]))
+                .vector_field("vector")
+                .vectors(SearchVectors::Float(vec![vec![1.0f32, 2.0, 3.0]]))
                 .limit(1)
+                .consistency_level(ConsistencyLevel::Strong)
                 .build()?,
         )
         .await?;

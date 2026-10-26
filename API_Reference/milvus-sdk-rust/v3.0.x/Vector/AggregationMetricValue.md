@@ -11,12 +11,12 @@ pub enum AggregationMetricValue {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Int(i64)` - Represents an integer value.
-- `Double(f64)` - Represents a floating-point value.
-- `String(String)` - Represents a string value.
-- `Bool(bool)` - Represents a boolean value.
+- **Int(i64)** - Represents an integer value.
+- **Double(f64)** - Represents a floating-point value.
+- **String(String)** - Represents a string value.
+- **Bool(bool)** - Represents a boolean value.
 
 Related typed aggregation result enums include `AggregationBucketValue` (grouping keys) and `AggregationHitFieldValue` (hit fields).
 

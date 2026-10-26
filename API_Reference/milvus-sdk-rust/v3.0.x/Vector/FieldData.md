@@ -36,113 +36,113 @@ pub enum FieldData {
 
 Each variant carries the field `name` shared with the collection schema and the `values` for the field in row order.
 
-**VARIANTS:**
+**Constants:**
 
-- `Bool`
+- **Bool**
 
     Boolean values.
 
-- `Int8`
+- **Int8**
 
     8-bit signed integer values.
 
-- `Int16`
+- **Int16**
 
     16-bit signed integer values.
 
-- `Int32`
+- **Int32**
 
     32-bit signed integer values.
 
-- `Int64`
+- **Int64**
 
     64-bit signed integer values.
 
-- `Float`
+- **Float**
 
     32-bit floating-point values.
 
-- `Double`
+- **Double**
 
     64-bit floating-point values.
 
-- `VarChar`
+- **VarChar**
 
     Variable-length UTF-8 string values. Values for `DataType::Text` schema fields are also supplied with this variant.
 
-- `Json`
+- **Json**
 
     JSON document values.
 
-- `Geometry`
+- **Geometry**
 
     Geometry values encoded as WKT strings.
 
-- `Timestamptz`
+- **Timestamptz**
 
     Timestamp-with-timezone values.
 
-- `ArrayBool`
+- **ArrayBool**
 
     Array of boolean elements.
 
-- `ArrayInt8`
+- **ArrayInt8**
 
     Array of 8-bit signed integer elements.
 
-- `ArrayInt16`
+- **ArrayInt16**
 
     Array of 16-bit signed integer elements.
 
-- `ArrayInt32`
+- **ArrayInt32**
 
     Array of 32-bit signed integer elements.
 
-- `ArrayInt64`
+- **ArrayInt64**
 
     Array of 64-bit signed integer elements.
 
-- `ArrayFloat`
+- **ArrayFloat**
 
     Array of 32-bit floating-point elements.
 
-- `ArrayDouble`
+- **ArrayDouble**
 
     Array of 64-bit floating-point elements.
 
-- `ArrayVarChar`
+- **ArrayVarChar**
 
     Array of UTF-8 string elements.
 
-- `Struct`
+- **Struct**
 
     Struct values, each a list of named sub-field values.
 
-- `FloatVector`
+- **FloatVector**
 
     Dense float vectors, one vector per row.
 
-- `BinaryVector`
+- **BinaryVector**
 
     Dense binary vectors stored as packed bytes, one vector per row.
 
-- `Float16Vector`
+- **Float16Vector**
 
     Dense half-precision float vectors, one vector per row.
 
-- `BFloat16Vector`
+- **BFloat16Vector**
 
     Dense bfloat16 vectors, one vector per row.
 
-- `SparseFloatVector`
+- **SparseFloatVector**
 
     Sparse float vectors, one per row.
 
-- `Int8Vector`
+- **Int8Vector**
 
     Dense int8 vectors, one vector per row.
 
-- `Nullable`
+- **Nullable**
 
     A nullable field value paired with a per-row validity bitmap.
 
@@ -160,9 +160,9 @@ Each variant carries the field `name` shared with the collection schema and the 
 
     Whether the field has no values.
 
-- `is_null()` (*bool*) -
+- `is_null(index: usize)` (*bool*) -
 
-    Whether the field carries only null values.
+    Whether the value at the given index is null, per the `Nullable` validity bitmap. Returns `false` when the field is not `Nullable` or the index is out of bounds.
 
 - `inner()` (*&FieldData*) -
 

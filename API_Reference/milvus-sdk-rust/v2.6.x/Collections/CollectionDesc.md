@@ -103,10 +103,7 @@ pub struct CollectionDesc
 - `created_utc_time(value)` / `set_created_utc_time(value)` / `get_created_utc_time()` - Sets or returns the UTC creation timestamp.
 - `update_time(value)` / `set_update_time(value)` / `get_update_time()` - Sets or returns the update timestamp.
 - `consistency_level(value)` / `set_consistency_level(value)` / `get_consistency_level()` - Sets or returns the consistency level.
-- `consistency_level_name()` - Returns the consistency level as a string.
 - `properties(value)` / `set_properties(value)` / `get_properties()` - Sets or returns the properties.
-- `get_external_source()` - Returns the external source of the underlying schema.
-- `get_external_spec()` - Returns the external spec of the underlying schema.
 
 ## Example
 

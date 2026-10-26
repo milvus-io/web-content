@@ -490,6 +490,9 @@ local directory via this table before editing. Current latest version line is
   `EntityRow`/`FieldPartialUpdateOp`/`FilterTemplateValue`/`FunctionChain`/
   `FunctionScore`/`Highlighter`/`OrderByField`/`SearchAggregation`/
   `SearchVectors` → `Vector/`.
+  **This placement list is not an exemption from Step 10.** A type named here
+  that is referenced by only ONE page at the target tag must still be folded
+  into that page and the standalone page deleted (Step 10 is unconditional).
 - **Dedicated type pages (per-SDK)**: `FieldData` and `Ids` are leaf data
   types with dedicated rust pages — `Vector/FieldData.md` and `Vector/Ids.md`
   — kept scoped to this SDK section (and the cpp section where they overlap),
@@ -505,6 +508,13 @@ local directory via this table before editing. Current latest version line is
 - **Conventions**: import via `use milvus::v2::prelude::*;`; connect with
   `ClientV2::new(&ConnectConfig::new().uri(uri).token("root:Milvus")).await?`;
   requests use `XxxRequest::builder()....build()?`.
+- **Operation page filename convention (Step 8b)**: Rust public methods are
+  snake_case (e.g. `create_collection`, `list_collections`), so operation page
+  filenames must be snake_case too (e.g. `create_collection.md`).
+  Type pages (enums, structs, response-model pages) keep their PascalCase
+  source-name filenames and are not affected by Step 8b. Format checks must
+  rename PascalCase operation pages immediately and update every link in the
+  same pass.
 - **Version pins**: `About.md` compatibility table + `cargo add milvus-sdk-rust@<ver>`.
 - **Extraction commands**:
 

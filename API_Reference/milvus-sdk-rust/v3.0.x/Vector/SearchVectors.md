@@ -15,16 +15,16 @@ pub enum SearchVectors {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Float(Vec<Vec<f32>>)` - Dense vectors of 32-bit floats, one slice per query.
-- `Binary(Vec<Vec<u8>>)` - Binary vectors stored as packed bytes, one slice per query.
-- `Float16(Vec<Vec<u16>>)` - Half-precision float vectors, one slice per query.
-- `BFloat16(Vec<Vec<u16>>)` - BFloat16 vectors, one slice per query.
-- `SparseFloat(Vec<SparseVector>)` - Sparse vectors, one per query.
-- `Int8(Vec<Vec<i8>>)` - Int8 vectors, one slice per query.
-- `EmbeddedText(Vec<String>)` - Plain text inputs embedded by the server for search.
-- `EmbeddingLists(Vec<EmbeddingList>)` - Struct-vector inputs, each carrying its own list of embeddings.
+- **Float(Vec<Vec<f32>>)** - Dense vectors of 32-bit floats, one slice per query.
+- **Binary(Vec<Vec<u8>>)** - Binary vectors stored as packed bytes, one slice per query.
+- **Float16(Vec<Vec<u16>>)** - Half-precision float vectors, one slice per query.
+- **BFloat16(Vec<Vec<u16>>)** - BFloat16 vectors, one slice per query.
+- **SparseFloat(Vec<SparseVector>)** - Sparse vectors, one per query.
+- **Int8(Vec<Vec<i8>>)** - Int8 vectors, one slice per query.
+- **EmbeddedText(Vec<String>)** - Plain text inputs embedded by the server for search.
+- **EmbeddingLists(Vec<EmbeddingList>)** - Struct-vector inputs, each carrying its own list of embeddings.
 
 ## Example
 

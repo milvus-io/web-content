@@ -4,20 +4,38 @@ Information of an external collection refresh job, as returned by `listRefreshEx
 
 **METHODS:**
 
-- `get_job_id()` (*i64*) - The refresh job identifier.
+- `get_job_id()` (*i64*) -
 
-- `get_collection_name()` (*&str*) - The name of the collection being refreshed.
+    The refresh job identifier.
 
-- `get_state()` (*RefreshExternalCollectionStateCode*) - The current state of the refresh job. See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
+- `get_collection_name()` (*&str*) -
 
-- `get_progress()` (*i32*) - The refresh progress in percent (0 to 100).
+    The name of the collection being refreshed.
 
-- `get_reason()` (*&str*) - The failure reason of the refresh job, empty when the job has not failed.
+- `get_state()` (*RefreshExternalCollectionStateCode*) -
 
-- `get_external_source()` (*&str*) - The external data source, e.g. an S3 path.
+    The current state of the refresh job. See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
-- `get_external_spec()` (*&str*) - The detailed external specification reported by the server.
+- `get_progress()` (*i32*) -
 
-- `get_start_time()` (*u64*) - The start timestamp of the refresh job.
+    The refresh progress in percent (0 to 100).
 
-- `get_end_time()` (*u64*) - The end timestamp of the refresh job.
+- `get_reason()` (*&str*) -
+
+    The failure reason of the refresh job, empty when the job has not failed.
+
+- `get_external_source()` (*&str*) -
+
+    The external data source, e.g. an S3 path.
+
+- `get_external_spec()` (*&str*) -
+
+    The detailed external specification reported by the server.
+
+- `get_start_time()` (*u64*) -
+
+    The start timestamp of the refresh job.
+
+- `get_end_time()` (*u64*) -
+
+    The end timestamp of the refresh job.

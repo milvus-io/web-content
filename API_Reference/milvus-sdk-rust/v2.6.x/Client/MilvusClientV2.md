@@ -37,7 +37,7 @@ let client = ClientV2::new(&config).await?;
 
 - `pub async fn use_database(&self, database: impl Into<String>) -> Result<()>`
 
-    Selects the database used by subsequent operations on this client and its clones. See [UseDatabase](../Database/UseDatabase.md).
+    Selects the database used by subsequent operations on this client and its clones. See [UseDatabase](../Database/use_database.md).
 
 - `pub fn current_database(&self) -> String`
 
@@ -45,21 +45,21 @@ let client = ClientV2::new(&config).await?;
 
 - `pub fn sdk_version(&self) -> &'static str`
 
-    Returns the compile-time Rust SDK package version. See [SDKVersion](../Management/SDKVersion.md).
+    Returns the compile-time Rust SDK package version. See [SDKVersion](../Management/sdk_version.md).
 
 ## Method index
 
 Operations are grouped into the following categories. Click a category page to see the request fields and examples for each operation.
 
 - **Client** — connection and runtime configuration.
-- [**Database**](../Database/CreateDatabase.md) — database lifecycle and selection: `use_database`, `current_database`, `create_database`, `drop_database`, `list_databases`, `describe_database`, `alter_database_properties`, `drop_database_properties`.
+- [**Database**](../Database/create_database.md) — database lifecycle and selection: `use_database`, `current_database`, `create_database`, `drop_database`, `list_databases`, `describe_database`, `alter_database_properties`, `drop_database_properties`.
 - **Collections** — collection lifecycle and schema: `create_collection`, `has_collection`, `describe_collection`, `list_collections`, `batch_describe_collections`, `get_collection_stats`, `drop_collection`, `load_collection`, `refresh_load`, `release_collection`, `get_load_state`, `truncate_collection`, `rename_collection`, `describe_replicas`, `alter_collection_properties`, `drop_collection_properties`, `alter_collection_field_properties`, `drop_collection_field_properties`, `add_collection_field`, `add_collection_function`, `alter_collection_function`, `drop_collection_function`.
-- [**Vector**](../Vector/Insert.md) — DML and DQL: `insert`, `upsert`, `delete`, `query`, `get`, `search`, `hybrid_search`, `query_iterator`, `search_iterator`.
+- [**Vector**](../Vector/insert.md) — DML and DQL: `insert`, `upsert`, `delete`, `query`, `get`, `search`, `hybrid_search`, `query_iterator`, `search_iterator`.
 - **Partitions** — partition lifecycle: `create_partition`, `drop_partition`, `has_partition`, `list_partitions`, `load_partitions`, `release_partitions`, `get_partition_stats`.
 - **Index** — index management: `create_index`, `describe_index`, `drop_index`, `list_indexes`, `alter_index_properties`, `drop_index_properties`.
-- [**Authentication**](../Authentication/CreateUser.md) — users, roles, privileges, and privilege groups.
-- [**ResourceGroup**](../ResourceGroup/CreateResourceGroup.md) — resource-group lifecycle, node and replica transfer.
-- [**Management**](../Management/CheckHealth.md) — maintenance, compaction, segments, server version, and health.
+- [**Authentication**](../Authentication/create_user.md) — users, roles, privileges, and privilege groups.
+- [**ResourceGroup**](../ResourceGroup/create_resource_group.md) — resource-group lifecycle, node and replica transfer.
+- [**Management**](../Management/check_health.md) — maintenance, compaction, segments, server version, and health.
 - **CDC** — change-data-capture replication: `update_replicate_configuration`, `get_replicate_configuration`, `get_replicate_info`, `dump_messages`.
 - **Alias** — collection aliases: `create_alias`, `drop_alias`, `alter_alias`, `describe_alias`, `list_aliases`.
 

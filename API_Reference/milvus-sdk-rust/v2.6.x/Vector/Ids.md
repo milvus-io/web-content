@@ -9,13 +9,13 @@ pub enum Ids {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Int64`
+- **Int64**
 
     Integer primary-key values.
 
-- `VarChar`
+- **VarChar**
 
     String primary-key values.
 
