@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>The primary key and vector fields use their default names (“id” and “vector”).</li>
 <li>The metric type (vector distance definition) is set to its default value (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
-<li>The primary key field accepts integers and does not automatically increments (namely not using <a href="https://milvus.io/docs/schema.md">auto-id feature</a>)
+<li>The primary key field accepts integers and does not automatically increment (namely, not using <a href="https://milvus.io/docs/schema.md">auto-id feature</a>).
 Alternatively, you can formally define the schema of the collection by following this <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruction</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Prepare Data<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
