@@ -25,5 +25,7 @@
   "attu_release": "v3.0.0-beta.6",
   "milvus_backup_release": "0.5.16",
   "birdwatcher_release": "1.1.1",
-  "minio_release": "RELEASE.2024-12-18T13-15-44Z"
+  "minio_release": "RELEASE.2024-12-18T13-15-44Z",
+  "example_endpoint": "http://localhost:19530",
+  "example_token": "root:Milvus"
 }

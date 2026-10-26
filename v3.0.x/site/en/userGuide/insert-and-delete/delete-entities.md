@@ -71,7 +71,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -154,8 +154,7 @@ using Milvus.Client.V2.Responses.Dml;
 var config = new ConnectConfig
 {
     Uri = "http://localhost:19530",
-    Username = "root",
-    Password = "Milvus"
+    ApiKey = "root:Milvus"
 };
 using var client = new MilvusClientV2(config);
 await client.ConnectAsync();
