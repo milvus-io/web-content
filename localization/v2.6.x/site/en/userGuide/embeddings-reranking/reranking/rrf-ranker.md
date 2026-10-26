@@ -325,13 +325,12 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> ranker = {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;weight&quot;</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
   <span class="hljs-attr">input_field_names</span>: [],
-  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
   <span class="hljs-attr">params</span>: {
-    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;weighted&quot;</span>,
-    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.9</span>],
-    <span class="hljs-attr">norm_score</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
   },
 };
 
@@ -369,7 +368,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Yes</p></td>
      <td><p>Specifies the reranking method to use.</p><p>Must be set to <code translate="no">rrf</code> to use RRF Ranker.</p></td>
-     <td><p><code translate="no">"weighted"</code></p></td>
+     <td><p><code translate="no">"rrf"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
@@ -401,7 +400,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest, RRFRanker
 
 <span class="hljs-comment"># Connect to Milvus server</span>
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -424,6 +423,9 @@ image_search = AnnSearchRequest(
     limit=<span class="hljs-number">10</span>
 )
 
+<span class="hljs-comment"># Create an RRF ranker with smoothing parameter k</span>
+ranker = RRFRanker(k=<span class="hljs-number">100</span>)
+
 <span class="hljs-comment"># Apply RRF Ranker to product hybrid search</span>
 <span class="hljs-comment"># The smoothing parameter k controls the balance</span>
 hybrid_results = milvus_client.hybrid_search(
@@ -441,6 +443,7 @@ hybrid_results = milvus_client.hybrid_search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -457,6 +460,10 @@ searchRequests.add(AnnSearchReq.builder()
         .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(imageEmbedding)))
         .limit(<span class="hljs-number">10</span>)
         .build());
+
+<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> RRFRanker.builder()
+                .k(<span class="hljs-number">100</span>)
+                .build();
         
 <span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
                 .collectionName(COLLECTION_NAME)
@@ -486,13 +493,12 @@ searchRequests.add(AnnSearchReq.builder()
 };
 
 <span class="hljs-keyword">const</span> ranker = {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;weight&quot;</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
   <span class="hljs-attr">input_field_names</span>: [],
-  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
   <span class="hljs-attr">params</span>: {
-    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;weighted&quot;</span>,
-    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.9</span>],
-    <span class="hljs-attr">norm_score</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
   },
 };
 
