@@ -168,6 +168,12 @@ To find entities where `price` raised to the power of 2 is greater than 1000:
 filter = 'price ** 2 > 1000'
 ```
 
+<div class="alert note">
+
+Arithmetic operators only support expressions involving a **single field and a constant**. Expressions that combine two fields arithmetically — such as `price * quantity > 100` — are not currently supported and will return an error. If you need to filter on a derived value computed from multiple fields, consider storing the pre-computed value as a separate scalar field at insert time.
+
+</div>
+
 ## Logical Operators
 
 Logical operators are used to combine multiple conditions into a more complex filter expression. These include `AND`, `OR`, and `NOT`.
