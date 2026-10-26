@@ -77,8 +77,9 @@ summary: >-
     </button></h2><p>To use the Partition Key, you need to</p>
 <ul>
 <li><p><a href="/docs/v2.6.x/use-partition-key.md#Set-Partition-Key">Set the Partition Key</a>,</p></li>
-<li><p><a href="/docs/v2.6.x/use-partition-key.md#Set-Partition-Numbers">Set the number of partitions to create</a> (Optional), and</p></li>
-<li><p><a href="/docs/v2.6.x/use-partition-key.md#Create-Filtering-Condition">Create a filtering condition based on the Partition Key</a>.</p></li>
+<li><p><a href="/docs/v2.6.x/use-partition-key.md#Set-Partition-Numbers">Set the number of partitions to create</a> (Optional),</p></li>
+<li><p><a href="/docs/v2.6.x/use-partition-key.md#Create-Filtering-Condition">Create a filtering condition based on the Partition Key</a>, and</p></li>
+<li><p><a href="/docs/v2.6.x/use-partition-key.md#Index-Partition-Key">Index the Partition Key</a> (Recommended).</p></li>
 </ul>
 <h3 id="Set-Partition-Key" class="common-anchor-header">Set Partition Key<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -379,6 +380,135 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>You have to replace <code translate="no">partition_key</code> with the name of the field that is designated as the partition key.</p>
 </div>
+<h3 id="Index-Partition-Key" class="common-anchor-header">Index Partition Key<button data-href="#Index-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>We recommend that you create a scalar index on the Partition Key field.</p>
+<p>The Partition Key narrows a search down to the partitions that may hold the matching Partition Key values. However, each partition usually holds entities with many different Partition Key values, so Milvus still evaluates the Partition-Key-based filter against every entity in the partitions it searches. Without a scalar index on the field, that evaluation is a full scan of the field values, which can take up a large share of search latency on large collections. With a scalar index, Milvus looks up the matching entities in the index instead.</p>
+<p>This evaluation happens regardless of the vector index type. Milvus can embed Partition Key values into HNSW-family vector indexes so that a Partition-Key-filtered search traverses only the relevant sub-indexes, but that optimization narrows the vector traversal — it does not remove the filter evaluation. Searches that filter on scalar fields alone have no equivalent shortcut. In both cases, a scalar index on the Partition Key field is what keeps the evaluation fast.</p>
+<p>Choose the index type based on the Partition Key field:</p>
+<ul>
+<li><p><a href="/docs/v2.6.x/inverted.md">INVERTED</a> suits most Partition Key fields, because Partition-Key-based filters use <code translate="no">==</code> and <code translate="no">in</code> conditions.</p></li>
+<li><p><a href="/docs/v2.6.x/bitmap.md">BITMAP</a> suits fields with few distinct values. As a general guideline, use it only when the field holds fewer than 500 distinct values.</p></li>
+<li><p><a href="/docs/v2.6.x/stl-sort.md">STL_SORT</a> is an alternative for numeric and <code translate="no">VARCHAR</code> fields.</p></li>
+</ul>
+<p>The following examples add an <code translate="no">INVERTED</code> index on the Partition Key field to the index parameters of the collection, alongside the index on the vector field.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+
+<span class="hljs-comment"># Index the partition key</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span></span>
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Index the partition key</span>
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+<span class="highlighted-wrapper-line">        .indexType(IndexParam.IndexType.INVERTED)</span>
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
+        index.NewAutoIndex(entity.COSINE)),
+    <span class="hljs-comment">// Index the partition key</span>
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_varchar&quot;</span>,
+        index.NewInvertedIndex()),
+}
+
+<span class="hljs-keyword">for</span> _, opt := <span class="hljs-keyword">range</span> indexOptions {
+    indexTask, err := client.CreateIndex(ctx, opt)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        fmt.Println(err.Error())
+        <span class="hljs-comment">// handle error</span>
+    }
+    err = indexTask.Await(ctx)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+},{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-comment">// Index the partition key</span>
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span></span>
+}]
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;my_varchar&quot;,
+            &quot;indexName&quot;: &quot;my_varchar&quot;,
+            &quot;indexType&quot;: &quot;INVERTED&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Pass these index parameters when you create the collection, or create the index on an existing collection. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
 <h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Use Partition Key Isolation<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -406,6 +536,7 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>Currently, the Partition-Key Isolation feature applies only to searches with the index type set to HNSW.</p>
 </div>
+<p>Partition Key Isolation does not replace the scalar index on the Partition Key field. The Partition Key value in the filter locates the matching sub-index, but Milvus still evaluates the filter itself to identify the matching entities, so we recommend that you also <a href="/docs/v2.6.x/use-partition-key.md#Index-Partition-Key">index the Partition Key</a>.</p>
 <h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Enable Partition Key Isolation<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
