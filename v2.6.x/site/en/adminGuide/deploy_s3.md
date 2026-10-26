@@ -27,6 +27,20 @@ minio:
 ```
 See [MinIO/S3 Configurations](configure_minio.md) for more information.
 
+Hard-coding an access key and secret key works, but if you run Milvus on a host or cluster that supports workload identity (for example, an EC2 instance profile, or IRSA on EKS), we recommend using an IAM role instead. Set `useIAM` to `true` and remove `accessKeyID` and `secretAccessKey`:
+
+```yaml
+minio:
+  address: <your_s3_endpoint>
+  port: <your_s3_port>
+  useIAM: true
+  cloudProvider: "aws"
+  useSSL: <true/false>
+  bucketName: "<your_bucket_name>"
+```
+
+Milvus then obtains temporary credentials from the IAM role attached to the workload. `cloudProvider` accepts `aws`, `gcp`, or `aliyun`, and `iamEndpoint` can optionally specify a custom endpoint for fetching IAM role credentials.
+
 ### 2. Refine docker-compose.yaml
 You'd also remove the `MINIO_ADDRESS` environment variable for milvus service at `docker-compose.yaml`. By default milvus will use local minio instead of external S3.
 
@@ -53,6 +67,11 @@ For Milvus clusters on K8s, you can configure S3 in the same command that starts
 | <code>externalS3.secretKey</code>  | The secret access key for S3.    |                                      |
 | <code>externalS3.bucketName</code> | The name of the S3 bucket.       |                                      |
 | <code>externalS3.useSSL</code>     | Whether to use SSL when connecting | The values defaults to <code>false</code> |
+| <code>externalS3.useIAM</code>     | Whether to use an IAM role instead of access/secret keys to access S3. | The value defaults to <code>false</code> |
+| <code>externalS3.cloudProvider</code> | Cloud provider that issues the IAM role credentials. | <code>aws</code>, <code>gcp</code>, or <code>aliyun</code>; defaults to <code>aws</code> |
+| <code>externalS3.iamEndpoint</code> | Custom endpoint for fetching IAM role credentials. | Leave empty to use the provider default. |
+
+If your cluster supports workload identity (for example, IRSA on EKS), set <code>externalS3.useIAM</code> to <code>true</code> and remove <code>externalS3.accessKey</code> and <code>externalS3.secretKey</code> — Milvus will obtain temporary credentials from the IAM role attached to the workload.
 
 
 ### Using the YAML file

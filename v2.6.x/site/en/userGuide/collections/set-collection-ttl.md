@@ -26,7 +26,7 @@ This configuration item defaults to `-1`, indicating that the existing data comp
 
 The TTL property in a Milvus collection is specified as an integer in seconds. Once set, any data that surpasses its TTL will be automatically deleted from the collection.
 
-Because the deletion process is asynchronous, data might not be removed from search results exactly once the specified TTL has elapsed. Instead, there may be a delay, as the removal depends on the garbage collection (GC) and compaction processes, which occur at non-deterministic intervals.
+Expired entities are filtered out of search and query results as soon as the TTL elapses. Removing the underlying data from storage, however, is asynchronous: reclaiming it depends on the garbage collection (GC) and compaction processes, which occur at non-deterministic intervals.
 
 ## Set TTL
 
