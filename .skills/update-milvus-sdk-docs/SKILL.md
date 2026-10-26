@@ -83,7 +83,15 @@ run with a clarification instead of downgrading.
 - Keep deprecated API guidance scoped to the API generation documented by the page.
 - Unless the user says otherwise, always confirm before changing. Keep every edit
   reviewable; produce a per-page change summary.
-- **Branch discipline**: in a shared checkout sitting on `master`/upstream,
+
+
+**Format check mode**: when the user's instruction includes "检查格式" or
+"check formatting", the checklist above becomes the primary scope. Run every
+step against the target tree and fix all violations found. This mode does not
+bump versions or add missing operations — it only audits and corrects
+formatting inconsistencies (wrong property names, missing Constants headers,
+stale inline expansions, misplaced type pages, missing cross-links, 3+
+consecutive blank lines, etc.).- **Branch discipline**: in a shared checkout sitting on `master`/upstream,
   create the per-SDK work branch (Step 7) BEFORE starting edits. Verify
   `git branch --show-current` before every commit or amend — running
   `git commit --amend` while on `master` rewrites upstream history.
@@ -868,58 +876,82 @@ and confirm with the user before deleting it.
 - **Signature mismatches** → parameter names/types/defaults differ between page and
   header; fix to match the code.
 
-Also check: enum values missing from type pages, stale version pins, missing
-`@deprecated` markers, **response wrappers documented as standalone pages**
-(fold them into the operation's `**RETURNS:**` and remove the wrapper page),
-**missing dedicated domain-type pages** (classes/structs/enums **defined in the
-SDK's own source code** and shared across **two or more pages** — via request
-params or as the return type of a response/result member — but have no page:
-create one in the owning business-domain category; **API-specific response
-wrappers stay inline in their operation pages even when shared across several
-of them**; types defined outside the SDK, or referenced by only a single page,
-stay as inline annotations and must NOT get a page), **missing cross-links**
-(references to a type whose
-page exists but is not linked — add the relative `.md` link), and **misplaced
-type pages** (a type page sitting outside its owning category directory — move
-it into the correct category, e.g. `MilvusClient/FunctionScore.md` →
-`MilvusClient/Vector/FunctionScore.md`, and update every relative link to and
-from the moved page), and **stale inline expansions** (a type with its own
-standalone page still fully expanded inside operation pages — replace the
-inline expansion with a link to the page and delete the expanded content),
-and **unnecessary standalone pages** (a type page whose only referencer is a
-single operation page — fold the type's members into that operation page's
-`**RETURNS:**` section and delete the standalone page), and
-**undocumented return types** (an operation page's `**RETURNS:**` names a
-type that has neither a standalone page nor an inline expansion — add the
-inline expansion). **"Inline expansion" means enumerating each member with
-its name, source type, and description** (bullet list or code block showing
-the response shape) — a summary sentence like "each entry exposes its name
-and path" is **not** an expansion. After adding expansions, verify every
-`**RETURNS:**` section contains at least one actual member entry per
-response type, not just prose.
+Also check, **one category at a time** (fix and verify each before moving to
+the next):
 
-**Duplicated symbols on a page**: also flag when the same symbol appears more
-than once on a page (e.g. the same `WithXxx` method in both a brief
-`METHODS:` list and a later expanded section). Treat it as a reconciliation
-finding, but do not auto-delete the longer copy — compare both occurrences and
-keep the better one (see the **Duplicate content** rule in Pass 2).
+**Step 1 — Enum values on type pages**: verify every enum type page lists all
+variants from the SDK source (name and value). Add missing values, remove
+values absent from the source.
 
-**Format-compliance audit**: Pass 1 must ALSO verify each operation page's
-*structure* against the canonical template in the Doc style guide, not just its
-API surface. Hand-written or drifted pages commonly deviate while staying
-factually correct, so a pure API diff misses them:
-- every operation page has a `**RETURN TYPE:**` heading, a `**RETURNS:**`
-  one-sentence intro, an accessor-shape code block, and a `**METHODS:**`
-  (or `**PARAMETERS:**`) member list; `Result<()>` pages split out
-  `**RETURN TYPE:**`;
-- no leftover `*Result<...>*` line as the first line of `**RETURNS:**`
-  (the return type must move to `**RETURN TYPE:**`);
-- no empty member bullets — a bullet whose next non-blank line is another
-  bullet instead of an indented description (a plain "bullet followed by
-  bullet" scan is needed; a naive "next non-empty line" check misses these);
-- every reference to a dedicated-page type is linked (see the **Dedicated type
-  pages & cross-links** section) — run a whole-tree bare-mention scan that
-  skips code fences, inline code spans, existing links, and `(*Type*)` headers.
+**Step 2 — Request parameter coverage**: verify each operation page's
+documented request parameters match the request class properties at the target
+tag. Add missing properties, remove properties absent from the source.
+
+**Step 3 — Response member coverage**: verify each operation page's documented
+response members match the response class properties at the target tag. Add
+missing members, remove members absent from the source.
+
+**Step 4 — Method signature accuracy**: verify each documented method
+signature matches the source. Fix name/type/default mismatches.
+
+**Step 5 — Standalone type page eligibility**: types defined in SDK source
+and shared across ≥2 pages should have standalone pages; single-page types
+should be expanded inline in their referencing operation page (no standalone
+page). Third-party types and pure stdlib aliases should never get pages.
+
+**Step 6 — Inlined enum format**: inlined enums in operation pages use
+`**Constants:**` as the header (not `**VARIANTS:**`), with each value as a
+`- **ValueName**` bullet followed by an indented description.
+
+**Step 7 — Cross-links**: every reference to a type with a dedicated page
+must use a relative markdown link. Run a whole-tree bare-mention scan that
+skips code fences, inline code spans, existing links, and `(*Type*)` headers.
+
+**Step 8 — Misplaced type pages**: a type page in the wrong category
+directory should be moved to its owning category, updating every relative
+link to and from the moved page.
+
+**Step 9 — Stale inline expansions**: a type with its own standalone page
+should not still be fully expanded inside operation pages — replace the
+inline expansion with a link to the page.
+
+**Step 10 — Unnecessary standalone pages**: a standalone type page whose only
+referencer is a single operation page should be folded into that operation
+page's RETURNS section and deleted.
+
+**Step 12 — Error-reporting convention**: verify that each operation page
+uses the correct error-reporting convention for its SDK. SDKs that return a
+Status/result object (e.g. C++, Go, Java) should use `**ERROR HANDLING:**`,
+while SDKs that throw exceptions (e.g. TypeScript) should use
+`**EXCEPTIONS:**`. Never mix the two conventions within the same tree —
+a Status-returning SDK must not have `**EXCEPTIONS:**` sections, and an
+exception-throwing SDK must not have `**ERROR HANDLING:**` sections. When
+checking, also verify that the section content matches the convention: a
+Status-returning SDK's error handling should describe the returned status
+codes and messages, not list thrown exception types.
+
+**Step 11 — About.md format compliance**: verify the About page against the
+canonical structure:
+- **Version pin**: the install command's version matches the target tag (e.g.
+  `--version 3.0.0`, not a stale version).
+- **Compatibility table**: has a row for the current version line pointing to
+  the target tag; older version-line rows are retained for users on legacy
+  Milvus servers.
+- **Section ordering**: Installation → Quick Start → Compatibility →
+  Breaking Changes (conditional) → Contributing → License.
+- **Breaking Changes section**: present only when the CHANGELOG for the target
+  release lists breaking changes; each entry names the release that introduced
+  the break and the required caller update. A release with no CHANGELOG
+  breaking-change entry has no Breaking Changes entry here.
+- **License link**: uses the absolute GitHub URL to the SDK repository's
+  LICENSE file (e.g. `https://github.com/milvus-io/milvus-sdk-csharp/blob/master/LICENSE`),
+  not a relative `(LICENSE)` link that 404s inside the web-content repo.
+- **Quick Start**: has exactly one `## Example` section; the example code is
+  copy-paste runnable (correct property names, correct method signatures from
+  the target tag).
+
+After completing all steps, run a final validation: 0 broken links, 0
+orphaned pages, 0 format violations, and produce a per-page change summary.
 
 #### Response surface (output members)
 

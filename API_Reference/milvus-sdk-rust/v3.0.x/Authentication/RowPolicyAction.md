@@ -15,7 +15,7 @@ pub enum RowPolicyAction {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Query` - Applies to query operations.
 - `Search` - Applies to search operations.

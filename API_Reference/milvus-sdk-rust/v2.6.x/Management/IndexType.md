@@ -36,7 +36,7 @@ pub enum IndexType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Invalid`
 

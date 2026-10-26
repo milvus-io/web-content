@@ -104,6 +104,37 @@ DmlResponse
 
     The execution cost reported by the server.
 
+
+FieldPartialUpdateOp members:
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults.
+- `field_name(value)` / `set_field_name(value)` / `get_field_name()` - Sets or returns the field name.
+- `op_type(value)` / `set_op_type(value)` / `get_op_type()` - Sets or returns the operation type.
+
+## FieldPartialUpdateOpType
+
+```rust
+pub enum FieldPartialUpdateOpType {
+    Replace,
+    ArrayAppend,
+    ArrayRemove,
+}
+```
+
+- `Replace` - Overwrite the existing field value. This is the default.
+- `ArrayAppend` - Append the supplied elements to an existing array field.
+- `ArrayRemove` - Remove every occurrence of the supplied elements from an existing array field.
+
+## Example
+
+```rust
+let op = FieldPartialUpdateOp::new()
+    .field_name("tags")
+    .op_type(FieldPartialUpdateOpType::ArrayAppend);
+```
+
 ## Example
 
 ```rust

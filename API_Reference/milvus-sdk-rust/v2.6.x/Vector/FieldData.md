@@ -36,7 +36,7 @@ pub enum FieldData {
 
 Each variant carries the field `name` shared with the collection schema and the `values` for the field in row order.
 
-**VARIANTS:**
+**Constants:**
 
 - `Bool`
 

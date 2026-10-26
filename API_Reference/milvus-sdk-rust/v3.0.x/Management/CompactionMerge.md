@@ -20,6 +20,28 @@ pub struct CompactionMerge
 - `get_failure_reason()` (*&str*) - The failure reason, or an empty string when the task has not failed.
 - `get_target_segment_ids()` (*&[i64]*) - The target segment IDs produced by the task.
 
+
+CompactionType members:
+
+
+CompactionTaskState members:
+
+## Example
+
+```rust
+if task.get_state() == CompactionTaskState::Failed {
+    println!("failure: {}", task.get_failure_reason());
+}
+```
+
+## Example
+
+```rust
+if task.get_compaction_type() == CompactionType::Clustering {
+    println!("clustering task: {}", task.get_plan_id());
+}
+```
+
 ## Example
 
 ```rust

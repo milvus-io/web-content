@@ -240,6 +240,42 @@ SearchResponse
 
     The ratio of scanned bytes served from the cache.
 
+
+FunctionScore members:
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults.
+- `functions(value)` / `set_functions(value)` / `get_functions()` - Sets or returns the functions.
+- `add_function(value)` - Adds one function to the existing values.
+- `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the params.
+
+
+Highlighter members:
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults.
+- `highlight_type(value)` / `set_highlight_type(value)` / `get_highlight_type()` - Sets or returns the highlight type.
+- `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the highlighting parameters.
+
+`Highlighter` also implements `From<LexicalHighlighter>` and `From<SemanticHighlighter>` to convert a typed highlighter into its parameterized form.
+
+## Example
+
+```rust
+let highlighter = Highlighter::new()
+    .highlight_type(HighlightType::Lexical)
+    .params(HashMap::from([("pre_tags".to_owned(), "[\"<b>\"]".to_owned())]));
+```
+
+## Example
+
+```rust
+let rerank = FunctionScore::new()
+    .add_function(BoostRerank::new().name("boost on year").filter("year >= 2000").weight(5.0));
+```
+
 ## Example
 
 ```rust

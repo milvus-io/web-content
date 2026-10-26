@@ -16,7 +16,7 @@ pub enum FilterTemplateValue {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Bool(bool)` - A boolean template value.
 - `Int64(i64)` - A 64-bit integer template value.

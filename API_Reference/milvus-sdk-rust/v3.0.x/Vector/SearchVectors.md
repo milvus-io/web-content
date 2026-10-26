@@ -15,7 +15,7 @@ pub enum SearchVectors {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Float(Vec<Vec<f32>>)` - Dense vectors of 32-bit floats, one slice per query.
 - `Binary(Vec<Vec<u8>>)` - Binary vectors stored as packed bytes, one slice per query.

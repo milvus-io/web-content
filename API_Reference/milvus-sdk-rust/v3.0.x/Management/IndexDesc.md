@@ -77,6 +77,19 @@ pub struct IndexDesc
 - `min_version(value)` / `set_min_version(value)` / `get_min_version()` - Sets or returns the minimum version.
 - `max_version(value)` / `set_max_version(value)` / `get_max_version()` - Sets or returns the maximum version.
 
+
+IndexStateCode members:
+
+## Example
+
+```rust
+for desc in resp.indexes() {
+    if desc.get_state() == IndexStateCode::Finished {
+        println!("index {} is ready", desc.get_index_name());
+    }
+}
+```
+
 ## Example
 
 ```rust

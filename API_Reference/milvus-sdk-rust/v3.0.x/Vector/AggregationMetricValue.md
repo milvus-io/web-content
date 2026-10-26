@@ -11,7 +11,7 @@ pub enum AggregationMetricValue {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Int(i64)` - Represents an integer value.
 - `Double(f64)` - Represents a floating-point value.

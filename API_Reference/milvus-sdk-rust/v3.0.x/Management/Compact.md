@@ -64,6 +64,19 @@ CompactResponse
 
     The number of compaction plans produced.
 
+
+TargetSizeUnit members:
+
+## Example
+
+```rust
+let request = CompactRequest::builder()
+    .collection_name("books")
+    .target_size(1)
+    .target_size_unit(TargetSizeUnit::GB)
+    .build()?;
+```
+
 ## Example
 
 ```rust

@@ -52,6 +52,18 @@ GetLoadStateResponse
 
     The loading progress as a percentage.
 
+
+LoadState members:
+
+## Example
+
+```rust
+let resp = client.get_load_state(request).await?;
+if resp.state() == LoadState::Loaded {
+    println!("collection is ready for queries");
+}
+```
+
 ## Example
 
 ```rust

@@ -10,7 +10,7 @@ pub enum CompactionStateCode {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown`
 

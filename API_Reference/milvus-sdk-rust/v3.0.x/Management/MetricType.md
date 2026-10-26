@@ -20,7 +20,7 @@ pub enum MetricType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Default`
 

@@ -28,7 +28,7 @@ pub enum DataType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown`
 

@@ -12,7 +12,7 @@ pub enum RestoreSnapshotStateCode {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
 - `Unknown` - The restore state is unknown. This is the default.
 
