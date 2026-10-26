@@ -17,6 +17,8 @@ delete(DeleteReq.builder()
     .ids(List<Object> ids)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -41,7 +43,7 @@ delete(DeleteReq.builder()
 
 - `ids(List<Object> ids)` -
 
-    A list of primary key values to identify specific entities.
+    A list of primary key values to identify specific entities. At least one of `filter` and `ids` must be set.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
@@ -50,6 +52,14 @@ delete(DeleteReq.builder()
 - `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
     The consistency level for the delete operation. Defaults to the server default when omitted. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
+
+- `rlsPrincipal(String rlsPrincipal)` -
+
+    The name of the RLS principal the delete runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)` -
+
+    Whether the delete explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 

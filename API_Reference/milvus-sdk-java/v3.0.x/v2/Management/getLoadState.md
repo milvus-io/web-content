@@ -47,9 +47,9 @@ A collection is in the loaded state if any or all of its partitions are loaded.
 
 **EXCEPTIONS:**
 
-- **MilvusException**
+- **[MilvusClientException](../Client/MilvusClientException.md)**
 
-    This exception will be raised when any error occurs during this operation.
+    This exception will be raised when the specified collection or partition does not exist, or when any error occurs during this operation.
 
 ## Example
 

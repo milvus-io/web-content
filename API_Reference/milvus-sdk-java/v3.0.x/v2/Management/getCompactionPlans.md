@@ -35,17 +35,57 @@ A **GetCompactionPlansResp** object that contains the compaction state and merge
 
     The ID of the compaction.
 
-- `getState()` (*CompactionState*) -
+- `getCollectionName()` (*String*) -
 
-    The state of the compaction.
+    The name of the collection the compaction plans belong to.
+
+- `getState()` (*[CompactionState](CompactionState.md)*) -
+
+    The overall state of the compaction job. See [CompactionState](CompactionState.md).
 
 - `getPlans()` (*List\<CompactionPlan\>*) -
 
     The merge plans of the compaction. Each **CompactionPlan** has the following getters:
 
+    - `getPlanId()` (*Long*) -
+
+        The ID of this compaction plan.
+
+    - `getTriggerId()` (*Long*) -
+
+        The ID of the compaction trigger.
+
+    - `getCollectionId()` (*Long*) -
+
+        The ID of the collection being compacted.
+
+    - `getPartitionId()` (*Long*) -
+
+        The ID of the partition being compacted.
+
+    - `getChannel()` (*String*) -
+
+        The insert channel that the segments belong to.
+
+    - `getCompactionType()` (*[CompactionType](CompactionType.md)*) -
+
+        The type of this compaction. See [CompactionType](CompactionType.md).
+
+    - `getState()` (*[CompactionTaskState](CompactionTaskState.md)*) -
+
+        The state of this compaction plan. See [CompactionTaskState](CompactionTaskState.md).
+
+    - `getFailureReason()` (*String*) -
+
+        The reason why this plan failed, or an empty string.
+
     - `getTarget()` (*Long*) -
 
         The ID of the target segment.
+
+    - `getTargets()` (*List\<Long\>*) -
+
+        The IDs of the target segments. Falls back to `getTarget()` when the server does not return multiple targets.
 
     - `getSources()` (*List\<Long\>*) -
 

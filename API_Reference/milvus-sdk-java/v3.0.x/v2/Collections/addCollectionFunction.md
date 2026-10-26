@@ -1,5 +1,7 @@
 # addCollectionFunction()
 
+**Deprecated since SDK v3.0.10.** Milvus 3.0 and later do not support adding a function separately. Use [`addFunctionField()`](addFunctionField.md) instead, which adds the function together with its output field and index.
+
 Adds a function definition to an existing collection. In Milvus 3.0, use [`addFunctionField()`](addFunctionField.md) when the function output field and its index must be added together.
 
 ```java

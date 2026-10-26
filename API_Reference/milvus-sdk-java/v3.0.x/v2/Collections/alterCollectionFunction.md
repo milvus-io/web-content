@@ -12,6 +12,7 @@ public void alterCollectionFunction(AlterCollectionFunctionReq request)
 alterCollectionFunction(AlterCollectionFunctionReq.builder()
     .collectionName(String collectionName)
     .databaseName(String databaseName)
+    .functionName(String functionName)
     .function(CreateCollectionReq.Function function)
     .build()
 );
@@ -19,17 +20,21 @@ alterCollectionFunction(AlterCollectionFunctionReq.builder()
 
 **BUILDER METHODS:**
 
-- `collectionName(String collectionName)` -
+- `collectionName(String collectionName)`
 
     **[REQUIRED]**
 
     The name of the collection.
 
-- `databaseName(String databaseName)` -
+- `databaseName(String databaseName)`
 
     The name of the database. Defaults to the current database if not specified.
 
-- `function(CreateCollectionReq.Function function)` -
+- `functionName(String functionName)`
+
+    The name of the function to alter. When omitted, the name of the `function()` definition is used.
+
+- `function(CreateCollectionReq.Function function)`
 
     **[REQUIRED]**
 

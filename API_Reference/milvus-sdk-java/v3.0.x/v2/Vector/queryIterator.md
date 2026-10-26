@@ -24,6 +24,8 @@ queryIterator(QueryIteratorReq.builder()
     .reduceStopForBest(boolean reduceStopForBest)
     .cursor(QueryIteratorCursor cursor)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -89,6 +91,14 @@ queryIterator(QueryIteratorReq.builder()
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
     A map of template variable values for parameterized filters.
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the query iterator runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the query iterator explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURNS:**
 

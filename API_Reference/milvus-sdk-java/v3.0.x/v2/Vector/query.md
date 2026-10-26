@@ -25,6 +25,9 @@ QueryReq.builder()
     .orderByFields(orderByFields)
     .queryParams(queryParams)
     .filterTemplateValues(filterTemplateValues)
+    .groupByFields(groupByFields)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 // include-end
 // include-start zilliz
@@ -44,6 +47,9 @@ QueryReq.builder()
     .orderByFields(orderByFields)
     .queryParams(queryParams)
     .filterTemplateValues(filterTemplateValues)
+    .groupByFields(groupByFields)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 // include-end
 ```
@@ -109,6 +115,18 @@ QueryReq.builder()
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 
     Values substituted into placeholders in the filter expression.
+
+- `groupByFields(List<String> groupByFields)`
+
+    The scalar fields to group the query results by. When set, the query returns one row per unique combination of the specified field values, and any aggregation expressions in `outputFields` (`count(*)`, `count(<f>)`, `min(<f>)`, `max(<f>)`, `sum(<f>)`, `avg(<f>)`) are computed per group. Supported grouping-key field types are Int8, Int16, Int32, Int64, VarChar, and Timestamptz; grouping by Float, Double, vector, JSON, or Array fields returns an error.
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the query runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the query explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 
