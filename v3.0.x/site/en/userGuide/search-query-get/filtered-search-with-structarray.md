@@ -16,6 +16,7 @@ This page uses the `tech_articles` collection from [Create a StructArray Field](
 | Filter by a top-level scalar field, such as `category`. | Regular filter expression. | Selects parent entities before or during search. |
 | Constrain element-level vector search to Struct elements that match scalar conditions. | `element_filter`. | Searches only matching Struct elements and can return matched element offsets. |
 | Select entities by whether any, all, or a specific number of Struct elements match a predicate. | `MATCH_ANY`, `MATCH_ALL`, `MATCH_LEAST`, `MATCH_MOST`, or `MATCH_EXACT`. | Row-level filtering. These operators do not return offsets by themselves. |
+| Test one element position, count Struct elements, or check subfield values across elements without `$[...]`. | Row-level StructArray paths, such as `chunks[0][section]`, `array_length(chunks)`, or `array_contains(chunks[section], ...)`. | Row-level filtering. For syntax, see [StructArray Operators](struct-array-operators.md). |
 
 <div class="alert note">
 

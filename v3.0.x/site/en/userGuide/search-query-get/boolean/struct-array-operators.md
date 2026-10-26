@@ -1,18 +1,19 @@
 ---
 id: struct-array-operators.md
 title: "StructArray Operators"
-summary: "StructArray operators filter entities by evaluating predicates on scalar subfields inside a StructArray field. Use this page as a syntax reference for element_filter and the MATCH_* operator family."
+summary: "StructArray operators filter entities by evaluating predicates on scalar subfields inside a StructArray field. Use this page as a syntax reference for element_filter, the MATCH_* operator family, and row-level predicates on StructArray paths."
 ---
 # StructArray Operators
 
-StructArray operators filter entities by evaluating predicates on scalar subfields inside a StructArray field. Use this page as a syntax reference for `element_filter` and the `MATCH_*` operator family.
+StructArray operators filter entities by evaluating predicates on scalar subfields inside a StructArray field. Use this page as a syntax reference for `element_filter`, the `MATCH_*` operator family, and row-level predicates on StructArray paths.
 
-StructArray filtering has two operator families:
+StructArray filtering has two operator families and a set of row-level path predicates:
 
-| Operator family | Main purpose | Result behavior |
+| Filter form | Main purpose | Result behavior |
 | --- | --- | --- |
 | `element_filter` | Match Struct elements that satisfy a scalar predicate. | In element-level search, matched hits can include element offsets. In row-level query or filtered search, result shape depends on the API and output fields. |
 | `MATCH_*` | Select entities by how many Struct elements satisfy a scalar predicate. | Row-level filtering. These operators do not return element offsets by themselves. |
+| Row-level path predicates | Test one element position, count Struct elements, or test subfield values across elements without a `$[...]` predicate. | Row-level filtering. These predicates do not return element offsets. |
 
 Use scalar subfields in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.
 
@@ -25,6 +26,9 @@ Use scalar subfields in StructArray operators. Vector subfields are used by vect
 | Return only entities where at least one Struct element satisfies a predicate. | `MATCH_ANY` |
 | Return only entities where all Struct elements satisfy a predicate. | `MATCH_ALL` |
 | Return only entities where at least, at most, or exactly `N` Struct elements satisfy a predicate. | `MATCH_LEAST`, `MATCH_MOST`, or `MATCH_EXACT` |
+| Check the Struct element at a specific position, such as the first chunk. | A positional path such as `chunks[0][section]` |
+| Filter by the number of Struct elements in an entity. | `array_length(chunks)` |
+| Check whether any Struct element holds a subfield value, without combining conditions on the same element. | `array_contains`, `array_contains_any`, or `array_contains_all` on a subfield path such as `chunks[section]` |
 
 ## Element Filter
 
@@ -118,6 +122,72 @@ MATCH_EXACT(chunks, $[section] == "filter", threshold=1)
 
 For `MATCH_EXACT`, `threshold` can be zero or a positive integer.
 
+## Row-level predicates on StructArray paths
+
+Besides `element_filter` and `MATCH_*`, a regular filter expression can reference a StructArray field or one of its scalar subfields directly. These predicates evaluate at the entity level and do not return element offsets.
+
+### Access a Struct element by position
+
+Use `structArrayField[index][subfield]` to reference one scalar subfield of the Struct element at a zero-based position. Write the position first, then the subfield name.
+
+```python
+# The first chunk belongs to the "index" section.
+chunks[0][section] == "index"
+
+# The second chunk has a high quality score.
+chunks[1][quality_score] > 0.9
+
+# The first chunk is on page 1, 2, or 3.
+chunks[0][page] in [1, 2, 3]
+
+# Chained range on a positional path.
+0.8 < chunks[0][quality_score] < 0.95
+```
+
+Positional paths support comparison, `in`, `not in`, and chained range predicates on scalar subfields. An entity does not match when its StructArray field has no element at that position.
+
+### Count Struct elements
+
+Use `array_length(structArrayField)` to filter by the number of Struct elements in an entity. `array_length` on a subfield path, such as `array_length(chunks[section])`, returns the same count, because every subfield holds one value per Struct element.
+
+```python
+# Articles with at least three chunks.
+array_length(chunks) >= 3
+
+# Articles with exactly one chunk.
+array_length(chunks) == 1
+```
+
+### Test subfield values across elements
+
+Use `array_contains`, `array_contains_any`, or `array_contains_all` on a scalar subfield path to test the values of that subfield across all Struct elements in the entity. Each subfield path is evaluated on its own, so conditions on different subfields can be satisfied by different Struct elements.
+
+```python
+# At least one chunk belongs to the "index" section.
+array_contains(chunks[section], "index")
+
+# At least one chunk belongs to the "index" or the "search" section.
+array_contains_any(chunks[section], ["index", "search"])
+
+# The chunks cover both the "index" and the "search" sections,
+# not necessarily in the same chunk.
+array_contains_all(chunks[section], ["index", "search"])
+```
+
+`array_contains(chunks[section], "index")` selects the same entities as `MATCH_ANY(chunks, $[section] == "index")`. Use `MATCH_*` or `element_filter` when several conditions must hold for the same Struct element, because `$[...]` predicates are evaluated per element.
+
+### Test whether a nullable StructArray field is null
+
+Use `IS NULL` or `IS NOT NULL` on a nullable StructArray field to test the whole field value. Null applies to the entire StructArray field, so these predicates accept only the field name, not a subfield path.
+
+```python
+# Entities that have no chunks value.
+chunks is null
+
+# Entities that have a chunks value.
+chunks is not null
+```
+
 ## Supported predicates
 
 The `$[...]` syntax represents the scalar value of the current Struct element. Predicate support depends on the scalar subfield type.
@@ -140,7 +210,7 @@ Element-level `$[...]` predicates do not support:
 
 - JSON path syntax, `exists` on JSON paths, or JSON functions such as `json_contains`, `json_contains_all`, or `json_contains_any`.
 
-- Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length`.
+- Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length` on `$[subfield]`. Use these functions on a subfield path such as `chunks[section]` in a row-level predicate instead.
 
 - `$[subfield] is null` or `$[subfield] is not null`.
 
@@ -158,13 +228,17 @@ Element-level `$[...]` predicates do not support:
 
 - `MATCH_*` operator names are case-insensitive.
 
-- Use `$[subfield]` only inside `element_filter` or `MATCH_*` predicates.
+- Use `$[subfield]` only inside `element_filter` or `MATCH_*` predicates. For example, `array_length($[section])` is rejected.
 
 - Do not use `$[subfield]` as a JSON path, array container, or vector field reference.
 
 - Do not nest `element_filter` or `MATCH_*` inside another StructArray operator.
 
 - Use named `threshold=N` for `MATCH_LEAST`, `MATCH_MOST`, and `MATCH_EXACT`.
+
+- In positional paths, write the element position before the subfield name: `chunks[0][section]`, not `chunks[section][0]`.
+
+- Use `IS NULL` and `IS NOT NULL` only on the whole StructArray field, such as `chunks is null`. Do not use them on a subfield path such as `chunks[section]` or on `$[subfield]`.
 
 - `MATCH_ANY` on an empty StructArray returns `false`.
 

@@ -125,6 +125,8 @@ At a high level:
 
 - Use `$[subfield]` only inside StructArray operators.
 
+- Row-level filter expressions can also reference StructArray paths directly: `chunks[0][section]` for one element position, `array_length(chunks)` for the element count, `array_contains(chunks[section], ...)` for subfield values across elements, and `chunks is null` on a nullable StructArray field.
+
 - Use scalar subfields for scalar predicates.
 
 - Do not use vector subfields as `$[...]` scalar predicate inputs.

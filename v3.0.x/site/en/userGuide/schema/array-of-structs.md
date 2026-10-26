@@ -133,7 +133,7 @@ StructArray documentation is split into modeling pages and search pages. Use the
 | Search | [Hybrid Search with StructArray](hybrid-search-with-structarray.md) | Combine StructArray element-level search with other vector searches. |
 | Search | [Filtered Search with StructArray](filtered-search-with-structarray.md) | Use StructArray filters in search, query, and hybrid search. |
 | Search | [Search with Embedding Lists](search-with-embedding-lists.md) | Build ColBERT and ColPali-style retrieval systems with StructArray. |
-| Filter | [StructArray Operators](struct-array-operators.md) | Reference syntax for `element_filter` and `MATCH_*` operators. |
+| Filter | [StructArray Operators](struct-array-operators.md) | Reference syntax for `element_filter`, `MATCH_*` operators, and row-level StructArray path predicates. |
 
 ## Key limits to check first
 
@@ -143,7 +143,7 @@ StructArray documentation is split into modeling pages and search pages. Use the
 
 - Vector subfields require indexes. EmbeddingList search uses `MAX_SIM*` metrics, while element-level search uses regular vector metrics.
 
-- `element_filter` and `MATCH_*` are for scalar subfields inside StructArray fields. Use `$[subfield]` only inside these operators.
+- `element_filter` and `MATCH_*` are for scalar subfields inside StructArray fields. Use `$[subfield]` only inside these operators. Row-level filters can also reference StructArray paths directly, such as `chunks[0][section]`, `array_length(chunks)`, and `array_contains(chunks[section], ...)`.
 
 - Some search combinations are version-gated or mode-specific. Check [StructArray Limits](structarray-limits.md) before relying on range search, grouping search, hybrid search, nullable fields, or dynamically added fields.
 
