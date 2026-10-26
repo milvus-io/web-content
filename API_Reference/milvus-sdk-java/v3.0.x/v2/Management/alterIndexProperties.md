@@ -95,8 +95,6 @@ client.createIndex(CreateIndexReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
-
 // 3. Alter the `mmap.enabled` property
 Map<String, String> properties = new HashMap<>();
 properties.put("mmap.enabled", "true");

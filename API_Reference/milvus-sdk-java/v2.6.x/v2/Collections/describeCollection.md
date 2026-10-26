@@ -36,7 +36,6 @@ DescribeCollectionReq.builder()
 
 **RETURNS:**
 
-
 A **DescribeCollectionResp** object that contains detailed information about the specified collection.
 
 - `getCollectionName()` (*String*) -

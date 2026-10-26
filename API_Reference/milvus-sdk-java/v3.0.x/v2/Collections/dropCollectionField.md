@@ -82,7 +82,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. Add a nullable field, then drop it
 client.addCollectionField(AddCollectionFieldReq.builder()
     .collectionName("books")

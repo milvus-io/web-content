@@ -87,7 +87,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 2. List the import jobs of the collection
 MilvusListImportJobsRequest request = MilvusListImportJobsRequest.builder()
     .dbName("default")

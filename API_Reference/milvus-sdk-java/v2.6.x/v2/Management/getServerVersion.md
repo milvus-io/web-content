@@ -12,7 +12,6 @@ public String getServerVersion()
 
 **RETURNS:**
 
-
 The version string of the server (e.g., `"2.6.13"`).
 
 **EXCEPTIONS:**

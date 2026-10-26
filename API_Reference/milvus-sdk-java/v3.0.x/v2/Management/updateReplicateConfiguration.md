@@ -62,8 +62,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. Define the message channels to replicate
 List<String> pchannelList = new ArrayList<>();
 pchannelList.add("by-dev-rootcoord-dml_0_123v0");

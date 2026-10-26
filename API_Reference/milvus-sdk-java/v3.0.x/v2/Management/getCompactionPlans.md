@@ -87,7 +87,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .build());
 
-
 // 3. Compact a collection and get the compaction ID
 CompactResp compactResp = client.compact(CompactReq.builder()
     .collectionName("test")

@@ -129,7 +129,7 @@ such as <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/qui
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
+    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo have 384 dimensions</span>
 )
 
 <span class="hljs-comment"># Text strings to search from.</span>

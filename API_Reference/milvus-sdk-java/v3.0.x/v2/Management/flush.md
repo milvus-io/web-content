@@ -69,8 +69,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .build());
 
-
-
 // 3. Flush the collection
 client.flush(FlushReq.builder()
     .collectionNames(Collections.singletonList("my_collection"))

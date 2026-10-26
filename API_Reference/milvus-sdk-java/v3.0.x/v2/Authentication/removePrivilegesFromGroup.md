@@ -55,8 +55,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. Create a privilege group and add privileges to it
 client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder().groupName("read_only").build());
 List<String> initPrivileges = new ArrayList<>();

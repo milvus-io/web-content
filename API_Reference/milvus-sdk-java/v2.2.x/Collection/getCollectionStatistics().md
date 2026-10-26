@@ -2,11 +2,9 @@
 
 A MilvusClient interface. This method shows the statistical information of a specified collection. 
 
-
 <div class="alert note">
 The current version only returns the row count of a collection. This method can be deprecated in the future. 
 </div>
-
 
 ```Java
 R<GetCollectionStatisticsResponse> getCollectionStatistics(GetCollectionStatisticsParam requestParam);

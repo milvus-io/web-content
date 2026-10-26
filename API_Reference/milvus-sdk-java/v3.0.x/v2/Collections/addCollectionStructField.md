@@ -108,8 +108,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
-
 // 3. Add a struct field to the collection
 client.addCollectionStructField(AddCollectionStructFieldReq.builder()
     .collectionName("books")

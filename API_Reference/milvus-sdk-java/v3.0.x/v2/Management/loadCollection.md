@@ -106,8 +106,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .build());
 
-
-
 // 3. Create an index for the field "vector" (required before loading)
 IndexParam indexParam = IndexParam.builder()
         .metricType(IndexParam.MetricType.COSINE)

@@ -148,8 +148,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
-
 // 3. Add a BM25 function field (requires StorageV3 enabled on the server)
 CreateCollectionReq.Function bm25Function = CreateCollectionReq.Function.builder()
     .name("bm25")

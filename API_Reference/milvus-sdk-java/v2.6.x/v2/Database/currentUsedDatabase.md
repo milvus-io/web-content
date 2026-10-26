@@ -12,7 +12,6 @@ public String currentUsedDatabase()
 
 **RETURNS:**
 
-
 The name of the currently active database.
 
 ## Example

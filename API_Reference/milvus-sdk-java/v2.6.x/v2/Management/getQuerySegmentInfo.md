@@ -128,8 +128,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .build());
 
-
-
 // 3. Create an index and load the collection
 IndexParam indexParam = IndexParam.builder()
         .metricType(IndexParam.MetricType.COSINE)

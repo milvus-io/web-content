@@ -28,7 +28,6 @@ Methods of AddUserToRoleParam.Builder:
 The `AddUserToRoleParam.Builder.build()` can throw the following exceptions:
 - `ParamException`: error if the parameter is invalid.
 
-
 ## Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.

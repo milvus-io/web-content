@@ -10,7 +10,6 @@ Note: Drops the role from Milvus. It succeeds if the role exists, otherwise fail
 R<RpcStatus> dropRole(DropRoleParam requestParam);
 ```
 
-
 ## DropRoleParam
 Use the `DropRoleParam.Builder` to construct a `DropRoleParam` object.
 
@@ -27,7 +26,6 @@ Methods of `DropRoleParam.Builder`:
 
 The `DropRoleParam.Builder.build()` can throw the following exceptions:
 - `ParamException`: Prompts an error if the parameter is invalid.
-
 
 ## Returns
 This method catches all the exceptions and returns an R<RpcStatus> object.

@@ -113,7 +113,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. Get the progress of a refresh job
 long jobId = 123456789L;
 GetRefreshExternalCollectionProgressResp resp = client.getRefreshExternalCollectionProgress(

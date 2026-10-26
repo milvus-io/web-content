@@ -116,7 +116,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. List the refresh jobs of the external collection
 ListRefreshExternalCollectionJobsResp resp = client.listRefreshExternalCollectionJobs(
     ListRefreshExternalCollectionJobsReq.builder()

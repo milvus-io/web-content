@@ -12,7 +12,6 @@ public boolean clientIsReady()
 
 **RETURNS:**
 
-
 Returns **true** if the client is connected and ready, **false** otherwise.
 
 ## Example

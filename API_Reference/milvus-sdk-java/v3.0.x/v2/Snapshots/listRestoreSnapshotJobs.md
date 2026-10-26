@@ -115,7 +115,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. List the restore snapshot jobs
 ListRestoreSnapshotJobsReq request = ListRestoreSnapshotJobsReq.builder()
     .databaseName("default")

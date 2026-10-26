@@ -67,8 +67,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. Create a database, a collection, and a role
 client.createDatabase(io.milvus.v2.service.database.request.CreateDatabaseReq.builder().databaseName("my_db").build());
 client.useDatabase("my_db");

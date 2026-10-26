@@ -102,7 +102,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 2. Import data files into the collection
 MilvusImportRequest request = MilvusImportRequest.builder()
     .collectionName("books")

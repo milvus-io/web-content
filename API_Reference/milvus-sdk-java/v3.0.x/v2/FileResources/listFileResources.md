@@ -57,7 +57,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. List the file resources
 ListFileResourcesResp resp = client.listFileResources(
     ListFileResourcesReq.builder().build()

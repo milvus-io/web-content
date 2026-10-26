@@ -94,7 +94,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .build());
 
-
 // 3. Compact the collection
 CompactResp response = client.compact(CompactReq.builder()
     .databaseName("default")

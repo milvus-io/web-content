@@ -85,7 +85,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. Create a snapshot of the collection
 CreateSnapshotReq request = CreateSnapshotReq.builder()
     .databaseName("default")

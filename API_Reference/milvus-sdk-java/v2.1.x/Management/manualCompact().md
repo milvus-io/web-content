@@ -26,7 +26,6 @@ Methods of `ManualCompactParam.Builder`:
 | `withCollectionName(String collectionName)` | Sets the collection name. The collection name cannot be empty or null. | collectionName: The name of the collection that needs to be manually compacted. |
 | `build()`                                   | Constructs a `ManualCompactParam` object.                    | N/A                                                          |
 
-
 The `ManualCompactParam.Builder.build()` could throw the following exceptions:
 
 - `ParamException`: error if the parameter is invalid.

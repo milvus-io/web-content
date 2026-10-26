@@ -79,7 +79,6 @@ A future completed with a **SearchResp** object that contains search results, re
 
         The relevance scores for the fragments.
 
-
 - `getRecalls()` (*List\<Float\>*) -
 
     The recall values of the search, one per query vector.

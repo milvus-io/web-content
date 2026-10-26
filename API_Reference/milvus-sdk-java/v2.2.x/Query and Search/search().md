@@ -79,7 +79,6 @@ Methods of `SearchResultsWrapper.IDScore`:
 | `getScore()`   | Gets the distance value.                               | float       |
 | `get(String keyName)` | Get the value of a field by its name. If the field exists either as a pre-defined field or a dynamic field, its value is to return.<br>If the field does not exist, a `ParamException` is raised. | Object  |
 
-
 Whether `getScore()` is an accurate distance or not depands on the index type:
 - FLAT
         

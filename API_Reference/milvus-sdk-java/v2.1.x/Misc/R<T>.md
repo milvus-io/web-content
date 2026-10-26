@@ -50,7 +50,6 @@ Not all status codes are used, some of them are reserved.
 | `IndexNotExist`         | 25       | **This error is reserved and not used for now.*              |
 | `EmptyCollection`       | 26       | **This error is reserved and not used for now.*              |
 
-
 ## Methods
 
 | Method         | Description                                      | Return             |

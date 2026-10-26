@@ -48,7 +48,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Remove a file resource
 client.removeFileResource(RemoveFileResourceReq.builder()
     .name("stopwords")

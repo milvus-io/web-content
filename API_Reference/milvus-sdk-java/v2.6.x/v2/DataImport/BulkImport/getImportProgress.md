@@ -31,7 +31,6 @@ Identifier of the import job to inspect.
 
 **RETURNS:**
 
-
 A JSON response containing the import job state, progress, and related details.
 
 ## Example
@@ -70,7 +69,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. Import data files and get the job ID from the response
 MilvusImportRequest importRequest = MilvusImportRequest.builder()

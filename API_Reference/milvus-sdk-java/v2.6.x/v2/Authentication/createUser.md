@@ -57,7 +57,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Create a user
 client.createUser(CreateUserReq.builder()
     .userName("alice")

@@ -52,7 +52,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Create a role
 client.createRole(CreateRoleReq.builder()
     .roleName("analyst")

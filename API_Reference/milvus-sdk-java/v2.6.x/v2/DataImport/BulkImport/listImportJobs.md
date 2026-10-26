@@ -35,7 +35,6 @@ Database containing the collection.
 
 **RETURNS:**
 
-
 A JSON response containing the matching import jobs and pagination details.
 
 ## Example
@@ -73,7 +72,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. List the import jobs of the collection
 MilvusListImportJobsRequest request = MilvusListImportJobsRequest.builder()

@@ -54,8 +54,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. Create a database
 String databaseName = "my_database";
 Map<String, String> properties = new HashMap<>();

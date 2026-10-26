@@ -43,4 +43,3 @@ structFieldSchema.getElementType();
 // DataType.Struct
 ```
 
-

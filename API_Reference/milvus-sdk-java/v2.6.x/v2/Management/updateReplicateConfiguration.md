@@ -34,7 +34,6 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 
 **RETURNS:**
 
-
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../Client/MilvusClientException.md)**
@@ -60,8 +59,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .build();
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-
 
 // 2. Define the message channels to replicate
 List<String> pchannelList = new ArrayList<>();

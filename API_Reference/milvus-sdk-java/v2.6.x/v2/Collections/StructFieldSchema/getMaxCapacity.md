@@ -43,4 +43,3 @@ structFieldSchema.getMaxCapacity();
 // 100
 ```
 
-

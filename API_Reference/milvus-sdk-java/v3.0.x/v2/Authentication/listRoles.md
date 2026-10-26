@@ -43,7 +43,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. List roles
 List<String> roles = client.listRoles();
 ```

@@ -77,7 +77,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. Create and load the partition
 client.createPartition(CreatePartitionReq.builder()
         .collectionName("test")

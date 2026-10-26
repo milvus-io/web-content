@@ -88,7 +88,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 2. Import data files and get the job ID from the response
 MilvusImportRequest importRequest = MilvusImportRequest.builder()
     .collectionName("books")

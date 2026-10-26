@@ -12,7 +12,6 @@ public Long getTotalRowCount()
 
 **RETURNS:**
 
-
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../../Client/MilvusClientException.md)**

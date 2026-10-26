@@ -72,7 +72,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Get the current replication configuration
 GetReplicateConfigurationResp resp = client.getReplicateConfiguration();
 ReplicateConfiguration config = resp.getReplicateConfiguration();

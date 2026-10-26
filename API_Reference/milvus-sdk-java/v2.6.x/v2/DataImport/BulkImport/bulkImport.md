@@ -49,7 +49,6 @@ Additional import options passed to the server.
 
 **RETURNS:**
 
-
 A JSON response whose `data.jobId` identifies the created import job.
 
 ## Example
@@ -87,7 +86,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. Import data files into the collection
 MilvusImportRequest request = MilvusImportRequest.builder()

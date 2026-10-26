@@ -57,8 +57,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. Create a database and set a property
 String databaseName = "my_database";
 client.createDatabase(CreateDatabaseReq.builder().databaseName(databaseName).build());

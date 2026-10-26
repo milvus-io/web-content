@@ -55,7 +55,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Add a file resource from a path on the server
 client.addFileResource(AddFileResourceReq.builder()
     .name("stopwords")

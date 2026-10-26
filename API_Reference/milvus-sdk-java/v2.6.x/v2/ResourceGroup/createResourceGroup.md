@@ -83,7 +83,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Prepare resource group config
 ResourceGroupLimit requests = new ResourceGroupLimit(1);
 ResourceGroupLimit limits = new ResourceGroupLimit(1);

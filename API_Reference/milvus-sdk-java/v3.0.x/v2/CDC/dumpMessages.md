@@ -89,7 +89,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Get the replication checkpoint for a channel
 GetReplicateInfoResp info = client.getReplicateInfo(GetReplicateInfoReq.builder()
     .sourceClusterId("cluster-a")

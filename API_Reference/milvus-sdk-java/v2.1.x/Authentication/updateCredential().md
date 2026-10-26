@@ -6,7 +6,6 @@ A MilvusClient interface. This method updates the password of an authenticated u
 The old connection to the Milvus client can be invalidated after the credential is updated. 
 </div>
 
-
 ```Java
 R<RpcStatus> updateCredential(UpdateCredentialParam requestParam);
 ```

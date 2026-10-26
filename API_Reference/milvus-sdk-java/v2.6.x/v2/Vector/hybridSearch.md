@@ -149,7 +149,6 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
         The relevance scores for the fragments.
 
-
 - `getRecalls()` (*List\<Float\>*) -
 
     The recall values of the search, one per query vector.

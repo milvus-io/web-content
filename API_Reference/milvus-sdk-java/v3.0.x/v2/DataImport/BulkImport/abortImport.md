@@ -101,7 +101,6 @@ String importResp = BulkImportUtils.bulkImport("http://localhost:19530", importR
 String jobId = new com.google.gson.JsonParser().parse(importResp).getAsJsonObject()
         .getAsJsonObject("data").get("jobId").getAsString();
 
-
 // 3. Abort the import job
 String response = BulkImportUtils.abortImport("http://localhost:19530",
     MilvusDescribeImportRequest.builder()

@@ -53,7 +53,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
 // 2. Create a role and a user
 client.createRole(CreateRoleReq.builder().roleName("db_ro").build());
 client.createUser(CreateUserReq.builder().userName("test").password("Milvus-Password-123").build());

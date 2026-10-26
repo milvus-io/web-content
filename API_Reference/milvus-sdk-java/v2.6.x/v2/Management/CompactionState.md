@@ -12,7 +12,7 @@ class io.milvus.v2.common.CompactionState
 
     The numeric compaction state code.
 
-## VARIANTS
+## Constants
 
 - **UndefiedState** (0) - The compaction state is undefined. (The spelling matches the SDK source, where this constant name contains a typo.)
 

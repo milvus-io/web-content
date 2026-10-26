@@ -92,7 +92,6 @@ client.createCollection(CreateCollectionReq.builder()
         .indexParams(Collections.singletonList(indexParam))
         .build());
 
-
 // 3. Refresh an external collection backed by S3 storage
 JsonObject spec = new JsonObject();
 spec.addProperty("endpoint", "https://s3.amazonaws.com");

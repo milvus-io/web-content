@@ -40,8 +40,6 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
-
-
 // 2. List databases
 ListDatabasesResp listDatabasesResp = client.listDatabases();
 List<String> dbNames = listDatabasesResp.getDatabaseNames();
