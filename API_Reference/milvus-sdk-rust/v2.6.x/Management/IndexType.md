@@ -36,121 +36,121 @@ pub enum IndexType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Invalid`
+- **Invalid**
 
     Unspecified or invalid index type. This is the default.
 
-- `Flat`
+- **Flat**
 
     Brute-force exact search; no index structure is built.
 
-- `IvfFlat`
+- **IvfFlat**
 
     Inverted-file index with flat storage of vectors in each cluster.
 
-- `IvfSq8`
+- **IvfSq8**
 
     IVF index with scalar-quantized vector storage.
 
-- `IvfPq`
+- **IvfPq**
 
     IVF index with product-quantized vector storage.
 
-- `Hnsw`
+- **Hnsw**
 
     Hierarchical navigable small-world graph index for ANN search.
 
-- `HnswSq`
+- **HnswSq**
 
     HNSW index with scalar-quantized vector storage.
 
-- `HnswPq`
+- **HnswPq**
 
     HNSW index with product-quantized vector storage.
 
-- `HnswPrq`
+- **HnswPrq**
 
     HNSW index with product residual quantization (PQ + RQ).
 
-- `DiskAnn`
+- **DiskAnn**
 
     Disk-based ANN index that keeps most of the graph on disk.
 
-- `AutoIndex`
+- **AutoIndex**
 
     Lets the server choose an appropriate index automatically.
 
-- `Scann`
+- **Scann**
 
     Scan index using anisotropic vector quantization with re-ranking.
 
-- `IvfRabitq`
+- **IvfRabitq**
 
     IVF index with range-approximation binary quantization.
 
-- `Aisaq`
+- **Aisaq**
 
     Adaptive index for high-recall ANN search on disk.
 
-- `GpuIvfFlat`
+- **GpuIvfFlat**
 
     GPU-accelerated IVF flat index.
 
-- `GpuIvfPq`
+- **GpuIvfPq**
 
     GPU-accelerated IVF product-quantization index.
 
-- `GpuBruteForce`
+- **GpuBruteForce**
 
     GPU brute-force exact search.
 
-- `GpuCagra`
+- **GpuCagra**
 
     GPU-accelerated CAGRA graph index.
 
-- `BinFlat`
+- **BinFlat**
 
     Exact search index for binary vectors.
 
-- `BinIvfFlat`
+- **BinIvfFlat**
 
     IVF index for binary vectors.
 
-- `MinhashLsh`
+- **MinhashLsh**
 
     MinHash LSH index for set similarity search.
 
-- `Trie`
+- **Trie**
 
     Trie index used for string filtering.
 
-- `Ngram`
+- **Ngram**
 
     N-gram index used for string matching.
 
-- `Rtree`
+- **Rtree**
 
     R-tree index used for spatial queries.
 
-- `StlSort`
+- **StlSort**
 
     Sorted-list index over scalar values.
 
-- `Inverted`
+- **Inverted**
 
     Inverted index over scalar values for efficient filtering.
 
-- `Bitmap`
+- **Bitmap**
 
     Bitmap index over scalar values for efficient filtering.
 
-- `SparseInvertedIndex`
+- **SparseInvertedIndex**
 
     Inverted index over sparse vector dimensions.
 
-- `SparseWand`
+- **SparseWand**
 
     Sparse-WAND index for sparse-vector ranking. Deprecated since Milvus 2.5.4; use `inverted_index_algo: DAAT_WAND` on `SparseInvertedIndex` instead.
 

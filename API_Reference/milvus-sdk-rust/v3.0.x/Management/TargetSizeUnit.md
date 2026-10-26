@@ -13,29 +13,29 @@ pub enum TargetSizeUnit {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `B`
+- **B**
 
     Bytes.
 
-- `KB`
+- **KB**
 
     Kilobytes.
 
-- `MB`
+- **MB**
 
     Megabytes.
 
-- `GB`
+- **GB**
 
     Gigabytes.
 
-- `TB`
+- **TB**
 
     Terabytes.
 
-- `PB`
+- **PB**
 
     Petabytes.
 

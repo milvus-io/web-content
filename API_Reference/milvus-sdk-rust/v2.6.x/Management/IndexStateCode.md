@@ -13,29 +13,29 @@ pub enum IndexStateCode {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `None`
+- **None**
 
     No index has been created for the field. This is the default.
 
-- `Unissued`
+- **Unissued**
 
     The index build task has been created but has not started running.
 
-- `InProgress`
+- **InProgress**
 
     The index build is currently in progress.
 
-- `Finished`
+- **Finished**
 
     The index build has completed successfully.
 
-- `Failed`
+- **Failed**
 
     The index build failed.
 
-- `Retry`
+- **Retry**
 
     The index build failed but will be retried.
 

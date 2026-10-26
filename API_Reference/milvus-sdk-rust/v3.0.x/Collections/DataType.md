@@ -28,89 +28,89 @@ pub enum DataType {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Unknown`
+- **Unknown**
 
     Unspecified or unrecognized field type. This is the default.
 
-- `Bool`
+- **Bool**
 
     Boolean value, `true` or `false`.
 
-- `Int8`
+- **Int8**
 
     8-bit signed integer.
 
-- `Int16`
+- **Int16**
 
     16-bit signed integer.
 
-- `Int32`
+- **Int32**
 
     32-bit signed integer.
 
-- `Int64`
+- **Int64**
 
     64-bit signed integer.
 
-- `Float`
+- **Float**
 
     32-bit IEEE 754 floating-point number.
 
-- `Double`
+- **Double**
 
     64-bit IEEE 754 floating-point number.
 
-- `VarChar`
+- **VarChar**
 
     Variable-length UTF-8 string. Constrain its size with `max_length`.
 
-- `Json`
+- **Json**
 
     JSON document stored as-is.
 
-- `Geometry`
+- **Geometry**
 
     Geometry value used by spatial queries (WKT-encoded).
 
-- `Text`
+- **Text**
 
     Full-text-searchable UTF-8 string, typically consumed by a BM25 function. Unlike `VarChar`, it has no `max_length` constraint.
 
-- `Timestamptz`
+- **Timestamptz**
 
     Timestamp with timezone.
 
-- `Array`
+- **Array**
 
     Array of scalar elements, all with the same element type.
 
-- `Struct`
+- **Struct**
 
     Nested struct of named sub-fields.
 
-- `FloatVector`
+- **FloatVector**
 
     Dense vector of 32-bit floats.
 
-- `BinaryVector`
+- **BinaryVector**
 
     Dense binary vector stored as packed bytes.
 
-- `Float16Vector`
+- **Float16Vector**
 
     Dense vector of IEEE 754 half-precision floats.
 
-- `BFloat16Vector`
+- **BFloat16Vector**
 
     Dense vector of bfloat16 values.
 
-- `SparseFloatVector`
+- **SparseFloatVector**
 
     Sparse vector stored as a map of dimension index to float value.
 
-- `Int8Vector`
+- **Int8Vector**
 
     Dense vector of 8-bit signed integers.
 

@@ -12,25 +12,25 @@ pub enum ConsistencyLevel {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Strong`
+- **Strong**
 
     Reads see all data committed before the request starts. Strongest guarantee, highest latency.
 
-- `Session`
+- **Session**
 
     Uses a per-session timestamp shared across operations so a read sees data written earlier by the same session.
 
-- `Bounded`
+- **Bounded**
 
     Reads tolerate staleness within a bounded time window, trading a little recency for lower latency.
 
-- `Eventually`
+- **Eventually**
 
     Reads may see data from some time in the past. Weakest guarantee, lowest latency.
 
-- `Customized`
+- **Customized**
 
     Deprecated. Selects a caller-customized consistency guarantee. The variant remains the enum default for compatibility, but new code should leave the request's consistency level unset so the collection or server default is used.
 

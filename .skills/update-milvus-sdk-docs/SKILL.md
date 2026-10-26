@@ -87,20 +87,24 @@ run with a clarification instead of downgrading.
 
 **Format check mode**: when the user's instruction includes "检查格式" or
 "check formatting", run the **full 12-step reconciliation checklist** against
-the target tree — the same Steps 1–12 in
+the target tree — the same Steps 1–12 (including sub-step 8b) in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
-enum format, cross-links, misplaced type pages, stale inline expansions,
-unnecessary standalone pages, error-reporting convention, About.md format
-compliance) plus the Pass 1 response-surface audit. Apply the steps strictly,
+enum format, cross-links, misplaced type pages, missing/absent inline
+expansions, unnecessary standalone pages, operation page filename, error
+reporting convention, About.md format compliance) plus the Pass 1
+response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
 versions — it audits and corrects whatever the checklist surfaces, including
 backfilling enum values, request parameters, response members, and signatures
 the steps reveal as missing or wrong, as well as pure formatting issues (wrong
 property names, missing `**Constants:**` headers, empty member bullets, 3+
 consecutive blank lines, missing or blank code-fence language tags, incorrect
-titles).
+titles). **Step 10 (unnecessary standalone pages) is applied unconditionally**:
+a type page referenced by only one page is folded into that page and deleted,
+regardless of why it was created and regardless of any per-SDK placement note
+naming it a "dedicated" page.
 
 - **Branch discipline**: in a shared checkout sitting on `master`/upstream,
   create the per-SDK work branch (Step 7) BEFORE starting edits. Verify
@@ -491,12 +495,17 @@ own new page automatically (no need to ask the user). Exceptions:
   Standalone type pages are reserved for types **defined in SDK source** that
   are either **global/cross-cutting response or status types** (see the wrapper
   rule above) or **domain data types shared across multiple pages** — and never
-  for API-specific response wrappers;
+  for API-specific response wrappers. This rule is enforced strictly (see
+  Steps 9 and 10 in Reconciliation mode): a multi-referencer type is
+  materialized as a standalone page with its inline expansions replaced by
+  links (Step 9), and a single-referencer standalone page is folded and deleted
+  (Step 10) — regardless of how or why it was created, and a per-SDK placement
+  note listing a type as "dedicated" does NOT exempt it;
 - **deduplicate inline expansions** → when a standalone page is created for a
-  type that operation pages previously expanded inline, replace those inline
-  member expansions with a link to the new page and delete the expanded
-  content. Keeping both duplicates the same information and lets the two
-  copies drift apart. This applies to the type's own member documentation
+  type that operation pages previously expanded inline (see Step 9), replace
+  those inline member expansions with a link to the new page and delete the
+  expanded content. Keeping both duplicates the same information and lets the
+  two copies drift apart. This applies to the type's own member documentation
   only — **operation-specific value lists** (valid property keys, enum values
   valid for a given call, per-operation defaults) stay in the operation page
   even when a standalone type page exists;
@@ -909,6 +918,10 @@ signature matches the source. Fix name/type/default mismatches.
 and shared across ≥2 pages should have standalone pages; single-page types
 should be expanded inline in their referencing operation page (no standalone
 page). Third-party types and pure stdlib aliases should never get pages.
+Single-referencer standalone pages are folded unconditionally (Step 10),
+even when a per-SDK placement note lists them as "dedicated". Execution:
+types shared across ≥2 pages are materialized and inline expansions replaced
+by Step 9; single-referencer standalone pages are folded by Step 10.
 
 **Step 6 — Inlined enum format**: inlined enums in operation pages use
 `**Constants:**` as the header (not `**VARIANTS:**`), with each value as a
@@ -922,13 +935,40 @@ skips code fences, inline code spans, existing links, and `(*Type*)` headers.
 directory should be moved to its owning category, updating every relative
 link to and from the moved page.
 
-**Step 9 — Stale inline expansions**: a type with its own standalone page
-should not still be fully expanded inside operation pages — replace the
-inline expansion with a link to the page.
+**Step 8b — Operation page filename**: verify that each operation page's
+filename matches the SDK's public method/API name using the SDK's native
+naming convention (e.g. `create_collection.md` for Rust, `CreateCollection.md`
+for C++/Go, `describeAlias.md` for Java). Rename mismatched pages and update
+every relative link to and from the renamed page. Type pages (enums, structs,
+response-model pages) follow the type's source name and are not affected by
+this step. Never defer renames to a later dedicated pass: if a format check
+finds a mismatch—even a whole-tree naming-convention gap—rename the pages
+immediately and include the link updates in that check.
 
-**Step 10 — Unnecessary standalone pages**: a standalone type page whose only
-referencer is a single operation page should be folded into that operation
-page's RETURNS section and deleted.
+**Step 9 — Missing/absent inline expansions**: a type/enum/struct referenced by
+≥2 pages must have a standalone page, and every operation page that currently
+expands it inline must link to that page instead. If the standalone page does
+not exist yet, create it first (extracting the members/values from the existing
+inline expansion), then replace each inline expansion with a relative link to
+the new page. If the page already exists, just replace the stale inline
+expansions with links. Reuse existing page content when extracting — do not
+rewrite the members from memory. After creating a new page, run the whole-tree
+reference sweep (see "When reconciliation creates a new dedicated type/enum
+page" above) to link every mention of the type.
+
+**Step 10 — Unnecessary standalone pages**: a standalone type/enum/struct page
+whose only referencer is a single operation page MUST be folded into that
+operation page's `**RETURNS:**` / `**PARAMETERS:**` sections and the standalone
+page deleted. This is unconditional: it applies regardless of why the page was
+created — including pages listed as "dedicated" in this skill's per-SDK
+placement notes or `references/sdk-map.md`, pages created by a prior reconcile
+or a previous migration, and pages that were shared across pages at an earlier
+SDK version but are referenced by only one page at the target tag. If the
+target tag makes a previously-shared type single-referenced, fold it too. The
+only exemptions are global/cross-cutting response or status types (see the
+response-wrapper rule) and types that ARE referenced by ≥2 pages at the target
+tag. After folding, delete the standalone page and re-point any relative links
+to it.
 
 **Step 12 — Error-reporting convention**: verify that each operation page
 uses the correct error-reporting convention for its SDK. SDKs that return a

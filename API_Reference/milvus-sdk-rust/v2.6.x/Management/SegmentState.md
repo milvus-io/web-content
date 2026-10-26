@@ -14,33 +14,33 @@ pub enum SegmentState {
 }
 ```
 
-**VARIANTS:**
+**Constants:**
 
-- `Unknown`
+- **Unknown**
 
     The segment state is unknown. This is the default.
 
-- `NotExist`
+- **NotExist**
 
     The segment does not exist.
 
-- `Growing`
+- **Growing**
 
     The segment is actively accepting new inserts.
 
-- `Sealed`
+- **Sealed**
 
     The segment is sealed and no longer accepts inserts.
 
-- `Flushed`
+- **Flushed**
 
     The segment is sealed and has been flushed to storage.
 
-- `Flushing`
+- **Flushing**
 
     The segment is in the process of being flushed.
 
-- `Dropped`
+- **Dropped**
 
     The segment has been dropped.
 
