@@ -91,7 +91,7 @@ $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>Modify the content in <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, changing the vector_io section to the relevant Milvus configuration. For example, add:</p>
+<p>Modify the content in <code translate="no">llama_stack/llama_stack/templates/together/run.yaml</code>, changing the vector_io section to the relevant Milvus configuration. For example, add:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
