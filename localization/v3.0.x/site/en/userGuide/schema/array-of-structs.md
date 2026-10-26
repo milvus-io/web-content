@@ -211,7 +211,7 @@ summary: >-
 <tr><td>Search</td><td><a href="/docs/hybrid-search-with-structarray.md">Hybrid Search with StructArray</a></td><td>Combine StructArray element-level search with other vector searches.</td></tr>
 <tr><td>Search</td><td><a href="/docs/filtered-search-with-structarray.md">Filtered Search with StructArray</a></td><td>Use StructArray filters in search, query, and hybrid search.</td></tr>
 <tr><td>Search</td><td><a href="/docs/search-with-embedding-lists.md">Search with Embedding Lists</a></td><td>Build ColBERT and ColPali-style retrieval systems with StructArray.</td></tr>
-<tr><td>Filter</td><td><a href="/docs/struct-array-operators.md">StructArray Operators</a></td><td>Reference syntax for <code translate="no">element_filter</code> and <code translate="no">MATCH_*</code> operators.</td></tr>
+<tr><td>Filter</td><td><a href="/docs/struct-array-operators.md">StructArray Operators</a></td><td>Reference syntax for <code translate="no">element_filter</code>, <code translate="no">MATCH_*</code> operators, and row-level StructArray path predicates.</td></tr>
 </tbody>
 </table>
 <h2 id="Key-limits-to-check-first" class="common-anchor-header">Key limits to check first<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
@@ -233,7 +233,7 @@ summary: >-
 <li><p>Struct can be used as the element type of an Array field. It is not used as a top-level collection field.</p></li>
 <li><p>All Struct elements in the same StructArray field share one predefined schema.</p></li>
 <li><p>Vector subfields require indexes. EmbeddingList search uses <code translate="no">MAX_SIM*</code> metrics, while element-level search uses regular vector metrics.</p></li>
-<li><p><code translate="no">element_filter</code> and <code translate="no">MATCH_*</code> are for scalar subfields inside StructArray fields. Use <code translate="no">$[subfield]</code> only inside these operators.</p></li>
+<li><p><code translate="no">element_filter</code> and <code translate="no">MATCH_*</code> are for scalar subfields inside StructArray fields. Use <code translate="no">$[subfield]</code> only inside these operators. Row-level filters can also reference StructArray paths directly, such as <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code>, and <code translate="no">array_contains(chunks[section], ...)</code>.</p></li>
 <li><p>Some search combinations are version-gated or mode-specific. Check <a href="/docs/structarray-limits.md">StructArray Limits</a> before relying on range search, grouping search, hybrid search, nullable fields, or dynamically added fields.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">

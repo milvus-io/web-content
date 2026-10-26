@@ -47,6 +47,7 @@ summary: >-
 <tr><td>Filter by a top-level scalar field, such as <code translate="no">category</code>.</td><td>Regular filter expression.</td><td>Selects parent entities before or during search.</td></tr>
 <tr><td>Constrain element-level vector search to Struct elements that match scalar conditions.</td><td><code translate="no">element_filter</code>.</td><td>Searches only matching Struct elements and can return matched element offsets.</td></tr>
 <tr><td>Select entities by whether any, all, or a specific number of Struct elements match a predicate.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code>, or <code translate="no">MATCH_EXACT</code>.</td><td>Row-level filtering. These operators do not return offsets by themselves.</td></tr>
+<tr><td>Test one element position, count Struct elements, or check subfield values across elements without <code translate="no">$[...]</code>.</td><td>Row-level StructArray paths, such as <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code>, or <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Row-level filtering. For syntax, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
