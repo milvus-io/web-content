@@ -50,9 +50,9 @@ await client.CreateRowPolicyAsync(new CreateRowPolicyReq
 
 - `PolicyType` (*RowPolicyType*) -
 
-    The type of the row policy: permissive or restrictive. Defaults to <see cref="RowPolicyType.Permissive" />, matching the server's default for an omitted value.
+    The type of the row policy: permissive or restrictive. See [RowPolicyType](RowPolicyType.md). Defaults to <see cref="RowPolicyType.Permissive" />, matching the server's default for an omitted value.
 
-- `Actions` (*IReadOnlyList<RowPolicyAction>*) -
+- `Actions` (*IReadOnlyList\<RowPolicyAction\>*) - See [RowPolicyAction](RowPolicyAction.md).
 
     The actions governed by the policy.
 

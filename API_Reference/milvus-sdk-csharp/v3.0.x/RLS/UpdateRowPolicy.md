@@ -50,9 +50,9 @@ await client.UpdateRowPolicyAsync(new UpdateRowPolicyReq
 
 - `PolicyType` (*RowPolicyType?*) -
 
-    The type of the row policy: permissive or restrictive. Must be set explicitly: unlike <see cref="CreateRowPolicyReq" />, the update wire contract carries no "omitted" policy type, and the server rejects an invalid type rather than defaulting it, so an unset value fails fast instead of silently re-typing the policy (e.g. re-typing a Restrictive policy to Permissive).
+    The type of the row policy: permissive or restrictive. See [RowPolicyType](RowPolicyType.md). Must be set explicitly: unlike <see cref="CreateRowPolicyReq" />, the update wire contract carries no "omitted" policy type, and the server rejects an invalid type rather than defaulting it, so an unset value fails fast instead of silently re-typing the policy (e.g. re-typing a Restrictive policy to Permissive).
 
-- `Actions` (*IReadOnlyList<RowPolicyAction>*) -
+- `Actions` (*IReadOnlyList\<RowPolicyAction\>*) - See [RowPolicyAction](RowPolicyAction.md).
 
     The actions governed by the policy.
 

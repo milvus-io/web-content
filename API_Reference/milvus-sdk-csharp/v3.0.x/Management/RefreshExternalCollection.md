@@ -50,7 +50,12 @@ var resp = await client.RefreshExternalCollectionAsync(new RefreshExternalCollec
 
 **RETURNS:**
 
-A **RefreshExternalCollectionResp** object returned by the operation.
+A **RefreshExternalCollectionResp** object.
+
+- `JobId` (*long*) -
+
+    The refresh job ID, which can be passed to `GetRefreshExternalCollectionProgressAsync()` to poll progress.
+
 ## Example
 
 ```csharp

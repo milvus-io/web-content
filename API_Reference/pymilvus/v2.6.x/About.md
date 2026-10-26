@@ -122,4 +122,4 @@ We are committed to building a collaborative, exuberant open-source community fo
 
 ## License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](https://github.com/milvus-io/pymilvus/blob/master/LICENSE)

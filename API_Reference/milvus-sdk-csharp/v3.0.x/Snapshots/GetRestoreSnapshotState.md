@@ -29,7 +29,12 @@ GetRestoreSnapshotStateResp result = await client.GetRestoreSnapshotStateAsync(r
 
 **RETURNS:**
 
-A **GetRestoreSnapshotStateResp** object returned by the operation.
+A **GetRestoreSnapshotStateResp** object.
+
+- `JobInfo` (*RestoreSnapshotJobInfo*) -
+
+    The restore job information, including state, progress, and failure reason. See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
+
 ## Example
 
 {example_call and '```csharp

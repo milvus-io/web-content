@@ -30,7 +30,24 @@ var resp = await client.ListFileResourcesAsync(new ListFileResourcesReq
 
 **RETURNS:**
 
-A **ListFileResourcesResp** object returned by the operation.
+A **ListFileResourcesResp** object.
+
+- `Resources` (*IReadOnlyList\<FileResourceInfo\>*) -
+
+    The file resources attached to the collection. Each **FileResourceInfo** exposes:
+
+    - `Id` (*long*) -
+
+        The ID of the file resource.
+
+    - `Name` (*string*) -
+
+        The name of the file resource.
+
+    - `Path` (*string*) -
+
+        The path of the file resource.
+
 ## Example
 
 ```csharp

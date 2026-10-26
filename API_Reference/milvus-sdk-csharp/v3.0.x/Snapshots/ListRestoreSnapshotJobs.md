@@ -29,7 +29,12 @@ ListRestoreSnapshotJobsResp result = await client.ListRestoreSnapshotJobsAsync(r
 
 **RETURNS:**
 
-A **ListRestoreSnapshotJobsResp** object returned by the operation.
+A **ListRestoreSnapshotJobsResp** object.
+
+- `Jobs` (*IReadOnlyList\<RestoreSnapshotJobInfo\>*) -
+
+    The list of restore jobs matching the collection filter. Each entry is a [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
+
 ## Example
 
 {example_call and '```csharp

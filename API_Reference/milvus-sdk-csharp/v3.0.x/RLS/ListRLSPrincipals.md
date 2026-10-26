@@ -38,7 +38,12 @@ var resp = await client.ListRLSPrincipalsAsync(new ListRLSPrincipalsReq
 
 **RETURNS:**
 
-A **ListRLSPrincipalsResp** object returned by the operation.
+A **ListRLSPrincipalsResp** object.
+
+- `PrincipalNames` (*IReadOnlyList\<string\>*) -
+
+    The names of the RLS principals configured on the collection.
+
 ## Example
 
 ```csharp

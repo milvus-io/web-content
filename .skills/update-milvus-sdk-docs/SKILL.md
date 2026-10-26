@@ -105,7 +105,10 @@ discipline:
 - **Small batches, immediate validation.** Apply one batch, then run the
   structural checks — broken-link scan, paren balance on annotation lines, no
   self-links inside type pages, no bare `([T](path))` forms — before the next
-  batch. Never stack multiple passes without validating between them.
+  batch. Never stack multiple passes without validating between them. When
+  adding inline expansions, verify each `**RETURNS:**` section now contains
+  actual member entries (bullets or code blocks naming fields with their
+  types) — not just a summary sentence.
 - **Watch for known pitfalls.** Indent-based parsing terminates at flush-left
   paragraphs between a bullet and its nested expansion (dedup silently skips
   the block); replacing `(*T*)` forms drops the italic markers unless the
@@ -882,7 +885,18 @@ it into the correct category, e.g. `MilvusClient/FunctionScore.md` →
 `MilvusClient/Vector/FunctionScore.md`, and update every relative link to and
 from the moved page), and **stale inline expansions** (a type with its own
 standalone page still fully expanded inside operation pages — replace the
-inline expansion with a link to the page and delete the expanded content).
+inline expansion with a link to the page and delete the expanded content),
+and **unnecessary standalone pages** (a type page whose only referencer is a
+single operation page — fold the type's members into that operation page's
+`**RETURNS:**` section and delete the standalone page), and
+**undocumented return types** (an operation page's `**RETURNS:**` names a
+type that has neither a standalone page nor an inline expansion — add the
+inline expansion). **"Inline expansion" means enumerating each member with
+its name, source type, and description** (bullet list or code block showing
+the response shape) — a summary sentence like "each entry exposes its name
+and path" is **not** an expansion. After adding expansions, verify every
+`**RETURNS:**` section contains at least one actual member entry per
+response type, not just prose.
 
 **Duplicated symbols on a page**: also flag when the same symbol appears more
 than once on a page (e.g. the same `WithXxx` method in both a brief
@@ -1564,7 +1578,10 @@ CONTRIBUTING guideline).
 
 ## License
 
-`[Apache License 2.0](LICENSE)` — same relative link as the other SDK trees.
+`[Apache License 2.0](https://github.com/milvus-io/<sdk-repo>/blob/master/LICENSE)` —
+absolute URL to the SDK repository's LICENSE file. A relative `(LICENSE)` link
+resolves inside the web-content repo (where no LICENSE file exists next to the
+docs) and 404s.
 ````
 
 Notes:
