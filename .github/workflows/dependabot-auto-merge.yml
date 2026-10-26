@@ -1,0 +1,120 @@
+name: Dependabot guarded auto-merge
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - master
+    paths:
+      - "**/package.json"
+      - "**/package-lock.json"
+      - "**/yarn.lock"
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Dependabot package update PR number
+        required: true
+        type: number
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  enable-auto-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.actor == 'dependabot[bot]' &&
+        github.event.pull_request.head.repo.full_name == github.repository
+      )
+
+    steps:
+      - name: Enable auto-merge for a guarded non-major update
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          EVENT_PR_NUMBER: ${{ github.event.pull_request.number }}
+          DISPATCH_PR_NUMBER: ${{ inputs.pr_number }}
+        run: |
+          set -euo pipefail
+
+          pr_number="${DISPATCH_PR_NUMBER:-$EVENT_PR_NUMBER}"
+          if [ -z "$pr_number" ]; then
+            echo "No pull request number was supplied."
+            exit 1
+          fi
+
+          pr_json="$(gh pr view "$pr_number" --repo "$REPOSITORY" --json author,files,headRepositoryOwner,baseRefName,title,url)"
+          author="$(printf '%s' "$pr_json" | jq -r '.author.login')"
+          head_repository_owner="$(gh pr view "$pr_number" --repo "$REPOSITORY" --json headRepositoryOwner --jq '.headRepositoryOwner.login')"
+          base_branch="$(printf '%s' "$pr_json" | jq -r '.baseRefName')"
+          title="$(printf '%s' "$pr_json" | jq -r '.title')"
+          files="$(printf '%s' "$pr_json" | jq -r '.files[].path')"
+          pr_url="$(printf '%s' "$pr_json" | jq -r '.url')"
+
+          echo "Checking Dependabot PR #$pr_number: $title"
+          if [ "$author" != "dependabot[bot]" ]; then
+            echo "Author is not dependabot[bot]; refusing auto-merge."
+            exit 0
+          fi
+
+          repository_owner="${REPOSITORY%%/*}"
+          if [ "$head_repository_owner" != "$repository_owner" ]; then
+            echo "Pull request head is outside the repository; refusing auto-merge."
+            exit 0
+          fi
+
+          if [ "$base_branch" != "master" ]; then
+            echo "Base branch is not master; refusing auto-merge."
+            exit 0
+          fi
+
+          invalid_files="$(printf '%s\n' "$files" | grep -Ev '(^|/)(package\.json|package-lock\.json|yarn\.lock)$' || true)"
+          if [ -n "$invalid_files" ]; then
+            echo "PR changes files beyond package manifests or lockfiles; refusing auto-merge."
+            printf '%s\n' "$invalid_files"
+            exit 0
+          fi
+
+          # Parse the standard single-dependency Dependabot title. Grouped
+          # updates contain whitespace in the dependency field and stay manual.
+          title_pattern='^Bump ([^ ]+) from v?([^ ]+) to v?([^ ]+)( in /.+)?$'
+          if ! [[ $title =~ $title_pattern ]]; then
+            echo "Title is not a single-dependency Dependabot update; refusing auto-merge."
+            exit 0
+          fi
+
+          dependency="${BASH_REMATCH[1]}"
+          old_version="${BASH_REMATCH[2]}"
+          new_version="${BASH_REMATCH[3]}"
+          old_major="${old_version%%.*}"
+          new_major="${new_version%%.*}"
+
+          if [[ ! $old_major =~ ^[0-9]+$ ]] || [[ ! $new_major =~ ^[0-9]+$ ]]; then
+            echo "Cannot determine numeric major versions; refusing auto-merge."
+            exit 0
+          fi
+
+          if [[ $old_version == *-* ]] || [[ $new_version == *-* ]]; then
+            echo "Prerelease versions stay manual."
+            exit 0
+          fi
+
+          if [ "$old_major" != "$new_major" ]; then
+            echo "Major-version update from $old_version to $new_version stays manual."
+            exit 0
+          fi
+
+          echo "Guarded update approved: $dependency $old_version -> $new_version"
+          echo "Enabling squash auto-merge for $pr_url"
+          gh pr merge "$pr_number" \
+            --repo "$REPOSITORY" \
+            --auto \
+            --squash \
+            --delete-branch

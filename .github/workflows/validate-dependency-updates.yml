@@ -1,0 +1,90 @@
+name: Validate dependency updates
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - master
+    paths:
+      - "**/package.json"
+      - "**/package-lock.json"
+      - "**/yarn.lock"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-dependency-updates-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Validate changed package trees
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+
+          git diff --name-only "${BASE_SHA}...HEAD" | sort -u > changed-files.txt
+          echo "Changed files:"
+          cat changed-files.txt
+
+          grep -E '(^|/)(package\.json|package-lock\.json|yarn\.lock)$' changed-files.txt |
+            sed -E 's#(^|/)(package\.json|package-lock\.json|yarn\.lock)$##' |
+            sed 's#/$##' |
+            sort -u > changed-package-directories.txt
+
+          while IFS= read -r directory; do
+            echo "::group::Validate ${directory:-root} package tree"
+            (
+              cd "${directory:-.}"
+
+              if [ -f package-lock.json ]; then
+                npm ci --ignore-scripts
+              fi
+
+              if [ -f yarn.lock ]; then
+                npx --yes yarn@1 install --frozen-lockfile --ignore-scripts
+              fi
+
+              node <<'NODE'
+                const { spawnSync } = require('node:child_process');
+                const pkg = require('./package.json');
+                const scripts = pkg.scripts || {};
+                const placeholder = /(^|\b(?:&&|\|\|);?)echo\s+["']?Error: no test specified/i;
+
+                const names = Object.keys(scripts).filter((name) => {
+                  if (!/^test(:|$)/.test(name)) return false;
+                  if (name === 'test' && placeholder.test(scripts[name])) return false;
+                  return true;
+                });
+
+                for (const name of names) {
+                  console.log(`Running script: ${name}`);
+                  const result = spawnSync('npm', ['run', name], {
+                    stdio: 'inherit',
+                    env: process.env,
+                  });
+                  if (result.status !== 0) process.exit(result.status ?? 1);
+                }
+              NODE
+            )
+            echo "::endgroup::"
+          done < changed-package-directories.txt
