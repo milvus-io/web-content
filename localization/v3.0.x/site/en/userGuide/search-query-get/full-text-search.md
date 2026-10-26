@@ -2,13 +2,8 @@
 id: full-text-search.md
 title: Full Text Search
 summary: >-
-  Full text search is a feature that retrieves documents containing specific
-  terms or phrases in text datasets, then ranking the results based on
-  relevance. This feature overcomes semantic search limitations, which might
-  overlook precise terms, ensuring you receive the most accurate and
-  contextually relevant results. Additionally, it simplifies vector searches by
-  accepting raw text input, automatically converting your text data into sparse
-  embeddings without the need to manually generate vector embeddings.
+  Full text search ranks documents by the terms they contain using the BM25
+  algorithm on raw text input, no embedding models needed.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Full Text Search<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
-<p>Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios, where it prioritizes documents that closely match specific search terms.</p>
+    </button></h1><p>Full text search retrieves documents that contain the terms or phrases in your query and ranks the results by relevance. It complements semantic search, which can overlook precise terms, and is especially useful in retrieval-augmented generation (RAG) scenarios, where documents that closely match specific search terms matter most.</p>
+<p>With full text search, you can also skip embedding models: you provide raw text, and Milvus converts it into sparse embeddings automatically.</p>
 <div class="alert note">
 <p>By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
 </div>
@@ -45,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides full text search powered by the BM25 relevance algorithm, a widely adopted scoring function in information retrieval systems, and Milvus integrates it into the search workflow to deliver accurate, relevance-ranked text results.</p>
+    </button></h2><p>Milvus implements full text search with the BM25 relevance algorithm, a widely adopted scoring function in information retrieval systems, and integrates it into the search workflow to deliver accurate, relevance-ranked text results.</p>
 <p>Full text search in Milvus follows the workflow below:</p>
 <ol>
 <li><p><strong>Raw text input</strong>: You insert text documents or provide a query using plain text, no embedding models required.</p></li>
@@ -100,7 +95,7 @@ summary: >-
     </button></h3><p>Your collection schema must include at least three required fields:</p>
 <ul>
 <li><p><strong>Primary field</strong>: Uniquely identifies each entity in the collection.</p></li>
-<li><p><strong>String field</strong> (<code translate="no">VARCHAR</code> or <code translate="no">TEXT</code>): Stores raw text documents. Must set <code translate="no">enable_analyzer=True</code> so Milvus can process the text for BM25 relevance ranking. By default, Milvus uses the <a href="/docs/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/standard-analyzer.md"> analyzer</a> for text analysis. To configure a different analyzer, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>. The examples on this page use <code translate="no">VARCHAR</code>; for long text, you can define the input field as <code translate="no">TEXT</code> and omit <code translate="no">max_length</code>. For a complete example, refer to <a href="/docs/text.md">Text Field</a>.</p></li>
+<li><p><strong>String field</strong> (<code translate="no">VARCHAR</code> or <code translate="no">TEXT</code>): Stores raw text documents. You must set <code translate="no">enable_analyzer=True</code> so that Milvus can process the text for BM25 relevance ranking. By default, Milvus uses the <a href="/docs/standard-analyzer.md"><code translate="no">standard</code> analyzer</a>; to configure a different analyzer, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>. The examples on this page use <code translate="no">VARCHAR</code>; for long text, define the field as <code translate="no">TEXT</code> and omit <code translate="no">max_length</code>. For a complete example, refer to <a href="/docs/text.md">Text Field</a>.</p></li>
 <li><p><strong>Sparse vector field</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Stores sparse embeddings automatically generated by the BM25 function.</p></li>
 </ul>
 <div class="multipleCode">
@@ -600,7 +595,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After setting up your collection and index, you’re ready to insert text data. In this process, you need only to provide the raw text. The built-in function we defined earlier automatically generates the corresponding sparse vector for each text entry.</p>
+    </button></h2><p>After setting up your collection and index, you can insert text data. You only need to provide the raw text — the BM25 function defined earlier automatically generates the corresponding sparse vector for each text entry.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -698,7 +693,7 @@ milvus::InsertResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you’ve inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (<code translate="no">limit</code>) results.</p>
+    </button></h2><p>Once you’ve inserted data into your collection, you can search it with raw text queries. Milvus automatically converts your query into a sparse vector, ranks the matched results using the BM25 algorithm, and returns the top <code translate="no">limit</code> results.</p>
 <div class="alert note">
 <p>You can highlight the matched terms in search results by configuring a text highlighter. See <a href="/docs/text-highlighter.md">Text Highlighter</a> for details.</p>
 </div>
@@ -810,10 +805,6 @@ milvus::SearchResponse response;
      <td><p>Proportion of low-importance terms to ignore during search. The value must be in the range [0.0, 1.0). For details, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">data</code></p></td>
      <td><p>Raw query text in natural language. Milvus automatically converts your text query into sparse vectors using the BM25 function - do not provide pre-computed vectors.</p></td>
    </tr>
@@ -860,13 +851,21 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No, the sparse vectors generated by the BM25 function are not directly accessible or outputable in full text search. Here are the details:</p>
+    </button></h3><p>No, the sparse vectors generated by the BM25 function are not directly accessible or returnable in full text search. Here are the details:</p>
 <ul>
-<li><p>The BM25 function generates sparse vectors internally for ranking and retrieval</p></li>
-<li><p>These vectors are stored in the sparse field but cannot be included in <code translate="no">output_fields</code></p></li>
-<li><p>You can only output the original text fields and metadata (like <code translate="no">id</code>, <code translate="no">text</code>)</p></li>
+<li><p>The BM25 function generates sparse vectors internally for ranking and retrieval.</p></li>
+<li><p>These vectors are stored in the sparse field but cannot be included in <code translate="no">output_fields</code>.</p></li>
+<li><p>You can only output the original text fields and metadata (like <code translate="no">id</code>, <code translate="no">text</code>).</p></li>
 </ul>
 <p>Example:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#cpp">C++</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
@@ -956,15 +955,15 @@ milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchReques
         ></path>
       </svg>
     </button></h3><p>The sparse vector field serves as an internal search index, similar to database indexes that users don’t directly interact with.</p>
-<p><strong>Design Rationale</strong>:</p>
+<p><strong>Design rationale</strong>:</p>
 <ul>
-<li><p>Separation of Concerns: You work with text (input/output), Milvus handles vectors (internal processing)</p></li>
-<li><p>Performance: Pre-computed sparse vectors enable fast BM25 ranking during queries</p></li>
-<li><p>User Experience: Abstracts away complex vector operations behind a simple text interface</p></li>
+<li><p><strong>Separation of concerns</strong>: You work with text for input and output, and Milvus handles the vectors internally.</p></li>
+<li><p><strong>Performance</strong>: Pre-computed sparse vectors enable fast BM25 ranking during queries.</p></li>
+<li><p><strong>User experience</strong>: Complex vector operations are abstracted away behind a simple text interface.</p></li>
 </ul>
 <p><strong>If you need vector access</strong>:</p>
 <ul>
-<li><p>Use manual sparse vector operations instead of full text search</p></li>
-<li><p>Create separate collections for custom sparse vector workflows</p></li>
+<li><p>Use manual sparse vector operations instead of full text search.</p></li>
+<li><p>Create separate collections for custom sparse vector workflows.</p></li>
 </ul>
 <p>For details, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
