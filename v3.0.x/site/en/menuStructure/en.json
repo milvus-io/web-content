@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "Idempotent Bulk Import",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },

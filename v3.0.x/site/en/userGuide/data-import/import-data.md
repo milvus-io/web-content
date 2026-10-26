@@ -31,6 +31,8 @@ The following code snippet creates a simple collection with the given schema. Fo
 
 ## Import data
 
+If your pipeline may retry a failed or timed-out import request, tag the job with an idempotency key; see [Idempotent Bulk Import](idempotent-import.md).
+
 To import the prepared data, you have to create an import job as follows:
 
 <div class="multipleCode">
