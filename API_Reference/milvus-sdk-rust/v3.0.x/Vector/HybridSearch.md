@@ -1,6 +1,6 @@
 # HybridSearch()
 
-Executes multiple vector searches and combines them with the requested reranking strategy.
+Executes multiple vector searches and combines them with a reranking strategy or function chain.
 
 ```rust
 pub async fn hybrid_search(&self, request: HybridSearchRequest) -> Result<SearchResponse>
@@ -18,7 +18,10 @@ let request = HybridSearchRequest::builder()
             .metric_type(MetricType::Cosine)
             .build()?,
     ])
-    .rerank(RRFRerank::new())
+    .function_chains([FunctionChain::new()
+        .name("refine")
+        .stage(FunctionChainStage::L2Rerank)
+        .limit(5, 0)])
     .limit(5)
     .build()?;
 ```
@@ -84,6 +87,18 @@ let request = HybridSearchRequest::builder()
 - `consistency_level: Option<ConsistencyLevel>`
 
     Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
+
+- `function_chains: Vec<FunctionChain>`
+
+    Function chains used to post-process the combined results. Mutually exclusive with `rerank`. See [FunctionChain](FunctionChain.md).
+
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security for every sub-search. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security for every sub-search. Defaults to `false`.
 
 ### SubSearchRequest
 

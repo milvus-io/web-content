@@ -9,6 +9,7 @@ pub enum FunctionType {
     TextEmbedding,
     Rerank,
     MinHash,
+    MolFingerprint,
 }
 ```
 
@@ -33,6 +34,10 @@ pub enum FunctionType {
 - `MinHash`
 
     MinHash function that turns an input text field into a binary MinHash signature.
+
+- `MolFingerprint`
+
+    Molecular-fingerprint function that turns an input SMILES field into a binary fingerprint.
 
 ## Example
 

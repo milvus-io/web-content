@@ -15,6 +15,7 @@ pub enum DataType {
     VarChar,
     Json,
     Geometry,
+    Text,
     Timestamptz,
     Array,
     Struct,
@@ -72,6 +73,10 @@ pub enum DataType {
 - `Geometry`
 
     Geometry value used by spatial queries (WKT-encoded).
+
+- `Text`
+
+    Full-text-searchable UTF-8 string, typically consumed by a BM25 function. Unlike `VarChar`, it has no `max_length` constraint.
 
 - `Timestamptz`
 

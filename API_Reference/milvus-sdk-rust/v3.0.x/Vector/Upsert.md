@@ -37,6 +37,14 @@ let request = UpsertRequest::builder()
 
     Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. See [FieldPartialUpdateOp](FieldPartialUpdateOp.md).
 
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security. Defaults to `false`.
+
 **RETURN TYPE:**
 
 *Result\<UpsertResponse\>*

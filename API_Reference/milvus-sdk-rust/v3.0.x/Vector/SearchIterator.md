@@ -37,6 +37,12 @@ let mut iterator = client.search_iterator(request).await?;
 
     Optional total number of hits to iterate before stopping.
 
+- `external_filter_func: Option<SearchIteratorFilter>`
+
+    Client-side callback invoked with each page of search hits. The callback can prune rows in place with `SingleResult::filter_rows()`; returning `Ok(())` continues iteration, while returning `Err` aborts it. Empty filtered pages are skipped.
+
+The wrapped `SearchRequest` carries the row-level security `rls_principal` and `skip_rls` settings used by the iterator.
+
 **RETURN TYPE:**
 
 *Result\<SearchIterator\>*

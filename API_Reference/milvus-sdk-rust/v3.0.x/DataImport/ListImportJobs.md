@@ -28,15 +28,15 @@ let request = ListImportJobsRequest::builder()
 
 - `cluster_id: String`
 
-    Cluster ID for Zilliz Cloud deployments. Cannot be combined with `project_id` and `region_id`.
+    **Zilliz Cloud only.** Cluster ID of the target deployment. Cannot be combined with `project_id` and `region_id`.
 
 - `project_id: String`
 
-    Project ID for Zilliz Cloud deployments. Must be specified together with `region_id`.
+    **Zilliz Cloud only.** Project ID of the target deployment. Must be specified together with `region_id`.
 
 - `region_id: String`
 
-    Region ID for Zilliz Cloud deployments. Must be specified together with `project_id`.
+    **Zilliz Cloud only.** Region ID of the target deployment. Must be specified together with `project_id`.
 
 - `page_size: u32`
 

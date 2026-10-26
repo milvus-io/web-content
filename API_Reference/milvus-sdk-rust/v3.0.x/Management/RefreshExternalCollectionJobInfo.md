@@ -16,6 +16,8 @@ Information of an external collection refresh job, as returned by `listRefreshEx
 
 - `get_external_source()` (*&str*) - The external data source, e.g. an S3 path.
 
+- `get_external_spec()` (*&str*) - The detailed external specification reported by the server.
+
 - `get_start_time()` (*u64*) - The start timestamp of the refresh job.
 
 - `get_end_time()` (*u64*) - The end timestamp of the refresh job.

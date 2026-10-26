@@ -67,6 +67,14 @@ ListPartitionsResponse
 
         The UTC creation timestamp of the partition.
 
+    - `get_in_memory_percentage()` (*i64*) -
+
+        The percentage of partition data loaded in memory.
+
+    - `is_loaded()` (*bool*) -
+
+        Whether the partition is loaded.
+
 ## Example
 
 ```rust

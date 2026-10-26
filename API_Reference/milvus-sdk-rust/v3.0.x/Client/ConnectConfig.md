@@ -22,8 +22,11 @@ let config = ConnectConfig::new()
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `uri` | `String` | `"http://localhost:19530"` | URI of the Milvus server, for example `http://localhost:19530`. |
-| `token` | `Option<String>` | `None` | Access token in the form `username:password`, base64-encoded before being sent as gRPC `authorization` metadata. |
+| `token` | `Option<String>` | `None` | Access token in the form `username:password`, base64-encoded before being sent as gRPC `authorization` metadata. An explicitly set token takes precedence over `username` and `password`. |
+| `username` | `Option<String>` | `None` | Username used with `password` to form the authentication credential. |
+| `password` | `Option<String>` | `None` | Password used with `username` to form the authentication credential. |
 | `tls_server_name` | `Option<String>` | `None` | Overrides the DNS name used to verify the Milvus server's TLS certificate. |
+| `secure` | `bool` | `false` | Whether to upgrade the connection to TLS even when the URI scheme is `http://` or omitted. |
 | `ca_certificate` | `Option<String>` | `None` | Path to a PEM-encoded custom CA certificate file. |
 | `client_certificate` | `Option<String>` | `None` | Path to the PEM-encoded client certificate file used for mutual TLS. |
 | `client_key` | `Option<String>` | `None` | Path to the PEM-encoded client private-key file used for mutual TLS. |
@@ -42,7 +45,10 @@ Each field has a consuming setter, a mutable setter, and a getter.
 
 - `uri(mut self, uri: impl Into<String>) -> Self` — sets the server URI. `set_uri(&mut self, uri)` and `get_uri() -> &str` are also available.
 - `token(mut self, token: impl Into<String>) -> Self` — sets the access token. `set_token(&mut self, token)` and `get_token() -> &Option<String>` are also available.
+- `username(mut self, username: impl Into<String>) -> Self` — sets the authentication username. `set_username(&mut self, username)` and `get_username() -> &Option<String>` are also available.
+- `password(mut self, password: impl Into<String>) -> Self` — sets the authentication password. `set_password(&mut self, password)` and `get_password() -> &Option<String>` are also available.
 - `tls_server_name(mut self, value: impl Into<String>) -> Self` — overrides the TLS certificate verification name. `set_tls_server_name(&mut self, value)` and `get_tls_server_name() -> &Option<String>` are also available.
+- `secure(mut self, secure: bool) -> Self` — enables TLS even when the URI scheme is `http://` or omitted. `set_secure(&mut self, secure)` and `is_secure() -> bool` are also available.
 - `ca_certificate(mut self, value: impl Into<String>) -> Self` — sets the custom CA certificate file path. `set_ca_certificate(&mut self, value)` and `get_ca_certificate() -> &Option<String>` are also available.
 - `client_certificate(mut self, value: impl Into<String>) -> Self` — sets the client certificate file path for mutual TLS. `set_client_certificate(&mut self, value)` and `get_client_certificate() -> &Option<String>` are also available.
 - `client_key(mut self, value: impl Into<String>) -> Self` — sets the client private-key file path for mutual TLS. `set_client_key(&mut self, value)` and `get_client_key() -> &Option<String>` are also available.
@@ -54,4 +60,4 @@ Each field has a consuming setter, a mutable setter, and a getter.
 - `database(mut self, database: impl Into<String>) -> Self` — sets the database selected on connection. `set_database(&mut self, database)` and `get_database() -> &str` are also available.
 - `retry(mut self, retry: RetryConfig) -> Self` — sets the retry policy. `set_retry(&mut self, retry)` and `get_retry() -> &RetryConfig` are also available.
 - `telemetry(mut self, telemetry: TelemetryConfig) -> Self` — sets the telemetry configuration. `set_telemetry(&mut self, telemetry)` and `get_telemetry() -> &TelemetryConfig` are also available.
-- `username_password(self, username: &str, password: &str) -> Self` — sets the token from a username and password pair.
+- `username_password(self, username: &str, password: &str) -> Self` — sets both credentials and derives the token unless `token()` was called explicitly.

@@ -1,5 +1,7 @@
 # MilvusClientV2Session
 
+**Zilliz Cloud only.**
+
 A cluster-scoped view of a [ClientV2](MilvusClientV2.md) that exposes the DQL surface only.
 
 ```rust

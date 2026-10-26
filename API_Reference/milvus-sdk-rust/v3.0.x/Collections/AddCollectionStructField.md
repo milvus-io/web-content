@@ -16,6 +16,7 @@ let request = AddCollectionStructFieldRequest::builder()
             .name("events")
             .max_capacity(16)
             .nullable(true)
+            .type_param("mmap.enabled", "true")
             .add_field(
                 FieldSchema::new()
                     .name("embedding")
@@ -40,6 +41,8 @@ let request = AddCollectionStructFieldRequest::builder()
 
     The `StructFieldSchema` describing the new struct field. Adding a struct field to an existing collection requires `nullable(true)`. Required.
 
+    Struct fields also accept type parameters with `type_param()`, such as `mmap.enabled` and `warmup`. Existing keys are preserved when a map is supplied with `type_params()`.
+
 **RETURN TYPE:**
 
 *Result\<()\>*
@@ -58,6 +61,7 @@ let request = AddCollectionStructFieldRequest::builder()
             .name("events")
             .max_capacity(16)
             .nullable(true)
+            .type_param("mmap.enabled", "true")
             .add_field(
                 FieldSchema::new()
                     .name("embedding")

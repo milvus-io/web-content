@@ -41,7 +41,7 @@ let client = ClientV2::new(&config).await?;
 
 - `pub fn session(&self, cluster_id: impl Into<String>) -> Result<MilvusClientV2Session>`
 
-    Creates a cluster-scoped session view bound to the given cluster identifier. See [MilvusClientV2Session](MilvusClientV2Session.md).
+    **Zilliz Cloud only.** Creates a cluster-scoped session view bound to the given cluster identifier. See [MilvusClientV2Session](MilvusClientV2Session.md).
 
 - `pub async fn use_database(&self, database: impl Into<String>) -> Result<()>`
 
@@ -65,7 +65,7 @@ Operations are grouped into the following categories. Click a category page to s
 - [**Vector**](../Vector/Insert.md) — DML and DQL: `insert`, `upsert`, `delete`, `query`, `get`, `search`, `hybrid_search`, `query_iterator`, `search_iterator`.
 - **Partitions** — partition lifecycle: `create_partition`, `drop_partition`, `has_partition`, `list_partitions`, `load_partitions`, `release_partitions`, `get_partition_stats`.
 - **Index** — index management: `create_index`, `describe_index`, `drop_index`, `list_indexes`, `alter_index_properties`, `drop_index_properties`.
-- [**Authentication**](../Authentication/CreateUser.md) — users, roles, privileges, and privilege groups.
+- [**Authentication**](../Authentication/CreateUser.md) — users, roles, privileges, privilege groups, and row-level security.
 - [**ResourceGroup**](../ResourceGroup/CreateResourceGroup.md) — resource-group lifecycle, node and replica transfer.
 - [**Snapshots**](../Snapshots/CreateSnapshot.md) — snapshot backup, restore, and pinning.
 - [**Management**](../Management/CheckHealth.md) — maintenance, compaction, segments, server version, and health.
