@@ -1,6 +1,6 @@
 ---
 name: update-milvus-sdk-docs
-description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, or mentions API_Reference, milvus-sdk-cpp, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, and a version bump (e.g. "update cpp docs to v3.0.2").
+description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 12-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
 ---
 
 # Update Milvus SDK Reference Docs
@@ -86,12 +86,23 @@ run with a clarification instead of downgrading.
 
 
 **Format check mode**: when the user's instruction includes "检查格式" or
-"check formatting", the checklist above becomes the primary scope. Run every
-step against the target tree and fix all violations found. This mode does not
-bump versions or add missing operations — it only audits and corrects
-formatting inconsistencies (wrong property names, missing Constants headers,
-stale inline expansions, misplaced type pages, missing cross-links, 3+
-consecutive blank lines, etc.).- **Branch discipline**: in a shared checkout sitting on `master`/upstream,
+"check formatting", run the **full 12-step reconciliation checklist** against
+the target tree — the same Steps 1–12 in
+[Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
+(enum values on type pages, request parameter coverage, response member
+coverage, method signature accuracy, standalone type page eligibility, inlined
+enum format, cross-links, misplaced type pages, stale inline expansions,
+unnecessary standalone pages, error-reporting convention, About.md format
+compliance) plus the Pass 1 response-surface audit. Apply the steps strictly,
+one category at a time, and fix every violation found. This mode does not bump
+versions — it audits and corrects whatever the checklist surfaces, including
+backfilling enum values, request parameters, response members, and signatures
+the steps reveal as missing or wrong, as well as pure formatting issues (wrong
+property names, missing `**Constants:**` headers, empty member bullets, 3+
+consecutive blank lines, missing or blank code-fence language tags, incorrect
+titles).
+
+- **Branch discipline**: in a shared checkout sitting on `master`/upstream,
   create the per-SDK work branch (Step 7) BEFORE starting edits. Verify
   `git branch --show-current` before every commit or amend — running
   `git commit --amend` while on `master` rewrites upstream history.
