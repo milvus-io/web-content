@@ -70,6 +70,12 @@ With this strategy, all tenants share a single collection and schema, but each t
 
 - **Others**: RBAC is not supported on the partition-key level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments.
 
+<div class="alert note">
+
+We recommend that you create a scalar index on the partition key field. Because each physical partition holds multiple tenants, Milvus evaluates the tenant filter against every entity in the searched partitions, and without an index this is a full scan. For details, refer to [Index Partition Key](use-partition-key.md#Index-Partition-Key).
+
+</div>
+
 ## Choosing the right multi-tenancy strategy
 
 The table below offers a comprehensive comparison between the four levels of multi-tenancy strategies.
