@@ -49,7 +49,7 @@ Methods of MilvusClient for connection:
    <tr>
      <td><p>setLogLevel(LogLevel level)</p></td>
      <td><p>Set log level in runtime.Note: this method cannot change the log level configured by log4j configurations. It only hides some logs inside the MilvusClient class.</p></td>
-     <td><p>level: A log level</p></td>
+     <td><p>level: The runtime log level: <code>Debug</code> shows all logs; <code>Info</code> shows information, warning, and error logs; <code>Warning</code> shows warning and error logs; <code>Error</code> shows only error logs.</p></td>
      <td><p>N/A</p></td>
    </tr>
 </table>

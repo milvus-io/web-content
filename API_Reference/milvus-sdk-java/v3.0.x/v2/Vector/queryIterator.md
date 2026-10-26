@@ -90,11 +90,60 @@ queryIterator(QueryIteratorReq.builder()
 
     A map of template variable values for parameterized filters.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryIterator*
 
+**RETURNS:**
+
+
 A **QueryIterator** object that iterates over the query results in batches.
+
+- `next()` (*List\<QueryResultsWrapper.RowRecord\>*) -
+
+    Fetches the next batch of query results. An empty list indicates that iteration is finished.
+
+    Each **RowRecord** exposes:
+
+    - `getFieldValues()` (*Map\<String, Object\>*) -
+
+        All field values keyed by field name.
+
+    - `put(String keyName, Object obj)` (*boolean*) -
+
+        Inserts a field value when the key is not already present.
+
+    - `get(String keyName)` (*Object*) -
+
+        Returns a field or dynamic-field value.
+
+    - `contains(String keyName)` (*boolean*) -
+
+        Whether the record contains the key.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases its server-side resources.
+
+- `getCursor()` (*QueryIteratorCursor*) -
+
+    Captures the iterator position for resumable pagination. The cursor exposes `getSessionTs()`, `getIntPk()`, `getStrPk()`, and `getLastElementOffset()`.
+
+    - `getSessionTs()` (*long*) -
+
+        The session timestamp of the original iterator.
+
+    - `getIntPk()` (*Long*) -
+
+        The last integer primary key returned.
+
+    - `getStrPk()` (*String*) -
+
+        The last string primary key returned.
+
+    - `getLastElementOffset()` (*Long*) -
+
+        The last matched element offset for element-filter iterators.
 
 **EXCEPTIONS:**
 

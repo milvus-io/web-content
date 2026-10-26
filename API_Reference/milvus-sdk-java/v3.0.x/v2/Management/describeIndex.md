@@ -91,7 +91,7 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getIndexState()` (*IndexBuildState*) -
 
-        The build state of the index.
+        The build state of the index: `IndexStateNone`, `Unissued`, `InProgress`, `Finished`, `Failed`, or `Retry`.
 
     - `getIndexFailedReason()` (*String*) -
 

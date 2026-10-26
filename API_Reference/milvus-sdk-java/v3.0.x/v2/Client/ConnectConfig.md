@@ -114,7 +114,13 @@ ConnectConfig.builder()
 
 - `telemetryConfig(TelemetryConfig telemetryConfig)` -
 
-    The client telemetry configuration. See [TelemetryConfig](TelemetryConfig.md) for the available settings.
+    The client telemetry configuration. `TelemetryConfig.builder()` exposes:
+
+    - `enabled(boolean enabled)` — Whether telemetry reporting is enabled. Defaults to `true`.
+    - `heartbeatIntervalMs(long heartbeatIntervalMs)` — Milliseconds between heartbeats and metrics windows. Defaults to `10000`.
+    - `samplingRate(double samplingRate)` — Fraction of recorded operations, from `0.0` to `1.0`. Defaults to `1.0`.
+    - `errorMaxCount(int errorMaxCount)` — Maximum number of retained errors. Defaults to `100`.
+    - `clientId(String clientId)` — Optional stable client identity; an empty value uses a random UUID.
 
 ## Example
 

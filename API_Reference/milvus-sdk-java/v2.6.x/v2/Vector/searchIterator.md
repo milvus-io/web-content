@@ -96,11 +96,40 @@ searchIterator(SearchIteratorReq.builder()
 
     The batch size for iterator operations.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *SearchIterator*
 
+**RETURNS:**
+
+
 A *SearchIterator* object to iterate search results, which offers the following methods:
+
+- `next()` (*List\<QueryResultsWrapper.RowRecord\>*) -
+
+    Fetches the next batch of search results. An empty list indicates that iteration is finished.
+
+    Each **RowRecord** exposes:
+
+    - `getFieldValues()` (*Map\<String, Object\>*) -
+
+        All field values keyed by field name.
+
+    - `put(String keyName, Object obj)` (*boolean*) -
+
+        Inserts a field value when the key is not already present.
+
+    - `get(String keyName)` (*Object*) -
+
+        Returns a field or dynamic-field value.
+
+    - `contains(String keyName)` (*boolean*) -
+
+        Whether the record contains the key.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases its server-side resources.
 
 **EXCEPTIONS:**
 

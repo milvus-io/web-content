@@ -37,7 +37,7 @@ A **GetCompactionPlansResp** object that contains the compaction state and merge
 
 - `getState()` (*CompactionState*) -
 
-    The state of the compaction.
+    The state of the compaction: `UndefiedState` (`0`), `Executing` (`1`), or `Completed` (`2`). The SDK preserves the source enum's `UndefiedState` spelling.
 
 - `getPlans()` (*List\<CompactionPlan\>*) -
 

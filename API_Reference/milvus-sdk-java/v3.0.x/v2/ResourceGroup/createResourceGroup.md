@@ -28,37 +28,16 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
     **[REQUIRED]**
 
-    The configuration of the target resource group, which is a **ResourceGroupConfig** object that provides the following builder methods:
+    The configuration of the target resource group. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
-    - `withRequests(ResourceGroupLimit requests)`
+**RETURN TYPE:**
 
-        A **ResourceGroupLimit** instance that defines the number of nodes required by a resource group.
-
-    - `withLimits(ResourceGroupLimit limits)`
-
-        A **ResourceGroupLimit** instance that defines the maximum number of nodes required by a resource group.
-
-    - `withFrom(List<ResourceGroupTransfer> from)`
-
-        A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers. 
-
-    - `withTo(List<ResourceGroupTransfer> to)`
-
-        A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers. 
-
-    - `withNodeFilter(ResourceGroupNodeFilter nodeFilter)`
-
-        A **ResourceGroupNodeFilter** is used to filter the query nodes with specified node labels.
-
-        <div class="alert note">
-        
-        You can set an environment variable for Milvus to label the query node during its startup. For example, to add the `QUERYNODE_LOCATION` label, you need to create an environment variable named after the label, prefixed by `MILVUS_SERVER_LABEL_`, and set the value for the label, as in `MILVUS_SERVER_LABEL_QUERYNODE_LOCATION=dc1`.
-
-        </div>
+*void*
 
 **RETURNS:**
 
-*void*
+
+Returns `void`; the absence of an exception indicates that the resource group was created.
 
 **EXCEPTIONS:**
 

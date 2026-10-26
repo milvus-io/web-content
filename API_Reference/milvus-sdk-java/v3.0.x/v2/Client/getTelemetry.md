@@ -6,11 +6,50 @@ This operation returns the telemetry manager for the connected client.
 public ClientTelemetryManager getTelemetry()
 ```
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *ClientTelemetryManager*
 
-The telemetry manager for the connected client, or `null` when telemetry is not available.
+**RETURNS:**
+
+
+The telemetry manager for the connected client, or `null` when telemetry is not available. The manager exposes:
+
+- `isSupported()` (*boolean*) -
+
+    Whether the connected server supports client telemetry.
+
+- `isReady()` (*boolean*) -
+
+    Whether the telemetry heartbeat is ready.
+
+- `isClosed()` (*boolean*) -
+
+    Whether the manager has been closed.
+
+- `getLastHeartbeatError()` (*Throwable*) -
+
+    The most recent heartbeat error, or `null` when the last heartbeat succeeded.
+
+- `getClientId()` (*String*) -
+
+    The stable telemetry client identifier.
+
+- `getConfigHash()` (*String*) -
+
+    The hash of the active server telemetry configuration.
+
+- `getLastCommandTimestamp()` (*long*) -
+
+    The timestamp of the most recently processed server command.
+
+- `registerCommandHandler(String type, CommandHandler handler)` (*void*) -
+
+    Registers a handler for a server-pushed telemetry command type. The handler receives a `ClientCommand` and returns a `CommandReply`.
+
+- `close()` (*void*) -
+
+    Stops telemetry and releases its resources.
 
 **EXCEPTIONS:**
 

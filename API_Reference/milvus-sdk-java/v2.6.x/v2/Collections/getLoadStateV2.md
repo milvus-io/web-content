@@ -38,7 +38,7 @@ getLoadStateV2(GetLoadStateReq.builder()
 
 - `getState()` (*LoadState*) -
 
-    The current load state of the collection or partition.
+    The current load state of the collection or partition: `LoadStateNotExist` (`0`), `LoadStateNotLoad` (`1`), `LoadStateLoading` (`2`), or `LoadStateLoaded` (`3`).
 
 - `getProgress()` (*Long*) -
 

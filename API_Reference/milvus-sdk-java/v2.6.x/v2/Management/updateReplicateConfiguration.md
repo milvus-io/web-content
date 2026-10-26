@@ -35,6 +35,8 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 **RETURNS:**
 
 
+A **UpdateReplicateConfigurationResp** confirms that the replication configuration was updated. The response contains no payload and exposes no public getters.
+
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../Client/MilvusClientException.md)**

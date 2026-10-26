@@ -40,7 +40,7 @@ A **GetLoadStateResp** object that indicates the load state of the collection.
 
 - `getState()` (*LoadState*) -
 
-    The load state of the collection.
+    The load state of the collection: `LoadStateNotExist` (`0`), `LoadStateNotLoad` (`1`), `LoadStateLoading` (`2`), or `LoadStateLoaded` (`3`).
 
 - `getStateName()` (*String*) -
 

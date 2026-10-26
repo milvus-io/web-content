@@ -34,7 +34,7 @@ updateReplicateConfiguration(UpdateReplicateConfigurationReq.builder()
 
 **RETURNS:**
 
-A **UpdateReplicateConfigurationResp** object that confirms the replication configuration was updated.
+A **UpdateReplicateConfigurationResp** object confirms that the configuration was updated. The response contains no payload and exposes no public getters.
 
 **EXCEPTIONS:**
 

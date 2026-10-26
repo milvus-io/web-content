@@ -21,11 +21,16 @@ updateResourceGroups(UpdateResourceGroupsReq.builder()
 
     **[REQUIRED]**
 
-    The resource groups and their configurations after the operation.
+    The resource groups and their configurations after the operation. See [ResourceGroupConfig](ResourceGroupConfig.md).
+
+**RETURN TYPE:**
+
+*void*
 
 **RETURNS:**
 
-*void*
+
+Returns `void`; the absence of an exception indicates that the resource-group configurations were updated.
 
 **EXCEPTIONS:**
 

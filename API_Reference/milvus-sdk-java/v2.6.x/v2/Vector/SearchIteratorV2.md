@@ -112,9 +112,62 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
     A function used to filter the search results before returning them.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *SearchIteratorV2*
+
+**RETURNS:**
+
+
+A **SearchIteratorV2** fetches token-based search results in batches and exposes:
+
+- `next()` (*List\<SearchResp.SearchResult\>*) -
+
+    Fetches the next batch of search hits. An empty list indicates that iteration is finished. Each **SearchResult** exposes:
+
+    - `getEntity()` (*Map\<String, Object\>*) -
+
+        The retrieved entity data.
+
+    - `getScore()` (*Float*) -
+
+        The similarity score.
+
+    - `getId()` (*Object*) -
+
+        The primary key value.
+
+    - `getPrimaryKey()` (*String*) -
+
+        The primary key value rendered as a string.
+
+    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
+
+        Highlighted text fragments keyed by field name. Each **HighlightResult** exposes:
+
+        - `getFieldName()` (*String*) -
+
+            The highlighted field name.
+
+        - `getFragments()` (*List\<String\>*) -
+
+            The highlighted text fragments.
+
+        - `getScores()` (*List\<Float\>*) -
+
+            The relevance score of each fragment.
+
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
+
+        The highlighted text fragments for one field, with the same getters as `getHighlightResults()`.
+
+    - `getElementOffset()` (*Long*) -
+
+        The matched element offset for struct-array element-level searches.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases its server-side resources.
 
 **EXCEPTIONS:**
 
