@@ -89,7 +89,7 @@ res = client.delete(
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -163,8 +163,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
 {
     Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    Username = <span class="hljs-string">&quot;root&quot;</span>,
-    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
 };
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
 <span class="hljs-keyword">await</span> client.ConnectAsync();
