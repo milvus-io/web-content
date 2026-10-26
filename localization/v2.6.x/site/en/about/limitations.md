@@ -129,7 +129,7 @@ summary: Learn about the limits while using Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Data type</th><th>Limit</th></tr>
+<tr><th>Data type</th><th>Limit (bytes)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>

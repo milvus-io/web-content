@@ -22,8 +22,9 @@ summary: 'In Milvus, VARCHAR is the data type used for storing string data.'
 <p>When you define a <code translate="no">VARCHAR</code> field, two parameters are mandatory:</p>
 <ul>
 <li><p>Set the <code translate="no">datatype</code> to <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Specify the <code translate="no">max_length</code>, which defines the maximum number of bytes the <code translate="no">VARCHAR</code> field can store. The valid range for <code translate="no">max_length</code> is from 1 to 65,535.</p></li>
+<li><p>Specify the <code translate="no">max_length</code>, which defines the maximum number of UTF-8 bytes allowed for each field value. The valid range for <code translate="no">max_length</code> is from 1 to 65,535.</p></li>
 </ul>
+<p>The number of bytes can differ from the number of characters. For example, with <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> fits within the limit because it uses 10 UTF-8 bytes. The string <code translate="no">&quot;一二三四五六七八九十&quot;</code> also has 10 characters, but uses 30 UTF-8 bytes and exceeds the limit.</p>
 <div class="alert note">
 <p>Milvus supports null values and default values for <code translate="no">VARCHAR</code> fields. To enable these features, set <code translate="no">nullable</code> to <code translate="no">True</code> and <code translate="no">default_value</code> to a string value. For details, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>
 </div>
