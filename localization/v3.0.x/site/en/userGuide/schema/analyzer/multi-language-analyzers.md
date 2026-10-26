@@ -336,14 +336,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
