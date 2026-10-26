@@ -1243,7 +1243,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi &amp; Model",
+        "label": "Inferensi Fungsi dan Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "Impor Massal Idempoten",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },
@@ -1639,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Kode Claude",
+        "label": "Server MCP untuk Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2132,7 +2138,7 @@
                 "children": []
               },
               {
-                "label": "Peran Pemberian Hibah",
+                "label": "Peran Pemberian Dana",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2490,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "Enkoder Silang",
+                "label": "Encoder Silang",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []

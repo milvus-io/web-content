@@ -1,9 +1,9 @@
 ---
 id: quickstart.md
-summary: Póngase en marcha con Milvus.
-title: Inicio rápido
+summary: Empieza a utilizar Milvus.
+title: Guía de inicio rápido
 ---
-<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Inicio rápido con Milvus Lite<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
+<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Introducción rápida a Milvus Lite<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Inicio rápido
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Los vectores, el formato de datos de salida de los modelos de redes neuronales, pueden codificar eficazmente la información y desempeñar un papel fundamental en aplicaciones de IA como la base de conocimientos, la búsqueda semántica, la generación aumentada de recuperación (RAG) y más.</p>
-<p>Milvus es una base de datos vectorial de código abierto que se adapta a aplicaciones de IA de todos los tamaños, desde la ejecución de un chatbot de demostración en el cuaderno Jupyter hasta la creación de búsquedas a escala web que sirven a miles de millones de usuarios. En esta guía, le mostraremos cómo configurar Milvus localmente en cuestión de minutos y utilizar la biblioteca cliente Python para generar, almacenar y buscar vectores.</p>
+<p>Los vectores, el formato de datos de salida de los modelos de redes neuronales, pueden codificar información de forma eficaz y desempeñan un papel fundamental en aplicaciones de IA como las bases de conocimiento, la búsqueda semántica, la generación aumentada por recuperación (RAG) y muchas otras.</p>
+<p>Milvus es una base de datos vectorial de código abierto que se adapta a aplicaciones de IA de cualquier envergadura, desde ejecutar un chatbot de demostración en Jupyter Notebook hasta crear un motor de búsqueda a escala web que dé servicio a miles de millones de usuarios. En esta guía, te explicaremos cómo configurar Milvus localmente en cuestión de minutos y cómo utilizar la biblioteca cliente de Python para generar, almacenar y buscar vectores.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,16 +37,16 @@ title: Inicio rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta guía utilizamos Milvus Lite, una biblioteca python incluida en <code translate="no">pymilvus</code> que puede incrustarse en la aplicación cliente. Milvus también admite el despliegue en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso de producción.</p>
-<p>Antes de empezar, asegúrate de que tienes Python 3.8+ disponible en el entorno local. Instale <code translate="no">pymilvus</code> que contiene tanto la biblioteca cliente python como Milvus Lite:</p>
+    </button></h2><p>En esta guía utilizamos Milvus Lite, una biblioteca de Python incluida en <code translate="no">pymilvus</code> que se puede integrar en la aplicación cliente. Milvus también admite la implementación en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de uso en producción.</p>
+<p>Antes de empezar, asegúrate de que dispones de Python 3.8 o superior en tu entorno local. Instala <code translate="no">pymilvus</code>, que contiene tanto la biblioteca cliente de Python como Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Si está utilizando Google Colab, para habilitar las dependencias que acaba de instalar, es posible que tenga que <strong>reiniciar el tiempo de ejecución</strong>. (Haga clic en el menú "Runtime" en la parte superior de la pantalla, y seleccione "Reiniciar sesión" en el menú desplegable).</p>
+<p>Si utilizas Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el entorno de ejecución</strong>. (Haz clic en el menú «Runtime» en la parte superior de la pantalla y selecciona «Restart session» en el menú desplegable).</p>
 </blockquote>
 </div>
-<h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar la base de datos de vectores<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configuración de la base de datos vectorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: Inicio rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para crear una base de datos vectorial Milvus local, simplemente instale un <code translate="no">MilvusClient</code> especificando un nombre de archivo para almacenar todos los datos, como "milvus_demo.db".</p>
+    </button></h2><p>Para crear una base de datos vectorial local de Milvus, basta con instanciar un objeto ` <code translate="no">MilvusClient</code> ` especificando un nombre de archivo para almacenar todos los datos, como «milvus_demo.db».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, necesitamos una colección para almacenar vectores y sus metadatos asociados. Puede pensar en ella como en una tabla de las bases de datos SQL tradicionales. Al crear una colección, puede definir parámetros de esquema e índice para configurar las especificaciones del vector, como la dimensionalidad, los tipos de índice y las métricas distantes. También hay conceptos complejos para optimizar el índice para el rendimiento de la búsqueda vectorial. Por ahora, centrémonos en lo básico y utilicemos por defecto para todo lo posible. Como mínimo, sólo necesitas establecer el nombre de la colección y la dimensión del campo vectorial de la colección.</p>
+    </button></h2><p>En Milvus, necesitamos una colección para almacenar vectores y sus metadatos asociados. Puedes considerarla como una tabla en las bases de datos SQL tradicionales. Al crear una colección, puedes definir parámetros de esquema e índice para configurar especificaciones vectoriales como la dimensionalidad, los tipos de índice y las métricas de distancia. También existen conceptos más complejos para optimizar el índice y mejorar el rendimiento de la búsqueda de vectores. Por ahora, centrémonos en lo básico y utilicemos los valores predeterminados siempre que sea posible. Como mínimo, solo es necesario establecer el nombre de la colección y la dimensión del campo vectorial de la misma.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -91,11 +91,12 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <p>En la configuración anterior,</p>
 <ul>
-<li>La clave primaria y los campos vectoriales utilizan sus nombres por defecto ("id" y "vector").</li>
-<li>El tipo de métrica (definición de distancia vectorial) se establece en su valor por defecto<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>El campo de clave primaria acepta enteros y no se incrementa automáticamente (es decir, no utiliza <a href="https://milvus.io/docs/schema.md">la función auto-id</a>) Alternativamente, puede definir formalmente el esquema de la colección siguiendo esta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucción</a>.</li>
+<li>la clave principal y los campos vectoriales utilizan sus nombres por defecto («id» y «vector»).</li>
+<li>El tipo de métrica (definición de distancia vectorial) se establece en su valor por defecto (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
+<li>El campo de clave primaria admite números enteros y no se incrementa automáticamente (es decir, no se utiliza <a href="https://milvus.io/docs/schema.md">la función de identificación automática</a>).
+Como alternativa, puedes definir formalmente el esquema de la colección siguiendo estas <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instrucciones</a>.</li>
 </ul>
-<h2 id="Prepare-Data" class="common-anchor-header">Preparar los datos<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
+<h2 id="Prepare-Data" class="common-anchor-header">Preparación de los datos<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,8 +111,8 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta guía, utilizamos vectores para realizar búsquedas semánticas en texto. Necesitamos generar vectores para el texto descargando modelos de incrustación. Esto puede hacerse fácilmente utilizando las funciones de utilidad de la biblioteca <code translate="no">pymilvus[model]</code>.</p>
-<h2 id="Represent-text-with-vectors" class="common-anchor-header">Representar texto con vectores<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
+    </button></h2><p>En esta guía, utilizamos vectores para realizar búsquedas semánticas en texto. Necesitamos generar vectores para el texto descargando modelos de incrustación. Esto se puede hacer fácilmente utilizando las funciones de utilidad de la biblioteca <code translate="no">pymilvus[model]</code>.</p>
+<h2 id="Represent-text-with-vectors" class="common-anchor-header">Representar el texto con vectores<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,10 +127,10 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En primer lugar, instale la biblioteca de modelos. Este paquete incluye herramientas esenciales de ML como PyTorch. La descarga del paquete puede llevar algún tiempo si su entorno local nunca ha instalado PyTorch.</p>
+    </button></h2><p>En primer lugar, instala la biblioteca de modelos. Este paquete incluye herramientas esenciales de aprendizaje automático, como PyTorch. La descarga del paquete puede tardar algún tiempo si nunca se ha instalado PyTorch en tu entorno local.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Genere incrustaciones vectoriales con el modelo por defecto. Milvus espera que los datos se inserten organizados como una lista de diccionarios, donde cada diccionario representa un registro de datos, denominado como entidad.</p>
+<p>Genera incrustaciones vectoriales con el modelo predeterminado. Milvus espera que los datos se introduzcan organizados como una lista de diccionarios, donde cada diccionario representa un registro de datos, denominado «entidad».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># If connection to https://huggingface.co/ failed, uncomment the following path</span>
@@ -164,7 +165,7 @@ data = [
 Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
 Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Alternativa] Usar representación falsa con vectores aleatorios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
+<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Alternativamente] Utiliza una representación ficticia con vectores aleatorios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +180,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si no has podido descargar el modelo por problemas de red, puedes utilizar vectores aleatorios para representar el texto y terminar el ejemplo. Tenga en cuenta que el resultado de la búsqueda no reflejará la similitud semántica, ya que los vectores son falsos.</p>
+    </button></h2><p>Si no has podido descargar el modelo debido a problemas de red, como solución alternativa, puedes utilizar vectores aleatorios para representar el texto y así completar el ejemplo. Ten en cuenta que el resultado de la búsqueda no reflejará la similitud semántica, ya que los vectores son ficticios.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -216,7 +217,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vamos a insertar los datos en la colección:</p>
+    </button></h2><p>Insertemos los datos en la colección:</p>
 <pre><code translate="no" class="language-python">res = client.insert(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, data=data)
 
 <span class="hljs-built_in">print</span>(res)
@@ -238,7 +239,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ahora podemos hacer búsquedas semánticas representando el texto de la consulta de búsqueda como vector, y realizar búsquedas de similitud vectorial en Milvus.</p>
+    </button></h2><p>Ahora podemos realizar búsquedas semánticas representando el texto de la consulta de búsqueda como un vector y llevando a cabo una búsqueda de similitud vectorial en Milvus.</p>
 <h3 id="Vector-search" class="common-anchor-header">Búsqueda vectorial<button data-href="#Vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -254,7 +255,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus acepta una o varias peticiones de búsqueda vectorial al mismo tiempo. El valor de la variable query_vectors es una lista de vectores, donde cada vector es una matriz de números flotantes.</p>
+    </button></h3><p>Milvus admite una o varias solicitudes de búsqueda vectorial al mismo tiempo. El valor de la variable `query_vectors` es una lista de vectores, donde cada vector es una matriz de números de tipo float.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -270,7 +271,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>La salida es una lista de resultados, cada uno de los cuales corresponde a una consulta de búsqueda vectorial. Cada consulta contiene una lista de resultados, donde cada resultado contiene la clave primaria de la entidad, la distancia al vector de consulta y los detalles de la entidad con <code translate="no">output_fields</code> especificado.</p>
+<p>El resultado es una lista de resultados, cada uno de los cuales se corresponde con una consulta de búsqueda vectorial. Cada consulta contiene una lista de resultados, en la que cada resultado incluye la clave primaria de la entidad, la distancia al vector de consulta y los detalles de la entidad con el « <code translate="no">output_fields</code> » especificado.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">Búsqueda vectorial con filtrado de metadatos<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -286,7 +287,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>También puede realizar una búsqueda vectorial teniendo en cuenta los valores de los metadatos (llamados campos "escalares" en Milvus, ya que escalar se refiere a datos no vectoriales). Esto se hace con una expresión de filtro que especifica ciertos criterios. Veamos cómo buscar y filtrar con el campo <code translate="no">subject</code> en el siguiente ejemplo.</p>
+    </button></h2><p>También se puede realizar una búsqueda vectorial teniendo en cuenta los valores de los metadatos (denominados campos «escalares» en Milvus, ya que «escalar» hace referencia a datos no vectoriales). Esto se lleva a cabo mediante una expresión de filtro que especifica determinados criterios. Veamos cómo buscar y filtrar con el campo « <code translate="no">subject</code> » en el siguiente ejemplo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -314,8 +315,8 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>Por defecto, los campos escalares no se indexan. Si necesita realizar una búsqueda filtrada de metadatos en un conjunto de datos de gran tamaño, puede considerar la posibilidad de utilizar un esquema fijo y activar también el <a href="https://milvus.io/docs/scalar_index.md">índice</a> para mejorar el rendimiento de la búsqueda.</p>
-<p>Además de la búsqueda vectorial, también puede realizar otros tipos de búsqueda:</p>
+<p>Por defecto, los campos escalares no están indexados. Si necesitas realizar una búsqueda filtrada por metadatos en un conjunto de datos de gran tamaño, puedes plantearte utilizar un esquema fijo y activar el <a href="https://milvus.io/docs/scalar_index.md">índice</a> para mejorar el rendimiento de la búsqueda.</p>
+<p>Además de la búsqueda vectorial, también puedes realizar otros tipos de búsquedas:</p>
 <h3 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -331,22 +332,22 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una consulta() es una operación que recupera todas las entidades que coinciden con un criterio, como una <a href="https://milvus.io/docs/boolean.md">expresión de filtro</a> o la coincidencia con algunos ids.</p>
-<p>Por ejemplo, recuperar todas las entidades cuyo campo escalar tenga un valor determinado:</p>
+    </button></h3><p>Una consulta (query()) es una operación que recupera todas las entidades que cumplen un criterio, como una <a href="https://milvus.io/docs/boolean.md">expresión de filtro</a> o la coincidencia con determinados identificadores.</p>
+<p>Por ejemplo, recuperar todas las entidades cuyo campo escalar tenga un valor concreto:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Recuperar directamente entidades por clave primaria:</p>
+<p>Recuperar entidades directamente por clave primaria:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities" class="common-anchor-header">Borrar entidades<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities" class="common-anchor-header">Eliminar entidades<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -361,7 +362,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si desea purgar datos, puede eliminar entidades especificando la clave primaria o eliminar todas las entidades que coincidan con una expresión de filtro determinada.</p>
+    </button></h2><p>Si deseas eliminar datos, puedes borrar entidades especificando la clave primaria o borrar todas las entidades que cumplan una expresión de filtro concreta.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 
@@ -378,7 +379,7 @@ res = client.delete(
 <pre><code translate="no">[<span class="hljs-meta">0, 2</span>]
 [<span class="hljs-meta">3, 4, 5</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Existing-Data" class="common-anchor-header">Cargar Datos Existentes<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Existing-Data" class="common-anchor-header">Cargar datos existentes<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -393,7 +394,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dado que todos los datos de Milvus Lite se almacenan en un archivo local, puede cargar todos los datos en memoria incluso después de que el programa termine, creando un <code translate="no">MilvusClient</code> con el archivo existente. Por ejemplo, esto recuperará las colecciones del archivo "milvus_demo.db" y continuará escribiendo datos en él.</p>
+    </button></h2><p>Dado que todos los datos de Milvus Lite se almacenan en un archivo local, puedes cargar todos los datos en memoria incluso después de que el programa haya finalizado, creando una colección de datos ( <code translate="no">MilvusClient</code> ) a partir del archivo existente. Por ejemplo, esto recuperará las colecciones del archivo «milvus_demo.db» y seguirá escribiendo datos en él.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -413,7 +414,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si desea eliminar todos los datos de una colección, puede eliminar la colección con</p>
+    </button></h2><p>Si desea eliminar todos los datos de una colección, puede eliminarla con</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Drop collection</span>
 client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -432,12 +433,12 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite es ideal para comenzar con un programa python local. Si tiene datos a gran escala o le gustaría usar Milvus en producción, puede aprender sobre el despliegue de Milvus en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Todos los modos de despliegue de Milvus comparten la misma API, por lo que su código del lado del cliente no necesita cambiar mucho si se mueve a otro modo de despliegue. Simplemente especifique el <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI y Token</a> de un servidor Milvus desplegado en cualquier lugar:</p>
+    </button></h2><p>Milvus Lite es ideal para iniciarse con un programa local en Python. Si dispones de datos a gran escala o deseas utilizar Milvus en producción, puedes informarte sobre cómo implementar Milvus en <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> y <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Todos los modos de implementación de Milvus comparten la misma API, por lo que no es necesario modificar mucho el código del lado del cliente si se cambia a otro modo de implementación. Basta con especificar el <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI y el token</a> de un servidor Milvus implementado en cualquier lugar:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Para migrar datos de Milvus Lite a Milvus desplegado en Docker o Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migrar datos de Milvus Lite</a>.</p>
-<p>Milvus proporciona API REST y gRPC, con bibliotecas cliente en lenguajes como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# y <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
-<p>Para el diseño de esquemas, Milvus admite un diseño de esquemas flexible, en el que puede definir los campos y sus tipos de datos, incluidos los campos vectoriales. También puede definir el tipo de índice y los parámetros para cada campo. Para obtener más información, consulte <a href="https://milvus.io/docs/schema-hands-on.md">Diseño del modelo de datos para la búsqueda</a>.</p>
+<p>Para migrar datos de Milvus Lite a Milvus implementado en Docker o Kubernetes, consulta <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migración</a> de <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">datos desde Milvus Lite</a>.</p>
+<p>Milvus ofrece API REST y gRPC, con bibliotecas de cliente en lenguajes como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# y <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>En cuanto al diseño de esquemas, Milvus admite un diseño flexible, en el que puedes definir los campos y sus tipos de datos, incluidos los campos vectoriales. También puedes definir el tipo de índice y los parámetros para cada campo. Para obtener más información, consulta <a href="https://milvus.io/docs/schema-hands-on.md">«Diseño del modelo de datos para la búsqueda</a>».</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus para agentes de IA<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,5 +454,5 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si está utilizando asistentes de codificación AI como Claude Code o Cursor, puede instalar <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> para ayudar a sus herramientas AI a escribir código Milvus correcto.</p>
-<p>Para más herramientas de agente incluyendo servidores MCP y prompts curados, vea <a href="/docs/es/milvus_for_agents.md">Milvus para Agentes AI</a>.</p>
+    </button></h2><p>Si utiliza asistentes de programación de IA como Claude Code o Cursor, puede instalar <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> para ayudar a sus herramientas de IA a escribir código Milvus correcto.</p>
+<p>Para conocer más herramientas para agentes, incluidos los servidores MCP y las indicaciones seleccionadas, consulta <a href="/docs/es/milvus_for_agents.md">Milvus para agentes de IA</a>.</p>

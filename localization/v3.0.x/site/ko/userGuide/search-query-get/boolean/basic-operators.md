@@ -2,7 +2,7 @@
 id: basic-operators.md
 title: 기본 연산자
 summary: >-
-  Milvus는 데이터를 효율적으로 필터링하고 쿼리할 수 있도록 다양한 기본 연산자를 제공합니다. 이러한 연산자를 활용하면 스칼라 필드, 수치
+  Milvus는 데이터를 효율적으로 필터링하고 쿼리할 수 있도록 다양한 기본 연산자를 제공합니다. 이러한 연산자를 사용하면 스칼라 필드, 수치
   연산, 논리 조건 등을 기반으로 검색 조건을 세밀하게 조정할 수 있습니다. 정확한 쿼리를 작성하고 검색 효율을 극대화하기 위해서는 이러한
   연산자의 사용법을 이해하는 것이 매우 중요합니다.
 ---
@@ -61,7 +61,7 @@ summary: >-
 <li><p><code translate="no">&gt;=</code> (보다 크거나 같음)</p></li>
 <li><p><code translate="no">&lt;=</code> (작거나 같음)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-equal-to-" class="common-anchor-header">예 1: '와 같음' 조건으로 필터링하기 (<code translate="no">==</code>)<button data-href="#Example-1-Filtering-with-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-1-Filtering-with-equal-to-" class="common-anchor-header">예 1: '같음' 조건으로 필터링하기 (<code translate="no">==</code>)<button data-href="#Example-1-Filtering-with-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +79,7 @@ summary: >-
     </button></h3><p><code translate="no">status</code> 라는 필드가 있고, <code translate="no">status</code> 가 "active"인 모든 엔티티를 찾고자 한다고 가정해 보겠습니다. 등호 연산자 <code translate="no">==</code> 를 사용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">예제 2: '<code translate="no">!=</code>'에 대한 '아님' 조건으로 필터링하기<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">예제 2: '<code translate="no">!=</code>'에 대한 '아님' 조건으로 필터링<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +130,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">price</code> 값이 100보다 작은 엔티티를 찾으려면:</p>
+    </button></h3><p><code translate="no">price</code> 가 100보다 작은 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">예 5:<code translate="no">&gt;=</code> 가 30보다 크거나 같은 값으로 필터링하기<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
@@ -184,7 +184,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>범위 연산자는 특정 값 집합을 기준으로 데이터를 필터링하는 데 도움이 됩니다. Milvus는 집합 소속 여부를 확인하기 위해 <code translate="no">IN</code> 를 지원합니다.</p>
+    </button></h2><p>범위 연산자는 특정 값 집합을 기준으로 데이터를 필터링하는 데 도움이 됩니다. Milvus는 집합 소속 여부 확인을 위해 <code translate="no">IN</code> 를 지원합니다.</p>
 <p><code translate="no">color</code> 가 "red", "green" 또는 "blue"인 모든 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,11 +204,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>패턴 일치 연산자는 와일드카드 패턴이나 정규식을 기반으로 문자열 값을 필터링하는 데 도움이 됩니다.</p>
+    </button></h2><p>패턴 매칭 연산자는 와일드카드 패턴이나 정규식을 기반으로 문자열 값을 필터링하는 데 도움이 됩니다.</p>
 <ul>
 <li><p><code translate="no">LIKE</code>: 문자열 값에 대한 간단한 와일드카드 패턴과 일치시키는 데 사용됩니다. 예를 들어, <code translate="no">name LIKE &quot;Prod%&quot;</code> 는 <code translate="no">Prod</code> 로 시작하는 값과 일치합니다.</p></li>
-<li><p><code translate="no">=~</code>: 문자열 값을 RE2 정규 표현식과 일치시키는 데 사용됩니다. 예를 들어, ` <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> `는 ` <code translate="no">E1001</code>`와 같은 오류 코드를 포함하는 값과 일치합니다.</p></li>
-<li><p><code translate="no">!~</code>: RE2 정규 표현식과 일치하는 문자열 값을 제외하는 데 사용됩니다. 이는 <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 와 동일합니다.</p></li>
+<li><p><code translate="no">=~</code>: 문자열 값을 RE2 정규 표현식과 일치시키는 데 사용됩니다. 예를 들어, ` <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> `는 ` <code translate="no">E1001</code>`와 같은 오류 코드가 포함된 값과 일치합니다.</p></li>
+<li><p><code translate="no">!~</code>: RE2 정규 표현식과 일치하는 문자열 값을 제외하는 데 사용됩니다. 이는 <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 과 동일합니다.</p></li>
 </ul>
 <p><code translate="no">name</code> 가 <code translate="no">Prod</code> 로 시작하는 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
@@ -219,7 +219,7 @@ summary: >-
 <p><code translate="no">message</code> 가 <code translate="no">DEBUG</code> 로 시작하는 엔티티를 제외하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">LIKE</code> 와 정규 표현식(regex) 중 선택 방법, 지원되는 필드 유형, 정규 표현식 구문, 이스케이프 규칙 및 성능에 대한 자세한 내용은 <a href="/docs/ko/pattern-matching.md">‘패턴 매칭’을</a> 참조하십시오. 또한 Milvus에서는 <code translate="no">VARCHAR</code> 필드나 JSON 문자열 경로에 <code translate="no">NGRAM</code> 인덱스를 생성하여 해당 패턴 매칭 필터의 성능을 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">‘NGRAM’을</a> 참조하십시오.</p>
+<p><code translate="no">LIKE</code> 와 정규 표현식(regex) 중 선택 방법, 지원되는 필드 유형, 정규 표현식 구문, 이스케이프 규칙 및 성능에 대한 자세한 내용은 <a href="/docs/ko/pattern-matching.md">패턴 매칭을</a> 참조하십시오. 또한 Milvus에서는 <code translate="no">VARCHAR</code> 필드나 JSON 문자열 경로에 <code translate="no">NGRAM</code> 인덱스를 생성하여 해당 패턴 매칭 필터의 성능을 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">NGRAM을</a> 참조하십시오.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">산술 연산자<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +277,7 @@ summary: >-
     </button></h3><p><code translate="no">id</code> 가 짝수(즉, 2로 나누어 떨어지는 수)인 원소를 구하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">예제 2: 지수 연산 활용 (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">예제 2: 지수 연산 사용 (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,10 +292,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">price</code> 의 2제곱이 1000보다 큰 개체를 찾으려면:</p>
+    </button></h3><p><code translate="no">price</code> 의 2제곱이 1000보다 큰 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">비트 연산자<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>산술 연산자는 <strong>단일 필드와 상수가</strong> 포함된 표현식만 지원합니다. <code translate="no">price * quantity &gt; 100</code> 과 같이 두 필드를 산술적으로 결합한 표현식은 현재 지원되지 않으며 오류가 발생합니다. 여러 필드에서 계산된 파생 값을 기준으로 필터링해야 하는 경우, 삽입 시점에 미리 계산된 값을 별도의 스칼라 필드로 저장하는 것을 고려해 보십시오.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">비트 연산자<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -310,7 +313,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>비트 연산자는 정수 필드가 권한, 기능 플래그 또는 상태 비트와 같은 여러 플래그를 인코딩할 때 유용합니다. 필터 표현식에서 이러한 연산자를 사용하여 정수 값의 개별 비트를 확인, 결합 또는 비교할 수 있습니다.</p>
+    </button></h2><p>비트 연산자는 정수 필드가 권한, 기능 플래그 또는 상태 비트와 같은 여러 플래그를 인코딩하는 경우에 유용합니다. 필터 표현식에서 이러한 연산자를 사용하여 정수 값의 개별 비트를 확인, 결합 또는 비교할 수 있습니다.</p>
 <p>스칼라 필드의 경우, 비트 연산자는 <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code> 와 같은 정수 필드 유형에 적용됩니다.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">지원되는 비트 단위 연산자<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -410,10 +413,10 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">AND</code>: 여러 조건이 모두 참이어야 하는 경우를 결합합니다.</p></li>
-<li><p><code translate="no">OR</code>: 조건 중 적어도 하나가 참이어야 하는 경우를 결합합니다.</p></li>
+<li><p><code translate="no">OR</code>: 조건 중 적어도 하나가 참이어야 하는 조건을 결합합니다.</p></li>
 <li><p><code translate="no">NOT</code>: 조건을 부정합니다.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">예 1: ` <code translate="no">AND</code> `을 사용하여 조건 결합하기<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">예 1: ` <code translate="no">AND</code> `를 사용하여 조건 결합하기<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -428,7 +431,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">price</code> 가 100보다 크고 <code translate="no">stock</code> 가 50보다 큰 모든 제품을 찾으려면:</p>
+    </button></h3><p><code translate="no">price</code> 가 100보다 크고 <code translate="no">stock</code> 가 50보다 큰 모든 상품을 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">예 2: ‘ <code translate="no">OR</code> ’를 사용하여 조건 결합하기<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
@@ -449,7 +452,7 @@ summary: >-
     </button></h3><p><code translate="no">color</code> 가 “red”이거나 “blue”인 모든 상품을 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">예 3: <code translate="no">NOT</code> 를 사용하여 조건 제외하기<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">예 3: ` <code translate="no">NOT</code> `를 사용하여 조건 제외하기<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -484,8 +487,8 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">IS NULL</code> 및 <code translate="no">IS NOT NULL</code> 연산자는 필드에 null 값(데이터 부재)이 포함되어 있는지 여부에 따라 필터를 적용하는 데 사용됩니다.</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: 특정 필드에 null 값이 포함된 엔티티, 즉 값이 없거나 정의되지 않은 엔티티를 식별합니다.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: 특정 필드에 null 이외의 값이 포함된 엔티티를 식별합니다. 즉, 해당 필드에 유효하고 정의된 값이 있음을 의미합니다.</p></li>
+<li><p><code translate="no">IS NULL</code>: 특정 필드에 null 값이 포함된, 즉 값이 없거나 정의되지 않은 엔티티를 식별합니다.</p></li>
+<li><p><code translate="no">IS NOT NULL</code>: 특정 필드에 null이 아닌 임의의 값이 포함된 엔티티를 식별합니다. 즉, 해당 필드에 유효하고 정의된 값이 있음을 의미합니다.</p></li>
 </ul>
 <div class="alert note">
 <p>연산자는 대소문자를 구분하지 않으므로, <code translate="no">IS NULL</code> 또는 <code translate="no">is null</code>, <code translate="no">IS NOT NULL</code> 또는 <code translate="no">is not null</code> 을 사용할 수 있습니다.</p>
@@ -565,7 +568,7 @@ summary: >-
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>예제 1: 메타데이터가 null인 엔티티 검색</strong></p>
-<p><code translate="no">metadata</code> 필드가 없거나 명시적으로 None으로 설정된 엔티티를 찾으려면:</p>
+<p><code translate="no">metadata</code> 필드가 누락되었거나 명시적으로 None으로 설정된 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -574,7 +577,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>예 2: 메타데이터가 null이 아닌 엔티티 가져오기</strong></p>
+<p><strong>예제 2: 메타데이터가 null이 아닌 엔티티 가져오기</strong></p>
 <p><code translate="no">metadata</code> 필드가 null이 아닌 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
@@ -638,7 +641,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>예 2: tags가 null이 아닌 엔티티 조회</strong></p>
+<p><strong>예제 2: tags가 null이 아닌 엔티티 조회</strong></p>
 <p><code translate="no">tags</code> 필드가 null이 아닌 엔티티를 검색하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
@@ -664,10 +667,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus의 기본 연산자는 다용도로 사용 가능하며 스칼라 필드에 적용할 수 있을 뿐만 아니라, JSON 및 ARRAY 필드의 키와 인덱스와 함께 효과적으로 사용할 수도 있습니다.</p>
-<p>예를 들어, <code translate="no">product</code> 필드에 <code translate="no">price</code>, <code translate="no">model</code>, <code translate="no">tags</code> 와 같은 여러 키가 포함되어 있는 경우, 항상 키를 직접 참조해야 합니다:</p>
+<p>예를 들어, <code translate="no">product</code> 필드에 <code translate="no">price</code>, <code translate="no">model</code>, <code translate="no">tags</code> 와 같은 여러 키가 포함된 경우, 항상 키를 직접 참조해야 합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>기록된 온도 배열에서 첫 번째 온도가 특정 값을 초과하는 레코드를 찾으려면 다음을 사용하십시오:</p>
+<p>기록된 온도 배열 중 첫 번째 온도가 특정 값을 초과하는 레코드를 찾으려면 다음을 사용하십시오:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
@@ -685,7 +688,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 데이터 필터링 및 쿼리 시 유연성을 제공하는 다양한 기본 연산자를 제공합니다. 비교, 범위, 산술 및 논리 연산자를 조합하여 강력한 필터 표현식을 생성하면 검색 결과를 좁혀 필요한 데이터를 효율적으로 가져올 수 있습니다.</p>
+    </button></h2><p>Milvus는 데이터 필터링 및 쿼리 시 유연성을 제공하는 다양한 기본 연산자를 제공합니다. 비교, 범위, 산술 및 논리 연산자를 조합하여 강력한 필터 표현식을 생성함으로써 검색 결과를 좁히고 필요한 데이터를 효율적으로 가져올 수 있습니다.</p>
 <h2 id="FAQ" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -701,6 +704,6 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>필터 조건에서 일치 값 목록의 길이에 제한이 있습니까(예: filter=’color in ["red", "green", “blue”]')? 목록이 너무 길면 어떻게 해야 합니까?</strong></p>
+    </button></h2><p><strong>필터 조건에서 일치 값 목록(예: filter=’color in ["red", "green", “blue”]’)의 길이에 제한이 있습니까? 목록이 너무 길면 어떻게 해야 합니까?</strong></p>
 <p>Zilliz Cloud는 필터 조건의 일치 값 목록에 길이 제한을 두지 않습니다. 그러나 목록이 지나치게 길면 쿼리 성능에 상당한 영향을 미칠 수 있습니다.
 필터 조건에 긴 일치 값 목록이나 요소가 많은 복잡한 표현식이 포함된 경우, 쿼리 성능을 향상시키기 위해 <a href="/docs/ko/filtering-templating.md">필터 템플릿을</a> 사용하는 것을 권장합니다.</p>

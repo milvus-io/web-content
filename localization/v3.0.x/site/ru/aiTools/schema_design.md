@@ -3,7 +3,7 @@ id: schema_design.md
 title: 'Задание: Проектирование схемы Milvus'
 summary: >-
   Правила для помощников по программированию на базе ИИ, предназначенные для
-  разработки корректных схем коллекций Milvus.
+  разработки корректных схем коллекций в Milvus.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">Проектирование схем<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Правила и рекомендации по проектированию корректных схем коллекций Milvus, включая типы полей, первичные ключи, настройку BM25 и ограничения неизменяемости схемы. Скопируйте полный текст подсказки ниже в свой инструмент искусственного интеллекта, чтобы эти правила применялись автоматически. Обзор всех подсказок см. в разделе <a href="/docs/ru/milvus_for_agents.md">«Подсказки для ИИ</a>».</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">Как использовать эту подсказку<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">Как использовать эту команду<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +149,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array) and on vector fields. Exceptions: primary keys and Array of Structs fields can never be nullable. Note: vector field nullable requires Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
@@ -161,7 +161,7 @@ schema.add_function(bm25_function)
 | Primary key type | `DataType.VARCHAR` | When you need application-controlled string IDs (e.g., UUIDs, composite keys). |
 | Dynamic fields | `enable_dynamic_field=True` | When entities have variable or unpredictable key-value metadata. Dynamic fields are queryable but not indexed as efficiently as schema-defined fields. |
 | Dynamic fields | `enable_dynamic_field=False` | When your schema is well-defined and all fields are known at creation time. Better query performance. |
-| Nullable fields | `nullable=True` | When some entities may lack a value for a scalar or vector field. Never nullable: primary keys, Array of Structs fields. |
+| Nullable fields | `nullable=True` | When some entities may lack a value for a scalar field, a vector field, or a whole Array of Structs field (v3.0.x+). Never nullable: primary keys, individual Struct subfields. |
 | Default values | `default_value=...` | When you want a fallback value for missing scalar fields during insertion. |
 
 ## Complete example: schema with all common field types
@@ -253,5 +253,5 @@ Before finishing, verify:
 - [ ] Only one primary key field per collection — no composite keys
 - [ ] Schema modifications account for version: immutable in v2.5.x, add nullable scalar fields in v2.6.x, drop scalar fields and non-last vector fields in v3.0.x
 - [ ] BM25 function and analyzer are defined at collection creation time, not added later
-- [ ] Nullable is used only on scalar fields (all versions) or vector fields (v3.0.x+) — never on primary keys or Array of Structs fields
+- [ ] Nullable is used only on scalar fields (all versions), vector fields (v3.0.x+), or parent Array of Structs fields (v3.0.x+) — never on primary keys or individual Struct subfields
 <button class="copy-code-btn"></button></code></pre>

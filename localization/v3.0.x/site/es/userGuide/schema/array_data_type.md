@@ -43,8 +43,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Valores predeterminados</strong>: Los campos ARRAY no admiten valores predeterminados. Sin embargo, puedes establecer el atributo « <code translate="no">nullable</code> » en « <code translate="no">True</code> » para permitir valores nulos. Para obtener más información, consulta <a href="/docs/es/nullable-and-default.md">«Nullable y predeterminado</a>».</p></li>
-<li><p><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse el « <code translate="no">max_length</code> » para los elementos del array. El « <code translate="no">element_type</code> » admite cualquier tipo de datos escalar compatible con Milvus, con la excepción de « <code translate="no">JSON</code> ».</p></li>
+<li><p><strong>Valores por defecto</strong>: Los campos ARRAY no admiten valores por defecto. Sin embargo, puedes establecer el atributo « <code translate="no">nullable</code> » en « <code translate="no">True</code> » para permitir valores nulos. Para obtener más información, consulta <a href="/docs/es/nullable-and-default.md">«Nullable y por defecto</a>».</p></li>
+<li><p><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse « <code translate="no">max_length</code> », que define el número máximo de bytes permitidos para cada elemento de la matriz. El parámetro « <code translate="no">element_type</code> » admite cualquier tipo de datos escalares compatible con Milvus, con la excepción de « <code translate="no">JSON</code> ».</p></li>
 <li><p><strong>Capacidad de la matriz</strong>: El número de elementos de un campo ARRAY debe ser menor o igual que la capacidad máxima definida al crear la matriz, tal y como se especifica en <code translate="no">max_capacity</code>. El valor debe ser un número entero comprendido entre <strong>1</strong> y <strong>4096</strong>.</p></li>
 <li><p><strong>Manejo de cadenas</strong>: Los valores de cadena en los campos ARRAY se almacenan tal cual, sin escape semántico ni conversión. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
 </ul>
@@ -65,7 +65,7 @@ summary: >-
       </svg>
     </button></h2><p>Para utilizar campos ARRAY en Milvus, defina el tipo de campo correspondiente al crear el esquema de la colección. Este proceso incluye:</p>
 <ol>
-<li><p>Establecer ` <code translate="no">datatype</code> ` en el tipo de datos `Array` compatible, ` <code translate="no">ARRAY</code>`.</p></li>
+<li><p>Establecer ` <code translate="no">datatype</code> ` en el tipo de datos `Array` compatible, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizar el parámetro « <code translate="no">element_type</code> » para especificar el tipo de datos de los elementos del array. Todos los elementos de un mismo array deben ser del mismo tipo de datos.</p></li>
 <li><p>Utilizar el parámetro ` <code translate="no">max_capacity</code> ` para definir la capacidad máxima de la matriz, es decir, el número máximo de elementos que puede contener.</p></li>
 </ol>
@@ -277,7 +277,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>La indexación ayuda a mejorar el rendimiento de las búsquedas y las consultas. En Milvus, la indexación es obligatoria para los campos vectoriales, pero opcional para los campos escalares.</p>
-<p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y en el campo ARRAY <code translate="no">tags</code>, ambos utilizando el tipo de índice « <code translate="no">AUTOINDEX</code> ». Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puedes personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulta <a href="/docs/es/index-explained.md">«Explicación del índice</a>».</p>
+<p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y en el campo ARRAY <code translate="no">tags</code>, ambos utilizando el tipo de índice « <code translate="no">AUTOINDEX</code> ». Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puedes personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulta <a href="/docs/es/index-explained.md">«Explicación</a> de <a href="/docs/es/index-explained.md">los índices</a>».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -548,7 +548,7 @@ client.<span class="hljs-title function_">insert</span>({
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Además de insertar matrices completas, los campos « <code translate="no">ARRAY</code> » también admiten los operadores de actualización parcial « <code translate="no">ARRAY_APPEND</code> » y « <code translate="no">ARRAY_REMOVE</code> » en la API « <code translate="no">upsert</code> » de Milvus v2.6.17 y versiones posteriores. Estos te permiten añadir elementos a una matriz existente o eliminar elementos coincidentes de la misma sin necesidad de recuperar primero su valor actual, lo que evita el patrón de lectura-modificación-escritura del lado del cliente. Para obtener más información, consulta <a href="/docs/es/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert de campos ARRAY en modo de fusión</a>».</p>
+<p>Además de insertar matrices completas, los campos « <code translate="no">ARRAY</code> » también admiten los operadores de actualización parcial « <code translate="no">ARRAY_APPEND</code> » y « <code translate="no">ARRAY_REMOVE</code> » en la API « <code translate="no">upsert</code> » de Milvus v2.6.17 y versiones posteriores. Estos te permiten añadir elementos a una matriz existente o eliminar elementos coincidentes de ella sin necesidad de recuperar primero su valor actual, lo que evita el patrón de lectura-modificación-escritura del lado del cliente. Para obtener más información, consulta <a href="/docs/es/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert de campos ARRAY en modo de fusión</a>».</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Consulta con expresiones de filtro<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"

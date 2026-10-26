@@ -1,11 +1,11 @@
 ---
 id: array_data_type.md
-title: Campo array
+title: Campo ARRAY
 summary: >-
   Un campo ARRAY memorizza un insieme ordinato di elementi dello stesso tipo di
   dati. Ecco un esempio di come i campi ARRAY memorizzano i dati:
 ---
-<h1 id="Array-Field" class="common-anchor-header">Campo array<button data-href="#Array-Field" class="anchor-icon" translate="no">
+<h1 id="Array-Field" class="common-anchor-header">Campo ARRAY<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Valori predefiniti</strong>: i campi ARRAY non supportano i valori predefiniti. Tuttavia, è possibile impostare l'attributo <code translate="no">nullable</code> su <code translate="no">True</code> per consentire valori nulli. Per ulteriori dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/nullable-and-default.md">Nullable &amp; Default"</a>.</p></li>
-<li><p><strong>Tipo di dati:</strong> tutti gli elementi in un campo ARRAY devono condividere lo stesso tipo di dati, definito dal parametro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> è impostato su <code translate="no">VARCHAR</code>, è necessario specificare anche l’ <code translate="no">max_length</code> e per gli elementi dell’array. L’ <code translate="no">element_type</code> accetta qualsiasi tipo di dati scalare supportato da Milvus, ad eccezione di <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Tipo di dati:</strong> tutti gli elementi in un campo ARRAY devono condividere lo stesso tipo di dati, definito dal parametro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> è impostato su <code translate="no">VARCHAR</code>, è necessario specificare anche <code translate="no">max_length</code>, che definisce il numero massimo di byte consentiti per ciascun elemento dell’array. Il parametro <code translate="no">element_type</code> accetta qualsiasi tipo di dati scalare supportato da Milvus, ad eccezione di <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Capacità dell’array</strong>: il numero di elementi in un campo ARRAY deve essere inferiore o uguale alla capacità massima definita al momento della creazione dell’array, come specificato da <code translate="no">max_capacity</code>. Il valore deve essere un numero intero compreso tra <strong>1</strong> e <strong>4096</strong>.</p></li>
-<li><p><strong>Gestione delle stringhe</strong>: i valori delle stringhe nei campi ARRAY vengono memorizzati così come sono, senza escape semantico né conversioni. Ad esempio, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> vengono memorizzati così come inseriti, mentre <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> sono considerati valori non validi.</p></li>
+<li><p><strong>Gestione delle stringhe</strong>: i valori stringa nei campi ARRAY vengono memorizzati così come sono, senza escape semantico né conversioni. Ad esempio, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> vengono memorizzati così come inseriti, mentre <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> sono considerati valori non validi.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Aggiungere un campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +64,7 @@ summary: >-
       </svg>
     </button></h2><p>Per utilizzare i campi ARRAY in Milvus, definire il tipo di campo pertinente durante la creazione dello schema della raccolta. Questa procedura prevede:</p>
 <ol>
-<li><p>Impostare ` <code translate="no">datatype</code> ` sul tipo di dati Array supportato, <code translate="no">ARRAY</code>.</p></li>
+<li><p>Impostare il parametro ` <code translate="no">datatype</code> ` sul tipo di dati Array supportato, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizzare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi nell'array. Tutti gli elementi dello stesso array devono essere dello stesso tipo di dati.</p></li>
 <li><p>Utilizzo del parametro ` <code translate="no">max_capacity</code> ` per definire la capacità massima dell’array, ovvero il numero massimo di elementi che può contenere.</p></li>
 </ol>
@@ -547,7 +547,7 @@ client.<span class="hljs-title function_">insert</span>({
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Oltre all'inserimento di array completi, i campi di tip <code translate="no">ARRAY</code> e supportano anche gli operatori di aggiornamento parziale <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> nell'API <code translate="no">upsert</code> in Milvus v2.6.17 e versioni successive. Questi consentono di aggiungere elementi o rimuovere elementi corrispondenti da un array esistente senza dover prima recuperarne il valore corrente, evitando così il modello di lettura-modifica-scrittura lato client. Per ulteriori dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Upsert dei campi ARRAY con gli operatori di aggiornamento parziale</a>".</p>
+<p>Oltre all'inserimento di array completi, i campi di tip <code translate="no">ARRAY</code> e supportano anche gli operatori di aggiornamento parziale <code translate="no">ARRAY_APPEND</code> e <code translate="no">ARRAY_REMOVE</code> nell'API <code translate="no">upsert</code> in Milvus v2.6.17 e versioni successive. Questi consentono di aggiungere elementi o rimuovere elementi corrispondenti da un array esistente senza dover prima recuperarne il valore corrente, evitando così il modello "read-modify-write" lato client. Per ulteriori dettagli, consultare la sezione " <a href="/docs/it/v2.6.x/upsert-entities.md#Upsert-ARRAY-fields-with-partial-update-operators">Upsert dei campi ARRAY con gli operatori di aggiornamento parziale</a>".</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Query con espressioni di filtro<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -565,7 +565,7 @@ client.<span class="hljs-title function_">insert</span>({
         ></path>
       </svg>
     </button></h2><p>Dopo aver inserito le entità, utilizzare il metodo ` <code translate="no">query</code> ` per recuperare le entità che corrispondono alle espressioni di filtro specificate.</p>
-<p>Per recuperare le entità in cui il parametro ` <code translate="no">tags</code> ` non è nullo:</p>
+<p>Per recuperare le entità in cui il campo ` <code translate="no">tags</code> ` non è nullo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

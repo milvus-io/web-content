@@ -2,15 +2,9 @@
 id: full-text-search.md
 title: Volltextsuche
 summary: >-
-  Die Volltextsuche ist eine Funktion, die Dokumente in Textdatensätzen abruft,
-  die bestimmte Begriffe oder Phrasen enthalten, und die Ergebnisse anschließend
-  nach ihrer Relevanz sortiert. Diese Funktion überwindet die Einschränkungen
-  der semantischen Suche, bei der präzise Begriffe möglicherweise übersehen
-  werden, und stellt sicher, dass Sie die genauesten und kontextuell
-  relevantesten Ergebnisse erhalten. Zudem vereinfacht sie die Vektorsuche,
-  indem sie Rohtext als Eingabe akzeptiert und Ihre Textdaten automatisch in
-  spärliche Einbettungen umwandelt, ohne dass Vektoreinbettungen manuell
-  generiert werden müssen.
+  Bei der Volltextsuche werden Dokumente anhand der darin enthaltenen Begriffe
+  mithilfe des BM25-Algorithmus auf der Grundlage des Rohtextes sortiert; es
+  sind keine Einbettungsmodelle erforderlich.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,10 +21,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Volltextsuche ist eine Funktion, die Dokumente aus Textdatensätzen abruft, die bestimmte Begriffe oder Phrasen enthalten, und die Ergebnisse anschließend nach Relevanz sortiert. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe möglicherweise übersehen werden, und stellt sicher, dass Sie die genauesten und kontextuell relevantesten Ergebnisse erhalten. Darüber hinaus vereinfacht sie die Vektorsuche, indem sie Rohtext als Eingabe akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen umwandelt, ohne dass Vektoreinbettungen manuell generiert werden müssen.</p>
-<p>Durch die Verwendung des BM25-Algorithmus zur Relevanzbewertung ist diese Funktion besonders wertvoll in RAG-Szenarien (Retrieval-Augmented Generation), in denen sie Dokumente priorisiert, die genau mit bestimmten Suchbegriffen übereinstimmen.</p>
+    </button></h1><p>Die Volltextsuche findet Dokumente, die die Begriffe oder Phrasen Ihrer Suchanfrage enthalten, und ordnet die Ergebnisse nach Relevanz. Sie ergänzt die semantische Suche, bei der präzise Begriffe unter Umständen übersehen werden können, und ist besonders nützlich in RAG-Szenarien (Retrieval-Augmented Generation), in denen Dokumente, die genau mit bestimmten Suchbegriffen übereinstimmen, am wichtigsten sind.</p>
+<p>Mit der Volltextsuche können Sie zudem auf Einbettungsmodelle verzichten: Sie stellen den Rohtext bereit, und Milvus wandelt ihn automatisch in spärliche Einbettungen um.</p>
 <div class="alert note">
-<p>Durch die Integration der Volltextsuche mit der semantisch basierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">„Hybrid Search</a>“.</p>
+<p>Durch die Integration der Volltextsuche mit der semantisch basierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">„Hybride Suche</a>“.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">BM25-Implementierung<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,14 +41,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus bietet eine Volltextsuche auf Basis des BM25-Relevanzalgorithmus, einer in Informationsabrufsystemen weit verbreiteten Bewertungsfunktion, und integriert diese in den Such-Workflow, um präzise, nach Relevanz geordnete Textergebnisse zu liefern.</p>
+    </button></h2><p>Milvus implementiert die Volltextsuche mit dem BM25-Relevanzalgorithmus, einer in Informationsabrufsystemen weit verbreiteten Bewertungsfunktion, und integriert diese in den Suchworkflow, um präzise, nach Relevanz geordnete Textergebnisse zu liefern.</p>
 <p>Die Volltextsuche in Milvus folgt dem folgenden Arbeitsablauf:</p>
 <ol>
 <li><p><strong>Eingabe von Rohtext</strong>: Sie fügen Textdokumente ein oder geben eine Suchanfrage im Klartext ein – es sind keine Einbettungsmodelle erforderlich.</p></li>
 <li><p><strong>Textanalyse</strong>: Milvus verwendet einen <a href="/docs/de/analyzer-overview.md">Analysator</a>, um Ihren Text in aussagekräftige Begriffe umzuwandeln, die indexiert und durchsucht werden können.</p></li>
 <li><p><strong>Verarbeitung mit der BM25-Funktion</strong>: Eine integrierte Funktion wandelt diese Begriffe in spärliche Vektordarstellungen um, die für die BM25-Bewertung optimiert sind.</p></li>
 <li><p><strong>Speicherung in einer Sammlung</strong>: Milvus speichert die resultierenden spärlichen Einbettungen in einer Sammlung, um ein schnelles Abrufen und Ranking zu ermöglichen.</p></li>
-<li><p><strong>BM25-Relevanzbewertung</strong>: Bei der Suche wendet Milvus die BM25-Bewertungsfunktion an, um die Relevanz der Dokumente zu berechnen und rangierte Ergebnisse zurückzugeben, die am besten zu den Suchbegriffen passen.</p></li>
+<li><p><strong>BM25-Relevanzbewertung</strong>: Bei der Suche wendet Milvus die BM25-Bewertungsfunktion an, um die Relevanz der Dokumente zu berechnen und die Ergebnisse in einer Rangliste auszugeben, die am besten zu den Suchbegriffen passen.</p></li>
 </ol>
 <p><span class="img-wrapper">
   
@@ -102,7 +96,7 @@ summary: >-
     </button></h3><p>Ihr Sammlungsschema muss mindestens drei Pflichtfelder enthalten:</p>
 <ul>
 <li><p><strong>Primärfeld</strong>: Identifiziert jede Entität in der Sammlung eindeutig.</p></li>
-<li><p><strong>Zeichenfolgenfeld</strong> (<code translate="no">VARCHAR</code> oder <code translate="no">TEXT</code>): Speichert Textdokumente im Rohformat. „ <code translate="no">enable_analyzer=True</code> “ muss gesetzt sein, damit Milvus den Text für das BM25-Relevanzranking verarbeiten kann. Standardmäßig verwendet Milvus den <a href="/docs/de/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/de/standard-analyzer.md"> Analyzer</a> für die Textanalyse. Informationen zur Konfiguration eines anderen Analyzers finden Sie unter <a href="/docs/de/analyzer-overview.md">„Analyzer-Übersicht</a>“. Die Beispiele auf dieser Seite verwenden „ <code translate="no">VARCHAR</code> “; bei Langtexten können Sie das Eingabefeld als „ <code translate="no">TEXT</code> “ definieren und „ <code translate="no">max_length</code> “ weglassen. Ein vollständiges Beispiel finden Sie unter <a href="/docs/de/text.md">„Textfeld</a>“.</p></li>
+<li><p><strong>Zeichenfolgenfeld</strong> (<code translate="no">VARCHAR</code> oder <code translate="no">TEXT</code>): Speichert Rohtextdokumente. Sie müssen „ <code translate="no">enable_analyzer=True</code> “ festlegen, damit Milvus den Text für das BM25-Relevanzranking verarbeiten kann. Standardmäßig verwendet Milvus den <a href="/docs/de/standard-analyzer.md">Analysator „<code translate="no">standard</code> “</a>; Informationen zur Konfiguration eines anderen Analysators finden Sie unter <a href="/docs/de/analyzer-overview.md">„Analyzer-Übersicht</a>“. Die Beispiele auf dieser Seite verwenden „ <code translate="no">VARCHAR</code> “; für Langtexte definieren Sie das Feld als „ <code translate="no">TEXT</code> “ und lassen „ <code translate="no">max_length</code> “ weg. Ein vollständiges Beispiel finden Sie unter <a href="/docs/de/text.md">„Textfeld</a>“.</p></li>
 <li><p><strong>Sparse-Vektor-Feld</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Speichert spärliche Einbettungen, die automatisch von der BM25-Funktion generiert werden.</p></li>
 </ul>
 <div class="multipleCode">
@@ -256,7 +250,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <p>In der vorstehenden Konfiguration</p>
 <ul>
 <li><p><code translate="no">id</code>: dient als Primärschlüssel und wird automatisch mit ` <code translate="no">auto_id=True</code>` generiert.</p></li>
-<li><p><code translate="no">text</code>: speichert Ihre Rohtextdaten für Volltextsuchvorgänge. Das Feld kann „ <code translate="no">VARCHAR</code> “ für begrenzte Textlängen oder „ <code translate="no">TEXT</code> “ für lange Quellinhalte verwenden.</p></li>
+<li><p><code translate="no">text</code>: speichert Ihre Rohtextdaten für Volltextsuchvorgänge. Das Feld kann „ <code translate="no">VARCHAR</code> “ für begrenzte Textmengen oder „ <code translate="no">TEXT</code> “ für lange Quellinhalte verwenden.</p></li>
 <li><p><code translate="no">sparse</code>: Ein Vektorfeld, das für die Speicherung intern generierter spärlicher Einbettungen für Volltextsuche reserviert ist. Der Datentyp muss „ <code translate="no">SPARSE_FLOAT_VECTOR</code> “ sein.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">Definieren Sie die BM25-Funktion<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
@@ -372,7 +366,7 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Der Name des Feldes „ <code translate="no">VARCHAR</code> “ oder „ <code translate="no">TEXT</code> “, für das eine Konvertierung von Text in spärliche Vektoren erforderlich ist. Bei „ <code translate="no">FunctionType.BM25</code> “ akzeptiert dieser Parameter nur einen Feldnamen.</p></td>
+     <td><p>Der Name des Feldes „ <code translate="no">VARCHAR</code> “ oder „ <code translate="no">TEXT</code> “, für das eine Konvertierung von Text in spärliche Vektoren erforderlich ist. Für „ <code translate="no">FunctionType.BM25</code> “ akzeptiert dieser Parameter nur einen Feldnamen.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
@@ -500,11 +494,11 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Der Algorithmus, der zum Erstellen und Abfragen des spärlichen BM25-Invertierungsindex verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): „Document-at-a-Time“-Abfrageverarbeitung mit MaxScore. Diese Option eignet sich für Volltextsuch-Workloads mit hohen <em>k-</em> Werten oder Abfragen mit vielen Suchbegriffen. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">„Abfrageauswertung: Strategien und Optimierungen</a>“.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: „Document-at-a-Time“-WAND-Abfrageverarbeitung. Diese Option eignet sich für Volltextsuch-Workloads mit kleinen <em>k</em> -Werten oder kurzen Abfragen. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/956863.956944">„Effiziente Abfrageauswertung mithilfe eines zweistufigen Abrufprozesses</a>“.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Einfache „Term-at-a-Time“-Abfrageverarbeitung. Verwenden Sie diese Option als Basis oder wenn sich die Bewertung dynamisch an globale Sammlungsstatistiken wie die durchschnittliche Dokumentlänge anpassen soll.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: „MaxScore“-Abfrageverarbeitung mit „Max-Score“-Metadaten auf Blockebene. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">„Schnellere Top-k-Dokumentenabfrage mithilfe von Block-Max-Indizes</a>“.</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: WAND-Abfrageverarbeitung mit Max-Score-Metadaten auf Blockebene. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">„Schnellere Top-k-Dokumentenabfrage mithilfe von Block-Max-Indizes</a>“.</p></li></ul></td>
+     <td><p>Der Algorithmus, der zum Erstellen und Abfragen des spärlichen BM25-Invertierindexes verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): „Document-at-a-Time“-Abfrageverarbeitung mit MaxScore. Diese Option eignet sich für Volltextsuch-Workloads mit hohen <em>k-</em> Werten oder Abfragen mit vielen Suchbegriffen. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">„Abfrageauswertung: Strategien und Optimierungen</a>“.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: „Document-at-a-Time“-WAND-Abfrageverarbeitung. Diese Option eignet sich für Volltextsuch-Workloads mit kleinen <em>k</em> -Werten oder kurzen Abfragen. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/956863.956944">„Effiziente Abfrageauswertung mithilfe eines zweistufigen Abrufprozesses</a>“.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Einfache „Term-at-a-Time“-Abfrageverarbeitung. Verwenden Sie diese Option als Basis oder wenn sich die Bewertung dynamisch an globale Sammlungsstatistiken wie die durchschnittliche Dokumentlänge anpassen soll.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: „MaxScore“-Abfrageverarbeitung mit Max-Score-Metadaten auf Blockebene. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">„Schnellere Top-k-Dokumentensuche mithilfe von Block-Max-Indizes</a>“.</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: WAND-Abfrageverarbeitung mit Max-Score-Metadaten auf Blockebene. Hintergrundinformationen finden Sie unter <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">„Schnellere Top-k-Dokumentensuche mit Block-Max-Indizes</a>“.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Steuert die Sättigung der Termhäufigkeit. Höhere Werte erhöhen die Bedeutung der Termhäufigkeiten für das Dokumentenranking. Empfohlener Bereich: [1,2; 2,0]. Standardwert: 1,2.</p></td>
+     <td><p>Steuert die Sättigung der Termhäufigkeit. Höhere Werte erhöhen die Bedeutung der Termhäufigkeiten bei der Dokumentenrangfolge. Empfohlener Bereich: [1,2; 2,0]. Standardwert: 1,2.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
@@ -602,7 +596,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie Ihre Sammlung und Ihren Index eingerichtet haben, können Sie Textdaten einfügen. Dabei müssen Sie lediglich den Rohtext bereitstellen. Die zuvor definierte integrierte Funktion generiert automatisch den entsprechenden Sparse-Vektor für jeden Texteintrag.</p>
+    </button></h2><p>Nachdem Sie Ihre Sammlung und Ihren Index eingerichtet haben, können Sie Textdaten einfügen. Sie müssen lediglich den Rohtext bereitstellen – die zuvor definierte BM25-Funktion generiert automatisch den entsprechenden Sparse-Vektor für jeden Texteintrag.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -700,7 +694,7 @@ milvus::InsertResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie Daten in Ihre Sammlung eingefügt haben, können Sie Volltextsuchen mithilfe von Rohtextabfragen durchführen. Milvus wandelt Ihre Abfrage automatisch in einen spärlichen Vektor um, ordnet die übereinstimmenden Suchergebnisse mithilfe des BM25-Algorithmus nach Relevanz und gibt anschließend die Top-K-Ergebnisse (<code translate="no">limit</code>) zurück.</p>
+    </button></h2><p>Sobald Sie Daten in Ihre Sammlung eingefügt haben, können Sie diese mit Rohtext-Abfragen durchsuchen. Milvus wandelt Ihre Abfrage automatisch in einen spärlichen Vektor um, ordnet die übereinstimmenden Ergebnisse mithilfe des BM25-Algorithmus nach Relevanz und gibt die Top- <code translate="no">limit</code> -Ergebnisse zurück.</p>
 <div class="alert note">
 <p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Weitere Informationen finden Sie unter <a href="/docs/de/text-highlighter.md">„Text-Highlighter</a> “.</p>
 </div>
@@ -812,12 +806,8 @@ milvus::SearchResponse response;
      <td><p>Anteil der Begriffe mit geringer Relevanz, die bei der Suche ignoriert werden sollen. Der Wert muss im Bereich [0,0; 1,0) liegen. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">„Sparse Vector</a>“.</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Unverarbeiteter Suchtext in natürlicher Sprache. Milvus wandelt Ihre Textabfrage automatisch mithilfe der BM25-Funktion in Sparse-Vektoren um – geben Sie keine vorab berechneten Vektoren an.</p></td>
+     <td><p>Unverarbeiteter Suchtext in natürlicher Sprache. Milvus wandelt Ihre Textanfrage automatisch mithilfe der BM25-Funktion in Sparse-Vektoren um – geben Sie keine vorab berechneten Vektoren an.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -862,13 +852,21 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nein, die von der BM25-Funktion generierten spärlichen Vektoren sind in der Volltextsuche nicht direkt zugänglich oder ausgabefähig. Hier sind die Details:</p>
+    </button></h3><p>Nein, auf die von der BM25-Funktion generierten Sparse-Vektoren kann in der Volltextsuche nicht direkt zugegriffen werden und sie können auch nicht zurückgegeben werden. Hier sind die Details:</p>
 <ul>
-<li><p>Die BM25-Funktion generiert intern Sparse-Vektoren für das Ranking und die Suche</p></li>
-<li><p>Diese Vektoren werden im „sparse“-Feld gespeichert, können jedoch nicht in <code translate="no">output_fields</code></p></li>
-<li><p>Sie können nur die ursprünglichen Textfelder und Metadaten (wie „ <code translate="no">id</code> “, „ <code translate="no">text</code> “) ausgeben</p></li>
+<li><p>Die BM25-Funktion generiert intern Sparse-Vektoren für das Ranking und die Suche.</p></li>
+<li><p>Diese Vektoren werden im „sparse“-Feld gespeichert, können jedoch nicht in „ <code translate="no">output_fields</code> “ einbezogen werden.</p></li>
+<li><p>Sie können nur die ursprünglichen Textfelder und Metadaten (wie „ <code translate="no">id</code> “, „ <code translate="no">text</code> “) ausgeben.</p></li>
 </ul>
 <p>Beispiel:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
@@ -942,7 +940,7 @@ milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchReques
     .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
     .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Warum muss ich ein Sparse-Vektor-Feld definieren, wenn ich nicht darauf zugreifen kann?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Warum muss ich ein „sparse“-Vektorfeld definieren, wenn ich nicht darauf zugreifen kann?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -960,13 +958,13 @@ milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchReques
     </button></h3><p>Das spärliche Vektorfeld dient als interner Suchindex, ähnlich wie Datenbankindizes, mit denen Benutzer nicht direkt interagieren.</p>
 <p><strong>Entwurfsgrundlagen</strong>:</p>
 <ul>
-<li><p>Trennung der Anliegen: Sie arbeiten mit Text (Eingabe/Ausgabe), Milvus kümmert sich um die Vektoren (interne Verarbeitung)</p></li>
-<li><p>Leistung: Vorberechnete spärliche Vektoren ermöglichen ein schnelles BM25-Ranking bei Abfragen</p></li>
-<li><p>Benutzererfahrung: Komplexe Vektoroperationen werden hinter einer einfachen Textschnittstelle verborgen</p></li>
+<li><p><strong>Trennung der Anliegen</strong>: Sie arbeiten mit Text als Eingabe und Ausgabe, und Milvus verarbeitet die Vektoren intern.</p></li>
+<li><p><strong>Leistung</strong>: Vorberechnete spärliche Vektoren ermöglichen ein schnelles BM25-Ranking bei Abfragen.</p></li>
+<li><p><strong>Benutzererfahrung</strong>: Komplexe Vektoroperationen werden hinter einer einfachen Textschnittstelle abstrahiert.</p></li>
 </ul>
 <p><strong>Wenn Sie auf Vektoren zugreifen müssen</strong>:</p>
 <ul>
-<li><p>Verwenden Sie manuelle Operationen mit spärlichen Vektoren anstelle der Volltextsuche</p></li>
-<li><p>Erstellen Sie separate Sammlungen für benutzerdefinierte Workflows mit spärlichen Vektoren</p></li>
+<li><p>Verwenden Sie manuelle Operationen mit spärlichen Vektoren anstelle der Volltextsuche.</p></li>
+<li><p>Erstellen Sie separate Sammlungen für benutzerdefinierte Workflows mit spärlichen Vektoren.</p></li>
 </ul>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">„Sparse-Vektor</a>“.</p>

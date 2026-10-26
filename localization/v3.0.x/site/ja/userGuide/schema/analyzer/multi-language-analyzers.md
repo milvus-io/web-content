@@ -21,7 +21,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusがテキスト分析を行う際、通常はコレクション内のテキストフィールド全体に対して単一のアナライザーを適用します。そのアナライザーが英語向けに最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる全く異なるトークン化やステミングのルールに対応できず、リコール率が低下してしまいます。 例えば、スペイン語の<em>「teléfono」</em>（<em>「電話」</em>を意味する）を検索する場合、英語に特化したアナライザーでは、アクセント記号が省略されたり、スペイン語固有のステミングが適用されなかったりするため、関連する結果が見落とされてしまう可能性があります。</p>
+    </button></h1><p>Milvusがテキスト分析を行う際、通常はコレクション内のテキストフィールド全体に対して単一のアナライザーを適用します。そのアナライザーが英語向けに最適化されている場合、中国語、スペイン語、フランス語など、他の言語で必要とされる全く異なるトークン化やステミングのルールに対応できず、リコール率が低下してしまいます。 例えば、スペイン語の<em>「teléfono」</em>（<em>「電話」</em>を意味する）を検索する場合、英語に特化したアナライザーでは、アクセント記号が省略されたり、スペイン語固有のステミングが適用されなかったりするため、関連性の高い結果が見落とされる可能性があります。</p>
 <p>多言語アナライザーは、単一のコレクション内のテキストフィールドに対して複数のアナライザーを設定できるようにすることで、この問題を解決します。これにより、テキストフィールドに多言語のドキュメントを保存でき、Milvusは各ドキュメントに適した言語ルールに従ってテキストを分析します。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +40,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h2><ul>
 <li><p>この機能は、BM25 ベースのテキスト検索およびスパースベクトルでのみ動作します。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
-<li><p>単一のコレクション内の各ドキュメントで使用できるアナライザーは、その言語識別子フィールドの値によって決定される 1 つのみです。</p></li>
+<li><p>単一のコレクション内の各ドキュメントで使用できるアナライザーは、その言語識別子フィールドの値によって決定される 1 つだけです。</p></li>
 <li><p>パフォーマンスは、アナライザーの複雑さやテキストデータのサイズによって異なる場合があります。</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ beta: Milvus 2.5.11+
   
  </span></p>
 <ol>
-<li><p><strong>多言語アナライザーの設定</strong>:</p>
+<li><p><strong>多言語アナライザの設定</strong>:</p>
 <ul>
 <li><p><code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code> という形式を使用して、複数の言語固有のアナライザーを設定します。ここで、各<code translate="no">analyzer_config</code> は、「<a href="/docs/ja/analyzer-overview.md#Analyzer-types">アナライザーの概要</a>」に記載されている標準的な<code translate="no">analyzer_params</code> の設定に従います。</p></li>
 <li><p>各ドキュメントに対してどのアナライザーを選択するかを決定する、特別な識別子フィールドを定義します。</p></li>
@@ -79,9 +79,9 @@ beta: Milvus 2.5.11+
 <li><p><strong>primary_key</strong>: ドキュメントの一意の識別子。</p></li>
 <li><p><strong>text_field</strong>: 元のテキストコンテンツを格納します。</p></li>
 <li><p><strong>identifier_field</strong>: 各ドキュメントに対して使用するアナライザーを指定します。</p></li>
-<li><p><strong>vector_field</strong>: BM25関数によって生成されるスパースな埋め込みデータを格納します。</p></li>
+<li><p><strong>vector_field</strong>: BM25関数によって生成されるスパースな埋め込みを格納します。</p></li>
 </ul></li>
-<li><p>BM25関数およびインデックス作成パラメータを設定します。</p></li>
+<li><p>BM25関数とインデックス作成パラメータを設定します。</p></li>
 </ul></li>
 <li><p><strong>言語識別子を含むデータの挿入</strong>:</p>
 <ul>
@@ -109,7 +109,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">multi_analyzer_params</code> は、Milvusが各エンティティに対して適切なアナライザーをどのように選択するかを決定する単一のJSONオブジェクトです：</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> は、Milvus が各エンティティに対して適切なアナライザーをどのように選択するかを決定する単一の JSON オブジェクトです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -237,10 +237,10 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>はい</p></td>
-     <td><p>Milvus がテキストの処理に使用できる、各言語固有のアナライザーをすべて一覧表示します。<code translate="no">analyzers</code> 内の各アナライザーは、<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> という形式に従います。</p></td>
+     <td><p>Milvus がテキストの処理に使用できる、言語固有のアナライザーをすべて一覧表示します。<code translate="no">analyzers</code> 内の各アナライザーは、<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> という形式に従います。</p></td>
      <td><ul>
-<li>各アナライザーは、標準の<code translate="no">analyzer_params</code> 構文（「<a href="/docs/ja/analyzer-overview.md#Analyzer-types">アナライザーの概要</a>」を参照）で定義してください。</li>
-<li>キーが<code translate="no">default</code> であるエントリを追加します。<code translate="no">by_field</code> に格納されている値が他のどのアナライザー名とも一致しない場合、Milvus はこのアナライザーをフォールバックとして使用します。</li>
+<li>各アナライザーは、標準の<code translate="no">analyzer_params</code> 構文（「<a href="/docs/ja/analyzer-overview.md#Analyzer-types">アナライザーの概要</a>」を参照）で定義します。</li>
+<li>キーが `<code translate="no">default</code>` であるエントリを追加します。`<code translate="no">by_field</code> ` に格納されている値が他のどのアナライザー名とも一致しない場合、Milvus はこのアナライザーをフォールバックとして使用します。</li>
 </ul></td>
    </tr>
    <tr>
@@ -257,7 +257,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p><code translate="no">alias</code></p></td>
      <td><p>いいえ</p></td>
      <td><p>アナライザーのショートカットや別名を作成し、コード内での参照を容易にします。各アナライザーには、1 つ以上のエイリアスを設定できます。</p></td>
-     <td><p>各エイリアスは、既存のアナライザーキーにマッピングされている必要があります。</p></td>
+     <td><p>各エイリアスは、既存のアナライザキーにマッピングされている必要があります。</p></td>
    </tr>
 </table>
 <h2 id="Step-2-Create-collection" class="common-anchor-header">ステップ 2: コレクションの作成<button data-href="#Step-2-Create-collection" class="anchor-icon" translate="no">
@@ -293,9 +293,9 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
       </svg>
     </button></h3><p>このステップでは、4つの必須フィールドを使用してコレクションスキーマを定義します：</p>
 <ul>
-<li><p><strong>主キーフィールド</strong>(<code translate="no">id</code>): コレクション内の各エンティティを一意に識別する識別子です。<code translate="no">auto_id=True</code> を設定すると、MilvusがこれらのIDを自動的に生成できるようになります。</p></li>
-<li><p><strong>言語識別子フィールド</strong>(<code translate="no">language</code>)：このVARCHARフィールドは、<code translate="no">multi_analyzer_params</code> で指定された<code translate="no">by_field</code> に対応します。各エンティティの言語識別子を格納し、Milvusにどのアナライザーを使用すべきかを指示します。</p></li>
-<li><p><strong>テキストコンテンツフィールド</strong>(<code translate="no">text</code>): この VARCHAR フィールドには、分析および検索の対象となる実際のテキストデータが格納されます。<code translate="no">enable_analyzer=True</code> を設定することは、このフィールドのテキスト分析機能を有効にする上で極めて重要です。<code translate="no">multi_analyzer_params</code> の設定は、このフィールドに直接紐付けられ、テキストデータと言語固有のアナライザーとの関連付けを確立します。</p></li>
+<li><p><strong>主キーフィールド</strong>(<code translate="no">id</code>)：コレクション内の各エンティティを一意に識別する識別子です。「<code translate="no">auto_id=True</code> 」を設定すると、MilvusがこれらのIDを自動的に生成できるようになります。</p></li>
+<li><p><strong>言語識別子フィールド</strong>(<code translate="no">language</code>): このVARCHARフィールドは、<code translate="no">multi_analyzer_params</code> で指定された<code translate="no">by_field</code> に対応します。各エンティティの言語識別子を格納し、Milvusにどのアナライザーを使用すべきかを指示します。</p></li>
+<li><p><strong>テキストコンテンツフィールド</strong>(<code translate="no">text</code>): この VARCHAR フィールドには、分析および検索対象となる実際のテキストデータが格納されます。<code translate="no">enable_analyzer=True</code> を設定することは、このフィールドのテキスト分析機能を有効にする上で極めて重要です。<code translate="no">multi_analyzer_params</code> の設定は、このフィールドに直接紐付けられ、テキストデータと言語固有のアナライザーとの関連付けを確立します。</p></li>
 <li><p><strong>ベクトルフィールド</strong>(<code translate="no">sparse</code>): このフィールドには、BM25関数によって生成されたスパースベクトルが格納されます。これらのベクトルは、テキストデータの分析可能な形式を表しており、Milvusが実際に検索対象とするものです。</p></li>
 </ul>
 <div class="multipleCode">
@@ -329,14 +329,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -895,7 +895,7 @@ curl --request POST \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>挿入処理中、Milvus は以下の処理を行います：</p>
+<p>挿入時、Milvus は以下の処理を行います:</p>
 <ol>
 <li><p>各ドキュメントの `<code translate="no">language</code> ` フィールドを読み取ります</p></li>
 <li><p><code translate="no">text</code> フィールドに対応するアナライザーを適用します</p></li>
@@ -938,7 +938,7 @@ curl --request POST \
     </button></h3><p>多言語アナライザーを使用して検索する場合、<code translate="no">search_params</code> には重要な設定が含まれています：</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> これはインデックスの設定と一致している必要があります。</p></li>
-<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> は、クエリテキストに適用するアナライザーを指定します。これは、保存されたドキュメントで使用されるアナライザーとは独立しています。</p></li>
+<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> は、クエリテキストにどのアナライザーを適用するかを指定します。これは、保存されたドキュメントで使用されるアナライザーとは独立しています。</p></li>
 <li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> BM25 特有の挙動を制御します。ここでは、検索対象のすべての用語が保持されます。詳細については、「<a href="/docs/ja/sparse_vector.md">Sparse Vector</a>」を参照してください。</p></li>
 </ul>
 <div class="multipleCode">
@@ -1081,7 +1081,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>この例では、異なるクエリテキストに対して中国語アナライザ（エイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替える方法を示します。他のすべてのパラメータは変更されませんが、クエリテキストは中国語固有のトークン化ルールを使用して処理されるようになります。</p>
+    </button></h3><p>この例では、異なるクエリテキストに対して中国語アナライザ（エイリアス<code translate="no">&quot;cn&quot;</code> を使用）に切り替える方法を示します。他のすべてのパラメータは変更されませんが、クエリテキストは中国語固有のトークン化ルールを使用して処理されます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -45,13 +45,14 @@ summary: >-
 <tr><th>Objectif</th><th>Utilisation</th><th>Comportement du résultat</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtrer selon un champ scalaire de niveau supérieur, tel que <code translate="no">category</code>.</td><td>Expression de filtrage standard.</td><td>Sélectionne les entités parentes avant ou pendant la recherche.</td></tr>
+<tr><td>Filtrer selon un champ scalaire de niveau supérieur, tel que <code translate="no">category</code>.</td><td>Expression de filtre standard.</td><td>Sélectionne les entités parentes avant ou pendant la recherche.</td></tr>
 <tr><td>Limite la recherche vectorielle au niveau des éléments aux éléments Struct qui répondent aux conditions scalaires.</td><td><code translate="no">element_filter</code>.</td><td>Recherche uniquement les éléments Struct correspondants et peut renvoyer les décalages des éléments correspondants.</td></tr>
 <tr><td>Sélectionne les entités selon qu’aucun, tous ou un nombre spécifique d’éléments Struct correspondent à un prédicat.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Filtrage au niveau des lignes. Ces opérateurs ne renvoient pas d’offset en eux-mêmes.</td></tr>
+<tr><td>Vérifier la position d’un élément, compter les éléments de la structure ou vérifier les valeurs des sous-champs sur l’ensemble des éléments sans utiliser « <code translate="no">$[...]</code> ».</td><td>Chemins StructArray au niveau des lignes, tels que <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code> ou <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Filtrage au niveau des lignes. Pour la syntaxe, consultez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Cette page explique comment utiliser les filtres StructArray dans les workflows de recherche. Pour connaître l’ensemble des règles de syntaxe, les types de prédicats pris en charge et la matrice des prédicats non pris en charge, consultez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p>
+<p>Cette page explique comment utiliser les filtres StructArray dans les workflows de recherche. Pour connaître l’ensemble des règles syntaxiques, les types de prédicats pris en charge et la matrice des prédicats non pris en charge, consultez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p>
 </div>
 <h2 id="Filter-by-top-level-fields" class="common-anchor-header">Filtrage par champs de niveau supérieur<button data-href="#Filter-by-top-level-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez des expressions de filtrage classiques lorsque la condition s’applique à l’entité parente, et non à un élément Struct individuel. Cela fonctionne aussi bien avec la recherche EmbeddingList qu’avec la recherche au niveau des éléments.</p>
+    </button></h2><p>Utilisez des expressions de filtrage classiques lorsque la condition s’applique à l’entité parente et non à un élément Struct individuel. Cela fonctionne aussi bien avec la recherche EmbeddingList qu’avec la recherche au niveau des éléments.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -96,7 +97,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant en particulier.</p>
+<p>Le filtre ci-dessus sélectionne uniquement les entités dont le champ de niveau supérieur « <code translate="no">category</code> » est « <code translate="no">&quot;search&quot;</code> ». Il n’identifie pas un élément Struct correspondant.</p>
 <h2 id="Filter-element-level-vector-search" class="common-anchor-header">Filtrage de la recherche vectorielle au niveau des éléments<button data-href="#Filter-element-level-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +155,7 @@ results = client.search(
 <p>Avertissement</p>
 <p>Lorsque vous combinez un prédicat de niveau supérieur avec <code translate="no">element_filter</code>, placez <code translate="no">element_filter</code> à la fin de l’expression. Une expression de filtrage ne peut contenir qu’un seul <code translate="no">element_filter</code>, et vous ne pouvez pas imbriquer <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> à l’intérieur d’un autre opérateur StructArray.</p>
 </div>
-<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrer des entités à l’aide d’opérateurs MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
+<h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrer des entités à l’aide des opérateurs MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +180,7 @@ results = client.search(
 <tr><td><code translate="no">MATCH_ALL</code></td><td>Tous les éléments Struct doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
 <tr><td><code translate="no">MATCH_LEAST</code></td><td>Au moins <code translate="no">N</code> éléments de la structure doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>Au plus <code translate="no">N</code> éléments de la structure doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
-<tr><td><code translate="no">MATCH_EXACT</code></td><td><code translate="no">N</code> éléments Struct exactement doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
+<tr><td><code translate="no">MATCH_EXACT</code></td><td>Exactement <code translate="no">N</code> éléments Struct doivent satisfaire le prédicat.</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
 </table>
 <pre><code translate="no" class="language-python">filter_expr = (
@@ -203,7 +204,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilisez « <code translate="no">MATCH_ANY</code> » ici car le résultat de recherche EmbeddingList est au niveau de l’entité. Le filtre exige qu’au moins un fragment de l’entité soit un fragment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de recherche lui-même représente toujours l’entité parente.</p>
+<p>Utilisez ici « <code translate="no">MATCH_ANY</code> » car le résultat de recherche EmbeddingList se situe au niveau de l’entité. Le filtre exige qu’au moins un fragment de l’entité soit un fragment « <code translate="no">&quot;index&quot;</code> » de haute qualité, mais le résultat de recherche lui-même représente toujours l’entité parente.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilisation des filtres dans la recherche hybride<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +283,7 @@ results = client.hybrid_search(
 <tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires d’ <code translate="no">$[...]</code>. Utilisez plutôt les sous-champs vectoriels via la recherche vectorielle.</td></tr>
 </tbody>
 </table>
-<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneur de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
+<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +302,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilisation de ` <code translate="no">$[subfield]</code> ` en dehors de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilisation de ` <code translate="no">chunks.section</code> ` à la place de la syntaxe des opérateurs StructArray, telle que ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utiliser <code translate="no">element_filter</code> alors que vous n'avez besoin que d'un filtrage au niveau des lignes. Utilisez plutôt <code translate="no">MATCH_ANY</code> si vous avez uniquement besoin de sélectionner des entités.</p></li>
+<li><p>Utiliser <code translate="no">element_filter</code> alors que vous n’avez besoin que d’un filtrage au niveau des lignes. Utilisez plutôt <code translate="no">MATCH_ANY</code> si vous avez uniquement besoin de sélectionner des entités.</p></li>
 <li><p>S'attendre à ce que ` <code translate="no">MATCH_*</code> ` renvoie des indices d'éléments. Ces opérateurs sélectionnent des entités et n'identifient pas eux-mêmes un élément correspondant.</p></li>
 <li><p>Écrire des prédicats booléens nus tels que <code translate="no">$[has_code]</code>. Utilisez des comparaisons explicites telles que <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Placer « <code translate="no">element_filter</code> » avant un prédicat de niveau supérieur dans la même expression de filtre.</p></li>
@@ -325,5 +326,5 @@ results = client.hybrid_search(
 <li><p>Pour consulter la syntaxe complète des filtres StructArray, lisez la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p></li>
 <li><p>Pour effectuer d’abord des recherches vectorielles non filtrées, consultez la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour créer des index scalaires pour les filtres StructArray fréquemment utilisés, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer les champs StructArray</a> ».</p></li>
-<li><p>Pour connaître les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
+<li><p>Pour vérifier les limites de filtrage et de recherche spécifiques à chaque version, consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> ».</p></li>
 </ol>

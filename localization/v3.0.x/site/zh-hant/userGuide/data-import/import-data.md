@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: 匯入資料
-summary: 本頁示範匯入準備資料的程序。
+summary: 本頁面示範了匯入已準備好資料的步驟。
 ---
 <h1 id="Import-data" class="common-anchor-header">匯入資料<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +19,8 @@ summary: 本頁示範匯入準備資料的程序。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本頁面示範匯入準備資料的步驟。</p>
-<h2 id="Before-you-start" class="common-anchor-header">在您開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本頁面將示範匯入已準備好資料的步驟。</p>
+<h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,15 +36,15 @@ summary: 本頁示範匯入準備資料的程序。
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>您已經準備好您的資料，並將其放入 Milvus 資料桶。</p>
-<p>如果沒有，您應該先使用<strong>RemoteBulkWriter</strong>準備您的資料，並確保準備好的資料已經傳輸到與您的 Milvus 實例一起啟動的 MinIO 實例上的 Milvus 資料桶。如需詳細資訊，請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備原始資料</a>。</p></li>
-<li><p>您已經使用您用來準備資料的模式建立了一個集合。如果沒有，請參閱<a href="/docs/zh-hant/manage-collections.md">管理集合</a>。</p></li>
+<li><p>您已預先準備好資料，並將其存放至 Milvus 儲存桶中。</p>
+<p>若尚未準備，請先使用<strong>RemoteBulkWriter</strong>處理資料，並確保已將處理好的資料傳輸至與您的 Milvus 實例一同啟動的 MinIO 實例上的 Milvus 儲存桶中。詳細資訊請參閱《<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>》。</p></li>
+<li><p>您已根據用於預處理資料的資料結構建立了一個集合。若尚未建立，請參閱《<a href="/docs/zh-hant/manage-collections.md">管理集合</a>》。</p></li>
 </ul>
 <div class="language-python">
-<p>下面的程式碼片段使用給定的模式建立一個簡單的集合。有關參數的詳細資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 參考資料。</p>
+<p>以下程式碼片段會根據指定的資料結構建立一個簡單的集合。有關參數的更多資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 以及 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> SDK 參考文件。</p>
 </div>
 <div class="language-java">
-<p>以下程式碼片段使用給定的模式建立一個簡單的集合。有關參數的詳細資訊，請參閱 SDK 參考資料中的 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a>SDK 參考資料。</p>
+<p>以下程式碼片段會根據指定的資料結構建立一個簡單的集合。有關參數的更多資訊，請參閱 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> SDK 參考文件中的相關內容。</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">匯入資料<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,9 +61,13 @@ summary: 本頁示範匯入準備資料的程序。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要匯入準備好的資料，您必須建立一個匯入工作，如下所示：</p>
+    </button></h2><p>若您的管線可能會重試失敗或超時的匯入請求，請為該工作標記一個冪等性金鑰；請參閱《<a href="/docs/zh-hant/idempotent-import.md">冪等性批次匯入</a>》。</p>
+<p>要匯入已準備好的資料，您必須依照以下方式建立匯入工作：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -126,18 +130,18 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <p>請求正文包含兩個欄位：</p>
 <ul>
 <li><p><code translate="no">collectionName</code></p>
-<p>目標資料集的名稱。</p></li>
+<p>目標集合的名稱。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>一個檔案路徑清單，相對於與您的 Milvus 實例一同啟動的 MioIO 實例上 Milvus 資料桶的根路徑。可能的子清單如下：</p>
+<p>一組以清單形式表示的檔案路徑，這些路徑是相對於在您的 Milvus 實例啟動時一併啟動的 MioIO 實例上，該 Milvus 儲存桶的根目錄而言的相對路徑。可能的子清單如下：</p>
 <ul>
 <li><p><strong>JSON 檔案</strong></p>
-<p>如果準備的檔案是 JSON 格式，<strong>每個子清單應該包含單一準備的 JSON 檔案路徑</strong>。</p>
+<p>若已準備的檔案為 JSON 格式<strong>，每個子清單應包含單一已準備 JSON 檔案的路徑</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Parquet 檔案</strong></p>
-<p>如果準備的檔案是 Parquet 格式，<strong>每個子清單都應包含單一準備的 Parquet 檔案的路徑</strong>。</p>
+<p>若預備檔案為 Parquet<strong>格式，每個子清單應包含單一預備 Parquet 檔案的路徑</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -145,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>可能的回傳如下：</p>
+<p>可能的回傳結果如下：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -168,9 +172,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>得到匯入工作 ID 後，您可以檢查匯入進度，如下所示：</p>
+    </button></h2><p>取得匯入工作 ID 後，可透過以下方式檢查匯入進度：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -229,7 +236,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>可能的回覆如下：</p>
+<p>可能的回應如下：</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -279,9 +286,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以列出相對於特定集合的所有匯入工作，如下所示：</p>
+    </button></h2><p>您可以透過以下方式列出特定集合所對應的所有匯入工作：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -345,12 +355,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>每個匯入檔案大小不得超過<strong>16 GB</strong>。</p></li>
-<li><p>每個匯入請求的最大檔案數不能超過<strong>1024</strong>。每個匯入要求每個檔案最多只能有 16GB * 1024 個檔案 = 16TB 的資料。</p></li>
-<li><p>並發匯入要求的最大數目限制為<strong>1024</strong>。</p></li>
+<li><p>每個匯入檔案的大小不得超過<strong>16 GB</strong>。</p></li>
+<li><p>每個匯入請求的檔案數量上限不得超過<strong>1024 個</strong>。每個匯入請求的資料量上限為：每檔 16 GB × 1024 檔 = 16 TB。</p></li>
+<li><p>同時進行的匯入請求數量上限為<strong>1024</strong> 個。</p></li>
 </ul>
 <ul>
-<li>匯入請求中只能指定一個磁碟分割名稱。如果沒有指定磁碟分割名稱，資料會插入預設磁碟分割。此外，如果已在目標集合中設定了分割區金鑰，則無法在匯入請求中設定分割區名稱。</li>
+<li>每個匯入請求中僅能指定一個分區名稱。若未指定分區名稱，資料將插入預設分區。此外，若您已在目標集合中設定「分區金鑰」，則無法在匯入請求中設定分區名稱。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制條件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,25 +377,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在匯入資料前，請確認已確認下列 Milvus 行為的限制：</p>
+    </button></h2><p>在匯入資料之前，請務必確認您已了解以下 Milvus 行為相關的限制：</p>
 <ul>
-<li><p>關於載入行為的限制：</p>
+<li><p>關於「載入」行為的限制：</p>
 <ul>
-<li>如果一個集合在匯入前已經被載入，您可以使用<code translate="no">refresh_load</code> 函式在匯入完成後載入新匯入的資料。</li>
+<li>若集合在匯入前已載入，您可在匯入完成後使用 `<code translate="no">refresh_load</code> ` 函式載入新匯入的資料。</li>
 </ul></li>
-<li><p>有關查詢和搜尋行為的限制：</p>
+<li><p>關於查詢與搜尋行為的限制：</p>
 <ul>
-<li><p>在匯入工作狀態為<strong>完成</strong>之前，新匯入的資料保證對查詢和搜尋不可见。</p></li>
-<li><p>一旦工作狀態為<strong>完成</strong>、</p>
+<li><p>在匯入工作狀態顯示為「<strong>已完成</strong>」之前，新匯入的資料在查詢與搜尋中絕對不會被檢索到。</p></li>
+<li><p>一旦工作狀態變為「<strong>已完成</strong>」，</p>
 <ul>
-<li><p>如果資料集尚未載入，您可以使用<code translate="no">load</code> 函式載入新匯入的資料。</p></li>
-<li><p>如果資料集已經載入，您可以呼叫<code translate="no">load(is_refresh=True)</code> 來載入匯入的資料。</p></li>
+<li><p>若集合尚未載入，您可以使用 `<code translate="no">load</code> ` 函式來載入新匯入的資料。</p></li>
+<li><p>若集合已載入，您可以呼叫 `<code translate="no">load(is_refresh=True)</code> ` 來載入已匯入的資料。</p></li>
 </ul></li>
 </ul></li>
-<li><p>有關刪除行為的限制：</p>
+<li><p>關於刪除行為的限制：</p>
 <ul>
-<li><p>在匯入工作狀態為<strong>完成</strong>之前，刪除不保證會成功，也可能不會成功。</p></li>
-<li><p>工作狀態為<strong>Completed</strong>之後的刪除保證會成功。</p></li>
+<li><p>在匯入工作狀態變為「<strong>已完成</strong>」之前，刪除操作無法保證成功，結果可能成功也可能失敗。</p></li>
+<li><p>當工作狀態為「<strong>已完成</strong>」後進行刪除，則保證成功。</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">建議<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +413,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們強烈建議您使用多檔案匯入功能，它允許您在單一要求中上傳多個檔案。此方法不僅能簡化匯入程序，還能大幅提升匯入效能。同時，透過整合上傳，您可以減少花在資料管理上的時間，並使您的工作流程更有效率。</p>
+    </button></h2><p>我們強烈建議使用多檔案匯入功能，此功能可讓您在單一請求中上傳多個檔案。此方法不僅能簡化匯入流程，更能顯著提升匯入效能。同時，透過整合上傳作業，您可以減少花在資料管理上的時間，並使工作流程更為高效。</p>

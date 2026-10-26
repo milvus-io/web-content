@@ -21,12 +21,13 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus unterstützt skalare Textdaten mit den Feldern „ <code translate="no">VARCHAR</code> “ und „ <code translate="no">TEXT</code> “. Auf dieser Seite wird das Feld „ <code translate="no">VARCHAR</code> “ beschrieben, das für kurze, begrenzte Zeichenfolgen-Metadaten wie Namen, Tags, Kategorien und externe IDs vorgesehen ist.</p>
-<p>Für längere Quelltexte, Dokumentpassagen, Artikeltexte, Tickets oder Protokolle, die zusammen mit Entitäten gespeichert und zurückgegeben werden sollen, verwenden Sie stattdessen ein „ <code translate="no">TEXT</code> “-Feld. Verwenden Sie „ <code translate="no">TEXT</code> “, wenn ein Wert die „ <code translate="no">65,535</code> “-Byte-Grenze überschreiten könnte oder wenn Sie keine feste „ <code translate="no">max_length</code> “ im Sammlungsschema festlegen möchten. Weitere Informationen finden Sie unter <a href="/docs/de/text.md">„Textfeld</a>“.</p>
+<p>Für längere Quelltexte, Dokumentauszüge, Artikeltexte, Tickets oder Protokolle, die zusammen mit Entitäten gespeichert und zurückgegeben werden sollen, verwenden Sie stattdessen ein „ <code translate="no">TEXT</code> “-Feld. Verwenden Sie „ <code translate="no">TEXT</code> “, wenn ein Wert die „ <code translate="no">65,535</code> “-Byte-Grenze überschreiten könnte oder wenn Sie keine feste „ <code translate="no">max_length</code> “ im Sammlungsschema festlegen möchten. Weitere Informationen finden Sie unter <a href="/docs/de/text.md">„Textfeld</a>“.</p>
 <p>Wenn Sie ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ definieren, sind zwei Parameter obligatorisch:</p>
 <ul>
 <li><p>Legen Sie die „ <code translate="no">datatype</code> “ auf „ <code translate="no">DataType.VARCHAR</code> “ fest.</p></li>
-<li><p>Geben Sie die „ <code translate="no">max_length</code> “ an, die die maximale Anzahl an Bytes definiert, die das Feld „ <code translate="no">VARCHAR</code> “ speichern kann. Der gültige Bereich für „ <code translate="no">max_length</code> “ liegt zwischen 1 und 65.535.</p></li>
+<li><p>Geben Sie den Wert für „ <code translate="no">max_length</code> “ an, der die maximal zulässige Anzahl von UTF-8-Bytes für jeden Feldwert definiert. Der gültige Bereich für „ <code translate="no">max_length</code> “ liegt zwischen 1 und 65.535.</p></li>
 </ul>
+<p>Die Anzahl der Bytes kann von der Anzahl der Zeichen abweichen. Bei einem Wert von „ <code translate="no">max_length=10</code> “ liegt beispielsweise „ <code translate="no">&quot;abcdefghij&quot;</code> “ innerhalb des Limits, da es 10 UTF-8-Bytes verwendet. Die Zeichenfolge „ <code translate="no">&quot;一二三四五六七八九十&quot;</code> “ hat ebenfalls 10 Zeichen, verwendet jedoch 30 UTF-8-Bytes und überschreitet damit das Limit.</p>
 <div class="alert note">
 <p>Milvus unterstützt Nullwerte und Standardwerte für „ <code translate="no">VARCHAR</code> “-Felder. Um diese Funktionen zu aktivieren, setzen Sie „ <code translate="no">nullable</code> “ auf „ <code translate="no">True</code> “ und „ <code translate="no">default_value</code> “ auf einen Zeichenfolgenwert. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullable &amp; Default</a>“.</p>
 </div>
@@ -48,7 +49,7 @@ summary: >-
     </button></h2><p>Um kurze, begrenzte Zeichenfolgen-Metadaten in Milvus zu speichern, definieren Sie ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ in Ihrem Sammlungsschema. Nachfolgend finden Sie ein Beispiel für die Definition eines Sammlungsschemas mit zwei Feldern vom Typ „ <code translate="no">VARCHAR</code> “:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: speichert bis zu 100 Byte, erlaubt Nullwerte und hat den Standardwert „ <code translate="no">&quot;Unknown&quot;</code> “.</p></li>
-<li><p><code translate="no">varchar_field2</code>: speichert bis zu 200 Byte, erlaubt Nullwerte, hat jedoch keinen Standardwert.</p></li>
+<li><p><code translate="no">varchar_field2</code>: Speichert bis zu 200 Byte, erlaubt Nullwerte, hat jedoch keinen Standardwert.</p></li>
 </ul>
 <div class="alert note">
 <p>Wenn Sie bei der Definition des Schemas „ <code translate="no">enable_dynamic_fields=True</code> “ festlegen, erlaubt Milvus das Einfügen von Skalarfeldern, die nicht im Voraus definiert wurden. Dies kann jedoch die Komplexität von Abfragen und der Verwaltung erhöhen und sich möglicherweise auf die Leistung auswirken. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">„Dynamisches Feld</a>“.</p>
@@ -550,7 +551,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
         ></path>
       </svg>
     </button></h2><p>Verwenden Sie nach dem Einfügen der Entitäten die Methode „ <code translate="no">query</code> “, um Entitäten abzurufen, die den angegebenen Filterausdrücken entsprechen.</p>
-<p>Um Entitäten abzurufen, bei denen der Wert von ` <code translate="no">varchar_field1</code> ` mit der Zeichenfolge ` <code translate="no">&quot;Product A&quot;</code>` übereinstimmt:</p>
+<p>Um Entitäten abzurufen, bei denen der „ <code translate="no">varchar_field1</code> “ mit der Zeichenfolge „ <code translate="no">&quot;Product A&quot;</code> “ übereinstimmt:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -624,7 +625,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>So rufen Sie Entitäten ab, bei denen der Wert von ` <code translate="no">varchar_field2</code> ` null ist:</p>
+<p>So rufen Sie Entitäten ab, bei denen „ <code translate="no">varchar_field2</code> “ null ist:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

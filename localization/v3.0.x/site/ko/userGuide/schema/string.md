@@ -19,14 +19,15 @@ summary: VARCHAR는 Milvus에서 길이가 제한된 짧은 문자열 메타데�
         ></path>
       </svg>
     </button></h1><p>Milvus는 ` <code translate="no">VARCHAR</code> ` 및 ` <code translate="no">TEXT</code> ` 필드를 통해 텍스트형 스칼라 데이터를 지원합니다. 이 페이지에서는 이름, 태그, 카테고리, 외부 ID와 같이 짧고 길이가 제한된 문자열 메타데이터를 위해 설계된 ` <code translate="no">VARCHAR</code>`에 대해 설명합니다.</p>
-<p>엔티티와 함께 저장 및 반환해야 하는 긴 원본 텍스트, 문서 구절, 기사 본문, 티켓 또는 로그의 경우, 대신 <code translate="no">TEXT</code> 필드를 사용하십시오. 값이 <code translate="no">65,535</code> 바이트를 초과할 수 있거나 컬렉션 스키마에 고정된 <code translate="no">max_length</code> 를 설정하지 않으려는 경우에는 <code translate="no">TEXT</code> 를 사용하십시오. 자세한 내용은 <a href="/docs/ko/text.md">텍스트 필드를</a> 참조하십시오.</p>
+<p>엔티티와 함께 저장 및 반환해야 하는 긴 원본 텍스트, 문서 발췌문, 기사 본문, 티켓 또는 로그의 경우, 대신 <code translate="no">TEXT</code> 필드를 사용하십시오. 값이 <code translate="no">65,535</code> 바이트를 초과할 수 있거나 컬렉션 스키마에 고정된 <code translate="no">max_length</code> 를 설정하지 않으려는 경우에는 <code translate="no">TEXT</code> 를 사용하십시오. 자세한 내용은 <a href="/docs/ko/text.md">텍스트 필드를</a> 참조하십시오.</p>
 <p><code translate="no">VARCHAR</code> 필드를 정의할 때는 다음 두 가지 매개변수가 필수입니다.</p>
 <ul>
 <li><p><code translate="no">datatype</code> 을 <code translate="no">DataType.VARCHAR</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">max_length</code> 를 지정해야 하며, 이는 <code translate="no">VARCHAR</code> 필드가 저장할 수 있는 최대 바이트 수를 정의합니다. <code translate="no">max_length</code> 의 유효 범위는 1에서 65,535까지입니다.</p></li>
+<li><p><code translate="no">max_length</code> 를 지정하여 각 필드 값에 허용되는 최대 UTF-8 바이트 수를 정의합니다. <code translate="no">max_length</code> 의 유효 범위는 1에서 65,535까지입니다.</p></li>
 </ul>
+<p>바이트 수는 문자 수와 다를 수 있습니다. 예를 들어, <code translate="no">max_length=10</code> 인 경우, <code translate="no">&quot;abcdefghij&quot;</code> 는 10개의 UTF-8 바이트를 사용하므로 제한 범위 내에 들어갑니다. 반면, 문자열 <code translate="no">&quot;一二三四五六七八九十&quot;</code> 도 10개의 문자를 포함하지만 30개의 UTF-8 바이트를 사용하므로 제한을 초과합니다.</p>
 <div class="alert note">
-<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 로 설정하고, <code translate="no">default_value</code> 을 문자열 값으로 설정하십시오. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable &amp; Default’를</a> 참조하십시오.</p>
+<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로 설정하고, <code translate="no">default_value</code> 을 문자열 값으로 설정하십시오. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable &amp; Default’를</a> 참조하십시오.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +46,7 @@ summary: VARCHAR는 Milvus에서 길이가 제한된 짧은 문자열 메타데�
       </svg>
     </button></h2><p>Milvus에 짧고 길이가 제한된 문자열 메타데이터를 저장하려면 컬렉션 스키마에 ` <code translate="no">VARCHAR</code> ` 필드를 정의하십시오. 다음은 두 개의 ` <code translate="no">VARCHAR</code> ` 필드가 포함된 컬렉션 스키마를 정의하는 예시입니다:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: 최대 100바이트까지 저장할 수 있으며, null 값을 허용하고 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
+<li><p><code translate="no">varchar_field1</code>: 최대 100바이트까지 저장할 수 있으며, null 값을 허용하고, 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
 <li><p><code translate="no">varchar_field2</code>: 최대 200바이트까지 저장할 수 있으며, null 값을 허용하지만 기본값은 없습니다.</p></li>
 </ul>
 <div class="alert note">
@@ -252,10 +253,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱싱은 검색 및 쿼리 성능 향상에 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만, 스칼라 필드의 경우 선택 사항입니다.</p>
+    </button></h2><p>인덱싱은 검색 및 쿼리 성능을 향상시키는 데 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만, 스칼라 필드의 경우 선택 사항입니다.</p>
 <p>다음 예제는 벡터 필드 ` <code translate="no">embedding</code> `과 스칼라 필드 ` <code translate="no">varchar_field1</code>`에 대해 모두 ` <code translate="no">AUTOINDEX</code> ` 인덱스 유형을 사용하여 인덱스를 생성합니다. 이 유형을 사용하면 Milvus가 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 또한 각 필드에 대해 인덱스 유형과 매개변수를 사용자 정의할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">‘인덱스 설명’을</a> 참조하십시오.</p>
 <div class="alert note">
-<p>또한 <code translate="no">NGRAM</code> 인덱스를 생성하여 <code translate="no">VARCHAR</code> 필드에 대한 <code translate="no">LIKE</code> 필터링 속도를 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">NGRAM을</a> 참조하십시오.</p>
+<p>또한 <code translate="no">NGRAM</code> 인덱스를 생성하여 <code translate="no">VARCHAR</code> 필드에 대한 <code translate="no">LIKE</code> 필터링 속도를 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">‘NGRAM’을</a> 참조하십시오.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

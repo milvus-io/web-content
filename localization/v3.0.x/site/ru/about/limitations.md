@@ -130,7 +130,7 @@ summary: Ознакомьтесь с ограничениями при испо�
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Тип данных</th><th>Ограничение</th></tr>
+<tr><th>Тип данных</th><th>Ограничение (байт)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65 535</td></tr>
@@ -156,7 +156,7 @@ summary: Ознакомьтесь с ограничениями при испо�
 <tr><th>Свойство</th><th>Предел</th></tr>
 </thead>
 <tbody>
-<tr><td>Размерность</td><td>32 768</td></tr>
+<tr><td>Размер</td><td>32 768</td></tr>
 </tbody>
 </table>
 <h2 id="Input-and-Output-per-RPC" class="common-anchor-header">Входные и выходные данные на RPC<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
@@ -199,7 +199,7 @@ summary: Ознакомьтесь с ограничениями при испо�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В текущей версии объем загружаемых данных не должен превышать 90% от общего объема ресурсов памяти всех узлов запроса, чтобы зарезервировать ресурсы памяти для механизма выполнения.</p>
+    </button></h2><p>В текущей версии объем загружаемых данных не должен превышать 90% от общего объема ресурсов памяти всех узлов запроса, чтобы оставить ресурсы памяти для механизма выполнения.</p>
 <h2 id="Search-limits" class="common-anchor-header">Ограничения на поиск<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,7 +248,7 @@ summary: Ознакомьтесь с ограничениями при испо�
 <tr><td>Базовый поиск</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
 <tr><td>Поиск разделов</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
 <tr><td>Простой поиск с получением необработанных данных</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
-<tr><td>Базовый поиск с пагинацией</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Простой поиск с пагинацией</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
 <tr><td>Поиск с фильтрами</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td></tr>
 <tr><td>Поиск по диапазону</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td><td>Да</td></tr>
 <tr><td>Поиск по группам</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Да</td><td>Нет</td><td>Да</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td><td>Нет</td><td>Нет</td></tr>

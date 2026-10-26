@@ -3,7 +3,7 @@ id: alter-collection-field.md
 title: تعديل حقل المجموعة
 summary: >-
   يمكنك تعديل خصائص حقل المجموعة لتغيير قيود الأعمدة أو فرض قواعد أكثر صرامة
-  لضمان سلامة البيانات.
+  لسلامة البيانات.
 ---
 <h1 id="Alter-Collection-Field" class="common-anchor-header">تعديل حقل المجموعة<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحتوي حقل VarChar على خاصية تُسمى " <code translate="no">max_length</code>" (الحد الأقصى لعدد الأحرف)، والتي تحدد الحد الأقصى لعدد الأحرف التي يمكن أن تحتوي عليها قيم الحقل. يمكنك تغيير خاصية " <code translate="no">max_length</code> " (الحد الأقصى لعدد الأحرف).</p>
+    </button></h2><p>يحتوي حقل VarChar على خاصية تُسمى « <code translate="no">max_length</code> » (الحد الأقصى لعدد البايتات)، والتي تحدد الحد الأقصى لعدد البايتات المسموح به لكل قيمة حقل. يمكنك تغيير خاصية « <code translate="no">max_length</code> » (الحد الأقصى لعدد البايتات).</p>
 <p>يفترض المثال التالي أن المجموعة تحتوي على حقل VarChar باسم <code translate="no">varchar</code> ويقوم بتعيين خاصية <code translate="no">max_length</code> الخاصة به.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

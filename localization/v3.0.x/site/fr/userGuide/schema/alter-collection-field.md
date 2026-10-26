@@ -1,12 +1,12 @@
 ---
 id: alter-collection-field.md
-title: Modifier un champ de collection
+title: Modifier les propriétés d'un champ de collection
 summary: >-
   Vous pouvez modifier les propriétés d'un champ de collection afin de modifier
   les contraintes de colonne ou d'imposer des règles d'intégrité des données
   plus strictes.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">Modifier un champ de collection<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">Modifier les propriétés d'un champ de collection<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Vous pouvez modifier les propriétés d’un champ de collection afin de modifier les contraintes de colonne ou d’appliquer des règles d’intégrité des données plus strictes.</p>
+    </button></h1><p>Vous pouvez modifier les propriétés d'un champ de collection afin de modifier les contraintes de colonne ou d'appliquer des règles d'intégrité des données plus strictes.</p>
 <p>Cette page traite des modifications des propriétés des champs, et non des modifications de la structure du schéma, telles que l'ajout ou la suppression de champs. Pour ajouter des champs scalaires ou supprimer des champs d'une collection existante, reportez-vous à <a href="/docs/fr/add-fields-to-an-existing-collection.md">la</a> section <a href="/docs/fr/add-fields-to-an-existing-collection.md">Modifier le schéma d'une collection</a>.</p>
 <div class="alert note">
 <ul>
@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ VarChar possède une propriété nommée « <code translate="no">max_length</code> », qui limite le nombre maximal de caractères que les valeurs du champ peuvent contenir. Vous pouvez modifier la propriété « <code translate="no">max_length</code> ».</p>
+    </button></h2><p>Un champ VarChar possède une propriété nommée « <code translate="no">max_length</code> », qui définit le nombre maximal d’octets autorisés pour chaque valeur de champ. Vous pouvez modifier la propriété « <code translate="no">max_length</code> ».</p>
 <p>L’exemple suivant part du principe que la collection comporte un champ VarChar nommé « <code translate="no">varchar</code> » et définit sa propriété « <code translate="no">max_length</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -150,8 +150,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ de type tableau possède deux propriétés : <code translate="no">element_type</code> et <code translate="no">max_capacity</code>. La première détermine le type de données des éléments du tableau, tandis que la seconde limite le nombre maximal d’éléments du tableau. Vous ne pouvez modifier que la propriété <code translate="no">max_capacity</code>.</p>
-<p>L'exemple suivant part du principe que la collection comporte un champ de type tableau nommé <code translate="no">array</code> et définit sa propriété <code translate="no">max_capacity</code>.</p>
+    </button></h2><p>Un champ de type tableau possède deux propriétés : <code translate="no">element_type</code> et <code translate="no">max_capacity</code>. La première détermine le type de données des éléments du tableau, tandis que la seconde limite le nombre maximal d’éléments dans le tableau. Vous ne pouvez modifier que la propriété <code translate="no">max_capacity</code>.</p>
+<p>L'exemple suivant part du principe que la collection comporte un champ de type tableau nommé « <code translate="no">array</code> » et définit sa propriété « <code translate="no">max_capacity</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

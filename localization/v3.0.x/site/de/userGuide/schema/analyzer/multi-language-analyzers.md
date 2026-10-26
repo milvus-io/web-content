@@ -76,7 +76,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>Mehrsprachige Analysatoren konfigurieren</strong>:</p>
 <ul>
-<li><p>Richten Sie mehrere sprachspezifische Analysatoren im folgenden Format ein: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, wobei jeder <code translate="no">analyzer_config</code> der Standardkonfiguration für „ <code translate="no">analyzer_params</code> “ entspricht, wie in <a href="/docs/de/analyzer-overview.md#Analyzer-types">der Übersicht über Analysatoren</a> beschrieben.</p></li>
+<li><p>Richten Sie mehrere sprachspezifische Analysatoren im folgenden Format ein: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, wobei jeder <code translate="no">analyzer_config</code> der Standardkonfiguration <code translate="no">analyzer_params</code> entspricht, wie in <a href="/docs/de/analyzer-overview.md#Analyzer-types">der Analysator-Übersicht</a> beschrieben.</p></li>
 <li><p>Definieren Sie ein spezielles Identifikationsfeld, das die Auswahl des Analyzers für jedes Dokument bestimmt.</p></li>
 <li><p>Konfigurieren Sie einen „ <code translate="no">default</code> “-Analysator für die Verarbeitung unbekannter Sprachen.</p></li>
 </ul></li>
@@ -248,7 +248,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Listet alle sprachspezifischen Analysatoren auf, die Milvus zur Textverarbeitung verwenden kann.
  Jeder Analysator in „ <code translate="no">analyzers</code> “ hat das folgende Format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
-<li>Definieren Sie jeden Analysator mit der Standard- <code translate="no">analyzer_params</code> -Syntax (siehe <a href="/docs/de/analyzer-overview.md#Analyzer-types">„Analysator-Übersicht“</a>).</li>
+<li>Definieren Sie jeden Analysator mit der Standard- <code translate="no">analyzer_params</code> -Syntax (siehe <a href="/docs/de/analyzer-overview.md#Analyzer-types">„Übersicht über Analysatoren“</a>).</li>
 <li>Fügen Sie einen Eintrag hinzu, dessen Schlüssel „ <code translate="no">default</code> “ lautet; Milvus greift auf diesen Analysator zurück, wenn der in „ <code translate="no">by_field</code> “ gespeicherte Wert mit keinem anderen Analysatornamen übereinstimmt.</li>
 </ul></td>
    </tr>
@@ -338,14 +338,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -654,7 +654,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Der Index verbessert die Suchleistung, indem er spärliche Vektoren für effiziente BM25-Ähnlichkeitsberechnungen organisiert.</p>
-<h3 id="Create-the-collection" class="common-anchor-header">Erstellen Sie die Sammlung<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+<h3 id="Create-the-collection" class="common-anchor-header">Erstellen der Sammlung<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -672,7 +672,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     </button></h3><p>Dieser abschließende Schritt fasst alle Ihre bisherigen Konfigurationen zusammen:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> Geben Sie Ihrer Sammlung einen Namen, damit Sie sie später leichter finden können.</p></li>
-<li><p><code translate="no">schema=schema</code> Wendet die von Ihnen definierte Feldstruktur und Funktion an.</p></li>
+<li><p><code translate="no">schema=schema</code> Wendet die von Ihnen definierte Feldstruktur und -funktion an.</p></li>
 <li><p><code translate="no">index_params=index_params</code> Implementiert die Indizierungsstrategie für effiziente Suchvorgänge.</p></li>
 </ul>
 <div class="multipleCode">
@@ -904,11 +904,11 @@ curl --request POST \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Während des Einfügens führt Milvus folgende Schritte aus:</p>
+<p>Während des Einfügens führt Milvus folgende Schritte durch:</p>
 <ol>
 <li><p>Liest das Feld „ <code translate="no">language</code> “ jedes Dokuments</p></li>
 <li><p>Wendet den entsprechenden Analysator auf das Feld „ <code translate="no">text</code> “ an</p></li>
-<li><p>Erzeugt über die BM25-Funktion eine Sparse-Vektor-Darstellung</p></li>
+<li><p>Erzeugt über die BM25-Funktion eine spärliche Vektordarstellung</p></li>
 <li><p>speichert sowohl den Originaltext als auch den generierten spärlichen Vektor</p></li>
 </ol>
 <div class="alert note">

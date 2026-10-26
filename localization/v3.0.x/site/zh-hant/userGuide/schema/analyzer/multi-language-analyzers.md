@@ -4,7 +4,7 @@ title: 多語言分析器Compatible with Milvus 2.5.11+
 summary: >-
   當 Milvus
   進行文本分析時，通常會對集合中的整個文本欄位套用單一分析器。如果該分析器是針對英語進行優化的，它將難以應對其他語言（例如中文、西班牙語或法語）所要求的截然不同的分詞與詞幹化規則，導致召回率降低。
-  舉例來說，若搜尋西班牙語單字「teléfono」（意為「電話」），以英語為主的分析器便會處理失誤：它可能會省略重音符號，且未套用西班牙語特有的詞幹化規則，導致相關結果被忽略。
+  舉例來說，搜尋西班牙語單字「teléfono」（意為「電話」）時，以英語為導向的分析器便會出現問題：它可能會省略重音符號，且未套用西班牙語特有的詞幹化處理，導致相關結果被忽略。
 beta: Milvus 2.5.11+
 ---
 <h1 id="Multi-language-Analyzers" class="common-anchor-header">多語言分析器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當 Milvus 執行文字分析時，通常會對集合中的整個文字欄位套用單一分析器。若該分析器是針對英語所優化，則在處理其他語言（例如中文、西班牙文或法文）所需的截然不同的分詞與詞幹化規則時，便會遇到困難，導致召回率降低。 舉例來說，若搜尋西班牙語單字<em>「teléfono」</em>（意為<em>「電話」</em>），以英語為主的分析器便會處理失誤：它可能會省略重音符號，且未套用西班牙語專屬的詞幹化規則，導致相關結果被忽略。</p>
+    </button></h1><p>當 Milvus 執行文本分析時，通常會對集合中的整個文本欄位套用單一分析器。若該分析器是針對英語進行優化的，則在處理其他語言（例如中文、西班牙語或法語）所需的截然不同的分詞與詞幹化規則時，便會遇到困難，導致召回率降低。 舉例來說，若搜尋西班牙語單字<em>「teléfono」</em>（意為<em>「電話」</em>），以英語為主的分析器便會處理失誤：它可能會省略重音符號，且未套用西班牙語專屬的詞幹化規則，導致相關結果被忽略。</p>
 <p>多語言分析器可透過讓您為單一集合中的文字欄位配置多個分析器來解決此問題。如此一來，您便能將多語言文件儲存於文字欄位中，而 Milvus 會根據每份文件的適當語言規則來分析文字。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ beta: Milvus 2.5.11+
 <li><p><strong>設定多語言分析器</strong>：</p>
 <ul>
 <li><p>請使用以下格式設定多個特定語言的分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code> ，其中每個<code translate="no">analyzer_config</code> 皆遵循《<a href="/docs/zh-hant/analyzer-overview.md#Analyzer-types">分析器概覽</a>》中所述的標準<code translate="no">analyzer_params</code> 配置規範。</p></li>
-<li><p>定義一個特殊識別碼欄位，用以決定每份文件的分析器選擇。</p></li>
+<li><p>定義一個特殊識別碼欄位，該欄位將決定系統針對每份文件選擇哪個分析器。</p></li>
 <li><p>設定一個<code translate="no">default</code> 分析器，用於處理未知語言。</p></li>
 </ul></li>
 <li><p><strong>建立集合</strong>：</p>
@@ -80,19 +80,19 @@ beta: Milvus 2.5.11+
 <li><p><strong>primary_key</strong>：文件唯一識別碼。</p></li>
 <li><p><strong>text_field</strong>：儲存原始文字內容。</p></li>
 <li><p><strong>identifier_field</strong>：指定每個文件應使用哪個分析器。</p></li>
-<li><p><strong>vector_field</strong>：儲存將由 BM25 函式生成的稀疏嵌入向量。</p></li>
+<li><p><strong>vector_field</strong>：儲存將由 BM25 函式產生的稀疏嵌入向量。</p></li>
 </ul></li>
 <li><p>設定 BM25 函式與索引參數。</p></li>
 </ul></li>
 <li><p><strong>插入帶有語言識別碼的資料</strong>：</p>
 <ul>
-<li><p>新增包含多種語言文字的文件，其中每個文件皆包含一個識別碼值，用以指定應使用的分析器。</p></li>
+<li><p>新增包含多種語言文字的文件，每個文件皆包含一個識別碼值，用以指定應使用的分析器。</p></li>
 <li><p>Milvus 會根據識別碼欄位選擇適當的分析器，而識別碼不明的文件則會使用「<code translate="no">default</code> 」分析器。</p></li>
 </ul></li>
 <li><p><strong>使用特定語言的分析器進行搜尋</strong>：</p>
 <ul>
 <li><p>在查詢文字中指定分析器名稱，Milvus 便會使用該指定分析器來處理查詢。</p></li>
-<li><p>分詞將依照特定語言的規則進行，搜尋結果會根據相似度，回傳符合該語言的結果。</p></li>
+<li><p>分詞將依照特定語言的規則進行，而搜尋結果會根據相似度，回傳符合該語言的結果。</p></li>
 </ul></li>
 </ol>
 <h2 id="Step-1-Configure-multianalyzerparams" class="common-anchor-header">步驟 1：設定 multi_analyzer_params<button data-href="#Step-1-Configure-multianalyzerparams" class="anchor-icon" translate="no">
@@ -238,10 +238,10 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>是</p></td>
-     <td><p>列出 Milvus 可用於處理文字的每種語言專用分析器。<code translate="no">analyzers</code> 中的每個分析器均遵循此格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
+     <td><p>列出 Milvus 可用來處理文字的每個語言專用分析器。<code translate="no">analyzers</code> 中的每個分析器皆遵循此格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
      <td><ul>
 <li>請使用標準的<code translate="no">analyzer_params</code> 語法來定義每個分析器（請參閱《<a href="/docs/zh-hant/analyzer-overview.md#Analyzer-types">分析器概覽</a>》）。</li>
-<li>新增一個鍵為<code translate="no">default</code> 的條目；每當<code translate="no">by_field</code> 中儲存的值與任何其他分析器名稱都不匹配時，Milvus 便會回退至此分析器。</li>
+<li>新增一個鍵為<code translate="no">default</code> 的項目；每當<code translate="no">by_field</code> 中儲存的值與任何其他分析器名稱不匹配時，Milvus 便會回退至此分析器。</li>
 </ul></td>
    </tr>
    <tr>
@@ -251,7 +251,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><ul>
 <li><p>必須是集合中定義的<code translate="no">VARCHAR</code> 欄位。</p></li>
 <li><p>每行中的值必須與<code translate="no">analyzers</code> 中列出的分析器名稱（或別名）之一完全匹配。</p></li>
-<li><p>若某一行中的值缺失或未找到，Milvus 會自動套用<code translate="no">default</code> 分析器。</p></li>
+<li><p>若某行值缺失或未找到，Milvus 會自動套用<code translate="no">default</code> 分析器。</p></li>
 </ul></td>
    </tr>
    <tr>
@@ -292,12 +292,12 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在此步驟中，請透過以下四個基本欄位定義集合模式：</p>
+    </button></h3><p>在此步驟中，請透過以下四個基本欄位定義集合架構：</p>
 <ul>
 <li><p><strong>主鍵欄位</strong>(<code translate="no">id</code>)：集合中每個實體的唯一識別碼。設定「<code translate="no">auto_id=True</code> 」可讓 Milvus 自動產生這些 ID。</p></li>
 <li><p><strong>語言標示字段</strong>（<code translate="no">language</code> ）：此 VARCHAR 字段對應於您在<code translate="no">multi_analyzer_params</code> 中指定的<code translate="no">by_field</code> 。它儲存每個實體的語言識別碼，用以告知 Milvus 應使用哪種分析器。</p></li>
 <li><p><strong>文字內容欄位</strong>(<code translate="no">text</code>)：此 VARCHAR 欄位儲存您欲進行分析與搜尋的實際文字資料。設定<code translate="no">enable_analyzer=True</code> 至關重要，因為它會為此欄位啟用文字分析功能。<code translate="no">multi_analyzer_params</code> 的設定會直接綁定至此欄位，從而建立您的文字資料與特定語言分析器之間的連結。</p></li>
-<li><p><strong>向量欄位</strong>(<code translate="no">sparse</code>)：此欄位將儲存由 BM25 函式所產生的稀疏向量。這些向量代表您文字資料的可分析形式，也是 Milvus 實際進行搜尋的對象。</p></li>
+<li><p><strong>向量欄位</strong>(<code translate="no">sparse</code>)：此欄位將儲存由 BM25 函式所產生的稀疏向量。這些向量代表您文字數據的可分析形式，也是 Milvus 實際進行搜尋的對象。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -330,14 +330,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -732,7 +732,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>至此，Milvus 已建立一個支援多語言分析器的空集合，並已準備好接收資料。</p>
+<p>此時，Milvus 會建立一個支援多語言分析器的空集合，並已準備好接收資料。</p>
 <h2 id="Step-3-Insert-example-data" class="common-anchor-header">步驟 3：插入範例資料<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -936,10 +936,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>當使用多語言分析器進行搜尋時，<code translate="no">search_params</code> 檔案包含關鍵的設定：</p>
+    </button></h3><p>當使用多語言分析器進行搜尋時，<code translate="no">search_params</code> 檔案包含關鍵的配置：</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> 必須與您的索引設定相符。</p></li>
-<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 指定要套用至查詢文字的分析器。此設定與儲存文件所使用的分析器無關。</p></li>
+<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> 指定應將哪個分析器套用至您的查詢文字。此設定與儲存文件所使用的分析器無關。</p></li>
 <li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> 控制 BM25 特定的行為；在此，它會保留搜尋中的所有術語。如需更多資訊，請參閱「<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>」。</p></li>
 </ul>
 <div class="multipleCode">
@@ -1082,7 +1082,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此範例示範針對不同的查詢文字切換至中文分析器（使用其別名<code translate="no">&quot;cn&quot;</code> ）。所有其他參數均保持不變，但現在查詢文字將依照中文專屬的分詞規則進行處理。</p>
+    </button></h3><p>此範例示範針對不同的查詢文字切換至中文分析器（使用其別名<code translate="no">&quot;cn&quot;</code> ）。所有其他參數均保持不變，但查詢文字現將依照中文專屬的分詞規則進行處理。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

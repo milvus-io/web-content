@@ -130,7 +130,7 @@ summary: Pelajari batasan-batasan saat menggunakan Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Tipe data</th><th>Batas</th></tr>
+<tr><th>Tipe data</th><th>Batas (byte)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65.535</td></tr>
@@ -220,11 +220,11 @@ summary: Pelajari batasan-batasan saat menggunakan Milvus.
 <tr><th>Vektor</th><th>Batas</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (jumlah hasil paling mirip yang akan dikembalikan)</td><td>16.384</td></tr>
+<tr><td><code translate="no">topk</code> (jumlah hasil paling mirip yang akan ditampilkan)</td><td>16.384</td></tr>
 <tr><td><code translate="no">nq</code> (jumlah permintaan pencarian)</td><td>16.384</td></tr>
 </tbody>
 </table>
-<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Batasan indeks pada berbagai jenis pencarian<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
+<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Batas indeks pada berbagai jenis pencarian<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,7 +249,7 @@ summary: Pelajari batasan-batasan saat menggunakan Milvus.
 <tr><td>Pencarian partisi</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian dasar dengan data mentah yang diambil</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian dasar dengan paginasi</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian yang difilter</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian dengan filter</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian rentang</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian berdasarkan kelompok</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
 <tr><td>Cari dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>

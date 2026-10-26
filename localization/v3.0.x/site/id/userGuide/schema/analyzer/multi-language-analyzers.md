@@ -2,14 +2,14 @@
 id: multi-language-analyzers.md
 title: Penganalisis MultibahasaCompatible with Milvus 2.5.11+
 summary: >-
-  Saat Milvus melakukan analisis teks, sistem ini biasanya menerapkan satu alat
-  analisis ke seluruh bidang teks dalam suatu koleksi. Jika alat analisis
-  tersebut dioptimalkan untuk bahasa Inggris, sistem akan mengalami kesulitan
-  dalam menangani aturan tokenisasi dan stemming yang sangat berbeda yang
-  diperlukan oleh bahasa lain, seperti bahasa Mandarin, Spanyol, atau Prancis,
-  sehingga mengakibatkan tingkat recall yang lebih rendah. Misalnya, pencarian
-  kata Spanyol "teléfono" (yang berarti "telepon") akan membingungkan alat
-  analisis yang difokuskan pada bahasa Inggris: alat tersebut mungkin
+  Saat Milvus melakukan analisis teks, sistem ini biasanya menerapkan satu
+  penganalisis tunggal pada seluruh bidang teks dalam suatu koleksi. Jika
+  penganalisis tersebut dioptimalkan untuk bahasa Inggris, sistem akan mengalami
+  kesulitan dalam menangani aturan tokenisasi dan stemming yang sangat berbeda
+  yang diperlukan oleh bahasa lain, seperti bahasa Mandarin, Spanyol, atau
+  Prancis, sehingga menghasilkan tingkat recall yang lebih rendah. Misalnya,
+  pencarian kata Spanyol "teléfono" (yang berarti "telepon") akan membingungkan
+  alat analisis yang difokuskan pada bahasa Inggris: alat tersebut mungkin
   mengabaikan tanda aksen dan tidak menerapkan stemming khusus bahasa Spanyol,
   sehingga hasil yang relevan terlewatkan.
 beta: Milvus 2.5.11+
@@ -29,7 +29,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Saat Milvus melakukan analisis teks, biasanya Milvus menerapkan satu penganalisis tunggal pada seluruh bidang teks dalam suatu koleksi. Jika penganalisis tersebut dioptimalkan untuk bahasa Inggris, penganalisis tersebut akan kesulitan menangani aturan tokenisasi dan stemming yang sangat berbeda yang diperlukan oleh bahasa lain, seperti bahasa Mandarin, Spanyol, atau Prancis, sehingga menghasilkan tingkat recall yang lebih rendah. Misalnya, pencarian kata Spanyol <em>“teléfono”</em> (yang berarti <em>“telepon”</em>) akan membingungkan penganalisis yang berfokus pada bahasa Inggris: penganalisis tersebut mungkin mengabaikan tanda aksen dan tidak menerapkan stemming khusus bahasa Spanyol, sehingga hasil yang relevan terlewatkan.</p>
+    </button></h1><p>Saat Milvus melakukan analisis teks, biasanya Milvus menerapkan satu penganalisis ke seluruh bidang teks dalam suatu koleksi. Jika penganalisis tersebut dioptimalkan untuk bahasa Inggris, penganalisis tersebut akan kesulitan menangani aturan tokenisasi dan stemming yang sangat berbeda yang diperlukan oleh bahasa lain, seperti bahasa Mandarin, Spanyol, atau Prancis, sehingga menghasilkan tingkat recall yang lebih rendah. Misalnya, pencarian kata Spanyol <em>“teléfono”</em> (yang berarti <em>“telepon”</em>) akan membingungkan penganalisis yang berfokus pada bahasa Inggris: penganalisis tersebut mungkin mengabaikan tanda aksen dan tidak menerapkan stemming khusus bahasa Spanyol, sehingga hasil yang relevan terlewatkan.</p>
 <p>Penganalisis multibahasa mengatasi masalah ini dengan memungkinkan Anda mengonfigurasi beberapa penganalisis untuk satu bidang teks dalam satu koleksi. Dengan cara ini, Anda dapat menyimpan dokumen multibahasa dalam satu bidang teks, dan Milvus akan menganalisis teks sesuai dengan aturan bahasa yang tepat untuk setiap dokumen.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,9 +74,9 @@ beta: Milvus 2.5.11+
   
  </span></p>
 <ol>
-<li><p><strong>Konfigurasi Analisis Multi-bahasa</strong>:</p>
+<li><p><strong>Konfigurasi Analisis Multi-Bahasa</strong>:</p>
 <ul>
-<li><p>Siapkan beberapa penganalisis khusus bahasa menggunakan format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, di mana setiap <code translate="no">analyzer_config</code> mengikuti konfigurasi standar <code translate="no">analyzer_params</code> seperti yang dijelaskan dalam <a href="/docs/id/analyzer-overview.md#Analyzer-types">Gambaran Umum Penganalisis</a>.</p></li>
+<li><p>Siapkan beberapa penganalisis khusus bahasa menggunakan format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, di mana setiap <code translate="no">analyzer_config</code> mengikuti konfigurasi standar <code translate="no">analyzer_params</code> sebagaimana dijelaskan dalam <a href="/docs/id/analyzer-overview.md#Analyzer-types">Gambaran Umum Penganalisis</a>.</p></li>
 <li><p>Tentukan bidang pengenal khusus yang akan menentukan pemilihan penganalisis untuk setiap dokumen.</p></li>
 <li><p>Konfigurasikan penganalisis <code translate="no">default</code> untuk menangani bahasa yang tidak dikenal.</p></li>
 </ul></li>
@@ -87,19 +87,19 @@ beta: Milvus 2.5.11+
 <li><p><strong>primary_key</strong>: Pengidentifikasi dokumen yang unik.</p></li>
 <li><p><strong>text_field</strong>: Menyimpan konten teks asli.</p></li>
 <li><p><strong>identifier_field</strong>: Menunjukkan penganalisis mana yang akan digunakan untuk setiap dokumen.</p></li>
-<li><p><strong>vector_field</strong>: Menyimpan embedding yang jarang yang akan dihasilkan oleh fungsi BM25.</p></li>
+<li><p><strong>vector_field</strong>: Menyimpan embedding spars yang akan dihasilkan oleh fungsi BM25.</p></li>
 </ul></li>
 <li><p>Konfigurasikan fungsi BM25 dan parameter pengindeksan.</p></li>
 </ul></li>
-<li><p><strong>Sisipkan Data dengan Pengidentifikasi Bahasa</strong>:</p>
+<li><p><strong>Masukkan Data dengan Pengidentifikasi Bahasa</strong>:</p>
 <ul>
 <li><p>Tambahkan dokumen yang berisi teks dalam berbagai bahasa, di mana setiap dokumen menyertakan nilai pengenal yang menentukan penganalisis mana yang akan digunakan.</p></li>
 <li><p>Milvus memilih penganalisis yang sesuai berdasarkan bidang pengenal, dan dokumen dengan pengenal yang tidak diketahui akan menggunakan penganalisis <code translate="no">default</code>.</p></li>
 </ul></li>
 <li><p><strong>Pencarian dengan Analisis Khusus Bahasa</strong>:</p>
 <ul>
-<li><p>Berikan teks kueri dengan nama penganalisis yang ditentukan, dan Milvus akan memproses kueri tersebut menggunakan penganalisis yang ditentukan.</p></li>
-<li><p>Tokenisasi dilakukan sesuai aturan khusus bahasa, dan hasil pencarian menampilkan hasil yang sesuai dengan bahasa berdasarkan tingkat kesamaan.</p></li>
+<li><p>Berikan teks kueri dengan nama analis yang ditentukan, dan Milvus memproses kueri tersebut menggunakan analis yang ditentukan.</p></li>
+<li><p>Tokenisasi dilakukan sesuai aturan khusus bahasa, dan hasil pencarian menampilkan hasil yang sesuai dengan bahasa berdasarkan kemiripan.</p></li>
 </ul></li>
 </ol>
 <h2 id="Step-1-Configure-multianalyzerparams" class="common-anchor-header">Langkah 1: Konfigurasikan `multi_analyzer_params`<button data-href="#Step-1-Configure-multianalyzerparams" class="anchor-icon" translate="no">
@@ -245,8 +245,8 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Mencantumkan setiap penganalisis khusus bahasa yang dapat digunakan Milvus untuk memproses teks.
- Setiap penganalisis di <code translate="no">analyzers</code> mengikuti format ini: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
+     <td><p>Menampilkan daftar setiap penganalisis khusus bahasa yang dapat digunakan Milvus untuk memproses teks.
+ Setiap penganalisis di <code translate="no">analyzers</code> mengikuti format berikut: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
 <li>Tentukan setiap penganalisis dengan sintaks standar <code translate="no">analyzer_params</code> (lihat <a href="/docs/id/analyzer-overview.md#Analyzer-types">Ikhtisar Penganalisis</a>).</li>
 <li>Tambahkan entri yang kuncinya adalah <code translate="no">default</code>; Milvus akan menggunakan penganalisis ini sebagai cadangan setiap kali nilai yang disimpan di <code translate="no">by_field</code> tidak cocok dengan nama penganalisis lainnya.</li>
@@ -258,14 +258,14 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Nama bidang yang menyimpan, untuk setiap dokumen, bahasa (yaitu, nama penganalisis) yang harus diterapkan Milvus.</p></td>
      <td><ul>
 <li><p>Harus berupa bidang ` <code translate="no">VARCHAR</code> ` yang didefinisikan dalam koleksi.</p></li>
-<li><p>Nilai pada setiap baris harus persis sama dengan salah satu nama penganalisis (atau alias) yang tercantum di <code translate="no">analyzers</code>.</p></li>
+<li><p>Nilai di setiap baris harus persis sama dengan salah satu nama penganalisis (atau alias) yang tercantum di <code translate="no">analyzers</code>.</p></li>
 <li><p>Jika nilai baris hilang atau tidak ditemukan, Milvus secara otomatis menerapkan penganalisis ` <code translate="no">default</code> `.</p></li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">alias</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Membuat pintasan atau nama alternatif untuk penganalisis Anda, sehingga memudahkan untuk merujuknya dalam kode Anda. Setiap penganalisis dapat memiliki satu atau lebih alias.</p></td>
+     <td><p>Membuat pintasan atau nama alternatif untuk penganalisis Anda, sehingga lebih mudah untuk dirujuk dalam kode Anda. Setiap penganalisis dapat memiliki satu atau lebih alias.</p></td>
      <td><p>Setiap alias harus dipetakan ke kunci penganalisis yang sudah ada.</p></td>
    </tr>
 </table>
@@ -302,7 +302,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
       </svg>
     </button></h3><p>Pada langkah ini, tentukan skema koleksi dengan empat bidang penting:</p>
 <ul>
-<li><p><strong>Bidang Kunci Utama</strong> (<code translate="no">id</code>): Pengidentifikasi unik untuk setiap entitas dalam koleksi. Mengaktifkan " <code translate="no">auto_id=True</code> " memungkinkan Milvus untuk secara otomatis menghasilkan ID-ID ini.</p></li>
+<li><p><strong>Bidang Kunci Utama</strong> (<code translate="no">id</code>): Pengenal unik untuk setiap entitas dalam koleksi. Dengan mengaktifkan " <code translate="no">auto_id=True</code> ", Milvus dapat secara otomatis menghasilkan ID-ID ini.</p></li>
 <li><p><strong>Bidang Indikator Bahasa</strong> (<code translate="no">language</code>): Bidang VARCHAR ini sesuai dengan <code translate="no">by_field</code> yang ditentukan dalam <code translate="no">multi_analyzer_params</code> Anda. Bidang ini menyimpan pengenal bahasa untuk setiap entitas, yang memberi tahu Milvus penganalisis mana yang harus digunakan.</p></li>
 <li><p><strong>Bidang Konten Teks</strong> (<code translate="no">text</code>): Bidang VARCHAR ini menyimpan data teks aktual yang ingin Anda analisis dan cari. Pengaturan <code translate="no">enable_analyzer=True</code> sangat penting karena mengaktifkan kemampuan analisis teks untuk bidang ini. Konfigurasi <code translate="no">multi_analyzer_params</code> terhubung langsung ke bidang ini, sehingga menjalin hubungan antara data teks Anda dan penganalisis khusus bahasa.</p></li>
 <li><p><strong>Bidang Vektor</strong> (<code translate="no">sparse</code>): Bidang ini akan menyimpan vektor-vektor spars yang dihasilkan oleh fungsi BM25. Vektor-vektor ini mewakili bentuk data teks Anda yang dapat dianalisis dan merupakan objek yang sebenarnya dicari oleh Milvus.</p></li>
@@ -338,14 +338,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -908,8 +908,8 @@ curl --request POST \
 <ol>
 <li><p>Membaca bidang ` <code translate="no">language</code> ` pada setiap dokumen</p></li>
 <li><p>Menerapkan penganalisis yang sesuai ke bidang ` <code translate="no">text</code> `</p></li>
-<li><p>Menghasilkan representasi vektor jarang melalui fungsi BM25</p></li>
-<li><p>Menyimpan teks asli dan vektor langka yang dihasilkan</p></li>
+<li><p>Menghasilkan representasi vektor langka melalui fungsi BM25</p></li>
+<li><p>Menyimpan teks asli dan vektor jarang yang dihasilkan</p></li>
 </ol>
 <div class="alert note">
 <p>Anda tidak perlu menyediakan vektor jarang secara langsung; fungsi BM25 akan menghasilkannya secara otomatis berdasarkan teks Anda dan analis yang ditentukan.</p>
@@ -947,7 +947,7 @@ curl --request POST \
     </button></h3><p>Saat melakukan pencarian dengan penganalisis multibahasa, berkas ` <code translate="no">search_params</code> ` berisi konfigurasi penting:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> harus sesuai dengan konfigurasi indeks Anda.</p></li>
-<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> menentukan penganalisis mana yang akan diterapkan pada teks kueri Anda. Hal ini tidak bergantung pada penganalisis yang digunakan pada dokumen yang disimpan.</p></li>
+<li><p><code translate="no">analyzer_name=&quot;english&quot;</code> menentukan analis mana yang akan diterapkan pada teks kueri Anda. Hal ini tidak bergantung pada analis yang digunakan pada dokumen yang disimpan.</p></li>
 <li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> mengontrol perilaku khusus BM25; di sini, semua istilah dalam pencarian dipertahankan. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Sparse Vector</a>.</p></li>
 </ul>
 <div class="multipleCode">
@@ -1075,7 +1075,7 @@ curl --request POST \
   &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Gunakan analis bahasa Mandarin<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
+<h3 id="Use-Chinese-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Mandarin<button data-href="#Use-Chinese-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1090,7 +1090,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Contoh ini menunjukkan peralihan ke penganalisis bahasa Mandarin (menggunakan aliasnya <code translate="no">&quot;cn&quot;</code>) untuk teks kueri yang berbeda. Semua parameter lainnya tetap sama, tetapi kini teks kueri diproses menggunakan aturan tokenisasi khusus bahasa Mandarin.</p>
+    </button></h3><p>Contoh ini menunjukkan cara beralih ke penganalisis bahasa Mandarin (menggunakan aliasnya <code translate="no">&quot;cn&quot;</code>) untuk teks kueri yang berbeda. Semua parameter lainnya tetap sama, tetapi kini teks kueri diproses menggunakan aturan tokenisasi khusus bahasa Mandarin.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

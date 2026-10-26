@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ StructArray",
+                "label": "Créer un champ de type StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -1377,7 +1377,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du « Decay Ranker »",
+                    "label": "Présentation du classement « Decay »",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1564,6 +1564,12 @@
         "label": "Importer des données",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "Importation en masse idempotente",
+        "id": "idempotent-import.md",
+        "order": 2,
         "children": []
       }
     ]

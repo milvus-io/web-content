@@ -18,7 +18,7 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>陣列欄位用於儲存一組具有相同資料型別且依序排列的元素。以下為陣列欄位儲存資料的範例：</p>
+    </button></h1><p>陣列欄位用於儲存一組具有相同資料型別且按順序排列的元素。以下為陣列欄位儲存資料的範例：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -41,7 +41,7 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
       </svg>
     </button></h2><ul>
 <li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。不過，您可以將 `<code translate="no">nullable</code> ` 屬性設定為 `<code translate="no">True</code> `，以允許空值。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>」。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同的資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須為陣列元素指定<code translate="no">max_length</code> 。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
+<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須指定<code translate="no">max_length</code> ，該參數定義每個陣列元素允許的最大位元組數。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，但<code translate="no">JSON</code> 除外。</p></li>
 <li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於建立陣列時所定義的最大容量，該容量由<code translate="no">max_capacity</code> 指定。該值應為<strong>1</strong>至<strong>4096</strong> 之間的整數。</p></li>
 <li><p><strong>字串處理</strong>：陣列欄位中的字串值將以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
 </ul>
@@ -60,7 +60,7 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要在 Milvus 中使用 ARRAY 欄位，請於建立集合架構時定義相關的欄位類型。此流程包含：</p>
+    </button></h2><p>若要在 Milvus 中使用 ARRAY 欄位，請在建立集合架構時定義相關的欄位類型。此流程包含：</p>
 <ol>
 <li><p>將 `<code translate="no">datatype</code> ` 設定為受支援的陣列資料型別，即 `<code translate="no">ARRAY</code>`。</p></li>
 <li><p>使用<code translate="no">element_type</code> 參數指定陣列中元素的資料類型。同一陣列中的所有元素必須具有相同的資料類型。</p></li>
@@ -545,7 +545,7 @@ client.<span class="hljs-title function_">insert</span>({
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>除了插入完整的陣列外，在 Milvus v2.6.17 及後續版本中，<code translate="no">ARRAY</code> 欄位亦支援<code translate="no">upsert</code> API 上的<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 部分更新運算子。這些運算子讓您無需先擷取陣列的當前值，即可向現有陣列追加元素或移除符合條件的元素，從而避免了客戶端端的「讀取-修改-寫入」模式。 詳細資訊請參閱「<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">在合併模式下對 ARRAY 欄位執行 Upsert</a>」。</p>
+<p>除了插入完整的陣列外，在 Milvus v2.6.17 及後續版本中，<code translate="no">ARRAY</code> 欄位亦支援<code translate="no">upsert</code> API 上的<code translate="no">ARRAY_APPEND</code> 和<code translate="no">ARRAY_REMOVE</code> 部分更新運算子。這些運算子讓您無需先擷取陣列的當前值，即可向現有陣列追加元素或移除符合條件的元素，從而避免了客戶端端的「讀取-修改-寫入」模式。 詳情請參閱「<a href="/docs/zh-hant/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">合併模式下對 ARRAY 欄位的 Upsert</a>」。</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">使用篩選表達式進行查詢<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -635,7 +635,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>若要擷取 `<code translate="no">ratings</code> ` 第一項元素的值大於 4 的實體：</p>
+<p>若要擷取 `<code translate="no">ratings</code> ` 的第一個元素值大於 4 的實體：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -717,7 +717,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">搭配篩選表達式的向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">結合篩選表達式的向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -829,4 +829,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 支援進階的陣列篩選運算子，例如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步強化查詢能力。如需更多詳細資訊，請參閱「<a href="/docs/zh-hant/array-operators.md">陣列運算子 (ARRAY Operators</a>)」。</p>
+<p>此外，Milvus 支援進階的陣列篩選運算子，例如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步強化查詢功能。如需更多詳細資訊，請參閱「<a href="/docs/zh-hant/array-operators.md">陣列運算子</a>」。</p>

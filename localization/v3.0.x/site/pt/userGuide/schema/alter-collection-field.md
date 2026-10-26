@@ -2,7 +2,7 @@
 id: alter-collection-field.md
 title: Alterar campo de coleção
 summary: >-
-  Pode alterar as propriedades de um campo de coleção para modificar as
+  É possível alterar as propriedades de um campo de coleção para modificar as
   restrições das colunas ou aplicar regras de integridade de dados mais
   rigorosas.
 ---
@@ -29,7 +29,7 @@ summary: >-
 <li><p>Cada coleção pode ter apenas uma chave de partição. Uma vez definida durante a criação da coleção, não é possível alterar a chave de partição.</p></li>
 </ul>
 </div>
-<h2 id="Alter-VarChar-field" class="common-anchor-header">Alterar o campo VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
+<h2 id="Alter-VarChar-field" class="common-anchor-header">Alterar campo VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo VarChar possui uma propriedade denominada « <code translate="no">max_length</code> », que restringe o número máximo de caracteres que os valores do campo podem conter. É possível alterar a propriedade « <code translate="no">max_length</code> ».</p>
+    </button></h2><p>Um campo VarChar possui uma propriedade denominada « <code translate="no">max_length</code> », que define o número máximo de bytes permitido para cada valor do campo. É possível alterar a propriedade « <code translate="no">max_length</code> ».</p>
 <p>O exemplo seguinte pressupõe que a coleção tem um campo VarChar denominado « <code translate="no">varchar</code> » e define a sua propriedade « <code translate="no">max_length</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -150,8 +150,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo de matriz tem duas propriedades: « <code translate="no">element_type</code> » e « <code translate="no">max_capacity</code> ». A primeira determina o tipo de dados dos elementos da matriz, enquanto a segunda restringe o número máximo de elementos na matriz. Só é possível alterar a propriedade « <code translate="no">max_capacity</code> ».</p>
-<p>O exemplo seguinte parte do princípio de que a coleção possui um campo de matriz denominado « <code translate="no">array</code> » e define a sua propriedade « <code translate="no">max_capacity</code> ».</p>
+    </button></h2><p>Um campo de matriz possui duas propriedades: « <code translate="no">element_type</code> » e « <code translate="no">max_capacity</code> ». A primeira determina o tipo de dados dos elementos da matriz, enquanto a segunda restringe o número máximo de elementos na matriz. Só é possível alterar a propriedade « <code translate="no">max_capacity</code> ».</p>
+<p>O exemplo seguinte parte do princípio de que a coleção tem um campo de matriz denominado <code translate="no">array</code> e define a sua propriedade <code translate="no">max_capacity</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -18,13 +18,14 @@ summary: VARCHAR 是 Milvus 中用于存储短的、有长度的字符串元数�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 通过 `<code translate="no">VARCHAR</code> ` 和 `<code translate="no">TEXT</code> ` 字段支持文本型标量数据。本页介绍 `<code translate="no">VARCHAR</code>`，该字段专为名称、标签、类别和外部 ID 等短且长度受限的字符串元数据而设计。</p>
-<p>对于需要与实体一起存储和返回的较长源文本、文档片段、文章正文、工单或日志，请改用<code translate="no">TEXT</code> 字段。当值可能超过<code translate="no">65,535</code> 字节，或者您不想在 Schema 中设置固定的<code translate="no">max_length</code> 时，请使用<code translate="no">TEXT</code> 。有关详细信息，请参阅<a href="/docs/zh/text.md">“文本字段”</a>。</p>
+    </button></h1><p>Milvus 通过 `<code translate="no">VARCHAR</code> ` 和 `<code translate="no">TEXT</code> ` 字段支持文本标量数据。本页介绍 `<code translate="no">VARCHAR</code>`，该字段专为名称、标签、类别和外部 ID 等短且长度受限的字符串元数据而设计。</p>
+<p>对于较长的源文本、文档片段、文章正文、工单或日志，如果需要将其与实体一起存储和返回，请改用<code translate="no">TEXT</code> 字段。当值可能超过<code translate="no">65,535</code> 字节，或者您不想在 Collection Schema 中设置固定的<code translate="no">max_length</code> 时，请使用<code translate="no">TEXT</code> 。有关详细信息，请参阅<a href="/docs/zh/text.md">“文本字段”</a>。</p>
 <p>定义<code translate="no">VARCHAR</code> 字段时，有两个必填参数：</p>
 <ul>
 <li><p>将<code translate="no">datatype</code> 设置为<code translate="no">DataType.VARCHAR</code> 。</p></li>
-<li><p>指定<code translate="no">max_length</code> ，该参数定义<code translate="no">VARCHAR</code> 字段可存储的最大字节数。<code translate="no">max_length</code> 的有效范围为1至65,535。</p></li>
+<li><p>指定<code translate="no">max_length</code> ，该参数定义每个字段值允许的最大UTF-8字节数。<code translate="no">max_length</code> 的有效范围为1到65,535。</p></li>
 </ul>
+<p>字节数可能与字符数不同。例如，对于<code translate="no">max_length=10</code> ，<code translate="no">&quot;abcdefghij&quot;</code> 符合限制，因为它使用了10个UTF-8字节。字符串<code translate="no">&quot;一二三四五六七八九十&quot;</code> 虽然也有10个字符，但使用了30个UTF-8字节，因此超出了限制。</p>
 <div class="alert note">
 <p>Milvus 支持<code translate="no">VARCHAR</code> 字段的空值和默认值。要启用这些功能，请将<code translate="no">nullable</code> 设置为<code translate="no">True</code> ，并将<code translate="no">default_value</code> 设置为字符串值。有关详细信息，请参阅《<a href="/docs/zh/nullable-and-default.md">可为空与默认值</a>》。</p>
 </div>
@@ -49,7 +50,7 @@ summary: VARCHAR 是 Milvus 中用于存储短的、有长度的字符串元数�
 <li><p><code translate="no">varchar_field2</code>: 最多存储 200 字节，允许空值，但没有默认值。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在定义 Schema 时设置了 `<code translate="no">enable_dynamic_fields=True</code> `，Milvus 允许您插入未预先定义的标量字段。但这可能会增加查询和管理的复杂性，并可能影响性能。有关更多信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。</p>
+<p>如果您在定义 Schema 时设置了 `<code translate="no">enable_dynamic_fields=True</code> `，Milvus 允许您插入未预先定义的标量字段。但这可能会增加查询和管理的复杂性，从而可能影响性能。有关更多信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -253,7 +254,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>建立索引有助于提升搜索和查询性能。在 Milvus 中，向量字段必须建立索引，而标量字段则可选。</p>
-<p>以下示例在向量字段<code translate="no">embedding</code> 和标量字段<code translate="no">varchar_field1</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus 会根据数据类型自动选择最合适的索引。您也可以为每个字段自定义索引类型和参数。有关详细信息，请参阅《<a href="/docs/zh/index-explained.md">索引详解》</a>。</p>
+<p>以下示例在向量字段<code translate="no">embedding</code> 和标量字段<code translate="no">varchar_field1</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus 会根据数据类型自动选择最合适的索引。您还可以为每个字段自定义索引类型和参数。详情请参阅《<a href="/docs/zh/index-explained.md">索引详解》</a>。</p>
 <div class="alert note">
 <p>您还可以构建一个<code translate="no">NGRAM</code> 索引，以加速对<code translate="no">VARCHAR</code> 字段中<code translate="no">LIKE</code> 的过滤。详情请参阅《<a href="/docs/zh/ngram.md">NGRAM</a>》。</p>
 </div>
@@ -696,7 +697,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要检索<code translate="no">varchar_field1</code> 值为<code translate="no">&quot;Unknown&quot;</code> 的实体，请使用以下表达式。由于<code translate="no">varchar_field1</code> 的默认值为<code translate="no">&quot;Unknown&quot;</code> ，预期结果应包含<code translate="no">varchar_field1</code> 显式设置为<code translate="no">&quot;Unknown&quot;</code> 的实体，或<code translate="no">varchar_field1</code> 设置为null的实体。</p>
+<p>要检索<code translate="no">varchar_field1</code> 值为<code translate="no">&quot;Unknown&quot;</code> 的实体，请使用以下表达式。由于<code translate="no">varchar_field1</code> 的默认值为<code translate="no">&quot;Unknown&quot;</code> ，因此预期结果应包含<code translate="no">varchar_field1</code> 显式设置为<code translate="no">&quot;Unknown&quot;</code> 的实体，或<code translate="no">varchar_field1</code> 设置为null的实体。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

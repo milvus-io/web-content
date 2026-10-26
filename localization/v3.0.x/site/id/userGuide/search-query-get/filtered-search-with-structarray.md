@@ -1,6 +1,6 @@
 ---
 id: filtered-search-with-structarray.md
-title: Pencarian Tersaring dengan StructArray
+title: Pencarian Terfilter dengan StructArray
 summary: >-
   Gunakan halaman ini untuk menambahkan penyaringan skalar ke pencarian vektor
   pada bidang StructArray. Penyaringan StructArray memiliki dua tingkatan:
@@ -8,7 +8,7 @@ summary: >-
   elemen membatasi elemen Struct mana saja yang ikut serta dalam pencarian
   vektor tingkat elemen.
 ---
-<h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">Pencarian Tersaring dengan StructArray<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
+<h1 id="Filtered-Search-with-StructArray" class="common-anchor-header">Pencarian Terfilter dengan StructArray<button data-href="#Filtered-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,6 +48,7 @@ summary: >-
 <tr><td>Saring berdasarkan bidang skalar tingkat atas, seperti <code translate="no">category</code>.</td><td>Ekspresi filter biasa.</td><td>Memilih entitas induk sebelum atau selama pencarian.</td></tr>
 <tr><td>Membatasi pencarian vektor tingkat elemen ke elemen Struct yang sesuai dengan kondisi skalar.</td><td><code translate="no">element_filter</code>.</td><td>Hanya mencari elemen Struct yang cocok dan dapat mengembalikan offset elemen yang cocok.</td></tr>
 <tr><td>Memilih entitas berdasarkan apakah ada, semua, atau sejumlah tertentu elemen Struct yang sesuai dengan predikat.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code>, atau <code translate="no">MATCH_EXACT</code>.</td><td>Penyaringan tingkat baris. Operator-operator ini tidak mengembalikan offset secara langsung.</td></tr>
+<tr><td>Uji posisi satu elemen, hitung elemen Struct, atau periksa nilai subbidang di seluruh elemen tanpa ` <code translate="no">$[...]</code>`.</td><td>Jalur StructArray tingkat baris, seperti <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code>, atau <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Penyaringan tingkat baris. Untuk sintaksis, lihat <a href="/docs/id/struct-array-operators.md">Operator StructArray</a>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -112,7 +113,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan ` <code translate="no">element_filter(structArrayField, predicate)</code> ` ketika kondisi skalar harus diterapkan pada elemen Struct yang sama yang berpartisipasi dalam pencarian vektor tingkat elemen. Di dalam predikat, gunakan ` <code translate="no">$[subfield]</code> ` untuk merujuk pada subbidang skalar dari elemen Struct saat ini.</p>
+    </button></h2><p>Gunakan ` <code translate="no">element_filter(structArrayField, predicate)</code> ` ketika kondisi skalar harus diterapkan pada elemen Struct yang sama yang terlibat dalam pencarian vektor tingkat elemen. Di dalam predikat, gunakan ` <code translate="no">$[subfield]</code> ` untuk merujuk pada subbidang skalar dari elemen Struct saat ini.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -302,8 +303,8 @@ results = client.hybrid_search(
 <li><p>Menggunak <code translate="no">$[subfield]</code> di luar <code translate="no">element_filter</code> atau <code translate="no">MATCH_*</code>.</p></li>
 <li><p>Menggunakan <code translate="no">chunks.section</code> alih-alih sintaks operator StructArray seperti <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
 <li><p>Menggunakan <code translate="no">element_filter</code> saat Anda hanya memerlukan penyaringan tingkat baris. Gunakan <code translate="no">MATCH_ANY</code> sebagai gantinya jika Anda hanya perlu memilih entitas.</p></li>
-<li><p>Mengharapkan ` <code translate="no">MATCH_*</code> ` mengembalikan offset elemen. Operator-operator ini memilih entitas dan tidak mengidentifikasi satu elemen yang cocok secara otomatis.</p></li>
-<li><p>Menulis predikat boolean tanpa operator, seperti <code translate="no">$[has_code]</code>. Gunakan perbandingan eksplisit seperti <code translate="no">$[has_code] == true</code>.</p></li>
+<li><p>Mengharapkan ` <code translate="no">MATCH_*</code> ` mengembalikan offset elemen. Operator-operator ini memilih entitas dan tidak mengidentifikasi satu elemen yang cocok secara mandiri.</p></li>
+<li><p>Menulis predikat boolean tanpa operator seperti <code translate="no">$[has_code]</code>. Gunakan perbandingan eksplisit seperti <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Menempatkan ` <code translate="no">element_filter</code> ` sebelum predikat tingkat atas dalam ekspresi filter yang sama.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -325,5 +326,5 @@ results = client.hybrid_search(
 <li><p>Untuk meninjau sintaks filter StructArray secara lengkap, baca <a href="/docs/id/struct-array-operators.md">StructArray Operators</a>.</p></li>
 <li><p>Untuk menjalankan pencarian vektor tanpa filter terlebih dahulu, baca <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>.</p></li>
 <li><p>Untuk membuat indeks skalar untuk filter StructArray yang sering digunakan, baca <a href="/docs/id/index-structarray-fields.md">Indeks Bidang StructArray</a>.</p></li>
-<li><p>Untuk memeriksa batasan filter dan pencarian yang spesifik untuk versi tertentu, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
+<li><p>Untuk memeriksa batasan filter dan pencarian yang spesifik versi, baca <a href="/docs/id/structarray-limits.md">Batasan StructArray</a>.</p></li>
 </ol>

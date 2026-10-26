@@ -2,13 +2,13 @@
 id: multi-language-analyzers.md
 title: Analisadores multilinguesCompatible with Milvus 2.5.11+
 summary: >-
-  Quando o Milvus realiza a análise de texto, aplica normalmente um único
+  Quando o Milvus realiza uma análise de texto, aplica normalmente um único
   analisador a todo o campo de texto de uma coleção. Se esse analisador estiver
   otimizado para o inglês, terá dificuldades com as regras de tokenização e
   stemming muito diferentes exigidas por outras línguas, como o chinês, o
   espanhol ou o francês, o que resulta numa taxa de recall mais baixa. Por
   exemplo, uma pesquisa pela palavra espanhola «teléfono» (que significa
-  «telefone») confundiria um analisador focado no inglês: este poderia ignorar o
+  «telefone») confundiria um analisador focado no inglês: este poderia omitir o
   acento e não aplicar a derivação específica do espanhol, fazendo com que
   resultados relevantes fossem ignorados.
 beta: Milvus 2.5.11+
@@ -47,7 +47,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h2><ul>
 <li><p>Esta funcionalidade funciona apenas com a recuperação de texto baseada em BM25 e vetores esparsos. Para mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa</a> de <a href="/docs/pt/full-text-search.md">Texto Completo</a>.</p></li>
-<li><p>Cada documento numa única coleção pode utilizar apenas um analisador, determinado pelo valor do seu campo identificador de idioma.</p></li>
+<li><p>Cada documento numa única coleção pode utilizar apenas um analisador, determinado pelo valor do campo identificador de idioma.</p></li>
 <li><p>O desempenho pode variar consoante a complexidade dos seus analisadores e a dimensão dos seus dados de texto.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ beta: Milvus 2.5.11+
 </ul></li>
 <li><p><strong>Pesquisar com analisadores específicos para cada idioma</strong>:</p>
 <ul>
-<li><p>Forneça o texto da consulta com o nome de um analisador especificado e o Milvus processa a consulta utilizando o analisador especificado.</p></li>
+<li><p>Forneça o texto da consulta com um nome de analisador especificado e o Milvus processa a consulta utilizando o analisador especificado.</p></li>
 <li><p>A tokenização ocorre de acordo com regras específicas do idioma, e a pesquisa devolve resultados adequados ao idioma com base na semelhança.</p></li>
 </ul></li>
 </ol>
@@ -257,18 +257,18 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Nome do campo que armazena, para cada documento, o idioma (ou seja, o nome do analisador) que o Milvus deve aplicar.</p></td>
      <td><ul>
 <li><p>Tem de ser um campo « <code translate="no">VARCHAR</code> » definido na coleção.</p></li>
-<li><p>O valor em cada linha deve corresponder exatamente a um dos nomes de analisador (ou aliases) listados em <code translate="no">analyzers</code>.</p></li>
+<li><p>O valor em cada linha deve corresponder exatamente a um dos nomes de analisadores (ou aliases) listados em <code translate="no">analyzers</code>.</p></li>
 <li><p>Se o valor de uma linha estiver em falta ou não for encontrado, o Milvus aplica automaticamente o analisador « <code translate="no">default</code> ».</p></li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">alias</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Cria atalhos ou nomes alternativos para os seus analisadores, facilitando a sua referência no seu código. Cada analisador pode ter um ou mais aliases.</p></td>
-     <td><p>Cada alias deve corresponder a uma chave de analisador existente.</p></td>
+     <td><p>Cria atalhos ou nomes alternativos para os seus analisadores, facilitando a sua referência no código. Cada analisador pode ter um ou mais aliases.</p></td>
+     <td><p>Cada alias deve estar associado a uma chave de analisador existente.</p></td>
    </tr>
 </table>
-<h2 id="Step-2-Create-collection" class="common-anchor-header">Passo 2: Criar coleção<button data-href="#Step-2-Create-collection" class="anchor-icon" translate="no">
+<h2 id="Step-2-Create-collection" class="common-anchor-header">Passo 2: Criar uma coleção<button data-href="#Step-2-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -302,8 +302,8 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
     </button></h3><p>Nesta etapa, defina o esquema da coleção com quatro campos essenciais:</p>
 <ul>
 <li><p><strong>Campo de chave primária</strong> (<code translate="no">id</code>): Um identificador único para cada entidade na coleção. Definir « <code translate="no">auto_id=True</code> » permite que o Milvus gere automaticamente estes IDs.</p></li>
-<li><p><strong>Campo de indicador de idioma</strong> (<code translate="no">language</code>): Este campo VARCHAR corresponde ao <code translate="no">by_field</code> especificado no seu <code translate="no">multi_analyzer_params</code>. Armazena o identificador de idioma de cada entidade, que indica ao Milvus qual o analisador a utilizar.</p></li>
-<li><p><strong>Campo de Conteúdo de Texto</strong> (<code translate="no">text</code>): Este campo VARCHAR armazena os dados de texto propriamente ditos que pretende analisar e pesquisar. A definição de « <code translate="no">enable_analyzer=True</code> » é crucial, uma vez que ativa as capacidades de análise de texto para este campo. A configuração de « <code translate="no">multi_analyzer_params</code> » está diretamente associada a este campo, estabelecendo a ligação entre os seus dados de texto e os analisadores específicos de cada idioma.</p></li>
+<li><p><strong>Campo de indicador de idioma</strong> (<code translate="no">language</code>): Este campo VARCHAR corresponde ao <code translate="no">by_field</code> especificado no seu ficheiro <code translate="no">multi_analyzer_params</code>. Armazena o identificador de idioma de cada entidade, que indica ao Milvus qual o analisador a utilizar.</p></li>
+<li><p><strong>Campo de Conteúdo de Texto</strong> (<code translate="no">text</code>): Este campo VARCHAR armazena os dados de texto propriamente ditos que pretende analisar e pesquisar. A definição de <code translate="no">enable_analyzer=True</code> é crucial, uma vez que ativa as capacidades de análise de texto para este campo. A configuração de <code translate="no">multi_analyzer_params</code> está diretamente associada a este campo, estabelecendo a ligação entre os seus dados de texto e os analisadores específicos de cada idioma.</p></li>
 <li><p><strong>Campo Vector</strong> (<code translate="no">sparse</code>): Este campo armazenará os vetores esparsos gerados pela função BM25. Estes vetores representam a forma analisável dos seus dados de texto e são o que o Milvus realmente pesquisa.</p></li>
 </ul>
 <div class="multipleCode">
@@ -337,14 +337,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -592,7 +592,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta função aplica automaticamente o analisador adequado a cada entrada de texto com base no seu identificador de idioma. Para mais informações sobre a recuperação de texto baseada em BM25, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de Texto Completo</a>.</p>
+<p>Esta função aplica automaticamente o analisador adequado a cada entrada de texto com base no seu identificador de idioma. Para mais informações sobre a recuperação de texto baseada em BM25, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
 <h3 id="Configure-index-params" class="common-anchor-header">Configurar parâmetros do índice<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -670,7 +670,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
       </svg>
     </button></h3><p>Esta etapa final de criação reúne todas as suas configurações anteriores:</p>
 <ul>
-<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> dê um nome à sua coleção para referência futura.</p></li>
+<li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> atribua um nome à sua coleção para referência futura.</p></li>
 <li><p><code translate="no">schema=schema</code> aplica a estrutura e a função do campo que definiu.</p></li>
 <li><p><code translate="no">index_params=index_params</code> implementa a estratégia de indexação para pesquisas eficientes.</p></li>
 </ul>
@@ -943,7 +943,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ao efetuar pesquisas com analisadores multilingues, o ficheiro « <code translate="no">search_params</code> » contém uma configuração crucial:</p>
+    </button></h3><p>Ao efetuar pesquisas com analisadores multilingues, o ficheiro « <code translate="no">search_params</code> » contém uma configuração essencial:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> deve corresponder à configuração do seu índice.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> especifica qual o analisador a aplicar ao texto da sua consulta. Isto é independente dos analisadores utilizados nos documentos armazenados.</p></li>

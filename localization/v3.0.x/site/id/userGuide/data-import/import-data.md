@@ -2,9 +2,11 @@
 id: import-data.md
 order: 1
 title: Impor Data
-summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiapkan.
+summary: >-
+  Halaman ini menjelaskan langkah-langkah untuk mengimpor data yang telah
+  disiapkan.
 ---
-<h1 id="Import-data" class="common-anchor-header">Mengimpor data<button data-href="#Import-data" class="anchor-icon" translate="no">
+<h1 id="Import-data" class="common-anchor-header">Impor data<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +21,8 @@ summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiap
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Halaman ini menunjukkan prosedur untuk mengimpor data yang telah disiapkan.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>Halaman ini menjelaskan prosedur untuk mengimpor data yang telah disiapkan.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Sebelum memulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +38,17 @@ summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiap
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Anda sudah menyiapkan data Anda dan menempatkannya ke dalam bucket Milvus.</p>
-<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk menyiapkan data Anda terlebih dahulu, dan memastikan bahwa data yang disiapkan telah ditransfer ke bucket Milvus pada instans MinIO yang dimulai bersama dengan instans Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/prepare-source-data.md">Menyiapkan Data Sumber</a>.</p></li>
-<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p></li>
+<li><p>Anda telah menyiapkan data Anda dan menempatkannya ke dalam bucket Milvus.</p>
+<p>Jika belum, Anda harus menggunakan <strong>RemoteBulkWriter</strong> untuk mempersiapkan data Anda terlebih dahulu, dan pastikan bahwa data yang telah disiapkan telah ditransfer ke bucket Milvus pada instance MinIO yang dijalankan bersamaan dengan instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/prepare-source-data.md">Persiapkan Data Sumber</a>.</p></li>
+<li><p>Anda telah membuat koleksi dengan skema yang Anda gunakan untuk menyiapkan data. Jika belum, lihat " <a href="/docs/id/manage-collections.md">Kelola Koleksi</a>".</p></li>
 </ul>
 <div class="language-python">
-<p>Cuplikan kode berikut ini membuat koleksi sederhana dengan skema yang diberikan. Untuk informasi lebih lanjut tentang parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> dalam referensi SDK.</p>
+<p>Potongan kode berikut membuat koleksi sederhana dengan skema yang ditentukan. Untuk informasi lebih lanjut mengenai parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> di referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>Cuplikan kode berikut membuat koleksi sederhana dengan skema yang diberikan. Untuk informasi lebih lanjut tentang parameter, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> dalam referensi SDK.</p>
+<p>Potongan kode berikut ini membuat koleksi sederhana dengan skema yang ditentukan. Untuk informasi lebih lanjut mengenai parameter, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> di referensi SDK.</p>
 </div>
-<h2 id="Import-data" class="common-anchor-header">Mengimpor data<button data-href="#Import-data" class="anchor-icon" translate="no">
+<h2 id="Import-data" class="common-anchor-header">Impor data<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,9 +63,13 @@ summary: Halaman ini menunjukkan prosedur untuk mengimpor data yang sudah disiap
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengimpor data yang telah disiapkan, Anda harus membuat pekerjaan impor sebagai berikut:</p>
+    </button></h2><p>Jika pipa Anda dapat mencoba kembali permintaan impor yang gagal atau habis waktunya, beri tanda pada pekerjaan tersebut dengan kunci idempotensi; lihat <a href="/docs/id/idempotent-import.md">Impor Massal Idempoten</a>.</p>
+<p>Untuk mengimpor data yang telah disiapkan, Anda harus membuat pekerjaan impor sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -123,21 +129,21 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Badan permintaan berisi dua bidang:</p>
+<p>Isi permintaan berisi dua bidang:</p>
 <ul>
 <li><p><code translate="no">collectionName</code></p>
-<p>Nama koleksi target.</p></li>
+<p>Nama koleksi tujuan.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>Daftar daftar jalur file yang relatif terhadap jalur root dari bucket Milvus pada instans MioIO yang dimulai bersama dengan instans Milvus Anda. Sub-daftar yang mungkin ada adalah sebagai berikut:</p>
+<p>Daftar dari daftar jalur file relatif terhadap jalur akar bucket Milvus pada instance MioIO yang dijalankan bersamaan dengan instance Milvus Anda. Sub-daftar yang mungkin adalah sebagai berikut:</p>
 <ul>
 <li><p><strong>File JSON</strong></p>
-<p>Jika berkas yang disiapkan dalam format JSON, <strong>setiap sub-daftar harus berisi jalur ke satu berkas JSON yang disiapkan</strong>.</p>
+<p>Jika berkas yang disiapkan berformat JSON, <strong>setiap sub-daftar harus berisi jalur ke satu berkas JSON yang telah disiapkan</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>File parket</strong></p>
-<p>Jika berkas yang disiapkan dalam format Parquet, <strong>setiap sub-daftar harus berisi jalur ke satu berkas parquet</strong> yang disiapkan.</p>
+<li><p><strong>File Parquet</strong></p>
+<p>Jika file yang disiapkan berformat Parquet, <strong>setiap sub-daftar harus berisi jalur ke satu file Parquet yang telah disiapkan</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -145,7 +151,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>Pengembalian yang mungkin adalah sebagai berikut:</p>
+<p>Hasil yang mungkin diperoleh adalah sebagai berikut:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -153,7 +159,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">Memeriksa kemajuan impor<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="Check-import-progress" class="common-anchor-header">Periksa kemajuan impor<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,7 +176,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>Setelah Anda mendapatkan ID pekerjaan impor, Anda dapat memeriksa kemajuan impor sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -229,7 +238,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Respons yang mungkin muncul adalah sebagai berikut:</p>
+<p>Respons yang mungkin diterima adalah sebagai berikut:</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -264,7 +273,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Buat daftar pekerjaan impor<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Daftar Pekerjaan Impor<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -279,9 +288,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat membuat daftar semua pekerjaan impor relatif terhadap koleksi tertentu sebagai berikut:</p>
+    </button></h2><p>Anda dapat menampilkan daftar semua tugas impor yang terkait dengan koleksi tertentu sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -314,7 +326,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Nilai yang mungkin adalah sebagai berikut:</p>
+<p>Nilai-nilai yang mungkin adalah sebagai berikut:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -329,7 +341,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limitations" class="common-anchor-header">Keterbatasan<button data-href="#Limitations" class="anchor-icon" translate="no">
+<h2 id="Limitations" class="common-anchor-header">Batasan<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -345,14 +357,14 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Setiap ukuran file impor tidak boleh melebihi <strong>16 GB</strong>.</p></li>
-<li><p>Jumlah maksimum file per permintaan impor tidak boleh melebihi <strong>1024</strong>. Setiap permintaan impor maksimal 16 GB per file * 1024 file = 16 TB data.</p></li>
-<li><p>Jumlah maksimum permintaan impor bersamaan dibatasi hingga <strong>1024</strong>.</p></li>
+<li><p>Ukuran setiap file impor tidak boleh melebihi <strong>16 GB</strong>.</p></li>
+<li><p>Jumlah maksimum berkas per permintaan impor tidak boleh melebihi <strong>1024</strong>. Setiap permintaan impor dapat memiliki data sebanyak 16 GB per berkas * 1024 berkas = 16 TB.</p></li>
+<li><p>Jumlah maksimum permintaan impor yang berjalan secara bersamaan dibatasi hingga 1. <strong>024</strong>.</p></li>
 </ul>
 <ul>
-<li>Hanya satu nama partisi yang dapat ditentukan dalam permintaan impor. Jika tidak ada nama partisi yang ditentukan, data akan dimasukkan ke dalam partisi default. Selain itu, Anda tidak dapat menetapkan nama partisi dalam permintaan impor jika Anda telah menetapkan Kunci Partisi di koleksi target.</li>
+<li>Hanya satu nama partisi yang dapat ditentukan dalam permintaan impor. Jika tidak ada nama partisi yang ditentukan, data akan dimasukkan ke dalam partisi default. Selain itu, Anda tidak dapat menetapkan nama partisi dalam permintaan impor jika Anda telah menetapkan Kunci Partisi dalam koleksi target.</li>
 </ul>
-<h2 id="Constraints" class="common-anchor-header">Kendala<button data-href="#Constraints" class="anchor-icon" translate="no">
+<h2 id="Constraints" class="common-anchor-header">Batasan<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -367,25 +379,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum mengimpor data, pastikan Anda telah mengetahui batasan-batasan terkait perilaku Milvus berikut ini:</p>
+    </button></h2><p>Sebelum mengimpor data, pastikan Anda telah memahami batasan-batasan terkait perilaku Milvus berikut ini:</p>
 <ul>
-<li><p>Kendala terkait perilaku Load:</p>
+<li><p>Batasan terkait perilaku Pemuatan:</p>
 <ul>
-<li>Jika koleksi telah dimuat sebelum impor, Anda dapat menggunakan fungsi <code translate="no">refresh_load</code> untuk memuat data yang baru diimpor setelah impor selesai.</li>
+<li>Jika sebuah koleksi telah dimuat sebelum impor, Anda dapat menggunakan fungsi ` <code translate="no">refresh_load</code> ` untuk memuat data yang baru diimpor setelah proses impor selesai.</li>
 </ul></li>
-<li><p>Kendala terkait perilaku kueri &amp; pencarian:</p>
+<li><p>Batasan terkait perilaku kueri &amp; pencarian:</p>
 <ul>
-<li><p>Sebelum status pekerjaan impor adalah <strong>Selesai</strong>, data yang baru diimpor dijamin tidak akan terlihat oleh kueri dan pencarian.</p></li>
-<li><p>Setelah status pekerjaan adalah <strong>Selesai</strong>,</p>
+<li><p>Sebelum status pekerjaan impor menjadi <strong>"Selesai"</strong>, data yang baru diimpor dijamin tidak akan terlihat dalam kueri dan pencarian.</p></li>
+<li><p>Setelah status pekerjaan menjadi " <strong>Selesai</strong>",</p>
 <ul>
-<li><p>Jika koleksi belum dimuat, Anda dapat menggunakan fungsi <code translate="no">load</code> untuk memuat data yang baru diimpor.</p></li>
-<li><p>Jika koleksi sudah dimuat, Anda dapat memanggil <code translate="no">load(is_refresh=True)</code> untuk memuat data yang diimpor.</p></li>
+<li><p>jika koleksi belum dimuat, Anda dapat menggunakan fungsi ` <code translate="no">load</code> ` untuk memuat data yang baru diimpor.</p></li>
+<li><p>Jika koleksi sudah dimuat, Anda dapat memanggil ` <code translate="no">load(is_refresh=True)</code> ` untuk memuat data yang diimpor.</p></li>
 </ul></li>
 </ul></li>
-<li><p>Kendala terkait perilaku penghapusan:</p>
+<li><p>Batasan terkait perilaku penghapusan:</p>
 <ul>
-<li><p>Sebelum status pekerjaan impor adalah <strong>Selesai</strong>, penghapusan tidak dijamin dan mungkin atau mungkin tidak berhasil.</p></li>
-<li><p>Penghapusan setelah status pekerjaan <strong>selesai</strong> dijamin berhasil.</p></li>
+<li><p>Sebelum status pekerjaan impor menjadi <strong>"Selesai</strong>", penghapusan tidak dijamin dan mungkin berhasil atau tidak.</p></li>
+<li><p>Penghapusan setelah status pekerjaan menjadi " <strong>Selesai</strong> " dijamin akan berhasil.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Rekomendasi<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +415,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Kami sangat menyarankan untuk menggunakan fitur impor multi-file, yang memungkinkan Anda mengunggah beberapa file dalam satu permintaan. Metode ini tidak hanya menyederhanakan proses impor, tetapi juga secara signifikan meningkatkan kinerja impor. Sementara itu, dengan mengkonsolidasikan unggahan Anda, Anda dapat mengurangi waktu yang dihabiskan untuk manajemen data dan membuat alur kerja Anda lebih efisien.</p>
+    </button></h2><p>Kami sangat merekomendasikan penggunaan fitur impor multi-file, yang memungkinkan Anda mengunggah beberapa file dalam satu permintaan. Metode ini tidak hanya menyederhanakan proses impor tetapi juga secara signifikan meningkatkan kinerja impor. Selain itu, dengan menggabungkan unggahan Anda, Anda dapat mengurangi waktu yang dihabiskan untuk pengelolaan data dan membuat alur kerja Anda lebih efisien.</p>

@@ -21,11 +21,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Puedes modificar las propiedades de un campo de colección para cambiar las restricciones de las columnas o aplicar normas de integridad de datos más estrictas.</p>
+    </button></h1><p>Puedes modificar las propiedades de un campo de colección para cambiar las restricciones de las columnas o aplicar reglas de integridad de datos más estrictas.</p>
 <p>Esta página trata sobre los cambios en las propiedades de los campos, no sobre los cambios en la estructura del esquema, como añadir o eliminar campos. Para añadir campos escalares o eliminar campos de una colección existente, consulta <a href="/docs/es/add-fields-to-an-existing-collection.md">Modificar el esquema de una colección</a>.</p>
 <div class="alert note">
 <ul>
-<li><p>Cada colección consta de un único campo primario. Una vez establecido durante la creación de la colección, no se puede cambiar el campo primario ni modificar sus propiedades.</p></li>
+<li><p>Cada colección consta de un único campo primario. Una vez establecido durante la creación de la colección, no es posible cambiar el campo primario ni modificar sus propiedades.</p></li>
 <li><p>Cada colección solo puede tener una clave de partición. Una vez establecida durante la creación de la colección, no se puede cambiar la clave de partición.</p></li>
 </ul>
 </div>
@@ -44,8 +44,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo VarChar tiene una propiedad denominada « <code translate="no">max_length</code> », que limita el número máximo de caracteres que pueden contener los valores del campo. Se puede modificar la propiedad « <code translate="no">max_length</code> ».</p>
-<p>En el siguiente ejemplo se da por hecho que la colección tiene un campo VarChar denominado « <code translate="no">varchar</code> » y se establece su propiedad « <code translate="no">max_length</code> ».</p>
+    </button></h2><p>Un campo VarChar tiene una propiedad denominada « <code translate="no">max_length</code> », que define el número máximo de bytes permitidos para cada valor del campo. Se puede modificar la propiedad « <code translate="no">max_length</code> ».</p>
+<p>En el siguiente ejemplo se supone que la colección tiene un campo VarChar denominado « <code translate="no">varchar</code> » y se establece su propiedad « <code translate="no">max_length</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -151,7 +151,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Un campo de matriz tiene dos propiedades: « <code translate="no">element_type</code> » y « <code translate="no">max_capacity</code> ». La primera determina el tipo de datos de los elementos de la matriz, mientras que la segunda limita el número máximo de elementos de la matriz. Solo se puede modificar la propiedad « <code translate="no">max_capacity</code> ».</p>
-<p>En el siguiente ejemplo se parte de la base de que la colección tiene un campo de matriz denominado « <code translate="no">array</code> » y se establece su propiedad « <code translate="no">max_capacity</code> ».</p>
+<p>En el siguiente ejemplo se supone que la colección tiene un campo de matriz denominado « <code translate="no">array</code> » y se establece su propiedad « <code translate="no">max_capacity</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

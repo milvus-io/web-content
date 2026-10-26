@@ -2,9 +2,10 @@
 id: struct-array-operators.md
 title: مشغلات StructArray
 summary: >-
-  تقوم مشغلات StructArray بتصفية الكيانات من خلال تقييم المسندات على الحقول
-  الفرعية القياسية داخل حقل StructArray. استخدم هذه الصفحة كمرجع لصيغة العنصر
-  element_filter ومجموعة مشغلات MATCH_*.
+  تقوم مشغلات StructArray بتصفية الكيانات من خلال تقييم المسلسلات المنطقية على
+  الحقول الفرعية القياسية داخل حقل StructArray. استخدم هذه الصفحة كمرجع لصيغة
+  العناصر مثل element_filter، ومجموعة مشغلات MATCH_*، والمسلسلات المنطقية على
+  مستوى الصفوف في مسارات StructArray.
 ---
 <h1 id="StructArray-Operators" class="common-anchor-header">مشغلات StructArray<button data-href="#StructArray-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,18 +22,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تقوم مشغلات StructArray بتصفية الكيانات من خلال تقييم المسندات على الحقول الفرعية القياسية داخل حقل StructArray. استخدم هذه الصفحة كمرجع لصيغة المشغل " <code translate="no">element_filter</code> " ومجموعة مشغلات " <code translate="no">MATCH_*</code> ".</p>
-<p>يحتوي تصفية StructArray على مجموعتين من العوامل:</p>
+    </button></h1><p>تقوم مشغلات StructArray بتصفية الكيانات من خلال تقييم المسندات على الحقول الفرعية القياسية داخل حقل StructArray. استخدم هذه الصفحة كمرجع لصيغة <code translate="no">element_filter</code> ، ومجموعة مشغلات <code translate="no">MATCH_*</code> ، والمسندات على مستوى الصفوف في مسارات StructArray.</p>
+<p>يحتوي تصفية StructArray على مجموعتين من العوامل ومجموعة من المسندات على مستوى الصف للمسارات:</p>
 <table>
 <thead>
-<tr><th>مجموعة العوامل</th><th>الغرض الرئيسي</th><th>سلوك النتيجة</th></tr>
+<tr><th>نموذج التصفية</th><th>الغرض الرئيسي</th><th>سلوك النتيجة</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">element_filter</code></td><td>مطابقة عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>في البحث على مستوى العناصر، يمكن أن تتضمن النتائج المطابقة إزاحات العناصر. في الاستعلام على مستوى الصفوف أو البحث المُصفى، يعتمد شكل النتيجة على واجهة برمجة التطبيقات (API) وحقول الإخراج.</td></tr>
-<tr><td><code translate="no">MATCH_*</code></td><td>تحديد الكيانات حسب عدد عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>التصفية على مستوى الصفوف. لا تُرجع هذه العوامل إزاحات العناصر من تلقاء نفسها.</td></tr>
+<tr><td><code translate="no">MATCH_*</code></td><td>تحديد الكيانات بناءً على عدد عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>التصفية على مستوى الصفوف. لا تُرجع هذه العوامل إزاحات العناصر بحد ذاتها.</td></tr>
+<tr><td>شروط المسار على مستوى الصف</td><td>اختبر موضع عنصر واحد، أو احسب عناصر Struct، أو اختبر قيم الحقول الفرعية عبر العناصر بدون شرط " <code translate="no">$[...]</code> ".</td><td>التصفية على مستوى الصف. لا تُرجع هذه المسندات إزاحات العناصر.</td></tr>
 </tbody>
 </table>
-<p>استخدم الحقول الفرعية القياسية في عوامل StructArray. تُستخدم الحقول الفرعية المتجهة في مسارات البحث المتجهة ولا تُعد مدخلات لشروط قياسية.</p>
+<p>استخدم الحقول الفرعية القياسية في مشغلات StructArray. تُستخدم الحقول الفرعية المتجهة في مسارات البحث المتجهة ولا تُعد مدخلات للمسلّطات القياسية.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">متى تستخدم أي عامل<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,13 +56,16 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>تقييد البحث المتجهي على مستوى العناصر ليقتصر على العناصر التي تتطابق مع الشروط القياسية.</td><td><code translate="no">element_filter</code></td></tr>
-<tr><td>مطابقة شروط سكالارية متعددة داخل نفس عنصر Struct.</td><td><code translate="no">element_filter</code></td></tr>
+<tr><td>مطابقة شروط عددية متعددة داخل نفس عنصر Struct.</td><td><code translate="no">element_filter</code></td></tr>
 <tr><td>إرجاع الكيانات التي يفي فيها عنصر Struct واحد على الأقل بشرط ما فقط.</td><td><code translate="no">MATCH_ANY</code></td></tr>
-<tr><td>إرجاع الكيانات التي تستوفي جميع عناصر Struct فيها الشرط فقط.</td><td><code translate="no">MATCH_ALL</code></td></tr>
-<tr><td>إرجاع الكيانات التي يستوفي فيها ما لا يقل عن أو ما لا يزيد عن أو بالضبط <code translate="no">N</code> من عناصر Struct شرطًا ما.</td><td><code translate="no">MATCH_LEAST</code>، أو <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code></td></tr>
+<tr><td>إرجاع الكيانات التي تستوفي جميع عناصر Struct فيها شرطًا ما فقط.</td><td><code translate="no">MATCH_ALL</code></td></tr>
+<tr><td>إرجاع الكيانات التي يستوفي فيها عدد من عناصر Struct يساوي «على الأقل» أو «على الأكثر» أو «بالضبط» <code translate="no">N</code> شرطًا ما.</td><td><code translate="no">MATCH_LEAST</code>، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code></td></tr>
+<tr><td>التحقق من عنصر Struct في موضع محدد، مثل الجزء الأول.</td><td>مسار موضعي مثل <code translate="no">chunks[0][section]</code></td></tr>
+<tr><td>التصفية حسب عدد عناصر Struct في كيان ما.</td><td><code translate="no">array_length(chunks)</code></td></tr>
+<tr><td>تحقق مما إذا كان أي عنصر من عناصر Struct يحتوي على قيمة حقل فرعي، دون الجمع بين الشروط على نفس العنصر.</td><td><code translate="no">array_contains</code>، <code translate="no">array_contains_any</code> ، أو <code translate="no">array_contains_all</code> على مسار حقل فرعي مثل <code translate="no">chunks[section]</code></td></tr>
 </tbody>
 </table>
-<h2 id="Element-Filter" class="common-anchor-header">مرشح العناصر<button data-href="#Element-Filter" class="anchor-icon" translate="no">
+<h2 id="Element-Filter" class="common-anchor-header">تصفية العناصر<button data-href="#Element-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,13 +81,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>استخدم <code translate="no">element_filter(structArrayField, predicate)</code> لمطابقة عناصر Struct في حقل StructArray.</p>
-<p>داخل الشرط، استخدم <code translate="no">$[subfield]</code> للإشارة إلى حقل فرعي قياسي لعنصر Struct الحالي.</p>
+<p>داخل المسند، استخدم " <code translate="no">$[subfield]</code> " للإشارة إلى حقل فرعي قياسي لعنصر Struct الحالي.</p>
 <pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>عند استخدام شروط متعددة داخل الشرط، تنطبق جميع إشارات <code translate="no">$[subfield]</code> على نفس عنصر Struct:</p>
+<p>عند استخدام شروط متعددة داخل المسند، تنطبق جميع إشارات <code translate="no">$[subfield]</code> على نفس عنصر Struct:</p>
 <pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; $[quality_score] &gt; <span class="hljs-number">0.9</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>عند دمج شرط على مستوى الكيان مع <code translate="no">element_filter</code> ، ضع <code translate="no">element_filter</code> في نهاية التعبير:</p>
+<p>عند دمج مسند على مستوى الكيان مع <code translate="no">element_filter</code> ، ضع <code translate="no">element_filter</code> في نهاية التعبير:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Correct</span>
 category == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>)
 
@@ -113,7 +118,7 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
 <tbody>
 <tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>يستوفي عنصر Struct واحد على الأقل الشرط.</td></tr>
 <tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>تستوفي جميع عناصر Struct الشرط.</td></tr>
-<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>يستوفي ما لا يقل عن <code translate="no">N</code> عنصر من عناصر Struct الشرط.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>يستوفي ما لا يقل عن <code translate="no">N</code> عنصر Struct الشرط.</td></tr>
 <tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>يستوفي ما لا يزيد عن <code translate="no">N</code> عن عناصر Struct الشرط.</td></tr>
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>يستوفي <code translate="no">N</code> عنصرًا من عناصر Struct بالضبط الشرط.</td></tr>
 </tbody>
@@ -214,7 +219,7 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
 <pre><code translate="no" class="language-python">MATCH_EXACT(chunks, $[section] == <span class="hljs-string">&quot;filter&quot;</span>, threshold=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة لـ <code translate="no">MATCH_EXACT</code> ، يمكن أن يكون <code translate="no">threshold</code> صفرًا أو عددًا صحيحًا موجبًا.</p>
-<h2 id="Supported-predicates" class="common-anchor-header">الشرطيات المدعومة<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
+<h2 id="Row-level-predicates-on-StructArray-paths" class="common-anchor-header">الشرط على مستوى الصف في مسارات StructArray<button data-href="#Row-level-predicates-on-StructArray-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,15 +234,131 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تمثل صيغة <code translate="no">$[...]</code> القيمة القياسية لعنصر Struct الحالي. يعتمد دعم الشرط على نوع الحقل الفرعي القياسي.</p>
+    </button></h2><p>بالإضافة إلى <code translate="no">element_filter</code> و <code translate="no">MATCH_*</code> ، يمكن لتعبير التصفية العادي أن يشير مباشرةً إلى حقل StructArray أو أحد حقوله الفرعية القياسية. يتم تقييم هذه المسندات على مستوى الكيان ولا تُرجع إزاحات العناصر.</p>
+<h3 id="Access-a-Struct-element-by-position" class="common-anchor-header">الوصول إلى عنصر Struct حسب الموضع<button data-href="#Access-a-Struct-element-by-position" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">structArrayField[index][subfield]</code> للإشارة إلى حقل فرعي سكالي واحد لعنصر Struct في موضع يبدأ من الصفر. اكتب الموضع أولاً، ثم اسم الحقل الفرعي.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk belongs to the &quot;index&quot; section.</span>
+chunks[<span class="hljs-number">0</span>][section] == <span class="hljs-string">&quot;index&quot;</span>
+
+<span class="hljs-comment"># The second chunk has a high quality score.</span>
+chunks[<span class="hljs-number">1</span>][quality_score] &gt; <span class="hljs-number">0.9</span>
+
+<span class="hljs-comment"># The first chunk is on page 1, 2, or 3.</span>
+chunks[<span class="hljs-number">0</span>][page] <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+
+<span class="hljs-comment"># Chained range on a positional path.</span>
+<span class="hljs-number">0.8</span> &lt; chunks[<span class="hljs-number">0</span>][quality_score] &lt; <span class="hljs-number">0.95</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>تدعم المسارات الموضعية المقارنة، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، ومسلّطات النطاق المتسلسلة على الحقول الفرعية القياسية. لا تتطابق الكيانات عندما لا يحتوي حقل StructArray الخاص بها على عنصر في ذلك الموضع.</p>
+<h3 id="Count-Struct-elements" class="common-anchor-header">عدد عناصر Struct<button data-href="#Count-Struct-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">array_length(structArrayField)</code> للتصفية حسب عدد عناصر Struct في كيان ما. يُرجع <code translate="no">array_length</code> على مسار حقل فرعي، مثل <code translate="no">array_length(chunks[section])</code> ، نفس العدد، لأن كل حقل فرعي يحتوي على قيمة واحدة لكل عنصر Struct.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Articles with at least three chunks.</span>
+array_length(chunks) &gt;= <span class="hljs-number">3</span>
+
+<span class="hljs-comment"># Articles with exactly one chunk.</span>
+array_length(chunks) == <span class="hljs-number">1</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Test-subfield-values-across-elements" class="common-anchor-header">اختبار قيم الحقول الفرعية عبر العناصر<button data-href="#Test-subfield-values-across-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">array_contains</code> أو <code translate="no">array_contains_any</code> أو <code translate="no">array_contains_all</code> على مسار حقل فرعي قياسي لاختبار قيم ذلك الحقل الفرعي عبر جميع عناصر Struct في الكيان. يتم تقييم كل مسار حقل فرعي على حدة، لذا يمكن تلبية الشروط المطبقة على الحقول الفرعية المختلفة بواسطة عناصر Struct مختلفة.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># At least one chunk belongs to the &quot;index&quot; section.</span>
+array_contains(chunks[section], <span class="hljs-string">&quot;index&quot;</span>)
+
+<span class="hljs-comment"># At least one chunk belongs to the &quot;index&quot; or the &quot;search&quot; section.</span>
+array_contains_any(chunks[section], [<span class="hljs-string">&quot;index&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>])
+
+<span class="hljs-comment"># The chunks cover both the &quot;index&quot; and the &quot;search&quot; sections,</span>
+<span class="hljs-comment"># not necessarily in the same chunk.</span>
+array_contains_all(chunks[section], [<span class="hljs-string">&quot;index&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>])
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> يختار نفس الكيانات مثل <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>. استخدم <code translate="no">MATCH_*</code> أو <code translate="no">element_filter</code> عندما يجب أن تتحقق عدة شروط لعنصر Struct نفسه، لأن المسندات <code translate="no">$[...]</code> تُقيَّم لكل عنصر على حدة.</p>
+<h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">اختبار ما إذا كان حقل StructArray القابل للقيمة null هو null<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> على حقل StructArray قابل للقيمة null لاختبار قيمة الحقل بالكامل. تنطبق القيمة null على حقل StructArray بأكمله، لذا تقبل هذه المسندات اسم الحقل فقط، وليس مسار حقل فرعي.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Entities that have no chunks value.</span>
+chunks <span class="hljs-keyword">is</span> null
+
+<span class="hljs-comment"># Entities that have a chunks value.</span>
+chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Supported-predicates" class="common-anchor-header">المسندات المدعومة<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تمثل صيغة <code translate="no">$[...]</code> القيمة العددية لعنصر Struct الحالي. يعتمد دعم المسند على نوع الحقل الفرعي العددية.</p>
 <table>
 <thead>
 <tr><th>نوع الحقل الفرعي</th><th>دعم المسندات على مستوى العنصر</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">BOOL</code></td><td>المسلمات القياسية مثل <code translate="no">$[has_code] == true</code> أو <code translate="no">!($[has_code] == true)</code>. تجنب التعبيرات المنطقية المجردة مثل <code translate="no">$[has_code]</code>.</td></tr>
-<tr><td><code translate="no">INT8</code>، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code></td><td>المقارنة، النطاق المتسلسل، <code translate="no">in</code> ، <code translate="no">not in</code> ، التعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، <code translate="no">-</code> ، <code translate="no">*</code> ، <code translate="no">/</code> ، أو <code translate="no">%</code> متبوعة بمقارنة، والتركيبات المنطقية.</td></tr>
-<tr><td><code translate="no">FLOAT</code>، <code translate="no">DOUBLE</code></td><td>المقارنة، النطاق المتسلسل، <code translate="no">in</code> ، <code translate="no">not in</code> ، التعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، <code translate="no">-</code> ، <code translate="no">*</code> ، أو <code translate="no">/</code> متبوعة بمقارنة، والتركيبات المنطقية. لا يُدعم عامل التشغيل <code translate="no">%</code> للحقول الفرعية ذات العلامة العائمة.</td></tr>
+<tr><td><code translate="no">INT8</code>، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code></td><td>المقارنة، النطاق المتسلسل، <code translate="no">in</code> ، <code translate="no">not in</code> ، التعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، <code translate="no">-</code> ، <code translate="no">*</code> ، <code translate="no">/</code> ، أو <code translate="no">%</code> متبوعة بمقارنة، والتوليفات المنطقية.</td></tr>
+<tr><td><code translate="no">FLOAT</code>، <code translate="no">DOUBLE</code></td><td>المقارنة، والنطاق المتسلسل، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، والتعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، أو <code translate="no">-</code> ، أو <code translate="no">*</code> ، أو <code translate="no">/</code> متبوعة بمقارنة، والتركيبات المنطقية. لا يُدعم عامل التشغيل <code translate="no">%</code> للحقول الفرعية ذات العلامة العائمة.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>مقارنة السلاسل، والنطاق المتسلسل، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، و <code translate="no">like</code> ، و <code translate="no">=~</code> ، و <code translate="no">!~</code> ، والتركيبات المنطقية.</td></tr>
 <tr><td>الحقول الفرعية للمتجهات</td><td>غير مدعومة كمدخلات للمسندات القياسية <code translate="no">$[...]</code>. استخدم الحقول الفرعية للمتجهات بدلاً من ذلك من خلال البحث في EmbeddingList أو البحث المتجهي على مستوى العنصر.</td></tr>
 </tbody>
@@ -261,8 +382,8 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
     </button></h2><p>لا تدعم المسندات على مستوى العناصر <code translate="no">$[...]</code> ما يلي:</p>
 <ul>
 <li><p>وظائف مطابقة النص، مثل <code translate="no">text_match(field, &quot;...&quot;)</code> أو <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>صيغة مسار JSON، و <code translate="no">exists</code> على مسارات JSON، أو دوال JSON مثل <code translate="no">json_contains</code> أو <code translate="no">json_contains_all</code> أو <code translate="no">json_contains_any</code>.</p></li>
-<li><p>دوال حاويات المصفوفات مثل <code translate="no">array_contains</code> أو <code translate="no">array_contains_all</code> أو <code translate="no">array_contains_any</code> أو <code translate="no">array_length</code>.</p></li>
+<li><p>بناء جملة مسار JSON، و <code translate="no">exists</code> على مسارات JSON، أو دوال JSON مثل <code translate="no">json_contains</code> أو <code translate="no">json_contains_all</code> أو <code translate="no">json_contains_any</code>.</p></li>
+<li><p>دوال حاويات المصفوفات مثل <code translate="no">array_contains</code> أو <code translate="no">array_contains_all</code> أو <code translate="no">array_contains_any</code> أو <code translate="no">array_length</code> على <code translate="no">$[subfield]</code>. استخدم هذه الدوال بدلاً من ذلك على مسار حقل فرعي مثل <code translate="no">chunks[section]</code> في مسند على مستوى الصف.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> أو <code translate="no">$[subfield] is not null</code>.</p></li>
 <li><p>وظائف الهندسة / نظم المعلومات الجغرافية (GIS).</p></li>
 <li><p>تعبيرات الطابع الزمني tz.</p></li>
@@ -287,12 +408,14 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
       </svg>
     </button></h2><ul>
 <li><p><code translate="no">MATCH_*</code> أسماء العوامل لا تميز بين الأحرف الكبيرة والصغيرة.</p></li>
-<li><p>استخدم <code translate="no">$[subfield]</code> فقط داخل المسندات <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code>.</p></li>
-<li><p>لا تستخدم <code translate="no">$[subfield]</code> كمسار JSON أو حاوية صفيف أو مرجع لحقل متجه.</p></li>
-<li><p>لا تقم بتداخل <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code> داخل عامل StructArray آخر.</p></li>
+<li><p>استخدم <code translate="no">$[subfield]</code> فقط داخل المسندات <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code>. على سبيل المثال، يتم رفض <code translate="no">array_length($[section])</code>.</p></li>
+<li><p>لا تستخدم <code translate="no">$[subfield]</code> كمسار JSON أو حاوية صفيف أو مرجع حقل متجه.</p></li>
+<li><p>لا تقم بتداخل <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code> داخل مشغل StructArray آخر.</p></li>
 <li><p>استخدم <code translate="no">threshold=N</code> المسمى لـ <code translate="no">MATCH_LEAST</code> و <code translate="no">MATCH_MOST</code> و <code translate="no">MATCH_EXACT</code>.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> عند استدعاءه على StructArray فارغ، يُرجع <code translate="no">false</code>.</p></li>
-<li><p><code translate="no">MATCH_ALL</code> عند استدعاءه على StructArray فارغ، يُرجع <code translate="no">true</code>.</p></li>
+<li><p>في المسارات الموضعية، اكتب موضع العنصر قبل اسم الحقل الفرعي: <code translate="no">chunks[0][section]</code> ، وليس <code translate="no">chunks[section][0]</code>.</p></li>
+<li><p>استخدم <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> فقط على حقل StructArray بأكمله، مثل <code translate="no">chunks is null</code>. لا تستخدمهما في مسار حقل فرعي مثل <code translate="no">chunks[section]</code> أو في <code translate="no">$[subfield]</code>.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> على StructArray فارغ يُرجع <code translate="no">false</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL</code> عند استخدامها على StructArray فارغ، تُرجع <code translate="no">true</code>.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">انظر أيضًا<button data-href="#See-also" class="anchor-icon" translate="no">
       <svg translate="no"

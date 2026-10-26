@@ -2,13 +2,13 @@
 id: use-partition-key.md
 title: Partitionsschlüssel verwenden
 summary: >-
-  Der Partitionsschlüssel ist eine Lösung zur Suchoptimierung auf der Grundlage
-  von Partitionen. Indem man ein bestimmtes skalares Feld als
-  Partitionsschlüssel bestimmt und während der Suche Filterbedingungen auf der
-  Grundlage des Partitionsschlüssels festlegt, kann der Suchbereich auf mehrere
-  Partitionen eingegrenzt werden, wodurch die Sucheffizienz verbessert wird. In
-  diesem Artikel werden die Verwendung des Partitionsschlüssels und damit
-  verbundene Überlegungen vorgestellt.
+  Der Partitionsschlüssel ist eine Lösung zur Suchoptimierung auf Basis von
+  Partitionen. Indem ein bestimmtes Skalarfeld als Partitionsschlüssel
+  festgelegt und bei der Suche Filterbedingungen auf Basis des
+  Partitionsschlüssels angegeben werden, lässt sich der Suchbereich auf mehrere
+  Partitionen eingrenzen, wodurch die Sucheffizienz verbessert wird. In diesem
+  Artikel wird die Verwendung des Partitionsschlüssels sowie damit verbundene
+  Überlegungen vorgestellt.
 ---
 <h1 id="Use-Partition-Key" class="common-anchor-header">Partitionsschlüssel verwenden<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Partitionsschlüssel ist eine Lösung zur Suchoptimierung auf der Grundlage von Partitionen. Indem man ein bestimmtes skalares Feld als Partitionsschlüssel bestimmt und während der Suche Filterbedingungen auf der Grundlage des Partitionsschlüssels festlegt, kann der Suchbereich auf mehrere Partitionen eingegrenzt werden, wodurch die Sucheffizienz verbessert wird. In diesem Artikel werden die Verwendung des Partitionsschlüssels und damit verbundene Überlegungen vorgestellt.</p>
-<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Der Partitionsschlüssel ist eine auf Partitionen basierende Lösung zur Suchoptimierung. Indem ein bestimmtes Skalarfeld als Partitionsschlüssel festgelegt und bei der Suche Filterbedingungen auf Basis des Partitionsschlüssels angegeben werden, lässt sich der Suchbereich auf mehrere Partitionen eingrenzen, wodurch die Sucheffizienz verbessert wird. In diesem Artikel wird erläutert, wie der Partitionsschlüssel verwendet wird und welche Aspekte dabei zu beachten sind.</p>
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,21 +41,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus können Sie Partitionen verwenden, um eine Datentrennung zu implementieren und die Suchleistung zu verbessern, indem Sie den Suchbereich auf bestimmte Partitionen beschränken. Wenn Sie sich für die manuelle Verwaltung von Partitionen entscheiden, können Sie maximal 1.024 Partitionen in einer Sammlung erstellen und Entitäten auf der Grundlage einer bestimmten Regel in diese Partitionen einfügen, so dass Sie den Suchbereich einschränken können, indem Sie die Suche auf eine bestimmte Anzahl von Partitionen beschränken.</p>
-<p>Milvus führt den Partitionsschlüssel ein, mit dem Sie Partitionen in der Datentrennung wiederverwenden können, um die Begrenzung der Anzahl der Partitionen zu überwinden, die Sie in einer Sammlung erstellen können. Bei der Erstellung einer Sammlung können Sie ein skalares Feld als Partitionsschlüssel verwenden. Sobald die Sammlung fertig ist, erstellt Milvus die angegebene Anzahl von Partitionen innerhalb der Sammlung. Beim Empfang einer eingefügten Entität berechnet Milvus einen Hash-Wert unter Verwendung des Partitionsschlüsselwerts der Entität, führt eine Modulo-Operation basierend auf dem Hash-Wert und der <code translate="no">partitions_num</code> Eigenschaft der Sammlung aus, um die Zielpartitions-ID zu erhalten, und speichert die Entität in der Zielpartition.</p>
-<p>
+    </button></h2><p>In Milvus können Sie Partitionen verwenden, um eine Datentrennung zu implementieren und die Suchleistung zu verbessern, indem Sie den Suchbereich auf bestimmte Partitionen beschränken. Wenn Sie sich für die manuelle Verwaltung von Partitionen entscheiden, können Sie in einer Sammlung maximal 1.024 Partitionen erstellen und Entitäten nach einer bestimmten Regel in diese Partitionen einfügen, sodass Sie den Suchbereich einschränken können, indem Sie die Suche auf eine bestimmte Anzahl von Partitionen beschränken.</p>
+<p>Milvus führt den Partitionsschlüssel ein, damit Sie Partitionen bei der Datentrennung wiederverwenden können, um die Beschränkung der Anzahl der Partitionen, die Sie in einer Sammlung erstellen können, zu umgehen. Beim Erstellen einer Sammlung können Sie ein skalares Feld als Partitionsschlüssel verwenden. Sobald die Sammlung bereit ist, erstellt Milvus die angegebene Anzahl von Partitionen innerhalb der Sammlung. Beim Empfang einer eingefügten Entität berechnet Milvus anhand des Partitionsschlüsselwerts der Entität einen Hash-Wert, führt auf Basis des Hash-Werts und der Eigenschaft „ <code translate="no">partitions_num</code> “ der Sammlung eine Modulo-Operation durch, um die Zielpartitions-ID zu ermitteln, und speichert die Entität in der Zielpartition.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-   </span> <span class="img-wrapper"> <span>Partition vs. Partitionsschlüssel</span> </span></p>
-<p>Die folgende Abbildung zeigt, wie Milvus die Suchanfragen in einer Sammlung mit und ohne aktivierter Partitionsschlüssel-Funktion verarbeitet.</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" /> 
+   <span>Partition vs. Partitionsschlüssel</span>
+  
+ </span></p>
+<p>Die folgende Abbildung veranschaulicht, wie Milvus Suchanfragen in einer Sammlung verarbeitet, je nachdem, ob die Partitionsschlüssel-Funktion aktiviert ist oder nicht.</p>
 <ul>
-<li><p>Wenn der Partitionsschlüssel deaktiviert ist, sucht Milvus nach Entitäten, die dem Abfragevektor innerhalb der Sammlung am ähnlichsten sind. Sie können den Suchbereich eingrenzen, wenn Sie wissen, welche Partition die relevantesten Ergebnisse enthält.</p></li>
-<li><p>Wenn der Partitionsschlüssel aktiviert ist, bestimmt Milvus den Suchbereich basierend auf dem in einem Suchfilter angegebenen Partitionsschlüsselwert und durchsucht nur die Entitäten innerhalb der Partitionen, die übereinstimmen.</p></li>
+<li><p>Ist der Partitionsschlüssel deaktiviert, sucht Milvus innerhalb der Sammlung nach Entitäten, die dem Abfragevektor am ähnlichsten sind. Sie können den Suchbereich eingrenzen, wenn Sie wissen, welche Partition die relevantesten Ergebnisse enthält.</p></li>
+<li><p>Ist der Partitionsschlüssel aktiviert, bestimmt Milvus den Suchbereich anhand des in einem Suchfilter angegebenen Partitionsschlüsselwerts und durchsucht nur die Entitäten in den Partitionen, die diesem Wert entsprechen.</p></li>
 </ul>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
-   </span> <span class="img-wrapper"> <span>Mit und ohne Partitionsschlüssel</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" /> 
+   <span>Mit und ohne Partitionsschlüssel</span>
+  
+ </span></p>
 <h2 id="Use-Partition-Key" class="common-anchor-header">Partitionsschlüssel verwenden<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,9 +77,10 @@ summary: >-
       </svg>
     </button></h2><p>Um den Partitionsschlüssel zu verwenden, müssen Sie</p>
 <ul>
-<li><p><a href="/docs/de/use-partition-key.md#Set-Partition-Key">Legen Sie den Partitionsschlüssel fest</a>,</p></li>
-<li><p><a href="/docs/de/use-partition-key.md#Set-Partition-Numbers">die Anzahl der zu erstellenden Partitionen festlegen</a> (optional), und</p></li>
-<li><p><a href="/docs/de/use-partition-key.md#Create-Filtering-Condition">eine Filterbedingung auf der Grundlage des Partitionsschlüssels erstellen</a>.</p></li>
+<li><p><a href="/docs/de/use-partition-key.md#Set-Partition-Key">den Partitionsschlüssel festlegen</a>,</p></li>
+<li><p><a href="/docs/de/use-partition-key.md#Set-Partition-Numbers">die Anzahl der zu erstellenden Partitionen festlegen</a> (optional),</p></li>
+<li><p><a href="/docs/de/use-partition-key.md#Create-Filtering-Condition">eine Filterbedingung basierend auf dem Partitionsschlüssel erstellen</a> und</p></li>
+<li><p><a href="/docs/de/use-partition-key.md#Index-Partition-Key">den Partitionsschlüssel indizieren</a> (empfohlen).</p></li>
 </ul>
 <h3 id="Set-Partition-Key" class="common-anchor-header">Partitionsschlüssel festlegen<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,12 +97,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um ein Skalarfeld als Partitionsschlüssel festzulegen, müssen Sie das Attribut <code translate="no">is_partition_key</code> auf <code translate="no">true</code> setzen, wenn Sie das Skalarfeld hinzufügen.</p>
+    </button></h3><p>Um ein Skalarfeld als Partitionsschlüssel festzulegen, müssen Sie beim Hinzufügen des Skalarfelds dessen Attribut „ <code translate="no">is_partition_key</code> “ auf „ <code translate="no">true</code> “ setzen.</p>
 <div class="alert note">
-<p>Wenn Sie ein Skalarfeld als Partitionsschlüssel festlegen, können die Feldwerte nicht leer oder null sein.</p>
+<p>Wenn Sie ein Skalarfeld als Partitionsschlüssel festlegen, dürfen die Feldwerte nicht leer oder null sein.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
 )
@@ -257,10 +267,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie ein skalares Feld in einer Sammlung als Partitionsschlüssel festlegen, erstellt Milvus automatisch 16 Partitionen in der Sammlung. Beim Empfang einer Entität wählt Milvus eine Partition basierend auf dem Partitionsschlüsselwert dieser Entität und speichert die Entität in der Partition, was dazu führt, dass einige oder alle Partitionen Entitäten mit unterschiedlichen Partitionsschlüsselwerten enthalten.</p>
-<p>Sie können auch die Anzahl der Partitionen bestimmen, die zusammen mit der Sammlung erstellt werden sollen. Dies gilt nur, wenn Sie ein skalares Feld als Partitionsschlüssel festgelegt haben.</p>
+    </button></h3><p>Wenn Sie ein Skalarfeld in einer Sammlung als Partitionsschlüssel festlegen, erstellt Milvus automatisch 16 Partitionen in der Sammlung. Beim Empfang einer Entität wählt Milvus anhand des Partitionsschlüsselwerts dieser Entität eine Partition aus und speichert die Entität in dieser Partition, was dazu führt, dass einige oder alle Partitionen Entitäten mit unterschiedlichen Partitionsschlüsselwerten enthalten.</p>
+<p>Sie können auch die Anzahl der zu erstellenden Partitionen zusammen mit der Sammlung festlegen. Dies gilt nur, wenn Sie ein Skalarfeld als Partitionsschlüssel festgelegt haben.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -308,7 +323,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Filterungsbedingung erstellen<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">Filterbedingung erstellen<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -323,11 +338,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie ANN-Suchen in einer Sammlung mit aktivierter Partitionsschlüssel-Funktion durchführen, müssen Sie einen Filterausdruck mit dem Partitionsschlüssel in die Suchanfrage aufnehmen. Im Filterausdruck können Sie den Wert des Partitionsschlüssels innerhalb eines bestimmten Bereichs einschränken, so dass Milvus den Suchbereich auf die entsprechenden Partitionen einschränkt.</p>
-<p>Bei der Durchführung von Löschvorgängen ist es ratsam, einen Filterausdruck zu verwenden, der einen einzelnen Partitionsschlüssel angibt, um einen effizienteren Löschvorgang zu erreichen. Dieser Ansatz beschränkt den Löschvorgang auf eine bestimmte Partition, wodurch die Schreibverstärkung während der Verdichtung reduziert und Ressourcen für die Verdichtung und Indizierung gespart werden.</p>
-<p>Die folgenden Beispiele demonstrieren die Partition-Key-basierte Filterung auf der Grundlage eines bestimmten Partition-Key-Werts und eines Satzes von Partition-Key-Werten.</p>
+    </button></h3><p>Bei der Durchführung von ANN-Suchen in einer Sammlung, bei der die Partitionsschlüssel-Funktion aktiviert ist, müssen Sie einen Filterausdruck, der den Partitionsschlüssel einbezieht, in die Suchanfrage aufnehmen. In diesem Filterausdruck können Sie den Wert des Partitionsschlüssels auf einen bestimmten Bereich beschränken, sodass Milvus den Suchbereich auf die entsprechenden Partitionen einschränkt.</p>
+<p>Bei Löschvorgängen empfiehlt es sich, einen Filterausdruck einzufügen, der einen einzelnen Partitionsschlüssel angibt, um eine effizientere Löschung zu erreichen. Dieser Ansatz beschränkt den Löschvorgang auf eine bestimmte Partition, wodurch die Schreibverstärkung während der Kompaktierung reduziert und Ressourcen für die Kompaktierung und Indizierung geschont werden.</p>
+<p>Die folgenden Beispiele veranschaulichen die partitionierungsschlüsselbasierte Filterung anhand eines bestimmten Partitionsschlüsselwerts und einer Menge von Partitionsschlüsselwerten.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
@@ -359,9 +379,9 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Sie müssen <code translate="no">partition_key</code> durch den Namen des Feldes ersetzen, das als Partitionsschlüssel bezeichnet wird.</p>
+<p>Sie müssen „ <code translate="no">partition_key</code> “ durch den Namen des Feldes ersetzen, das als Partitionsschlüssel festgelegt ist.</p>
 </div>
-<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Partition Key Isolation verwenden<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+<h3 id="Index-Partition-Key" class="common-anchor-header">Index für Partitionsschlüssel<button data-href="#Index-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,34 +396,171 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im Multi-Tenancy-Szenario können Sie das skalare Feld, das sich auf Tenant-Identitäten bezieht, als Partitionsschlüssel festlegen und einen Filter basierend auf einem bestimmten Wert in diesem skalaren Feld erstellen. Um die Suchleistung in ähnlichen Szenarien weiter zu verbessern, führt Milvus die Funktion "Partition Key Isolation" ein.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
-   </span> <span class="img-wrapper"> <span>Partitionsschlüssel-Isolierung</span> </span></p>
-<p>Wie in der obigen Abbildung dargestellt, gruppiert Milvus Entitäten auf der Grundlage des Partitionsschlüsselwerts und erstellt für jede dieser Gruppen einen eigenen Index. Beim Empfang einer Suchanfrage sucht Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich gesteigert wird.</p>
-<p>Sobald Sie die Partitionsschlüssel-Isolierung aktiviert haben, müssen Sie nur einen bestimmten Wert in den Partitionsschlüssel-basierten Filter aufnehmen, damit Milvus den Suchbereich innerhalb der Entitäten, die im Index enthalten sind und übereinstimmen, einschränken kann.</p>
-<div class="alert note">
-<p>Derzeit gilt die Partitionsschlüssel-Isolationsfunktion nur für Suchen, bei denen der Indextyp auf HNSW eingestellt ist.</p>
-</div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Aktivieren der Partitionsschlüssel-Isolierung<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Die folgenden Codebeispiele zeigen, wie die Partition Key Isolation aktiviert werden kann.</p>
+    </button></h3><p>Wir empfehlen, einen skalaren Index für das Partitionsschlüsselfeld anzulegen.</p>
+<p>Der Partitionsschlüssel grenzt eine Suche auf die Partitionen ein, die möglicherweise die passenden Partitionsschlüsselwerte enthalten. Da jede Partition jedoch in der Regel Entitäten mit vielen verschiedenen Partitionsschlüsselwerten enthält, wertet Milvus den Partitionsschlüssel-basierten Filter weiterhin für jede Entität in den durchsuchten Partitionen aus. Ohne einen skalaren Index für das Feld erfolgt diese Auswertung durch einen vollständigen Durchlauf der Feldwerte, was bei großen Sammlungen einen großen Teil der Suchlatenz ausmachen kann. Mit einem skalaren Index sucht Milvus stattdessen die passenden Entitäten im Index.</p>
+<p>Diese Auswertung erfolgt unabhängig vom Typ des Vektorindexes. Milvus kann Partitionsschlüsselwerte in Vektorindizes der HNSW-Familie einbetten, sodass eine nach dem Partitionsschlüssel gefilterte Suche nur die relevanten Teilindizes durchläuft; diese Optimierung schränkt jedoch lediglich den Vektordurchlauf ein – sie beseitigt nicht die Filterauswertung. Für Suchvorgänge, die ausschließlich nach skalaren Feldern filtern, gibt es keine entsprechende Abkürzung. In beiden Fällen sorgt ein skalarer Index auf dem Partitionsschlüsselfeld dafür, dass die Auswertung schnell bleibt.</p>
+<p>Wählen Sie den Indextyp basierend auf dem Partitionsschlüsselfeld aus:</p>
+<ul>
+<li><p><a href="/docs/de/inverted.md">„INVERTED“</a> eignet sich für die meisten Partitionsschlüsselfelder, da Partitionsschlüssel-basierte Filter Bedingungen vom Typ „ <code translate="no">==</code> “ und „ <code translate="no">in</code> “ verwenden.</p></li>
+<li><p><a href="/docs/de/bitmap.md">„BITMAP“</a> eignet sich für Felder mit wenigen unterschiedlichen Werten. Als allgemeine Richtlinie gilt: Verwenden Sie diesen Typ nur, wenn das Feld weniger als 500 unterschiedliche Werte enthält.</p></li>
+<li><p><a href="/docs/de/stl-sort.md">„STL_SORT“</a> ist eine Alternative für numerische und „ <code translate="no">VARCHAR</code> “-Felder.</p></li>
+</ul>
+<p>In den folgenden Beispielen wird den Indexparametern der Sammlung neben dem Index für das Vektorfeld ein „ <code translate="no">INVERTED</code> “-Index für das Feld „Partition Key“ hinzugefügt.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+
+<span class="hljs-comment"># Index the partition key</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span></span>
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Index the partition key</span>
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+<span class="highlighted-wrapper-line">        .indexType(IndexParam.IndexType.INVERTED)</span>
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
+        index.NewAutoIndex(entity.COSINE)),
+    <span class="hljs-comment">// Index the partition key</span>
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_varchar&quot;</span>,
+        index.NewInvertedIndex()),
+}
+
+<span class="hljs-keyword">for</span> _, opt := <span class="hljs-keyword">range</span> indexOptions {
+    indexTask, err := client.CreateIndex(ctx, opt)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        fmt.Println(err.Error())
+        <span class="hljs-comment">// handle error</span>
+    }
+    err = indexTask.Await(ctx)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+},{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-comment">// Index the partition key</span>
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span></span>
+}]
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;my_varchar&quot;,
+            &quot;indexName&quot;: &quot;my_varchar&quot;,
+            &quot;indexType&quot;: &quot;INVERTED&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Übergeben Sie diese Indexparameter beim Erstellen der Sammlung oder erstellen Sie den Index für eine vorhandene Sammlung. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">„Sammlung erstellen</a>“.</p>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Partitionsschlüssel-Isolation verwenden<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>In einem Multi-Tenancy-Szenario können Sie das Skalarfeld, das sich auf die Mandantenidentitäten bezieht, als Partitionsschlüssel festlegen und einen Filter basierend auf einem bestimmten Wert in diesem Skalarfeld erstellen. Um die Suchleistung in ähnlichen Szenarien weiter zu verbessern, führt Milvus die Funktion „Partition Key Isolation“ ein.</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" /> 
+   <span>Partitionsschlüssel-Isolation</span>
+  
+ </span></p>
+<p>Wie in der obigen Abbildung dargestellt, gruppiert Milvus Entitäten anhand des Partitionsschlüsselwerts und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage ermittelt Milvus den Index anhand des in der Filterbedingung angegebenen Partitionsschlüsselwerts und beschränkt den Suchumfang auf die im Index enthaltenen Entitäten. Dadurch wird vermieden, dass während der Suche irrelevante Entitäten durchsucht werden, was die Suchleistung erheblich verbessert.</p>
+<p>Sobald Sie die Partitionsschlüssel-Isolation aktiviert haben, müssen Sie nur einen bestimmten Wert in den Partitionsschlüssel-basierten Filter aufnehmen, damit Milvus den Suchbereich auf die im Index enthaltenen Entitäten beschränken kann, die diesem Wert entsprechen.</p>
+<div class="alert note">
+<p>Derzeit gilt die Funktion „Partition-Key-Isolation“ nur für Suchvorgänge, bei denen der Indextyp auf „HNSW“ gesetzt ist.</p>
+</div>
+<p>Die Partitionsschlüssel-Isolation ersetzt nicht den skalaren Index für das Partitionsschlüsselfeld. Der Partitionsschlüsselwert im Filter lokalisiert zwar den passenden Unterindex, Milvus wertet jedoch weiterhin den Filter selbst aus, um die passenden Entitäten zu identifizieren. Daher empfehlen wir, auch <a href="/docs/de/use-partition-key.md#Index-Partition-Key">den Partitionsschlüssel zu indizieren</a>.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Partitionsschlüssel-Isolation aktivieren<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die folgenden Code-Beispiele veranschaulichen, wie die Partitionsschlüssel-Isolation aktiviert wird.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -455,4 +612,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Sie die Partitionsschlüssel-Isolierung aktiviert haben, können Sie den Partitionsschlüssel und die Anzahl der Partitionen wie unter <a href="/docs/de/use-partition-key.md#Set-Partition-Numbers">Partitionsnummern festlegen</a> beschrieben festlegen. Beachten Sie, dass der Partitionsschlüssel-basierte Filter nur einen bestimmten Partitionsschlüsselwert enthalten sollte.</p>
+<p>Nachdem Sie die Partitionsschlüssel-Isolation aktiviert haben, können Sie den Partitionsschlüssel und die Anzahl der Partitionen weiterhin wie unter <a href="/docs/de/use-partition-key.md#Set-Partition-Numbers">„Partitionsnummern festlegen“</a> beschrieben festlegen. Beachten Sie, dass der auf dem Partitionsschlüssel basierende Filter nur einen bestimmten Partitionsschlüsselwert enthalten sollte.</p>

@@ -19,7 +19,7 @@ summary: Milvus 사용 시 주의해야 할 사항에 대해 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 AI 애플리케이션 및 벡터 유사도 검색을 지원하기 위해 최고의 벡터 데이터베이스를 제공하기 위해 최선을 다하고 있습니다. 또한, 팀은 사용자 경험을 향상시키기 위해 더 많은 기능과 최적의 유틸리티를 도입하기 위해 지속적으로 노력하고 있습니다. 이 페이지에는 사용자가 Milvus를 사용할 때 발생할 수 있는 몇 가지 알려진 제한 사항이 나열되어 있습니다.</p>
+    </button></h1><p>Milvus는 AI 애플리케이션과 벡터 유사도 검색을 지원하기 위해 최고의 벡터 데이터베이스를 제공하기 위해 최선을 다하고 있습니다. 또한, 팀은 사용자 경험을 향상시키기 위해 더 많은 기능과 유용한 도구를 지속적으로 개발하고 있습니다. 이 페이지에는 사용자가 Milvus를 사용하면서 겪을 수 있는 몇 가지 알려진 제한 사항이 나열되어 있습니다.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">리소스 이름의 길이<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: Milvus 사용 시 주의해야 할 사항에 대해 알아보세요.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>데이터 유형</th><th>제한</th></tr>
+<tr><th>데이터 유형</th><th>제한 (바이트)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>
@@ -239,16 +239,16 @@ summary: Milvus 사용 시 주의해야 할 사항에 대해 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 표는 다양한 인덱스 유형별 검색 동작 지원 현황을 요약하여 보여줍니다.</p>
+    </button></h2><p>다음 표는 다양한 인덱스 유형에 따른 여러 검색 동작의 지원 현황을 개괄적으로 보여줍니다.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_무차별 대입</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_무차별대입</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
 <tr><td>기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
 <tr><td>파티션 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
-<tr><td>원시 데이터를 기반으로 한 기본 검색 결과</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
-<tr><td>페이지 나누기가 적용된 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
+<tr><td>원시 데이터를 기반으로 한 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
+<tr><td>페이지 매김이 적용된 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
 <tr><td>필터 적용 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>네</td><td>예</td></tr>
 <tr><td>범위 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>네</td><td>네</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>
 <tr><td>검색 그룹화</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>

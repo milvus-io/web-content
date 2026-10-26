@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
+                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1499,7 +1499,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über die mehrstufige Speicherung",
+                "label": "Übersicht über mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1564,6 +1564,12 @@
         "label": "Daten importieren",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "Idempotenter Massenimport",
+        "id": "idempotent-import.md",
+        "order": 2,
         "children": []
       }
     ]
@@ -3194,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matroschka-Einbettungen",
+        "label": "Trichter-Suche mit Matryoshka-Embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ofrece un amplio conjunto de operadores básicos que te ayudan a filtrar y consultar datos de forma eficiente. Estos operadores te permiten refinar tus condiciones de búsqueda basándote en campos escalares, cálculos numéricos, condiciones lógicas y mucho más. Comprender cómo utilizar estos operadores es fundamental para crear consultas precisas y maximizar la eficiencia de tus búsquedas.</p>
+    </button></h1><p>Milvus ofrece un amplio conjunto de operadores básicos que te ayudan a filtrar y consultar datos de forma eficaz. Estos operadores te permiten refinar tus condiciones de búsqueda basándote en campos escalares, cálculos numéricos, condiciones lógicas y mucho más. Comprender cómo utilizar estos operadores es fundamental para crear consultas precisas y maximizar la eficacia de tus búsquedas.</p>
 <h2 id="Comparison-operators" class="common-anchor-header">Operadores de comparación<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los operadores de comparación se utilizan para filtrar datos en función de la igualdad, la desigualdad o el tamaño. Se pueden aplicar a campos numéricos y de texto.</p>
+    </button></h2><p>Los operadores de comparación se utilizan para filtrar datos en función de la igualdad, la desigualdad o el tamaño. Son aplicables a campos numéricos y de texto.</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">Operadores de comparación admitidos<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ summary: >-
     </button></h3><p>Supongamos que tienes un campo llamado « <code translate="no">status</code> » y quieres encontrar todas las entidades en las que « <code translate="no">status</code> » sea «active». Puedes utilizar el operador de igualdad « <code translate="no">==</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">Ejemplo 2: Filtrado con «no igual a» (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">Ejemplo 2: Filtrado con «no es igual a» (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,8 +209,8 @@ summary: >-
       </svg>
     </button></h2><p>Los operadores de coincidencia de patrones ayudan a filtrar valores de cadena basándose en patrones con comodines o expresiones regulares.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Se utiliza para buscar coincidencias con patrones de comodines sencillos en valores de cadena. Por ejemplo, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » encuentra valores que empiezan por « <code translate="no">Prod</code> ».</p></li>
-<li><p><code translate="no">=~</code>: Se utiliza para buscar coincidencias entre un valor de cadena y una expresión regular RE2. Por ejemplo, « <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> » coincide con valores que contienen un código de error como « <code translate="no">E1001</code> ».</p></li>
+<li><p><code translate="no">LIKE</code>: Se utiliza para buscar coincidencias con patrones de comodines sencillos en valores de cadena. Por ejemplo, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » coincide con valores que empiezan por « <code translate="no">Prod</code> ».</p></li>
+<li><p><code translate="no">=~</code>: Se utiliza para hacer coincidir un valor de cadena con una expresión regular RE2. Por ejemplo, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> coincide con valores que contienen un código de error como <code translate="no">E1001</code>.</p></li>
 <li><p><code translate="no">!~</code>: Se utiliza para excluir valores de cadena que coincidan con una expresión regular RE2. Esto equivale a « <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> ».</p></li>
 </ul>
 <p>Para buscar entidades en las que « <code translate="no">name</code> » comience por « <code translate="no">Prod</code> »:</p>
@@ -219,7 +219,7 @@ summary: >-
 <p>Para buscar entidades cuyo « <code translate="no">code</code> » contenga un código de error como « <code translate="no">E1001</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para excluir entidades cuyo « <code translate="no">message</code> » comience por « <code translate="no">DEBUG</code> »:</p>
+<p>Para excluir entidades cuyo <code translate="no">message</code> comience por <code translate="no">DEBUG</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obtener más detalles sobre cómo elegir entre « <code translate="no">LIKE</code> » y expresiones regulares, los tipos de campo compatibles, la sintaxis de las expresiones regulares, las reglas de escape y el rendimiento, consulta <a href="/docs/es/pattern-matching.md">«Coincidencia de patrones</a>». Milvus también te permite crear un índice « <code translate="no">NGRAM</code> » en campos « <code translate="no">VARCHAR</code> » o rutas de cadenas JSON para acelerar los filtros de coincidencia de patrones elegibles. Para más detalles, consulta <a href="/docs/es/ngram.md">«NGRAM</a>».</p>
@@ -277,7 +277,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para hallar los elementos en los que el <code translate="no">id</code> es un número par (es decir, divisible por 2):</p>
+    </button></h3><p>Para hallar los números en los que el <code translate="no">id</code> es un número par (es decir, divisible por 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">Ejemplo 2: Uso de la elevación a una potencia (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
@@ -298,7 +298,10 @@ summary: >-
     </button></h3><p>Para encontrar entidades en las que <code translate="no">price</code> elevado a la potencia de 2 sea mayor que 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Operadores bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Los operadores aritméticos solo admiten expresiones que incluyan un <strong>único campo y una constante</strong>. Las expresiones que combinan dos campos aritméticamente —como <code translate="no">price * quantity &gt; 100</code> — no son compatibles actualmente y devolverán un error. Si necesitas filtrar por un valor derivado calculado a partir de varios campos, considera almacenar el valor precalculado como un campo escalar independiente en el momento de la inserción.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">Operadores bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,8 +316,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los operadores bit a bit resultan útiles cuando un campo entero codifica múltiples indicadores, como permisos, indicadores de características o bits de estado. Puedes utilizar estos operadores en expresiones de filtro para comprobar, combinar o comparar bits individuales de un valor entero.</p>
-<p>En el caso de los campos escalares, los operadores bit a bit se aplican a tipos de campo enteros, como <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> y <code translate="no">INT64</code>.</p>
+    </button></h2><p>Los operadores bit a bit resultan útiles cuando un campo entero codifica varios indicadores, como permisos, indicadores de funciones o bits de estado. Puede utilizar estos operadores en expresiones de filtro para comprobar, combinar o comparar bits individuales de un valor entero.</p>
+<p>En el caso de los campos escalares, los operadores bit a bit se aplican a los tipos de campo enteros, como <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> y <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Operadores bit a bit admitidos<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -378,7 +381,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Encerra siempre la operación bit a bit entre paréntesis antes de comparar el resultado, como en <code translate="no">(permissions &amp; 4) == 4</code>. Milvus 3.0.0 admite <code translate="no">&amp;</code>, <code translate="no">|</code> y <code translate="no">^</code> en expresiones de filtro. No se admiten el NOT bit a bit (<code translate="no">~</code>) ni los operadores de desplazamiento (<code translate="no">&lt;&lt;</code> y <code translate="no">&gt;&gt;</code>).</p>
+<p>Envuelve siempre la operación bit a bit entre paréntesis antes de comparar el resultado, como en <code translate="no">(permissions &amp; 4) == 4</code>. Milvus 3.0.0 admite <code translate="no">&amp;</code>, <code translate="no">|</code> y <code translate="no">^</code> en expresiones de filtro. No se admiten el NOT bit a bit (<code translate="no">~</code>) ni los operadores de desplazamiento (<code translate="no">&lt;&lt;</code> y <code translate="no">&gt;&gt;</code>).</p>
 </div>
 <h2 id="Logical-operators" class="common-anchor-header">Operadores lógicos<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -508,7 +511,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus permite filtrar en campos escalares normales, como cadenas o números, con valores nulos.</p>
+    </button></h3><p>Milvus permite filtrar en campos escalares normales, como cadenas o números, que contengan valores nulos.</p>
 <div class="alert note">
 <p>Una cadena vacía <code translate="no">&quot;&quot;</code> no se considera un valor nulo para un campo <code translate="no">VARCHAR</code>.</p>
 </div>
@@ -578,7 +581,7 @@ summary: >-
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Ejemplo 2: Recuperar entidades en las que los metadatos no sean nulos</strong></p>
-<p>Para buscar entidades en las que el campo « <code translate="no">metadata</code> » no sea nulo:</p>
+<p>Para buscar entidades en las que el campo ` <code translate="no">metadata</code> ` no sea nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -610,7 +613,7 @@ summary: >-
 <div class="alert note">
 <p>Un campo ARRAY no puede contener valores nulos parciales, ya que todos los elementos de un campo ARRAY deben tener el mismo tipo de datos. Para más detalles, consulta <a href="/docs/es/array_data_type.md">«Campo ARRAY</a>».</p>
 </div>
-<p>Para ilustrar mejor cómo gestiona Milvus los campos ARRAY con valores nulos, considere los siguientes datos de ejemplo con un campo ARRAY <code translate="no">tags</code>:</p>
+<p>Para ilustrar mejor cómo gestiona Milvus los campos ARRAY con valores nulos, considere los siguientes datos de ejemplo con un campo ARRAY « <code translate="no">tags</code> »:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],

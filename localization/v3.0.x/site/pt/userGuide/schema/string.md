@@ -21,14 +21,15 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O Milvus suporta dados escalares textuais com os campos « <code translate="no">VARCHAR</code> » e « <code translate="no">TEXT</code> ». Esta página descreve o campo « <code translate="no">VARCHAR</code> », concebido para metadados de cadeias de caracteres curtas e delimitadas, tais como nomes, etiquetas, categorias e identificadores externos.</p>
-<p>Para texto de origem mais extenso, passagens de documentos, corpos de artigos, tickets ou registos que devam ser armazenados e devolvidos com entidades, utilize, em vez disso, um campo « <code translate="no">TEXT</code> ». Utilize « <code translate="no">TEXT</code> » quando um valor possa exceder os bytes do « <code translate="no">65,535</code> » ou quando não pretender definir um « <code translate="no">max_length</code> » fixo no esquema da coleção. Para mais detalhes, consulte <a href="/docs/pt/text.md">«Campo de texto</a>».</p>
+<p>Para textos de origem mais longos, passagens de documentos, corpos de artigos, tickets ou registos que devam ser armazenados e devolvidos com entidades, utilize, em vez disso, um campo « <code translate="no">TEXT</code> ». Utilize « <code translate="no">TEXT</code> » quando um valor possa exceder os bytes do « <code translate="no">65,535</code> » ou quando não pretender definir um « <code translate="no">max_length</code> » fixo no esquema da coleção. Para mais detalhes, consulte <a href="/docs/pt/text.md">«Campo de texto</a>».</p>
 <p>Ao definir um campo « <code translate="no">VARCHAR</code> », dois parâmetros são obrigatórios:</p>
 <ul>
 <li><p>Defina o « <code translate="no">datatype</code> » como « <code translate="no">DataType.VARCHAR</code> ».</p></li>
-<li><p>Especifique o « <code translate="no">max_length</code> », que define o número máximo de bytes que o campo « <code translate="no">VARCHAR</code> » pode armazenar. O intervalo válido para « <code translate="no">max_length</code> » é de 1 a 65 535.</p></li>
+<li><p>Especifique o parâmetro « <code translate="no">max_length</code> », que define o número máximo de bytes UTF-8 permitidos para cada valor de campo. O intervalo válido para « <code translate="no">max_length</code> » é de 1 a 65 535.</p></li>
 </ul>
+<p>O número de bytes pode diferir do número de caracteres. Por exemplo, com <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> cabe dentro do limite porque utiliza 10 bytes UTF-8. A cadeia de caracteres <code translate="no">&quot;一二三四五六七八九十&quot;</code> também tem 10 caracteres, mas utiliza 30 bytes UTF-8 e excede o limite.</p>
 <div class="alert note">
-<p>O Milvus suporta valores nulos e valores predefinidos para campos « <code translate="no">VARCHAR</code> ». Para ativar estas funcionalidades, defina « <code translate="no">nullable</code> » como « <code translate="no">True</code> » e « <code translate="no">default_value</code> » como um valor de cadeia de caracteres. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">«Nullable &amp; Default</a>».</p>
+<p>O Milvus suporta valores nulos e valores por predefinição para campos « <code translate="no">VARCHAR</code> ». Para ativar estas funcionalidades, defina « <code translate="no">nullable</code> » como « <code translate="no">True</code> » e « <code translate="no">default_value</code> » como um valor de cadeia de caracteres. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">«Nullable &amp; Default</a>».</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Adicionar um campo VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -257,7 +258,7 @@ schema.WithField(entity.NewField().
     </button></h2><p>A indexação ajuda a melhorar o desempenho das pesquisas e consultas. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
 <p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">varchar_field1</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também é possível personalizar o tipo de índice e os parâmetros para cada campo. Para mais detalhes, consulte <a href="/docs/pt/index-explained.md">Explicação</a> sobre <a href="/docs/pt/index-explained.md">o Índice</a>.</p>
 <div class="alert note">
-<p>Também pode criar um índice « <code translate="no">NGRAM</code> » para acelerar a filtragem « <code translate="no">LIKE</code> » nos campos « <code translate="no">VARCHAR</code> ». Para mais detalhes, consulte <a href="/docs/pt/ngram.md">«NGRAM</a>».</p>
+<p>Também é possível criar um índice « <code translate="no">NGRAM</code> » para acelerar a filtragem « <code translate="no">LIKE</code> » nos campos « <code translate="no">VARCHAR</code> ». Para mais detalhes, consulte <a href="/docs/pt/ngram.md">«NGRAM</a>».</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -624,7 +625,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades em que o parâmetro « <code translate="no">varchar_field2</code> » seja nulo:</p>
+<p>Para recuperar entidades em que o parâmetro ` <code translate="no">varchar_field2</code> ` seja nulo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -698,7 +699,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades em que <code translate="no">varchar_field1</code> tenha o valor <code translate="no">&quot;Unknown&quot;</code>, utilize a expressão apresentada abaixo. Como o valor predefinido de <code translate="no">varchar_field1</code> é <code translate="no">&quot;Unknown&quot;</code>, o resultado esperado deverá incluir entidades com <code translate="no">varchar_field1</code> explicitamente definido como <code translate="no">&quot;Unknown&quot;</code> ou com <code translate="no">varchar_field1</code> definido como nulo.</p>
+<p>Para recuperar entidades em que <code translate="no">varchar_field1</code> tenha o valor <code translate="no">&quot;Unknown&quot;</code>, utilize a expressão abaixo. Como o valor predefinido de <code translate="no">varchar_field1</code> é <code translate="no">&quot;Unknown&quot;</code>, o resultado esperado deve incluir entidades com <code translate="no">varchar_field1</code> explicitamente definido como <code translate="no">&quot;Unknown&quot;</code> ou com <code translate="no">varchar_field1</code> definido como nulo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

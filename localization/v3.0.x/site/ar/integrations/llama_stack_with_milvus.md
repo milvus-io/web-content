@@ -1,13 +1,13 @@
 ---
 id: llama_stack_with_milvus.md
-title: بناء RAG مع كومة لاما مع ميلفوس
+title: إنشاء RAG باستخدام Llama Stack مع Milvus
 related_key: Llama Stack
 summary: >-
-  يقدم هذا البرنامج التعليمي كيفية إنشاء خادم Llama Stack Server مهيأ باستخدام
-  Milvus، مما يتيح لك استيراد بياناتك الخاصة لتكون بمثابة قاعدة معرفية. سنقوم
-  بعد ذلك بإجراء استعلامات على الخادم، وإنشاء تطبيق RAG كامل.
+  يشرح هذا الدليل التعليمي كيفية إنشاء خادم Llama Stack مُهيأ باستخدام Milvus،
+  مما يتيح لك استيراد بياناتك الخاصة لاستخدامها كقاعدة معرفية. سنقوم بعد ذلك
+  بإجراء استعلامات على الخادم، مما يؤدي إلى إنشاء تطبيق RAG كامل.
 ---
-<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">بناء RAG مع Llama Stack مع Milvus<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">بناء RAG باستخدام Llama Stack مع Milvus<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,9 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> هو نهج مكدس<a href="https://github.com/meta-llama/llama-stack/tree/main">Llama</a> Stack هو نهج موجه نحو الخدمة يعتمد على واجهة برمجة التطبيقات أولاً لبناء تطبيقات الذكاء الاصطناعي للإنتاج. وهو يوفر مكدسًا عالميًا يسمح للمطورين بالتطوير في أي مكان، والنشر في كل مكان، والاستفادة من وحدات البناء الجاهزة للإنتاج مع استقلالية حقيقية للمزود. تركز حزمة Llama Stack على نماذج Llama الخاصة ب Meta، وقابلية التركيب، والجاهزية للإنتاج، والنظام البيئي للشراكة.</p>
-<p>سنقدم في هذا البرنامج التعليمي كيفية إنشاء خادم Llama Stack المكدس الذي تم تكوينه باستخدام Milvus، مما يتيح لك استيراد بياناتك الخاصة لتكون بمثابة قاعدة معرفية. سنقوم بعد ذلك بإجراء استعلامات على الخادم، وإنشاء تطبيق RAG كامل.</p>
-<h2 id="Preparing-the-Environment" class="common-anchor-header">إعداد البيئة<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> هو نهج موجه نحو الخدمات ويضع واجهة برمجة التطبيقات (API) في المقام الأول لبناء تطبيقات الذكاء الاصطناعي الجاهزة للإنتاج. وهو يوفر حزمة شاملة تتيح للمطورين التطوير في أي مكان، والنشر في كل مكان، والاستفادة من مكونات جاهزة للإنتاج مع استقلالية حقيقية عن المزود. يركز Llama Stack على نماذج Llama من Meta، وقابلية التركيب، والجاهزية للإنتاج، ونظام بيئي للشراكة.</p>
+<p>في هذا البرنامج التعليمي، سنقدم شرحًا لكيفية إنشاء خادم Llama Stack مُهيأ باستخدام Milvus، مما يتيح لك استيراد بياناتك الخاصة لتكون بمثابة قاعدة المعرفة الخاصة بك. سنقوم بعد ذلك بإجراء استعلامات على الخادم، مما يؤدي إلى إنشاء تطبيق RAG كامل.</p>
+<h2 id="Preparing-the-Environment" class="common-anchor-header">تحضير البيئة<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,17 +39,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>هناك العديد من الطرق لبدء تشغيل خادم Llama Stack، مثل <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">مكتبة</a> أو <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">بناء توزيع،</a> إلخ. لكل مكوّن في Llama Stack، يمكن أيضًا اختيار مزودين مختلفين. لذلك، هناك العديد من الطرق لبدء تشغيل خادم Llama Stack.</p>
-<p>يستخدم هذا البرنامج التعليمي التكوين التالي كمثال لبدء تشغيل الخدمة. إذا كنت ترغب في بدء تشغيله بطريقة أخرى، يرجى الرجوع إلى <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">بدء تشغيل خادم Llama Stack</a>.</p>
+    </button></h2><p>هناك طرق عديدة لتشغيل خادم Llama Stack، مثل <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">استخدامه كمكتبة</a>، أو <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">إنشاء توزيع</a>، وما إلى ذلك. كما يمكن اختيار مزودين مختلفين لكل مكون في Llama Stack. لذلك، هناك طرق عديدة لتشغيل خادم Llama Stack.</p>
+<p>يستخدم هذا البرنامج التعليمي التكوين التالي كمثال لبدء تشغيل الخدمة. إذا كنت ترغب في بدء تشغيله بطريقة أخرى، فيرجى الرجوع إلى <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">«بدء تشغيل خادم Llama Stack</a>».</p>
 <ul>
-<li>نستخدم كوندا لبناء توزيع مخصص مع تكوين ميلفوس.</li>
-<li>نستخدم <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a> كموفر LLM.</li>
-<li>نستخدم الافتراضي <code translate="no">all-MiniLM-L6-v2</code> كنموذج التضمين.</li>
+<li>نستخدم Conda لإنشاء توزيع مخصص بتكوين Milvus.</li>
+<li>نستخدم <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a> كمزود LLM.</li>
+<li>نستخدم نموذج التضمين الافتراضي « <code translate="no">all-MiniLM-L6-v2</code> » كنموذج التضمين.</li>
 </ul>
 <div class="alert note">
-<p>يشير هذا البرنامج التعليمي بشكل أساسي إلى دليل التثبيت الرسمي <a href="https://llama-stack.readthedocs.io/en/latest/index.html">لوثائق Llama Stack</a>. إذا وجدت أي أجزاء قديمة في هذا البرنامج التعليمي، يمكنك إعطاء الأولوية لاتباع الدليل الرسمي وإنشاء مشكلة لنا.</p>
+<p>يشير هذا البرنامج التعليمي بشكل أساسي إلى دليل التثبيت الرسمي في <a href="https://llama-stack.readthedocs.io/en/latest/index.html">وثائق Llama Stack</a>. إذا وجدت أي أجزاء قديمة في هذا البرنامج التعليمي، فيمكنك إعطاء الأولوية لاتباع الدليل الرسمي وإرسال تقرير عن المشكلة إلينا.</p>
 </div>
-<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">بدء تشغيل خادم لاما ستاك<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
+<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">بدء تشغيل خادم Llama Stack<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">إعداد البيئة<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">تحضير البيئة<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,18 +79,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نظرًا لأننا بحاجة إلى استخدام الذكاء الاصطناعي معًا كخدمة LLM، يجب علينا أولاً تسجيل الدخول إلى الموقع الرسمي لتقديم طلب للحصول على <a href="https://api.together.xyz/settings/api-keys">مفتاح API</a> وتعيين مفتاح API <code translate="no">TOGETHER_API_KEY</code> كمتغير بيئة.</p>
-<p>استنساخ كود مصدر Llama Stack</p>
+    </button></h3><p>نظرًا لأننا نحتاج إلى استخدام Together AI كخدمة LLM، يجب علينا أولاً تسجيل الدخول إلى الموقع الرسمي لتقديم طلب للحصول على <a href="https://api.together.xyz/settings/api-keys">مفتاح API</a> وتعيين مفتاح API <code translate="no">TOGETHER_API_KEY</code> كمتغير بيئة.</p>
+<p>نسخ شفرة مصدر Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
 <button class="copy-code-btn"></button></code></pre>
-<p>إنشاء بيئة كوندا وتثبيت التبعيات</p>
+<p>إنشاء بيئة conda وتثبيت التبعيات</p>
 <pre><code translate="no" class="language-bash">$ conda create -n stack python=3.10
 $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتعديل المحتوى في <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code> ، وتغيير قسم vector_io إلى تكوين ميلفوس ذي الصلة. على سبيل المثال، أضف:</p>
+<p>تعديل المحتوى الموجود في <code translate="no">llama_stack/llama_stack/templates/together/run.yaml</code> ، وتغيير قسم vector_io إلى تكوين Milvus ذي الصلة. على سبيل المثال، أضف:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -103,16 +103,16 @@ $ pip install -e .
 <span class="hljs-comment">#      uri: http://localhost:19530</span>
 <span class="hljs-comment">#      token: root:Milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في Llama Stack، يمكن تكوين Milvus بطريقتين: التكوين المحلي، وهو <code translate="no">inline::milvus</code> ، والتكوين عن بعد، وهو <code translate="no">remote::milvus</code>.</p>
+<p>في Llama Stack، يمكن تكوين Milvus بطريقتين: التكوين المحلي، وهو <code translate="no">inline::milvus</code> ، والتكوين عن بُعد، وهو <code translate="no">remote::milvus</code>.</p>
 <ul>
-<li><p>أبسط طريقة هي التكوين المحلي، والتي تتطلب تعيين <code translate="no">db_path</code> ، وهو مسار لتخزين ملفات <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> محليًا.</p></li>
-<li><p>التكوين عن بعد مناسب لتخزين البيانات الكبيرة.</p>
+<li><p>الطريقة الأبسط هي التكوين المحلي، الذي يتطلب تعيين <code translate="no">db_path</code> ، وهو مسار لتخزين ملفات <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> محليًا.</p></li>
+<li><p>التكوين عن بُعد مناسب لتخزين البيانات الكبيرة.</p>
 <ul>
-<li>إذا كان لديك كمية كبيرة من البيانات، يمكنك إعداد خادم Milvus فعال على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يرجى استخدام URI الخادم URI، على سبيل المثال، <code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>. الافتراضي <code translate="no">token</code> هو <code translate="no">root:Milvus</code>.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
+<li>إذا كانت لديك كمية كبيرة من البيانات، فيمكنك إعداد خادم Milvus عالي الأداء على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يرجى استخدام عنوان URI للخادم، على سبيل المثال، <code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code> الخاص بك. عنوان <code translate="no">token</code> الافتراضي هو <code translate="no">root:Milvus</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> وهي الخدمة السحابية المُدارة بالكامل لـ Milvus، فقم بتعديل <code translate="no">uri</code> و <code translate="no">token</code> ، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة (Public Endpoint) ومفتاح واجهة برمجة التطبيقات (API key)</a> في Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">بناء التوزيع من القالب<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">إنشاء التوزيع من القالب<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,13 +127,13 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتشغيل الأمر التالي لبناء التوزيع:</p>
+    </button></h3><p>قم بتشغيل الأمر التالي لإنشاء التوزيع:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p>سيتم إنشاء ملف على <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. بعد ذلك، قم بتشغيل هذا الأمر لبدء تشغيل الخادم:</p>
+<p>سيتم إنشاء ملف في <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. بعد ذلك، قم بتشغيل هذا الأمر لبدء تشغيل الخادم:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>إذا سار كل شيء بسلاسة، يجب أن ترى خادم Llama Stack يعمل بنجاح على المنفذ 8321.</p>
+<p>إذا سارت الأمور على ما يرام، فمن المفترض أن ترى خادم Llama Stack يعمل بنجاح على المنفذ 8321.</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">تنفيذ RAG من العميل<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +149,7 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد بدء تشغيل الخادم، يمكنك كتابة كود العميل للوصول إليه. إليك عينة من الشيفرة البرمجية:</p>
+    </button></h2><p>بمجرد بدء تشغيل الخادم، يمكنك كتابة كود العميل للوصول إليه. إليك مثال على الكود:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> uuid
 <span class="hljs-keyword">from</span> llama_stack_client.types <span class="hljs-keyword">import</span> Document
 <span class="hljs-keyword">from</span> llama_stack_client.lib.agents.agent <span class="hljs-keyword">import</span> Agent
@@ -222,7 +222,8 @@ response = rag_agent.create_turn(
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Response: &quot;</span>)
 <span class="hljs-built_in">print</span>(response.output_message.content)
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتشغيل هذا الرمز لتنفيذ استعلام RAG. إذا كان كل شيء يعمل بشكل صحيح، يجب أن يبدو الإخراج هكذا:</p>
+<p>قم بتشغيل هذا الكود لتنفيذ استعلام RAG.
+إذا كان كل شيء يعمل بشكل صحيح، يجب أن تبدو النتيجة كما يلي:</p>
 <pre><code translate="no" class="language-log">inserting...
 finish init agent...
 Response: 

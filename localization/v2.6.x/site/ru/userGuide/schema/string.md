@@ -1,7 +1,7 @@
 ---
 id: string.md
 title: Строковое поле
-summary: 'В Milvus VARCHAR - это тип данных, используемый для хранения строковых данных.'
+summary: В Milvus тип данных VARCHAR используется для хранения строковых данных.
 ---
 <h1 id="String-Field" class="common-anchor-header">Строковое поле<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,14 +18,15 @@ summary: 'В Milvus VARCHAR - это тип данных, используемы
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В Milvus <code translate="no">VARCHAR</code> - это тип данных, используемый для хранения строковых данных.</p>
-<p>Когда вы определяете поле <code translate="no">VARCHAR</code>, два параметра являются обязательными:</p>
+    </button></h1><p>В Milvus тип данных « <code translate="no">VARCHAR</code> » используется для хранения строковых данных.</p>
+<p>При определении поля типа « <code translate="no">VARCHAR</code> » необходимо указать два обязательных параметра:</p>
 <ul>
-<li><p>Установите <code translate="no">datatype</code> в <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Укажите <code translate="no">max_length</code>, который определяет максимальное количество байт, которое может хранить поле <code translate="no">VARCHAR</code>. Диапазон допустимых значений для <code translate="no">max_length</code> составляет от 1 до 65 535.</p></li>
+<li><p>Укажите значение <code translate="no">datatype</code> как <code translate="no">DataType.VARCHAR</code>.</p></li>
+<li><p>Укажите значение параметра ` <code translate="no">max_length</code>`, которое определяет максимальное количество байтов в кодировке UTF-8, допустимое для каждого значения поля. Допустимый диапазон значений параметра ` <code translate="no">max_length</code> ` составляет от 1 до 65 535.</p></li>
 </ul>
+<p>Количество байтов может отличаться от количества символов. Например, при значении <code translate="no">max_length=10</code> строка <code translate="no">&quot;abcdefghij&quot;</code> укладывается в пределы ограничения, поскольку использует 10 байтов UTF-8. Строка <code translate="no">&quot;一二三四五六七八九十&quot;</code> также содержит 10 символов, но использует 30 байтов UTF-8 и превышает ограничение.</p>
 <div class="alert note">
-<p>Milvus поддерживает нулевые значения и значения по умолчанию для полей <code translate="no">VARCHAR</code>. Чтобы включить эти возможности, установите <code translate="no">nullable</code> в значение <code translate="no">True</code>, а <code translate="no">default_value</code> - в строковое значение. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
+<p>Milvus поддерживает нулевые значения и значения по умолчанию для полей типа « <code translate="no">VARCHAR</code> ». Чтобы включить эти функции, установите для параметра « <code translate="no">nullable</code> » значение « <code translate="no">True</code> », а для параметра « <code translate="no">default_value</code> » — строковое значение. Подробности см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">«Nullable &amp; Default</a>».</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Добавление поля VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,16 +43,21 @@ summary: 'В Milvus VARCHAR - это тип данных, используемы
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы хранить строковые данные в Milvus, определите поле <code translate="no">VARCHAR</code> в схеме коллекции. Ниже приведен пример определения схемы коллекции с двумя полями <code translate="no">VARCHAR</code>:</p>
+    </button></h2><p>Чтобы хранить строковые данные в Milvus, определите поле типа « <code translate="no">VARCHAR</code> » в схеме коллекции. Ниже приведен пример определения схемы коллекции с двумя полями типа « <code translate="no">VARCHAR</code> »:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: хранит до 100 байт, допускает нулевые значения и имеет значение по умолчанию <code translate="no">&quot;Unknown&quot;</code>.</p></li>
 <li><p><code translate="no">varchar_field2</code>: хранит до 200 байт, допускает нулевые значения, но не имеет значения по умолчанию.</p></li>
 </ul>
 <div class="alert note">
-<p>Если вы установите <code translate="no">enable_dynamic_fields=True</code> при определении схемы, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Если при определении схемы вы установите значение <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.6.x/enable-dynamic-field.md">«Динамическое поле</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -231,7 +237,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Установка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Настройка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,13 +252,18 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей и необязательным для скалярных.</p>
-<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">varchar_field1</code>, оба с использованием типа индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/index-explained.md">"Объяснение индекса</a>".</p>
+    </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей, но необязательным для скалярных полей.</p>
+<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">varchar_field1</code>; для обоих используется тип индекса « <code translate="no">AUTOINDEX</code> ». При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс в зависимости от типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробности см. в разделе <a href="/docs/ru/v2.6.x/index-explained.md">«Объяснение индекса</a>».</p>
 <div class="alert note">
-<p>Вы также можете создать индекс <code translate="no">NGRAM</code>, чтобы ускорить фильтрацию <code translate="no">LIKE</code> по полям <code translate="no">VARCHAR</code>. Подробности см. в разделе <a href="/docs/ru/v2.6.x/ngram.md">NGRAM</a>.</p>
+<p>Кроме того, можно создать индекс « <code translate="no">NGRAM</code> » для ускорения фильтрации <code translate="no">LIKE</code> по полям <code translate="no">VARCHAR</code>. Подробности см. в разделе <a href="/docs/ru/v2.6.x/ngram.md">«NGRAM</a>».</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -341,9 +352,14 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как схема и индекс определены, создайте коллекцию, включающую строковые поля.</p>
+    </button></h2><p>После определения схемы и индекса создайте коллекцию, содержащую строковые поля.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -399,9 +415,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После создания коллекции вставьте сущности, соответствующие схеме.</p>
+    </button></h2><p>После создания коллекции добавьте сущности, соответствующие схеме.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -511,7 +532,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Запрос с использованием выражений фильтрации<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">Запрос с использованием фильтрующих выражений<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,10 +547,15 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После вставки сущностей используйте метод <code translate="no">query</code> для получения сущностей, соответствующих заданным выражениям фильтра.</p>
-<p>Чтобы получить сущности, в которых <code translate="no">varchar_field1</code> совпадает со строкой <code translate="no">&quot;Product A&quot;</code>:</p>
+    </button></h2><p>После вставки сущностей используйте метод ` <code translate="no">query</code> ` для извлечения сущностей, соответствующих указанным фильтрам.</p>
+<p>Чтобы извлечь сущности, для которых значение параметра ` <code translate="no">varchar_field1</code> ` совпадает со строкой ` <code translate="no">&quot;Product A&quot;</code>`:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -598,7 +624,12 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 <button class="copy-code-btn"></button></code></pre>
 <p>Чтобы получить сущности, для которых <code translate="no">varchar_field2</code> равен null:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -665,9 +696,14 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы получить сущности, в которых <code translate="no">varchar_field1</code> имеет значение <code translate="no">&quot;Unknown&quot;</code>, используйте следующее выражение. Поскольку по умолчанию значение <code translate="no">varchar_field1</code> равно <code translate="no">&quot;Unknown&quot;</code>, ожидаемый результат должен включать сущности, у которых <code translate="no">varchar_field1</code> явно установлено на <code translate="no">&quot;Unknown&quot;</code> или у которых <code translate="no">varchar_field1</code> установлено на null.</p>
+<p>Чтобы получить сущности, у которых <code translate="no">varchar_field1</code> имеет значение <code translate="no">&quot;Unknown&quot;</code>, используйте приведенное ниже выражение. Поскольку значением по умолчанию для <code translate="no">varchar_field1</code> является <code translate="no">&quot;Unknown&quot;</code>, ожидаемый результат должен включать сущности, у которых <code translate="no">varchar_field1</code> явно установлено в <code translate="no">&quot;Unknown&quot;</code> или у которых <code translate="no">varchar_field1</code> установлено в null.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -733,7 +769,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Векторный поиск с помощью выражений фильтрации<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Векторный поиск с использованием фильтрующих выражений<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -748,9 +784,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Помимо базовой фильтрации по скалярным полям, вы можете комбинировать поиск по векторному сходству с фильтрами по скалярным полям. Например, в следующем коде показано, как добавить фильтр скалярного поля к векторному поиску:</p>
+    </button></h2><p>Помимо базовой фильтрации по скалярным полям, можно комбинировать векторный поиск по схожести с фильтрами по скалярным полям. Например, в следующем коде показано, как добавить фильтр по скалярному полю к векторному поиску:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>

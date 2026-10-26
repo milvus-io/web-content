@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "Importación masiva idempotente",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },
@@ -2280,7 +2286,7 @@
             "children": []
           },
           {
-            "label": "Cambio",
+            "label": "Transición",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []

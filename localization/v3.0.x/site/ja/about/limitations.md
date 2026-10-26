@@ -130,7 +130,7 @@ summary: Milvusの使用における制限事項についてご確認くださ�
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>データ型</th><th>制限</th></tr>
+<tr><th>データ型</th><th>制限（バイト）</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>
@@ -220,7 +220,7 @@ summary: Milvusの使用における制限事項についてご確認くださ�
 <tr><th>ベクトル</th><th>制限</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> （返す最も類似度の高い結果の数）</td><td>16,384(検索リクエスト数)</td></tr>
+<tr><td><code translate="no">topk</code> （返す最も類似度の高い結果の数）</td><td>16,384</td></tr>
 <tr><td><code translate="no">nq</code> (検索リクエスト数)</td><td>16,384</td></tr>
 </tbody>
 </table>
@@ -239,7 +239,7 @@ summary: Milvusの使用における制限事項についてご確認くださ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の表は、さまざまなインデックス・タイプにおける各種検索動作のサポート概要を示しています。</p>
+    </button></h2><p>以下の表は、さまざまなインデックス・タイプにおける各種検索動作のサポート状況の概要を示しています。</p>
 <table>
 <thead>
 <tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>

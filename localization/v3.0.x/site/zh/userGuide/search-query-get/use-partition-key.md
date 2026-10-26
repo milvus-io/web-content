@@ -1,11 +1,11 @@
 ---
 id: use-partition-key.md
-title: 使用分区密钥
+title: 使用Partition Key
 summary: >-
-  分区关键字是一种基于分区的搜索优化解决方案。通过指定一个特定的标量字段作为 Partition Key，并在搜索过程中根据 Partition Key
-  指定过滤条件，可以将搜索范围缩小到几个分区，从而提高搜索效率。本文将介绍如何使用 Partition Key 及相关注意事项。
+  Partition Key是一种基于分区的搜索优化方案。通过将特定的标量字段指定为Partition Key，并在搜索时根据Partition
+  Key设定过滤条件，可以将搜索范围缩小到几个分区，从而提高搜索效率。本文将介绍如何使用Partition Key以及相关注意事项。
 ---
-<h1 id="Use-Partition-Key" class="common-anchor-header">使用分区密钥<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">使用Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>分区关键字是一种基于分区的搜索优化解决方案。通过指定特定标量字段作为 Partition Key，并在搜索过程中根据 Partition Key 指定过滤条件，可以将搜索范围缩小到多个分区，从而提高搜索效率。本文将介绍如何使用 Partition Key 以及相关注意事项。</p>
+    </button></h1><p>Partition Key是一种基于分区的搜索优化方案。通过将特定的标量字段指定为Partition Key，并在搜索时根据Partition Key设定过滤条件，可以将搜索范围缩小到几个分区，从而提高搜索效率。本文将介绍如何使用Partition Key以及相关注意事项。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,22 +36,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，你可以使用分区来实现数据隔离，并通过将搜索范围限制在特定分区来提高搜索性能。如果选择手动管理分区，可以在 Collections 中创建最多 1,024 个分区，并根据特定规则将实体插入这些分区，这样就可以通过限制在特定数量的分区内进行搜索来缩小搜索范围。</p>
-<p>Milvus 引入了分区密钥，供你在数据隔离中重复使用分区，以克服在集合中创建分区数量的限制。创建 Collections 时，可以使用标量字段作为 Partition Key。一旦集合准备就绪，Milvus 就会在集合内创建指定数量的分区。接收到插入的实体后，Milvus 会使用实体的分区密钥值计算哈希值，根据哈希值和集合的<code translate="no">partitions_num</code> 属性执行求模操作，以获得目标分区 ID，并将实体存储到目标分区中。</p>
-<p>
+    </button></h2><p>在 Milvus 中，您可以通过分区实现数据隔离，并通过将搜索范围限制在特定分区内来提升搜索性能。 若选择手动管理分区，您可以在一个 Collection 中最多创建 1,024 个分区，并根据特定规则将实体插入这些分区，从而通过将搜索范围限制在特定数量的分区内来缩小搜索范围。</p>
+<p>Milvus 引入了 Partition Key，以便您在数据隔离中复用分区，从而突破单个 Collection 中可创建分区数量的限制。创建 Collection 时，您可以使用标量字段作为 Partition Key。Collection 准备就绪后，Milvus 会在 Collection 内部创建指定数量的分区。 收到插入的实体后，Milvus 会使用该实体的 Partition Key 值计算哈希值，并根据哈希值和 Collection 的 `<code translate="no">partitions_num</code> ` 属性执行取模运算以获取目标分区 ID，然后将实体存储在目标分区中。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-   </span> <span class="img-wrapper"> <span>分区与分区 Key</span> </span></p>
-<p>下图说明了在启用或未启用分区密钥功能的情况下，Milvus 如何处理 Collections 中的搜索请求。</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" /> 
+   <span>分区与Partition Key</span>
+  
+ </span></p>
+<p>下图说明了 Milvus 在启用或禁用 Partition Key 功能的情况下，如何处理 Collection 中的搜索请求。</p>
 <ul>
-<li><p>如果禁用了 Partition Key，Milvus 会在 Collections 中搜索与查询向量最相似的实体。如果知道哪个分区包含最相关的结果，就可以缩小搜索范围。</p></li>
-<li><p>如果启用了分区关键字，Milvus 会根据搜索过滤器中指定的分区关键字值确定搜索范围，并只扫描分区内匹配的实体。</p></li>
+<li><p>如果禁用了 Partition Key，Milvus 会在 Collection 中搜索与查询向量最相似的实体。如果您知道哪个分区包含最相关的结果，则可以缩小搜索范围。</p></li>
+<li><p>如果启用了 Partition Key，Milvus 将根据搜索过滤器中指定的 Partition Key 值确定搜索范围，并仅扫描匹配的分区中的实体。</p></li>
 </ul>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
-   </span> <span class="img-wrapper"> <span>有无分区密钥</span> </span></p>
-<h2 id="Use-Partition-Key" class="common-anchor-header">使用分区密钥<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" /> 
+   <span>启用与禁用Partition Key的情况</span>
+  
+ </span></p>
+<h2 id="Use-Partition-Key" class="common-anchor-header">使用Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,13 +70,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用分区密钥，您需要</p>
+    </button></h2><p>要使用Partition Key，您需要</p>
 <ul>
-<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Key">设置分区密钥</a>、</p></li>
-<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">设置要创建的分区数量</a>（可选），以及</p></li>
-<li><p><a href="/docs/zh/use-partition-key.md#Create-Filtering-Condition">根据分区密钥创建过滤条件</a>。</p></li>
+<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Key">设置Partition</a> Key，</p></li>
+<li><p><a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">设置要创建的分区数量</a>（可选），</p></li>
+<li><p><a href="/docs/zh/use-partition-key.md#Create-Filtering-Condition">基于Partition Key创建过滤条件</a>，以及</p></li>
+<li><p><a href="/docs/zh/use-partition-key.md#Index-Partition-Key">为Partition Key建立索引</a>（推荐）。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">设置分区密钥<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+<h3 id="Set-Partition-Key" class="common-anchor-header">设置Partition Key<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,12 +92,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要将标量字段指定为分区密钥，需要在添加标量字段时将其<code translate="no">is_partition_key</code> 属性设置为<code translate="no">true</code> 。</p>
+    </button></h3><p>要将标量字段指定为Partition Key，您需要在添加该标量字段时将其<code translate="no">is_partition_key</code> 属性设置为<code translate="no">true</code> 。</p>
 <div class="alert note">
-<p>将标量字段设置为 Partition Key 时，字段值不能为空或 null。</p>
+<p>将标量字段设置为Partition Key时，该字段的值不能为空或为 null。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
 )
@@ -237,7 +247,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">设置分区编号<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">设置分区数量<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,10 +262,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。接收到实体后，Milvus 会根据该实体的 Partition Key 值选择一个分区，并将实体存储到分区中，从而导致部分或全部分区持有不同 Partition Key 值的实体。</p>
-<p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
+    </button></h3><p>当您将 Collection 中的标量字段指定为 Partition Key 时，Milvus 会自动在该 Collection 中创建 16 个分区。接收到实体后，Milvus 会根据该实体的 Partition Key 值选择一个分区，并将实体存储到该分区中，从而导致部分或所有分区都包含具有不同 Partition Key 值的实体。</p>
+<p>您还可以与Collection一同指定要创建的分区数量。此操作仅在您已将某个标量字段指定为Partition Key时有效。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -318,11 +333,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在启用分区关键字功能的 Collections 中进行 ANN 搜索时，需要在搜索请求中包含涉及分区关键字的过滤表达式。在过滤表达式中，你可以将 Partition Key 的值限制在特定范围内，这样 Milvus 就会将搜索范围限制在相应的分区内。</p>
-<p>在执行删除操作时，建议加入指定单一分区键的过滤表达式，以实现更高效的删除。这种方法将删除操作限制在特定分区内，减少了压缩过程中的写入放大，节省了用于压缩和索引的资源。</p>
-<p>下面的示例演示了基于 Partition Key 的过滤，它基于一个特定的 Partition Key 值和一组 Partition Key 值。</p>
+    </button></h3><p>在启用了 Partition Key 功能的 Collection 中进行 ANN 搜索时，您需要在搜索请求中包含一个涉及 Partition Key 的过滤表达式。在该过滤表达式中，您可以将 Partition Key 值限制在特定范围内，从而使 Milvus 将搜索范围限制在相应的分区内。</p>
+<p>执行删除操作时，建议包含一个指定单个Partition Key的过滤表达式，以实现更高效的删除。此方法将删除操作限制在特定分区内，从而减少压缩过程中的写入放大，并节省用于压缩和索引的资源。</p>
+<p>以下示例演示了基于特定Partition Key值和一组Partition Key值的分区键过滤。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
@@ -354,9 +374,9 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>必须将<code translate="no">partition_key</code> 替换为指定为分区密钥的字段名称。</p>
+<p>您需要将 `<code translate="no">partition_key</code> ` 替换为被指定为Partition Key的字段名称。</p>
 </div>
-<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">使用 Partition Key 隔离<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+<h3 id="Index-Partition-Key" class="common-anchor-header">索引分区键<button data-href="#Index-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -371,34 +391,171 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在多租户场景中，可以将与租户身份相关的标量字段指定为分区密钥，并根据此标量字段中的特定值创建过滤器。为了进一步提高类似情况下的搜索性能，Milvus 引入了分区密钥隔离功能。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
-   </span> <span class="img-wrapper"> <span>分区密钥隔离</span> </span></p>
-<p>如上图所示，Milvus 根据分区键值对实体进行分组，并为每个分组创建单独的索引。收到搜索请求后，Milvus 会根据过滤条件中指定的 Partition Key 值定位索引，并将搜索范围限制在索引所包含的实体内，从而避免在搜索过程中扫描不相关的实体，大大提高搜索性能。</p>
-<p>启用 "分区密钥隔离 "后，必须在基于分区密钥的过滤条件中只包含一个特定值，这样 Milvus 才能在匹配的索引所包含的实体内限制搜索范围。</p>
-<div class="alert note">
-<p>目前，分区密钥隔离功能只适用于索引类型设置为 HNSW 的搜索。</p>
-</div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">启用分区密钥隔离功能<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>以下代码示例演示了如何启用分区键隔离。</p>
+    </button></h3><p>建议您在Partition Key字段上创建一个标量索引。</p>
+<p>Partition Key 可将搜索范围缩小到可能包含匹配 Partition Key 值的分区。但是，每个分区通常包含具有许多不同 Partition Key 值的实体，因此 Milvus 仍会对所搜索分区中的每个实体评估基于 Partition Key 的过滤条件。 如果该字段上没有标量索引，该评估将对字段值进行全量扫描，这在大型 Collection 中可能占用搜索延迟的大部分。有了标量索引，Milvus 则会转而在索引中查找匹配的实体。</p>
+<p>无论向量索引类型如何，都会进行这种评估。Milvus 可以将 Partition Key 值嵌入到 HNSW 系列向量索引中，使得基于 Partition Key 过滤的搜索仅遍历相关的子索引，但这种优化只是缩小了向量遍历的范围——并不会消除过滤条件的评估。 仅基于标量字段进行过滤的搜索则没有相应的捷径。在两种情况下，Partition Key字段上的标量索引都是确保评估速度的关键。</p>
+<p>请根据Partition Key字段选择索引类型：</p>
+<ul>
+<li><p><a href="/docs/zh/inverted.md">INVERTED</a>适用于大多数 Partition Key 字段，因为基于 Partition Key 的过滤器使用<code translate="no">==</code> 和<code translate="no">in</code> 条件。</p></li>
+<li><p><a href="/docs/zh/bitmap.md">BITMAP</a>适用于具有少量不同值的字段。一般而言，仅当字段包含少于 500 个不同值时才应使用它。</p></li>
+<li><p><a href="/docs/zh/stl-sort.md">STL_SORT</a>是数值型和<code translate="no">VARCHAR</code> 字段的另一种选择。</p></li>
+</ul>
+<p>以下示例在Collection的索引参数中，除了向量字段的索引外，还在“Partition Key”字段上添加了一个<code translate="no">INVERTED</code> 索引。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+
+<span class="hljs-comment"># Index the partition key</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span></span>
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Index the partition key</span>
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+<span class="highlighted-wrapper-line">        .indexType(IndexParam.IndexType.INVERTED)</span>
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
+        index.NewAutoIndex(entity.COSINE)),
+    <span class="hljs-comment">// Index the partition key</span>
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_varchar&quot;</span>,
+        index.NewInvertedIndex()),
+}
+
+<span class="hljs-keyword">for</span> _, opt := <span class="hljs-keyword">range</span> indexOptions {
+    indexTask, err := client.CreateIndex(ctx, opt)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        fmt.Println(err.Error())
+        <span class="hljs-comment">// handle error</span>
+    }
+    err = indexTask.Await(ctx)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+},{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-comment">// Index the partition key</span>
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span></span>
+}]
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;my_varchar&quot;,
+            &quot;indexName&quot;: &quot;my_varchar&quot;,
+            &quot;indexType&quot;: &quot;INVERTED&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>在创建Collection时传递这些索引参数，或在现有Collection上创建索引。有关详细信息，请参阅《<a href="/docs/zh/create-collection.md">创建Collection》</a>。</p>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">使用Partition Key隔离<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在多租户场景中，您可以将与租户身份相关的标量字段指定为Partition Key，并基于该标量字段中的特定值创建过滤器。为了在类似场景中进一步提升搜索性能，Milvus 引入了“Partition Key 隔离”功能。</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" /> 
+   <span>Partition Key隔离</span>
+  
+ </span></p>
+<p>如上图所示，Milvus 会根据 Partition Key 值对实体进行分组，并为每个分组创建独立的索引。 接收到搜索请求后，Milvus 会根据过滤条件中指定的Partition Key值定位索引，并将搜索范围限制在该索引所包含的实体内，从而避免在搜索过程中扫描无关实体，并大幅提升搜索性能。</p>
+<p>启用Partition Key隔离后，您必须在基于Partition Key的过滤器中仅包含一个特定值，以便 Milvus 将搜索范围限制在索引中匹配的实体内。</p>
+<div class="alert note">
+<p>目前，“Partition Key 隔离”功能仅适用于索引类型设置为 HNSW 的搜索。</p>
+</div>
+<p>Partition Key 隔离不会取代 Partition Key 字段上的标量索引。过滤器中的 Partition Key 值用于定位匹配的子索引，但 Milvus 仍会评估过滤器本身以识别匹配的实体，因此我们建议您也<a href="/docs/zh/use-partition-key.md#Index-Partition-Key">对 Partition Key 进行索引</a>。</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">启用Partition Key隔离<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下代码示例演示了如何启用Partition Key隔离。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -450,4 +607,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>启用分区密钥隔离后，仍可按照<a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">设置分区编号</a>中的说明设置分区密钥和分区<a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">编号</a>。请注意，基于 Partition Key 的过滤器应只包含特定的 Partition Key 值。</p>
+<p>启用Partition Key隔离后，您仍可按照<a href="/docs/zh/use-partition-key.md#Set-Partition-Numbers">《设置分区编号》</a>中的说明设置Partition Key和分区数量。请注意，基于Partition Key的过滤器应仅包含一个特定的Partition Key值。</p>

@@ -1,10 +1,10 @@
 ---
 id: use-partition-key.md
-title: パーティション・キーの使用
+title: パーティションキーの使用
 summary: >-
-  パーティション・キーは、パーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。この記事では、パーティション・キーの使い方と、それに関連する注意点を紹介する。
+  パーティションキーは、パーティションに基づく検索最適化の手法です。特定のスカラーフィールドをパーティションキーとして指定し、検索時にそのパーティションキーに基づいたフィルタリング条件を指定することで、検索範囲をいくつかのパーティションに絞り込み、検索効率を向上させることができます。本記事では、パーティションキーの使用方法と、それに伴う考慮事項について紹介します。
 ---
-<h1 id="Use-Partition-Key" class="common-anchor-header">パーティション・キーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">パーティションキーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>パーティション・キーはパーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。本稿では、パーティション・キーの使い方と注意点について紹介する。</p>
+    </button></h1><p>パーティションキーは、パーティションに基づく検索最適化ソリューションです。特定のスカラーフィールドをパーティションキーとして指定し、検索時にそのパーティションキーに基づくフィルタリング条件を指定することで、検索範囲をいくつかのパーティションに絞り込み、検索効率を向上させることができます。本記事では、パーティションキーの使用方法と関連する考慮事項について紹介します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,22 +35,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、パーティションを使ってデータの分離を行い、検索範囲を特定のパーティションに限定することで検索性能を向上させることができます。パーティションを手動で管理する場合、コレクション内に最大1,024個のパーティションを作成し、特定のルールに基づいてこれらのパーティションにエンティティを挿入することで、特定の数のパーティション内に検索を制限して検索範囲を絞り込むことができます。</p>
-<p>Milvusは、コレクションに作成できるパーティション数の制限を克服するために、データ分離でパーティションを再利用するためのパーティションキーを導入しています。コレクションを作成する際、パーティション・キーとしてスカラー・フィールドを使用することができます。コレクションの準備ができると、Milvusはコレクション内に指定された数のパーティションを作成します。挿入されたエンティティを受け取ると、Milvusはエンティティのパーティションキー値を使用してハッシュ値を計算し、ハッシュ値とコレクションの<code translate="no">partitions_num</code> プロパティに基づいてモジュロ演算を実行してターゲットパーティションIDを取得し、ターゲットパーティションにエンティティを格納します。</p>
-<p>
+    </button></h2><p>Milvusでは、パーティションを使用してデータの分離を実現し、検索範囲を特定のパーティションに限定することで、検索パフォーマンスを向上させることができます。 パーティションを手動で管理する場合、1つのコレクション内に最大1,024個のパーティションを作成でき、特定のルールに基づいてエンティティをこれらのパーティションに挿入することで、特定の数のパーティション内に検索を制限し、検索範囲を絞り込むことができます。</p>
+<p>Milvusでは、コレクション内で作成できるパーティション数の制限を克服し、データ分離においてパーティションを再利用できるようにするために、パーティションキーを導入しています。コレクションを作成する際、スカラーフィールドをパーティションキーとして指定できます。コレクションの準備が整うと、Milvusはそのコレクション内に指定された数のパーティションを作成します。 エンティティの挿入を受け取ると、Milvusはそのエンティティのパーティションキー値を使用してハッシュ値を計算し、そのハッシュ値とコレクションの<code translate="no">partitions_num</code> プロパティに基づいて剰余演算を実行して対象のパーティションIDを取得し、そのエンティティを対象のパーティションに格納します。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-   </span> <span class="img-wrapper"> <span>パーティション対パーティション・キー</span> </span></p>
-<p>次の図は、Milvusがパーティション・キー機能を有効にしている場合と無効にしていない場合で、コレクション内の検索要求をどのように処理するかを示しています。</p>
+   <img translate="no" src="/docs/v2.6.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" /> 
+   <span>パーティションとパーティションキー</span>
+  
+ </span></p>
+<p>次の図は、パーティションキー機能が有効な場合と無効な場合で、Milvusがコレクション内の検索リクエストをどのように処理するかを示しています。</p>
 <ul>
-<li><p>パーティション・キーが無効の場合、Milvusはコレクション内のクエリ・ベクタに最も類似したエンティティを検索します。どのパーティションに最も関連性の高い結果が含まれているかを知っていれば、検索範囲を狭めることができます。</p></li>
-<li><p>パーティション・キーが有効な場合、Milvusは検索フィルターで指定されたパーティション・キーの値に基づいて検索範囲を決定し、一致するパーティション内のエンティティだけをスキャンします。</p></li>
+<li><p>パーティションキーが無効になっている場合、Milvus はコレクション内でクエリベクトルに最も類似したエンティティを検索します。どのパーティションに最も関連性の高い結果が含まれているかを知っている場合は、検索範囲を絞り込むことができます。</p></li>
+<li><p>パーティションキーが有効になっている場合、Milvus は検索フィルターで指定されたパーティションキーの値に基づいて検索範囲を決定し、一致するパーティション内のエンティティのみをスキャンします。</p></li>
 </ul>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" />
-   </span> <span class="img-wrapper"> <span>パーティションキーの有無</span> </span></p>
-<h2 id="Use-Partition-Key" class="common-anchor-header">パーティション・キーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/with-and-without-partition-key.png" alt="With And Without Partition Key" class="doc-image" id="with-and-without-partition-key" /> 
+   <span>パーティションキーの有効／無効時</span>
+  
+ </span></p>
+<h2 id="Use-Partition-Key" class="common-anchor-header">パーティションキーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,13 +69,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>パーティション・キーを使用するには、以下の手順が必要です。</p>
+    </button></h2><p>パーティションキーを使用するには、次の操作が必要です。</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Key">パーティション・キーを設定</a>します、</p></li>
-<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">作成するパーティション数を設定します</a>（オプション）。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Create-Filtering-Condition">パーティション・キーに基づいたフィルタリング条件を作成する</a>。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Key">パーティションキーを設定し</a>、</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">作成するパーティション数を設定する</a>（オプション）、</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Create-Filtering-Condition">パーティションキーに基づくフィルタリング条件を作成し</a>、</p></li>
+<li><p><a href="/docs/ja/v2.6.x/use-partition-key.md#Index-Partition-Key">パーティションキーにインデックスを付与する</a>（推奨）。</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">パーティション・キーの設定<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+<h3 id="Set-Partition-Key" class="common-anchor-header">パーティションキーの設定<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,12 +91,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>スカラー・フィールドをパーティション・キーとして指定するには、スカラー・フィールドを追加するときに、その<code translate="no">is_partition_key</code> 属性を<code translate="no">true</code> に設定する必要があります。</p>
+    </button></h3><p>スカラーフィールドをパーティションキーとして指定するには、そのスカラーフィールドを追加する際に、<code translate="no">is_partition_key</code> 属性を<code translate="no">true</code> に設定する必要があります。</p>
 <div class="alert note">
-<p>スカラー・フィールドをパーティション・キーに設定する場合、フィールドの値を空やNULLにすることはできません。</p>
+<p>スカラーフィールドをパーティションキーとして設定する場合、そのフィールドの値は空またはnullであってはなりません。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType
 )
@@ -236,7 +246,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">パーティション番号の設定<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">パーティション数の設定<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -251,10 +261,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受信すると、このエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
-<p>また、コレクションと一緒に作成するパーティションの数を決定することもできます。これは、パーティション・キーとしてスカラー・フィールドを指定した場合のみ有効です。</p>
+    </button></h3><p>コレクション内のスカラーフィールドをパーティションキーとして指定すると、Milvus はそのコレクション内に自動的に 16 のパーティションを作成します。エンティティを受信すると、Milvus はそのエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。その結果、一部のパーティションまたはすべてのパーティションに、異なるパーティションキー値を持つエンティティが格納されることになります。</p>
+<p>また、コレクションの作成時に作成するパーティション数を指定することもできます。これは、スカラーフィールドがパーティションキーとして指定されている場合にのみ有効です。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -317,11 +332,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>パーティション・キー機能を有効にしたコレクションでANN検索を行う場合、検索リクエストにパーティション・キーを含むフィルタリング式を含める必要があります。フィルタリング式では、Milvusが対応するパーティション内で検索範囲を制限するように、特定の範囲内でパーティションキーの値を制限することができます。</p>
-<p>削除操作を実行する場合、より効率的な削除を実現するために、単一のパーティション・キーを指定するフィルタ式を含めることをお勧めします。このアプローチは、削除操作を特定のパーティションに限定し、コンパクション時の書き込み増幅を減らし、コンパクションとインデックス作成のリソースを節約します。</p>
-<p>以下の例は、特定のパーティション・キー値とパーティション・キー値のセットに基づくパーティション・キー・ベース・フィルタリングを示しています。</p>
+    </button></h3><p>パーティションキー機能が有効になっているコレクションで ANN 検索を実行する場合、検索リクエストにパーティションキーを含むフィルタリング式を含める必要があります。フィルタリング式では、パーティションキーの値を特定の範囲に制限することで、Milvus が対応するパーティション内に検索範囲を限定するようにできます。</p>
+<p>削除操作を実行する際は、より効率的な削除を実現するために、単一のパーティションキーを指定するフィルタ式を含めることをお勧めします。このアプローチにより、削除操作が特定のパーティションに限定されるため、コンパクション時の書き込み増幅が低減され、コンパクションおよびインデックス作成のためのリソースを節約できます。</p>
+<p>以下の例は、特定のパーティションキー値およびパーティションキー値のセットに基づく、パーティションキーによるフィルタリングを示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
@@ -353,9 +373,9 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">partition_key</code> 、パーティション・キーとして指定されているフィールド名に置き換える必要があります。</p>
+<p><code translate="no">partition_key</code> を、パーティションキーとして指定されているフィールド名に置き換える必要があります。</p>
 </div>
-<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">パーティション・キーの分離を使用する<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+<h3 id="Index-Partition-Key" class="common-anchor-header">インデックス パーティションキー<button data-href="#Index-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -370,34 +390,171 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>マルチテナントのシナリオでは、テナントIDに関連するスカラー・フィールドをパーティション・キーとして指定し、このスカラー・フィールドの特定の値に基づいてフィルターを作成できます。同様のシナリオにおける検索パフォーマンスをさらに向上させるために、Milvusはパーティションキーアイソレーション機能を導入しています。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
-   </span> <span class="img-wrapper"> <span>パーティションキーの分離</span> </span></p>
-<p>上図のように、Milvusはパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。検索要求を受け取ると、Milvusはフィルタリング条件に指定されたパーティションキー値に基づいてインデックスを検索し、インデックスに含まれるエンティティ内で検索範囲を制限します。これにより、検索中に無関係なエンティティをスキャンすることがなくなり、検索パフォーマンスが大幅に向上します。</p>
-<p>Partition Key Isolationを有効にすると、Milvusが一致するインデックスに含まれるエンティティ内で検索範囲を制限できるように、Partition Keyベースのフィルタに特定の値を1つだけ含める必要があります。</p>
-<div class="alert note">
-<p>現在、パーティションキー分離機能は、インデックスタイプが HNSW に設定された検索にのみ適用されます。</p>
-</div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティション・キー分離の有効化<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>以下のコード例は、パーティション・キー分離を有効にする方法を示しています。</p>
+    </button></h3><p>パーティションキーフィールドに対してスカラーインデックスを作成することを推奨します。</p>
+<p>パーティションキーは、一致するパーティションキー値を含む可能性のあるパーティションに検索範囲を絞り込みます。ただし、各パーティションには通常、多くの異なるパーティションキー値を持つエンティティが含まれているため、Milvusは検索対象のパーティション内のすべてのエンティティに対して、パーティションキーに基づくフィルタリングを評価し続けます。 そのフィールドにスカラーインデックスがない場合、その評価はフィールド値のフルスキャンとなり、大規模なコレクションでは検索レイテンシの大部分を占める可能性があります。スカラーインデックスがあれば、Milvusは代わりにインデックス内から一致するエンティティを検索します。</p>
+<p>この評価は、ベクトルインデックスのタイプに関係なく行われます。Milvusは、パーティションキーの値をHNSW系ベクトルインデックスに埋め込むことができるため、パーティションキーでフィルタリングされた検索では関連するサブインデックスのみを走査しますが、この最適化はベクトルの走査範囲を狭めるだけであり、フィルタの評価そのものを排除するものではありません。 スカラーフィールドのみでフィルタリングを行う検索には、これと同等のショートカットは存在しません。いずれの場合も、パーティションキーフィールドに対するスカラーインデックスが存在することで、評価が高速に実行されます。</p>
+<p>パーティションキーフィールドに基づいてインデックスタイプを選択してください：</p>
+<ul>
+<li><p><a href="/docs/ja/v2.6.x/inverted.md">INVERTEDは</a>、パーティションキーに基づくフィルタが<code translate="no">==</code> および<code translate="no">in</code> 条件を使用するため、ほとんどのパーティションキーフィールドに適しています。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/bitmap.md">BITMAPは</a>、固有値が少ないフィールドに適しています。一般的な指針として、フィールドの固有値が500未満の場合にのみ使用してください。</p></li>
+<li><p><a href="/docs/ja/v2.6.x/stl-sort.md">STL_SORTは</a>、数値型および<code translate="no">VARCHAR</code> 型のフィールドに対する代替手段となります。</p></li>
+</ul>
+<p>以下の例では、ベクトルフィールドのインデックスに加え、パーティションキーフィールドに<code translate="no">INVERTED</code> インデックスをコレクションのインデックスパラメータに追加しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+
+<span class="hljs-comment"># Index the partition key</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span></span>
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Index the partition key</span>
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+<span class="highlighted-wrapper-line">        .indexType(IndexParam.IndexType.INVERTED)</span>
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(indexParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>,
+        index.NewAutoIndex(entity.COSINE)),
+    <span class="hljs-comment">// Index the partition key</span>
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_varchar&quot;</span>,
+        index.NewInvertedIndex()),
+}
+
+<span class="hljs-keyword">for</span> _, opt := <span class="hljs-keyword">range</span> indexOptions {
+    indexTask, err := client.CreateIndex(ctx, opt)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        fmt.Println(err.Error())
+        <span class="hljs-comment">// handle error</span>
+    }
+    err = indexTask.Await(ctx)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>
+},{
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-comment">// Index the partition key</span>
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span></span>
+}]
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        },
+        {
+            &quot;fieldName&quot;: &quot;my_varchar&quot;,
+            &quot;indexName&quot;: &quot;my_varchar&quot;,
+            &quot;indexType&quot;: &quot;INVERTED&quot;
+        }
+    ]&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>コレクションを作成する際にこれらのインデックスパラメータを渡すか、既存のコレクションに対してインデックスを作成してください。詳細については、「<a href="/docs/ja/v2.6.x/create-collection.md">コレクションの作成</a>」を参照してください。</p>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">パーティションキーの分離の利用<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>マルチテナント環境では、テナント ID に関連するスカラーフィールドをパーティションキーとして指定し、このスカラーフィールドの特定の値に基づいてフィルターを作成できます。同様のシナリオにおける検索パフォーマンスをさらに向上させるため、Milvus では「パーティションキーの分離」機能を導入しています。</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="/docs/v2.6.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" /> 
+   <span>パーティションキーの分離</span>
+  
+ </span></p>
+<p>上の図に示すように、Milvus はパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。 検索リクエストを受信すると、Milvusはフィルタリング条件で指定されたパーティションキーの値に基づいてインデックスを特定し、検索範囲をそのインデックスに含まれるエンティティ内に限定します。これにより、検索中に無関係なエンティティをスキャンすることを回避し、検索パフォーマンスを大幅に向上させます。</p>
+<p>パーティションキー分離を有効にした場合は、Milvus が一致するインデックスに含まれるエンティティの範囲内に検索範囲を制限できるよう、パーティションキーベースのフィルタには 1 つの特定の値のみを含める必要があります。</p>
+<div class="alert note">
+<p>現在、パーティションキー分離機能は、インデックスタイプが HNSW に設定されている検索にのみ適用されます。</p>
+</div>
+<p>パーティションキー分離は、パーティションキーフィールドのスカラーインデックスに取って代わるものではありません。フィルタ内のパーティションキー値は、一致するサブインデックスを特定しますが、Milvus は依然としてフィルタ自体を評価して一致するエンティティを特定するため、<a href="/docs/ja/v2.6.x/use-partition-key.md#Index-Partition-Key">パーティションキーもインデックスに登録することを</a>お勧めします。</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティションキー分離の有効化<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコード例は、パーティションキー分離を有効にする方法を示しています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -449,4 +606,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>パーティション・キー・アイソレーションを有効にした後も、<a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">パーティション・ナンバーの設定</a> で説明するように、パーティション・キーとパーティション数を設定することができます。パーティション・キー・ベース・フィルターには、特定のパーティション・キーの値だけを含める必要があることに注意してください。</p>
+<p>パーティションキー分離を有効にした後も、「<a href="/docs/ja/v2.6.x/use-partition-key.md#Set-Partition-Numbers">パーティション番号の設定</a>」で説明されているように、パーティションキーやパーティション数を設定することは可能です。ただし、パーティションキーに基づくフィルターには、特定のパーティションキー値のみを含める必要がある点に注意してください。</p>

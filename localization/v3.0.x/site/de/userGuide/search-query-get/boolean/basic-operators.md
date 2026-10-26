@@ -58,7 +58,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">==</code> (Gleich)</p></li>
-<li><p><code translate="no">!=</code> (Nicht gleich)</p></li>
+<li><p><code translate="no">!=</code> (Ungleich)</p></li>
 <li><p><code translate="no">&gt;</code> (Größer als)</p></li>
 <li><p><code translate="no">&lt;</code> (Kleiner als)</p></li>
 <li><p><code translate="no">&gt;=</code> (Größer als oder gleich)</p></li>
@@ -115,7 +115,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie alle Entitäten mit einem „ <code translate="no">age</code> “ von mehr als 30 finden möchten:</p>
+    </button></h3><p>Wenn Sie alle Entitäten mit einem „ <code translate="no">age</code> “ größer als 30 suchen möchten:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-4-Filtering-with-less-than" class="common-anchor-header">Beispiel 4: Filtern mit „kleiner als“<button data-href="#Example-4-Filtering-with-less-than" class="anchor-icon" translate="no">
@@ -154,7 +154,7 @@ summary: >-
     </button></h3><p>Wenn Sie alle Entitäten mit einem „ <code translate="no">rating</code> “ von größer oder gleich 4 suchen möchten:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-less-than-or-equal-to" class="common-anchor-header">Beispiel 6: Filtern mit „kleiner oder gleich“<button data-href="#Example-6-Filtering-with-less-than-or-equal-to" class="anchor-icon" translate="no">
+<h3 id="Example-6-Filtering-with-less-than-or-equal-to" class="common-anchor-header">Beispiel 6: Filtern nach „kleiner oder gleich“<button data-href="#Example-6-Filtering-with-less-than-or-equal-to" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,7 +222,7 @@ summary: >-
 <p>So schließen Sie Entitäten aus, deren „ <code translate="no">message</code> “ mit „ <code translate="no">DEBUG</code> “ beginnt:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zur Wahl zwischen „ <code translate="no">LIKE</code> “ und regulären Ausdrücken, zu unterstützten Feldtypen, zur Syntax regulärer Ausdrücke, zu Escaping-Regeln und zur Leistung finden Sie unter <a href="/docs/de/pattern-matching.md">„Musterabgleich</a>“. Milvus ermöglicht es Ihnen außerdem, einen „ <code translate="no">NGRAM</code> “-Index für „ <code translate="no">VARCHAR</code> “-Felder oder JSON-String-Pfade zu erstellen, um geeignete Filter für den Musterabgleich zu beschleunigen. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">„NGRAM</a>“.</p>
+<p>Weitere Informationen zur Wahl zwischen „ <code translate="no">LIKE</code> “ und regulären Ausdrücken, zu unterstützten Feldtypen, zur Syntax regulärer Ausdrücke, zu Escape-Regeln und zur Leistung finden Sie unter <a href="/docs/de/pattern-matching.md">„Musterabgleich</a>“. Milvus ermöglicht es Ihnen außerdem, einen „ <code translate="no">NGRAM</code> “-Index für „ <code translate="no">VARCHAR</code> “-Felder oder JSON-String-Pfade zu erstellen, um geeignete Filter für den Musterabgleich zu beschleunigen. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">„NGRAM</a>“.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Arithmetische Operatoren<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +277,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um Elemente zu finden, bei denen der <code translate="no">id</code> eine gerade Zahl ist (d. h. durch 2 teilbar):</p>
+    </button></h3><p>Um Elemente zu finden, bei denen der <code translate="no">id</code> eine gerade Zahl ist (d. h. durch 2 teilbar):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">Beispiel 2: Verwendung der Potenzierung (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
@@ -295,10 +295,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um Elemente zu finden, bei denen <code translate="no">price</code> zur Potenz 2 größer als 1000 ist:</p>
+    </button></h3><p>Um Entitäten zu finden, bei denen „ <code translate="no">price</code> “ hoch 2 größer als 1000 ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Bitweise Operatoren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Arithmetische Operatoren unterstützen nur Ausdrücke, die ein <strong>einzelnes Feld und eine Konstante</strong> beinhalten. Ausdrücke, die zwei Felder arithmetisch kombinieren – wie beispielsweise „ <code translate="no">price * quantity &gt; 100</code> “ – werden derzeit nicht unterstützt und führen zu einer Fehlermeldung. Wenn Sie nach einem abgeleiteten Wert filtern müssen, der aus mehreren Feldern berechnet wurde, sollten Sie in Betracht ziehen, den vorberechneten Wert beim Einfügen als separates Skalarfeld zu speichern.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">Bitweise Operatoren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,8 +316,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bitweise Operatoren sind nützlich, wenn ein Ganzzahlfeld mehrere Flags codiert, wie z. B. Berechtigungen, Feature-Flags oder Statusbits. Sie können diese Operatoren in Filterausdrücken verwenden, um einzelne Bits in einem Ganzzahlwert zu prüfen, zu kombinieren oder zu vergleichen.</p>
-<p>Bei skalaren Feldern gelten bitweise Operatoren für ganzzahlige Feldtypen wie „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “ und „ <code translate="no">INT64</code> “.</p>
+    </button></h2><p>Bitweise Operatoren sind nützlich, wenn ein Ganzzahlfeld mehrere Flags kodiert, wie z. B. Berechtigungen, Feature-Flags oder Statusbits. Sie können diese Operatoren in Filterausdrücken verwenden, um einzelne Bits in einem Ganzzahlwert zu prüfen, zu kombinieren oder zu vergleichen.</p>
+<p>Bei Skalarfeldern gelten bitweise Operatoren für ganzzahlige Feldtypen wie „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “ und „ <code translate="no">INT64</code> “.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Unterstützte bitweise Operatoren<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -336,7 +339,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">&amp;</code></td><td>Bitweises UND</td><td>Prüft, ob bestimmte Bits gesetzt sind.</td></tr>
-<tr><td><code translate="no">|</code></td><td>Bitweises ODER</td><td>Kombiniert Bits vor dem Vergleich.</td></tr>
+<tr><td><code translate="no">|</code></td><td>Bitweises ODER</td><td>Bits vor dem Vergleich kombinieren.</td></tr>
 <tr><td><code translate="no">^</code></td><td>Bitweises XOR</td><td>Vergleichen Sie die Bitunterschiede zwischen zwei Werten.</td></tr>
 </tbody>
 </table>
@@ -355,7 +358,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Angenommen, Sie haben ein Ganzzahlfeld namens „ <code translate="no">permissions</code> “, und jedes Bit in der Ganzzahl stellt ein Berechtigungsflag dar:</p>
+    </button></h3><p>Angenommen, Sie haben ein Ganzzahlfeld namens „ <code translate="no">permissions</code> “, und jedes Bit in der Ganzzahl steht für ein Berechtigungsflag:</p>
 <table>
 <thead>
 <tr><th>Berechtigungsflag</th><th>Bitwert</th></tr>
@@ -367,7 +370,7 @@ summary: >-
 <tr><td><code translate="no">ADMIN</code></td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
-<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da gilt: „ <code translate="no">5 = 1 + 4</code> “.</p>
+<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da <code translate="no">5 = 1 + 4</code> gilt.</p>
 <p>Um Entitäten zu finden, bei denen das Bit „ <code translate="no">SHARE</code> “ gesetzt ist, verwenden Sie die bitweise UND-Verknüpfung (<code translate="no">&amp;</code>):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -378,7 +381,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Schließen Sie die bitweise Operation immer in Klammern ein, bevor Sie das Ergebnis vergleichen, z. B. „ <code translate="no">(permissions &amp; 4) == 4</code> “. Milvus 3.0.0 unterstützt „ <code translate="no">&amp;</code> “, „ <code translate="no">|</code> “ und „ <code translate="no">^</code> “ in Filterausdrücken. Das bitweise NOT (<code translate="no">~</code>) und die Verschiebungsoperatoren (<code translate="no">&lt;&lt;</code> und <code translate="no">&gt;&gt;</code>) werden nicht unterstützt.</p>
+<p>Schließen Sie die bitweise Operation immer in Klammern ein, bevor Sie das Ergebnis vergleichen, z. B. <code translate="no">(permissions &amp; 4) == 4</code>. Milvus 3.0.0 unterstützt <code translate="no">&amp;</code>, <code translate="no">|</code> und <code translate="no">^</code> in Filterausdrücken. Das bitweise NOT (<code translate="no">~</code>) und die Verschiebungsoperatoren (<code translate="no">&lt;&lt;</code> und <code translate="no">&gt;&gt;</code>) werden nicht unterstützt.</p>
 </div>
 <h2 id="Logical-operators" class="common-anchor-header">Logische Operatoren<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -452,7 +455,7 @@ summary: >-
     </button></h3><p>So finden Sie alle Produkte, bei denen „ <code translate="no">color</code> “ entweder „rot“ oder „blau“ ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Beispiel 3: Verwendung von „ <code translate="no">NOT</code> “ zum Ausschluss einer Bedingung<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Beispiel 3: Verwendung von „ <code translate="no">NOT</code> “, um eine Bedingung auszuschließen<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -508,7 +511,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus ermöglicht das Filtern nach regulären Skalarfeldern, wie z. B. Zeichenfolgen oder Zahlen, die Nullwerte enthalten.</p>
+    </button></h3><p>Milvus ermöglicht das Filtern nach regulären Skalarfeldern, wie z. B. Zeichenketten oder Zahlen, die Nullwerte enthalten.</p>
 <div class="alert note">
 <p>Eine leere Zeichenkette <code translate="no">&quot;&quot;</code> wird für ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ nicht als Nullwert behandelt.</p>
 </div>
@@ -536,7 +539,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus ermöglicht das Filtern nach JSON-Feldern, die Nullwerte enthalten. Ein JSON-Feld wird in folgenden Fällen als null behandelt:</p>
+    </button></h3><p>Milvus ermöglicht das Filtern nach JSON-Feldern, die Nullwerte enthalten. Ein JSON-Feld wird in folgenden Fällen als Null behandelt:</p>
 <ul>
 <li><p>Das gesamte JSON-Objekt wird explizit auf „None“ (null) gesetzt, zum Beispiel „ <code translate="no">{&quot;metadata&quot;: None}</code> “.</p></li>
 <li><p>Das JSON-Feld selbst fehlt vollständig in der Entität.</p></li>
@@ -567,7 +570,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Beispiel 1: Entitäten abrufen, bei denen die Metadaten null sind</strong></p>
+<p><strong>Beispiel 1: Abrufen von Entitäten, bei denen die Metadaten null sind</strong></p>
 <p>So finden Sie Entitäten, bei denen das Feld „ <code translate="no">metadata</code> “ entweder fehlt oder explizit auf „None“ gesetzt ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
@@ -602,7 +605,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus ermöglicht das Filtern nach ARRAY-Feldern, die Nullwerte enthalten. Ein ARRAY-Feld wird in folgenden Fällen als null behandelt:</p>
+    </button></h3><p>Milvus ermöglicht das Filtern nach ARRAY-Feldern, die Nullwerte enthalten. Ein ARRAY-Feld wird in folgenden Fällen als Null behandelt:</p>
 <ul>
 <li><p>Das gesamte ARRAY-Feld ist explizit auf „None“ (null) gesetzt, zum Beispiel „ <code translate="no">&quot;tags&quot;: None</code> “.</p></li>
 <li><p>Das ARRAY-Feld fehlt vollständig in der Entität.</p></li>
@@ -631,7 +634,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Beispiel 1: Entitäten abrufen, bei denen „tags“ den Wert „null“ hat</strong></p>
+<p><strong>Beispiel 1: Entitäten abrufen, bei denen „tags“ null ist</strong></p>
 <p>So rufen Sie Entitäten ab, bei denen das Feld „ <code translate="no">tags</code> “ entweder fehlt oder explizit auf „ <code translate="no">None</code> “ gesetzt ist:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -666,7 +669,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Grundoperatoren in Milvus sind zwar vielseitig und können auf skalare Felder angewendet werden, lassen sich aber auch effektiv mit den Schlüsseln und Indizes in den JSON- und ARRAY-Feldern nutzen.</p>
+    </button></h2><p>Die Grundoperatoren in Milvus sind zwar vielseitig und lassen sich auf skalare Felder anwenden, können aber auch effektiv mit den Schlüsseln und Indizes in den JSON- und ARRAY-Feldern verwendet werden.</p>
 <p>Wenn Sie beispielsweise ein Feld „ <code translate="no">product</code> “ haben, das mehrere Schlüssel wie „ <code translate="no">price</code> “, „ <code translate="no">model</code> “ und „ <code translate="no">tags</code> “ enthält, verweisen Sie immer direkt auf den Schlüssel:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

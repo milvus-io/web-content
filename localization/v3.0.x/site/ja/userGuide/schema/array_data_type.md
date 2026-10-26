@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドには、同じデータ型の要素が順序付けられて格納されます。以下に、ARRAYフィールドによるデータの格納例を示します。
+summary: ARRAYフィールドには、同じデータ型の要素が順序付きで格納されます。以下に、ARRAYフィールドによるデータの格納例を示します。
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: ARRAYフィールドには、同じデータ型の要素が順序付け
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ARRAYフィールドは、同じデータ型の要素からなる順序付き集合を格納します。以下に、ARRAYフィールドによるデータの格納例を示します。</p>
+    </button></h1><p>ARRAYフィールドは、同じデータ型の要素からなる順序付き集合を格納します。ARRAYフィールドによるデータの格納方法の例を以下に示します。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -41,9 +41,9 @@ summary: ARRAYフィールドには、同じデータ型の要素が順序付け
       </svg>
     </button></h2><ul>
 <li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。ただし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、NULL値を許可することができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p></li>
-<li><p><code translate="no">element_type</code> データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義された同一のデータ型でなければなりません。 が<code translate="no">VARCHAR</code> に設定されている場合、配列要素の<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除く、Milvusがサポートするすべてのスカラーデータ型を受け入れます。</p></li>
+<li><p><code translate="no">element_type</code> データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義される同一のデータ型でなければなりません。 が<code translate="no">VARCHAR</code> に設定されている場合は、各配列要素に許可される最大バイト数を定義する<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除き、Milvusがサポートするすべてのスカラーデータ型を受け入れます。</p></li>
 <li><p><strong>配列の容量</strong>：ARRAYフィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値<strong>は</strong> <strong>1から4096までの</strong>整数である必要があります。</p></li>
-<li><p><strong>文字列の取り扱い</strong>：配列フィールド内の文字列値は、セマンティックなエスケープや変換を行わずに、そのままの形で格納されます。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
+<li><p><strong>文字列の取り扱い</strong>：配列フィールド内の文字列値は、意味的なエスケープや変換を行わずに、そのままの形で格納されます。たとえば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAYフィールドの追加<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,9 +60,9 @@ summary: ARRAYフィールドには、同じデータ型の要素が順序付け
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus で ARRAY フィールドを使用するには、コレクションスキーマの作成時に該当するフィールド型を定義します。この手順には以下が含まれます：</p>
+    </button></h2><p>Milvus で ARRAY フィールドを使用するには、コレクションスキーマの作成時に関連するフィールド型を定義する必要があります。この手順には以下が含まれます：</p>
 <ol>
-<li><p><code translate="no">datatype</code> を、サポートされている配列データ型である<code translate="no">ARRAY</code> に設定します。</p></li>
+<li><p><code translate="no">datatype</code> を、サポートされている配列データ型（<code translate="no">ARRAY</code> ）に設定します。</p></li>
 <li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。同じ配列内のすべての要素は、同じデータ型でなければなりません。</p></li>
 <li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量（つまり、配列が格納できる要素の最大数）を定義します。</p></li>
 </ol>
@@ -274,7 +274,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックス作成は、検索およびクエリのパフォーマンス向上に役立ちます。Milvusでは、ベクトルフィールドに対してインデックス作成は必須ですが、スカラーフィールドに対してはオプションです。</p>
-<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` および ARRAY フィールド `<code translate="no">tags</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックス型を使用してインデックスを作成しています。この型を使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックス型やパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
+<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` および ARRAY フィールド `<code translate="no">tags</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックスタイプを使用してインデックスを作成しています。このタイプを使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックスタイプやパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -419,7 +419,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成したら、ARRAYフィールドを含むデータを挿入できます。</p>
+    </button></h2><p>コレクションを作成した後、ARRAYフィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -732,7 +732,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドのフィルタを組み合わせることができます。たとえば、以下のコードは、ベクトル検索にスカラーフィールドのフィルタを追加する方法を示しています:</p>
+    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドフィルタを組み合わせることができます。たとえば、次のコードは、ベクトル検索にスカラーフィールドフィルタを追加する方法を示しています:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -829,4 +829,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、Milvusでは、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> といった高度な配列フィルタ演算子をサポートしており、クエリ機能をさらに強化できます。詳細については、「<a href="/docs/ja/array-operators.md">ARRAY演算子</a>」を参照してください。</p>
+<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> といった高度な配列フィルタ演算子をサポートしており、クエリ機能をさらに強化できます。詳細については、「<a href="/docs/ja/array-operators.md">ARRAY演算子</a>」を参照してください。</p>

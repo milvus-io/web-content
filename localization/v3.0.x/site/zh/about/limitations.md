@@ -43,7 +43,7 @@ summary: 了解使用 Milvus 时的限制。
 <tr><td>数据库</td><td>255 个字符</td></tr>
 <tr><td>Collection</td><td>255个字符</td></tr>
 <tr><td>字段</td><td>255个字符</td></tr>
-<tr><td>索引</td><td>255个字符</td></tr>
+<tr><td>索引</td><td>255 个字符</td></tr>
 <tr><td>分区</td><td>255 个字符</td></tr>
 </tbody>
 </table>
@@ -62,7 +62,7 @@ summary: 了解使用 Milvus 时的限制。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>资源名称（例如Collection名称、分区名称或索引名称）可以包含数字、字母和下划线 (_)。资源名称必须以字母或下划线 (_) 开头。</p>
+    </button></h2><p>资源名称（如Collection名称、分区名称或索引名称）可以包含数字、字母和下划线 (_)。资源名称必须以字母或下划线 (_) 开头。</p>
 <h2 id="Number-of-resources" class="common-anchor-header">资源数量<button data-href="#Number-of-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ summary: 了解使用 Milvus 时的限制。
 <tr><td>分区</td><td>1,024</td></tr>
 <tr><td>分片</td><td>16</td></tr>
 <tr><td>字段</td><td>64</td></tr>
-<tr><td>索引</td><td>1</td></tr>
+<tr><td>索引</td><td>分片1</td></tr>
 <tr><td>实体</td><td>无限制</td></tr>
 </tbody>
 </table>
@@ -130,7 +130,7 @@ summary: 了解使用 Milvus 时的限制。
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>数据类型</th><th>限制</th></tr>
+<tr><th>数据类型</th><th>限制（字节）</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>
@@ -242,7 +242,7 @@ summary: 了解使用 Milvus 时的限制。
     </button></h2><p>下表概述了不同索引类型对各种搜索行为的支持情况。</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_暴力搜索</th><th>稀疏反向索引</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_暴力搜索</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
 <tr><td>基本搜索</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>

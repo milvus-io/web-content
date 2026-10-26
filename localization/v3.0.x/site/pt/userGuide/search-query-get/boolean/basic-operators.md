@@ -82,7 +82,7 @@ summary: >-
     </button></h3><p>Suponha que tem um campo chamado « <code translate="no">status</code> » e que pretende encontrar todas as entidades em que « <code translate="no">status</code> » seja «active». Pode utilizar o operador de igualdade « <code translate="no">==</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">Exemplo 2: Filtragem com «não é igual a» (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">Exemplo 2: Filtragem com «não igual a» (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,14 +209,14 @@ summary: >-
       </svg>
     </button></h2><p>Os operadores de correspondência de padrões ajudam a filtrar valores de cadeia de caracteres com base em padrões com caracteres curinga ou expressões regulares.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Utilizado para corresponder padrões simples com caracteres curinga em valores de cadeia de caracteres. Por exemplo, <code translate="no">name LIKE &quot;Prod%&quot;</code> corresponde a valores que começam por <code translate="no">Prod</code>.</p></li>
+<li><p><code translate="no">LIKE</code>: Utilizado para corresponder padrões simples com caracteres curinga em valores de cadeia de caracteres. Por exemplo, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » corresponde a valores que começam por « <code translate="no">Prod</code> ».</p></li>
 <li><p><code translate="no">=~</code>: Utilizado para corresponder um valor de cadeia de caracteres a uma expressão regular RE2. Por exemplo, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> corresponde a valores que contenham um código de erro como <code translate="no">E1001</code>.</p></li>
 <li><p><code translate="no">!~</code>: Utilizado para excluir valores de cadeia de caracteres que correspondam a uma expressão regular RE2. Isto é equivalente a <code translate="no">NOT (field =~ &quot;pattern&quot;)</code>.</p></li>
 </ul>
 <p>Para encontrar entidades em que « <code translate="no">name</code> » comece por « <code translate="no">Prod</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para encontrar entidades cujo « <code translate="no">code</code> » contenha um código de erro como « <code translate="no">E1001</code> »:</p>
+<p>Para encontrar entidades cujo « <code translate="no">code</code> » contenha um código de erro, como « <code translate="no">E1001</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para excluir entidades cujo <code translate="no">message</code> comece por <code translate="no">DEBUG</code>:</p>
@@ -260,7 +260,7 @@ summary: >-
 <li><p><code translate="no">*</code> (Multiplicação)</p></li>
 <li><p><code translate="no">/</code> (Divisão)</p></li>
 <li><p><code translate="no">%</code> (Módulo)</p></li>
-<li><p><code translate="no">**</code> (Elevamento a potência)</p></li>
+<li><p><code translate="no">**</code> (Elevado a uma potência)</p></li>
 </ul>
 <h3 id="Example-1-Using-modulus-" class="common-anchor-header">Exemplo 1: Utilização do módulo (<code translate="no">%</code>)<button data-href="#Example-1-Using-modulus-" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -295,10 +295,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para encontrar entidades em que <code translate="no">price</code> elevado à potência de 2 seja maior que 1000:</p>
+    </button></h3><p>Para encontrar entidades em que <code translate="no">price</code> elevado à potência de 2 seja superior a 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Operadores bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Os operadores aritméticos suportam apenas expressões que envolvam um <strong>único campo e uma constante</strong>. As expressões que combinam dois campos aritmeticamente — tais como <code translate="no">price * quantity &gt; 100</code> — não são atualmente suportadas e irão devolver um erro. Se precisar de filtrar com base num valor derivado calculado a partir de vários campos, considere armazenar o valor pré-calculado como um campo escalar separado no momento da inserção.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">Operadores bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,7 +316,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os operadores bit a bit são úteis quando um campo inteiro codifica vários indicadores, tais como permissões, indicadores de funcionalidades ou bits de estado. Pode utilizar estes operadores em expressões de filtro para verificar, combinar ou comparar bits individuais num valor inteiro.</p>
+    </button></h2><p>Os operadores bit a bit são úteis quando um campo inteiro codifica vários sinalizadores, tais como permissões, sinalizadores de funcionalidades ou bits de estado. Pode utilizar estes operadores em expressões de filtro para verificar, combinar ou comparar bits individuais num valor inteiro.</p>
 <p>Para campos escalares, os operadores bit a bit aplicam-se a tipos de campo inteiros, tais como <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> e <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Operadores bit a bit suportados<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -416,7 +419,7 @@ summary: >-
 <li><p><code translate="no">OR</code>: Combina condições em que pelo menos uma deve ser verdadeira.</p></li>
 <li><p><code translate="no">NOT</code>: Nega uma condição.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Exemplo 1: Utilizar « <code translate="no">AND</code> » para combinar condições<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Exemplo 1: Utilização de « <code translate="no">AND</code> » para combinar condições<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -449,7 +452,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para encontrar todos os produtos em que a cor ( <code translate="no">color</code> ) seja «vermelha» ou «azul»:</p>
+    </button></h3><p>Para encontrar todos os produtos em que <code translate="no">color</code> seja «red» ou «blue»:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Exemplo 3: Utilizar « <code translate="no">NOT</code> » para excluir uma condição<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
@@ -508,7 +511,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O Milvus permite filtrar em campos escalares normais, como cadeias de caracteres ou números, com valores nulos.</p>
+    </button></h3><p>O Milvus permite filtrar campos escalares regulares, como cadeias de caracteres ou números, com valores nulos.</p>
 <div class="alert note">
 <p>Uma cadeia de caracteres vazia <code translate="no">&quot;&quot;</code> não é tratada como um valor nulo para um campo <code translate="no">VARCHAR</code>.</p>
 </div>
@@ -567,7 +570,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Exemplo 1: Recuperar entidades em que os metadados são nulos</strong></p>
+<p><strong>Exemplo 1: Recuperar entidades cujos metadados sejam nulos</strong></p>
 <p>Para encontrar entidades em que o campo <code translate="no">metadata</code> esteja em falta ou explicitamente definido como None:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
@@ -608,7 +611,7 @@ summary: >-
 <li><p>O campo ARRAY está completamente ausente da entidade.</p></li>
 </ul>
 <div class="alert note">
-<p>Um campo ARRAY não pode conter valores nulos parciais, uma vez que todos os elementos de um campo ARRAY devem ter o mesmo tipo de dados. Para mais detalhes, consulte <a href="/docs/pt/array_data_type.md">Campo ARRAY</a>.</p>
+<p>Um campo ARRAY não pode conter valores nulos parciais, uma vez que todos os elementos num campo ARRAY devem ter o mesmo tipo de dados. Para mais detalhes, consulte <a href="/docs/pt/array_data_type.md">Campo ARRAY</a>.</p>
 </div>
 <p>Para ilustrar melhor como o Milvus lida com campos ARRAY com valores nulos, considere os seguintes dados de exemplo com um campo ARRAY <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
@@ -631,7 +634,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Exemplo 1: Recuperar entidades em que o campo «tags» é nulo</strong></p>
+<p><strong>Exemplo 1: Recuperar entidades em que o campo «tags» seja nulo</strong></p>
 <p>Para recuperar entidades em que o campo « <code translate="no">tags</code> » esteja em falta ou explicitamente definido como « <code translate="no">None</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -688,7 +691,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus oferece uma variedade de operadores básicos que lhe proporcionam flexibilidade na filtragem e consulta dos seus dados. Ao combinar operadores de comparação, intervalo, aritméticos e lógicos, pode criar expressões de filtro poderosas para restringir os resultados da sua pesquisa e recuperar os dados de que necessita de forma eficiente.</p>
+    </button></h2><p>O Milvus oferece uma variedade de operadores básicos que lhe proporcionam flexibilidade na filtragem e consulta dos seus dados. Ao combinar operadores de comparação, intervalo, aritméticos e lógicos, pode criar expressões de filtragem poderosas para restringir os resultados da sua pesquisa e recuperar os dados de que necessita de forma eficiente.</p>
 <h2 id="FAQ" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -706,4 +709,4 @@ summary: >-
       </svg>
     </button></h2><p><strong>Existe algum limite para o comprimento da lista de valores de correspondência nas condições de filtro (por exemplo, filter=’color in ["red", "green", “blue”]')? O que devo fazer se a lista for demasiado longa?</strong></p>
 <p>O Zilliz Cloud não impõe um limite de comprimento à lista de valores de correspondência nas condições de filtro. No entanto, uma lista excessivamente longa pode afetar significativamente o desempenho da consulta.
-Se a sua condição de filtro incluir uma longa lista de valores de correspondência ou uma expressão complexa com muitos elementos, recomendamos a utilização <a href="/docs/pt/filtering-templating.md">de Modelos de Filtro</a> para melhorar o desempenho da consulta.</p>
+Se a sua condição de filtro incluir uma longa lista de valores de correspondência ou uma expressão complexa com muitos elementos, recomendamos a utilização <a href="/docs/pt/filtering-templating.md">de modelos de filtro</a> para melhorar o desempenho da consulta.</p>

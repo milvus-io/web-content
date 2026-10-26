@@ -1,14 +1,14 @@
 ---
 id: llama_stack_with_milvus.md
-title: RAG mit Llama Stack mit Milvus aufbauen
+title: RAG mit Llama Stack und Milvus erstellen
 related_key: Llama Stack
 summary: >-
-  Dieses Tutorial zeigt Ihnen, wie Sie einen mit Milvus konfigurierten Llama
-  Stack Server aufbauen, der es Ihnen ermöglicht, Ihre privaten Daten zu
-  importieren und als Wissensbasis zu nutzen. Wir werden dann Abfragen auf dem
-  Server durchführen und eine vollständige RAG-Anwendung erstellen.
+  In diesem Tutorial erfahren Sie, wie Sie einen mit Milvus konfigurierten Llama
+  Stack-Server einrichten, damit Sie Ihre privaten Daten importieren und als
+  Wissensbasis nutzen können. Anschließend führen wir Abfragen auf dem Server
+  durch und erstellen so eine vollständige RAG-Anwendung.
 ---
-<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">RAG mit Llama Stack mit Milvus aufbauen<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">RAG mit Llama Stack und Milvus erstellen<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> ist ein serviceorientierter, API-basierter Ansatz für den Aufbau produktiver KI-Anwendungen. Er bietet einen universellen Stack, der es Entwicklern ermöglicht, überall zu entwickeln, überall einzusetzen und produktionsreife Bausteine mit echter Anbieterunabhängigkeit zu nutzen. Der Llama-Stack konzentriert sich auf Metas Llama-Modelle, Kompositionsfähigkeit, Produktionsreife und ein Partner-Ökosystem.</p>
-<p>In diesem Tutorial werden wir Ihnen zeigen, wie Sie einen mit Milvus konfigurierten Llama Stack Server aufbauen, der es Ihnen ermöglicht, Ihre privaten Daten zu importieren und als Wissensbasis zu nutzen. Anschließend werden wir Abfragen auf dem Server durchführen und eine vollständige RAG-Anwendung erstellen.</p>
-<h2 id="Preparing-the-Environment" class="common-anchor-header">Vorbereiten der Umgebung<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> ist ein serviceorientierter, API-first-Ansatz für die Entwicklung von KI-Anwendungen für den produktiven Einsatz. Er bietet einen universellen Stack, der es Entwicklern ermöglicht, überall zu entwickeln, überall bereitzustellen und produktionsreife Bausteine mit echter Anbieterunabhängigkeit zu nutzen. Der Llama Stack konzentriert sich auf die Llama-Modelle von Meta, Kombinierbarkeit, Produktionsreife und ein Ökosystem aus Partnern.</p>
+<p>In diesem Tutorial zeigen wir Ihnen, wie Sie einen mit Milvus konfigurierten Llama-Stack-Server einrichten, damit Sie Ihre privaten Daten als Wissensbasis importieren können. Anschließend führen wir Abfragen auf dem Server durch und erstellen so eine vollständige RAG-Anwendung.</p>
+<h2 id="Preparing-the-Environment" class="common-anchor-header">Vorbereitung der Umgebung<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,17 +40,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Es gibt viele Möglichkeiten, den Llama Stack Server zu starten, z.B. <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">als Bibliothek</a>, als <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">Distribution</a>, usw. Für jede Komponente des Llama Stack können auch verschiedene Provider gewählt werden. Daher gibt es zahlreiche Möglichkeiten, den Llama Stack-Server zu starten.</p>
-<p>Dieses Tutorial verwendet die folgende Konfiguration als Beispiel für den Start des Dienstes. Wenn Sie ihn auf eine andere Weise starten möchten, lesen Sie bitte <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">Start eines Llama Stack Servers</a>.</p>
+    </button></h2><p>Es gibt viele Möglichkeiten, den Llama-Stack-Server zu starten, beispielsweise <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">als Bibliothek</a> oder <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">durch das Erstellen einer Distribution</a> usw. Für jede Komponente im Llama Stack können zudem verschiedene Anbieter ausgewählt werden. Daher gibt es zahlreiche Möglichkeiten, den Llama-Stack-Server zu starten.</p>
+<p>Dieses Tutorial verwendet die folgende Konfiguration als Beispiel zum Starten des Dienstes. Wenn Sie ihn auf andere Weise starten möchten, lesen Sie bitte den Abschnitt <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">„Starten eines Llama-Stack-Servers</a>“.</p>
 <ul>
-<li>Wir verwenden Conda, um eine eigene Distribution mit Milvus-Konfiguration zu erstellen.</li>
-<li>Wir verwenden <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a> als LLM-Anbieter.</li>
-<li>Als Einbettungsmodell wird das Standardmodell <code translate="no">all-MiniLM-L6-v2</code> verwendet.</li>
+<li>Wir verwenden Conda, um eine benutzerdefinierte Distribution mit Milvus-Konfiguration zu erstellen.</li>
+<li>Als LLM-Anbieter verwenden wir <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a>.</li>
+<li>Als Einbettungsmodell verwenden wir das Standardmodell „ <code translate="no">all-MiniLM-L6-v2</code> “.</li>
 </ul>
 <div class="alert note">
-<p>Dieses Tutorial bezieht sich hauptsächlich auf die offizielle Installationsanleitung der <a href="https://llama-stack.readthedocs.io/en/latest/index.html">Llama Stack Dokumentation</a>. Wenn Sie veraltete Teile in diesem Tutorial finden, können Sie sich vorrangig an der offiziellen Anleitung orientieren und ein Issue für uns erstellen.</p>
+<p>Dieses Tutorial bezieht sich hauptsächlich auf die offizielle Installationsanleitung in der <a href="https://llama-stack.readthedocs.io/en/latest/index.html">Llama-Stack-Dokumentation</a>. Sollten Sie in diesem Tutorial veraltete Informationen finden, befolgen Sie bitte vorrangig die offizielle Anleitung und melden Sie uns das Problem über ein Issue.</p>
 </div>
-<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Llama Stack Server starten<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
+<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Llama Stack-Server starten<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Vorbereiten der Umgebung<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Umgebung vorbereiten<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,18 +80,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Da wir Together AI als LLM-Dienst verwenden müssen, müssen wir uns zunächst auf der offiziellen Website anmelden, um einen <a href="https://api.together.xyz/settings/api-keys">API-Schlüssel</a> zu beantragen und den API-Schlüssel <code translate="no">TOGETHER_API_KEY</code> als Umgebungsvariable zu setzen.</p>
-<p>Klonen Sie den Quellcode von Llama Stack</p>
+    </button></h3><p>Da wir Together AI als LLM-Dienst nutzen müssen, müssen wir uns zunächst auf der offiziellen Website anmelden, um einen <a href="https://api.together.xyz/settings/api-keys">API-Schlüssel</a> zu beantragen, und den API-Schlüssel <code translate="no">TOGETHER_API_KEY</code> als Umgebungsvariable festlegen.</p>
+<p>Den Llama-Stack-Quellcode klonen</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
 <button class="copy-code-btn"></button></code></pre>
-<p>Erstellen Sie eine conda-Umgebung und installieren Sie die Abhängigkeiten</p>
+<p>Erstellen Sie eine Conda-Umgebung und installieren Sie die Abhängigkeiten</p>
 <pre><code translate="no" class="language-bash">$ conda create -n stack python=3.10
 $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>Ändern Sie den Inhalt von <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, indem Sie den Abschnitt vector_io durch die entsprechende Milvus-Konfiguration ersetzen. Zum Beispiel, fügen Sie hinzu:</p>
+<p>Passen Sie den Inhalt von ` <code translate="no">llama_stack/llama_stack/templates/together/run.yaml</code>` an und ändern Sie den Abschnitt `vector_io` entsprechend der Milvus-Konfiguration. Fügen Sie beispielsweise Folgendes hinzu:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -104,16 +104,16 @@ $ pip install -e .
 <span class="hljs-comment">#      uri: http://localhost:19530</span>
 <span class="hljs-comment">#      token: root:Milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In Llama Stack kann Milvus auf zwei Arten konfiguriert werden: die lokale Konfiguration, <code translate="no">inline::milvus</code>, und die Remote-Konfiguration, <code translate="no">remote::milvus</code>.</p>
+<p>In Llama Stack kann Milvus auf zwei Arten konfiguriert werden: als lokale Konfiguration ( <code translate="no">inline::milvus</code>) und als Remote-Konfiguration ( <code translate="no">remote::milvus</code>).</p>
 <ul>
-<li><p>Die einfachste Methode ist die lokale Konfiguration, bei der Sie <code translate="no">db_path</code> als Pfad für die lokale Speicherung von <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite-Dateien</a> angeben müssen.</p></li>
-<li><p>Die Fernkonfiguration ist für große Datenmengen geeignet.</p>
+<li><p>Die einfachste Methode ist die lokale Konfiguration, für die „ <code translate="no">db_path</code> “ festgelegt werden muss – ein Pfad zur lokalen Speicherung von <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite-Dateien</a>.</p></li>
+<li><p>Die Remote-Konfiguration eignet sich für große Datenspeicher.</p>
 <ul>
-<li>Wenn Sie eine große Datenmenge haben, können Sie einen performanten Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-URI, z. B. <code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>. Der Standard <code translate="no">token</code> ist <code translate="no">root:Milvus</code>.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Dienst für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem API-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie über große Datenmengen verfügen, können Sie einen leistungsstarken Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Verwenden Sie in dieser Konfiguration bitte die Server-URI, z. B. <code translate="no">http://localhost:19530</code>, als Ihren <code translate="no">uri</code>. Die Standard- <code translate="no">token</code> lautet <code translate="no">root:Milvus</code>.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Dienst für Milvus, nutzen möchten, passen Sie die Werte für „ <code translate="no">uri</code> “ und „ <code translate="no">token</code> “ entsprechend dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem API-Schlüssel</a> in Zilliz Cloud an.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Erstellen der Distribution aus der Vorlage<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Distribution aus der Vorlage erstellen<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,11 +131,11 @@ $ pip install -e .
     </button></h3><p>Führen Sie den folgenden Befehl aus, um die Distribution zu erstellen:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p>Es wird eine Datei unter <code translate="no">~/.llama/distributions/together/together-run.yaml</code> erstellt. Führen Sie dann diesen Befehl aus, um den Server zu starten:</p>
+<p>Es wird eine Datei unter <code translate="no">~/.llama/distributions/together/together-run.yaml</code> generiert. Führen Sie anschließend diesen Befehl aus, um den Server zu starten:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn alles glatt läuft, sollten Sie sehen, dass der Llama Stack Server erfolgreich auf Port 8321 läuft.</p>
-<h2 id="Perform-RAG-from-client" class="common-anchor-header">RAG vom Client aus ausführen<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
+<p>Wenn alles reibungslos verläuft, sollte der Llama Stack-Server erfolgreich auf Port 8321 laufen.</p>
+<h2 id="Perform-RAG-from-client" class="common-anchor-header">RAG vom Client aus durchführen<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie den Server gestartet haben, können Sie den Client-Code für den Zugriff auf den Server schreiben. Hier ist ein Beispielcode:</p>
+    </button></h2><p>Sobald Sie den Server gestartet haben, können Sie den Client-Code schreiben, um darauf zuzugreifen. Hier ist ein Beispielcode:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> uuid
 <span class="hljs-keyword">from</span> llama_stack_client.types <span class="hljs-keyword">import</span> Document
 <span class="hljs-keyword">from</span> llama_stack_client.lib.agents.agent <span class="hljs-keyword">import</span> Agent
@@ -223,7 +223,8 @@ response = rag_agent.create_turn(
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Response: &quot;</span>)
 <span class="hljs-built_in">print</span>(response.output_message.content)
 <button class="copy-code-btn"></button></code></pre>
-<p>Führen Sie diesen Code aus, um die RAG-Abfrage durchzuführen. Wenn alles richtig funktioniert, sollte die Ausgabe wie folgt aussehen:</p>
+<p>Führen Sie diesen Code aus, um die RAG-Abfrage durchzuführen.
+Wenn alles ordnungsgemäß funktioniert, sollte die Ausgabe wie folgt aussehen:</p>
 <pre><code translate="no" class="language-log">inserting...
 finish init agent...
 Response: 

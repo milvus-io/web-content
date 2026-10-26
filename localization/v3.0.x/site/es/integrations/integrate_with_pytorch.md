@@ -1,6 +1,8 @@
 ---
 id: integrate_with_pytorch.md
-summary: Esta página muestra cómo crear una búsqueda de imágenes con PyTorch y Milvus
+summary: >-
+  En esta página se explica cómo crear un buscador de imágenes con PyTorch y
+  Milvus.
 title: Búsqueda de imágenes con PyTorch y Milvus
 ---
 <h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Búsqueda de imágenes con PyTorch y Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
@@ -18,8 +20,8 @@ title: Búsqueda de imágenes con PyTorch y Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía presenta un ejemplo de integración de PyTorch y Milvus para realizar búsquedas de imágenes utilizando incrustaciones. PyTorch es un potente marco de aprendizaje profundo de código abierto ampliamente utilizado para construir y desplegar modelos de aprendizaje automático. En este ejemplo, aprovecharemos su biblioteca Torchvision y un modelo ResNet50 preentrenado para generar vectores de características (incrustaciones) que representen el contenido de la imagen. Estas incrustaciones se almacenarán en Milvus, una base de datos vectorial de alto rendimiento, para permitir una búsqueda eficiente de similitudes. El conjunto de datos utilizado es el Impressionist-Classifier Dataset de <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Combinando las capacidades de aprendizaje profundo de PyTorch con la funcionalidad de búsqueda escalable de Milvus, este ejemplo demuestra cómo construir un sistema de recuperación de imágenes robusto y eficiente.</p>
-<p>¡Vamos a empezar!</p>
+    </button></h1><p>Esta guía presenta un ejemplo de integración de PyTorch y Milvus para realizar búsquedas de imágenes mediante incrustaciones. PyTorch es un potente marco de código abierto de aprendizaje profundo ampliamente utilizado para crear e implementar modelos de aprendizaje automático. En este ejemplo, aprovecharemos su biblioteca Torchvision y un modelo ResNet50 preentrenado para generar vectores de características (representaciones) que representen el contenido de las imágenes. Estas representaciones se almacenarán en Milvus, una base de datos vectorial de alto rendimiento, para permitir una búsqueda por similitud eficiente. El conjunto de datos utilizado es el «Impressionist-Classifier Dataset» de <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Al combinar las capacidades de aprendizaje profundo de PyTorch con la funcionalidad de búsqueda escalable de Milvus, este ejemplo muestra cómo crear un sistema de recuperación de imágenes robusto y eficiente.</p>
+<p>¡Empecemos!</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">Instalación de los requisitos<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,10 +37,10 @@ title: Búsqueda de imágenes con PyTorch y Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para este ejemplo, vamos a utilizar <code translate="no">pymilvus</code> para conectarnos y utilizar Milvus, <code translate="no">torch</code> para ejecutar el modelo de incrustación, <code translate="no">torchvision</code> para el modelo real y el preprocesamiento, <code translate="no">gdown</code> para descargar el conjunto de datos de ejemplo y <code translate="no">tqdm</code> para cargar las barras.</p>
+    </button></h2><p>Para este ejemplo, vamos a utilizar <code translate="no">pymilvus</code> para conectarnos a Milvus, <code translate="no">torch</code> para ejecutar el modelo de incrustación, <code translate="no">torchvision</code> para el modelo propiamente dicho y el preprocesamiento, <code translate="no">gdown</code> para descargar el conjunto de datos de ejemplo y <code translate="no">tqdm</code> para cargar las barras.</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Grabbing-the-data" class="common-anchor-header">Obtener los datos<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
+<h2 id="Grabbing-the-data" class="common-anchor-header">Obtención de los datos<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,7 +55,7 @@ title: Búsqueda de imágenes con PyTorch y Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vamos a utilizar <code translate="no">gdown</code> para descargar el archivo zip de Google Drive y descomprimirlo con la biblioteca integrada <code translate="no">zipfile</code>.</p>
+    </button></h2><p>Vamos a utilizar <code translate="no">gdown</code> para descargar el archivo zip de Google Drive y, a continuación, descomprimirlo con la biblioteca integrada <code translate="no">zipfile</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> gdown
 <span class="hljs-keyword">import</span> zipfile
 
@@ -65,7 +67,7 @@ gdown.download(url, output)
     zip_ref.extractall(<span class="hljs-string">&quot;./paintings&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>El tamaño del conjunto de datos es de 2,35 GB, y el tiempo de descarga dependerá del estado de la red.</p>
+<p>El tamaño del conjunto de datos es de 2,35 GB, y el tiempo que se tarda en descargarlo depende de las condiciones de tu conexión a Internet.</p>
 </div>
 <h2 id="Global-Arguments" class="common-anchor-header">Argumentos globales<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,34 +110,34 @@ TOP_K = <span class="hljs-number">3</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Llegados a este punto, vamos a empezar a configurar Milvus. Los pasos son los siguientes:</p>
+    </button></h2><p>Llegados a este punto, vamos a comenzar a configurar Milvus. Los pasos son los siguientes:</p>
 <ol>
-<li><p>Conéctese a la instancia de Milvus utilizando el URI proporcionado.</p>
+<li><p>Conéctate a la instancia de Milvus utilizando la URI facilitada.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 <span class="hljs-comment"># Connect to the instance</span>
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si la colección ya existe, elimínela.</p>
+<li><p>Si la colección ya existe, elimínala.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
 
 <span class="hljs-comment"># Remove any previous collections with the same name</span>
 <span class="hljs-keyword">if</span> utility.has_collection(COLLECTION_NAME):
     utility.drop_collection(COLLECTION_NAME)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Cree la colección que contiene el ID, la ruta del archivo de la imagen y su incrustación.</p>
+<li><p>Crea la colección que contenga el ID, la ruta del archivo de la imagen y su incrustación.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType, Collection
 
 <span class="hljs-comment"># Create collection which includes the id, filepath of the image, and image embedding</span>
 fields = [
     FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;filepath&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>),  <span class="hljs-comment"># VARCHARS need a maximum length, so for this example they are set to 200 characters</span>
+    FieldSchema(name=<span class="hljs-string">&#x27;filepath&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>),  <span class="hljs-comment"># Each file path can contain up to 200 bytes</span>
     FieldSchema(name=<span class="hljs-string">&#x27;image_embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 ]
 schema = CollectionSchema(fields=fields)
 collection = Collection(name=COLLECTION_NAME, schema=schema)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Cree un índice en la colección recién creada y cárguela en memoria.</p>
+<li><p>Crea un índice en la colección recién creada y cárgalo en memoria.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an AutoIndex index for collection</span>
 index_params = {
 <span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;L2&#x27;</span>,
@@ -146,8 +148,8 @@ collection.create_index(field_name=<span class="hljs-string">&quot;image_embeddi
 collection.load()
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>Una vez realizados estos pasos, la colección estará lista para ser insertada y buscada. Cualquier dato añadido se indexará automáticamente y estará disponible para la búsqueda de forma inmediata. Si los datos son muy recientes, la búsqueda puede ser más lenta, ya que se utilizará la búsqueda de fuerza bruta en los datos que aún están en proceso de indexación.</p>
-<h2 id="Inserting-the-data" class="common-anchor-header">Insertar los datos<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
+<p>Una vez completados estos pasos, la colección estará lista para que se le añadan datos y se realicen búsquedas en ella. Cualquier dato añadido se indexará automáticamente y estará disponible para su búsqueda de forma inmediata. Si los datos son muy recientes, la búsqueda podría ser más lenta, ya que se utilizará la búsqueda por fuerza bruta en los datos que aún se estén indexando.</p>
+<h2 id="Inserting-the-data" class="common-anchor-header">Inserción de los datos<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,8 +164,8 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para este ejemplo, vamos a utilizar el modelo ResNet50 proporcionado por <code translate="no">torch</code> y su hub de modelos. Para obtener las incrustaciones, vamos a quitar la última capa de clasificación, lo que resulta en que el modelo nos da incrustaciones de 2048 dimensiones. Todos los modelos de visión que se encuentran en <code translate="no">torch</code> utilizan el mismo preprocesamiento que hemos incluido aquí.</p>
-<p>En estos próximos pasos vamos a:</p>
+    </button></h2><p>Para este ejemplo, vamos a utilizar el modelo ResNet50 proporcionado por <code translate="no">torch</code> y su centro de modelos. Para obtener las representaciones, eliminamos la capa de clasificación final, lo que hace que el modelo nos proporcione representaciones de 2048 dimensiones. Todos los modelos de visión que se encuentran en <code translate="no">torch</code> utilizan el mismo preprocesamiento que hemos incluido aquí.</p>
+<p>En los siguientes pasos vamos a:</p>
 <ol>
 <li><p>Cargar los datos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
@@ -180,7 +182,7 @@ model = torch.hub.load(<span class="hljs-string">&#x27;pytorch/vision:v0.10.0&#x
 model = torch.nn.Sequential(*(<span class="hljs-built_in">list</span>(model.children())[:-<span class="hljs-number">1</span>]))
 model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Incrustar los datos.</p>
+<li><p>Realizar la incrustación de los datos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms
 
 <span class="hljs-comment"># Preprocessing for images</span>
@@ -221,13 +223,13 @@ collection.flush()
 <button class="copy-code-btn"></button></code></pre>
    <div class="alert note">
 <ul>
-<li>Este paso es relativamente largo porque la incrustación lleva tiempo. Tome un sorbo de café y relájese.</li>
-<li>PyTorch puede no funcionar bien con Python 3.9 y versiones anteriores. Considere usar Python 3.10 y versiones posteriores en su lugar.</li>
+<li>Este paso lleva bastante tiempo, ya que la incrustación tarda un rato. Tómate un sorbo de café y relájate.</li>
+<li>Es posible que PyTorch no funcione bien con Python 3.9 y versiones anteriores. Plantéate utilizar Python 3.10 o versiones posteriores.</li>
 </ul>
    </div>
 </li>
 </ol>
-<h2 id="Performing-the-search" class="common-anchor-header">Realizar la búsqueda<button data-href="#Performing-the-search" class="anchor-icon" translate="no">
+<h2 id="Performing-the-search" class="common-anchor-header">Realización de la búsqueda<button data-href="#Performing-the-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,7 +244,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Con todos los datos insertados en Milvus, podemos empezar a realizar nuestras búsquedas. En este ejemplo, vamos a buscar dos imágenes de ejemplo. Como estamos realizando una búsqueda por lotes, el tiempo de búsqueda se comparte entre todas las imágenes del lote.</p>
+    </button></h2><p>Una vez insertados todos los datos en Milvus, podemos empezar a realizar nuestras búsquedas. En este ejemplo, vamos a buscar dos imágenes de ejemplo. Como estamos realizando una búsqueda por lotes, el tiempo de búsqueda se reparte entre las imágenes del lote.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
 
 <span class="hljs-comment"># Get the filepaths of the search images</span>
@@ -290,8 +292,10 @@ f, axarr = plt.subplots(<span class="hljs-built_in">len</span>(data_batch[<span 
 <span class="hljs-comment"># Save the search result in a separate image file alongside your script.</span>
 plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>La imagen resultante de la búsqueda debería ser similar a la siguiente:</p>
-<p>
+<p>La imagen del resultado de la búsqueda debería ser similar a la siguiente:</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
-   </span> <span class="img-wrapper"> <span>Resultado de la búsqueda de imágenes</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" /> 
+   <span>Resultado de la búsqueda de imágenes</span>
+  
+ </span></p>

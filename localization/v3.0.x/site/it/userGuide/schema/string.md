@@ -21,14 +21,15 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus supporta i dati scalari testuali tramite i campi " <code translate="no">VARCHAR</code> " e " <code translate="no">TEXT</code> ". Questa pagina descrive il campo " <code translate="no">VARCHAR</code>", progettato per metadati costituiti da stringhe brevi e limitate, quali nomi, tag, categorie e ID esterni.</p>
-<p>Per testi di origine più lunghi, brani di documenti, corpi di articoli, ticket o registri che devono essere memorizzati e restituiti con le entità, utilizzare invece un campo <code translate="no">TEXT</code>. Utilizzare <code translate="no">TEXT</code> quando un valore potrebbe superare i <code translate="no">65,535</code> byte o quando non si desidera impostare un <code translate="no">max_length</code> fisso nello schema della collezione. Per ulteriori dettagli, consultare <a href="/docs/it/text.md">Campo di testo</a>.</p>
-<p>Quando si definisce un campo di tipo " <code translate="no">VARCHAR</code> ", sono obbligatori due parametri:</p>
+<p>Per testi di origine più lunghi, brani di documenti, corpi di articoli, ticket o log che devono essere memorizzati e restituiti con le entità, utilizzare invece un campo <code translate="no">TEXT</code>. Utilizzare <code translate="no">TEXT</code> quando un valore può superare i <code translate="no">65,535</code> byte o quando non si desidera impostare un <code translate="no">max_length</code> fisso nello schema della collezione. Per ulteriori dettagli, consultare <a href="/docs/it/text.md">Campo di testo</a>.</p>
+<p>Quando si definisce un campo di tipo " <code translate="no">VARCHAR</code> ", due parametri sono obbligatori:</p>
 <ul>
 <li><p>Impostare il campo " <code translate="no">datatype</code> " su " <code translate="no">DataType.VARCHAR</code>".</p></li>
-<li><p>Specificare l’ <code translate="no">max_length</code>, che definisce il numero massimo di byte che il campo <code translate="no">VARCHAR</code> può memorizzare. L’intervallo valido per <code translate="no">max_length</code> va da 1 a 65.535.</p></li>
+<li><p>Specificare l’ <code translate="no">max_length</code>, che definisce il numero massimo di byte UTF-8 consentiti per ciascun valore del campo. L’intervallo valido per <code translate="no">max_length</code> va da 1 a 65.535.</p></li>
 </ul>
+<p>Il numero di byte può differire dal numero di caratteri. Ad esempio, con <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> rientra nel limite poiché utilizza 10 byte UTF-8. Anche la stringa <code translate="no">&quot;一二三四五六七八九十&quot;</code> ha 10 caratteri, ma utilizza 30 byte UTF-8 e supera il limite.</p>
 <div class="alert note">
-<p>Milvus supporta i valori nulli e i valori predefiniti per i campi di tipo <code translate="no">VARCHAR</code>. Per abilitare queste funzionalità, impostare <code translate="no">nullable</code> su <code translate="no">True</code> e <code translate="no">default_value</code> su un valore stringa. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/nullable-and-default.md">"Nullable &amp; Default"</a>.</p>
+<p>Milvus supporta i valori nulli e i valori predefiniti per i campi di tipo ` <code translate="no">VARCHAR</code> `. Per abilitare queste funzionalità, impostare ` <code translate="no">nullable</code> ` su ` <code translate="no">True</code> ` e ` <code translate="no">default_value</code> ` su un valore stringa. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/nullable-and-default.md">"Nullable &amp; Default"</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Aggiungere un campo VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,10 +49,10 @@ summary: >-
     </button></h2><p>Per memorizzare metadati sotto forma di stringhe brevi e limitate in Milvus, definire un campo ` <code translate="no">VARCHAR</code> ` nello schema della collezione. Di seguito è riportato un esempio di definizione di uno schema di collezione con due campi ` <code translate="no">VARCHAR</code> `:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: memorizza fino a 100 byte, consente valori nulli e ha un valore predefinito pari a <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: memorizza fino a 200 byte, consente valori nulli, ma non ha un valore predefinito.</p></li>
+<li><p><code translate="no">varchar_field2</code>: memorizza fino a 200 byte, ammette valori nulli, ma non ha un valore predefinito.</p></li>
 </ul>
 <div class="alert note">
-<p>Se si imposta <code translate="no">enable_dynamic_fields=True</code> durante la definizione dello schema, Milvus consente di inserire campi scalari non definiti in precedenza. Tuttavia, ciò potrebbe aumentare la complessità delle query e della gestione, con potenziali ripercussioni sulle prestazioni. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a>.</p>
+<p>Se si imposta <code translate="no">enable_dynamic_fields=True</code> durante la definizione dello schema, Milvus consente di inserire campi scalari non definiti in precedenza. Tuttavia, ciò potrebbe aumentare la complessità delle query e della gestione, con un potenziale impatto sulle prestazioni. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -239,7 +240,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Imposta i parametri dell’indice<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Impostazione dei parametri di indicizzazione<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,8 +255,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'indicizzazione contribuisce a migliorare le prestazioni di ricerca e delle query. In Milvus, l'indicizzazione è obbligatoria per i campi vettoriali ma facoltativa per i campi scalari.</p>
-<p>L'esempio seguente crea indici sul campo vettoriale <code translate="no">embedding</code> e sul campo scalare <code translate="no">varchar_field1</code>, entrambi utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l'indice più adatto in base al tipo di dati. È inoltre possibile personalizzare il tipo di indice e i parametri per ciascun campo. Per i dettagli, consultare la sezione <a href="/docs/it/index-explained.md">"Spiegazione dell'indice"</a>.</p>
+    </button></h2><p>L’indicizzazione contribuisce a migliorare le prestazioni di ricerca e delle query. In Milvus, l’indicizzazione è obbligatoria per i campi vettoriali ma facoltativa per i campi scalari.</p>
+<p>L’esempio seguente crea indici sul campo vettoriale <code translate="no">embedding</code> e sul campo scalare <code translate="no">varchar_field1</code>, entrambi utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l’indice più adatto in base al tipo di dati. È inoltre possibile personalizzare il tipo di indice e i parametri per ciascun campo. Per i dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Spiegazione dell’indice</a>.</p>
 <div class="alert note">
 <p>È inoltre possibile creare un indice " <code translate="no">NGRAM</code> " per accelerare il filtraggio <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code>. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/ngram.md">"NGRAM"</a>.</p>
 </div>
@@ -339,7 +340,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Creare una collezione<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Creare una raccolta<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -417,7 +418,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver creato la collezione, inserire entità conformi allo schema.</p>
+    </button></h2><p>Dopo aver creato la collezione, inserire entità che corrispondano allo schema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -550,7 +551,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
         ></path>
       </svg>
     </button></h2><p>Dopo aver inserito le entità, utilizzare il metodo <code translate="no">query</code> per recuperare le entità che corrispondono alle espressioni di filtro specificate.</p>
-<p>Per recuperare le entità in cui l'<code translate="no">varchar_field1</code> corrisponde alla stringa <code translate="no">&quot;Product A&quot;</code>:</p>
+<p>Per recuperare le entità in cui il campo ` <code translate="no">varchar_field1</code> ` corrisponde alla stringa ` <code translate="no">&quot;Product A&quot;</code>`:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

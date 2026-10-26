@@ -3,7 +3,7 @@ id: string.md
 title: Campo VarChar
 summary: >-
   VARCHAR es un tipo de campo escalar que permite almacenar metadatos en forma
-  de cadenas cortas y de longitud limitada en Milvus.
+  de cadenas cortas y limitadas en Milvus.
 ---
 <h1 id="VarChar-Field" class="common-anchor-header">Campo VarChar<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,14 +21,15 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus admite datos escalares de tipo textual mediante los campos « <code translate="no">VARCHAR</code> » y « <code translate="no">TEXT</code> ». En esta página se describe el campo « <code translate="no">VARCHAR</code> », diseñado para metadatos de cadena cortos y delimitados, como nombres, etiquetas, categorías e identificadores externos.</p>
-<p>Para textos de origen más largos, pasajes de documentos, cuerpos de artículos, tickets o registros que deban almacenarse y devolverse con entidades, utilice en su lugar un campo « <code translate="no">TEXT</code> ». Utilice « <code translate="no">TEXT</code> » cuando un valor pueda superar los bytes de « <code translate="no">65,535</code> » o cuando no desee establecer un « <code translate="no">max_length</code> » fijo en el esquema de la colección. Para obtener más detalles, consulte <a href="/docs/es/text.md">«Campo de texto</a>».</p>
+<p>Para textos de origen más largos, pasajes de documentos, cuerpos de artículos, tickets o registros que deban almacenarse y devolverse junto con entidades, utilice en su lugar un campo « <code translate="no">TEXT</code> ». Utilice « <code translate="no">TEXT</code> » cuando un valor pueda superar los « <code translate="no">65,535</code> » bytes o cuando no desee establecer un « <code translate="no">max_length</code> » fijo en el esquema de la colección. Para obtener más detalles, consulte <a href="/docs/es/text.md">«Campo de texto</a>».</p>
 <p>Al definir un campo « <code translate="no">VARCHAR</code> », hay dos parámetros obligatorios:</p>
 <ul>
-<li><p>Establezca el « <code translate="no">datatype</code> » en « <code translate="no">DataType.VARCHAR</code> ».</p></li>
-<li><p>Especifique el « <code translate="no">max_length</code> », que define el número máximo de bytes que puede almacenar el campo « <code translate="no">VARCHAR</code> ». El rango válido para « <code translate="no">max_length</code> » es de 1 a 65 535.</p></li>
+<li><p>Establezca el valor de « <code translate="no">datatype</code> » en « <code translate="no">DataType.VARCHAR</code> ».</p></li>
+<li><p>Especifique el valor de « <code translate="no">max_length</code> », que define el número máximo de bytes UTF-8 permitidos para cada valor de campo. El rango válido para « <code translate="no">max_length</code> » es de 1 a 65 535.</p></li>
 </ul>
+<p>El número de bytes puede diferir del número de caracteres. Por ejemplo, con <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> se ajusta al límite porque utiliza 10 bytes UTF-8. La cadena <code translate="no">&quot;一二三四五六七八九十&quot;</code> también tiene 10 caracteres, pero utiliza 30 bytes UTF-8 y supera el límite.</p>
 <div class="alert note">
-<p>Milvus admite valores nulos y valores por defecto para los campos « <code translate="no">VARCHAR</code> ». Para habilitar estas funciones, establezca « <code translate="no">nullable</code> » en « <code translate="no">True</code> » y « <code translate="no">default_value</code> » en un valor de cadena. Para obtener más detalles, consulte <a href="/docs/es/nullable-and-default.md">«Nullable &amp; Default</a>».</p>
+<p>Milvus admite valores nulos y valores por defecto para los campos de tipo « <code translate="no">VARCHAR</code> ». Para habilitar estas funciones, configura « <code translate="no">nullable</code> » en « <code translate="no">True</code> » y « <code translate="no">default_value</code> » en un valor de cadena. Para más detalles, consulta <a href="/docs/es/nullable-and-default.md">«Nullable &amp; Default</a>».</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Añadir un campo VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +48,7 @@ summary: >-
       </svg>
     </button></h2><p>Para almacenar metadatos de cadena corta y acotada en Milvus, defina un campo « <code translate="no">VARCHAR</code> » en el esquema de su colección. A continuación se muestra un ejemplo de cómo definir un esquema de colección con dos campos « <code translate="no">VARCHAR</code> »:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: almacena hasta 100 bytes, admite valores nulos y tiene un valor por defecto de « <code translate="no">&quot;Unknown&quot;</code> ».</p></li>
+<li><p><code translate="no">varchar_field1</code>: almacena hasta 100 bytes, admite valores nulos y tiene un valor por defecto de <code translate="no">&quot;Unknown&quot;</code>.</p></li>
 <li><p><code translate="no">varchar_field2</code>: almacena hasta 200 bytes, admite valores nulos, pero no tiene un valor por defecto.</p></li>
 </ul>
 <div class="alert note">
@@ -257,7 +258,7 @@ schema.WithField(entity.NewField().
     </button></h2><p>La indexación ayuda a mejorar el rendimiento de las búsquedas y las consultas. En Milvus, la indexación es obligatoria para los campos vectoriales, pero opcional para los campos escalares.</p>
 <p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y en el campo escalar <code translate="no">varchar_field1</code>, ambos utilizando el tipo de índice <code translate="no">AUTOINDEX</code>. Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puedes personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulta <a href="/docs/es/index-explained.md">«Explicación</a> de <a href="/docs/es/index-explained.md">los índices</a>».</p>
 <div class="alert note">
-<p>También puede crear un índice « <code translate="no">NGRAM</code> » para acelerar el filtrado de « <code translate="no">LIKE</code> » en los campos « <code translate="no">VARCHAR</code> ». Para obtener más información, consulte <a href="/docs/es/ngram.md">«NGRAM</a>».</p>
+<p>También puede crear un índice « <code translate="no">NGRAM</code> » para acelerar el filtrado de « <code translate="no">LIKE</code> » en los campos « <code translate="no">VARCHAR</code> ». Para más detalles, consulte <a href="/docs/es/ngram.md">«NGRAM</a>».</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -698,7 +699,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades en las que « <code translate="no">varchar_field1</code> » tenga el valor « <code translate="no">&quot;Unknown&quot;</code> », utiliza la siguiente expresión. Dado que el valor por defecto de « <code translate="no">varchar_field1</code> » es « <code translate="no">&quot;Unknown&quot;</code> », el resultado esperado debería incluir entidades con « <code translate="no">varchar_field1</code> » establecido explícitamente en « <code translate="no">&quot;Unknown&quot;</code> » o con « <code translate="no">varchar_field1</code> » establecido en nulo.</p>
+<p>Para recuperar entidades en las que <code translate="no">varchar_field1</code> tenga el valor <code translate="no">&quot;Unknown&quot;</code>, utilice la siguiente expresión. Dado que el valor por defecto de <code translate="no">varchar_field1</code> es <code translate="no">&quot;Unknown&quot;</code>, el resultado esperado debería incluir entidades con <code translate="no">varchar_field1</code> establecido explícitamente en <code translate="no">&quot;Unknown&quot;</code> o con <code translate="no">varchar_field1</code> establecido en nulo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

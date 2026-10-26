@@ -18,15 +18,16 @@ summary: VARCHAR 是 Milvus 中用於儲存短且有長度限制的字串元資�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 透過 `<code translate="no">VARCHAR</code> ` 和 `<code translate="no">TEXT</code> ` 字段支援文字型標量資料。本頁說明 `<code translate="no">VARCHAR</code>`，該字段專為名稱、標籤、類別及外部 ID 等短且有長度限制的字串元資料而設計。</p>
+    </button></h1><p>Milvus 透過 `<code translate="no">VARCHAR</code> ` 和 `<code translate="no">TEXT</code> ` 字段支援文字型標量資料。本頁說明 `<code translate="no">VARCHAR</code>`，該字段專為名稱、標籤、類別及外部 ID 等簡短且長度受限的字串元資料而設計。</p>
 <p>若需儲存並與實體一併回傳較長的原始文字、文件段落、文章正文、票證或日誌，請改用<code translate="no">TEXT</code> 欄位。當值可能超過<code translate="no">65,535</code> 位元組，或您不希望在集合架構中設定固定的<code translate="no">max_length</code> 時，請使用<code translate="no">TEXT</code> 。詳細資訊請參閱「<a href="/docs/zh-hant/text.md">文字欄位</a>」。</p>
 <p>定義<code translate="no">VARCHAR</code> 欄位時，有兩個必填參數：</p>
 <ul>
 <li><p>將「<code translate="no">datatype</code> 」設定為「<code translate="no">DataType.VARCHAR</code> 」。</p></li>
-<li><p>指定<code translate="no">max_length</code> ，該參數定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍為 1 至 65,535。</p></li>
+<li><p>指定「<code translate="no">max_length</code> 」，此參數定義每個欄位值允許的 UTF-8 位元組最大數量。「<code translate="no">max_length</code> 」的有效範圍為 1 至 65,535。</p></li>
 </ul>
+<p>位元組數可能與字元數不同。例如，當<code translate="no">max_length=10</code> 設定為<code translate="no">&quot;abcdefghij&quot;</code> 時，由於其使用 10 個 UTF-8 位元組，因此符合限制。而字串<code translate="no">&quot;一二三四五六七八九十&quot;</code> 雖然也有 10 個字元，但使用 30 個 UTF-8 位元組，因此超出限制。</p>
 <div class="alert note">
-<p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值與預設值。若要啟用這些功能，請將<code translate="no">nullable</code> 設定為<code translate="no">True</code> ，並將<code translate="no">default_value</code> 設定為字串值。詳細資訊請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值》</a>。</p>
+<p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值與預設值。若要啟用這些功能，請將 `<code translate="no">nullable</code> ` 設定為 `<code translate="no">True</code> `，並將 `<code translate="no">default_value</code> ` 設定為字串值。詳細資訊請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>》。</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">新增 VARCHAR 欄位<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,13 +44,13 @@ summary: VARCHAR 是 Milvus 中用於儲存短且有長度限制的字串元資�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要在 Milvus 中儲存短且長度受限的字串元資料，請在集合架構中定義一個 `<code translate="no">VARCHAR</code> ` 欄位。以下為定義包含兩個 `<code translate="no">VARCHAR</code> ` 欄位的集合架構範例：</p>
+    </button></h2><p>若要在 Milvus 中儲存短且長度受限的字串元資料，請在您的集合架構中定義一個<code translate="no">VARCHAR</code> 欄位。以下是一個定義包含兩個<code translate="no">VARCHAR</code> 欄位的集合架構範例：</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>：最多可儲存 100 位元組，允許空值，且預設值為<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
 <li><p><code translate="no">varchar_field2</code>：最多可儲存 200 位元組，允許空值，但沒有預設值。</p></li>
 </ul>
 <div class="alert note">
-<p>若您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 將允許您插入未預先定義的標量欄位。然而，此舉可能會增加查詢與管理的複雜度，進而影響效能。如需更多資訊，請參閱「<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>」。</p>
+<p>若您在定義資料結構時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 將允許您插入未預先定義的標量欄位。然而，此舉可能會增加查詢與管理的複雜度，進而影響效能。如需更多資訊，請參閱「<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>」。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -253,9 +254,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>建立索引有助於提升搜尋與查詢效能。在 Milvus 中，向量欄位必須建立索引，但標量欄位則為選用。</p>
-<p>以下範例針對向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 建立索引，兩者均使用<code translate="no">AUTOINDEX</code> 索引類型。採用此類型時，Milvus 會根據資料類型自動選取最適合的索引。您也可以針對每個欄位自訂索引類型與參數。詳細資訊請參閱<a href="/docs/zh-hant/index-explained.md">《索引說明》</a>。</p>
+<p>以下範例針對向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 建立索引，兩者均使用<code translate="no">AUTOINDEX</code> 索引類型。使用此類型時，Milvus 會根據資料類型自動選取最適合的索引。您也可以針對每個欄位自訂索引類型和參數。詳細資訊請參閱<a href="/docs/zh-hant/index-explained.md">《索引說明》</a>。</p>
 <div class="alert note">
-<p>您亦可建立<code translate="no">NGRAM</code> 索引，以加速針對<code translate="no">VARCHAR</code> 欄位的<code translate="no">LIKE</code> 篩選作業。詳細資訊請參閱《<a href="/docs/zh-hant/ngram.md">NGRAM</a>》。</p>
+<p>您亦可建立<code translate="no">NGRAM</code> 索引，以加速針對<code translate="no">VARCHAR</code> 欄位的<code translate="no">LIKE</code> 篩選。詳情請參閱《<a href="/docs/zh-hant/ngram.md">NGRAM</a>》。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

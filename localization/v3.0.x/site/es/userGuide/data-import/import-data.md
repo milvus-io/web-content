@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: Importar datos
-summary: Esta página muestra el procedimiento para importar los datos preparados.
+summary: En esta página se explica el procedimiento para importar los datos preparados.
 ---
 <h1 id="Import-data" class="common-anchor-header">Importar datos<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: Esta página muestra el procedimiento para importar los datos preparado
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta página muestra el procedimiento para importar los datos preparados.</p>
+    </button></h1><p>En esta página se explica el procedimiento para importar los datos preparados.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,17 +36,17 @@ summary: Esta página muestra el procedimiento para importar los datos preparado
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Ya ha preparado sus datos y los ha colocado en el cubo de Milvus.</p>
-<p>Si no es así, debería utilizar <strong>RemoteBulkWriter</strong> para preparar sus datos primero y asegurarse de que los datos preparados ya se han transferido al cubo de Milvus en la instancia MinIO iniciada junto con su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/prepare-source-data.md">Preparar datos de origen</a>.</p></li>
-<li><p>Ya ha creado una colección con el esquema que utiliza para preparar sus datos. Si no es así, consulte <a href="/docs/es/manage-collections.md">Administrar colecciones</a>.</p></li>
+<li><p>Ya has preparado tus datos y los has colocado en el bucket de Milvus.</p>
+<p>Si no es así, debe utilizar <strong>RemoteBulkWriter</strong> para preparar primero sus datos y asegurarse de que los datos preparados ya se hayan transferido al bucket de Milvus en la instancia de MinIO iniciada junto con su instancia de Milvus. Para obtener más detalles, consulte <a href="/docs/es/prepare-source-data.md">«Preparar datos de origen</a>».</p></li>
+<li><p>Ya ha creado una colección con el esquema que utiliza para preparar sus datos. Si no es así, consulte <a href="/docs/es/manage-collections.md">«Gestionar colecciones</a>».</p></li>
 </ul>
 <div class="language-python">
-<p>El siguiente fragmento de código crea una colección simple con el esquema dado. Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> en la referencia del SDK.</p>
+<p>El siguiente fragmento de código crea una colección sencilla con el esquema indicado. Para obtener más información sobre los parámetros, consulta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> en la referencia del SDK.</p>
 </div>
 <div class="language-java">
-<p>El siguiente fragmento de código crea una colección simple con el esquema dado. Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> en la referencia del SDK.</p>
+<p>El siguiente fragmento de código crea una colección sencilla con el esquema indicado. Para obtener más información sobre los parámetros, consulta <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> en la referencia del SDK.</p>
 </div>
-<h2 id="Import-data" class="common-anchor-header">Importar datos<button data-href="#Import-data" class="anchor-icon" translate="no">
+<h2 id="Import-data" class="common-anchor-header">Importación de datos<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,9 +61,13 @@ summary: Esta página muestra el procedimiento para importar los datos preparado
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para importar los datos preparados, debe crear una tarea de importación como se indica a continuación:</p>
+    </button></h2><p>Si su canalización puede reintentar una solicitud de importación que haya fallado o haya agotado el tiempo de espera, asigne al trabajo una clave de idempotencia; consulte <a href="/docs/es/idempotent-import.md">Importación masiva idempotente</a>.</p>
+<p>Para importar los datos preparados, debe crear un trabajo de importación de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -128,7 +132,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>El nombre de la colección de destino.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>Una lista de rutas de archivos relativa a la ruta raíz del cubo de Milvus en la instancia de MioIO iniciada junto con su instancia de Milvus. Las posibles sublistas son las siguientes</p>
+<p>Una lista de listas de rutas de archivos relativas a la ruta raíz del bucket de Milvus en la instancia de MioIO iniciada junto con su instancia de Milvus. Las sublistas posibles son las siguientes:</p>
 <ul>
 <li><p><strong>Archivos JSON</strong></p>
 <p>Si el archivo preparado está en formato JSON, <strong>cada sublista debe contener la ruta a un único archivo JSON preparado</strong>.</p>
@@ -145,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>El posible retorno es el siguiente</p>
+<p>El resultado posible es el siguiente:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -168,9 +172,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez que obtenga un ID de trabajo de importación, puede comprobar el progreso de la importación de la siguiente manera:</p>
+    </button></h2><p>Una vez obtenido el ID de la tarea de importación, puedes comprobar el progreso de la importación de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -229,7 +236,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>La posible respuesta es la siguiente</p>
+<p>La respuesta posible es la siguiente:</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -264,7 +271,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Listar trabajos de importación<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Listar tareas de importación<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -279,9 +286,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede listar todos los trabajos de importación relativos a una colección específica de la siguiente manera:</p>
+    </button></h2><p>Puedes listar todas las tareas de importación relacionadas con una colección específica de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -346,11 +356,11 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
       </svg>
     </button></h2><ul>
 <li><p>El tamaño de cada archivo de importación no debe superar <strong>los 16 GB</strong>.</p></li>
-<li><p>El número máximo de archivos por solicitud de importación no debe exceder de <strong>1024</strong>. Cada solicitud de importación puede tener como máximo 16 GB por archivo * 1024 archivos = 16 TB de datos.</p></li>
-<li><p>El número máximo de peticiones de importación simultáneas está limitado a <strong>1024</strong>.</p></li>
+<li><p>El número máximo de archivos por solicitud de importación no debe superar <strong>los 1024</strong>. Cada solicitud de importación puede tener como máximo 16 GB por archivo * 1024 archivos = 16 TB de datos.</p></li>
+<li><p>El número máximo de solicitudes de importación simultáneas está limitado a <strong>1024</strong>.</p></li>
 </ul>
 <ul>
-<li>Sólo se puede especificar un nombre de partición en una solicitud de importación. Si no se especifica ningún nombre de partición, los datos se insertarán en la partición por defecto. Además, no se puede establecer un nombre de partición en la petición de importación si se ha establecido la Clave de Partición en la colección destino.</li>
+<li>Solo se puede especificar un nombre de partición en una solicitud de importación. Si no se especifica ningún nombre de partición, los datos se insertarán en la partición predeterminada. Además, no se puede establecer un nombre de partición en la solicitud de importación si se ha configurado la clave de partición en la colección de destino.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Restricciones<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,25 +377,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de importar datos, asegúrese de que ha reconocido las restricciones relativas a los siguientes comportamientos de Milvus:</p>
+    </button></h2><p>Antes de importar datos, asegúrate de haber tenido en cuenta las restricciones relacionadas con los siguientes comportamientos de Milvus:</p>
 <ul>
-<li><p>Restricciones relativas al comportamiento Cargar:</p>
+<li><p>Restricciones relativas al comportamiento de carga:</p>
 <ul>
-<li>Si una colección ya se ha cargado antes de una importación, puede utilizar la función <code translate="no">refresh_load</code> para cargar los datos recién importados una vez finalizada la importación.</li>
+<li>Si una colección ya se ha cargado antes de una importación, puede utilizar la función « <code translate="no">refresh_load</code> » para cargar los datos recién importados una vez finalizada la importación.</li>
 </ul></li>
 <li><p>Restricciones relativas a los comportamientos de consulta y búsqueda:</p>
 <ul>
-<li><p>Antes de que el estado del trabajo de importación sea <strong>Completado</strong>, se garantiza que los datos recién importados sean invisibles para las consultas y búsquedas.</p></li>
-<li><p>Una vez <strong>completado</strong> el trabajo,</p>
+<li><p>Mientras el estado del trabajo de importación no sea <strong>«Completado»</strong>, se garantiza que los datos recién importados no serán visibles en las consultas ni en las búsquedas.</p></li>
+<li><p>Una vez que el estado del trabajo sea <strong>«Completado»</strong>,</p>
 <ul>
-<li><p>Si la colección no está cargada, puede utilizar la función <code translate="no">load</code> para cargar los datos recién importados.</p></li>
+<li><p>si la colección no está cargada, puedes utilizar la función ` <code translate="no">load</code> ` para cargar los datos recién importados.</p></li>
 <li><p>Si la colección ya está cargada, puede llamar a <code translate="no">load(is_refresh=True)</code> para cargar los datos importados.</p></li>
 </ul></li>
 </ul></li>
 <li><p>Restricciones relativas al comportamiento de eliminación:</p>
 <ul>
-<li><p>Antes de que el estado del trabajo de importación sea <strong>Completado</strong>, el borrado no está garantizado y puede o no tener éxito.</p></li>
-<li><p>El borrado después de que el estado del trabajo sea <strong>Completado</strong> está garantizado.</p></li>
+<li><p>Antes de que el estado del trabajo de importación sea <strong>«Completado»</strong>, la eliminación no está garantizada y puede tener éxito o no.</p></li>
+<li><p>La eliminación una vez que el estado de la tarea sea <strong>«Completado»</strong> tiene éxito garantizado.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Recomendaciones<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +413,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le recomendamos encarecidamente que utilice la función de importación de varios archivos, que le permite cargar varios archivos en una única solicitud. Este método no sólo simplifica el proceso de importación, sino que también aumenta significativamente el rendimiento de la importación. Mientras tanto, al consolidar sus cargas, puede reducir el tiempo dedicado a la gestión de datos y hacer que su flujo de trabajo sea más eficiente.</p>
+    </button></h2><p>Recomendamos encarecidamente utilizar la función de importación de varios archivos, que te permite cargar varios archivos en una sola solicitud. Este método no solo simplifica el proceso de importación, sino que también mejora significativamente el rendimiento de la misma. Además, al agrupar tus cargas, puedes reducir el tiempo dedicado a la gestión de datos y hacer que tu flujo de trabajo sea más eficiente.</p>

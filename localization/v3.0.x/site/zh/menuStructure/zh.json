@@ -316,7 +316,7 @@
         "order": 1,
         "children": [
           {
-            "label": "About the Collection",
+            "label": "关于本Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "解聚机",
+                    "label": "解聚剂",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改Collection Schema",
+            "label": "修改集合 Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1427,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1564,6 +1564,12 @@
         "label": "导入数据",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "幂等批量导入",
+        "id": "idempotent-import.md",
+        "order": 2,
         "children": []
       }
     ]

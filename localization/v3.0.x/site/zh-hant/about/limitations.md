@@ -20,7 +20,7 @@ summary: 了解使用 Milvus 時的限制。
         ></path>
       </svg>
     </button></h1><p>Milvus 致力於提供最優質的向量資料庫，以支援人工智慧應用與向量相似度搜尋。然而，團隊正持續努力導入更多功能與最佳實用工具，以提升使用者體驗。本頁面列出使用者在使用 Milvus 時可能遇到的若干已知限制。</p>
-<h2 id="Length-of-a-resource-name" class="common-anchor-header">資源名稱長度<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
+<h2 id="Length-of-a-resource-name" class="common-anchor-header">資源名稱的長度<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +130,7 @@ summary: 了解使用 Milvus 時的限制。
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>資料類型</th><th>限制</th></tr>
+<tr><th>資料類型</th><th>限制（位元組）</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65,535</td></tr>
@@ -159,7 +159,7 @@ summary: 了解使用 Milvus 時的限制。
 <tr><td>維度</td><td>32,768</td></tr>
 </tbody>
 </table>
-<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">每次 RPC 的輸入與輸出<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
+<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">每個 RPC 的輸入與輸出<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +246,7 @@ summary: 了解使用 Milvus 時的限制。
 </thead>
 <tbody>
 <tr><td>基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>分割區搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>分區搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>已擷取原始資料的基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>帶分頁的基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>篩選搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>

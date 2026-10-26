@@ -2,7 +2,7 @@
 id: limitations.md
 title: Limitações do Milvus
 related_key: Limitations
-summary: Informe-se sobre os limites ao utilizar o Milvus.
+summary: Informe-se sobre as restrições ao utilizar o Milvus.
 ---
 <h1 id="Milvus-Limits" class="common-anchor-header">Limitações do Milvus<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: Informe-se sobre os limites ao utilizar o Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus está empenhado em fornecer as melhores bases de dados vetoriais para alimentar aplicações de IA e a pesquisa de similaridade vetorial. No entanto, a equipa está continuamente a trabalhar para introduzir mais funcionalidades e as melhores ferramentas para melhorar a experiência do utilizador. Esta página enumera algumas limitações conhecidas com as quais os utilizadores se podem deparar ao utilizar o Milvus.</p>
+    </button></h1><p>O Milvus está empenhado em fornecer as melhores bases de dados vetoriais para alimentar aplicações de IA e a pesquisa de similaridade vetorial. No entanto, a equipa está continuamente a trabalhar para introduzir mais funcionalidades e as melhores ferramentas para melhorar a experiência do utilizador. Esta página enumera algumas limitações conhecidas com as quais os utilizadores podem deparar-se ao utilizar o Milvus.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">Comprimento do nome de um recurso<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: Informe-se sobre os limites ao utilizar o Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Tipo de dados</th><th>Limite</th></tr>
+<tr><th>Tipo de dados</th><th>Limite (bytes)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65 535</td></tr>
@@ -199,7 +199,7 @@ summary: Informe-se sobre os limites ao utilizar o Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Na versão atual, os dados a carregar devem ser inferiores a 90% dos recursos totais de memória de todos os nós de consulta, a fim de reservar recursos de memória para o motor de execução.</p>
+    </button></h2><p>Na versão atual, os dados a carregar devem ser inferiores a 90% dos recursos de memória totais de todos os nós de consulta, a fim de reservar recursos de memória para o motor de execução.</p>
 <h2 id="Search-limits" class="common-anchor-header">Limites de pesquisa<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

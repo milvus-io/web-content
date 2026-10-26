@@ -1,17 +1,17 @@
 ---
 id: phrase-match.md
-title: Corrispondenza di fraseCompatible with Milvus 2.5.17+
+title: Corrispondenza fraseCompatible with Milvus 2.5.17+
 summary: >-
-  La ricerca per frase consente di trovare documenti che contengono i termini
+  La ricerca per frase consente di cercare documenti che contengano i termini
   della query come frase esatta. Per impostazione predefinita, le parole devono
   apparire nello stesso ordine e essere direttamente adiacenti l'una all'altra.
-  Ad esempio, una query del tipo "robotica machine learning" trova
-  corrispondenze con testi come "…modelli tipici di robotica machine learning…",
-  in cui le parole "robotica", "machine" e "learning" compaiono in sequenza
-  senza altre parole tra di esse.
+  Ad esempio, una query come "robotica machine learning" trova corrispondenze
+  con testi del tipo "…modelli tipici di robotica machine learning…", in cui le
+  parole "robotica", "machine" e "learning" compaiono in sequenza senza altre
+  parole tra di esse.
 beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +26,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La corrispondenza di frase consente di cercare documenti che contengano i termini della query come frase esatta. Per impostazione predefinita, le parole devono apparire nello stesso ordine e essere direttamente adiacenti l'una all'altra. Ad esempio, una query come <strong>“robotica machine learning”</strong> trova corrispondenze in testi del tipo <em>“…modelli tipici di robotica e machine learning…”</em>, dove le parole <strong>“robotica”</strong>, <strong>“machine”</strong> e <strong>“learning”</strong> compaiono in sequenza senza altre parole tra di loro.</p>
-<p>Tuttavia, in scenari reali, la corrispondenza esatta delle frasi può risultare troppo rigida. Potrebbe essere necessario trovare corrispondenze con testi del tipo <em>“…modelli di machine learning ampiamente adottati nella robotica…”.</em> In questo caso, le stesse parole chiave sono presenti ma non una accanto all’altra né nell’ordine originale. Per gestire questa situazione, la corrispondenza per frase supporta il parametro “ <code translate="no">slop</code> ”, che introduce una maggiore flessibilità. Il valore di " <code translate="no">slop</code> " (spostamento tra i termini) definisce quanti spostamenti posizionali sono consentiti tra i termini della frase. Ad esempio, con un " <code translate="no">slop</code> " pari a 1, una query per <strong>"machine learning"</strong> può trovare corrispondenze con testi come <em>"...machine deep learning..."</em>, dove una parola (<strong>"deep"</strong>) separa i termini originali.</p>
+    </button></h1><p>La corrispondenza di frase consente di cercare documenti che contengano i termini della query come frase esatta. Per impostazione predefinita, le parole devono apparire nello stesso ordine e essere direttamente adiacenti l'una all'altra. Ad esempio, una query come <strong>“robotica machine learning”</strong> trova corrispondenze in testi del tipo <em>“…modelli tipici di machine learning nella robotica…”</em>, dove le parole <strong>“robotica”</strong>, <strong>“machine”</strong> e <strong>“learning”</strong> compaiono in sequenza senza altre parole tra di esse.</p>
+<p>Tuttavia, in scenari reali, la corrispondenza esatta delle frasi può risultare troppo rigida. Potrebbe essere necessario trovare corrispondenze con testi del tipo <em>“…modelli di machine learning ampiamente adottati nella robotica…”.</em> In questo caso, le stesse parole chiave sono presenti ma non una accanto all’altra né nell’ordine originale. Per gestire questa situazione, la corrispondenza per frase supporta il parametro “ <code translate="no">slop</code> ”, che introduce una maggiore flessibilità. Il valore « <code translate="no">slop</code> » definisce quanti spostamenti posizionali sono consentiti tra i termini della frase. Ad esempio, con un « <code translate="no">slop</code> » pari a 1, una query per <strong>«machine learning»</strong> può trovare corrispondenze con testi come <em>«…machine deep learning…»</em>, dove una parola (<strong>«deep»</strong>) separa i termini originali.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,26 +47,26 @@ beta: Milvus 2.5.17+
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" /> 
-   <span>Flusso di lavoro della corrispondenza frasale</span>
+   <span>Flusso di lavoro della corrispondenza di frasi</span>
   
  </span></p>
 <ol>
 <li><p><strong>Tokenizzazione del documento</strong>: quando si inseriscono documenti in Milvus, il testo viene suddiviso in token (singole parole o termini) tramite un analizzatore, con la registrazione delle informazioni posizionali per ciascun token. Ad esempio, <strong>doc_1</strong> viene tokenizzato in <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. Per ulteriori informazioni sugli analizzatori, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica sugli analizzatori</a>.</p></li>
-<li><p><strong>Creazione dell’indice invertito</strong>: Milvus crea un indice invertito, mappando ogni token ai documenti in cui compare e alle posizioni del token in tali documenti.</p></li>
-<li><p><strong>Corrispondenza delle frasi</strong>: quando viene eseguita una query di frase, Milvus cerca ogni token nell’indice invertito e ne verifica le posizioni per determinare se compaiono nell’ordine e nella vicinanza corretti. Il parametro ` <code translate="no">slop</code> ` controlla il numero massimo di posizioni consentite tra i token corrispondenti:</p>
+<li><p><strong>Creazione dell’indice invertito</strong>: Milvus crea un indice invertito, mappando ogni token ai documenti in cui compare e alle posizioni del token all’interno di tali documenti.</p></li>
+<li><p><strong>Corrispondenza delle frasi</strong>: quando viene eseguita una query per frase, Milvus cerca ogni token nell’indice invertito e ne verifica le posizioni per determinare se compaiono nell’ordine e nella vicinanza corretti. Il parametro ` <code translate="no">slop</code> ` controlla il numero massimo di posizioni consentite tra i token corrispondenti:</p>
 <ul>
 <li><p><strong>slop = 0</strong> significa che i token devono apparire <strong>nell’ordine esatto ed essere immediatamente adiacenti</strong> (cioè senza parole extra in mezzo).</p>
 <ul>
-<li>Nell’esempio, solo <strong>doc_1</strong> (<strong>“machine”</strong> alla <strong>pos=0</strong>, <strong>“learning”</strong> alla <strong>pos=1</strong>) corrisponde esattamente.</li>
+<li>Nell’esempio, solo <strong>doc_1</strong> (<strong>“machine”</strong> in <strong>pos=0</strong>, <strong>“learning”</strong> in <strong>pos=1</strong>) corrisponde esattamente.</li>
 </ul></li>
-<li><p><strong>slop = 2</strong> consente fino a due posizioni di flessibilità o riorganizzazione tra i token corrispondenti.</p>
+<li><p><strong>slop = 2</strong> consente fino a due posizioni di flessibilità o riorganizzazioni tra i token corrispondenti.</p>
 <ul>
-<li><p>Ciò consente l’inversione dell’ordine (<strong>“learning machine”</strong>) o un piccolo spazio tra i token.</p></li>
+<li><p>Ciò consente l’ordine invertito (<strong>“learning machine”</strong>) o un piccolo spazio tra i token.</p></li>
 <li><p>Di conseguenza, <strong>doc_1</strong>, <strong>doc_2</strong> (<strong>“learning”</strong> in <strong>pos=0</strong>, <strong>“machine”</strong> in <strong>pos=1</strong>) e <strong>doc_3</strong> (<strong>“learning”</strong> in <strong>pos=1</strong>, <strong>“machine”</strong> in <strong>pos=2</strong>) corrispondono tutti.</p></li>
 </ul></li>
 </ul></li>
 </ol>
-<h2 id="Enable-phrase-match" class="common-anchor-header">Abilitare la corrispondenza di frasi<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza per frase<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&#x27;text&#x27;</span>,                 <span class="hljs-comment"># Name of the field</span>
     datatype=DataType.VARCHAR,         <span class="hljs-comment"># Field data type set as VARCHAR (string)</span>
-    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string</span>
+    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string in bytes</span>
     enable_analyzer=<span class="hljs-literal">True</span>,              <span class="hljs-comment"># Enables text analysis (tokenization)</span>
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
@@ -149,7 +149,7 @@ schema.addField(AddFieldReq.builder()
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)              <span class="hljs-comment">// Name of the field</span>
         .dataType(DataType.VarChar)     <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
         .enableAnalyzer(<span class="hljs-literal">true</span>)           <span class="hljs-comment">// Enables text analysis (tokenization)</span>
         .enableMatch(<span class="hljs-literal">true</span>)              <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
         .build());
@@ -171,7 +171,7 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;text&quot;</span>).                      <span class="hljs-comment">// Name of the field</span>
     WithDataType(entity.FieldTypeVarChar). <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string</span>
+    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string in bytes</span>
     WithEnableAnalyzer(<span class="hljs-literal">true</span>).              <span class="hljs-comment">// Enables text analysis (tokenization)</span>
     WithEnableMatch(<span class="hljs-literal">true</span>),                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 ).WithField(entity.NewField().
@@ -194,7 +194,7 @@ schema.WithField(entity.NewField().
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-comment">// Name of the field</span>
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string in bytes</span>
     <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables text analysis (tokenization)</span>
     <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
   },
@@ -241,7 +241,7 @@ schema.<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hlj
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>));
 <span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string in bytes</span>
                     .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Enables text analysis (tokenization)</span>
                     .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));    <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
@@ -262,9 +262,9 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La precisione della corrispondenza delle frasi dipende in modo significativo dall'analizzatore utilizzato per tokenizzare i dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il proprio caso d'uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per i dettagli, consultare <a href="/docs/it/standard-analyzer.md">Analizzatore standard</a>.</p>
-<p>Se la propria applicazione richiede un analizzatore specifico, configurarlo utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, ecco come configurare l’analizzatore ` <code translate="no">english</code> ` per la corrispondenza delle frasi in un testo in inglese:</p>
+    </button></h3><p>La precisione della corrispondenza delle frasi dipende in modo significativo dall’analizzatore utilizzato per tokenizzare i dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il proprio caso d’uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
+<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Analizzatore standard</a>.</p>
+<p>Se la propria applicazione richiede un analizzatore specifico, è possibile configurarlo utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, ecco come configurare l’analizzatore ` <code translate="no">english</code> ` per la corrispondenza delle frasi in un testo in inglese:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -282,7 +282,7 @@ analyzer_params = {
 schema.add_field(
     field_name=<span class="hljs-string">&#x27;text&#x27;</span>,                 <span class="hljs-comment"># Name of the field</span>
     datatype=DataType.VARCHAR,         <span class="hljs-comment"># Field data type set as VARCHAR</span>
-    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string</span>
+    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string in bytes</span>
     enable_analyzer=<span class="hljs-literal">True</span>,              <span class="hljs-comment"># Enables text analysis</span>
     analyzer_params=analyzer_params,   <span class="hljs-comment"># Specifies the analyzer configuration</span>
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
@@ -296,7 +296,7 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)              <span class="hljs-comment">// Name of the field</span>
         .dataType(DataType.VarChar)     <span class="hljs-comment">// Field data type set as VARCHAR</span>
-        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
         .enableAnalyzer(<span class="hljs-literal">true</span>)           <span class="hljs-comment">// Enables text analysis</span>
         .analyzerParams(analyzerParams) <span class="hljs-comment">// Specifies the analyzer configuration</span>
         .enableMatch(<span class="hljs-literal">true</span>)              <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -309,7 +309,7 @@ analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;text&quot;</span>).                      <span class="hljs-comment">// Name of the field</span>
     WithDataType(entity.FieldTypeVarChar). <span class="hljs-comment">// Field data type set as VARCHAR</span>
-    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string</span>
+    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string in bytes</span>
     WithEnableAnalyzer(<span class="hljs-literal">true</span>).              <span class="hljs-comment">// Enables text analysis</span>
     WithAnalyzerParams(analyzerParams).    <span class="hljs-comment">// Specifies the analyzer configuration</span>
     WithEnableMatch(<span class="hljs-literal">true</span>),                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -323,7 +323,7 @@ schema.WithField(entity.NewField().
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-comment">// Name of the field</span>
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-comment">// Field data type set as VARCHAR</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string in bytes</span>
     <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables text analysis</span>
     <span class="hljs-attr">analyzer_params</span>: analyzer_params, <span class="hljs-comment">// Specifies the analyzer configuration</span>
     <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -352,12 +352,12 @@ nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</s
 
 <span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
                     .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)               <span class="hljs-comment">// Enables text analysis</span>
                     .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params) <span class="hljs-comment">// Specifies the analyzer configuration</span>
                     .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));                <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus supporta diversi analizzatori su misura per diverse lingue e casi d’uso. Per informazioni dettagliate, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica degli analizzatori</a>.</p>
+<p>Milvus supporta diversi analizzatori su misura per diversi linguaggi e casi d’uso. Per informazioni dettagliate, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica degli analizzatori</a>.</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">Utilizzo della corrispondenza delle frasi<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -373,9 +373,9 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta abilitata la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della collezione, è possibile eseguire corrispondenze di frasi utilizzando l’espressione <code translate="no">PHRASE_MATCH</code>.</p>
+    </button></h2><p>Dopo aver abilitato la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della collezione, è possibile eseguire corrispondenze di frasi utilizzando l’espressione <code translate="no">PHRASE_MATCH</code>.</p>
 <div class="alert note">
-<p>L'espressione <code translate="no">PHRASE_MATCH</code> non fa distinzione tra maiuscole e minuscole. È possibile utilizzare sia <code translate="no">PHRASE_MATCH</code> che <code translate="no">phrase_match</code>.</p>
+<p>L’espressione <code translate="no">PHRASE_MATCH</code> non fa distinzione tra maiuscole e minuscole. È possibile utilizzare sia <code translate="no">PHRASE_MATCH</code> che <code translate="no">phrase_match</code>.</p>
 </div>
 <h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintassi dell’espressione PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -392,7 +392,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilizzare l’espressione <code translate="no">PHRASE_MATCH</code> per specificare il campo, la frase e la flessibilità facoltativa (<code translate="no">slop</code>) durante la ricerca. La sintassi è la seguente:</p>
+    </button></h3><p>Utilizzare l’espressione <code translate="no">PHRASE_MATCH</code> per specificare il campo, la frase e la flessibilità opzionale (<code translate="no">slop</code>) durante la ricerca. La sintassi è la seguente:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -480,7 +480,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando si utilizza il metodo ` <code translate="no">query()</code> `, <strong>`PHRASE_MATCH</strong> ` agisce come un filtro scalare. Vengono restituiti solo i documenti che contengono la frase specificata (entro il margine di tolleranza consentito).</p>
+    </button></h3><p>Quando si utilizza il metodo ` <code translate="no">query()</code> `, <strong>`PHRASE_MATCH</strong> ` agisce come un filtro scalare. Vengono restituiti solo i documenti che contengono la frase specificata (nel rispetto della tolleranza consentita).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">Esempio: slop = 0 (corrispondenza esatta)</h4><p>Questo esempio restituisce i documenti contenenti la frase esatta <strong>“machine learning”</strong> senza alcun token aggiuntivo in mezzo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -567,7 +567,7 @@ milvus::QueryResponse response;
      <td><p>"L’apprendimento automatico aumenta l’efficienza nell’analisi dei dati su larga scala"</p></td>
    </tr>
 </table>
-<p>Solo il documento 1 contiene la frase esatta <strong>“machine learning”</strong> nell'ordine specificato senza token aggiuntivi.</p>
+<p>Solo il documento 1 contiene la frase esatta <strong>“machine learning”</strong> nell’ordine specificato senza token aggiuntivi.</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">Ricerca con corrispondenza di frase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -699,7 +699,7 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"L’apprendimento di un approccio basato sulle macchine è fondamentale per il progresso dell’IA moderna"</p></td>
+     <td><p>"L'apprendimento di un approccio basato sulle macchine è fondamentale per il progresso dell'IA moderna"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -710,7 +710,7 @@ milvus::SearchResponse response;
      <td><p>"L'apprendimento di algoritmi avanzati espande le capacità dell'IA"</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--2" class="common-anchor-header">Esempio: slop = 2</h4><p>Questo esempio consente uno slop pari a 2, il che significa che sono ammessi fino a due token aggiuntivi (o termini invertiti) tra le parole <strong>“machine”</strong> e <strong>“learning”.</strong></p>
+<h4 id="Example-slop--2" class="common-anchor-header">Esempio: slop = 2</h4><p>Questo esempio consente uno slop pari a 2, il che significa che tra le parole <strong>“machine”</strong> e <strong>“learning”</strong> sono ammessi fino a due token aggiuntivi (o termini invertiti) <strong>.</strong></p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -825,7 +825,7 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L'apprendimento automatico aumenta l'efficienza nell’analisi dei dati su larga scala"</p></td>
+     <td><p>"L’apprendimento automatico aumenta l’efficienza nell’analisi dei dati su larga scala"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -947,7 +947,7 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L’apprendimento automatico migliora l’efficienza nell’analisi dei dati su larga scala"</p></td>
+     <td><p>"L'apprendimento automatico aumenta l'efficienza nell'analisi dei dati su larga scala"</p></td>
    </tr>
    <tr>
      <td><p>2</p></td>
@@ -978,12 +978,12 @@ milvus::SearchResponse response;
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>L'abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l'impatto sull'archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all'analizzatore utilizzato.</p></li>
+<li><p>L’abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l’impatto sull’archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all’analizzatore utilizzato.</p></li>
 <li><p>Una volta definito un analizzatore nello schema, le relative impostazioni diventano permanenti per quella raccolta. Se si ritiene che un analizzatore diverso sia più adatto alle proprie esigenze, è possibile eliminare la raccolta esistente e crearne una nuova con la configurazione dell’analizzatore desiderata.</p></li>
-<li><p>Le prestazioni della corrispondenza delle frasi dipendono dal modo in cui il testo viene tokenizzato. Prima di applicare un analizzatore all’intera raccolta, utilizzare il metodo ` <code translate="no">run_analyzer</code> ` per esaminare l’output della tokenizzazione. Per ulteriori informazioni, consultare <a href="/docs/it/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">la panoramica sugli analizzatori</a>.</p></li>
+<li><p>Le prestazioni della corrispondenza delle frasi dipendono dal modo in cui il testo viene tokenizzato. Prima di applicare un analizzatore all’intera raccolta, utilizzare il metodo ` <code translate="no">run_analyzer</code> ` per esaminare l’output della tokenizzazione. Per ulteriori informazioni, consultare <a href="/docs/it/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">la Panoramica sull’analizzatore</a>.</p></li>
 <li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>
 <ul>
-<li><p>I caratteri racchiusi tra virgolette doppie o singole all’interno delle espressioni vengono interpretati come costanti stringa. Se la costante stringa include caratteri di escape, questi devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare ` <code translate="no">\\</code> ` per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare un tabulatore <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare un carattere di nuova riga.</p></li>
+<li><p>I caratteri racchiusi tra virgolette doppie o singole all’interno delle espressioni vengono interpretati come costanti stringa. Se la costante stringa include caratteri di escape, questi devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare <code translate="no">\\</code> per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare un tabulatore <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare un carattere di nuova riga.</p></li>
 <li><p>Se una costante stringa è racchiusa tra virgolette singole, una virgoletta singola all’interno della costante deve essere rappresentata come <code translate="no">\\'</code>, mentre una virgoletta doppia può essere rappresentata sia come <code translate="no">&quot;</code> che come <code translate="no">\\&quot;</code>. Esempio: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Se una costante stringa è racchiusa tra virgolette doppie, una virgoletta doppia all’interno della costante deve essere rappresentata come <code translate="no">\\&quot;</code>, mentre una virgoletta singola può essere rappresentata sia come <code translate="no">'</code> che come <code translate="no">\\'</code>. Esempio: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

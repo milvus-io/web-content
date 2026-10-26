@@ -2,8 +2,8 @@
 id: multi-language-analyzers.md
 title: 多语言分析器Compatible with Milvus 2.5.11+
 summary: >-
-  当 Milvus 进行文本分析时，通常会将单一分析器应用于 Collection
-  中的整个文本字段。如果该分析器针对英语进行了优化，那么面对其他语言（如中文、西班牙语或法语）所要求的截然不同的分词和词干提取规则时，它将难以应对，从而导致召回率降低。
+  当 Milvus 进行文本分析时，通常会将同一个分析器应用于 Collection
+  中的整个文本字段。如果该分析器是针对英语优化的，那么面对其他语言（如中文、西班牙语或法语）所要求的截然不同的分词和词干提取规则时，它就会难以应对，从而导致召回率降低。
   例如，搜索西班牙语单词“teléfono”（意为“电话”）时，以英语为重点的分析器就会出现问题：它可能会忽略重音符号，且不应用西班牙语特有的词干化规则，从而导致相关结果被遗漏。
 beta: Milvus 2.5.11+
 ---
@@ -22,7 +22,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>当 Milvus 进行文本分析时，通常会对 Collection 中的整个文本字段应用单一分析器。如果该分析器针对英语进行了优化，那么面对中文、西班牙语或法语等其他语言所要求的截然不同的分词和词干化规则时，它将难以应对，从而导致召回率降低。 例如，搜索西班牙语单词<em>“teléfono”</em>（意为<em>“电话”</em>）时，以英语为重点的分析器就会出现问题：它可能会忽略重音符号，且不应用西班牙语特有的词干化规则，导致相关结果被遗漏。</p>
+    </button></h1><p>当 Milvus 进行文本分析时，通常会将单一分析器应用于 Collection 中的整个文本字段。如果该分析器针对英语进行了优化，那么面对中文、西班牙语或法语等其他语言所要求的截然不同的分词和词干化规则时，它将难以应对，从而导致召回率降低。 例如，搜索西班牙语单词<em>“teléfono”</em>（意为<em>“电话”</em>）时，以英语为重点的分析器就会出现问题：它可能会忽略重音符号，且不应用西班牙语特有的词干化规则，导致相关结果被遗漏。</p>
 <p>多语言分析器通过允许您为单个 Collection 中的文本字段配置多个分析器来解决这一问题。这样，您就可以在文本字段中存储多语言文档，而 Milvus 会根据每份文档的相应语言规则来分析文本。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,24 +70,24 @@ beta: Milvus 2.5.11+
 <li><p><strong>配置多语言分析器</strong>：</p>
 <ul>
 <li><p>使用以下格式设置多个特定语言的分析器：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code> ，其中每个<code translate="no">analyzer_config</code> 都遵循《<a href="/docs/zh/analyzer-overview.md#Analyzer-types">分析器概述</a>》中描述的标准<code translate="no">analyzer_params</code> 配置。</p></li>
-<li><p>定义一个特殊的标识符字段，该字段将决定为每份文档选择哪个分析器。</p></li>
+<li><p>定义一个特殊的标识符字段，该字段将决定每个文档应选用哪个分析器。</p></li>
 <li><p>配置一个<code translate="no">default</code> 分析器，用于处理未知语言。</p></li>
 </ul></li>
-<li><p><strong>创建Collection</strong>：</p>
+<li><p><strong>创建 Collection</strong>：</p>
 <ul>
 <li><p>定义包含基本字段的Schema：</p>
 <ul>
 <li><p><strong>primary_key</strong>：文档唯一标识符。</p></li>
 <li><p><strong>text_field</strong>：存储原始文本内容。</p></li>
-<li><p><strong>identifier_field</strong>：指定针对每个文档应使用哪个分析器。</p></li>
-<li><p><strong>vector_field</strong>：用于存储由 BM25 函数生成的稀疏 Embeddings。</p></li>
+<li><p><strong>identifier_field</strong>：指定每个文档应使用哪个分析器。</p></li>
+<li><p><strong>vector_field</strong>：存储由 BM25 函数生成的稀疏 Embeddings。</p></li>
 </ul></li>
 <li><p>配置 BM25 函数和索引参数。</p></li>
 </ul></li>
 <li><p><strong>插入带有语言标识符的数据</strong>：</p>
 <ul>
 <li><p>添加包含多种语言文本的文档，每个文档都包含一个标识符值，用于指定应使用哪个分析器。</p></li>
-<li><p>Milvus 将根据标识符字段选择合适的分析器，而标识符未知文档将使用<code translate="no">default</code> 分析器。</p></li>
+<li><p>Milvus 将根据标识符字段选择合适的分析器，而标识符未知文档则使用<code translate="no">default</code> 分析器。</p></li>
 </ul></li>
 <li><p><strong>使用特定语言的分析器进行搜索</strong>：</p>
 <ul>
@@ -238,7 +238,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>是</p></td>
-     <td><p>列出了 Milvus 可用于处理文本的每个特定语言的分析器。<code translate="no">analyzers</code> 中的每个分析器都遵循以下格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
+     <td><p>列出了 Milvus 可用于处理文本的所有特定语言的分析器。<code translate="no">analyzers</code> 中的每个分析器都遵循以下格式：<code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code> 。</p></td>
      <td><ul>
 <li>请使用标准的<code translate="no">analyzer_params</code> 语法定义每个分析器（参见《<a href="/docs/zh/analyzer-overview.md#Analyzer-types">分析器概述</a>》）。</li>
 <li>添加一个键为<code translate="no">default</code> 的条目；当<code translate="no">by_field</code> 中存储的值与其他分析器名称都不匹配时，Milvus 将回退到此分析器。</li>
@@ -296,7 +296,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
 <ul>
 <li><p><strong>主键字段</strong>（<code translate="no">id</code> ）：Collection中每个实体的唯一标识符。设置<code translate="no">auto_id=True</code> 可使Milvus自动生成这些ID。</p></li>
 <li><p><strong>语言标识字段</strong>（<code translate="no">language</code> ）：此 VARCHAR 字段对应于您在<code translate="no">multi_analyzer_params</code> 中指定的<code translate="no">by_field</code> 。它存储每个实体的语言标识符，用于告知 Milvus 应使用哪种分析器。</p></li>
-<li><p><strong>文本内容字段</strong>（<code translate="no">text</code> ）：此 VARCHAR 字段用于存储您需要分析和检索的实际文本数据。设置<code translate="no">enable_analyzer=True</code> 至关重要，因为它会为此字段启用文本分析功能。<code translate="no">multi_analyzer_params</code> 的配置直接关联到该字段，从而在您的文本数据与特定语言的分析器之间建立联系。</p></li>
+<li><p><strong>文本内容字段</strong>（<code translate="no">text</code> ）：此 VARCHAR 字段存储您要分析和搜索的实际文本数据。设置<code translate="no">enable_analyzer=True</code> 至关重要，因为它会为该字段启用文本分析功能。<code translate="no">multi_analyzer_params</code> 的配置直接关联到该字段，从而在您的文本数据与特定语言的分析器之间建立联系。</p></li>
 <li><p><strong>向量字段</strong>(<code translate="no">sparse</code>)：该字段将存储由 BM25 函数生成的稀疏向量。这些向量代表了文本数据的可分析形式，也是 Milvus 实际进行搜索的对象。</p></li>
 </ul>
 <div class="multipleCode">
@@ -330,14 +330,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -585,7 +585,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>该函数会根据文本条目的语言标识符，自动为其应用相应的分析器。有关基于 BM25 的文本检索的更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>该函数会根据每条文本条目的语言标识符，自动为其应用相应的分析器。有关基于 BM25 的文本检索的更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
 <h3 id="Configure-index-params" class="common-anchor-header">配置索引参数<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -645,7 +645,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>该索引通过组织稀疏向量，以实现高效的 BM25 相似度计算，从而提升搜索性能。</p>
+<p>该索引通过组织稀疏向量以实现高效的 BM25 相似度计算，从而提升搜索性能。</p>
 <h3 id="Create-the-collection" class="common-anchor-header">创建Collection<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

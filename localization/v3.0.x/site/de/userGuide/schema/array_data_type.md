@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Standardwerte</strong>: ARRAY-Felder unterstützen keine Standardwerte. Sie können jedoch das Attribut „ <code translate="no">nullable</code> “ auf „ <code translate="no">True</code> “ setzen, um Nullwerte zuzulassen. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullable &amp; Default</a>“.</p></li>
-<li><p><strong>Datentyp:</strong> Alle Elemente in einem ARRAY-Feld müssen denselben Datentyp aufweisen, der durch den Parameter „ <code translate="no">element_type</code> “ definiert wird. Wenn „ <code translate="no">element_type</code> “ auf „ <code translate="no">VARCHAR</code> “ gesetzt ist, müssen Sie außerdem den „ <code translate="no">max_length</code> “ für die Array-Elemente angeben. Der „ <code translate="no">element_type</code> “ akzeptiert jeden von Milvus unterstützten skalaren Datentyp, mit Ausnahme von „ <code translate="no">JSON</code> “.</p></li>
+<li><p><strong>Datentyp:</strong> Alle Elemente in einem ARRAY-Feld müssen denselben Datentyp aufweisen, der durch den Parameter „ <code translate="no">element_type</code> “ definiert wird. Wenn „ <code translate="no">element_type</code> “ auf „ <code translate="no">VARCHAR</code> “ gesetzt ist, müssen Sie zusätzlich „ <code translate="no">max_length</code> “ angeben, wodurch die maximal zulässige Byteanzahl für jedes Array-Element festgelegt wird. Der Parameter „ <code translate="no">element_type</code> “ akzeptiert jeden von Milvus unterstützten skalaren Datentyp, mit Ausnahme von „ <code translate="no">JSON</code> “.</p></li>
 <li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem ARRAY-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays definiert wurde, wie unter <code translate="no">max_capacity</code> angegeben. Der Wert sollte eine ganze Zahl im Bereich von <strong>1</strong> bis <strong>4096</strong> sein.</p></li>
-<li><p><strong>Behandlung von Zeichenketten</strong>: Zeichenkettenwerte in Array-Feldern werden unverändert gespeichert, ohne semantische Escaping-Zeichen oder Konvertierung. Beispielsweise werden „ <code translate="no">'a&quot;b'</code> “, „ <code translate="no">&quot;a'b&quot;</code> “, „ <code translate="no">'a\'b'</code> “ und „ <code translate="no">&quot;a\&quot;b&quot;</code> “ so gespeichert, wie sie eingegeben wurden, während „ <code translate="no">'a'b'</code> “ und „ <code translate="no">&quot;a&quot;b&quot;</code> “ als ungültige Werte betrachtet werden.</p></li>
+<li><p><strong>Behandlung von Zeichenketten</strong>: Zeichenkettenwerte in Array-Feldern werden unverändert gespeichert, ohne semantische Escaping-Zeichen oder Konvertierung. Beispielsweise werden <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> und <code translate="no">&quot;a\&quot;b&quot;</code> so gespeichert, wie sie eingegeben wurden, während <code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> als ungültige Werte betrachtet werden.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY-Feld hinzufügen<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -276,7 +276,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus ist die Indizierung für Vektorfelder obligatorisch, für Skalarfelder jedoch optional.</p>
-<p>Im folgenden Beispiel werden Indizes für das Vektorfeld „ <code translate="no">embedding</code> “ und das ARRAY-Feld „ <code translate="no">tags</code> “ erstellt, beide unter Verwendung des Indextyps „ <code translate="no">AUTOINDEX</code> “. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index basierend auf dem Datentyp aus. Sie können den Indextyp und die Parameter auch für jedes Feld individuell anpassen. Weitere Informationen finden Sie unter <a href="/docs/de/index-explained.md">„Index Explained</a>“.</p>
+<p>Im folgenden Beispiel werden Indizes für das Vektorfeld „ <code translate="no">embedding</code> “ und das ARRAY-Feld „ <code translate="no">tags</code> “ erstellt, beide unter Verwendung des Indextyps „ <code translate="no">AUTOINDEX</code> “. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index basierend auf dem Datentyp aus. Sie können den Indextyp und die Parameter auch für jedes Feld individuell anpassen. Weitere Informationen finden Sie unter <a href="/docs/de/index-explained.md">„Index erklärt</a>“.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -421,7 +421,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nach dem Erstellen der Sammlung können Sie Daten einfügen, die ARRAY-Felder enthalten.</p>
+    </button></h2><p>Nachdem Sie die Sammlung erstellt haben, können Sie Daten einfügen, die ARRAY-Felder enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -637,7 +637,7 @@ fmt.Println(<span class="hljs-string">&quot;ratings&quot;</span>, rs.GetColumn(<
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>So rufen Sie Entitäten ab, bei denen der Wert des ersten Elements von ` <code translate="no">ratings</code> ` größer als 4 ist:</p>
+<p>So rufen Sie Entitäten ab, bei denen der Wert des ersten Elements von „ <code translate="no">ratings</code> “ größer als 4 ist:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -734,7 +734,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zur grundlegenden Filterung nach skalaren Feldern können Sie Vektorähnlichkeitssuchen mit Filtern für skalare Felder kombinieren. Der folgende Code zeigt beispielsweise, wie Sie einer Vektorsuche einen Filter für ein skalares Feld hinzufügen:</p>
+    </button></h2><p>Zusätzlich zur einfachen Filterung nach skalaren Feldern können Sie Vektorähnlichkeitssuchen mit Filtern für skalare Felder kombinieren. Der folgende Code zeigt beispielsweise, wie Sie einen Filter für ein skalares Feld zu einer Vektorsuche hinzufügen:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -346,7 +346,7 @@
             "children": []
           },
           {
-            "label": "Carica e rilascio",
+            "label": "Caricamento e rilascio",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "Importazione in blocco idempotente",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },
@@ -1625,7 +1631,7 @@
         ]
       },
       {
-        "label": "Abilità Milvus",
+        "label": "Abilità di Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -1938,7 +1944,7 @@
         ]
       },
       {
-        "label": "Ridimensionamento",
+        "label": "Scalabilità",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2152,7 +2158,7 @@
             "children": []
           },
           {
-            "label": "Connettiti a Kafka con SASL/SSL",
+            "label": "Connettiti a Kafka tramite SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2210,7 +2216,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un’unica istanza",
+                "label": "Backup e ripristino in un'unica istanza",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

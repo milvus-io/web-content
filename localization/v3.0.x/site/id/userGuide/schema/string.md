@@ -21,14 +21,15 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus mendukung data skalar teks melalui bidang ` <code translate="no">VARCHAR</code> ` dan ` <code translate="no">TEXT</code> `. Halaman ini menjelaskan ` <code translate="no">VARCHAR</code>`, yang dirancang untuk metadata string pendek dan terbatas, seperti nama, tag, kategori, dan ID eksternal.</p>
-<p>Untuk teks sumber yang lebih panjang, bagian dokumen, isi artikel, tiket, atau log yang harus disimpan dan dikembalikan bersama entitas, gunakan bidang ` <code translate="no">TEXT</code> `. Gunakan ` <code translate="no">TEXT</code> ` jika nilai mungkin melebihi batas ` <code translate="no">65,535</code> ` byte atau jika Anda tidak ingin menetapkan ` <code translate="no">max_length</code> ` tetap dalam skema koleksi. Untuk detailnya, lihat <a href="/docs/id/text.md">Bidang Teks</a>.</p>
+<p>Untuk teks sumber yang lebih panjang, bagian dokumen, isi artikel, tiket, atau log yang harus disimpan dan dikembalikan bersama entitas, gunakan bidang ` <code translate="no">TEXT</code> `. Gunakan ` <code translate="no">TEXT</code> ` jika nilai mungkin melebihi ` <code translate="no">65,535</code> ` byte atau jika Anda tidak ingin menetapkan ` <code translate="no">max_length</code> ` tetap dalam skema koleksi. Untuk detailnya, lihat <a href="/docs/id/text.md">Bidang Teks</a>.</p>
 <p>Saat Anda mendefinisikan bidang ` <code translate="no">VARCHAR</code> `, ada dua parameter yang wajib diisi:</p>
 <ul>
-<li><p>Tetapkan " <code translate="no">datatype</code> " ke " <code translate="no">DataType.VARCHAR</code>".</p></li>
-<li><p>Tentukan ` <code translate="no">max_length</code>`, yang menentukan jumlah byte maksimum yang dapat disimpan oleh bidang ` <code translate="no">VARCHAR</code> `. Rentang nilai yang valid untuk ` <code translate="no">max_length</code> ` adalah dari 1 hingga 65.535.</p></li>
+<li><p>Tetapkan ` <code translate="no">datatype</code> ` ke ` <code translate="no">DataType.VARCHAR</code>`.</p></li>
+<li><p>Tentukan " <code translate="no">max_length</code>", yang menentukan jumlah maksimum byte UTF-8 yang diizinkan untuk setiap nilai bidang. Rentang nilai yang valid untuk " <code translate="no">max_length</code> " adalah dari 1 hingga 65.535.</p></li>
 </ul>
+<p>Jumlah byte dapat berbeda dengan jumlah karakter. Misalnya, dengan <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> masih dalam batas karena menggunakan 10 byte UTF-8. String <code translate="no">&quot;一二三四五六七八九十&quot;</code> juga memiliki 10 karakter, tetapi menggunakan 30 byte UTF-8 dan melebihi batas.</p>
 <div class="alert note">
-<p>Milvus mendukung nilai null dan nilai default untuk bidang ` <code translate="no">VARCHAR</code> `. Untuk mengaktifkan fitur ini, atur ` <code translate="no">nullable</code> ` ke ` <code translate="no">True</code> ` dan ` <code translate="no">default_value</code> ` ke nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Milvus mendukung nilai null dan nilai default untuk bidang <code translate="no">VARCHAR</code>. Untuk mengaktifkan fitur-fitur ini, atur <code translate="no">nullable</code> menjadi <code translate="no">True</code> dan <code translate="no">default_value</code> menjadi nilai string. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Menambahkan bidang VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menyimpan metadata string pendek dan terbatas di Milvus, tentukan bidang ` <code translate="no">VARCHAR</code> ` dalam skema koleksi Anda. Berikut adalah contoh mendefinisikan skema koleksi dengan dua bidang ` <code translate="no">VARCHAR</code> `:</p>
+    </button></h2><p>Untuk menyimpan metadata string pendek dan terbatas di Milvus, tentukan bidang ` <code translate="no">VARCHAR</code> ` dalam skema koleksi Anda. Berikut adalah contoh penentuan skema koleksi dengan dua bidang ` <code translate="no">VARCHAR</code> `:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: menyimpan hingga 100 byte, mengizinkan nilai null, dan memiliki nilai default <code translate="no">&quot;Unknown&quot;</code>.</p></li>
 <li><p><code translate="no">varchar_field2</code>: menyimpan hingga 200 byte, mengizinkan nilai null, tetapi tidak memiliki nilai default.</p></li>

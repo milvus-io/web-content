@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externa",
+            "label": "Alterar o esquema de cobrança externo",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "Importação em massa idempotente",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },
@@ -2126,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Conceder Privilégios",
+                "label": "Conceder privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []

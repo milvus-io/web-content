@@ -19,7 +19,7 @@ summary: Scopri quali sono i limiti nell'utilizzo di Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus si impegna a fornire i migliori database vettoriali per potenziare le applicazioni di intelligenza artificiale e la ricerca di similarità vettoriale. Tuttavia, il team lavora costantemente per introdurre ulteriori funzionalità e le migliori utilità al fine di migliorare l'esperienza utente. Questa pagina elenca alcune limitazioni note che gli utenti potrebbero riscontrare durante l'utilizzo di Milvus.</p>
+    </button></h1><p>Milvus si impegna a fornire i migliori database vettoriali per potenziare le applicazioni di intelligenza artificiale e la ricerca di similarità vettoriale. Tuttavia, il team lavora costantemente per introdurre nuove funzionalità e le migliori utilità volte a migliorare l'esperienza utente. Questa pagina elenca alcune limitazioni note che gli utenti potrebbero riscontrare durante l'utilizzo di Milvus.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">Lunghezza del nome di una risorsa<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +130,7 @@ summary: Scopri quali sono i limiti nell'utilizzo di Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Tipo di dati</th><th>Limite</th></tr>
+<tr><th>Tipo di dati</th><th>Limite (byte)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65.535</td></tr>
@@ -242,13 +242,13 @@ summary: Scopri quali sono i limiti nell'utilizzo di Milvus.
     </button></h2><p>La tabella seguente fornisce una panoramica del supporto per i vari comportamenti di ricerca nei diversi tipi di indice.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_FORZA_BRUTA</th><th>SPARSE_INDICE_INVERSO</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INDICE_INVERTITO</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
 <tr><td>Ricerca di base</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca partizioni</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca di base con dati grezzi recuperati</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
-<tr><td>Ricerca semplice con impaginazione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
+<tr><td>Ricerca di base con impaginazione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca filtrata</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca per intervallo</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca per gruppi</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>No</td><td>Sì</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>No</td><td>No</td></tr>

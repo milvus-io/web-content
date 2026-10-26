@@ -43,10 +43,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Valores predeterminados</strong>: Los campos ARRAY no admiten valores predeterminados. Sin embargo, puedes establecer el atributo « <code translate="no">nullable</code> » en « <code translate="no">True</code> » para permitir valores nulos. Para obtener más información, consulta <a href="/docs/es/v2.6.x/nullable-and-default.md">«Nullable y predeterminado</a>».</p></li>
-<li><p><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse el « <code translate="no">max_length</code> » para los elementos del array. El « <code translate="no">element_type</code> » admite cualquier tipo de datos escalar compatible con Milvus, con la excepción de « <code translate="no">JSON</code> ».</p></li>
+<li><p><strong>Valores por defecto</strong>: Los campos ARRAY no admiten valores por defecto. Sin embargo, puedes establecer el atributo « <code translate="no">nullable</code> » en « <code translate="no">True</code> » para permitir valores nulos. Para más detalles, consulta <a href="/docs/es/v2.6.x/nullable-and-default.md">«Nullable &amp; Default</a>».</p></li>
+<li><p><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse « <code translate="no">max_length</code> », que define el número máximo de bytes permitidos para cada elemento de la matriz. El parámetro « <code translate="no">element_type</code> » admite cualquier tipo de datos escalares compatible con Milvus, con la excepción de « <code translate="no">JSON</code> ».</p></li>
 <li><p><strong>Capacidad de la matriz</strong>: El número de elementos de un campo ARRAY debe ser menor o igual que la capacidad máxima definida al crear la matriz, tal y como se especifica en <code translate="no">max_capacity</code>. El valor debe ser un número entero comprendido entre <strong>1</strong> y <strong>4096</strong>.</p></li>
-<li><p><strong>Manejo de cadenas</strong>: Los valores de cadena en los campos ARRAY se almacenan tal cual, sin escape semántico ni conversión. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
+<li><p><strong>Manejo de cadenas</strong>: Los valores de cadena en los campos «Array» se almacenan tal cual, sin escape semántico ni conversión. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Añadir un campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
       </svg>
     </button></h2><p>Para utilizar campos ARRAY en Milvus, defina el tipo de campo correspondiente al crear el esquema de la colección. Este proceso incluye:</p>
 <ol>
-<li><p>Establecer ` <code translate="no">datatype</code> ` en el tipo de datos `Array` compatible, ` <code translate="no">ARRAY</code>`.</p></li>
+<li><p>Establecer ` <code translate="no">datatype</code> ` en el tipo de datos `Array` compatible, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizar el parámetro « <code translate="no">element_type</code> » para especificar el tipo de datos de los elementos del array. Todos los elementos de un mismo array deben ser del mismo tipo de datos.</p></li>
 <li><p>Utilizar el parámetro ` <code translate="no">max_capacity</code> ` para definir la capacidad máxima de la matriz, es decir, el número máximo de elementos que puede contener.</p></li>
 </ol>
@@ -565,7 +565,7 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tras insertar entidades, utiliza el método « <code translate="no">query</code> » para recuperar las entidades que coincidan con las expresiones de filtro especificadas.</p>
+    </button></h2><p>Tras insertar entidades, utilice el método « <code translate="no">query</code> » para recuperar las entidades que coincidan con las expresiones de filtro especificadas.</p>
 <p>Para recuperar entidades en las que el campo « <code translate="no">tags</code> » no sea nulo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

@@ -3,7 +3,7 @@ id: array_data_type.md
 title: Поле «Массив»
 summary: >-
   Поле ARRAY хранит упорядоченный набор элементов одного и того же типа данных.
-  Ниже приведён пример того, как поля ARRAY хранят данные:
+  Вот пример того, как поля ARRAY хранят данные:
 ---
 <h1 id="Array-Field" class="common-anchor-header">Поле «Массив»<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,8 +42,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Значения по умолчанию</strong>: поля ARRAY не поддерживают значения по умолчанию. Однако вы можете установить атрибут « <code translate="no">nullable</code> » в значение « <code translate="no">True</code> », чтобы разрешить нулевые значения. Подробности см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">«Nullable &amp; Default</a>».</p></li>
-<li><p><strong>Тип данных:</strong> все элементы в поле ARRAY должны иметь одинаковый тип данных, который определяется параметром <code translate="no">element_type</code>. Если для параметра <code translate="no">element_type</code> установлено значение <code translate="no">VARCHAR</code>, необходимо также указать <code translate="no">max_length</code> для элементов массива. Параметр <code translate="no">element_type</code> допускает любой скалярный тип данных, поддерживаемый Milvus, за исключением <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Значения по умолчанию</strong>: поля ARRAY не поддерживают значения по умолчанию. Однако можно установить атрибут « <code translate="no">nullable</code> » в значение « <code translate="no">True</code> », чтобы разрешить нулевые значения. Подробности см. в разделе <a href="/docs/ru/v2.6.x/nullable-and-default.md">«Nullable &amp; Default</a>».</p></li>
+<li><p><strong>Тип данных:</strong> все элементы в поле ARRAY должны иметь одинаковый тип данных, который определяется параметром <code translate="no">element_type</code>. Если для параметра <code translate="no">element_type</code> установлено значение <code translate="no">VARCHAR</code>, необходимо также указать параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, допустимое для каждого элемента массива. Параметр <code translate="no">element_type</code> принимает любой скалярный тип данных, поддерживаемый Milvus, за исключением <code translate="no">JSON</code>.</p></li>
 <li><p><strong>Емкость массива</strong>: количество элементов в поле ARRAY должно быть меньше или равно максимальной емкости, заданной при создании массива, как указано в параметре <code translate="no">max_capacity</code>. Значение должно быть целым числом в диапазоне от <strong>1</strong> до <strong>4096</strong>.</p></li>
 <li><p><strong>Обработка строк</strong>: Строковые значения в полях массива хранятся без изменений, без семантической экранировки или преобразования. Например, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся в том виде, в котором они введены, тогда как <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
 </ul>
@@ -66,7 +66,7 @@ summary: >-
 <ol>
 <li><p>Установку параметра « <code translate="no">datatype</code> » в значение поддерживаемого типа данных «Array» ( <code translate="no">ARRAY</code>).</p></li>
 <li><p>Использование параметра <code translate="no">element_type</code> для указания типа данных элементов в массиве. Все элементы одного массива должны иметь одинаковый тип данных.</p></li>
-<li><p>Использование параметра ` <code translate="no">max_capacity</code> ` для определения максимальной емкости массива, т. е. максимального количества элементов, которые он может содержать.</p></li>
+<li><p>Использование параметра ` <code translate="no">max_capacity</code> ` для определения максимальной емкости массива, т. е. максимального количества элементов, которое он может содержать.</p></li>
 </ol>
 <p>Вот как определить схему коллекции, включающую поля ARRAY:</p>
 <div class="alert note">
@@ -260,7 +260,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Настройка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Настройка параметров индексации<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -276,7 +276,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей, но необязательным для скалярных полей.</p>
-<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и поля ARRAY <code translate="no">tags</code> — в обоих случаях используется тип индекса « <code translate="no">AUTOINDEX</code> ». При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс в зависимости от типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробности см. в разделе <a href="/docs/ru/v2.6.x/index-explained.md">«Объяснение индекса</a>».</p>
+<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и поля ARRAY <code translate="no">tags</code>; для обоих используется тип индекса « <code translate="no">AUTOINDEX</code> ». При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс в зависимости от типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробности см. в разделе <a href="/docs/ru/v2.6.x/index-explained.md">«Объяснение индекса</a>».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: Импорт данных
-summary: На этой странице показана процедура импорта подготовленных данных.
+summary: На этой странице показан порядок действий по импорту подготовленных данных.
 ---
 <h1 id="Import-data" class="common-anchor-header">Импорт данных<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: На этой странице показана процедура им
         ></path>
       </svg>
     </button></h1><p>На этой странице показана процедура импорта подготовленных данных.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+<h2 id="Before-you-start" class="common-anchor-header">Перед началом<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,15 +36,15 @@ summary: На этой странице показана процедура им
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Вы уже подготовили данные и поместили их в ведро Milvus.</p>
-<p>Если нет, то сначала следует использовать <strong>RemoteBulkWriter</strong> для подготовки данных и убедиться, что подготовленные данные уже переданы в ведро Milvus на экземпляре MinIO, запущенном вместе с вашим экземпляром Milvus. Подробности см. в разделе <a href="/docs/ru/prepare-source-data.md">Подготовка исходных данных</a>.</p></li>
-<li><p>Вы уже создали коллекцию со схемой, которую вы используете для подготовки данных. Если нет, обратитесь к разделу <a href="/docs/ru/manage-collections.md">Управление коллекциями</a>.</p></li>
+<li><p>Вы уже подготовили данные и поместили их в корзину Milvus.</p>
+<p>Если нет, сначала необходимо использовать <strong>RemoteBulkWriter</strong> для подготовки данных и убедиться, что подготовленные данные уже перенесены в корзину Milvus на экземпляре MinIO, запущенном вместе с вашим экземпляром Milvus. Подробности см. в разделе <a href="/docs/ru/prepare-source-data.md">«Подготовка исходных данных</a>».</p></li>
+<li><p>Вы уже создали коллекцию со схемой, которую используете для подготовки данных. Если нет, обратитесь к разделу <a href="/docs/ru/manage-collections.md">«Управление коллекциями</a>».</p></li>
 </ul>
 <div class="language-python">
-<p>Следующий фрагмент кода создает простую коллекцию с заданной схемой. Для получения дополнительной информации о параметрах см. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> в справочнике SDK.</p>
+<p>Следующий фрагмент кода создает простую коллекцию с заданной схемой. Для получения дополнительной информации о параметрах см. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> в справочнике по SDK.</p>
 </div>
 <div class="language-java">
-<p>Следующий фрагмент кода создает простую коллекцию с заданной схемой. Для получения дополнительной информации о параметрах см. <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> в справочнике SDK.</p>
+<p>Следующий фрагмент кода создаёт простую коллекцию с заданной схемой. Для получения дополнительной информации о параметрах см. <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> в справочнике по SDK.</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">Импорт данных<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,9 +61,13 @@ summary: На этой странице показана процедура им
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы импортировать подготовленные данные, необходимо создать задание импорта следующим образом:</p>
+    </button></h2><p>Если ваш конвейер может повторить запрос на импорт, завершившийся сбоем или по истечении времени ожидания, пометьте задание ключом идемпотентности; см. раздел <a href="/docs/ru/idempotent-import.md">«Идемпотентный массовый импорт</a>».</p>
+<p>Чтобы импортировать подготовленные данные, необходимо создать задание импорта следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -128,16 +132,16 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>Имя целевой коллекции.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>Список списков путей к файлам относительно корневого пути ведра Milvus на экземпляре MioIO, запущенном вместе с вашим экземпляром Milvus. Возможные вложенные списки следующие:</p>
+<p>Список списков путей к файлам, относительных к корневому пути корзины Milvus на экземпляре MioIO, запущенном вместе с вашим экземпляром Milvus. Возможные подсписки следующие:</p>
 <ul>
 <li><p><strong>Файлы JSON</strong></p>
-<p>Если подготовленный файл имеет формат JSON, <strong>каждый подсписок должен содержать путь к одному подготовленному JSON-файлу</strong>.</p>
+<p>Если подготовленный файл находится в формате JSON, <strong>каждый подсписок должен содержать путь к одному подготовленному файлу JSON</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Паркетные файлы</strong></p>
-<p>Если подготовленный файл имеет формат Parquet, <strong>каждый вложенный список должен содержать путь к одному подготовленному файлу parquet</strong>.</p>
+<li><p><strong>Файлы Parquet</strong></p>
+<p>Если подготовленный файл находится в формате Parquet, <strong>каждый подсписок должен содержать путь к одному подготовленному файлу Parquet</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -145,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>Возможные варианты возврата следующие:</p>
+<p>Возможный результат выглядит следующим образом:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -153,7 +157,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">Проверить ход импорта<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="Check-import-progress" class="common-anchor-header">Проверка хода импорта<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,9 +172,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Получив идентификатор задания импорта, вы можете проверить ход импорта следующим образом:</p>
+    </button></h2><p>После получения идентификатора задания импорта вы можете проверить ход импорта следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -279,9 +286,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете перечислить все задания импорта относительно определенной коллекции следующим образом:</p>
+    </button></h2><p>Вы можете отобразить список всех заданий импорта, относящихся к конкретной коллекции, следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -345,12 +355,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Размер каждого файла импорта не должен превышать <strong>16 ГБ</strong>.</p></li>
-<li><p>Максимальное количество файлов в одном запросе на импорт не должно превышать <strong>1024</strong>. Каждый запрос на импорт может содержать не более 16 ГБ на файл * 1024 файла = 16 ТБ данных.</p></li>
+<li><p>Размер каждого файла для импорта не должен превышать <strong>16 ГБ</strong>.</p></li>
+<li><p>Максимальное количество файлов на один запрос на импорт не должно превышать <strong>1024</strong>. Каждый запрос на импорт может содержать не более 16 ГБ на файл * 1024 файла = 16 ТБ данных.</p></li>
 <li><p>Максимальное количество одновременных запросов на импорт ограничено <strong>1024</strong>.</p></li>
 </ul>
 <ul>
-<li>В запросе на импорт можно указать только одно имя раздела. Если имя раздела не указано, данные будут вставлены в раздел по умолчанию. Кроме того, в запросе на импорт нельзя задать имя раздела, если в целевой коллекции задан ключ раздела.</li>
+<li>В запросе на импорт можно указать только одно имя раздела. Если имя раздела не указано, данные будут вставлены в раздел по умолчанию. Кроме того, вы не можете установить имя раздела в запросе на импорт, если вы установили ключ раздела в целевой коллекции.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Ограничения<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,25 +377,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Перед импортом данных убедитесь, что вы приняли к сведению ограничения в отношении следующих поведений Milvus:</p>
+    </button></h2><p>Перед импортом данных убедитесь, что вы ознакомились с ограничениями, связанными со следующими особенностями работы Milvus:</p>
 <ul>
-<li><p>Ограничения, касающиеся поведения Load:</p>
+<li><p>Ограничения, касающиеся поведения при загрузке:</p>
 <ul>
-<li>Если коллекция уже была загружена до импорта, вы можете использовать функцию <code translate="no">refresh_load</code> для загрузки новых импортированных данных после завершения импорта.</li>
+<li>Если коллекция уже была загружена до импорта, вы можете использовать функцию « <code translate="no">refresh_load</code> » для загрузки вновь импортированных данных после завершения импорта.</li>
 </ul></li>
-<li><p>Ограничения, касающиеся поведения запросов и поиска:</p>
+<li><p>Ограничения, связанные с поведением при выполнении запросов и поиска:</p>
 <ul>
-<li><p>До перехода задания импорта в состояние <strong>Completed</strong> новые импортированные данные гарантированно будут невидимы для запросов и поиска.</p></li>
-<li><p>После <strong>завершения</strong> задания,</p>
+<li><p>До тех пор, пока статус задания импорта не станет <strong>«Завершено»</strong>, вновь импортированные данные гарантированно не будут отображаться в результатах запросов и поиска.</p></li>
+<li><p>Как только статус задания станет <strong>«Завершено»</strong>,</p>
 <ul>
-<li><p>Если коллекция не загружена, можно использовать функцию <code translate="no">load</code> для загрузки новых импортированных данных.</p></li>
-<li><p>Если коллекция уже загружена, можно вызвать функцию <code translate="no">load(is_refresh=True)</code> для загрузки импортированных данных.</p></li>
+<li><p>если коллекция не загружена, можно использовать функцию ` <code translate="no">load</code> ` для загрузки вновь импортированных данных.</p></li>
+<li><p>Если коллекция уже загружена, вы можете вызвать функцию ` <code translate="no">load(is_refresh=True)</code> `, чтобы загрузить импортированные данные.</p></li>
 </ul></li>
 </ul></li>
-<li><p>Ограничения, касающиеся поведения при удалении:</p>
+<li><p>Ограничения, касающиеся удаления:</p>
 <ul>
-<li><p>До того как статус задания импорта станет <strong>Завершен</strong>, удаление не гарантируется и может быть успешным, а может и не быть.</p></li>
-<li><p>Удаление после <strong>завершения</strong> задания гарантированно успешно.</p></li>
+<li><p>До тех пор, пока статус задания импорта не станет <strong>«Завершено»</strong>, удаление не гарантируется и может как завершиться успешно, так и нет.</p></li>
+<li><p>Удаление после того, как статус задания станет <strong>«Завершено»</strong>, гарантированно завершится успешно.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Рекомендации<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +413,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Мы настоятельно рекомендуем использовать функцию многофайлового импорта, которая позволяет загружать несколько файлов в одном запросе. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, консолидация загружаемых файлов позволяет сократить время на управление данными и повысить эффективность рабочего процесса.</p>
+    </button></h2><p>Мы настоятельно рекомендуем использовать функцию импорта нескольких файлов, которая позволяет загружать несколько файлов одним запросом. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, объединяя загрузки, вы можете сократить время, затрачиваемое на управление данными, и сделать свой рабочий процесс более эффективным.</p>

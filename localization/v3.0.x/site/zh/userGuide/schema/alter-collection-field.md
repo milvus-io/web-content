@@ -19,7 +19,7 @@ summary: 您可以修改Collection字段的属性，以更改列约束或强制�
         ></path>
       </svg>
     </button></h1><p>您可以修改Collection字段的属性，以更改列约束或强制执行更严格的数据完整性规则。</p>
-<p>本页面介绍字段属性的修改，不涉及Schema结构的变更（例如添加或删除字段）。若要向现有Collection添加标量字段或从其中删除字段，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改Collection Schema”</a>。</p>
+<p>本页面介绍字段属性的修改，不涉及 Schema 结构的变更（例如添加或删除字段）。若要向现有 Collection 添加标量字段或从其中删除字段，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改 Collection Schema”</a>。</p>
 <div class="alert note">
 <ul>
 <li><p>每个Collection仅包含一个主字段。该主字段在创建Collection时设定后，您将无法更改主字段或修改其属性。</p></li>
@@ -41,7 +41,7 @@ summary: 您可以修改Collection字段的属性，以更改列约束或强制�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarChar 字段有一个名为 `<code translate="no">max_length</code>` 的属性，该属性限制了字段值可包含的最大字符数。您可以修改 `<code translate="no">max_length</code> ` 属性。</p>
+    </button></h2><p>VarChar 字段有一个名为 `<code translate="no">max_length</code>` 的属性，用于定义每个字段值允许的最大字节数。您可以修改 `<code translate="no">max_length</code> ` 属性。</p>
 <p>以下示例假设Collection中有一个名为<code translate="no">varchar</code> 的VarChar字段，并设置其<code translate="no">max_length</code> 属性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -148,7 +148,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>数组字段有两个属性，即<code translate="no">element_type</code> 和<code translate="no">max_capacity</code> 。前者决定数组中元素的数据类型，而后者限制数组中元素的最大数量。您只能修改<code translate="no">max_capacity</code> 属性。</p>
-<p>以下示例假设 Collection 中有一个名为<code translate="no">array</code> 的数组字段，并设置其<code translate="no">max_capacity</code> 属性。</p>
+<p>以下示例假设该 Collection 有一个名为<code translate="no">array</code> 的数组字段，并设置其<code translate="no">max_capacity</code> 属性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -213,8 +213,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>内存映射（Mmap）支持直接访问磁盘上的大文件，使 Milvus 能够同时在内存和硬盘中存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不影响搜索性能的情况下扩展 Collections 的存储容量。</p>
-<p>以下示例假设Collection中有一个名为<code translate="no">doc_chunk</code> 的字段，并设置其<code translate="no">mmap_enabled</code> 属性。</p>
+    </button></h2><p>内存映射（Mmap）支持直接访问磁盘上的大文件，使 Milvus 能够同时在内存和硬盘中存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不影响搜索性能的前提下扩展 Collections 的存储容量。</p>
+<p>以下示例假设 Collection 中有一个名为<code translate="no">doc_chunk</code> 的字段，并设置其<code translate="no">mmap_enabled</code> 属性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

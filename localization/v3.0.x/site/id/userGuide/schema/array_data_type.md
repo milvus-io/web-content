@@ -3,7 +3,7 @@ id: array_data_type.md
 title: Bidang Array
 summary: >-
   Bidang ARRAY menyimpan sekumpulan elemen yang terurut dengan tipe data yang
-  sama. Berikut ini adalah contoh cara bidang ARRAY menyimpan data:
+  sama. Berikut ini contoh cara bidang ARRAY menyimpan data:
 ---
 <h1 id="Array-Field" class="common-anchor-header">Bidang Array<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut ` <code translate="no">nullable</code> ` menjadi ` <code translate="no">True</code> ` untuk mengizinkan nilai null. Untuk detailnya, lihat bagian <a href="/docs/id/nullable-and-default.md">"Nullable &amp; Default</a>".</p></li>
-<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code> ` untuk elemen-elemen array. ` <code translate="no">element_type</code> ` menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali ` <code translate="no">JSON</code>`.</p></li>
+<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code>`, yang menentukan jumlah byte maksimum yang diperbolehkan untuk setiap elemen array. ` <code translate="no">element_type</code> ` menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali ` <code translate="no">JSON</code>`.</p></li>
 <li><p><strong>Kapasitas Array</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, sebagaimana ditentukan oleh <code translate="no">max_capacity</code>. Nilainya harus berupa bilangan bulat dalam rentang <strong>1</strong> hingga <strong>4096</strong>.</p></li>
 <li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sesuai yang dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
 </ul>
@@ -64,7 +64,7 @@ summary: >-
       </svg>
     </button></h2><p>Untuk menggunakan bidang ARRAY di Milvus, tentukan tipe bidang yang relevan saat membuat skema koleksi. Proses ini meliputi:</p>
 <ol>
-<li><p>Menetapkan ` <code translate="no">datatype</code> ` ke tipe data Array yang didukung, ` <code translate="no">ARRAY</code>`.</p></li>
+<li><p>Menetapkan ` <code translate="no">datatype</code> ` ke tipe data Array yang didukung, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Gunakan parameter ` <code translate="no">element_type</code> ` untuk menentukan tipe data elemen dalam array. Semua elemen dalam array yang sama harus memiliki tipe data yang sama.</p></li>
 <li><p>Menggunakan parameter ` <code translate="no">max_capacity</code> ` untuk menentukan kapasitas maksimum array, yaitu jumlah elemen maksimum yang dapat ditampungnya.</p></li>
 </ol>
@@ -361,7 +361,7 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks ditentukan, buat koleksi yang mencakup bidang ARRAY.</p>
+    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang mencakup bidang ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

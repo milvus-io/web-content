@@ -2,7 +2,7 @@
 id: array-of-structs.md
 title: Обзор StructArray
 summary: >-
-  Используйте StructArray, когда одному объекту необходимо хранить упорядоченный
+  Используйте StructArray, когда одному объекту требуется хранить упорядоченный
   список структурированных элементов, например один документ, состоящий из
   множества фрагментов, одну страницу, состоящую из множества визуальных блоков,
   или одно видео, состоящее из множества клипов. StructArray хранит эти элементы
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Используйте StructArray, когда одному объекту необходимо хранить упорядоченный список структурированных элементов, например один документ, состоящий из множества фрагментов, одну страницу с множеством визуальных блоков или одно видео, состоящее из множества клипов. StructArray хранит эти элементы внутри родительского объекта, при этом позволяя выполнять векторный поиск и скалярную фильтрацию по полям внутри каждого элемента.</p>
+    </button></h1><p>Используйте StructArray, когда одному объекту необходимо хранить упорядоченный список структурированных элементов, например один документ, состоящий из множества фрагментов, одну страницу, состоящую из множества визуальных фрагментов, или одно видео, состоящее из множества клипов. StructArray хранит эти элементы внутри родительского объекта, при этом позволяя выполнять векторный поиск и скалярную фильтрацию по полям внутри каждого элемента.</p>
 <h2 id="What-is-StructArray" class="common-anchor-header">Что такое StructArray?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Два векторных подполя в этом примере представляют один и тот же фрагмент с двух точек зрения поиска. Поле « <code translate="no">chunks[emb_list_vector]</code> » предназначено для поиска по списку вложений (EmbeddingList) с использованием метрик « <code translate="no">MAX_SIM*</code> », а поле « <code translate="no">chunks[emb]</code> » — для поиска на уровне элементов с использованием обычных векторных метрик, таких как « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » или « <code translate="no">L2</code> ».</p>
+<p>Два векторных подполя в этом примере представляют один и тот же фрагмент с двух точек зрения поиска. Поле ` <code translate="no">chunks[emb_list_vector]</code> ` предназначено для поиска по списку вложений (EmbeddingList) с использованием метрик ` <code translate="no">MAX_SIM*</code> `, а поле ` <code translate="no">chunks[emb]</code> ` — для поиска на уровне элементов с использованием обычных векторных метрик, таких как ` <code translate="no">COSINE</code>`, ` <code translate="no">IP</code>` или ` <code translate="no">L2</code>`.</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">Когда использовать StructArray<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,10 +93,10 @@ summary: >-
 <tr><th>Пример использования</th><th>Почему StructArray помогает</th><th>Типичное поле StructArray</th></tr>
 </thead>
 <tbody>
-<tr><td>Поиск документов</td><td>Хранение одного документа в виде сущности при поиске по его фрагментам.</td><td><code translate="no">chunks</code></td></tr>
-<tr><td>Поиск с поздним взаимодействием</td><td>Хранение документа или страницы в виде списка вложений и оценка с помощью <code translate="no">MAX_SIM*</code>.</td><td><code translate="no">chunks[emb_list_vector]</code> или <code translate="no">patches[emb]</code></td></tr>
+<tr><td>Поиск документов</td><td>Хранение одного документа как сущности при поиске по его фрагментам.</td><td><code translate="no">chunks</code></td></tr>
+<tr><td>Поиск с поздним взаимодействием</td><td>Храните документ или страницу в виде списка вложений и оценивайте их с помощью <code translate="no">MAX_SIM*</code>.</td><td><code translate="no">chunks[emb_list_vector]</code> или <code translate="no">patches[emb]</code></td></tr>
 <tr><td>Поиск на уровне элементов</td><td>Возвращайте наиболее релевантный фрагмент, клип, патч или наблюдение, включая его смещение в массиве.</td><td><code translate="no">chunks[emb]</code></td></tr>
-<tr><td>Структурированная фильтрация</td><td>Фильтрация по скалярным подполям внутри элементов Struct, таких как section, score, page или flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
+<tr><td>Структурированная фильтрация</td><td>Фильтрация по скалярным подполям внутри элементов Struct, таким как section, score, page или flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
 <tr><td>Уменьшение количества дубликатов результатов родительских элементов</td><td>Сохраняйте дочерние элементы под одним и тем же родительским объектом вместо того, чтобы хранить каждый дочерний элемент в отдельной строке.</td><td><code translate="no">chunks</code>, <code translate="no">clips</code>, <code translate="no">patches</code></td></tr>
 </tbody>
 </table>
@@ -118,7 +118,7 @@ summary: >-
     </button></h2><p>Используйте следующую матрицу для выбора подходящего пути StructArray.</p>
 <table>
 <thead>
-<tr><th>Цель</th><th>Рекомендуемый путь</th><th>Уровень детализации результатов</th><th>Начните с этого</th></tr>
+<tr><th>Цель</th><th>Рекомендуемый путь</th><th>Детализация результатов</th><th>Начните с этого</th></tr>
 </thead>
 <tbody>
 <tr><td>Моделируйте один родительский объект со множеством структурированных дочерних объектов.</td><td>Создайте поле StructArray.</td><td>Сущность содержит упорядоченные элементы Struct.</td><td><a href="/docs/ru/create-structarray-field.md">Создание поля StructArray</a></td></tr>
@@ -126,10 +126,10 @@ summary: >-
 <tr><td>Запустить ColBERT, ColPali или поиск с поздним взаимодействием на уровне документа.</td><td>Использовать поиск по EmbeddingList с индексом « <code translate="no">MAX_SIM*</code> ».</td><td>Уровень сущностей.</td><td><a href="/docs/ru/search-with-embedding-lists.md">Поиск с помощью списков вложений</a></td></tr>
 <tr><td>Поиск отдельных фрагментов, клипов или участков.</td><td>Используйте поиск на уровне элементов с помощью обычной векторной метрики.</td><td>Уровень элементов Struct, с учетом смещения, если оно доступно.</td><td><a href="/docs/ru/basic-vector-search-with-structarray.md">Базовый векторный поиск с StructArray</a></td></tr>
 <tr><td>Ограничьте векторный поиск на уровне элементов элементами, соответствующими скалярным условиям.</td><td>Используйте ` <code translate="no">element_filter</code>`.</td><td>Фильтрация на уровне элементов; форма результата зависит от типа поиска.</td><td><a href="/docs/ru/filtered-search-with-structarray.md">Поиск с фильтрацией с помощью StructArray</a></td></tr>
-<tr><td>Выберите объекты в зависимости от того, сколько элементов Struct удовлетворяют условию.</td><td>Используйте команды « <code translate="no">MATCH_ANY</code> », « <code translate="no">MATCH_ALL</code> », « <code translate="no">MATCH_LEAST</code> », « <code translate="no">MATCH_MOST</code> » или « <code translate="no">MATCH_EXACT</code> ».</td><td>Уровень объекта.</td><td><a href="/docs/ru/struct-array-operators.md">Операторы StructArray</a></td></tr>
+<tr><td>Выбор объектов в зависимости от того, сколько элементов Struct удовлетворяют условию.</td><td>Используйте команды « <code translate="no">MATCH_ANY</code> », « <code translate="no">MATCH_ALL</code> », « <code translate="no">MATCH_LEAST</code> », « <code translate="no">MATCH_MOST</code> » или « <code translate="no">MATCH_EXACT</code> ».</td><td>Уровень объекта.</td><td><a href="/docs/ru/struct-array-operators.md">Операторы StructArray</a></td></tr>
 <tr><td>Используйте границы по оценке или расстоянию для подполей вектора StructArray.</td><td>Используйте поиск по диапазону на уровне элементов.</td><td>Уровень элемента Struct.</td><td><a href="/docs/ru/range-search-with-structarray.md">Поиск по диапазону с StructArray</a></td></tr>
-<tr><td>Возвращайте не более одного результата на каждую родительскую сущность после поиска на уровне элементов.</td><td>Используйте поиск с группировкой по первичному ключу.</td><td>Уровень сущности после группировки.</td><td><a href="/docs/ru/grouping-search-with-structarray.md">Групповой поиск с StructArray</a></td></tr>
-<tr><td>Объедините поиск по элементам StructArray с другим векторным полем.</td><td>Используйте гибридный поиск с одним запросом AnnSearchRequest, нацеленным на векторное подполе StructArray.</td><td>Поиск на уровне элементов, переранжирование на уровне сущностей.</td><td><a href="/docs/ru/hybrid-search-with-structarray.md">Гибридный поиск с StructArray</a></td></tr>
+<tr><td>Возвращает не более одного результата на каждую родительскую сущность после поиска на уровне элементов.</td><td>Используйте поиск с группировкой по первичному ключу.</td><td>Уровень сущности после группировки.</td><td><a href="/docs/ru/grouping-search-with-structarray.md">Групповой поиск с StructArray</a></td></tr>
+<tr><td>Объедините поиск по элементам StructArray с другим векторным полем.</td><td>Используйте гибридный поиск с одним AnnSearchRequest, нацеленным на векторное подполе StructArray.</td><td>Поиск на уровне элементов, переранжирование на уровне сущностей.</td><td><a href="/docs/ru/hybrid-search-with-structarray.md">Гибридный поиск с StructArray</a></td></tr>
 </tbody>
 </table>
 <h2 id="Understand-the-two-search-models" class="common-anchor-header">Понимание двух моделей поиска<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
@@ -157,7 +157,7 @@ summary: >-
   <tbody>
     <tr>
       <td>
-        <p>Поиск по EmbeddingList рассматривает векторы внутри подполя вектора StructArray как один список вложений для родительского объекта. Запрос также представляет собой список вложений. Milvus сравнивает список вложений запроса с сохраненным списком вложений, используя метрику « <code translate="no">MAX_SIM*</code> », и возвращает совпадающие объекты.</p>
+        <p>Поиск по EmbeddingList рассматривает векторы внутри подполя вектора StructArray как один список вложений для родительского объекта. Запрос также представляет собой список вложений. Milvus сравнивает список вложений запроса с сохраненным списком вложений, используя метрику « <code translate="no">MAX_SIM*</code> », и возвращает соответствующие объекты.</p>
         <ul>
           <li>Данные запроса: список вложений.</li>
           <li>Семейство метрик: « <code translate="no">MAX_SIM*</code> ».</li>
@@ -166,11 +166,11 @@ summary: >-
         </ul>
       </td>
       <td>
-        <p>Поиск на уровне элементов рассматривает каждый элемент Struct как независимый кандидат для векторного поиска. Каждый результат соответствует найденному элементу внутри поля StructArray, а в результатах без группировки может отображаться смещение элемента.</p>
+        <p>Поиск на уровне элементов рассматривает каждый элемент Struct как независимый кандидат для векторного поиска. Каждое совпадение представляет собой соответствующий элемент внутри поля StructArray, а в результатах без группировки может отображаться смещение элемента.</p>
         <ul>
           <li>Данные запроса: обычный вектор.</li>
           <li>Семейство метрик: метрики обычного вектора.</li>
-          <li>Уровень детализации результатов: уровень элементов Struct.</li>
+          <li>Детализация результатов: уровень элементов Struct.</li>
           <li>Оптимально подходит для: поиска на уровне фрагментов, клипов или участков.</li>
         </ul>
       </td>
@@ -179,7 +179,7 @@ summary: >-
 </table>
 <div class="alert note">
 <p>Предупреждение</p>
-<p>Если вашей коллекции требуется как поиск по EmbeddingList, так и поиск на уровне элементов, используйте два отдельных векторных подполя. Векторное поле или векторное подполе принимает только один индекс, а для этих двух режимов поиска требуются разные семейства метрик.</p>
+<p>Если вашей коллекции требуется как поиск по EmbeddingList, так и поиск на уровне элементов, используйте два отдельных векторных подполя. Векторное поле или векторное подполе допускает только один индекс, а для этих двух режимов поиска требуются разные семейства метрик.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Карта документации<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +196,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Документация по StructArray разделена на страницы, посвященные моделированию, и страницы, посвященные поиску. Используйте страницы по моделированию для определения и подготовки данных. Используйте страницы по поиску, чтобы выбрать подходящее поведение поиска и фильтрации.</p>
+    </button></h2><p>Документация по StructArray разделена на страницы, посвященные моделированию, и страницы, посвященные поиску. Используйте страницы, посвященные моделированию, для определения и подготовки данных. Используйте страницы, посвященные поиску, для выбора подходящего поведения при извлечении и фильтрации.</p>
 <table>
 <thead>
 <tr><th>Область</th><th>Страница</th><th>Используйте для</th></tr>
@@ -212,7 +212,7 @@ summary: >-
 <tr><td>Поиск</td><td><a href="/docs/ru/hybrid-search-with-structarray.md">Гибридный поиск с StructArray</a></td><td>Объединение поиска на уровне элементов StructArray с другими векторными поисками.</td></tr>
 <tr><td>Поиск</td><td><a href="/docs/ru/filtered-search-with-structarray.md">Поиск с фильтрами с использованием StructArray</a></td><td>Используйте фильтры StructArray при поиске, запросе и гибридном поиске.</td></tr>
 <tr><td>Поиск</td><td><a href="/docs/ru/search-with-embedding-lists.md">Поиск с использованием списков вложений</a></td><td>Создавайте системы поиска в стиле ColBERT и ColPali с помощью StructArray.</td></tr>
-<tr><td>Фильтр</td><td><a href="/docs/ru/struct-array-operators.md">Операторы StructArray</a></td><td>Справочный синтаксис для операторов <code translate="no">element_filter</code> и <code translate="no">MATCH_*</code>.</td></tr>
+<tr><td>Фильтр</td><td><a href="/docs/ru/struct-array-operators.md">Операторы StructArray</a></td><td>Справочный синтаксис для операторов <code translate="no">element_filter</code>, <code translate="no">MATCH_*</code> и предикатов пути StructArray на уровне строк.</td></tr>
 </tbody>
 </table>
 <h2 id="Key-limits-to-check-first" class="common-anchor-header">Основные ограничения, которые следует проверить в первую очередь<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
@@ -233,9 +233,9 @@ summary: >-
     </button></h2><ul>
 <li><p>Struct можно использовать в качестве типа элемента поля Array. Он не используется в качестве поля коллекции верхнего уровня.</p></li>
 <li><p>Все элементы Struct в одном поле StructArray используют одну предопределенную схему.</p></li>
-<li><p>Для подполей Vector требуются индексы. При поиске с помощью EmbeddingList используются метрики <code translate="no">MAX_SIM*</code>, а при поиске на уровне элементов — обычные векторные метрики.</p></li>
-<li><p><code translate="no">element_filter</code> <code translate="no">MATCH_*</code> и предназначены для скалярных подполей внутри полей StructArray. Используйте оператор только внутри этих операторов. <code translate="no">$[subfield]</code> </p></li>
-<li><p>Некоторые комбинации поиска зависят от версии или режима работы. Ознакомьтесь с <a href="/docs/ru/structarray-limits.md">ограничениями StructArray</a>, прежде чем использовать поиск по диапазону, групповой поиск, гибридный поиск, поля с допустимыми нулевыми значениями или динамически добавленные поля.</p></li>
+<li><p>Поподполя вектора требуют индексов. Поиск с помощью EmbeddingList использует метрики <code translate="no">MAX_SIM*</code>, тогда как поиск на уровне элементов использует обычные векторные метрики.</p></li>
+<li><p><code translate="no">element_filter</code> а также <code translate="no">MATCH_*</code> предназначены для скалярных подполей внутри полей StructArray. Используйте <code translate="no">$[subfield]</code> только внутри этих операторов. Фильтры на уровне строк также могут напрямую ссылаться на пути StructArray, например: <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code> и <code translate="no">array_contains(chunks[section], ...)</code>.</p></li>
+<li><p>Некоторые комбинации поиска зависят от версии или режима работы. Ознакомьтесь с <a href="/docs/ru/structarray-limits.md">ограничениями StructArray</a>, прежде чем использовать поиск по диапазону, групповой поиск, гибридный поиск, поля, допускающие значение null, или динамически добавленные поля.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Следующие шаги<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

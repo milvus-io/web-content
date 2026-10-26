@@ -20,15 +20,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus prend en charge les données scalaires textuelles grâce aux champs « <code translate="no">VARCHAR</code> » et « <code translate="no">TEXT</code> ». Cette page décrit le champ « <code translate="no">VARCHAR</code> », conçu pour les métadonnées sous forme de chaînes de caractères courtes et limitées, telles que les noms, les balises, les catégories et les identifiants externes.</p>
-<p>Pour les textes sources plus longs, les extraits de documents, le corps d’articles, les tickets ou les journaux qui doivent être stockés et renvoyés avec des entités, utilisez plutôt un champ « <code translate="no">TEXT</code> ». Utilisez « <code translate="no">TEXT</code> » lorsqu’une valeur est susceptible de dépasser la taille de « <code translate="no">65,535</code> » octets ou lorsque vous ne souhaitez pas définir une « <code translate="no">max_length</code> » fixe dans le schéma de la collection. Pour plus de détails, reportez-vous à <a href="/docs/fr/text.md">la section « Champ de texte</a> ».</p>
+    </button></h1><p>Milvus prend en charge les données scalaires textuelles grâce aux champs « <code translate="no">VARCHAR</code> » et « <code translate="no">TEXT</code> ». Cette page décrit le champ « <code translate="no">VARCHAR</code> », conçu pour les métadonnées sous forme de chaînes courtes et limitées, telles que les noms, les balises, les catégories et les identifiants externes.</p>
+<p>Pour les textes sources plus longs, les extraits de documents, le corps d’articles, les tickets ou les journaux qui doivent être stockés et renvoyés avec des entités, utilisez plutôt un champ « <code translate="no">TEXT</code> ». Utilisez « <code translate="no">TEXT</code> » lorsqu’une valeur est susceptible de dépasser la taille en octets définie par « <code translate="no">65,535</code> » ou lorsque vous ne souhaitez pas définir une « <code translate="no">max_length</code> » fixe dans le schéma de la collection. Pour plus de détails, reportez-vous à <a href="/docs/fr/text.md">la section Champ de texte</a>.</p>
 <p>Lorsque vous définissez un champ « <code translate="no">VARCHAR</code> », deux paramètres sont obligatoires :</p>
 <ul>
-<li><p>Définissez la longueur de la chaîne ( <code translate="no">datatype</code> ) sur « <code translate="no">DataType.VARCHAR</code> ».</p></li>
-<li><p>Spécifiez la valeur de « <code translate="no">max_length</code> », qui définit le nombre maximal d’octets que le champ « <code translate="no">VARCHAR</code> » peut stocker. La plage valide pour « <code translate="no">max_length</code> » est comprise entre 1 et 65 535.</p></li>
+<li><p>Définissez la longueur du champ ( <code translate="no">datatype</code> ) sur « <code translate="no">DataType.VARCHAR</code> ».</p></li>
+<li><p>Spécifiez l’ <code translate="no">max_length</code>, qui définit le nombre maximal d’octets UTF-8 autorisés pour chaque valeur de champ. La plage valide pour <code translate="no">max_length</code> va de 1 à 65 535.</p></li>
 </ul>
+<p>Le nombre d’octets peut différer du nombre de caractères. Par exemple, avec <code translate="no">max_length=10</code>, <code translate="no">&quot;abcdefghij&quot;</code> respecte la limite car il utilise 10 octets UTF-8. La chaîne <code translate="no">&quot;一二三四五六七八九十&quot;</code> comporte également 10 caractères, mais utilise 30 octets UTF-8 et dépasse la limite.</p>
 <div class="alert note">
-<p>Milvus prend en charge les valeurs nulles et les valeurs par défaut pour les champs de type « <code translate="no">VARCHAR</code> ». Pour activer ces fonctionnalités, définissez « <code translate="no">nullable</code> » sur « <code translate="no">True</code> » et « <code translate="no">default_value</code> » sur une valeur de type chaîne de caractères. Pour plus de détails, consultez la section « <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a> ».</p>
+<p>Milvus prend en charge les valeurs nulles et les valeurs par défaut pour les champs de type « <code translate="no">VARCHAR</code> ». Pour activer ces fonctionnalités, définissez « <code translate="no">nullable</code> » sur « <code translate="no">True</code> » et « <code translate="no">default_value</code> » sur une valeur de chaîne. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a> ».</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">Ajouter un champ VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour stocker des métadonnées sous forme de chaînes de caractères courtes et bornées dans Milvus, définissez un champ « <code translate="no">VARCHAR</code> » dans le schéma de votre collection. Vous trouverez ci-dessous un exemple de définition d’un schéma de collection comportant deux champs « <code translate="no">VARCHAR</code> » :</p>
+    </button></h2><p>Pour stocker des métadonnées sous forme de chaînes de caractères courtes et limitées dans Milvus, définissez un champ « <code translate="no">VARCHAR</code> » dans le schéma de votre collection. Vous trouverez ci-dessous un exemple de définition d’un schéma de collection comportant deux champs « <code translate="no">VARCHAR</code> » :</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: stocke jusqu’à 100 octets, autorise les valeurs nulles et possède une valeur par défaut « <code translate="no">&quot;Unknown&quot;</code> ».</p></li>
 <li><p><code translate="no">varchar_field2</code>: stocke jusqu’à 200 octets, autorise les valeurs nulles, mais ne possède pas de valeur par défaut.</p></li>
@@ -255,7 +256,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>L’indexation contribue à améliorer les performances de recherche et de requête. Dans Milvus, l’indexation est obligatoire pour les champs vectoriels, mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">varchar_field1</code>, en utilisant dans les deux cas le type d'index « <code translate="no">AUTOINDEX</code> ». Avec ce type, Milvus sélectionne automatiquement l'index le plus adapté en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, consultez la section « <a href="/docs/fr/index-explained.md">Explication de l'index</a> ».</p>
+<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">varchar_field1</code>, tous deux utilisant le type d'index « <code translate="no">AUTOINDEX</code> ». Avec ce type, Milvus sélectionne automatiquement l'index le plus adapté en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, consultez la section « <a href="/docs/fr/index-explained.md">Explication de l'index</a> ».</p>
 <div class="alert note">
 <p>Vous pouvez également créer un index « <code translate="no">NGRAM</code> » pour accélérer le filtrage « <code translate="no">LIKE</code> » sur les champs « <code translate="no">VARCHAR</code> ». Pour plus de détails, consultez la section <a href="/docs/fr/ngram.md">«NGRAM</a>».</p>
 </div>
@@ -550,7 +551,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
         ></path>
       </svg>
     </button></h2><p>Après avoir inséré des entités, utilisez la méthode ` <code translate="no">query</code> ` pour récupérer les entités qui correspondent aux expressions de filtrage spécifiées.</p>
-<p>Pour récupérer les entités dont la valeur « <code translate="no">varchar_field1</code> » correspond à la chaîne « <code translate="no">&quot;Product A&quot;</code> » :</p>
+<p>Pour récupérer les entités pour lesquelles la valeur « <code translate="no">varchar_field1</code> » correspond à la chaîne « <code translate="no">&quot;Product A&quot;</code> » :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -624,7 +625,7 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour récupérer les entités dont l'<code translate="no">varchar_field2</code> est nulle :</p>
+<p>Pour récupérer les entités dont l’ <code translate="no">varchar_field2</code> est nulle :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -771,7 +772,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Recherche vectorielle avec expressions de filtrage<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Recherche vectorielle avec des expressions de filtrage<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

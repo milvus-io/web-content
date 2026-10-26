@@ -9,9 +9,9 @@ summary: >-
   языков, таких как китайский, испанский или французский, что приводит к
   снижению коэффициента полноты. Например, поиск испанского слова «teléfono»
   (означающего «телефон») заставит аналитик, ориентированный на английский язык,
-  «запутаться»: он может игнорировать диакритические знаки и не применять
-  специфическую для испанского языка стеминг-обработку, из-за чего релевантные
-  результаты будут упущены.
+  «запутаться»: он может игнорировать акцент и не применять специфическую для
+  испанского языка стеминг-обработку, из-за чего релевантные результаты будут
+  упущены.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Multi-language-Analyzers" class="common-anchor-header">Многоязычные анализаторы<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
@@ -29,8 +29,8 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Когда Milvus выполняет анализ текста, он, как правило, применяет один и тот же анализатор ко всему текстовому полю в коллекции. Если этот анализатор оптимизирован для английского языка, он не справляется с совершенно иными правилами токенизации и стемминга, требуемыми для других языков, таких как китайский, испанский или французский, что приводит к снижению коэффициента полноты поиска. Например, поиск испанского слова <em>«teléfono»</em> (означающего <em>«телефон»</em>) заставит аналитик, ориентированный на английский язык, «запутаться»: он может игнорировать акцент и не применять специфическую для испанского языка стеминг-обработку, что приведет к пропуску релевантных результатов.</p>
-<p>Многоязычные анализаторы решают эту проблему, позволяя настроить несколько анализаторов для текстового поля в одной коллекции. Таким образом, вы можете хранить многоязычные документы в текстовом поле, а Milvus будет анализировать текст в соответствии с правилами конкретного языка для каждого документа.</p>
+    </button></h1><p>Когда Milvus выполняет анализ текста, он обычно применяет один анализатор ко всему текстовому полю в коллекции. Если этот анализатор оптимизирован для английского языка, он сталкивается с трудностями при работе с совершенно иными правилами токенизации и стемминга, требуемыми для других языков, таких как китайский, испанский или французский, что приводит к снижению коэффициента полноты поиска. Например, поиск испанского слова <em>«teléfono»</em> (означающего <em>«телефон»</em>) заставит аналитик, ориентированный на английский язык, «запутаться»: он может игнорировать акцент и не применять специфическую для испанского языка стеминг-обработку, что приведет к пропуску релевантных результатов.</p>
+<p>Многоязычные анализаторы решают эту проблему, позволяя настроить несколько анализаторов для одного текстового поля в одной коллекции. Таким образом, вы можете хранить многоязычные документы в текстовом поле, а Milvus будет анализировать текст в соответствии с правилами конкретного языка для каждого документа.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ beta: Milvus 2.5.11+
     </button></h2><ul>
 <li><p>Эта функция работает только с текстовым поиском на основе алгоритма BM25 и разреженными векторами. Дополнительную информацию см. в разделе <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p></li>
 <li><p>Каждый документ в одной коллекции может использовать только один анализатор, определяемый значением поля идентификатора языка.</p></li>
-<li><p>Производительность может варьироваться в зависимости от сложности используемых вами анализаторов и объема текстовых данных.</p></li>
+<li><p>Производительность может варьироваться в зависимости от сложности ваших анализаторов и объема текстовых данных.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ beta: Milvus 2.5.11+
 <ul>
 <li><p><strong>primary_key</strong>: уникальный идентификатор документа.</p></li>
 <li><p><strong>text_field</strong>: хранит исходное текстовое содержимое.</p></li>
-<li><p><strong>identifier_field</strong>: указывает, какой анализатор следует использовать для каждого документа.</p></li>
+<li><p><strong>identifier_field</strong>: указывает, какой анализатор использовать для каждого документа.</p></li>
 <li><p><strong>vector_field</strong>: хранит разреженные вложения, которые будут сгенерированы функцией BM25.</p></li>
 </ul></li>
 <li><p>Настройте функцию BM25 и параметры индексирования.</p></li>
@@ -99,7 +99,7 @@ beta: Milvus 2.5.11+
 <li><p><strong>Поиск с использованием языковых анализаторов</strong>:</p>
 <ul>
 <li><p>Укажите в тексте запроса название анализатора, и Milvus обработает запрос с использованием указанного анализатора.</p></li>
-<li><p>Токенизация происходит в соответствии с правилами конкретного языка, а поиск возвращает результаты, соответствующие данному языку, на основе схожести.</p></li>
+<li><p>Токенизация происходит в соответствии с правилами конкретного языка, и поиск возвращает результаты, соответствующие данному языку, на основе схожести.</p></li>
 </ul></li>
 </ol>
 <h2 id="Step-1-Configure-multianalyzerparams" class="common-anchor-header">Шаг 1: Настройте параметр `multi_analyzer_params`<button data-href="#Step-1-Configure-multianalyzerparams" class="anchor-icon" translate="no">
@@ -117,7 +117,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">multi_analyzer_params</code> — это отдельный объект JSON, который определяет, как Milvus выбирает подходящий анализатор для каждой сущности:</p>
+    </button></h2><p><code translate="no">multi_analyzer_params</code> — это единый объект JSON, который определяет, как Milvus выбирает подходящий анализатор для каждой сущности:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -245,7 +245,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Перечисляет все языковые анализаторы, которые Milvus может использовать для обработки текста.
+     <td><p>Содержит список всех языковых анализаторов, которые Milvus может использовать для обработки текста.
  Каждый анализатор в файле <code translate="no">analyzers</code> имеет следующий формат: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
 <li>Определите каждый анализатор с использованием стандартного синтаксиса <code translate="no">analyzer_params</code> (см. <a href="/docs/ru/analyzer-overview.md#Analyzer-types">«Обзор анализаторов</a>»).</li>
@@ -304,8 +304,8 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
 <ul>
 <li><p><strong>Поле первичного ключа</strong> (<code translate="no">id</code>): уникальный идентификатор для каждой сущности в коллекции. Установка параметра « <code translate="no">auto_id=True</code> » позволяет Milvus автоматически генерировать эти идентификаторы.</p></li>
 <li><p><strong>Поле-индикатор языка</strong> (<code translate="no">language</code>): это поле типа VARCHAR соответствует параметру « <code translate="no">by_field</code> », указанному в файле <code translate="no">multi_analyzer_params</code>. В нём хранится идентификатор языка для каждого объекта, который указывает Milvus, какой анализатор следует использовать.</p></li>
-<li><p><strong>Поле текстового содержимого</strong> (<code translate="no">text</code>): это поле типа VARCHAR хранит фактические текстовые данные, которые вы хотите анализировать и по которым хотите выполнять поиск. Настройка параметра « <code translate="no">enable_analyzer=True</code> » имеет решающее значение, поскольку она активирует возможности текстового анализа для этого поля. Конфигурация <code translate="no">multi_analyzer_params</code> напрямую привязана к этому полю, устанавливая связь между вашими текстовыми данными и анализаторами для конкретных языков.</p></li>
-<li><p><strong>Поле вектора</strong> (<code translate="no">sparse</code>): В этом поле будут храниться разреженные векторы, сгенерированные функцией BM25. Эти векторы представляют собой анализируемую форму ваших текстовых данных и именно по ним Milvus фактически осуществляет поиск.</p></li>
+<li><p><strong>Поле текстового содержимого</strong> (<code translate="no">text</code>): это поле типа VARCHAR хранит фактические текстовые данные, которые вы хотите анализировать и по которым хотите выполнять поиск. Настройка параметра « <code translate="no">enable_analyzer=True</code> » имеет решающее значение, так как она активирует возможности текстового анализа для этого поля. Конфигурация <code translate="no">multi_analyzer_params</code> напрямую привязана к этому полю, устанавливая связь между вашими текстовыми данными и анализаторами для конкретных языков.</p></li>
+<li><p><strong>Поле вектора</strong> (<code translate="no">sparse</code>): В этом поле будут храниться разреженные векторы, сгенерированные функцией BM25. Эти векторы представляют собой анализируемую форму ваших текстовых данных и являются тем, по чему Milvus фактически выполняет поиск.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -338,14 +338,14 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&quot;language&quot;</span>,       <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length (adjust as needed)</span>
+    max_length=<span class="hljs-number">255</span>               <span class="hljs-comment"># Maximum length in bytes (adjust as needed)</span>
 )
 
 <span class="hljs-comment"># Step 2.3: Add text content field with multi-language analysis capability</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;text&quot;</span>,                           <span class="hljs-comment"># Field name</span>
     datatype=DataType.VARCHAR,                   <span class="hljs-comment"># String data type</span>
-    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length (adjust based on expected text size)</span>
+    max_length=<span class="hljs-number">8192</span>,                             <span class="hljs-comment"># Maximum length in bytes (adjust based on expected text size)</span>
     enable_analyzer=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># Enable text analysis</span>
     multi_analyzer_params=multi_analyzer_params  <span class="hljs-comment"># Connect with our language analyzers</span>
 )
@@ -528,7 +528,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Определите функцию BM25 для генерации разреженных векторных представлений из ваших исходных текстовых данных:</p>
+    </button></h3><p>Определите функцию BM25 для генерации разреженных векторных представлений на основе ваших исходных текстовых данных:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -593,7 +593,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Эта функция автоматически применяет соответствующий анализатор к каждой текстовой записи на основе её языкового идентификатора. Для получения дополнительной информации о поиске текста на основе BM25 см. раздел <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p>
+<p>Эта функция автоматически применяет соответствующий анализатор к каждому текстовому фрагменту на основе его языкового идентификатора. Для получения дополнительной информации о поиске текста на основе BM25 см. раздел <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p>
 <h3 id="Configure-index-params" class="common-anchor-header">Настройте параметры индекса<button data-href="#Configure-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -741,7 +741,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <p>На этом этапе Milvus создает пустую коллекцию с поддержкой многоязычного анализатора, готовую к приему данных.</p>
-<h2 id="Step-3-Insert-example-data" class="common-anchor-header">Шаг 3: Вставка примера данных<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
+<h2 id="Step-3-Insert-example-data" class="common-anchor-header">Шаг 3: Вставка примерных данных<button data-href="#Step-3-Insert-example-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -944,11 +944,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>При поиске с использованием многоязычных анализаторов файл ` <code translate="no">search_params</code> ` содержит важные настройки:</p>
+    </button></h3><p>При поиске с использованием многоязычных анализаторов файл ` <code translate="no">search_params</code> ` содержит важную конфигурацию:</p>
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> должно соответствовать настройкам вашего индекса.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> определяет, какой анализатор следует применить к тексту вашего запроса. Это не зависит от анализаторов, используемых для хранящихся документов.</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> управляет поведением, специфичным для BM25; в данном случае он сохраняет все термины в поиске. Для получения дополнительной информации см. раздел <a href="/docs/ru/sparse_vector.md">«Разреженный вектор</a>».</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> управляет поведением, специфичным для BM25; в данном случае он сохраняет все термины в поиске. Для получения дополнительной информации см. раздел <a href="/docs/ru/sparse_vector.md">«Редкий вектор</a>».</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>

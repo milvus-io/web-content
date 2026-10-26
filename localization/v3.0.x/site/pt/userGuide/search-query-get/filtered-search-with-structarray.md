@@ -45,9 +45,10 @@ summary: >-
 <tr><th>Objetivo</th><th>Utilização</th><th>Comportamento do resultado</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtrar por um campo escalar de nível superior, como <code translate="no">category</code>.</td><td>Expressão de filtro normal.</td><td>Seleciona entidades pai antes ou durante a pesquisa.</td></tr>
+<tr><td>Filtrar por um campo escalar de nível superior, como <code translate="no">category</code>.</td><td>Expressão de filtro regular.</td><td>Seleciona entidades pai antes ou durante a pesquisa.</td></tr>
 <tr><td>Restringe a pesquisa vetorial ao nível do elemento aos elementos Struct que correspondam às condições escalares.</td><td><code translate="no">element_filter</code>.</td><td>Pesquisa apenas os elementos Struct correspondentes e pode devolver os deslocamentos dos elementos correspondentes.</td></tr>
 <tr><td>Seleciona entidades consoante se algum, todos ou um número específico de elementos Struct correspondam a um predicado.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Filtragem ao nível da linha. Estes operadores não devolvem deslocamentos por si próprios.</td></tr>
+<tr><td>Testar a posição de um elemento, contar elementos da Struct ou verificar valores de subcampos em todos os elementos sem <code translate="no">$[...]</code>.</td><td>Caminhos StructArray ao nível da linha, tais como <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code> ou <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Filtragem ao nível da linha. Para a sintaxe, consulte <a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -68,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize expressões de filtro normais quando a condição pertencer à entidade pai e não a um elemento Struct individual. Isto funciona tanto com a pesquisa EmbeddingList como com a pesquisa ao nível do elemento.</p>
+    </button></h2><p>Utilize expressões de filtro normais quando a condição pertencer à entidade pai, e não a um elemento Struct individual. Isto funciona tanto com a pesquisa EmbeddingList como com a pesquisa ao nível do elemento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -112,7 +113,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize « <code translate="no">element_filter(structArrayField, predicate)</code> » quando as condições escalares se aplicarem ao mesmo elemento Struct que participa na pesquisa vetorial ao nível do elemento. Dentro do predicado, utilize « <code translate="no">$[subfield]</code> » para se referir a subcampos escalares do elemento Struct atual.</p>
+    </button></h2><p>Utilize ` <code translate="no">element_filter(structArrayField, predicate)</code> ` quando as condições escalares se aplicarem ao mesmo elemento `Struct` que participa na pesquisa vetorial ao nível do elemento. Dentro do predicado, utilize ` <code translate="no">$[subfield]</code> ` para se referir a subcampos escalares do elemento `Struct` atual.</p>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 filter_expr = (
@@ -152,7 +153,7 @@ results = client.search(
 <p>Neste exemplo, o predicado de nível superior <code translate="no">category == &quot;search&quot;</code> seleciona entidades candidatas, e <code translate="no">element_filter</code> restringe a pesquisa vetorial ao nível do elemento a blocos em que <code translate="no">section</code>, <code translate="no">quality_score</code> e <code translate="no">has_code</code> coincidem todos no mesmo elemento Struct.</p>
 <div class="alert note">
 <p>Aviso</p>
-<p>Quando combinar um predicado de nível superior com <code translate="no">element_filter</code>, coloque <code translate="no">element_filter</code> no final da expressão. Uma expressão de filtro só pode conter um <code translate="no">element_filter</code>, e não é possível aninhar <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> dentro de outro operador StructArray.</p>
+<p>Quando combinar um predicado de nível superior com <code translate="no">element_filter</code>, coloque <code translate="no">element_filter</code> no final da expressão. Uma expressão de filtro pode conter apenas um <code translate="no">element_filter</code>, e não é possível aninhar <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> dentro de outro operador StructArray.</p>
 </div>
 <h2 id="Filter-entities-with-MATCH-operators" class="common-anchor-header">Filtrar entidades com operadores MATCH<button data-href="#Filter-entities-with-MATCH-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +170,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize os operadores « <code translate="no">MATCH_*</code> » quando o filtro tiver de determinar se uma entidade pai é elegível com base nos seus elementos «Struct». Estes operadores são filtros ao nível da linha: selecionam entidades, mas não devolvem, por si só, os deslocamentos dos elementos.</p>
+    </button></h2><p>Utilize os operadores « <code translate="no">MATCH_*</code> » quando o filtro tiver de determinar se uma entidade pai se qualifica com base nos seus elementos «Struct». Estes operadores são filtros ao nível da linha: selecionam entidades, mas não devolvem, por si só, os deslocamentos dos elementos.</p>
 <table>
 <thead>
 <tr><th>Operador</th><th>Utilize-o quando</th><th>Exemplo</th></tr>
@@ -203,7 +204,7 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilize « <code translate="no">MATCH_ANY</code> » aqui porque o resultado da pesquisa da EmbeddingList é ao nível da entidade. O filtro exige que, pelo menos, um fragmento na entidade seja um fragmento « <code translate="no">&quot;index&quot;</code> » de alta qualidade, mas o próprio resultado da pesquisa continua a representar a entidade pai.</p>
+<p>Utilize « <code translate="no">MATCH_ANY</code> » aqui porque o resultado da pesquisa da «EmbeddingList» é ao nível da entidade. O filtro exige que, pelo menos, um fragmento na entidade seja um fragmento « <code translate="no">&quot;index&quot;</code> » de alta qualidade, mas o próprio resultado da pesquisa continua a representar a entidade pai.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">Utilizar filtros na pesquisa híbrida<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -253,7 +254,7 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>O argumento « <code translate="no">filter</code> » aplica a condição da entidade de nível superior, enquanto o « <code translate="no">expr</code> » em « <code translate="no">chunk_req</code> » restringe apenas a solicitação do vetor ao nível do elemento do StructArray. Para combinações de pesquisa híbrida suportadas e limites específicos da versão, consulte <a href="/docs/pt/hybrid-search-with-structarray.md">«Pesquisa híbrida com StructArray</a> » e <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p>
+<p>O argumento « <code translate="no">filter</code> » aplica a condição da entidade de nível superior, enquanto « <code translate="no">expr</code> » em « <code translate="no">chunk_req</code> » restringe apenas a solicitação do vetor ao nível do elemento do StructArray. Para combinações de pesquisa híbrida suportadas e limites específicos da versão, consulte <a href="/docs/pt/hybrid-search-with-structarray.md">«Pesquisa híbrida com StructArray</a> » e <a href="/docs/pt/structarray-limits.md">«Limites do StructArray</a>».</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Resumo do suporte a predicados<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +302,7 @@ results = client.hybrid_search(
     </button></h2><ul>
 <li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fora de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">chunks.section</code> ` em vez da sintaxe do operador `StructArray`, como ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utilizar ` <code translate="no">element_filter</code> ` quando apenas é necessária uma filtragem ao nível da linha. Utilize ` <code translate="no">MATCH_ANY</code> ` em vez disso, se apenas precisar de selecionar entidades.</p></li>
+<li><p>Utilizar <code translate="no">element_filter</code> quando apenas é necessária uma filtragem ao nível da linha. Utilize <code translate="no">MATCH_ANY</code> em vez disso, se apenas precisar de selecionar entidades.</p></li>
 <li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva deslocamentos de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
 <li><p>Escrever predicados booleanos simples, como <code translate="no">$[has_code]</code>. Utilize comparações explícitas, como <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Colocar « <code translate="no">element_filter</code> » antes de um predicado de nível superior na mesma expressão de filtro.</p></li>

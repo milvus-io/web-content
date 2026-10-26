@@ -1,14 +1,14 @@
 ---
 id: llama_stack_with_milvus.md
-title: Buat RAG dengan Llama Stack dengan Milvus
+title: Bangun RAG menggunakan Llama Stack dengan Milvus
 related_key: Llama Stack
 summary: >-
-  Tutorial ini memperkenalkan cara membuat Llama Stack Server yang dikonfigurasi
-  dengan Milvus, yang memungkinkan Anda untuk mengimpor data pribadi Anda untuk
-  digunakan sebagai basis pengetahuan. Kita kemudian akan melakukan query pada
-  server, membuat aplikasi RAG yang lengkap.
+  Tutorial ini menjelaskan cara membangun Llama Stack Server yang dikonfigurasi
+  dengan Milvus, sehingga Anda dapat mengimpor data pribadi Anda untuk dijadikan
+  basis pengetahuan. Selanjutnya, kita akan melakukan kueri pada server
+  tersebut, sehingga menghasilkan aplikasi RAG yang lengkap.
 ---
-<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">Membangun RAG dengan Llama Stack dengan Milvus<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">Bangun RAG dengan Llama Stack menggunakan Milvus<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> adalah pendekatan yang berorientasi pada layanan dan mengutamakan API untuk membangun aplikasi AI produksi. Llama Stack menyediakan tumpukan universal yang memungkinkan pengembang untuk mengembangkan di mana saja, menerapkan di mana saja, dan memanfaatkan blok bangunan yang siap produksi dengan kemandirian penyedia yang sebenarnya. Llama Stack berfokus pada model Llama Meta, komposabilitas, kesiapan produksi, dan ekosistem kemitraan.</p>
-<p>Dalam tutorial ini, kami akan memperkenalkan cara membangun Llama Stack Server yang dikonfigurasi dengan Milvus, memungkinkan Anda untuk mengimpor data pribadi Anda untuk berfungsi sebagai basis pengetahuan Anda. Kita kemudian akan melakukan kueri pada server, membuat aplikasi RAG yang lengkap.</p>
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> adalah pendekatan berorientasi layanan dan berbasis API untuk membangun aplikasi AI produksi. Llama Stack menyediakan stack universal yang memungkinkan pengembang untuk mengembangkan di mana saja, menerapkan di mana saja, dan memanfaatkan blok bangunan siap produksi dengan kemandirian penyedia yang sesungguhnya. Llama Stack berfokus pada model Llama dari Meta, kemampuan komposisi, kesiapan produksi, dan ekosistem kemitraan.</p>
+<p>Dalam tutorial ini, kami akan memperkenalkan cara membangun Server Llama Stack yang dikonfigurasi dengan Milvus, sehingga Anda dapat mengimpor data pribadi Anda untuk dijadikan basis pengetahuan. Selanjutnya, kami akan melakukan kueri pada server tersebut, sehingga menghasilkan aplikasi RAG yang lengkap.</p>
 <h2 id="Preparing-the-Environment" class="common-anchor-header">Mempersiapkan Lingkungan<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,17 +40,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ada banyak cara untuk memulai server Llama Stack, seperti <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">sebagai perpustakaan</a>, <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">membangun distribusi</a>, dll. Untuk setiap komponen dalam Llama Stack, berbagai penyedia juga dapat dipilih. Oleh karena itu, ada banyak cara untuk meluncurkan server Llama Stack.</p>
-<p>Tutorial ini menggunakan konfigurasi berikut sebagai contoh untuk memulai layanan. Jika Anda ingin memulainya dengan cara lain, silakan lihat Memulai <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">Server Llama Stack</a>.</p>
+    </button></h2><p>Ada banyak cara untuk menjalankan server Llama Stack, seperti <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">sebagai pustaka</a>, <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">membangun distribusi</a>, dan sebagainya. Untuk setiap komponen dalam Llama Stack, berbagai penyedia juga dapat dipilih. Oleh karena itu, terdapat banyak cara untuk menjalankan server Llama Stack.</p>
+<p>Tutorial ini menggunakan konfigurasi berikut sebagai contoh untuk memulai layanan. Jika Anda ingin memulainya dengan cara lain, silakan lihat <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">Memulai Server Llama Stack</a>.</p>
 <ul>
-<li>Kita menggunakan Conda untuk membangun distribusi kustom dengan konfigurasi Milvus.</li>
+<li>Kami menggunakan Conda untuk membangun distribusi khusus dengan konfigurasi Milvus.</li>
 <li>Kami menggunakan <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI</a> sebagai penyedia LLM.</li>
-<li>Kami menggunakan <code translate="no">all-MiniLM-L6-v2</code> default sebagai model penyematan.</li>
+<li>Kami menggunakan model embedding default " <code translate="no">all-MiniLM-L6-v2</code> ".</li>
 </ul>
 <div class="alert note">
-<p>Tutorial ini terutama mengacu pada panduan instalasi resmi dari <a href="https://llama-stack.readthedocs.io/en/latest/index.html">dokumentasi Llama Stack</a>. Jika Anda menemukan bagian yang sudah ketinggalan zaman dalam tutorial ini, Anda dapat memprioritaskan untuk mengikuti panduan resmi dan membuat masalah untuk kami.</p>
+<p>Tutorial ini terutama mengacu pada panduan instalasi resmi dari <a href="https://llama-stack.readthedocs.io/en/latest/index.html">dokumentasi Llama Stack</a>. Jika Anda menemukan bagian yang sudah ketinggalan zaman dalam tutorial ini, Anda dapat memprioritaskan mengikuti panduan resmi dan membuat laporan masalah untuk kami.</p>
 </div>
-<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Memulai Llama Stack Server<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
+<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Memulai Server Llama Stack<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Menyiapkan Lingkungan<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">Siapkan Lingkungan<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Karena kita perlu menggunakan Together AI sebagai layanan LLM, pertama-tama kita harus masuk ke situs web resminya untuk mengajukan permohonan <a href="https://api.together.xyz/settings/api-keys">API key</a> dan menetapkan API key <code translate="no">TOGETHER_API_KEY</code> sebagai variabel lingkungan.</p>
+    </button></h3><p>Karena kami perlu menggunakan Together AI sebagai layanan LLM, kami harus terlebih dahulu masuk ke situs web resmi untuk mengajukan permohonan <a href="https://api.together.xyz/settings/api-keys">kunci API</a> dan menetapkan kunci API <code translate="no">TOGETHER_API_KEY</code> sebagai variabel lingkungan.</p>
 <p>Kloning kode sumber Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
@@ -91,7 +91,7 @@ $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p>Ubah konten di <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, ubah bagian vector_io ke konfigurasi Milvus yang relevan. Sebagai contoh, tambahkan:</p>
+<p>Ubah isi di <code translate="no">llama_stack/llama_stack/templates/together/run.yaml</code>, dengan mengganti bagian vector_io menjadi konfigurasi Milvus yang sesuai. Misalnya, tambahkan:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -106,14 +106,14 @@ $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
 <p>Di Llama Stack, Milvus dapat dikonfigurasi dengan dua cara: konfigurasi lokal, yaitu <code translate="no">inline::milvus</code>, dan konfigurasi jarak jauh, yaitu <code translate="no">remote::milvus</code>.</p>
 <ul>
-<li><p>Metode yang paling sederhana adalah konfigurasi lokal, yang membutuhkan pengaturan <code translate="no">db_path</code>, jalur untuk menyimpan file <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> secara lokal.</p></li>
-<li><p>Konfigurasi jarak jauh cocok untuk penyimpanan data yang besar.</p>
+<li><p>Metode paling sederhana adalah konfigurasi lokal, yang memerlukan pengaturan <code translate="no">db_path</code>, yaitu jalur untuk menyimpan berkas <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> secara lokal.</p></li>
+<li><p>Konfigurasi jarak jauh cocok untuk penyimpanan data dalam skala besar.</p>
 <ul>
-<li>Jika Anda memiliki data dalam jumlah besar, Anda dapat menyiapkan server Milvus yang berkinerja baik pada <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, silakan gunakan URI server, misalnya, <code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>. <code translate="no">token</code> default adalah <code translate="no">root:Milvus</code>.</li>
-<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint dan kunci API</a> di Zilliz Cloud.</li>
+<li>Jika Anda memiliki data dalam jumlah besar, Anda dapat menyiapkan server Milvus berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan URI server, misalnya <code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code> Anda. Nilai default untuk <code translate="no">token</code> adalah <code translate="no">root:Milvus</code>.</li>
+<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang sepenuhnya dikelola untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Membangun distribusi dari templat<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">Buat distribusi dari templat<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,14 +128,14 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jalankan perintah berikut untuk membangun distribusi:</p>
+    </button></h3><p>Jalankan perintah berikut untuk membuat distribusi:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p>Sebuah berkas akan dibuat di <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Kemudian, jalankan perintah ini untuk memulai server:</p>
+<p>Sebuah berkas akan dihasilkan di <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Selanjutnya, jalankan perintah ini untuk memulai server:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Jika semuanya berjalan lancar, Anda akan melihat server Llama Stack berhasil berjalan pada port 8321.</p>
-<h2 id="Perform-RAG-from-client" class="common-anchor-header">Melakukan RAG dari klien<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
+<p>Jika semuanya berjalan lancar, Anda seharusnya melihat server Llama Stack berhasil berjalan di port 8321.</p>
+<h2 id="Perform-RAG-from-client" class="common-anchor-header">Lakukan RAG dari klien<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda memulai server, Anda dapat menulis kode klien untuk mengaksesnya. Berikut ini adalah contoh kodenya:</p>
+    </button></h2><p>Setelah Anda memulai server, Anda dapat menulis kode klien untuk mengaksesnya. Berikut adalah contoh kodenya:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> uuid
 <span class="hljs-keyword">from</span> llama_stack_client.types <span class="hljs-keyword">import</span> Document
 <span class="hljs-keyword">from</span> llama_stack_client.lib.agents.agent <span class="hljs-keyword">import</span> Agent
@@ -223,7 +223,8 @@ response = rag_agent.create_turn(
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Response: &quot;</span>)
 <span class="hljs-built_in">print</span>(response.output_message.content)
 <button class="copy-code-btn"></button></code></pre>
-<p>Jalankan kode ini untuk melakukan kueri RAG. Jika semuanya berjalan dengan baik, hasilnya akan terlihat seperti ini:</p>
+<p>Jalankan kode ini untuk melakukan kueri RAG.
+Jika semuanya berfungsi dengan baik, hasilnya akan terlihat seperti ini:</p>
 <pre><code translate="no" class="language-log">inserting...
 finish init agent...
 Response: 

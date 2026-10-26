@@ -19,7 +19,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus se compromete a proporcionar las mejores bases de datos vectoriales para potenciar las aplicaciones de IA y la búsqueda de similitudes vectoriales. No obstante, el equipo trabaja continuamente para incorporar más funciones y las mejores herramientas con el fin de mejorar la experiencia del usuario. En esta página se enumeran algunas limitaciones conocidas con las que los usuarios pueden encontrarse al utilizar Milvus.</p>
+    </button></h1><p>Milvus se compromete a proporcionar las mejores bases de datos vectoriales para impulsar las aplicaciones de IA y la búsqueda de similitudes vectoriales. No obstante, el equipo trabaja continuamente para incorporar más funciones y las mejores herramientas con el fin de mejorar la experiencia del usuario. En esta página se enumeran algunas limitaciones conocidas con las que los usuarios pueden encontrarse al utilizar Milvus.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">Longitud del nombre de un recurso<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
 <tr><td>Partición</td><td>255  caracteres</td></tr>
 </tbody>
 </table>
-<h2 id="Naming-rules" class="common-anchor-header">Reglas de nomenclatura<button data-href="#Naming-rules" class="anchor-icon" translate="no">
+<h2 id="Naming-rules" class="common-anchor-header">Normas de nomenclatura<button data-href="#Naming-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +130,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Tipo de datos</th><th>Límite</th></tr>
+<tr><th>Tipo de datos</th><th>Límite (bytes)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65 535</td></tr>
@@ -220,7 +220,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
 <tr><th>Vectores</th><th>Límite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (número de resultados más similares que se van a devolver)</td><td>16 384</td></tr>
+<tr><td><code translate="no">topk</code> (número de resultados más similares que se devolverán)</td><td>16 384</td></tr>
 <tr><td><code translate="no">nq</code> (número de consultas de búsqueda)</td><td>16 384</td></tr>
 </tbody>
 </table>
@@ -239,7 +239,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La siguiente tabla ofrece una visión general de la compatibilidad con diversos comportamientos de búsqueda en los distintos tipos de índices.</p>
+    </button></h2><p>La siguiente tabla ofrece una visión general de la compatibilidad con diversos comportamientos de búsqueda en diferentes tipos de índices.</p>
 <table>
 <thead>
 <tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_FUERZA BRUTA</th><th>ÍNDICE_INVERTIDO_DISPARSE</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
@@ -254,7 +254,7 @@ summary: Infórmate sobre las limitaciones a la hora de utilizar Milvus.
 <tr><td>Búsqueda por grupos</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>No</td><td>No</td></tr>
 <tr><td>Búsqueda con iterador</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
 <tr><td>Búsqueda híbrida</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí (solo RRFRanker)</td><td>Sí</td><td>Sí</td></tr>
-<tr><td>Consultar/Obtener</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+<tr><td>Consulta/Obtener</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
 <tr><td>Consulta con iterador</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
 </tbody>
 </table>

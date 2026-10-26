@@ -5,7 +5,7 @@ summary: >-
   Milvus menyediakan serangkaian operator dasar yang lengkap untuk membantu Anda
   menyaring dan melakukan kueri data secara efisien. Operator-operator ini
   memungkinkan Anda menyempurnakan kriteria pencarian berdasarkan bidang skalar,
-  perhitungan numerik, kondisi logika, dan lain-lain. Memahami cara menggunakan
+  perhitungan numerik, kondisi logika, dan lainnya. Memahami cara menggunakan
   operator-operator ini sangat penting untuk menyusun kueri yang akurat dan
   memaksimalkan efisiensi pencarian Anda.
 ---
@@ -115,7 +115,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika Anda ingin mencari semua entitas dengan <code translate="no">age</code> lebih besar dari 30:</p>
+    </button></h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">age</code> lebih besar dari 30:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-4-Filtering-with-less-than" class="common-anchor-header">Contoh 4: Penyaringan dengan "kurang dari"<button data-href="#Example-4-Filtering-with-less-than" class="anchor-icon" translate="no">
@@ -151,7 +151,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika Anda ingin mencari semua entitas dengan nilai <code translate="no">rating</code> yang lebih besar dari atau sama dengan 4:</p>
+    </button></h3><p>Jika Anda ingin mencari semua entitas dengan <code translate="no">rating</code> lebih besar dari atau sama dengan 4:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-6-Filtering-with-less-than-or-equal-to" class="common-anchor-header">Contoh 6: Penyaringan dengan kurang dari atau sama dengan<button data-href="#Example-6-Filtering-with-less-than-or-equal-to" class="anchor-icon" translate="no">
@@ -209,7 +209,7 @@ summary: >-
       </svg>
     </button></h2><p>Operator pencocokan pola membantu menyaring nilai string berdasarkan pola wildcard atau ekspresi reguler.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Digunakan untuk mencocokkan pola karakter pengganti sederhana pada nilai string. Misalnya, <code translate="no">name LIKE &quot;Prod%&quot;</code> mencocokkan nilai yang dimulai dengan <code translate="no">Prod</code>.</p></li>
+<li><p><code translate="no">LIKE</code>: Digunakan untuk mencocokkan pola karakter pengganti sederhana pada nilai string. Misalnya, ` <code translate="no">name LIKE &quot;Prod%&quot;</code> ` mencocokkan nilai yang dimulai dengan ` <code translate="no">Prod</code>`.</p></li>
 <li><p><code translate="no">=~</code>: Digunakan untuk mencocokkan nilai string dengan ekspresi reguler RE2. Misalnya, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> mencocokkan nilai yang mengandung kode kesalahan seperti <code translate="no">E1001</code>.</p></li>
 <li><p><code translate="no">!~</code>: Digunakan untuk mengecualikan nilai string yang cocok dengan ekspresi reguler RE2. Ini setara dengan <code translate="no">NOT (field =~ &quot;pattern&quot;)</code>.</p></li>
 </ul>
@@ -295,10 +295,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mencari bilangan di mana <code translate="no">price</code> dipangkatkan dengan 2 hasilnya lebih besar dari 1000:</p>
+    </button></h3><p>Untuk mencari entitas di mana <code translate="no">price</code> dipangkatkan 2 hasilnya lebih besar dari 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Operator bitwise<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Operator aritmatika hanya mendukung ekspresi yang melibatkan <strong>satu bidang dan konstanta</strong>. Ekspresi yang menggabungkan dua bidang secara aritmatika — seperti <code translate="no">price * quantity &gt; 100</code> — saat ini tidak didukung dan akan menghasilkan kesalahan. Jika Anda perlu menyaring berdasarkan nilai turunan yang dihitung dari beberapa bidang, pertimbangkan untuk menyimpan nilai yang telah dihitung sebelumnya sebagai bidang skalar terpisah pada saat penyisipan.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">Operator bitwise<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -313,7 +316,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Operator bitwise berguna ketika bidang bilangan bulat mengkodekan beberapa flag, seperti izin, flag fitur, atau bit status. Anda dapat menggunakan operator ini dalam ekspresi filter untuk memeriksa, menggabungkan, atau membandingkan bit individual dalam nilai bilangan bulat.</p>
+    </button></h2><p>Operator bitwise berguna ketika bidang bilangan bulat mengkodekan beberapa flag, seperti izin, fitur flag, atau bit status. Anda dapat menggunakan operator ini dalam ekspresi filter untuk memeriksa, menggabungkan, atau membandingkan bit individual dalam nilai bilangan bulat.</p>
 <p>Untuk bidang skalar, operator bitwise berlaku untuk tipe bidang bilangan bulat, seperti <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, dan <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Operator bitwise yang didukung<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +340,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">&amp;</code></td><td>AND bitwise</td><td>Memeriksa apakah bit tertentu disetel.</td></tr>
 <tr><td><code translate="no">|</code></td><td>OR bitwise</td><td>Menggabungkan bit sebelum perbandingan.</td></tr>
-<tr><td><code translate="no">^</code></td><td>XOR bit</td><td>Bandingkan perbedaan bit antara dua nilai.</td></tr>
+<tr><td><code translate="no">^</code></td><td>XOR bitwise</td><td>Bandingkan perbedaan bit antara dua nilai.</td></tr>
 </tbody>
 </table>
 <h3 id="Example-Filtering-by-permission-bits" class="common-anchor-header">Contoh: Penyaringan berdasarkan bit izin<button data-href="#Example-Filtering-by-permission-bits" class="anchor-icon" translate="no">
@@ -368,13 +371,13 @@ summary: >-
 </tbody>
 </table>
 <p>Misalnya, <code translate="no">permissions = 5</code> berarti bit <code translate="no">READ</code> dan <code translate="no">SHARE</code> disetel, karena <code translate="no">5 = 1 + 4</code>.</p>
-<p>Untuk menemukan entitas di mana bit ` <code translate="no">SHARE</code> ` disetel, gunakan operasi bitwise AND (`<code translate="no">&amp;</code>`):</p>
+<p>Untuk menemukan entitas di mana bit ` <code translate="no">SHARE</code> ` diaktifkan, gunakan operasi bitwise AND (`<code translate="no">&amp;</code>`):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk menemukan entitas di mana pengaturan bit ` <code translate="no">WRITE</code> ` menghasilkan set izin ` <code translate="no">READ + WRITE + SHARE</code> `, gunakan operasi bitwise OR (<code translate="no">|</code>):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk menemukan entitas yang bit izinnya berbeda dari <code translate="no">READ + WRITE + SHARE</code> hanya pada bit <code translate="no">WRITE</code>, gunakan operasi bitwise XOR (<code translate="no">^</code>):</p>
+<p>Untuk menemukan entitas yang bit izinnya berbeda dari ` <code translate="no">READ + WRITE + SHARE</code> ` hanya pada bit ` <code translate="no">WRITE</code> `, gunakan operasi XOR bitwise (<code translate="no">^</code>):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -414,7 +417,7 @@ summary: >-
     </button></h3><ul>
 <li><p><code translate="no">AND</code>: Menggabungkan beberapa kondisi yang semuanya harus benar.</p></li>
 <li><p><code translate="no">OR</code>: Menggabungkan kondisi di mana setidaknya satu di antaranya harus benar.</p></li>
-<li><p><code translate="no">NOT</code>: Menafikan suatu kondisi.</p></li>
+<li><p><code translate="no">NOT</code>: Menegasikan suatu kondisi.</p></li>
 </ul>
 <h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Contoh 1: Menggunakan <code translate="no">AND</code> untuk menggabungkan kondisi<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -515,7 +518,7 @@ summary: >-
 <p>Untuk mengambil entitas di mana bidang <code translate="no">description</code> bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengambil entitas di mana bidang ` <code translate="no">description</code> ` tidak bernilai `null`:</p>
+<p>Untuk mengambil entitas di mana bidang ` <code translate="no">description</code> ` tidak bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk mengambil entitas di mana bidang ` <code translate="no">description</code> ` tidak bernilai `null` dan bidang ` <code translate="no">price</code> ` lebih besar dari 10:</p>
@@ -567,8 +570,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Contoh 1: Mengambil entitas yang metadata-nya bernilai null</strong></p>
-<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak ada atau secara eksplisit ditetapkan ke None:</p>
+<p><strong>Contoh 1: Mengambil entitas di mana metadata bernilai null</strong></p>
+<p>Untuk menemukan entitas yang bidang <code translate="no">metadata</code> -nya hilang atau secara eksplisit ditetapkan ke None:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>

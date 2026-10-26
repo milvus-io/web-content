@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gli operatori di confronto vengono utilizzati per filtrare i dati in base a uguaglianza, disuguaglianza o dimensione. Sono applicabili ai campi numerici e di testo.</p>
+    </button></h2><p>Gli operatori di confronto vengono utilizzati per filtrare i dati in base all’uguaglianza, alla disuguaglianza o alla grandezza. Sono applicabili ai campi numerici e di testo.</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">Operatori di confronto supportati<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -207,7 +207,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gli operatori di corrispondenza dei pattern consentono di filtrare i valori stringa in base a pattern con caratteri jolly o espressioni regolari.</p>
+    </button></h2><p>Gli operatori di corrispondenza dei pattern aiutano a filtrare i valori delle stringhe in base a pattern con caratteri jolly o espressioni regolari.</p>
 <ul>
 <li><p><code translate="no">LIKE</code>: Utilizzato per trovare corrispondenze con semplici modelli con caratteri jolly nei valori stringa. Ad esempio, <code translate="no">name LIKE &quot;Prod%&quot;</code> trova corrispondenze con valori che iniziano con <code translate="no">Prod</code>.</p></li>
 <li><p><code translate="no">=~</code>: Utilizzato per trovare corrispondenze tra un valore stringa e un'espressione regolare RE2. Ad esempio, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> trova corrispondenze con valori che contengono un codice di errore come <code translate="no">E1001</code>.</p></li>
@@ -298,7 +298,10 @@ summary: >-
     </button></h3><p>Per trovare le entità in cui <code translate="no">price</code> elevato a 2 è maggiore di 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">Operatori bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Gli operatori aritmetici supportano solo espressioni che coinvolgono un <strong>singolo campo e una costante</strong>. Le espressioni che combinano aritmeticamente due campi — come <code translate="no">price * quantity &gt; 100</code> — non sono attualmente supportate e restituiranno un errore. Se è necessario filtrare in base a un valore derivato calcolato da più campi, si consiglia di memorizzare il valore precalcolato come campo scalare separato al momento dell’inserimento.</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">Operatori bit a bit<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -416,7 +419,7 @@ summary: >-
 <li><p><code translate="no">OR</code>: Combina condizioni di cui almeno una deve essere vera.</p></li>
 <li><p><code translate="no">NOT</code>: Negazione di una condizione.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Esempio 1: Utilizzo di <code translate="no">AND</code> per combinare le condizioni<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Esempio 1: Utilizzo di <code translate="no">AND</code> per combinare condizioni<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -434,7 +437,7 @@ summary: >-
     </button></h3><p>Per trovare tutti i prodotti per cui <code translate="no">price</code> è maggiore di 100 e <code translate="no">stock</code> è maggiore di 50:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">Esempio 2: Utilizzo di " <code translate="no">OR</code> " per combinare le condizioni<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">Esempio 2: Utilizzo di “ <code translate="no">OR</code> ” per combinare le condizioni<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -452,7 +455,7 @@ summary: >-
     </button></h3><p>Per trovare tutti i prodotti in cui <code translate="no">color</code> è “red” o “blue”:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Esempio 3: Utilizzo di “ <code translate="no">NOT</code> ” per escludere una condizione<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">Esempio 3: Utilizzo di <code translate="no">NOT</code> per escludere una condizione<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -508,7 +511,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus consente di filtrare su campi scalari regolari, come stringhe o numeri, con valori nulli.</p>
+    </button></h3><p>Milvus consente di applicare filtri su campi scalari regolari, come stringhe o numeri, con valori nulli.</p>
 <div class="alert note">
 <p>Una stringa vuota <code translate="no">&quot;&quot;</code> non viene considerata un valore nullo per un campo <code translate="no">VARCHAR</code>.</p>
 </div>
@@ -542,9 +545,9 @@ summary: >-
 <li><p>Il campo JSON stesso è completamente assente dall’entità.</p></li>
 </ul>
 <div class="alert note">
-<p>Se alcuni elementi all’interno di un oggetto JSON sono null (ad es. singole chiavi), il campo viene comunque considerato non null. Ad esempio, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> non viene considerato null, anche se la chiave <code translate="no">category</code> è null.</p>
+<p>Se alcuni elementi all’interno di un oggetto JSON sono null (ad es. singole chiavi), il campo viene comunque considerato non nullo. Ad esempio, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> non viene considerato null, anche se la chiave <code translate="no">category</code> è null.</p>
 </div>
-<p>Per illustrare ulteriormente come Milvus gestisce i campi JSON con valori nulli, si considerino i seguenti dati di esempio con un campo JSON <code translate="no">metadata</code>:</p>
+<p>Per illustrare ulteriormente come Milvus gestisce i campi JSON con valori null, si considerino i seguenti dati di esempio con un campo JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},

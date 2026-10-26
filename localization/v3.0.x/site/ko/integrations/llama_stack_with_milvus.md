@@ -1,12 +1,12 @@
 ---
 id: llama_stack_with_milvus.md
-title: 밀버스와 함께 라마 스택으로 RAG 구축하기
+title: Milvus를 사용하여 Llama Stack으로 RAG 구축하기
 related_key: Llama Stack
 summary: >-
-  이 튜토리얼에서는 Milvus로 구성된 라마 스택 서버를 구축하여 개인 데이터를 가져와 지식창고로 사용할 수 있도록 하는 방법을 소개합니다.
-  그런 다음 서버에서 쿼리를 수행하여 완전한 RAG 애플리케이션을 만들어 보겠습니다.
+  이 튜토리얼에서는 Milvus로 구성된 Llama Stack 서버를 구축하여, 사용자의 비공개 데이터를 가져와 지식 기반으로 활용하는 방법을
+  소개합니다. 이후 서버에서 쿼리를 실행하여 완전한 RAG 애플리케이션을 구축해 보겠습니다.
 ---
-<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">Milvus와 함께 Llama Stack으로 RAG 구축하기<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Llama-Stack-with-Milvus" class="common-anchor-header">Milvus를 활용한 Llama Stack 기반 RAG 구축<button data-href="#Build-RAG-with-Llama-Stack-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">라마 스택은</a> 프로덕션 AI 애플리케이션을 구축하기 위한 서비스 지향의 API 우선 접근 방식입니다. 개발자가 어디서나 개발하고, 어디서나 배포하며, 진정한 공급자 독립성을 갖춘 프로덕션 지원 빌딩 블록을 활용할 수 있는 범용 스택을 제공합니다. 라마 스택은 Meta의 라마 모델, 구성 가능성, 프로덕션 준비성, 파트너 에코시스템에 중점을 두고 있습니다.</p>
-<p>이 튜토리얼에서는 개인 데이터를 가져와 지식창고로 사용할 수 있도록 Milvus로 구성된 Llama 스택 서버를 구축하는 방법을 소개합니다. 그런 다음 서버에서 쿼리를 수행하여 완전한 RAG 애플리케이션을 만들어 보겠습니다.</p>
-<h2 id="Preparing-the-Environment" class="common-anchor-header">환경 준비하기<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack은</a> 프로덕션용 AI 애플리케이션을 구축하기 위한 서비스 지향적이고 API 우선의 접근 방식입니다. 이 플랫폼은 개발자가 어디서나 개발하고, 어디에나 배포하며, 진정한 공급자 독립성을 갖춘 프로덕션 준비 완료 빌딩 블록을 활용할 수 있도록 하는 범용 스택을 제공합니다. Llama Stack은 Meta의 Llama 모델, 조합성, 프로덕션 준비 상태, 그리고 파트너십 생태계에 중점을 둡니다.</p>
+<p>이 튜토리얼에서는 Milvus로 구성된 Llama Stack 서버를 구축하여, 사용자의 비공개 데이터를 지식 기반으로 활용할 수 있도록 하는 방법을 소개합니다. 그런 다음 서버에서 쿼리를 실행하여 완전한 RAG 애플리케이션을 완성해 보겠습니다.</p>
+<h2 id="Preparing-the-Environment" class="common-anchor-header">환경 준비<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,17 +38,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">라이브러리</a>, <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">배포 빌드</a> 등 여러 가지 방법으로 Llama Stack 서버를 시작할 수 있습니다. 라마 스택의 각 구성 요소에 대해 다양한 공급자를 선택할 수도 있습니다. 따라서 라마 스택 서버를 시작하는 방법에는 여러 가지가 있습니다.</p>
-<p>이 튜토리얼에서는 다음 구성을 예로 들어 서비스를 시작합니다. 다른 방법으로 시작하려면 <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">라마 스택 서버 시작하기를</a> 참조하세요.</p>
+    </button></h2><p>Llama Stack 서버를 시작하는 방법에는 <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">라이브러리 사용</a>, <a href="https://llama-stack.readthedocs.io/en/latest/distributions/building_distro.html">배포판 빌드</a> <a href="https://llama-stack.readthedocs.io/en/latest/distributions/importing_as_library.html">등</a> 여러 가지가 있습니다. 또한 Llama Stack의 각 구성 요소마다 다양한 제공자를 선택할 수 있습니다. 따라서 Llama Stack 서버를 실행하는 방법도 매우 다양합니다.</p>
+<p>이 튜토리얼에서는 서비스를 시작하는 예시로 다음 구성을 사용합니다. 다른 방법으로 시작하고 싶다면 <a href="https://llama-stack.readthedocs.io/en/latest/distributions/index.html">‘Llama Stack 서버 시작하기’를</a> 참조하십시오.</p>
 <ul>
-<li>Conda를 사용하여 Milvus 구성으로 사용자 정의 배포를 구축합니다.</li>
-<li>LLM 공급자로는 <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI를</a> 사용합니다.</li>
-<li>임베딩 모델로는 기본 <code translate="no">all-MiniLM-L6-v2</code> 을 사용합니다.</li>
+<li>Conda를 사용하여 Milvus 구성이 포함된 사용자 지정 배포판을 빌드합니다.</li>
+<li>LLM 제공자로는 <a href="https://llama-stack.readthedocs.io/en/latest/distributions/self_hosted_distro/together.html#via-conda">Together AI를</a> 사용합니다.</li>
+<li>임베딩 모델로는 기본값인 <code translate="no">all-MiniLM-L6-v2</code> 를 사용합니다.</li>
 </ul>
 <div class="alert note">
-<p>이 튜토리얼은 주로 <a href="https://llama-stack.readthedocs.io/en/latest/index.html">라마 스택 문서의</a> 공식 설치 가이드를 참조합니다. 이 튜토리얼에서 오래된 부분을 발견하면 공식 가이드를 우선적으로 따르고 문제를 만들어 주세요.</p>
+<p>이 튜토리얼은 주로 <a href="https://llama-stack.readthedocs.io/en/latest/index.html">Llama Stack 문서의</a> 공식 설치 가이드를 참조합니다. 이 튜토리얼에서 오래된 내용이 발견될 경우, 공식 가이드를 우선적으로 따르고 저희에게 이슈를 등록해 주시기 바랍니다.</p>
 </div>
-<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">라마 스택 서버 시작하기<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
+<h2 id="Start-Llama-Stack-Server" class="common-anchor-header">Llama Stack 서버 시작<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +63,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">환경 준비하기<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">환경 준비<button data-href="#Prepare-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,18 +78,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>LLM 서비스로 Together AI를 사용해야 하므로 먼저 공식 홈페이지에 로그인하여 <a href="https://api.together.xyz/settings/api-keys">API 키를</a> 신청하고 환경 변수로 <code translate="no">TOGETHER_API_KEY</code> 을 설정해야 합니다.</p>
-<p>라마 스택 소스 코드 복제</p>
+    </button></h3><p>LLM 서비스로 Together AI를 사용해야 하므로, 먼저 공식 웹사이트에 로그인하여 <a href="https://api.together.xyz/settings/api-keys">API 키를</a> 신청하고, API 키 <code translate="no">TOGETHER_API_KEY</code> 를 환경 변수로 설정해야 합니다.</p>
+<p>Llama Stack 소스 코드 클론하기</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack
 <button class="copy-code-btn"></button></code></pre>
-<p>콘다 환경을 생성하고 종속 요소를 설치합니다.</p>
+<p>conda 환경 생성 및 종속성 설치</p>
 <pre><code translate="no" class="language-bash">$ conda create -n stack python=3.10
 $ conda activate stack
 
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">llama_stack/llama_stack/template/together/run.yaml</code> 의 내용을 수정하여 vector_io 섹션을 관련 Milvus 설정으로 변경합니다. 예를 들어 추가합니다:</p>
+<p><code translate="no">llama_stack/llama_stack/templates/together/run.yaml</code> 파일의 내용을 수정하여 vector_io 섹션을 관련 Milvus 구성으로 변경합니다. 예를 들어, 다음을 추가합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
 <span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
   <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
@@ -102,16 +102,16 @@ $ pip install -e .
 <span class="hljs-comment">#      uri: http://localhost:19530</span>
 <span class="hljs-comment">#      token: root:Milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Llama Stack에서 Milvus는 로컬 구성( <code translate="no">inline::milvus</code>)과 원격 구성( <code translate="no">remote::milvus</code>)의 두 가지 방법으로 구성할 수 있습니다.</p>
+<p>Llama Stack에서 Milvus는 <code translate="no">inline::milvus</code> 인 로컬 구성과 <code translate="no">remote::milvus</code> 인 원격 구성, 두 가지 방법으로 설정할 수 있습니다.</p>
 <ul>
 <li><p>가장 간단한 방법은 로컬 구성으로, <a href="https://milvus.io/docs/quickstart.md">Milvus-Lite</a> 파일을 로컬에 저장할 경로인 <code translate="no">db_path</code> 를 설정해야 합니다.</p></li>
 <li><p>원격 구성은 대용량 데이터 저장에 적합합니다.</p>
 <ul>
-<li>대용량의 데이터가 있는 경우 <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 고성능 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URI(예: <code translate="no">http://localhost:19530</code>)를 <code translate="no">uri</code> 으로 사용하세요. 기본 <code translate="no">token</code> 은 <code translate="no">root:Milvus</code> 입니다.</li>
-<li>Milvus의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하려면 Zilliz Cloud의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">공용 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정하세요.</li>
+<li>데이터 양이 많은 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에서</a> 고성능 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 <code translate="no">uri</code> 값으로 서버 URI(예: <code translate="no">http://localhost:19530</code>)를 사용하십시오. 기본 <code translate="no">token</code> 는 <code translate="no">root:Milvus</code> 입니다.</li>
+<li>Milvus용 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용하려면, Zilliz Cloud의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">공개 엔드포인트(Public Endpoint) 및 API 키</a> 에 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 를 조정하십시오.</li>
 </ul></li>
 </ul>
-<h3 id="Build-distribution-from-the-template" class="common-anchor-header">템플릿에서 배포 빌드하기<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
+<h3 id="Build-distribution-from-the-template" class="common-anchor-header">템플릿을 사용하여 배포판 빌드<button data-href="#Build-distribution-from-the-template" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,13 +126,13 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 명령어를 실행하여 배포를 빌드합니다:</p>
+    </button></h3><p>다음 명령어를 실행하여 배포판을 빌드하십시오:</p>
 <pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">~/.llama/distributions/together/together-run.yaml</code> 에 파일이 생성됩니다. 그런 다음 이 명령을 실행하여 서버를 시작합니다:</p>
+<p><code translate="no">~/.llama/distributions/together/together-run.yaml</code> 에 파일이 생성됩니다. 그런 다음 다음 명령어를 실행하여 서버를 시작하십시오:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 것이 순조롭게 진행되면 포트 8321에서 라마 스택 서버가 성공적으로 실행되는 것을 볼 수 있을 것입니다.</p>
+<p>모든 과정이 순조롭게 진행되면, Llama Stack 서버가 포트 8321에서 정상적으로 실행되는 것을 확인할 수 있습니다.</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">클라이언트에서 RAG 수행<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +148,7 @@ $ pip install -e .
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>서버를 시작했으면 클라이언트 코드를 작성하여 서버에 액세스할 수 있습니다. 다음은 샘플 코드입니다:</p>
+    </button></h2><p>서버를 시작한 후에는 서버에 액세스할 클라이언트 코드를 작성할 수 있습니다. 다음은 샘플 코드입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> uuid
 <span class="hljs-keyword">from</span> llama_stack_client.types <span class="hljs-keyword">import</span> Document
 <span class="hljs-keyword">from</span> llama_stack_client.lib.agents.agent <span class="hljs-keyword">import</span> Agent
@@ -221,7 +221,8 @@ response = rag_agent.create_turn(
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Response: &quot;</span>)
 <span class="hljs-built_in">print</span>(response.output_message.content)
 <button class="copy-code-btn"></button></code></pre>
-<p>이 코드를 실행하여 RAG 쿼리를 수행합니다. 모든 것이 제대로 작동하면 출력은 다음과 같아야 합니다:</p>
+<p>이 코드를 실행하여 RAG 쿼리를 수행하세요.
+모든 것이 정상적으로 작동하면 출력은 다음과 같아야 합니다:</p>
 <pre><code translate="no" class="language-log">inserting...
 finish init agent...
 Response: 

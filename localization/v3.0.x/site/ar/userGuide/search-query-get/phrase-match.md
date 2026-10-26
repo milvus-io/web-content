@@ -3,10 +3,10 @@ id: phrase-match.md
 title: مطابقة العبارةCompatible with Milvus 2.5.17+
 summary: >-
   تتيح لك «مطابقة العبارة» البحث عن المستندات التي تحتوي على مصطلحات استعلامك
-  كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب ومتجاورة مباشرةً.
-  على سبيل المثال، يتطابق استعلام مثل "robotics machine learning" مع نص مثل
-  "…typical robotics machine learning models…"، حيث تظهر الكلمات "robotics"
-  و"machine" و"learning" بالتسلسل دون وجود أي كلمات أخرى بينها.
+  كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وأن تكون متجاورة
+  مباشرةً. على سبيل المثال، يتطابق الاستعلام عن «robotics machine learning» مع
+  نص مثل «…typical robotics machine learning models…»، حيث تظهر الكلمات
+  «robotics» و«machine» و«learning» بالتسلسل دون وجود كلمات أخرى بينها.
 beta: Milvus 2.5.17+
 ---
 <h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
@@ -24,8 +24,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب ومتجاورة مباشرةً. على سبيل المثال، يطابق الاستعلام عن <strong>"التعلم الآلي في مجال الروبوتات"</strong> نصًا مثل <em>"...نماذج التعلم الآلي النموذجية في مجال الروبوتات..."</em>، حيث تظهر الكلمات <strong>"الروبوتات"</strong> و <strong>"الآلي"</strong> و <strong>"التعلم"</strong> بالتسلسل دون وجود كلمات أخرى بينها.</p>
-<p>ومع ذلك، في السيناريوهات الواقعية، قد تكون مطابقة العبارات الصارمة مفرطة في الصرامة. قد ترغب في مطابقة نص مثل <em>«…نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات…».</em> هنا، توجد الكلمات الرئيسية نفسها ولكنها ليست متجاورة أو بالترتيب الأصلي. للتعامل مع هذا الأمر، تدعم مطابقة العبارات المعلمة « <code translate="no">slop</code> »، التي تضفي مرونة. تحدد قيمة « <code translate="no">slop</code> » عدد التغييرات المسموح بها في ترتيب المصطلحات داخل العبارة. على سبيل المثال، إذا كانت قيمة « <code translate="no">slop</code> » هي 1، فإن استعلام <strong>«machine learning»</strong> يمكن أن يطابق نصًا مثل <em>«…machine deep learning…»،</em> حيث تفصل كلمة واحدة (<strong>«deep»</strong>) بين المصطلحات الأصلية.</p>
+    </button></h1><p>تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام الخاصة بك كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب ومتجاورة مباشرةً. على سبيل المثال، يتطابق الاستعلام عن <strong>"robotics machine learning"</strong> مع نص مثل <em>"...typical robotics machine learning models..."</em>، حيث تظهر الكلمات <strong>"robotics"</strong> و <strong>"machine"</strong> و <strong>"learning"</strong> بالتسلسل دون وجود كلمات أخرى بينها.</p>
+<p>ومع ذلك، في السيناريوهات الواقعية، قد تكون مطابقة العبارة الصارمة مفرطة في الصرامة. قد ترغب في مطابقة نص مثل <em>«…نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات…».</em> هنا، توجد الكلمات الرئيسية نفسها ولكنها ليست متجاورة أو بالترتيب الأصلي. للتعامل مع هذا الأمر، تدعم مطابقة العبارة المعلمة « <code translate="no">slop</code> »، التي توفر مرونة. تحدد قيمة « <code translate="no">slop</code> » عدد التغييرات المسموح بها في ترتيب الكلمات داخل العبارة. على سبيل المثال، إذا كانت قيمة « <code translate="no">slop</code> » تساوي 1، فإن استعلام <strong>«machine learning»</strong> يمكن أن يطابق نصًا مثل <em>«…machine deep learning…»،</em> حيث تفصل كلمة واحدة (<strong>«deep»</strong>) بين المصطلحات الأصلية.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل مطابقة العبارات، المدعومة بمكتبة محرك البحث <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> من خلال تحليل المعلومات المتعلقة بموضع الكلمات داخل المستندات. يوضح الرسم البياني أدناه هذه العملية:</p>
+    </button></h2><p>تعمل مطابقة العبارات، المدعومة بمكتبة محرك البحث <a href="https://github.com/quickwit-oss/tantivy">Tantivy،</a> من خلال تحليل المعلومات المتعلقة بمواقع الكلمات داخل المستندات. يوضح الرسم البياني أدناه هذه العملية:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" /> 
@@ -50,21 +50,21 @@ beta: Milvus 2.5.17+
  </span></p>
 <ol>
 <li><p><strong>تقسيم المستند إلى رموز</strong>: عند إدراج المستندات في Milvus، يتم تقسيم النص إلى رموز (كلمات أو مصطلحات فردية) باستخدام أداة تحليل، مع تسجيل معلومات الموضع لكل رمز. على سبيل المثال، يتم تجزئة <strong>doc_1</strong> إلى <strong>[“machine” (pos=0)، “learning” (pos=1)، “boosts” (pos=2)، “efficiency” (pos=3)]</strong>. لمزيد من المعلومات حول أدوات التحليل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">أدوات التحليل</a>.</p></li>
-<li><p><strong>إنشاء الفهرس المعكوس</strong>: يقوم Milvus بإنشاء فهرس معكوس، حيث يربط كل وحدة نصية بالمستند (المستندات) التي تظهر فيها ومواقع الوحدة النصية في تلك المستندات.</p></li>
-<li><p><strong>مطابقة العبارات</strong>: عند تنفيذ استعلام عبارة، يبحث Milvus عن كل وحدة في الفهرس المقلوب ويتحقق من مواقعها لتحديد ما إذا كانت تظهر بالترتيب الصحيح والقرب الصحيح. يتحكم المعامل <code translate="no">slop</code> في الحد الأقصى لعدد المواقع المسموح بها بين الوحدات المتطابقة:</p>
+<li><p><strong>إنشاء الفهرس المعكوس</strong>: يقوم Milvus بإنشاء فهرس معكوس، حيث يربط كل وحدة نصية بالوثيقة (أو الوثائق) التي تظهر فيها ومواقع الوحدة النصية في تلك الوثائق.</p></li>
+<li><p><strong>مطابقة العبارات</strong>: عند تنفيذ استعلام عبارة، يبحث Milvus عن كل رمز في الفهرس المعكوس ويتحقق من مواقعه لتحديد ما إذا كانت تظهر بالترتيب الصحيح والقرب الصحيح. يتحكم المعامل <code translate="no">slop</code> في الحد الأقصى لعدد المواقع المسموح بها بين الرموز المتطابقة:</p>
 <ul>
 <li><p><strong>slop = 0</strong> يعني أن الرموز يجب أن تظهر <strong>بالترتيب الدقيق وأن تكون متجاورة مباشرة</strong> (أي لا توجد كلمات إضافية بينها).</p>
 <ul>
-<li>في المثال، لا تتطابق سوى <strong>doc_1</strong> (<strong>«machine»</strong> في <strong>الموضع 0</strong>، <strong>و«learning»</strong> في <strong>الموضع 1</strong>) تمامًا.</li>
+<li>في المثال، لا يتطابق تمامًا سوى <strong>doc_1</strong> (<strong>«machine»</strong> في <strong>الموضع 0</strong>، <strong>و«learning»</strong> في <strong>الموضع 1</strong>).</li>
 </ul></li>
 <li><p><strong>slop = 2</strong> يسمح بمرونة أو إعادة ترتيب تصل إلى موضعين بين الرموز المتطابقة.</p>
 <ul>
-<li><p>وهذا يسمح بالترتيب المعكوس (<strong>«learning machine»</strong>) أو وجود فجوة صغيرة بين الرموز.</p></li>
+<li><p>وهذا يسمح بترتيب معكوس (<strong>«learning machine»</strong>) أو وجود فجوة صغيرة بين الرموز.</p></li>
 <li><p>وبالتالي، فإن <strong>doc_1</strong> و <strong>doc_2</strong> (<strong>«learning»</strong> في <strong>الموضع 0</strong>، <strong>و«machine»</strong> في <strong>الموضع 1</strong>)، و <strong>doc_3</strong> (<strong>«learning»</strong> في <strong>الموضع 1</strong>، <strong>و«machine»</strong> في <strong>الموضع 2</strong>) تتطابق جميعها.</p></li>
 </ul></li>
 </ul></li>
 </ol>
-<h2 id="Enable-phrase-match" class="common-anchor-header">تمكين مطابقة العبارة<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Enable-phrase-match" class="common-anchor-header">تمكين مطابقة العبارات<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتمكين مطابقة العبارات لحقل <code translate="no">VARCHAR</code> معين، قم بتعيين كل من المعلمتين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على <code translate="no">True</code> عند تعريف مخطط الحقل. يوجه هذا التكوين Milvus إلى تجزئة النص وإنشاء فهرس معكوس مع المعلومات الموضعية المطلوبة لمطابقة العبارات بكفاءة.</p>
+    </button></h3><p>لتمكين مطابقة العبارات لحقل <code translate="no">VARCHAR</code> معين، اضبط كل من المعلمتين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على <code translate="no">True</code> عند تعريف مخطط الحقل. يوجه هذا التكوين Milvus إلى تجزئة النص وإنشاء فهرس معكوس مع المعلومات الموضعية المطلوبة لمطابقة العبارات بكفاءة.</p>
 <p>فيما يلي مثال على تعريف مخطط لتمكين مطابقة العبارات:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -119,7 +119,7 @@ schema.add_field(
 schema.add_field(
     field_name=<span class="hljs-string">&#x27;text&#x27;</span>,                 <span class="hljs-comment"># Name of the field</span>
     datatype=DataType.VARCHAR,         <span class="hljs-comment"># Field data type set as VARCHAR (string)</span>
-    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string</span>
+    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string in bytes</span>
     enable_analyzer=<span class="hljs-literal">True</span>,              <span class="hljs-comment"># Enables text analysis (tokenization)</span>
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
@@ -147,7 +147,7 @@ schema.addField(AddFieldReq.builder()
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)              <span class="hljs-comment">// Name of the field</span>
         .dataType(DataType.VarChar)     <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
         .enableAnalyzer(<span class="hljs-literal">true</span>)           <span class="hljs-comment">// Enables text analysis (tokenization)</span>
         .enableMatch(<span class="hljs-literal">true</span>)              <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
         .build());
@@ -169,7 +169,7 @@ schema.WithField(entity.NewField().
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;text&quot;</span>).                      <span class="hljs-comment">// Name of the field</span>
     WithDataType(entity.FieldTypeVarChar). <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string</span>
+    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string in bytes</span>
     WithEnableAnalyzer(<span class="hljs-literal">true</span>).              <span class="hljs-comment">// Enables text analysis (tokenization)</span>
     WithEnableMatch(<span class="hljs-literal">true</span>),                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 ).WithField(entity.NewField().
@@ -192,7 +192,7 @@ schema.WithField(entity.NewField().
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-comment">// Name of the field</span>
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string in bytes</span>
     <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables text analysis (tokenization)</span>
     <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
   },
@@ -239,7 +239,7 @@ schema.<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hlj
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>));
 <span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string in bytes</span>
                     .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Enables text analysis (tokenization)</span>
                     .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));    <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
@@ -260,8 +260,8 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تعتمد دقة مطابقة العبارات بشكل كبير على المحلل المستخدم لتجزئة بيانات النص الخاصة بك. تتناسب المحللات المختلفة مع اللغات وتنسيقات النص المختلفة، مما يؤثر على التجزئة ودقة المواقع. سيؤدي اختيار محلل مناسب لحالة الاستخدام المحددة الخاصة بك إلى تحسين نتائج مطابقة العبارات.</p>
-<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، الذي يقوم بتقسيم النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/standard-analyzer.md">«المحلل القياسي»</a> للحصول على التفاصيل.</p>
+    </button></h3><p>تعتمد دقة مطابقة العبارات بشكل كبير على المحلل المستخدم لتقطيع بيانات النص إلى رموز. تتناسب المحللات المختلفة مع اللغات وتنسيقات النص المختلفة، مما يؤثر على عملية التقطيع ودقة المواقع. سيؤدي اختيار محلل مناسب لحالة الاستخدام المحددة الخاصة بك إلى تحسين نتائج مطابقة العبارات.</p>
+<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، الذي يقوم بتجزئة النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/standard-analyzer.md">المحلل القياسي</a> للحصول على التفاصيل.</p>
 <p>إذا كان تطبيقك يتطلب محللًا محددًا، فقم بتكوينه باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، إليك كيفية تكوين محلل <code translate="no">english</code> لمطابقة العبارات في النص باللغة الإنجليزية:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -280,7 +280,7 @@ analyzer_params = {
 schema.add_field(
     field_name=<span class="hljs-string">&#x27;text&#x27;</span>,                 <span class="hljs-comment"># Name of the field</span>
     datatype=DataType.VARCHAR,         <span class="hljs-comment"># Field data type set as VARCHAR</span>
-    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string</span>
+    max_length=<span class="hljs-number">1000</span>,                   <span class="hljs-comment"># Maximum length of the string in bytes</span>
     enable_analyzer=<span class="hljs-literal">True</span>,              <span class="hljs-comment"># Enables text analysis</span>
     analyzer_params=analyzer_params,   <span class="hljs-comment"># Specifies the analyzer configuration</span>
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
@@ -294,7 +294,7 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)              <span class="hljs-comment">// Name of the field</span>
         .dataType(DataType.VarChar)     <span class="hljs-comment">// Field data type set as VARCHAR</span>
-        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+        .maxLength(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
         .enableAnalyzer(<span class="hljs-literal">true</span>)           <span class="hljs-comment">// Enables text analysis</span>
         .analyzerParams(analyzerParams) <span class="hljs-comment">// Specifies the analyzer configuration</span>
         .enableMatch(<span class="hljs-literal">true</span>)              <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -307,7 +307,7 @@ analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;text&quot;</span>).                      <span class="hljs-comment">// Name of the field</span>
     WithDataType(entity.FieldTypeVarChar). <span class="hljs-comment">// Field data type set as VARCHAR</span>
-    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string</span>
+    WithMaxLength(<span class="hljs-number">1000</span>).                   <span class="hljs-comment">// Maximum length of the string in bytes</span>
     WithEnableAnalyzer(<span class="hljs-literal">true</span>).              <span class="hljs-comment">// Enables text analysis</span>
     WithAnalyzerParams(analyzerParams).    <span class="hljs-comment">// Specifies the analyzer configuration</span>
     WithEnableMatch(<span class="hljs-literal">true</span>),                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -321,7 +321,7 @@ schema.WithField(entity.NewField().
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-comment">// Name of the field</span>
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>, <span class="hljs-comment">// Field data type set as VARCHAR</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// Maximum length of the string in bytes</span>
     <span class="hljs-attr">enable_analyzer</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables text analysis</span>
     <span class="hljs-attr">analyzer_params</span>: analyzer_params, <span class="hljs-comment">// Specifies the analyzer configuration</span>
     <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -350,7 +350,7 @@ nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</s
 
 <span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
 schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
                     .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)               <span class="hljs-comment">// Enables text analysis</span>
                     .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params) <span class="hljs-comment">// Specifies the analyzer configuration</span>
                     .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));                <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
@@ -390,7 +390,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>استخدم تعبير <code translate="no">PHRASE_MATCH</code> لتحديد الحقل والعبارة والمرونة الاختيارية (<code translate="no">slop</code>) عند البحث. الصيغة هي:</p>
+    </button></h3><p>استخدم تعبير <code translate="no">PHRASE_MATCH</code> لتحديد الحقل والعبارة والمرونة الاختيارية (<code translate="no">slop</code>) عند البحث. وصيغة التعبير هي:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -412,12 +412,12 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
 <pre><code translate="no" class="language-cpp"><span class="hljs-built_in">PHRASE_MATCH</span>(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code><strong>:</strong> اسم حقل « <code translate="no">VARCHAR</code> » الذي تُجري عليه عمليات مطابقة العبارات.</p></li>
+<li><p><code translate="no">field_name</code><strong>:</strong> اسم حقل " <code translate="no">VARCHAR</code> " الذي تُجري عليه عمليات مطابقة العبارات.</p></li>
 <li><p><code translate="no">phrase</code><strong>:</strong> العبارة الدقيقة المراد البحث عنها.</p></li>
-<li><p><code translate="no">slop</code> (اختياري)<strong>:</strong> عدد صحيح يحدد الحد الأقصى لعدد المواضع المسموح بها في الرموز المميزة المطابقة.</p>
+<li><p><code translate="no">slop</code> (اختياري)<strong>:</strong> عدد صحيح يحدد الحد الأقصى لعدد المواضع المسموح بها في الرموز المطابقة.</p>
 <ul>
 <li><p><code translate="no">0</code> (الافتراضي): يطابق العبارات الدقيقة فقط. مثال: سيطابق مرشح عبارة <strong>«machine learning»</strong> <strong>العبارة «machine learning»</strong> بالضبط، ولكنه لن يطابق <strong>«machine boosts learning»</strong> أو <strong>«learning machine».</strong></p></li>
-<li><p><code translate="no">1</code>: يسمح باختلاف طفيف، مثل مصطلح إضافي واحد أو تغيير بسيط في الموضع. مثال: سيطابق عامل التصفية الخاص بـ <strong>«machine learning»</strong> <strong>عبارة «machine boosts learning»</strong> (رمز واحد بين <strong>«machine»</strong> <strong>و«learning»</strong>) ولكنه لن يطابق <strong>«learning machine»</strong> (عكس ترتيب المصطلحات).</p></li>
+<li><p><code translate="no">1</code>: يسمح باختلافات طفيفة، مثل إضافة مصطلح واحد أو تغيير بسيط في الموضع. مثال: سيطابق مرشح عبارة <strong>«machine learning»</strong> <strong>عبارة «machine boosts learning»</strong> (وجود رمز واحد بين <strong>«machine»</strong> <strong>و«learning»</strong>) ولكنه لن يطابق <strong>«learning machine»</strong> (عكس ترتيب المصطلحين).</p></li>
 <li><p><code translate="no">2</code>: يسمح بمرونة أكبر، بما في ذلك عكس ترتيب المصطلحات أو وجود ما يصل إلى رمزين بينهما. مثال: سيطابق عامل التصفية الخاص بـ <strong>«machine learning»</strong> <strong>عبارة «learning machine»</strong> (عكس ترتيب المصطلحات) أو <strong>«machine quickly boosts learning»</strong> (وجود رمزين بين <strong>«machine»</strong> <strong>و«learning»</strong>).</p></li>
 </ul></li>
 </ul>
@@ -448,7 +448,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"إن تعلم نهج قائم على الآلة أمر حيوي لتقدم الذكاء الاصطناعي الحديث"</p></td>
+     <td><p>"يعد تعلم النهج القائم على الآلة أمرًا حيويًا لتقدم الذكاء الاصطناعي الحديث"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -460,10 +460,10 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"يؤدي تعلم خوارزميات الآلات المتقدمة إلى توسيع قدرات الذكاء الاصطناعي"</p></td>
+     <td><p>"يوسع تعلم خوارزميات الآلات المتقدمة من قدرات الذكاء الاصطناعي"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">الاستعلام باستخدام مطابقة العبارات<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+<h3 id="Query-with-phrase-match" class="common-anchor-header">الاستعلام باستخدام مطابقة العبارة<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -479,7 +479,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
         ></path>
       </svg>
     </button></h3><p>عند استخدام طريقة <code translate="no">query()</code> ، تعمل <strong>PHRASE_MATCH</strong> كمرشح قياسي. يتم إرجاع المستندات التي تحتوي على العبارة المحددة فقط (مع مراعاة التفاوت المسموح به).</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">مثال: slop = 0 (مطابقة تامة)</h4><p>يعرض هذا المثال المستندات التي تحتوي على العبارة <strong>«machine learning»</strong> بالضبط دون أي رموز إضافية بينهما.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">مثال: slop = 0 (مطابقة تامة)</h4><p>يعرض هذا المثال المستندات التي تحتوي على العبارة <strong>«machine learning»</strong> بالضبط دون أي رموز إضافية بينها.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -565,7 +565,7 @@ milvus::QueryResponse response;
      <td><p>"التعلم الآلي يعزز الكفاءة في تحليل البيانات على نطاق واسع"</p></td>
    </tr>
 </table>
-<p>الوثيقة 1 هي الوحيدة التي تحتوي على العبارة الدقيقة <strong>“machine learning”</strong> بالترتيب المحدد دون أي رموز إضافية.</p>
+<p>الوثيقة 1 هي الوحيدة التي تحتوي على العبارة الدقيقة <strong>«machine learning»</strong> بالترتيب المحدد دون أي رموز إضافية.</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">البحث باستخدام مطابقة العبارة<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -581,7 +581,7 @@ milvus::QueryResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>في عمليات البحث، تُستخدم <strong>PHRASE_MATCH</strong> لتصفية المستندات قبل تطبيق ترتيب التشابه المتجهي. تعمل هذه الطريقة المكونة من خطوتين أولاً على تضييق مجموعة المرشحين من خلال المطابقة النصية، ثم تعيد ترتيب هؤلاء المرشحين بناءً على التضمينات المتجهة.</p>
+    </button></h3><p>في عمليات البحث، تُستخدم <strong>PHRASE_MATCH</strong> لتصفية المستندات قبل تطبيق ترتيب التشابه المتجهي. تعمل هذه الطريقة المكونة من خطوتين أولاً على تضييق مجموعة المرشحين من خلال المطابقة النصية، ثم إعادة ترتيب تلك المرشحين بناءً على التضمينات المتجهة.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">مثال: slop = 1</h4><p>هنا، نسمح بـ slop يساوي 1. يتم تطبيق المرشح على المستندات التي تحتوي على العبارة <strong>«learning machine»</strong> مع مرونة طفيفة.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -830,7 +830,7 @@ milvus::SearchResponse response;
      <td><p>"بنى التعلم الآلي العميق تعمل على تحسين الأحمال الحسابية"</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--3" class="common-anchor-header">مثال: slop = 3</h4><p>في هذا المثال، يوفر slop بقيمة 3 مرونة أكبر. يبحث المرشح عن <strong>عبارة “machine learning”</strong> مع السماح بوجود ما يصل إلى ثلاثة مواقع للرموز الفاصلة بين الكلمات.</p>
+<h4 id="Example-slop--3" class="common-anchor-header">مثال: slop = 3</h4><p>في هذا المثال، يوفر slop بقيمة 3 مرونة أكبر. يبحث المرشح عن عبارة <strong>"machine learning"</strong> مع السماح بوجود ما يصل إلى ثلاثة مواضع للرموز الفاصلة بين الكلمات.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -949,11 +949,11 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"تعد دراسة النهج القائم على التعلم الآلي أمرًا حيويًا لتقدم الذكاء الاصطناعي الحديث"</p></td>
+     <td><p>"تعد دراسة النهج القائم على الآلة أمرًا حيويًا لتقدم الذكاء الاصطناعي الحديث"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"بنى آلات التعلم العميق تعمل على تحسين الأحمال الحسابية"</p></td>
+     <td><p>"تعمل بنى التعلم العميق للآلات على تحسين الأحمال الحسابية"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
@@ -977,12 +977,12 @@ milvus::SearchResponse response;
       </svg>
     </button></h2><ul>
 <li><p>يؤدي تمكين مطابقة العبارات لحقل ما إلى إنشاء فهرس معكوس، مما يستهلك موارد التخزين. ضع في اعتبارك تأثير ذلك على التخزين عند اتخاذ قرار بتمكين هذه الميزة، حيث يختلف هذا التأثير بناءً على حجم النص، والرموز الفريدة، والمحلل المستخدم.</p></li>
-<li><p>بمجرد تحديد محلل في المخطط الخاص بك، تصبح إعداداته دائمة لتلك المجموعة. إذا قررت أن محللًا مختلفًا يناسب احتياجاتك بشكل أفضل، فيمكنك التفكير في حذف المجموعة الحالية وإنشاء مجموعة جديدة بتكوين المحلل المطلوب.</p></li>
-<li><p>يعتمد أداء مطابقة العبارات على كيفية تقطيع النص إلى رموز. قبل تطبيق المحلل على المجموعة بأكملها، استخدم الطريقة <code translate="no">run_analyzer</code> لمراجعة ناتج التقطيع. لمزيد من المعلومات، راجع <a href="/docs/ar/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">المحلل</a>.</p></li>
+<li><p>بمجرد تحديد محلل في مخططك، تصبح إعداداته دائمة لتلك المجموعة. إذا قررت أن محللًا مختلفًا يناسب احتياجاتك بشكل أفضل، فيمكنك التفكير في حذف المجموعة الحالية وإنشاء مجموعة جديدة بتكوين المحلل المطلوب.</p></li>
+<li><p>يعتمد أداء مطابقة العبارات على كيفية تقسيم النص إلى رموز. قبل تطبيق محلل على مجموعتك بأكملها، استخدم طريقة <code translate="no">run_analyzer</code> لمراجعة ناتج تقسيم النص إلى رموز. لمزيد من المعلومات، راجع <a href="/docs/ar/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">المحلل</a>.</p></li>
 <li><p>قواعد الهروب في تعبيرات <code translate="no">filter</code>:</p>
 <ul>
-<li><p>يتم تفسير الأحرف المحاطة بعلامات اقتباس مزدوجة أو مفردة داخل التعبيرات على أنها ثوابت سلاسل. إذا كانت ثابتة السلسلة تتضمن أحرف الهروب، فيجب تمثيل أحرف الهروب باستخدام تسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> ، و <code translate="no">\\t</code> لتمثيل علامة الجدولة <code translate="no">\t</code> ، و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
-<li><p>إذا كانت ثابتة السلسلة محاطة بعلامات اقتباس مفردة، فيجب تمثيل علامة الاقتباس المفردة داخل الثابتة على أنها <code translate="no">\\'</code> ، بينما يمكن تمثيل علامة الاقتباس المزدوجة إما على أنها <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>يتم تفسير الأحرف المحاطة بعلامات الاقتباس المزدوجة أو المفردة داخل التعبيرات على أنها ثوابت سلاسل. إذا كانت ثابتة السلسلة تتضمن أحرف الهروب، فيجب تمثيل أحرف الهروب بتسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> ، و <code translate="no">\\t</code> لتمثيل علامة الجدولة <code translate="no">\t</code> ، و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
+<li><p>إذا كانت ثابتة السلسلة محاطة بعلامات اقتباس مفردة، فيجب تمثيل علامة الاقتباس المفردة داخل الثابتة على أنها <code translate="no">\\'</code> بينما يمكن تمثيل علامة الاقتباس المزدوجة إما على أنها <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>إذا كان الثابت السلسلي محاطًا بعلامات اقتباس مزدوجة، فيجب تمثيل علامة الاقتباس المزدوجة داخل الثابت على النحو التالي: <code translate="no">\\&quot;</code> ، بينما يمكن تمثيل علامة الاقتباس المفردة إما على النحو التالي: <code translate="no">'</code> أو <code translate="no">\\'</code>. مثال: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

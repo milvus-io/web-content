@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "주 필드 및 자동 식별자",
+            "label": "주 필드 및 자동 식별(AutoID)",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -1088,7 +1088,7 @@
             "order": 8,
             "children": [
               {
-                "label": "필터링에 대한 설명",
+                "label": "필터링에 대해 알아보기",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1565,6 +1565,12 @@
         "id": "import-data.md",
         "order": 1,
         "children": []
+      },
+      {
+        "label": "항등적 일괄 가져오기",
+        "id": "idempotent-import.md",
+        "order": 2,
+        "children": []
       }
     ]
   },
@@ -1639,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "클로드 코드용 MCP 서버",
+        "label": "Claude 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",

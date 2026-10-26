@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: استيراد البيانات
-summary: توضح هذه الصفحة إجراء استيراد البيانات المعدة.
+summary: توضح هذه الصفحة الإجراءات اللازمة لاستيراد البيانات المعدة مسبقًا.
 ---
 <h1 id="Import-data" class="common-anchor-header">استيراد البيانات<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +19,8 @@ summary: توضح هذه الصفحة إجراء استيراد البيانات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>توضح هذه الصفحة إجراء استيراد البيانات المعدة.</p>
-<h2 id="Before-you-start" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>توضح هذه الصفحة إجراءات استيراد البيانات المعدة مسبقًا.</p>
+<h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,15 +36,15 @@ summary: توضح هذه الصفحة إجراء استيراد البيانات
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>لقد قمت بالفعل بإعداد بياناتك ووضعها في دلو ملفوس.</p>
-<p>إذا لم يكن الأمر كذلك، يجب عليك استخدام <strong>RemoteBulkWriter</strong> لإعداد بياناتك أولاً، والتأكد من أن البيانات المعدة قد تم نقلها بالفعل إلى دلو Milvus على مثيل MinIO الذي تم تشغيله مع مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/prepare-source-data.md">إعداد بيانات المصدر</a>.</p></li>
-<li><p>لقد قمت بالفعل بإنشاء مجموعة مع المخطط الذي تستخدمه لإعداد بياناتك. إذا لم يكن كذلك، راجع <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>.</p></li>
+<li><p>لقد قمت بالفعل بإعداد بياناتك ووضعها في دلو Milvus.</p>
+<p>وإذا لم تكن قد قمت بذلك، فيجب عليك استخدام <strong>RemoteBulkWriter</strong> لإعداد البيانات أولاً، والتأكد من أن البيانات المُعدة قد تم نقلها بالفعل إلى دلو Milvus على مثيل MinIO الذي تم تشغيله مع مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/prepare-source-data.md">إعداد البيانات المصدرية</a>.</p></li>
+<li><p>لقد قمت بالفعل بإنشاء مجموعة باستخدام المخطط الذي تستخدمه لإعداد بياناتك. إذا لم يكن الأمر كذلك، فراجع " <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>".</p></li>
 </ul>
 <div class="language-python">
-<p>يقوم مقتطف التعليمات البرمجية التالي بإنشاء مجموعة بسيطة بالمخطط المحدد. لمزيد من المعلومات حول المعلمات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> في مرجع SDK.</p>
+<p>يُنشئ مقتطف الشفرة التالي مجموعة بسيطة باستخدام المخطط المحدد. لمزيد من المعلومات حول المعلمات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> في مرجع SDK.</p>
 </div>
 <div class="language-java">
-<p>ينشئ مقتطف الشيفرة التالي مجموعة بسيطة بالمخطط المحدد. للمزيد من المعلومات حول المعلمات، ارجع إلى <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> في مرجع SDK.</p>
+<p>يُنشئ المقتطف البرمجي التالي مجموعة بسيطة باستخدام المخطط المحدد. لمزيد من المعلومات حول المعلمات، راجع <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> في مرجع SDK.</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">استيراد البيانات<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,9 +61,13 @@ summary: توضح هذه الصفحة إجراء استيراد البيانات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستيراد البيانات المعدة، عليك إنشاء مهمة استيراد على النحو التالي:</p>
+    </button></h2><p>إذا كان مسار العمل الخاص بك قد يعيد محاولة طلب استيراد فاشل أو انتهت مهلته، فقم بتمييز المهمة بمفتاح التكرار؛ انظر <a href="/docs/ar/idempotent-import.md">الاستيراد المجمّع القابل للتكرار</a>.</p>
+<p>لاستيراد البيانات المعدة، يجب عليك إنشاء مهمة استيراد على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -128,16 +132,16 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>اسم المجموعة المستهدفة.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>قائمة بقوائم مسارات الملفات بالنسبة للمسار الجذر لحافظة Milvus على مثيل MioIO الذي بدأ مع مثيل Milvus الخاص بك. القوائم الفرعية المحتملة هي كما يلي:</p>
+<p>قائمة من قوائم مسارات الملفات النسبية لمسار الجذر لحاوية Milvus على مثيل MioIO الذي تم تشغيله مع مثيل Milvus الخاص بك. القوائم الفرعية المحتملة هي كما يلي:</p>
 <ul>
 <li><p><strong>ملفات JSON</strong></p>
-<p>إذا كان الملف المُعد بتنسيق JSON، <strong>فيجب أن تحتوي كل قائمة فرعية على المسار إلى ملف JSON واحد مُعد</strong>.</p>
+<p>إذا كان الملف المُعد بتنسيق JSON، <strong>فيجب أن تحتوي كل قائمة فرعية على مسار ملف JSON واحد مُعد</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>ملفات الباركيه</strong></p>
-<p>إذا كان الملف المُعد بتنسيق Parquet، <strong>فيجب أن تحتوي كل قائمة فرعية</strong> على <strong>المسار إلى ملف باركيه واحد مُعد</strong>.</p>
+<li><p><strong>ملفات Parquet</strong></p>
+<p>إذا كان الملف المُعد بتنسيق Parquet، <strong>فيجب أن تحتوي كل قائمة فرعية على مسار ملف Parquet واحد مُعد</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -145,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>العائد المحتمل كما يلي:</p>
+<p>النتائج المحتملة هي كما يلي:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -153,7 +157,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">تحقق من تقدم الاستيراد<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="Check-import-progress" class="common-anchor-header">التحقق من تقدم عملية الاستيراد<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,9 +172,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد الحصول على معرف مهمة الاستيراد، يمكنك التحقق من تقدم الاستيراد على النحو التالي:</p>
+    </button></h2><p>بمجرد الحصول على معرّف مهمة الاستيراد، يمكنك التحقق من تقدم عملية الاستيراد على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -229,7 +236,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>يكون الرد المحتمل كما يلي:</p>
+<p>الاستجابة المحتملة هي كما يلي:</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -279,9 +286,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك سرد جميع مهام الاستيراد المتعلقة بمجموعة محددة على النحو التالي:</p>
+    </button></h2><p>يمكنك عرض قائمة بجميع مهام الاستيراد المتعلقة بمجموعة معينة على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -314,7 +324,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>القيم الممكنة هي كالتالي:</p>
+<p>القيم المحتملة هي كما يلي:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -346,11 +356,11 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
       </svg>
     </button></h2><ul>
 <li><p>يجب ألا يتجاوز حجم كل ملف استيراد <strong>16 جيجابايت</strong>.</p></li>
-<li><p>يجب ألا يتجاوز الحد الأقصى لعدد الملفات لكل طلب استيراد <strong>1024</strong>. يمكن أن يحتوي كل طلب استيراد على 16 جيجابايت كحد أقصى لكل ملف * 1024 ملف = 16 تيرابايت من البيانات.</p></li>
-<li><p>يقتصر الحد الأقصى لعدد طلبات الاستيراد المتزامنة على <strong>1024</strong> طلب استيراد متزامن.</p></li>
+<li><p>يجب ألا يتجاوز الحد الأقصى لعدد الملفات لكل طلب استيراد <strong>1024 ملفًا</strong>. يمكن أن يحتوي كل طلب استيراد على 16 جيجابايت كحد أقصى لكل ملف * 1024 ملفًا = 16 تيرابايت من البيانات.</p></li>
+<li><p>يقتصر الحد الأقصى لعدد طلبات الاستيراد المتزامنة على <strong>1024</strong> طلبًا.</p></li>
 </ul>
 <ul>
-<li>يمكن تحديد اسم قسم واحد فقط في طلب الاستيراد. إذا لم يتم تحديد اسم قسم، سيتم إدراج البيانات في القسم الافتراضي. بالإضافة إلى ذلك، لا يمكنك تعيين اسم قسم في طلب الاستيراد إذا قمت بتعيين مفتاح القسم في المجموعة المستهدفة.</li>
+<li>يمكن تحديد اسم قسم واحد فقط في طلب الاستيراد. إذا لم يتم تحديد اسم قسم، فسيتم إدراج البيانات في القسم الافتراضي. بالإضافة إلى ذلك، لا يمكنك تعيين اسم قسم في طلب الاستيراد إذا كنت قد قمت بتعيين مفتاح القسم في المجموعة الهدف.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">القيود<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,25 +377,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل استيراد البيانات، تأكد من أنك قد تعرفت على القيود فيما يتعلق بسلوكيات ميلفوس التالية:</p>
+    </button></h2><p>قبل استيراد البيانات، تأكد من أنك على دراية بالقيود المتعلقة بسلوكيات Milvus التالية:</p>
 <ul>
-<li><p>القيود المتعلقة بسلوك التحميل:</p>
+<li><p>القيود المتعلقة بسلوك التحميل (Load):</p>
 <ul>
-<li>إذا تم تحميل مجموعة بالفعل قبل الاستيراد، يمكنك استخدام الدالة <code translate="no">refresh_load</code> لتحميل البيانات المستوردة حديثًا بعد اكتمال الاستيراد.</li>
+<li>إذا تم تحميل مجموعة بالفعل قبل الاستيراد، فيمكنك استخدام وظيفة «تحميل القسم» ( <code translate="no">refresh_load</code> ) لتحميل البيانات المستوردة حديثًا بعد اكتمال عملية الاستيراد.</li>
 </ul></li>
 <li><p>القيود المتعلقة بسلوكيات الاستعلام والبحث:</p>
 <ul>
-<li><p>قبل <strong>اكتمال</strong> حالة مهمة الاستيراد، يتم ضمان أن تكون البيانات المستوردة حديثًا غير مرئية للاستعلامات وعمليات البحث.</p></li>
-<li><p>بمجرد <strong>اكتمال</strong> حالة المهمة,</p>
+<li><p>قبل أن تصبح حالة مهمة الاستيراد " <strong>مكتملة" (Completed</strong>)، من المؤكد أن البيانات المستوردة حديثًا لن تظهر في عمليات الاستعلام والبحث.</p></li>
+<li><p>بمجرد أن تصبح حالة المهمة " <strong>مكتملة</strong>"،</p>
 <ul>
-<li><p>إذا لم يتم تحميل المجموعة، يمكنك استخدام الدالة <code translate="no">load</code> لتحميل البيانات المستوردة حديثًا.</p></li>
-<li><p>إذا كانت المجموعة محملة بالفعل، يمكنك استدعاء <code translate="no">load(is_refresh=True)</code> لتحميل البيانات المستوردة.</p></li>
+<li><p>وإذا لم تكن المجموعة محملة، فيمكنك استخدام الدالة <code translate="no">load</code> لتحميل البيانات المستوردة حديثًا.</p></li>
+<li><p>إذا كانت المجموعة قد تم تحميلها بالفعل، فيمكنك استدعاء <code translate="no">load(is_refresh=True)</code> لتحميل البيانات المستوردة.</p></li>
 </ul></li>
 </ul></li>
 <li><p>القيود المتعلقة بسلوك الحذف:</p>
 <ul>
-<li><p>قبل <strong>اكتمال</strong> حالة مهمة الاستيراد، الحذف غير مضمون وقد ينجح أو لا ينجح.</p></li>
-<li><p>الحذف بعد <strong>اكتمال</strong> حالة المهمة مضمون النجاح.</p></li>
+<li><p>قبل أن تصبح حالة مهمة الاستيراد <strong>«مكتملة</strong>»، لا يُضمن نجاح الحذف وقد ينجح أو لا ينجح.</p></li>
+<li><p>يُضمن نجاح الحذف بعد أن تصبح حالة المهمة " <strong>مكتملة</strong> ".</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">التوصيات<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +413,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نوصي بشدة باستخدام ميزة الاستيراد متعدد الملفات، والتي تسمح لك بتحميل عدة ملفات في طلب واحد. لا تعمل هذه الطريقة على تبسيط عملية الاستيراد فحسب، بل تعزز أداء الاستيراد بشكل كبير. وفي الوقت نفسه، من خلال دمج عمليات التحميل الخاصة بك، يمكنك تقليل الوقت المستغرق في إدارة البيانات وجعل سير عملك أكثر كفاءة.</p>
+    </button></h2><p>نوصي بشدة باستخدام ميزة الاستيراد متعدد الملفات، التي تتيح لك تحميل عدة ملفات في طلب واحد. لا تعمل هذه الطريقة على تبسيط عملية الاستيراد فحسب، بل تعزز أيضًا أداء الاستيراد بشكل كبير. وفي الوقت نفسه، من خلال دمج عمليات التحميل، يمكنك تقليل الوقت المستغرق في إدارة البيانات وجعل سير عملك أكثر كفاءة.</p>

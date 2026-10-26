@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдер",
+                    "label": "Линдэра",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "Декомпоундер",
+                    "label": "Устройство для удаления смеси",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -1118,7 +1118,7 @@
                 "children": []
               },
               {
-                "label": "Операторы с массивами",
+                "label": "Операторы над массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1191,7 +1191,7 @@
                 "children": []
               },
               {
-                "label": "Поиск по диапазону с использованием StructArray",
+                "label": "Поиск по диапазону с помощью StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1564,6 +1564,12 @@
         "label": "Импорт данных",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "Идемпотентный массовый импорт",
+        "id": "idempotent-import.md",
+        "order": 2,
         "children": []
       }
     ]
@@ -2597,7 +2603,7 @@
                 "children": []
               },
               {
-                "label": "Async API Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

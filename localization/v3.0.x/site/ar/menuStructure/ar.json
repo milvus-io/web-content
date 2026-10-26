@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "إنشاء حقل من نوع StructArray",
+                "label": "إنشاء حقل StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -1359,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "مُصنِّف RRF",
+                "label": "مصنف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1564,6 +1564,12 @@
         "label": "استيراد البيانات",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "الاستيراد الجماعي المتكرر",
+        "id": "idempotent-import.md",
+        "order": 2,
         "children": []
       }
     ]
@@ -2898,7 +2904,7 @@
             "children": []
           },
           {
-            "label": "ميسترال أي آي",
+            "label": "ميسترال آي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []

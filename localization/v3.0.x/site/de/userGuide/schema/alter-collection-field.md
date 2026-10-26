@@ -1,12 +1,12 @@
 ---
 id: alter-collection-field.md
-title: Sammlungsfeld bearbeiten
+title: Sammlungsfeld ändern
 summary: >-
-  Sie können die Eigenschaften eines Sammlungsfeldes ändern, um
+  Sie können die Eigenschaften eines Sammlungsfelds ändern, um
   Spaltenbeschränkungen anzupassen oder strengere Regeln zur Datenintegrität
   durchzusetzen.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">Sammlungsfeld bearbeiten<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">Sammlungsfeld ändern<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Sie können die Eigenschaften eines Sammlungsfelds ändern, um Spaltenbeschränkungen anzupassen oder strengere Regeln zur Datenintegrität durchzusetzen.</p>
-<p>Diese Seite behandelt Änderungen an Feldeigenschaften, nicht jedoch Änderungen an der Schemastruktur, wie das Hinzufügen oder Entfernen von Feldern. Informationen zum Hinzufügen von Skalarfeldern oder zum Entfernen von Feldern aus einer bestehenden Sammlung finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">„Schema einer Sammlung ändern</a>“.</p>
+<p>Diese Seite behandelt Änderungen an Feldeigenschaften, nicht jedoch Änderungen an der Schemastruktur, wie das Hinzufügen oder Entfernen von Feldern. Informationen zum Hinzufügen von Skalarfeldern oder zum Entfernen von Feldern aus einer bestehenden Sammlung finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">„Sammlungsschema ändern</a>“.</p>
 <div class="alert note">
 <ul>
 <li><p>Jede Sammlung besteht aus nur einem Primärfeld. Sobald dieses bei der Erstellung der Sammlung festgelegt wurde, können Sie das Primärfeld nicht mehr ändern und auch seine Eigenschaften nicht mehr anpassen.</p></li>
@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein VarChar-Feld verfügt über eine Eigenschaft namens „ <code translate="no">max_length</code> “, die die maximale Anzahl an Zeichen begrenzt, die die Feldwerte enthalten dürfen. Sie können die Eigenschaft „ <code translate="no">max_length</code> “ ändern.</p>
+    </button></h2><p>Ein VarChar-Feld verfügt über eine Eigenschaft namens „ <code translate="no">max_length</code> “, die die maximal zulässige Anzahl an Bytes für jeden Feldwert definiert. Sie können die Eigenschaft „ <code translate="no">max_length</code> “ ändern.</p>
 <p>Das folgende Beispiel geht davon aus, dass die Sammlung ein VarChar-Feld namens „ <code translate="no">varchar</code> “ enthält, und legt dessen Eigenschaft „ <code translate="no">max_length</code> “ fest.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -201,7 +201,7 @@ curl --request POST \
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Einstellungen für „mmap“ auf Feldebene ändern<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
+<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Einstellungen für mmap auf Feldebene ändern<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

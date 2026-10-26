@@ -2,13 +2,8 @@
 id: full-text-search.md
 title: البحث عن النص الكامل
 summary: >-
-  البحث النصي الكامل هو ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات
-  محددة في مجموعات البيانات النصية، ثم تصنف النتائج بناءً على مدى صلتها
-  بالموضوع. تتغلب هذه الميزة على قيود البحث الدلالي، الذي قد يتجاهل مصطلحات
-  محددة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى
-  ذلك، فإنها تبسط عمليات البحث المتجهي من خلال قبول إدخال النص الخام، وتحويل
-  بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة
-  يدويًّا.
+  يقوم البحث عن النص الكامل بترتيب المستندات حسب المصطلحات التي تحتوي عليها
+  باستخدام خوارزمية BM25 على النص الخام المدخل، دون الحاجة إلى نماذج التضمين.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">البحث عن النص الكامل<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,10 +20,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>البحث عن النص الكامل هو ميزة تستخرج المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تصنف النتائج بناءً على مدى صلتها بالموضوع. تتغلب هذه الميزة على قيود البحث الدلالي، الذي قد يتجاهل مصطلحات دقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، فإنها تبسط عمليات البحث المتجهي من خلال قبول إدخال النص الخام، وتحويل بيانات النص تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًّا.</p>
-<p>باستخدام خوارزمية BM25 لتقييم الصلة بالموضوع، تُعد هذه الميزة ذات قيمة خاصة في سيناريوهات التوليد المعزز بالاسترجاع (RAG)، حيث تعطي الأولوية للمستندات التي تتطابق بشكل وثيق مع مصطلحات بحث محددة.</p>
+    </button></h1><p>يسترد البحث عن النص الكامل المستندات التي تحتوي على المصطلحات أو العبارات الموجودة في استعلامك ويصنف النتائج حسب مدى صلتها بالموضوع. وهو يكمل البحث الدلالي، الذي قد يتجاهل المصطلحات الدقيقة، ويكون مفيدًا بشكل خاص في سيناريوهات التوليد المعزز بالاسترجاع (RAG)، حيث تكون المستندات التي تتطابق بشكل وثيق مع مصطلحات بحث محددة هي الأكثر أهمية.</p>
+<p>باستخدام البحث في النص الكامل، يمكنك أيضًا تخطي نماذج التضمين: ما عليك سوى تقديم النص الخام، وسيقوم Milvus بتحويله تلقائيًا إلى تضمينات متفرقة.</p>
 <div class="alert note">
-<p>من خلال دمج البحث عن النص الكامل مع البحث المتجه الكثيف القائم على الدلالة، يمكنك تحسين دقة نتائج البحث ومدى ملاءمتها. لمزيد من المعلومات، راجع <a href="/docs/ar/multi-vector-search.md">«البحث الهجين</a>».</p>
+<p>من خلال دمج البحث عن النص الكامل مع البحث المتجه الكثيف القائم على الدلالة، يمكنك تحسين دقة نتائج البحث ومدى ملاءمتها. لمزيد من المعلومات، راجع <a href="/docs/ar/multi-vector-search.md">البحث الهجين</a>.</p>
 </div>
 <h2 id="BM25-implementation" class="common-anchor-header">تنفيذ BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,14 +40,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus البحث عن النص الكامل المدعوم بخوارزمية الصلة BM25، وهي وظيفة تقييم معتمدة على نطاق واسع في أنظمة استرجاع المعلومات، ويقوم Milvus بدمجها في سير عمل البحث لتقديم نتائج نصية دقيقة ومصنفة حسب الصلة.</p>
+    </button></h2><p>يُنفذ Milvus البحث عن النص الكامل باستخدام خوارزمية الصلة BM25، وهي دالة تقييم معتمدة على نطاق واسع في أنظمة استرجاع المعلومات، ويدمجها في سير عمل البحث لتقديم نتائج نصية دقيقة ومصنفة حسب الصلة.</p>
 <p>يتبع البحث عن النص الكامل في Milvus سير العمل التالي:</p>
 <ol>
 <li><p><strong>إدخال النص الخام</strong>: تقوم بإدراج مستندات نصية أو تقديم استعلام باستخدام نص عادي، دون الحاجة إلى نماذج تضمين.</p></li>
 <li><p><strong>تحليل النص</strong>: يستخدم Milvus أداة <a href="/docs/ar/analyzer-overview.md">تحليل</a> لمعالجة النص وتحويله إلى مصطلحات ذات معنى يمكن فهرستها والبحث عنها.</p></li>
 <li><p><strong>معالجة وظيفة BM25</strong>: تقوم وظيفة مدمجة بتحويل هذه المصطلحات إلى تمثيلات متجهة متفرقة مُحسّنة لتقييم BM25.</p></li>
 <li><p><strong>تخزين المجموعة</strong>: يقوم Milvus بتخزين التضمينات المتفرقة الناتجة في مجموعة من أجل الاسترجاع والترتيب السريعين.</p></li>
-<li><p><strong>تقييم مدى الصلة باستخدام BM25</strong>: عند إجراء البحث، يطبق Milvus دالة التقييم BM25 لحساب مدى صلة المستندات وإرجاع النتائج المصنفة التي تتطابق بشكل أفضل مع مصطلحات الاستعلام.</p></li>
+<li><p><strong>تقييم مدى الصلة باستخدام BM25</strong>: عند إجراء البحث، يطبق Milvus دالة تقييم BM25 لحساب مدى صلة المستندات وإرجاع النتائج المصنفة التي تتطابق بشكل أفضل مع مصطلحات الاستعلام.</p></li>
 </ol>
 <p><span class="img-wrapper">
   
@@ -63,10 +58,10 @@ summary: >-
 <p>لاستخدام البحث عن النص الكامل، اتبع الخطوات الرئيسية التالية:</p>
 <ol>
 <li><p><a href="/docs/ar/full-text-search.md#Create-a-collection-for-BM25-full-text-search">إنشاء مجموعة</a>: قم بإعداد الحقول المطلوبة وحدد دالة BM25 التي تحول النص الخام إلى تمثيلات متفرقة.</p></li>
-<li><p><a href="/docs/ar/full-text-search.md#Insert-text-data">إدخال البيانات</a>: قم باستيراد مستندات النص الخام إلى المجموعة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Insert-text-data">إدراج البيانات</a>: قم باستيعاب مستندات النص الخام في المجموعة.</p></li>
 <li><p><a href="/docs/ar/full-text-search.md#Perform-full-text-search">إجراء عمليات البحث</a>: استخدم نص استعلام باللغة الطبيعية لاسترداد نتائج مرتبة بناءً على ملاءمة BM25.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">إنشاء مجموعة للبحث في النص الكامل باستخدام BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">إنشاء مجموعة للبحث عن النص الكامل باستخدام BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,11 +92,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يجب أن يتضمن مخطط المجموعة الخاص بك ثلاثة حقول إلزامية على الأقل:</p>
+    </button></h3><p>يجب أن يتضمن مخطط مجموعتك ثلاثة حقول إلزامية على الأقل:</p>
 <ul>
 <li><p><strong>الحقل الأساسي</strong>: يحدد بشكل فريد كل كيان في المجموعة.</p></li>
-<li><p><strong>حقل السلسلة</strong> (<code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code>): يخزن مستندات النص الخام. يجب تعيين <code translate="no">enable_analyzer=True</code> حتى يتمكن Milvus من معالجة النص لترتيب الصلة في BM25. بشكل افتراضي، يستخدم Milvus <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ar/standard-analyzer.md"> المحلل</a> لتحليل النص. لتكوين محلل مختلف، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلل</a>. تستخدم الأمثلة في هذه الصفحة <code translate="no">VARCHAR</code> ؛ بالنسبة للنصوص الطويلة، يمكنك تعريف حقل الإدخال على أنه <code translate="no">TEXT</code> وتجاهل <code translate="no">max_length</code>. للحصول على مثال كامل، راجع <a href="/docs/ar/text.md">حقل النص</a>.</p></li>
-<li><p><strong>حقل متجه متفرق</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): يخزن التضمينات المتفرقة التي تم إنشاؤها تلقائيًا بواسطة دالة BM25.</p></li>
+<li><p><strong>حقل السلسلة</strong> (<code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code>): يخزن المستندات النصية الأولية. يجب تعيين <code translate="no">enable_analyzer=True</code> حتى يتمكن Milvus من معالجة النص لترتيب الصلة باستخدام BM25. بشكل افتراضي، يستخدم Milvus <a href="/docs/ar/standard-analyzer.md">محلل<code translate="no">standard</code> </a> ؛ لتكوين محلل مختلف، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلل</a>. تستخدم الأمثلة الواردة في هذه الصفحة <code translate="no">VARCHAR</code> ؛ بالنسبة للنصوص الطويلة، قم بتعريف الحقل على أنه <code translate="no">TEXT</code> وتجاهل <code translate="no">max_length</code>. للحصول على مثال كامل، راجع <a href="/docs/ar/text.md">«حقل النص</a>».</p></li>
+<li><p><strong>حقل المتجهات المتفرقة</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): يخزن التضمينات المتفرقة التي تم إنشاؤها تلقائيًا بواسطة دالة BM25.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -254,7 +249,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <p>في التكوين السابق،</p>
 <ul>
 <li><p><code translate="no">id</code>: يُستخدم كمفتاح أساسي ويتم إنشاؤه تلقائيًا باستخدام <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: يخزن بيانات النص الأولية الخاصة بك لعمليات البحث عن النص الكامل. يمكن للحقل استخدام <code translate="no">VARCHAR</code> للنص المحدود أو <code translate="no">TEXT</code> للمحتوى المصدر الطويل.</p></li>
+<li><p><code translate="no">text</code>: يخزن بيانات النص الأولية الخاصة بك لعمليات البحث عن النص الكامل. يمكن للحقل استخدام <code translate="no">VARCHAR</code> للنصوص المحدودة أو <code translate="no">TEXT</code> للمحتوى المصدر الطويل.</p></li>
 <li><p><code translate="no">sparse</code>: حقل متجه مخصص لتخزين التضمينات المتفرقة التي يتم إنشاؤها داخليًا لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <h3 id="Define-the-BM25-function" class="common-anchor-header">تعريف دالة BM25<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
@@ -366,7 +361,7 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>اسم الدالة. تقوم هذه الدالة بتحويل النص الخام من حقل " <code translate="no">text</code> " إلى متجهات متفرقة متوافقة مع BM25 سيتم تخزينها في حقل " <code translate="no">sparse</code> ".</p></td>
+     <td><p>اسم الدالة. تقوم هذه الدالة بتحويل النص الخام من حقل " <code translate="no">text</code> " إلى متجهات متفرقة متوافقة مع BM25، والتي سيتم تخزينها في حقل " <code translate="no">sparse</code> ".</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
@@ -374,7 +369,7 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>اسم الحقل الذي سيتم تخزين المتجهات المتفرقة التي تم إنشاؤها داخليًا فيه. بالنسبة لـ <code translate="no">FunctionType.BM25</code> ، لا تقبل هذه المعلمة سوى اسم حقل واحد.</p></td>
+     <td><p>اسم الحقل الذي سيتم تخزين المتجهات المتفرقة التي تم إنشاؤها داخليًا فيه. بالنسبة لـ <code translate="no">FunctionType.BM25</code> ، تقبل هذه المعلمة اسم حقل واحد فقط.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
@@ -382,7 +377,7 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
    </tr>
 </table>
 <div class="alert note">
-<p>إذا كانت هناك حقول نصية متعددة تتطلب معالجة BM25، فحدد <strong>دالة BM25 واحدة لكل حقل،</strong> بحيث يكون لكل منها اسم وحقل إخراج فريدان.</p>
+<p>إذا كانت هناك حقول نصية متعددة تتطلب معالجة BM25، فقم بتعريف <strong>دالة BM25 واحدة لكل حقل،</strong> بحيث يكون لكل منها اسم وحقل إخراج فريدان.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -498,7 +493,7 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>الخوارزمية المستخدمة لإنشاء الفهرس المعكوس المتفرق BM25 والاستعلام عنه. القيم الصالحة:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (الافتراضي): معالجة استعلامات MaxScore بنظام «وثيقة واحدة في كل مرة». هذا الخيار مناسب لأحمال عمل البحث عن النص الكامل ذات قيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">تقييم الاستعلامات: الاستراتيجيات والتحسينات</a>.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلامات WAND بنظام «وثيقة واحدة في كل مرة». هذا الخيار مناسب لأحمال عمل البحث عن النص الكامل ذات قيم <em>k</em> الصغيرة أو الاستعلامات القصيرة. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1145/956863.956944">«تقييم الاستعلامات بكفاءة باستخدام عملية استرجاع ذات مستويين</a>».</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة الاستعلامات الأساسية «مصطلح واحد في كل مرة». استخدم هذا الخيار كخط أساس، أو عندما تحتاج إلى أن تتكيف عملية التقييم ديناميكيًا مع إحصائيات المجموعة الشاملة مثل متوسط طول المستند.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: معالجة استعلامات MaxScore باستخدام بيانات تعريف النتيجة القصوى على مستوى الكتلة. للحصول على معلومات أساسية، راجع <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«استرجاع أسرع للوثائق Top-k باستخدام فهارس Block-Max</a>».</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: معالجة الاستعلامات باستخدام طريقة WAND مع بيانات تعريفية للدرجة القصوى على مستوى الكتلة. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«استرجاع أسرع للوثائق Top-k باستخدام فهارس Block-Max</a>».</p></li></ul></td>
+     <td><p>الخوارزمية المستخدمة لإنشاء الفهرس المقلوب المتفرق BM25 والاستعلام عنه. القيم الصالحة:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (الافتراضي): معالجة استعلامات MaxScore بنظام «وثيقة واحدة في كل مرة». هذا الخيار مناسب لأحمال عمل البحث عن النص الكامل ذات قيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1016/0306-4573%2895%2900020-H">تقييم الاستعلامات: الاستراتيجيات والتحسينات</a>.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلامات WAND بنظام «وثيقة واحدة في كل مرة». هذا الخيار مناسب لأحمال عمل البحث عن النص الكامل ذات قيم <em>k</em> الصغيرة أو الاستعلامات القصيرة. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1145/956863.956944">«تقييم الاستعلامات بكفاءة باستخدام عملية استرجاع ذات مستويين</a>».</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة الاستعلامات الأساسية «مصطلح واحد في كل مرة». استخدم هذا الخيار كخط أساس، أو عندما تحتاج إلى أن تتكيف عملية التقييم ديناميكيًا مع إحصائيات المجموعة الشاملة مثل متوسط طول المستند.</p></li><li><p><code translate="no">"BLOCK_MAX_MAXSCORE"</code>: معالجة استعلامات MaxScore باستخدام بيانات تعريفية للدرجة القصوى على مستوى الكتلة. للحصول على معلومات أساسية، راجع <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«استرجاع أسرع للوثائق Top-k باستخدام فهارس Block-Max</a>».</p></li><li><p><code translate="no">"BLOCK_MAX_WAND"</code>: معالجة الاستعلامات باستخدام طريقة WAND مع بيانات تعريفية للدرجة القصوى على مستوى الكتلة. لمزيد من المعلومات الأساسية، راجع <a href="https://dl.acm.org/doi/10.1145/2009916.2010048">«استرجاع أسرع للوثائق Top-k باستخدام فهارس Block-Max</a>».</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -600,7 +595,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إعداد المجموعة والفهرس، تكون جاهزًا لإدراج البيانات النصية. في هذه العملية، ما عليك سوى توفير النص الخام. تقوم الدالة المدمجة التي حددناها سابقًا بإنشاء المتجه المتفرق المقابل تلقائيًا لكل إدخال نصي.</p>
+    </button></h2><p>بعد إعداد المجموعة والفهرس، يمكنك إدراج البيانات النصية. ما عليك سوى توفير النص الخام — حيث تقوم دالة BM25 المحددة سابقًا تلقائيًا بإنشاء المتجه المتفرق المقابل لكل إدخال نصي.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -683,7 +678,7 @@ milvus::InsertResponse response;
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-full-text-search" class="common-anchor-header">إجراء بحث النص الكامل<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Perform-full-text-search" class="common-anchor-header">إجراء بحث نصي كامل<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -698,9 +693,9 @@ milvus::InsertResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك إجراء عمليات بحث عن النص الكامل باستخدام استعلامات نصية أولية. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه متفرق وترتيب نتائج البحث المطابقة باستخدام خوارزمية BM25، ثم يعرض النتائج topK (<code translate="no">limit</code>).</p>
+    </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك البحث فيها باستخدام استعلامات نصية أولية. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه متفرق، وترتيب النتائج المطابقة باستخدام خوارزمية BM25، وإرجاع أفضل <code translate="no">limit</code> من النتائج.</p>
 <div class="alert note">
-<p>يمكنك تمييز المصطلحات المطابقة في نتائج البحث عن طريق تكوين أداة تمييز النص. انظر <a href="/docs/ar/text-highlighter.md">«أداة تمييز النص»</a> للحصول على التفاصيل.</p>
+<p>يمكنك تمييز المصطلحات المطابقة في نتائج البحث عن طريق تكوين أداة تمييز النص. انظر <a href="/docs/ar/text-highlighter.md">أداة تمييز النص</a> للحصول على التفاصيل.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -810,24 +805,20 @@ milvus::SearchResponse response;
      <td><p>نسبة المصطلحات ذات الأهمية المنخفضة التي يجب تجاهلها أثناء البحث. يجب أن تكون القيمة في النطاق [0.0، 1.0). لمزيد من التفاصيل، راجع " <a href="/docs/ar/sparse_vector.md">المتجه المتفرق</a>".</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">data</code></p></td>
      <td><p>نص الاستعلام الخام باللغة الطبيعية. يقوم Milvus تلقائيًا بتحويل استعلامك النصي إلى متجهات متفرقة باستخدام دالة BM25 - لا تقدم متجهات محسوبة مسبقًا.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>اسم الحقل الذي يحتوي على المتجهات المتفرقة التي تم إنشاؤها داخليًّا.</p></td>
+     <td><p>اسم الحقل الذي يحتوي على المتجهات المتفرقة التي تم إنشاؤها داخليًا.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>قائمة بأسماء الحقول المطلوب إرجاعها في نتائج البحث. يدعم جميع الحقول <strong>باستثناء حقل المتجهات المتفرقة الذي</strong> يحتوي على التضمينات التي تم إنشاؤها بواسطة BM25. تشمل حقول الإخراج الشائعة حقل المفتاح الأساسي (على سبيل المثال، <code translate="no">id</code>) وحقل النص الأصلي (على سبيل المثال، <code translate="no">text</code>). لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">الأسئلة الشائعة</a>.</p></td>
+     <td><p>قائمة بأسماء الحقول المراد إرجاعها في نتائج البحث. يدعم جميع الحقول <strong>باستثناء حقل المتجهات المتفرقة الذي</strong> يحتوي على التضمينات التي تم إنشاؤها بواسطة BM25. تشمل حقول الإخراج الشائعة حقل المفتاح الأساسي (على سبيل المثال، <code translate="no">id</code>) وحقل النص الأصلي (على سبيل المثال، <code translate="no">text</code>). لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">الأسئلة الشائعة</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
-     <td><p>الحد الأقصى لعدد أفضل النتائج المطلوب إرجاعها.</p></td>
+     <td><p>الحد الأقصى لعدد أفضل التطابقات المطلوب إرجاعها.</p></td>
    </tr>
 </table>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -860,13 +851,21 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لا، لا يمكن الوصول مباشرةً إلى المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 أو إخراجها في البحث عن النص الكامل. فيما يلي التفاصيل:</p>
+    </button></h3><p>لا، لا يمكن الوصول مباشرةً إلى المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 أو إرجاعها في البحث عن النص الكامل. فيما يلي التفاصيل:</p>
 <ul>
-<li><p>تقوم دالة BM25 بإنشاء متجهات متفرقة داخليًا لأغراض الترتيب والاسترجاع</p></li>
-<li><p>يتم تخزين هذه المتجهات في الحقل المتفرق، ولكن لا يمكن تضمينها في <code translate="no">output_fields</code></p></li>
-<li><p>يمكنك فقط إخراج حقول النص الأصلية والبيانات الوصفية (مثل <code translate="no">id</code> و <code translate="no">text</code>)</p></li>
+<li><p>تقوم دالة BM25 بإنشاء متجهات متفرقة داخليًا لأغراض الترتيب والاسترجاع.</p></li>
+<li><p>يتم تخزين هذه المتجهات في الحقل المتفرق (sparse field) ولكن لا يمكن تضمينها في حقل البحث المتفرق ( <code translate="no">output_fields</code>).</p></li>
+<li><p>يمكنك فقط إخراج حقول النص الأصلية والبيانات الوصفية (مثل <code translate="no">id</code> و <code translate="no">text</code>).</p></li>
 </ul>
 <p>مثال:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
@@ -940,7 +939,7 @@ milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchReques
     .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
     .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">لماذا أحتاج إلى تعريف حقل متجه متفرق إذا لم أتمكن من الوصول إليه؟<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">لماذا أحتاج إلى تعريف حقل متجه متفرق إذا لم يكن بإمكاني الوصول إليه؟<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -956,15 +955,15 @@ milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchReques
         ></path>
       </svg>
     </button></h3><p>يعمل حقل المتجهات المتفرقة كفهرس بحث داخلي، على غرار فهارس قواعد البيانات التي لا يتفاعل معها المستخدمون بشكل مباشر.</p>
-<p><strong>أساس التصميم</strong>:</p>
+<p><strong>الأساس المنطقي للتصميم</strong>:</p>
 <ul>
-<li><p>فصل الاهتمامات: أنت تعمل مع النص (الإدخال/الإخراج)، بينما يتولى Milvus معالجة المتجهات (المعالجة الداخلية)</p></li>
-<li><p>الأداء: تتيح المتجهات المتفرقة المحسوبة مسبقًا ترتيبًا سريعًا باستخدام خوارزمية BM25 أثناء الاستعلامات</p></li>
-<li><p>تجربة المستخدم: يخفي العمليات المتجهة المعقدة خلف واجهة نصية بسيطة</p></li>
+<li><p><strong>فصل الاهتمامات</strong>: أنت تعمل مع النص كمدخلات ومخرجات، بينما يتولى Milvus معالجة المتجهات داخليًا.</p></li>
+<li><p><strong>الأداء</strong>: تتيح المتجهات المتفرقة المحسوبة مسبقًا ترتيبًا سريعًا باستخدام خوارزمية BM25 أثناء الاستعلامات.</p></li>
+<li><p><strong>تجربة المستخدم</strong>: يتم تجريد العمليات المتجهة المعقدة خلف واجهة نصية بسيطة.</p></li>
 </ul>
 <p><strong>إذا كنت بحاجة إلى الوصول إلى المتجهات</strong>:</p>
 <ul>
-<li><p>استخدم عمليات المتجهات المتفرقة يدويًا بدلاً من البحث عن النص الكامل</p></li>
-<li><p>أنشئ مجموعات منفصلة لسير عمل المتجهات المتفرقة المخصصة</p></li>
+<li><p>استخدم عمليات المتجهات المتفرقة يدويًا بدلاً من البحث عن النص الكامل.</p></li>
+<li><p>أنشئ مجموعات منفصلة لسير عمل المتجهات المتفرقة المخصصة.</p></li>
 </ul>
-<p>للحصول على التفاصيل، راجع <a href="/docs/ar/sparse_vector.md">«المتجهات المتفرقة</a>».</p>
+<p>للحصول على التفاصيل، راجع " <a href="/docs/ar/sparse_vector.md">المتجهات المتفرقة</a>".</p>

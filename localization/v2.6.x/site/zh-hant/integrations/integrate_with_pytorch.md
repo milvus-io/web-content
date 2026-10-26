@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: 本頁面演示如何使用 PyTorch 和 Milvus 建立圖片搜尋。
-title: 使用 PyTorch 和 Milvus 進行圖片搜尋
+summary: 本頁面將示範如何使用 PyTorch 和 Milvus 建置圖像搜尋功能
+title: 使用 PyTorch 與 Milvus 進行圖像搜尋
 ---
-<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">使用 PyTorch 和 Milvus 進行圖片搜尋<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">使用 PyTorch 與 Milvus 進行圖像搜尋<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,9 +18,9 @@ title: 使用 PyTorch 和 Milvus 進行圖片搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介紹一個整合 PyTorch 與 Milvus 的範例，以使用嵌入式執行圖像搜尋。PyTorch 是一個強大的開源深度學習框架，廣泛用於建立和部署機器學習模型。在本範例中，我們將利用其 Torchvision 函式庫和預先訓練好的 ResNet50 模型來產生代表圖像內容的特徵向量 (embeddings)。這些嵌入向量將儲存在高效能向量資料庫 Milvus 中，以便進行有效率的相似性搜尋。使用的資料集是來自<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a> 的 Impressionist-Classifier Dataset。透過結合 PyTorch 的深度學習能力與 Milvus 的可擴充搜尋功能，本範例展示了如何建立一個強大且有效率的圖像檢索系統。</p>
-<p>讓我們開始吧</p>
-<h2 id="Installing-the-requirements" class="common-anchor-header">安裝需求<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>本指南將介紹一個整合 PyTorch 與 Milvus，並利用嵌入向量進行圖像搜尋的範例。PyTorch 是一個強大的開源深度學習框架，廣泛用於建構和部署機器學習模型。 在此範例中，我們將運用其 Torchvision 函式庫以及預訓練的 ResNet50 模型，來生成代表影像內容的特徵向量（嵌入向量）。這些嵌入向量將儲存於 Milvus（一款高效能向量資料庫）中，以實現高效的相似度搜尋。 本範例使用的資料集為<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a> 上的「印象派分類器資料集」（Impressionist-Classifier Dataset）。透過結合 PyTorch 的深度學習能力與 Milvus 的可擴展搜尋功能，本範例將展示如何建構一個穩健且高效的影像檢索系統。</p>
+<p>讓我們開始吧！</p>
+<h2 id="Installing-the-requirements" class="common-anchor-header">安裝所需套件<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ title: 使用 PyTorch 和 Milvus 進行圖片搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本範例中，我們將使用<code translate="no">pymilvus</code> 連線使用 Milvus，<code translate="no">torch</code> 用於執行嵌入模型，<code translate="no">torchvision</code> 用於實際模型和預處理，<code translate="no">gdown</code> 用於下載範例資料集，<code translate="no">tqdm</code> 用於載入欄位。</p>
+    </button></h2><p>在此範例中，我們將使用<code translate="no">pymilvus</code> 連線至 Milvus、<code translate="no">torch</code> 執行嵌入模型、<code translate="no">torchvision</code> 進行實際模型訓練與預處理、<code translate="no">gdown</code> 下載範例資料集，以及<code translate="no">tqdm</code> 載入條形圖。</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Grabbing-the-data" class="common-anchor-header">擷取資料<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
@@ -53,7 +53,7 @@ title: 使用 PyTorch 和 Milvus 進行圖片搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們要使用<code translate="no">gdown</code> 從 Google Drive 抓取壓縮檔，然後用內建的<code translate="no">zipfile</code> 函式庫來解壓縮。</p>
+    </button></h2><p>我們將使用<code translate="no">gdown</code> 從 Google Drive 取得 ZIP 檔案，然後使用內建的<code translate="no">zipfile</code> 函式庫進行解壓縮。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> gdown
 <span class="hljs-keyword">import</span> zipfile
 
@@ -65,9 +65,9 @@ gdown.download(url, output)
     zip_ref.extractall(<span class="hljs-string">&quot;./paintings&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>資料集的大小為 2.35 GB，下載所花的時間取決於您的網路狀況。</p>
+<p>資料集的大小為 2.35 GB，下載所需的時間取決於您的網路狀況。</p>
 </div>
-<h2 id="Global-Arguments" class="common-anchor-header">全局參數<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
+<h2 id="Global-Arguments" class="common-anchor-header">全域參數<button data-href="#Global-Arguments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +82,7 @@ gdown.download(url, output)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>這些是我們將會使用的一些主要全局參數，以便於追蹤和更新。</p>
+    </button></h2><p>以下是我們將用來方便追蹤與更新的主要全域參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Milvus Setup Arguments</span>
 COLLECTION_NAME = <span class="hljs-string">&#x27;image_search&#x27;</span>  <span class="hljs-comment"># Collection name</span>
 DIMENSION = <span class="hljs-number">2048</span>  <span class="hljs-comment"># Embedding vector size in this example</span>
@@ -108,34 +108,34 @@ TOP_K = <span class="hljs-number">3</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>此時，我們要開始設定 Milvus。步驟如下：</p>
+    </button></h2><p>接下來，我們將開始設定 Milvus。步驟如下：</p>
 <ol>
-<li><p>使用提供的 URI 連線到 Milvus 實例。</p>
+<li><p>使用提供的 URI 連線至 Milvus 實例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 <span class="hljs-comment"># Connect to the instance</span>
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果集合已經存在，請將它刪除。</p>
+<li><p>若集合已存在，請將其刪除。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
 
 <span class="hljs-comment"># Remove any previous collections with the same name</span>
 <span class="hljs-keyword">if</span> utility.has_collection(COLLECTION_NAME):
     utility.drop_collection(COLLECTION_NAME)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>建立收藏集，收藏 ID、圖片的檔案路徑及其嵌入。</p>
+<li><p>建立一個集合，用以儲存 ID、影像的檔案路徑及其嵌入向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType, Collection
 
 <span class="hljs-comment"># Create collection which includes the id, filepath of the image, and image embedding</span>
 fields = [
     FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;filepath&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>),  <span class="hljs-comment"># VARCHARS need a maximum length, so for this example they are set to 200 characters</span>
+    FieldSchema(name=<span class="hljs-string">&#x27;filepath&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>),  <span class="hljs-comment"># Each file path can contain up to 200 bytes</span>
     FieldSchema(name=<span class="hljs-string">&#x27;image_embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 ]
 schema = CollectionSchema(fields=fields)
 collection = Collection(name=COLLECTION_NAME, schema=schema)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>在新建立的集合上建立索引，並將其載入記憶體。</p>
+<li><p>在新建立的集合上建立索引，並將其載入記憶體中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an AutoIndex index for collection</span>
 index_params = {
 <span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;L2&#x27;</span>,
@@ -146,7 +146,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;image_embeddi
 collection.load()
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>完成這些步驟後，就可以插入集合並進行搜尋。任何新增的資料都會自動建立索引，並立即可供搜尋。如果資料非常新，搜尋速度可能會較慢，因為會對仍在編制索引的資料使用暴力搜尋。</p>
+<p>完成上述步驟後，該集合即已準備就緒，可進行資料插入與搜尋。任何新增的資料都會自動建立索引，並可立即進行搜尋。若資料非常新，搜尋速度可能會較慢，因為系統會對仍在建立索引過程中的資料使用暴力搜尋。</p>
 <h2 id="Inserting-the-data" class="common-anchor-header">插入資料<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,8 +162,8 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本範例中，我們將使用<code translate="no">torch</code> 及其 model hub 所提供的 ResNet50 模型。為了取得嵌入式資料，我們會去掉最後的分類層，結果模型會提供 2048 個維度的嵌入式資料。在<code translate="no">torch</code> 上找到的所有視覺模型都使用相同的預處理，我們在這裡也包含了相同的預處理。</p>
-<p>在接下來的幾個步驟中，我們將會</p>
+    </button></h2><p>在此範例中，我們將使用<code translate="no">torch</code> 及其模型中心所提供的 ResNet50 模型。為了取得嵌入向量，我們移除了最後的分類層，使得模型能提供 2048 維度的嵌入向量。所有在<code translate="no">torch</code> 上找到的視覺模型，均採用與我們在此所包含相同的預處理方式。</p>
+<p>在接下來的幾個步驟中，我們將進行：</p>
 <ol>
 <li><p>載入資料。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
@@ -172,7 +172,7 @@ collection.load()
 paths = glob.glob(<span class="hljs-string">&#x27;./paintings/paintings/**/*.jpg&#x27;</span>, recursive=<span class="hljs-literal">True</span>)
 <span class="hljs-built_in">len</span>(paths)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>將資料分批預先處理。</p>
+<li><p>將資料預處理為批次。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 
 <span class="hljs-comment"># Load the embedding model with the last layer removed</span>
@@ -180,7 +180,7 @@ model = torch.hub.load(<span class="hljs-string">&#x27;pytorch/vision:v0.10.0&#x
 model = torch.nn.Sequential(*(<span class="hljs-built_in">list</span>(model.children())[:-<span class="hljs-number">1</span>]))
 model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>嵌入資料。</p>
+<li><p>對資料進行嵌入。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms
 
 <span class="hljs-comment"># Preprocessing for images</span>
@@ -221,8 +221,8 @@ collection.flush()
 <button class="copy-code-btn"></button></code></pre>
    <div class="alert note">
 <ul>
-<li>這個步驟相對耗時，因為嵌入需要時間。喝一口咖啡，放鬆一下。</li>
-<li>PyTorch 可能無法在 Python 3.9 及更早的版本中順利運作。請考慮使用 Python 3.10 或更高版本。</li>
+<li>此步驟相對耗時，因為嵌入過程需要時間。不妨喝一口咖啡，放鬆一下。</li>
+<li>PyTorch 可能無法與 Python 3.9 及更早版本良好相容。建議改用 Python 3.10 及後續版本。</li>
 </ul>
    </div>
 </li>
@@ -242,7 +242,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將所有資料插入 Milvus 之後，我們就可以開始執行搜尋了。在這個範例中，我們要搜尋兩個範例圖片。由於我們進行的是批次搜尋，因此搜尋時間是由批次中的影像共同分擔的。</p>
+    </button></h2><p>將所有資料插入 Milvus 後，我們就可以開始執行搜尋了。在此範例中，我們將搜尋兩張範例圖片。由於我們進行的是批次搜尋，因此搜尋時間會由該批次中的所有圖片共同分攤。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> glob
 
 <span class="hljs-comment"># Get the filepaths of the search images</span>
@@ -290,8 +290,10 @@ f, axarr = plt.subplots(<span class="hljs-built_in">len</span>(data_batch[<span 
 <span class="hljs-comment"># Save the search result in a separate image file alongside your script.</span>
 plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>搜尋結果的影像應該類似於下圖：</p>
-<p>
+<p>搜尋結果的圖片應類似如下所示：</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
-   </span> <span class="img-wrapper"> <span>影像搜尋輸出</span> </span></p>
+   <img translate="no" src="/docs/v2.6.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" /> 
+   <span>圖片搜尋輸出結果</span>
+  
+ </span></p>

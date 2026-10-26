@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: 导入数据
-summary: 本页演示导入准备好的数据的程序。
+summary: 本页面演示了导入已准备好的数据的步骤。
 ---
 <h1 id="Import-data" class="common-anchor-header">导入数据<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: 本页演示导入准备好的数据的程序。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页演示导入准备好的数据的步骤。</p>
+    </button></h1><p>本页面演示了导入已准备好数据的步骤。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,15 +36,15 @@ summary: 本页演示导入准备好的数据的程序。
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>您已经准备好数据并将其放入 Milvus 存储桶。</p>
-<p>如果没有，您应该先使用<strong>RemoteBulkWriter</strong>准备数据，并确保准备好的数据已经传输到与您的 Milvus 实例一起启动的 MinIO 实例上的 Milvus 数据桶中。有关详细信息，请参阅<a href="/docs/zh/prepare-source-data.md">准备源数据</a>。</p></li>
-<li><p>您已经使用用于准备数据的 Schema 创建了一个 Collections。如果没有，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p></li>
+<li><p>您已准备好数据并将其放入 Milvus 存储桶中。</p>
+<p>如果尚未准备好，请先使用<strong>RemoteBulkWriter</strong>处理数据，并确保处理后的数据已传输到与您的 Milvus 实例一同启动的 MinIO 实例上的 Milvus 存储桶中。详情请参阅《<a href="/docs/zh/prepare-source-data.md">准备源数据</a>》。</p></li>
+<li><p>您已根据用于准备数据的 Schema 创建了一个 Collection。若尚未创建，请参阅《<a href="/docs/zh/manage-collections.md">管理 Collections</a>》。</p></li>
 </ul>
 <div class="language-python">
-<p>下面的代码片段使用给定的 Schema 创建了一个简单的 Collections。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 参考资料。</p>
+<p>以下代码片段将根据给定的Schema创建一个简单的Collection。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 以及 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> SDK 参考文档。</p>
 </div>
 <div class="language-java">
-<p>以下代码片段使用给定的 Schema 创建一个简单集合。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
+<p>以下代码片段将根据给定的Schema创建一个简单的Collection。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> SDK 参考文档中的相关内容。</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">导入数据<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,9 +61,13 @@ summary: 本页演示导入准备好的数据的程序。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要导入准备好的数据，必须创建如下导入任务：</p>
+    </button></h2><p>如果您的管道可能会重试失败或超时的导入请求，请为该作业添加一个幂等键；请参阅<a href="/docs/zh/idempotent-import.md">“幂等批量导入”</a>。</p>
+<p>要导入已准备好的数据，您需要按以下方式创建一个导入作业：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -123,21 +127,21 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>请求体包含两个字段：</p>
+<p>请求正文包含两个字段：</p>
 <ul>
 <li><p><code translate="no">collectionName</code></p>
-<p>目标 Collections 的名称。</p></li>
+<p>目标Collection的名称。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>与 Milvus 实例一起启动的 MioIO 实例上相对于 Milvus 存储桶根路径的文件路径列表。可能的子列表如下：</p>
+<p>一个列表的列表，其中包含相对于在您的 Milvus 实例启动时一并启动的 MioIO 实例上 Milvus 存储桶根路径的文件路径。可能的子列表如下：</p>
 <ul>
 <li><p><strong>JSON 文件</strong></p>
-<p>如果准备的文件是 JSON 格式，则<strong>每个子列表都应包含单个准备的 JSON 文件的路径</strong>。</p>
+<p>如果准备好的文件为 JSON 格式，则<strong>每个子列表应包含单个已准备好的 JSON 文件的路径</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Parquet 文件</strong></p>
-<p>如果准备的文件是 Parquet 格式，则<strong>每个子列表都应包含单个准备的 parquet 文件的路径</strong>。</p>
+<p>如果预处理文件为 Parquet 格式，则<strong>每个子列表应包含单个预处理 Parquet 文件的路径</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -145,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>可能的返回值如下：</p>
+<p>可能的返回结果如下：</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -168,9 +172,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>获得导入任务 ID 后，可以按如下方式检查导入进度：</p>
+    </button></h2><p>获取导入任务 ID 后，可通过以下方式查看导入进度：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -229,7 +236,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>可能的返回如下</p>
+<p>可能的响应如下：</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -279,9 +286,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以按如下方式列出相对于特定 Collections 的所有导入任务：</p>
+    </button></h2><p>您可以按以下方式列出特定Collection下的所有导入任务：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+ <a href="#shell"> cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -345,12 +355,12 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>每个导入文件的大小不得超过<strong>16 GB</strong>。</p></li>
-<li><p>每个导入请求的最大文件数不能超过<strong>1024</strong>。每个导入请求最多可导入 16GB 文件 * 1024 个文件 = 16TB 数据。</p></li>
-<li><p>并发导入请求的最大数量限制为<strong>1024</strong>。</p></li>
+<li><p>每个导入文件的大小不应超过<strong>16 GB</strong>。</p></li>
+<li><p>每次导入请求的文件数量上限为<strong>1024</strong> 个。每次导入请求的数据总量上限为：16 GB/文件 × 1024 个文件 = 16 TB。</p></li>
+<li><p>并发导入请求的最大数量限制为<strong>1024</strong> 个。</p></li>
 </ul>
 <ul>
-<li>导入请求中只能指定一个分区名称。如果没有指定分区名称，数据将插入默认分区。此外，如果在目标 Collections 中设置了 Partition Key，则无法在导入请求中设置分区名称。</li>
+<li>每个导入请求中只能指定一个分区名称。如果未指定分区名称，数据将被插入到默认分区中。此外，如果您已在目标Collection中设置了Partition Key，则无法在导入请求中设置分区名称。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制条件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,25 +377,25 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>导入数据前，请确保已确认以下 Milvus 行为方面的约束：</p>
+    </button></h2><p>在导入数据之前，请确保您已了解以下与 Milvus 行为相关的限制：</p>
 <ul>
-<li><p>有关加载行为的限制：</p>
+<li><p>关于加载行为的限制：</p>
 <ul>
-<li>如果在导入之前已经加载了一个 Collections，则可以在导入完成后使用<code translate="no">refresh_load</code> 函数加载新导入的数据。</li>
+<li>如果Collection在导入前已被加载，您可以在导入完成后使用<code translate="no">refresh_load</code> 函数加载新导入的数据。</li>
 </ul></li>
-<li><p>有关查询和搜索行为的限制：</p>
+<li><p>关于查询和搜索行为的限制：</p>
 <ul>
-<li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，保证新导入的数据对查询和搜索是不可见的。</p></li>
-<li><p>一旦任务状态为<strong>完成</strong>、</p>
+<li><p>在导入任务状态变为<strong>“已完成”</strong>之前，新导入的数据在查询和搜索中绝对不可见。</p></li>
+<li><p>一旦作业状态变为<strong>“已完成</strong>”，</p>
 <ul>
-<li><p>如果 Collections 尚未加载，可以使用<code translate="no">load</code> 函数加载新导入的数据。</p></li>
-<li><p>如果 Collections 已加载，则可调用<code translate="no">load(is_refresh=True)</code> 加载导入的数据。</p></li>
+<li><p>如果Collection尚未加载，您可以使用<code translate="no">load</code> 函数加载新导入的数据。</p></li>
+<li><p>如果Collection已加载，您可以调用 `<code translate="no">load(is_refresh=True)</code> ` 来加载已导入的数据。</p></li>
 </ul></li>
 </ul></li>
-<li><p>有关删除行为的限制：</p>
+<li><p>关于删除行为的限制：</p>
 <ul>
-<li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，不保证删除成功。</p></li>
-<li><p>在任务状态为 "<strong>已完成</strong>"之后，删除将保证成功。</p></li>
+<li><p>在导入任务状态变为<strong>“已完成”</strong>之前，删除操作无法保证成功，可能成功也可能失败。</p></li>
+<li><p>在任务状态变为<strong>“已完成</strong>”后进行的删除操作，则保证成功。</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">建议<button data-href="#Recommendations" class="anchor-icon" translate="no">
@@ -403,4 +413,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我们强烈建议使用多文件导入功能，该功能允许您在单个请求中上传多个文件。这种方法不仅简化了导入过程，还能显著提高导入性能。同时，通过合并上传，您可以减少用于数据管理的时间，提高工作流程的效率。</p>
+    </button></h2><p>我们强烈建议使用多文件导入功能，该功能允许您在单次请求中上传多个文件。此方法不仅简化了导入流程，还能显著提升导入性能。同时，通过合并上传操作，您可以减少数据管理所花费的时间，并提高工作流的效率。</p>

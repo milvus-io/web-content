@@ -19,7 +19,7 @@ summary: Informieren Sie sich über die Einschränkungen bei der Nutzung von Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus hat es sich zum Ziel gesetzt, die besten Vektordatenbanken für KI-Anwendungen und die Suche nach Vektorähnlichkeiten bereitzustellen. Das Team arbeitet jedoch kontinuierlich daran, weitere Funktionen und die besten Hilfsmittel einzuführen, um die Benutzererfahrung zu verbessern. Auf dieser Seite sind einige bekannte Einschränkungen aufgeführt, auf die Nutzer bei der Verwendung von Milvus stoßen können.</p>
+    </button></h1><p>Milvus hat es sich zum Ziel gesetzt, die besten Vektordatenbanken für KI-Anwendungen und die Vektorähnlichkeitssuche bereitzustellen. Das Team arbeitet jedoch kontinuierlich daran, weitere Funktionen und die besten Hilfsmittel einzuführen, um die Benutzererfahrung zu verbessern. Auf dieser Seite sind einige bekannte Einschränkungen aufgeführt, auf die Nutzer bei der Verwendung von Milvus stoßen können.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">Länge eines Ressourcennamens<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ summary: Informieren Sie sich über die Einschränkungen bei der Nutzung von Mil
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Ressource</th><th>Beschränkung</th></tr>
+<tr><th>Ressource</th><th>Begrenzung</th></tr>
 </thead>
 <tbody>
 <tr><td>Datenbank</td><td>255 Zeichen</td></tr>
@@ -130,7 +130,7 @@ summary: Informieren Sie sich über die Einschränkungen bei der Nutzung von Mil
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Datentyp</th><th>Begrenzung</th></tr>
+<tr><th>Datentyp</th><th>Begrenzung (Bytes)</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>65.535</td></tr>
@@ -159,7 +159,7 @@ summary: Informieren Sie sich über die Einschränkungen bei der Nutzung von Mil
 <tr><td>Dimension</td><td>32.768</td></tr>
 </tbody>
 </table>
-<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">Ein- und Ausgabe pro RPC<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
+<h2 id="Input-and-Output-per-RPC" class="common-anchor-header">Eingabe und Ausgabe pro RPC<button data-href="#Input-and-Output-per-RPC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -251,7 +251,7 @@ summary: Informieren Sie sich über die Einschränkungen bei der Nutzung von Mil
 <tr><td>Einfache Suche mit Paginierung</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
 <tr><td>Gefilterte Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
 <tr><td>Bereichssuche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Gruppensuche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td></tr>
+<tr><td>Gruppierte Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td></tr>
 <tr><td>Suche mit Iterator</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
 <tr><td>Hybridsuche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja (nur RRFRanker)</td><td>Ja</td><td>Ja</td></tr>
 <tr><td>Abfrage/Abruf</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>

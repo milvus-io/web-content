@@ -3,7 +3,7 @@ id: basic-operators.md
 title: 基本運算子
 summary: >-
   Milvus
-  提供了一套豐富的基本運算子，可協助您高效地篩選與查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。掌握這些運算子的使用方法，對於建立精確的查詢並將搜尋效率最大化至關重要。
+  提供了一套豐富的基本運算子，可協助您高效地篩選和查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。了解如何使用這些運算子，對於建立精確的查詢並將搜尋效率最大化至關重要。
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">基本運算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供豐富的基本運算子，協助您高效地篩選與查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。掌握這些運算子的使用方法，對於建構精確的查詢並最大化搜尋效率至關重要。</p>
+    </button></h1><p>Milvus 提供豐富的基本運算子，協助您高效地篩選與查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。掌握這些運算子的使用方法，對於建立精確的查詢並最大化搜尋效率至關重要。</p>
 <h2 id="Comparison-operators" class="common-anchor-header">比較運算子<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>比較運算子用於根據等於、不等於或大小進行資料篩選，適用於數值與文字欄位。</p>
+    </button></h2><p>比較運算子用於根據等於、不等於或數值大小來篩選資料。它們適用於數值和文字欄位。</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">支援的比較運算子<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ summary: >-
     </button></h3><p>假設您有一個名為<code translate="no">status</code> 的欄位，且您想找出所有<code translate="no">status</code> 為「active」的實體。您可以使用等於運算子<code translate="no">==</code> ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">範例 2：使用「不等於」篩選 (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">範例 2：使用「不等於」進行篩選（<code translate="no">!=</code> ）<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,7 +96,7 @@ summary: >-
     </button></h3><p>若要找出<code translate="no">status</code> 並非「inactive」的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">範例 3：使用「大於」條件進行篩選 (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
+<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">範例 3：使用「大於」條件篩選（<code translate="no">&gt;</code> ）<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,7 +218,7 @@ summary: >-
 <p>若要排除<code translate="no">message</code> 以<code translate="no">DEBUG</code> 開頭的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關在「<code translate="no">LIKE</code> 」與正規表達式（regex）之間進行選擇、受支援的欄位類型、正規表達式語法、轉義規則及效能等詳細資訊，請參閱<a href="/docs/zh-hant/pattern-matching.md">《模式匹配》</a>。Milvus 亦允許您針對「<code translate="no">VARCHAR</code> 」欄位或 JSON 字串路徑建立「<code translate="no">NGRAM</code> 」索引，以加速符合條件的模式匹配篩選器。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">《NGRAM》</a>。</p>
+<p>有關如何在<code translate="no">LIKE</code> 與正規表達式之間進行選擇、受支援的欄位類型、正規表達式語法、轉義規則及效能等詳細資訊，請參閱<a href="/docs/zh-hant/pattern-matching.md">《模式比對》</a>。Milvus 亦允許您針對<code translate="no">VARCHAR</code> 欄位或 JSON 字串路徑建立<code translate="no">NGRAM</code> 索引，以加速符合條件的模式比對篩選器。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">《NGRAM》</a>。</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">算術運算子<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -276,7 +276,7 @@ summary: >-
     </button></h3><p>找出使<code translate="no">id</code> 為偶數（即能被 2 整除）的數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">範例 2：使用冪運算 (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">範例 2：使用冪運算（<code translate="no">**</code> ）<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -294,7 +294,10 @@ summary: >-
     </button></h3><p>要找出<code translate="no">price</code> 提升至 2 次方後大於 1000 的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bitwise-operators--Milvus-300+" class="common-anchor-header">位元運算子<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators--Milvus-300+" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>算術運算子僅支援涉及<strong>單一欄位與常數的</strong>運算式。目前不支援將兩個欄位進行算術運算的運算式（例如<code translate="no">price * quantity &gt; 100</code> ），此類運算式將產生錯誤。若需根據由多個欄位計算而得的衍生值進行篩選，請考慮在插入資料時，將預先計算好的值儲存為獨立的標量欄位。</p>
+</div>
+<h2 id="Bitwise-operators" class="common-anchor-header">位元運算子<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -309,7 +312,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當整數欄位編碼多個標誌（例如權限、功能標誌或狀態位元）時，位元運算子便十分實用。您可以在篩選表達式中使用這些運算子，以檢查、組合或比較整數值中的個別位元。</p>
+    </button></h2><p>當整數欄位編碼了多個標誌（例如權限、功能標誌或狀態位元）時，位元運算子便十分實用。您可以在篩選表達式中使用這些運算子，以檢查、組合或比較整數值中的個別位元。</p>
 <p>對於標量欄位，位元運算子適用於整數欄位類型，例如<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 以及<code translate="no">INT64</code> 。</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">受支援的位元運算子<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -364,7 +367,7 @@ summary: >-
 </tbody>
 </table>
 <p>例如，<code translate="no">permissions = 5</code> 表示<code translate="no">READ</code> 和<code translate="no">SHARE</code> 位元已設定，因為<code translate="no">5 = 1 + 4</code> 。</p>
-<p>若要找出「<code translate="no">SHARE</code> 」位元已設定的實體，請使用位元與運算 (<code translate="no">&amp;</code>)：</p>
+<p>若要找出<code translate="no">SHARE</code> 位元已設定的實體，請使用位元與運算 (<code translate="no">&amp;</code>)：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">|</code>若要找出設定<code translate="no">WRITE</code> 位元後會產生<code translate="no">READ + WRITE + SHARE</code> 權限集的實體，請使用位元與 ( )：</p>
@@ -408,7 +411,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><code translate="no">AND</code>：將多個條件組合起來，且所有條件都必須為真。</p></li>
+<li><p><code translate="no">AND</code>: 將多個條件組合在一起，且所有條件都必須為真。</p></li>
 <li><p><code translate="no">OR</code>: 將多個條件組合，其中至少有一個必須為真。</p></li>
 <li><p><code translate="no">NOT</code>: 否定一個條件。</p></li>
 </ul>
@@ -430,7 +433,7 @@ summary: >-
     </button></h3><p>要找出所有「<code translate="no">price</code> 」大於 100 且「<code translate="no">stock</code> 」大於 50 的產品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">範例 2：使用「<code translate="no">OR</code> 」組合條件<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">範例 2：使用「<code translate="no">OR</code> 」來組合條件<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,13 +486,13 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 運算子用於根據欄位是否包含空值（無資料）來篩選欄位。</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: 識別特定欄位包含 null 值的實體，即該欄位無值或未定義。</p></li>
+<li><p><code translate="no">IS NULL</code>: 識別特定欄位包含空值的實體，即該欄位無值或未定義。</p></li>
 <li><p><code translate="no">IS NOT NULL</code>：識別特定欄位包含 null 以外任何值的實體，意即該欄位具有有效且已定義的值。</p></li>
 </ul>
 <div class="alert note">
 <p>這些運算子不區分大小寫，因此您可以使用<code translate="no">IS NULL</code> 或<code translate="no">is null</code> ，以及<code translate="no">IS NOT NULL</code> 或<code translate="no">is not null</code> 。</p>
 </div>
-<h3 id="Regular-scalar-fields-with-null-values" class="common-anchor-header">包含 null 值的常量標量欄位<button data-href="#Regular-scalar-fields-with-null-values" class="anchor-icon" translate="no">
+<h3 id="Regular-scalar-fields-with-null-values" class="common-anchor-header">具有 null 值的常量標量欄位<button data-href="#Regular-scalar-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -517,7 +520,7 @@ summary: >-
 <p>若要擷取<code translate="no">description</code> 欄位不為空，且<code translate="no">price</code> 欄位大於 10 的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-fields-with-null-values" class="common-anchor-header">具有 null 值的 JSON 欄位<button data-href="#JSON-fields-with-null-values" class="anchor-icon" translate="no">
+<h3 id="JSON-fields-with-null-values" class="common-anchor-header">含有 null 值的 JSON 欄位<button data-href="#JSON-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -535,7 +538,7 @@ summary: >-
     </button></h3><p>Milvus 允許針對包含 null 值的 JSON 欄位進行篩選。JSON 欄位在以下情況下會被視為 null：</p>
 <ul>
 <li><p>整個 JSON 物件被明確設定為 None（null），例如<code translate="no">{&quot;metadata&quot;: None}</code> 。</p></li>
-<li><p>該 JSON 欄位本身在實體中完全缺失。</p></li>
+<li><p>該 JSON 欄位在實體中完全缺失。</p></li>
 </ul>
 <div class="alert note">
 <p>若 JSON 物件中的某些元素為 null（例如個別鍵），該欄位仍被視為非 null。例如，<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 即使<code translate="no">category</code> 鍵為 null，也不會被視為 null。</p>
@@ -574,7 +577,7 @@ summary: >-
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>範例 2：擷取元資料不為 null 的實體</strong></p>
-<p>若要查找 `<code translate="no">metadata</code> ` 欄位不為 `null` 的實體：</p>
+<p>若要查找 `<code translate="no">metadata</code> ` 欄位不為 null 的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -583,7 +586,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-fields-with-null-values" class="common-anchor-header">包含 null 值的 ARRAY 欄位<button data-href="#ARRAY-fields-with-null-values" class="anchor-icon" translate="no">
+<h3 id="ARRAY-fields-with-null-values" class="common-anchor-header">含有 null 值的 ARRAY 欄位<button data-href="#ARRAY-fields-with-null-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -637,7 +640,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>範例 2：擷取 `tags` 欄位不為空的實體</strong></p>
+<p><strong>範例 2：擷取 `tags` 非空的實體</strong></p>
 <p>若要擷取 `<code translate="no">tags</code> ` 欄位不為空的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
@@ -662,7 +665,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>雖然 Milvus 中的基本運算子用途廣泛且可套用至標量欄位，但它們也能有效地與 JSON 和 ARRAY 欄位中的鍵值及索引搭配使用。</p>
+    </button></h2><p>雖然 Milvus 中的基本運算子用途廣泛且可套用至標量欄位，但它們也能有效應用於 JSON 和 ARRAY 欄位中的鍵與索引。</p>
 <p>例如，若您有一個<code translate="no">product</code> 欄位，其中包含多個鍵，如<code translate="no">price</code> 、<code translate="no">model</code> 及<code translate="no">tags</code> ，請務必直接引用該鍵：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -684,7 +687,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供一系列基本運算子，讓您能靈活地篩選和查詢資料。透過結合比較運算子、範圍運算子、算術運算子及邏輯運算子，您可以建立強大的篩選表達式，藉此縮小搜尋結果範圍，並高效地擷取所需資料。</p>
+    </button></h2><p>Milvus 提供一系列基本運算子，讓您能靈活地篩選和查詢資料。透過結合比較運算子、範圍運算子、算術運算子及邏輯運算子，您可以建立強大的篩選表達式，藉此縮小搜尋範圍，並高效地擷取所需資料。</p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -702,4 +705,4 @@ summary: >-
       </svg>
     </button></h2><p><strong>篩選條件中的匹配值清單長度是否有上限（例如：filter=’color in ["red", "green", “blue”]’）？若清單過長該如何處理？</strong></p>
 <p>Zilliz Cloud 並未對篩選條件中的匹配值清單長度設限。然而，過長的清單可能會顯著影響查詢效能。
-若您的篩選條件包含冗長的匹配值清單，或含有許多元素的複雜表達式，我們建議使用<a href="/docs/zh-hant/filtering-templating.md">「篩選模板」</a>功能來提升查詢效能。</p>
+若您的篩選條件包含冗長的匹配值清單，或含有許多元素的複雜表達式，我們建議您使用<a href="/docs/zh-hant/filtering-templating.md">「篩選範本</a>」功能來提升查詢效能。</p>

@@ -3,7 +3,7 @@ id: array_data_type.md
 title: Bidang Array
 summary: >-
   Bidang ARRAY menyimpan sekumpulan elemen yang terurut dengan tipe data yang
-  sama. Berikut ini adalah contoh cara bidang ARRAY menyimpan data:
+  sama. Berikut ini contoh cara bidang ARRAY menyimpan data:
 ---
 <h1 id="Array-Field" class="common-anchor-header">Bidang Array<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Nilai Default</strong>: Bidang ARRAY tidak mendukung nilai default. Namun, Anda dapat mengatur atribut ` <code translate="no">nullable</code> ` menjadi ` <code translate="no">True</code> ` untuk mengizinkan nilai null. Untuk detailnya, lihat bagian <a href="/docs/id/v2.6.x/nullable-and-default.md">"Nullable &amp; Default</a>".</p></li>
-<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code> ` untuk elemen array. ` <code translate="no">element_type</code> ` menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali ` <code translate="no">JSON</code>`.</p></li>
+<li><p><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code>`, yang menentukan jumlah byte maksimum yang diperbolehkan untuk setiap elemen array. ` <code translate="no">element_type</code> ` menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali ` <code translate="no">JSON</code>`.</p></li>
 <li><p><strong>Kapasitas Array</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, sebagaimana ditentukan oleh <code translate="no">max_capacity</code>. Nilainya harus berupa bilangan bulat dalam rentang <strong>1</strong> hingga <strong>4096</strong>.</p></li>
-<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sebagaimana dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
+<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sesuai yang dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Menambahkan bidang ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"

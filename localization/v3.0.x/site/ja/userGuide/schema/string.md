@@ -18,13 +18,14 @@ summary: VARCHAR は、Milvus において、長さが制限された短い文�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは、<code translate="no">VARCHAR</code> および<code translate="no">TEXT</code> フィールドによるテキスト型スカラーデータをサポートしています。このページでは、名前、タグ、カテゴリ、外部IDなど、短く範囲が限定された文字列メタデータ向けに設計された<code translate="no">VARCHAR</code> について説明します。</p>
-<p>より長いソーステキスト、ドキュメントの抜粋、記事本文、チケット、またはログなどをエンティティと共に保存・返却する必要がある場合は、代わりに<code translate="no">TEXT</code> フィールドを使用してください。値が<code translate="no">65,535</code> バイトを超える可能性がある場合や、コレクションスキーマに固定の<code translate="no">max_length</code> を設定したくない場合は、<code translate="no">TEXT</code> を使用してください。詳細については、<a href="/docs/ja/text.md">「テキストフィールド」</a>を参照してください。</p>
+    </button></h1><p>Milvusは、<code translate="no">VARCHAR</code> および<code translate="no">TEXT</code> フィールドを用いて、テキスト型のスカラーデータをサポートしています。このページでは、名前、タグ、カテゴリ、外部IDなど、短く範囲が限定された文字列メタデータ向けに設計された<code translate="no">VARCHAR</code> について説明します。</p>
+<p>より長いソーステキスト、ドキュメントの抜粋、記事本文、チケット、またはエンティティと共に保存・返却する必要があるログについては、代わりに<code translate="no">TEXT</code> フィールドを使用してください。値が<code translate="no">65,535</code> バイトを超える可能性がある場合や、コレクションスキーマに固定の<code translate="no">max_length</code> を設定したくない場合は、<code translate="no">TEXT</code> を使用してください。詳細については、<a href="/docs/ja/text.md">「テキストフィールド」</a>を参照してください。</p>
 <p><code translate="no">VARCHAR</code> フィールドを定義する際、次の2つのパラメータは必須です。</p>
 <ul>
 <li><p><code translate="no">datatype</code> を<code translate="no">DataType.VARCHAR</code> に設定します。</p></li>
-<li><p><code translate="no">max_length</code> を指定します。これは、<code translate="no">VARCHAR</code> フィールドが格納できる最大バイト数を定義します。<code translate="no">max_length</code> の有効範囲は1から65,535です。</p></li>
+<li><p><code translate="no">max_length</code> を指定します。これは、各フィールド値で許可されるUTF-8バイトの最大数を定義します。<code translate="no">max_length</code> の有効範囲は1から65,535です。</p></li>
 </ul>
+<p>バイト数は文字数とは異なる場合があります。たとえば、<code translate="no">max_length=10</code> が設定されている場合、<code translate="no">&quot;abcdefghij&quot;</code> は10 UTF-8バイトを使用するため、制限内に収まります。一方、文字列<code translate="no">&quot;一二三四五六七八九十&quot;</code> も10文字ですが、30 UTF-8バイトを使用するため、制限を超えています。</p>
 <div class="alert note">
 <p>Milvusは、<code translate="no">VARCHAR</code> フィールドのNULL値およびデフォルト値をサポートしています。これらの機能を有効にするには、<code translate="no">nullable</code> を<code translate="no">True</code> に設定し、<code translate="no">default_value</code> に文字列値を指定してください。詳細については、<a href="/docs/ja/nullable-and-default.md">「Nullable &amp; Default</a>」を参照してください。</p>
 </div>
@@ -253,9 +254,9 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックス作成は、検索およびクエリのパフォーマンス向上に役立ちます。Milvusでは、ベクトルフィールドに対してインデックス作成は必須ですが、スカラーフィールドに対してはオプションです。</p>
-<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` およびスカラーフィールド `<code translate="no">varchar_field1</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックスタイプを使用してインデックスを作成しています。このタイプを使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックスタイプやパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
+<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` とスカラーフィールド `<code translate="no">varchar_field1</code>` の両方に、<code translate="no">AUTOINDEX</code> インデックスタイプを使用してインデックスを作成しています。このタイプを使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックスタイプやパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
 <div class="alert note">
-<p>また、`<code translate="no">VARCHAR</code> `フィールドでの`<code translate="no">LIKE</code> `フィルタリングを高速化するために、<code translate="no">NGRAM</code> インデックスを構築することもできます。詳細については、「<a href="/docs/ja/ngram.md">NGRAM</a>」を参照してください。</p>
+<p>また、<code translate="no">NGRAM</code> インデックスを構築することで、<code translate="no">VARCHAR</code> フィールドに対する<code translate="no">LIKE</code> のフィルタリングを高速化できます。詳細については、「<a href="/docs/ja/ngram.md">NGRAM</a>」を参照してください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -784,7 +785,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドフィルタを組み合わせることができます。たとえば、次のコードは、ベクトル検索にスカラーフィールドフィルタを追加する方法を示しています。</p>
+    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドのフィルタを組み合わせることができます。たとえば、次のコードは、ベクトル検索にスカラーフィールドのフィルタを追加する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

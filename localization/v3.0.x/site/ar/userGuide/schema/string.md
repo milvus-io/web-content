@@ -3,7 +3,7 @@ id: string.md
 title: حقل VarChar
 summary: >-
   VARCHAR هو نوع حقل قياسي يُستخدم لتخزين بيانات وصفية على شكل سلاسل نصية قصيرة
-  ومحدودة في Milvus.
+  ومحدودة الحجم في Milvus.
 ---
 <h1 id="VarChar-Field" class="common-anchor-header">حقل VarChar<button data-href="#VarChar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +20,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يدعم Milvus البيانات النصية القياسية من خلال حقول " <code translate="no">VARCHAR</code> " و" <code translate="no">TEXT</code> ". تصف هذه الصفحة حقل " <code translate="no">VARCHAR</code>"، الذي صُمم للبيانات الوصفية النصية القصيرة والمحدودة مثل الأسماء والعلامات والفئات والمعرفات الخارجية.</p>
+    </button></h1><p>يدعم Milvus البيانات النصية القياسية من خلال حقول <code translate="no">VARCHAR</code> و <code translate="no">TEXT</code>. تصف هذه الصفحة حقل <code translate="no">VARCHAR</code> ، الذي صُمم للبيانات الوصفية ذات السلاسل القصيرة والمحدودة مثل الأسماء والعلامات والفئات والمعرفات الخارجية.</p>
 <p>بالنسبة للنصوص المصدرية الأطول، أو مقاطع المستندات، أو نصوص المقالات، أو التذاكر، أو السجلات التي يجب تخزينها وإرجاعها مع الكيانات، استخدم حقل <code translate="no">TEXT</code> بدلاً من ذلك. استخدم <code translate="no">TEXT</code> عندما قد تتجاوز القيمة <code translate="no">65,535</code> بايت أو عندما لا ترغب في تعيين <code translate="no">max_length</code> ثابت في مخطط المجموعة. لمزيد من التفاصيل، راجع <a href="/docs/ar/text.md">حقل النص</a>.</p>
 <p>عند تعريف حقل « <code translate="no">VARCHAR</code> »، هناك معلمتان إلزاميتان:</p>
 <ul>
-<li><p>اضبط الحقل <code translate="no">datatype</code> على <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>حدد الحد الأقصى لحجم الحقل ( <code translate="no">max_length</code>)، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن لحقل الحد الأقصى لحجم الحقل ( <code translate="no">VARCHAR</code> ) تخزينها. النطاق الصالح لـ الحد الأقصى لحجم الحقل ( <code translate="no">max_length</code> ) هو من 1 إلى 65,535.</p></li>
+<li><p>اضبط <code translate="no">datatype</code> على <code translate="no">DataType.VARCHAR</code>.</p></li>
+<li><p>حدد الحد الأقصى لعدد البايتات ( <code translate="no">max_length</code>)، الذي يحدد الحد الأقصى لعدد بايتات UTF-8 المسموح بها لكل قيمة حقل. النطاق الصالح لـ <code translate="no">max_length</code> هو من 1 إلى 65,535.</p></li>
 </ul>
+<p>قد يختلف عدد البايتات عن عدد الأحرف. على سبيل المثال، مع <code translate="no">max_length=10</code> ، تتناسب <code translate="no">&quot;abcdefghij&quot;</code> مع الحد المسموح به لأنها تستخدم 10 بايتات UTF-8. تحتوي السلسلة <code translate="no">&quot;一二三四五六七八九十&quot;</code> أيضًا على 10 أحرف، ولكنها تستخدم 30 بايتًا من UTF-8 وتتجاوز الحد المسموح به.</p>
 <div class="alert note">
 <p>يدعم Milvus القيم الفارغة والقيم الافتراضية لحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. لمزيد من التفاصيل، راجع «القيم <a href="/docs/ar/nullable-and-default.md">الفارغة</a> والقيم الافتراضية» ( <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>).</p>
 </div>
@@ -45,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لتخزين بيانات تعريفية على شكل سلاسل نصية قصيرة ومحدودة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط المجموعة الخاص بك. فيما يلي مثال على تعريف مخطط مجموعة يحتوي على حقلين من نوع <code translate="no">VARCHAR</code>:</p>
+    </button></h2><p>لتخزين بيانات تعريفية على شكل سلاسل قصيرة ومحدودة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط المجموعة الخاص بك. فيما يلي مثال على تعريف مخطط مجموعة يحتوي على حقلين من نوع <code translate="no">VARCHAR</code>:</p>
 <ul>
 <li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 بايت، ويسمح بالقيم الفارغة، وقيمته الافتراضية هي <code translate="no">&quot;Unknown&quot;</code>.</p></li>
 <li><p><code translate="no">varchar_field2</code>: يخزن ما يصل إلى 200 بايت، ويسمح بالقيم الفارغة، ولكنه لا يحتوي على قيمة افتراضية.</p></li>
@@ -254,10 +255,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تساعد الفهرسة في تحسين أداء البحث والاستعلام. في Milvus، تكون الفهرسة إلزامية للحقول المتجهة، لكنها اختيارية للحقول القياسية.</p>
+    </button></h2><p>تساعد الفهرسة في تحسين أداء البحث والاستعلام. في Milvus، تعد الفهرسة إلزامية للحقول المتجهة، لكنها اختيارية للحقول القياسية.</p>
 <p>يُنشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والمعلمات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <div class="alert note">
-<p>يمكنك أيضًا إنشاء فهرس « <code translate="no">NGRAM</code> » لتسريع عملية التصفية <code translate="no">LIKE</code> في حقول <code translate="no">VARCHAR</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">«NGRAM</a>».</p>
+<p>يمكنك أيضًا إنشاء فهرس « <code translate="no">NGRAM</code> » لتسريع عملية تصفية <code translate="no">LIKE</code> على حقول <code translate="no">VARCHAR</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">«NGRAM</a>».</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -698,7 +699,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لاسترداد الكيانات التي يكون فيها <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة الكيانات التي تم تعيين <code translate="no">varchar_field1</code> فيها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو التي تم تعيين <code translate="no">varchar_field1</code> فيها إلى null.</p>
+<p>لاسترداد الكيانات التي يكون فيها <code translate="no">varchar_field1</code> بقيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة الكيانات التي تم تعيين <code translate="no">varchar_field1</code> فيها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو التي تم تعيين <code translate="no">varchar_field1</code> فيها إلى null.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
