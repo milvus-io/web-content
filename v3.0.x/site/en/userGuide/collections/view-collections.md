@@ -108,6 +108,12 @@ If you have already created a collection named `quick_setup`, the result of the 
 ["quick_setup"]
 ```
 
+<div class="alert note">
+
+`list_collections()` returns the names of all collections in the currently connected database and is not intended for existence checks. To check whether a specific collection exists, use `has_collection()` instead (e.g. `client.has_collection("quick_setup")` returns a boolean), or its equivalent in other SDKs.
+
+</div>
+
 ## Describe Collection
 
 You can also obtain the details of a specific collection. The following example assumes that you have already created a collection named quick_setup.

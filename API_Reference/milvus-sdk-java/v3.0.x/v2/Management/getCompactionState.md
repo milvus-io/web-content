@@ -19,6 +19,8 @@ getCompactionState(GetCompactionStateReq.builder()
 
 - `compactionID(Long compactionID)`
 
+    **[REQUIRED]**
+
     The ID of a compact operation, which is returned by a `compact()` call.
 
 **RETURN TYPE:**
@@ -29,15 +31,9 @@ getCompactionState(GetCompactionStateReq.builder()
 
 A **GetCompactionStateResp** instance, which comprises the following parameters:
 
-- `getState()` (*CompactState*) -
+- `getState()` (*[CompactionState](CompactionState.md)*) -
 
-    The current state of the specified compact operation. Possible values are:
-
-    - UndefinedState(0)
-
-    - Executing(1)
-
-    - Completed(2)
+    The current state of the specified compact operation. See [CompactionState](CompactionState.md) for the possible values.
 
 - `getExecutingPlanNo()` (*Long*) -
 

@@ -17,6 +17,8 @@ get(GetReq.builder()
     .partitionNames(List<String> partitionNames)
     .ids(List<Object> ids)
     .outputFields(List<String> outputFields)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 )
 ```
@@ -50,6 +52,14 @@ get(GetReq.builder()
 - `outputFields(List<String> outputFields)`
 
     A list of names of the fields to be included in the query result.
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the get runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the get explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 

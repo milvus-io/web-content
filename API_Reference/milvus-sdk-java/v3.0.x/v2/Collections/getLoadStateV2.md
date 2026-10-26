@@ -36,7 +36,7 @@ getLoadStateV2(GetLoadStateReq.builder()
 
 **RETURNS:**
 
-A **GetLoadStateResp** object that indicates the load state of the collection.
+A **GetLoadStateResp** object that indicates the load state of the collection. When the collection or partition does not exist, the response reports `LoadStateNotExist` instead of raising an exception.
 
 - `getState()` (*LoadState*) -
 

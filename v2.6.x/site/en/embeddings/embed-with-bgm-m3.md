@@ -9,7 +9,7 @@ title: BGE M3
 
 [BGE-M3](https://arxiv.org/abs/2402.03216) is named for its capabilities in Multi-Linguality, Multi-Functionality, and Multi-Granularity. Capable of supporting over 100 languages, BGE-M3 sets new benchmarks in multi-lingual and cross-lingual retrieval tasks. Its unique ability to perform dense retrieval, multi-vector retrieval, and sparse retrieval within a single framework makes it an ideal choice for a wide range of information retrieval (IR) applications.
 
-Milvus integrates with the BGE M3 model using the __BGEM3EmbeddingFunction__ class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching. To use this feature, FlagEmbedding must be installed.
+Milvus integrates with the BGE M3 model using the __BGEM3EmbeddingFunction__ class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching.
 
 To use this feature, install the necessary dependencies:
 

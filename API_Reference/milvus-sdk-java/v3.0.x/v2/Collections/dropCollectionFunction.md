@@ -1,5 +1,7 @@
 # dropCollectionFunction()
 
+**Deprecated since SDK v3.0.10.** Milvus 3.0 and later do not support dropping a function separately. Use [`dropFunctionField()`](dropFunctionField.md) instead, which also removes the function's output field and its index.
+
 Removes a function definition from an existing collection without removing its output field. Use [`dropFunctionField()`](dropFunctionField.md) to remove both.
 
 ```java

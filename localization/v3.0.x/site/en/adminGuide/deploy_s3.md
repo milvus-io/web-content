@@ -61,6 +61,16 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>See <a href="/docs/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
+<p>Hard-coding an access key and secret key works, but if you run Milvus on a host or cluster that supports workload identity (for example, an EC2 instance profile, or IRSA on EKS), we recommend using an IAM role instead. Set <code translate="no">useIAM</code> to <code translate="no">true</code> and remove <code translate="no">accessKeyID</code> and <code translate="no">secretAccessKey</code>:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">&quot;aws&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus then obtains temporary credentials from the IAM role attached to the workload. <code translate="no">cloudProvider</code> accepts <code translate="no">aws</code>, <code translate="no">gcp</code>, or <code translate="no">aliyun</code>, and <code translate="no">iamEndpoint</code> can optionally specify a custom endpoint for fetching IAM role credentials.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Refine docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,8 +137,12 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 <tr><td><code translate="no">externalS3.secretKey</code></td><td>The secret access key for S3.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.bucketName</code></td><td>The name of the S3 bucket.</td><td></td></tr>
 <tr><td><code translate="no">externalS3.useSSL</code></td><td>Whether to use SSL when connecting</td><td>The values defaults to <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.useIAM</code></td><td>Whether to use an IAM role instead of access/secret keys to access S3.</td><td>The value defaults to <code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalS3.cloudProvider</code></td><td>Cloud provider that issues the IAM role credentials.</td><td><code translate="no">aws</code>, <code translate="no">gcp</code>, or <code translate="no">aliyun</code>; defaults to <code translate="no">aws</code></td></tr>
+<tr><td><code translate="no">externalS3.iamEndpoint</code></td><td>Custom endpoint for fetching IAM role credentials.</td><td>Leave empty to use the provider default.</td></tr>
 </tbody>
 </table>
+<p>If your cluster supports workload identity (for example, IRSA on EKS), set <code translate="no">externalS3.useIAM</code> to <code translate="no">true</code> and remove <code translate="no">externalS3.accessKey</code> and <code translate="no">externalS3.secretKey</code> — Milvus will obtain temporary credentials from the IAM role attached to the workload.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

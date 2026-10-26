@@ -24,6 +24,8 @@ hybridSearch(HybridSearchReq.builder()
     .groupSize(Integer groupSize)
     .strictGroupSize(Boolean strictGroupSize)
     .functionScore(FunctionScore functionScore)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -93,6 +95,14 @@ hybridSearch(HybridSearchReq.builder()
 - `ranker(CreateCollectionReq.Function ranker)`
 
     **Deprecated.** A single rerank function applied to the search results. Prefer `functionScore()`. See [Function](../Collections/Function/Function.md).
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the hybrid search runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the hybrid search explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 

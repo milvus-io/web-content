@@ -1035,7 +1035,7 @@ You can also perform queries within one or multiple partitions by including the 
 res = client.get(
     collection_name="my_collection",
     # highlight-next-line
-    partitionNames=["partitionA"],
+    partition_names=["partitionA"],
     ids=[10, 11, 12],
     output_fields=["vector", "color"]
 )
@@ -1043,7 +1043,7 @@ res = client.get(
 res = client.query(
     collection_name="my_collection",
     # highlight-next-line
-    partitionNames=["partitionA"],
+    partition_names=["partitionA"],
     filter="color like \"red%\"",
     output_fields=["vector", "color"],
     limit=3

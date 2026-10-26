@@ -65,7 +65,7 @@ import numpy as np
 client = MilvusClient("./milvus_demo.db")
 client.create_collection(
     collection_name="demo_collection",
-    dimension=384  # The vectors we will use in this demo has 384 dimensions
+    dimension=384  # The vectors we will use in this demo have 384 dimensions
 )
 
 # Text strings to search from.

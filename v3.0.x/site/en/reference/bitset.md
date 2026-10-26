@@ -43,7 +43,7 @@ In this case, a user sets `time_travel` as 150, which means that the user conduc
 
 During the initial filtering stage, the `filter_bitset` should be `[1, 0, 1, 0, 1, 0, 1, 0]`, where entities [1, 3, 5, 7] are marked as `1` because they are valid filtering results.
 
-However, entities [4, 5, 6, 7] were not inserted to the vector database when `ts` equals 150. Therefore, these four entities should be marked as 0 regardless of the filtering condition. Now the bitset result should be `[1, 0, 1, 0, 0, 0, 0, 0]`.
+However, entities [5, 6, 7, 8] were not inserted to the vector database when `ts` equals 150. Therefore, these four entities should be marked as 0 regardless of the filtering condition. Now the bitset result should be `[1, 0, 1, 0, 0, 0, 0, 0]`.
 
 As discussed in [Data deletion](#data-deletion), entities that are marked with `1` are ignored during a search or query. The bitset result now needs to be flipped in order to be combined with the deletion bitmap, which gives us `[0, 1, 0, 1, 1, 1, 1, 1]`.
 
