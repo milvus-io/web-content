@@ -263,13 +263,12 @@ CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
 const ranker = {
-  name: "weight",
+  name: "rrf",
   input_field_names: [],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
-    reranker: "weighted",
-    weights: [0.1, 0.9],
-    norm_score: true,
+    reranker: "rrf",
+    k: 100,
   },
 };
 
@@ -312,7 +311,7 @@ const ranker = {
      <td><p><code>params.reranker</code></p></td>
      <td><p>Yes</p></td>
      <td><p>Specifies the reranking method to use.</p><p>Must be set to <code>rrf</code> to use RRF Ranker.</p></td>
-     <td><p><code>"weighted"</code></p></td>
+     <td><p><code>"rrf"</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.k</code></p></td>
@@ -335,7 +334,7 @@ RRF Ranker is designed specifically for hybrid search operations that combine mu
 </div>
 
 ```python
-from pymilvus import MilvusClient, AnnSearchRequest
+from pymilvus import MilvusClient, AnnSearchRequest, RRFRanker
 
 # Connect to Milvus server
 milvus_client = MilvusClient(uri="http://localhost:19530")
@@ -358,6 +357,9 @@ image_search = AnnSearchRequest(
     limit=10
 )
 
+# Create an RRF ranker with smoothing parameter k
+ranker = RRFRanker(k=100)
+
 # Apply RRF Ranker to product hybrid search
 # The smoothing parameter k controls the balance
 hybrid_results = milvus_client.hybrid_search(
@@ -378,6 +380,7 @@ import io.milvus.v2.service.vector.request.HybridSearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
@@ -394,6 +397,10 @@ searchRequests.add(AnnSearchReq.builder()
         .vectors(Collections.singletonList(new FloatVec(imageEmbedding)))
         .limit(10)
         .build());
+
+RRFRanker ranker = RRFRanker.builder()
+                .k(100)
+                .build();
         
 HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
                 .collectionName(COLLECTION_NAME)
@@ -425,13 +432,12 @@ const image_search = {
 };
 
 const ranker = {
-  name: "weight",
+  name: "rrf",
   input_field_names: [],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
-    reranker: "weighted",
-    weights: [0.1, 0.9],
-    norm_score: true,
+    reranker: "rrf",
+    k: 100,
   },
 };
 
