@@ -433,82 +433,20 @@ helm repo update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can follow the simple guide below to verify the installation. For more details, refer to <a href="https://milvus.io/docs/v2.3.x/example_code.md">this example</a>.</p>
+    </button></h2><p>You can follow the simple guide below to verify the installation. For more details, refer to the <a href="https://github.com/milvus-io/pymilvus/tree/master/examples">example scripts</a> in the pymilvus repository.</p>
 <ul>
 <li><p>Download the example code.</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/hello_milvus.py
+<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/milvus-io/pymilvus/master/examples/simple.py
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Change the <code translate="no">host</code> argument in the example code to the Milvus service address above.</p></li>
-</ul>
-<pre><code translate="no">```python
+<li><p>Change the connection URI in the example code to the Milvus service address above.</p>
+<pre><code translate="no" class="language-python">...
+milvus_client = MilvusClient(<span class="hljs-string">&quot;http://milvus-service-06b515b1ce9ad10.elb.us-east-2.amazonaws.com:19530&quot;</span>)
 ...
-connections.connect(&quot;default&quot;, host=&quot;milvus-service-06b515b1ce9ad10.elb.us-east-2.amazonaws.com&quot;, port=&quot;19530&quot;)
-...
-```
-</code></pre>
-<ul>
+<button class="copy-code-btn"></button></code></pre></li>
 <li><p>Run the example code.</p>
-<pre><code translate="no" class="language-shell">python3 hello_milvus.py
+<pre><code translate="no" class="language-shell">python3 simple.py
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be similar to the following:</p>
-<pre><code translate="no" class="language-shell">=== start connecting to Milvus     ===
-
-Does collection hello_milvus exist in Milvus: False
-
-=== Create collection `hello_milvus` ===
-
-
-=== Start inserting entities       ===
-
-Number of entities in Milvus: 3000
-
-=== Start Creating index IVF_FLAT  ===
-
-
-=== Start loading                  ===
-
-
-=== Start searching based on vector similarity ===
-
-hit: id: 2998, distance: 0.0, entity: {&#x27;random&#x27;: 0.9728033590489911}, random field: 0.9728033590489911
-hit: id: 1262, distance: 0.08883658051490784, entity: {&#x27;random&#x27;: 0.2978858685751561}, random field: 0.2978858685751561
-hit: id: 1265, distance: 0.09590047597885132, entity: {&#x27;random&#x27;: 0.3042039939240304}, random field: 0.3042039939240304
-hit: id: 2999, distance: 0.0, entity: {&#x27;random&#x27;: 0.02316334456872482}, random field: 0.02316334456872482
-hit: id: 1580, distance: 0.05628091096878052, entity: {&#x27;random&#x27;: 0.3855988746044062}, random field: 0.3855988746044062
-hit: id: 2377, distance: 0.08096685260534286, entity: {&#x27;random&#x27;: 0.8745922204004368}, random field: 0.8745922204004368
-search latency = 0.4693s
-
-=== Start querying with `random &gt; 0.5` ===
-
-query result:
--{&#x27;embeddings&#x27;: [0.20963514, 0.39746657, 0.12019053, 0.6947492, 0.9535575, 0.5454552, 0.82360446, 0.21096309], &#x27;pk&#x27;: &#x27;0&#x27;, &#x27;random&#x27;: 0.6378742006852851}
-search latency = 0.9407s
-query pagination(limit=4):
-        [{&#x27;random&#x27;: 0.6378742006852851, &#x27;pk&#x27;: &#x27;0&#x27;}, {&#x27;random&#x27;: 0.5763523024650556, &#x27;pk&#x27;: &#x27;100&#x27;}, {&#x27;random&#x27;: 0.9425935891639464, &#x27;pk&#x27;: &#x27;1000&#x27;}, {&#x27;random&#x27;: 0.7893211256191387, &#x27;pk&#x27;: &#x27;1001&#x27;}]
-query pagination(offset=1, limit=3):
-        [{&#x27;random&#x27;: 0.5763523024650556, &#x27;pk&#x27;: &#x27;100&#x27;}, {&#x27;random&#x27;: 0.9425935891639464, &#x27;pk&#x27;: &#x27;1000&#x27;}, {&#x27;random&#x27;: 0.7893211256191387, &#x27;pk&#x27;: &#x27;1001&#x27;}]
-
-=== Start hybrid searching with `random &gt; 0.5` ===
-
-hit: id: 2998, distance: 0.0, entity: {&#x27;random&#x27;: 0.9728033590489911}, random field: 0.9728033590489911
-hit: id: 747, distance: 0.14606499671936035, entity: {&#x27;random&#x27;: 0.5648774800635661}, random field: 0.5648774800635661
-hit: id: 2527, distance: 0.1530652642250061, entity: {&#x27;random&#x27;: 0.8928974315571507}, random field: 0.8928974315571507
-hit: id: 2377, distance: 0.08096685260534286, entity: {&#x27;random&#x27;: 0.8745922204004368}, random field: 0.8745922204004368
-hit: id: 2034, distance: 0.20354536175727844, entity: {&#x27;random&#x27;: 0.5526117606328499}, random field: 0.5526117606328499
-hit: id: 958, distance: 0.21908017992973328, entity: {&#x27;random&#x27;: 0.6647383716417955}, random field: 0.6647383716417955
-search latency = 0.4652s
-
-=== Start deleting with expr `pk in [&quot;0&quot; , &quot;1&quot;]` ===
-
-query before delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
--{&#x27;random&#x27;: 0.6378742006852851, &#x27;embeddings&#x27;: [0.20963514, 0.39746657, 0.12019053, 0.6947492, 0.9535575, 0.5454552, 0.82360446, 0.21096309], &#x27;pk&#x27;: &#x27;0&#x27;}
--{&#x27;random&#x27;: 0.43925103574669633, &#x27;embeddings&#x27;: [0.52323616, 0.8035404, 0.77824664, 0.80369574, 0.4914803, 0.8265614, 0.6145269, 0.80234545], &#x27;pk&#x27;: &#x27;1&#x27;}
-
-query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result: []
-
-
-=== Drop collection `hello_milvus` ===
-<button class="copy-code-btn"></button></code></pre></li>
+<p>The script creates a collection named <code translate="no">hello_milvus</code>, inserts a few rows, runs several queries and a vector search, and drops the collection at the end. If it completes without errors, your Milvus cluster is working as expected.</p></li>
 </ul>
 <h2 id="Clean-up-works" class="common-anchor-header">Clean-up works<button data-href="#Clean-up-works" class="anchor-icon" translate="no">
       <svg translate="no"
