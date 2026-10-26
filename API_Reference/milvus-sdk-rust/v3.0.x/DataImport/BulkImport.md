@@ -1,6 +1,6 @@
 # BulkImport
 
-The `BulkImport` struct is an async client for the Milvus bulk-import REST endpoints. Create one with `BulkImport::new()`, then use its methods to create import jobs, list jobs, and monitor progress. The create operation is also called bulk import.
+The `BulkImport` struct is an async client for the Milvus bulk-import REST endpoints. Create one with `BulkImport::new()`, then use its methods to create, commit, or abort import jobs; list jobs; and monitor progress. The create operation is also called bulk import.
 
 ```rust
 pub struct BulkImport
@@ -80,7 +80,7 @@ Creates a bulk-import job.
 pub async fn bulk_import(&self, request: BulkImportRequest) -> Result<BulkImportResponse>
 ```
 
-The request must specify exactly one data source among `files`, `object_url`, `object_urls`, and `data_paths`.
+The request selects exactly one import mode: open-source Milvus with `files`, Zilliz Cloud object storage with `object_urls` (or the deprecated singular `object_url`), or a Zilliz Cloud volume with `volume_name` and `data_paths`.
 
 **REQUEST FIELDS:**
 
@@ -102,47 +102,49 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
 - `object_url: String`
 
-    Deprecated singular object URL accepted by Milvus 2.6. Prefer `object_urls`.
+    **Zilliz Cloud only.** Deprecated singular object URL. Prefer `object_urls`.
 
 - `object_urls: Vec<Vec<String>>`
 
-    Object URLs of the files to import, grouped per import.
+    **Zilliz Cloud only.** Object URLs of the files to import, grouped per import.
 
 - `cluster_id: String`
 
-    Cluster ID for Zilliz Cloud deployments. Cannot be combined with `project_id` and `region_id`.
+    **Zilliz Cloud only.** Cluster ID of the target deployment. Optional when the connected deployment is the target. Cannot be combined with `project_id` and `region_id`.
 
 - `project_id: String`
 
-    Project ID for Zilliz Cloud deployments. Must be specified together with `region_id`.
+    **Zilliz Cloud only.** Project ID of the target deployment. Must be specified together with `region_id` as an alternative to `cluster_id`.
 
 - `region_id: String`
 
-    Region ID for Zilliz Cloud deployments. Must be specified together with `project_id`.
+    **Zilliz Cloud only.** Region ID of the target deployment. Must be specified together with `project_id` as an alternative to `cluster_id`.
 
 - `access_key: String`
 
-    Object-storage access key. Must be specified together with `secret_key`.
+    **Zilliz Cloud only.** Object-storage access key for object-URL import. Must be specified together with `secret_key`.
 
 - `secret_key: String`
 
-    Object-storage secret key. Must be specified together with `access_key`.
+    **Zilliz Cloud only.** Object-storage secret key for object-URL import. Must be specified together with `access_key`.
 
 - `token: String`
 
-    Object-storage session token.
+    **Zilliz Cloud only.** Object-storage session token for object-URL import.
 
 - `volume_name: String`
 
-    Volume name, required when `data_paths` is used.
+    **Zilliz Cloud only.** Volume name, required for volume import.
 
 - `data_paths: Vec<Vec<String>>`
 
-    Data paths within the volume to import, grouped per import.
+    **Zilliz Cloud only.** Data paths within the volume to import, grouped per import.
 
 - `options: HashMap<String, Value>`
 
-    Additional import options, such as `auto_commit`.
+    Additional import options, such as `auto_commit`. Use `rls_principal()` and `skip_rls()` to populate the row-level security options for an import into an RLS-enabled collection.
+
+    The request exposes `rls_principal()` and `should_skip_rls()` accessors for those two options.
 
 **RETURN TYPE:**
 

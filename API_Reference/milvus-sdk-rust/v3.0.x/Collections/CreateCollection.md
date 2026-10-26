@@ -37,6 +37,8 @@ let request = CreateCollectionRequest::builder()
 
     The collection schema, including its fields. Must contain exactly one primary-key field. Required.
 
+    Struct fields are configured with `StructFieldSchema`; use `type_param()` for struct-level parameters such as `mmap.enabled` and `warmup`.
+
 - `num_partitions: i64`
 
     Number of partitions to create. Defaults to `0`.

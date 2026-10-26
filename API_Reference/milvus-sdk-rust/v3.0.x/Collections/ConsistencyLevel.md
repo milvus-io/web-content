@@ -32,7 +32,7 @@ pub enum ConsistencyLevel {
 
 - `Customized`
 
-    Lets the server apply its own configured consistency policy when the request carries no explicit setting. This is the default.
+    Deprecated. Selects a caller-customized consistency guarantee. The variant remains the enum default for compatibility, but new code should leave the request's consistency level unset so the collection or server default is used.
 
 ## Example
 

@@ -41,6 +41,18 @@ let request = DeleteRequest::builder()
 
     Primary-key values of the entities to delete. Mutually exclusive with `filter`. See [Ids](Ids.md).
 
+- `consistency_level: ConsistencyLevel`
+
+    Consistency guarantee for checking and deleting rows. Defaults to `Strong`. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
+
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security. Defaults to `false`.
+
 **RETURN TYPE:**
 
 *Result\<DeleteResponse\>*

@@ -1,6 +1,6 @@
 # GetCompactionPlans()
 
-Retrieves the execution plans produced for a compaction action.
+Retrieves the execution plans produced for a compaction action, or all compaction tasks still retained for a collection when the request selects by collection name.
 
 ```rust
 pub async fn get_compaction_plans(&self, request: GetCompactionPlansRequest) -> Result<GetCompactionPlansResponse>
@@ -16,9 +16,17 @@ let request = GetCompactionPlansRequest::builder()
 
 **REQUEST FIELDS:**
 
+- `database_name: Option<String>`
+
+    Name of the target database; uses the default database when empty. It applies only when `collection_name` selects retained tasks.
+
 - `compaction_id: i64`
 
-    Identifier of the compaction action, as returned by [Compact](Compact.md). Must be greater than zero.
+    Identifier of the compaction action, as returned by [Compact](Compact.md). Must be greater than zero when `collection_name` is not set.
+
+- `collection_name: Option<String>`
+
+    Name of a collection whose retained compaction tasks are returned. When set, it replaces `compaction_id` as the selection criterion and must not be combined with a nonzero `compaction_id`.
 
 **RETURN TYPE:**
 
@@ -30,27 +38,29 @@ A **GetCompactionPlansResponse** containing the compaction state and merge plans
 
 ```rust
 GetCompactionPlansResponse
+    compaction_id() // -> i64
+    collection_name() // -> &str
     state() // -> CompactionStateCode
     merges() // -> &[CompactionMerge]
 ```
 
 **METHODS:**
 
+- `compaction_id()` (*i64*) -
+
+    The compaction ID echoed from the request. It is `0` when retained tasks are selected by collection name.
+
+- `collection_name()` (*&str*) -
+
+    The collection name used to select retained tasks, or an empty string when the request selected one compaction ID.
+
 - `state()` (*CompactionStateCode*) -
 
-    The state of the compaction action. See [CompactionStateCode](CompactionStateCode.md).
+    The aggregate state of the compaction action. See [CompactionStateCode](CompactionStateCode.md).
 
 - `merges()` (*&[CompactionMerge]*) -
 
-    The compaction merge plans produced by the action.
-
-    - `get_source_segment_ids()` (*&[i64]*) -
-
-        The IDs of the source segments being merged.
-
-    - `get_target_segment_id()` (*i64*) -
-
-        The ID of the target segment produced by the merge.
+    The compaction tasks or merge plans produced by the action. See [CompactionMerge](CompactionMerge.md).
 
 ## Example
 

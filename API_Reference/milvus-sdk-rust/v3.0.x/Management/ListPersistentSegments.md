@@ -73,9 +73,19 @@ ListPersistentSegmentsResponse
 
     - `get_sorted()` (*bool*) -
 
-        
+        Whether the segment is sorted.
 
     - `get_storage_version()` (*i64*) -
+
+        The storage format version of the segment.
+
+    - `get_insert_channel()` (*&str*) -
+
+        The insert channel that produced the segment.
+
+    - `get_compaction_from()` (*&[i64]*) -
+
+        The IDs of the source segments from which this segment was compacted.
 
 ## Example
 

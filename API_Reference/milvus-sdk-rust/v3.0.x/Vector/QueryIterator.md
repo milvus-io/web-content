@@ -26,7 +26,7 @@ let mut iterator = client.query_iterator(request).await?;
 
 - `query: QueryRequest`
 
-    The `QueryRequest` that defines the collection, filter, and output fields. Query iterators do not accept primary-key IDs or `order_by_fields`. Required.
+    The `QueryRequest` that defines the collection, filter, output fields, and row-level security settings. Query iterators do not accept primary-key IDs, `order_by_fields`, or `group_by_fields`. Required.
 
 - `batch_size: usize`
 

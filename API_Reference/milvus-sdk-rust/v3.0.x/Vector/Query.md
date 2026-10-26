@@ -12,7 +12,8 @@ pub async fn query(&self, request: QueryRequest) -> Result<QueryResponse>
 let request = QueryRequest::builder()
     .collection_name("books")
     .filter("id > 0")
-    .output_fields(["id", "title"])
+    .output_fields(["genre", "count(*)"])
+    .group_by_fields(["genre"])
     .limit(10)
     .build()?;
 ```
@@ -75,6 +76,18 @@ let request = QueryRequest::builder()
 
     Additional query parameters.
 
+- `group_by_fields: Vec<String>`
+
+    Scalar fields used to group aggregation results. Combine them with aggregate expressions such as `count(*)` or `sum(field)` in `output_fields`; the server returns one row per group.
+
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security. Defaults to `false`.
+
 **RETURN TYPE:**
 
 *Result\<QueryResponse\>*
@@ -87,6 +100,10 @@ A **QueryResponse** containing the rows matched by the query. Returns an `Error`
 QueryResponse
     results() // -> &QueryResults
     session_timestamp() // -> u64
+    cost() // -> i64
+    scanned_remote_bytes() // -> i64
+    scanned_total_bytes() // -> i64
+    cache_hit_ratio() // -> f32
 ```
 
 **METHODS:**
@@ -130,6 +147,22 @@ QueryResponse
 - `session_timestamp()` (*u64*) -
 
     The session timestamp of the query.
+
+- `cost()` (*i64*) -
+
+    The execution cost reported by the server.
+
+- `scanned_remote_bytes()` (*i64*) -
+
+    The number of bytes scanned remotely.
+
+- `scanned_total_bytes()` (*i64*) -
+
+    The total number of bytes scanned.
+
+- `cache_hit_ratio()` (*f32*) -
+
+    The ratio of scanned bytes served from the cache.
 
 ## Example
 

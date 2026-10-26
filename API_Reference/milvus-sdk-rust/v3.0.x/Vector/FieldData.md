@@ -68,7 +68,7 @@ Each variant carries the field `name` shared with the collection schema and the 
 
 - `VarChar`
 
-    Variable-length UTF-8 string values.
+    Variable-length UTF-8 string values. Values for `DataType::Text` schema fields are also supplied with this variant.
 
 - `Json`
 

@@ -27,7 +27,7 @@ let request = DescribeReplicasRequest::builder()
 
 - `with_shard_nodes: bool`
 
-    Whether to include the shard-node details of each replica. Defaults to `false`.
+    Whether to include the shard-node details of each replica. Defaults to `true`.
 
 **RETURN TYPE:**
 
