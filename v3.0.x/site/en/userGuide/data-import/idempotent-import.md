@@ -38,7 +38,7 @@ resp = bulk_import(
 resp.json()["data"]["jobId"]   # the same id on every retry
 ```
 
-`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. The `headers` parameter requires a recent pymilvus: v3.0.3 or later on the 3.x line, or v2.6.18 or later on the 2.6 line. Both were pending release when this page was written. On an older pymilvus, the `import` line above fails with an `ImportError` at the `IDEMPOTENCY_KEY_HEADER` lookup, and what passing `headers` to `bulk_import` does is undefined — the call may error, or the import may be submitted without the key. Check your pymilvus version before relying on the key.
+`IDEMPOTENCY_KEY_HEADER` is `"Idempotency-Key"`; the raw string works too. The `headers` parameter and `IDEMPOTENCY_KEY_HEADER` require pymilvus v3.0.3 or later on the 3.x line, or v2.6.18 or later on the 2.6 line. On an older pymilvus, the `import` line above fails with an `ImportError` at the `IDEMPOTENCY_KEY_HEADER` lookup, and passing `headers` to `bulk_import` has undefined behavior — the call may error, or the import may be submitted without the key.
 
 Poll `/v2/vectordb/jobs/import/describe` with the returned `jobId` as usual. A retry that arrives while the original is still being registered waits for it, so a retry never observes a half-registered job.
 
