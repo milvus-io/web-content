@@ -102,7 +102,7 @@ search_params = {
     # highlight-start
     "params": {
         "nprobe": 128, # Number of clusters to search
-        "rbq_query_bits": 0, # Query vector quantization bits
+        "rbq_bits_query": 0, # Query vector quantization bits
         "refine_k": 1 # Refinement magnification factor
     }
     # highlight-end
@@ -187,7 +187,7 @@ The following table lists the parameters that can be configured in `search_param
    </tr>
    <tr>
      <td rowspan="2"><p>RaBitQ</p></td>
-     <td><p><code>rbq_query_bits</code></p></td>
+     <td><p><code>rbq_bits_query</code></p></td>
      <td><p>Sets whether additional scalar quantization of a query vector is applied. If set to <code>0</code>, the query is used without quantization. If set to a value within [1, 8], the query is preprocessed using n-bit scalar quantization.</p></td>
      <td><p><strong>Type</strong>: Integer<br><strong>Range</strong>: [0, 8]<br><strong>Default value</strong>: <code>0</code></p></td>
      <td><p>The default <code>0</code> value provides maximum recall rate but slowest performance. We recommend testing values <code>0</code>, <code>8</code>, and <code>6</code>, as they provide similar recall rates with <code>6</code> being the fastest. Use smaller values for higher recall requirements.</p></td>
