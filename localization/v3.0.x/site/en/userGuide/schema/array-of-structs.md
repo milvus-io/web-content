@@ -149,8 +149,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>EmbeddingList search</h3></th>
-      <th scope="col"><h3>Element-level search</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">EmbeddingList search</h3></th>
+      <th scope="col"><h3 id="element-level-search">Element-level search</h3></th>
     </tr>
   </thead>
   <tbody>
