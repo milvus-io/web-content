@@ -15,8 +15,11 @@ The following example demonstrates how to obtain the name list of all collection
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -49,30 +52,18 @@ ListCollectionsResp resp = client.listCollections();
 System.out.println(resp.getCollectionNames());
 ```
 
-```javascript
-import { MilvusClient } from '@zilliz/milvus2-sdk-node';
-
-const client = new MilvusClient({
-    address: 'localhost:19530',
-    token: 'root:Milvus'
-});
-
-const collections = await client.listCollections();
-console.log(collections);
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 token := "root:Milvus"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -93,7 +84,80 @@ if err != nil {
 fmt.Println(collectionNames)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let collections = client
+    .list_collections(ListCollectionsRequest::builder().build()?)
+    .await?;
+println!("{:?}", collections.collection_names());
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListCollectionsResponse response;
+status = client->ListCollections(milvus::ListCollectionsRequest(), response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& name : response.CollectionNames()) {
+    std::cout << "\t" << name << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+    address: 'http://localhost:19530',
+    token: 'root:Milvus'
+});
+
+const collections = await client.listCollections();
+console.log(collections);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+var res = await client.ListCollectionsAsync(new ListCollectionsReq());
+foreach (var name in res.CollectionNames)
+{
+    Console.WriteLine(name);
+}
+```
+
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
 --header "Authorization: Bearer ${TOKEN}" \
@@ -121,8 +185,11 @@ You can also obtain the details of a specific collection. The following example 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -145,14 +212,6 @@ DescribeCollectionResp resp = client.describeCollection(request);
 System.out.println(resp);
 ```
 
-```javascript
-const res = await client.describeCollection({
-    collection_name: "quick_setup"
-});
-
-console.log(res);
-```
-
 ```go
 collection, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption("quick_setup"))
 if err != nil {
@@ -163,7 +222,57 @@ if err != nil {
 fmt.Println(collection)
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let description = client
+    .describe_collection(
+        DescribeCollectionRequest::builder()
+            .collection_name("quick_setup")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", description.description());
+```
+
+```cpp
+#include <iostream>
+
+milvus::DescribeCollectionResponse response;
+auto status = client->DescribeCollection(milvus::DescribeCollectionRequest()
+                                            .WithCollectionName("quick_setup"),
+                                         response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::cout << "Collection name: " << response.Desc().CollectionName() << std::endl;
+std::cout << "Collection ID: " << response.Desc().ID() << std::endl;
+```
+
+```javascript
+const res = await client.describeCollection({
+    collection_name: "quick_setup"
+});
+
+console.log(res);
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+var res = await client.DescribeCollectionAsync(new DescribeCollectionReq
+{
+    CollectionName = "quick_setup"
+});
+Console.WriteLine(res.CollectionName);
+```
+
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/describe" \
 --header "Authorization: Bearer ${TOKEN}" \
