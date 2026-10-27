@@ -20,7 +20,7 @@ The number of bytes can differ from the number of characters. For example, with 
 
 <div class="alert note">
 
-Milvus supports null values and default values for `VARCHAR` fields. To enable these features, set `nullable` to `True` and `default_value` to a string value. For details, refer to [Nullable & Default](nullable-and-default.md).
+Milvus supports NULL values and default values for `VARCHAR` fields. To enable these features, enable `nullable` and set `default_value` to a string value. For details, refer to [Nullable & Default](nullable-and-default.md).
 
 </div>
 
@@ -28,21 +28,23 @@ Milvus supports null values and default values for `VARCHAR` fields. To enable t
 
 To store short, bounded string metadata in Milvus, define a `VARCHAR` field in your collection schema. Below is an example of defining a collection schema with two `VARCHAR` fields:
 
-- `varchar_field1`: stores up to 100 bytes, allows null values, and has a default value of `"Unknown"`.
+- `varchar_field1`: stores up to 100 bytes, allows NULL values, and has a default value of `"Unknown"`.
 
-- `varchar_field2`: stores up to 200 bytes, allows null values, but does not have a default value.
+- `varchar_field2`: stores up to 200 bytes, allows NULL values, but does not have a default value.
 
 <div class="alert note">
 
-If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to [Dynamic Field](enable-dynamic-field.md).
+If you enable `enable_dynamic_field` when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to [Dynamic Field](enable-dynamic-field.md).
 
 </div>
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -54,17 +56,17 @@ from pymilvus import MilvusClient, DataType
 SERVER_ADDR = "http://localhost:19530"
 
 # Create a MilvusClient instance
-client = MilvusClient(uri=SERVER_ADDR)
+client = MilvusClient(uri=SERVER_ADDR, token="root:Milvus")
 
 # Define the collection schema
 schema = client.create_schema(
     auto_id=False,
-    enable_dynamic_fields=True,
+    enable_dynamic_field=True,
 )
 
-# Add `varchar_field1` that supports null values with default value "Unknown"
+# Add `varchar_field1` that supports NULL values with default value "Unknown"
 schema.add_field(field_name="varchar_field1", datatype=DataType.VARCHAR, max_length=100, nullable=True, default_value="Unknown")
-# Add `varchar_field2` that supports null values without default value
+# Add `varchar_field2` that supports NULL values without default value
 schema.add_field(field_name="varchar_field2", datatype=DataType.VARCHAR, max_length=200, nullable=True)
 schema.add_field(field_name="pk", datatype=DataType.INT64, is_primary=True)
 schema.add_field(field_name="embedding", datatype=DataType.FLOAT_VECTOR, dim=3)
@@ -80,8 +82,9 @@ import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build());
-        
+
 CreateCollectionReq.CollectionSchema schema = client.createSchema();
 schema.setEnableDynamicField(true);
 
@@ -113,54 +116,25 @@ schema.addField(AddFieldReq.builder()
         .build());
 ```
 
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const client = new MilvusClient({
-  address: `http://localhost:19530`
-});
-
-const schema = [
-  {
-    name: "metadata",
-    data_type: DataType.JSON,
-  },
-  {
-    name: "pk",
-    data_type: DataType.Int64,
-    is_primary_key: true,
-  },
-  {
-    name: "varchar_field2",
-    data_type: DataType.VarChar,
-    max_length: 200,
-  },
-  {
-    name: "varchar_field1",
-    data_type: DataType.VarChar,
-    max_length: 100,
-  },
-];
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey: "root:Milvus",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -191,6 +165,102 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("varchar_field1")
+            .data_type(DataType::VarChar)
+            .max_length(100)
+            .nullable(true)
+            .default_value(DefaultValue::String("Unknown".to_string())),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("varchar_field2")
+            .data_type(DataType::VarChar)
+            .max_length(200)
+            .nullable(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("pk")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("embedding")
+            .data_type(DataType::FloatVector)
+            .dimension(3),
+    );
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"pk", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("embedding", milvus::DataType::FLOAT_VECTOR).WithDimension(3));
+schema->AddField(milvus::FieldSchema("varchar_field1", milvus::DataType::VARCHAR).WithMaxLength(100).WithNullable(true).WithDefaultValue("Unknown"));
+schema->AddField(milvus::FieldSchema("varchar_field2", milvus::DataType::VARCHAR).WithMaxLength(200).WithNullable(true));
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+  address: "http://localhost:19530",
+  token: "root:Milvus"
+});
+
+const schema = [
+  {
+    name: "varchar_field1",
+    data_type: DataType.VarChar,
+    max_length: 100,
+    nullable: true,
+    default_value: "Unknown",
+  },
+  {
+    name: "varchar_field2",
+    data_type: DataType.VarChar,
+    max_length: 200,
+    nullable: true,
+  },
+  {
+    name: "pk",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+  },
+  {
+    name: "embedding",
+    data_type: DataType.FloatVector,
+    dim: 3,
+  },
+];
+```
+
 ```bash
 export varcharField1='{
     "fieldName": "varchar_field1",
@@ -198,7 +268,8 @@ export varcharField1='{
     "elementTypeParams": {
         "max_length": 100
     },
-    "nullable": true
+    "nullable": true,
+    "defaultValue": "Unknown"
 }'
 
 export varcharField2='{
@@ -243,7 +314,7 @@ The following example creates indexes on the vector field `embedding` and the sc
 
 <div class="alert note">
 
-You can also builds an `NGRAM` index to accelerate `LIKE` filtering on `VARCHAR` fields. For details, refer to [NGRAM](ngram.md).
+You can also build an `NGRAM` index to accelerate `LIKE` filtering on `VARCHAR` fields. For details, refer to [NGRAM](ngram.md).
 
 </div>
 
@@ -251,6 +322,8 @@ You can also builds an `NGRAM` index to accelerate `LIKE` filtering on `VARCHAR`
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -285,7 +358,7 @@ indexes.add(IndexParam.builder()
         .indexName("varchar_index")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .build());
-        
+
 indexes.add(IndexParam.builder()
         .fieldName("embedding")
         .indexType(IndexParam.IndexType.AUTOINDEX)
@@ -295,20 +368,43 @@ indexes.add(IndexParam.builder()
 
 ```go
 indexOption1 := milvusclient.NewCreateIndexOption("my_collection", "embedding",
-    index.NewAutoIndex(index.MetricType(entity.IP)))
+    index.NewAutoIndex(index.MetricType(entity.COSINE)))
 indexOption2 := milvusclient.NewCreateIndexOption("my_collection", "varchar_field1",
     index.NewInvertedIndex())
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let indexes = vec![
+    IndexParam::new()
+        .field_name("varchar_field1")
+        .index_name("varchar_index")
+        .index_type(IndexType::AutoIndex),
+    IndexParam::new()
+        .field_name("embedding")
+        .index_type(IndexType::AutoIndex)
+        .metric_type(MetricType::Cosine),
+];
+```
+
+```cpp
+std::vector<milvus::IndexDesc> indexes = {
+    milvus::IndexDesc("varchar_field1", "varchar_index", milvus::IndexType::AUTOINDEX),
+    milvus::IndexDesc("embedding", "", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)
+};
+```
+
 ```javascript
+import { IndexType, MetricType } from "@zilliz/milvus2-sdk-node";
+
 const indexParams = [{
     index_name: 'varchar_index',
     field_name: 'varchar_field1',
     index_type: IndexType.AUTOINDEX,
-)];
+}];
 
 indexParams.push({
-    index_name: 'embedding_index',
     field_name: 'embedding',
     metric_type: MetricType.COSINE,
     index_type: IndexType.AUTOINDEX,
@@ -316,14 +412,6 @@ indexParams.push({
 ```
 
 ```bash
-export indexParams='[
-        {
-            "fieldName": "varchar_field1",
-            "indexName": "varchar_index",
-            "indexType": "AUTOINDEX"
-        }
-    ]'
-    
 export indexParams='[
         {
             "fieldName": "varchar_field1",
@@ -346,6 +434,8 @@ Once the schema and index are defined, create a collection that includes string 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -376,21 +466,55 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(indexes)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                        .WithCollectionName("my_collection")
+                                        .WithIndexes(std::move(indexes))
+                                        .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ```javascript
-await client.create_collection({
+await client.createCollection({
     collection_name: "my_collection",
     schema: schema,
-    index_params: index_params
+    index_params: indexParams
 });
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d "{
     \"collectionName\": \"my_collection\",
     \"schema\": $schema,
@@ -407,6 +531,8 @@ After creating the collection, insert entities that match the schema.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -479,6 +605,76 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .columns(vec![
+                FieldData::nullable(
+                    FieldData::varchar(
+                        "varchar_field1",
+                        vec![
+                            "Product A".to_string(),
+                            "Product B".to_string(),
+                            "Product C".to_string(),
+                            "Unknown".to_string(),
+                            "".to_string(),
+                        ],
+                    ),
+                    vec![true, true, false, true, false, true, true],
+                )?,
+                FieldData::nullable(
+                    FieldData::varchar(
+                        "varchar_field2",
+                        vec![
+                            "High quality product".to_string(),
+                            "Exclusive deal".to_string(),
+                            "Best seller".to_string(),
+                        ],
+                    ),
+                    vec![true, false, false, false, true, false, true],
+                )?,
+                FieldData::int64("pk", vec![1, 2, 3, 4, 5, 6, 7]),
+                FieldData::float_vector(
+                    "embedding",
+                    vec![
+                        vec![0.1, 0.2, 0.3],
+                        vec![0.4, 0.5, 0.6],
+                        vec![0.2, 0.3, 0.1],
+                        vec![0.5, 0.7, 0.2],
+                        vec![0.6, 0.4, 0.8],
+                        vec![0.8, 0.5, 0.3],
+                        vec![0.8, 0.5, 0.3],
+                    ],
+                ),
+            ])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+milvus::EntityRows data = {{{"varchar_field1", "Product A"}, {"varchar_field2", "High quality product"}, {"pk", 1}, {"embedding", std::vector<float>{0.1, 0.2, 0.3}}},
+                           {{"varchar_field1", "Product B"}, {"pk", 2}, {"embedding", std::vector<float>{0.4, 0.5, 0.6}}},
+                           {{"varchar_field1", nullptr}, {"varchar_field2", nullptr}, {"pk", 3}, {"embedding", std::vector<float>{0.2, 0.3, 0.1}}},
+                           {{"varchar_field1", "Product C"}, {"varchar_field2", nullptr}, {"pk", 4}, {"embedding", std::vector<float>{0.5, 0.7, 0.2}}},
+                           {{"varchar_field1", nullptr}, {"varchar_field2", "Exclusive deal"}, {"pk", 5}, {"embedding", std::vector<float>{0.6, 0.4, 0.8}}},
+                           {{"varchar_field1", "Unknown"}, {"varchar_field2", nullptr}, {"pk", 6}, {"embedding", std::vector<float>{0.8, 0.5, 0.3}}},
+                           {{"varchar_field1", ""}, {"varchar_field2", "Best seller"}, {"pk", 7}, {"embedding", std::vector<float>{0.8, 0.5, 0.3}}}};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data)),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 const data = [
   {
@@ -489,15 +685,38 @@ const data = [
   },
   {
     varchar_field1: "Product B",
-    varchar_field2: "Affordable price",
     pk: 2,
     embedding: [0.4, 0.5, 0.6],
   },
   {
-    varchar_field1: "Product C",
-    varchar_field2: "Best seller",
+    varchar_field1: null,
+    varchar_field2: null,
     pk: 3,
-    embedding: [0.7, 0.8, 0.9],
+    embedding: [0.2, 0.3, 0.1],
+  },
+  {
+    varchar_field1: "Product C",
+    varchar_field2: null,
+    pk: 4,
+    embedding: [0.5, 0.7, 0.2],
+  },
+  {
+    varchar_field1: null,
+    varchar_field2: "Exclusive deal",
+    pk: 5,
+    embedding: [0.6, 0.4, 0.8],
+  },
+  {
+    varchar_field1: "Unknown",
+    varchar_field2: null,
+    pk: 6,
+    embedding: [0.8, 0.5, 0.3],
+  },
+  {
+    varchar_field1: "",
+    varchar_field2: "Best seller",
+    pk: 7,
+    embedding: [0.8, 0.5, 0.3],
   },
 ];
 
@@ -505,28 +724,31 @@ await client.insert({
   collection_name: "my_collection",
   data: data,
 });
-
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 --data '{
     "data": [
         {"varchar_field1": "Product A", "varchar_field2": "High quality product", "pk": 1, "embedding": [0.1, 0.2, 0.3]},
         {"varchar_field1": "Product B", "pk": 2, "embedding": [0.4, 0.5, 0.6]},
-        {"varchar_field1": null, "varchar_field2": null, "pk": 3, "embedding": [0.2, 0.3, 0.1]},  
-        {"varchar_field1": "Product C", "varchar_field2": null, "pk": 4, "embedding": [0.5, 0.7, 0.2]},  
-        {"varchar_field1": null, "varchar_field2": "Exclusive deal", "pk": 5, "embedding": [0.6, 0.4, 0.8]},  
-        {"varchar_field1": "Unknown", "varchar_field2": null, "pk": 6, "embedding": [0.8, 0.5, 0.3]},  
-        {"varchar_field1": "", "varchar_field2": "Best seller", "pk": 7, "embedding": [0.8, 0.5, 0.3]}  
+        {"varchar_field1": null, "varchar_field2": null, "pk": 3, "embedding": [0.2, 0.3, 0.1]},
+        {"varchar_field1": "Product C", "varchar_field2": null, "pk": 4, "embedding": [0.5, 0.7, 0.2]},
+        {"varchar_field1": null, "varchar_field2": "Exclusive deal", "pk": 5, "embedding": [0.6, 0.4, 0.8]},
+        {"varchar_field1": "Unknown", "varchar_field2": null, "pk": 6, "embedding": [0.8, 0.5, 0.3]},
+        {"varchar_field1": "", "varchar_field2": "Best seller", "pk": 7, "embedding": [0.8, 0.5, 0.3]}
     ],
     "collectionName": "my_collection"
 }'
 
-## {"code":0,"cost":0,"data":{"insertCount":3,"insertIds":[1,2,3]}}
+## {"code":0,"cost":0,"data":{"insertCount":7,"insertIds":[1,2,3,4,5,6,7]}}
 ```
 
 ## Query with filter expressions
@@ -539,6 +761,8 @@ To retrieve entities where the `varchar_field1` matches the string `"Product A"`
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -597,6 +821,42 @@ fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2").FieldData(
 // varchar_field2 string_data:{data:"High quality product"}
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let res = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"varchar_field1 == "Product A""#)
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+auto request = milvus::QueryRequest()
+                       .WithCollectionName("my_collection")
+                       .WithFilter(R"(varchar_field1 == "Product A")")
+                       .AddOutputField("varchar_field1")
+                       .AddOutputField("varchar_field2");
+
+milvus::QueryResponse response;
+auto status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::EntityRows output_rows;
+status = response.Results().OutputRows(output_rows);
+for (const auto& row : output_rows) {
+    std::cout << "\t" << row << std::endl;
+}
+```
+
 ```javascript
 await client.query({
     collection_name: 'my_collection',
@@ -606,10 +866,14 @@ await client.query({
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "filter": "varchar_field1 == \"Product A\"",
@@ -618,12 +882,14 @@ curl --request POST \
 ## {"code":0,"cost":0,"data":[{"pk":1,"varchar_field1":"Product A","varchar_field2":"High quality product"}]}
 ```
 
-To retrieve entities where the `varchar_field2` is null:
+To retrieve entities where the `varchar_field2` is NULL:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -682,6 +948,42 @@ fmt.Println("varchar_field1", queryResult.GetColumn("varchar_field1"))
 fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2"))
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let res = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter("varchar_field2 is null")
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+auto request = milvus::QueryRequest()
+                       .WithCollectionName("my_collection")
+                       .WithFilter("varchar_field2 IS NULL")
+                       .AddOutputField("varchar_field1")
+                       .AddOutputField("varchar_field2");
+
+milvus::QueryResponse response;
+auto status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::EntityRows output_rows;
+status = response.Results().OutputRows(output_rows);
+for (const auto& row : output_rows) {
+    std::cout << "\t" << row << std::endl;
+}
+```
+
 ```javascript
 await client.query({
     collection_name: 'my_collection',
@@ -691,11 +993,15 @@ await client.query({
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 # restful
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "filter": "varchar_field2 is null",
@@ -703,12 +1009,14 @@ curl --request POST \
 }'
 ```
 
-To retrieve entities where `varchar_field1` has the value `"Unknown"`, use the following expression below. As the default value of `varchar_field1` is `"Unknown"`, the expected result should include entities with `varchar_field1` explicitly set to `"Unknown"` or with `varchar_field1` set to null.
+To retrieve entities where `varchar_field1` has the value `"Unknown"`, use the following expression below. As the default value of `varchar_field1` is `"Unknown"`, the expected result should include entities with `varchar_field1` explicitly set to `"Unknown"` or with `varchar_field1` set to NULL.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -744,7 +1052,7 @@ QueryResp resp = client.query(QueryReq.builder()
 System.out.println(resp.getQueryResults());
 
 // Output
-// 
+//
 // [
 //    QueryResp.QueryResult(entity={varchar_field1=Unknown, varchar_field2=null, pk=3}),
 //    QueryResp.QueryResult(entity={varchar_field1=Unknown, varchar_field2=Exclusive deal, pk=5}),
@@ -765,6 +1073,41 @@ fmt.Println("varchar_field1", queryResult.GetColumn("varchar_field1"))
 fmt.Println("varchar_field2", queryResult.GetColumn("varchar_field2"))
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let res = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("my_collection")
+            .filter(r#"varchar_field1 == "Unknown""#)
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+auto request = milvus::QueryRequest()
+                       .WithCollectionName("my_collection")
+                       .WithFilter(R"(varchar_field1 == "Unknown")")
+                       .AddOutputField("varchar_field1")
+                       .AddOutputField("varchar_field2");
+
+milvus::QueryResponse response;
+auto status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+milvus::EntityRows output_rows;
+status = response.Results().OutputRows(output_rows);
+for (const auto& row : output_rows) {
+    std::cout << "\t" << row << std::endl;
+}
+```
+
 ```javascript
 // node
 await client.query({
@@ -775,11 +1118,15 @@ await client.query({
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 # restful
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "filter": "varchar_field1 == \"Unknown\"",
@@ -795,6 +1142,8 @@ In addition to basic scalar field filtering, you can combine vector similarity s
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -823,6 +1172,7 @@ print(res)
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.response.SearchResp;
 
@@ -870,24 +1220,74 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let res = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("embedding")
+            .vectors(SearchVectors::Float(vec![vec![0.3, -0.6, 0.1]]))
+            .filter(r#"varchar_field2 == "Best seller""#)
+            .output_fields(["varchar_field1", "varchar_field2"])
+            .limit(5)
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+std::vector<float> query_vector = {0.3, -0.6, 0.1};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("embedding")
+                   .WithFilter(R"(varchar_field2 == "Best seller")")
+                   .WithLimit(5)
+                   .AddExtraParam("nprobe", "10")
+                   .AddOutputField("varchar_field1")
+                   .AddOutputField("varchar_field2")
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+auto search_results = response.Results();
+for (auto& result : search_results.Results()) {
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
 ```javascript
 await client.search({
     collection_name: 'my_collection',
     data: [0.3, -0.6, 0.1],
     limit: 5,
     output_fields: ['varchar_field1', 'varchar_field2'],
-    filter: 'varchar_field2 == "Best seller"'
+    filter: 'varchar_field2 == "Best seller"',
     params: {
-       nprobe:10
+       nprobe: 10
     }
 });
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
 -d '{
     "collectionName": "my_collection",
     "data": [
@@ -901,5 +1301,5 @@ curl --request POST \
     "filter": "varchar_field2 == \"Best seller\""
 }'
 
-## {"code":0,"cost":0,"data":[{"distance":-0.2364331,"id":1,"varchar_field1":"Product A","varchar_field2":"High quality product"}]}
+## {"code":0,"cost":0,"data":[{"distance":-0.044681635,"pk":7,"varchar_field1":"","varchar_field2":"Best seller"}]}
 ```
