@@ -12,9 +12,15 @@ class io.milvus.v2.common.CompactionState
 
     The numeric compaction state code.
 
+- **forNumber(int code)** (*CompactionState*) -
+
+    Returns the `CompactionState` constant whose code matches the given value, or throws `IllegalArgumentException` if no constant matches.
+
 ## VARIANTS
 
-- **UndefiedState** (0) - The compaction state is undefined. (The spelling matches the SDK source, where this constant name contains a typo.)
+- **UndefinedState** (0) - The compaction state is undefined. (Available since v2.6.27 or later.)
+
+- **UndefiedState** (0) - The compaction state is undefined. (The spelling matches the SDK source, where this constant name contains a typo. Deprecated since v2.6.27 or later; use `UndefinedState` instead.)
 
 - **Executing** (1) - A compaction task is currently running.
 
