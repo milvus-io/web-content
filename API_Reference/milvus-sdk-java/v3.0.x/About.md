@@ -12,20 +12,20 @@ You can use **[Apache Maven](https://maven.apache.org/install.html)** or **[Grad
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>3.0.11</version>
+    <version>3.0.12</version>
 </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java:3.0.11'
+implementation 'io.milvus:milvus-sdk-java:3.0.12'
 ```
 
 - Gradle/Kotlin
 
 ```plaintext
-implementation("io.milvus:milvus-sdk-java:3.0.11")
+implementation("io.milvus:milvus-sdk-java:3.0.12")
 ```
 
 Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-java** and **milvus-sdk-java-bulkwriter**. If you do not need BulkWriter, ignore the **milvus-sdk-java-bulkwriter** package. To use BulkWriter, import the **milvus-sdk-java-bulkwriter** as follows:
@@ -36,20 +36,20 @@ Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-jav
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java-bulkwriter</artifactId>
-    <version>3.0.11</version>
+    <version>3.0.12</version>
 </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java-bulkwriter:3.0.11'
+implementation 'io.milvus:milvus-sdk-java-bulkwriter:3.0.12'
 ```
 
 - Gradle/Kotlin
 
 ```plaintext
-implementation("io.milvus:milvus-sdk-java-bulkwriter:3.0.11")
+implementation("io.milvus:milvus-sdk-java-bulkwriter:3.0.12")
 ```
 
 Since SDK v3.0.11, a Spring Boot starter is available for applications built with Spring Boot 3.x or 4.x and Java 17 or later. It auto-configures a **MilvusClientV2** bean from `milvus.*` properties and closes the client on context shutdown.
@@ -60,20 +60,20 @@ Since SDK v3.0.11, a Spring Boot starter is available for applications built wit
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java-spring-boot-starter</artifactId>
-    <version>3.0.11</version>
+    <version>3.0.12</version>
 </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java-spring-boot-starter:3.0.11'
+implementation 'io.milvus:milvus-sdk-java-spring-boot-starter:3.0.12'
 ```
 
 - Gradle/Kotlin
 
 ```plaintext
-implementation("io.milvus:milvus-sdk-java-spring-boot-starter:3.0.11")
+implementation("io.milvus:milvus-sdk-java-spring-boot-starter:3.0.12")
 ```
 
 ## Quick Start
@@ -148,7 +148,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.4.x | 2.4.11 |
 | 2.5.x | 2.5.17 |
 | 2.6.x | 2.6.26 |
-| 3.0.x | 3.0.11 |
+| 3.0.x | 3.0.12 |
 
 ## Contributing
 
