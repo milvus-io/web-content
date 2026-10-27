@@ -1,4 +1,4 @@
-# Compact()
+# compact()
 
 Starts a compaction action for a collection.
 
@@ -30,7 +30,46 @@ let request = CompactRequest::builder()
 
 - `target_size_unit: TargetSizeUnit`
 
-    Unit of `target_size`; the value is converted to MB before being sent to Milvus. Defaults to `TargetSizeUnit::MB`. See [TargetSizeUnit](TargetSizeUnit.md).
+    Unit of `target_size`; the value is converted to MB before being sent to Milvus. Defaults to `TargetSizeUnit::MB`.
+
+    This enum specifies the unit of the `target_size` parameter in `Compact()`.
+
+    ```rust
+    pub enum TargetSizeUnit {
+        B,
+        KB,
+        MB,
+        GB,
+        TB,
+        PB,
+    }
+    ```
+
+    **Constants:**
+
+    - **B**
+
+        Bytes.
+
+    - **KB**
+
+        Kilobytes.
+
+    - **MB**
+
+        Megabytes.
+
+    - **GB**
+
+        Gigabytes.
+
+    - **TB**
+
+        Terabytes.
+
+    - **PB**
+
+        Petabytes.
 
 - `clustering_compaction: bool`
 

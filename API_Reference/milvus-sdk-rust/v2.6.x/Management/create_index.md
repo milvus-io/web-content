@@ -1,4 +1,4 @@
-# CreateIndex()
+# create_index()
 
 Creates an index on the specified vector field of a collection.
 

@@ -1,4 +1,4 @@
-# HasPartition()
+# has_partition()
 
 Checks whether a named partition exists in a collection.
 

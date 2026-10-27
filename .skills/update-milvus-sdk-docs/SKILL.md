@@ -92,7 +92,7 @@ the target tree — the same Steps 1–12 (including sub-step 8b) in
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
 enum format, cross-links, misplaced type pages, missing/absent inline
-expansions, unnecessary standalone pages, operation page filename, error
+expansions, unnecessary standalone pages, operation page filename and title, error
 reporting convention, About.md format compliance) plus the Pass 1
 response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
@@ -678,6 +678,11 @@ grep -rn "3\.0\.1" API_Reference/<sdk>/<version-line>/   # adjust for the actual
 
 # structural format compliance (every operation page, esp. after a full-tree
 # RETURNS reformat):
+#  - operation page filename and first-level title match the public API name
+#    in the SDK's native convention (e.g. Rust add_collection_field ->
+#    add_collection_field.md + "# add_collection_field()")
+#  - has exactly one operation-level `## Example`; an inline-expanded type must
+#    not carry its own nested `## Example`
 #  - has **RETURN TYPE:** + **RETURNS:** + accessor code block + **METHODS:**
 #  - no '*Result<' as the first RETURNS line
 #  - no empty member bullets (bullet whose next non-blank line is another bullet)
@@ -923,9 +928,11 @@ even when a per-SDK placement note lists them as "dedicated". Execution:
 types shared across ≥2 pages are materialized and inline expansions replaced
 by Step 9; single-referencer standalone pages are folded by Step 10.
 
-**Step 6 — Inlined enum format**: inlined enums in operation pages use
-`**Constants:**` as the header (not `**VARIANTS:**`), with each value as a
-`- **ValueName**` bullet followed by an indented description.
+**Step 6 — Enum format**: use the cross-SDK canonical enum format in the doc
+style guide for every expanded enum: one-sentence scope description, native
+declaration, `**Constants:**`, and one multi-line bullet per value. Language
+changes only the declaration fence and value qualifiers; it does not change the
+Markdown scaffold or heading.
 
 **Step 7 — Cross-links**: every reference to a type with a dedicated page
 must use a relative markdown link. Run a whole-tree bare-mention scan that
@@ -935,15 +942,18 @@ skips code fences, inline code spans, existing links, and `(*Type*)` headers.
 directory should be moved to its owning category, updating every relative
 link to and from the moved page.
 
-**Step 8b — Operation page filename**: verify that each operation page's
-filename matches the SDK's public method/API name using the SDK's native
-naming convention (e.g. `create_collection.md` for Rust, `CreateCollection.md`
-for C++/Go, `describeAlias.md` for Java). Rename mismatched pages and update
-every relative link to and from the renamed page. Type pages (enums, structs,
-response-model pages) follow the type's source name and are not affected by
-this step. Never defer renames to a later dedicated pass: if a format check
-finds a mismatch—even a whole-tree naming-convention gap—rename the pages
-immediately and include the link updates in that check.
+**Step 8b — Operation page filename and title**: verify that each operation
+page's filename and first-level title match the SDK's public method/API name
+using the SDK's native naming convention. For Rust, `add_collection_field`
+must be `add_collection_field.md` with the title `# add_collection_field()`;
+for C++/Go, `CreateCollection.md` may use `# CreateCollection()`, and Java may
+use `describeAlias.md` with `# describeAlias()`. Rename mismatched pages,
+correct mismatched titles, and update every relative link to and from the
+renamed page. Type pages (enums, structs, response-model pages) follow the
+type's source name and are not affected by this step. Never defer renames or
+title corrections to a later dedicated pass: if a format check finds a
+mismatch—even a whole-tree naming-convention gap—fix the pages immediately
+and include the link updates in that check.
 
 **Step 9 — Missing/absent inline expansions**: a type/enum/struct referenced by
 ≥2 pages must have a standalone page, and every operation page that currently
@@ -968,7 +978,11 @@ target tag makes a previously-shared type single-referenced, fold it too. The
 only exemptions are global/cross-cutting response or status types (see the
 response-wrapper rule) and types that ARE referenced by ≥2 pages at the target
 tag. After folding, delete the standalone page and re-point any relative links
-to it.
+to it. When the target is an operation page, omit the standalone page's type
+local `## Example`; the operation page keeps only its own operation-level
+`## Example`. Inline type expansions in operation pages must never introduce
+nested `## Example` sections or standalone-page import-only blocks; rely on the
+operation/client page's existing top-level imports.
 
 **Step 12 — Error-reporting convention**: verify that each operation page
 uses the correct error-reporting convention for its SDK. SDKs that return a
@@ -1282,6 +1296,50 @@ operation's `**RETURN TYPE:**` / `**RETURNS:**` and do not get standalone pages.
   type is referenced by a request or by a response/result member, and it has no
   page yet, create its dedicated type page (see Step 3), then link to it. Do not
   use this rule to create a page for the response/result wrapper itself.
+
+### Canonical enum format
+
+All SDKs use the same Markdown scaffold for a standalone or expanded enum.
+Only the declaration fence, value syntax, and qualifiers are language-specific:
+
+1. A one-sentence scope description.
+2. A fenced declaration using the SDK's language tag.
+3. `**Constants:**` — use this exact heading, not `VALUES`, `FIELDS`, or
+   `VARIANTS`.
+4. One bullet per value. Keep the public name exactly as written in source, add
+   a language-appropriate qualifier outside the bold name when useful, leave a
+   blank line, and indent the description by four spaces. Never collapse the
+   bullet name and description onto one line.
+
+````markdown
+# DataType
+
+Defines the logical type of a schema field.
+
+```<language>
+<native enum or constants declaration>
+```
+
+**Constants:**
+
+- **Bool** (1)
+
+    A boolean value.
+
+- **Int64** (5)
+
+    A 64-bit signed integer.
+````
+
+For variants that carry data, keep the source constructor in the bold label —
+for example, `- **Int(i64)**` for Rust. For nested expansions under a request
+field or response accessor, indent the description, declaration, heading, and
+bullets consistently so the whole enum explanation remains part of that member.
+Do not add a type-local `## Example` section to an inline expansion in an
+operation page; examples belong only in the operation page's top-level
+`## Example`.
+When reconciling an existing enum page, normalize `**VALUES:**`,
+`**FIELDS:**`, `## Constants`, and `**VARIANTS:**` to this scaffold.
 
 ### Response/output member description format
 

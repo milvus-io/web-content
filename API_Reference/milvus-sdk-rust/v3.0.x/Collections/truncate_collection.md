@@ -1,4 +1,4 @@
-# TruncateCollection()
+# truncate_collection()
 
 Removes all entities from a collection.
 

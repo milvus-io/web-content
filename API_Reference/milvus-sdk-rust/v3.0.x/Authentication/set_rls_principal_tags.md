@@ -1,4 +1,4 @@
-# SetRLSPrincipalTags()
+# set_rls_principal_tags()
 
 Incrementally upserts tags for an application principal on a collection.
 

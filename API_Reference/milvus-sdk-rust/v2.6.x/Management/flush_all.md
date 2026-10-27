@@ -1,4 +1,4 @@
-# FlushAll()
+# flush_all()
 
 Flushes pending insert data for all collections into durable storage.
 

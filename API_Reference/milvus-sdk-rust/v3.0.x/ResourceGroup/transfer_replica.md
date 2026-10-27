@@ -1,4 +1,4 @@
-# TransferReplica()
+# transfer_replica()
 
 Transfers collection replicas from one resource group to another.
 

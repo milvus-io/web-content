@@ -1,4 +1,4 @@
-# UpdateReplicateConfiguration()
+# update_replicate_configuration()
 
 Updates the CDC replication configuration for the current database. Use it to change cluster definitions or cross-cluster topology.
 

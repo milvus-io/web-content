@@ -1,4 +1,4 @@
-# Optimize()
+# optimize()
 
 Starts an asynchronous collection-optimization task.
 

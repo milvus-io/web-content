@@ -1,4 +1,4 @@
-# GetRestoreSnapshotState()
+# get_restore_snapshot_state()
 
 Retrieves the state and progress of a restore-snapshot job.
 

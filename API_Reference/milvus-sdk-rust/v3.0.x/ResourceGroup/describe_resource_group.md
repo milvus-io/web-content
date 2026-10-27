@@ -1,4 +1,4 @@
-# DescribeResourceGroup()
+# describe_resource_group()
 
 Retrieves a resource group's node and replica assignments.
 

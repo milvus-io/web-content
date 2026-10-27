@@ -38,11 +38,160 @@ pub struct CompactionMerge
 
 - `get_compaction_type()` (*CompactionType*) -
 
-    The type of compaction. See [CompactionType](CompactionType.md).
+    The type of compaction.
+
+    This enum represents the type of a compaction task.
+
+    ```rust
+    pub enum CompactionType {
+        Undefined,
+        Merge,
+        Mix,
+        Single,
+        Minor,
+        Major,
+        Level0Delete,
+        Clustering,
+        Sort,
+        PartitionKeySort,
+        ClusteringPartitionKeySort,
+        BumpSchemaVersion,
+    }
+    ```
+
+    **Constants:**
+
+    - **Undefined**
+
+        Unspecified or unrecognized compaction type. This is the default.
+
+    - **Merge**
+
+        Merge compaction over sealed segments.
+
+    - **Mix**
+
+        Mixed compaction.
+
+    - **Single**
+
+        Single-segment compaction.
+
+    - **Minor**
+
+        Minor compaction.
+
+    - **Major**
+
+        Major compaction.
+
+    - **Level0Delete**
+
+        Level-0 delete compaction.
+
+    - **Clustering**
+
+        Clustering compaction.
+
+    - **Sort**
+
+        Sort compaction.
+
+    - **PartitionKeySort**
+
+        Partition-key sort compaction.
+
+    - **ClusteringPartitionKeySort**
+
+        Combined clustering and partition-key sort compaction.
+
+    - **BumpSchemaVersion**
+
+        Compaction that bumps the schema version.
+
+    ## Example
+
+    ```rust
+    if task.get_compaction_type() == CompactionType::Clustering {
+        println!("clustering task: {}", task.get_plan_id());
+    }
+    ```
 
 - `get_state()` (*CompactionTaskState*) -
 
-    The lifecycle state of the task. See [CompactionTaskState](CompactionTaskState.md).
+    The lifecycle state of the task.
+
+    This enum represents the lifecycle state of one compaction task.
+
+    ```rust
+    pub enum CompactionTaskState {
+        Unknown,
+        Executing,
+        Pipelining,
+        Completed,
+        Failed,
+        Timeout,
+        Analyzing,
+        Indexing,
+        Cleaned,
+        MetaSaved,
+        Statistic,
+    }
+    ```
+
+    **Constants:**
+
+    - **Unknown**
+
+        The task state is unknown. This is the default.
+
+    - **Executing**
+
+        The task is running.
+
+    - **Pipelining**
+
+        The task is waiting in the pipeline.
+
+    - **Completed**
+
+        The task completed.
+
+    - **Failed**
+
+        The task failed.
+
+    - **Timeout**
+
+        The task timed out.
+
+    - **Analyzing**
+
+        The task is analyzing segments.
+
+    - **Indexing**
+
+        The task is building indexes.
+
+    - **Cleaned**
+
+        The task has been cleaned up.
+
+    - **MetaSaved**
+
+        The task metadata has been saved.
+
+    - **Statistic**
+
+        The task is collecting statistics.
+
+    ## Example
+
+    ```rust
+    if task.get_state() == CompactionTaskState::Failed {
+        println!("failure: {}", task.get_failure_reason());
+    }
+    ```
 
 - `get_failure_reason()` (*&str*) -
 

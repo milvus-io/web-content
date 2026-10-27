@@ -1,4 +1,4 @@
-# Insert()
+# insert()
 
 Inserts entities into a collection, returning the primary keys assigned to the new rows.
 

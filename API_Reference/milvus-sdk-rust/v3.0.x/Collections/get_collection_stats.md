@@ -1,4 +1,4 @@
-# GetCollectionStats()
+# get_collection_stats()
 
 Returns statistics for a collection, such as the row count.
 

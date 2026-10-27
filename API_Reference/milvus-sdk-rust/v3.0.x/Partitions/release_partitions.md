@@ -1,4 +1,4 @@
-# ReleasePartitions()
+# release_partitions()
 
 Releases selected partitions from query-node memory without dropping their data.
 

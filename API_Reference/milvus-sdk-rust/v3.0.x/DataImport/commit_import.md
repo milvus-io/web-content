@@ -1,4 +1,4 @@
-# CommitImport()
+# commit_import()
 
 Commits a bulk-import job after all its data files have been uploaded and flushed.
 

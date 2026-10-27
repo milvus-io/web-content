@@ -1,4 +1,4 @@
-# AlterIndexProperties()
+# alter_index_properties()
 
 Alters the properties of an existing index.
 

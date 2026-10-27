@@ -1,4 +1,4 @@
-# ListRLSPrincipals()
+# list_rls_principals()
 
 Lists application principal names with stored tags on a collection.
 

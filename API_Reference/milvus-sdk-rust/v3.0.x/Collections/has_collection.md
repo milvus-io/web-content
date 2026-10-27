@@ -1,4 +1,4 @@
-# HasCollection()
+# has_collection()
 
 Checks whether a collection exists in the request's database.
 

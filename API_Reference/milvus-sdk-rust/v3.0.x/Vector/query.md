@@ -1,4 +1,4 @@
-# Query()
+# query()
 
 Queries a collection with a scalar filter and returns the matching entities.
 

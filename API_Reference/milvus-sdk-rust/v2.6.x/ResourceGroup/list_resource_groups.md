@@ -1,4 +1,4 @@
-# ListResourceGroups()
+# list_resource_groups()
 
 Lists resource groups visible in the current database.
 

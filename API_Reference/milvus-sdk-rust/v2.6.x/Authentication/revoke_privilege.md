@@ -1,4 +1,4 @@
-# RevokePrivilege()
+# revoke_privilege()
 
 Revokes a privilege from a role.
 

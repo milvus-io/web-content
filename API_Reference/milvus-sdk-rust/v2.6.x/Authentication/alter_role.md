@@ -1,4 +1,4 @@
-# AlterRole()
+# alter_role()
 
 Updates a role's mutable properties.
 

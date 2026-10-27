@@ -1,4 +1,4 @@
-# GetLoadState()
+# get_load_state()
 
 Returns the load state and loading progress of a collection or partition.
 
@@ -46,7 +46,41 @@ GetLoadStateResponse
 
 - `state()` (*LoadState*) -
 
-    The load state of the collection or partition. See [LoadState](LoadState.md).
+    The load state of the collection or partition.
+
+    This enum represents the load state of a collection or partition, as returned by `GetLoadState()`.
+
+    ```rust
+    pub enum LoadState {
+        NotExist,
+        NotLoad,
+        Loading,
+        Loaded,
+        Unknown,
+    }
+    ```
+
+    **Constants:**
+
+    - **NotExist**
+
+        The collection does not exist on the server. This is the default.
+
+    - **NotLoad**
+
+        The collection exists but its data is not loaded.
+
+    - **Loading**
+
+        The collection is currently being loaded.
+
+    - **Loaded**
+
+        The collection is fully loaded and available for queries.
+
+    - **Unknown**
+
+        The load state could not be determined.
 
 - `progress()` (*i64*) -
 

@@ -1,4 +1,4 @@
-# AddFunctionField()
+# add_function_field()
 
 Adds a function together with its output field and bound index to an existing collection.
 

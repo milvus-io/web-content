@@ -1,4 +1,4 @@
-# ListPersistentSegments()
+# list_persistent_segments()
 
 Lists persisted segments reported by data nodes.
 

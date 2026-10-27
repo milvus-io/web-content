@@ -1,4 +1,4 @@
-# RestoreSnapshot()
+# restore_snapshot()
 
 Restores a snapshot to a new collection.
 

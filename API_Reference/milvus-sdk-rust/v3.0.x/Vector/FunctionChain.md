@@ -34,6 +34,8 @@ pub struct FunctionChain
 
 ## FunctionChainStage
 
+Defines the lifecycle stage where a chain operation runs.
+
 ```rust
 pub enum FunctionChainStage {
     Unspecified,
@@ -46,13 +48,39 @@ pub enum FunctionChainStage {
 }
 ```
 
-- `Unspecified` - Unset stage; the default. Not supported for search.
-- `Ingestion` - Stage applied during data ingestion.
-- `PreProcess` - Stage applied before search.
-- `L0Rerank` / `L1Rerank` / `L2Rerank` - Rerank stages at increasing levels.
-- `PostProcess` - Stage applied after search.
+**Constants:**
+
+- **Unspecified**
+
+    Unset stage; the default. Not supported for search.
+
+- **Ingestion**
+
+    Stage applied during data ingestion.
+
+- **PreProcess**
+
+    Stage applied before search.
+
+- **L0Rerank**
+
+    First-level rerank stage.
+
+- **L1Rerank**
+
+    Second-level rerank stage.
+
+- **L2Rerank**
+
+    Third-level rerank stage.
+
+- **PostProcess**
+
+    Stage applied after search.
 
 ## FunctionChainArg
+
+Defines one argument passed to a map-stage expression.
 
 ```rust
 pub enum FunctionChainArg {
@@ -61,12 +89,21 @@ pub enum FunctionChainArg {
 }
 ```
 
-- `Column(String)` - References an input column by name.
-- `Literal(FunctionParamValue)` - Carries a literal parameter value.
+**Constants:**
+
+- **Column(String)**
+
+    References an input column by name.
+
+- **Literal(FunctionParamValue)**
+
+    Carries a literal parameter value.
 
 The helper function `col(name)` builds a `FunctionChainArg::Column`.
 
 ## FunctionParamValue
+
+Defines a typed parameter value accepted by a map-stage expression.
 
 ```rust
 pub enum FunctionParamValue {
@@ -80,9 +117,35 @@ pub enum FunctionParamValue {
 }
 ```
 
-- `Bool(bool)` / `Int(i64)` / `Double(f64)` / `String(String)` / `Bytes(Vec<u8>)` - Scalar parameter values.
-- `Array(Vec<FunctionParamValue>)` - An array of parameter values, built with `FunctionParamValue::array(...)`.
-- `Object(HashMap<String, FunctionParamValue>)` - A map of parameter values, built with `FunctionParamValue::object(...)`.
+**Constants:**
+
+- **Bool(bool)**
+
+    A boolean parameter value.
+
+- **Int(i64)**
+
+    A 64-bit integer parameter value.
+
+- **Double(f64)**
+
+    A floating-point parameter value.
+
+- **String(String)**
+
+    A string parameter value.
+
+- **Bytes(Vec<u8>)**
+
+    A raw byte-string parameter value.
+
+- **Array(Vec<FunctionParamValue>)**
+
+    An array of parameter values, built with `FunctionParamValue::array(...)`.
+
+- **Object(HashMap<String, FunctionParamValue>)**
+
+    A map of parameter values, built with `FunctionParamValue::object(...)`.
 
 `FunctionParamValue` implements `From` conversions for bool, integer, float, string, byte-slice, array, and object types.
 

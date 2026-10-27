@@ -1,4 +1,4 @@
-# GetCompactionState()
+# get_compaction_state()
 
 Retrieves the state of a compaction action.
 

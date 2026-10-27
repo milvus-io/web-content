@@ -1,4 +1,4 @@
-# GetImportProgress()
+# get_import_progress()
 
 Gets the current state and progress of one bulk-import job.
 

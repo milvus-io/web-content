@@ -1,4 +1,4 @@
-# DropCollectionFunction()
+# drop_collection_function()
 
 Drops a function from a collection schema.
 

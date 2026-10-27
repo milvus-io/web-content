@@ -1,4 +1,4 @@
-# GetPartitionStats()
+# get_partition_stats()
 
 Returns server-reported statistics for a partition, including its row count.
 

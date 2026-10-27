@@ -1,4 +1,4 @@
-# GetReplicateInfo()
+# get_replicate_info()
 
 Retrieves replication progress and metadata for a CDC channel.
 

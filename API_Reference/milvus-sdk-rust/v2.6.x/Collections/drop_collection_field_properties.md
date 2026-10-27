@@ -1,4 +1,4 @@
-# DropCollectionFieldProperties()
+# drop_collection_field_properties()
 
 Removes properties from a field in a collection.
 

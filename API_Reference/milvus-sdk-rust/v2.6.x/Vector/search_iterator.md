@@ -1,4 +1,4 @@
-# SearchIterator()
+# search_iterator()
 
 Creates an iterator that retrieves search results in batches while preserving the server search token and one MVCC session timestamp across pages.
 

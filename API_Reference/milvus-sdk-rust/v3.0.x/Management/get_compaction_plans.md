@@ -1,4 +1,4 @@
-# GetCompactionPlans()
+# get_compaction_plans()
 
 Retrieves the execution plans produced for a compaction action, or all compaction tasks still retained for a collection when the request selects by collection name.
 

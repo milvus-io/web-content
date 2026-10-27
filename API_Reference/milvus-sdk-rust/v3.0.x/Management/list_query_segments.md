@@ -1,4 +1,4 @@
-# ListQuerySegments()
+# list_query_segments()
 
 Lists segments currently loaded on query nodes.
 

@@ -1,4 +1,4 @@
-# DeleteRLSPrincipalTags()
+# delete_rls_principal_tags()
 
 Deletes selected tag keys for a principal, or all tags when `tag_keys` is empty.
 

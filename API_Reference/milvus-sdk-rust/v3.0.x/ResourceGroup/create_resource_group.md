@@ -1,4 +1,4 @@
-# CreateResourceGroup()
+# create_resource_group()
 
 Creates a resource group used to isolate query-node resources.
 

@@ -1,4 +1,4 @@
-# ListPartitions()
+# list_partitions()
 
 Lists the partitions defined for a collection.
 

@@ -1,4 +1,4 @@
-# ListCompactionTasks()
+# list_compaction_tasks()
 
 Lists the compaction tasks still retained for a collection.
 

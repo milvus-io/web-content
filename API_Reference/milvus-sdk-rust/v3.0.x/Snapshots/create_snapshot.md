@@ -1,4 +1,4 @@
-# CreateSnapshot()
+# create_snapshot()
 
 Creates a snapshot of a collection.
 

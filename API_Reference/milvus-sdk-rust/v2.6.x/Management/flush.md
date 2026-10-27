@@ -1,4 +1,4 @@
-# Flush()
+# flush()
 
 Flushes pending insert data for a collection into durable storage.
 

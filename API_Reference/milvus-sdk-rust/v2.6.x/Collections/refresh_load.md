@@ -1,4 +1,4 @@
-# RefreshLoad()
+# refresh_load()
 
 Refreshes a loaded collection or its partitions on query nodes.
 

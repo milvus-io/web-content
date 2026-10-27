@@ -1,4 +1,4 @@
-# DescribeUser()
+# describe_user()
 
 Retrieves a user and its role assignments.
 

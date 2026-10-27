@@ -1,4 +1,4 @@
-# ListRowPolicies()
+# list_row_policies()
 
 Lists the row-level security policies attached to a collection.
 
@@ -45,7 +45,43 @@ ListRowPoliciesResponse
 
 - `policies()` (*&[RowPolicy]*) -
 
-    The row policies attached to the collection. See [RowPolicy](RowPolicy.md).
+    The row policies attached to the collection.
+
+    A row-level security policy attached to a collection, as returned by [ListRowPolicies](list_row_policies.md).
+
+    ```rust
+    pub struct RowPolicy
+    ```
+
+    **METHODS:**
+
+    - `get_policy_name()` (*&str*) -
+
+        The policy name.
+
+    - `get_actions()` (*&[RowPolicyAction]*) -
+
+        Operations governed by the policy. See [RowPolicyAction](RowPolicyAction.md).
+
+    - `get_using_expr()` (*&str*) -
+
+        Expression that filters readable rows.
+
+    - `get_check_expr()` (*&str*) -
+
+        Expression that checks writable rows.
+
+    - `get_description()` (*&str*) -
+
+        Policy description.
+
+    - `get_created_at()` (*i64*) -
+
+        Server creation timestamp; `0` means unavailable.
+
+    - `get_policy_type()` (*RowPolicyType*) -
+
+        Policy combination mode. See [RowPolicyType](RowPolicyType.md).
 
 - `database_name()` (*&str*) -
 

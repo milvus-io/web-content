@@ -1,4 +1,4 @@
-# UseDatabase()
+# use_database()
 
 Selects the database used by subsequent operations on this client and its clones.
 

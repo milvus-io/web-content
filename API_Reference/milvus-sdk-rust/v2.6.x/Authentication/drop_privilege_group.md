@@ -1,4 +1,4 @@
-# DropPrivilegeGroup()
+# drop_privilege_group()
 
 Drops a privilege group.
 

@@ -1,4 +1,4 @@
-# LoadPartitions()
+# load_partitions()
 
 Loads selected partitions into query-node memory. A synchronous request polls load state until completion; an asynchronous request returns once the server accepts the load operation.
 

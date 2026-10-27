@@ -1,4 +1,4 @@
-# ListSnapshots()
+# list_snapshots()
 
 Lists snapshot names for a collection, or for the whole database when the collection name is omitted.
 

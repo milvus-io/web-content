@@ -1,4 +1,4 @@
-# ReleaseCollection()
+# release_collection()
 
 Releases a collection's loaded data from query nodes while retaining its definition.
 

@@ -12,9 +12,17 @@ pub enum RowPolicyType {
 
 **Constants:**
 
-- **Unknown** - Unspecified or unrecognized policy type. This is the default and cannot be used to create or update a policy.
-- **Permissive** - Combines policy predicates with OR across policies.
-- **Restrictive** - Combines policy predicates with AND across policies.
+- **Unknown**
+
+    Unspecified or unrecognized policy type. This is the default and cannot be used to create or update a policy.
+
+- **Permissive**
+
+    Combines policy predicates with OR across policies.
+
+- **Restrictive**
+
+    Combines policy predicates with AND across policies.
 
 ## Example
 

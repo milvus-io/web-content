@@ -1,4 +1,4 @@
-# DropCollection()
+# drop_collection()
 
 Drops a collection together with its partitions, indexes, and stored segments.
 

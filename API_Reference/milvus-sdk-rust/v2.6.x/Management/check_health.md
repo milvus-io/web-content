@@ -1,4 +1,4 @@
-# CheckHealth()
+# check_health()
 
 Checks whether the connected Milvus server is healthy.
 

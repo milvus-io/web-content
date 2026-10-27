@@ -1,4 +1,4 @@
-# ListIndexes()
+# list_indexes()
 
 Returns the names of the indexes on a collection.
 

@@ -1,4 +1,4 @@
-# ListUsers()
+# list_users()
 
 Lists user accounts visible to the caller.
 

@@ -1,4 +1,4 @@
-# RemoveFileResource()
+# remove_file_resource()
 
 Removes a registered file resource.
 

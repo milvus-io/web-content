@@ -1,4 +1,4 @@
-# ListRoles()
+# list_roles()
 
 Lists roles visible to the caller.
 

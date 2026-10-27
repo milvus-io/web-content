@@ -1,4 +1,4 @@
-# DropSnapshot()
+# drop_snapshot()
 
 Drops a snapshot of a collection.
 

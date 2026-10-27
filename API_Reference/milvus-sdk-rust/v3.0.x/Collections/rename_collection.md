@@ -1,4 +1,4 @@
-# RenameCollection()
+# rename_collection()
 
 Renames a collection, optionally moving it to another database.
 

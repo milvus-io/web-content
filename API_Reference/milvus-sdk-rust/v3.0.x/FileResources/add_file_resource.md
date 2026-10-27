@@ -1,4 +1,4 @@
-# AddFileResource()
+# add_file_resource()
 
 Registers a named file resource for external-table workflows.
 
