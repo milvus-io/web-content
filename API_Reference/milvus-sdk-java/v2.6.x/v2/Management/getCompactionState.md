@@ -32,7 +32,9 @@ A **GetCompactionStateResp** instance, which comprises the following parameters:
 
     The current state of the specified compact operation. Possible values are:
 
-    - UndefiedState(0)
+    - UndefinedState(0)
+
+    - UndefiedState(0) (deprecated; use `UndefinedState` instead)
 
     - Executing(1)
 

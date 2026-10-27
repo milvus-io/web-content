@@ -12,20 +12,20 @@ You can use **[Apache Maven](https://maven.apache.org/install.html)** or **[Grad
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>2.6.25</version>
+    <version>2.6.27</version>
 </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java:2.6.25'
+implementation 'io.milvus:milvus-sdk-java:2.6.27'
 ```
 
 - Gradle/Kotlin
 
 ```plaintext
-implementation("io.milvus:milvus-sdk-java:2.6.25")
+implementation("io.milvus:milvus-sdk-java:2.6.27")
 ```
 
 Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-java** and **milvus-sdk-java-bulkwriter**. If you do not need BulkWriter, ignore the **milvus-sdk-java-bulkwriter** package. To use BulkWriter, import the **milvus-sdk-java-bulkwriter** as follows:
@@ -36,20 +36,20 @@ Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-jav
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java-bulkwriter</artifactId>
-    <version>2.6.25</version>
+    <version>2.6.27</version>
 </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java-bulkwriter:2.6.25'
+implementation 'io.milvus:milvus-sdk-java-bulkwriter:2.6.27'
 ```
 
 - Gradle/Kotlin
 
 ```plaintext
-implementation("io.milvus:milvus-sdk-java-bulkwriter:2.6.25")
+implementation("io.milvus:milvus-sdk-java-bulkwriter:2.6.27")
 ```
 
 ## Quick Start
@@ -140,7 +140,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.3.x | 2.3.11 |
 | 2.4.x | 2.4.11 |
 | 2.5.x | 2.5.15 |
-| 2.6.x | 2.6.25 |
+| 2.6.x | 2.6.27 |
 
 ## Contributing
 
