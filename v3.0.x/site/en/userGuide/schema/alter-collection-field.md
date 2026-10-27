@@ -27,6 +27,12 @@ The following example assumes the collection has a VarChar field named `varchar`
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -64,37 +70,22 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 ```
 
-<div class="multipleCode">
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```javascript
-await client.alterCollectionFieldProperties({
-  collection_name: LOAD_COLLECTION_NAME,
-  field_name: 'varchar',
-  properties: { max_length: 1024 },
-});
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/v2/common"
+    "github.com/milvus-io/milvus/client/v3/common"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
+ctx := context.Background()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey: "root:Milvus",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -110,19 +101,93 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+client
+    .alter_collection_field_properties(
+        AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("varchar")
+            .property("max_length", "1024")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+                    .WithCollectionName("my_collection")
+                    .WithFieldName("varchar")
+                    .AddProperty("max_length", "1024"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({ address: 'http://localhost:19530', token: 'root:Milvus' });
+
+await client.alterCollectionFieldProperties({
+  collection_name: 'my_collection',
+  field_name: 'varchar',
+  properties: { max_length: 1024 },
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+using Milvus.Client.V2.Requests.Collection;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+await client.AlterCollectionFieldAsync(new AlterCollectionFieldReq
+{
+    CollectionName = "my_collection",
+    FieldName = "varchar",
+    Properties = { ["max_length"] = "1024" }
+});
+```
+
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 # restful
 curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/collections/fields/alter_properties" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/fields/alter_properties" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---data "{
+--header "Request-Timeout: 10" \
+--data '{
     "collectionName": "my_collection",
-    "field_name": "varchar",
-    "properties": {
+    "fieldName": "varchar",
+    "fieldParams": {
         "max_length": "1024"
     }
-}"
+}'
 ```
 
 ## Alter ARRAY field
@@ -134,8 +199,11 @@ The following example assumes the collection has an array field named `array` an
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -157,6 +225,49 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         .build());
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/common"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
+    "my_collection", "array").WithProperty(common.MaxCapacityKey, 64))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .alter_collection_field_properties(
+        AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("array")
+            .property("max_capacity", "64")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+                                                .WithCollectionName("my_collection")
+                                                .WithFieldName("array")
+                                                .AddProperty("max_capacity", "64"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.alterCollectionFieldProperties({
   collection_name: "my_collection",
@@ -167,28 +278,34 @@ await client.alterCollectionFieldProperties({
 });
 ```
 
-```go
-err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
-    "my_collection", "array").WithProperty(common.MaxCapacityKey, 64))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+await client.AlterCollectionFieldAsync(new AlterCollectionFieldReq
+{
+    CollectionName = "my_collection",
+    FieldName = "array",
+    Properties = { ["max_capacity"] = "64" }
+});
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 # restful
 curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/collections/fields/alter_properties" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/fields/alter_properties" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---data "{
+--header "Request-Timeout: 10" \
+--data '{
     "collectionName": "my_collection",
-    "field_name": "array",
-    "properties": {
+    "fieldName": "array",
+    "fieldParams": {
         "max_capacity": "64"
     }
-}"
+}'
 ```
 
 ## Alter field-level mmap settings
@@ -200,8 +317,11 @@ The following example assumes the collection has a field named `doc_chunk` and s
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -217,21 +337,18 @@ client.alter_collection_field(
 client.alterCollectionField(AlterCollectionFieldReq.builder()
         .collectionName("my_collection")
         .fieldName("doc_chunk")
-        .property("mmap.enabled", "True")
+        .property("mmap.enabled", "true")
         .build());
 ```
 
-```javascript
-await client.alterCollectionProperties({
-  collection_name: "my_collection",
-  field_name: 'doc_chunk',
-  properties: { 
-      'mmap.enabled': true, 
-  }
-});
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/common"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
     "my_collection", "doc_chunk").WithProperty(common.MmapEnabledKey, true))
 if err != nil {
@@ -240,17 +357,67 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .alter_collection_field_properties(
+        AlterCollectionFieldPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .field_name("doc_chunk")
+            .property("mmap.enabled", "true")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+auto status = client->AlterCollectionFieldProperties(milvus::AlterCollectionFieldPropertiesRequest()
+                                                    .WithCollectionName("my_collection")
+                                                    .WithFieldName("doc_chunk")
+                                                    .AddProperty("mmap.enabled", "true"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.alterCollectionFieldProperties({
+  collection_name: 'my_collection',
+  field_name: 'doc_chunk',
+  properties: { 'mmap.enabled': true },
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+await client.AlterCollectionFieldAsync(new AlterCollectionFieldReq
+{
+    CollectionName = "my_collection",
+    FieldName = "doc_chunk",
+    Properties = { ["mmap.enabled"] = "true" }
+});
+```
+
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 # restful
 curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/collections/fields/alter_properties" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/fields/alter_properties" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
---data "{
+--header "Request-Timeout: 10" \
+--data '{
     "collectionName": "my_collection",
-    "field_name": "doc_chunk",
-    "properties": {
-        "mmap.enabled": True
+    "fieldName": "doc_chunk",
+    "fieldParams": {
+        "mmap.enabled": true
     }
-}"
+}'
 ```
