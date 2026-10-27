@@ -31,7 +31,7 @@ client = MilvusClient(
 res = client.delete(
     collection_name="quick_setup",
     # highlight-next-line
-    filter="color in ['red_7025', 'purple_4976]"
+    filter="color in ['red_7025', 'purple_4976']"
 )
 
 print(res)
@@ -53,7 +53,7 @@ ilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
 
 DeleteResp deleteResp = client.delete(DeleteReq.builder()
         .collectionName("quick_setup")
-        .filter("color in ['red_7025', 'purple_4976]")
+        .filter("color in ['red_7025', 'purple_4976']")
         .build());
 
 ```
@@ -69,7 +69,7 @@ const client = new MilvusClient({address, token});
 res = await client.delete({
     collection_name: "quick_setup",
     // highlight-next-line
-    filter: "color in ['red_7025', 'purple_4976]"
+    filter: "color in ['red_7025', 'purple_4976']"
 })
 
 console.log(res.delete_cnt)
