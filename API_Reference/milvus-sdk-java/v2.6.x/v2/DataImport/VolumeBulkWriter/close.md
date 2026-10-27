@@ -59,4 +59,3 @@ writer.appendRow(row);
 // 4. Close the writer
 writer.close();
 ```
-

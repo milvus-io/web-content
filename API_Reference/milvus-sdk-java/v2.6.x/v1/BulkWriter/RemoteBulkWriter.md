@@ -218,7 +218,7 @@ StorageConnectParam connectParam = S3ConnectParam.newBuilder()
         .withSecretKey(STORAGE_SECRET_KEY)
         .withRegion(STORAGE_REGION)
         .build();
-        
+
 RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
         .withCollectionSchema(collectionSchema)
         .withRemotePath("bulk_data")
@@ -226,7 +226,7 @@ RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
         .withChunkSize(512 * 1024 * 1024)
         .withConnectParam(connectParam)
         .build();
-        
+
 try (RemoteBulkWriter remoteBulkWriter = RemoteBulkWriter(bulkWriterParam)) {
     Gson gson = new Gson();
     for (int i = 0; i < 10000; ++i) {
@@ -243,7 +243,7 @@ try (RemoteBulkWriter remoteBulkWriter = RemoteBulkWriter(bulkWriterParam)) {
 
     List<List<String>> batchFiles = remoteBulkWriter.getBatchFiles();
     System.out.printf("Data files have been uploaded: %s%n", batchFiles);
-    
+
     for (List<String> files : batchFiles) {
         R<ImportResponse> response = milvusClient.bulkInsert(BulkInsertParam.newBuilder()
             .withCollectionName(COLLECTION_NAME)
@@ -255,4 +255,3 @@ try (RemoteBulkWriter remoteBulkWriter = RemoteBulkWriter(bulkWriterParam)) {
     throw e;
 }
 ```
-

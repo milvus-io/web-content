@@ -1,6 +1,6 @@
 # dropCollection()
 
-A MilvusClient interface. This method drops a specified collection. 
+A MilvusClient interface. This method drops a specified collection.
 
 <div class="admonition note">
 

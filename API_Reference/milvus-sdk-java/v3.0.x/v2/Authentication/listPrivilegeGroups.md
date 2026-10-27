@@ -56,9 +56,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 
 // 2. Create a privilege group
@@ -67,11 +66,10 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder().groupName("read_on
 // 3. List privilege groups
 ListPrivilegeGroupsReq listPrivilegeGroupsReq = ListPrivilegeGroupsReq.builder()
         .build();
-        
+
 ListPrivilegeGroupsResp resp = client.listPrivilegeGroups(listPrivilegeGroupsReq);
 List<PrivilegeGroup> groups = resp.getPrivilegeGroups();
 for (PrivilegeGroup group : groups) {
     System.out.println(group.getGroupName() + group.getPrivileges());
 }
 ```
-

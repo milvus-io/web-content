@@ -80,4 +80,3 @@ collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(Dat
 ## Methods
 
 The following are the methods of the `CollectionSchema` class:
-

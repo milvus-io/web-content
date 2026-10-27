@@ -62,4 +62,3 @@ row.addProperty("id", 1L);
 row.add("vector", new com.google.gson.Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
 writer.appendRow(row);
 ```
-

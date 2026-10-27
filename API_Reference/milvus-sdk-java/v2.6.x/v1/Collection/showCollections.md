@@ -61,7 +61,7 @@ This method catches all the exceptions and returns an `R<ShowCollectionsResponse
 
 #### ShowCollResponseWrapper
 
-A tool class to encapsulate the ShowCollectionsResponse. 
+A tool class to encapsulate the ShowCollectionsResponse.
 
 ```java
 import io.milvus.response.ShowCollResponseWrapper;

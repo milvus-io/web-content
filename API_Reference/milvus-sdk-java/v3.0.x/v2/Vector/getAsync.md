@@ -29,15 +29,11 @@ A future completed with a **GetResp** object representing one or more queried en
 
 - `getQueryResults()` (*List\<QueryResult\>*) -
 
-    The queried entities. Each **QueryResult** has the following getters:
+    The query result rows. Each **QueryResult** has the following getters:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the row.
 
-        The field values of the result.
-
-    - `getElementOffset()` (*Long*) -
-
-        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+    - `getElementOffset()` (*Long*) - The index of the matched element within a struct-array field for element-level queries; `null` for ordinary queries.
 
 - `getSessionTs()` (*long*) -
 

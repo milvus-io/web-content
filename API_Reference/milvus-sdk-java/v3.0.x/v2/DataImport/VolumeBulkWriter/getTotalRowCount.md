@@ -56,4 +56,3 @@ writer.appendRow(row);
 Long totalRows = writer.getTotalRowCount();
 System.out.println("Total rows written: " + totalRows);
 ```
-

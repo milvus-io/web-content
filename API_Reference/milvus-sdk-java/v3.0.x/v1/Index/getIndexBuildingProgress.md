@@ -1,4 +1,4 @@
-# getIndexBuildProgress()
+# getIndexBuildingProgress()
 
 MilvusClient interface. This method shows the index-building progress, such as how many rows are indexed.
 

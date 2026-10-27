@@ -22,7 +22,7 @@ LexicalHighlighter.builder()
     .fragmentOffset(Integer)
     .fragmentSize(Integer)
     .numOfFragments(Integer)
-    .build(); 
+    .build();
 ```
 
 **BUILDER METHODS:**
@@ -35,13 +35,13 @@ LexicalHighlighter.builder()
     import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
     import java.util.ArrayList;
     import java.util.List;
-    
+
     LexicalHighlighter.HighlightQuery q = new LexicalHighlighter.HighlightQuery(
         "TextMatch",
         "text",
         "my doc"
     );
-    
+
     List<LexicalHighlighter.HighlightQuery> queries = new ArrayList<>();
     queries.add(q);
     ```
@@ -122,7 +122,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with a "text" field and a BM25 output field "sparse_vector"
@@ -173,8 +173,8 @@ LexicalHighlighter highlighter = LexicalHighlighter.builder()
     .highlightSearchText(true)
     .preTags(preTags)
     .postTags(postTags)
-    .build(); 
-    
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("test")))
@@ -212,7 +212,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with a "text" field and a BM25 output field "sparse_vector"
@@ -272,8 +272,8 @@ LexicalHighlighter highlighter = LexicalHighlighter.builder()
     .highlightQueries(queries)
     .preTags(preTags)
     .postTags(postTags)
-    .build(); 
-    
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("my doc")))

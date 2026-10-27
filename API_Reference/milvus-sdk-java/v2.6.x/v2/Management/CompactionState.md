@@ -1,34 +1,35 @@
 # CompactionState
 
-This enum represents the state of a compaction task, as returned in each plan of `getCompactionPlans()`.
+Represents the state of a compaction job returned by `getCompactionState()` and `getCompactionPlans()`.
 
 ```java
-class io.milvus.v2.common.CompactionState
+public enum CompactionState
 ```
 
 **METHODS:**
 
-- **getCode()** (*int*) -
+- `getCode()` (*int*) -
 
-    The numeric compaction state code.
+    Returns the numeric compaction-state code.
 
 - **forNumber(int code)** (*CompactionState*) -
 
-    Returns the `CompactionState` constant whose code matches the given value, or throws `IllegalArgumentException` if no constant matches.
+    Returns the `CompactionState` constant whose code matches the given value. The proto enum historically spells the undefined value `UndefiedState`; this lookup maps it to `UndefinedState` so consumers comparing against the corrected constant always match. Throws an `IllegalArgumentException` if no constant matches.
 
-## VARIANTS
+**Constants:**
 
-- **UndefinedState** (0) - The compaction state is undefined. (Available since v2.6.27 or later.)
+- **UndefinedState** (0)
 
-- **UndefiedState** (0) - The compaction state is undefined. (The spelling matches the SDK source, where this constant name contains a typo. Deprecated since v2.6.27 or later; use `UndefinedState` instead.)
+    The compaction state is undefined.
 
-- **Executing** (1) - A compaction task is currently running.
+- **UndefiedState** (0)
 
-- **Completed** (2) - A compaction task has completed.
+    **Deprecated.** A backward-compatible alias of `UndefinedState`. Use `UndefinedState` instead.
 
-## Example
+- **Executing** (1)
 
-```java
-resp.getPlans().forEach(plan ->
-    System.out.println(plan.getState() == CompactionState.Completed ? "done" : "in progress"));
-```
+    The compaction job is currently running.
+
+- **Completed** (2)
+
+    The compaction job has completed.

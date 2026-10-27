@@ -50,15 +50,13 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 
-
-// 2. List resource groups    
+// 2. List resource groups
 ListResourceGroupsReq listResourceGroupsReq = ListResourceGroupsReq.builder()
     .build();
 ListResourceGroupsResp listResp = client.listResourceGroups(listResourceGroupsReq);
 List<String> groupNames = listResp.getGroupNames();
 ```
-

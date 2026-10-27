@@ -1,6 +1,6 @@
 # flush()
 
-A MilvusClient interface. This method triggers a flush action in which all growing segments in the specified collection are marked as sealed and then flushed to storage. 
+A MilvusClient interface. This method triggers a flush action in which all growing segments in the specified collection are marked as sealed and then flushed to storage.
 
 <div class="admonition note">
 

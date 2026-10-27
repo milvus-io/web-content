@@ -45,4 +45,3 @@ EmbeddingList embeddingList2 = new EmbeddingList();
 embeddingList2.add(new FloatVec(vector3));
 embeddingList2.add(new FloatVec(vector4));
 ```
-

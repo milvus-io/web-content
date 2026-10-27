@@ -3,7 +3,7 @@
 This operation adds a field to the schema of a collection.
 
 ```java
-public void addField(AddFieldReq addFieldReq)
+public CollectionSchema addField(AddFieldReq addFieldReq)
 ```
 
 ## Request Syntax
@@ -22,8 +22,8 @@ CollectionSchema.addField(AddFieldReq.builder()
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
-    .defaultValue(DataType dataType)
-    .enableDefaultValue(Boolean enableDefaultValue)
+    .defaultValue(Object defaultValue)
+    .enableDefaultValue(boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .enableMatch(Boolean enableMatch)
     .analyzerParams(Map<String, Object> analyzerParams)
@@ -105,11 +105,11 @@ CollectionSchema.addField(AddFieldReq.builder()
 
     For more information, refer to Nullable & Default.
 
-- `defaultValue(DataType dataType)` -
+- `defaultValue(Object defaultValue)` -
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion. See [DataType](../DataType.md).
 
-- `enableDefaultValue(Boolean enableDefaultValue)` -
+- `enableDefaultValue(boolean enableDefaultValue)` -
 
     Whether to pass the configured `defaultValue` to the server. Set to `true` so the default value takes effect; otherwise the default value is ignored.
 
@@ -145,7 +145,9 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 **RETURNS:**
 
-*void*
+*CollectionSchema*
+
+The updated `CollectionSchema` object.
 
 **EXCEPTIONS:**
 
@@ -167,4 +169,3 @@ int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```
-

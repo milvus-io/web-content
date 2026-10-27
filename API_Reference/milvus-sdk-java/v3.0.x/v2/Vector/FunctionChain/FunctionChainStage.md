@@ -6,7 +6,7 @@ This enumeration specifies the execution stage where a function chain runs. Nume
 io.milvus.v2.service.vector.request.FunctionChainStage
 ```
 
-## Constants
+**Constants:**
 
 - **UNSPECIFIED**
 
@@ -31,10 +31,6 @@ io.milvus.v2.service.vector.request.FunctionChainStage
 - **L2_RERANK**
 
     The third rerank stage applied to search results.
-
-- **POST_PROCESS**
-
-    Runs after the search.
 
 ## Example
 

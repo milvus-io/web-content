@@ -1,6 +1,6 @@
 # updateCredential()
 
-A MilvusClient interface. This method updates the password corresponding to a given username. The original username and password must be provided to check if the update operation is valid. 
+A MilvusClient interface. This method updates the password corresponding to a given username. The original username and password must be provided to check if the update operation is valid.
 
 <div class="admonition note">
 

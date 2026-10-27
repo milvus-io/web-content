@@ -60,4 +60,3 @@ for (String collectionName : response.getData().collectionNames) {
     System.out.println(collectionName);
 }
 ```
-

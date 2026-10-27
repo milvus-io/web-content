@@ -47,19 +47,21 @@ A **GetReplicateInfoResp** object that contains the checkpoint and salvage check
 
     - `getMessageID()` (*MessageID*) -
 
-        The message ID of the checkpoint. Each **MessageID** has the following getters:
+        The message ID of the checkpoint.
+
+        This nested type has the following getters:
 
         - `getId()` (*String*) -
 
-            The message ID value.
+            The ID of the message.
 
         - `getWalName()` (*String*) -
 
-            The WAL implementation name. Supported values are `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
+            The name of the WAL. Supports `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
 
     - `getTimeTick()` (*Long*) -
 
-        The time tick of the checkpoint.
+        The timetick of the checkpoint.
 
 - `getSalvageCheckpoint()` (*ReplicateCheckpoint*) -
 

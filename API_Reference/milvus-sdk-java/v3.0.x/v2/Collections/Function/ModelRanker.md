@@ -79,7 +79,7 @@ ModelRanker.builder()
     .queries(Arrays.asList("machine learning for time series"))
     .endpoint("http://model-service:8080")
     .build();
-    
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)
@@ -92,4 +92,3 @@ CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .param("endpoint", "http://model-service:8080")
     .build();
 ```
-

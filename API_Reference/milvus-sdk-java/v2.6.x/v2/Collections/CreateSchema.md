@@ -44,7 +44,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2 Quickly create a collectionSchema
@@ -53,4 +53,3 @@ int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```
-

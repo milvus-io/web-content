@@ -28,17 +28,9 @@ getCompactionState(GetCompactionStateReq.builder()
 
 A **GetCompactionStateResp** instance, which comprises the following parameters:
 
-- `getState()` (*CompactionState*) -
+- `getState()` (*[CompactionState](CompactionState.md)*) -
 
-    The current state of the specified compact operation. Possible values are:
-
-    - UndefinedState(0)
-
-    - UndefiedState(0) (deprecated; use `UndefinedState` instead)
-
-    - Executing(1)
-
-    - Completed(2)
+    The current state of the specified compact operation. See [CompactionState](CompactionState.md) for possible values.
 
 - `getExecutingPlanNo()` (*Long*) -
 
@@ -70,7 +62,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field

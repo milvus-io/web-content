@@ -10,19 +10,13 @@ class io.milvus.v2.service.vector.response.aggregation.AggregationBucket
 
 - **getKey()** (*List<KeyEntry>*) -
 
-    The group-by key entries. Each **KeyEntry** (a nested class of **AggregationBucket**) exposes the following getters:
+    The group-by key entries. Each **KeyEntry** has the following getters:
 
-    - **getFieldId()** (*long*) -
+    - `getFieldId()` (*Long*) - The ID of the grouped field.
 
-        The ID of the group-by field.
+    - `getFieldName()` (*String*) - The name of the grouped field.
 
-    - **getFieldName()** (*String*) -
-
-        The name of the group-by field.
-
-    - **getValue()** (*Object*) -
-
-        The group-by value shared by all hits in this bucket.
+    - `getValue()` (*Object*) - The grouped field value.
 
 - **getCount()** (*long*) -
 

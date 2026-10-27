@@ -101,7 +101,7 @@ This method catches all the exceptions and returns an `R<QueryResults>` object.
 
 #### QueryResultsWrapper
 
-A tool class to encapsulate the `QueryResults`. 
+A tool class to encapsulate the `QueryResults`.
 
 ```java
 import io.milvus.response.QueryResultsWrapper;
@@ -139,7 +139,7 @@ Methods of `QueryResultsWrapper`:
 
 #### FieldDataWrapper
 
-A tool class to encapsulate column data returned by `query()` API. 
+A tool class to encapsulate column data returned by `query()` API.
 
 Methods of `FieldDataWrapper`:
 

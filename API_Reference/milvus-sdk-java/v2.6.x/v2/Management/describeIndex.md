@@ -51,55 +51,31 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
 - `getIndexDescriptions()` (*List\<IndexDesc\>*) -
 
-    A list of index descriptions. Each **IndexDesc** object has the following getters:
+    Each **IndexDesc** has the following getters:
 
-    - `getFieldName()` (*String*) -
+    - `getFieldName()` (*String*) - The name of the indexed field.
 
-        The name of the field the index is built on.
+    - `getIndexName()` (*String*) - The name of the index.
 
-    - `getIndexName()` (*String*) -
+    - `getId()` (*Long*) - The ID of the index.
 
-        The name of the index.
+    - `getParams()` (*Map\<String, String\>*) - The index parameters.
 
-    - `getId()` (*long*) -
+    - `getIndexedRows()` (*Long*) - The number of rows that have been indexed.
 
-        The ID of the index.
+    - `getTotalRows()` (*Long*) - The total number of rows known to the index.
 
-    - `getIndexType()` (*IndexType*) -
+    - `getPendingIndexRows()` (*Long*) - The number of rows waiting to be indexed.
 
-        The index type. See [IndexType](IndexType.md).
+    - `getIndexState()` (*String*) - The current index-building state.
 
-    - `getMetricType()` (*MetricType*) -
+    - `getIndexFailedReason()` (*String*) - The reason why index building failed.
 
-        The metric type. See [MetricType](MetricType.md).
+    - `getIndexType()` (*String*) - The index type.
 
-    - `getExtraParams()` (*Map\<String, String\>*) -
+    - `getMetricType()` (*String*) - The metric type used by the index.
 
-        Additional index parameters.
-
-    - `getIndexedRows()` (*long*) -
-
-        The number of rows that have been indexed.
-
-    - `getTotalRows()` (*long*) -
-
-        The total number of rows in the field.
-
-    - `getPendingIndexRows()` (*long*) -
-
-        The number of rows that are still pending indexing.
-
-    - `getIndexState()` (*IndexBuildState*) -
-
-        The state of the index build.
-
-    - `getIndexFailedReason()` (*String*) -
-
-        The reason for the index build failure, if any.
-
-    - `getProperties()` (*Map\<String, String\>*) -
-
-        Legacy properties of the index. Newer index settings are exposed through `extraParams`.
+    - `getExtraParam()` (*String*) - The serialized extra parameters for the index.
 
 **EXCEPTIONS:**
 
@@ -126,7 +102,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field
@@ -137,7 +113,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionName("test")
         .collectionSchema(collectionSchema)
         .build());
-
 
 
 // 3. Create an index for the field "vector"

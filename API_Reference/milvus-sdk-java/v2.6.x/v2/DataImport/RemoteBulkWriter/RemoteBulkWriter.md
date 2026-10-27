@@ -67,9 +67,9 @@ RemoteBulkWriterParam.newBuilder()
     The value defaults to **134,217,728** in bytes, which is **128 MB**.
 
     <div class="alert note">
-    
+
     The way BulkWriter segments your data varies with the target file type.
-    
+
     If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.
 
     </div>

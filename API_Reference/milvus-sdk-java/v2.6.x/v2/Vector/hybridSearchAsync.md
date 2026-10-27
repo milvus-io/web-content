@@ -33,51 +33,23 @@ A future completed with a **SearchResp** object that contains search results, re
 
     The search results, one list per query vector. Each **SearchResult** has the following getters:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the result.
 
-        The retrieved entity data.
+    - `getScore()` (*Float*) - The similarity score of the result.
 
-    - `getScore()` (*Float*) -
+    - `getId()` (*Object*) - The primary-key value of the result.
 
-        The similarity score of the result.
+    - `getPrimaryKey()` (*String*) - The name of the primary-key field.
 
-    - `getId()` (*Object*) -
+    - `getHighlightResults()` (*Map<String, HighlightResult>*) - The highlight results keyed by field name. Each **HighlightResult** has `getFieldName()` (*String*), `getFragments()` (*List<String>*), and `getScores()` (*List<Float>*).
 
-        The primary key value of the result.
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) - The highlight result for the specified field, or `null` if none exists.
 
-    - `getPrimaryKey()` (*String*) -
-
-        The primary key value rendered as a string.
-
-    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
-
-        Highlighting results keyed by field name.
-
-    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
-
-        The highlighting result for one requested field, or `null` when no result exists.
-
-    - `getElementOffset()` (*Long*) -
-
-        The element offset for array-of-struct subfield search. `null` for ordinary searches.
+    - `getElementOffset()` (*Long*) - The offset of the matched element in a struct-array element query, or `null` for an ordinary query.
 
 - `getSessionTs()` (*long*) -
 
     The session timestamp used for the search.
-
-    Each `HighlightResult` exposes the following getters:
-
-    - `getFieldName()` (*String*) -
-
-        The field name used for highlighting.
-
-    - `getFragments()` (*List\<String\>*) -
-
-        The highlighted text fragments.
-
-    - `getScores()` (*List\<Float\>*) -
-
-        The relevance scores for the fragments.
 
 
 - `getRecalls()` (*List\<Float\>*) -
@@ -123,6 +95,7 @@ import io.milvus.v2.service.vector.request.data.BaseVector;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.request.data.SparseFloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.ConsistencyLevel;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.Arrays;
@@ -172,6 +145,7 @@ List<BaseVector> sparseVector = Collections.singletonList(new SparseFloatVec(new
     put(1L, 0.2f);
 }}));
 
+// Strong consistency ensures the newly inserted rows are visible to this hybridSearch.
 CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.builder()
         .collectionName("my_collection")
         .searchRequests(Arrays.asList(
@@ -179,7 +153,8 @@ CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.
                         .vectorFieldName("dense_vector")
                         .vectors(queryVector)
                         .limit(10)
-                        .build(),
+
+    .consistencyLevel(ConsistencyLevel.STRONG).build(),
                 AnnSearchReq.builder()
                         .vectorFieldName("sparse_vector")
                         .vectors(sparseVector)

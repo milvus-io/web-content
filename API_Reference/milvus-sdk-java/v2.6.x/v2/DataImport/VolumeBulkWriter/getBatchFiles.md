@@ -60,4 +60,3 @@ writer.commit(false);
 // 4. Get the batch files
 java.util.List<java.util.List<String>> batchFiles = writer.getBatchFiles();
 ```
-

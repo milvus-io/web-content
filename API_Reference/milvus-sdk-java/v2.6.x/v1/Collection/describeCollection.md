@@ -56,7 +56,7 @@ This method catches all the exceptions and returns an `R<DescribeCollectionRespo
 
 #### DescCollResponseWrapper
 
-A tool class to encapsulate the DescribeCollectionResponse. 
+A tool class to encapsulate the DescribeCollectionResponse.
 
 ```java
 import io.milvus.response.DescCollResponseWrapper;

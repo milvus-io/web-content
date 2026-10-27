@@ -85,9 +85,10 @@ run with a clarification instead of downgrading.
   reviewable; produce a per-page change summary.
 
 
-**Format check mode**: when the user's instruction includes "检查格式" or
-"check formatting", run the **full 12-step reconciliation checklist** against
-the target tree — the same Steps 1–12 (including sub-step 8b) in
+**Format check mode**: when the user's instruction includes "检查格式",
+"格式检查", "check formatting", or "check format", run the **full 12-step
+reconciliation checklist** against the target tree — the same Steps 1–12
+(including sub-step 8b) in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
@@ -105,6 +106,60 @@ titles). **Step 10 (unnecessary standalone pages) is applied unconditionally**:
 a type page referenced by only one page is folded into that page and deleted,
 regardless of why it was created and regardless of any per-SDK placement note
 naming it a "dedicated" page.
+
+**Strict evidence contract for format checks**: the preceding trigger is a hard
+scope, not a suggestion. Never narrow "检查格式" to a subset such as enums,
+titles, links, whitespace, or code snippets. Before editing, emit a
+`FORMAT CHECK BASELINE` containing the target paths/tags, a complete source
+API/type inventory, a complete Markdown page inventory, the source-to-page map,
+and a type reference matrix showing every page that references each type. Then
+execute Steps 1–12 in order. Do not replace a full pass with representative
+samples; sample during diagnosis only, then reconcile every matching page.
+The matrix must be source-backed and classified before Step 5: remove every
+candidate whose name is absent from the target Java tag, then classify each
+remaining source-backed candidate by declaration kind and package into request
+wrapper, response wrapper/status model, enum, request-data/domain model, client
+or pool API class, exception, or generic nested field. Record the classification
+and source path for every candidate; do not treat section names such as
+`Example` or prose tokens such as `Field` as types. Step 5 may not be marked
+complete while any candidate remains `UNCLASSIFIED`.
+Nested request/response subtypes default to inline owner-page documentation. A
+reference such as `GetReplicateInfoResp.MessageID` counts as a reference to the
+owner `GetReplicateInfoResp`, not as a second reference to the nested subtype;
+the description links to the owner page. This default is subordinate to an
+explicit dedicated-type allowlist: Java V2 `CreateCollectionReq.CollectionSchema`,
+`.FieldSchema`, `.StructFieldSchema`, `.Function`, `IndexParam.MetricType`, and
+`IndexParam.IndexType` must keep their own standalone pages even though they are
+nested in source. An allowlisted type is never folded by reference count or
+source nesting.
+API generations are independent documentation surfaces. A `v1/` page resolves
+types only against the V1 source namespace/API generation, and a `v2/` page
+resolves types only against V2; never link one generation's page to the other
+generation. Treat same-named types in different generations as distinct types
+and use their fully qualified source owner when classifying or linking (for
+example, Java V1 `DescIndexResponseWrapper.IndexDesc` and Java V2
+`DescribeIndexResp.IndexDesc` are not the same type).
+
+After every step, emit evidence in this exact shape:
+
+```text
+STEP <N>: PASS | FIXED | FAIL | INCOMPLETE
+Scope: <files/categories/API surface inspected>
+Evidence: <commands, inventory names, report paths, or line references>
+Pages inspected: <count and list or explicit batch index>
+Issues before: <count>
+Issues after: <count>
+Files changed: <list>
+Remaining: <list or none>
+```
+
+Any unresolved violation, missing source/docs inventory, ambiguous reference
+count, tool failure, or inability to inspect the complete scope makes the whole
+run `FORMAT CHECK INCOMPLETE`. In that case, stop the format-check workflow and
+do not create, push, open, or update a PR as complete. If a PR already exists,
+mark its title/description with `[FORMAT CHECK INCOMPLETE]` and list the failed
+steps. A PR may be submitted only after every applicable step is `PASS` or
+`FIXED`, remaining is `none`, and a final rerun reports zero violations.
 
 - **Branch discipline**: in a shared checkout sitting on `master`/upstream,
   create the per-SDK work branch (Step 7) BEFORE starting edits. Verify
@@ -468,14 +523,17 @@ as one page per API, so a newly added public operation/method/class/type gets it
 own new page automatically (no need to ask the user). Exceptions:
 - **new enum values** → add to the existing enum page (do NOT create a page per
   enum value);
-- **new request parameters/fields** → add to the existing operation page;
+- **new request parameters/fields and nested request/response subtypes** →
+  document them on the existing operation/owner page; never create a nested
+  subtype page;
 - **operation response/result wrappers** → document the wrapper and its members
   under the operation page's `**RETURN TYPE:**` / `**RETURNS:**`; do NOT create
   a standalone page merely because the operation returns it. This includes
   `XxxResponse`, `XxxResult`, and async task-handle types such as `XxxTask`.
-  A wrapper member may reference an important reusable domain/model type (for
-  example `FieldData`, `CollectionSchema`, or `FieldSchema`); that referenced
-  type may get its own dedicated page and must be linked.
+  A wrapper member may reference an important reusable **top-level**
+  domain/model type (for example `FieldData`); that referenced type may get its
+  own dedicated page and must be linked. A nested request/response subtype is
+  expanded on the owner/operation page instead.
   This applies even when the same wrapper is returned by several operations —
   sharing alone does not make a response wrapper eligible. Only **global,
   cross-cutting response/status types** surfaced across the API surface (for
@@ -489,18 +547,21 @@ own new page automatically (no need to ask the user). Exceptions:
   stdlib/generic containers** (e.g. `type Properties = Record<string, string |
   number | boolean>`) — an alias that adds no SDK-specific structure has no
   standalone-page value and stays inline as a plain annotation;
-- **single-page types** → expand inline. A type/enum/struct referenced by only
-  ONE operation page does not get a standalone page — document its members
-  nested inside that page's `**RETURNS:**` / `**PARAMETERS:**` sections instead.
-  Standalone type pages are reserved for types **defined in SDK source** that
-  are either **global/cross-cutting response or status types** (see the wrapper
-  rule above) or **domain data types shared across multiple pages** — and never
-  for API-specific response wrappers. This rule is enforced strictly (see
-  Steps 9 and 10 in Reconciliation mode): a multi-referencer type is
-  materialized as a standalone page with its inline expansions replaced by
-  links (Step 9), and a single-referencer standalone page is folded and deleted
-  (Step 10) — regardless of how or why it was created, and a per-SDK placement
-  note listing a type as "dedicated" does NOT exempt it;
+- **single-page non-allowlisted types** → expand inline. A type referenced by
+  only ONE operation page, and any nested request/response subtype that is not
+  explicitly allowlisted, does not get a standalone page — document its members
+  on the owner page inside `**RETURNS:**` / `**PARAMETERS:**` sections instead.
+  Standalone type pages are reserved for top-level types **defined in SDK
+  source** that are either **global/cross-cutting response or status types**
+  (see the wrapper rule above) or **domain data types shared across multiple
+  pages** — and never for API-specific response wrappers. The explicit Java V2
+  allowlist (`CollectionSchema`, `FieldSchema`, `StructFieldSchema`,
+  `Function`, `MetricType`, and `IndexType`) overrides source nesting. This
+  rule is enforced strictly (see Steps 9 and 10 in Reconciliation mode): a
+  multi-referencer eligible type is materialized as a standalone page with its
+  inline expansions replaced by links (Step 9), and a non-allowlisted nested or
+  single-referencer standalone page is folded and deleted (Step 10) —
+  regardless of how or why it was created;
 - **deduplicate inline expansions** → when a standalone page is created for a
   type that operation pages previously expanded inline (see Step 9), replace
   those inline member expansions with a link to the new page and delete the
@@ -514,10 +575,10 @@ own new page automatically (no need to ask the user). Exceptions:
   `Client.GetService()`) → skip (no page);
 - only ask the user when a new symbol does not fit the one-page-per-API shape.
 
-When an operation/request page references a type that has a dedicated
-page (e.g. `CollectionSchema`, `DataType`, `IndexType`), the change list must
-include adding the relative link to that type page (see **Dedicated type pages &
-cross-links** under the Doc style guide).
+When an operation/request page references an eligible type that has a
+dedicated page (including the Java V2 allowlisted nested types), the change
+list must include adding the relative link to that type page. Non-allowlisted
+nested types link to their same-generation owner page.
 
 When reconciliation creates a new dedicated type/enum page, immediately run a
 whole-tree reference sweep for that type and add links to every markdown
@@ -919,14 +980,26 @@ missing members, remove members absent from the source.
 **Step 4 — Method signature accuracy**: verify each documented method
 signature matches the source. Fix name/type/default mismatches.
 
-**Step 5 — Standalone type page eligibility**: types defined in SDK source
-and shared across ≥2 pages should have standalone pages; single-page types
-should be expanded inline in their referencing operation page (no standalone
-page). Third-party types and pure stdlib aliases should never get pages.
-Single-referencer standalone pages are folded unconditionally (Step 10),
-even when a per-SDK placement note lists them as "dedicated". Execution:
-types shared across ≥2 pages are materialized and inline expansions replaced
-by Step 9; single-referencer standalone pages are folded by Step 10.
+**Step 5 — Standalone type page eligibility**: apply the explicit
+dedicated-type allowlist first. Every type in the "Dedicated type pages" list,
+including `BoostRanker` and the Java V2 nested
+`CreateCollectionReq.CollectionSchema`, `.FieldSchema`,
+`.StructFieldSchema`, `.Function`, `IndexParam.MetricType`, and
+`IndexParam.IndexType`, remains standalone despite source nesting and reference
+count. Next, non-allowlisted nested request/response subtypes default to inline
+owner-page documentation, even when multiple pages mention them. For remaining
+top-level types, types defined in SDK source and shared across ≥2 pages should
+have standalone pages; single-page types should be expanded inline in their
+referencing operation page (no standalone page). Third-party types and pure
+stdlib aliases should never get pages. Non-allowlisted nested or
+single-referencer standalone pages are folded unconditionally (Step 10).
+Execution: allowlisted and eligible shared types are materialized and inline
+expansions replaced by Step 9; non-allowlisted nested and single-referencer
+standalone pages are folded by Step 10. Run
+`audit-java-protected-type-pages.py` to verify the explicit protected set,
+including the `Highlighter`/`LexicalHighlighter`/`SemanticHighlighter` split.
+Record the fully qualified owner and allowlist status for every nested
+candidate.
 
 **Step 6 — Enum format**: use the cross-SDK canonical enum format in the doc
 style guide for every expanded enum: one-sentence scope description, native
@@ -934,9 +1007,17 @@ declaration, `**Constants:**`, and one multi-line bullet per value. Language
 changes only the declaration fence and value qualifiers; it does not change the
 Markdown scaffold or heading.
 
-**Step 7 — Cross-links**: every reference to a type with a dedicated page
-must use a relative markdown link. Run a whole-tree bare-mention scan that
-skips code fences, inline code spans, existing links, and `(*Type*)` headers.
+**Step 7 — Cross-links**: every reference to an eligible type with a dedicated
+page must use a relative markdown link within the same API generation. Run a
+whole-tree bare-mention scan that skips code fences, inline code spans, existing
+links, and `(*Type*)` headers. Also run a Markdown link-syntax audit so forms
+such as `[Type]](path.md)` fail the run, then repair them to
+`[Type](path.md)`. Run a generation-isolation link scan: a
+`v1/` page must not link to a `v2/` page, and a `v2/` page must not link to a
+`v1/` page. Same-named generation-specific types must remain resolved and linked
+only inside their own generation; when a non-allowlisted nested type has no
+same-generation owner page, expand it on the same-generation owner page instead
+of borrowing the other generation's page.
 
 **Step 8 — Misplaced type pages**: a type page in the wrong category
 directory should be moved to its owning category, updating every relative
@@ -955,34 +1036,50 @@ title corrections to a later dedicated pass: if a format check finds a
 mismatch—even a whole-tree naming-convention gap—fix the pages immediately
 and include the link updates in that check.
 
-**Step 9 — Missing/absent inline expansions**: a type/enum/struct referenced by
-≥2 pages must have a standalone page, and every operation page that currently
+**Step 9 — Missing/absent inline expansions**: apply the explicit allowlist
+first. Every type in the "Dedicated type pages" list requires a dedicated page
+and links to that page; this includes `BoostRanker` and the Java V2 nested
+`CollectionSchema`, `FieldSchema`, `StructFieldSchema`, `Function`,
+`MetricType`, and `IndexType`. Next, a non-allowlisted nested request/response subtype referenced
+by any number of pages is expanded on its owner page; references on other pages
+link to that owner page and are not counted as references to a separate type.
+After those rules, an eligible top-level type/enum/struct referenced by ≥2
+pages must have a standalone page, and every operation page that currently
 expands it inline must link to that page instead. If the standalone page does
 not exist yet, create it first (extracting the members/values from the existing
 inline expansion), then replace each inline expansion with a relative link to
 the new page. If the page already exists, just replace the stale inline
 expansions with links. Reuse existing page content when extracting — do not
-rewrite the members from memory. After creating a new page, run the whole-tree
-reference sweep (see "When reconciliation creates a new dedicated type/enum
-page" above) to link every mention of the type.
+rewrite the members from memory.
+After creating a new page, run the whole-tree reference sweep (see "When
+reconciliation creates a new dedicated type/enum page" above) to link every
+mention of the type.
 
-**Step 10 — Unnecessary standalone pages**: a standalone type/enum/struct page
-whose only referencer is a single operation page MUST be folded into that
-operation page's `**RETURNS:**` / `**PARAMETERS:**` sections and the standalone
-page deleted. This is unconditional: it applies regardless of why the page was
-created — including pages listed as "dedicated" in this skill's per-SDK
-placement notes or `references/sdk-map.md`, pages created by a prior reconcile
-or a previous migration, and pages that were shared across pages at an earlier
-SDK version but are referenced by only one page at the target tag. If the
-target tag makes a previously-shared type single-referenced, fold it too. The
-only exemptions are global/cross-cutting response or status types (see the
-response-wrapper rule) and types that ARE referenced by ≥2 pages at the target
-tag. After folding, delete the standalone page and re-point any relative links
-to it. When the target is an operation page, omit the standalone page's type
-local `## Example`; the operation page keeps only its own operation-level
-`## Example`. Inline type expansions in operation pages must never introduce
-nested `## Example` sections or standalone-page import-only blocks; rely on the
-operation/client page's existing top-level imports.
+**Step 10 — Unnecessary standalone pages**: fold and delete a standalone page
+when it is a non-allowlisted nested request/response subtype, or when it is a
+top-level type whose only referencer is a single operation page. Never fold a
+type listed under "Dedicated type pages"; this protected set includes
+`BoostRanker` as well as the Java V2 nested `CollectionSchema`, `FieldSchema`,
+`StructFieldSchema`, `Function`, `MetricType`, and `IndexType`. A listed type
+is not folded merely because its only external referencer is its owning
+wrapper/operation page, and any duplicate inline expansion is replaced by a
+link to the listed page. For the
+non-allowlisted top-level single-referencer case, fold the page into the
+operation page's `**RETURNS:**` / `**PARAMETERS:**` sections. This is
+unconditional for non-allowlisted pages: it applies regardless of why the page
+was created, including pages created by a prior reconcile or a previous
+migration, and pages that were shared across pages at an earlier SDK version
+but are referenced by only one page at the target tag. If the target tag makes
+a previously-shared type single-referenced, fold it too. The exemptions are
+global/cross-cutting response or status types, eligible top-level types that
+ARE referenced by ≥2 pages at the target tag, and the explicit allowlist. After
+folding, delete the standalone page and re-point every relative link to the
+owner page. When the target is an operation
+page, omit the standalone page's type-local `## Example`; the operation page
+keeps only its own operation-level `## Example`. Inline type expansions in
+operation pages must never introduce nested `## Example` sections or
+standalone-page import-only blocks; rely on the operation/client page's
+existing top-level imports.
 
 **Step 12 — Error-reporting convention**: verify that each operation page
 uses the correct error-reporting convention for its SDK. SDKs that return a
@@ -1221,17 +1318,57 @@ hard-coded expected-output comments so they match what actually runs with Strong
 consistency (verify against a live Milvus server — see Step 4b/5), including
 search distances, which differ by metric type (e.g. COSINE vs IP).
 
+### Request/response member rendering
+
+When documenting or folding request/response types, follow the owner's access
+model:
+
+- **Request types** expose user-configurable inputs. Document setters or Lombok
+  builder setters; do not document getters, `toString()`, or internal conversion
+  methods.
+- **Response types** expose observable outputs. Document getters and boolean
+  accessors such as `isEmpty()`; do not document setters, builders, or
+  `toString()`.
+
+Derive descriptions first from the target-tag source comments on the type and
+members, then from method behavior and defaults in code. Describe only
+user-visible members and observable effects. Do not expose private fields,
+builder internals, proto conversion details, tests, or other implementation
+machinery.
+
+`About.md` must satisfy the canonical structure and use the latest released line
+version. A newly introduced component such as a Spring Boot starter may receive
+its own concise description. Derive Breaking Changes directly from the release
+CHANGELOG without independently verifying each upstream change; ordinary
+changelog behavior changes need not be reflected outside API descriptions. The
+comments and defaults in the latest target-tag code are authoritative when
+updating descriptions.
+
+**PR merge policy**: never merge a PR automatically. Opening, pushing, updating,
+and commenting may be performed when requested; merging is always a human
+reviewer action.
+
 ### Dedicated type pages & cross-links
 
-Every important reusable domain/model class, struct, or enum gets its own
-dedicated type page, and every reference to it links to that page. Operation
-response/result wrappers are the exception: they are documented inline in the
-operation's `**RETURN TYPE:**` / `**RETURNS:**` and do not get standalone pages.
-**java is the model for both the domain-type page set and the placement.**
+Every important reusable domain/model class, struct, interface, or enum gets
+its own dedicated type page, and every reference to it links to that page.
+Operation response/result wrappers and non-allowlisted nested request/response
+subtypes are the exception: they are documented inline on their owner/operation
+page and do not get standalone pages. **java is the model for both the
+domain-type page set and the placement.** A base type/interface and its
+implementations remain separate dedicated pages; for example, `Highlighter`,
+`LexicalHighlighter`, and `SemanticHighlighter` are never merged into one page
+merely because they are related or an implementation is referenced from its
+interface page.
 
-- **Dedicated type pages** — each of these gets a one-page-per-type page:
-  `CollectionSchema`, `FieldSchema`, `StructFieldSchema`, `Function`,
-  `FunctionType`, `DataType`, `IndexType`, `MetricType`, `SegmentState`,
+- **Dedicated type pages** — each eligible type gets a one-page-per-type page.
+  This is an explicit protected allowlist, not merely source-nesting or
+  reference-count inference. In Java V2, `CreateCollectionReq.CollectionSchema`,
+  `.FieldSchema`,
+  `.StructFieldSchema`, `.Function`, `IndexParam.MetricType`, and
+  `IndexParam.IndexType` must have dedicated pages even though they are nested
+  in source. Top-level examples include `FunctionType`, `DataType`,
+  `SegmentState`,
   `CompactionState` / `CompactionType` / `CompactionTaskState`,
   `ResourceGroupConfig`, `Highlighter`, `LexicalHighlighter`, `SemanticHighlighter`,
   `FunctionScore`, `EmbeddingList`, `LoadState`,
@@ -1470,13 +1607,11 @@ Rules:
     dedicated-page type.
 - **Always link a member/function type that has a dedicated type page** — a leaf
   enum or scalar (e.g. cpp `([DataType](...))`, go `*[entity.Collection](Collection.md)`),
-  **or a schema/record type such as `CollectionSchema`/`FieldSchema`** — with a
-  relative `.md` link (e.g. java `getCollectionSchema()` →
-  `[CollectionSchema](CollectionSchema/CollectionSchema.md)`). Do not leave a
-  referenced type as bare text when its page exists, and do not re-expand a
-  dedicated-page type's full member list inline where the SDK tree links it
-  (java links `CollectionSchema`; cpp still expands `Schema`/`Fields` inline and
-  links the leaf `DataType`).
+  **or a schema/record type** — with a relative `.md` link when it is an
+  eligible top-level type. For Java V2, link a nested subtype to its owner page
+  and keep its member expansion there. Do not leave an eligible referenced type
+  as bare text when its page exists, and do not re-expand an eligible
+  dedicated-page type's full member list inline where the SDK tree links it.
 - Show the return object's shape with a language-idiomatic code block before the
   member list: a Go `struct`, a Node TS interface or object literal, a Rust
   struct with its accessors, a pymilvus example `dict`, a Java class with its
@@ -1557,9 +1692,10 @@ Rules:
   under `**RETURNS:**` as `` `getXxx()` `` bullets (no `**METHODS:**` heading —
   the java tree nests them under `**RETURNS:**`). **List getter methods only** —
   never the raw Lombok fields/members, because users access response data
-  exclusively through getters. When a getter's return type has a dedicated type
-  page, link it (e.g. `getCollectionSchema()` returns `CollectionSchema` →
-  `[CollectionSchema](CollectionSchema/CollectionSchema.md)`).
+  exclusively through getters. When a getter's return type has a dedicated
+  page—including the Java V2 allowlisted nested types—link it. When it is a
+  non-allowlisted Java V2 nested subtype, expand it on the operation page or
+  link explicitly to the owner page named in the qualified type.
 
 - **cpp** — the operation fills an out-param `response` and returns `Status`, so
   there is **no** `**RETURN TYPE:**` heading: `*Status*` is the first line of
@@ -1762,9 +1898,13 @@ Notes:
   `About.md` Breaking Changes (per the CHANGELOG rule above). An API still
   present but marked deprecated/`[Obsolete]` keeps its page with a deprecation
   note naming the replacement. Do not ask the user to choose.
-- **V1/V2 deprecation scope**: when updating a V2 reference, never import
-  deprecated V1-only methods as aliases or warnings. Audit the V2 surface only;
-  audit an explicit V1 reference separately if requested.
+- **V1/V2 isolation and deprecation scope**: when updating a V2 reference,
+  never import deprecated V1-only methods as aliases or warnings. Audit the V2
+  surface only; audit an explicit V1 reference separately if requested. V1 and
+  V2 pages are independent surfaces and must not cross-link. Resolve same-named
+  classes, enums, methods, and nested types against the source package/API
+  generation that matches the page path; never substitute the other
+  generation's implementation or documentation merely because names match.
 - **New API placement**: new public APIs get a **new page by default** (one page
   per API); new enum values go into the existing enum page. Only ask the user
   when a symbol does not fit the one-page-per-API shape.

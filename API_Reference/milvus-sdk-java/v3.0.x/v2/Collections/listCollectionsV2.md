@@ -1,4 +1,4 @@
-# ListCollectionsV2()
+# listCollectionsV2()
 
 This operation lists all existing collections in a specified database.
 
@@ -64,7 +64,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. List collections
@@ -74,4 +74,3 @@ ListCollectionsReq listCollectionReq = ListCollectionsReq.builder()
 
 ListCollectionsResp listAliasResp = client.listCollectionsV2(listCollectionReq);
 ```
-

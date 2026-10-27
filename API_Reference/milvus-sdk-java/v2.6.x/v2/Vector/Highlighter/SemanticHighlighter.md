@@ -24,7 +24,7 @@ SemanticHighlighter.builder()
     .highlightOnly(Boolean)
     .modelDeploymentID(String)
     .maxClientBatchSize(Integer)
-    .build(); 
+    .build();
 ```
 
 **BUILDER METHODS:**
@@ -113,7 +113,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with a "dense" vector field and a "document" text field
@@ -162,8 +162,8 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .preTags(preTags)
     .postTags(postTags)
     .modelDeploymentID("your-model-deployment-id")
-    .build(); 
-    
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("test")))
@@ -217,7 +217,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with a "dense" vector field and a "document" text field
@@ -267,8 +267,8 @@ SemanticHighlighter highlighter = SemanticHighlighter.builder()
     .postTags(postTags)
     .threshold(0.8f)
     .modelDeploymentID("your-model-deployment-id")
-    .build(); 
-    
+    .build();
+
 SearchResp searchR = client.search(SearchReq.builder()
     .collectionName("your_collection")
     .data(Collections.singletonList(new EmbeddedText("machine learning applications")))
@@ -278,4 +278,3 @@ SearchResp searchR = client.search(SearchReq.builder()
     .highlighter(highlighter)
     .build());
 ```
-

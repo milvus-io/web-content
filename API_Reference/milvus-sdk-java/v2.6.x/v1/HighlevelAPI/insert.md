@@ -112,4 +112,3 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 System.out.println("insertCount: " + response.getData().getInsertCount());
 System.out.println("insertIds: " + response.getData().getInsertIds());
 ```
-

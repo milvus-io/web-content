@@ -16,7 +16,7 @@ addFunction(
 
 **PARAMETERS:**
 
-- **func** (*CreateCollectionReq.Function*) 
+- **func** (*CreateCollectionReq.Function*)
 
     A function.
 
@@ -44,6 +44,7 @@ import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.ConsistencyLevel;
 import com.google.gson.JsonObject;
 import java.util.Collections;
 
@@ -52,7 +53,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field, a "vector" field, and a "doctype" field
@@ -90,7 +91,8 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
                  .param("weight", "0.5")
                  .param("random_score", "{\"seed\": 126, \"field\": \"id\"}")
                  .build();
-                 
+
+// Strong consistency ensures the newly inserted rows are visible to this search.
 // 5. Search with FunctionScore for reranking
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
@@ -100,6 +102,7 @@ SearchResp searchResp = client.search(SearchReq.builder()
         .limit(10)
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
-                .build())
+
+    .consistencyLevel(ConsistencyLevel.STRONG).build())
         .build());
 ```

@@ -1,8 +1,12 @@
 # BulkFileType
 
 This is an enumeration that provides the following constants.
+```java
+public enum BulkFileType
+```
 
-## Constants
+
+**Constants:**
 
 - **PARQUET**
 

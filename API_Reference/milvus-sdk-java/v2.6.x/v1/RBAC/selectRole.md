@@ -1,6 +1,6 @@
 # selectRole()
 
-MilvusClient interface. This method gets all users' information about a role. 
+MilvusClient interface. This method gets all users' information about a role.
 
 ```java
 R<SelectRoleResponse> selectRole(SelectRoleParam requestParam);

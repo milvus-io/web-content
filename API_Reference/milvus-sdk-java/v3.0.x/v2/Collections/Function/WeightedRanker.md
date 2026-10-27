@@ -17,7 +17,7 @@ WeightedRanker.builder()
     .functionType(FunctionType functionType)
     .params(Map<String, String> params)
     .weights(List<Float> weights)
-    .build()    
+    .build()
 ```
 
 **BUILDER METHODS:**
@@ -59,7 +59,7 @@ import java.util.Collections;
 WeightedRanker.builder()
     .weights(Arrays.asList(0.4f, 0.6f))
     .build();
-    
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)
@@ -67,4 +67,3 @@ CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .param("params", "{\"weights\": [0.4, 0.6]}")
     .build();
 ```
-

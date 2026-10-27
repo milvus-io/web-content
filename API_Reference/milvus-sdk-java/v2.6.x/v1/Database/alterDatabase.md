@@ -65,7 +65,7 @@ AlterDatabaseParam param = AlterDatabaseParam.newBuilder()
         .withReplicaNumber(3)
         .WithResourceGroups(Arrays.asList("rg1", "rg2", "rg3"))
         .build();
-        
+
 R<RpcStatus> response = client.alterDatabase(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
@@ -121,7 +121,7 @@ This method catches all the exceptions and returns an `R<DescribeDatabaseRespons
 
 #### DescDBResponseWrapper
 
-A tool class to encapsulate the `DescribeDatabaseResponse`. 
+A tool class to encapsulate the `DescribeDatabaseResponse`.
 
 ```java
 import io.milvus.response.DescDBResponseWrapper;

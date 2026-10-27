@@ -1,121 +1,129 @@
 # IndexType
 
-This is an enumeration that provides the following constants.
+This enumeration provides index types for collection fields.
 
-## Constants
+```java
+public enum IndexType
+```
 
-### FLAT
+**Constants:**
 
-Sets the index type to FLAT.
+- **None**
 
-### IVF_FLAT
+    The index type is not set.
 
-Sets the index type to IVF_FLAT.
+- **FLAT**
 
-### IVF_SQ8
+    A brute-force index that computes exact distances. This applies to float vectors only.
 
-Sets the index type to IVF_SQ8.
+- **IVF_FLAT**
 
-### IVF_PQ
+    An inverted-file index that partitions vectors into clusters. This applies to float vectors only.
 
-Sets the index type to IVF_PQ.
+- **IVF_SQ8**
 
-### HNSW
+    An IVF index that stores scalar-quantized vectors. This applies to float vectors only.
 
-Sets the index type to HNSW.
+- **IVF_PQ**
 
-### HNSW_SQ
+    An IVF index that stores product-quantized vectors. This applies to float vectors only.
 
-Sets the index type to HNSW.
+- **HNSW**
 
-### HNSW_PQ
+    A graph-based index using the Hierarchical Navigable Small World algorithm. This applies to float vectors only.
 
-Sets the index type to HNSW_PQ.
+- **HNSW_SQ**
 
-### HNSW_PRQ
+    An HNSW index that stores scalar-quantized vectors. This applies to float vectors only.
 
-Sets the index type to HNSW_PRQ.
+- **HNSW_PQ**
 
-### DISKANN
+    An HNSW index that stores product-quantized vectors. This applies to float vectors only.
 
-Sets the index type to DISKANN.
+- **HNSW_PRQ**
 
-### AUTOINDEX
+    An HNSW index with product-quantized routing and raw-data refinement. This applies to float vectors only.
 
-Sets the index type to AUTOINDEX.
+- **DISKANN**
 
-### SCANN
+    A disk-based index designed for large-scale data. This applies to float vectors only.
 
-Sets the index type to SCANN.
+- **AUTOINDEX**
 
-### IVF_RABITQ
+    An index type chosen automatically by Milvus.
 
-Sets the index type to IVF_RABITQ. This applies to dense float vectors.
+- **SCANN**
 
-### AISAQ
+    A cluster-based index for efficient approximate search. This applies to float vectors only.
 
-Sets the index type to AISAQ. This applies to dense float vectors on GPU.
+- **IVF_RABITQ**
 
-### GPU_IVF_FLAT
+    An IVF index using residual-adaptive bit quantization. This applies to dense float vectors only.
 
-Sets the index type to GPU_IVF_FLAT. This applies to GPU indexes only.
+- **AISAQ**
 
-### GPU_IVF_PQ
+    An approximate inverted index using additive quantization. This applies to dense float vectors only.
 
-Sets the index type to GPU_IVF_PQ. This applies to GPU indexes only.
+- **GPU_IVF_FLAT**
 
-### GPU_BRUTE_FORCE
+    A GPU-accelerated IVF-FLAT index. This applies to float vectors on GPU indexes only.
 
-Sets the index type to GPU_BRUTE_FORCE. This applies to GPU indexes only.
+- **GPU_IVF_PQ**
 
-### GPU_CAGRA
+    A GPU-accelerated IVF-PQ index. This applies to float vectors on GPU indexes only.
 
-Sets the index type to GPU_CAGRA. This applies to GPU indexes only.
+- **GPU_BRUTE_FORCE**
 
-### BIN_FLAT
+    A GPU-accelerated brute-force index. This applies to float vectors on GPU indexes only.
 
-Sets the index type to BIN_FLAT. This applies to binary vectors only.
+- **GPU_CAGRA**
 
-### BIN_IVF_FLAT
+    A GPU-accelerated graph index based on CAGRA. This applies to float vectors on GPU indexes only.
 
-Sets the index type to BIN_IVF_FLAT. This applies to binary vectors only.
+- **BIN_FLAT**
 
-### MINHASH_LSH
+    A brute-force index for binary vectors. This applies to binary vectors only.
 
-Sets the index type to MINHASH_LSH. This applies to binary vectors only.
+- **BIN_IVF_FLAT**
 
-### TRIE("Trie")
+    An inverted-file index for binary vectors. This applies to binary vectors only.
 
-Sets the index type to TRIE. This applies to VarChar fields only.
+- **MINHASH_LSH**
 
-### NGRAM
+    A MinHash-based LSH index for binary vectors. This applies to binary vectors only.
 
-Sets the index type to NGRAM. This applies to VarChar fields and JSON Path indexes.
+- **TRIE ("Trie")**
 
-### FMINDEX
+    A trie index for VarChar fields. This applies to VarChar fields only.
 
-Sets the index type to FMINDEX. This applies to VarChar fields. An exact byte-level substring index that answers anchored LIKE (prefix/infix/suffix) queries with no candidate recheck.
+- **NGRAM**
 
-### RTREE
+    An n-gram index for VarChar fields and `json_path` of JSON fields.
 
-Sets the index type to RTREE. This applies to geometry fields only.
+- **RTREE**
 
-### STL_SORT
+    An R-tree index for geometry fields. This applies to geometry fields only.
 
-Sets the index type to SLT_SORT. This applies to fields of numeric types only.
+- **STL_SORT**
 
-### INVERTED
+    A sort-based index for numeric fields. This applies to numeric scalar fields only.
 
-Sets the index type to INVERTED. This applies to all scalar fields except JSON fields.
+- **INVERTED**
 
-### BITMAP
+    An inverted index for scalar fields and `json_path` of JSON fields.
 
-Sets the index type to BITMAP. This applies to all scalar fields except JSON, FLOAT, and DOUBLE fields.
+- **BITMAP**
 
-### SPARSE_INVERTED_INDEX
+    A bitmap index for scalar fields except `JSON`, `FLOAT`, and `DOUBLE` fields.
 
-Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors only.
+- **SPARSE_INVERTED_INDEX**
 
-### SPARSE_WAND
+    An inverted index for sparse vectors. This applies to sparse vectors only.
 
-Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
+- **SPARSE_WAND**
+
+    A sparse vector index using the WAND algorithm. Since Milvus 2.5.4, prefer `INVERTED_INDEX_ALGO="DAAT_WAND"` in the inverted index; this value remains available for compatibility.
+
+- **FMINDEX**
+
+    An exact byte-level substring index for VarChar fields. It answers anchored `LIKE` queries with prefix, infix, or suffix matching and no candidate recheck. This applies to VarChar fields only.

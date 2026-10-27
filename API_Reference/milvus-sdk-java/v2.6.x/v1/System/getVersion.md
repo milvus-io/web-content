@@ -1,6 +1,6 @@
 # getVersion()
 
-MilvusClient interface. This method gets the milvus kernel version. 
+MilvusClient interface. This method gets the milvus kernel version.
 
 <div class="admonition note">
 
@@ -34,4 +34,3 @@ if (response.getStatus() != R.Status.Success.getCode()) {
     throw new RuntimeException(response.getMessage());
 }
 ```
-

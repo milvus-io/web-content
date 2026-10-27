@@ -1,6 +1,6 @@
 # getCollectionStatistics()
 
-A MilvusClient interface. This method shows the statistical information of the specified collection. 
+A MilvusClient interface. This method shows the statistical information of the specified collection.
 
 <div class="admonition note">
 
@@ -67,7 +67,7 @@ This method catches all the exceptions and returns an `R<GetCollectionStatistics
 
 #### GetCollStatResponseWrapper
 
-A tool class to encapsulate the `GetCollectionStatisticsResponse`. 
+A tool class to encapsulate the `GetCollectionStatisticsResponse`.
 
 ```java
 import io.milvus.response.GetCollStatResponseWrapper;

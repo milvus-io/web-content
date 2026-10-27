@@ -40,5 +40,3 @@ CreateCollectionReq.StructFieldSchema structFieldSchema = CreateCollectionReq.St
 
 structFieldSchema.getFields();
 ```
-
-

@@ -1,6 +1,6 @@
 # createRole()
 
-MilvusClient interface. This method creates an object that some privileges can bind to. 
+MilvusClient interface. This method creates an object that some privileges can bind to.
 
 ```java
 R<RpcStatus> createRole(CreateRoleParam requestParam);

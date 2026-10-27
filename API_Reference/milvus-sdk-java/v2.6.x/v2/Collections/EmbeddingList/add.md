@@ -10,7 +10,7 @@ public void add(BaseVector vector)
 
 - **vector** (*BaseVector*) -
 
-    A vector embedding to be added to the current EmbeddingList. 
+    A vector embedding to be added to the current EmbeddingList.
 
 **RETURN TYPE:**
 

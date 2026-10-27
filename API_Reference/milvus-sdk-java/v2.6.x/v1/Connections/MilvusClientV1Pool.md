@@ -165,4 +165,3 @@ try {
     pool.returnClient("client_name", client); // make sure the client is returned after use
 }
 ```
-
