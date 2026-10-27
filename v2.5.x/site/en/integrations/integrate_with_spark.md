@@ -1,12 +1,12 @@
 ---
 id: integrate_with_spark.md
 summary: Apache Spark and Databricks integrates with Milvus and Zilliz Cloud to combine big data processing with vector search. Learn how to build AI-powered search and analytics with Spark-Milvus connector.
-title: Use Apache Spark™ with Milvus/Zilliz Cloud for AI Pipelines
+title: Use Apache Spark and Databricks with Milvus for AI Data Pipelines
 ---
 
-# Use Apache Spark™ with Milvus/Zilliz Cloud for AI Pipelines
+# Use Apache Spark and Databricks with Milvus for AI Data Pipelines
 
-The [Spark-Milvus Connector](https://github.com/zilliztech/spark-milvus) provides integration of Apache Spark and Databricks with Milvus and Zilliz Cloud. It bridges Apache Spark’s powerful big data processing and machine learning (ML) features with Milvus’s state-of-the-art vector search capabilities. This integration enables streamlined workflow for AI-powered search, advanced analytics, ML training, and efficient management of large-scale vector data.
+The [Spark-Milvus Connector](https://github.com/zilliztech/spark-milvus) provides integration of Apache Spark and Databricks with Milvus and [Zilliz Cloud](https://zilliz.com/product/integrations/Databricks) (fully managed Milvus). It bridges Apache Spark’s powerful big data processing and machine learning (ML) features with Milvus’s state-of-the-art vector search capabilities. This integration enables streamlined workflow for AI-powered search, advanced analytics, ML training, and efficient management of large-scale vector data.
 
 Apache Spark is a distributed data processing platform designed for handling massive datasets with high-speed computation. When paired with Milvus or Zilliz Cloud, it unlocks new possibilities for use cases such as semantic search, recommendation systems, and AI-driven data analytics.
 

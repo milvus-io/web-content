@@ -19,7 +19,7 @@ An ARRAY field stores an ordered set of elements of the same data type. Here's a
 
 - **Default Values**: ARRAY fields do not support default values. However, you can set the `nullable` attribute to `True` to allow null values. For details, refer to [Nullable & Default](nullable-and-default.md).
 
-- **Data Type**: All elements in an Array field must have the same data type, as specified by the `element_type`. If you set `element_type` to `VARCHAR`, you should also set `max_length` for the array elements.
+- **Data Type**: All elements in an Array field must have the same data type, as specified by the `element_type`. If you set `element_type` to `VARCHAR`, you should also set `max_length`, which defines the maximum number of bytes allowed for each array element.
 
 - **Array Capacity**: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
 
