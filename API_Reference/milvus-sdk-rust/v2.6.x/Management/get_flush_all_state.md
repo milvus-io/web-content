@@ -1,4 +1,4 @@
-# GetFlushAllState()
+# get_flush_all_state()
 
 Retrieves the state of an earlier flush-all operation.
 

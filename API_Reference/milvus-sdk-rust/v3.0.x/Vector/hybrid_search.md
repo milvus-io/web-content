@@ -1,4 +1,4 @@
-# HybridSearch()
+# hybrid_search()
 
 Executes multiple vector searches and combines them with a reranking strategy or function chain.
 

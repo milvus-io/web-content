@@ -1,4 +1,4 @@
-# UnpinSnapshotData()
+# unpin_snapshot_data()
 
 Releases a snapshot data pin created by [PinSnapshotData](pin_snapshot_data.md).
 

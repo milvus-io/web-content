@@ -1,4 +1,4 @@
-# CreateRole()
+# create_role()
 
 Creates a role that can receive privileges.
 

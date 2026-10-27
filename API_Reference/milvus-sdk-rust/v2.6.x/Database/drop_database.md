@@ -1,4 +1,4 @@
-# DropDatabase()
+# drop_database()
 
 Drops a database and the resources owned by it according to server policy.
 

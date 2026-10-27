@@ -1,4 +1,4 @@
-# AddPrivilegesToGroup()
+# add_privileges_to_group()
 
 Adds privileges to a privilege group.
 

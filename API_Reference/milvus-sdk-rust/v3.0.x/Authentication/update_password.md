@@ -1,4 +1,4 @@
-# UpdatePassword()
+# update_password()
 
 Changes an existing user's password.
 

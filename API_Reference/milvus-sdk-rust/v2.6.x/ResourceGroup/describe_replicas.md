@@ -1,4 +1,4 @@
-# DescribeReplicas()
+# describe_replicas()
 
 Returns the replica information of a loaded collection.
 

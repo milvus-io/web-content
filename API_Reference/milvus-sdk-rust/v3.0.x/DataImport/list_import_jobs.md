@@ -1,4 +1,4 @@
-# ListImportJobs()
+# list_import_jobs()
 
 Lists bulk-import jobs visible to the target deployment.
 

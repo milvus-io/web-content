@@ -1,4 +1,4 @@
-# DescribeIndex()
+# describe_index()
 
 Returns the configuration and build state of the indexes on a collection.
 

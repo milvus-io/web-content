@@ -1,4 +1,4 @@
-# RemovePrivilegesFromGroup()
+# remove_privileges_from_group()
 
 Removes privileges from a privilege group.
 

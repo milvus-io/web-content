@@ -1,4 +1,4 @@
-# DropAlias()
+# drop_alias()
 
 Drops an alias without dropping the underlying collection.
 

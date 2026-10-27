@@ -1,4 +1,4 @@
-# CreateAlias()
+# create_alias()
 
 Creates an alias that can be used in query and search requests in place of a collection name.
 

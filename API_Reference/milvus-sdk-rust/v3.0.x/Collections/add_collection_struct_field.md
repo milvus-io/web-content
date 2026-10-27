@@ -1,4 +1,4 @@
-# AddCollectionStructField()
+# add_collection_struct_field()
 
 Adds a struct (array-of-structs) field to an existing collection.
 

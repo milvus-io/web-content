@@ -1,4 +1,4 @@
-# Search()
+# search()
 
 Searches vector fields and returns ranked hits for each query vector.
 
@@ -102,7 +102,30 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. See [FunctionScore](FunctionScore.md).
+    Reranking configuration for single-vector search.
+
+    This struct carries reranking functions and combination settings used by search. It is used both as a V2 request input and as a response domain object.
+
+    ```rust
+    pub struct FunctionScore
+    ```
+
+    **PARAMETERS:**
+
+    - `functions: Vec<Function>`
+
+        Reranking functions applied to the candidate set.
+
+    - `params: HashMap<String, serde_json::Value>`
+
+        Combination settings for the reranking functions.
+
+    **METHODS:**
+
+    - `new()` - Creates a value initialized with its SDK defaults.
+    - `functions(value)` / `set_functions(value)` / `get_functions()` - Sets or returns the functions.
+    - `add_function(value)` - Adds one function to the existing values.
+    - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the params.
 
 - `timezone: String`
 
@@ -110,7 +133,31 @@ let request = SearchRequest::builder()
 
 - `highlighter: Option<Highlighter>`
 
-    Text-highlighting configuration for full-text search. See [Highlighter](Highlighter.md).
+    Text-highlighting configuration for full-text search.
+
+    This struct configures text highlighting for search results.
+
+    ```rust
+    pub struct Highlighter
+    ```
+
+    **PARAMETERS:**
+
+    - `highlight_type: HighlightType`
+
+        Highlighting strategy, `Lexical` or `Semantic`. Defaults to `Lexical`.
+
+    - `params: HashMap<String, String>`
+
+        Highlighting parameters, such as pre-tags, post-tags, and fragment settings.
+
+    **METHODS:**
+
+    - `new()` - Creates a value initialized with its SDK defaults.
+    - `highlight_type(value)` / `set_highlight_type(value)` / `get_highlight_type()` - Sets or returns the highlight type.
+    - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the highlighting parameters.
+
+    `Highlighter` also implements `From<LexicalHighlighter>` and `From<SemanticHighlighter>` to convert a typed highlighter into its parameterized form.
 
 - `consistency_level: Option<ConsistencyLevel>`
 

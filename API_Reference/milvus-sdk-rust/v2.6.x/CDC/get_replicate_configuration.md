@@ -1,4 +1,4 @@
-# GetReplicateConfiguration()
+# get_replicate_configuration()
 
 Retrieves the current CDC replication configuration. Use it to inspect configured clusters and replication topology.
 

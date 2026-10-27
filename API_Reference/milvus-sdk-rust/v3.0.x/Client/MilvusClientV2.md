@@ -37,11 +37,126 @@ let client = ClientV2::new(&config).await?;
 
 - `pub fn telemetry(&self) -> ClientTelemetry`
 
-    Returns the shared client-side telemetry manager. See [ClientTelemetry](ClientTelemetry.md).
+    Returns the shared client-side telemetry manager.
+
+    A shared client-side telemetry manager that reports operation metrics and errors to the Milvus server over a heartbeat, and executes server-pushed commands.
+
+    ## Construction
+
+    A `ClientTelemetry` is owned by a [ClientV2](MilvusClientV2.md) and obtained through `ClientV2::telemetry()`:
+
+    ```rust
+    let telemetry = client.telemetry();
+    ```
+
+    The manager starts a heartbeat task when the client connects, unless telemetry is disabled in the [TelemetryConfig](TelemetryConfig.md). Use `with_client_request_id` to attach a request ID to a future's gRPC metadata:
+
+    ```rust
+    let request_id = new_client_request_id();
+    let resp = with_client_request_id(request_id, async {
+        client.search(search_request).await
+    }).await?;
+    ```
+
+    - `pub async fn with_client_request_id<F>(request_id: impl Into<String>, future: F) -> F::Output`
+
+        Runs a future with a caller-provided `client_request_id`. The ID must be a non-zero, 32-character lowercase OpenTelemetry TraceID; malformed values are omitted from gRPC metadata and telemetry error correlation.
+
+    - `pub fn new_client_request_id() -> String`
+
+        Generates a non-zero, lowercase, 32-character OpenTelemetry TraceID.
+
+    ## PARAMETERS
+
+    `ClientTelemetry` is not constructed directly; it is created internally by `ClientV2` from the [TelemetryConfig](TelemetryConfig.md) in the connect configuration.
+
+    ## METHODS
+
+    - `pub fn client_id(&self) -> &str`
+
+        Returns the stable runtime client identifier sent in heartbeats.
+
+    - `pub fn config(&self) -> TelemetryConfig`
+
+        Returns the current effective telemetry configuration.
+
+    - `pub fn is_supported(&self) -> bool`
+
+        Reports whether the server is not currently known to reject telemetry as unimplemented.
+
+    - `pub fn last_heartbeat_error(&self) -> Option<String>`
+
+        Returns the most recent best-effort heartbeat failure.
+
+    - `pub fn recent_errors(&self, max_count: usize) -> Vec<TelemetryErrorInfo>`
+
+        Returns recent operation errors, newest first. Each `TelemetryErrorInfo` carries the error timestamp, operation name, error text, associated collection, and request ID.
+
+    - `pub fn snapshots(&self) -> Vec<TelemetrySnapshot>`
+
+        Returns retained metric snapshots in chronological order. Each `TelemetrySnapshot` contains the window start/end and per-operation `TelemetryMetrics` (request counts and latency percentiles).
+
+    - `pub fn register_command_handler<F>(&self, command_type: impl Into<String>, handler: F)`
+
+        Registers or replaces a custom command handler where `F: Fn(&ClientTelemetryCommand) -> ClientTelemetryCommandReply + Send + Sync + 'static`. The handler is invoked for server commands of the matching `command_type` and returns a reply acknowledging success or failure.
 
 - `pub fn session(&self, cluster_id: impl Into<String>) -> Result<MilvusClientV2Session>`
 
-    **Zilliz Cloud only.** Creates a cluster-scoped session view bound to the given cluster identifier. See [MilvusClientV2Session](MilvusClientV2Session.md).
+    **Zilliz Cloud only.** Creates a cluster-scoped session view bound to the given cluster identifier.
+
+    **Zilliz Cloud only.**
+
+    A cluster-scoped view of a [ClientV2](MilvusClientV2.md) that exposes the DQL surface only.
+
+    Created through [`ClientV2::session`](MilvusClientV2.md), the session shares the parent client's channel, selected database, RPC settings, and caches, and routes every DQL request to a target global-cluster identifier. It does not expose schema, DML, or administration operations. Closing the session marks it closed and makes every subsequent call fail, regardless of which clone of the session is used.
+
+    ## Construction
+
+    ```rust
+    let session = client.session("my-cluster-id")?;
+    ```
+
+    `ClientV2::session` returns an `Error` when `cluster_id` is empty.
+
+    ## PARAMETERS
+
+    | Parameter | Type | Description |
+    | --- | --- | --- |
+    | `cluster_id` | `String` | Target global-cluster identifier to which every request is routed. A global-cluster connection selects the member cluster to serve the request; a regular server ignores the param when it does not support cluster routing. |
+
+    ## METHODS
+
+    - `pub fn cluster_id(&self) -> &str`
+
+        Returns the target cluster identifier.
+
+    - `pub async fn search(&self, request: SearchRequest) -> Result<SearchResponse>`
+
+        Searches vector fields in the target cluster.
+
+    - `pub async fn hybrid_search(&self, request: HybridSearchRequest) -> Result<SearchResponse>`
+
+        Executes multiple vector searches combined with a reranking strategy in the target cluster.
+
+    - `pub async fn query(&self, request: QueryRequest) -> Result<QueryResponse>`
+
+        Queries entities in the target cluster.
+
+    - `pub async fn get(&self, request: GetRequest) -> Result<GetResponse>`
+
+        Retrieves entities by their primary-key values in the target cluster.
+
+    - `pub async fn query_iterator(&self, request: QueryIteratorRequest) -> Result<QueryIterator>`
+
+        Creates a query iterator bound to the target cluster. Closing the session also stops this iterator's subsequent pages.
+
+    - `pub async fn search_iterator(&self, request: SearchIteratorRequest) -> Result<SearchIterator>`
+
+        Creates a search iterator bound to the target cluster. Closing the session also stops this iterator's subsequent pages.
+
+    - `pub fn close(&self)`
+
+        Closes this session view without disconnecting the parent client. Every subsequent call on this session, including on clones created before the close, fails with an error.
 
 - `pub async fn use_database(&self, database: impl Into<String>) -> Result<()>`
 

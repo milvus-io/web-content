@@ -1,4 +1,4 @@
-# DescribeRole()
+# describe_role()
 
 Retrieves a role and its assignments.
 

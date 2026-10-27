@@ -1,4 +1,4 @@
-# CreateDatabase()
+# create_database()
 
 Creates a database in the connected Milvus instance.
 

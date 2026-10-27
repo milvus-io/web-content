@@ -1,4 +1,4 @@
-# CreateUser()
+# create_user()
 
 Creates a user account with a username and password.
 

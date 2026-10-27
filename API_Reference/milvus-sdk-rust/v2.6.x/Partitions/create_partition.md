@@ -1,4 +1,4 @@
-# CreatePartition()
+# create_partition()
 
 Creates a named partition in an existing collection.
 

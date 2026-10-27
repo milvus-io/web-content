@@ -508,13 +508,14 @@ local directory via this table before editing. Current latest version line is
 - **Conventions**: import via `use milvus::v2::prelude::*;`; connect with
   `ClientV2::new(&ConnectConfig::new().uri(uri).token("root:Milvus")).await?`;
   requests use `XxxRequest::builder()....build()?`.
-- **Operation page filename convention (Step 8b)**: Rust public methods are
-  snake_case (e.g. `create_collection`, `list_collections`), so operation page
-  filenames must be snake_case too (e.g. `create_collection.md`).
+- **Operation page filename and title convention (Step 8b)**: Rust public
+  methods are snake_case (e.g. `create_collection`, `list_collections`), so
+  operation page filenames must be snake_case too (e.g. `create_collection.md`)
+  and their titles must be `# create_collection()`.
   Type pages (enums, structs, response-model pages) keep their PascalCase
   source-name filenames and are not affected by Step 8b. Format checks must
-  rename PascalCase operation pages immediately and update every link in the
-  same pass.
+  rename PascalCase operation pages, replace PascalCase titles with the
+  snake_case API name, and update every link in the same pass.
 - **Version pins**: `About.md` compatibility table + `cargo add milvus-sdk-rust@<ver>`.
 - **Extraction commands**:
 

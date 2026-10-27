@@ -1,4 +1,4 @@
-# GrantPrivilege()
+# grant_privilege()
 
 Grants a privilege on a resource to a role.
 

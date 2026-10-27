@@ -1,4 +1,4 @@
-# ListRestoreSnapshotJobs()
+# list_restore_snapshot_jobs()
 
 Lists restore-snapshot jobs for a collection, or for the whole database when the collection name is omitted.
 

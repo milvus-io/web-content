@@ -1,4 +1,4 @@
-# AddCollectionField()
+# add_collection_field()
 
 Adds a field to an existing collection.
 

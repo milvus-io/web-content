@@ -1,4 +1,4 @@
-# GetRLSPrincipalTags()
+# get_rls_principal_tags()
 
 Returns the stored tags of a principal on a collection.
 

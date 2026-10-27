@@ -14,12 +14,22 @@ pub enum RefreshExternalCollectionStateCode {
 
 **Constants:**
 
-- **Unknown** - The refresh state is unknown. This is the default.
+- **Unknown**
 
-- **Pending** - The refresh task has been created but has not started running.
+    The refresh state is unknown. This is the default.
 
-- **InProgress** - The refresh task is running.
+- **Pending**
 
-- **Completed** - The refresh task completed successfully.
+    The refresh task has been created but has not started running.
 
-- **Failed** - The refresh task failed.
+- **InProgress**
+
+    The refresh task is running.
+
+- **Completed**
+
+    The refresh task completed successfully.
+
+- **Failed**
+
+    The refresh task failed.

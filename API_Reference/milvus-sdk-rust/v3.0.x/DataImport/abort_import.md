@@ -1,4 +1,4 @@
-# AbortImport()
+# abort_import()
 
 Aborts a bulk-import job.
 

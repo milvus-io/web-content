@@ -1,4 +1,4 @@
-# Delete()
+# delete()
 
 Deletes entities selected by a filter expression or primary-key IDs.
 

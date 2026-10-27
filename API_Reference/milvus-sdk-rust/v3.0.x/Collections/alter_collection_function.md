@@ -1,4 +1,4 @@
-# AlterCollectionFunction()
+# alter_collection_function()
 
 Alters a function attached to a collection schema.
 

@@ -1,4 +1,4 @@
-# RefreshExternalCollection()
+# refresh_external_collection()
 
 Refreshes an external collection from its external data source.
 

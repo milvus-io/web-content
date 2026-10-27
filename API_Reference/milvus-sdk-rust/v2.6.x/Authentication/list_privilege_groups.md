@@ -1,4 +1,4 @@
-# ListPrivilegeGroups()
+# list_privilege_groups()
 
 Lists privilege groups visible to the caller.
 

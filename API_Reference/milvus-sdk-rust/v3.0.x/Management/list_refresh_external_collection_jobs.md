@@ -1,4 +1,4 @@
-# ListRefreshExternalCollectionJobs()
+# list_refresh_external_collection_jobs()
 
 Lists refresh-external-collection jobs for a collection, or for the whole database when the collection name is omitted.
 

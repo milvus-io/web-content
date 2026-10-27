@@ -1,4 +1,4 @@
-# AlterDatabaseProperties()
+# alter_database_properties()
 
 Updates mutable properties of a database.
 

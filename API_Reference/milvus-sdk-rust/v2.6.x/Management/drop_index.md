@@ -1,4 +1,4 @@
-# DropIndex()
+# drop_index()
 
 Drops an index from a collection.
 

@@ -1,4 +1,4 @@
-# QueryIterator()
+# query_iterator()
 
 Creates an iterator that retrieves query results in bounded batches.
 

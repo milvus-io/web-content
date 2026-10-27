@@ -1,4 +1,4 @@
-# SDKVersion()
+# sdk_version()
 
 Returns the compile-time Rust SDK package version.
 

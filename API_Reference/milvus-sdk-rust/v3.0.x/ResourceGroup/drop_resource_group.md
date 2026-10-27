@@ -1,4 +1,4 @@
-# DropResourceGroup()
+# drop_resource_group()
 
 Drops a resource group after its resources are no longer assigned to it.
 

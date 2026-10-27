@@ -1,4 +1,4 @@
-# DropPartition()
+# drop_partition()
 
 Drops a partition and its associated index and segment data.
 

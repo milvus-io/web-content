@@ -1,4 +1,4 @@
-# PinSnapshotData()
+# pin_snapshot_data()
 
 Pins the data referenced by a snapshot so it is not reclaimed.
 

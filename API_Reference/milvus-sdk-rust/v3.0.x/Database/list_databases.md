@@ -1,4 +1,4 @@
-# ListDatabases()
+# list_databases()
 
 Lists databases visible to the authenticated user.
 

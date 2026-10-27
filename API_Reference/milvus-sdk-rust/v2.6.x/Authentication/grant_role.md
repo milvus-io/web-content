@@ -1,4 +1,4 @@
-# GrantRole()
+# grant_role()
 
 Assigns a role to a user.
 

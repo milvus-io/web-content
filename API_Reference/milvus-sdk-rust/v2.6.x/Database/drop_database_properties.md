@@ -1,4 +1,4 @@
-# DropDatabaseProperties()
+# drop_database_properties()
 
 Removes the requested mutable database properties.
 

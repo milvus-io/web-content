@@ -1,4 +1,4 @@
-# AlterCollectionProperties()
+# alter_collection_properties()
 
 Alters the properties of a collection.
 

@@ -1,4 +1,4 @@
-# UpdateResourceGroups()
+# update_resource_groups()
 
 Updates the properties or node allocation of resource groups.
 

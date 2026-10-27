@@ -1,4 +1,4 @@
-# GetRefreshExternalCollectionProgress()
+# get_refresh_external_collection_progress()
 
 Retrieves the state and progress of a refresh-external-collection job.
 

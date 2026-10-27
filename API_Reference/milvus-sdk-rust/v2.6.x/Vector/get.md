@@ -1,4 +1,4 @@
-# Get()
+# get()
 
 Retrieves entities by their primary-key values.
 

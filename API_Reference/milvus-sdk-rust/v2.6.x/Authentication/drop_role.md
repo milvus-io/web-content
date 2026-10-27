@@ -1,4 +1,4 @@
-# DropRole()
+# drop_role()
 
 Drops a role.
 

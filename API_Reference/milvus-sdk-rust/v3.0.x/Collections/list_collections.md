@@ -1,4 +1,4 @@
-# ListCollections()
+# list_collections()
 
 Lists the collections in the selected database.
 

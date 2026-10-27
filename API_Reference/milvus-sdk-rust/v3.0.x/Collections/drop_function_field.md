@@ -1,4 +1,4 @@
-# DropFunctionField()
+# drop_function_field()
 
 Drops a function and its output fields from a collection.
 

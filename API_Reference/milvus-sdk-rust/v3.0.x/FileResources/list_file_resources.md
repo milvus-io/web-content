@@ -1,4 +1,4 @@
-# ListFileResources()
+# list_file_resources()
 
 Lists all registered file resources.
 

@@ -1,4 +1,4 @@
-# RevokeRole()
+# revoke_role()
 
 Removes a role assignment from a user.
 

@@ -1,4 +1,4 @@
-# DumpMessages()
+# dump_messages()
 
 Consumes dumped WAL messages from a physical channel with an SDK-domain callback.
 

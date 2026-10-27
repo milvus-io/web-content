@@ -1,4 +1,4 @@
-# RunAnalyzer()
+# run_analyzer()
 
 Runs an analyzer on the supplied texts and returns the resulting tokens.
 

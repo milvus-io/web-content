@@ -1,4 +1,4 @@
-# BatchDescribeCollections()
+# batch_describe_collections()
 
 Describes multiple collections in a single call.
 

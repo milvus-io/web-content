@@ -1,4 +1,4 @@
-# AlterCollectionFieldProperties()
+# alter_collection_field_properties()
 
 Alters the properties of a field in a collection.
 

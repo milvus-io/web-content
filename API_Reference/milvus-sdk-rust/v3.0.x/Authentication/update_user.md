@@ -1,4 +1,4 @@
-# UpdateUser()
+# update_user()
 
 Updates mutable properties of a user account.
 

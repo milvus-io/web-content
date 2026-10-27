@@ -1,4 +1,4 @@
-# AddCollectionFunction()
+# add_collection_function()
 
 Adds a function to an existing collection.
 

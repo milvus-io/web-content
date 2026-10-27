@@ -1,4 +1,4 @@
-# CreatePrivilegeGroup()
+# create_privilege_group()
 
 Creates a named group of privileges.
 

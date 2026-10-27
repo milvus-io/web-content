@@ -1,4 +1,4 @@
-# DescribeAlias()
+# describe_alias()
 
 Resolves an alias to its database and canonical collection name.
 

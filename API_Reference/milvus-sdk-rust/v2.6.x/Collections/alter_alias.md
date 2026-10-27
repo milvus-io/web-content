@@ -1,4 +1,4 @@
-# AlterAlias()
+# alter_alias()
 
 Repoints an alias from its current collection to another collection.
 

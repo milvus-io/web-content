@@ -1,4 +1,4 @@
-# DropRowPolicy()
+# drop_row_policy()
 
 Drops a row-level security policy by name.
 

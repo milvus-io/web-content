@@ -1,4 +1,4 @@
-# DescribeSnapshot()
+# describe_snapshot()
 
 Describes a snapshot of a collection.
 

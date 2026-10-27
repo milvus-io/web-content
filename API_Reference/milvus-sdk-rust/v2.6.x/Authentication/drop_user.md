@@ -1,4 +1,4 @@
-# DropUser()
+# drop_user()
 
 Drops a user account.
 

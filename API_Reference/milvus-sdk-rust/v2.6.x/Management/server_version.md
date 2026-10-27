@@ -1,4 +1,4 @@
-# GetServerVersion()
+# server_version()
 
 Returns the connected Milvus server version and optional build details.
 

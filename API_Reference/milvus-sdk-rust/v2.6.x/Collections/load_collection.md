@@ -1,4 +1,4 @@
-# LoadCollection()
+# load_collection()
 
 Loads collection data into query-node memory.
 

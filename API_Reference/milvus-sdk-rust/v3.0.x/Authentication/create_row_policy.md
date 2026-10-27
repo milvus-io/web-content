@@ -1,4 +1,4 @@
-# CreateRowPolicy()
+# create_row_policy()
 
 Creates a row-level security policy on a collection.
 

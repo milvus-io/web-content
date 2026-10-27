@@ -1,4 +1,4 @@
-# DescribeDatabase()
+# describe_database()
 
 Retrieves a database's metadata and properties.
 

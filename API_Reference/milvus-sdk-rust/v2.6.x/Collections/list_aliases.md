@@ -1,4 +1,4 @@
-# ListAliases()
+# list_aliases()
 
 Lists the aliases associated with a collection in the selected database.
 

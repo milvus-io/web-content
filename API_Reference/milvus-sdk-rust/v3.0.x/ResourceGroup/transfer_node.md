@@ -1,4 +1,4 @@
-# TransferNode()
+# transfer_node()
 
 Transfers query nodes between resource groups.
 

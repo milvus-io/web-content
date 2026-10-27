@@ -14,12 +14,22 @@ pub enum RestoreSnapshotStateCode {
 
 **Constants:**
 
-- **Unknown** - The restore state is unknown. This is the default.
+- **Unknown**
 
-- **Pending** - The restore task has been created but has not started running.
+    The restore state is unknown. This is the default.
 
-- **Executing** - The restore task is running.
+- **Pending**
 
-- **Completed** - The restore task completed successfully.
+    The restore task has been created but has not started running.
 
-- **Failed** - The restore task failed.
+- **Executing**
+
+    The restore task is running.
+
+- **Completed**
+
+    The restore task completed successfully.
+
+- **Failed**
+
+    The restore task failed.

@@ -1,4 +1,4 @@
-# DropIndexProperties()
+# drop_index_properties()
 
 Drops properties from an existing index.
 

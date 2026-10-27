@@ -1,4 +1,4 @@
-# UpdateRowPolicy()
+# update_row_policy()
 
 Replaces a named row-level security policy while preserving its server-side identity.
 

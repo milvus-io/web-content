@@ -1,4 +1,4 @@
-# DropCollectionField()
+# drop_collection_field()
 
 Drops a field from a collection.
 

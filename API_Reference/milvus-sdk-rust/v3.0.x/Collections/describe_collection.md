@@ -1,4 +1,4 @@
-# DescribeCollection()
+# describe_collection()
 
 Describes the schema and properties of a collection.
 

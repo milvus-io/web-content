@@ -1,4 +1,4 @@
-# DropCollectionProperties()
+# drop_collection_properties()
 
 Removes properties from a collection.
 
