@@ -109,9 +109,7 @@ Use the following matrix to choose the right StructArray path.
   </tbody>
 </table>
 
-<div class="alert note">
-
-Warning
+<div class="alert warning">
 
 If your collection needs both EmbeddingList search and element-level search, use two separate vector subfields. A vector field or vector subfield accepts only one index, and the two search modes require different metric families.
 
