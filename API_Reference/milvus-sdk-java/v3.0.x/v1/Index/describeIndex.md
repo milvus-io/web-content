@@ -96,32 +96,60 @@ Methods of `DescIndexResponseWrapper`:
    </tr>
 </table>
 
-#### IndexDesc
-
-A tool class to describe an index.
-
-Methods of `DescIndexResponseWrapper.IndexDesc`
+Each `DescIndexResponseWrapper.IndexDesc` has the following getters:
 
 <table>
    <tr>
      <th><p><strong>Method</strong></p></th>
      <th><p><strong>Description</strong></p></th>
-     <th><p><strong>Returns</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>getFieldName()</p></td>
+     <td><p>Get the name of the indexed field.</p></td>
+   </tr>
+   <tr>
+     <td><p>getIndexName()</p></td>
+     <td><p>Get the name of the index.</p></td>
+   </tr>
+   <tr>
+     <td><p>getId()</p></td>
+     <td><p>Get the ID of the index.</p></td>
+   </tr>
+   <tr>
+     <td><p>getParams()</p></td>
+     <td><p>Get the parameters of the index.</p></td>
+   </tr>
+   <tr>
+     <td><p>getIndexedRows()</p></td>
+     <td><p>Get the number of rows that have been indexed.</p></td>
+   </tr>
+   <tr>
+     <td><p>getTotalRows()</p></td>
+     <td><p>Get the total number of rows known to the index.</p></td>
+   </tr>
+   <tr>
+     <td><p>getPendingIndexRows()</p></td>
+     <td><p>Get the number of rows waiting to be indexed.</p></td>
+   </tr>
+   <tr>
+     <td><p>getIndexState()</p></td>
+     <td><p>Get the current state of index building.</p></td>
+   </tr>
+   <tr>
+     <td><p>getIndexFailedReason()</p></td>
+     <td><p>Get the reason why index building failed.</p></td>
    </tr>
    <tr>
      <td><p>getIndexType()</p></td>
-     <td><p>Get index type.</p></td>
-     <td><p>IndexType</p></td>
+     <td><p>Get the index type parsed from the index parameters.</p></td>
    </tr>
    <tr>
      <td><p>getMetricType()</p></td>
-     <td><p>Get metric type.</p></td>
-     <td><p>MetricType</p></td>
+     <td><p>Get the metric type parsed from the index parameters.</p></td>
    </tr>
    <tr>
      <td><p>getExtraParam()</p></td>
-     <td><p>Get index parameters in JSON format.</p></td>
-     <td><p>String</p></td>
+     <td><p>Get the extra index parameters other than index type and metric type.</p></td>
    </tr>
 </table>
 

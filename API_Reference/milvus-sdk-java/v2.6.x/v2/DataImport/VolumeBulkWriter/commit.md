@@ -63,4 +63,3 @@ writer.appendRow(row);
 // 4. Commit the writer
 writer.commit(false);
 ```
-

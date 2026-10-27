@@ -68,7 +68,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field
@@ -96,4 +96,3 @@ ReleaseCollectionReq releaseCollectionReq = ReleaseCollectionReq.builder()
         .build();
 client.releaseCollection(releaseCollectionReq);
 ```
-

@@ -42,5 +42,3 @@ structFieldSchema.getDescription();
 
 // "clips of a film"
 ```
-
-

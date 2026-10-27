@@ -1,85 +1,89 @@
 # DataType
 
 This is an enumeration that provides the following constants.
+```java
+public enum DataType
+```
 
-## Constants
 
-- None(0)
+**Constants:**
+
+- **None** (0)
 
     Sets the data type to **NoneType**.
 
-- Bool(1)
+- **Bool** (1)
 
     Sets the data type to **Boolean**.
 
-- Int8(2)
+- **Int8** (2)
 
     Sets the data type to **Int8**.
 
-- Int16(3)
+- **Int16** (3)
 
     Sets the data type to **Int16**.
 
-- Int32(4)
+- **Int32** (4)
 
     Sets the data type to **Int32**.
 
-- Int64(5)
+- **Int64** (5)
 
     Sets the data type to **Int64**.
 
-- Float(10)
+- **Float** (10)
 
     Sets the data type to **Float**.
 
-- Double(11)
+- **Double** (11)
 
     Sets the data type to **Double**.
 
-- VarChar(21)
+- **VarChar** (21)
 
     Sets the data type to **VarChar**.
 
-- Array(22)
+- **Array** (22)
 
     Sets the data type to **Array**.
 
-- JSON(23)
+- **JSON** (23)
 
     Sets the data type to **JSON**.
 
-- Geometry(24)
+- **Geometry** (24)
 
     Sets the data type to **Geometry**.
 
-- Timestamptz(26)
+- **Timestamptz** (26)
 
     Sets the data type to **Timestamptz**.
 
-- BinaryVector(100)
+- **BinaryVector** (100)
 
     Sets the data type to **Binary Vector**.
 
-- FloatVector(101)
+- **FloatVector** (101)
 
     Sets the data type to **Float Vector**.
 
-- Float16Vector(102)
+- **Float16Vector** (102)
 
     Sets the data type to **Float16 Vector**.
 
-- BFloat16Vector(103)
+- **BFloat16Vector** (103)
 
     Sets the data type to **BFloat16 Vector**.
 
-- SparseFloatVector(104)
+- **SparseFloatVector** (104)
 
     Sets the data type to **Sparse Vector**.
 
-- Int8Vector(105)
+- **Int8Vector** (105)
 
     Sets the data type to **Int8 Vector**.
 
-- Struct(201)
+- **Struct** (201)
 
     Sets the data type to **Struct**, which should be the element type of an **Array** field.

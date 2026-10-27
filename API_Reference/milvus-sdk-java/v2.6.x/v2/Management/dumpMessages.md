@@ -26,6 +26,7 @@ dumpMessages(DumpMessagesReq.builder()
 - `startMessageID(GetReplicateInfoResp.MessageID startMessageID)`
 
     The WAL start position. `walName` supports `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
+    The nested `MessageID` type is documented with [GetReplicateInfoResp](getReplicateInfo.md).
 
 - `startTimetick(Long startTimetick)`
 
@@ -81,7 +82,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 

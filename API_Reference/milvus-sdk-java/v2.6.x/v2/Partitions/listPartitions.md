@@ -59,7 +59,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field
@@ -77,7 +77,6 @@ client.createCollection(CreateCollectionReq.builder()
         .build());
 
 
-
 // 3. Create a partition
 client.createPartition(CreatePartitionReq.builder()
         .collectionName("test")
@@ -90,4 +89,3 @@ ListPartitionsReq listPartitionsReq = ListPartitionsReq.builder()
         .build();
 List<String> res = client.listPartitions(listPartitionsReq);
 ```
-

@@ -29,11 +29,9 @@ A future completed with a `GetResp`, or completed exceptionally when the operati
 
 - `getGetResults()` (*List\<QueryResp.QueryResult\>*) -
 
-    The queried entities. Each **QueryResult** has the following getters:
+    The query result rows. Each **QueryResult** has the following getter:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
-
-        The field values of the result.
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the row.
 
 **EXCEPTIONS:**
 

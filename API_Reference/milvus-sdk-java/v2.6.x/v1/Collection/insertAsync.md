@@ -1,6 +1,6 @@
 # insertAsync()
 
-A MilvusClient interface. This method inserts entities asynchronously into a specified collection. 
+A MilvusClient interface. This method inserts entities asynchronously into a specified collection.
 
 ```java
 ListenableFuture<R<MutationResult>> insertAsync(InsertParam requestParam);

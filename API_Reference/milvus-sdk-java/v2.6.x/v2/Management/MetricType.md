@@ -1,62 +1,65 @@
 # MetricType
 
-This is an enumeration that provides the following constants.
+This enumeration provides metric types for vector similarity measurement.
 
-## Constants
+```java
+public enum MetricType
+```
 
-- INVALID
+**Constants:**
 
-    Sets the metric type to **INVALID**.
+- **INVALID**
 
-- L2
+    An invalid metric type.
 
-    Sets the metric type to **L2**. This applies to float vectors only.
+- **L2**
 
-- IP
+    Euclidean distance. This applies to float vectors only.
 
-    Sets the metric type to **IP**. This applies to float vectors only.
+- **IP**
 
-- COSINE
+    Inner product. This applies to float vectors only.
 
-    Sets the metric type to **COSINE**. This applies to float vectors only.
+- **COSINE**
 
-- HAMMING
+    Cosine similarity. This applies to float vectors only.
 
-    Sets the metric type to **HAMMING**. This applies to binary vectors only.
+- **HAMMING**
 
-- JACCARD
+    Hamming distance. This applies to binary vectors only.
 
-    Sets the metric type to **JACCARD**. This applies to binary vectors only.
+- **JACCARD**
 
-- MHJACCARD
+    Jaccard distance. This applies to binary vectors only.
 
-    Sets the metric type to **MHJACCARD**. This applies to binary vectors only.
+- **MHJACCARD**
 
-- BM25
+    Modified Hamming-Jaccard distance. This applies to binary vectors only.
 
-    Sets the metric type to **BM25**. This applies to sparse vector fields derived from BM25 functions.
+- **BM25**
 
-- MAX_SIM
+    BM25 score for sparse vectors. This applies to sparse vector fields derived from BM25 functions.
 
-    Sets the metric type to **MAX_SIM**. This applies only to all vectors in Struct elements.
+- **MAX_SIM**
 
-- MAX_SIM_COSINE
+    Maximum similarity, equal to `MAX_SIM_COSINE`. This applies only to vectors in Struct elements.
 
-    Sets the metric type to **MAX_SIM_COSINE**. This applies only to float vectors in Struct elements.
+- **MAX_SIM_COSINE**
 
-- MAX_SIM_IP
+    Maximum cosine similarity for vectors inside a Struct field.
 
-    Sets the metric type to **MAX_SIM_IP**. This applies only to float vectors in Struct elements.
+- **MAX_SIM_IP**
 
-- MAX_SIM_L2
+    Maximum inner-product similarity for vectors inside a Struct field.
 
-    Sets the metric type to **MAX_SIM_L2**. This applies only to float vectors in Struct elements.
+- **MAX_SIM_L2**
 
-- MAX_SIM_JACCARD
+    Maximum Euclidean-distance similarity for vectors inside a Struct field.
 
-    Sets the metric type to **MAX_SIM_JACCARD**. This applies only to binary vectors in Struct elements.
+- **MAX_SIM_JACCARD**
 
-- MAX_SIM_HAMMING
+    Maximum Jaccard similarity for binary vectors inside a Struct field.
 
-    Sets the metric type to **MAX_SIM_HAMMING**. This applies only to binary vectors in Struct elements.
+- **MAX_SIM_HAMMING**
 
+    Maximum Hamming similarity for binary vectors inside a Struct field.

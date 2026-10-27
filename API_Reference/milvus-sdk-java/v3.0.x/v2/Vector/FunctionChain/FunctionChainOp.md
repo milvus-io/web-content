@@ -6,14 +6,19 @@ A single operation in a function-chain pipeline, such as `map`, `sort`, or `limi
 io.milvus.v2.service.vector.request.FunctionChainOp
 ```
 
-## Constants
+**Constants:**
 
-- `String OP_MAP` — The `"map"` operation name.
+- **OP_MAP**
 
-- `String OP_SORT` — The `"sort"` operation name.
+    The `"map"` operation name.
 
-- `String OP_LIMIT` — The `"limit"` operation name.
+- **OP_SORT**
 
+    The `"sort"` operation name.
+
+- **OP_LIMIT**
+
+    The `"limit"` operation name.
 ## Constructor
 
 This builder creates a function-chain operation with an optional expression, inputs, outputs, and parameters.

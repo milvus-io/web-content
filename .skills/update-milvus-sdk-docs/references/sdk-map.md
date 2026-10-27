@@ -224,6 +224,17 @@ local directory via this table before editing. Current latest version line is
   DataImport, FileResources, Management, Partitions, ResourceGroup, Snapshots,
   Vector, Volume; `v1/` holds legacy pages. (The java tree nests the API version
   as `v1/` / `v2/` subfolders — do not confuse these with Milvus versions.)
+  These are independent documentation surfaces: never link `v1/` pages to `v2/`
+  pages or the reverse. Resolve same-named symbols against the matching source
+  generation (`io/milvus/response/DescIndexResponseWrapper.IndexDesc` for V1 is
+  distinct from `io/milvus/v2/service/index/response/DescribeIndexResp.IndexDesc`
+  for V2).
+- **Dedicated nested allowlist (V2)**: `CreateCollectionReq.CollectionSchema`,
+  `.FieldSchema`, `.StructFieldSchema`, `.Function`, `IndexParam.MetricType`,
+  and `IndexParam.IndexType` must have V2 standalone pages despite source
+  nesting. Do not fold them into owner-operation pages or replace them with
+  cross-generation links. Non-allowlisted nested request/response subtypes, such
+  as `GetReplicateInfoResp.MessageID`, are inline-only.
 - **Page mapping** (V2): `io/milvus/v2/service/<group>/request/*Req.java` →
   `<Category>/<Group>/...` pages (groups: `collection`, `vector`, `database`,
   `partition`, `index`, `rbac`→Authentication, `resourcegroup`, `snapshot`,
@@ -280,8 +291,12 @@ local directory via this table before editing. Current latest version line is
   Format precedent: java pages describe the `*XxxResp*` return in one sentence
   followed by the response class's getter methods (`` `getXxx()` `` bullets);
   extend to the full getter list where the response carries meaningful fields.
-  When a getter's return type has a dedicated type page (e.g. `CollectionSchema`,
-  `FieldSchema`), link it instead of re-expanding every nested member inline.
+  When a getter's return type has a dedicated page, link it instead of
+  re-expanding every member inline. The Java V2 dedicated nested allowlist
+  (`CreateCollectionReq.CollectionSchema`, `.FieldSchema`,
+  `.StructFieldSchema`, `.Function`, `IndexParam.MetricType`, and
+  `IndexParam.IndexType`) keeps standalone subtype pages; non-allowlisted
+  nested request/response subtypes are expanded on their owner pages.
 
 - **Known quirks**: doc pages use `**PARAMETERS:**`/`**RETURNS:**` with Java
   types; `About.md` needs every version literal bumped (bulkwriter too). Do NOT

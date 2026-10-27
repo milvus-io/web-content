@@ -10,7 +10,7 @@ public SearchIterator searchIterator(SearchIteratorReq request)
 
 ```java
 searchIterator(SearchIteratorReq.builder()
-    .databaseName(String databaseName)
+searchIterator(SearchIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
@@ -151,7 +151,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field with dimension 2
@@ -185,6 +185,7 @@ client.loadCollection(LoadCollectionReq.builder().collectionName("test").build()
 // 4. Iterator search
 List<Float> vector = Arrays.asList(0.1f, 0.2f);
 SearchIterator searchIterator = client.searchIterator(SearchIteratorReq.builder()
+// Strong consistency ensures the newly inserted rows are visible to this iterator.
         .collectionName("test")
         .outputFields(Lists.newArrayList("vector"))
         .batchSize(50L)
@@ -194,7 +195,7 @@ SearchIterator searchIterator = client.searchIterator(SearchIteratorReq.builder(
         .params("{\"range_filter\": 15.0, \"radius\": 20.0}")
         .topK(300)
         .metricType(IndexParam.MetricType.L2)
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 
 System.out.println("SearchIteratorV1 results:");

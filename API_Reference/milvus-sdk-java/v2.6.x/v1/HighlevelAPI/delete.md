@@ -78,7 +78,7 @@ DeleteIdsParam param = DeleteIdsParam.newBuilder()
         .withCollectionName(COLLECTION_NAME)
         .withPrimaryIds(ids)
         .build();
-        
+
 R<DeleteResponse> response = client.delete(param);
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
@@ -88,4 +88,3 @@ for (Object deleteId : response.getData().getDeleteIds()) {
     System.out.println(deleteId);
 }
 ```
-

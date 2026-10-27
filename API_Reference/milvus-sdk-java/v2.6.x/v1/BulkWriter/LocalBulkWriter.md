@@ -95,7 +95,7 @@ CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
                 .withDimension(DIM)
                 .build())
         .build();
-        
+
 LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()
         .withCollectionSchema(collectionSchema)
         .withLocalPath("/tmp/bulk_writer")

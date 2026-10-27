@@ -40,7 +40,7 @@ RRFRanker.builder()
 
 - `k(int k)`
 
-    A smoothing parameter that controls the impact of document ranks; higher `k` reduces sensitivity to top ranks. The value ranges from `1` to `16383` and defaults to `60`. 
+    A smoothing parameter that controls the impact of document ranks; higher `k` reduces sensitivity to top ranks. The value ranges from `1` to `16383` and defaults to `60`.
 
 **RETURN TYPE:**
 
@@ -62,7 +62,7 @@ import java.util.Collections;
 RRFRanker.builder()
     .k(60)
     .build();
-    
+
 // Instead, you can use the Function class as well
 CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .functionType(FunctionType.RERANK)
@@ -70,4 +70,3 @@ CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
     .param("params", "{\"k\": 60}")
     .build();
 ```
-

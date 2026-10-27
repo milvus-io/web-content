@@ -1,8 +1,12 @@
 # FunctionType
 
 This is an enumeration that provides the following constants.
+```java
+public enum FunctionType
+```
 
-## Constants
+
+**Constants:**
 
 - **UNKNOWN** (0)
 

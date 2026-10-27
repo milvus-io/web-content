@@ -66,7 +66,7 @@ This method catches all the exceptions and returns an `R<ShowPartitionsResponse>
 
 #### ShowPartResponseWrapper
 
-A tool class to encapsulate the `ShowPartitionsResponse`. 
+A tool class to encapsulate the `ShowPartitionsResponse`.
 
 ```java
 import io.milvus.response.ShowPartResponseWrapper;

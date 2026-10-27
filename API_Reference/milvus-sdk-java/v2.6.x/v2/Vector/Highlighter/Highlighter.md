@@ -23,4 +23,3 @@ The following are the methods of the `Highlighter` interface:
 - [LexicalHighlighter](LexicalHighlighter.md)
 
 - [SemanticHighlighter](SemanticHighlighter.md)
-

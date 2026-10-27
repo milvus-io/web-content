@@ -30,11 +30,9 @@ A future completed with a **QueryResp** object that contains query rows with the
 
 - `getQueryResults()` (*List\<QueryResult\>*) -
 
-    The query result rows. Each **QueryResult** has the following getters:
+    The query result rows. Each **QueryResult** has the following getter:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
-
-        The field values of the result row.
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the row.
 
 - `getSessionTs()` (*long*) -
 
@@ -59,6 +57,7 @@ import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.QueryReq;
 import io.milvus.v2.service.vector.response.QueryResp;
+import io.milvus.v2.common.ConsistencyLevel;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -107,10 +106,12 @@ client.insert(InsertReq.builder()
 // Load the collection
 client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
 
+// Strong consistency ensures the newly inserted rows are visible to this query.
 CompletableFuture<QueryResp> future = client.queryAsync(QueryReq.builder()
         .collectionName("my_collection")
         .filter("age > 20")
         .outputFields(Arrays.asList("name", "age"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 QueryResp response = future.get();
 ```

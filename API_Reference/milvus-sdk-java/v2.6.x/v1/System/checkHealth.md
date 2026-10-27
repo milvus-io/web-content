@@ -1,6 +1,6 @@
 # checkHealth()
 
-MilvusClient interface. This method checks milvus server health. 
+MilvusClient interface. This method checks milvus server health.
 
 ```java
 R<CheckHealthResponse> checkHealth();

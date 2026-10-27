@@ -1,27 +1,35 @@
 # CompactionState
 
-This enum represents the state of a compaction job as reported by the `getCompactionState()` API.
+Represents the state of a compaction job returned by `getCompactionState()` and `getCompactionPlans()`.
 
 ```java
-class io.milvus.v2.common.CompactionState
+public enum CompactionState
 ```
 
 **METHODS:**
 
-- **getCode()** (*int*) -
+- `getCode()` (*int*) -
 
-    The numeric compaction-state code.
+    Returns the numeric compaction-state code.
 
-- **forNumber(int code)** (*CompactionState*) -
+- `forNumber(int code)` (*CompactionState*) -
 
-    Returns the canonical compaction state for the given numeric code. The proto enum spells the undefined value `UndefiedState`; this lookup maps it to `UndefinedState` so consumers comparing against the corrected constant always match. Throws an `IllegalArgumentException` if the code is unknown.
+    Returns the canonical compaction state for the given numeric code. The proto enum historically spells the undefined value `UndefiedState`; this lookup maps it to `UndefinedState` so consumers comparing against the corrected constant always match. Throws an `IllegalArgumentException` if the code is unknown.
 
-## VARIANTS
+**Constants:**
 
-- **UndefinedState** (0) - The compaction state is undefined.
+- **UndefinedState** (0)
 
-- **UndefiedState** (0) - **Deprecated.** A deprecated alias of `UndefinedState`, kept for backward compatibility. Use `UndefinedState` instead.
+    The compaction state is undefined.
 
-- **Executing** (1) - A compaction job is currently running.
+- **UndefiedState** (0)
 
-- **Completed** (2) - A compaction job has completed.
+    **Deprecated.** A backward-compatible alias of `UndefinedState`. Use `UndefinedState` instead.
+
+- **Executing** (1)
+
+    The compaction job is currently running.
+
+- **Completed** (2)
+
+    The compaction job has completed.

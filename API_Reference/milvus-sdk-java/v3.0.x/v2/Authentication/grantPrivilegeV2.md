@@ -64,9 +64,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 
 // 2. Create a database, a collection, and a role
@@ -92,4 +91,3 @@ GrantPrivilegeReqV2 grantPrivilegeReqV2 = GrantPrivilegeReqV2.builder()
 
 client.grantPrivilegeV2(grantPrivilegeReqV2);
 ```
-

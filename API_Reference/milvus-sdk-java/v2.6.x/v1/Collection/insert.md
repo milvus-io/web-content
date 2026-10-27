@@ -98,7 +98,7 @@ This method catches all the exceptions and returns an `R<MutationResult>` object
 
 #### MutationResultWrapper
 
-A tool class to encapsulate the MutationResult. 
+A tool class to encapsulate the MutationResult.
 
 ```java
 import io.milvus.response.MutationResultWrapper;

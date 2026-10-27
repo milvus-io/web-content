@@ -90,7 +90,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `dimension(int dimension)`
 
-    The dimensionality of a vector field. 
+    The dimensionality of a vector field.
 
     The value should be greater than 1 and is usually determined by the embedding model in use.
 
@@ -175,7 +175,7 @@ CollectionSchema.addField(AddFieldReq.builder()
 
 - `structFields(List<CreateCollectionReq.FieldSchema> structFields)`
 
-    A list of fields in the Array of Structs field. 
+    A list of fields in the Array of Structs field.
 
     This is required if **[dataType](../DataType.md)** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**.
 
@@ -209,4 +209,3 @@ int dim = 2;
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```
-

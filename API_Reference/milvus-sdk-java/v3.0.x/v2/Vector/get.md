@@ -71,15 +71,11 @@ A **GetResp** object representing one or more queried entities, including the op
 
 - `getQueryResults()` (*List\<QueryResult\>*) -
 
-    The queried entities. Each **QueryResult** has the following getters:
+    The query result rows. Each **QueryResult** has the following getters:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the row.
 
-        The field values of the result.
-
-    - `getElementOffset()` (*Long*) -
-
-        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+    - `getElementOffset()` (*Long*) - The index of the matched element within a struct-array field for element-level queries; `null` for ordinary queries.
 
 - `getSessionTs()` (*long*) -
 
@@ -135,7 +131,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field with dimension 2
@@ -171,4 +167,3 @@ GetReq getReq = GetReq.builder()
         .build();
 GetResp getResp = client.get(getReq);
 ```
-

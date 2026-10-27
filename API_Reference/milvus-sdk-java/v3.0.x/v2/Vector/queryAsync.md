@@ -32,13 +32,9 @@ A future completed with a **QueryResp** object that contains query rows and exec
 
     The query result rows. Each **QueryResult** has the following getters:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the row.
 
-        The field values of the result row.
-
-    - `getElementOffset()` (*Long*) -
-
-        For struct-array element-level queries (via `element_filter`), the index of the matched element within the array. Null for ordinary queries.
+    - `getElementOffset()` (*Long*) - The index of the matched element within a struct-array field for element-level queries; `null` for ordinary queries.
 
 - `getSessionTs()` (*long*) -
 
@@ -79,6 +75,7 @@ import io.milvus.v2.service.collection.request.LoadCollectionReq;
 import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.request.QueryReq;
 import io.milvus.v2.service.vector.response.QueryResp;
+import io.milvus.v2.common.ConsistencyLevel;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -127,10 +124,12 @@ client.insert(InsertReq.builder()
 // Load the collection
 client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection").build());
 
+// Strong consistency ensures the newly inserted rows are visible to this query.
 CompletableFuture<QueryResp> future = client.queryAsync(QueryReq.builder()
         .collectionName("my_collection")
         .filter("age > 20")
         .outputFields(Arrays.asList("name", "age"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 QueryResp response = future.get();
 ```

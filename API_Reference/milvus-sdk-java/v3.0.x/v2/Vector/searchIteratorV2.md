@@ -1,4 +1,4 @@
-# SearchIteratorV2()
+# searchIteratorV2()
 
 This operation creates an iterator for you to iterate over the search results. It is useful, especially when the search result contains a large volume of data.
 
@@ -159,7 +159,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with a "userFace" vector field and a "userAge" field
@@ -205,7 +205,8 @@ SearchIteratorV2 searchIterator = client.searchIteratorV2(SearchIteratorReqV2.bu
         .searchParams(new HashMap<>())
         .limit(120)
         .metricType(IndexParam.MetricType.L2)
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        // Strong consistency ensures the newly inserted rows are visible to this searchIteratorV2.
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 
 // 5. Iterate through search results

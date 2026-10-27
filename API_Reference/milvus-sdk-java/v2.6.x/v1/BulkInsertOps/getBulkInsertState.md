@@ -51,7 +51,7 @@ This method catches all the exceptions and returns an `R<GetImportStateResponse>
 
 #### GetBulkInsertStateWrapper
 
-A tool class to encapsulate the GetImportStateResponse. 
+A tool class to encapsulate the GetImportStateResponse.
 
 ```java
 import io.milvus.response.GetBulkInsertStateWrapper;

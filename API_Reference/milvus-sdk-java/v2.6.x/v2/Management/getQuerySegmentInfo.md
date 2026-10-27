@@ -86,7 +86,7 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         The storage version of the current segment.
 
-    - `getIsSorted()` (*Boolean*) -   
+    - `getIsSorted()` (*Boolean*) -
 
         Whether the entities in the current segment are sorted.
 
@@ -116,7 +116,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field
@@ -127,7 +127,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionName("test")
         .collectionSchema(collectionSchema)
         .build());
-
 
 
 // 3. Create an index and load the collection
@@ -147,4 +146,3 @@ GetQuerySegmentInfoResp segInfoResp = client.getQuerySegmentInfo(GetQuerySegment
         .collectionName("test")
         .build());
 ```
-

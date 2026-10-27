@@ -42,5 +42,3 @@ structFieldSchema.getName();
 
 // "struct_field"
 ```
-
-

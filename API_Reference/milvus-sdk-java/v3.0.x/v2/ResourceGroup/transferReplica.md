@@ -71,7 +71,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a resource group
@@ -107,4 +107,3 @@ TransferReplicaReq transferReplicaReq = TransferReplicaReq.builder()
     .build();
 client.transferReplica(transferReplicaReq);
 ```
-

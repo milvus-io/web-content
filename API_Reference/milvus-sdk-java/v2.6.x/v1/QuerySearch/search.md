@@ -151,7 +151,7 @@ This method catches all the exceptions and returns an `R<SearchResults>` object.
 
 #### SearchResultsWrapper
 
-A tool class to encapsulate the `SearchResults`. 
+A tool class to encapsulate the `SearchResults`.
 
 ```java
 import io.milvus.response.SearchResultsWrapper;
@@ -251,4 +251,3 @@ for (int i = 0; i < targetVectors.size(); ++i) {
     }
 }
 ```
-

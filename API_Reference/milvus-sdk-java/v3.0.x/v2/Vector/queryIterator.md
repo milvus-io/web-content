@@ -10,7 +10,7 @@ public QueryIterator queryIterator(QueryIteratorReq request)
 
 ```java
 queryIterator(QueryIteratorReq.builder()
-    .databaseName(String databaseName)
+queryIterator(QueryIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .outputFields(List<String> outputFields)
@@ -139,7 +139,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with "id", "userID", and "userAge" fields
@@ -176,13 +176,14 @@ client.loadCollection(LoadCollectionReq.builder().collectionName("my_collection"
 
 // 4. Create a query iterator to retrieve results in batches
 QueryIterator queryIterator = client.queryIterator(QueryIteratorReq.builder()
+// Strong consistency ensures the newly inserted rows are visible to this iterator.
         .collectionName("my_collection")
         .expr("userID < 3000")
         .outputFields(Arrays.asList("userID", "userAge"))
         .batchSize(100)
         .offset(0)
         .limit(10000)
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 
 // 5. Iterate through all results

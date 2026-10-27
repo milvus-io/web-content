@@ -76,4 +76,3 @@ io.milvus.bulkwriter.model.UploadFilesResult result = writer.getVolumeUploadResu
 System.out.println("Target volume: " + result.getVolumeName());
 System.out.println("Target paths: " + result.getPath());
 ```
-

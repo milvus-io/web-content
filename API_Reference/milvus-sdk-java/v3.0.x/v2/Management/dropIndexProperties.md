@@ -73,7 +73,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection and an index for the "vector" field
@@ -93,7 +93,6 @@ client.createIndex(CreateIndexReq.builder()
         .collectionName("test")
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 
 // 3. Set the `mmap.enabled` property first
@@ -116,4 +115,3 @@ DropIndexPropertiesReq dropIndexPropertiesReq = DropIndexPropertiesReq.builder()
         .build();
 client.dropIndexProperties(dropIndexPropertiesReq);
 ```
-

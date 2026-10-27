@@ -69,11 +69,11 @@ A **DescribeResourceGroupResp** object contains the following getters:
 
     - `getFrom()` (*List\<ResourceGroupTransfer>*) -
 
-        The source resource groups for necessary transfers. 
+        The source resource groups for necessary transfers.
 
     - `getTo()` (*List\<ResourceGroupTransfer>*) -
 
-        The target resource groups for necessary transfers. 
+        The target resource groups for necessary transfers.
 
     - `getNodeFilter()` (*ResourceGroupNodeFilter*) -
 
@@ -117,7 +117,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 
@@ -133,10 +133,9 @@ client.createResourceGroup(CreateResourceGroupReq.builder()
     .config(config)
     .build());
 
-// 3. Describe the resource group  
+// 3. Describe the resource group
 DescribeResourceGroupReq describeResourceGroupReq = DescribeResourceGroupReq.builder()
     .groupName("rg1")
     .build();
 DescribeResourceGroupResp group = client.describeResourceGroup(describeResourceGroupReq);
 ```
-

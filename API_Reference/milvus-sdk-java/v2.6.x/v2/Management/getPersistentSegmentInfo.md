@@ -70,7 +70,7 @@ A **GetPersistentSegmentInfoResp** object that contains detailed information abo
 
         The storage version of the current segment.
 
-    - `getIsSorted()` (*Boolean*) -   
+    - `getIsSorted()` (*Boolean*) -
 
         Whether the entities in the current segment are sorted.
 
@@ -96,7 +96,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with an "id" field and a "vector" field

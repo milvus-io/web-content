@@ -78,4 +78,3 @@ if (response.getStatus() != R.Status.Success.getCode()) {
 }
 System.out.println(response.getState());
 ```
-

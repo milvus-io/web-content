@@ -31,4 +31,3 @@ embeddingList.add(new FloatVec(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f)));
 // Get the placeholder type
 PlaceholderType type = embeddingList.getPlaceholderType();
 ```
-

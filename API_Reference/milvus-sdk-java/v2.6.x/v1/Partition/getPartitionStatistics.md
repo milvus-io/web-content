@@ -66,7 +66,7 @@ This method catches all the exceptions and returns an `R<GetPartitionStatisticsR
 
 #### GetPartStatResponseWrapper
 
-A tool class to encapsulate the `GetPartitionStatisticsResponse`. 
+A tool class to encapsulate the `GetPartitionStatisticsResponse`.
 
 ```java
 import io.milvus.response.GetPartStatResponseWrapper;

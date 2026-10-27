@@ -116,45 +116,19 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
     The search results, one list per query vector. Each **SearchResult** has the following getters:
 
-    - `getEntity()` (*Map\<String, Object\>*) -
+    - `getEntity()` (*Map<String, Object>*) - The output field names and values for the result.
 
-        The retrieved entity data.
+    - `getScore()` (*Float*) - The similarity score of the result.
 
-    - `getScore()` (*Float*) -
+    - `getId()` (*Object*) - The primary-key value of the result.
 
-        The similarity score of the result.
+    - `getPrimaryKey()` (*String*) - The name of the primary-key field.
 
-    - `getId()` (*Object*) -
+    - `getHighlightResults()` (*Map<String, HighlightResult>*) - The highlight results keyed by field name. Each **HighlightResult** has `getFieldName()` (*String*), `getFragments()` (*List<String>*), and `getScores()` (*List<Float>*).
 
-        The primary key value of the result.
+    - `getHighlightResult(String fieldName)` (*HighlightResult*) - The highlight result for the specified field, or `null` if none exists.
 
-    - `getPrimaryKey()` (*String*) -
-
-        The primary key value rendered as a string.
-
-    - `getHighlightResults()` (*Map\<String, HighlightResult\>*) -
-
-        The highlighted text fragments for each requested field, keyed by field name. Each **HighlightResult** has the following getters:
-
-        - `getFieldName()` (*String*) -
-
-            The name of the highlighted field.
-
-        - `getFragments()` (*List\<String\>*) -
-
-            The highlighted text fragments.
-
-        - `getScores()` (*List\<Float\>*) -
-
-            The relevance scores of the fragments.
-
-    - `getHighlightResult(String fieldName)` (*HighlightResult*) -
-
-        The highlight result for the specified field name, or `null` if none exists.
-
-    - `getElementOffset()` (*Long*) -
-
-        For struct-array element-level queries, the index of the matched element within the array. Null for ordinary queries.
+    - `getElementOffset()` (*Long*) - The offset of the matched element in a struct-array element query, or `null` for an ordinary query.
 
 - `getSessionTs()` (*long*) -
 
@@ -186,51 +160,7 @@ A **SearchResp** object that contains search results, recalls, cost, scanned byt
 
     - `getKey()` (*List\<KeyEntry\>*) -
 
-        The bucket key entries that define the bucket. Each **KeyEntry** has the following getters:
-
-        - `getFieldId()` (*long*) -
-
-            The ID of the field the key is based on.
-
-        - `getFieldName()` (*String*) -
-
-            The name of the field the key is based on.
-
-        - `getValue()` (*Object*) -
-
-            The value of the key.
-
-    - `getCount()` (*long*) -
-
-        The number of entities in the bucket.
-
-    - `getMetrics()` (*Map\<String, Object\>*) -
-
-        The aggregation metric values for the bucket.
-
-    - `getHits()` (*List\<AggregationHit\>*) -
-
-        The top hits inside the bucket. Each **AggregationHit** has the following getters:
-
-        - `getId()` (*Object*) -
-
-            The primary key of the hit.
-
-        - `getScore()` (*Float*) -
-
-            The similarity score of the hit.
-
-        - `getFields()` (*Map\<String, Object\>*) -
-
-            The field values of the hit.
-
-        - `getFieldIds()` (*Map\<String, Long\>*) -
-
-            The field ID map of the hit.
-
-    - `getSubGroups()` (*List\<AggregationBucket\>*) -
-
-        The nested sub-buckets.
+        The bucket key entries that define the bucket. See [KeyEntry](AggregationBucket.md).
 
 **EXCEPTIONS:**
 
@@ -272,7 +202,7 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
+
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection with float, binary, and sparse vector fields
@@ -332,16 +262,16 @@ searchRequests.add(AnnSearchReq.builder()
         .build());
 
 // 5. Hybrid search with WeightedRanker via FunctionScore
+// Strong consistency ensures the newly inserted rows are visible to this hybridSearch.
 SearchResp searchResp = client.hybridSearch(HybridSearchReq.builder()
         .collectionName("my_collection")
         .searchRequests(searchRequests)
         .functionScore(FunctionScore.builder()
                 .addFunction(WeightedRanker.builder()
                         .weights(Arrays.asList(0.2f, 0.5f, 0.6f))
-                        .build())
-                .build())
+                .build()))
         .limit(5)
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 
 List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();

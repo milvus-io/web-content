@@ -52,7 +52,7 @@ implementation 'io.milvus:milvus-sdk-java-bulkwriter:3.0.12'
 implementation("io.milvus:milvus-sdk-java-bulkwriter:3.0.12")
 ```
 
-Since SDK v3.0.11, a Spring Boot starter is available for applications built with Spring Boot 3.x or 4.x and Java 17 or later. It auto-configures a **MilvusClientV2** bean from `milvus.*` properties and closes the client on context shutdown.
+Since SDK v3.0.12, a Spring Boot starter is available for applications built with Spring Boot 3.x or 4.x and Java 17 or later. It auto-configures a **MilvusClientV2** bean from `milvus.*` properties and closes the client on context shutdown.
 
 - Apache Maven
 
@@ -85,6 +85,7 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.common.ConsistencyLevel;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.vector.request.InsertReq;
@@ -122,11 +123,13 @@ public class QuickStart {
         row.add("embedding", new Gson().toJsonTree(new float[]{0.1f, 0.2f, 0.3f}));
         client.insert(InsertReq.builder().collectionName(collectionName).data(Collections.singletonList(row)).build());
 
+        // Strong consistency ensures the newly inserted row is visible to this search.
         SearchResp resp = client.search(SearchReq.builder()
                 .collectionName(collectionName)
                 .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f})))
                 .annsField("embedding")
                 .limit(1)
+                .consistencyLevel(ConsistencyLevel.STRONG)
                 .build());
         System.out.println("Hit count: " + resp.getSearchResults().get(0).size());
         client.close();
@@ -147,7 +150,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.3.x | 2.3.9 |
 | 2.4.x | 2.4.11 |
 | 2.5.x | 2.5.17 |
-| 2.6.x | 2.6.26 |
+| 2.6.x | 2.6.27 |
 | 3.0.x | 3.0.12 |
 
 ## Contributing

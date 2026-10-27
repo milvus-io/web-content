@@ -1,6 +1,6 @@
 # alterDatabaseProperties()
 
-This operation alters a database's properties. 
+This operation alters a database's properties.
 
 ```java
 public void alterDatabaseProperties(AlterDatabasePropertiesReq request)
@@ -75,9 +75,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 
 // 2. Create a database
@@ -93,4 +92,3 @@ AlterDatabasePropertiesReq alterDatabasePropertiesReq = AlterDatabasePropertiesR
         .build();
 client.alterDatabaseProperties(alterDatabasePropertiesReq);
 ```
-

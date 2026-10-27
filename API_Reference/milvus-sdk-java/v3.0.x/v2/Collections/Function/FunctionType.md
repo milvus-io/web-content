@@ -6,31 +6,31 @@ Represents the supported server-side function types and provides conversion by n
 public enum FunctionType
 ```
 
-## Constants
+**Constants:**
 
-### UNKNOWN(0)
+- **UNKNOWN (0)**
 
-Represents an unknown or unsupported function type. `fromName()` and `fromCode()` return this value when no match is found.
+    Represents an unknown or unsupported function type. `fromName()` and `fromCode()` return this value when no match is found.
 
-### BM25(1)
+- **BM25 (1)**
 
-Represents the BM25 full-text scoring function.
+    Represents the BM25 full-text scoring function.
 
-### TEXTEMBEDDING(2)
+- **TEXTEMBEDDING (2)**
 
-Represents a text-embedding function.
+    Represents a text-embedding function.
 
-### RERANK(3)
+- **RERANK (3)**
 
-Represents a reranking function.
+    Represents a reranking function.
 
-### MINHASH(4)
+- **MINHASH (4)**
 
-Represents a MinHash function.
+    Represents a MinHash function.
 
-### MOLFINGERPRINT(5)
+- **MOLFINGERPRINT (5)**
 
-Represents a molecular-fingerprint function.
+    Represents a molecular-fingerprint function.
 
 **RETURNS:**
 

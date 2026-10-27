@@ -26,7 +26,7 @@ CreateCollectionReq.CollectionSchema.builder()
     A list of **[FieldSchema](../FieldSchema.md)** objects that define the fields in the collection schema.
 
     <div class="alert note">
-    
+
     A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
 
     </div>
@@ -76,4 +76,3 @@ collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(Dat
 ## Methods
 
 The following are the methods of the `CollectionSchema` class:
-

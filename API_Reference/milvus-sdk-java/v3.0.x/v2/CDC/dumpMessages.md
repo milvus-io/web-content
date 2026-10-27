@@ -27,6 +27,7 @@ dumpMessages(DumpMessagesReq.builder()
 - `startMessageID(GetReplicateInfoResp.MessageID startMessageID)`
 
     The WAL start position. `walName` supports `RocksMQ`, `Pulsar`, `Kafka`, and `WoodPecker`.
+    The nested `MessageID` type is documented with [GetReplicateInfoResp](getReplicateInfo.md).
 
 - `startTimetick(Long startTimetick)`
 

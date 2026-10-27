@@ -98,4 +98,3 @@ for (QueryResultsWrapper.RowRecord rowRecord : response.getData().getRowRecords(
     System.out.println(rowRecord);
 }
 ```
-

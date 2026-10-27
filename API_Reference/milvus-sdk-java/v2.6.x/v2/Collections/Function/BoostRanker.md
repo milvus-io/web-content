@@ -49,7 +49,7 @@ BoostRanker.builder()
     The filter expression that will be used to match entities among search result entities. It can be any valid basic filter expression mentioned in [Filtering Explained](https://milvus.io/docs/boolean.md).
 
     <div class="alert note">
-    
+
     Only use basic operators, such as `==`, `>`, or `<`. Using advanced operators, such as `text_match` or `phrase_match`, will degrade search performance.
 
     </div>
@@ -66,13 +66,13 @@ BoostRanker.builder()
 
 - `randomScoreSeed(Long randomScoreSeed)`
 
-    The random function that works with `randomScoreField(String randomScoreField)` to generate a value between `0` and `1` randomly. 
+    The random function that works with `randomScoreField(String randomScoreField)` to generate a value between `0` and `1` randomly.
 
     You should specify an initial value to start a pseudorandom number generator (PRNG).
 
 - `randomScoreField(String randomScoreField)`
 
-    The random function that works with `randomScoreSeed(Long randomScoreSeed)` to generate a value between `0` and `1` randomly. 
+    The random function that works with `randomScoreSeed(Long randomScoreSeed)` to generate a value between `0` and `1` randomly.
 
     You should specify the name of a field whose value will be used as a random factor in generating the random number. A field with unique values will suffice.
 
@@ -102,7 +102,7 @@ BoostRanker boost = BoostRanker.builder()
     .randomScoreSeed(123L)
     .randomScoreField("id")
     .build();
-    
+
 // Instead, you can use the Function class as well
 Function boostFunc = Function.builder()
     .functionType(FunctionType.RERANK)
@@ -114,4 +114,3 @@ Function boostFunc = Function.builder()
     .param("random_score", "{\"seed\": 123, \"field\": \"id\"}")
     .build();
 ```
-
