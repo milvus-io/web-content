@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ",
+    "label": "ابدأ الآن",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "أنواع الوحدات المترية",
+        "label": "أنواع المقاييس",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1359,7 +1365,7 @@
                 "children": []
               },
               {
-                "label": "مصنف RRF",
+                "label": "مُصنِّف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1421,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف نماذج اللغة الكبيرة (vLLM)",
+                    "label": "مُصنِّف vLLM",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1987,7 +1993,7 @@
             "children": []
           },
           {
-            "label": "ترقية إصدار Milvus المستقل",
+            "label": "ترقية Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2108,7 +2114,7 @@
             "children": []
           },
           {
-            "label": "تمكين RBAC",
+            "label": "تمكين نظام RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2440,7 +2446,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال أي آي",
+                "label": "ميسترال آي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []

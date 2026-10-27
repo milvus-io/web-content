@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1243,7 +1249,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi dan Model",
+        "label": "Inferensi Fungsi &amp; Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1645,7 +1651,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Claude Code",
+        "label": "Server MCP untuk Kode Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1950,7 +1956,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kelompok Skala",
+            "label": "Kluster Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -2222,7 +2228,7 @@
                 "children": []
               },
               {
-                "label": "Migrasi Antar Instansi dalam Satu Bucket",
+                "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []

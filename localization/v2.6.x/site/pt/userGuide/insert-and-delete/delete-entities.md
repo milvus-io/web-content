@@ -2,8 +2,8 @@
 id: delete-entities.md
 title: Eliminar entidades
 summary: >-
-  É possível eliminar as entidades que já não são necessárias através de
-  condições de filtragem ou das suas chaves primárias.
+  Pode eliminar as entidades que já não são necessárias, utilizando condições de
+  filtragem ou as respetivas chaves primárias.
 ---
 <h1 id="Delete-Entities" class="common-anchor-header">Eliminar entidades<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>É possível eliminar as entidades que já não são necessárias através de condições de filtragem ou das suas chaves primárias.</p>
-<h2 id="Delete-Entities-by-Filtering-Conditions" class="common-anchor-header">Eliminar entidades por condições de filtragem<button data-href="#Delete-Entities-by-Filtering-Conditions" class="anchor-icon" translate="no">
+    </button></h1><p>Pode eliminar as entidades que já não são necessárias, utilizando condições de filtragem ou as suas chaves primárias.</p>
+<h2 id="Delete-Entities-by-Filtering-Conditions" class="common-anchor-header">Eliminar entidades através de condições de filtragem<button data-href="#Delete-Entities-by-Filtering-Conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +36,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao eliminar várias entidades que partilham alguns atributos num lote, pode utilizar expressões de filtragem. O código de exemplo abaixo usa o operador <strong>in</strong> para excluir em massa todas as entidades com seu campo <strong>de cor</strong> definido para os valores <strong>vermelho</strong> e <strong>roxo</strong>. Também pode utilizar outros operadores para construir expressões de filtro que satisfaçam os seus requisitos. Para obter mais informações sobre expressões de filtro, consulte <a href="/docs/pt/v2.6.x/boolean.md">Filtragem explicada</a>.</p>
+    </button></h2><p>Ao eliminar em lote várias entidades que partilham alguns atributos, pode utilizar expressões de filtro. O código de exemplo abaixo utiliza o operador <strong>«in»</strong> para eliminar em massa todas as entidades cujo campo <strong>«color</strong> » esteja definido com os valores <strong>«red</strong> » e <strong>«purple</strong>». Também pode utilizar outros operadores para construir expressões de filtro que satisfaçam os seus requisitos. Para mais informações sobre expressões de filtro, consulte <a href="/docs/pt/v2.6.x/boolean.md">«Explicação</a> sobre <a href="/docs/pt/v2.6.x/boolean.md">filtragem</a>».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -48,7 +53,7 @@ client = MilvusClient(
 
 res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976&#x27;]&quot;</span></span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -68,7 +73,7 @@ res = client.delete(
 
 <span class="hljs-type">DeleteResp</span> <span class="hljs-variable">deleteResp</span> <span class="hljs-operator">=</span> client.delete(DeleteReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976&#x27;]&quot;</span>)
         .build());
 
 <button class="copy-code-btn"></button></code></pre>
@@ -81,7 +86,7 @@ res = client.delete(
 <span class="hljs-comment">// 7. Delete entities</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">delete</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976&#x27;]&quot;</span></span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">delete_cnt</span>)
@@ -132,7 +137,7 @@ curl --request POST \
     &quot;filter&quot;: &quot;color in [\&quot;red_7025\&quot;, \&quot;purple_4976\&quot;]&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-by-Primary-Keys" class="common-anchor-header">Excluir entidades por chaves primárias<button data-href="#Delete-Entities-by-Primary-Keys" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-by-Primary-Keys" class="common-anchor-header">Eliminar entidades por chaves primárias<button data-href="#Delete-Entities-by-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,9 +152,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Na maioria dos casos, uma chave primária identifica exclusivamente uma entidade. Você pode excluir entidades definindo suas chaves primárias na solicitação de exclusão. O código de exemplo abaixo demonstra como excluir duas entidades com chaves primárias <strong>18</strong> e <strong>19</strong>.</p>
+    </button></h2><p>Na maioria dos casos, uma chave primária identifica uma entidade de forma única. Pode eliminar entidades definindo as suas chaves primárias no pedido de eliminação. O código de exemplo abaixo demonstra como eliminar duas entidades com as chaves primárias <strong>18</strong> e <strong>19</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 <span class="highlighted-wrapper-line">    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]</span>
@@ -205,7 +215,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-from-Partitions" class="common-anchor-header">Excluir entidades de partições<button data-href="#Delete-Entities-from-Partitions" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-from-Partitions" class="common-anchor-header">Eliminar entidades de partições<button data-href="#Delete-Entities-from-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,9 +230,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Você também pode excluir entidades armazenadas em partições específicas. Os trechos de código a seguir assumem que você tem uma partição chamada <strong>PartitionA</strong> na sua coleção.</p>
+    </button></h2><p>Também é possível eliminar entidades armazenadas em partições específicas. Os trechos de código seguintes partem do princípio de que existe uma partição denominada <strong>PartitionA</strong> na sua coleção.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>],

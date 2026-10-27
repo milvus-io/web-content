@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ein Index ist eine zusätzliche Struktur, die auf den Daten aufbaut. Seine interne Struktur hängt vom verwendeten Algorithmus für die ungefähre Suche nach dem nächsten Nachbarn ab. Ein Index beschleunigt die Suche, verursacht jedoch während der Suche zusätzlichen Aufwand bei der Vorverarbeitung sowie zusätzlichen Speicherplatz- und RAM-Bedarf. Darüber hinaus senkt die Verwendung eines Index in der Regel die Recall-Rate (auch wenn der Effekt vernachlässigbar ist, spielt er dennoch eine Rolle). Daher wird in diesem Artikel erläutert, wie sich die Kosten für die Verwendung eines Index minimieren und gleichzeitig die Vorteile maximieren lassen.</p>
+    </button></h1><p>Ein Index ist eine zusätzliche Struktur, die auf den Daten aufbaut. Seine interne Struktur hängt vom verwendeten Algorithmus für die ungefähre Suche nach dem nächsten Nachbarn ab. Ein Index beschleunigt die Suche, verursacht jedoch während der Suche zusätzlichen Aufwand bei der Vorverarbeitung sowie zusätzlichen Speicherplatz- und RAM-Bedarf. Darüber hinaus senkt die Verwendung eines Index in der Regel die Wiederauffindungsrate (auch wenn der Effekt vernachlässigbar ist, spielt er dennoch eine Rolle). Daher wird in diesem Artikel erläutert, wie sich die Kosten für die Verwendung eines Index minimieren und gleichzeitig die Vorteile maximieren lassen.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus sind Indizes feldspezifisch, und die anwendbaren Indextypen variieren je nach den Datentypen der Zielfelder. Als professionelle Vektordatenbank konzentriert sich Milvus darauf, sowohl die Leistung der Vektorsuche als auch die der skalaren Filterung zu verbessern, weshalb es verschiedene Indextypen anbietet.</p>
+    </button></h2><p>In Milvus sind Indizes feldspezifisch, und die anwendbaren Indextypen variieren je nach Datentyp der Zielfelder. Als professionelle Vektordatenbank konzentriert sich Milvus darauf, sowohl die Leistung der Vektorsuche als auch die der skalaren Filterung zu verbessern, weshalb es verschiedene Indextypen anbietet.</p>
 <p>Die folgende Tabelle listet die Zuordnung zwischen Felddatentypen und den entsprechenden Indextypen auf.</p>
 <table>
    <tr>
@@ -52,7 +52,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>FLOAT_VECTOR</p></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
+     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>IVF_RABITQ_FASTSCAN</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
      <td><ul><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
@@ -95,7 +95,7 @@ summary: >-
      <td><p>INVERTED</p></td>
    </tr>
 </table>
-<p>Dieser Artikel befasst sich mit der Auswahl geeigneter Vektorindizes. Für skalare Felder können Sie stets den empfohlenen Index-Typ verwenden.</p>
+<p>Dieser Artikel befasst sich mit der Auswahl geeigneter Vektorindizes. Für skalare Felder können Sie stets den empfohlenen Indextyp verwenden.</p>
 <p>Die Auswahl eines geeigneten Indextyps für eine Vektorsuche kann sich erheblich auf die Leistung und die Ressourcennutzung auswirken. Bei der Auswahl eines Indextyps für ein Vektorfeld müssen verschiedene Faktoren berücksichtigt werden, darunter die zugrunde liegende Datenstruktur, die Speicherauslastung und die Leistungsanforderungen.</p>
 <h2 id="Vector-Index-anatomy" class="common-anchor-header">Aufbau eines Vektorindex<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ summary: >-
    <span>Aufbau eines Vektorindex</span>
   
  </span></p>
-<p>Bei der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu ermitteln. Bei der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um Abstände mit höherer Präzision neu zu berechnen, und gibt schließlich die genauesten <code translate="no">topK</code> Ergebnisse zurück. Dieser hybride Ansatz schafft ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit, indem die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt wird.</p>
+<p>Bei der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu ermitteln. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um Abstände mit höherer Präzision neu zu berechnen, und gibt schließlich die genauesten <code translate="no">topK</code> Ergebnisse zurück. Dieser hybride Ansatz schafft ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit, indem die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt wird.</p>
 <h3 id="Data-structure" class="common-anchor-header">Datenstruktur<button data-href="#Data-structure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,10 +138,10 @@ summary: >-
     </button></h3><p>Die Datenstruktur bildet die grundlegende Ebene des Index. Zu den gängigen Typen gehören:</p>
 <ul>
 <li><p><strong>Inverted File (IVF)</strong></p>
-<p>Index-Typen der IVF-Reihe ermöglichen es Milvus, Vektoren durch zentroidbasierte Partitionierung in Buckets zu gruppieren. Im Allgemeinen kann man davon ausgehen, dass alle Vektoren in einem Bucket wahrscheinlich nahe am Abfragevektor liegen, wenn das Zentrum des Buckets nahe am Abfragevektor liegt. Basierend auf dieser Prämisse durchsucht Milvus nur die Vektor-Embeddings in jenen Buckets, deren Zentren nahe am Abfragevektor liegen, anstatt den gesamten Datensatz zu untersuchen. Diese Strategie reduziert den Rechenaufwand bei gleichzeitiger Beibehaltung einer akzeptablen Genauigkeit.</p>
+<p>Index-Typen der IVF-Reihe ermöglichen es Milvus, Vektoren durch zentroidbasierte Partitionierung in Buckets zu gruppieren. Im Allgemeinen kann man davon ausgehen, dass alle Vektoren in einem Bucket wahrscheinlich nahe am Abfragevektor liegen, wenn sich das Zentrum des Buckets nahe am Abfragevektor befindet. Basierend auf dieser Prämisse durchsucht Milvus nur die Vektor-Einbettungen in jenen Buckets, deren Zentren nahe am Abfragevektor liegen, anstatt den gesamten Datensatz zu untersuchen. Diese Strategie reduziert den Rechenaufwand bei gleichzeitiger Aufrechterhaltung einer akzeptablen Genauigkeit.</p>
 <p>Diese Art von Indexdatenstruktur eignet sich ideal für große Datensätze, die einen schnellen Durchsatz erfordern.</p></li>
 <li><p><strong>Graphbasierte Struktur</strong></p>
-<p>Eine graphbasierte Datenstruktur für die Vektorsuche, wie beispielsweise „Hierarchical Navigable Small World“ (<a href="https://arxiv.org/abs/1603.09320">HNSW</a>), bildet einen geschichteten Graphen, in dem jeder Vektor mit seinen nächsten Nachbarn verbunden ist. Abfragen durchlaufen diese Hierarchie, beginnend bei den groben oberen Schichten und wechselnd zu den unteren Schichten, was eine effiziente Suchkomplexität in logarithmischer Zeit ermöglicht.</p>
+<p>Eine graphbasierte Datenstruktur für die Vektorsuche, wie beispielsweise „Hierarchical Navigable Small World“ (<a href="https://arxiv.org/abs/1603.09320">HNSW</a>), bildet einen geschichteten Graphen, in dem jeder Vektor mit seinen nächsten Nachbarn verbunden ist. Abfragen navigieren durch diese Hierarchie, beginnend bei groben oberen Schichten und weiterführend zu unteren Schichten, was eine effiziente Suchkomplexität in logarithmischer Zeit ermöglicht.</p>
 <p>Diese Art von Indexdatenstruktur eignet sich besonders für hochdimensionale Räume und Szenarien, die Abfragen mit geringer Latenz erfordern.</p></li>
 </ul>
 <h3 id="Quantization" class="common-anchor-header">Quantisierung<button data-href="#Quantization" class="anchor-icon" translate="no">
@@ -179,7 +179,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Quantisierung ist von Natur aus verlustbehaftet. Um die Wiederauffindungsrate aufrechtzuerhalten, erzeugt die Quantisierung durchweg mehr Top-K-Kandidaten als erforderlich. Dadurch können Refiner mit höherer Genauigkeit die Top-K-Ergebnisse aus diesen Kandidaten weiter auswählen und so die Wiederauffindungsrate verbessern.</p>
+    </button></h3><p>Die Quantisierung ist von Natur aus verlustbehaftet. Um die Wiederauffindungsrate aufrechtzuerhalten, erzeugt die Quantisierung durchweg mehr Top-K-Kandidaten als nötig, sodass Refiner mit höherer Genauigkeit die Top-K-Ergebnisse aus diesen Kandidaten weiter auswählen und so die Wiederauffindungsrate verbessern können.</p>
 <p>Beispielsweise verarbeitet der FP32-Refiner die durch die Quantisierung zurückgegebenen Suchergebniskandidaten, indem er die Abstände mit FP32-Genauigkeit anstelle der quantisierten Werte neu berechnet.</p>
 <p>Dies ist entscheidend für Anwendungen, die einen Kompromiss zwischen Sucheffizienz und Präzision erfordern, wie beispielsweise die semantische Suche oder Empfehlungssysteme, bei denen geringfügige Abstandsabweichungen die Ergebnisqualität erheblich beeinflussen.</p>
 <h3 id="Summary" class="common-anchor-header">Zusammenfassung<button data-href="#Summary" class="anchor-icon" translate="no">
@@ -216,8 +216,8 @@ summary: >-
     </button></h2><p>Bei der Bewertung der Leistung ist es entscheidend, ein Gleichgewicht zwischen <strong>Erstellungszeit</strong>, <strong>Abfragen pro Sekunde (QPS)</strong> und <strong>Recall-Rate</strong> herzustellen. Die allgemeinen Regeln lauten wie folgt:</p>
 <ul>
 <li><p><strong>Graphbasierte Indextypen</strong> übertreffen <strong>IVF-Varianten</strong> in der Regel hinsichtlich der <strong>QPS</strong>.</p></li>
-<li><p><strong>IVF-Varianten</strong> eignen sich besonders für Szenarien mit <strong>einem hohen Top-K-Wert (beispielsweise über 2.000)</strong>.</p></li>
-<li><p><strong>PQ</strong> bietet im Vergleich zu <strong>SQ</strong> bei ähnlichen Kompressionsraten in der Regel eine bessere Recall-Rate, obwohl letzteres eine höhere Leistung bietet.</p></li>
+<li><p><strong>IVF-Varianten</strong> eignen sich besonders für Szenarien mit <strong>einem großen topK (zum Beispiel über 2.000)</strong>.</p></li>
+<li><p><strong>PQ</strong> bietet im Vergleich zu <strong>SQ</strong> bei ähnlichen Kompressionsraten in der Regel eine bessere Recall-Rate, wobei SQ eine höhere Leistung bietet.</p></li>
 <li><p>Die Verwendung von Festplatten für einen Teil des Index (wie bei <strong>DiskANN</strong>) hilft bei der Verwaltung großer Datensätze, führt jedoch auch zu potenziellen IOPS-Engpässen.</p></li>
 </ul>
 <h3 id="Capacity" class="common-anchor-header">Kapazität<button data-href="#Capacity" class="anchor-icon" translate="no">
@@ -235,7 +235,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bei der Kapazität geht es in der Regel um das Verhältnis zwischen Datenvolumen und verfügbarem RAM. Beachten Sie bei der Kapazitätsplanung Folgendes:</p>
+    </button></h3><p>Bei der Kapazität geht es in der Regel um das Verhältnis zwischen Datengröße und verfügbarem RAM. Beachten Sie bei der Kapazitätsplanung Folgendes:</p>
 <ul>
 <li><p>Wenn ein Viertel Ihrer Rohdaten in den Arbeitsspeicher passt, sollten Sie DiskANN wegen seiner stabilen Latenz in Betracht ziehen.</p></li>
 <li><p>Wenn alle Ihre Rohdaten in den Arbeitsspeicher passen, sollten Sie speicherbasierte Indextypen und mmap in Betracht ziehen.</p></li>
@@ -259,14 +259,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der Recall hängt in der Regel mit der Filterquote zusammen, die sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Beachten Sie beim Umgang mit dem Recall Folgendes:</p>
+    </button></h3><p>Der Recall hängt in der Regel mit der Filterquote zusammen, die sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Beachten Sie beim Recall Folgendes:</p>
 <ul>
 <li><p>Liegt die Filterquote unter 85 %, schneiden graphbasierte Indextypen besser ab als IVF-Varianten.</p></li>
-<li><p>Liegt die Filterquote zwischen 85 % und 95 %, sollten Sie IVF-Varianten verwenden.</p></li>
+<li><p>Liegt die Filterquote zwischen 85 % und 95 %, verwenden Sie IVF-Varianten.</p></li>
 <li><p>Liegt die Filterquote über 98 %, verwenden Sie „Brute-Force“ (FLAT), um die genauesten Suchergebnisse zu erzielen.</p></li>
 </ul>
 <div class="alert note">
-<p>Die oben genannten Punkte treffen nicht immer zu. Es wird empfohlen, den Recall mit verschiedenen Indizierungstypen zu optimieren, um festzustellen, welcher Indizierungstyp am besten geeignet ist.</p>
+<p>Die oben genannten Punkte treffen nicht immer zu. Es wird empfohlen, den Recall mit verschiedenen Indextypen zu optimieren, um festzustellen, welcher Indextyp am besten geeignet ist.</p>
 </div>
 <h3 id="Performance" class="common-anchor-header">Leistung<button data-href="#Performance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -324,7 +324,7 @@ summary: >-
    <tr>
      <td><p>Rohdaten auf Festplatte, begrenzter Arbeitsspeicher</p></td>
      <td><p>IVFPQ/SQ + mmap</p></td>
-     <td><p>Gleicht Speicher- und Festplattenzugriff aus.</p></td>
+     <td><p>Schafft ein Gleichgewicht zwischen Speicher- und Festplattenzugriff.</p></td>
    </tr>
    <tr>
      <td><p>Hohe Filterquote (&gt;95 %)</p></td>
@@ -334,7 +334,7 @@ summary: >-
    <tr>
      <td><p>Großes „ <code translate="no">k</code> “ (≥1 % des Datensatzes)</p></td>
      <td><p>IVF</p></td>
-     <td><p>Cluster-Pruning reduziert den Rechenaufwand.</p></td>
+     <td><p>Das Cluster-Pruning reduziert den Rechenaufwand.</p></td>
    </tr>
    <tr>
      <td><p>Extrem hohe Recall-Rate (&gt;99 %)</p></td>
@@ -360,7 +360,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>Dieser Abschnitt befasst sich mit der Berechnung des Speicherverbrauchs eines bestimmten Indextyps und enthält viele technische Details. Sie können diesen Abschnitt getrost überspringen, wenn er nicht Ihren Interessen entspricht.</p>
 </div>
-<p>Der Speicherverbrauch eines Indexes wird durch seine Datenstruktur, die Kompressionsrate durch Quantisierung und den verwendeten Refiner beeinflusst. Generell haben graphbasierte Indizes aufgrund der Graphstruktur (z. B. <strong>HNSW</strong>) typischerweise einen höheren Speicherbedarf, was in der Regel einen spürbaren Overhead pro Vektorraum mit sich bringt. Im Gegensatz dazu sind IVF und seine Varianten speichereffizienter, da der Overhead pro Vektorraum geringer ist. Fortgeschrittene Techniken wie <strong>DiskANN</strong> ermöglichen es jedoch, Teile des Indexes, wie den Graphen oder den Refiner, auf der Festplatte zu speichern, wodurch die Speicherbelastung reduziert wird, während die Leistung erhalten bleibt.</p>
+<p>Der Speicherverbrauch eines Indexes wird durch seine Datenstruktur, die Kompressionsrate durch Quantisierung und den verwendeten Refiner beeinflusst. Generell haben graphbasierte Indizes aufgrund der Graphstruktur (z. B. <strong>HNSW</strong>) typischerweise einen höheren Speicherbedarf, was in der Regel einen spürbaren Overhead pro Vektorraum mit sich bringt. Im Gegensatz dazu sind IVF und seine Varianten speichereffizienter, da hier weniger Overhead pro Vektorraum anfällt. Fortgeschrittene Techniken wie <strong>DiskANN</strong> ermöglichen es jedoch, Teile des Indexes, wie den Graphen oder den Refiner, auf der Festplatte zu speichern, wodurch die Speicherbelastung reduziert wird, während die Leistung erhalten bleibt.</p>
 <p>Konkret lässt sich der Speicherbedarf eines Index wie folgt berechnen:</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">Speicherbedarf von IVF-Indizes<button data-href="#IVF-index-memory-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -483,8 +483,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Während IVF- und graphbasierte Indizes die Speichernutzung durch Quantisierung optimieren, sind Memory-Mapped-Dateien (mmap) und DiskANN für Szenarien vorgesehen, in denen Datensätze den verfügbaren Arbeitsspeicher (RAM) überschreiten.</p>
-<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN ist ein auf dem Vamana-Graphen basierender Index, der Datenpunkte für eine effiziente Navigation während der Suche miteinander verknüpft und gleichzeitig PQ anwendet, um die Größe der Vektoren zu reduzieren und eine schnelle, approximative Berechnung der Abstände zwischen den Vektoren zu ermöglichen.</p>
+    </button></h3><p>Während IVF- und graphbasierte Indizes die Speichernutzung durch Quantisierung optimieren, sind memory-mapped files (mmap) und DiskANN für Szenarien vorgesehen, in denen Datensätze den verfügbaren Arbeitsspeicher (RAM) überschreiten.</p>
+<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN ist ein auf dem Vamana-Graphen basierender Index, der Datenpunkte für eine effiziente Navigation während der Suche miteinander verknüpft und gleichzeitig PQ anwendet, um die Größe der Vektoren zu reduzieren und eine schnelle, approximative Abstandsberechnung zwischen den Vektoren zu ermöglichen.</p>
 <p>Der Vamana-Graph wird auf der Festplatte gespeichert, wodurch DiskANN große Datensätze verarbeiten kann, die andernfalls zu groß wären, um in den Arbeitsspeicher zu passen. Dies ist besonders nützlich für Datensätze mit Milliarden von Punkten.</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Memory-Mapped-Dateien (mmap)</h4><p>Memory Mapping (mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, sodass Milvus Indizes und Daten sowohl im Arbeitsspeicher als auch auf Festplatten speichern kann. Dieser Ansatz trägt zur Optimierung von E/A-Operationen bei, indem er den Overhead von E/A-Aufrufen je nach Zugriffshäufigkeit reduziert und dadurch die Speicherkapazität für Sammlungen erweitert, ohne die Suchleistung wesentlich zu beeinträchtigen.</p>
-<p>Insbesondere können Sie Milvus so konfigurieren, dass die Rohdaten in bestimmten Feldern per Memory-Mapping zugeordnet werden, anstatt sie vollständig in den Arbeitsspeicher zu laden. Auf diese Weise erhalten Sie direkten Speicherzugriff auf die Felder, ohne sich um Speicherprobleme sorgen zu müssen, und können die Kapazität der Sammlung erweitern.</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Memory-Mapped-Dateien (mmap)</h4><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, sodass Milvus Indizes und Daten sowohl im Arbeitsspeicher als auch auf Festplatten speichern kann. Dieser Ansatz trägt zur Optimierung von E/A-Vorgängen bei, indem er den Overhead von E/A-Aufrufen je nach Zugriffshäufigkeit reduziert und dadurch die Speicherkapazität für Sammlungen erweitert, ohne die Suchleistung wesentlich zu beeinträchtigen.</p>
+<p>Konkret können Sie Milvus so konfigurieren, dass die Rohdaten in bestimmten Feldern per Memory-Mapping abgebildet werden, anstatt sie vollständig in den Arbeitsspeicher zu laden. Auf diese Weise erhalten Sie direkten Speicherzugriff auf die Felder, ohne sich um Speicherprobleme sorgen zu müssen, und können die Kapazität der Sammlung erweitern.</p>

@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ de type StructArray",
+                "label": "Créer un champ StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1377,7 +1383,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du classement « Decay »",
+                    "label": "Présentation du « Decay Ranker »",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2216,7 +2222,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration au sein d'une même instance",
+                "label": "Sauvegarde et restauration dans une seule instance",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

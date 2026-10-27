@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдэра",
+                    "label": "Линдер",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1118,7 +1124,7 @@
                 "children": []
               },
               {
-                "label": "Операторы над массивами",
+                "label": "Операторы с массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1191,7 +1197,7 @@
                 "children": []
               },
               {
-                "label": "Поиск по диапазону с помощью StructArray",
+                "label": "Поиск по диапазону с использованием StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1371,7 +1377,7 @@
                 "children": []
               },
               {
-                "label": "Рейтинг разложения",
+                "label": "Рейтинг распада",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1415,7 +1421,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор Model Ranker",
+                    "label": "Обзор модели ранжирования",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2144,7 +2150,7 @@
                 "children": []
               },
               {
-                "label": "Удалить пользователей и роли",
+                "label": "Удаление пользователей и ролей",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2222,7 +2228,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном хранилище",
+                "label": "Перенос данных между экземплярами в одном бакете",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -2603,7 +2609,7 @@
                 "children": []
               },
               {
-                "label": "API Milvus Async",
+                "label": "Async API Milvus",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

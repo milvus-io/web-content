@@ -454,7 +454,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufspaltung",
+                "label": "JSON-Aufteilung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -735,7 +735,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -832,7 +832,7 @@
             "children": []
           },
           {
-            "label": "Gleitkommavektorindizes",
+            "label": "Gleitkomma-Vektorindizes",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -952,7 +958,7 @@
             ]
           },
           {
-            "label": "Skalare Indizes",
+            "label": "Skalarindizes",
             "id": "scalar-indexes",
             "order": 5,
             "isMenu": true,
@@ -1499,7 +1505,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über mehrstufige Speicherung",
+                "label": "Übersicht über die mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -2716,7 +2722,7 @@
         ]
       },
       {
-        "label": "Agenten",
+        "label": "Vertreter",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2769,7 +2775,7 @@
             "children": []
           },
           {
-            "label": "Grundlegendes zum Gedächtnis",
+            "label": "Grundlegendes zum Arbeitsspeicher",
             "id": "basic_memory_with_milvus.md",
             "order": 8,
             "children": []
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Embeddings",
+        "label": "Trichter-Suche mit Matroschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

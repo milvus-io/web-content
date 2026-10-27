@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e identificação automática",
+            "label": "Campo principal e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -761,7 +761,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externo",
+            "label": "Alterar o esquema de cobrança externa",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1645,7 +1651,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o código Claude",
+        "label": "Servidor MCP para o Código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2132,7 +2138,7 @@
                 "children": []
               },
               {
-                "label": "Conceder privilégios",
+                "label": "Conceder Privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -2496,7 +2502,7 @@
                 "children": []
               },
               {
-                "label": "Codificador cruzado",
+                "label": "Codificador Cruzado",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
@@ -2508,7 +2514,7 @@
                 "children": []
               },
               {
-                "label": "Jina IA",
+                "label": "Jina AI",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -3200,7 +3206,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com incorporações Matryoshka",
+        "label": "Pesquisa em funil com representações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

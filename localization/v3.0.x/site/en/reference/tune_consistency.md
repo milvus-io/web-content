@@ -39,23 +39,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is a system that separates storage and computation. In this system, <strong>DataNodes</strong> are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. <strong>QueryNodes</strong> handle computational tasks like Search. These tasks involve processing both <strong>batch data</strong> and <strong>streaming data</strong>. Simply put, batch data can be understood as data that has already been stored in object storage while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.</p>
-<p>Milvus Commercial Edition is a system that separates storage and computation. In this system, DataNodes are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. QueryNodes handle computational tasks like Search. These tasks involve processing both batch data and streaming data. Simply put, batch data can be understood as data that has already been stored in object storage, while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.</p>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
-    <span>Batch Data And Streaming Data</span>
-  </span>
-</p>
-<p>As shown in the figure above, QueryNodes can receive both streaming data and batch data simultaneously after receiving a Search request. However, due to network latency, the streaming data obtained by QueryNodes may be incomplete.</p>
-<p>To address this issue, Milvus timestamps each record in the data queue and continuously inserts synchronization timestamps into the data queue. Whenever a synchronization timestamp (syncTs) is received, QueryNodes sets it as the ServiceTime, meaning that QueryNodes can see all data prior to that Service Time. Based on the ServiceTime, Milvus can provide guarantee timestamps (GuaranteeTs) to meet different user requirements for consistency and availability. Users can inform QueryNodes of the need to include data prior to a specified point in time in the search scope by specifying GuaranteeTs in their Search requests.</p>
+    </button></h2><p>Milvus is a system that separates storage and computation. <strong>Streaming Nodes</strong> append all write operations to the Write-Ahead Log (WAL) and hold the <strong>growing data</strong> — data that is still in the WAL and not yet persisted. A recovery process converts growing data into <strong>historical data</strong> (sealed segments persisted in object storage such as MinIO/S3), which is served by <strong>Query Nodes</strong>. Each search or query request is received by a <strong>Query Delegator</strong> on the Streaming Node that hosts the collection’s WAL: the delegator generates the query plan, executes the growing-data part locally, forwards the historical-data part to the relevant Query Nodes, and merges the results before returning them. For details, refer to <a href="/docs/streaming_service.md">Streaming Service</a>.</p>
+<p>To provide consistency guarantees, Milvus assigns every message a Timestamp Oracle (TSO) timestamp that determines its order in the WAL, and continuously inserts synchronization timestamps into the WAL alongside the data messages. Whenever a synchronization timestamp (syncTs) is received, it is recorded as the ServiceTime, meaning that all data prior to that ServiceTime is visible to queries. Based on the ServiceTime, Milvus provides guarantee timestamps (GuaranteeTs) to meet different user requirements for consistency and availability. Users can inform the delegator of the need to include data prior to a specified point in time in the search scope by specifying GuaranteeTs in their Search requests.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
     <span>Service Time And Guarantee Time</span>
   </span>
 </p>
-<p>As shown in the figure above, if GuaranteeTs is less than ServiceTime, it means that all data before the specified time point has been fully written to disk, allowing QueryNodes to immediately perform the Search operation. When GuaranteeTs is greater than ServiceTime, QueryNodes must wait until ServiceTime exceeds GuaranteeTs before they can execute the Search operation.</p>
+<p>As shown in the figure above, if GuaranteeTs is less than ServiceTime, it means that all data before the specified time point is already visible, allowing the search to execute immediately. When GuaranteeTs is greater than ServiceTime, the search must wait until ServiceTime exceeds GuaranteeTs before it can execute.</p>
 <p>Users need to make a trade-off between query accuracy and query latency. If users have high consistency requirements and are not sensitive to query latency, they can set GuaranteeTs to a value as large as possible; if users wish to receive search results quickly and are more tolerant of query accuracy, then GuaranteeTs can be set to a smaller value.</p>
 <p>
   <span class="img-wrapper">
@@ -66,13 +58,13 @@ summary: >-
 <p>Milvus provides four types of consistency levels with different GuaranteeTs.</p>
 <ul>
 <li><p><strong>Strong</strong></p>
-<p>The latest timestamp is used as the GuaranteeTs, and QueryNodes have to wait until the ServiceTime meets the GuaranteeTs before executing Search requests.</p></li>
+<p>The latest timestamp is used as the GuaranteeTs, and the search has to wait until the ServiceTime meets the GuaranteeTs before executing.</p></li>
 <li><p><strong>Eventual</strong></p>
-<p>The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that QueryNodes can immediately execute Search requests upon all batch data.</p></li>
+<p>The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that the search executes immediately on the currently visible data.</p></li>
 <li><p><strong>Bounded Staleness</strong></p>
-<p>The GuranteeTs is set to a time point earlier than the latest timestamp to make QueryNodes to perform searches with a tolerance of certain data loss.</p></li>
+<p>The GuaranteeTs is set to a time point earlier than the latest timestamp, so that the search executes with a tolerance of certain recent data not yet being visible.</p></li>
 <li><p><strong>Session</strong></p>
-<p>The latest time point at which the client inserts data is used as the GuaranteeTs so that QueryNodes can perform searches upon all the data inserted by the client.</p></li>
+<p>The latest time point at which the client inserts data is used as the GuaranteeTs so that searches can cover all the data inserted by the client.</p></li>
 </ul>
 <p>Milvus uses Bounded Staleness as the default consistency level. If the GuaranteeTs is left unspecified, the latest ServiceTime is used as the GuaranteeTs.</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">Set Consistency Level<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">

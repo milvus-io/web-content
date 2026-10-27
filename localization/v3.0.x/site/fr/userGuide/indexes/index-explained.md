@@ -3,13 +3,13 @@ id: index-explained.md
 title: Explication de l'index
 summary: >-
   Un index est une structure supplémentaire construite par-dessus les données.
-  Sa structure interne dépend de l’algorithme de recherche par plus proche
-  voisin utilisé. Un index accélère la recherche, mais entraîne un surcroît de
-  temps de prétraitement, d’espace disque et de mémoire vive pendant la
-  recherche. De plus, l’utilisation d’un index réduit généralement le taux de
-  rappel (même si cet effet est négligeable, il n’en reste pas moins important).
-  C'est pourquoi cet article explique comment minimiser les coûts liés à
-  l'utilisation d'un index tout en maximisant ses avantages.
+  Sa structure interne dépend de l’algorithme de recherche du plus proche voisin
+  utilisé. Un index accélère la recherche, mais entraîne un surcoût en temps de
+  prétraitement, en espace disque et en mémoire vive pendant la recherche. De
+  plus, l’utilisation d’un index réduit généralement le taux de rappel (même si
+  cet effet est négligeable, il n’en reste pas moins important). C'est pourquoi
+  cet article explique comment minimiser les coûts liés à l'utilisation d'un
+  index tout en maximisant ses avantages.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Explication de l'index<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Un index est une structure supplémentaire construite par-dessus les données. Sa structure interne dépend de l’algorithme de recherche du plus proche voisin utilisé. Un index accélère la recherche, mais entraîne un surcroît de temps de prétraitement, d’espace disque et de mémoire vive (RAM) pendant la recherche. De plus, l’utilisation d’un index réduit généralement le taux de rappel (même si cet effet est négligeable, il n’en reste pas moins important). C'est pourquoi cet article explique comment minimiser les coûts liés à l'utilisation d'un index tout en maximisant ses avantages.</p>
+    </button></h1><p>Un index est une structure supplémentaire construite par-dessus les données. Sa structure interne dépend de l’algorithme de recherche du plus proche voisin utilisé. Un index accélère la recherche, mais entraîne un surcoût en temps de prétraitement, en espace et en mémoire vive pendant la recherche. De plus, l’utilisation d’un index réduit généralement le taux de rappel (même si cet effet est négligeable, il n’en reste pas moins important). C’est pourquoi cet article explique comment minimiser les coûts liés à l’utilisation d’un index tout en maximisant ses avantages.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,11 +47,11 @@ summary: >-
 <table>
    <tr>
      <th><p>Type de données du champ</p></th>
-     <th><p>Types d'index applicables</p></th>
+     <th><p>Types d’index applicables</p></th>
    </tr>
    <tr>
      <td><p>FLOAT_VECTOR</p></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
+     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>IVF_RABITQ_FASTSCAN</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
      <td><ul><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
@@ -67,7 +67,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (recommandé)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul><li><p>INVERTÉ (recommandé)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
@@ -86,7 +86,7 @@ summary: >-
      <td><p>BITMAP (recommandé)</p></td>
    </tr>
    <tr>
-     <td><p>ARRAY <sup>(éléments de types BOOL, INT8/16/32/64, FLOAT, DOUBLE et VARCHAR)</sup></p></td>
+     <td><p>TABLEAU <sup>(éléments de types BOOL, INT8/16/32/64, FLOAT, DOUBLE et VARCHAR)</sup></p></td>
      <td><p>INVERSÉ</p></td>
    </tr>
    <tr>
@@ -94,7 +94,7 @@ summary: >-
      <td><p>INVERTED</p></td>
    </tr>
 </table>
-<p>Cet article explique comment choisir les index vectoriels adaptés. Pour les champs scalaires, vous pouvez toujours utiliser le type d’index recommandé.</p>
+<p>Cet article explique comment choisir les index vectoriels appropriés. Pour les champs scalaires, vous pouvez toujours utiliser le type d’index recommandé.</p>
 <p>Le choix d’un type d’index adapté à une recherche vectorielle peut avoir un impact significatif sur les performances et l’utilisation des ressources. Lors du choix d’un type d’index pour un champ vectoriel, il est essentiel de prendre en compte divers facteurs, notamment la structure de données sous-jacente, l’utilisation de la mémoire et les exigences en matière de performances.</p>
 <h2 id="Vector-Index-anatomy" class="common-anchor-header">Anatomie d’un index vectoriel<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +179,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>La quantification est intrinsèquement source de pertes. Afin de maintenir le taux de rappel, la quantification génère systématiquement plus de candidats « top-K » que nécessaire, ce qui permet aux raffinateurs d’utiliser une précision plus élevée pour sélectionner les résultats « top-K » parmi ces candidats, améliorant ainsi le taux de rappel.</p>
-<p>Par exemple, le « refiner » FP32 agit sur les candidats de résultats de recherche renvoyés par la quantification en recalculant les distances à l’aide de la précision FP32 plutôt qu’à partir des valeurs quantifiées.</p>
+<p>Par exemple, le « refiner » FP32 traite les candidats issus de la quantification en recalculant les distances avec une précision FP32 plutôt qu’à partir des valeurs quantifiées.</p>
 <p>Ceci est essentiel pour les applications nécessitant un compromis entre l’efficacité de la recherche et la précision, telles que la recherche sémantique ou les systèmes de recommandation, où de légères variations de distance ont un impact significatif sur la qualité des résultats.</p>
 <h3 id="Summary" class="common-anchor-header">Résumé<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -236,12 +236,12 @@ summary: >-
       </svg>
     </button></h3><p>La capacité implique généralement la relation entre la taille des données et la mémoire vive (RAM) disponible. Lorsque vous traitez la question de la capacité, tenez compte des éléments suivants :</p>
 <ul>
-<li><p>Si un quart de vos données brutes tient en mémoire, envisagez DiskANN pour sa latence stable.</p></li>
+<li><p>Si un quart de vos données brutes tient en mémoire, optez pour DiskANN en raison de sa latence stable.</p></li>
 <li><p>Si l’intégralité de vos données brutes tient en mémoire, privilégiez les types d’index basés sur la mémoire et mmap.</p></li>
-<li><p>Vous pouvez utiliser les types d’index avec quantification et mmap pour privilégier la capacité maximale au détriment de la précision.</p></li>
+<li><p>Vous pouvez utiliser les types d’index avec quantification et la fonction mmap pour privilégier la capacité maximale au détriment de la précision.</p></li>
 </ul>
 <div class="alert note">
-<p>La fonction mmap n’est pas toujours la solution. Lorsque la majeure partie de vos données se trouve sur le disque, DiskANN offre une meilleure latence.</p>
+<p>La fonction mmap n’est pas toujours la solution. Lorsque la plupart de vos données se trouvent sur le disque, DiskANN offre une meilleure latence.</p>
 </div>
 <h3 id="Recall" class="common-anchor-header">Rappel<button data-href="#Recall" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -262,7 +262,7 @@ summary: >-
 <ul>
 <li><p>Si le taux de filtrage est inférieur à 85 %, les types d’index basés sur des graphes sont plus performants que les variantes IVF.</p></li>
 <li><p>Si le taux de filtrage est compris entre 85 % et 95 %, utilisez les variantes IVF.</p></li>
-<li><p>Si le taux de filtrage est supérieur à 98 %, utilisez Brute-Force (FLAT) pour obtenir les résultats de recherche les plus précis.</p></li>
+<li><p>Si le taux de filtrage est supérieur à 98 %, utilisez la méthode Brute-Force (FLAT) pour obtenir les résultats de recherche les plus précis.</p></li>
 </ul>
 <div class="alert note">
 <p>Les recommandations ci-dessus ne sont pas toujours valables. Il est conseillé d’ajuster le rappel en testant différents types d’index afin de déterminer celui qui fonctionne le mieux.</p>
@@ -282,7 +282,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les performances d’une recherche dépendent généralement du « top-K », qui désigne le nombre d’enregistrements renvoyés par la recherche. En matière de performances, tenez compte des éléments suivants :</p>
+    </button></h3><p>Les performances d’une recherche sont généralement évaluées en fonction du « top-K », qui désigne le nombre d’enregistrements renvoyés par la recherche. En matière de performances, tenez compte des éléments suivants :</p>
 <ul>
 <li><p>Pour une recherche avec un top-K faible (par exemple, 2 000) nécessitant un taux de rappel élevé, les types d’index basés sur des graphes sont plus performants que les variantes IVF.</p></li>
 <li><p>Pour une recherche avec un top-K élevé (par rapport au nombre total d’embeddings vectoriels), les variantes IVF constituent un meilleur choix que les types d’index basés sur des graphes.</p></li>
@@ -312,7 +312,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>Les données brutes tiennent en mémoire</p></td>
-     <td><p>HNSW, IVF + affinage</p></td>
+     <td><p>HNSW, IVF + affinement</p></td>
      <td><p>Utilisez HNSW pour un faible taux de « low-<code translate="no">k</code> » et un taux de rappel élevé.</p></td>
    </tr>
    <tr>
@@ -425,7 +425,7 @@ summary: >-
 </tr>
 </table></p></li>
 <li><p><strong>Calculer la surcharge liée au raffinement.</strong></p>
-<p>Les variantes d’IVF sont souvent associées à un affineur pour reclasser les candidats. Pour une recherche renvoyant les 10 premiers résultats avec un taux d’expansion de 5, la surcharge liée à l’affinement peut être estimée comme suit :</p>
+<p>Les variantes d’IVF sont souvent associées à un raffinateur pour reclasser les candidats. Pour une recherche renvoyant les 10 premiers résultats avec un taux d’expansion de 5, la surcharge liée au raffinement peut être estimée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
@@ -448,7 +448,7 @@ summary: >-
     </button></h3><p>Les types d’index basés sur des graphes, tels que HNSW, nécessitent une quantité importante de mémoire pour stocker à la fois la structure du graphe et les représentations vectorielles brutes. Vous trouverez ci-dessous une ventilation détaillée de la mémoire consommée par 1 million de vecteurs à 128 dimensions indexés à l’aide du type d’index HNSW.</p>
 <ol>
 <li><p><strong>Calcul de la mémoire utilisée par la structure du graphe.</strong></p>
-<p>Chaque vecteur dans HNSW conserve des connexions avec ses voisins. Avec un degré de graphe (nombre d’arêtes par nœud) de 32, la mémoire consommée peut être calculée comme suit :</p>
+<p>Chaque vecteur dans HNSW entretient des connexions avec ses voisins. Avec un degré de graphe (nombre d’arêtes par nœud) de 32, la mémoire consommée peut être calculée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calculer la mémoire utilisée par les représentations vectorielles brutes.</strong></p>
@@ -460,7 +460,7 @@ summary: >-
 <p>La quantification réduit la taille des vecteurs. Par exemple, l’utilisation de PQ avec 8 sous-quantificateurs (8 octets par vecteur) entraîne une compression drastique. La mémoire consommée par les vecteurs d’embeddement compressés peut être calculée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>On obtient ainsi un taux de compression de 64 par rapport aux représentations vectorielles brutes, et la mémoire totale utilisée par le type d’index <strong>HNSWPQ</strong> serait de <strong>128 Mo (graphe) + 8 Mo (vecteurs compressés) = 136 Mo</strong>.</p></li>
+<p>On obtient ainsi un taux de compression de 64 fois par rapport aux représentations vectorielles brutes, et la mémoire totale utilisée par le type d’index <strong>HNSWPQ</strong> serait de <strong>128 Mo (graphe) + 8 Mo (vecteurs compressés) = 136 Mo</strong>.</p></li>
 <li><p><strong>Calculer la surcharge liée au raffinement.</strong></p>
 <p>Les opérations de raffinement, telles que le reclassement à l’aide de vecteurs bruts, chargent temporairement des données de haute précision en mémoire. Pour une recherche renvoyant les 10 premiers résultats avec un taux d’expansion de 5, la surcharge liée au raffinement peut être estimée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
@@ -485,5 +485,5 @@ summary: >-
     </button></h3><p>Alors que les index IVF et basés sur des graphes optimisent l’utilisation de la mémoire grâce à la quantification, les fichiers mappés en mémoire (mmap) et DiskANN répondent aux scénarios où les ensembles de données dépassent la mémoire vive (RAM) disponible.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN est un index Vamana basé sur un graphe qui relie les points de données pour une navigation efficace pendant la recherche, tout en appliquant la quantification par probabilité (PQ) afin de réduire la taille des vecteurs et de permettre un calcul rapide et approximatif de la distance entre les vecteurs.</p>
 <p>Le graphe Vamana est stocké sur disque, ce qui permet à DiskANN de traiter de grands ensembles de données qui seraient autrement trop volumineux pour tenir en mémoire. Cela s’avère particulièrement utile pour les ensembles de données comportant des milliards de points.</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Fichiers mappés en mémoire (mmap)</h4><p>Le mappage en mémoire (mmap) permet un accès direct en mémoire à des fichiers volumineux sur disque, ce qui permet à Milvus de stocker les index et les données à la fois en mémoire et sur les disques durs. Cette approche contribue à optimiser les opérations d’E/S en réduisant la surcharge liée aux appels d’E/S en fonction de la fréquence d’accès, augmentant ainsi la capacité de stockage des collections sans impact significatif sur les performances de recherche.</p>
-<p>Plus précisément, vous pouvez configurer Milvus pour qu’il effectue un mappage en mémoire des données brutes de certains champs au lieu de les charger intégralement en mémoire. De cette manière, vous bénéficiez d’un accès direct en mémoire à ces champs sans vous soucier des problèmes de mémoire, tout en augmentant la capacité de la collection.</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Fichiers mappés en mémoire (mmap)</h4><p>Le mappage en mémoire (mmap) permet un accès direct en mémoire à des fichiers volumineux stockés sur disque, ce qui permet à Milvus de stocker les index et les données à la fois en mémoire et sur les disques durs. Cette approche contribue à optimiser les opérations d’E/S en réduisant la surcharge liée aux appels d’E/S en fonction de la fréquence d’accès, augmentant ainsi la capacité de stockage des collections sans impact significatif sur les performances de recherche.</p>
+<p>Plus précisément, vous pouvez configurer Milvus pour qu’il effectue un mappage en mémoire des données brutes de certains champs au lieu de les charger entièrement en mémoire. De cette manière, vous bénéficiez d’un accès direct en mémoire à ces champs sans vous soucier des problèmes de mémoire, tout en augmentant la capacité de la collection.</p>

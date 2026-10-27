@@ -3,13 +3,13 @@ id: index-explained.md
 title: Penjelasan tentang Indeks
 summary: >-
   Indeks adalah struktur tambahan yang dibangun di atas data. Struktur
-  internalnya bergantung pada algoritma pencarian tetangga terdekat (approximate
-  nearest neighbor) yang digunakan. Indeks mempercepat proses pencarian, tetapi
-  membutuhkan waktu prapemrosesan, ruang penyimpanan, dan RAM tambahan selama
-  proses pencarian berlangsung. Selain itu, penggunaan indeks biasanya
-  menurunkan tingkat recall (meskipun dampaknya dapat diabaikan, hal ini tetap
-  penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya
-  penggunaan indeks sekaligus memaksimalkan manfaatnya.
+  internalnya bergantung pada algoritma pencarian tetangga terdekat perkiraan
+  yang digunakan. Indeks mempercepat proses pencarian, tetapi membutuhkan waktu
+  prapemrosesan, ruang penyimpanan, dan RAM tambahan selama proses pencarian
+  berlangsung. Selain itu, penggunaan indeks biasanya menurunkan tingkat recall
+  (meskipun dampaknya dapat diabaikan, hal ini tetap penting). Oleh karena itu,
+  artikel ini menjelaskan cara meminimalkan biaya penggunaan indeks sekaligus
+  memaksimalkan manfaatnya.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Penjelasan tentang Indeks<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,10 +51,10 @@ summary: >-
    </tr>
    <tr>
      <td><p>FLOAT_VECTOR</p></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
+     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>IVF_RABITQ_FASTSCAN</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>FAISS</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VEKTOR</p></li><li><p>INT8_VEKTOR</p></li></ul></td>
+     <td><ul><li><p>FLOAT16_VEKTOR</p></li><li><p>BFLOAT16_VEKTOR</p></li><li><p>INT8_VEKTOR</p></li></ul></td>
      <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_BRUTE_FORCE</p></li></ul></td>
    </tr>
    <tr>
@@ -62,12 +62,12 @@ summary: >-
      <td><ul><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>MINHASH_LSH</p></li><li><p>FAISS</p></li></ul></td>
    </tr>
    <tr>
-     <td><p>VEKTOR_FLOAT_JARANG</p></td>
+     <td><p>SPARSE_FLOAT_VECTOR</p></td>
      <td><p>SPARSE_INVERTED_INDEX</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (Disarankan)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul><li><p>TERBALIK (Disarankan)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
@@ -137,7 +137,7 @@ summary: >-
     </button></h3><p>Struktur data merupakan lapisan dasar dari indeks. Jenis-jenis yang umum meliputi:</p>
 <ul>
 <li><p><strong>Inverted File (IVF)</strong></p>
-<p>Jenis indeks seri IVF memungkinkan Milvus mengelompokkan vektor ke dalam bucket melalui partisi berbasis pusat kluster. Secara umum, aman untuk mengasumsikan bahwa semua vektor dalam sebuah bucket kemungkinan besar berada dekat dengan vektor kueri jika pusat kluster bucket tersebut dekat dengan vektor kueri. Berdasarkan premis ini, Milvus hanya memindai embedding vektor di bucket-bucket yang pusatnya dekat dengan vektor kueri, alih-alih memeriksa seluruh dataset. Strategi ini mengurangi biaya komputasi sambil mempertahankan akurasi yang dapat diterima.</p>
+<p>Jenis indeks seri IVF memungkinkan Milvus mengelompokkan vektor ke dalam bucket melalui partisi berbasis pusat (centroid). Secara umum, aman untuk mengasumsikan bahwa semua vektor dalam suatu bucket kemungkinan besar berada dekat dengan vektor kueri jika pusat bucket tersebut dekat dengan vektor kueri. Berdasarkan premis ini, Milvus hanya memindai embedding vektor di bucket-bucket yang pusatnya dekat dengan vektor kueri, alih-alih memeriksa seluruh dataset. Strategi ini mengurangi biaya komputasi sambil mempertahankan akurasi yang dapat diterima.</p>
 <p>Jenis struktur data indeks ini ideal untuk dataset berskala besar yang membutuhkan throughput yang cepat.</p></li>
 <li><p><strong>Struktur berbasis graf</strong></p>
 <p>Struktur data berbasis graf untuk pencarian vektor, seperti Hierarchical Navigable Small World (<a href="https://arxiv.org/abs/1603.09320">HNSW</a>), membangun graf berlapis di mana setiap vektor terhubung ke tetangga terdekatnya. Kueri menelusuri hierarki ini, dimulai dari lapisan atas yang kasar dan beralih ke lapisan bawah, sehingga memungkinkan kompleksitas pencarian waktu logaritmik yang efisien.</p>
@@ -160,7 +160,7 @@ summary: >-
       </svg>
     </button></h3><p>Kuantisasi mengurangi penggunaan memori dan biaya komputasi melalui representasi yang lebih kasar:</p>
 <ul>
-<li><p><strong>Kuantisasi Skalar</strong> (mis. <strong>SQ8</strong>) memungkinkan Milvus mengompres setiap dimensi vektor menjadi satu byte (8-bit), sehingga mengurangi penggunaan memori sebesar 75% dibandingkan dengan bilangan floating-point 32-bit sambil tetap mempertahankan akurasi yang memadai.</p></li>
+<li><p><strong>Kuantisasi Skalar</strong> (misalnya <strong>SQ8</strong>) memungkinkan Milvus mengompres setiap dimensi vektor menjadi satu byte (8-bit), sehingga mengurangi penggunaan memori sebesar 75% dibandingkan dengan bilangan floating-point 32-bit sambil tetap mempertahankan akurasi yang memadai.</p></li>
 <li><p><strong>Kuantisasi Produk</strong> (<strong>PQ</strong>) memungkinkan Milvus membagi vektor menjadi subvektor dan mengkodekannya menggunakan pengelompokan berbasis buku kode. Hal ini menghasilkan rasio kompresi yang lebih tinggi (misalnya, 4-32x) dengan sedikit penurunan recall, sehingga cocok untuk lingkungan dengan keterbatasan memori.</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Refiner<button data-href="#Refiner" class="anchor-icon" translate="no">
@@ -212,12 +212,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat mengevaluasi kinerja, sangat penting untuk menyeimbangkan <strong>waktu pembangunan</strong>, <strong>kueri per detik (QPS)</strong>, dan <strong>tingkat recall</strong>. Aturan umumnya adalah sebagai berikut:</p>
+    </button></h2><p>Saat mengevaluasi kinerja, sangat penting untuk menyeimbangkan <strong>waktu pembuatan</strong>, <strong>kueri per detik (QPS)</strong>, dan <strong>tingkat recall</strong>. Aturan umumnya adalah sebagai berikut:</p>
 <ul>
 <li><p><strong>Jenis indeks berbasis graf</strong> biasanya mengungguli <strong>varian IVF</strong> dalam hal <strong>QPS</strong>.</p></li>
 <li><p><strong>Varian IVF</strong> sangat cocok untuk skenario dengan <strong>topK yang besar (misalnya, lebih dari 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> biasanya menawarkan tingkat recall yang lebih baik pada tingkat kompresi yang serupa jika dibandingkan dengan <strong>SQ</strong>, meskipun SQ memberikan kinerja yang lebih cepat.</p></li>
-<li><p>Menggunakan hard drive untuk sebagian indeks (seperti pada <strong>DiskANN</strong>) membantu mengelola kumpulan data besar, tetapi juga berpotensi menimbulkan kemacetan IOPS.</p></li>
+<li><p>Menggunakan hard drive untuk sebagian indeks (seperti pada <strong>DiskANN</strong>) membantu mengelola dataset besar, tetapi juga berpotensi menimbulkan bottleneck IOPS.</p></li>
 </ul>
 <h3 id="Capacity" class="common-anchor-header">Kapasitas<button data-href="#Capacity" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ summary: >-
 <li><p>Jika rasio penyaringan lebih dari 98%, gunakan Brute-Force (FLAT) untuk hasil pencarian yang paling akurat.</p></li>
 </ul>
 <div class="alert note">
-<p>Hal-hal di atas tidak selalu benar. Anda disarankan untuk menyesuaikan recall dengan jenis indeks yang berbeda untuk menentukan jenis indeks mana yang paling efektif.</p>
+<p>Hal-hal di atas tidak selalu benar. Anda disarankan untuk menyesuaikan recall dengan berbagai jenis indeks untuk menentukan jenis indeks mana yang paling efektif.</p>
 </div>
 <h3 id="Performance" class="common-anchor-header">Kinerja<button data-href="#Performance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -359,7 +359,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>Bagian ini berfokus pada perhitungan konsumsi memori dari jenis indeks tertentu dan mencakup banyak detail teknis. Anda dapat melewati bagian ini dengan aman jika tidak sesuai dengan minat Anda.</p>
 </div>
-<p>Konsumsi memori suatu indeks dipengaruhi oleh struktur datanya, tingkat kompresi melalui kuantisasi, dan refiner yang digunakan. Secara umum, indeks berbasis graf biasanya memiliki jejak memori yang lebih besar karena struktur grafnya (misalnya, <strong>HNSW</strong>), yang biasanya berarti adanya overhead ruang per-vektor yang cukup signifikan. Sebaliknya, IVF dan variannya lebih efisien dalam hal memori karena overhead per ruang vektor yang diterapkan lebih sedikit. Namun, teknik-teknik canggih seperti <strong>DiskANN</strong> memungkinkan bagian-bagian dari indeks, seperti graf atau refiner, untuk disimpan di disk, sehingga mengurangi beban memori sekaligus mempertahankan kinerja.</p>
+<p>Konsumsi memori suatu indeks dipengaruhi oleh struktur datanya, tingkat kompresi melalui kuantisasi, dan refiner yang digunakan. Secara umum, indeks berbasis graf biasanya memiliki jejak memori yang lebih besar karena struktur grafnya (misalnya, <strong>HNSW</strong>), yang biasanya menimbulkan overhead ruang per vektor yang cukup signifikan. Sebaliknya, IVF dan variannya lebih efisien dalam hal memori karena overhead per ruang vektor yang diterapkan lebih sedikit. Namun, teknik-teknik canggih seperti <strong>DiskANN</strong> memungkinkan bagian-bagian dari indeks, seperti graf atau refiner, untuk disimpan di disk, sehingga mengurangi beban memori sekaligus mempertahankan kinerja.</p>
 <p>Secara spesifik, penggunaan memori suatu indeks dapat dihitung sebagai berikut:</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">Penggunaan memori indeks IVF<button data-href="#IVF-index-memory-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -379,7 +379,7 @@ summary: >-
     </button></h3><p>Indeks IVF menyeimbangkan efisiensi memori dengan kinerja pencarian dengan mempartisi data ke dalam kluster. Di bawah ini adalah rincian memori yang digunakan oleh 1 juta vektor berdimensi 128 yang diindeks menggunakan varian IVF.</p>
 <ol>
 <li><p><strong>Hitung memori yang digunakan oleh pusat kluster.</strong></p>
-<p>Jenis indeks seri IVF memungkinkan Milvus mengelompokkan vektor ke dalam bucket menggunakan partisi berbasis centroid. Setiap centroid dimasukkan ke dalam indeks dalam bentuk embedding vektor mentah. Saat Anda membagi vektor menjadi 2.000 kluster, penggunaan memori dapat dihitung sebagai berikut:</p>
+<p>Jenis indeks seri IVF memungkinkan Milvus mengelompokkan vektor ke dalam bucket menggunakan partisi berbasis pusat kluster. Setiap pusat kluster dimasukkan ke dalam indeks dalam bentuk embedding vektor mentah. Saat Anda membagi vektor menjadi 2.000 kluster, penggunaan memori dapat dihitung sebagai berikut:</p>
 <pre><code translate="no" class="language-plaintext">2,000 clusters × 128 dimensions × 4 bytes = 1.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Hitung memori yang digunakan oleh penugasan kluster.</strong></p>
@@ -409,7 +409,7 @@ summary: >-
 <td><p>11,0 MB</p></td>
 </tr>
 <tr>
-<td><p>IVF-PQ + penyempurnaan 10% data mentah</p></td>
+<td><p>IVF-PQ + penyempurnaan data mentah sebesar 10%</p></td>
 <td><p>1,0 MB + 2,0 MB + 8,0 MB + 51,2 MB</p></td>
 <td><p>62,2 MB</p></td>
 </tr>
@@ -424,7 +424,7 @@ summary: >-
 <td><p>515,0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Hitung beban pemurnian.</strong></p>
+<li><p><strong>Hitung beban pemrosesan penyempurnaan.</strong></p>
 <p>Varian IVF sering dipasangkan dengan refiner untuk menyusun ulang peringkat kandidat. Untuk pencarian yang mengambil 10 hasil teratas dengan tingkat ekspansi 5, overhead penyempurnaan dapat diperkirakan sebagai berikut:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
@@ -448,7 +448,7 @@ summary: >-
     </button></h3><p>Jenis indeks berbasis graf seperti HNSW memerlukan memori yang signifikan untuk menyimpan struktur graf dan embedding vektor mentah. Di bawah ini adalah rincian terperinci mengenai memori yang digunakan oleh 1 juta vektor berdimensi 128 yang diindeks menggunakan jenis indeks HNSW.</p>
 <ol>
 <li><p><strong>Hitung memori yang digunakan oleh struktur graf.</strong></p>
-<p>Setiap vektor dalam HNSW mempertahankan koneksi ke tetangganya. Dengan derajat graf (tepi per simpul) sebesar 32, memori yang digunakan dapat dihitung sebagai berikut:</p>
+<p>Setiap vektor di HNSW mempertahankan koneksi ke tetangganya. Dengan derajat graf (tepi per simpul) sebesar 32, memori yang digunakan dapat dihitung sebagai berikut:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Hitung memori yang digunakan oleh embedding vektor mentah.</strong></p>
@@ -457,11 +457,11 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Saat Anda menggunakan HNSW untuk mengindeks 1 juta embedding vektor 128 dimensi, total memori yang digunakan adalah <strong>128 MB (grafik) + 512 MB (vektor) = 640 MB</strong>.</p></li>
 <li><p><strong>Hitung kompresi yang disebabkan oleh kuantisasi.</strong></p>
-<p>Kuantisasi mengurangi ukuran vektor. Misalnya, menggunakan PQ dengan 8 subkuantisator (8 byte per vektor) menghasilkan kompresi yang drastis. Memori yang digunakan oleh vektor embedding terkompresi dapat dihitung sebagai berikut:</p>
+<p>Kuantisasi mengurangi ukuran vektor. Misalnya, penggunaan PQ dengan 8 subkuantizer (8 byte per vektor) menghasilkan kompresi yang drastis. Memori yang digunakan oleh vektor embedding terkompresi dapat dihitung sebagai berikut:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
 <p>Hal ini menghasilkan tingkat kompresi 64 kali lipat jika dibandingkan dengan vektor embedding mentah, dan total memori yang digunakan oleh tipe indeks <strong>HNSWPQ</strong> adalah <strong>128 MB (grafik) + 8 MB (vektor terkompresi) = 136 MB</strong>.</p></li>
-<li><p><strong>Hitung beban tambahan penyempurnaan.</strong></p>
+<li><p><strong>Hitung overhead penyempurnaan.</strong></p>
 <p>Penyempurnaan, seperti pemeringkatan ulang dengan vektor mentah, memuat data presisi tinggi ke dalam memori untuk sementara waktu. Untuk pencarian yang mengambil 10 hasil teratas dengan tingkat ekspansi 5, overhead penyempurnaan dapat diperkirakan sebagai berikut:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
@@ -486,4 +486,4 @@ summary: >-
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN adalah indeks berbasis grafik Vamana yang menghubungkan titik-titik data untuk navigasi yang efisien selama pencarian sambil menerapkan PQ untuk mengurangi ukuran vektor dan memungkinkan perhitungan jarak perkiraan yang cepat antar vektor.</p>
 <p>Grafik Vamana disimpan di disk, yang memungkinkan DiskANN menangani kumpulan data besar yang jika tidak akan terlalu besar untuk dimuat dalam memori. Hal ini sangat berguna untuk kumpulan data dengan miliaran titik.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">File yang dipetakan ke memori (mmap)</h4><p>Pemetaan memori (mmap) memungkinkan akses memori langsung ke berkas besar di disk, sehingga Milvus dapat menyimpan indeks dan data baik di memori maupun di hard drive. Pendekatan ini membantu mengoptimalkan operasi I/O dengan mengurangi beban panggilan I/O berdasarkan frekuensi akses, sehingga memperluas kapasitas penyimpanan untuk koleksi tanpa secara signifikan memengaruhi kinerja pencarian.</p>
-<p>Secara khusus, Anda dapat mengonfigurasi Milvus untuk memetakan data mentah di bidang-bidang tertentu ke memori, alih-alih memuatnya sepenuhnya ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke bidang-bidang tersebut tanpa perlu khawatir tentang masalah memori dan memperluas kapasitas koleksi.</p>
+<p>Secara khusus, Anda dapat mengonfigurasi Milvus untuk memetakan data mentah di bidang tertentu ke memori alih-alih memuatnya sepenuhnya ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke bidang-bidang tersebut tanpa khawatir akan masalah memori dan memperluas kapasitas koleksi.</p>

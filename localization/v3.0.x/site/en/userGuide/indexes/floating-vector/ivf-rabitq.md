@@ -174,7 +174,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {</span>
 <span class="highlighted-comment-line">        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">128</span>, <span class="hljs-comment"># Number of clusters to search</span></span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;rbq_query_bits&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-comment"># Query vector quantization bits</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;rbq_bits_query&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-comment"># Query vector quantization bits</span></span>
 <span class="highlighted-comment-line">        <span class="hljs-string">&quot;refine_k&quot;</span>: <span class="hljs-number">1</span> <span class="hljs-comment"># Refinement magnification factor</span></span>
 <span class="highlighted-comment-line">    }</span>
 }
@@ -288,7 +288,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td rowspan="2"><p>RaBitQ</p></td>
-     <td><p><code translate="no">rbq_query_bits</code></p></td>
+     <td><p><code translate="no">rbq_bits_query</code></p></td>
      <td><p>Sets whether additional scalar quantization of a query vector is applied. If set to <code translate="no">0</code>, the query is used without quantization. If set to a value within [1, 8], the query is preprocessed using n-bit scalar quantization.</p></td>
      <td><p><strong>Type</strong>: Integer<br><strong>Range</strong>: [0, 8]<br><strong>Default value</strong>: <code translate="no">0</code></p></td>
      <td><p>The default <code translate="no">0</code> value provides maximum recall rate but slowest performance. We recommend testing values <code translate="no">0</code>, <code translate="no">8</code>, and <code translate="no">6</code>, as they provide similar recall rates with <code translate="no">6</code> being the fastest. Use smaller values for higher recall requirements.</p></td>

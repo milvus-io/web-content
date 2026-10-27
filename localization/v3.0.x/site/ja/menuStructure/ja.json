@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース情報",
+        "label": "リリース",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "インメモリレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -546,7 +546,7 @@
                 "children": []
               },
               {
-                "label": "組み込みアナライザ",
+                "label": "内蔵アナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "デコンパウンダー",
+                    "label": "脱コンパウンド装置",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -800,7 +800,7 @@
             "children": []
           },
           {
-            "label": "アップサートされるエンティティ",
+            "label": "Upsert エンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1223,7 +1229,7 @@
             ]
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1932,7 +1938,7 @@
                     "children": []
                   },
                   {
-                    "label": "カフカ ↔ キツツキ",
+                    "label": "カフカ ↔ ウッドペッカー",
                     "id": "switch-kafka-woodpecker.md",
                     "order": 3,
                     "children": []
@@ -2210,7 +2216,7 @@
             "children": []
           },
           {
-            "label": "よくある事例",
+            "label": "よくある症例",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
@@ -2446,7 +2452,7 @@
                 "children": []
               },
               {
-                "label": "Nomic",
+                "label": "ノミック",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []

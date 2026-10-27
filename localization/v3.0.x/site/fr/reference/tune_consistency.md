@@ -2,11 +2,12 @@
 id: tune_consistency.md
 title: Niveau de cohérence
 summary: >-
-  En tant que base de données vectorielle distribuée, Milvus offre plusieurs
-  niveaux de cohérence pour garantir que chaque nœud ou réplique peut accéder
-  aux mêmes données lors des opérations de lecture et d'écriture. Actuellement,
-  les niveaux de cohérence pris en charge sont Strong, Bounded, Eventually et
-  Session, Bounded étant le niveau de cohérence utilisé par défaut.
+  En tant que base de données vectorielle distribuée, Milvus propose plusieurs
+  niveaux de cohérence afin de garantir que chaque nœud ou réplique puisse
+  accéder aux mêmes données lors des opérations de lecture et d'écriture.
+  Actuellement, les niveaux de cohérence pris en charge sont « Strong », «
+  Bounded », « Eventually » et « Session », « Bounded » étant le niveau de
+  cohérence utilisé par défaut.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Niveau de cohérence<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En tant que base de données vectorielle distribuée, Milvus offre plusieurs niveaux de cohérence pour garantir que chaque nœud ou réplique peut accéder aux mêmes données lors des opérations de lecture et d'écriture. Actuellement, les niveaux de cohérence pris en charge sont <strong>Strong</strong>, <strong>Bounded</strong>, <strong>Eventually</strong> et <strong>Session</strong>, <strong>Bounded</strong> étant le niveau de cohérence utilisé par défaut.</p>
-<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>En tant que base de données vectorielle distribuée, Milvus propose plusieurs niveaux de cohérence afin de garantir que chaque nœud ou réplique puisse accéder aux mêmes données lors des opérations de lecture et d’écriture. Actuellement, les niveaux de cohérence pris en charge sont <strong>« Strong »</strong>, <strong>« Bounded »</strong>, <strong>« Eventually »</strong> et <strong>« Session »</strong>, <strong>« Bounded »</strong> étant le niveau de cohérence utilisé par défaut.</p>
+<h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,36 +40,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. Dans ce système, les <strong>DataNodes</strong> sont responsables de la persistance des données et les stockent finalement dans un système de stockage d'objets distribué tel que MinIO/S3. Les <strong>QueryNodes</strong> gèrent les tâches de calcul telles que la recherche. Ces tâches impliquent le traitement de <strong>données par lots</strong> et de <strong>données en continu</strong>. En termes simples, les données par lots peuvent être considérées comme des données qui ont déjà été stockées dans un système de stockage d'objets, tandis que les données en continu font référence à des données qui n'ont pas encore été stockées dans un système de stockage d'objets. En raison de la latence du réseau, il arrive souvent que les QueryNodes ne détiennent pas les données en continu les plus récentes. Sans garanties supplémentaires, l'exécution d'une recherche directement sur des données en continu peut entraîner la perte de nombreux points de données non validés, ce qui affecte la précision des résultats de la recherche.</p>
-<p>Milvus Commercial Edition est un système qui sépare le stockage et le calcul. Dans ce système, les DataNodes sont responsables de la persistance des données et les stockent finalement dans un stockage d'objets distribué tel que MinIO/S3. Les QueryNodes gèrent les tâches de calcul telles que la recherche. Ces tâches impliquent le traitement de données par lots et de données en continu. En termes simples, les données par lots peuvent être considérées comme des données qui ont déjà été stockées dans le stockage d'objets, tandis que les données en continu font référence à des données qui n'ont pas encore été stockées dans le stockage d'objets. En raison de la latence du réseau, il arrive souvent que les QueryNodes ne détiennent pas les données en continu les plus récentes. En l'absence de mesures de protection supplémentaires, l'exécution d'une recherche directement sur des données en continu peut entraîner la perte de nombreux points de données non validés, ce qui affecte la précision des résultats de la recherche.</p>
-<p>
+    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. <strong>Les nœuds de streaming</strong> ajoutent toutes les opérations d’écriture au journal d’écriture anticipée (WAL) et conservent les <strong>données en croissance</strong> — c’est-à-dire les données qui se trouvent encore dans le WAL et qui n’ont pas encore été persistées. Un processus de récupération convertit les données en croissance en <strong>données historiques</strong> (segments scellés persistés dans un stockage objet tel que MinIO/S3), qui sont ensuite servies par <strong>les nœuds de requête</strong>. Chaque requête de recherche ou d’interrogation est reçue par un <strong>déléguant de requêtes (Query Delegator)</strong> sur le nœud de streaming qui héberge le WAL de la collection : le déléguant génère le plan de requête, exécute localement la partie relative aux données en croissance, transmet la partie relative aux données historiques aux nœuds de requête concernés, puis fusionne les résultats avant de les renvoyer. Pour plus de détails, reportez-vous à <a href="/docs/fr/streaming_service.md">la section Service de streaming</a>.</p>
+<p>Afin de garantir la cohérence, Milvus attribue à chaque message un horodatage TSO (Timestamp Oracle) qui détermine son ordre dans le WAL, et insère en continu des horodatages de synchronisation dans le WAL parallèlement aux messages de données. Chaque fois qu’un horodatage de synchronisation (syncTs) est reçu, il est enregistré en tant que ServiceTime, ce qui signifie que toutes les données antérieures à ce ServiceTime sont visibles pour les requêtes. Sur la base du ServiceTime, Milvus fournit des horodatages de garantie (GuaranteeTs) afin de répondre aux différentes exigences des utilisateurs en matière de cohérence et de disponibilité. Les utilisateurs peuvent indiquer au délégateur la nécessité d’inclure dans le champ de recherche les données antérieures à un moment donné en spécifiant des GuaranteeTs dans leurs requêtes de recherche.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
-   </span> <span class="img-wrapper"> <span>Données par lots et données en continu</span> </span></p>
-<p>Comme le montre la figure ci-dessus, les QueryNodes peuvent recevoir simultanément des données en continu et des données par lots après avoir reçu une demande de recherche. Toutefois, en raison de la latence du réseau, les données en continu obtenues par les nœuds de requête peuvent être incomplètes.</p>
-<p>Pour résoudre ce problème, Milvus horodate chaque enregistrement dans la file d'attente des données et insère continuellement des horodatages de synchronisation dans la file d'attente des données. Chaque fois qu'un horodatage de synchronisation (syncTs) est reçu, QueryNodes le définit comme Heure de service, ce qui signifie que QueryNodes peut voir toutes les données antérieures à cette Heure de service. Sur la base de l'heure de service, Milvus peut fournir des horodatages de garantie (GuaranteeTs) pour répondre aux différentes exigences des utilisateurs en matière de cohérence et de disponibilité. Les utilisateurs peuvent informer les QueryNodes de la nécessité d'inclure des données antérieures à un moment précis dans l'étendue de la recherche en spécifiant des GuaranteeTs dans leurs demandes de recherche.</p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
+   <span>Heure de service et heure de garantie</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
-   </span> <span class="img-wrapper"> <span>Temps de service et temps de garantie</span> </span></p>
-<p>Comme le montre la figure ci-dessus, si GuaranteeTs est inférieur à ServiceTime, cela signifie que toutes les données antérieures au moment spécifié ont été entièrement écrites sur le disque, ce qui permet aux QueryNodes d'effectuer immédiatement l'opération de recherche. Lorsque GuaranteeTs est supérieur à ServiceTime, les QueryNodes doivent attendre que ServiceTime dépasse GuaranteeTs avant de pouvoir exécuter l'opération Search.</p>
-<p>Les utilisateurs doivent trouver un compromis entre la précision et la latence des requêtes. Si les utilisateurs ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent fixer GuaranteeTs à une valeur aussi grande que possible ; si les utilisateurs souhaitent recevoir les résultats de la recherche rapidement et sont plus tolérants quant à la précision des requêtes, alors GuaranteeTs peut être fixé à une valeur plus petite.</p>
-<p>
+ </span></p>
+<p>Comme le montre la figure ci-dessus, si GuaranteeTs est inférieur à ServiceTime, cela signifie que toutes les données antérieures au moment spécifié sont déjà visibles, ce qui permet à la recherche de s’exécuter immédiatement. Lorsque GuaranteeTs est supérieur à ServiceTime, la recherche doit attendre que ServiceTime dépasse GuaranteeTs avant de pouvoir s’exécuter.</p>
+<p>Les utilisateurs doivent trouver un compromis entre la précision de la requête et sa latence. S’ils ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent définir GuaranteeTs sur une valeur aussi élevée que possible ; s’ils souhaitent obtenir rapidement des résultats de recherche et sont plus tolérants quant à la précision de la requête, GuaranteeTs peut alors être défini sur une valeur plus faible.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
-   </span> <span class="img-wrapper"> <span>Niveau de cohérence illustré</span> </span></p>
-<p>Milvus propose quatre types de niveaux de cohérence avec différents T de garantie.</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
+   <span>Illustration des niveaux de cohérence</span>
+  
+ </span></p>
+<p>Milvus propose quatre types de niveaux de cohérence avec des valeurs de GuaranteeTs différentes.</p>
 <ul>
 <li><p><strong>Fort</strong></p>
-<p>L'horodatage le plus récent est utilisé comme T de garantie, et les nœuds de requête doivent attendre que l'heure de service soit conforme aux T de garantie avant d'exécuter les requêtes de recherche.</p></li>
-<li><p><strong>Eventuel</strong></p>
-<p>La GarantieTs est fixée à une valeur extrêmement faible, telle que 1, afin d'éviter les contrôles de cohérence et de permettre aux nœuds de requête d'exécuter immédiatement des requêtes de recherche sur toutes les données du lot.</p></li>
-<li><p><strong>Stabilité limitée</strong></p>
-<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant certaines pertes de données.</p></li>
+<p>L’horodatage le plus récent est utilisé comme GuaranteeTs, et la recherche doit attendre que le ServiceTime atteigne la valeur de GuaranteeTs avant de s’exécuter.</p></li>
+<li><p><strong>Éventuel</strong></p>
+<p>La valeur de GuaranteeTs est définie sur une valeur extrêmement faible, telle que 1, afin d’éviter les vérifications de cohérence et de permettre à la recherche de s’exécuter immédiatement sur les données actuellement visibles.</p></li>
+<li><p><strong>Staleness bornée</strong></p>
+<p>La valeur de GuaranteeTs est définie sur un moment antérieur à l’horodatage le plus récent, de sorte que la recherche s’exécute en acceptant que certaines données récentes ne soient pas encore visibles.</p></li>
 <li><p><strong>Session</strong></p>
-<p>Le dernier point temporel auquel le client insère des données est utilisé comme GuaranteeTs afin que les QueryNodes puissent effectuer des recherches sur toutes les données insérées par le client.</p></li>
+<p>Le dernier moment auquel le client a inséré des données est utilisé comme GuaranteeTs, afin que les recherches puissent couvrir toutes les données insérées par le client.</p></li>
 </ul>
-<p>Milvus utilise Bounded Staleness comme niveau de cohérence par défaut. Si le niveau de garantie n'est pas spécifié, le dernier temps de service est utilisé comme niveau de garantie.</p>
+<p>Milvus utilise la « Bounded Staleness » comme niveau de cohérence par défaut. Si la valeur de GuaranteeTs n’est pas spécifiée, le dernier ServiceTime est utilisé comme GuaranteeTs.</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">Définir le niveau de cohérence<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,8 +83,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez définir différents niveaux de cohérence lorsque vous créez une collection ou lorsque vous effectuez des recherches et des requêtes.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Définir le niveau de cohérence lors de la création d'une collection<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Vous pouvez définir différents niveaux de cohérence lors de la création d’une collection, ainsi que lors de l’exécution de recherches et de requêtes.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Définir le niveau de cohérence lors de la création d’une collection<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,9 +99,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Lors de la création d'une collection, vous pouvez définir le niveau de cohérence pour les recherches et les requêtes au sein de la collection. L'exemple de code suivant définit le niveau de cohérence sur <strong>Bounded</strong>.</p>
+    </button></h3><p>Lors de la création d’une collection, vous pouvez définir le niveau de cohérence pour les recherches et les requêtes au sein de la collection. L’exemple de code suivant définit le niveau de cohérence sur « <strong>Bounded</strong> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -166,7 +169,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Les valeurs possibles pour le paramètre <code translate="no">consistency_level</code> sont <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> et <code translate="no">Session</code>.</p>
+<p>Les valeurs possibles pour le paramètre ` <code translate="no">consistency_level</code> ` sont ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>` et ` <code translate="no">Session</code>`.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Définir le niveau de cohérence dans la recherche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,9 +185,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous pouvez toujours modifier le niveau de cohérence pour une recherche spécifique. L'exemple de code suivant ramène le niveau de cohérence à <strong>Bounded</strong>. La modification ne s'applique qu'à la demande de recherche en cours.</p>
+    </button></h3><p>Vous pouvez à tout moment modifier le niveau de cohérence pour une recherche spécifique. L'exemple de code suivant rétablit le niveau de cohérence sur « <strong>Bounded</strong> ». La modification s'applique uniquement à la requête de recherche en cours.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -228,8 +235,8 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ce paramètre est également disponible pour les recherches hybrides et l'itérateur de recherche. Les valeurs possibles pour le paramètre <code translate="no">consistency_level</code> sont <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> et <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Définir le niveau de cohérence dans la requête<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
+<p>Ce paramètre est également disponible dans les recherches hybrides et l’itérateur de recherche. Les valeurs possibles pour le paramètre « <code translate="no">consistency_level</code> » sont « <code translate="no">Strong</code> », « <code translate="no">Bounded</code> », « <code translate="no">Eventually</code> » et « <code translate="no">Session</code> ».</p>
+<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Définition du niveau de cohérence dans une requête<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -244,9 +251,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous pouvez toujours modifier le niveau de cohérence pour une recherche spécifique. L'exemple de code suivant définit le niveau de cohérence sur " <strong>Eventuellement"</strong>. Ce paramètre ne s'applique qu'à la requête en cours.</p>
+    </button></h3><p>Vous pouvez à tout moment modifier le niveau de cohérence pour une recherche spécifique. L’exemple de code suivant définit le niveau de cohérence sur « <strong>Eventually</strong> ». Ce paramètre s’applique uniquement à la requête en cours.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -287,4 +298,4 @@ curl --request POST \
     &quot;limit&quot;: 3
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ce paramètre est également disponible dans l'itérateur de requête. Les valeurs possibles pour le paramètre <code translate="no">consistency_level</code> sont <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> et <code translate="no">Session</code>.</p>
+<p>Ce paramètre est également disponible dans l’itérateur de requête. Les valeurs possibles pour le paramètre « <code translate="no">consistency_level</code> » sont « <code translate="no">Strong</code> », « <code translate="no">Bounded</code> », « <code translate="no">Eventually</code> » et « <code translate="no">Session</code> ».</p>

@@ -395,7 +395,7 @@
             "children": []
           },
           {
-            "label": "주 필드 및 자동 식별(AutoID)",
+            "label": "주 필드 및 자동 식별자",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1088,7 +1094,7 @@
             "order": 8,
             "children": [
               {
-                "label": "필터링에 대해 알아보기",
+                "label": "필터링에 대한 설명",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1353,7 +1359,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "가중 순위 산정기",
+                "label": "가중 순위 결정기",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1645,7 +1651,7 @@
         "children": []
       },
       {
-        "label": "Claude 코드용 MCP 서버",
+        "label": "클로드 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -3259,7 +3265,7 @@
             "children": []
           },
           {
-            "label": "DNA 서열 분류",
+            "label": "DNA 염기서열 분류",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

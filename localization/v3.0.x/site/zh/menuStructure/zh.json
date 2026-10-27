@@ -316,13 +316,13 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本Collection",
+            "label": "关于本系列 Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "创建Collection",
+            "label": "Create Collection",
             "id": "create-collection.md",
             "order": 1,
             "children": []
@@ -334,7 +334,7 @@
             "children": []
           },
           {
-            "label": "View Collections",
+            "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -697,7 +697,7 @@
                     "children": []
                   },
                   {
-                    "label": "解聚剂",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -868,45 +868,51 @@
                 "children": []
               },
               {
+                "label": "IVF_RABITQ_FASTSCAN",
+                "id": "ivf-rabitq-fastscan.md",
+                "order": 5,
+                "children": []
+              },
+              {
                 "label": "HNSW",
                 "id": "hnsw.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "HNSW_SQ",
                 "id": "hnsw-sq.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               },
               {
                 "label": "HNSW_PQ",
                 "id": "hnsw-pq.md",
-                "order": 7,
+                "order": 8,
                 "children": []
               },
               {
                 "label": "HNSW_PRQ",
                 "id": "hnsw-prq.md",
-                "order": 8,
+                "order": 9,
                 "children": []
               },
               {
                 "label": "DISKANN",
                 "id": "diskann.md",
-                "order": 9,
+                "order": 10,
                 "children": []
               },
               {
                 "label": "SCANN",
                 "id": "scann.md",
-                "order": 10,
+                "order": 11,
                 "children": []
               },
               {
                 "label": "AISAQ",
                 "id": "aisaq.md",
-                "order": 11,
+                "order": 12,
                 "children": []
               }
             ]
@@ -1427,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名工具",
+                    "label": "TEI 排名器",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1645,7 +1651,7 @@
         "children": []
       },
       {
-        "label": "Claude 代码的 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1995,7 +2001,7 @@
         ]
       },
       {
-        "label": "监控、警报和日志",
+        "label": "监控、警报与日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2187,7 +2193,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -2228,7 +2234,7 @@
                 "children": []
               },
               {
-                "label": "在不同存储桶的实例之间迁移",
+                "label": "在不同存储桶之间的实例之间进行迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
