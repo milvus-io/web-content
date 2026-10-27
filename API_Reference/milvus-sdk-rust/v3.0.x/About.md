@@ -116,6 +116,10 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 
 ## Breaking Changes
 
+### 3.0.2
+
+- `filter_templates` on `QueryRequest`, `SearchRequest`, `SubSearchRequest`, and `DeleteRequest` now takes and returns `HashMap<String, FilterTemplateValue>` instead of `HashMap<String, serde_json::Value>`. Pass the typed `FilterTemplateValue` variants (`Int64`, `String`, `Int64Array`, `StringArray`, `Bytes`), or use the new `add_filter_template` builder method, instead of raw JSON values.
+
 ### 3.0.1
 
 - `use_database()` is now asynchronous and validates that the target database exists. Await the call and handle a validation error when the database does not exist.
