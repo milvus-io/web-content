@@ -176,8 +176,7 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Warning</p>
+<div class="alert warning">
 <p>If your collection needs both EmbeddingList search and element-level search, use two separate vector subfields. A vector field or vector subfield accepts only one index, and the two search modes require different metric families.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Documentation map<button data-href="#Documentation-map" class="anchor-icon" translate="no">
