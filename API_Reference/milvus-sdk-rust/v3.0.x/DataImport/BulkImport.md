@@ -200,6 +200,46 @@ BulkImportResponse
 
     The failure reason reported by the endpoint, when present.
 
+### ListImportJobs()
+
+Lists bulk-import jobs visible to the target deployment.
+
+```rust
+pub async fn list_import_jobs(&self, request: ListImportJobsRequest) -> Result<BulkImportResponse>
+```
+
+See [list_import_jobs](list_import_jobs.md) for the request fields, response surface, and an example.
+
+### GetImportProgress()
+
+Gets the current state and progress of one bulk-import job.
+
+```rust
+pub async fn get_import_progress(&self, request: GetImportProgressRequest) -> Result<BulkImportResponse>
+```
+
+`DescribeImportRequest` is an alias for `GetImportProgressRequest`. See [get_import_progress](get_import_progress.md) for the request fields, response surface, and an example.
+
+### CommitImport()
+
+Commits a bulk-import job after all its data files have been uploaded and flushed.
+
+```rust
+pub async fn commit_import(&self, request: DescribeImportRequest) -> Result<BulkImportResponse>
+```
+
+See [commit_import](commit_import.md) for the request fields, response surface, and an example.
+
+### AbortImport()
+
+Aborts a bulk-import job.
+
+```rust
+pub async fn abort_import(&self, request: DescribeImportRequest) -> Result<BulkImportResponse>
+```
+
+See [abort_import](abort_import.md) for the request fields, response surface, and an example.
+
 ## Example
 
 ```rust

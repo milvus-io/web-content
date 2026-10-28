@@ -87,16 +87,6 @@ pub struct IndexDesc
 
         The index build failed but will be retried.
 
-    ## Example
-
-    ```rust
-    for desc in resp.indexes() {
-        if desc.get_state() == IndexStateCode::Finished {
-            println!("index {} is ready", desc.get_index_name());
-        }
-    }
-    ```
-
 - `failure_reason: String`
 
     Reason for failure when the index build failed.

@@ -38,111 +38,111 @@ Each variant carries the field `name` shared with the collection schema and the 
 
 **Constants:**
 
-- **Bool**
+- **Bool { name: String, values: Vec<bool> }**
 
     Boolean values.
 
-- **Int8**
+- **Int8 { name: String, values: Vec<i8> }**
 
     8-bit signed integer values.
 
-- **Int16**
+- **Int16 { name: String, values: Vec<i16> }**
 
     16-bit signed integer values.
 
-- **Int32**
+- **Int32 { name: String, values: Vec<i32> }**
 
     32-bit signed integer values.
 
-- **Int64**
+- **Int64 { name: String, values: Vec<i64> }**
 
     64-bit signed integer values.
 
-- **Float**
+- **Float { name: String, values: Vec<f32> }**
 
     32-bit floating-point values.
 
-- **Double**
+- **Double { name: String, values: Vec<f64> }**
 
     64-bit floating-point values.
 
-- **VarChar**
+- **VarChar { name: String, values: Vec<String> }**
 
     Variable-length UTF-8 string values. Values for `DataType::Text` schema fields are also supplied with this variant.
 
-- **Json**
+- **Json { name: String, values: Vec<serde_json::Value> }**
 
     JSON document values.
 
-- **Geometry**
+- **Geometry { name: String, values: Vec<String> }**
 
     Geometry values encoded as WKT strings.
 
-- **Timestamptz**
+- **Timestamptz { name: String, values: Vec<String> }**
 
     Timestamp-with-timezone values.
 
-- **ArrayBool**
+- **ArrayBool { name: String, values: Vec<Vec<bool>> }**
 
     Array of boolean elements.
 
-- **ArrayInt8**
+- **ArrayInt8 { name: String, values: Vec<Vec<i8>> }**
 
     Array of 8-bit signed integer elements.
 
-- **ArrayInt16**
+- **ArrayInt16 { name: String, values: Vec<Vec<i16>> }**
 
     Array of 16-bit signed integer elements.
 
-- **ArrayInt32**
+- **ArrayInt32 { name: String, values: Vec<Vec<i32>> }**
 
     Array of 32-bit signed integer elements.
 
-- **ArrayInt64**
+- **ArrayInt64 { name: String, values: Vec<Vec<i64>> }**
 
     Array of 64-bit signed integer elements.
 
-- **ArrayFloat**
+- **ArrayFloat { name: String, values: Vec<Vec<f32>> }**
 
     Array of 32-bit floating-point elements.
 
-- **ArrayDouble**
+- **ArrayDouble { name: String, values: Vec<Vec<f64>> }**
 
     Array of 64-bit floating-point elements.
 
-- **ArrayVarChar**
+- **ArrayVarChar { name: String, values: Vec<Vec<String>> }**
 
     Array of UTF-8 string elements.
 
-- **Struct**
+- **Struct { name: String, values: Vec<Vec<StructValue>> }**
 
     Struct values, each a list of named sub-field values.
 
-- **FloatVector**
+- **FloatVector { name: String, values: Vec<Vec<f32>> }**
 
     Dense float vectors, one vector per row.
 
-- **BinaryVector**
+- **BinaryVector { name: String, values: Vec<Vec<u8>> }**
 
     Dense binary vectors stored as packed bytes, one vector per row.
 
-- **Float16Vector**
+- **Float16Vector { name: String, values: Vec<Vec<u16>> }**
 
     Dense half-precision float vectors, one vector per row.
 
-- **BFloat16Vector**
+- **BFloat16Vector { name: String, values: Vec<Vec<u16>> }**
 
     Dense bfloat16 vectors, one vector per row.
 
-- **SparseFloatVector**
+- **SparseFloatVector { name: String, values: Vec<SparseVector> }**
 
     Sparse float vectors, one per row.
 
-- **Int8Vector**
+- **Int8Vector { name: String, values: Vec<Vec<i8>> }**
 
     Dense int8 vectors, one vector per row.
 
-- **Nullable**
+- **Nullable { data: Box<FieldData>, valid_data: Vec<bool> }**
 
     A nullable field value paired with a per-row validity bitmap.
 
