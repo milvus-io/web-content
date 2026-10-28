@@ -36,6 +36,10 @@ listCompactionTasks(ListCompactionTasksReq.builder()
 
 A **GetCompactionPlansResp** object that contains the compaction state and the retained compaction plans of the collection.
 
+- `getCompactionId()` (*Long*) -
+
+    The ID of the compaction.
+
 - `getCollectionName()` (*String*) -
 
     The name of the collection the compaction plans belong to.
