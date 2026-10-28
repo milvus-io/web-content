@@ -6,17 +6,27 @@ This operation switches the client to another database by closing the current co
 Status UseDatabase(const std::string& db_name)
 ```
 
+## Request Syntax
+
+```cpp
+auto status = client->UseDatabase(db_name);
+```
+
+**REQUEST METHODS:**
+
+Not applicable; this operation accepts `db_name` directly and has no request builder methods.
+
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
-Returns a Status indicating whether the switch to the target database succeeded.
+Returns a [Status](Status.md) indicating whether the switch to the target database succeeded.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md). The SDK converts internal exceptions into a non-OK [Status](Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
 
 ## Example
 

@@ -89,9 +89,9 @@ auto request = DeleteRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. On success, the DeleteResponse output parameter is filled with the DML results, including the number of entities actually deleted.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. On success, the DeleteResponse output parameter is filled with the DML results, including the number of entities actually deleted.
 
 - **response** (*DeleteResponse*) -
 
@@ -141,9 +141,9 @@ Returns a Status indicating whether the operation succeeded. On success, the Del
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

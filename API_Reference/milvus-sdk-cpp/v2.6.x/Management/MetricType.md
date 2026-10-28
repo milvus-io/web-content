@@ -21,7 +21,7 @@ enum class MetricType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 *Dense float vectors (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
 
@@ -57,7 +57,13 @@ enum class MetricType {
 
 *Special:*
 
-- **INVALID** / **DEFAULT** (0) - Not explicitly set; the server auto-determines the metric type based on the field data type. Not needed for scalar field indexes.
+- **INVALID** (0)
+
+    Not explicitly set; the server auto-determines the metric type based on the field data type. Not needed for scalar field indexes.
+
+- **DEFAULT** (0)
+
+    A synonym for `INVALID`; the server auto-determines the metric type based on the field data type.
 
 ## Example
 

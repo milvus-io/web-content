@@ -25,7 +25,7 @@ enum class IndexType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 *Dense float vectors — CPU (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
 

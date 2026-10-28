@@ -34,9 +34,9 @@ auto request = DescribeRoleRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded; on success, the output DescribeRoleResponse carries the role's details, including its name, description, and the privilege grants assigned to it.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded; on success, the output DescribeRoleResponse carries the role's details, including its name, description, and the privilege grants assigned to it.
 
 - **response** (*DescribeRoleResponse*) -
 
@@ -115,32 +115,6 @@ struct GrantItem {
     std::string privilege_;     // privilege name (e.g., "Insert", "Search")
     std::string grantor_name_;  // user who granted this privilege
 };
-```
-
-## Example
-
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-DescribeRoleResponse response;
-auto status = client->DescribeRole(
-    DescribeRoleRequest().WithRoleName("read_only"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-const RoleDesc& desc = response.Desc();
-std::cout << "Role: " << desc.Name() << "\n";
-for (const auto& item : desc.GrantItems()) {
-    std::cout << "  " << item.privilege_
-              << " on " << item.object_type_ << "/" << item.object_name_
-              << " (db=" << item.db_name_ << ")\n";
-}
 ```
 
 **ERROR HANDLING:**

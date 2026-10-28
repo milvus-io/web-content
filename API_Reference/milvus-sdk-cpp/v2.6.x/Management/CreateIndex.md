@@ -38,7 +38,7 @@ auto request = CreateIndexRequest()
 
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
-    Sets the list of index descriptions (milvus::IndexDesc) to be created; each description carries the field name, index name, index type, and metric type.
+    Sets the list of index descriptions (milvus::[IndexDesc](IndexDesc.md)) to be created; each description carries the field name, index name, index type, and metric type.
 
 - `SetIndexes(std::vector<IndexDesc>&& indexes)`
 
@@ -46,7 +46,7 @@ auto request = CreateIndexRequest()
 
 - `AddIndex(IndexDesc&& index)`
 
-    Adds one index description (milvus::IndexDesc) to the list of indexes to be created.
+    Adds one index description (milvus::[IndexDesc](IndexDesc.md)) to the list of indexes to be created.
 
 - `WithSync(bool sync)`
 
@@ -66,15 +66,15 @@ auto request = CreateIndexRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the indexes were created successfully and, in sync mode, whether they became ready within the configured timeout.
+Returns a [Status](../Client/Status.md) indicating whether the indexes were created successfully and, in sync mode, whether they became ready within the configured timeout.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

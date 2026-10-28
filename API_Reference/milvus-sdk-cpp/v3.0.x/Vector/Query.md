@@ -165,13 +165,37 @@ auto request = QueryRequest()
 
     Add a field used to order query results.
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `SetGroupByFields(std::vector<std::string>&& group_by_fields)`
+
+    Sets the fields used to group query results.
+
+- `WithGroupByFields(std::vector<std::string>&& group_by_fields)`
+
+    Sets the fields used to group query results.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
-### FieldData
+### [FieldData](FieldData.md)
 
 Field payloads use [FieldData](FieldData.md), its concrete aliases, and `FieldDataPtr`. See that page for template methods, array and binary specializations, and supported payload forms.
 
@@ -243,9 +267,9 @@ The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. Thi
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

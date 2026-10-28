@@ -89,9 +89,9 @@ auto request = GetRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded, and on success populates the response with the fetched records.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded, and on success populates the response with the fetched records.
 
 - **response** (*GetResponse*) -
 
@@ -107,13 +107,15 @@ Returns a Status indicating whether the operation succeeded, and on success popu
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -127,13 +129,15 @@ Returns a Status indicating whether the operation succeeded, and on success popu
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -146,10 +150,12 @@ Returns a Status indicating whether the operation succeeded, and on success popu
         - **OutputRows** (*Status*) -
 
             Get all output rows.
+            See [Status](../Client/Status.md).
 
         - **OutputRow** (*Status*) -
 
             Get row data. Throw exception if the i is out of bound.
+            See [Status](../Client/Status.md).
 
         - **GetRowCount** (*uint64_t*) -
 
@@ -168,7 +174,7 @@ Field payloads are instances of [FieldData](FieldData.md).
    <tr>
      <td><p>Scalar</p></td>
      <td><p><code>BoolFieldData</code>, <code>Int8FieldData</code>, <code>Int16FieldData</code>, <code>Int32FieldData</code>, <code>Int64FieldData</code>, <code>FloatFieldData</code>, <code>DoubleFieldData</code>, <code>VarCharFieldData</code>, <code>JSONFieldData</code>, <code>GeometryFieldData</code>, <code>TimestamptzFieldData</code></p></td>
-     <td><p>Aliases of <code>FieldData&lt;T, DataType::...&gt;</code>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
+     <td><p>Aliases of <code>[FieldData](FieldData.md)&lt;T, [DataType](../Collections/DataType.md)::...&gt;</code>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
    </tr>
    <tr>
      <td><p>Vector</p></td>
@@ -189,9 +195,9 @@ Field payloads are instances of [FieldData](FieldData.md).
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -51,9 +51,10 @@ public:
 
     The C++ type used to store one element. For array and vector fields, this is itself a container type, as shown in the alias tables below.
 
-- **Dt** (*[DataType](../Collections/DataType.md)*)
+- **Dt** (*DataType*)
 
     The logical Milvus data type represented by this field payload.
+    See [DataType](../Collections/DataType.md).
 
 **METHODS:**
 

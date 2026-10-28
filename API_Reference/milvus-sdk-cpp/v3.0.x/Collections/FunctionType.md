@@ -1,26 +1,40 @@
 # FunctionType
 
-Enumerates the function types supported by collection schema functions.
-
-## Example
-
-Demonstrates FunctionType with the C++ SDK.
+Defines the function types available to a Milvus collection schema.
 
 ```cpp
-auto function_type = milvus::FunctionType::BM25;
+enum class FunctionType {
+    UNKNOWN = 0,
+    BM25 = 1,
+    TEXTEMBEDDING = 2,
+    RERANK = 3,
+    MINHASH = 4,
+    MOLFINGERPRINT = 5,
+};
 ```
 
-## Notes
+**Constants:**
 
-- UNKNOWN = 0
+- **UNKNOWN** (0)
 
-- BM25 = 1
+    No function type is set.
 
-- TEXTEMBEDDING = 2
+- **BM25** (1)
 
-- RERANK = 3
+    Generates sparse vectors from text for full-text search.
 
-- MINHASH = 4
+- **TEXTEMBEDDING** (2)
 
-- MOLFINGERPRINT = 5
+    Generates dense text embeddings.
 
+- **RERANK** (3)
+
+    Reranks or combines results from multiple vector fields.
+
+- **MINHASH** (4)
+
+    Generates MinHash signatures for approximate set similarity.
+
+- **MOLFINGERPRINT** (5)
+
+    Generates molecular fingerprints for chemistry workloads.

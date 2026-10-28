@@ -122,7 +122,7 @@ auto request = SearchRequest()
 
 - `WithConsistencyLevel(ConsistencyLevel consistency_level)`
 
-    Sets the consistency level of the search, such as ConsistencyLevel::STRONG or ConsistencyLevel::BOUNDED. Optional.
+    Sets the consistency level of the search, such as [ConsistencyLevel](../Collections/ConsistencyLevel.md)::STRONG or [ConsistencyLevel](../Collections/ConsistencyLevel.md)::BOUNDED. Optional.
 
 - `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
 
@@ -316,11 +316,11 @@ auto request = SearchRequest()
 
 - `WithMetricType(::milvus::MetricType metric_type)`
 
-    Sets the metric type of the search, such as MetricType::L2, MetricType::IP, or MetricType::COSINE. Optional.
+    Sets the metric type of the search, such as [MetricType](../Management/MetricType.md)::L2, [MetricType](../Management/MetricType.md)::IP, or [MetricType](../Management/MetricType.md)::COSINE. Optional.
 
 - `SetMetricType(::milvus::MetricType metric_type)`
 
-    Sets the metric type of the search, such as MetricType::L2, MetricType::IP, or MetricType::COSINE. Optional.
+    Sets the metric type of the search, such as [MetricType](../Management/MetricType.md)::L2, [MetricType](../Management/MetricType.md)::IP, or [MetricType](../Management/MetricType.md)::COSINE. Optional.
 
 - `WithExtraParams(const std::unordered_map<std::string, std::string>& params)`
 
@@ -454,7 +454,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Request methods</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -496,7 +496,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>Function or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
@@ -505,9 +505,9 @@ Vector request payloads use [FieldData](FieldData.md) instances.
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the search succeeded; on success the response carries per-query results, each holding the matched primary keys with their scores and any requested output fields.
+Returns a [Status](../Client/Status.md) indicating whether the search succeeded; on success the response carries per-query results, each holding the matched primary keys with their scores and any requested output fields.
 
 - **response** (*SearchResponse*) -
 
@@ -525,7 +525,7 @@ Returns a Status indicating whether the search succeeded; on success the respons
 
             - **Ids** (*IDArray*) -
 
-                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from FieldData. It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
+                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from [FieldData](FieldData.md). It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
 
                 - **IsIntegerID** (*bool*) -
 
@@ -559,13 +559,15 @@ Returns a Status indicating whether the search succeeded; on success the respons
 
                     Get field name.
 
-                - **Type** ([DataType](../Collections/DataType.md)) -
+                - **Type** (*DataType*) -
 
                     Get field data type.
+                    See [DataType](../Collections/DataType.md).
 
-                - **ElementType** ([DataType](../Collections/DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Get the element type for an array field.
+                    See [DataType](../Collections/DataType.md).
 
                 - **Count** (*size_t*) -
 
@@ -579,13 +581,15 @@ Returns a Status indicating whether the search succeeded; on success the respons
 
                     Get field name.
 
-                - **Type** ([DataType](../Collections/DataType.md)) -
+                - **Type** (*DataType*) -
 
                     Get field data type.
+                    See [DataType](../Collections/DataType.md).
 
-                - **ElementType** ([DataType](../Collections/DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Get the element type for an array field.
+                    See [DataType](../Collections/DataType.md).
 
                 - **Count** (*size_t*) -
 
@@ -598,14 +602,17 @@ Returns a Status indicating whether the search succeeded; on success the respons
             - **OutputRows** (*Status*) -
 
                 Get all output rows.
+                See [Status](../Client/Status.md).
 
             - **OutputRow** (*Status*) -
 
                 Get row data. Returns INVALID_ARGUMENT status if the i is out of bound.
+                See [Status](../Client/Status.md).
 
             - **OutputHighlightResult** (*Status*) -
 
                 Get highlight results of one row. Returns INVALID_ARGUMENT status if the i is out of bound.
+                See [Status](../Client/Status.md).
 
                 - **field_name** (*std::string*) -
 
@@ -633,9 +640,9 @@ Returns a Status indicating whether the search succeeded; on success the respons
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

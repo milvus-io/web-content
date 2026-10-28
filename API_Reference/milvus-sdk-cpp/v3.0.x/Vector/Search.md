@@ -323,15 +323,15 @@ auto request = SearchRequest()
 
 - `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Set the function chains used to post-process search results. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+    Set the function chains used to post-process search results. [Function](../Collections/Function.md) chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
 
 - `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Set function chains. Function chains and rerank cannot be used together.
+    Set function chains. [Function](../Collections/Function.md) chains and rerank cannot be used together.
 
 - `AddFunctionChain(const FunctionChain& function_chain)`
 
-    Add a function chain used to post-process search results. Function chains and rerank cannot be used together.
+    Add a function chain used to post-process search results. [Function](../Collections/Function.md) chains and rerank cannot be used together.
 
 - `WithTimezone(const std::string& timezone)`
 
@@ -375,7 +375,7 @@ The request accepts one query-vector representation matching the target field's 
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Request methods</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -417,20 +417,36 @@ The request accepts one query-vector representation matching the target field's 
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>Function or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
      <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
-### FieldData
+### [FieldData](FieldData.md)
 
 Field payloads use [FieldData](FieldData.md), its concrete aliases, and `FieldDataPtr`. See that page for template methods, array and binary specializations, and supported payload forms.
 
@@ -627,7 +643,7 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
 - `FieldDataPtr OutputField(const std::string& name) const`
 
-    Returns one requested output field by name; the template overload casts it to the requested concrete FieldData type.
+    Returns one requested output field by name; the template overload casts it to the requested concrete [FieldData](FieldData.md) type.
 
 - `const std::vector<FieldDataPtr>& OutputFields() const`
 
@@ -651,9 +667,9 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 #### Output field types
 
@@ -663,7 +679,7 @@ The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. Thi
 
 ### FunctionScore
 
-This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchArguments::WithFunctionScore()` or `HybridSearchRequest::WithFunctionScore()`. For `HybridSearch` use RRF or Weighted functions; for `Search` use Boost, Decay, or Model functions. For the function subclass details see Function.
+This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchArguments::WithFunctionScore()` or `HybridSearchRequest::WithFunctionScore()`. For `HybridSearch` use RRF or Weighted functions; for `Search` use Boost, Decay, or Model functions. For the function subclass details see [Function](../Collections/Function.md).
 
 ```cpp
 using FunctionScorePtr = std::shared_ptr<FunctionScore>;

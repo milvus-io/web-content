@@ -6,9 +6,19 @@ This operation checks the health of the connected Milvus server; the response re
 Status CheckHealth(const CheckHealthRequest& request, CheckHealthResponse& response)
 ```
 
+## Request Syntax
+
+```cpp
+auto status = client->CheckHealth(request, response);
+```
+
+**REQUEST METHODS:**
+
+This request has no builder methods.
+
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
 Returns a status indicating whether the operation succeeded; the response carries the health flag and, if unhealthy, the reasons.
 
@@ -28,9 +38,9 @@ Returns a status indicating whether the operation succeeded; the response carrie
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](Status.md). The SDK converts internal exceptions into a non-OK [Status](Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

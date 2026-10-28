@@ -164,7 +164,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Request methods</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -206,7 +206,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>Function or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
@@ -215,9 +215,9 @@ Vector request payloads use [FieldData](FieldData.md) instances.
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status reporting success or failure, while the response output parameter carries the fused, reranked search results of the hybrid search.
+Returns a [Status](../Client/Status.md) reporting success or failure, while the response output parameter carries the fused, reranked search results of the hybrid search.
 
 - **response** (*HybridSearchResponse*) -
 
@@ -235,7 +235,7 @@ Returns a Status reporting success or failure, while the response output paramet
 
             - **Ids** (*IDArray*) -
 
-                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from FieldData. It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
+                Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from [FieldData](FieldData.md). It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
 
                 - **IsIntegerID** (*bool*) -
 
@@ -269,13 +269,15 @@ Returns a Status reporting success or failure, while the response output paramet
 
                     Get field name.
 
-                - **Type** ([DataType](../Collections/DataType.md)) -
+                - **Type** (*DataType*) -
 
                     Get field data type.
+                    See [DataType](../Collections/DataType.md).
 
-                - **ElementType** ([DataType](../Collections/DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Get the element type for an array field.
+                    See [DataType](../Collections/DataType.md).
 
                 - **Count** (*size_t*) -
 
@@ -289,13 +291,15 @@ Returns a Status reporting success or failure, while the response output paramet
 
                     Get field name.
 
-                - **Type** ([DataType](../Collections/DataType.md)) -
+                - **Type** (*DataType*) -
 
                     Get field data type.
+                    See [DataType](../Collections/DataType.md).
 
-                - **ElementType** ([DataType](../Collections/DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Get the element type for an array field.
+                    See [DataType](../Collections/DataType.md).
 
                 - **Count** (*size_t*) -
 
@@ -308,14 +312,17 @@ Returns a Status reporting success or failure, while the response output paramet
             - **OutputRows** (*Status*) -
 
                 Get all output rows.
+                See [Status](../Client/Status.md).
 
             - **OutputRow** (*Status*) -
 
                 Get row data. Returns INVALID_ARGUMENT status if the i is out of bound.
+                See [Status](../Client/Status.md).
 
             - **OutputHighlightResult** (*Status*) -
 
                 Get highlight results of one row. Returns INVALID_ARGUMENT status if the i is out of bound.
+                See [Status](../Client/Status.md).
 
                 - **field_name** (*std::string*) -
 
@@ -343,9 +350,9 @@ Returns a Status reporting success or failure, while the response output paramet
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

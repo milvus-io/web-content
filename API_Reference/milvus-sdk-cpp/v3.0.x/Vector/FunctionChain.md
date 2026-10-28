@@ -1,6 +1,6 @@
 # FunctionChain
 
-This class builds a function chain that post-processes search results. A function chain runs a pipeline of operations (map, sort, limit, ...) on the result columns of a `Search` call. Pass one or more `FunctionChain` objects to `SearchRequest::WithFunctionChains()` or `SearchRequest::AddFunctionChain()`. Function chains and rerank cannot be used together.
+This class builds a function chain that post-processes search results. A function chain runs a pipeline of operations (map, sort, limit, ...) on the result columns of a `Search` call. Pass one or more `FunctionChain` objects to `SearchRequest::WithFunctionChains()` or `SearchRequest::AddFunctionChain()`. [Function](../Collections/Function.md) chains and rerank cannot be used together.
 
 ```cpp
 FunctionChain();
@@ -67,7 +67,7 @@ enum class FunctionChainStage {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **UNSPECIFIED** (0) - Unset stage.
 
@@ -132,7 +132,7 @@ explicit FunctionChainExprArg(nlohmann::json literal);
 
 ## FunctionChainExpr
 
-Function invocation expression used by a function-chain operation, e.g. `"num_combine"`, `"decay"`, `"round_decimal"`.
+[Function](../Collections/Function.md) invocation expression used by a function-chain operation, e.g. `"num_combine"`, `"decay"`, `"round_decimal"`.
 
 ```cpp
 FunctionChainExpr();

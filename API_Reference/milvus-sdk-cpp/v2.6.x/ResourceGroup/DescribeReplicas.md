@@ -36,7 +36,7 @@ auto request = DescribeReplicasRequest()
 
 **RETURNS:**
 
-*Status* with *DescribeReplicasResponse*
+*[Status](../Client/Status.md)* with *DescribeReplicasResponse*
 
 ### DescribeReplicasResponse
 
@@ -118,9 +118,9 @@ const ShardReplica& shard = replica.ShardReplicas()[0];
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status; check `status.Code()` and `status.Message()` for invalid collection names or unavailable replica metadata. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md); check `status.Code()` and `status.Message()` for invalid collection names or unavailable replica metadata. See [Status](../Client/Status.md).
 
 ## Example
 

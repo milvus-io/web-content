@@ -34,15 +34,16 @@ auto request = ListCollectionsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The list of collections and their brief information are carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The list of collections and their brief information are carried in the response object.
 
 - **response** (*ListCollectionsResponse*) -
 
     - **CollectionInfos** (*const std::vector<CollectionInfo>&*) -
 
         Get brief information of collections.
+        See [CollectionInfo](CollectionInfo.md).
 
         - **Name** (*const std::string&*) -
 
@@ -66,9 +67,9 @@ Returns a Status indicating whether the operation succeeded. The list of collect
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

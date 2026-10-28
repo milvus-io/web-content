@@ -53,7 +53,7 @@ auto request = BatchDescribeCollectionsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded. The response carries the full descriptions of the requested collections.
 
@@ -62,6 +62,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
     - **Descs** (*const std::vector<CollectionDesc>&*) -
 
         Get collection descriptions.
+        See [CollectionDesc](CollectionDesc.md).
 
         - **DatabaseName** (*const std::string&*) -
 
@@ -82,6 +83,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
         - **Schema** (*const CollectionSchema&*) -
 
             Collection schema.
+            See [CollectionSchema](CollectionSchema.md).
 
             - **Name** (*const std::string&*) -
 
@@ -102,6 +104,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.
+                See [FieldSchema](FieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -111,13 +114,15 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
                     Description of this field, can be empty.
 
-                - **FieldDataType** ([DataType](DataType.md)) -
+                - **FieldDataType** (*DataType*) -
 
                     Field data type.
+                    See [DataType](DataType.md).
 
-                - **ElementType** ([DataType](DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Element type of array field.
+                    See [DataType](DataType.md).
 
                 - **IsPrimaryKey** (*bool*) -
 
@@ -182,6 +187,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
             - **StructFields** (*const std::vector<StructFieldSchema>&*) -
 
                 Struct fields schema array.
+                See [StructFieldSchema](StructFieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -202,6 +208,7 @@ Returns a status indicating whether the operation succeeded. The response carrie
                 - **Fields** (*const std::vector<FieldSchema>&*) -
 
                     Get sub fields of the struct field.
+                    See [FieldSchema](FieldSchema.md).
 
                     - **Name** (*const std::string&*) -
 
@@ -211,13 +218,15 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
                         Description of this field, can be empty.
 
-                    - **FieldDataType** ([DataType](DataType.md)) -
+                    - **FieldDataType** (*DataType*) -
 
                         Field data type.
+                        See [DataType](DataType.md).
 
-                    - **ElementType** ([DataType](DataType.md)) -
+                    - **ElementType** (*DataType*) -
 
                         Element type of array field.
+                        See [DataType](DataType.md).
 
                     - **IsPrimaryKey** (*bool*) -
 
@@ -301,7 +310,8 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type. See [FunctionType](FunctionType.md).
+                    [Function](Function.md) type.
+                    See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 
@@ -351,9 +361,10 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
             Get the external file specification of the collection.
 
-        - **GetConsistencyLevel** ([ConsistencyLevel](ConsistencyLevel.md)) -
+        - **GetConsistencyLevel** (*ConsistencyLevel*) -
 
             Consistency level of the collection.
+            See [ConsistencyLevel](ConsistencyLevel.md).
 
         - **NumPartitions** (*int64_t*) -
 
@@ -361,9 +372,9 @@ Returns a status indicating whether the operation succeeded. The response carrie
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

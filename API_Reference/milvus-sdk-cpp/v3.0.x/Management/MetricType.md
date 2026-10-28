@@ -21,7 +21,7 @@ enum class MetricType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 *Dense float vectors (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
 
@@ -57,7 +57,13 @@ enum class MetricType {
 
 *Special:*
 
-- **INVALID** / **DEFAULT** (0) - Not explicitly set; the server auto-determines the metric type based on the field data type. Not needed for scalar field indexes.
+- **INVALID** (0)
+
+    Not explicitly set; the server auto-determines the metric type based on the field data type. Not needed for scalar field indexes.
+
+- **DEFAULT** (0)
+
+    A synonym for `INVALID`; the server auto-determines the metric type based on the field data type.
 
 ## Example
 
@@ -71,22 +77,22 @@ auto client = MilvusClientV2::Create();
 client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
 
 // Float vector: cosine similarity (recommended for unnormalized embeddings)
-IndexDesc idx_float("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+IndexParam idx_float("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
 idx_float.AddExtraParam("M", "16");
 idx_float.AddExtraParam("efConstruction", "200");
 
 // Binary vector: Hamming distance
-IndexDesc idx_bin("bin_vec", "bin_idx", IndexType::BIN_FLAT, MetricType::HAMMING);
+IndexParam idx_bin("bin_vec", "bin_idx", IndexType::BIN_FLAT, MetricType::HAMMING);
 
 // Sparse vector: BM25 for full-text search
-IndexDesc idx_sparse("sparse_vec", "sparse_idx",
+IndexParam idx_sparse("sparse_vec", "sparse_idx",
                      IndexType::SPARSE_INVERTED_INDEX, MetricType::BM25);
 
 client->CreateIndex(
     CreateIndexRequest()
         .WithCollectionName("my_collection")
         .WithSync(true)
-        .AddIndex(std::move(idx_float))
-        .AddIndex(std::move(idx_bin))
-        .AddIndex(std::move(idx_sparse)));
+        .AddIndexParam(std::move(idx_float))
+        .AddIndexParam(std::move(idx_bin))
+        .AddIndexParam(std::move(idx_sparse)));
 ```

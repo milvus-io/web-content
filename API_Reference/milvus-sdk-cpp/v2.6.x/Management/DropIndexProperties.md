@@ -1,6 +1,6 @@
 # DropIndexProperties()
 
-This operation removes the specified property keys from an index of a collection. The keys are sent to the server as delete keys of an AlterIndex request, and the returned Status reports whether the drop succeeded.
+This operation removes the specified property keys from an index of a collection. The keys are sent to the server as delete keys of an AlterIndex request, and the returned [Status](../Client/Status.md) reports whether the drop succeeded.
 
 ```cpp
 Status DropIndexProperties(const DropIndexPropertiesRequest& request)
@@ -57,15 +57,15 @@ auto request = DropIndexPropertiesRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the property keys were dropped from the index successfully.
+Returns a [Status](../Client/Status.md) indicating whether the property keys were dropped from the index successfully.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -34,15 +34,16 @@ auto request = milvus::ListRefreshExternalCollectionJobsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The refresh job list is carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The refresh job list is carried in the response object.
 
 - **response** (*ListRefreshExternalCollectionJobsResponse*) -
 
-    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*) - See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
+    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*)
 
         Get the refresh jobs.
+        See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
         - **CollectionName** (*const std::string&*) -
 
@@ -76,15 +77,16 @@ Returns a Status indicating whether the operation succeeded. The refresh job lis
 
             Start timestamp of the refresh job.
 
-        - **State** (*RefreshExternalCollectionStateCode*) - See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
+        - **State** (*RefreshExternalCollectionStateCode*)
 
             Current state of the refresh job.
+            See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

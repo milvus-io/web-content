@@ -35,19 +35,19 @@ auto request = CreateCollectionRequest()
 
 - `WithCollectionName(const std::string& collection_name)`
 
-    Sets the name of the collection to create; this name overrides the name held by the CollectionSchema.
+    Sets the name of the collection to create; this name overrides the name held by the [CollectionSchema](CollectionSchema.md).
 
 - `SetCollectionName(const std::string& collection_name)`
 
-    Set name of the collection. Note: due to history reason, the CollectionSchema also contains a collection name.
+    Set name of the collection. Note: due to history reason, the [CollectionSchema](CollectionSchema.md) also contains a collection name.
 
 - `WithDescription(const std::string& description)`
 
-    Sets the description of the collection; this description overrides the description held by the CollectionSchema. Optional.
+    Sets the description of the collection; this description overrides the description held by the [CollectionSchema](CollectionSchema.md). Optional.
 
 - `SetDescription(const std::string& description)`
 
-    Sets the description of the collection; this description overrides the description held by the CollectionSchema. Optional.
+    Sets the description of the collection; this description overrides the description held by the [CollectionSchema](CollectionSchema.md). Optional.
 
 - `WithCollectionSchema(const CollectionSchemaPtr& schema)`
 
@@ -67,15 +67,15 @@ auto request = CreateCollectionRequest()
 
 - `WithNumShards(int64_t num_shards)`
 
-    Sets the number of shards of the collection, overriding the shards number held by the CollectionSchema; defaults to 1. Optional.
+    Sets the number of shards of the collection, overriding the shards number held by the [CollectionSchema](CollectionSchema.md); defaults to 1. Optional.
 
 - `SetNumShards(int64_t num_shards)`
 
-    Set number of shards of the collection. Note: due to history reason, the CollectionSchema also contains a shards number.
+    Set number of shards of the collection. Note: due to history reason, the [CollectionSchema](CollectionSchema.md) also contains a shards number.
 
 - `WithConsistencyLevel(ConsistencyLevel level)`
 
-    Sets the default consistency level of the collection, such as ConsistencyLevel::BOUNDED, which is also the default when not set. Optional.
+    Sets the default consistency level of the collection, such as [ConsistencyLevel](ConsistencyLevel.md)::BOUNDED, which is also the default when not set. Optional.
 
 - `SetConsistencyLevel(ConsistencyLevel level)`
 
@@ -107,15 +107,15 @@ auto request = CreateCollectionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the collection was created successfully; an INVALID_ARGUMENT status is returned if the request carries a null collection schema.
+Returns a [Status](../Client/Status.md) indicating whether the collection was created successfully; an INVALID_ARGUMENT status is returned if the request carries a null collection schema.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status, including the INVALID_ARGUMENT status returned when the collection schema is null. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md), including the INVALID_ARGUMENT status returned when the collection schema is null. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -1,6 +1,6 @@
 # Optimize()
 
-This operation triggers a server-side compaction on the collection's segments with a target segment size, then monitors it to completion: it waits for vector-field indexes to finish before and after compaction, polls the compaction state until it completes, and refreshes the load of a loaded collection so post-compaction segments become available. When the request's async option is false (the default) the whole workflow runs on the calling thread and the returned Status is the final result; when true it runs on a background thread owned by the returned OptimizeTask, which supports polling, waiting, cancellation, and progress reporting.
+This operation triggers a server-side compaction on the collection's segments with a target segment size, then monitors it to completion: it waits for vector-field indexes to finish before and after compaction, polls the compaction state until it completes, and refreshes the load of a loaded collection so post-compaction segments become available. When the request's async option is false (the default) the whole workflow runs on the calling thread and the returned [Status](../Client/Status.md) is the final result; when true it runs on a background thread owned by the returned OptimizeTask, which supports polling, waiting, cancellation, and progress reporting.
 
 ```cpp
 Status Optimize(const OptimizeRequest& request, OptimizeTaskPtr& task)
@@ -61,15 +61,16 @@ auto request = OptimizeRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded: in synchronous mode it carries the final optimization outcome, and in asynchronous mode it is OK once the task has started (task progress and the final result are obtained from the OptimizeTask output parameter).
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded: in synchronous mode it carries the final optimization outcome, and in asynchronous mode it is OK once the task has started (task progress and the final result are obtained from the OptimizeTask output parameter).
 
 - **response** (*OptimizeTaskPtr*) -
 
     - **GetResult** (*Status*) -
 
         Wait for task result. Timeout zero means wait forever.
+        See [Status](../Client/Status.md).
 
         - **StatusText** (*const std::string&*) -
 
@@ -114,12 +115,13 @@ Returns a Status indicating whether the operation succeeded: in synchronous mode
     - **TaskStatus** (*Status*) -
 
         Final task status if done, otherwise OK.
+        See [Status](../Client/Status.md).
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status, for example an empty collection name, an invalid target size, RPC transport errors, a failed compaction, an index failure, or the overall timeout being exceeded. For asynchronous runs, inspect the task's TaskStatus and progress messages instead. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md), for example an empty collection name, an invalid target size, RPC transport errors, a failed compaction, an index failure, or the overall timeout being exceeded. For asynchronous runs, inspect the task's TaskStatus and progress messages instead. See [Status](../Client/Status.md).
 
 ## Example
 

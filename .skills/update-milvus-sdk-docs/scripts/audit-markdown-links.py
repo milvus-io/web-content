@@ -9,6 +9,14 @@ from pathlib import Path
 
 LINK = re.compile(r"(?<!!)\]\(([^)#?]+)(?:#[^)]*)?\)")
 BAD_CLOSE = re.compile(r"\]\]\(")
+FENCE = re.compile(r"(?ms)^(?:```|~~~).*?^(?:```|~~~)[ \t]*$")
+INLINE_CODE = re.compile(r"`[^`\n]+`")
+
+
+def strip_code(text: str) -> str:
+    """Remove code while preserving line positions so reports keep line numbers."""
+    text = FENCE.sub(lambda match: "\n" * match.group(0).count("\n"), text)
+    return INLINE_CODE.sub(lambda match: "`" + " " * max(0, len(match.group(0)) - 2) + "`", text)
 
 
 def main() -> int:
@@ -23,7 +31,7 @@ def main() -> int:
     links = 0
     for page in root.rglob("*.md"):
         pages += 1
-        text = page.read_text()
+        text = strip_code(page.read_text())
         for match in BAD_CLOSE.finditer(text):
             malformed.append(
                 {

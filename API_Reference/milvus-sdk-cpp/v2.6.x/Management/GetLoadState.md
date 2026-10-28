@@ -47,9 +47,9 @@ auto request = GetLoadStateRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. On success, the GetLoadStateResponse carries the load state and loading progress.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. On success, the GetLoadStateResponse carries the load state and loading progress.
 
 - **response** (*GetLoadStateResponse*) -
 
@@ -64,7 +64,7 @@ Returns a Status indicating whether the operation succeeded. On success, the Get
 
 LoadState members:
 
-**VALUES:**
+**Constants:**
 
 - **LOAD_STATE_NOT_EXIST** (0) - The collection or partition does not exist.
 
@@ -73,37 +73,6 @@ LoadState members:
 - **LOAD_STATE_LOADING** (2) - The collection or partition is currently being loaded into query node memory. Wait for the state to transition to `LOAD_STATE_LOADED`.
 
 - **LOAD_STATE_LOADED** (3) - Fully loaded and ready for `Search()` and `Query()` operations.
-
-## Example
-
-```cpp
-#include "milvus/MilvusClientV2.h"
-#include <milvus/MilvusClientV2.h>
-#include <milvus/types/LoadState.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-GetLoadStateResponse resp;
-auto status = client->GetLoadState(
-    GetLoadStateRequest().WithCollectionName("my_collection"), resp);
-
-switch (resp.State()) {
-    case LoadState::LOAD_STATE_LOADED:
-        std::cout << "Collection is ready for search." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_LOADING:
-        std::cout << "Collection is still loading..." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_NOT_LOAD:
-        std::cout << "Collection is not loaded. Call LoadCollection() first." << std::endl;
-        break;
-    case LoadState::LOAD_STATE_NOT_EXIST:
-        std::cout << "Collection does not exist." << std::endl;
-        break;
-}
-```
 
 **ERROR HANDLING:**
 

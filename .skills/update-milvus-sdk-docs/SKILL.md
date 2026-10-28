@@ -1010,9 +1010,14 @@ Markdown scaffold or heading.
 **Step 7 — Cross-links**: every reference to an eligible type with a dedicated
 page must use a relative markdown link within the same API generation. Run a
 whole-tree bare-mention scan that skips code fences, inline code spans, existing
-links, and `(*Type*)` headers. Also run a Markdown link-syntax audit so forms
-such as `[Type]](path.md)` fail the run, then repair them to
-`[Type](path.md)`. Run a generation-isolation link scan: a
+links, headers, signatures, declarations, and inline source-like type
+expressions. A Markdown link must not alter the rendered source signature: keep
+`- **Schema** (*const CollectionSchema&*) -` verbatim and put
+`See [CollectionSchema](CollectionSchema.md).` in the description beneath it.
+The same rule applies to request fields, response members, getters/accessors,
+constructor parameters, enum variants, and type-page declarations. Also run a
+Markdown link-syntax audit so forms such as `[Type]](path.md)` fail the run,
+then repair them to `[Type](path.md)`. Run a generation-isolation link scan: a
 `v1/` page must not link to a `v2/` page, and a `v2/` page must not link to a
 `v1/` page. Same-named generation-specific types must remain resolved and linked
 only inside their own generation; when a non-allowlisted nested type has no
@@ -1352,6 +1357,14 @@ reviewer action.
 
 Every important reusable domain/model class, struct, interface, or enum gets
 its own dedicated type page, and every reference to it links to that page.
+Keep links in explanatory prose, not inside source-derived signatures or
+declarations. For a bullet such as
+`- **Schema** (*const CollectionSchema&*) -`, preserve the member declaration
+exactly and place `See [CollectionSchema](CollectionSchema.md).` in the indented
+description below it. Do not render
+`- **Schema** (*const [CollectionSchema](CollectionSchema.md)&*) -`. This
+applies to request parameters, response members, getters/accessors, constructor
+parameters, enum variants, and type-page declarations across SDKs.
 Operation response/result wrappers and non-allowlisted nested request/response
 subtypes are the exception: they are documented inline on their owner/operation
 page and do not get standalone pages. **java is the model for both the
@@ -1485,8 +1498,9 @@ heading that names the type, and a `**RETURNS:**` block that describes the value
 and — when the return is a compound object (struct / dict / response class) —
 lists its members. Do not move this material to a standalone response/result
 page. If a response/result member returns an important reusable domain/model
-type, link that type's dedicated page instead of duplicating its full members
-inline. The four SDK example docs (pymilvus / java / go / cpp
+type, link that type's dedicated page from the member's description instead of
+duplicating its full members inline; never embed the link in the member's
+source-derived type expression. The four SDK example docs (pymilvus / java / go / cpp
 `describeCollection`) are the canonical reference. **Pick the list style by how
 the returned type exposes its state:**
 

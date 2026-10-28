@@ -34,7 +34,7 @@ auto request = GetReplicateInfoRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded; on success, the response object is filled with the replication progress for the requested channel, including the current replication checkpoint and the salvage checkpoint.
 
@@ -70,9 +70,9 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

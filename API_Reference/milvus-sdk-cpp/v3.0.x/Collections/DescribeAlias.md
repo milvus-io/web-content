@@ -34,9 +34,9 @@ auto request = DescribeAliasRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The alias description is carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The alias description is carried in the response object.
 
 - **response** (*DescribeAliasResponse*) -
 
@@ -72,30 +72,6 @@ AliasDesc members:
 - `const std::string& CollectionName() const`
 
     Name of the collection this alias points to.
-
-## Example
-
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-DescribeAliasResponse response;
-auto status = client->DescribeAlias(
-    DescribeAliasRequest()
-        .WithAlias("my_alias"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-const AliasDesc& desc = response.Desc();
-std::cout << "Alias:      " << desc.Name() << "\n"
-          << "Collection: " << desc.CollectionName() << "\n"
-          << "Database:   " << desc.DatabaseName() << "\n";
-```
 
 **ERROR HANDLING:**
 

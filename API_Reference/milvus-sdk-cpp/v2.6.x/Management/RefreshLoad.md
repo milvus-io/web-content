@@ -53,13 +53,13 @@ auto request = RefreshLoadRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status; check `status.Code()` and `status.Message()` for invalid collection names, load-state issues, or timeout failures. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md); check `status.Code()` and `status.Message()` for invalid collection names, load-state issues, or timeout failures. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -29,11 +29,35 @@ auto request = GetPartitionStatsRequest()
 
     Sets the name of a partition.
 
+- `SetPartitionName(const std::string& partition_name)`
+
+    Sets the partition name.
+
+- `WithPartitionName(const std::string& partition_name)`
+
+    Sets the partition name.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Sets the collection name.
+
+- `WithCollectionName(const std::string& collection_name)`
+
+    Sets the collection name.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Sets the database name. Use the default database when it is empty.
+
+- `WithDatabaseName(const std::string& db_name)`
+
+    Sets the database name. Use the default database when it is empty.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The partition statistics are carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The partition statistics are carried in the response object.
 
 - **response** (*GetPartitionStatsResponse*) -
 
@@ -51,9 +75,9 @@ Returns a Status indicating whether the operation succeeded. The partition stati
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

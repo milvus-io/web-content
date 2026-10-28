@@ -13,7 +13,7 @@ enum class IndexStateCode {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **NONE** (0) - No index state is available.
 

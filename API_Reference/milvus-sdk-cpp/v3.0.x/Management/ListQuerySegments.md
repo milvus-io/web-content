@@ -26,9 +26,9 @@ auto request = ListQuerySegmentsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The loaded segment information is carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The loaded segment information is carried in the response object.
 
 - **response** (*ListQuerySegmentsResponse*) -
 
@@ -56,9 +56,10 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
             Whether the segment is sorted.
 
-        - **Level** (*[SegmentLevel](SegmentLevel.md)*) -
+        - **Level** (*SegmentLevel*) -
 
             Level of the segment.
+            See [SegmentLevel](SegmentLevel.md).
 
         - **MemSize** (*int64_t*) -
 
@@ -84,9 +85,10 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
             ID of the segment.
 
-        - **State** (*[SegmentState](SegmentState.md)*) -
+        - **State** (*SegmentState*) -
 
             Current state of the segment.
+            See [SegmentState](SegmentState.md).
 
         - **StorageVersion** (*int64_t*) -
 
@@ -94,9 +96,9 @@ Returns a Status indicating whether the operation succeeded. The loaded segment 
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

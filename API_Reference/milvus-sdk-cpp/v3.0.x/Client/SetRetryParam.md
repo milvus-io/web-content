@@ -8,21 +8,32 @@ Status SetRetryParam(const RetryParam& retry_param)
 
 **PARAMETERS:**
 
-- **retry_param** (*const [RetryParam](RetryParam.md)&*)
+- **retry_param** (*const RetryParam&*)
 
     Sets the retry parameters.
+    See [RetryParam](RetryParam.md).
+
+## Request Syntax
+
+```cpp
+auto status = client->SetRetryParam(retry_param);
+```
+
+**REQUEST METHODS:**
+
+Not applicable; this operation accepts a `RetryParam` directly and has no request builder methods.
 
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
 Check `status.IsOk()` to confirm success.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md). The SDK converts internal exceptions into a non-OK [Status](Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
 
 ## Example
 

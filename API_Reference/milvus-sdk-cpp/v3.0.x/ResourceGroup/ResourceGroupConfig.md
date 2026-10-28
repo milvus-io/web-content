@@ -16,11 +16,15 @@ ResourceGroupConfig config;
 
     The maximum number of query nodes the resource group may hold. Setting this caps growth even when spare nodes are available.
 
-- `const std::set<std::string>& TransferFromGroups() const` / `void AddTrnasferFromGroup(const std::string& group_name)`
+- `const std::set<std::string>& TransferFromGroups() const` / `void AddTransferFromGroup(const std::string& group_name)`
+
+    `AddTrnasferFromGroup()` is a deprecated misspelled alias.
 
     Names of resource groups from which spare nodes may be transferred into this group.
 
-- `const std::set<std::string>& TransferToGroups() const` / `void AddTrnasferToGroup(const std::string& group_name)`
+- `const std::set<std::string>& TransferToGroups() const` / `void AddTransferToGroup(const std::string& group_name)`
+
+    `AddTrnasferToGroup()` is a deprecated misspelled alias.
 
     Names of resource groups to which surplus nodes from this group may be transferred.
 
@@ -37,7 +41,7 @@ using namespace milvus;
 ResourceGroupConfig config;
 config.SetRequests(2);
 config.SetLimits(4);
-config.AddTrnasferFromGroup("__default_resource_group");
+config.AddTransferFromGroup("__default_resource_group");
 config.AddNodeFilter("GPU", "A100");
 
 auto client = MilvusClientV2::Create();

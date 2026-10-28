@@ -6,6 +6,16 @@ This operation returns the telemetry manager for diagnostics and custom command 
 ClientTelemetryManagerPtr GetTelemetry() const
 ```
 
+## Request Syntax
+
+```cpp
+auto telemetry = client->GetTelemetry();
+```
+
+**REQUEST METHODS:**
+
+Not applicable; this operation has no request object.
+
 **RETURNS:**
 
 *ClientTelemetryManagerPtr*
@@ -38,6 +48,11 @@ Returns `nullptr` when telemetry is not available for the connected client.
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
+
+milvus::TelemetryCommandReply HandlePing(const milvus::TelemetryCommand&) {
+    return milvus::TelemetryCommandReply{};
+}
+
 auto client = milvus::MilvusClientV2::Create();
 
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
@@ -48,10 +63,6 @@ if (!status.IsOk()) {
 
 auto telemetry = client->GetTelemetry();
 if (telemetry) {
-    telemetry->RegisterCommandHandler(
-        "ping",
-        [](const milvus::TelemetryCommand&) {
-            return milvus::TelemetryCommandReply{};
-        });
+    telemetry->RegisterCommandHandler("ping", HandlePing);
 }
 ```

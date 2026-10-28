@@ -102,7 +102,7 @@ Note: Milvus and the C++ SDK are NOT compatible across major versions.
 
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|
-| 2.6.x | v2.6.7 |
+| 2.6.x | v2.6.8 |
 
 ## Contributing
 

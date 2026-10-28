@@ -21,9 +21,9 @@ auto request = GetCompactionStateRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. On success, the GetCompactionStateResponse carries the state of the compaction job.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. On success, the GetCompactionStateResponse carries the state of the compaction job.
 
 - **response** (*GetCompactionStateResponse*) -
 
@@ -54,25 +54,13 @@ Returns a Status indicating whether the operation succeeded. On success, the Get
 
 CompactionStateCode members:
 
-**VALUES:**
+**Constants:**
 
 - **UNKNOWN** (0) - The compaction state is unknown.
 
 - **EXECUTING** (1) - The compaction job is executing.
 
 - **COMPLETED** (2) - The compaction job completed.
-
-## Example
-
-```cpp
-#include <milvus/types/CompactionState.h>
-using namespace milvus;
-
-auto state = response.State().State();
-if (state == CompactionStateCode::COMPLETED) {
-    // Handle the completed compaction.
-}
-```
 
 **ERROR HANDLING:**
 

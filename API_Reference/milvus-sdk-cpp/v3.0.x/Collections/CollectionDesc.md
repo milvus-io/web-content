@@ -26,7 +26,7 @@ const CollectionDesc& desc = response.Desc();
 
 - `const CollectionSchema& Schema() const`
 
-    Schema of the collection, including field definitions and dynamic field settings. For details see CollectionSchema.
+    Schema of the collection, including field definitions and dynamic field settings. For details see [CollectionSchema](CollectionSchema.md).
 
 - `int64_t ID() const`
 

@@ -61,9 +61,9 @@ auto request = CompactRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the compaction was triggered successfully. On success, the response object carries the compaction ID assigned by the server for tracking the operation.
+Returns a [Status](../Client/Status.md) indicating whether the compaction was triggered successfully. On success, the response object carries the compaction ID assigned by the server for tracking the operation.
 
 - **response** (*CompactResponse*) -
 
@@ -77,9 +77,9 @@ Returns a Status indicating whether the compaction was triggered successfully. O
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

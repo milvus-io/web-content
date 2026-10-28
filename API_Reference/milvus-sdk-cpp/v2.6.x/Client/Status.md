@@ -84,7 +84,7 @@ enum class StatusCode {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **OK** (0) - The operation succeeded.
 

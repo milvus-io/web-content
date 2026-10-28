@@ -1,6 +1,6 @@
 # Query()
 
-This operation queries entities in a collection that match a filter expression, or a set of primary keys, and returns the matching records through the response parameter. Callers check the returned Status and read the matched records from the response's query results.
+This operation queries entities in a collection that match a filter expression, or a set of primary keys, and returns the matching records through the response parameter. Callers check the returned [Status](../Client/Status.md) and read the matched records from the response's query results.
 
 ```cpp
 Status Query(const QueryRequest& request, QueryResponse& response)
@@ -153,9 +153,9 @@ auto request = QueryRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the query succeeded, with the matching records and their requested output field data delivered in the response's query results.
+Returns a [Status](../Client/Status.md) indicating whether the query succeeded, with the matching records and their requested output field data delivered in the response's query results.
 
 - **response** (*QueryResponse*) -
 
@@ -171,13 +171,15 @@ Returns a Status indicating whether the query succeeded, with the matching recor
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -191,13 +193,15 @@ Returns a Status indicating whether the query succeeded, with the matching recor
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -210,10 +214,12 @@ Returns a Status indicating whether the query succeeded, with the matching recor
         - **OutputRows** (*Status*) -
 
             Get all output rows.
+            See [Status](../Client/Status.md).
 
         - **OutputRow** (*Status*) -
 
             Get row data. Throw exception if the i is out of bound.
+            See [Status](../Client/Status.md).
 
         - **GetRowCount** (*uint64_t*) -
 
@@ -235,9 +241,9 @@ Returns a Status indicating whether the query succeeded, with the matching recor
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

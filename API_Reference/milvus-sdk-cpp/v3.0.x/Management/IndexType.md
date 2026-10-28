@@ -25,7 +25,7 @@ enum class IndexType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 *Dense float vectors — CPU (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
 
@@ -112,22 +112,22 @@ auto client = MilvusClientV2::Create();
 client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
 
 // HNSW for float vector (most common choice)
-IndexDesc idx_hnsw("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+IndexParam idx_hnsw("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
 idx_hnsw.AddExtraParam("M", "16");
 idx_hnsw.AddExtraParam("efConstruction", "200");
 
 // INVERTED for a VARCHAR scalar field
-IndexDesc idx_inv("name", "name_idx", IndexType::INVERTED);
+IndexParam idx_inv("name", "name_idx", IndexType::INVERTED);
 
 // SPARSE_INVERTED_INDEX for full-text search
-IndexDesc idx_sparse("sparse_vec", "sparse_idx",
+IndexParam idx_sparse("sparse_vec", "sparse_idx",
                      IndexType::SPARSE_INVERTED_INDEX, MetricType::BM25);
 
 client->CreateIndex(
     CreateIndexRequest()
         .WithCollectionName("my_collection")
         .WithSync(true)
-        .AddIndex(std::move(idx_hnsw))
-        .AddIndex(std::move(idx_inv))
-        .AddIndex(std::move(idx_sparse)));
+        .AddIndexParam(std::move(idx_hnsw))
+        .AddIndexParam(std::move(idx_inv))
+        .AddIndexParam(std::move(idx_sparse)));
 ```

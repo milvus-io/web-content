@@ -80,9 +80,25 @@ auto request = DeleteRequest()
 
     Set string primary keys to be deleted. Only take effect when filter is empty.
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
 **RETURNS:**
 
-*Status* with *DeleteResponse*
+*[Status](../Client/Status.md)* with *DeleteResponse*
 
 Check `status.IsOk()` to confirm success.
 
@@ -122,9 +138,9 @@ const DmlResults& results = response.Results();
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -249,7 +249,7 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Request methods</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -291,20 +291,48 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>Function or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
      <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `AddFunctionChain(FunctionChain&& function_chain)`
+
+    Adds one reranking function chain. See [FunctionChain](FunctionChain.md).
+
+- `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Sets the reranking function chains applied to hybrid-search results.
+
+- `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
+
+    Sets the reranking function chains applied to hybrid-search results.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
-### FieldData
+### [FieldData](FieldData.md)
 
 Field payloads use [FieldData](FieldData.md), its concrete aliases, and `FieldDataPtr`. See that page for template methods, array and binary specializations, and supported payload forms.
 
@@ -479,7 +507,7 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
 - `FieldDataPtr OutputField(const std::string& name) const`
 
-    Returns one requested output field by name; the template overload casts it to the requested concrete FieldData type.
+    Returns one requested output field by name; the template overload casts it to the requested concrete [FieldData](FieldData.md) type.
 
 - `const std::vector<FieldDataPtr>& OutputFields() const`
 
@@ -503,9 +531,9 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 #### Output field types
 

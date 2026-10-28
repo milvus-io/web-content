@@ -12,17 +12,27 @@ Status CurrentUsedDatabase(std::string& db_name)
 
     Sets a variable that holds the name of the currently used database.
 
+## Request Syntax
+
+```cpp
+std::string database = client->CurrentUsedDatabase();
+```
+
+**REQUEST METHODS:**
+
+Not applicable; this operation has no request object.
+
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
 Check `status.IsOk()` to confirm success.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md). The SDK converts internal exceptions into a non-OK [Status](Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
 
 ## Example
 

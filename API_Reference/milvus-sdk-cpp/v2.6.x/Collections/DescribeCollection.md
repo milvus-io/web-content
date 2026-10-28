@@ -34,15 +34,16 @@ auto request = DescribeCollectionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating success or failure, and fills the supplied DescribeCollectionResponse with the collection's description, which is accessible through its Desc() accessor.
+Returns a [Status](../Client/Status.md) indicating success or failure, and fills the supplied DescribeCollectionResponse with the collection's description, which is accessible through its Desc() accessor.
 
 - **response** (*DescribeCollectionResponse*) -
 
     - **Desc** (*const CollectionDesc&*) -
 
         Get collection description.
+        See [CollectionDesc](CollectionDesc.md).
 
         - **DatabaseName** (*const std::string&*) -
 
@@ -63,6 +64,7 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
         - **Schema** (*const CollectionSchema&*) -
 
             Collection schema.
+            See [CollectionSchema](CollectionSchema.md).
 
             - **Name** (*const std::string&*) -
 
@@ -81,6 +83,7 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.
+                See [FieldSchema](FieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -90,13 +93,15 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
 
                     Description of this field, can be empty.
 
-                - **FieldDataType** ([DataType](DataType.md)) -
+                - **FieldDataType** (*DataType*) -
 
                     Field data type.
+                    See [DataType](DataType.md).
 
-                - **ElementType** ([DataType](DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Element type of array field.
+                    See [DataType](DataType.md).
 
                 - **IsPrimaryKey** (*bool*) -
 
@@ -157,6 +162,7 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
             - **StructFields** (*const std::vector<StructFieldSchema>&*) -
 
                 Struct fields schema array.
+                See [StructFieldSchema](StructFieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -173,6 +179,7 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
                 - **Fields** (*const std::vector<FieldSchema>&*) -
 
                     Get sub fields of the struct field.
+                    See [FieldSchema](FieldSchema.md).
 
                     - **Name** (*const std::string&*) -
 
@@ -182,13 +189,15 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
 
                         Description of this field, can be empty.
 
-                    - **FieldDataType** ([DataType](DataType.md)) -
+                    - **FieldDataType** (*DataType*) -
 
                         Field data type.
+                        See [DataType](DataType.md).
 
-                    - **ElementType** ([DataType](DataType.md)) -
+                    - **ElementType** (*DataType*) -
 
                         Element type of array field.
+                        See [DataType](DataType.md).
 
                     - **IsPrimaryKey** (*bool*) -
 
@@ -268,7 +277,8 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type. See [FunctionType](FunctionType.md).
+                    [Function](Function.md) type.
+                    See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 
@@ -304,9 +314,9 @@ Returns a Status indicating success or failure, and fills the supplied DescribeC
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status when the RPC transport fails or the server returns an error for the describe request; inspect `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md) when the RPC transport fails or the server returns an error for the describe request; inspect `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

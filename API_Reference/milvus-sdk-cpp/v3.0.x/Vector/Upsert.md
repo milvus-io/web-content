@@ -98,7 +98,7 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Column payload type</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -111,7 +111,7 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
    </tr>
    <tr>
      <td><p>INT8, INT16, INT32, INT64</p></td>
-     <td><p>Matching Int&ast;FieldData</p></td>
+     <td><p>Matching Int&ast;[FieldData](FieldData.md)</p></td>
      <td><p>Matching fixed-width integer</p></td>
      <td><p>Choose the container matching the schema type.</p></td>
    </tr>
@@ -129,7 +129,7 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
    </tr>
    <tr>
      <td><p>FLOAT_VECTOR, FLOAT16_VECTOR, BFLOAT16_VECTOR, INT8_VECTOR</p></td>
-     <td><p>Matching dense-vector FieldData class</p></td>
+     <td><p>Matching dense-vector [FieldData](FieldData.md) class</p></td>
      <td><p>std::vector<float>, std::vector<uint16_t>, or std::vector<int8_t></p></td>
      <td><p>Choose the container matching the vector encoding.</p></td>
    </tr>
@@ -141,9 +141,9 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
    </tr>
    <tr>
      <td><p>ARRAY, STRUCT</p></td>
-     <td><p>Specialized Array&ast;FieldData or StructFieldData</p></td>
+     <td><p>Specialized Array&ast;[FieldData](FieldData.md) or StructFieldData</p></td>
      <td><p>Element-specific container or array-style nlohmann::json storage</p></td>
-     <td><p>Arrays declare an element type; structs use the array template with DataType::STRUCT.</p></td>
+     <td><p>Arrays declare an element type; structs use the array template with [DataType](../Collections/DataType.md)::STRUCT.</p></td>
    </tr>
    <tr>
      <td><p>UNKNOWN</p></td>
@@ -155,13 +155,29 @@ The collection schema uses [DataType](../Collections/DataType.md) to declare eac
 
 For a concrete container `XxxFieldData`, the pointer alias `XxxFieldDataPtr` is `std::shared_ptr<XxxFieldData>`. DML requests accept these values through `FieldDataPtr`.
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
-### FieldData
+### [FieldData](FieldData.md)
 
 Field payloads use [FieldData](FieldData.md), its concrete aliases, and `FieldDataPtr`. See that page for template methods, array and binary specializations, and supported payload forms.
 
@@ -201,9 +217,9 @@ const DmlResults& results = response.Results();
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 
