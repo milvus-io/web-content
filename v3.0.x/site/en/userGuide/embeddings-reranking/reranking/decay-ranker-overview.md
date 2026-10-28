@@ -117,7 +117,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>6 months ago</p></td>
      <td><p>0.45</p></td>
      <td><p>0.41</p></td>
-     <td>3</td>
+     <td>4</td>
    </tr>
    <tr>
      <td><p>Paper C</p></td>
@@ -135,7 +135,7 @@ In this example, decay scores reflect how relevance diminishes with time—newer
      <td><p>3 weeks ago</p></td>
      <td><p>0.70</p></td>
      <td><p>0.53</p></td>
-     <td>4</td>
+     <td>3</td>
    </tr>
 </table>
 
@@ -143,9 +143,9 @@ Without decay reranking, Paper B would rank highest based on pure vector similar
 
 - Paper C jumps to position #1 despite medium similarity because it's very recent (published yesterday)
 
-- Paper B drops to position #3 despite excellent similarity because it's relatively old
+- Paper B drops to position #4 despite excellent similarity because it's relatively old
 
-- Paper D uses L2 distance (where lower is better), so its score is normalized from 1.2 to 0.76 before applying decay
+- Paper D uses COSINE similarity, so its score of 0.76 is used directly before applying decay
 
 ## Choose the right decay ranker
 
@@ -203,17 +203,21 @@ To implement decay ranking, first define a `Function` object with the appropriat
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 from pymilvus import Function, FunctionType
+import datetime
 
 # Create a decay function for timestamp-based decay
 # Note: All time parameters must use the same unit as your collection data
-decay_ranker = Function(
+rerank = Function(
     name="time_decay",                  # Function identifier
     input_field_names=["timestamp"],    # Numeric field to use for decay
     function_type=FunctionType.RERANK,  # Must be set to RERANK for decay rankers
@@ -230,46 +234,97 @@ decay_ranker = Function(
 
 ```java
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
-
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 
 ZonedDateTime zdt = ZonedDateTime.of(2025, 1, 25, 0, 0, 0, 0, ZoneId.systemDefault());
 
-DecayRanker ranker = DecayRanker.builder()
+DecayRanker rerank = DecayRanker.builder()
         .name("time_decay")
         .inputFieldNames(Collections.singletonList("timestamp"))
         .function("gauss")
-        .origin(zdt.toInstant().toEpochMilli())
+        .origin(zdt.toInstant().getEpochSecond())
         .scale(7 * 24 * 60 * 60)
         .offset(24 * 60 * 60)
         .decay(0.5)
         .build();
+```
 
+```go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+rerank := entity.NewFunction().
+    WithName("time_decay").
+    WithInputFields("timestamp").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "decay").
+    WithParam("function", "gauss").
+    WithParam("origin", 1735689600).
+    WithParam("scale", 7*24*60*60).
+    WithParam("offset", 24*60*60).
+    WithParam("decay", 0.5)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let rerank = DecayRerank::new()
+    .function(Function::new()
+        .name("time_decay")
+        .input_fields(["timestamp"])
+        .function_type(FunctionType::Rerank)
+        .param("reranker", "decay"))
+    .decay_function("gauss")
+    .origin(1735689600)
+    .scale(7 * 24 * 60 * 60)
+    .offset(24 * 60 * 60)
+    .decay(0.5);
+```
+
+```cpp
+auto rerank = std::make_shared<milvus::DecayRerank>("time_decay");
+rerank->AddInputFieldName("timestamp");
+rerank->SetFunction("gauss");
+rerank->SetOrigin(1735689600);
+rerank->SetScale(7 * 24 * 60 * 60);
+rerank->SetOffset(24 * 60 * 60);
+rerank->SetDecay(0.5);
 ```
 
 ```javascript
-
 import {FunctionType } from "@zilliz/milvus2-sdk-node";
 
-const decayRanker = {
+const rerank = {
   name: "time_decay",
   input_field_names: ["timestamp"],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
     reranker: "decay",
     function: "gauss",
-    origin: new Date(2025, 1, 15).getTime(),
+    origin: Math.floor(Date.UTC(2025, 0, 15) / 1000),
     scale: 7 * 24 * 60 * 60,
     offset: 24 * 60 * 60,
     decay: 0.5,
   },
 };
-
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2.Types;
+
+// Create a decay function for timestamp-based decay
+// Note: All time parameters must use the same unit as your collection data
+var rerank = new DecayRerank("time_decay")     // Function identifier
+    .WithInputField("timestamp")                // Numeric field to use for decay
+    .WithFunction("gauss")                       // Choose decay function type: "gauss", "exp", or "linear"
+    .WithOrigin(new DateTimeOffset(2025, 1, 15, 0, 0, 0, TimeSpan.Zero).ToUnixTimeSeconds()) // Reference point (seconds)
+    .WithScale(7 * 24 * 60 * 60)                 // 7 days in seconds (must match collection data unit)
+    .WithOffset(24 * 60 * 60)                    // 1 day no-decay zone (must match collection data unit)
+    .WithDecay(0.5f);                            // Half score at scale distance
 ```
 
 ```bash
@@ -346,8 +401,11 @@ After defining your decay ranker, you can apply it during search operations by p
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -360,15 +418,18 @@ results = milvus_client.search(
     limit=10,
     output_fields=["document", "timestamp"],  # Include the decay field in outputs to see values
     #  highlight-next-line
-    ranker=decay_ranker,                      # Apply the decay ranker here
+    ranker=rerank,                      # Apply the decay ranker here
     consistency_level="Strong"
 )
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.SearchReq;
-import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
 
 SearchReq searchReq = SearchReq.builder()
         .collectionName(COLLECTION_NAME)
@@ -377,26 +438,110 @@ SearchReq searchReq = SearchReq.builder()
         .limit(10)
         .outputFields(Arrays.asList("document", "timestamp"))
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .build();
 SearchResp searchResp = client.search(searchReq);
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+functionScore := entity.NewFunctionScore().AddFunction(rerank)
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    collection_name, // collection name
+    10,              // limit
+    []entity.Vector{your_query_vector}, // query vector
+).WithANNSField("vector_field").
+    WithFunctionScore(functionScore).
+    WithOutputFields("document", "timestamp"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let function_score = FunctionScore::new().add_function(rerank);
+let request = SearchRequest::builder()
+    .collection_name(collection_name)
+    .vectors(SearchVectors::Float(vec![your_query_vector]))
+    .vector_field("vector_field")
+    .limit(10)
+    .output_fields(vec!["document", "timestamp"])
+    .rerank(function_score)
+    .build()?;
+let resp = client.search(request).await?;
+```
+
+```cpp
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(rerank);
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName(collection_name)
+                   .WithAnnsField("vector_field")
+                   .WithLimit(10)
+                   .WithRerank(function_score)
+                   .AddOutputField("document")
+                   .AddOutputField("timestamp")
+                   .AddFloatVector(your_query_vector);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 const result = await milvusClient.search({
-  collection_name: "collection_name",
+  collection_name: collection_name,
   data: [your_query_vector], // Replace with your query vector
-  anns_field: "dense",
+  anns_field: "vector_field",
   limit: 10,
   output_fields: ["document", "timestamp"],
-  rerank: ranker,
+  rerank: rerank,
   consistency_level: "Strong",
 });
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+// Use the decay function in standard vector search
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = collectionName,
+    Vectors = [yourQueryVector], // Replace with your query vector
+    VectorFieldName = "vector_field",
+    Limit = 10,
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "document", "timestamp" },  // Include the decay field in outputs to see values
+        FunctionScoreReranker = rerank,              // Apply the decay ranker here
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 ```
 
 ```bash
