@@ -19,6 +19,9 @@ summary: You can drop a collection if it is no longer needed.
         ></path>
       </svg>
     </button></h1><p>You can drop a collection if it is no longer needed.</p>
+<div class="alert note">
+<p>Unlike dropping a managed collection, which removes both the collection and the data, dropping an external collection only removes the collection and keeps the data intact.</p>
+</div>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +41,11 @@ summary: You can drop a collection if it is no longer needed.
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -60,7 +66,7 @@ client.drop_collection(
 <span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 
-<span class="hljs-comment">// 1. Connect to Milvus server</span>
+<span class="hljs-comment">// 1. Connect to Milvus</span>
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -68,42 +74,23 @@ client.drop_collection(
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
 
-<span class="hljs-type">DropCollectionReq</span> <span class="hljs-variable">dropQuickSetupParam</span> <span class="hljs-operator">=</span> DropCollectionReq.builder()
+<span class="hljs-type">DropCollectionReq</span> <span class="hljs-variable">dropCollectionParam</span> <span class="hljs-operator">=</span> DropCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 
-client.dropCollection(dropQuickSetupParam);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
-
-<span class="hljs-comment">// 10. Drop the collection</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
+client.dropCollection(dropCollectionParam);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    milvusclient <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
@@ -121,6 +108,71 @@ err = client.DropCollection(ctx, milvusclient.NewDropCollectionOption(<span clas
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_collection</span>(
+        DropCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">DropCollection</span>(milvus::<span class="hljs-built_in">DropCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>);
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">await</span> client.DropCollectionAsync(<span class="hljs-keyword">new</span> DropCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
