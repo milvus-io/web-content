@@ -18,6 +18,7 @@ let request = QueryIteratorRequest::builder()
             .build()?,
     )
     .batch_size(100)
+    .limit(10)
     .build()?;
 let mut iterator = client.query_iterator(request).await?;
 ```
@@ -35,6 +36,10 @@ let mut iterator = client.query_iterator(request).await?;
 - `reduce_stop_for_best: bool`
 
     Whether the iterator stops fetching a page as soon as the best result is found. Defaults to `true`.
+
+- `limit: Option<i64>`
+
+    Optional maximum number of rows to iterate before stopping. `None` iterates all matching rows.
 
 - `cursor: Option<QueryCursor>`
 
@@ -93,6 +98,7 @@ let request = QueryIteratorRequest::builder()
             .build()?,
     )
     .batch_size(100)
+    .limit(10)
     .build()?;
 let mut iterator = client.query_iterator(request).await?;
 while let Some(batch) = iterator.next().await? {

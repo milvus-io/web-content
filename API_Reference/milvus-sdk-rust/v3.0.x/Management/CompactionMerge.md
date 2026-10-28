@@ -109,14 +109,6 @@ pub struct CompactionMerge
 
         Compaction that bumps the schema version.
 
-    ## Example
-
-    ```rust
-    if task.get_compaction_type() == CompactionType::Clustering {
-        println!("clustering task: {}", task.get_plan_id());
-    }
-    ```
-
 - `get_state()` (*CompactionTaskState*) -
 
     The lifecycle state of the task.
@@ -184,14 +176,6 @@ pub struct CompactionMerge
     - **Statistic**
 
         The task is collecting statistics.
-
-    ## Example
-
-    ```rust
-    if task.get_state() == CompactionTaskState::Failed {
-        println!("failure: {}", task.get_failure_reason());
-    }
-    ```
 
 - `get_failure_reason()` (*&str*) -
 

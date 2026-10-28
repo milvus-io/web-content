@@ -67,6 +67,10 @@ ListRefreshExternalCollectionJobsResponse
 
         The external source of the refreshed data.
 
+    - `get_external_spec()` (*&str*) -
+
+        The detailed external specification reported by the server.
+
     - `get_start_time()` (*u64*) -
 
         The start time of the refresh job.

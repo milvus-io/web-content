@@ -11,11 +11,11 @@ pub enum Ids {
 
 **Constants:**
 
-- **Int64**
+- **Int64(Vec\<i64\>)**
 
     Integer primary-key values.
 
-- **VarChar**
+- **VarChar(Vec\<String\>)**
 
     String primary-key values.
 

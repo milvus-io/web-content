@@ -152,7 +152,7 @@ pub enum IndexType {
 
 - **SparseWand**
 
-    Sparse-WAND index for sparse-vector ranking. Deprecated since Milvus 2.5.4; use `inverted_index_algo: DAAT_WAND` on `SparseInvertedIndex` instead.
+    Sparse-WAND index for sparse-vector ranking.
 
 ## Example
 
