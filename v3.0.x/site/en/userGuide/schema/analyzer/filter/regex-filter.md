@@ -1,11 +1,11 @@
 ---
 id: regex-filter.md
-title: "Regex Analyzer Filter"
+title: "Regex"
 summary: "The regex analyzer filter keeps tokens that match a regular expression and discards the rest."
 beta: Milvus 2.5.11+
 ---
 
-# Regex Analyzer Filter
+# Regex
 
 The `regex` filter is a regular expression filter: any token produced by the tokenizer is kept only if it matches the expression you provide; everything else is discarded.
 
@@ -22,8 +22,11 @@ The `regex` filter is a custom filter in Milvus. To use it, specify `"type": "re
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -38,30 +41,87 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter",
         Arrays.asList(new HashMap<String, Object>() {{
-                    put("type", "regex");
-                    put("expr", "^(?!test)");
-                }})
+            put("type", "regex");
+            put("expr", "^(?!test)");
+        }})
 );
 ```
 
-```javascript
-// node
+```go
+analyzerParams := map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type": "regex",
+        "expr": "^(?!test)",
+    }}}
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "standard",
-        "filter": []any{map[string]any{
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [{
+        "type": "regex",
+        "expr": "^(?!test)"
+    }]
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        {{"type", "regex"}, {"expr", "^(?!test)"}}
+    }}
+};
+```
+
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+    "filter": [
+        {
             "type": "regex",
-            "expr": "^(?!test)",
-        }}}
+            "expr": "^(?!test)"
+        }
+    ],
+};
+```
+
+```csharp
+using System.Collections.Generic;
+
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = "standard",
+    ["filter"] = new[]
+    {
+        new Dictionary<string, object>
+        {
+            ["type"] = "regex",
+            ["expr"] = "^(?!test)" // keep tokens that do NOT start with "test"
+        }
+    }
+};
 ```
 
 ```bash
-# curl
+# restful
+analyzerParams='{
+  "tokenizer": "standard",
+  "filter": [
+    {
+      "type": "regex",
+      "expr": "^(?!test)"
+    }
+  ]
+}'
 ```
 
 The `regex` filter accepts the following configurable parameters.
@@ -74,7 +134,7 @@ The `regex` filter accepts the following configurable parameters.
    <tr>
      <td><p><code>expr</code></p></td>
      <td><p>A regular‑expression pattern applied to each token. Tokens that match are retained; non‑matches are dropped.
- For details on regex syntax, refer to <a href="https://docs.rs/regex/latest/regex/#syntax">Syntax</a>.</p></td>
+ For details on regex syntax, refer to <a href="https://docs.rs/fancy-regex/0.14.0/fancy_regex/#syntax">Syntax</a>.</p></td>
    </tr>
 </table>
 
@@ -89,14 +149,17 @@ Before applying the analyzer configuration to your collection schema, verify its
 ### Analyzer configuration
 
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
-```plaintext
+```python
 analyzer_params = {
     "tokenizer": "standard",
     "filter": [{
@@ -107,6 +170,10 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter",
@@ -116,20 +183,73 @@ analyzerParams.put("filter",
         }}));
 ```
 
-```javascript
-// node
+```go
+analyzerParams := map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type": "regex",
+        "expr": "^(?!test)",
+    }}}
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "standard",
-        "filter": []any{map[string]any{
+```rust
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [{
+        "type": "regex",
+        "expr": "^(?!test)"
+    }]
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "standard"},
+    {"filter", {
+        {{"type", "regex"}, {"expr", "^(?!test)"}}
+    }}
+};
+```
+
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+    "filter": [
+        {
             "type": "regex",
-            "expr": "^(?!test)",
-        }}}
+            "expr": "^(?!test)"
+        }
+    ],
+};
+```
+
+```csharp
+using System.Collections.Generic;
+
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = "standard",
+    ["filter"] = new[]
+    {
+        new Dictionary<string, object>
+        {
+            ["type"] = "regex",
+            ["expr"] = "^(?!test)"
+        }
+    }
+};
 ```
 
 ```bash
-# curl
+# restful
+analyzerParams='{
+  "tokenizer": "standard",
+  "filter": [
+    {
+      "type": "regex",
+      "expr": "^(?!test)"
+    }
+  ]
+}'
 ```
 
 ### Verification using `run_analyzer`
@@ -137,8 +257,11 @@ analyzerParams = map[string]any{"tokenizer": "standard",
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -147,14 +270,17 @@ from pymilvus import (
     MilvusClient,
 )
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Sample text to analyze
 sample_text = "testItem apple testCase banana"
 
-# Run the standard analyzer with the defined configuration
+# Run the analyzer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
-print("Standard analyzer output:", result)
+print("Analyzer output:", result)
 ```
 
 ```java
@@ -162,9 +288,12 @@ import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.RunAnalyzerReq;
 import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+import java.util.ArrayList;
+import java.util.List;
 
 ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 
@@ -178,21 +307,17 @@ RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
 List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
-```javascript
-// node
-```
-
 ```go
 import (
     "context"
-    "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
+ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "http://localhost:19530",
     APIKey:  "root:Milvus",
 })
 if err != nil {
@@ -200,20 +325,130 @@ if err != nil {
     // handle error
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []string{"testItem apple testCase banana"}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+for _, r := range result {
+    for _, token := range r.Tokens {
+        fmt.Println("Analyzer output:", token.Text)
+    }
+}
+```
+
+```rust
+use milvus::v2::error::Result;
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": "standard",
+    "filter": [{
+        "type": "regex",
+        "expr": "^(?!test)"
+    }]
+});
+
+let sample_text = "testItem apple testCase banana";
+let result = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(vec![sample_text])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+
+println!("Analyzer output: {:?}", result);
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <string>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::string text = "testItem apple testCase banana";
+auto request = milvus::RunAnalyzerRequest()
+                       .AddText(text)
+                       .WithAnalyzerParams(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+const sampleText = "testItem apple testCase banana";
+const result = await client.runAnalyzer({
+    text: sampleText,
+    analyzer_params,
+});
+console.log("Analyzer output:", result);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+// Sample text to analyze
+var sampleText = "testItem apple testCase banana";
+
+// Run the analyzer with the defined configuration
+RunAnalyzerResp result = await client.RunAnalyzerAsync(new RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = new[] { sampleText }
+});
+Console.WriteLine("Analyzer output: " + string.Join(", ", result.Results.SelectMany(r => r.Tokens).Select(t => t.Token)));
 ```
 
 ```bash
-# curl
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "text": ["testItem apple testCase banana"],
+    "analyzerParams": "{\"tokenizer\": \"standard\", \"filter\": [{\"type\": \"regex\", \"expr\": \"^(?!test)\"}]}"
+}'
 ```
 
 ### Expected output
@@ -221,4 +456,3 @@ if err != nil {
 ```python
 ['apple', 'banana']
 ```
-
