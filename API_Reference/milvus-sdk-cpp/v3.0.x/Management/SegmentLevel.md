@@ -12,7 +12,7 @@ enum class SegmentLevel {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **UNKNOWN** (-1) - The segment level is unknown.
 

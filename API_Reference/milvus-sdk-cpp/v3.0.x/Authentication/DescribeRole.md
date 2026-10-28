@@ -34,7 +34,7 @@ auto request = DescribeRoleRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
@@ -119,37 +119,11 @@ struct GrantItem {
 };
 ```
 
-## Example
-
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-DescribeRoleResponse response;
-auto status = client->DescribeRole(
-    DescribeRoleRequest().WithRoleName("read_only"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-const RoleDesc& desc = response.Desc();
-std::cout << "Role: " << desc.Name() << "\n";
-for (const auto& item : desc.GrantItems()) {
-    std::cout << "  " << item.privilege_
-              << " on " << item.object_type_ << "/" << item.object_name_
-              << " (db=" << item.db_name_ << ")\n";
-}
-```
-
 **ERROR HANDLING:**
 
 - **Status**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

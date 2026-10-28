@@ -12,7 +12,7 @@ enum class RestoreSnapshotStateCode {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **UNKNOWN** (0) - The restore job state is unknown.
 

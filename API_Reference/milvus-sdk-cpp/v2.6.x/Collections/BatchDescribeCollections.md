@@ -1,6 +1,6 @@
 # BatchDescribeCollections()
 
-This operation fetches the full descriptions of multiple collections in a single call, selecting them by collection names, collection IDs, or both. Descriptions are returned through the response parameter, while the returned Status reports whether the call succeeded.
+This operation fetches the full descriptions of multiple collections in a single call, selecting them by collection names, collection IDs, or both. Descriptions are returned through the response parameter, while the returned [Status](../Client/Status.md) reports whether the call succeeded.
 
 ```cpp
 Status BatchDescribeCollections(const BatchDescribeCollectionsRequest& request, BatchDescribeCollectionsResponse& response)
@@ -53,15 +53,16 @@ auto request = BatchDescribeCollectionsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns one collection description (CollectionDesc) per requested collection name or ID in the response, each carrying that collection's schema and runtime details.
+Returns one collection description ([CollectionDesc](CollectionDesc.md)) per requested collection name or ID in the response, each carrying that collection's schema and runtime details.
 
 - **response** (*BatchDescribeCollectionsResponse*) -
 
     - **Descs** (*const std::vector<CollectionDesc>&*) -
 
         Get collection descriptions.
+        See [CollectionDesc](CollectionDesc.md).
 
         - **DatabaseName** (*const std::string&*) -
 
@@ -82,6 +83,7 @@ Returns one collection description (CollectionDesc) per requested collection nam
         - **Schema** (*const CollectionSchema&*) -
 
             Collection schema.
+            See [CollectionSchema](CollectionSchema.md).
 
             - **Name** (*const std::string&*) -
 
@@ -100,6 +102,7 @@ Returns one collection description (CollectionDesc) per requested collection nam
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.
+                See [FieldSchema](FieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -109,13 +112,15 @@ Returns one collection description (CollectionDesc) per requested collection nam
 
                     Description of this field, can be empty.
 
-                - **FieldDataType** ([DataType](DataType.md)) -
+                - **FieldDataType** (*DataType*) -
 
                     Field data type.
+                    See [DataType](DataType.md).
 
-                - **ElementType** ([DataType](DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Element type of array field.
+                    See [DataType](DataType.md).
 
                 - **IsPrimaryKey** (*bool*) -
 
@@ -176,6 +181,7 @@ Returns one collection description (CollectionDesc) per requested collection nam
             - **StructFields** (*const std::vector<StructFieldSchema>&*) -
 
                 Struct fields schema array.
+                See [StructFieldSchema](StructFieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -192,6 +198,7 @@ Returns one collection description (CollectionDesc) per requested collection nam
                 - **Fields** (*const std::vector<FieldSchema>&*) -
 
                     Get sub fields of the struct field.
+                    See [FieldSchema](FieldSchema.md).
 
                     - **Name** (*const std::string&*) -
 
@@ -201,13 +208,15 @@ Returns one collection description (CollectionDesc) per requested collection nam
 
                         Description of this field, can be empty.
 
-                    - **FieldDataType** ([DataType](DataType.md)) -
+                    - **FieldDataType** (*DataType*) -
 
                         Field data type.
+                        See [DataType](DataType.md).
 
-                    - **ElementType** ([DataType](DataType.md)) -
+                    - **ElementType** (*DataType*) -
 
                         Element type of array field.
+                        See [DataType](DataType.md).
 
                     - **IsPrimaryKey** (*bool*) -
 
@@ -287,7 +296,8 @@ Returns one collection description (CollectionDesc) per requested collection nam
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type. See [FunctionType](FunctionType.md).
+                    [Function](Function.md) type.
+                    See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 
@@ -323,9 +333,9 @@ Returns one collection description (CollectionDesc) per requested collection nam
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

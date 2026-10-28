@@ -21,9 +21,9 @@ auto request = GetCompactionPlansRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The compaction state and merge plans are carried in the response: call Plans() to get the list of plans, each mapping its source segments to the merged target segment, and State() for the [CompactionStateCode](CompactionStateCode.md).
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The compaction state and merge plans are carried in the response: call Plans() to get the list of plans, each [CompactionPlan](CompactionPlan.md) mapping its source segments to its output targets, and State() for the [CompactionStateCode](CompactionStateCode.md).
 
 - **response** (*GetCompactionPlansResponse*) -
 
@@ -43,15 +43,20 @@ Returns a Status indicating whether the operation succeeded. The compaction stat
 
         Get the id of the compaction.
 
-    - **State** (*[CompactionStateCode](CompactionStateCode.md)*) -
+    - **State** (*CompactionStateCode*) -
 
         Get the state of the compaction.
+        See [CompactionStateCode](CompactionStateCode.md).
+
+    - **CollectionName** (*const std::string&*) -
+
+        Get the collection name to which the compaction tasks belong.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

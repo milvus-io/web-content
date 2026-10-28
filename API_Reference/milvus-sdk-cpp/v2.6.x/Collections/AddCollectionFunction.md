@@ -43,15 +43,15 @@ auto request = AddCollectionFunctionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the function was successfully added to the collection schema.
+Returns a [Status](../Client/Status.md) indicating whether the function was successfully added to the collection schema.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status; a null function pointer or an empty function name is also rejected locally with an invalid-argument Status before any request is sent. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md); a null function pointer or an empty function name is also rejected locally with an invalid-argument [Status](../Client/Status.md) before any request is sent. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
 
 ## Example
 

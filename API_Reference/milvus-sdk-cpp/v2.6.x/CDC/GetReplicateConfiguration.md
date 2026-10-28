@@ -6,9 +6,19 @@ This operation returns the current replication configuration of the Milvus CDC s
 Status GetReplicateConfiguration(const GetReplicateConfigurationRequest& request, GetReplicateConfigurationResponse& response)
 ```
 
+## Request Syntax
+
+```cpp
+auto request = GetReplicateConfigurationRequest();
+```
+
+**REQUEST METHODS:**
+
+This request has no builder methods.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded; on success, the response carries the retrieved replication configuration.
 
@@ -52,9 +62,9 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

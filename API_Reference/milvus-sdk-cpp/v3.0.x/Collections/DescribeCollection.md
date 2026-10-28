@@ -34,15 +34,16 @@ auto request = DescribeCollectionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. On success, the full collection description, including its schema and properties, is carried in the response.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. On success, the full collection description, including its schema and properties, is carried in the response.
 
 - **response** (*DescribeCollectionResponse*) -
 
     - **Desc** (*const CollectionDesc&*) -
 
         Get collection description.
+        See [CollectionDesc](CollectionDesc.md).
 
         - **DatabaseName** (*const std::string&*) -
 
@@ -63,6 +64,7 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
         - **Schema** (*const CollectionSchema&*) -
 
             Collection schema.
+            See [CollectionSchema](CollectionSchema.md).
 
             - **Name** (*const std::string&*) -
 
@@ -83,6 +85,7 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.
+                See [FieldSchema](FieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -92,13 +95,15 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
                     Description of this field, can be empty.
 
-                - **FieldDataType** ([DataType](DataType.md)) -
+                - **FieldDataType** (*DataType*) -
 
                     Field data type.
+                    See [DataType](DataType.md).
 
-                - **ElementType** ([DataType](DataType.md)) -
+                - **ElementType** (*DataType*) -
 
                     Element type of array field.
+                    See [DataType](DataType.md).
 
                 - **IsPrimaryKey** (*bool*) -
 
@@ -163,6 +168,7 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
             - **StructFields** (*const std::vector<StructFieldSchema>&*) -
 
                 Struct fields schema array.
+                See [StructFieldSchema](StructFieldSchema.md).
 
                 - **Name** (*const std::string&*) -
 
@@ -183,6 +189,7 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
                 - **Fields** (*const std::vector<FieldSchema>&*) -
 
                     Get sub fields of the struct field.
+                    See [FieldSchema](FieldSchema.md).
 
                     - **Name** (*const std::string&*) -
 
@@ -192,13 +199,15 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
                         Description of this field, can be empty.
 
-                    - **FieldDataType** ([DataType](DataType.md)) -
+                    - **FieldDataType** (*DataType*) -
 
                         Field data type.
+                        See [DataType](DataType.md).
 
-                    - **ElementType** ([DataType](DataType.md)) -
+                    - **ElementType** (*DataType*) -
 
                         Element type of array field.
+                        See [DataType](DataType.md).
 
                     - **IsPrimaryKey** (*bool*) -
 
@@ -282,7 +291,8 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
                 - **GetFunctionType** (*FunctionType*) -
 
-                    Function type. See [FunctionType](FunctionType.md).
+                    [Function](Function.md) type.
+                    See [FunctionType](FunctionType.md).
 
                 - **InputFieldNames** (*const std::vector<std::string>&*) -
 
@@ -332,9 +342,10 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
             Get the external file specification of the collection.
 
-        - **GetConsistencyLevel** ([ConsistencyLevel](ConsistencyLevel.md)) -
+        - **GetConsistencyLevel** (*ConsistencyLevel*) -
 
             Consistency level of the collection.
+            See [ConsistencyLevel](ConsistencyLevel.md).
 
         - **NumPartitions** (*int64_t*) -
 
@@ -342,9 +353,9 @@ Returns a Status indicating whether the operation succeeded. On success, the ful
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

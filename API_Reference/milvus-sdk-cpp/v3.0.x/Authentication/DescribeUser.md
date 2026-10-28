@@ -21,7 +21,7 @@ auto request = DescribeUserRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Returns a status indicating whether the operation succeeded.
 
@@ -56,35 +56,11 @@ UserDesc members:
 
     List of role names assigned to the user.
 
-## Example
-
-```cpp
-#include <milvus/MilvusClientV2.h>
-using namespace milvus;
-
-auto client = MilvusClientV2::Create();
-client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
-
-DescribeUserResponse response;
-auto status = client->DescribeUser(
-    DescribeUserRequest().WithUserName("alice"),
-    response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-const UserDesc& desc = response.Desc();
-std::cout << "User: " << desc.Name() << "\n";
-for (const auto& role : desc.Roles()) {
-    std::cout << "  role: " << role << "\n";
-}
-```
-
 **ERROR HANDLING:**
 
 - **Status**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -52,15 +52,15 @@ auto request = RenameCollectionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the collection was renamed successfully; check IsOk() and Message() for the outcome.
+Returns a [Status](../Client/Status.md) indicating whether the collection was renamed successfully; check IsOk() and Message() for the outcome.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status; the Status carries the error code and message, for example when the source collection does not exist under the given database. Inspect `status.IsOk()` and `status.Message()` to determine the cause. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md); the [Status](../Client/Status.md) carries the error code and message, for example when the source collection does not exist under the given database. Inspect `status.IsOk()` and `status.Message()` to determine the cause. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -43,15 +43,15 @@ auto request = DropCollectionFunctionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the function was dropped from the collection's schema; a Status with code INVALID_ARGUMENT is returned locally, without any RPC, if the function name is empty.
+Returns a [Status](../Client/Status.md) indicating whether the function was dropped from the collection's schema; a [Status](../Client/Status.md) with code INVALID_ARGUMENT is returned locally, without any RPC, if the function name is empty.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status when request construction, connection setup, transport, or response processing fails; inspect `status.IsOk()` and `status.Message()` for the failure cause. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md) when request construction, connection setup, transport, or response processing fails; inspect `status.IsOk()` and `status.Message()` for the failure cause. See [Status](../Client/Status.md).
 
 ## Example
 

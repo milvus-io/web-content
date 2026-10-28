@@ -61,15 +61,16 @@ auto request = OptimizeRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. In synchronous mode it reflects the outcome of the whole optimization run; in asynchronous mode it indicates whether the background task was started, whose final status is available through the OptimizeTask handle.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. In synchronous mode it reflects the outcome of the whole optimization run; in asynchronous mode it indicates whether the background task was started, whose final status is available through the OptimizeTask handle.
 
 - **response** (*OptimizeTaskPtr*) -
 
     - **GetResult** (*Status*) -
 
         Wait for task result. Timeout zero means wait forever.
+        See [Status](../Client/Status.md).
 
         - **StatusText** (*const std::string&*) -
 
@@ -114,12 +115,13 @@ Returns a Status indicating whether the operation succeeded. In synchronous mode
     - **TaskStatus** (*Status*) -
 
         Final task status if done, otherwise OK.
+        See [Status](../Client/Status.md).
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

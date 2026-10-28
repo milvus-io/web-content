@@ -28,7 +28,7 @@ enum class DataType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 *Scalar types:*
 

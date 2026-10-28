@@ -1,6 +1,6 @@
 # AlterCollectionFunction()
 
-This operation alters a function of an existing collection: the name carried by the request's Function object identifies which existing function to alter, and that function's definition is replaced with the new definition carried by the same Function object. The collection is looked up in the database set on the request; the default database is used when no database name is set.
+This operation alters a function of an existing collection: the name carried by the request's [Function](Function.md) object identifies which existing function to alter, and that function's definition is replaced with the new definition carried by the same [Function](Function.md) object. The collection is looked up in the database set on the request; the default database is used when no database name is set.
 
 ```cpp
 Status AlterCollectionFunction(const AlterCollectionFunctionRequest& request)
@@ -35,7 +35,7 @@ auto request = AlterCollectionFunctionRequest()
 
 - `WithFunction(const FunctionPtr& function)`
 
-    Sets the Function object carrying the new definition; its name identifies which existing function of the collection is replaced.
+    Sets the [Function](Function.md) object carrying the new definition; its name identifies which existing function of the collection is replaced.
 
 - `SetFunction(const FunctionPtr& function)`
 
@@ -43,19 +43,19 @@ auto request = AlterCollectionFunctionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the function was altered successfully; it also reports locally detected errors such as a null Function object or an empty function name.
+Returns a [Status](../Client/Status.md) indicating whether the function was altered successfully; it also reports locally detected errors such as a null [Function](Function.md) object or an empty function name.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status; a null Function or an empty function name is rejected locally with an INVALID_ARGUMENT status. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md); a null [Function](Function.md) or an empty function name is rejected locally with an INVALID_ARGUMENT status. Inspect `status.IsOk()` and `status.Message()` for details. See [Status](../Client/Status.md).
 
 ## Example
 
-Use AlterCollectionFunction() after connecting a MilvusClientV2; the Function's name must match the name of the existing function to alter.
+Use AlterCollectionFunction() after connecting a MilvusClientV2; the [Function](Function.md)'s name must match the name of the existing function to alter.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();

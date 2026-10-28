@@ -1,104 +1,155 @@
 # CreateImportJobs()
 
-This operation creates a bulk import job to load data from files stored in object storage into a Milvus collection. It communicates directly with the Milvus server via its RESTful import API and returns a JSON object containing the assigned job ID. Use `GetImportJobProgress()` to monitor progress.
+Creates a bulk import job from source files. The typed request/response overload is recommended in C++ SDK 3.0.4 or later. Transport behavior is controlled by [BulkImportConfig](BulkImportConfig.md). The legacy `nlohmann::json` overload is deprecated; use the typed request/response overload instead.
 
 ```cpp
-static nlohmann::json BulkImport::CreateImportJobs(
+Status BulkImport::CreateImportJobs(
     const std::string& url,
-    const std::string& collection_name,
-    const std::vector<std::string>& files,
-    const std::string& db_name = "default",
-    const std::string& api_key = "",
-    const std::string& partition_name = "",
-    const nlohmann::json& options = nlohmann::json{})
+    const BaseImportRequest<T>& request,
+    BulkImportResponse& response,
+    const BulkImportConfig& config = BulkImportConfig{})
 ```
 
 ## Request Syntax
 
 ```cpp
-auto resp = milvus::BulkImport::CreateImportJobs(
-    url,
-    collection_name,
-    files,
-    db_name,
-    api_key,
-    partition_name,
-    options);
+auto request = milvus::MilvusImportRequest()
+    .WithApiKey("root:Milvus")
+    .WithDatabaseName("default")
+    .WithCollectionName("demo")
+    .WithOptions(nlohmann::json{{"timeout", 300}})
+    .WithFiles({{"backup/1.parquet", "backup/2.parquet"}});
+
+milvus::BulkImportResponse response;
+auto status = milvus::BulkImport::CreateImportJobs(
+    "http://localhost:19530", request, response);
 ```
 
-**PARAMETERS:**
+**REQUEST METHODS:**
 
-- `url` (*const std::string&*)
+- `WithApiKey(const std::string& api_key)`
 
-    **[REQUIRED]**
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    The URL of the Milvus server, e.g. `"http://localhost:19530"`.
+- `SetApiKey(const std::string& api_key)`
 
-- `collection_name` (*const std::string&*)
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    **[REQUIRED]**
+- `WithDatabaseName(const std::string& db_name)`
 
-    The name of the target collection.
+    Sets the target database. Empty selects the default database.
 
-- `files` (*const std::vector<std::string>&*)
+- `SetDatabaseName(const std::string& db_name)`
 
-    **[REQUIRED]**
+    Sets the target database. Empty selects the default database.
 
-    A list of file paths relative to the object storage root. Each path may point to a single JSON/Parquet file or a folder. Example: `{"parquet-folder/1.parquet", "parquet-folder/2.parquet"}`.
+- `WithCollectionName(const std::string& collection_name)`
 
-- `db_name` (*const std::string&*)
+    Sets the target collection.
 
-    The name of the database that holds the collection. Defaults to `"default"`.
+- `SetCollectionName(const std::string& collection_name)`
 
-- `api_key` (*const std::string&*)
+    Sets the target collection.
 
-    The API key for authentication. Pass as `"username:password"` for Milvus or a cloud API key for Zilliz Cloud.
+- `WithPartitionName(const std::string& partition_name)`
 
-- `partition_name` (*const std::string&*)
+    Sets the target partition for imports into a non-partition-key collection.
 
-    The name of a target partition. Optional — only specify when the collection does not use a partition key.
+- `SetPartitionName(const std::string& partition_name)`
 
-- `options` (*const nlohmann::json&*)
+    Sets the target partition for imports into a non-partition-key collection.
 
-    Additional import options in JSON format. Supports `"timeout"` (integer, seconds).
+- `WithOptions(nlohmann::json&& options)`
+
+    Sets import options, such as timeout behavior.
+
+- `SetOptions(nlohmann::json&& options)`
+
+    Sets import options, such as timeout behavior.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement.
+
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement.
+
+- `WithFiles(std::vector<std::vector<std::string>>&& files)`
+
+    Sets the Milvus import files. Each inner vector is one batch of source paths.
+
+- `SetFiles(std::vector<std::vector<std::string>>&& files)`
+
+    Sets the Milvus import files. Each inner vector is one batch of source paths.
 
 **RETURNS:**
 
-*nlohmann::json*
+*[Status](../Client/Status.md)*
 
-A JSON object containing the job ID on success, or `nullptr` on failure. The `jobId` field in the response can be passed to `GetImportJobProgress()`.
+Returns a [Status](../Client/Status.md) indicating whether the REST call succeeded. The REST envelope and payload are carried in `BulkImportResponse`.
+
+- **response** (*BulkImportResponse*) -
+
+    See [BulkImportResponse](BulkImportResponse.md).
+
+    - **RawJson** (*const nlohmann::json&*) -
+
+        Returns the raw JSON body.
+
+    - **Code** (*int64_t*) -
+
+        Returns the REST envelope code.
+
+    - **Message** (*std::string*) -
+
+        Returns the REST envelope message.
+
+    - **Data** (*const nlohmann::json&*) -
+
+        Returns the REST envelope data object.
+
+    - **JobId** (*std::string*) -
+
+        Returns the created job ID when applicable; otherwise returns an empty string.
 
 **ERROR HANDLING:**
 
-The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
+- **[Status](../Client/Status.md)**
+
+    Failures are reported through the returned [Status](../Client/Status.md). HTTP transport failures and REST errors produce a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()`, `response.Code()`, and `response.Message()`. See [Status](../Client/Status.md).
 
 ## Example
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include "milvus/BulkImport.h"
+#include <iostream>
+
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-
-// Create an import job using local Milvus
-auto resp = milvus::BulkImport::CreateImportJobs(
-    "http://localhost:19530",               // Milvus server URL
-    "my_collection",                         // Target collection
-    {"parquet-folder/1.parquet",            // Files to import
-     "parquet-folder/2.parquet"},
-    "default",                              // Database name
-    "root:Milvus",                          // API key (user:password)
-    ""                                      // Partition name (optional)
-);
-
-if (!resp.is_null()) {
-    std::string job_id = resp["data"]["jobId"];
-    std::cout << "Import job created: " << job_id << std::endl;
+auto request = milvus::MilvusImportRequest()
+    .WithApiKey("root:Milvus")
+    .WithCollectionName("demo")
+    .WithFiles({{"backup/1.parquet", "backup/2.parquet"}});
+milvus::BulkImportResponse response;
+status = milvus::BulkImport::CreateImportJobs(
+    "http://localhost:19530", request, response);
+if (!status.IsOk() || response.Code() != 0) {
+    std::cout << response.Message() << '\n';
 } else {
-    std::cout << "Failed to create import job" << std::endl;
+    std::cout << response.JobId() << '\n';
 }
 ```

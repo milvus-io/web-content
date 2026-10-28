@@ -1,6 +1,6 @@
 # FunctionType
 
-This enum identifies the built-in function type associated with a schema-level `Function`.
+Defines the function types available to a Milvus collection schema.
 
 ```cpp
 enum class FunctionType {
@@ -11,22 +11,20 @@ enum class FunctionType {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
-- **UNKNOWN** (0) - Unset or unrecognized function type.
+- **UNKNOWN** (0)
 
-- **BM25** (1) - Built-in BM25 sparse-embedding function.
+    No function type is set.
 
-- **TEXTEMBEDDING** (2) - Text-embedding function.
+- **BM25** (1)
 
-- **RERANK** (3) - Search reranking function.
+    Generates sparse vectors from text for full-text search.
 
-## Example
+- **TEXTEMBEDDING** (2)
 
-```cpp
-#include <milvus/types/FunctionType.h>
-using namespace milvus;
+    Generates dense text embeddings.
 
-auto function = Function();
-function.SetFunctionType(FunctionType::BM25);
-```
+- **RERANK** (3)
+
+    Reranks or combines results from multiple vector fields.

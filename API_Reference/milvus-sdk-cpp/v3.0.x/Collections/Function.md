@@ -17,7 +17,8 @@ using FunctionPtr = std::shared_ptr<Function>;
 
 - **function_type** (*FunctionType*)
 
-    Type of function. Values: `UNKNOWN=0`, `BM25=1`, `TEXTEMBEDDING=2`, `RERANK=3`, `MINHASH=4`, `MOLFINGERPRINT=5`. See [FunctionType](FunctionType.md).
+    Type of function. Values: `UNKNOWN=0`, `BM25=1`, `TEXTEMBEDDING=2`, `RERANK=3`, `MINHASH=4`, `MOLFINGERPRINT=5`.
+    See [FunctionType](FunctionType.md).
 
 - **description** (*std::string*)
 

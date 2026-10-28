@@ -2,6 +2,8 @@
 
 This operation creates a collection with the given schema and options.
 
+To create indexes atomically, use [IndexParam](../Management/IndexParam.md).
+
 ```cpp
 Status CreateCollection(const CreateCollectionRequest& request)
 ```
@@ -19,8 +21,8 @@ auto request = CreateCollectionRequest()
     .WithConsistencyLevel(level)
     .WithProperties(properties)
     .AddProperty(key, property)
-    .WithIndexes(indexes)
-    .AddIndex(index);
+    .WithIndexParams(index_params)
+    .AddIndexParam(index_param);
 ```
 
 **REQUEST METHODS:**
@@ -39,7 +41,7 @@ auto request = CreateCollectionRequest()
 
 - `SetCollectionName(const std::string& collection_name)`
 
-    Set name of the collection. Note: due to history reason, the CollectionSchema also contains a collection name. SetCollectionName() will override the collection name of CollectionSchema.
+    Set name of the collection. Note: due to history reason, the [CollectionSchema](CollectionSchema.md) also contains a collection name. SetCollectionName() will override the collection name of [CollectionSchema](CollectionSchema.md).
 
 - `WithDescription(const std::string& description)`
 
@@ -71,7 +73,7 @@ auto request = CreateCollectionRequest()
 
 - `SetNumShards(int64_t num_shards)`
 
-    Set number of shards of the collection. Note: due to history reason, the CollectionSchema also contains a shards number. SetNumShards() will override the shards_num of CollectionSchema.
+    Set number of shards of the collection. Note: due to history reason, the [CollectionSchema](CollectionSchema.md) also contains a shards number. SetNumShards() will override the shards_num of [CollectionSchema](CollectionSchema.md).
 
 - `WithConsistencyLevel(ConsistencyLevel level)`
 
@@ -93,7 +95,31 @@ auto request = CreateCollectionRequest()
 
     Adds a single collection-level property as a key-value pair.
 
+- `WithIndexParams(std::vector<IndexParam>&& index_params)`
+
+    Sets indexes to create along with the collection. This is the preferred creation input.
+
+- `SetIndexParams(std::vector<IndexParam>&& index_params)`
+
+    Sets indexes to create along with the collection. This is the preferred creation input.
+
+- `AddIndexParam(IndexParam&& index_param)`
+
+    Adds one index to create along with the collection. This is the preferred creation input.
+
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
+
+    **Deprecated.** Sets legacy index descriptors. Use `WithIndexParams()` instead.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    **Deprecated.** Sets legacy index descriptors. Use `SetIndexParams()` instead.
+
+- `AddIndex(IndexDesc&& index)`
+
+    **Deprecated.** Adds a legacy index descriptor. Use `AddIndexParam()` instead.
+
+
 
     Sets the indexes to create along with the collection. The vector is passed by rvalue reference, so pass it with std::move.
 
@@ -107,15 +133,15 @@ auto request = CreateCollectionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the collection was created successfully.
+Returns a [Status](../Client/Status.md) indicating whether the collection was created successfully.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

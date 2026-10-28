@@ -53,23 +53,23 @@ auto request = UpdatePasswordRequest()
 
 - `WithResetConnection(bool reset_connection)`
 
-    Whether to reset the client connection after the password is updated. The password is updated on the server before the reconnect is attempted. If the reconnect fails, the returned Status reports that the password was updated but the connection must be re-established manually with the new credentials.
+    Whether to reset the client connection after the password is updated. The password is updated on the server before the reconnect is attempted. If the reconnect fails, the returned [Status](../Client/Status.md) reports that the password was updated but the connection must be re-established manually with the new credentials.
 
 - `SetResetConnection(bool reset_connection)`
 
-    Set whether to reset the current connection with the new credentials after the password is updated. When true, the client reconnects using the new password so subsequent RPCs keep working. Note: the password is updated on the server before the reconnect is attempted. If the reconnect fails, the returned Status reports that the password was updated but the connection must be re-established manually with the new credentials.
+    Set whether to reset the current connection with the new credentials after the password is updated. When true, the client reconnects using the new password so subsequent RPCs keep working. Note: the password is updated on the server before the reconnect is attempted. If the reconnect fails, the returned [Status](../Client/Status.md) reports that the password was updated but the connection must be re-established manually with the new credentials.
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
 Check `status.IsOk()` to confirm success.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

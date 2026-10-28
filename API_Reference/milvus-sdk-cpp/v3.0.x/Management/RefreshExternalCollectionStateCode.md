@@ -11,7 +11,7 @@ enum class RefreshExternalCollectionStateCode {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **PENDING** (0) - The refresh job is pending.
 

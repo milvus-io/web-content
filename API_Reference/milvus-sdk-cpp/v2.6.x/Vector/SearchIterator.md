@@ -442,7 +442,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Request methods</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -484,24 +484,41 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>Function or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>
 
+- `SetReduceStopForBest(bool reduce_stop_for_best)`
+
+    Sets whether reduction may stop early when the best result is already known.
+
+- `SetPkSchema(const FieldSchema& schema)`
+
+    Sets the primary-key schema used to escape iterator paging values correctly.
+
+- `SetCollectionID(int64_t id)`
+
+    Sets an explicit collection ID for iterator paging when server-side cache behavior requires it.
+
+- `SetBatchSize(int64_t batch_size)`
+
+    Sets the number of records requested in each iterator page.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() fetches successive batches of matching entities until exhausted.
+Returns a [Status](../Client/Status.md) and hands back a SearchIteratorPtr (the iterator) whose Next() fetches successive batches of matching entities until exhausted.
 
 - **response** (*SearchIteratorPtr*) -
 
     - **Next** (*Status*) -
 
         Get next batch of results. Note: this method is not designed to be called in multi-thread, it is not thread-safe.
+        See [Status](../Client/Status.md).
 
         - **Scores** (*const std::vector<float>&*) -
 
@@ -509,7 +526,7 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
 
         - **Ids** (*IDArray*) -
 
-            Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from FieldData. It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
+            Topk id array of one target vector. Note: the returned IDArray is a temporary object copied from [FieldData](FieldData.md). It is recommended to use OutputField() method like this: FieldDataPtr ids = result.OutputField(result.PrimaryKeyName());.
 
             - **IsIntegerID** (*bool*) -
 
@@ -543,13 +560,15 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -563,13 +582,15 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -582,14 +603,17 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
         - **OutputRows** (*Status*) -
 
             Get all output rows.
+            See [Status](../Client/Status.md).
 
         - **OutputRow** (*Status*) -
 
             Get row data. Returns INVALID_ARGUMENT status if the i is out of bound.
+            See [Status](../Client/Status.md).
 
         - **OutputHighlightResult** (*Status*) -
 
             Get highlight results of one row. Returns INVALID_ARGUMENT status if the i is out of bound.
+            See [Status](../Client/Status.md).
 
             - **field_name** (*std::string*) -
 
@@ -603,9 +627,9 @@ Returns a Status and hands back a SearchIteratorPtr (the iterator) whose Next() 
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status, for example when IDs are set as search targets, the collection has no vector field, the ANN field is unspecified while several vector fields exist, or no index is found on the ANN field; iterator initialization failures are reported with the underlying reason. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md), for example when IDs are set as search targets, the collection has no vector field, the ANN field is unspecified while several vector fields exist, or no index is found on the ANN field; iterator initialization failures are reported with the underlying reason. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

@@ -61,15 +61,16 @@ auto request = DescribeIndexRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The index description is carried in the DescribeIndexResponse object passed as the response parameter, where Descs() exposes the list of IndexDesc entries.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The index description is carried in the DescribeIndexResponse object passed as the response parameter, where Descs() exposes the list of [IndexDesc](IndexDesc.md) entries.
 
 - **response** (*DescribeIndexResponse*) -
 
     - **Descs** (*const std::vector<IndexDesc>&*) -
 
         Get index description.
+        See [IndexDesc](IndexDesc.md).
 
         - **FieldName** (*const std::string&*) -
 
@@ -86,18 +87,21 @@ Returns a Status indicating whether the operation succeeded. The index descripti
         - **MetricType** (*milvus::MetricType*) -
 
             Metric type.
+            See [MetricType](MetricType.md).
 
         - **IndexType** (*milvus::IndexType*) -
 
             Index type.
+            See [IndexType](IndexType.md).
 
         - **ExtraParams** (*const std::unordered_map<std::string, std::string>&*) -
 
             Get extra param. Note: this method was redefined in v2.4, which may affect older client code.
 
-        - **StateCode** (*[IndexStateCode](IndexStateCode.md)*) -
+        - **StateCode** (*IndexStateCode*) -
 
             Get index state.
+            See [IndexStateCode](IndexStateCode.md).
 
         - **FailReason** (*std::string*) -
 
@@ -117,9 +121,9 @@ Returns a Status indicating whether the operation succeeded. The index descripti
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

@@ -22,10 +22,12 @@ IndexDesc(std::string field_name, std::string index_name,
 - **index_type** (*milvus::IndexType*)
 
     The algorithm used to build the index. See `IndexType` for available values.
+    See [IndexType](IndexType.md).
 
 - **metric_type** (*milvus::MetricType*)
 
     Distance metric used to compare vectors. Not required for scalar field indexes. Default: `MetricType::INVALID` (server auto-determines). See `MetricType` for available values.
+    See [MetricType](MetricType.md).
 
 ## Methods
 

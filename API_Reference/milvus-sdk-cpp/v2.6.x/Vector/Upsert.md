@@ -96,7 +96,7 @@ Column payloads are concrete instances of [FieldData](FieldData.md).
 
 <table>
    <tr>
-     <th><p>Schema DataType</p></th>
+     <th><p>Schema [DataType](../Collections/DataType.md)</p></th>
      <th><p>Column payload type</p></th>
      <th><p>C++ representation</p></th>
      <th><p>Notes</p></th>
@@ -109,7 +109,7 @@ Column payloads are concrete instances of [FieldData](FieldData.md).
    </tr>
    <tr>
      <td><p><code>INT8</code>, <code>INT16</code>, <code>INT32</code>, <code>INT64</code></p></td>
-     <td><p>Matching <code>Int&ast;FieldData</code></p></td>
+     <td><p>Matching <code>Int&ast;[FieldData](FieldData.md)</code></p></td>
      <td><p>Matching fixed-width integer</p></td>
      <td><p>Choose the container matching the schema type.</p></td>
    </tr>
@@ -127,7 +127,7 @@ Column payloads are concrete instances of [FieldData](FieldData.md).
    </tr>
    <tr>
      <td><p><code>FLOAT_VECTOR</code>, <code>FLOAT16_VECTOR</code>, <code>BFLOAT16_VECTOR</code>, <code>INT8_VECTOR</code></p></td>
-     <td><p>Matching dense-vector <code>FieldData</code> class</p></td>
+     <td><p>Matching dense-vector <code>[FieldData](FieldData.md)</code> class</p></td>
      <td><p><code>std::vector&lt;float&gt;</code>, <code>std::vector&lt;uint16_t&gt;</code>, or <code>std::vector&lt;int8_t&gt;</code></p></td>
      <td><p>Choose the container matching the vector encoding.</p></td>
    </tr>
@@ -139,9 +139,9 @@ Column payloads are concrete instances of [FieldData](FieldData.md).
    </tr>
    <tr>
      <td><p><code>ARRAY</code>, <code>STRUCT</code></p></td>
-     <td><p>Specialized <code>Array&ast;FieldData</code> or <code>StructFieldData</code></p></td>
+     <td><p>Specialized <code>Array&ast;[FieldData](FieldData.md)</code> or <code>StructFieldData</code></p></td>
      <td><p>Element-specific container or array-style <code>nlohmann::json</code> storage</p></td>
-     <td><p>Arrays declare an element type; structs use the array template with <code>DataType::STRUCT</code>.</p></td>
+     <td><p>Arrays declare an element type; structs use the array template with <code>[DataType](../Collections/DataType.md)::STRUCT</code>.</p></td>
    </tr>
    <tr>
      <td><p><code>UNKNOWN</code></p></td>
@@ -153,9 +153,9 @@ Column payloads are concrete instances of [FieldData](FieldData.md).
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded; on success the response carries the upsert count and the IDs of the upserted entities in its DmlResults.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded; on success the response carries the upsert count and the IDs of the upserted entities in its DmlResults.
 
 - **response** (*UpsertResponse*) -
 
@@ -205,9 +205,9 @@ Returns a Status indicating whether the operation succeeded; on success the resp
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status, for example a schema mismatch or an unknown collection. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md), for example a schema mismatch or an unknown collection. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

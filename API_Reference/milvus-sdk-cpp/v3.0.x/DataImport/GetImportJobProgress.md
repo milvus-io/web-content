@@ -1,99 +1,111 @@
 # GetImportJobProgress()
 
-This operation retrieves the current progress and status of a bulk import job by its job ID. Poll this method after calling `CreateImportJobs()` to determine when the import is complete.
+Gets the progress and state of a bulk import job. The typed request/response overload is recommended in C++ SDK 3.0.4 or later. Transport behavior is controlled by [BulkImportConfig](BulkImportConfig.md). The legacy `nlohmann::json` overload is deprecated; use the typed request/response overload instead.
 
 ```cpp
-static nlohmann::json BulkImport::GetImportJobProgress(
+Status BulkImport::GetImportJobProgress(
     const std::string& url,
-    const std::string& job_id,
-    const std::string& db_name = "default",
-    const std::string& api_key = "")
+    const BaseDescribeImportRequest<T>& request,
+    BulkImportResponse& response,
+    const BulkImportConfig& config = BulkImportConfig{})
 ```
 
 ## Request Syntax
 
 ```cpp
-auto resp = milvus::BulkImport::GetImportJobProgress(
-    url,
-    job_id,
-    db_name,
-    api_key);
+auto request = milvus::MilvusDescribeImportRequest()
+    .WithApiKey("root:Milvus")
+    .WithDatabaseName("default")
+    .WithJobId(job_id);
+
+
+milvus::BulkImportResponse response;
+auto status = milvus::BulkImport::GetImportJobProgress(
+    "http://localhost:19530", request, response);
 ```
 
-**PARAMETERS:**
+**REQUEST METHODS:**
 
-- `url` (*const std::string&*)
+- `WithApiKey(const std::string& api_key)`
 
-    **[REQUIRED]**
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    The URL of the Milvus server, e.g. `"http://localhost:19530"`.
+- `SetApiKey(const std::string& api_key)`
 
-- `job_id` (*const std::string&*)
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    **[REQUIRED]**
+- `WithDatabaseName(const std::string& db_name)`
 
-    The ID of the import job to query. Obtained from the response of `CreateImportJobs()`.
+    Sets the target database. Empty selects the default database.
 
-- `db_name` (*const std::string&*)
+- `SetDatabaseName(const std::string& db_name)`
 
-    The name of the database used when the job was created. Defaults to `"default"`.
+    Sets the target database. Empty selects the default database.
 
-- `api_key` (*const std::string&*)
+- `WithJobId(const std::string& job_id)`
 
-    The API key for authentication. Pass as `"username:password"` for Milvus or a cloud API key for Zilliz Cloud.
+    Sets the import job to describe.
+
+- `SetJobId(const std::string& job_id)`
+
+    Sets the import job to describe.
 
 **RETURNS:**
 
-*nlohmann::json*
+*[Status](../Client/Status.md)*
 
-A JSON object describing job progress, or `nullptr` on failure. Includes fields such as `state` (`"Pending"`, `"InProgress"`, `"Completed"`, `"Failed"`), `progress` (0–100), and `importedRows`.
+Returns a [Status](../Client/Status.md) indicating whether the REST call succeeded. The REST envelope and payload are carried in `BulkImportResponse`.
+
+- **response** (*BulkImportResponse*) -
+
+    See [BulkImportResponse](BulkImportResponse.md).
+
+    - **RawJson** (*const nlohmann::json&*) -
+
+        Returns the raw JSON body.
+
+    - **Code** (*int64_t*) -
+
+        Returns the REST envelope code.
+
+    - **Message** (*std::string*) -
+
+        Returns the REST envelope message.
+
+    - **Data** (*const nlohmann::json&*) -
+
+        Returns the REST envelope data object.
+
+    - **JobId** (*std::string*) -
+
+        Returns the created job ID when applicable; otherwise returns an empty string.
 
 **ERROR HANDLING:**
 
-The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
+- **[Status](../Client/Status.md)**
+
+    Failures are reported through the returned [Status](../Client/Status.md). HTTP transport failures and REST errors produce a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()`, `response.Code()`, and `response.Message()`. See [Status](../Client/Status.md).
 
 ## Example
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include "milvus/BulkImport.h"
+#include <iostream>
+
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-
-// Create a job first
-auto create_resp = milvus::BulkImport::CreateImportJobs(
-    "http://localhost:19530",
-    "my_collection",
-    {"parquet-folder/1.parquet"},
-    "default",
-    "root:Milvus"
-);
-
-std::string job_id = create_resp["data"]["jobId"];
-
-// Poll for progress
-while (true) {
-    auto progress_resp = milvus::BulkImport::GetImportJobProgress(
-        "http://localhost:19530",
-        job_id,
-        "default",
-        "root:Milvus"
-    );
-
-    if (progress_resp.is_null()) {
-        std::cout << "Failed to get progress" << std::endl;
-        break;
-    }
-
-    std::string state = progress_resp["data"]["state"];
-    int progress = progress_resp["data"]["progress"];
-    std::cout << "State: " << state << "  Progress: " << progress << "%" << std::endl;
-
-    if (state == "Completed" || state == "Failed") break;
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+auto request = milvus::MilvusDescribeImportRequest()
+    .WithApiKey("root:Milvus")
+    .WithJobId("import-job-id");
+milvus::BulkImportResponse response;
+status = milvus::BulkImport::GetImportJobProgress(
+    "http://localhost:19530", request, response);
+if (status.IsOk() && response.Code() == 0) {
+    std::cout << response.Data().dump() << '\n';
 }
 ```

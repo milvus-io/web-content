@@ -84,13 +84,29 @@ auto request = GetRequest()
 
     Set id array. Note: this method will reset the id array.
 
+- `SetSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level row-level-security principal for this request.
+
 **RETURNS:**
 
-*Status* with *GetResponse*
+*[Status](../Client/Status.md)* with *GetResponse*
 
 Check `status.IsOk()` to confirm success.
 
-### FieldData
+### [FieldData](FieldData.md)
 
 Field payloads use [FieldData](FieldData.md), its concrete aliases, and `FieldDataPtr`. See that page for template methods, array and binary specializations, and supported payload forms.
 
@@ -152,9 +168,9 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Field-data type aliases
 
@@ -167,7 +183,7 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
    <tr>
      <td><p>Scalar</p></td>
      <td><p>BoolFieldData, Int8FieldData, Int16FieldData, Int32FieldData, Int64FieldData, FloatFieldData, DoubleFieldData, VarCharFieldData, JSONFieldData, GeometryFieldData, TimestamptzFieldData</p></td>
-     <td><p>Aliases of FieldData<T, DataType::…>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
+     <td><p>Aliases of [FieldData](FieldData.md)<T, [DataType](../Collections/DataType.md)::…>. Geometry uses WKT strings; timestamptz uses ISO-8601 strings.</p></td>
    </tr>
    <tr>
      <td><p>Vector</p></td>

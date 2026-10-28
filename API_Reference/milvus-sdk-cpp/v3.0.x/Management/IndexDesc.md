@@ -1,6 +1,6 @@
 # IndexDesc
 
-This class carries the parameters needed to build a vector or scalar index. Pass one or more `IndexDesc` objects to `CreateIndexRequest::AddIndex()`. `DescribeIndex()` also returns `IndexDesc` objects (via `DescribeIndexResponse::Descs()`) that include build-progress and state information.
+This class carries legacy index creation parameters and detailed index state returned by `DescribeIndex()`. For new index creation, prefer [IndexParam](IndexParam.md).
 
 ```cpp
 IndexDesc();
@@ -22,10 +22,12 @@ IndexDesc(std::string field_name, std::string index_name,
 - **index_type** (*milvus::IndexType*)
 
     The algorithm used to build the index. See `IndexType` for available values.
+    See [IndexType](IndexType.md).
 
 - **metric_type** (*milvus::MetricType*)
 
     Distance metric used to compare vectors. Not required for scalar field indexes. Default: `MetricType::INVALID` (server auto-determines). See `MetricType` for available values.
+    See [MetricType](MetricType.md).
 
 ## Methods
 
@@ -96,18 +98,18 @@ auto client = MilvusClientV2::Create();
 client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
 
 // Create an HNSW vector index and a scalar TRIE index together
-IndexDesc index_vec("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+IndexParam index_vec("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
 index_vec.AddExtraParam("M", "16");
 index_vec.AddExtraParam("efConstruction", "200");
 
-IndexDesc index_name("name", "", IndexType::TRIE);
+IndexParam index_name("name", "", IndexType::TRIE);
 
 auto status = client->CreateIndex(
     CreateIndexRequest()
         .WithCollectionName("my_collection")
         .WithSync(true)
-        .AddIndex(std::move(index_vec))
-        .AddIndex(std::move(index_name)));
+        .AddIndexParam(std::move(index_vec))
+        .AddIndexParam(std::move(index_name)));
 
 // Inspect build progress via DescribeIndex
 DescribeIndexResponse resp;

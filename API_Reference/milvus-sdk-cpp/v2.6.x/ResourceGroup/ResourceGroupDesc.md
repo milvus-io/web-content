@@ -36,7 +36,7 @@ const ResourceGroupDesc& desc = response.Desc();
 
 - `const ResourceGroupConfig& Config() const`
 
-    The current configuration of the resource group. For ResourceGroupConfig details see ResourceGroupConfig.
+    The current configuration of the resource group. For [ResourceGroupConfig](ResourceGroupConfig.md) details see [ResourceGroupConfig](ResourceGroupConfig.md).
 
 - `const std::vector<NodeInfo>& Nodes() const`
 

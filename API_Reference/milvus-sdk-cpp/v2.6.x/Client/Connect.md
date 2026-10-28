@@ -6,21 +6,31 @@ This operation establishes a connection to the Milvus server using the supplied 
 Status Connect(const ConnectParam& connect_param)
 ```
 
+## Request Syntax
+
+```cpp
+auto status = client->Connect(connect_param);
+```
+
+**REQUEST METHODS:**
+
+Not applicable; this operation accepts a `ConnectParam` directly and has no request builder methods.
+
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
-Returns a Status indicating whether the connection was established successfully; on failure, the Status code and message describe the cause.
+Returns a [Status](Status.md) indicating whether the connection was established successfully; on failure, the [Status](Status.md) code and message describe the cause.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status (NOT_CONNECTED, TIMEOUT, or RPC_FAILED) carrying the underlying error message; for example when URI parsing, gRPC channel creation, or the connection handshake fails, such as an invalid URI, an unreachable server, or an expired connect timeout. Exceptions raised while creating the gRPC channel are caught internally and converted to a failed Status rather than propagating. Inspect `status.IsOk()`, `Code()`, and `Message()` for details. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md) (NOT_CONNECTED, TIMEOUT, or RPC_FAILED) carrying the underlying error message; for example when URI parsing, gRPC channel creation, or the connection handshake fails, such as an invalid URI, an unreachable server, or an expired connect timeout. Exceptions raised while creating the gRPC channel are caught internally and converted to a failed [Status](Status.md) rather than propagating. Inspect `status.IsOk()`, `Code()`, and `Message()` for details. See [Status](Status.md).
 
 ## Example
 
-Create a client instance, construct a URI-based ConnectParam with a token, connect to the local Milvus server, and check the returned Status.
+Create a client instance, construct a URI-based ConnectParam with a token, connect to the local Milvus server, and check the returned [Status](Status.md).
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();

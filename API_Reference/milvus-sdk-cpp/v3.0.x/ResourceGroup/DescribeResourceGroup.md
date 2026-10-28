@@ -21,15 +21,16 @@ auto request = DescribeResourceGroupRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The resource group description is carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The resource group description is carried in the response object.
 
 - **response** (*DescribeResourceGroupResponse*) -
 
     - **Desc** (*const ResourceGroupDesc&*) -
 
         Get resource group description.
+        See [ResourceGroupDesc](ResourceGroupDesc.md).
 
         - **AvailableNodesNum** (*uint32_t*) -
 
@@ -42,6 +43,7 @@ Returns a Status indicating whether the operation succeeded. The resource group 
         - **Config** (*const ResourceGroupConfig&*) -
 
             Configurations of the resource group.
+            See [ResourceGroupConfig](ResourceGroupConfig.md).
 
             - **Limits** (*uint32_t*) -
 
@@ -97,9 +99,9 @@ Returns a Status indicating whether the operation succeeded. The resource group 
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

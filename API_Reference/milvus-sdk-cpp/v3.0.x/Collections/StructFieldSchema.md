@@ -24,6 +24,8 @@ StructFieldSchema(name, description)
     .WithName(name)
     .WithDescription(description)
     .WithMaxCapacity(capacity)
+    .WithNullable(nullable)
+    .AddTypeParam(key, value)
     .AddField(field_schema);
 ```
 
@@ -41,9 +43,21 @@ StructFieldSchema(name, description)
 
     Sets the maximum number of elements the struct field can hold. Returns the schema for chaining.
 
+- `StructFieldSchema& WithNullable(bool nullable)`
+
+    Sets whether the struct field can contain empty element lists. Returns the schema for chaining.
+
+- `void SetTypeParams(const std::map<std::string, std::string>& params)`
+
+    Merges extra key-value settings into the struct field without overwriting existing keys.
+
+- `StructFieldSchema& AddTypeParam(const std::string& key, const std::string& val)`
+
+    Adds one extra key-value setting. If the key already exists, the new value is ignored.
+
 - `StructFieldSchema& AddField(const FieldSchema& field_schema)`
 
-    Appends a sub-field (vector field within the struct) and returns the schema for chaining. For FieldSchema details see FieldSchema.
+    Appends a sub-field (vector field within the struct) and returns the schema for chaining. For [FieldSchema](FieldSchema.md) details see [FieldSchema](FieldSchema.md).
 
 - `const std::vector<FieldSchema>& Fields() const`
 

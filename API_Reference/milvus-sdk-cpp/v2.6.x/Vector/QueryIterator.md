@@ -148,17 +148,30 @@ auto request = QueryIteratorRequest()
 
     Set the flag of internal retrieve strategy.
 
+- `SetPkSchema(const FieldSchema& schema)`
+
+    Sets the primary-key schema used to escape iterator paging values correctly.
+
+- `SetCollectionID(int64_t id)`
+
+    Sets an explicit collection ID for iterator paging when server-side cache behavior requires it.
+
+- `SetBatchSize(int64_t batch_size)`
+
+    Sets the number of records requested in each iterator page.
+
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status, and on success assigns the output parameter with a QueryIteratorPtr whose Next() call fetches successive batches of QueryResults until all matching results are exhausted.
+Returns a [Status](../Client/Status.md), and on success assigns the output parameter with a QueryIteratorPtr whose Next() call fetches successive batches of QueryResults until all matching results are exhausted.
 
 - **response** (*QueryIteratorPtr*) -
 
     - **Next** (*Status*) -
 
         Get next batch of results. Note: this method is not designed to be called in multi-thread, it is not thread-safe.
+        See [Status](../Client/Status.md).
 
         - **OutputField** (*FieldDataPtr*) -
 
@@ -168,13 +181,15 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -188,13 +203,15 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
 
                 Get field name.
 
-            - **Type** ([DataType](../Collections/DataType.md)) -
+            - **Type** (*DataType*) -
 
                 Get field data type.
+                See [DataType](../Collections/DataType.md).
 
-            - **ElementType** ([DataType](../Collections/DataType.md)) -
+            - **ElementType** (*DataType*) -
 
                 Get the element type for an array field.
+                See [DataType](../Collections/DataType.md).
 
             - **Count** (*size_t*) -
 
@@ -207,10 +224,12 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
         - **OutputRows** (*Status*) -
 
             Get all output rows.
+            See [Status](../Client/Status.md).
 
         - **OutputRow** (*Status*) -
 
             Get row data. Throw exception if the i is out of bound.
+            See [Status](../Client/Status.md).
 
         - **GetRowCount** (*uint64_t*) -
 
@@ -218,9 +237,9 @@ Returns a Status, and on success assigns the output parameter with a QueryIterat
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status when request preparation, transport, or iterator initialization fails, including when the request carries ID-based criteria, which is rejected outright because the query iterator does not support IDs. Iterator-construction failures surface as an "Unable to create query iterator" error. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md) when request preparation, transport, or iterator initialization fails, including when the request carries ID-based criteria, which is rejected outright because the query iterator does not support IDs. Iterator-construction failures surface as an "Unable to create query iterator" error. Inspect `status.Code()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

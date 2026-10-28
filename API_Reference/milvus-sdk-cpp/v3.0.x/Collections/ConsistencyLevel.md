@@ -12,7 +12,7 @@ enum class ConsistencyLevel {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **NONE** (-1)
 

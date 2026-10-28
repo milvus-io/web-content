@@ -59,7 +59,7 @@ int main() {
     // Create an index on the vector field
     auto index_status = client->CreateIndex(milvus::CreateIndexRequest()
         .WithCollectionName("hello_milvus")
-        .AddIndex(milvus::IndexDesc("embedding", "embedding_idx", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)));
+        .AddIndexParam(milvus::IndexParam("embedding", "embedding_idx", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)));
     if (!index_status.IsOk()) {
         std::cerr << index_status.Message() << std::endl;
         return 1;
@@ -99,8 +99,8 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|
-| 2.6.x | v2.6.7 |
-| 3.0.x | v3.0.3 |
+| 2.6.x | v2.6.8 |
+| 3.0.x | v3.0.4 |
 
 ## Contributing
 

@@ -16,9 +16,10 @@ FieldSchema(std::string name, DataType data_type,
 
     Sets the field name. Must be unique within the collection.
 
-- **data_type** (*[DataType](DataType.md)*)
+- **data_type** (*DataType*)
 
     Sets the data type of the field. See `DataType` for all supported values.
+    See [DataType](DataType.md).
 
 - **description** (*std::string*)
 

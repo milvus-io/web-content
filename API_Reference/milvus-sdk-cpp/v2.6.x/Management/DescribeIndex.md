@@ -1,6 +1,6 @@
 # DescribeIndex()
 
-This operation fetches the index descriptions and parameters of a collection, optionally narrowed to a field name or index name. Results are written to the DescribeIndexResponse output parameter, and the returned Status reports whether the operation succeeded.
+This operation fetches the index descriptions and parameters of a collection, optionally narrowed to a field name or index name. Results are written to the DescribeIndexResponse output parameter, and the returned [Status](../Client/Status.md) reports whether the operation succeeded.
 
 ```cpp
 Status DescribeIndex(const DescribeIndexRequest& request, DescribeIndexResponse& response)
@@ -61,15 +61,16 @@ auto request = DescribeIndexRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status, with the DescribeIndexResponse output parameter populated with the index descriptions that match the request.
+Returns a [Status](../Client/Status.md), with the DescribeIndexResponse output parameter populated with the index descriptions that match the request.
 
 - **response** (*DescribeIndexResponse*) -
 
     - **Descs** (*const std::vector<IndexDesc>&*) -
 
         Get index description.
+        See [IndexDesc](IndexDesc.md).
 
         - **FieldName** (*const std::string&*) -
 
@@ -86,18 +87,21 @@ Returns a Status, with the DescribeIndexResponse output parameter populated with
         - **MetricType** (*milvus::MetricType*) -
 
             Metric type.
+            See [MetricType](MetricType.md).
 
         - **IndexType** (*milvus::IndexType*) -
 
             Index type.
+            See [IndexType](IndexType.md).
 
         - **ExtraParams** (*const std::unordered_map<std::string, std::string>&*) -
 
             Get extra param. Note: this method was redefined in v2.4, which may affect older client code.
 
-        - **StateCode** (*[IndexStateCode](IndexStateCode.md)*) -
+        - **StateCode** (*IndexStateCode*) -
 
             Get index state.
+            See [IndexStateCode](IndexStateCode.md).
 
         - **FailReason** (*std::string*) -
 
@@ -117,9 +121,9 @@ Returns a Status, with the DescribeIndexResponse output parameter populated with
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status rather than a thrown exception; a field with no matching index is reported this way. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md) rather than a thrown exception; a field with no matching index is reported this way. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

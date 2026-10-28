@@ -21,7 +21,7 @@ auto request = GetServerVersionRequest()
 
 **RETURNS:**
 
-*Status* with *GetServerVersionResponse*
+*[Status](Status.md)* with *GetServerVersionResponse*
 
 Check `status.IsOk()` to confirm success.
 
@@ -51,9 +51,9 @@ Check `status.IsOk()` to confirm success.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md). The SDK converts internal exceptions into a non-OK [Status](Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](Status.md).
 
 ## Example
 

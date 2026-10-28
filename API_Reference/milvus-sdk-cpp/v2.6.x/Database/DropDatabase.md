@@ -25,15 +25,15 @@ auto request = DropDatabaseRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the database was dropped successfully.
+Returns a [Status](../Client/Status.md) indicating whether the database was dropped successfully.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status, for example NOT_CONNECTED when the client is not connected to the server. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md), for example NOT_CONNECTED when the client is not connected to the server. Inspect `status.IsOk()` and `status.Message()` for failure details. See [Status](../Client/Status.md).
 
 ## Example
 

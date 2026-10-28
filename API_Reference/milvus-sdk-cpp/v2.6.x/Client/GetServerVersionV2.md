@@ -21,9 +21,9 @@ auto request = GetServerVersionRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](Status.md)*
 
-Returns a Status reporting whether the operation succeeded, and fills the response object with the Milvus server version, plus detailed build information when the detail option is enabled.
+Returns a [Status](Status.md) reporting whether the operation succeeded, and fills the response object with the Milvus server version, plus detailed build information when the detail option is enabled.
 
 - **response** (*GetServerVersionResponse*) -
 
@@ -49,9 +49,9 @@ Returns a Status reporting whether the operation succeeded, and fills the respon
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](Status.md)**
 
-    Failures are reported through the returned Status when the client is not connected, or the underlying RPC to the server fails or times out; the Status carries the error code and message. Check it with `IsOk()` before reading the response. See [Status](Status.md).
+    Failures are reported through the returned [Status](Status.md) when the client is not connected, or the underlying RPC to the server fails or times out; the [Status](Status.md) carries the error code and message. Check it with `IsOk()` before reading the response. See [Status](Status.md).
 
 ## Example
 

@@ -1,83 +1,102 @@
 # ListImportJobs()
 
-This operation retrieves a list of all bulk import jobs associated with a specific collection. It is useful for auditing past and in-progress import operations.
+Lists bulk import jobs for a collection. The typed request/response overload is recommended in C++ SDK 3.0.4 or later. Transport behavior is controlled by [BulkImportConfig](BulkImportConfig.md). The legacy `nlohmann::json` overload is deprecated; use the typed request/response overload instead.
 
 ```cpp
-static nlohmann::json BulkImport::ListImportJobs(
+Status BulkImport::ListImportJobs(
     const std::string& url,
-    const std::string& collection_name,
-    const std::string& db_name = "default",
-    const std::string& api_key = "")
+    const BaseListImportJobsRequest<T>& request,
+    BulkImportResponse& response,
+    const BulkImportConfig& config = BulkImportConfig{})
 ```
 
 ## Request Syntax
 
 ```cpp
-auto resp = milvus::BulkImport::ListImportJobs(
-    url,
-    collection_name,
-    db_name,
-    api_key);
+auto request = milvus::MilvusListImportJobsRequest()
+    .WithApiKey("root:Milvus")
+    .WithDatabaseName("default")
+    .WithCollectionName("demo");
+
+milvus::BulkImportResponse response;
+auto status = milvus::BulkImport::ListImportJobs(
+    "http://localhost:19530", request, response);
 ```
 
-**PARAMETERS:**
+**REQUEST METHODS:**
 
-- `url` (*const std::string&*)
+- `WithApiKey(const std::string& api_key)`
 
-    **[REQUIRED]**
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    The URL of the Milvus server, e.g. `"http://localhost:19530"`.
+- `SetApiKey(const std::string& api_key)`
 
-- `collection_name` (*const std::string&*)
+    Sets the REST API key. For Milvus, use `username:password`.
 
-    **[REQUIRED]**
+- `WithDatabaseName(const std::string& db_name)`
 
-    The name of the collection whose import jobs to list.
+    Sets the target database. Empty selects the default database.
 
-- `db_name` (*const std::string&*)
+- `SetDatabaseName(const std::string& db_name)`
 
-    The name of the database that holds the collection. Defaults to `"default"`.
-
-- `api_key` (*const std::string&*)
-
-    The API key for authentication. Pass as `"username:password"` for Milvus or a cloud API key for Zilliz Cloud.
+    Sets the target database. Empty selects the default database.
 
 **RETURNS:**
 
-*nlohmann::json*
+*[Status](../Client/Status.md)*
 
-A JSON object containing an array of import job records, or `nullptr` on failure. Each record includes the job ID, state, and creation time.
+Returns a [Status](../Client/Status.md) indicating whether the REST call succeeded. The REST envelope and payload are carried in `BulkImportResponse`.
+
+- **response** (*BulkImportResponse*) -
+
+    See [BulkImportResponse](BulkImportResponse.md).
+
+    - **RawJson** (*const nlohmann::json&*) -
+
+        Returns the raw JSON body.
+
+    - **Code** (*int64_t*) -
+
+        Returns the REST envelope code.
+
+    - **Message** (*std::string*) -
+
+        Returns the REST envelope message.
+
+    - **Data** (*const nlohmann::json&*) -
+
+        Returns the REST envelope data object.
+
+    - **JobId** (*std::string*) -
+
+        Returns the created job ID when applicable; otherwise returns an empty string.
 
 **ERROR HANDLING:**
 
-The call does not throw: when the HTTP request fails or the response cannot be parsed, it returns a null result. Check the return value for `nullptr` to detect failures.
+- **[Status](../Client/Status.md)**
+
+    Failures are reported through the returned [Status](../Client/Status.md). HTTP transport failures and REST errors produce a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()`, `response.Code()`, and `response.Message()`. See [Status](../Client/Status.md).
 
 ## Example
 
 ```cpp
 #include "milvus/MilvusClientV2.h"
 #include "milvus/BulkImport.h"
+#include <iostream>
+
 auto client = milvus::MilvusClientV2::Create();
 milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
 auto status = client->Connect(connect_param);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
-
-// List all import jobs for a collection
-auto resp = milvus::BulkImport::ListImportJobs(
-    "http://localhost:19530",
-    "my_collection",
-    "default",
-    "root:Milvus"
-);
-
-if (!resp.is_null()) {
-    for (auto& job : resp["data"]["records"]) {
-        std::cout << "Job ID: " << job["jobId"]
-                  << "  State: " << job["state"] << std::endl;
-    }
-} else {
-    std::cout << "Failed to list import jobs" << std::endl;
+auto request = milvus::MilvusListImportJobsRequest()
+    .WithApiKey("root:Milvus")
+    .WithCollectionName("demo");
+milvus::BulkImportResponse response;
+status = milvus::BulkImport::ListImportJobs(
+    "http://localhost:19530", request, response);
+if (status.IsOk() && response.Code() == 0) {
+    std::cout << response.Data().dump() << '\n';
 }
 ```

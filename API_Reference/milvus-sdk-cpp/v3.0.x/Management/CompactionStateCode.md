@@ -10,7 +10,7 @@ enum class CompactionStateCode {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **UNKNOWN** (0) - The compaction state is unknown.
 

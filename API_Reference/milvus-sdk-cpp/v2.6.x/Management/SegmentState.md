@@ -14,7 +14,7 @@ enum class SegmentState {
 };
 ```
 
-**VALUES:**
+**Constants:**
 
 - **UNKNOWN** (0) - The segment state is unknown.
 

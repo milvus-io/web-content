@@ -2,6 +2,8 @@
 
 This operation creates one or more indexes on vector or scalar fields of a collection. You can specify multiple indexes in a single call, and in sync mode the call waits until the indexes are fully built.
 
+The preferred index input is [IndexParam](IndexParam.md).
+
 ```cpp
 Status CreateIndex(const CreateIndexRequest& request)
 ```
@@ -12,8 +14,8 @@ Status CreateIndex(const CreateIndexRequest& request)
 auto request = CreateIndexRequest()
     .WithDatabaseName(db_name)
     .WithCollectionName(collection_name)
-    .WithIndexes(indexes)
-    .AddIndex(index)
+    .WithIndexParams(index_params)
+    .AddIndexParam(index_param)
     .WithSync(sync)
     .WithTimeoutMs(timeout_ms);
 ```
@@ -36,9 +38,33 @@ auto request = CreateIndexRequest()
 
     Set the collection name.
 
+- `WithIndexParams(std::vector<IndexParam>&& index_params)`
+
+    Sets the indexes to be created. This is the preferred creation input.
+
+- `SetIndexParams(std::vector<IndexParam>&& index_params)`
+
+    Sets the indexes to be created. This is the preferred creation input.
+
+- `AddIndexParam(IndexParam&& index_param)`
+
+    Adds one index to be created. This is the preferred creation input.
+
 - `WithIndexes(std::vector<IndexDesc>&& indexes)`
 
-    Sets the indexes to be created. Accepts a std::vector<IndexDesc> rvalue that is moved into the request.
+    **Deprecated.** Sets legacy index descriptors. Use `WithIndexParams()` instead.
+
+- `SetIndexes(std::vector<IndexDesc>&& indexes)`
+
+    **Deprecated.** Sets legacy index descriptors. Use `SetIndexParams()` instead.
+
+- `AddIndex(IndexDesc&& index)`
+
+    **Deprecated.** Adds a legacy index descriptor. Use `AddIndexParam()` instead.
+
+
+
+    Sets the indexes to be created. Accepts a std::vector<[IndexDesc](IndexDesc.md)> rvalue that is moved into the request.
 
 - `SetIndexes(std::vector<IndexDesc>&& indexes)`
 
@@ -46,7 +72,7 @@ auto request = CreateIndexRequest()
 
 - `AddIndex(IndexDesc&& index)`
 
-    Adds an index to be created. Accepts an IndexDesc rvalue that is moved into the request.
+    Adds an index to be created. Accepts an [IndexDesc](IndexDesc.md) rvalue that is moved into the request.
 
 - `WithSync(bool sync)`
 
@@ -66,15 +92,15 @@ auto request = CreateIndexRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the index was created successfully.
+Returns a [Status](../Client/Status.md) indicating whether the index was created successfully.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 
@@ -88,13 +114,13 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-milvus::IndexDesc index("vector", "vector_idx", milvus::IndexType::HNSW, milvus::MetricType::L2);
+milvus::IndexParam index("vector", "vector_idx", milvus::IndexType::HNSW, milvus::MetricType::L2);
 index.AddExtraParam("M", "16");
 
 status = client->CreateIndex(milvus::CreateIndexRequest()
                                  .WithCollectionName(collection_name)
                                  .WithSync(true)
-                                 .AddIndex(std::move(index)));
+                                 .AddIndexParam(std::move(index)));
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }

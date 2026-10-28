@@ -34,15 +34,16 @@ auto request = milvus::ListRestoreSnapshotJobsRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the operation succeeded. The restore job list is carried in the response object.
+Returns a [Status](../Client/Status.md) indicating whether the operation succeeded. The restore job list is carried in the response object.
 
 - **response** (*ListRestoreSnapshotJobsResponse*) -
 
-    - **Jobs** (*const std::vector<RestoreSnapshotJobInfo>&*) - See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
+    - **Jobs** (*const std::vector<RestoreSnapshotJobInfo>&*)
 
         Get the restore jobs.
+        See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
         - **CollectionName** (*const std::string&*) -
 
@@ -72,9 +73,10 @@ Returns a Status indicating whether the operation succeeded. The restore job lis
 
             Start timestamp of the restore job.
 
-        - **State** (*[RestoreSnapshotStateCode](RestoreSnapshotStateCode.md)*) -
+        - **State** (*RestoreSnapshotStateCode*) -
 
             Current state of the restore job.
+            See [RestoreSnapshotStateCode](RestoreSnapshotStateCode.md).
 
         - **TimeCost** (*uint64_t*) -
 
@@ -82,9 +84,9 @@ Returns a Status indicating whether the operation succeeded. The restore job lis
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status. The SDK converts internal exceptions into a non-OK Status; public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
+    Failures are reported through the returned [Status](../Client/Status.md). The SDK converts internal exceptions into a non-OK [Status](../Client/Status.md); public API calls do not throw. Inspect `status.IsOk()` and `status.Message()` for failure details.
 
 ## Example
 

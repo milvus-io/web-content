@@ -57,15 +57,15 @@ auto request = DropCollectionFieldPropertiesRequest()
 
 **RETURNS:**
 
-*Status*
+*[Status](../Client/Status.md)*
 
-Returns a Status indicating whether the specified property keys were removed from the collection field.
+Returns a [Status](../Client/Status.md) indicating whether the specified property keys were removed from the collection field.
 
 **ERROR HANDLING:**
 
-- **Status**
+- **[Status](../Client/Status.md)**
 
-    Failures are reported through the returned Status when the request cannot be constructed, the RPC transport fails, or the server rejects the drop; inspect `IsOk()` and `Message()` for the failure reason. See [Status](../Client/Status.md).
+    Failures are reported through the returned [Status](../Client/Status.md) when the request cannot be constructed, the RPC transport fails, or the server rejects the drop; inspect `IsOk()` and `Message()` for the failure reason. See [Status](../Client/Status.md).
 
 ## Example
 
