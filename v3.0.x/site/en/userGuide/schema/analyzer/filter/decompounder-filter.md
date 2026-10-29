@@ -6,9 +6,11 @@ summary: "Use the decompounder filter to split compound words with an inline dic
 
 # Decompounder
 
+The `decompounder` filter splits compound words into individual components based on a specified dictionary, making it easier to search for parts of compound terms. This filter is particularly useful for languages that frequently use compound words, such as German.
+
 <!-- doc:block:start id="decompounder-overview" -->
 
-The `decompounder` filter splits compound words into individual components based on a specified dictionary, making it easier to search for parts of compound terms. This filter is particularly useful for languages that frequently use compound words, such as German. The component dictionary can be supplied inline via the `word_list` parameter or loaded from a [registered file resource](manage-file-resources.md) via the `word_list_file` parameter.
+The component dictionary can be supplied inline via the `word_list` parameter or loaded from a [registered file resource](manage-file-resources.md) via the `word_list_file` parameter.
 
 <!-- doc:block:end id="decompounder-overview" -->
 
@@ -18,9 +20,9 @@ The `decompounder` filter splits compound words into individual components based
 
 The `decompounder` filter accepts its component dictionary either inline via the `word_list` parameter or from a registered file resource via the `word_list_file` parameter.
 
-<!-- doc:block:end id="decompounder-word-list-sources" -->
-
 ### Inline word list
+
+<!-- doc:block:end id="decompounder-word-list-sources" -->
 
 The `decompounder` filter is a custom filter in Milvus. To use it, specify `"type": "decompounder"` in the filter configuration, along with a `word_list` parameter that provides the dictionary of word components to recognize.
 

@@ -14,9 +14,9 @@ The `stop` filter removes specified stop words from tokenized text, helping to e
 
 The `stop` filter accepts its stop-words list either inline via the `stop_words` parameter or from a registered file resource via the `stop_words_file` parameter.
 
-<!-- doc:block:end id="stop-words-sources" -->
-
 ### Inline stop-words list
+
+<!-- doc:block:end id="stop-words-sources" -->
 
 To use the `stop` filter with an inline list, specify `"type": "stop"` in the filter configuration, along with a `stop_words` parameter that provides the list of stop words.
 

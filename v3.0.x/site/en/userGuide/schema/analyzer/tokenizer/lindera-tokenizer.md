@@ -270,16 +270,10 @@ curl --request POST \
      <td><p><code>type</code></p></td>
      <td><p>The type of tokenizer. This is fixed to <code>"lindera"</code>.</p></td>
    </tr>
-
-<!-- doc:block:start id="lindera-dictionary-options" -->
-
    <tr>
      <td><p><code>dict_kind</code></p></td>
      <td><p>A dictionary used to define vocabulary. Possible values:</p><ul><li><p><code>ko-dic</code>: Korean - Korean morphological dictionary (<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">MeCab Ko-dic</a>)</p></li><li><p><code>ipadic</code>: Japanese - Standard morphological dictionary (<a href="https://taku910.github.io/mecab/">MeCab IPADIC</a>)</p></li><li><p><code>ipadic-neologd</code>: Japanese with neologism dictionary (extended) - Includes new words and proper nouns (<a href="https://github.com/neologd/mecab-ipadic-neologd">IPADIC NEologd</a>)</p></li><li><p><code>unidic</code>: Japanese UniDic (extended) - Academic standard dictionary with detailed linguistic information (<a href="https://clrd.ninjal.ac.jp/unidic/">UniDic</a>)</p></li><li><p><code>cc-cedict</code>: Mandarin Chinese (traditional/simplified) - Community-maintained Chinese-English dictionary (<a href="https://cc-cedict.org/wiki/">CC-CEDICT</a>)</p></li></ul></td>
    </tr>
-
-<!-- doc:block:end id="lindera-dictionary-options" -->
-
    <tr>
      <td><p><code>filter</code></p></td>
      <td><p>A list of tokenizer-level filters to apply after segmentation. Each filter is an object with:</p><ul><li><p><code>kind</code>: The filter type. Supported values:</p><ul><li><p><code>korean_stop_tags</code>: Remove tokens matching specified Korean POS tags.</p></li><li><p><code>japanese_stop_tags</code>: Remove tokens matching specified Japanese POS tags.</p></li></ul></li><li><p><code>tags</code>: A list of POS tags to filter out. The available tags depend on the <code>kind</code>:</p><ul><li><p>For <code>korean_stop_tags</code>: Use exact tag codes (e.g., <code>JKS</code>, <code>JKO</code>, <code>SF</code>). Korean tags require exact matching. For the complete list based on the Sejong tagset, see the <a href="https://docs.rs/lindera/latest/src/lindera/token_filter/korean_stop_tags.rs.html">Lindera Korean stop tags source</a>.</p></li><li><p>For <code>japanese_stop_tags</code>: Use exact tag codes (e.g., <code>助詞,格助詞</code>, <code>助詞,係助詞</code>, <code>助動詞</code>). Japanese tags require exact matching. For the complete list (IPADIC), see <a href="https://github.com/taku910/mecab/blob/master/mecab-ipadic/pos-id.def">Japanese POS tags reference</a>.</p></li></ul></li></ul></td>
