@@ -11,6 +11,8 @@ title: BGE M3
 
 Milvus integrates with the BGE M3 model using the __BGEM3EmbeddingFunction__ class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching.
 
+This example generates embeddings in your Python process; it does not connect to a Milvus server. The model weights are downloaded on first use, so you need network access to the model host or a populated local model cache. CPU inference is supported with `use_fp16=False`.
+
 To use this feature, install the necessary dependencies:
 
 ```bash
@@ -101,3 +103,14 @@ Embeddings: {'dense': [array([-0.02024024, -0.01514386,  0.02380808, ...,  0.002
 Dense query dim: 1024 (1024,)
 Sparse query dim: 250002 (1, 250002)
 ```
+
+## Store and search the embeddings
+
+Generating embeddings is the first step. To use these outputs for retrieval, define a collection and index each vector field:
+
+- Map `docs_embeddings["dense"]` to a `FLOAT_VECTOR` field with dimension `bge_m3_ef.dim["dense"]`.
+- Map `docs_embeddings["sparse"]` to a `SPARSE_FLOAT_VECTOR` field, which does not require a fixed dimension in the Milvus schema. Use an `IP` metric for these learned sparse vectors. See [Sparse Vector](sparse_vector.md).
+- Store each document's ID and source text or metadata alongside its vectors so search results can be traced back to the source.
+- Encode queries with the same model and settings as the documents. Issue a single `hybrid_search()` request with one `AnnSearchRequest` for the dense field and one for the sparse field, and let a server-side ranker such as RRF or a weighted ranker fuse the results.
+
+Follow [Hybrid Search with Milvus](hybrid_search_with_milvus.md) for the collection schema, indexes, insertion, and hybrid-search requests. The examples on this page use the wrapper's dense and sparse outputs; they do not demonstrate BGE-M3's optional ColBERT multi-vector output.

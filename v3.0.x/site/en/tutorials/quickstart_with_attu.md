@@ -1,17 +1,31 @@
 ---
 id: quickstart_with_attu.md
-summary: Attu is an all-in-one, open-source administration tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
+summary: Use Attu Desktop and Python to create a Milvus collection, insert text embeddings, and inspect vector-search results.
 title: Quick Start with Attu - the Web UI of Milvus
 ---
 
-# Quick Start with Attu Desktop
+# Quick Start with Attu - the Web UI of Milvus
 
 ## 1. Introduction
-[Attu](https://github.com/zilliztech/attu) is an all-in-one, open-source administration tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
+[Attu](https://github.com/zilliztech/attu) is an administration tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
 
 
 
 ---
+
+## Prerequisites
+
+Before starting, prepare the following:
+
+- A running Milvus server that both Attu and your Python environment can reach. This tutorial uses Milvus Standalone at `http://localhost:19530`, not a local Milvus Lite `.db` file.
+- An Attu release compatible with your server. Attu 3.0 supports Milvus 2.6.0 and later, including Milvus 3.x; use the [compatibility table](https://github.com/zilliztech/attu#compatibility) for older servers.
+- A Python environment with a PyMilvus version compatible with your server. See [Install Milvus Python SDK](install-pymilvus.md) and [Release Notes](release_notes.md). For the SDK version used in this documentation branch, install the model extra and progress-bar dependency:
+
+```bash
+python3 -m pip install "pymilvus[model]==3.0.2" tqdm
+```
+
+The data-preparation steps also use `wget` and `unzip`. The embedding function downloads its model on first use, so allow network access to the model host or prepare the model cache in advance. Screenshots illustrate the workflow; labels and layouts can differ between Attu releases.
 
 ## 2. Install Desktop Application
 Download the desktop version of Attu by visiting the [Attu GitHub Releases page](https://github.com/zilliztech/attu/releases). Select the appropriate version for your operating system and follow the installation steps.
@@ -38,8 +52,6 @@ To use Milvus Standalone locally:
 3. Click Connect to access your database.
 > You can also connect the fully managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud). Simply set the `Milvus Address` and `token` to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) of your Zilliz Cloud instance.
 
-4. Click  to access your database.
-
 <p align="center">
   <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_login_page.png" alt="Attu Login Page" width="80%">
 </p>
@@ -49,7 +61,7 @@ To use Milvus Standalone locally:
 ## 4. Prepare Data, Create Collection, and Insert Data
 
 ### 4.1 Prepare the Data
-We use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the dataset for this example.
+We use the FAQ pages from a fixed [Milvus Documentation 2.4.x archive](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as sample text. The archive is a retrieval dataset, not the server or SDK version to install.
 
 #### Download and Extract Data:
 ```bash
@@ -63,9 +75,12 @@ from glob import glob
 
 text_lines = []
 for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         file_text = file.read()
     text_lines += file_text.split("# ")
+
+if not text_lines:
+    raise RuntimeError("No FAQ files found. Check the extracted milvus_docs/en/faq directory.")
 ```
 
 ---
@@ -92,7 +107,7 @@ print(test_embedding[:10])
 ---
 
 ### 4.3 Create Collection
-Connect to Milvus and create a collection:
+Connect Python to the same Milvus endpoint and database you selected in Attu. If authentication is enabled, configure the corresponding credentials in both clients. Create a collection:
 ```python
 from pymilvus import MilvusClient
 
@@ -101,7 +116,8 @@ client = MilvusClient(uri="http://localhost:19530")
 
 collection_name = "attu_tutorial"
 
-# Drop collection if it exists
+# Drop the tutorial collection if it exists so the steps can be rerun from the top.
+# Choose a different collection_name if "attu_tutorial" already holds data you want to keep.
 if client.has_collection(collection_name):
     client.drop_collection(collection_name)
 
@@ -133,7 +149,7 @@ client.insert(collection_name=collection_name, data=data)
 
 ### 4.5 Visualize Data and Schema
 
-Now we can visualize the data schema and inserted entities using Attu's interface. The schema displays defined fields, including an `id` field of type `Int64` and a `vector` field of type `FloatVector(768)` with an `Inner Product (IP)` metric. The collection is loaded with **72 entities**. 
+In Attu, refresh the collection list and open `attu_tutorial`. The quick-setup schema includes an `id` primary key and a `vector` field whose dimension is `embedding_dim`, with an `Inner Product (IP)` metric. The `text` values are stored in the dynamic field. See [Create Collection](create-collection.md) and [Dynamic Field](enable-dynamic-field.md) for explicit schema options. The entity count depends on the extracted sample text, so use your inserted row count rather than the number in the screenshots.
 
 Additionally, we can view the inserted data, including ID, vector embeddings, and dynamic fields storing metadata such as text content. The interface supports filtering and querying based on specified conditions or dynamic fields.
 <p align="center">
@@ -151,7 +167,7 @@ Navigate to the **Vector Search** tab in Attu.
 1. Click on the **Generate Random Data** button to create test queries.  
 2. Click **Search** to retrieve results based on the generated data.  
 
-The results are displayed in a table, showing IDs, similarity scores, and dynamic fields for each matching entity.  
+The results are displayed in a table, showing IDs, similarity scores, and dynamic fields for each matching entity. Random vectors test the search workflow, not semantic relevance. For a meaningful text query, encode it with the same `embedding_model.encode_queries()` function used for this collection, then search with that vector. See [Single-Vector Search](single-vector-search.md) for a Python example.
 
 <p align="center">
   <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">

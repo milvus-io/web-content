@@ -38,7 +38,7 @@ For details on how to adjust these settings to suit your needs, refer to [Index 
 
 ## Build index
 
-This example uses a connected client named `client` and an existing collection named `your_collection_name`. The collection has a five-dimensional vector field named `your_vector_field_name`.
+This example uses a connected `MilvusClient` named `client` and an existing collection named `your_collection_name`. The collection has a five-dimensional `FLOAT_VECTOR` field named `your_vector_field_name`. See [Install Milvus Python SDK](install-pymilvus.md) for SDK compatibility and [Create Collection](create-collection.md) for the schema and connection setup. Replace the field name and query dimension together when adapting the example to your embeddings.
 
 Define the index parameters with `add_index()`, then build the index with `create_index()`.
 
@@ -159,3 +159,13 @@ The following table lists the parameters that can be configured in `search_param
    </tr>
 </table>
 
+## Evaluate the trade-offs
+
+Use representative data and queries to choose parameters rather than treating the example values as production defaults:
+
+1. Fix the embedding model, metric, `limit`, and any [filter conditions](filtered-search.md). Compute exact nearest neighbors for the same queries and eligible entities, for example with a [FLAT](flat.md) index, to measure recall.
+1. Sweep the search-time `ef` at your target concurrency. Record recall, throughput, and tail latency together. Increasing `ef` does not require rebuilding the index.
+1. If search-time tuning cannot meet the target, compare rebuilt indexes with different `M` and `efConstruction`. Record index build time and memory use as well as query performance.
+1. Include the loading strategy and cache state in the test. When using [Tiered Storage](tiered-storage-overview.md), measure queries that fetch uncached data separately from warm-cache queries.
+
+For memory constraints or a different recall and latency target, compare the alternatives in [Index Explained](index-explained.md).

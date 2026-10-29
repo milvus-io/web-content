@@ -66,7 +66,9 @@ Meta storage stores snapshots of metadata such as collection schema, and message
 
 ### Object storage
 
-Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world's most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.
+Object storage persists data and index files. Milvus supports object storage backends such as MinIO, AWS S3, and Azure Blob Storage. QueryNodes cache the data and indexes needed to serve queries.
+
+With [Tiered Storage](tiered-storage-overview.md), available in Milvus 2.6.4 and later, QueryNodes can load segment metadata first and fetch field data or indexes on demand, rather than loading everything at initialization. Remote object storage remains the persistent source; evicting a local cache entry does not delete the stored data. Accessing uncached data adds storage I/O and can increase query latency. Use [Warm Up](warm-up.md) for latency-sensitive fields or indexes, and evaluate cold-query as well as warm-cache latency before choosing a loading strategy.
 
 ### WAL storage
 

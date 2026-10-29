@@ -1,62 +1,74 @@
 ---
 id: milvus_lite.md
-summary: Get started with Milvus Lite.
+summary: Install Milvus Lite and run local vector search with a persistent database path.
 title: Run Milvus Lite Locally
 ---
 
 # Run Milvus Lite Locally
 
-This page illustrates how to run Milvus locally with Milvus Lite. Milvus Lite is the lightweight version of [Milvus](https://github.com/milvus-io/milvus), an open-source vector database that powers AI applications with vector embeddings and similarity search.
-
+This page shows how to run local vector search with Milvus Lite. It covers installation, data persistence, filtering, and exporting data to another Milvus deployment.
 
 ## Overview
 
-Milvus Lite can be imported into your Python application, providing the core vector search functionality of Milvus. Milvus Lite is already included in the [Python SDK of Milvus](https://github.com/milvus-io/pymilvus). It can be simply deployed with `pip install pymilvus`. 
+Milvus Lite is a lightweight local backend for the [Milvus Python SDK](https://github.com/milvus-io/pymilvus). Install it with the optional `milvus-lite` extra; installing `pymilvus` alone does not install this backend in the SDK version used below.
 
-With Milvus Lite, you can start building an AI application with vector similarity search within minutes! Milvus Lite is good for running in the following environment:
-- Jupyter Notebook / Google Colab
+Milvus Lite is suitable for local development and small-scale workloads in environments such as:
+
+- Jupyter Notebook or Google Colab
 - Laptops
-- Edge Devices
+- Edge devices with compatible Python dependencies
 
-Milvus Lite shares the same API with Milvus Standalone and Distributed, and covers most of the features such as vector data persistence and management, vector CRUD operations, sparse and dense vector search, metadata filtering, multi-vector and hybrid_search. Together, they provide a consistent experience across different types of environments, from edge devices to clusters in cloud, fitting use cases of different size. With the same client-side code, you can run GenAI apps with Milvus Lite on a laptop or Jupyter Notebook, or Milvus Standalone on Docker container, or Milvus Distributed on massive scale Kubernetes cluster serving billions of vectors in production.
+Milvus Lite uses the `MilvusClient` API for supported operations, including vector data persistence, insert and delete, vector search, and metadata filtering. To move a supported application workflow to a remote deployment, change the connection URI and credentials, and review the differences in supported features. For large-scale production workloads, use [Milvus Standalone or Distributed](install-overview.md), or fully managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud).
 
 ## Prerequisites
 
-Milvus Lite currently supports the following environmnets:
-- Ubuntu >= 20.04 (x86_64 and arm64)
-- MacOS >= 11.0 (Apple Silicon M1/M2 and x86_64)
+This guide uses PyMilvus **3.0.2** and Milvus Lite **3.2.2**. Prepare the following environment:
 
-Please note that Milvus Lite is only suitable for small scale vector search use cases. For a large scale use case, we recommend using [Milvus Standalone](https://milvus.io/docs/install-overview.md#Milvus-Standalone) or [Milvus Distributed](https://milvus.io/docs/install-overview.md#Milvus-Distributed). You can also consider the fully-managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud).
+- Python 3.10 or newer. The local Lite backend has a higher minimum Python version than the remote PyMilvus client.
+- macOS, Linux, or Windows, with compatible wheels for dependencies such as `faiss-cpu` and `pyarrow`. Milvus Lite 3.2.2 is a pure-Python package, so the operating system and architecture must satisfy those dependencies rather than the Lite package itself.
+- A writable local directory for database storage.
 
+On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2 because of its platform marker, so `milvus-lite` must be named explicitly. The install command below already does this. For other package and platform combinations, consult the [Milvus Lite release requirements](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements).
 
 ## Set up Milvus Lite
 
-```shell
-pip install -U pymilvus[milvus-lite]
+Create an isolated Python environment and install both packages:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
 ```
 
-We recommend using `pymilvus`. You can `pip install` with `-U` to force update to the latest version and `milvus-lite` will be automatically installed.
+Quote the extras expression so shells such as zsh do not interpret the brackets. On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1` instead of `source .venv/bin/activate`. The explicit versions keep the SDK and local backend aligned with this guide.
 
-If you want to explicitly install `milvus-lite` package, or you have installed an older version of `milvus-lite` and would like to update it, you can do `pip install -U milvus-lite`.
+<div class="alert note">
+
+> Milvus Lite 3.x uses a different storage engine from the original 2.x package. It cannot open an existing 2.x `.db` file in place. Keep the original database and an environment that can open it, export its data there, and import the data into a new database. Installing a new package does not migrate the old storage format. See [Migrating data from Milvus Lite](#Migrating-data-from-Milvus-Lite).
+
+</div>
 
 ## Connect to Milvus Lite
 
-In `pymilvus`, specify a local file name as uri parameter of MilvusClient will use Milvus Lite.
+Pass a local path ending in `.db` to `MilvusClient`:
 
 ```python
 from pymilvus import MilvusClient
+
 client = MilvusClient("./milvus_demo.db")
 ```
 
-After running the above code snippet, a database file named **milvus_demo.db** will be generated in the current folder.
+For Milvus Lite 3.2.2, this creates a **milvus_demo.db directory** in the working directory. The directory contains the database's storage files; the `.db` suffix does not mean it is a single portable file. Reuse the same path to reopen the database after closing the client or restarting the application.
 
-> **_NOTE:_**  Note that the same API also applies to Milvus Standalone, Milvus Distributed and Zilliz Cloud, the only difference is to replace local file name to remote server endpoint and credentials, e.g. 
-`client = MilvusClient(uri="http://localhost:19530", token="username:password")`.
+Use a different path for a new database. To connect to a remote Milvus server instead, pass its endpoint and credentials:
 
-## Examples
+```python
+client = MilvusClient(uri="http://localhost:19530", token="username:password")
+```
 
-Following is a simple demo showing how to use Milvus Lite for text search. There are more comprehensive [examples](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials) for using Milvus Lite to build applications
-such as [RAG](https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb), [image search](https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb), and using Milvus Lite in popular RAG framework such as [LangChain](https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb) and [LlamaIndex](https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb)!
+## Run a local search example
+
+The following example demonstrates the API workflow with generated vectors. These vectors do not encode the meaning of the text; use an embedding model when building semantic search. Run the example against a new database path, or remove the existing `demo_collection` before running it again.
 
 ```python
 from pymilvus import MilvusClient
@@ -65,25 +77,26 @@ import numpy as np
 client = MilvusClient("./milvus_demo.db")
 client.create_collection(
     collection_name="demo_collection",
-    dimension=384  # The vectors we will use in this demo have 384 dimensions
+    dimension=384  # The vectors in this example have 384 dimensions.
 )
 
-# Text strings to search from.
 docs = [
     "Artificial intelligence was founded as an academic discipline in 1956.",
     "Alan Turing was the first person to conduct substantial research in AI.",
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
-# For illustration, here we use fake vectors with random numbers (384 dimension).
 
-vectors = [[ np.random.uniform(-1, 1) for _ in range(384) ] for _ in range(len(docs)) ]
-data = [ {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"} for i in range(len(vectors)) ]
-res = client.insert(
-    collection_name="demo_collection",
-    data=data
-)
+# Generate reproducible example vectors, not semantic embeddings.
+rng = np.random.default_rng(7)
+vectors = rng.uniform(-1, 1, size=(len(docs), 384)).tolist()
+data = [
+    {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
+    for i in range(len(docs))
+]
+res = client.insert(collection_name="demo_collection", data=data)
+print(res)
 
-# This will exclude any text in "history" subject despite close to the query vector.
+# Search only records whose subject is "history".
 res = client.search(
     collection_name="demo_collection",
     data=[vectors[0]],
@@ -93,7 +106,7 @@ res = client.search(
 )
 print(res)
 
-# a query that retrieves all entities matching filter expressions.
+# Retrieve all records that match the scalar filter, without vector ranking.
 res = client.query(
     collection_name="demo_collection",
     filter="subject == 'history'",
@@ -101,224 +114,72 @@ res = client.query(
 )
 print(res)
 
-# delete
-res = client.delete(
-    collection_name="demo_collection",
-    filter="subject == 'history'",
-)
+# Delete one record and keep the others for the export example below.
+res = client.delete(collection_name="demo_collection", ids=[2])
 print(res)
+client.close()
 ```
 
-## Limits
+For an application that generates embeddings from text, continue with [Quickstart](quickstart.md). You can also explore the [Milvus Bootcamp examples](https://github.com/milvus-io/bootcamp) for RAG, image search, and framework integrations.
 
-When running Milvus Lite, note that some features are not supported. The following tables summarize the usage limits on Milvus Lite.
+## Supported features and limits
 
-### Collection
+Milvus Lite 3.2.2 implements a subset of Milvus operations through its local PyMilvus adapter. Its [versioned feature reference](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features) describes the following capabilities:
 
-| Method / Parameter                                                                                                                   | Supported in Milvus Lite                                      |
-|----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| [create_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md)       | Support with limited parameters                               |
-| `collection_name`                                                                                                          | Y                                                             |
-| `dimension`                                                                                                                | Y                                                             |
-| `primary_field_name`                                                                                                       | Y                                                             |
-| `id_type`                                                                                                                  | Y                                                             |
-| `vector_field_name`                                                                                                        | Y                                                             |
-| `metric_type`                                                                                                              | Y                                                             |
-| `auto_id`                                                                                                                  | Y                                                             |
-| `schema`                                                                                                                   | Y                                                             |
-| `index_params`                                                                                                             | Y                                                             |
-| `enable_dynamic_field`                                                                                                     | Y                                                             |
-| `num_shards`                                                                                                               | N                                                             |
-| `partition_key_field`                                                                                                      | N                                                             |
-| `num_partitions`                                                                                                           | N                                                             |
-| `consistency_level`                                                                                                        | N (Only supports `Strong`; Any configuration will be treated as `Strong`.)          |
-| [get_collection_stats()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md) | Supports getting collection statistics.                       |
-| `collection_name`                                                                                                          | Y                                                             |
-| `timeout`                                                                                                                  | Y                                                             |
-| [describe_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md)   | `num_shards`, `consistency_level`, and `collection_id` in response are invalid. |
-| `timeout`                                                                                                                  | Y                                                             |
-| [has_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md)             | Supports checking if a collection exists.                     |
-| `collection_name`                                                                                                          | Y                                                             |
-| `timeout`                                                                                                                  | Y                                                             |
-| [list_collections()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md)         | Supports listing all collections.                             |
-| [drop_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md)           | Supports dropping a collection.                               |
-| `collection_name`                                                                                                          | Y                                                             |
-| `timeout`                                                                                                                  | Y                                                             |
-| [rename_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md)       | Renaming a collection is not supported.                             |
+| Area | Support in this Lite version |
+|---|---|
+| Dense and sparse vectors | `FLOAT_VECTOR` and `SPARSE_FLOAT_VECTOR` |
+| Vector indexes | `FLAT`, `BRUTE_FORCE`, `IVF_FLAT`, `IVF_SQ8`, `HNSW`, `HNSW_SQ`, and `AUTOINDEX` |
+| Scalar and sparse indexes | `INVERTED` scalar indexes and `SPARSE_INVERTED_INDEX` |
+| Data operations | Insert, upsert, get, query, vector search, and delete |
+| Search | Dense and sparse search, metadata filters, multiple vector fields, and hybrid search |
+| Collection organization | Collections, named databases, aliases, and partitions, within the local adapter's supported operations |
 
-### Field & Schema
+This version is not limited to `FLAT` indexes. Index availability and behavior depend on the Lite version; do not apply limits from the original 2.x backend to the 3.x engine.
 
-| Method / Parameter                                                                                                     | Supported in Milvus Lite        |
-|--------------------------------------------------------------------------------------------------------------|---------------------------------|
-| [create_schema()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md) | Support with limited parameters |
-| `auto_id`                                                                                                    | Y                               |
-| `enable_dynamic_field`                                                                                       | Y                               |
-| `primary_field`                                                                                              | Y                               |
-| `partition_key_field`                                                                                        | N                               |
-| [add_field()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md)    | Support with limited parameters |
-| `field_name`                                                                                                 | Y                               |
-| `datatype`                                                                                                   | Y                               |
-| `is_primary`                                                                                                 | Y                               |
-| `max_length`                                                                                                 | Y                               |
-| `element_type`                                                                                               | Y                               |
-| `max_capacity`                                                                                               | Y                               |
-| `dim`                                                                                                        | Y                               |
-| `is_partition_key`                                                                                           | N                               |
+Review these limits before choosing Lite for an application:
 
-### Insert & Search
+- Only one process can own a database storage directory at a time. The engine protects the directory with a file lock.
+- Serialize writes to the same collection. Concurrent writes are not supported safely.
+- The local adapter does not implement every Milvus RPC. Unsupported operations return `UNIMPLEMENTED`; schema alteration and partition-level load or release are not available.
+- Authentication, users, roles, RBAC, and TLS are not supported. Do not expose the local server to an untrusted network.
+- Binary, float16, bfloat16, and int8 vector fields, and Product Quantization indexes, are not supported.
+- Lite is designed for local workloads. Local API compatibility does not provide distributed scaling or the production isolation and availability of a remote deployment.
 
-| Method / Parameter                                                                                  | Supported in Milvus Lite        |
-|-------------------------------------------------------------------------------------------|---------------------------------|
-| [search()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `data`                                                                                    | Y                               |
-| `filter`                                                                                  | Y                               |
-| `limit`                                                                                   | Y                               |
-| `output_fields`                                                                           | Y                               |
-| `search_params`                                                                           | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `partition_names`                                                                         | N                               |
-| `anns_field`                                                                              | Y                               |
-| [query()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md)   | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `filter`                                                                                  | Y                               |
-| `output_fields`                                                                           | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `ids`                                                                                     | Y                               |
-| `partition_names`                                                                         | N                               |
-| [get()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md)                                                                                   | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `ids`                                                                                     | Y                               |
-| `output_fields`                                                                           | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `partition_names`                                                                         | N                               |
-| [delete()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md) | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `ids`                                                                                     | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `filter`                                                                                  | Y                               |
-| `partition_name`                                                                          | N                               |
-| [insert()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `data`                                                                                    | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `partition_name`                                                                          | N                               |
-| [upsert()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md) | Support with limited parameters |
-| `collection_name`                                                                         | Y                               |
-| `data`                                                                                    | Y                               |
-| `timeout`                                                                                 | Y                               |
-| `partition_name`                                                                          | N                               |
-
-### Load & Release
-
-| Method / Parameter                                                                                                              | Supported in Milvus Lite |
-|-----------------------------------------------------------------------------------------------------------------------|--------------------------|
-| [load_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md)       | Y                        |
-| `collection_name`                                                                                                     | Y                        |
-| `timeout`                                                                                                             | Y                        |
-| [release_collection()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md) | Y                        |
-| `collection_name`                                                                                                     | Y                        |
-| `timeout`                                                                                                             | Y                        |
-| [get_load_state()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md)         | Getting load status is not supported.            |
-| [refresh_load()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md)             | Loading the unloaded data of a loaded collection is not supported.            |
-| [close()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md)                               | Y                        |
-
-### Index
-
-| Method / Parameter                                                                                                       | Supported in Milvus Lite                                                                               |
-|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| [list_indexes()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md) | Listing indexes is supported.                                                                          |
-| `collection_name`                                                                                              | Y                                                                                                      |
-| `field_name`                                                                                                   | Y                                                                                                      |
-| [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md)      | Only supports `FLAT` index type.                                                                      |
-| `index_params`                                                                                                 | Y                                                                                                      |
-| `timeout`                                                                                                      | Y                                                                                                      |
-| [drop_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md)          | Dropping indexes is supported.                                                                         |
-| `collection_name`                                                                                              | Y                                                                                                      |
-| `index_name`                                                                                                   | Y                                                                                                      |
-| `timeout`                                                                                                      | Y                                                                                                      |
-| [describe_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md)  | Describing indexes is supported.                                                                       |
-| `collection_name`                                                                                              | Y                                                                                                      |
-| `index_name`                                                                                                   | Y                                                                                                      |
-| `timeout`                                                                                                      | Y                                                                                                      |
-
-### Vector Index Types
-
-Milvus Lite only supports [FLAT](https://milvus.io/docs/index.md?tab=floating#FLAT) index type. It uses FLAT type regardless of the specified index type in collection.
-
-### Search Features
-
-Milvus Lite supports Sparse Vector, Multi-vector, Hybrid Search.
-
-### Partition
-
-Milvus Lite does not support partitions and partition-related methods.
-
-### Users & Roles
-
-Milvus Lite does not support users and roles and related methods.
-
-### Alias
-
-Milvus Lite does not support aliases and alias-related methods.
+See the [versioned known limitations](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#known-limitations) before relying on a server feature that the local example does not exercise.
 
 ## Migrating data from Milvus Lite
 
-All data stored in Milvus Lite can be easily exported and loaded into other types of Milvus deployment, such as Milvus Standalone on Docker, Milvus Distributed on K8s, or fully-managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud).
+Use `milvus-lite dump` to export a collection as Milvus BulkWriter JSON files. These files can be imported into a self-hosted Milvus deployment or Zilliz Cloud.
 
-Milvus Lite provides a command line tool that can dump data into a json file, which can be imported into [milvus](https://github.com/milvus-io/milvus) and [Zilliz Cloud](https://zilliz.com/cloud)(the fully managed cloud service for Milvus). The milvus-lite command will be installed together with milvus-lite python package 
+Install the SDK's bulk writer dependencies in the environment that opens the source database:
 
-```shell
-# Install
-pip install -U "pymilvus[bulk_writer]"
-
+```bash
+python -m pip install "pymilvus[bulk_writer]==3.0.2"
 milvus-lite dump -h
-
-usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -d DB_FILE, --db-file DB_FILE
-                        milvus lite db file
-  -c COLLECTION, --collection COLLECTION
-                        collection that need to be dumped
-  -p PATH, --path PATH  dump file storage dir
 ```
-The following example dumps all data from `demo_collection` collection that's stored in `./milvus_demo.db` (Milvus Lite database file)
 
-To export data:
+Close the Python application that owns the local database before running the command in another process. Export the collection from the preceding example:
 
-```shell
+```bash
 milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-# ./milvus_demo.db: milvus lite db file
-# demo_collection: collection that need to be dumped
-#./data_dir : dump file storage dir
 ```
 
-With the dump file, you can upload data to Zilliz Cloud via [Data Import](https://docs.zilliz.com/docs/data-import), or upload data to Milvus servers via [Bulk Insert](https://milvus.io/docs/import-data.md).
+The command reads `demo_collection` from the **milvus_demo.db storage directory** and writes export files under **data_dir**. Import those files with [Bulk Insert](import-data.md) or [Zilliz Cloud Data Import](https://docs.zilliz.com/docs/data-import).
 
+<div class="alert note">
+
+> To export an original 2.x database file, run the dump tool in an environment with the original Lite version that can open that file. The 3.x dump tool does not convert the old storage format by opening it directly. Preserve the source database until you have verified the imported row count and search results.
+
+</div>
+
+For supported dump options and storage-format restrictions, see the [Milvus Lite export reference](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#dump-data).
 
 ## What's next
 
-Having connected to Milvus Lite, you can:
+Continue with these tasks:
 
-- Check [Quickstart](quickstart.md) to see what Milvus can do.
-
-- Learn the basic operations of Milvus:
-  - [Manage Databases](manage_databases.md)
-  - [Manage Collections](manage-collections.md)
-  - [Manage Partitions](manage-partitions.md)
-  - [Insert, Upsert & Delete](insert-update-delete.md)
-  - [Single-Vector Search](single-vector-search.md)
-  - [Hybrid Search](multi-vector-search.md)
-
-- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
-- [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvus cluster on clouds:
-  - [Amazon EKS](eks.md)
-  - [Google Cloud](gcp.md)
-  - [Microsoft Azure](azure.md)
-- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
-- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
-- [Monitor Milvus with Prometheus](monitor.md).
+- [Quickstart](quickstart.md): generate embeddings and run a search workflow.
+- [Single-Vector Search](single-vector-search.md) and [Hybrid Search](multi-vector-search.md): design queries for your application.
+- [Choose a deployment](install-overview.md): move beyond local development.
+- [Attu](https://github.com/zilliztech/attu): explore the Milvus GUI for a remote deployment.

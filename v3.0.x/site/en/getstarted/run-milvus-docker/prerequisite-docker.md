@@ -23,17 +23,24 @@ Before installing a Milvus Standalone instance, check your hardware and software
 
 | Operating system           | Software                                                     | Note                                                         |
 | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| macOS 10.14 or later       | Docker Desktop                                               | Set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail. <br/>See [Install Docker Desktop on Mac](https://docs.docker.com/desktop/mac/install/) for more information. |
-| Linux platforms            | <ul><li>Docker 19.03 or later</li><li>Docker Compose 1.25.1 or later</li></ul> | See [Install Docker Engine](https://docs.docker.com/engine/install/) and [Install Docker Compose](https://docs.docker.com/compose/install/) for more information. |
-| Windows with WSL 2 enabled | Docker Desktop                                               | We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/windows/install/#wsl-2-backend) for more information. |
+| macOS supported by Docker Desktop | Docker Desktop                                               | Allocate at least 8 GB of memory to the Docker virtual machine (VM) and size its CPUs according to the hardware recommendations above. <br/>See [Install Docker Desktop on Mac](https://docs.docker.com/desktop/setup/install/mac-install/) for more information. |
+| Linux platforms            | <ul><li>Docker 19.03 or later</li><li>Docker Compose plugin V2 or later (for Compose deployments)</li></ul> | See [Install Docker Engine](https://docs.docker.com/engine/install/) and [Install Docker Compose](https://docs.docker.com/compose/install/) for more information. |
+| Windows with WSL 2 enabled | Docker Desktop                                               | We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See [Install Docker Desktop on Windows with WSL 2 backend](https://docs.docker.com/desktop/features/wsl/) for more information. |
 
-The following dependencies will be obtained and configured automatically when Milvus Standalone is installed using the Docker script, or the Docker Compose configuration:
-| Software | Version                       | Note |
-| -------- | ----------------------------- | ---- |
-| etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
-| MinIO    |  RELEASE.2024-12-18T13-15-44Z | |
-| Woodpecker | Bundled with Milvus | Default message queue (embedded); no separate service to install. |
-| Pulsar   | 2.8.2                         | Optional — only if you switch the message queue to Pulsar; not installed by default. |
+The Compose guides use `docker compose`, not the legacy `docker-compose` V1 command. Verify the plugin before following them:
+
+```bash
+docker compose version
+```
+
+The installation method determines how dependencies are provided. Use the image versions pinned in the downloaded script or Compose file:
+
+| Component | Docker script | Docker Compose |
+| --------- | ------------- | -------------- |
+| etcd | Embedded in the Milvus container | Separate container; see [additional disk requirements](#Additional-disk-requirements). |
+| Object storage | Local filesystem; no MinIO container | MinIO container with its image pinned in the Compose file |
+| Woodpecker | Bundled with Milvus; local-filesystem WAL backend | Bundled with Milvus; MinIO/object-storage WAL backend |
+| Pulsar | Optional external service; not installed by default | Optional external service; not installed by default |
 
 ### Additional disk requirements
 

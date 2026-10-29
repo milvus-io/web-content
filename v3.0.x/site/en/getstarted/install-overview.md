@@ -1,18 +1,24 @@
 ---
 id: install-overview.md
-summary: Milvus is a highly performant, scalable vector database. It supports use cases of a wide range of sizes, from demos running locally in Jupyter Notebooks to massive-scale Kubernetes clusters handling tens of billions of vectors. Currently, there are three Milvus deployment options_ Milvus Lite, Milvus Standalone, and Milvus Distributed.
+summary: Choose Milvus Lite, Standalone, or Distributed based on your workload, availability requirements, and operating environment.
 title: Overview of Milvus Deployment Options
 ---
 
 # Overview of Milvus Deployment Options
 
-Milvus is a highly performant, scalable vector database. It supports use cases of a wide range of sizes, from demos running locally in Jupyter Notebooks to massive-scale Kubernetes clusters handling tens of billions of vectors. Currently, there are three Milvus deployment options: Milvus Lite, Milvus Standalone, and Milvus Distributed.
+Milvus supports local prototypes and large-scale vector search services. Choose among Milvus Lite, Milvus Standalone, and Milvus Distributed based on your data, read and write load, availability requirements, and operating environment.
 
 ## Milvus Lite
 
 [Milvus Lite](https://milvus.io/docs/milvus_lite.md) is a Python library that can be imported into your applications. As a lightweight version of Milvus, it is ideal for quick prototyping in Jupyter Notebooks or running on smart devices with limited resources. Milvus Lite supports the same APIs as other Milvus deployments. The client-side code interacting with Milvus Lite can also work with Milvus instances in other deployment modes.
 
-To integrate Milvus Lite into your applications, run `pip install pymilvus` to install it and use the `MilvusClient("./demo.db")` statement to instantiate a vector database with a local file that persists all your data. For more details, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+For the local examples, use Python 3.10 or later and install the optional Lite dependency explicitly. On Windows, pip skips the `milvus-lite` extra, so the explicit package name is required:
+
+```bash
+python3 -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
+```
+
+Use `MilvusClient("./demo.db")` to open local storage. Milvus Lite 3.x creates a directory at this path; an existing Milvus Lite 2.x database file requires export and migration. See [Run Milvus Lite](milvus_lite.md) for platform requirements and [Quickstart](quickstart.md) for a complete insert-and-search example.
 
 ## Milvus Standalone
 
@@ -28,11 +34,11 @@ The selection of a deployment mode typically depends on the development stage of
 
 - **For Quick Prototyping**
 
-    If you would like to quickly build something as a prototype or for learning purposes, such as Retrieval Augmented Generation (RAG) demos, AI chatbots, multi-modality search, Milvus Lite itself or a combination of Milvus Lite and Milvus Standalone is suitable. You can use Milvus Lite in notebooks for rapid prototyping and explore various approaches such as different chunking strategies in RAG. You may want to deploy the application built with Milvus Lite in a small-scale production to serve real users, or validating the idea on larger datasets, say more than a few millions of vectors. Milvus Standalone is appropriate. The application logic for Milvus Lite can still be shared as all Milvus deployments have the same client side API. The data stored in Milvus Lite can also be ported to Milvus Standalone with a command line tool.
+    Use Milvus Lite in a notebook to test embeddings, RAG chunking strategies, and retrieval behavior. Move to Milvus Standalone when you need a shared server or when the measured memory and query load exceed the local environment. The client API is similar, but check feature differences and migrate the stored data separately.
 
 - **Small-Scale Production Deployment**
 
-    For early-stage production, when the project is still seeking product-market fit and agility is more important than scalability, Milvus Standalone is the best choice. It can still scale up to 100M vectors given enough machine resource, while requiring much less DevOps than maintaining a K8s cluster. 
+    Use Milvus Standalone when a single server can meet your workload and availability requirements, and you prefer to operate without Kubernetes. Estimate memory from vector dimensions, scalar fields, index settings, and replicas, then benchmark the expected query concurrency and write rate. A vector count alone does not establish capacity.
 
 - **Large-Scale Production Deployment**
 
@@ -44,23 +50,27 @@ The selection of a deployment mode typically depends on the development stage of
 
 The choice of Milvus deployment mode depends on your project's stage and scale. Milvus provides a flexible and powerful solution for various needs, from rapid prototyping to large-scale enterprise deployment.
 
-- **Milvus Lite** is recommended for smaller datasets, up to a few million vectors.
-- **Milvus Standalone** is suitable for medium-sized datasets, scaling up to 100 million vectors.
-- **Milvus Distributed** is designed for large-scale deployments, capable of handling datasets from 100 million up to tens of billions of vectors.
+- **Milvus Lite** fits local evaluation and workloads within a single application's resources.
+- **Milvus Standalone** provides a shared service when one server meets your measured capacity and availability requirements.
+- **Milvus Distributed** provides component-level scaling and redundancy when you need to grow beyond one server or isolate read and write resources.
 
-Regardless of the deployment mode, every Milvus instance relies on a message queue, object storage, and a metadata store — by default **Woodpecker**, **MinIO**, and **etcd**. To learn about these dependencies, tune them, or connect external services, see [Data Infrastructure](data-infra-integration-overview.md).
+Milvus Standalone and Distributed use a message queue, object storage, and a metadata store. Milvus Lite runs locally without those separate services. For the server deployments' default dependencies and external service options, see [Data Infrastructure](data-infra-integration-overview.md).
+
+If you want a managed service instead of operating the server infrastructure, consider [Zilliz Cloud](https://zilliz.com/cloud). For a hands-on deployment, continue with [Docker](install_standalone-docker.md) or [Kubernetes](install_cluster-milvusoperator.md).
 
 ![Select deployment option for your use case](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png)
 
 ## Comparison on functionalities
 
+The Lite column describes Milvus Lite 3.2.2. Check [Milvus Lite limits](milvus_lite.md#Supported-features-and-limits) before relying on a server feature in a local application.
+
 | Feature                  | Milvus Lite                                                                                                                           | Milvus Standalone                                                                                                                     | Milvus Distributed                                                                                                                    |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| SDK / Client Lirary      | Python<br/>gRPC                                                                                                                       | Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful                                                                                 | Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful                                                                                 |
-| Data types               | Dense Vector<br/>Sparse Vector<br/>Binary Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            | Dense Vector<br/>Sparse Vector<br/>Binary Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            | Dense Vector<br/>Sparse Vector<br/>Binary Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            |
+| SDK / client library | Python (local PyMilvus adapter) | Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful                                                                                 | Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful                                                                                 |
+| Data types               | Dense Vector<br/>Sparse Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            | Dense Vector<br/>Sparse Vector<br/>Binary Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            | Dense Vector<br/>Sparse Vector<br/>Binary Vector<br/>Boolean<br/>Integer<br/>Floating Point<br/>VarChar<br/>Array<br/>JSON            |
 | Search capabilities      | Vector Search (ANN Search)<br/>Metadata Filtering<br/>Range Search<br/>Scalar Query<br/>Get Entities by Primary Key<br/>Hybrid Search | Vector Search (ANN Search)<br/>Metadata Filtering<br/>Range Search<br/>Scalar Query<br/>Get Entities by Primary Key<br/>Hybrid Search | Vector Search (ANN Search)<br/>Metadata Filtering<br/>Range Search<br/>Scalar Query<br/>Get Entities by Primary Key<br/>Hybrid Search |
 | CRUD operations          | ✔️                                                                                                                                    | ✔️                                                                                                                                    | ✔️                                                                                                                                    |
-| Advanced data management | N/A                                                                                                                                   | Access Control<br/>Partition<br/>Partition Key                                                                                        | Access Control<br/>Partition<br/>Partition Key<br/>Physical Resource Grouping                                                         |
-| Consistency Levels       | Strong                                                                                                                                | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 |
+| Advanced data management | Databases<br/>Partitions<br/>Aliases<br/>No access control | Access Control<br/>Partition<br/>Partition Key                                                                                        | Access Control<br/>Partition<br/>Partition Key<br/>Physical Resource Grouping                                                         |
+| Consistency Levels       | Not applicable: a single local process serves all requests; `consistency_level` is accepted but has no effect | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 | Strong<br/>Bounded Staleness<br/>Session<br/>Eventual                                                                                 |
 | Message queue            | N/A                                                                                                                                   | Woodpecker (embedded)                                                                                                                 | Woodpecker (service)                                                                                                                 |
 

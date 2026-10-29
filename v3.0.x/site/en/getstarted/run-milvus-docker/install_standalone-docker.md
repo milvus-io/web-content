@@ -19,11 +19,14 @@ This page illustrates how to launch a Milvus instance in Docker.
 
 ## Install Milvus in Docker
 
-Milvus provides an installation script to install it as a docker container. The script is available in the [Milvus repository](https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh). To install Milvus in Docker, just run
+Milvus provides an installation script to install it as a Docker container. The script is available in the [Milvus repository](https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh). Download and inspect the script before starting a new deployment:
 
 ```shell
 # Download the installation script
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+
+# Inspect the Docker image selected by the script
+$ grep -n "milvusdb/milvus:" standalone_embed.sh
 
 # Start the Docker container
 $ bash standalone_embed.sh start
@@ -31,14 +34,11 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-**What's new in v3.0.3:**
-- **Streaming Node**: Enhanced data processing capabilities
-- **Woodpecker MQ (default)**: This Docker deployment runs Woodpecker as the message queue with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
-- **Optimized Architecture**: Consolidated components for better performance
+The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.3. To install that exact release, use the versioned configuration in [Run Milvus with Docker Compose](install_standalone-docker-compose.md).
 
-Always download the latest script to ensure you get the most recent configurations and architecture improvements.
+This Docker deployment runs **Woodpecker** with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 
-If you want to use [Backup](https://milvus.io/docs/milvus_backup_overview.md) in standalone deployment mode, it is recommended to use the [Docker Compose](https://milvus.io/docs/install_standalone-docker-compose.md) deployment method.
+If you want to use [Backup](milvus_backup_overview.md) in standalone deployment mode, it is recommended to use the [Docker Compose](install_standalone-docker-compose.md) deployment method.
 
 If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
 
@@ -50,6 +50,15 @@ After running the installation script:
 - An embed etcd is installed along with Milvus in the same container and serves at port **2379**. Its configuration file is mapped to **embedEtcd.yaml** in the current folder.
 - To change the default Milvus configuration, add your settings to the **user.yaml** file in the current folder and then restart the service.
 - The Milvus data volume is mapped to **volumes/milvus** in the current folder.
+
+Verify the actual image and health status:
+
+```bash
+docker inspect --format '{{.Config.Image}}' milvus-standalone
+docker inspect --format '{{.State.Health.Status}}' milvus-standalone
+```
+
+Wait for `healthy` before following [Quickstart](quickstart.md). When using this server, connect the SDK to `http://localhost:19530`; a local `.db` URI starts Milvus Lite instead.
 
 You can access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
@@ -75,24 +84,9 @@ For applicable configuration items, refer to [System Configuration](system_confi
 
 ## Upgrade Milvus
 
-You can upgrade to the latest version of Milvus using the built-in upgrade command. This automatically downloads the latest configuration and Milvus image:
+The script's `upgrade` command downloads the script from `master` and recreates the container using the image selected by that script. It does not validate a supported source-to-target version path and can recreate generated configuration files. Do not treat it as a guarantee that an arbitrary older deployment can upgrade safely to v3.0.3.
 
-```shell
-# Upgrade Milvus to the latest version
-$ bash standalone_embed.sh upgrade
-```
-
-<div class="alert note">
-
-The upgrade command automatically:
-- Downloads the latest installation script with updated configurations
-- Pulls the latest Milvus Docker image
-- Restarts the container with the new version
-- Preserves your existing data and configurations
-
-This is the recommended way to upgrade your Milvus standalone deployment.
-
-</div>
+Before an upgrade, back up metadata, persistent data, `embedEtcd.yaml`, and `user.yaml`. Check the target version, message queue, and storage compatibility, and validate recovery in a non-production environment. For deployments managed with Docker Compose, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md); do not apply that procedure directly to a script-managed container.
 
 ## Stop and delete Milvus
 
@@ -135,7 +129,7 @@ Having installed Milvus in Docker, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Hybrid Search](multi-vector-search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
+- Review the upgrade considerations on this page before changing the Milvus version.
 - [Scale your Milvus cluster](scaleout.md).
 - Deploy your Milvu cluster on clouds:
   - [Amazon EKS](eks.md)

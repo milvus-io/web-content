@@ -10,252 +10,164 @@ title: Run Milvus in Docker (Windows)
 
 > By default, this deployment runs **Woodpecker** (local filesystem) as its message queue, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 
-This page demonstrates how to run Milvus on Windows using Docker Desktop for Windows.​
+This page demonstrates how to run Milvus on Windows using Docker Desktop with the WSL 2 backend and Linux containers.
 
-## Prerequisites​
+## Prerequisites
 
-- [Install Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/).​
+- [Install Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/) and meet its Windows and hardware requirements.
+- [Install Windows Subsystem for Linux 2 (WSL 2)](https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command).
+- Start Docker Desktop, enable **Use the WSL 2 based engine**, and select Linux containers. For commands run inside a WSL distribution, also enable that distribution under **Settings** > **Resources** > **WSL Integration**. See [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/features/wsl/).
 
-- [Install Windows Subsystem for Linux 2 (WSL 2)](https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command).​
+Run the following checks in PowerShell or Windows Command Prompt before downloading the Milvus files:
 
-- Install Python 3.8+.​
+```powershell
+wsl --version
+docker info --format "{{.OSType}}"
+docker compose version
+```
 
-## Run Milvus in Docker​
+The Docker OS type must be `linux`. The Compose examples use the `docker compose` plugin (V2 or later), not the legacy `docker-compose` V1 command.
 
-Milvus provides an installation script to install it as a Docker container. Once you have installed Docker Desktop on Microsoft Windows, you can access the Docker CLI from PowerShell or Windows Command Prompt in **administrator** mode and from WSL 2. ​
+## Run Milvus in Docker
 
-### From PowerShell or Windows Command Prompt​
+Choose one of the following terminals. Run the commands in a writable working directory; the script stores configuration files and the `volumes` directory there.
 
-If you are more familiar with PowerShell or Windows Command Prompt, the command prompt is as follows.​
+The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.3. To deploy that exact release, use the versioned Docker Compose configuration below.
 
-1. Open Docker Desktop in administrator mode by right-clicking and selecting **Run as administrator**.​
+### From PowerShell
 
-2. Download the installation script and save it as `standalone.bat`.​
+Download the script, then start Milvus:
 
-    ```powershell
-    C:\>Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.bat" -OutFile standalone.bat
+.\standalone.bat start
+```
 
-    ```
+PowerShell requires the `.\` prefix to run a script from the working directory.
 
-3. Run the downloaded script to start Milvus as a Docker container.​
+### From Windows Command Prompt
 
-    ```powershell
-    C:\>standalone.bat start​
-    Wait for Milvus starting...​
-    Start successfully.​
-    To change the default Milvus configuration, edit user.yaml and restart the service.​
+Use `curl.exe` to download the script; `Invoke-WebRequest` is a PowerShell command and does not run in Command Prompt:
 
-    ```
+```bat
+curl.exe -fL "https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.bat" -o standalone.bat
+standalone.bat start
+```
 
-    After running the installation script:​
+After running either Windows command sequence:
 
-    - A docker container named **milvus-standalone** has been started at port **19530**.​
+- A Docker container named **milvus-standalone** serves port **19530**.
+- Embedded etcd runs in the same container on port **2379**. Its configuration file maps to **embedEtcd.yaml** in the working directory.
+- Milvus stores data in **volumes/milvus** in the working directory.
+- Configuration overrides belong in **user.yaml** in the working directory. Restart the container after changing them.
 
-    - An embed etcd is installed along with Milvus in the same container and serves at port **2379**. Its configuration file is mapped to **embedEtcd.yaml** in the current folder.​
+Check the image and container status in either terminal:
 
-    - The Milvus data volume is mapped to **volumes/milvus** in the current folder.​
+```powershell
+docker inspect --format "{{.Config.Image}}" milvus-standalone
+docker ps --filter name=milvus-standalone
+```
 
-    You can use the following commands to manage the Milvus container and stored data.​
+To stop Milvus from PowerShell, run `.\standalone.bat stop`; from Command Prompt, run `standalone.bat stop`. The `delete` command removes both the container and its stored data. Back up the data before using it.
 
-    ```powershell
-    # Stop Milvus​
-    C:\>standalone.bat stop​
-    Stop successfully.​
-    ​
-    # Delete Milvus container​
-    C:\>standalone.bat delete​
-    Delete Milvus container successfully. # Container has been removed.​
-    Delete successfully. # Data has been removed.​
+### From WSL 2
 
-    ```
+Open your installed WSL distribution from a Windows terminal:
 
-### From WSL 2​
+```powershell
+wsl
+```
 
-If you prefer to start Milvus using Linux commands and shell scripts on Windows, ensure that you already have installed the WSL 2 command. For details on how to install WSL 2 command, you can refer to this [Microsoft article](https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command).​
+In the WSL terminal, download the Linux script and start Milvus once:
 
-1. Start WSL 2.​
+```bash
+curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+bash standalone_embed.sh start
+```
 
-    ```powershell
-    C:\>wsl --install​
-    Ubuntu already installed.​
-    Starting Ubuntu...​
+To stop Milvus, run `bash standalone_embed.sh stop`. The `bash standalone_embed.sh delete` command removes the container, configuration, and data; back up the data before using it.
 
-    ```
+## Run Milvus with Docker Compose
 
-2. Download the installation script​
+Use the configuration attached to release v3.0.3. Run only the command sequence for your terminal.
 
-    ```bash
-    # Download the installation script​
-    $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
-    ​
-    # Start the Docker container​
-    $ bash standalone_embed.sh start​
+### From PowerShell
 
-    ```
+Download the configuration and start Milvus:
 
-3. Start Milvus as a docker container.​
+```powershell
+Invoke-WebRequest -Uri "https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml" -OutFile docker-compose.yml
+docker compose up -d
+docker compose ps
+```
 
-    ```bash
-    $ bash standalone_embed.sh start​
-    Wait for Milvus Starting...​
-    Start successfully.​
-    To change the default Milvus configuration, add your settings to the user.yaml file and then restart the service.​
+### From Windows Command Prompt
 
-    ```
+Download the configuration and start Milvus:
 
-    You can use the following commands to manage the Milvus container and stored data.​
+```bat
+curl.exe -fL "https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml" -o docker-compose.yml
+docker compose up -d
+docker compose ps
+```
 
-    ```bash
-    # Stop Milvus​
-    $ bash standalone_embed.sh stop​
-    Stop successfully.​
-    ​
-    # Delete Milvus data​
-    $ bash standalone_embed.sh delete​
-    Delete Milvus container successfully.​
-    Delete successfully.​
+### From WSL 2
 
-    ```
+Open your WSL distribution, then run the Linux commands:
 
-## Run Milvus with Docker Compose​
+```bash
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+docker compose up -d
+docker compose ps
+```
 
-Once you have installed Docker Desktop on Microsoft Windows, you can access the Docker CLI from the PowerShell or Windows Command Prompt in **administrator** mode. You can run Docker Compose either in PowerShell, Windows Command Prompt, or WSL 2 to start Milvus.​
+The configuration starts three long-running containers: **milvus-standalone**, **milvus-minio**, and **milvus-etcd**. It also runs the one-shot `milvus-volume-init` service to prepare data-directory ownership. Their data maps to **volumes/milvus**, **volumes/minio**, and **volumes/etcd** in the working directory. MinIO exposes ports **9000** and **9001**; Milvus exposes ports **19530** and **9091**. For configuration and lifecycle commands, see [Run Milvus with Docker Compose](install_standalone-docker-compose.md).
 
-### From PowerShell or Windows Command Prompt​
+## FAQs
 
-1. Open Docker Desktop in administrator mode by right-clicking and selecting **Run as administrator**.​
+### How can I deal with the `Docker Engine stopped` error?
 
-2. Run the following commands in PowerShell or Windows Command Prompt to download the Docker Compose configuration file for Milvus Standalone and start Milvus.​
+Milvus uses Linux containers. Check Docker Desktop and its WSL 2 backend before retrying the installation:
 
-    ```powershell
-    # Download the configuration file and rename it as docker-compose.yml​
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -OutFile docker-compose.yml​
-    ​
-    # Start Milvus​
-    C:\>docker compose up -d​
-    Creating milvus-etcd  ... done​
-    Creating milvus-minio ... done​
-    Creating milvus-standalone ... done​
-
-    ```
-
-    Depending on your network connection, downloading images for the Milvus installation may take a while. Once the containers named **milvus-standalone**, **milvus-minio**, and **milvus-etcd** are up, you can witness that ​
-
-    - The **milvus-etcd** container does not expose any ports to the host and maps its data to **volumes/etcd** in the current folder.​
-
-    - The **milvus-minio** container serves ports **9000** and **9001** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.​
-
-    - The **milvus-standalone** container serves ports **19530** locally with the default settings and maps its data to **volumes/milvus** in the current folder.​
-
-You can also call the Linux version of the Docker Compose commands if you have WSL 2 installed.​
-
-### From WSL 2​
-
-The procedure is similar to using Docker Compose to install Milvus in Linux systems.​
-
-1. Start WSL 2.​
+1. Enable hardware virtualization in BIOS/UEFI if **Task Manager** > **Performance** shows it is disabled. See the [Docker Desktop Windows requirements](https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements).
+2. Start Docker Desktop from the Windows Start menu and wait for its engine to run. Administrator privileges may be required to install or update WSL or for specific Docker Desktop installation modes; they are not a general requirement for running Linux containers with the WSL 2 backend.
+3. Check WSL from a Windows terminal. If it needs an update, run the update command with the privileges requested by Windows:
 
     ```powershell
-    C:\>wsl --install​
-    Ubuntu already installed.​
-    Starting Ubuntu...​
-
+    wsl --version
+    wsl --update
     ```
 
-2. Download the Milvus configuration file.​
-
-    ```shell
-    $ wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml​
-
-    ```
-
-3. Start Milvus.​
-
-    ```shell
-    $ sudo docker compose up -d​
-    ​
-    Creating milvus-etcd  ... done​
-    Creating milvus-minio ... done​
-    Creating milvus-standalone ... done​
-
-    ```
-
-## FAQs​
-
-### How can I deal with the `Docker Engine stopped` error?​
-
-Once you install Docker Desktop in Windows, you may encounter the `Docker Engine stopped` error if your computer are not configured properly. In this case, you may need to make the following checks:​
-
-1. Check whether virtualization is enabled.​
-
-    You can check whether virtualization is enabled by looking at the **Performance** tab in the **Task Manager**.​
-
-    ![Virtualization in Task Manager](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png)
-
-    If virtualization is disabled, you may need to check the BIOS settings of your motherboard firmware. The way to enable virtualization in BIOS settings varies with motherboard vendors. For the ASUS motherboard, for example, you can refer to [this article](https://www.asus.com/support/faq/1043786/) on enabling virtualization.​
-
-    Then, you need to restart your computer and enable Hyper-V. For details, refer to this [Microsoft article](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings).​
-
-2. Check whether the Docker Desktop Service has been started.​
-
-    You can run the following command to start the Docker Desktop Service.​
+4. Enable **Use the WSL 2 based engine** in Docker Desktop. If the Docker menu offers **Switch to Linux containers**, select it. Do not switch to Windows containers to troubleshoot a Milvus Linux image.
+5. Run the following check in the terminal you use for installation:
 
     ```powershell
-    C:\>net start com.docker.service​
-    The Docker for Windows Service service is starting.​
-    The Docker for Windows Service service was started successfully.​
-
+    docker info --format "{{.OSType}}"
     ```
 
-3. Check whether WSL has been installed properly.​
+    It must return `linux`. If it cannot connect to the daemon, follow [Docker Desktop troubleshooting](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) before rerunning the Milvus script. Starting `com.docker.service` alone does not establish that the WSL 2 Linux engine is running.
 
-    You can run the following command to install or update the WSL 2 command.​
+### How can I deal with WSL-related issues while deploying Milvus?
 
-    ```powershell
-    C:\>wsl --update​
-    Checking for updates.​
-    The most recent version of Windows Subsystem for Linux is already installed.​
+If you have encountered WSL-related issues while running Milvus from WSL 2, you may need to check whether you have configured Docker Desktop to use the WSL 2-based engine as follows:
 
-    ```
-
-4. Check whether Docker Daemon has been started.​
-
-    You need to go to the installation directory of Docker Desktop and run `.\DockerCli.exe -SwitchDaemon` to start Docker Daemon.​
-
-    ```powershell
-    C:\>cd "C:\Program Files\Docker\Docker"​
-    C:\Program Files\Docker\Docker>.\DockerCli.exe -SwitchDaemon​
-    Switching to windows engine: Post "http://ipc/engine/switch": open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
-
-    ```
-
-5. Check whether you have started Docker Desktop in **administrator** mode.​
-
-    Ensure that you have started Docker Desktop in administrator mode. To do so, right-click on **Docker Desktop** and choose **Run as administrator**.​
-
-    ![Start Docker Desktop as Administrator](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png)
-
-### How can I deal with WSL-related issues while deploying Milvus?​
-
-If you have encountered WSL-related issues while running Milvus from WSL 2, you may need to check whether you have configured Docker Desktop to use the WSL 2-based engine as follows:​
-
-1. Ensure that "Use the WSL 2 based engine" is checked in **Settings** > **General**. ​
+1. Ensure that "Use the WSL 2 based engine" is checked in **Settings** > **General**.
 
     ![Use the WSL 2 based engine in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png)
 
-2. Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: **Settings** > **Resources** > **WSL Integration**.​
+2. Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: **Settings** > **Resources** > **WSL Integration**.
 
     ![Select WSL 2 distributions in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png)
 
-### How can I deal with the volume-related errors prompted during Milvus startup that reads `Read config failed`?​
+### How can I deal with the volume-related errors prompted during Milvus startup that reads `Read config failed`?
 
 ![Read config failed error prompt in Milvus startup](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png)
 
-To deal with the error prompted during Milvus startup that reads "Read config failed," you need to check whether the volume mounted into the Milvus container is correct. If the volume is correctly mounted into the container, you can use the `docker exec` command to go into the container and list the **/milvus/configs** folder as follows:​
+To deal with the error prompted during Milvus startup that reads "Read config failed," you need to check whether the volume mounted into the Milvus container is correct. If the volume is correctly mounted into the container, you can use the `docker exec` command to go into the container and list the **/milvus/configs** folder as follows:
 
 ![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
-​
+
 <div class="alert note">
 
 Storage V3 is disabled by default. Enable it before using features that depend on it. For requirements and compatibility considerations, see [Storage V3](storage-v3.md).
@@ -265,7 +177,9 @@ Storage V3 is disabled by default. Enable it before using features that depend o
 
 ## What's next
 
-Having installed Milvus in Docker, you can:
+Having installed Milvus in Docker, follow the **Use an existing Milvus server** path in [Quickstart](quickstart.md) and connect the SDK to `http://localhost:19530`. This server path does not need Milvus Lite; the local `.db` connection block would start a separate local database instead of using this container.
+
+You can also:
 
 - Check [Quickstart](quickstart.md) to see what Milvus can do.
 
@@ -277,7 +191,7 @@ Having installed Milvus in Docker, you can:
   - [Single-Vector Search](single-vector-search.md)
   - [Hybrid Search](multi-vector-search.md)
 
-- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
+- For Compose deployments, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md); validate the procedure in your environment before upgrading.
 - [Scale your Milvus cluster](scaleout.md).
 - Deploy your Milvu cluster on clouds:
   - [Amazon EKS](eks.md)

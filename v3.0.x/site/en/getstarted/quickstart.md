@@ -4,7 +4,7 @@ summary: Get started with Milvus.
 title: Quickstart
 ---
 
-# Quickstart with Milvus Lite
+# Quickstart
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
@@ -15,13 +15,19 @@ Milvus is an open-source vector database that suits AI applications of every siz
 
 ## Install Milvus
 
-In this guide we use Milvus Lite, a python library included in `pymilvus` that can be embedded into the client application. Milvus also supports deployment on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) for production use cases.
+Choose one path: use Milvus Lite for a local example, or connect to a Milvus server you have already deployed. Both paths use the collection and query examples below.
 
-Before starting, make sure you have Python 3.8+ available in the local environment. Install `pymilvus` which contains both the python client library and Milvus Lite:
+### Use a local database
 
-```python
-$ pip install -U pymilvus
+This guide uses Milvus Lite, an optional dependency of the PyMilvus Python SDK that runs locally. For a server deployment, see [Docker](install_standalone-docker.md) or [Kubernetes](install_cluster-milvusoperator.md).
+
+Use Python 3.10 or later on macOS, Linux, or Windows, with binary wheels available for Milvus Lite's dependencies such as `faiss-cpu` and `pyarrow`. The examples use PyMilvus 3.0.2 and Milvus Lite 3.2.2. Install both packages explicitly:
+
+```bash
+python3 -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
 ```
+
+On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2; the command above names `milvus-lite` explicitly, so the local path works there as well. For SDK-only installation requirements, see [Install Milvus Python SDK](install-pymilvus.md).
 
 <div class="alert note">
 
@@ -29,15 +35,43 @@ $ pip install -U pymilvus
 
 </div>
 
+### Use an existing Milvus server
+
+If you have already installed Milvus with Docker or Kubernetes, or have a Zilliz Cloud endpoint, install only the SDK. PyMilvus 3.0.2 requires Python 3.9 or later; you do not need the local Lite dependency for this path:
+
+```bash
+python3 -m pip install "pymilvus==3.0.2"
+```
+
+Use the server connection block in the next section instead of opening a `.db` path. Confirm that the SDK version is compatible with your server; see [Release Notes](release_notes.md).
+
 ## Set Up Vector Database
 
-To create a local Milvus vector database, simply instantiate a `MilvusClient` by specifying a file name to store all data, such as "milvus_demo.db".
+Choose exactly one connection block below.
+
+### Local Milvus Lite
+
+To create a local Milvus vector database, instantiate a `MilvusClient` with a storage path, such as `milvus_demo.db`. Milvus Lite 3.x creates a directory at this path, even when its name ends in `.db`.
+
+If you have a database file created by Milvus Lite 2.x, export it with the old version before migrating. Do not open that file directly with Milvus Lite 3.x. See [Migrating data from Milvus Lite](milvus_lite.md#Migrating-data-from-Milvus-Lite).
 
 ```python
 from pymilvus import MilvusClient
 
 client = MilvusClient("milvus_demo.db")
 ```
+
+### Existing Milvus server
+
+For a local Docker deployment, connect to its server endpoint. For Zilliz Cloud, replace the URI with the cluster endpoint and the token with your API key:
+
+```python
+from pymilvus import MilvusClient
+
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+```
+
+Use your configured credentials if you have changed them. The remaining examples use the `client` you selected; they do not require a separate local Lite database.
 
 ## Create a Collection
 
@@ -67,8 +101,8 @@ In this guide, we use vectors to perform semantic search on text. We need to gen
 
 First, install the model library. This package includes essential ML tools such as PyTorch. The package download may take some time if your local environment has never installed PyTorch.
 
-```python
-$ pip install "pymilvus[model]"
+```bash
+python3 -m pip install "pymilvus[model]==3.0.2"
 ```
 
 Generate vector embeddings with default model. Milvus expects data to be inserted organized as a list of dictionaries, where each dictionary represents a data record, termed as an entity.
@@ -125,7 +159,21 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 # Use fake representation with random vectors (768 dimension).
-vectors = [[random.uniform(-1, 1) for _ in range(768)] for _ in docs]
+# Keep the same interface as the model-backed path so the remaining examples run.
+class DemoEmbeddingFunction:
+    dim = 768
+
+    def __init__(self):
+        self.rng = random.Random(42)
+
+    def encode_documents(self, texts):
+        return [[self.rng.uniform(-1, 1) for _ in range(self.dim)] for _ in texts]
+
+    def encode_queries(self, texts):
+        return self.encode_documents(texts)
+
+embedding_fn = DemoEmbeddingFunction()
+vectors = embedding_fn.encode_documents(docs)
 data = [
     {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
     for i in range(len(vectors))
@@ -272,11 +320,14 @@ print(res)
 
 ## Load Existing Data
 
-Since all data of Milvus Lite is stored in a local file, you can load all data into memory even after the program terminates, by creating a `MilvusClient` with the existing file. For example, this will recover the collections from "milvus_demo.db" file and continue to write data into it.
+This section applies to the local Lite path. For a server deployment, reconnect with the same server URI and credentials instead.
+
+Milvus Lite persists data under its local storage path. Close the client before reopening the same path to continue using the existing collections:
 
 ```python
 from pymilvus import MilvusClient
 
+client.close()
 client = MilvusClient("milvus_demo.db")
 ```
 
@@ -291,13 +342,19 @@ client.drop_collection(collection_name="demo_collection")
 
 ## Learn More
 
+After completing the local example, choose a next step:
+
+- Build an application with [Retrieval Augmented Generation (RAG)](build-rag-with-milvus.md).
+- Design fields and filters for your own data with [Data Model Design for Search](schema-hands-on.md).
+- Compare local and server requirements with [Milvus Deployment Options](install-overview.md).
+
 Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
 ```python
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
-To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite).
+To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](milvus_lite.md#Migrating-data-from-Milvus-Lite).
 
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
 

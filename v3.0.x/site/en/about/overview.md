@@ -7,6 +7,8 @@ summary: Milvus is a high-performance, highly scalable vector database that runs
 
 # What is Milvus?
 
+Milvus is a vector database for storing embeddings and searching them together with structured metadata. Use it as the retrieval layer in applications such as RAG, semantic search, and agent memory: your application supplies the data, embedding model, and access rules, while Milvus stores, indexes, and retrieves the matching entities.
+
 <span>Milvus <span style="display: inline-block; vertical-align: middle;">
   <audio id="milvus-audio" style="display: none;">
     <source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
@@ -107,7 +109,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 - [JSON Support](use-json-fields.md)
 - [Array Support](array_data_type.md)
 - [Geolocation](geometry-field.md)
-- Text (under development)
+- [Text](text.md) (Milvus 3.0 and later; requires Storage V3)
 
 ### Why Milvus?
 
@@ -121,7 +123,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 - **Flexible Multi-tenancy and Hot/Cold Storage**
 
-  Milvus supports [multi-tenancy](multi_tenancy.md#Multi-tenancy-strategies) through isolation at database, collection, partition, or partition key level. The flexible strategies allow a single cluster to handle hundreds to millions of tenants, also ensures optimized search performance and flexible access control. Milvus enhances cost-effectiveness with hot/cold storage. Frequently accessed hot data can be stored in memory or on SSDs for better performance, while less-accessed cold data is kept on slower, cost-effective storage. This mechanism can significantly reduce costs while maintaining high performance for critical tasks.
+  Milvus supports [multi-tenancy](multi_tenancy.md#Multi-tenancy-strategies) through isolation at database, collection, partition, or partition key level. Choose an isolation strategy based on tenant count, access control, and workload. With [Tiered Storage](tiered-storage-overview.md), available in Milvus 2.6.4 and later, QueryNodes cache data from persistent object storage on demand. This can reduce local resource requirements, but a query that needs uncached data incurs additional I/O and can have higher latency. Configure [Warm Up](warm-up.md) and [eviction](eviction.md) for your access patterns, and measure both cold and warm queries.
 
 - **Sparse Vector for Full Text Search and Hybrid Search**
 
@@ -164,3 +166,12 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 - Vector Transmission Services (VTS)
   Milvus provides a set of tools for you to transfer your data between a Milvus instance and a bunch of data sources, including Zilliz clusters, Elasticsearch, Postgres (PgVector), and another Milvus instance. For details, refer to [VTS](https://github.com/zilliztech/vts).
+
+## Next steps
+
+Choose a guide based on the task you want to complete:
+
+- Run [Quickstart](quickstart.md) to create a collection, insert entities, and search them.
+- Use [Create Collection](create-collection.md) to define vector fields, primary keys, and metadata for your data.
+- Follow [Build RAG with Milvus](build-rag-with-milvus.md) to connect retrieval to an application.
+- Read [Index Explained](index-explained.md) to compare index trade-offs for your workload.
