@@ -41,7 +41,7 @@ HealthState
 
 - **ErrorCode** (*MilvusErrorCode*) -
 
-    The error code reported by the server.
+    The error code reported by the server. For the values of the `MilvusErrorCode` enumeration, refer to [MilvusErrorCode](MilvusErrorCode.md).
 
 - **Reasons** (*IReadOnlyList\<string\>?*) -
 
