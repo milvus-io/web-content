@@ -94,16 +94,11 @@ SearchResp results = await client.SearchAsync(request);
 
 - `RlsPrincipal` (*string?*) -
 
-
     The row-level security (RLS) principal for the operation. When set, Milvus applies the row policies of the collection to this operation.
 
 - `SkipRls` (*bool?*) -
 
     Whether the operation should skip row-level security (RLS) enforcement. When `null`, the server default applies.
-
-- `AggregationBuckets` (*IReadOnlyList\<IReadOnlyList\<AggregationBucket\>\>?*) -
-
-    The bucket-aggregation results, one inner list per query vector, populated when the request used `SearchAggregation`. See [AggregationBucket](AggregationBucket.md).
 
 **RETURN TYPE:**
 
@@ -133,6 +128,7 @@ SearchResp
     SingleResults      // -> IReadOnlyList<SingleResult>?
     HighlightResults   // -> IReadOnlyList<HighlightResult>?
     ElementIndices     // -> IReadOnlyList<long>?
+    AggregationBuckets // -> IReadOnlyList<IReadOnlyList<AggregationBucket>>?
 ```
 
 **PARAMETERS:**
@@ -208,6 +204,10 @@ SearchResp
 - **ElementIndices** (*IReadOnlyList\<long\>?*) -
 
     The element indices, populated for matched sub-struct elements when the search operated on array/struct fields. `null` when the server reported none.
+
+- **AggregationBuckets** (*IReadOnlyList\<IReadOnlyList\<AggregationBucket\>\>?*) -
+
+    The bucket-aggregation results, one inner list per query vector, populated when the request used `SearchAggregation`. See [AggregationBucket](AggregationBucket.md).
 
 **EXCEPTIONS:**
 

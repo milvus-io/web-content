@@ -7,14 +7,20 @@ public enum RowPolicyType
 {
     Unknown = 0,
     Permissive = 1,
-    Restrictive = 2,
+    Restrictive = 2
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Unknown** (0) -
+- **Unknown** (0)
 
-- **Permissive** (1) -
+    Unknown policy type. Returned when the server reports a type that has no mapped value.
 
-- **Restrictive** (2) -
+- **Permissive** (1)
+
+    Permissive policy type. A row matches when any permissive policy applies.
+
+- **Restrictive** (2)
+
+    Restrictive policy type. A row must match all restrictive policies.

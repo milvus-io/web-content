@@ -81,6 +81,14 @@ BulkImportResp response = await bulkImport.BulkImportAsync(request);
 
     The import options, e.g. `["format"] = "json"`. Entries are added via the collection-initializer syntax `Options = { ... }`.
 
+- `RlsPrincipal` (*string?*) -
+
+    The row-level security (RLS) principal for the import operation.
+
+- `SkipRls` (*bool?*) -
+
+    Whether the import operation should skip row-level security (RLS) enforcement. When `null`, the server default applies.
+
 **RETURN TYPE:**
 
 *Task\<BulkImportResp\>*

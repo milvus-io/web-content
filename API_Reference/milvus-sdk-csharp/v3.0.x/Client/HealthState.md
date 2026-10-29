@@ -40,18 +40,33 @@ public enum QuotaState
     ReadLimited = 2,
     WriteLimited = 3,
     DenyToRead = 4,
-    DenyToWrite = 5
+    DenyToWrite = 5,
+    DenyToDdl = 6
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Unknown** (0) - The quota state is unknown.
+- **Unknown** (0)
 
-- **ReadLimited** (2) - Reads are rate-limited.
+    The quota state is unknown.
 
-- **WriteLimited** (3) - Writes are rate-limited.
+- **ReadLimited** (2)
 
-- **DenyToRead** (4) - Reads are denied.
+    Reads are rate-limited.
 
-- **DenyToWrite** (5) - Writes are denied.
+- **WriteLimited** (3)
+
+    Writes are rate-limited.
+
+- **DenyToRead** (4)
+
+    Reads are denied.
+
+- **DenyToWrite** (5)
+
+    Writes are denied.
+
+- **DenyToDdl** (6)
+
+    DDL operations are denied.

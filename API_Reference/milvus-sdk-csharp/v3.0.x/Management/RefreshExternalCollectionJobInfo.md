@@ -17,7 +17,7 @@ public sealed class RefreshExternalCollectionJobInfo
 }
 ```
 
-**METHODS / PROPERTIES:**
+**PARAMETERS:**
 
 - `JobId` (*long*) -
 
@@ -54,7 +54,8 @@ public sealed class RefreshExternalCollectionJobInfo
 - `ExternalSpec` (*string*) -
 
     The external spec used for this job.
-# RefreshExternalCollectionState
+
+## RefreshExternalCollectionState
 
 This enum represents the state of an external-collection refresh job.
 
@@ -64,17 +65,24 @@ public enum RefreshExternalCollectionState
     Pending = 0,
     InProgress = 1,
     Completed = 2,
-    Failed = 3,
+    Failed = 3
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Pending** (0) -
+- **Pending** (0)
 
-- **InProgress** (1) -
+    The refresh job has been created but has not started running.
 
-- **Completed** (2) -
+- **InProgress** (1)
 
-- **Failed** (3) -
+    The refresh job is currently executing.
 
+- **Completed** (2)
+
+    The refresh job has completed successfully.
+
+- **Failed** (3)
+
+    The refresh job has failed.

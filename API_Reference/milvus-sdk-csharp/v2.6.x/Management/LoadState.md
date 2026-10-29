@@ -12,12 +12,20 @@ public enum LoadState
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **NotExist** (0) - The entity does not exist.
+- **NotExist** (0)
 
-- **NotLoad** (1) - The entity is not loaded.
+    The entity does not exist.
 
-- **Loading** (2) - The entity is being loaded.
+- **NotLoad** (1)
 
-- **Loaded** (3) - The entity is loaded.
+    The entity is not loaded.
+
+- **Loading** (2)
+
+    The entity is being loaded.
+
+- **Loaded** (3)
+
+    The entity is loaded.

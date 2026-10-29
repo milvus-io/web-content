@@ -1,4 +1,4 @@
-# SetRLSPrincipalTags
+# SetRLSPrincipalTagsAsync()
 
 Upserts the RLS principal tags for a principal on a collection.
 
@@ -11,17 +11,15 @@ public async Task SetRLSPrincipalTagsAsync(SetRLSPrincipalTagsReq request, Cance
 ```csharp
 var request = new SetRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
+    CollectionName = "my_collection",
+    PrincipalName = "user1",
+    Tags = new Dictionary<string, object?>
+    {
+        ["department"] = "engineering"
+    }
 };
 
-await client.SetRLSPrincipalTagsAsync(new SetRLSPrincipalTagsReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
-});
+await client.SetRLSPrincipalTagsAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -37,21 +35,46 @@ await client.SetRLSPrincipalTagsAsync(new SetRLSPrincipalTagsReq
 - `PrincipalName` (*string*) -
 
     The name of the principal whose tags are upserted.
+
+- `Tags` (*IDictionary\<string, object?\>*) -
+
+    The tag keys and values to upsert.
+
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
-using Milvus.Client.V2.Requests.Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Requests.Rls;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
 await client.SetRLSPrincipalTagsAsync(new SetRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
+    CollectionName = "my_collection",
+    PrincipalName = "user1",
+    Tags = new Dictionary<string, object?>
+    {
+        ["department"] = "engineering"
+    }
 });
 ```

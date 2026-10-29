@@ -1,6 +1,6 @@
 # FieldSchema
 
-Defines the schema of a single field in a `CollectionSchema`.
+Defines the schema of a single field in a [CollectionSchema](CollectionSchema.md).
 
 ```csharp
 public sealed class FieldSchema

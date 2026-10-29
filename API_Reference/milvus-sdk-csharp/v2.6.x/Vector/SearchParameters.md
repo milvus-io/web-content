@@ -125,8 +125,12 @@ public enum HighlightType
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Lexical** (0) - Lexical (BM25/keyword-based) highlighting. The server default.
+- **Lexical** (0)
 
-- **Semantic** (1) - Semantic (embedding-based) highlighting.
+    Lexical (BM25/keyword-based) highlighting. The server default.
+
+- **Semantic** (1)
+
+    Semantic (embedding-based) highlighting.

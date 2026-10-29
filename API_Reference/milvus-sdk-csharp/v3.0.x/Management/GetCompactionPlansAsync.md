@@ -22,46 +22,7 @@ GetCompactionPlansResp result = await client.GetCompactionPlansAsync(request);
 
 - `CompactionId` (*long*) -
 
-    The id of the compaction whose plans to retrieve.
-
-
-- `CompactionId` (*long?*) -
-
-    The overall compaction ID.
-
-- `CollectionName` (*string?*) -
-
-    The collection the compaction belongs to.
-
-- `Targets` (*IReadOnlyList\<long\>*) -
-
-    The target segment IDs produced by the compaction.
-
-Each **CompactionMergeInfo** additionally exposes the full per-task metadata:
-
-- `PlanId` (*long*) -
-
-    The compaction plan ID.
-
-- `TriggerId` (*long*) -
-
-    The trigger ID of the task.
-
-- `CollectionId` / `PartitionId` (*long*) -
-
-    The collection and partition the task compacts.
-
-- `Channel` (*string*) -
-
-    The channel the task compacts.
-
-- `CompactionType` - The compaction type. See [CompactionType](CompactionType.md).
-
-- `State` - The task state. See [CompactionTaskState](CompactionTaskState.md).
-
-- `FailureReason` (*string*) -
-
-    The failure reason when the task failed.
+    The ID of the compaction whose plans to retrieve.
 
 **RETURN TYPE:**
 
@@ -73,27 +34,73 @@ A **GetCompactionPlansResp** object that contains the state of the compaction an
 
 ```csharp
 GetCompactionPlansResp
-    State       // -> CompactionState
-    MergeInfos  // -> IReadOnlyList<CompactionMergeInfo>
+    CompactionId    // -> long?
+    CollectionName  // -> string?
+    State           // -> CompactionState
+    MergeInfos      // -> IReadOnlyList<CompactionMergeInfo>
 ```
 
 **PARAMETERS:**
 
+- **CompactionId** (*long?*) -
+
+    The ID of the compaction whose plans are reported, or `null` when the tasks were selected by collection name.
+
+- **CollectionName** (*string?*) -
+
+    The name of the collection the reported compaction tasks belong to, or `null` when the plans were selected by compaction ID.
+
 - **State** (*CompactionState*) -
 
-    The state of the compaction. See [CompactionState](CompactionState.md).
+    The aggregate state of the compaction. See [CompactionState](CompactionState.md).
 
 - **MergeInfos** (*IReadOnlyList\<CompactionMergeInfo\>*) -
 
-    The merge plans for the compaction: each entry maps the source segments onto a target segment. Each **CompactionMergeInfo** has the following members:
+    The merge plans for the compaction: each entry maps the source segments onto a target segment. Each **CompactionMergeInfo** exposes:
 
-    - **Sources** (*IReadOnlyList\<long\>*) -
+    - `Sources` (*IReadOnlyList\<long\>*) -
 
         The segment IDs that are merged as part of this plan.
 
-    - **Target** (*long*) -
+    - `Target` (*long*) -
 
         The target segment ID produced by this merge.
+
+    - `Targets` (*IReadOnlyList\<long\>*) -
+
+        The complete set of target segments produced by this compaction, which may be larger than the single legacy `Target`.
+
+    - `PlanId` (*long*) -
+
+        The server-side compaction task identifier.
+
+    - `TriggerId` (*long*) -
+
+        The ID of the compaction that triggered this plan.
+
+    - `CollectionId` (*long*) -
+
+        The ID of the collection being compacted.
+
+    - `PartitionId` (*long*) -
+
+        The ID of the partition being compacted.
+
+    - `Channel` (*string*) -
+
+        The channel on which the compaction was scheduled.
+
+    - `CompactionType` (*CompactionType*) -
+
+        The type of the compaction task. See [CompactionType](CompactionType.md).
+
+    - `State` (*CompactionTaskState*) -
+
+        The state of the compaction task. See [CompactionTaskState](CompactionTaskState.md).
+
+    - `FailureReason` (*string*) -
+
+        The failure reason of the compaction task, empty when it did not fail.
 
 **EXCEPTIONS:**
 

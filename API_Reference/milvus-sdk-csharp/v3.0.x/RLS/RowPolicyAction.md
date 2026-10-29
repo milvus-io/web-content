@@ -13,23 +13,44 @@ public enum RowPolicyAction
     Upsert = 4,
     QueryIterator = 5,
     SearchIterator = 6,
+    HybridSearch = 7
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Unknown** (-1) -
+- **Unknown** (-1)
 
-- **Query** (0) -
+    Unknown action. Returned when the server reports an action code that has no mapped value.
 
-- **Search** (1) -
+- **Query** (0)
 
-- **Insert** (2) -
+    Query action.
 
-- **Delete** (3) -
+- **Search** (1)
 
-- **Upsert** (4) -
+    Search action.
 
-- **QueryIterator** (5) -
+- **Insert** (2)
 
-- **SearchIterator** (6) -
+    Insert action.
+
+- **Delete** (3)
+
+    Delete action.
+
+- **Upsert** (4)
+
+    Upsert action.
+
+- **QueryIterator** (5)
+
+    Query iterator action.
+
+- **SearchIterator** (6)
+
+    Search iterator action.
+
+- **HybridSearch** (7)
+
+    Hybrid search action.

@@ -1,4 +1,4 @@
-# RefreshExternalCollection
+# RefreshExternalCollectionAsync()
 
 Refreshes an external collection from its external data source.
 
@@ -11,19 +11,10 @@ public async Task<RefreshExternalCollectionResp> RefreshExternalCollectionAsync(
 ```csharp
 var request = new RefreshExternalCollectionReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    ExternalSource = null,
-    ExternalSpec = null,
+    CollectionName = "my_collection"
 };
 
-var resp = await client.RefreshExternalCollectionAsync(new RefreshExternalCollectionReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-    ExternalSource = null,
-    ExternalSpec = null,
-});
+RefreshExternalCollectionResp result = await client.RefreshExternalCollectionAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -46,7 +37,7 @@ var resp = await client.RefreshExternalCollectionAsync(new RefreshExternalCollec
 
 **RETURN TYPE:**
 
-*RefreshExternalCollectionResp*
+*Task\<RefreshExternalCollectionResp\>*
 
 **RETURNS:**
 
@@ -56,22 +47,29 @@ A **RefreshExternalCollectionResp** object.
 
     The refresh job ID, which can be passed to `GetRefreshExternalCollectionProgressAsync()` to poll progress.
 
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
-var resp = await client.RefreshExternalCollectionAsync(new RefreshExternalCollectionReq
+RefreshExternalCollectionResp result = await client.RefreshExternalCollectionAsync(new RefreshExternalCollectionReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    ExternalSource = null,
-    ExternalSpec = null,
+    CollectionName = "my_collection"
 });
 ```

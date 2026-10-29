@@ -1,4 +1,4 @@
-# DropRowPolicy
+# DropRowPolicyAsync()
 
 Drops a row policy from a collection.
 
@@ -11,17 +11,11 @@ public async Task DropRowPolicyAsync(DropRowPolicyReq request, CancellationToken
 ```csharp
 var request = new DropRowPolicyReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PolicyName = "value",
+    CollectionName = "my_collection",
+    PolicyName = "policy_1"
 };
 
-await client.DropRowPolicyAsync(new DropRowPolicyReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-    PolicyName = "value",
-});
+await client.DropRowPolicyAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -38,6 +32,20 @@ await client.DropRowPolicyAsync(new DropRowPolicyReq
 
     The name of the row policy to drop.
 
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
@@ -47,12 +55,14 @@ using Milvus.Client.V2.Requests.Rls;
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
 await client.DropRowPolicyAsync(new DropRowPolicyReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PolicyName = "value",
+    CollectionName = "my_collection",
+    PolicyName = "policy_1"
 });
 ```

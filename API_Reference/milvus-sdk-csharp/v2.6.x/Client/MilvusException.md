@@ -1,6 +1,6 @@
 # MilvusException
 
-The exception thrown by `MilvusClientV2` for errors related to the Milvus client.
+The exception thrown by [MilvusClientV2](MilvusClientV2.md) for errors related to the Milvus client.
 
 ```csharp
 public sealed class MilvusException : Exception
@@ -52,22 +52,6 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 - `GrpcStatusCode` (*Grpc.Core.StatusCode?*) -
 
     The underlying gRPC status code, when this exception wraps a transport-level `RpcException`. `null` for server-returned errors.
-
-## MilvusErrorCode
-
-The [MilvusErrorCode](MilvusErrorCode.md) enumeration classifies the error returned in `ErrorCode`.
-
-| Constant | Value |
-|---|---|
-| **Success** | 0 |
-| **UnexpectedError** | 1 |
-| **RateLimit** | 8 |
-| **ServiceQuotaExceeded** | 9 |
-| **LegacyRateLimit** | 49 |
-| **CollectionNotFound** | 100 |
-| **SchemaMismatch** | 109 |
-| **SegmentNotFound** | 600 |
-| **IndexNotFound** | 700 |
 
 ## Example
 

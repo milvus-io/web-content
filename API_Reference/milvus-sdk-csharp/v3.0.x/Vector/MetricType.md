@@ -22,32 +22,60 @@ public enum MetricType
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Invalid** (0) - An invalid metric type.
+- **Invalid** (0)
 
-- **L2** (1) - Squared Euclidean distance (smaller is more similar). For float vectors.
+    An invalid metric type.
 
-- **Ip** (2) - Inner product (larger is more similar). For float vectors.
+- **L2** (1)
 
-- **Cosine** (3) - Cosine similarity (larger is more similar). For float vectors.
+    Squared Euclidean distance (smaller is more similar). For float vectors.
 
-- **Hamming** (4) - Hamming distance (smaller is more similar). For binary vectors.
+- **Ip** (2)
 
-- **Jaccard** (5) - Jaccard distance (smaller is more similar). For binary vectors.
+    Inner product (larger is more similar). For float vectors.
 
-- **MhJaccard** (6) - Modified Jaccard distance (smaller is more similar). For binary vectors.
+- **Cosine** (3)
 
-- **Bm25** (7) - The BM25 ranking metric for full-text search on sparse vectors. Only valid for sparse float vectors; larger BM25 scores are more similar.
+    Cosine similarity (larger is more similar). For float vectors.
 
-- **MaxSim** (8) - Max-sim cosine similarity (larger is more similar). Equal to `MaxSimCosine`. Applies to float vectors stored inside a struct field.
+- **Hamming** (4)
 
-- **MaxSimCosine** (9) - Max-sim cosine similarity (larger is more similar). Applies to float vectors inside a struct field.
+    Hamming distance (smaller is more similar). For binary vectors.
 
-- **MaxSimIp** (10) - Max-sim inner product. Applies to float vectors inside a struct field.
+- **Jaccard** (5)
 
-- **MaxSimL2** (11) - Max-sim squared Euclidean distance. Applies to float vectors inside a struct field.
+    Jaccard distance (smaller is more similar). For binary vectors.
 
-- **MaxSimJaccard** (12) - Max-sim Jaccard similarity (larger is more similar). Applies to binary vectors inside a struct field.
+- **MhJaccard** (6)
 
-- **MaxSimHamming** (13) - Max-sim Hamming similarity (smaller is more similar). Applies to binary vectors inside a struct field.
+    Modified Jaccard distance (smaller is more similar). For binary vectors.
+
+- **Bm25** (7)
+
+    The BM25 ranking metric for full-text search on sparse vectors. Only valid for sparse float vectors; larger BM25 scores are more similar.
+
+- **MaxSim** (8)
+
+    Max-sim cosine similarity (larger is more similar). Equal to `MaxSimCosine`. Applies to float vectors stored inside a struct field.
+
+- **MaxSimCosine** (9)
+
+    Max-sim cosine similarity (larger is more similar). Applies to float vectors inside a struct field.
+
+- **MaxSimIp** (10)
+
+    Max-sim inner product. Applies to float vectors inside a struct field.
+
+- **MaxSimL2** (11)
+
+    Max-sim squared Euclidean distance. Applies to float vectors inside a struct field.
+
+- **MaxSimJaccard** (12)
+
+    Max-sim Jaccard similarity (larger is more similar). Applies to binary vectors inside a struct field.
+
+- **MaxSimHamming** (13)
+
+    Max-sim Hamming similarity (smaller is more similar). Applies to binary vectors inside a struct field.

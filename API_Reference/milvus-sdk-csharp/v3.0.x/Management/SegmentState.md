@@ -16,23 +16,39 @@ public enum SegmentState
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **None** (0) - Default value, not set.
+- **None** (0)
 
-- **NotExist** (1) - The segment no longer exists.
+    Default value, not set.
 
-- **Growing** (2) - The segment is being built or loaded.
+- **NotExist** (1)
 
-- **Sealed** (3) - The segment is sealed and searchable.
+    The segment no longer exists.
 
-- **Flushed** (4) - The segment has been flushed to storage.
+- **Growing** (2)
 
-- **Flushing** (5) - The segment is currently being flushed.
+    The segment is being built or loaded.
 
-- **Dropped** (6) - The segment has been dropped.
+- **Sealed** (3)
 
-- **Importing** (7) - The segment is being imported.
+    The segment is sealed and searchable.
+
+- **Flushed** (4)
+
+    The segment has been flushed to storage.
+
+- **Flushing** (5)
+
+    The segment is currently being flushed.
+
+- **Dropped** (6)
+
+    The segment has been dropped.
+
+- **Importing** (7)
+
+    The segment is being imported.
 
 The level of a segment.
 
@@ -46,12 +62,20 @@ public enum SegmentLevel
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Legacy** (0) - Legacy level, zero value.
+- **Legacy** (0)
 
-- **L0** (1) - L0 segment: contains delta data for the current channel.
+    Legacy level, zero value.
 
-- **L1** (2) - L1 segment: normal segment, with no extra compaction attribute.
+- **L0** (1)
 
-- **L2** (3) - L2 segment: segment with extra data distribution info.
+    L0 segment: contains delta data for the current channel.
+
+- **L1** (2)
+
+    L1 segment: normal segment, with no extra compaction attribute.
+
+- **L2** (3)
+
+    L2 segment: segment with extra data distribution info.

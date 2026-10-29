@@ -1,4 +1,4 @@
-# DeleteRLSPrincipalTags
+# DeleteRLSPrincipalTagsAsync()
 
 Deletes the RLS principal tags of a principal on a collection.
 
@@ -11,19 +11,12 @@ public async Task DeleteRLSPrincipalTagsAsync(DeleteRLSPrincipalTagsReq request,
 ```csharp
 var request = new DeleteRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
-    TagKeys = null,
+    CollectionName = "my_collection",
+    PrincipalName = "user1",
+    TagKeys = ["department"]
 };
 
-await client.DeleteRLSPrincipalTagsAsync(new DeleteRLSPrincipalTagsReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
-    TagKeys = null,
-});
+await client.DeleteRLSPrincipalTagsAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -40,25 +33,42 @@ await client.DeleteRLSPrincipalTagsAsync(new DeleteRLSPrincipalTagsReq
 
     The name of the principal whose tags are deleted.
 
-- `TagKeys` (*IReadOnlyList<string>?*) -
+- `TagKeys` (*IReadOnlyList\<string\>?*) -
 
     The tag keys to delete. An empty or null list deletes all tags of the principal.
+
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
-using Milvus.Client.V2.Requests.Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Requests.Rls;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
 await client.DeleteRLSPrincipalTagsAsync(new DeleteRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
-    TagKeys = null,
+    CollectionName = "my_collection",
+    PrincipalName = "user1",
+    TagKeys = ["department"]
 });
 ```

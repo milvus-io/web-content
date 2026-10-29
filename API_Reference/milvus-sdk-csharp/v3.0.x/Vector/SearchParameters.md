@@ -63,8 +63,6 @@ public sealed class SearchParameters
 
     Whether to retain the original order when paging results.
 
-
-
 - `Offset` (*int?*) -
 
     The number of entities to skip during the search. The sum of this value and the search limit must be between 1 and 16384.
@@ -159,8 +157,12 @@ public enum HighlightType
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Lexical** (0) - Lexical (BM25/keyword-based) highlighting. The server default.
+- **Lexical** (0)
 
-- **Semantic** (1) - Semantic (embedding-based) highlighting.
+    Lexical (BM25/keyword-based) highlighting. The server default.
+
+- **Semantic** (1)
+
+    Semantic (embedding-based) highlighting.

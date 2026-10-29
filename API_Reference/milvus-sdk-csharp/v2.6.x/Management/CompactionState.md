@@ -11,10 +11,16 @@ public enum CompactionState
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **UndefinedState** (0) - The compaction state is undefined.
+- **UndefinedState** (0)
 
-- **Executing** (1) - The compaction is currently executing.
+    The compaction state is undefined.
 
-- **Completed** (2) - The compaction has completed.
+- **Executing** (1)
+
+    The compaction is currently executing.
+
+- **Completed** (2)
+
+    The compaction has completed.

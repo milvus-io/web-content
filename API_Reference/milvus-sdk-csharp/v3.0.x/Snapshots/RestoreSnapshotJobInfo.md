@@ -17,13 +17,13 @@ public sealed class RestoreSnapshotJobInfo
 }
 ```
 
-**METHODS / PROPERTIES:**
+**PARAMETERS:**
 
 - `JobId` (*long*) -
 
     The ID of the restore job.
 
-- `Name` (*string*) -
+- `SnapshotName` (*string*) -
 
     The name of the snapshot being restored.
 
@@ -54,7 +54,8 @@ public sealed class RestoreSnapshotJobInfo
 - `TimeCost` (*ulong*) -
 
     The time cost of the restore job, in milliseconds.
-# RestoreSnapshotState
+
+## RestoreSnapshotState
 
 This enum represents the state of a snapshot-restore job.
 
@@ -65,19 +66,28 @@ public enum RestoreSnapshotState
     Pending = 1,
     Executing = 2,
     Completed = 3,
-    Failed = 4,
+    Failed = 4
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **None** (0) -
+- **None** (0)
 
-- **Pending** (1) -
+    The restore state is undefined.
 
-- **Executing** (2) -
+- **Pending** (1)
 
-- **Completed** (3) -
+    The restore job has been created and is waiting to start.
 
-- **Failed** (4) -
+- **Executing** (2)
 
+    The restore job is currently executing.
+
+- **Completed** (3)
+
+    The restore job has completed.
+
+- **Failed** (4)
+
+    The restore job has failed.

@@ -1,6 +1,6 @@
 # ConnectConfig
 
-The connection parameters for `MilvusClientV2`.
+The connection parameters for [MilvusClientV2](MilvusClientV2.md).
 
 ```csharp
 public sealed class ConnectConfig
