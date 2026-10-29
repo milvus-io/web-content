@@ -17,7 +17,7 @@ type Collection struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **ID** (*int64*) -
 The unique identifier of the collection.

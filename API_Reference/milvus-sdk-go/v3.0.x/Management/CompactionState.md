@@ -6,7 +6,7 @@ Enumerates the possible states of a compaction operation.
 type CompactionState commonpb
 ```
 
-**VALUES:**
+**Constants:**
 
 - **CompactionStateRunning** = CompactionState(commonpb.CompactionState_Executing)
 

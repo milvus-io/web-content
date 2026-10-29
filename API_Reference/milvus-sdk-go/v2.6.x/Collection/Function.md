@@ -56,7 +56,7 @@ import (
 // Define a BM25 text embedding function on a VarChar field
 fn := entity.NewFunction().
     WithName("bm25_fn").
-    WithFunctionType(entity.FunctionTypeBM25).
+    WithType(entity.FunctionTypeBM25).
     WithInputFields("text").
     WithOutputFields("sparse_vector")
 

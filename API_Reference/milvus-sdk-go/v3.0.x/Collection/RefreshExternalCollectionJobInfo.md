@@ -16,7 +16,7 @@ type RefreshExternalCollectionJobInfo struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **JobID** (*int64*) -
 The unique identifier of the refresh job.

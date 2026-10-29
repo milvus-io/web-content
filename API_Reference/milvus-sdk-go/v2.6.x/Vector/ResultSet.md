@@ -14,7 +14,7 @@ type ResultSet struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **ResultCount** (*int*)
 

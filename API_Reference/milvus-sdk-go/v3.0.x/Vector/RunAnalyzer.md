@@ -66,7 +66,7 @@ type AnalyzerResult struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **Tokens** (*[]*Token*)
 
@@ -87,7 +87,7 @@ type Token struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **Text** (*string*)
 

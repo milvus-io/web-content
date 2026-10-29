@@ -6,7 +6,7 @@ Enumerates the distance metric types used for vector similarity search.
 type MetricType string
 ```
 
-**VALUES:**
+**Constants:**
 
 - **L2** = "L2"
 

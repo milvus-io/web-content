@@ -9,7 +9,7 @@ type Role struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **RoleName** (*string*)
 

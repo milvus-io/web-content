@@ -11,7 +11,7 @@ type RBACMeta struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **Users** (*[]*UserInfo*)
 

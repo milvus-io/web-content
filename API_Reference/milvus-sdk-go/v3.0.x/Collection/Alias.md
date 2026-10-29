@@ -10,7 +10,7 @@ type Alias struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **DbName** (*string*)
 

@@ -121,7 +121,7 @@ type UpsertResult struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **UpsertCount** (*int64*)
 

@@ -12,7 +12,7 @@ type ResourceGroupConfig struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **Requests** (*ResourceGroupLimit*)
 

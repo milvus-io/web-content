@@ -8,11 +8,38 @@ func (c *Client) BackupRBAC(ctx context.Context, option BackupRBACOption, callOp
 
 **RETURN TYPE:**
 
-**[entity.RBACMeta](RBACMeta.md), error*
+*entity.RBACMeta, error*
 
 **RETURNS:**
 
 The full RBAC metadata snapshot including users, roles, grants, and privilege groups. Returns an error if the operation fails.
+
+```go
+type RBACMeta struct {
+    Users []*UserInfo
+    Roles []*Role
+    RoleGrants []*RoleGrants
+    PrivilegeGroups []*PrivilegeGroup
+}
+```
+
+**PARAMETERS:**
+
+- **Users** (*[]*UserInfo*)
+
+    The users.
+
+- **Roles** (*[]*[Role](Role.md)*)
+
+    The list of assigned roles.
+
+- **RoleGrants** (*[]*RoleGrants*)
+
+    The role grants.
+
+- **PrivilegeGroups** (*[]*[PrivilegeGroup](PrivilegeGroup.md)*)
+
+    The privilege groups.
 
 **ERROR HANDLING:**
 

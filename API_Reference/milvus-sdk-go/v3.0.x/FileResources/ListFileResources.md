@@ -22,11 +22,33 @@ resources, err := cli.ListFileResources(ctx, option)
 
 **RETURN TYPE:**
 
-*[]*[entity.FileResource](FileResource.md), error*
+*[]*entity.FileResource, error*
 
 **RETURNS:**
 
-A list of [entity.FileResource](FileResource.md) records, each with `ID`, `Name`, and `Path` fields. Returns an error if the operation fails.
+A list of file resource records, each with `ID`, `Name`, and `Path` fields. Returns an error if the operation fails.
+
+```go
+type FileResource struct {
+    ID   int64
+    Name string
+    Path string
+}
+```
+
+**PARAMETERS:**
+
+- **ID** (*int64*)
+
+    The unique identifier of the file resource.
+
+- **Name** (*string*)
+
+    The name of the file resource.
+
+- **Path** (*string*)
+
+    The path of the file resource.
 
 **ERROR HANDLING:**
 
