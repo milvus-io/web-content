@@ -20,8 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><!-- doc:block:start id="decompounder-overview" -->
-<p>The <code translate="no">decompounder</code> filter splits compound words into individual components based on a specified dictionary, making it easier to search for parts of compound terms. This filter is particularly useful for languages that frequently use compound words, such as German. The component dictionary can be supplied inline via the <code translate="no">word_list</code> parameter or loaded from a <a href="/docs/manage-file-resources.md">registered file resource</a> via the <code translate="no">word_list_file</code> parameter.</p>
+    </button></h1><p>The <code translate="no">decompounder</code> filter splits compound words into individual components based on a specified dictionary, making it easier to search for parts of compound terms. This filter is particularly useful for languages that frequently use compound words, such as German.</p>
+<!-- doc:block:start id="decompounder-overview" -->
+<p>The component dictionary can be supplied inline via the <code translate="no">word_list</code> parameter or loaded from a <a href="/docs/manage-file-resources.md">registered file resource</a> via the <code translate="no">word_list_file</code> parameter.</p>
 <!-- doc:block:end id="decompounder-overview" -->
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +41,6 @@ summary: >-
       </svg>
     </button></h2><!-- doc:block:start id="decompounder-word-list-sources" -->
 <p>The <code translate="no">decompounder</code> filter accepts its component dictionary either inline via the <code translate="no">word_list</code> parameter or from a registered file resource via the <code translate="no">word_list_file</code> parameter.</p>
-<!-- doc:block:end id="decompounder-word-list-sources" -->
 <h3 id="Inline-word-list" class="common-anchor-header">Inline word list<button data-href="#Inline-word-list" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The <code translate="no">decompounder</code> filter is a custom filter in Milvus. To use it, specify <code translate="no">&quot;type&quot;: &quot;decompounder&quot;</code> in the filter configuration, along with a <code translate="no">word_list</code> parameter that provides the dictionary of word components to recognize.</p>
+    </button></h3><!-- doc:block:end id="decompounder-word-list-sources" -->
+<p>The <code translate="no">decompounder</code> filter is a custom filter in Milvus. To use it, specify <code translate="no">&quot;type&quot;: &quot;decompounder&quot;</code> in the filter configuration, along with a <code translate="no">word_list</code> parameter that provides the dictionary of word components to recognize.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
