@@ -228,8 +228,11 @@ Milvus 2.6.x and later let you configure reranking strategies directly via the `
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -241,7 +244,7 @@ ranker = Function(
     input_field_names=[], # Must be an empty list
     function_type=FunctionType.RERANK,
     params={
-        "reranker": "rrf", 
+        "reranker": "rrf",
         "k": 100  # Optional
     }
 )
@@ -259,6 +262,31 @@ CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
         .build();
 ```
 
+```go
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
+
+rerank := milvusclient.NewRRFReranker().WithK(100)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let rerank = Function::new()
+    .name("rrf")
+    .function_type(FunctionType::Rerank)
+    .param("reranker", "rrf")
+    .param("k", "100");
+```
+
+```cpp
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+auto rerank = std::make_shared<milvus::Function>("rrf", milvus::FunctionType::RERANK);
+rerank->AddParam("reranker", "rrf");
+rerank->AddParam("k", "100");
+```
+
 ```javascript
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
@@ -271,15 +299,26 @@ const ranker = {
     k: 100,
   },
 };
-
 ```
 
-```go
-// Go
+```csharp
+using Milvus.Client.V2.Types;
+
+var rerank = new RrfReranker(100);
 ```
 
 ```bash
-# Restful
+functions='[
+  {
+    "name": "rrf",
+    "type": "RERANK",
+    "inputFieldNames": [],
+    "params": {
+      "reranker": "rrf",
+      "k": 100
+    }
+  }
+]'
 ```
 
 <table>
@@ -325,11 +364,16 @@ const ranker = {
 
 RRF Ranker is designed specifically for hybrid search operations that combine multiple vector fields. Here's how to use it in a hybrid search:
 
+The examples assume an existing collection with a text embedding function for `text_vector` and a prepared image embedding that matches the dimension of `image_vector`. Replace the collection name and image embedding with your own values.
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -337,7 +381,10 @@ RRF Ranker is designed specifically for hybrid search operations that combine mu
 from pymilvus import MilvusClient, AnnSearchRequest, RRFRanker
 
 # Connect to Milvus server
-milvus_client = MilvusClient(uri="http://localhost:19530")
+milvus_client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Assume you have a collection setup
 
@@ -381,15 +428,20 @@ import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.request.ranker.RRFRanker;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build());
-        
+
 List<AnnSearchReq> searchRequests = new ArrayList<>();
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName("text_vector")
-        .vectors(Collections.singletonList(new EmbeddedText("\"modern dining table\"")))
+        .vectors(Collections.singletonList(new EmbeddedText("modern dining table")))
         .limit(10)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -401,33 +453,149 @@ searchRequests.add(AnnSearchReq.builder()
 RRFRanker ranker = RRFRanker.builder()
                 .k(100)
                 .build();
-        
+
 HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
                 .collectionName(COLLECTION_NAME)
                 .searchRequests(searchRequests)
                 .ranker(ranker)
                 .limit(10)
-                .outputFields(Arrays.asList("product_name", "price", "category"))
+                .outFields(Arrays.asList("product_name", "price", "category"))
                 .build();
 SearchResp searchResp = client.hybridSearch(hybridSearchReq);
+```
+
+```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx := context.Background()
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey: "root:Milvus",
+})
+if err != nil {
+    panic(err)
+}
+defer client.Close(ctx)
+
+// Define text vector search request
+textSearch := milvusclient.NewAnnRequest("text_vector", 10, entity.Text("modern dining table"))
+
+// Define image vector search request
+imageSearch := milvusclient.NewAnnRequest("image_vector", 10, entity.FloatVector(imageEmbedding))
+
+// Apply RRF Ranker to product hybrid search
+rerank := milvusclient.NewRRFReranker().WithK(100)
+resultSets, err := client.HybridSearch(ctx, milvusclient.NewHybridSearchOption(
+    collectionName, 10, textSearch, imageSearch,
+).WithReranker(rerank).WithOutputFields("product_name", "price", "category"))
+if err != nil {
+    panic(err)
+}
+fmt.Println(resultSets)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+// Define text vector search request
+let text_search = SubSearchRequest::builder()
+    .vector_field("text_vector")
+    .vectors(SearchVectors::EmbeddedText(vec!["modern dining table".to_string()]))
+    .limit(10)
+    .build()?;
+
+// Define image vector search request
+let image_search = SubSearchRequest::builder()
+    .vector_field("image_vector")
+    .vectors(SearchVectors::Float(vec![image_embedding]))
+    .limit(10)
+    .build()?;
+
+// Apply RRF Ranker to product hybrid search
+let hybrid_results = client
+    .hybrid_search(
+        HybridSearchRequest::builder()
+            .collection_name(collection_name)
+            .sub_requests(vec![text_search, image_search])
+            .rerank(RRFRerank::new().k(100))
+            .limit(10)
+            .output_fields(["product_name", "price", "category"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <utility>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+auto connect_status = client->Connect(milvus::ConnectParam{
+    "http://localhost:19530", "root:Milvus"});
+if (!connect_status.IsOk()) {
+    std::cout << connect_status.Message() << std::endl;
+    return;
+}
+
+auto text_search = milvus::SubSearchRequest()
+                    .WithLimit(10)
+                    .WithAnnsField("text_vector")
+                    .AddEmbeddedText("modern dining table");
+
+auto image_search = milvus::SubSearchRequest()
+                    .WithLimit(10)
+                    .WithAnnsField("image_vector")
+                    .AddFloatVector(image_embedding);
+
+auto request = milvus::HybridSearchRequest()
+                    .WithCollectionName(collection_name)
+                    .WithLimit(10)
+                    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(text_search)))
+                    .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(image_search)))
+                    .WithRerank(rerank)
+                    .AddOutputField("product_name")
+                    .AddOutputField("price")
+                    .AddOutputField("category");
+
+milvus::SearchResponse response;
+auto status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ```javascript
 import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
 
-const milvusClient = new MilvusClient({ address: "http://localhost:19530" });
+const milvusClient = new MilvusClient({
+  address: "http://localhost:19530",
+  token: "root:Milvus",
+});
 
 const text_search = {
     data: ["modern dining table"],
     anns_field: "text_vector",
-    param: {},
+    params: {},
     limit: 10,
 };
 
 const image_search = {
   data: [image_embedding],
   anns_field: "image_vector",
-  param: {},
+  params: {},
   limit: 10,
 };
 
@@ -450,12 +618,92 @@ const search = await milvusClient.search({
 });
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+// Connect to Milvus server
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+// Assume you have a collection setup
+
+// Define text vector search request
+var textSearch = new AnnSearchReq
+{
+    VectorFieldName = "text_vector",
+    Texts = ["modern dining table"],
+    Limit = 10
+};
+
+// Define image vector search request
+var imageSearch = new AnnSearchReq
+{
+    VectorFieldName = "image_vector",
+    Vectors = [imageEmbedding], // Image embedding vector
+    Limit = 10
+};
+
+var rerank = new RrfReranker(100);
+
+// Apply RRF Ranker to product hybrid search
+// The smoothing parameter k controls the balance
+SearchResp hybridResults = await client.HybridSearchAsync(new HybridSearchReq
+{
+    CollectionName = collectionName,
+    SearchRequests = [textSearch, imageSearch], // Multiple search requests
+    Reranker = rerank, // Apply the RRF ranker
+    Limit = 10,
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "product_name", "price", "category" }
+    }
+});
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# Set IMAGE_EMBEDDING to your image vector as a JSON array before running this request.
+: "${IMAGE_EMBEDDING:?Set IMAGE_EMBEDDING to a JSON array of embedding values}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/hybrid_search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data-binary @- <<EOF
+{
+    "collectionName": "collection_name",
+    "search": [
+        {
+            "data": ["modern dining table"],
+            "annsField": "text_vector",
+            "limit": 10
+        },
+        {
+            "data": [${IMAGE_EMBEDDING}],
+            "annsField": "image_vector",
+            "limit": 10
+        }
+    ],
+    "rerank": {
+        "strategy": "rrf",
+        "params": {
+            "k": 100
+        }
+    },
+    "limit": 10,
+    "outputFields": ["product_name", "price", "category"]
+}
+EOF
 ```
 
 For more information on hybrid search, refer to [Multi-Vector Hybrid Search](multi-vector-search.md).
