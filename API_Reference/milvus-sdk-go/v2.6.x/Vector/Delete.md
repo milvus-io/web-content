@@ -56,7 +56,7 @@ type DeleteResult struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **DeleteCount** (*int64*)
 

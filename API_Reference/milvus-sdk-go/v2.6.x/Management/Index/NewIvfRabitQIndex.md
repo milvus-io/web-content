@@ -10,7 +10,7 @@ func NewIvfRabitQIndex(metricType MetricType, nlist int) *ivfRabitQIndex
 
 - **[metricType](../MetricType.md)** (*[MetricType](../MetricType.md)*)
 
-    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., entity.COSINE, entity.L2, entity.IP).
 
 - **nlist** (*int*)
 
@@ -33,11 +33,12 @@ An index configuration instance. Pass this to `CreateIndex()` via the index opti
 ```go
 import (
 	"github.com/milvus-io/milvus/client/v2/index"
+	"github.com/milvus-io/milvus/client/v2/entity"
 	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 // Create index configuration
-idx := index.NewIvfRabitQIndex(index.COSINE, 128)
+idx := index.NewIvfRabitQIndex(entity.COSINE, 128)
 
 // Use with CreateIndex
 createIdxOption := milvusclient.NewCreateIndexOption("collection_name", "vector_field", idx)

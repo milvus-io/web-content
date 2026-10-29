@@ -26,11 +26,43 @@ result, err := client.DescribeIndex(ctx, option)
 
 **RETURN TYPE:**
 
-*[IndexDescription](IndexDescription.md), error*
+*IndexDescription, error*
 
 **RETURNS:**
 
 The index details including type, metric, and parameters. Returns an error if the operation fails.
+
+```go
+type IndexDescription struct {
+    index.Index
+    State index.IndexState
+    PendingIndexRows int64
+    TotalRows int64
+    IndexedRows int64
+}
+```
+
+**PARAMETERS:**
+
+- **index.Index** *(embedded)*
+
+    Inherits methods from index.Index.
+
+- **State** (*index.IndexState*)
+
+    The current state.
+
+- **PendingIndexRows** (*int64*)
+
+    The number of rows pending indexing.
+
+- **TotalRows** (*int64*)
+
+    The total number of rows.
+
+- **IndexedRows** (*int64*)
+
+    The number of indexed rows.
 
 **ERROR HANDLING:**
 

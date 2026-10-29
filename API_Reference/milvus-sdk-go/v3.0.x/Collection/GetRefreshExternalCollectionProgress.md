@@ -41,8 +41,6 @@ type RefreshExternalCollectionJobInfo struct {
 }
 ```
 
-PARAMETERS:
-
 **PARAMETERS:**
 
 - **JobID** (*int64*) -
@@ -85,7 +83,13 @@ PARAMETERS:
 
     The timestamp in milliseconds at which the specified job ends.
 
-## Examples:
+**ERROR HANDLING:**
+
+- **error**
+
+    Check `err != nil` for failure details.
+
+## Example
 
 ```go
 refreshResult, err := client.RefreshExternalCollection(ctx,

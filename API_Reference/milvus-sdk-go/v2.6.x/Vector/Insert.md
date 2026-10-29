@@ -121,7 +121,7 @@ type InsertResult struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **InsertCount** (*int64*)
 

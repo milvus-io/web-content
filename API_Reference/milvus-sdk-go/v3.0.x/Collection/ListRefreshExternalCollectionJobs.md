@@ -28,6 +28,12 @@ result, err := client.ListRefreshExternalCollectionJobs(option)
 
 A list of [entity.RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md) struct, each recording the details of an external collection refresh job.
 
+**ERROR HANDLING:**
+
+- **error**
+
+    Check `err != nil` for failure details.
+
 ## Example
 
 ```go

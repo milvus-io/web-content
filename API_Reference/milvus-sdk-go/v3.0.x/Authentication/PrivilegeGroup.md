@@ -9,7 +9,7 @@ type PrivilegeGroup struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **GroupName** (*string*)
 

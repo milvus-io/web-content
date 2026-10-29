@@ -2,101 +2,95 @@
 
 Enumerates supported Milvus field data types and provides helpers for identifying vector types.
 
-**RETURN TYPE:**
+```go
+type FieldType int32
+```
 
-*FieldType*
+**Constants:**
 
-**RETURNS:**
-
-Enumerates the supported data types for collection fields.
-
-- **FieldTypeNone** (*int32*) -
-
-    Default: `0`
+- **FieldTypeNone** = 0
 
     zero value place holder.
 
-- **FieldTypeBool** (*int32*) -
+- **FieldTypeBool** = 1
 
-    Default: `1`
+    Boolean field type.
 
-- **FieldTypeInt8** (*int32*) -
+- **FieldTypeInt8** = 2
 
-    Default: `2`
+    8-bit signed integer.
 
-- **FieldTypeInt16** (*int32*) -
+- **FieldTypeInt16** = 3
 
-    Default: `3`
+    16-bit signed integer.
 
-- **FieldTypeInt32** (*int32*) -
+- **FieldTypeInt32** = 4
 
-    Default: `4`
+    32-bit signed integer.
 
-- **FieldTypeInt64** (*int32*) -
+- **FieldTypeInt64** = 5
 
-    Default: `5`
+    64-bit signed integer.
 
-- **FieldTypeFloat** (*int32*) -
+- **FieldTypeFloat** = 10
 
-    Default: `10`
+    IEEE 754 32-bit floating-point number.
 
-- **FieldTypeDouble** (*int32*) -
+- **FieldTypeDouble** = 11
 
-    Default: `11`
+    IEEE 754 64-bit floating-point number.
 
-- **FieldTypeString** (*int32*) -
+- **FieldTypeString** = 20
 
-    Default: `20`
+    String field type.
 
-- **FieldTypeVarChar** (*int32*) -
+- **FieldTypeVarChar** = 21
 
-    Default: `21`
+    Variable-length strings with a specified maximum length.
 
-    variable-length strings with a specified maximum length.
+- **FieldTypeArray** = 22
 
-- **FieldTypeArray** (*int32*) -
+    Array field type.
 
-    Default: `22`
+- **FieldTypeJSON** = 23
 
-- **FieldTypeJSON** (*int32*) -
+    JSON field type.
 
-    Default: `23`
+- **FieldTypeGeometry** = 24
 
-- **FieldTypeGeometry** (*int32*) -
+    Geometry field type.
 
-    Default: `24`
+- **FieldTypeTimestamptz** = 26
 
-- **FieldTypeTimestamptz** (*int32*) -
+    Time-stamped timezone-aware field type.
 
-    Default: `26`
+- **FieldTypeBinaryVector** = 100
 
-- **FieldTypeBinaryVector** (*int32*) -
+    Binary vector field type.
 
-    Default: `100`
+- **FieldTypeFloatVector** = 101
 
-- **FieldTypeFloatVector** (*int32*) -
+    Float vector field type.
 
-    Default: `101`
+- **FieldTypeFloat16Vector** = 102
 
-- **FieldTypeFloat16Vector** (*int32*) -
+    Float16 vector field type.
 
-    Default: `102`
+- **FieldTypeBFloat16Vector** = 103
 
-- **FieldTypeBFloat16Vector** (*int32*) -
+    BFloat16 vector field type.
 
-    Default: `103`
+- **FieldTypeSparseVector** = 104
 
-- **FieldTypeSparseVector** (*int32*) -
+    Sparse vector field type.
 
-    Default: `104`
+- **FieldTypeInt8Vector** = 105
 
-- **FieldTypeInt8Vector** (*int32*) -
+    Int8 vector field type.
 
-    Default: `105`
+- **FieldTypeStruct** = 201
 
-- **FieldTypeStruct** (*int32*) -
-
-    Default: `201`
+    Struct field type.
 
 ## Example
 
@@ -117,4 +111,3 @@ fmt.Println(fieldType.IsVectorType())
 ## Notes
 
 - `IsVectorType()` returns true for binary, float, float16, bfloat16, sparse, and int8 vector field types.
-

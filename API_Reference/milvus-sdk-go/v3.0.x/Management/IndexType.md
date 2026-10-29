@@ -6,7 +6,7 @@ Enumerates the supported index algorithms for vector and scalar fields.
 type IndexType string
 ```
 
-**VALUES:**
+**Constants:**
 
 - **Flat** = "FLAT"
 

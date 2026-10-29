@@ -8,11 +8,44 @@ func (c *Client) GetPersistentSegmentInfo(ctx context.Context, option GetPersist
 
 **RETURN TYPE:**
 
-*[]*[entity.Segment](Segment.md), error*
+*[]*entity.Segment, error*
 
 **RETURNS:**
 
 A list of persistent segment details. Returns an error if the operation fails.
+
+```go
+type Segment struct {
+    ID           int64
+    CollectionID int64
+    ParititionID int64
+    NumRows      int64
+    State        commonpb.SegmentState
+}
+```
+
+**PARAMETERS:**
+
+- **ID** (*int64*) -
+The unique identifier of the segment.
+
+- **CollectionID** (*int64*) -
+The identifier of the collection the segment belongs to.
+
+- **ParititionID** (*int64*) -
+The identifier of the partition the segment belongs to.
+
+- **NumRows** (*int64*) -
+The number of rows in the segment.
+
+- **State** (*commonpb.SegmentState*) -
+The current segment state.
+
+**METHODS:**
+
+- `Flushed() bool`
+
+    Returns true when the segment is in the flushed state.
 
 **ERROR HANDLING:**
 

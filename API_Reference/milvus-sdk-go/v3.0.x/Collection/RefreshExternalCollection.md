@@ -117,13 +117,19 @@ type RefreshExternalCollectionResult struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **JobID** (*int64*) -
 
     An integer that indicates an asynchronous job that has been created.
 
-## Examples
+**ERROR HANDLING:**
+
+- **error**
+
+    Check `err != nil` for failure details.
+
+## Example
 
 ```go
 refreshResult, err := client.RefreshExternalCollection(ctx,

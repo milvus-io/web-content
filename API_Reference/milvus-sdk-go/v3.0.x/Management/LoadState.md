@@ -9,7 +9,7 @@ type LoadState struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **State** (*LoadStateCode*)
 

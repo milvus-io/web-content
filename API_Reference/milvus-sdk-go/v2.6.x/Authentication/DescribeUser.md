@@ -22,11 +22,28 @@ result, err := client.DescribeUser(ctx, option)
 
 **RETURN TYPE:**
 
-**[entity.User](User.md), error*
+*entity.User, error*
 
 **RETURNS:**
 
 The user description including assigned roles. Returns an error if the operation fails.
+
+```go
+type User struct {
+    UserName string
+    Roles []string
+}
+```
+
+**PARAMETERS:**
+
+- **UserName** (*string*)
+
+    The name of the user.
+
+- **Roles** (*[]string*)
+
+    The list of assigned roles.
 
 **ERROR HANDLING:**
 

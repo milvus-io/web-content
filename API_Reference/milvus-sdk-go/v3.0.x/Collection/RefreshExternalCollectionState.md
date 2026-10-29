@@ -6,7 +6,7 @@ Enumerates the possible states of a refresh external collection job.
 type RefreshExternalCollectionState milvuspb.RefreshExternalCollectionState
 ```
 
-**VALUES:**
+**Constants:**
 
 - **RefreshStatePending** = RefreshExternalCollectionState(RefreshExternalCollectionState_RefreshPending)
 

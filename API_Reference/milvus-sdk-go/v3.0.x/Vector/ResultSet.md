@@ -15,7 +15,7 @@ type ResultSet struct {
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
 - **ResultCount** (*int*) -
 The number of returned entries.

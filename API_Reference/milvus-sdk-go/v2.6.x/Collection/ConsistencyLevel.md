@@ -6,7 +6,7 @@ Specifies the consistency guarantee level for read operations on a collection.
 type ConsistencyLevel commonpb
 ```
 
-**VALUES:**
+**Constants:**
 
 - **ClStrong** = ConsistencyLevel(commonpb.ConsistencyLevel_Strong)
 
