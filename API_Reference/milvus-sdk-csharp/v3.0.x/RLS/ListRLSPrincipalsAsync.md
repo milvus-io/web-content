@@ -1,4 +1,4 @@
-# ListRLSPrincipals
+# ListRLSPrincipalsAsync()
 
 Lists the RLS principals of a collection.
 
@@ -11,15 +11,10 @@ public async Task<ListRLSPrincipalsResp> ListRLSPrincipalsAsync(ListRLSPrincipal
 ```csharp
 var request = new ListRLSPrincipalsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
+    CollectionName = "my_collection"
 };
 
-var resp = await client.ListRLSPrincipalsAsync(new ListRLSPrincipalsReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-});
+ListRLSPrincipalsResp result = await client.ListRLSPrincipalsAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -34,7 +29,7 @@ var resp = await client.ListRLSPrincipalsAsync(new ListRLSPrincipalsReq
 
 **RETURN TYPE:**
 
-*ListRLSPrincipalsResp*
+*Task\<ListRLSPrincipalsResp\>*
 
 **RETURNS:**
 
@@ -44,20 +39,29 @@ A **ListRLSPrincipalsResp** object.
 
     The names of the RLS principals configured on the collection.
 
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
-using Milvus.Client.V2.Requests.Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Responses.Rls;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
-var resp = await client.ListRLSPrincipalsAsync(new ListRLSPrincipalsReq
+ListRLSPrincipalsResp result = await client.ListRLSPrincipalsAsync(new ListRLSPrincipalsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
+    CollectionName = "my_collection"
 });
 ```

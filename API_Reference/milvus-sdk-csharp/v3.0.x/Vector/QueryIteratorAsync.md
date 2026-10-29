@@ -61,9 +61,7 @@ QueryIterator iterator = client.QueryIteratorAsync(request);
 
 A **QueryIterator** that lazily pages over query results as an async iterator of `IReadOnlyList<FieldData>` batches, consuming one `BatchSize`-sized batch per server round-trip. Consume with `await foreach`, optionally with `.WithCancellation(token)`.
 
-
-
-QueryIterator members (from the **QueryIterator** documentation):
+The **QueryIterator** exposes the following members:
 
 **METHODS:**
 

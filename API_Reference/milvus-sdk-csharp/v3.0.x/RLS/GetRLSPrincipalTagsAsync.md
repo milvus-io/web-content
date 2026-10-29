@@ -1,4 +1,4 @@
-# GetRLSPrincipalTags
+# GetRLSPrincipalTagsAsync()
 
 Gets the RLS principal tags for a principal on a collection.
 
@@ -11,17 +11,11 @@ public async Task<GetRLSPrincipalTagsResp> GetRLSPrincipalTagsAsync(GetRLSPrinci
 ```csharp
 var request = new GetRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
+    CollectionName = "my_collection",
+    PrincipalName = "user1"
 };
 
-var resp = await client.GetRLSPrincipalTagsAsync(new GetRLSPrincipalTagsReq
-{
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
-});
+GetRLSPrincipalTagsResp result = await client.GetRLSPrincipalTagsAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
@@ -40,7 +34,7 @@ var resp = await client.GetRLSPrincipalTagsAsync(new GetRLSPrincipalTagsReq
 
 **RETURN TYPE:**
 
-*GetRLSPrincipalTagsResp*
+*Task\<GetRLSPrincipalTagsResp\>*
 
 **RETURNS:**
 
@@ -50,21 +44,30 @@ A **GetRLSPrincipalTagsResp** object.
 
     The principal's tag keys and values.
 
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
-using Milvus.Client.V2.Requests.Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Responses.Rls;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
-var resp = await client.GetRLSPrincipalTagsAsync(new GetRLSPrincipalTagsReq
+GetRLSPrincipalTagsResp result = await client.GetRLSPrincipalTagsAsync(new GetRLSPrincipalTagsReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    PrincipalName = "value",
+    CollectionName = "my_collection",
+    PrincipalName = "user1"
 });
 ```

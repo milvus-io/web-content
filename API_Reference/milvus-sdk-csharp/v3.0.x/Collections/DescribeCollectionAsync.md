@@ -27,18 +27,6 @@ DescribeCollectionResp result = await client.DescribeCollectionAsync(request);
 
     An optional database name to operate on. When empty, the client's currently selected database is used.
 
-- `SchemaVersion` (*string*) -
-
-    The schema version of the collection.
-
-- `ExternalSource` (*string?*) -
-
-    The external data source of an external collection.
-
-- `ExternalSpec` (*string?*) -
-
-    The external specification of an external collection.
-
 **RETURN TYPE:**
 
 *Task\<DescribeCollectionResp\>*
@@ -59,8 +47,9 @@ DescribeCollectionResp
     DatabaseName        // -> string
     NumPartitions       // -> long?
     CreatedUtcTimestamp // -> ulong
-    Aliases             // -> IReadOnlyList<string>
-    Properties          // -> IReadOnlyDictionary<string, string>
+    SchemaVersion      // -> int?
+    Aliases            // -> IReadOnlyList<string>
+    Properties         // -> IReadOnlyDictionary<string, string>
 ```
 
 **PARAMETERS:**
@@ -132,6 +121,10 @@ DescribeCollectionResp
 - **CreatedUtcTimestamp** (*ulong*) -
 
     The UTC timestamp at which the collection was created, as reported by the server.
+
+- **SchemaVersion** (*int?*) -
+
+    The schema version of the collection, as reported by the server. `null` when the server does not report it.
 
 - **Aliases** (*IReadOnlyList\<string\>*) -
 

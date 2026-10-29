@@ -1,4 +1,4 @@
-# DropCollectionField
+# DropCollectionFieldAsync()
 
 Drops a field from an existing collection.
 
@@ -11,10 +11,8 @@ public async Task DropCollectionFieldAsync(DropCollectionFieldReq request, Cance
 ```csharp
 var request = new DropCollectionFieldReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    FieldName = null,
-    FieldId = 0,
+    CollectionName = "my_collection",
+    FieldName = "extra_field"
 };
 
 await client.DropCollectionFieldAsync(request);
@@ -32,11 +30,25 @@ await client.DropCollectionFieldAsync(request);
 
 - `FieldName` (*string?*) -
 
-    The name of the field to drop. Mutually exclusive with <see cref="FieldId" />: exactly one of the two must be provided.
+    The name of the field to drop. Mutually exclusive with `FieldId`: exactly one of the two must be provided.
 
 - `FieldId` (*long?*) -
 
-    The id of the field to drop. Must be a positive field id. Mutually exclusive with <see cref="FieldName" />: exactly one of the two must be provided.
+    The ID of the field to drop. Must be a positive field ID. Mutually exclusive with `FieldName`: exactly one of the two must be provided.
+
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
 
 ## Example
 
@@ -47,13 +59,14 @@ using Milvus.Client.V2.Requests.Collection;
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
 await client.DropCollectionFieldAsync(new DropCollectionFieldReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    FieldName = null,
-    FieldId = 0,
+    CollectionName = "my_collection",
+    FieldName = "extra_field"
 });
 ```

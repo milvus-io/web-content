@@ -1,4 +1,4 @@
-# ListFileResources
+# ListFileResourcesAsync()
 
 Lists the external file resources of a collection.
 
@@ -9,24 +9,18 @@ public async Task<ListFileResourcesResp> ListFileResourcesAsync(ListFileResource
 ## Request Syntax
 
 ```csharp
-var request = new ListFileResourcesReq
-{
+var request = new ListFileResourcesReq();
 
-};
-
-var resp = await client.ListFileResourcesAsync(new ListFileResourcesReq
-{
-
-});
+ListFileResourcesResp result = await client.ListFileResourcesAsync(request);
 ```
 
 **REQUEST PARAMETERS:**
 
-
+`ListFileResourcesReq` takes no parameters.
 
 **RETURN TYPE:**
 
-*ListFileResourcesResp*
+*Task\<ListFileResourcesResp\>*
 
 **RETURNS:**
 
@@ -48,19 +42,26 @@ A **ListFileResourcesResp** object.
 
         The path of the file resource.
 
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
-var resp = await client.ListFileResourcesAsync(new ListFileResourcesReq
-{
-
-});
+ListFileResourcesResp result = await client.ListFileResourcesAsync(new ListFileResourcesReq());
 ```

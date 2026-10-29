@@ -57,18 +57,6 @@ await client.CreateCollectionAsync(new CreateCollectionReq
 
     Optional indexes to create immediately after the collection is created. When set, the collection is also loaded automatically after the indexes are built. See [IndexParam](../Management/IndexParam.md).
 
-- `ExternalSource` (*string?*) -
-
-    The external data source for an external collection.
-
-- `ExternalSpec` (*string?*) -
-
-    The external specification configuration for an external collection.
-
-- `FileResourceIds` (*IReadOnlyList\<object\>?*) -
-
-    The external file-resource IDs attached to the collection.
-
 **RETURN TYPE:**
 
 *Task*

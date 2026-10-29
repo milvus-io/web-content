@@ -86,7 +86,7 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 
 - `ExternalFilterFunc` (*Func\<SingleResult, IReadOnlyList\<int\>\>?*) -
 
-    An optional client-side per-page filter that receives each page as a `SingleResult` and returns the zero-based row indices to keep, in the desired order. Filtered rows are accumulated and returned in batches of `BatchSize`, with a final partial batch when no more results remain.
+    An optional client-side per-page filter that receives each page as a [SingleResult](SingleResult.md) and returns the zero-based row indices to keep, in the desired order. Filtered rows are accumulated and returned in batches of `BatchSize`, with a final partial batch when no more results remain.
 
 **RETURN TYPE:**
 
@@ -96,15 +96,13 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 
 A **SearchIterator** that pages over search results as an async iterator of batches. It uses the `search_iter_v2` server protocol and requires a Milvus server of version 2.5.2 or later. Consume with `await foreach`, optionally with `.WithCancellation(token)`.
 
-
-
-SearchIterator members (from the **SearchIterator** documentation):
+The **SearchIterator** exposes the following members:
 
 **METHODS:**
 
 - `GetAsyncEnumerator(CancellationToken cancellationToken = default)` -
 
-    Returns an async enumerator that yields each page of search results as a `SingleResult` holding that page's top-K hits with their scores, primary keys and output fields.
+    Returns an async enumerator that yields each page of search results as a [SingleResult](SingleResult.md) holding that page's top-K hits with their scores, primary keys and output fields.
 
 **EXCEPTIONS:**
 

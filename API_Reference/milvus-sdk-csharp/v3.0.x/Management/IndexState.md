@@ -14,16 +14,28 @@ public enum IndexState
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **None** (0) - The index does not exist.
+- **None** (0)
 
-- **Unissued** (1) - The index build has not been issued.
+    The index does not exist.
 
-- **InProgress** (2) - The index build is in progress.
+- **Unissued** (1)
 
-- **Finished** (3) - The index build has finished.
+    The index build has not been issued.
 
-- **Failed** (4) - The index build failed.
+- **InProgress** (2)
 
-- **Retry** (5) - The index build is scheduled for a retry.
+    The index build is in progress.
+
+- **Finished** (3)
+
+    The index build has finished.
+
+- **Failed** (4)
+
+    The index build failed.
+
+- **Retry** (5)
+
+    The index build is scheduled for a retry.

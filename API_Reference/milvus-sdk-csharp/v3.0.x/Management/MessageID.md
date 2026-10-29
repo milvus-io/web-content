@@ -41,16 +41,28 @@ public enum WalName
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Unknown** (0) - Unknown or unset WAL.
+- **Unknown** (0)
 
-- **RocksMq** (1) - The RocksMQ WAL.
+    Unknown or unset WAL.
 
-- **Pulsar** (2) - The Pulsar WAL.
+- **RocksMq** (1)
 
-- **Kafka** (3) - The Kafka WAL.
+    The RocksMQ WAL.
 
-- **WoodPecker** (4) - The WoodPecker WAL.
+- **Pulsar** (2)
 
-- **Test** (999) - A test WAL.
+    The Pulsar WAL.
+
+- **Kafka** (3)
+
+    The Kafka WAL.
+
+- **WoodPecker** (4)
+
+    The WoodPecker WAL.
+
+- **Test** (999)
+
+    A test WAL.

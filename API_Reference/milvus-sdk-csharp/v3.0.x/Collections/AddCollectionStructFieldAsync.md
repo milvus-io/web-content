@@ -1,4 +1,4 @@
-# AddCollectionStructField
+# AddCollectionStructFieldAsync()
 
 Adds a struct field to an existing collection.
 
@@ -11,9 +11,8 @@ public async Task AddCollectionStructFieldAsync(AddCollectionStructFieldReq requ
 ```csharp
 var request = new AddCollectionStructFieldReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    StructField = 0,
+    CollectionName = "my_collection",
+    StructField = new StructFieldSchema("address")
 };
 
 await client.AddCollectionStructFieldAsync(request);
@@ -31,23 +30,40 @@ await client.AddCollectionStructFieldAsync(request);
 
 - `StructField` (*StructFieldSchema*) -
 
-    The schema of the struct field to add. The struct field must be nullable: Milvus only accepts a nullable struct field when adding it to an existing collection, mirroring the Java/C++/Rust SDKs.
+    The struct field to add to the existing collection, mirroring the Java/C++/Rust SDKs. See [StructFieldSchema](StructFieldSchema.md).
+
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
 
 ## Example
 
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
     Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
 });
+await client.ConnectAsync();
 
 await client.AddCollectionStructFieldAsync(new AddCollectionStructFieldReq
 {
-    DatabaseName = null,
-    CollectionName = "value",
-    StructField = 0,
+    CollectionName = "my_collection",
+    StructField = new StructFieldSchema("address")
 });
 ```

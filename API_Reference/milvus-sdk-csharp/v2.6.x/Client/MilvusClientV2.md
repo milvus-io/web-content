@@ -1,4 +1,4 @@
-# MilvusClientV2()
+# MilvusClientV2
 
 The Milvus gRPC client (V2).
 

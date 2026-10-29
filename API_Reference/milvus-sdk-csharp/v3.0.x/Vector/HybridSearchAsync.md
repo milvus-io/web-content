@@ -163,10 +163,6 @@ SearchResp results = await client.HybridSearchAsync(request);
 
     Function chains applied to the search results. See [FunctionChain](FunctionChain.md).
 
-- `SearchAggregation` (*SearchAggregation?*) -
-
-    Hierarchical bucket aggregation for the search. See [SearchAggregation](SearchAggregation.md).
-
 - `Reranker` (*IReranker*) -
 
     The reranker used to combine the results of the individual searches. See [Reranker](Reranker.md).
@@ -186,10 +182,6 @@ SearchResp results = await client.HybridSearchAsync(request);
 - `SkipRls` (*bool?*) -
 
     Whether the operation should skip row-level security (RLS) enforcement. When `null`, the server default applies.
-
-- `AggregationBuckets` (*IReadOnlyList\<IReadOnlyList\<AggregationBucket\>\>?*) -
-
-    The bucket-aggregation results, populated when the request used `SearchAggregation`. See [AggregationBucket](AggregationBucket.md).
 
 **RETURN TYPE:**
 
@@ -219,6 +211,7 @@ SearchResp
     SingleResults      // -> IReadOnlyList<SingleResult>?
     HighlightResults   // -> IReadOnlyList<HighlightResult>?
     ElementIndices     // -> IReadOnlyList<long>?
+    AggregationBuckets // -> IReadOnlyList<IReadOnlyList<AggregationBucket>>?
 ```
 
 **PARAMETERS:**
@@ -294,6 +287,10 @@ SearchResp
 - **ElementIndices** (*IReadOnlyList\<long\>?*) -
 
     The element indices, populated for matched sub-struct elements when the search operated on array/struct fields. `null` when the server reported none.
+
+- **AggregationBuckets** (*IReadOnlyList\<IReadOnlyList\<AggregationBucket\>\>?*) -
+
+    The bucket-aggregation results, one inner list per query vector, populated when the request used `SearchAggregation`. See [AggregationBucket](AggregationBucket.md).
 
 **EXCEPTIONS:**
 

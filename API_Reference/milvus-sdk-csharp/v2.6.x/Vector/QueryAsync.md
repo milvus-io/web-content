@@ -55,6 +55,7 @@ QueryResp
     ScannedRemoteBytes // -> long
     ScannedTotalBytes  // -> long
     CacheHitRatio      // -> float?
+    RowCount           // -> int
 ```
 
 **PARAMETERS:**
@@ -90,6 +91,10 @@ QueryResp
 - **CacheHitRatio** (*float?*) -
 
     The cache hit ratio, or `null` when the server does not report it.
+
+- **RowCount** (*int*) -
+
+    The number of rows in the result, equal to the row count of the first `FieldData`.
 
 **EXCEPTIONS:**
 

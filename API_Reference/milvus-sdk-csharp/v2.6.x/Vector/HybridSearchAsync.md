@@ -265,7 +265,7 @@ SearchResp
 
 - **SingleResults** (*IReadOnlyList\<SingleResult\>?*) -
 
-    The per-query-vector results, sliced out of the flat response. One `SingleResult` per query vector, each holding that query's top-K scores, primary keys and output fields.
+    The per-query-vector results, sliced out of the flat response. One [SingleResult](SingleResult.md) per query vector, each holding that query's top-K scores, primary keys and output fields.
 
 - **HighlightResults** (*IReadOnlyList\<HighlightResult\>?*) -
 

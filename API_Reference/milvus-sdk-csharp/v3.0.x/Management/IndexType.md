@@ -40,68 +40,132 @@ public enum IndexType
 }
 ```
 
-**VALUES:**
+**Constants:**
 
-- **Invalid** (0) - An invalid index type.
+- **Invalid** (0)
 
-- **Flat** (1) - A brute-force index that compares each query vector against all vectors. CPU index for float vectors; always exact (no quantization loss). Good for small datasets.
+    An invalid index type.
 
-- **IvfFlat** (2) - An inverted-file index that partitions the vector space into clusters. CPU index for float vectors; the `nlist` extra param controls cluster count.
+- **Flat** (1)
 
-- **IvfSq8** (3) - An IVF index with scalar quantization.
+    A brute-force index that compares each query vector against all vectors. CPU index for float vectors; always exact (no quantization loss). Good for small datasets.
 
-- **IvfPq** (4) - An IVF index with product quantization.
+- **IvfFlat** (2)
 
-- **Hnsw** (5) - A graph-based index using Hierarchical Navigable Small World graphs. CPU index for float vectors; the `M` and `efConstruction` extra params tune recall vs cost.
+    An inverted-file index that partitions the vector space into clusters. CPU index for float vectors; the `nlist` extra param controls cluster count.
 
-- **HnswSq** (6) - An HNSW index with scalar quantization.
+- **IvfSq8** (3)
 
-- **HnswPq** (7) - An HNSW index with product quantization.
+    An IVF index with scalar quantization.
 
-- **HnswPrq** (8) - An HNSW index with product quantization and residual coding.
+- **IvfPq** (4)
 
-- **DiskAnn** (9) - A disk-based index for very large datasets.
+    An IVF index with product quantization.
 
-- **AutoIndex** (10) - An index type automatically chosen by the server.
+- **Hnsw** (5)
 
-- **Scann** (11) - A graph-based index from Microsoft (ANNS).
+    A graph-based index using Hierarchical Navigable Small World graphs. CPU index for float vectors; the `M` and `efConstruction` extra params tune recall vs cost.
 
-- **GpuIvfFlat** (12) - A GPU-accelerated IVF index.
+- **HnswSq** (6)
 
-- **GpuIvfPq** (13) - A GPU-accelerated IVF index with product quantization.
+    An HNSW index with scalar quantization.
 
-- **GpuBruteForce** (14) - A GPU brute-force index.
+- **HnswPq** (7)
 
-- **GpuCagra** (15) - A GPU-accelerated CAGRA graph index.
+    An HNSW index with product quantization.
 
-- **BinFlat** (16) - A binary vector flat index. CPU index for binary vectors; exact (no quantization loss).
+- **HnswPrq** (8)
 
-- **BinIvfFlat** (17) - A binary vector inverted-file index. CPU index for binary vectors; the `nlist` extra param controls cluster count.
+    An HNSW index with product quantization and residual coding.
 
-- **Trie** (18) - A trie index for string fields. Used for exact-match prefix queries on VarChar fields.
+- **DiskAnn** (9)
 
-- **StlSort** (19) - A sorted-list index for numeric fields.
+    A disk-based index for very large datasets.
 
-- **Inverted** (20) - An inverted index for scalar fields (works for all scalar fields except JSON).
+- **AutoIndex** (10)
 
-- **Bitmap** (21) - A bitmap index for scalar fields (works for all scalar fields except JSON, FLOAT and DOUBLE).
+    An index type automatically chosen by the server.
 
-- **SparseInvertedIndex** (22) - An inverted index for sparse vectors.
+- **Scann** (11)
 
-- **SparseWand** (23) - A sparse vector index using the WAND algorithm.
+    A graph-based index from Microsoft (ANNS).
 
-- **Ngram** (24) - An n-gram full-text index for string fields.
+- **GpuIvfFlat** (12)
 
-- **Rtree** (25) - An R-tree index for spatial/geographic data.
+    A GPU-accelerated IVF index.
 
-- **FmIndex** (26) - A full-text index using the FM algorithm.
+- **GpuIvfPq** (13)
 
-- **Hybrid** (27) - A hybrid index (combined BITMAP + INVERTED).
+    A GPU-accelerated IVF index with product quantization.
 
-- **VecIndex** (28) - A vector index automatically selected by the server for the target vector type.
+- **GpuBruteForce** (14)
 
-- **IvfRabitq** (29) - An IVF index with RaBitQ quantization.
+    A GPU brute-force index.
 
-- **MinHashLsh** (30) - A MinHash LSH index for binary vectors holding MinHash signatures, used for Jaccard-similarity search.
+- **GpuCagra** (15)
 
-- **Aisaq** (31) - An AISAQ index for scalar/vector fields. Adaptive Indexing with Scalar And Quantization; supports scalar fields and low-dimensional vectors.
+    A GPU-accelerated CAGRA graph index.
+
+- **BinFlat** (16)
+
+    A binary vector flat index. CPU index for binary vectors; exact (no quantization loss).
+
+- **BinIvfFlat** (17)
+
+    A binary vector inverted-file index. CPU index for binary vectors; the `nlist` extra param controls cluster count.
+
+- **Trie** (18)
+
+    A trie index for string fields. Used for exact-match prefix queries on VarChar fields.
+
+- **StlSort** (19)
+
+    A sorted-list index for numeric fields.
+
+- **Inverted** (20)
+
+    An inverted index for scalar fields (works for all scalar fields except JSON).
+
+- **Bitmap** (21)
+
+    A bitmap index for scalar fields (works for all scalar fields except JSON, FLOAT and DOUBLE).
+
+- **SparseInvertedIndex** (22)
+
+    An inverted index for sparse vectors.
+
+- **SparseWand** (23)
+
+    A sparse vector index using the WAND algorithm.
+
+- **Ngram** (24)
+
+    An n-gram full-text index for string fields.
+
+- **Rtree** (25)
+
+    An R-tree index for spatial/geographic data.
+
+- **FmIndex** (26)
+
+    A full-text index using the FM algorithm.
+
+- **Hybrid** (27)
+
+    A hybrid index (combined BITMAP + INVERTED).
+
+- **VecIndex** (28)
+
+    A vector index automatically selected by the server for the target vector type.
+
+- **IvfRabitq** (29)
+
+    An IVF index with RaBitQ quantization.
+
+- **MinHashLsh** (30)
+
+    A MinHash LSH index for binary vectors holding MinHash signatures, used for Jaccard-similarity search.
+
+- **Aisaq** (31)
+
+    An AISAQ index for scalar/vector fields. Adaptive Indexing with Scalar And Quantization; supports scalar fields and low-dimensional vectors.

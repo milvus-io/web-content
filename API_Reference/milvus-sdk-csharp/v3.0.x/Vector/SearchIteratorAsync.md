@@ -104,9 +104,7 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 
 A **SearchIterator** that pages over search results as an async iterator of batches. It uses the `search_iter_v2` server protocol and requires a Milvus server of version 2.5.2 or later. Consume with `await foreach`, optionally with `.WithCancellation(token)`.
 
-
-
-SearchIterator members (from the **SearchIterator** documentation):
+The **SearchIterator** exposes the following members:
 
 **METHODS:**
 

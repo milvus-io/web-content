@@ -14,7 +14,7 @@ var request = new CreateSnapshotReq
     SnapshotName = "snapshot_1",
     CollectionName = "my_collection",
     Description = "Snapshot before schema migration",
-    CompactionProtectionSeconds = 3600,
+    CompactionProtectionSeconds = 3600
 };
 
 await client.CreateSnapshotAsync(request);
@@ -22,7 +22,7 @@ await client.CreateSnapshotAsync(request);
 
 **REQUEST PARAMETERS:**
 
-- `Name` (*string*) -
+- `SnapshotName` (*string*) -
 
     The name of the snapshot to create. Must be unique.
 
@@ -41,8 +41,40 @@ await client.CreateSnapshotAsync(request);
 - `CompactionProtectionSeconds` (*long*) -
 
     The duration in seconds during which the segments referenced by this snapshot are protected from compaction. 0 means no protection.
+
+**RETURN TYPE:**
+
+*Task*
+
+**RETURNS:**
+
+This method does not return a value.
+
+**EXCEPTIONS:**
+
+- [MilvusException](../Client/MilvusException.md)
+
+    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+
 ## Example
 
-{example_call and '```csharp
-' + example_call + '
-```' or ''}
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Snapshot;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+await client.ConnectAsync();
+
+await client.CreateSnapshotAsync(new CreateSnapshotReq
+{
+    SnapshotName = "snapshot_1",
+    CollectionName = "my_collection",
+    Description = "Snapshot before schema migration",
+    CompactionProtectionSeconds = 3600
+});
+```
