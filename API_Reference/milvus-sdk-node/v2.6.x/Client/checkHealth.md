@@ -35,6 +35,13 @@ This method returns a promise that resolves to a **CheckHealthResponse** object.
 
     When **isHealthy** is **false**, a list of human-readable reasons explaining which components are unhealthy. The list is empty when **isHealthy** is **true**.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Examples
 
 ```javascript

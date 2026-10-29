@@ -28,7 +28,7 @@ This method returns a promise that resolves to a **GetReplicateConfigurationResp
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     Raised when Milvus cannot load replication configuration.
 

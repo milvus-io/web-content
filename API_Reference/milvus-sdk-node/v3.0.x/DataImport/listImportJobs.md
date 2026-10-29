@@ -22,9 +22,30 @@ await milvusClient.listImportJobs({
 
 **RETURNS:**
 
-*Promise<[HttpImportListResponse](HttpImportListResponse.md)>*
+*Promise<HttpImportListResponse>*
 
 This method returns a promise that resolves to a **HttpImportListResponse** object.
+
+**PARAMETERS:**
+
+- **code** (*number*) -
+
+    Specifies the HTTP API response code.
+
+- **data.records** (*ImportJobType[]*) -
+
+    Lists import jobs with collection name, job ID, progress, and state.
+
+- **message** (*string*) -
+
+    Specifies the response message.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 

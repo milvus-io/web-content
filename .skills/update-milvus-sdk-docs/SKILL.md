@@ -1244,7 +1244,10 @@ whose API semantics are uncertain from the source alone.
 
 - Titles: `# <Operation>()` for operations, `# <Type>` for classes/types.
 - Language tags: code blocks use `cpp` (or the SDK's language) — never leave it
-  blank or wrong.
+  blank or wrong. For the TypeScript-based node SDK, use `javascript` for
+  runnable examples and `## Request Syntax` blocks, and `typescript` for
+  type-declaration blocks (enum/interface/type/`const X = ... as const`), so an
+  `interface`/`enum` declaration is never shown inside a `javascript` fence.
 - Operation pages: `## Request Syntax` block shows a chained-builder example; the
   `**REQUEST METHODS:**` list uses `- \`WithXxx(...)\`` + a short description.
 - `**PARAMETERS:**` for constructor/type params; `**RETURNS:**` describes the
@@ -1260,8 +1263,8 @@ whose API semantics are uncertain from the source alone.
     carries the failure; state "Returns an `Error` if the operation fails." in
     `**RETURNS:**` (the rust template below is the model).
   - **Python (pymilvus) / Java / Node** → `**EXCEPTIONS:**`. These SDKs
-    raise/throw (pymilvus raises, java throws, node throws `MilvusError`), so
-    the heading is accurate.
+    raise/throw (pymilvus raises, java throws, node throws `Error`/gRPC
+    `ServiceError`), so the heading is accurate.
   - **C++** → `**ERROR HANDLING:**` — operations return `Status`/`Error`, so the
     section names error handling even where a method can also throw.
   - **csharp** → `**EXCEPTIONS:**` linking `Client/MilvusException.md`.

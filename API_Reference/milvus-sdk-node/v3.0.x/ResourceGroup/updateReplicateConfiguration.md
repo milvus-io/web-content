@@ -45,7 +45,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     Raised when replication configuration validation fails or the RPC fails.
 

@@ -396,11 +396,17 @@ local directory via this table before editing. Current latest version line is
   Partitions, ResourceGroup, Snapshot, Vector.
 - **Page mapping**: client methods (e.g. `createCollection`) → category pages;
   types under `milvus/types/` → the page documenting that type.
-  The shared error type `MilvusError` (used in the error-handling sections of
-  operation pages) is placed at `Client/MilvusError.md`.
+  The SDK throws plain `Error` / gRPC `ServiceError`; there is **no** `MilvusError`
+  class in the source, so operation pages document the thrown error as
+  `**EXCEPTIONS:**` with a `- **Error**` bullet (do not create a `MilvusError`
+  page and do not link one).
   (Per the SKILL.md placement rule there is no standalone `types/` directory:
   the legacy `types/SearchAggregation.md` was moved to `Vector/SearchAggregation.md`;
   place new type pages in their business-domain category.)
+- **Language tags**: the SDK is written in TypeScript. Use `javascript` for
+  runnable examples and `## Request Syntax` blocks, and `typescript` for
+  type-declaration blocks (enum/interface/type declarations), never an
+  `interface`/`enum` inside a `javascript` fence.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
   rather than hard-coding a patch number here).
 - **Version pins**: NONE — `About.md` uses `v3.0.0+` → `**latest**` rows and

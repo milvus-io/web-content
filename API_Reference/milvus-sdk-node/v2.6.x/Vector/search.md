@@ -270,6 +270,13 @@ This method returns a promise that resolves to a **SearchResults** object.
 
     Optional. Set when the search reports the total candidate count examined.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript

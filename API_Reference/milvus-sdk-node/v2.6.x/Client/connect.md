@@ -28,6 +28,13 @@ connect({
 
 This method returns nothing.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript

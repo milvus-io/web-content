@@ -19,6 +19,10 @@ await milvusClient.restoreRBAC({
 
 - **RBAC_meta** (*[RBACMeta](RBACMeta.md)*) -
 
+    **[REQUIRED]**
+
+    The full RBAC meta to restore, including users, roles, grants, and privilege groups.
+
 - **timeout** (*number*) -  
 
     The timeout duration for this operation. 
@@ -52,6 +56,13 @@ This method returns a promise that resolves to a **ResStatus** object.
 - **reason** (*string*) - 
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 

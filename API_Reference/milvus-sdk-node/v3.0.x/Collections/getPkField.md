@@ -33,6 +33,13 @@ getPkField({
 
 The complete field schema object for the primary key, including name, data type, field ID, and other properties.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript

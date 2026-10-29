@@ -189,6 +189,13 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     A mapping from function-output-field name to its **FieldSchema**.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript

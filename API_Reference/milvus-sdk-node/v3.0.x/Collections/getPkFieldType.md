@@ -33,6 +33,13 @@ getPkFieldType({
 
 The data type of the primary key field (e.g., `"Int64"`, `"VarChar"`). See [DataType](DataType.md).
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript

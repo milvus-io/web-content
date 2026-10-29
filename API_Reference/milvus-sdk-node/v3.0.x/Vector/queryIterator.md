@@ -72,7 +72,7 @@ Returns an async iterable. Each iteration yields an array of entities for that b
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     This exception will be raised when any error occurs during this operation.
 

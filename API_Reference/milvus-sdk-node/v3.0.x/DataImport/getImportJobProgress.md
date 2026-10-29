@@ -29,9 +29,50 @@ await milvusClient.getImportJobProgress({
 
 **RETURNS:**
 
-*Promise<[HttpImportProgressResponse](HttpImportProgressResponse.md)>*
+*Promise<HttpImportProgressResponse>*
 
 This method returns a promise that resolves to a **HttpImportProgressResponse** object.
+
+**PARAMETERS:**
+
+- **code** (*number*) -
+
+    Specifies the HTTP API response code.
+
+- **data.jobId** (*string*) -
+
+    Specifies the import job ID.
+
+- **data.progress** (*number*) -
+
+    Specifies the job progress.
+
+- **data.state** (*string*) -
+
+    Specifies the current job state.
+
+- **data.totalRows** (*number*) -
+
+    Specifies the total row count when available.
+
+- **data.importedRows** (*number*) -
+
+    Specifies the imported row count when available.
+
+- **data.details** (*ImportJobDetailType[]*) -
+
+    Lists per-file import progress details when available.
+
+- **data.reason** (*string*) -
+
+    Specifies the failure reason when the job fails.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 
