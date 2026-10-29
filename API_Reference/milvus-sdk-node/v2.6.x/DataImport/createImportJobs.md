@@ -43,9 +43,30 @@ await milvusClient.createImportJobs({
 
 **RETURNS:**
 
-*Promise<[HttpImportCreateResponse](HttpImportCreateResponse.md)>*
+*Promise<HttpImportCreateResponse>*
 
 This method returns a promise that resolves to a **HttpImportCreateResponse** object.
+
+**PARAMETERS:**
+
+- **code** (*number*) -
+
+    Specifies the HTTP API response code.
+
+- **data.jobId** (*string*) -
+
+    Specifies the created import job ID.
+
+- **message** (*string*) -
+
+    Specifies the response message.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 

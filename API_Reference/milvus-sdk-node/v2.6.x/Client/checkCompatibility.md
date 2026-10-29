@@ -31,6 +31,13 @@ await milvusClient.checkCompatibility({
 
 A promise that resolves to the result of the specified checker function.
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Examples
 
 ```javascript

@@ -1,6 +1,6 @@
 # ConsistencyLevelEnum
 
-This enum specifies the consistency guarantee applied to reads and queries.
+Defines the consistency guarantee applied to reads and queries.
 
 ```typescript
 export enum ConsistencyLevelEnum {
@@ -10,27 +10,26 @@ export enum ConsistencyLevelEnum {
   Eventually = 3,
   Customized = 4, // Users pass their own `guarantee_timestamp`. Deprecated
 }
-
 ```
 
-**FIELDS:**
+**Constants:**
 
-- **Strong**
+- **Strong** (0)
 
     Strongest guarantee: reads see all data committed before the request starts.
 
-- **Session**
+- **Session** (1)
 
     Read-your-writes consistency via a per-session timestamp (the default in PyMilvus).
 
-- **Bounded**
+- **Bounded** (2)
 
     Reads tolerate staleness within a bounded time window.
 
-- **Eventually**
+- **Eventually** (3)
 
-    Weakest guarantee: replicas converge eventually, lowest latency.
+    Weakest guarantee: replicas converge eventually; lowest latency.
 
-- **Customized**
+- **Customized** (4)
 
     The caller passes its own guarantee timestamp. Deprecated.

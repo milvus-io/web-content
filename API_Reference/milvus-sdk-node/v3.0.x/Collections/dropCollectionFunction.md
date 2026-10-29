@@ -53,7 +53,7 @@ dropCollectionFunction({
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     This exception will be raised when any error occurs during this operation.
 

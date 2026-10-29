@@ -121,7 +121,7 @@ This method returns a promise that resolves to a `SearchResults` object.
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     This exception will be raised when any error occurs during this operation.
 

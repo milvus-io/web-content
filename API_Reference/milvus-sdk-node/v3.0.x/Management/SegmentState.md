@@ -1,6 +1,6 @@
 # SegmentState
 
-This enum represents the state of a segment.
+Represents the state of a segment.
 
 ```typescript
 export enum SegmentState {
@@ -13,10 +13,9 @@ export enum SegmentState {
   Dropped = 'Dropped',
   Importing = 'Importing',
 }
-
 ```
 
-**FIELDS:**
+**Constants:**
 
 - **SegmentStateNone**
 
@@ -34,18 +33,18 @@ export enum SegmentState {
 
     The segment is sealed and no longer accepts inserts.
 
-- **Flushed**
+- **Flushed** ('Flushed')
 
     The segment is sealed and has been flushed to storage.
 
-- **Flushing**
+- **Flushing** ('Flushing')
 
     The segment is being flushed.
 
-- **Dropped**
+- **Dropped** ('Dropped')
 
     The segment has been dropped.
 
-- **Importing**
+- **Importing** ('Importing')
 
     The segment is being created via bulk import.

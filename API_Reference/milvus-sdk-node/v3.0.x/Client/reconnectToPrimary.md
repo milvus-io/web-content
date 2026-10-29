@@ -24,7 +24,7 @@ This method returns a promise that resolves to a **boolean** indicating whether 
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     This exception will be raised when any error occurs during this operation.
 

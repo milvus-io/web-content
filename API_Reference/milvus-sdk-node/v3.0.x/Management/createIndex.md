@@ -56,11 +56,11 @@ await milvusClient.createIndex([
 
 - **index_type** (*string*) -
 
-    The type of the index to create.
+    The type of the index to create. See [IndexType](IndexType.md).
 
 - **metric_type** (*string*) -
 
-    The metric type used to measure vector distance. Possible values: `IP`, `L2`, `COSINE`, `HAMMING`, `JACCARD`, `BM25` (used only for full text search). For more information, refer to [Metric Types](https://milvus.io/docs/metric.md).
+    The metric type used to measure vector distance. Possible values: `IP`, `L2`, `COSINE`, `HAMMING`, `JACCARD`, `BM25` (used only for full text search). See [MetricType](MetricType.md).
 
     This is available only when the specified field is a vector field.
 
@@ -99,6 +99,13 @@ This method returns a promise that resolves to a **ResStatus** object.
 - **reason** (*string*) - 
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 

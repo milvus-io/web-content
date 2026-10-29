@@ -44,21 +44,39 @@ export interface SearchAggregation {
 
 ## AggregationDirection
 
-- **asc** - Sort buckets in ascending order.
+**Constants:**
 
-- **desc** - Sort buckets in descending order.
+- **asc** ('asc')
+
+    Sort buckets in ascending order.
+
+- **desc** ('desc')
+
+    Sort buckets in descending order.
 
 ## AggregationMetricOp
 
-- **avg** - Average of the grouped field values.
+**Constants:**
 
-- **sum** - Sum of the grouped field values.
+- **avg** ('avg')
 
-- **count** - Number of entities in each group.
+    Average of the grouped field values.
 
-- **min** - Minimum of the grouped field values.
+- **sum** ('sum')
 
-- **max** - Maximum of the grouped field values.
+    Sum of the grouped field values.
+
+- **count** ('count')
+
+    Number of entities in each group.
+
+- **min** ('min')
+
+    Minimum of the grouped field values.
+
+- **max** ('max')
+
+    Maximum of the grouped field values.
 
 ## SearchAggregation
 

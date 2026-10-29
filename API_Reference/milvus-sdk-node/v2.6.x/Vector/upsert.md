@@ -87,7 +87,7 @@ Returns the mutation result, including the operation status and counts for the a
 
 **EXCEPTIONS:**
 
-- **MilvusError**
+- **Error**
 
     The server rejects the upsert request or the RPC fails. Inspect the error details for the server code and failure reason.
 

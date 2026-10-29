@@ -201,6 +201,8 @@ await milvusClient.createCollection({
 
 - **schema** ([FieldType](FieldType.md)[]) -
 
+    The schema of the collection as a list of field definitions.
+
 - **functions** (*list*)
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
@@ -401,6 +403,8 @@ await milvusClient.createCollection({
 
 - **schema** ([FieldType](FieldType.md)[]) -
 
+    The schema of the collection as a list of field definitions.
+
 - **functions** (*list*)
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
@@ -550,6 +554,13 @@ This method returns a promise that resolves to a **ResStatus** object.
 - **reason** (*string*) - 
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
 
 ## Example
 

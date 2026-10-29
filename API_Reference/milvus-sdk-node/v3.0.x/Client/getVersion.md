@@ -24,6 +24,13 @@ This method returns a promise that resolves to a **GetVersionResponse** object.
 
     The semantic version of the Milvus server (for example, **"v3.0.0"**).
 
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
 ## Example
 
 ```javascript
