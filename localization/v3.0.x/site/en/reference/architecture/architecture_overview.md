@@ -229,7 +229,8 @@ title: Milvus Architecture Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world’s most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.</p>
+    </button></h3><p>Object storage persists data and index files. Milvus supports object storage backends such as MinIO, AWS S3, and Azure Blob Storage. QueryNodes cache the data and indexes needed to serve queries.</p>
+<p>With <a href="/docs/tiered-storage-overview.md">Tiered Storage</a>, available in Milvus 2.6.4 and later, QueryNodes can load segment metadata first and fetch field data or indexes on demand, rather than loading everything at initialization. Remote object storage remains the persistent source; evicting a local cache entry does not delete the stored data. Accessing uncached data adds storage I/O and can increase query latency. Use <a href="/docs/warm-up.md">Warm Up</a> for latency-sensitive fields or indexes, and evaluate cold-query as well as warm-cache latency before choosing a loading strategy.</p>
 <h3 id="WAL-storage" class="common-anchor-header">WAL storage<button data-href="#WAL-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

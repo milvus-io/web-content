@@ -67,21 +67,24 @@ title: Requirements for Installing Milvus Standalone
 <tr><th>Operating system</th><th>Software</th><th>Note</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 or later</td><td>Docker Desktop</td><td>Set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, installation might fail. <br/>See <a href="https://docs.docker.com/desktop/mac/install/">Install Docker Desktop on Mac</a> for more information.</td></tr>
-<tr><td>Linux platforms</td><td><ul><li>Docker 19.03 or later</li><li>Docker Compose 1.25.1 or later</li></ul></td><td>See <a href="https://docs.docker.com/engine/install/">Install Docker Engine</a> and <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a> for more information.</td></tr>
-<tr><td>Windows with WSL 2 enabled</td><td>Docker Desktop</td><td>We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Install Docker Desktop on Windows with WSL 2 backend</a> for more information.</td></tr>
+<tr><td>macOS supported by Docker Desktop</td><td>Docker Desktop</td><td>Allocate at least 8 GB of memory to the Docker virtual machine (VM) and size its CPUs according to the hardware recommendations above. <br/>See <a href="https://docs.docker.com/desktop/setup/install/mac-install/">Install Docker Desktop on Mac</a> for more information.</td></tr>
+<tr><td>Linux platforms</td><td><ul><li>Docker 19.03 or later</li><li>Docker Compose plugin V2 or later (for Compose deployments)</li></ul></td><td>See <a href="https://docs.docker.com/engine/install/">Install Docker Engine</a> and <a href="https://docs.docker.com/compose/install/">Install Docker Compose</a> for more information.</td></tr>
+<tr><td>Windows with WSL 2 enabled</td><td>Docker Desktop</td><td>We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See <a href="https://docs.docker.com/desktop/features/wsl/">Install Docker Desktop on Windows with WSL 2 backend</a> for more information.</td></tr>
 </tbody>
 </table>
-<p>The following dependencies will be obtained and configured automatically when Milvus Standalone is installed using the Docker script, or the Docker Compose configuration:</p>
+<p>The Compose guides use <code translate="no">docker compose</code>, not the legacy <code translate="no">docker-compose</code> V1 command. Verify the plugin before following them:</p>
+<pre><code translate="no" class="language-bash">docker compose version
+<button class="copy-code-btn"></button></code></pre>
+<p>The installation method determines how dependencies are provided. Use the image versions pinned in the downloaded script or Compose file:</p>
 <table>
 <thead>
-<tr><th>Software</th><th>Version</th><th>Note</th></tr>
+<tr><th>Component</th><th>Docker script</th><th>Docker Compose</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>See <a href="#Additional-disk-requirements">additional disk requirements</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Bundled with Milvus</td><td>Default message queue (embedded); no separate service to install.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Optional — only if you switch the message queue to Pulsar; not installed by default.</td></tr>
+<tr><td>etcd</td><td>Embedded in the Milvus container</td><td>Separate container; see <a href="#Additional-disk-requirements">additional disk requirements</a>.</td></tr>
+<tr><td>Object storage</td><td>Local filesystem; no MinIO container</td><td>MinIO container with its image pinned in the Compose file</td></tr>
+<tr><td>Woodpecker</td><td>Bundled with Milvus; local-filesystem WAL backend</td><td>Bundled with Milvus; MinIO/object-storage WAL backend</td></tr>
+<tr><td>Pulsar</td><td>Optional external service; not installed by default</td><td>Optional external service; not installed by default</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Additional disk requirements<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">

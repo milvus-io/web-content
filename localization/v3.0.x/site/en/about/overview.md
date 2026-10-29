@@ -23,7 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+    </button></h1><p>Milvus is a vector database for storing embeddings and searching them together with structured metadata. Use it as the retrieval layer in applications such as RAG, semantic search, and agent memory: your application supplies the data, embedding model, and access rules, while Milvus stores, indexes, and retrieves the matching entities.</p>
+<p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
 <audio id="milvus-audio" style="display: none;">
 <source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
 </audio>
@@ -207,7 +208,7 @@ summary: >-
 <li><a href="/docs/use-json-fields.md">JSON Support</a></li>
 <li><a href="/docs/array_data_type.md">Array Support</a></li>
 <li><a href="/docs/geometry-field.md">Geolocation</a></li>
-<li>Text (under development)</li>
+<li><a href="/docs/text.md">Text</a> (Milvus 3.0 and later; requires Storage V3)</li>
 </ul>
 <h3 id="Why-Milvus" class="common-anchor-header">Why Milvus?<button data-href="#Why-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,7 +231,7 @@ summary: >-
 <li><p><strong>Support for Various Vector Index Types and Hardware Acceleration</strong></p>
 <p>Milvus separates the system and core vector search engine, allowing it to support all major vector index types that are optimized for different scenarios, including HNSW, IVF, FLAT (brute-force), SCANN, and DiskANN, with <a href="/docs/index-explained.md">quantization-based</a> variations and <a href="/docs/mmap.md">mmap</a>. Milvus optimizes vector search for advanced features such as <a href="/docs/boolean.md">metadata filtering</a> and <a href="/docs/range-search.md">range search</a>. Additionally, Milvus implements hardware acceleration to enhance vector search performance and supports GPU indexing, such as NVIDIA’s <a href="/docs/gpu-cagra.md">CAGRA</a>.</p></li>
 <li><p><strong>Flexible Multi-tenancy and Hot/Cold Storage</strong></p>
-<p>Milvus supports <a href="/docs/multi_tenancy.md#Multi-tenancy-strategies">multi-tenancy</a> through isolation at database, collection, partition, or partition key level. The flexible strategies allow a single cluster to handle hundreds to millions of tenants, also ensures optimized search performance and flexible access control. Milvus enhances cost-effectiveness with hot/cold storage. Frequently accessed hot data can be stored in memory or on SSDs for better performance, while less-accessed cold data is kept on slower, cost-effective storage. This mechanism can significantly reduce costs while maintaining high performance for critical tasks.</p></li>
+<p>Milvus supports <a href="/docs/multi_tenancy.md#Multi-tenancy-strategies">multi-tenancy</a> through isolation at database, collection, partition, or partition key level. Choose an isolation strategy based on tenant count, access control, and workload. With <a href="/docs/tiered-storage-overview.md">Tiered Storage</a>, available in Milvus 2.6.4 and later, QueryNodes cache data from persistent object storage on demand. This can reduce local resource requirements, but a query that needs uncached data incurs additional I/O and can have higher latency. Configure <a href="/docs/warm-up.md">Warm Up</a> and <a href="/docs/eviction.md">eviction</a> for your access patterns, and measure both cold and warm queries.</p></li>
 <li><p><strong>Sparse Vector for Full Text Search and Hybrid Search</strong></p>
 <p>In addition to semantic search through dense vector, Milvus also natively supports <a href="/docs/full-text-search.md">full text search</a> with BM25 as well as learned sparse embedding such as SPLADE and BGE-M3. Users can store sparse vector and dense vector in the same collection, and define functions to rerank results from multiple search requests. See examples of <a href="/docs/full_text_search_with_milvus.md">Hybrid Search with semantic search + full text search</a>.</p></li>
 <li><p><strong>Data Security and Fine-grain Access Control</strong></p>
@@ -289,4 +290,26 @@ Milvus CDC can replicate data changes from one Milvus cluster to another for pri
 Milvus has planned a set of connectors for you to seamlessly integrate Milvus with third-party tools, such as Apache Spark. Currently, you can use our Spark Connector to feed your Milvus data to Apache Spark for machine-learning processing. For details, refer to <a href="/docs/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
 <li><p>Vector Transmission Services (VTS)
 Milvus provides a set of tools for you to transfer your data between a Milvus instance and a bunch of data sources, including Zilliz clusters, Elasticsearch, Postgres (PgVector), and another Milvus instance. For details, refer to <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
+</ul>
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Choose a guide based on the task you want to complete:</p>
+<ul>
+<li>Run <a href="/docs/quickstart.md">Quickstart</a> to create a collection, insert entities, and search them.</li>
+<li>Use <a href="/docs/create-collection.md">Create Collection</a> to define vector fields, primary keys, and metadata for your data.</li>
+<li>Follow <a href="/docs/build-rag-with-milvus.md">Build RAG with Milvus</a> to connect retrieval to an application.</li>
+<li>Read <a href="/docs/index-explained.md">Index Explained</a> to compare index trade-offs for your workload.</li>
 </ul>

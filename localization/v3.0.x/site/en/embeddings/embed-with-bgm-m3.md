@@ -23,6 +23,7 @@ title: BGE M3
       </svg>
     </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> is named for its capabilities in Multi-Linguality, Multi-Functionality, and Multi-Granularity. Capable of supporting over 100 languages, BGE-M3 sets new benchmarks in multi-lingual and cross-lingual retrieval tasks. Its unique ability to perform dense retrieval, multi-vector retrieval, and sparse retrieval within a single framework makes it an ideal choice for a wide range of information retrieval (IR) applications.</p>
 <p>Milvus integrates with the BGE M3 model using the <strong>BGEM3EmbeddingFunction</strong> class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching.</p>
+<p>This example generates embeddings in your Python process; it does not connect to a Milvus server. The model weights are downloaded on first use, so you need network access to the model host or a populated local model cache. CPU inference is supported with <code translate="no">use_fp16=False</code>.</p>
 <p>To use this feature, install the necessary dependencies:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Store and search the embeddings<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Generating embeddings is the first step. To use these outputs for retrieval, define a collection and index each vector field:</p>
+<ul>
+<li>Map <code translate="no">docs_embeddings[&quot;dense&quot;]</code> to a <code translate="no">FLOAT_VECTOR</code> field with dimension <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>.</li>
+<li>Map <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> to a <code translate="no">SPARSE_FLOAT_VECTOR</code> field, which does not require a fixed dimension in the Milvus schema. Use an <code translate="no">IP</code> metric for these learned sparse vectors. See <a href="/docs/sparse_vector.md">Sparse Vector</a>.</li>
+<li>Store each document’s ID and source text or metadata alongside its vectors so search results can be traced back to the source.</li>
+<li>Encode queries with the same model and settings as the documents. Issue a single <code translate="no">hybrid_search()</code> request with one <code translate="no">AnnSearchRequest</code> for the dense field and one for the sparse field, and let a server-side ranker such as RRF or a weighted ranker fuse the results.</li>
+</ul>
+<p>Follow <a href="/docs/hybrid_search_with_milvus.md">Hybrid Search with Milvus</a> for the collection schema, indexes, insertion, and hybrid-search requests. The examples on this page use the wrapper’s dense and sparse outputs; they do not demonstrate BGE-M3’s optional ColBERT multi-vector output.</p>
