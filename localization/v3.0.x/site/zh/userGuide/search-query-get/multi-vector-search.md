@@ -92,7 +92,7 @@ summary: >-
 <li><p><code translate="no">id</code>: 用作存储文本 ID 的主键。该字段的数据类型为<code translate="no">INT64</code> 。</p></li>
 <li><p><code translate="no">text</code>: 用于存储文本内容。该字段的数据类型为<code translate="no">VARCHAR</code> ，最大长度为1000字节。<code translate="no">enable_analyzer</code> 选项已设置为<code translate="no">True</code> ，以支持全文搜索。</p></li>
 <li><p><code translate="no">text_dense</code>: 用于存储文本的稠密向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维度为768。</p></li>
-<li><p><code translate="no">text_sparse</code>: 用于存储文本的稠密向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">text_sparse</code>: 用于存储文本的稀疏向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 <li><p><code translate="no">image_dense</code>: 用于存储产品图片的稠密向量。该字段的数据类型为<code translate="no">FLOAT_VETOR</code> ，向量维度为512。</p></li>
 </ul>
 <p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此必须将 Milvus 的<code translate="no">Function</code> 添加到 Schema 中。有关更多详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文检索</a>。</p>
