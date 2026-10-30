@@ -84,7 +84,16 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Once vectorization is complete, the query embedding list is compared with each document embedding list, token by token, to determine the final similarity score.</p>
-<p>As shown in the diagram above, the query contains two tokens, namely <code translate="no">machine</code> and <code translate="no">learning</code>, and the document in the window has four tokens: <code translate="no">neural</code>, <code translate="no">network</code>, <code translate="no">python</code>, and <code translate="no">tutorial</code>. Once these tokens are vectorized, the vector embeddings of each query token are compared with those in the document to get a list of similarity scores. Then the highest scores from each score list are summed to produce the final score. The process for determining a document’s final score is known as maximum similarity (<strong>MAX_SIM</strong>). For details on maximum similarity, refer to Maximum similarity.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="https://raw.githubusercontent.com/milvus-io/milvus-docs/79341af3be75a66425e5972ea26d1d9c90705fd7/assets/late-interaction.png" alt="Late interaction scores each query token against document tokens." class="doc-image" id="late-interaction-scores-each-query-token-against-document-tokens." />
+    <span>Late interaction scores each query token against document tokens.</span>
+  </span>
+</p>
+<p>As shown in the diagram above, the query contains two tokens, namely <code translate="no">machine</code> and <code translate="no">learning</code>, and the document in the window has four tokens: <code translate="no">neural</code>, <code translate="no">network</code>, <code translate="no">python</code>, and <code translate="no">tutorial</code>. Once these tokens are vectorized, the vector embeddings of each query token are compared with those in the document to get a list of similarity scores. Then the highest scores from each score list are summed to produce the final score. The process for determining a document’s final score is known as maximum similarity (<strong>MAX_SIM</strong>).</p>
+<!-- doc:block:start id="embeddinglist-metric-reference" -->
+<p>For the supported metric types, see <a href="/docs/index-structarray-fields.md#EmbeddingList-search">EmbeddingList index metrics</a>.</p>
+<!-- doc:block:end id="embeddinglist-metric-reference" -->
 <div class="alert note">
 <p>When implementing a ColBERT-like text retrieval system in Milvus, you are not limited to splitting documents into tokens.</p>
 <p>Instead, you can divide the documents into segments of any appropriate size, embed each segment to create an embedding list, and store the document along with its embedded segments in an entity.</p>
@@ -106,7 +115,14 @@ summary: >-
       </svg>
     </button></h3><p>Based on ColBERT, ColPali (arXiv: <a href="https://arxiv.org/abs/2407.01449?spm=a2ty_o01.29997173.0.0.31c4c9217HFv28&amp;file=2407.01449">2407.01449</a>) proposes a novel approach to visually rich document retrieval that leverages Vision-Language Models (VLMs). During data ingestion, each document page is rendered into a high-resolution image, then split into patches, rather than tokenized. For example, a document page image of 448 x 448 pixels can produce 1,024 patches, each measuring 14 x 14 pixels.</p>
 <p>This method preserves non-textual information, such as the document layout, images, and table structures, which are lost when using text-only retrieval systems.</p>
-<p>The VLM used in ColPali is called PaliGemma (arXiv: <a href="https://arxiv.org/html/2407.07726v2#S1">2407.07726</a>), which comprises an image encoder (<strong>SigLIP-400M</strong>), a decoder-only language model (<strong>Gemma2-2B</strong>), and a linear layer that projects the image encoder’s output into the language model’s vector space, as shown in the above diagram.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="https://raw.githubusercontent.com/milvus-io/milvus-docs/79341af3be75a66425e5972ea26d1d9c90705fd7/assets/copali-extension.png" alt="ColPali compares query token embeddings with document page patch embeddings." class="doc-image" id="colpali-compares-query-token-embeddings-with-document-page-patch-embeddings." />
+    <span>ColPali compares query token embeddings with document page patch embeddings.</span>
+  </span>
+</p>
+<p>This diagram illustrates the retrieval workflow. Its intermediate dimensions are schematic; use the model configuration and the embedding tensor shape for implementation. The visual patches do not include additional text or special tokens in the model input.</p>
+<p>The VLM used in ColPali is called PaliGemma (arXiv: <a href="https://arxiv.org/html/2407.07726v2#S1">2407.07726</a>), which comprises an image encoder (<strong>SigLIP-400M</strong>), a decoder-only language model (<strong>Gemma-2B</strong>), and a linear layer that projects the image encoder’s output into the language model’s vector space, as shown in the above diagram.</p>
 <p>During data ingestion, a document page, represented as a raw image, is divided into multiple visual patches, each of which is embedded to generate a list of vector embeddings. Then they are projected into the language model’s vector space to obtain the final embedding list, as in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>→</mo><msub><mi>E</mi><mi>d</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>e</mi><mrow><mi>d</mi><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>e</mi><mrow><mi>d</mi><mn>2</mn></mrow></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>e</mi><mrow><mi>d</mi><mi>n</mi></mrow></msub><mo stretchy="false">]</mo><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>n</mi><mo>×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">d \rightarrow E_d = [e_{d1}, e_{d2}, \dots, e_{dn}] ∈ \R^{n×d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span></span></span></span></span></span></span>. When a query arrives, it is tokenized, and each token is embedded to generate a list of vector embeddings, as in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>→</mo><msub><mi>E</mi><mi>q</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>e</mi><mrow><mi>q</mi><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>e</mi><mrow><mi>q</mi><mn>2</mn></mrow></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>e</mi><mrow><mi>q</mi><mi>m</mi></mrow></msub><mo stretchy="false">]</mo><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>m</mi><mo>×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">q \rightarrow E_q = [e_{q1}, e_{q2}, \dots, e_{qm}] ∈ \R^{m×d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">q</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">q</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">q</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">q</span><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8491em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">d</span></span></span></span></span></span></span></span></span></span></span></span>. Then, <strong>MAX_SIM</strong> has been applied to compare the two embedding lists and obtain the final score between the query and the document page.</p>
 <h2 id="ColBERT-text-retrieval-system" class="common-anchor-header">ColBERT text retrieval system<button data-href="#ColBERT-text-retrieval-system" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +139,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we are going to set up a ColBERT text retrieval system using StructArray. Before that, set up a Milvus v2.6.x instance, and obtain a Cohere access token.</p>
+    </button></h2><!-- doc:block:start id="colbert-prerequisites" -->
+<p>Use a Milvus deployment that supports StructArray vector subfields, <code translate="no">MAX_SIM_COSINE</code> indexes, and EmbeddingList search. See <a href="/docs/structarray-limits.md">StructArray Limits</a> for requirements. The database examples use PyMilvus 3.0.2. You also need a Cohere access token.</p>
+<!-- doc:block:end id="colbert-prerequisites" -->
 <h3 id="Step-1-Install-the-dependencies" class="common-anchor-header">Step 1: Install the dependencies<button data-href="#Step-1-Install-the-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +158,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Run the following command to install the dependencies.</p>
-<pre><code translate="no" class="language-Shell">pip install --upgrade huggingface-hub transformers datasets pymilvus cohere
+<pre><code translate="no" class="language-bash">pip install --upgrade huggingface-hub transformers datasets pymilvus cohere
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Load-the-Cohere-dataset" class="common-anchor-header">Step 2: Load the Cohere dataset<button data-href="#Step-2-Load-the-Cohere-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -243,7 +261,7 @@ schema.add_field(<span class="hljs-string">&#x27;title&#x27;</span>, DataType.VA
 <span class="hljs-comment"># Create struct schema</span>
 struct_schema = client.create_struct_field_schema()
 struct_schema.add_field(<span class="hljs-string">&#x27;text&#x27;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
-struct_schema.add_field(<span class="hljs-string">&#x27;emb&#x27;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">512</span>)
+struct_schema.add_field(<span class="hljs-string">&#x27;emb&#x27;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 
 schema.add_field(<span class="hljs-string">&#x27;paragraphs&#x27;</span>, DataType.ARRAY,
                  element_type=DataType.STRUCT,
@@ -300,32 +318,21 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>According to ColBERT’s design, the query text should be tokenized and then embedded into an EmbeddingList. In this step, we will use the same model that Cohere used to generate embeddings for the paragraphs in the Wikipedia dataset.</p>
+    </button></h3><p>This example demonstrates late interaction between query terms and stored paragraphs. It uses Cohere’s <code translate="no">embed-multilingual-v3.0</code> model, which produces 1,024-dimensional embeddings, rather than ColBERT’s contextual token encoder. Embed the query terms with <code translate="no">search_query</code> to match the retrieval use case.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> cohere
 
 co = cohere.ClientV2(<span class="hljs-string">&quot;COHERE_API_KEY&quot;</span>)
 
-query_inputs = [
-    {
-        <span class="hljs-string">&#x27;content&#x27;</span>: [
-            {<span class="hljs-string">&#x27;type&#x27;</span>: <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;Adobe&#x27;</span>},
-        ]
-    },
-    {
-        <span class="hljs-string">&#x27;content&#x27;</span>: [
-            {<span class="hljs-string">&#x27;type&#x27;</span>: <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;software&#x27;</span>}
-        ]
-    }
-]
+query_inputs = [<span class="hljs-string">&quot;Adobe&quot;</span>, <span class="hljs-string">&quot;software&quot;</span>]
 
 embeddings = co.embed(
-    inputs=query_inputs,
+    texts=query_inputs,
     model=<span class="hljs-string">&#x27;embed-multilingual-v3.0&#x27;</span>,
-    input_type=<span class="hljs-string">&quot;classification&quot;</span>,
+    input_type=<span class="hljs-string">&quot;search_query&quot;</span>,
     embedding_types=[<span class="hljs-string">&quot;float&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In the code, the query texts are organized into tokens in <code translate="no">query_inputs</code> and embedded into a list of float vectors. Then you can use Milvus’ EmbeddingList to conduct a similarity search as follows.</p>
+<p>In the code, the query terms are stored in <code translate="no">query_inputs</code> and embedded into a list of float vectors. Then you can use the <code translate="no">EmbeddingList</code> API to conduct a similarity search as follows.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 query_emb_list = EmbeddingList()
@@ -344,17 +351,9 @@ results = client.search(
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
   <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Document <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;title&#x27;</span>]}</span>: <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output of the above code is similar to the following:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Document Software: 2.3035</span>
-<span class="hljs-comment"># Document Application: 2.1875</span>
-<span class="hljs-comment"># Document Adobe Illustrator: 2.1167</span>
-<span class="hljs-comment"># Document Open source: 2.0542</span>
-<span class="hljs-comment"># Document Computer: 1.9811</span>
-<span class="hljs-comment"># Document Microsoft: 1.9784</span>
-<span class="hljs-comment"># Document Web browser: 1.9655</span>
-<span class="hljs-comment"># Document Program: 1.9627</span>
-<span class="hljs-comment"># Document Website: 1.9594</span>
-<span class="hljs-comment"># Document Computer science: 1.9460</span>
+<p>The following schematic output illustrates the format. Document titles, ordering, and scores depend on the dataset and query embeddings:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Document &lt;title&gt;: &lt;score&gt;</span>
+<span class="hljs-comment"># Document &lt;another title&gt;: &lt;score&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Each pairwise cosine similarity score ranges from <code translate="no">-1</code> to <code translate="no">1</code>. The final <code translate="no">MAX_SIM_COSINE</code> score can be greater than <code translate="no">1</code> because it aggregates multiple token-level maximum similarity scores.</p>
 <h2 id="ColPali-document-retrieval-system" class="common-anchor-header">ColPali document retrieval system<button data-href="#ColPali-document-retrieval-system" class="anchor-icon" translate="no">
@@ -372,7 +371,9 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will set up a ColPali-based document retrieval system using StructArray. Before that, set up a Milvus v2.6.x instance.</p>
+    </button></h2><!-- doc:block:start id="colpali-prerequisites" -->
+<p>Use a Milvus deployment that supports StructArray vector subfields, <code translate="no">MAX_SIM_COSINE</code> indexes, and EmbeddingList search. See <a href="/docs/structarray-limits.md">StructArray Limits</a> for requirements. The database examples use PyMilvus 3.0.2.</p>
+<!-- doc:block:end id="colpali-prerequisites" -->
 <h3 id="Step-1-Install-the-dependencies" class="common-anchor-header">Step 1: Install the dependencies<button data-href="#Step-1-Install-the-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -388,7 +389,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-Shell">pip install --upgrade huggingface-hub transformers datasets pymilvus &#x27;colpali-engine&gt;=0.3.0,&lt;0.4.0&#x27;
+    </button></h3><pre><code translate="no" class="language-bash">pip install --upgrade huggingface-hub transformers datasets pymilvus <span class="hljs-string">&#x27;colpali-engine&gt;=0.3.0,&lt;0.4.0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Load-the-Vidore-dataset" class="common-anchor-header">Step 2: Load the Vidore dataset<button data-href="#Step-2-Load-the-Vidore-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -405,7 +406,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In this section, we will use a Vidore dataset named <strong>vidore_v2_finance_en</strong>. This dataset is a corpus of annual reports from the banking sector, intended for long-document understanding tasks. It is one of the 10 corpora comprising the ViDoRe v3 Benchmark. You can find details about this dataset on <a href="https://huggingface.co/datasets/vidore/vidore_v3_finance_en">this page</a>.</p>
+    </button></h3><p>In this section, we will use a Vidore dataset named <strong>vidore_v3_finance_en</strong>. This dataset is a corpus of annual reports from the banking sector, intended for long-document understanding tasks. It is one of the 10 corpora comprising the ViDoRe v3 Benchmark. You can find details about this dataset on <a href="https://huggingface.co/datasets/vidore/vidore_v3_finance_en">this page</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
 ds = load_dataset(<span class="hljs-string">&quot;vidore/vidore_v3_finance_en&quot;</span>, <span class="hljs-string">&quot;corpus&quot;</span>)
@@ -438,7 +439,7 @@ df = ds[<span class="hljs-string">&#x27;test&#x27;</span>].to_pandas()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>As illustrated in the <a href="/docs/search-with-embedding-lists.md#overview">Overview</a> section, the ColPali model is a VLM that projects images into the vector space of a text model. In this step, we will use the latest ColPali model <strong>vidore/colpali-v1.3</strong>. You can find details about this model on <a href="https://huggingface.co/vidore/colpali-v1.3">this page</a>.</p>
+    </button></h3><p>As illustrated in the <a href="/docs/search-with-embedding-lists.md#ColPali-extension">ColPali extension</a> section, the ColPali model is a VLM that projects images into the vector space of a text model. In this step, we will use the ColPali model <strong>vidore/colpali-v1.3</strong>. You can find details about this model on <a href="https://huggingface.co/vidore/colpali-v1.3">this page</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> cast
 <span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali, ColPaliProcessor
@@ -472,7 +473,7 @@ batch_images = processor.process_images(images).to(model.device)
 
 <span class="hljs-comment"># [1031, 128]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the code above, the ColPali model resizes the image to 448 x 448 pixels, then divides it into patches, each measuring 14 x 14 pixels. Lastly, these patches are embedded into 1,031 embeddings, each with 128 dimensions.</p>
+<p>In the code above, the ColPali model resizes the image to 448 x 448 pixels, then divides it into patches, each measuring 14 x 14 pixels. The example output contains 1,031 embeddings, each with 128 dimensions, including embeddings for additional non-image tokens. The output length depends on the model and processor; inspect the tensor shape and ensure it fits the StructArray capacity before insertion.</p>
 <p>You can generate embeddings for all the images using a loop as follows:</p>
 <pre><code translate="no" class="language-python">data = []
 
@@ -519,8 +520,8 @@ batch_images = processor.process_images(images).to(model.device)
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=YOUR_CLUSTER_ENDPOINT,
-    token=YOUR_API_KEY
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
@@ -596,7 +597,7 @@ client.create_collection(
 <div class="alert note">
 <p>Inserting the financial reports can take a long time. Each page can contain more than one thousand patch vectors, and each vector is stored inside the <code translate="no">patches</code> StructArray field. For larger datasets, split <code translate="no">data</code> into smaller batches and insert one batch at a time.</p>
 </div>
-<p>From the output, you can find that all pages from the Vidore dataset are inserted.</p>
+<p>Check the insert response to confirm how many pages were inserted.</p>
 <h3 id="Step-6-Search-within-the-financial-reports" class="common-anchor-header">Step 6: Search within the financial reports<button data-href="#Step-6-Search-within-the-financial-reports" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
