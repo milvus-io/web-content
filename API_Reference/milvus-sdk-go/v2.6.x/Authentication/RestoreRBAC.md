@@ -6,6 +6,12 @@ This operation restores RBAC metadata from a previously created backup.
 func (c *Client) RestoreRBAC(ctx context.Context, option RestoreRBACOption, callOptions ...grpc.CallOption) error
 ```
 
+**PARAMETERS:**
+
+- **meta** (*entity.RBACMeta*)
+
+    The RBAC metadata to restore, typically the snapshot returned by `BackupRBAC()`. See [BackupRBAC](BackupRBAC.md) for the struct definition.
+
 **RETURN TYPE:**
 
 *error*

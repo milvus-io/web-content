@@ -55,9 +55,11 @@ client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption(collectionName).
 
     The maximum total number of entities to iterate over. A negative value means unlimited. Default: `Unlimited` (-1).
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *QueryIterator, error*
+
+**RETURNS:**
 
 The QueryIterator interface provides paginated access to query results. Call `Next()` repeatedly until `io.EOF` is returned.
 

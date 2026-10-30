@@ -3,7 +3,7 @@
 Enumerates the possible states of a compaction operation.
 
 ```go
-type CompactionState commonpb
+type CompactionState commonpb.CompactionState
 ```
 
 **Constants:**

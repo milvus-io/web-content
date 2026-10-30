@@ -6,6 +6,16 @@ This operation returns statistics about a partition, such as row count.
 func (c *Client) GetPartitionStats(ctx context.Context, opt GetPartitionStatsOption, callOptions ...grpc.CallOption) (map[string]string, error)
 ```
 
+**PARAMETERS:**
+
+- **collectionName** (*string*)
+
+    The name of the target collection.
+
+- **partitionName** (*string*)
+
+    The name of the target partition.
+
 **RETURN TYPE:**
 
 *map[string]string, error*

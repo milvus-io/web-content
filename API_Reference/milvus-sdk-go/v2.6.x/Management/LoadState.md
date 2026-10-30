@@ -13,7 +13,25 @@ type LoadState struct {
 
 - **State** (*LoadStateCode*)
 
-    The current state.
+    The current load state of the collection or partitions.
+
+    **Constants:**
+
+    - **LoadStateLoading**
+
+        The collection or partitions are being loaded.
+
+    - **LoadStateLoaded**
+
+        The collection or partitions have been fully loaded.
+
+    - **LoadStateUnloading**
+
+        The collection or partitions are being released.
+
+    - **LoadStateNotLoad**
+
+        The collection or partitions are not loaded.
 
 - **Progress** (*int64*)
 
