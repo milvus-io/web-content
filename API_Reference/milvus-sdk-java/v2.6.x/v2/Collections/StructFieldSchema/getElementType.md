@@ -20,7 +20,7 @@ getElementType()
 
 The return value will always be `DataType.Struct`.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

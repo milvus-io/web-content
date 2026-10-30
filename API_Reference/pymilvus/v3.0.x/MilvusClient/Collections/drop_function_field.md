@@ -8,7 +8,7 @@ This does not apply to external collections.
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.drop_function_field(

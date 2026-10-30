@@ -2,7 +2,7 @@
 
 This operation grants a role to a user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 grant_role(

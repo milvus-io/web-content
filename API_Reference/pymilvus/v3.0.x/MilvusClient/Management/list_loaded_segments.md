@@ -2,7 +2,7 @@
 
 This operation lists all currently loaded segments for a collection, including information about row count, sort status, storage level, and memory size.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.list_loaded_segments(

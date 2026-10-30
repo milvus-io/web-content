@@ -38,7 +38,7 @@ A dictionary containing the connection configuration.
 
     This exception will be raised when the connection configuration is invalid.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections

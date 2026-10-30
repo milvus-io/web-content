@@ -133,7 +133,7 @@ A **CollectionSchema** object.
 
     - This exception will be raised if the **auto_id** parameter has been set but the value is not a boolean.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType

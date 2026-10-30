@@ -107,7 +107,7 @@ A **MutationResult** object contains the following fields:
 
     This exception will be raised when the specified primary field is not valid.
 
-## Examples
+## Example
 
 ```python
 import pandas as pd

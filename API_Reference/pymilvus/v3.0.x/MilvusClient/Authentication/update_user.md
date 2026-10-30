@@ -2,7 +2,7 @@
 
 This operation updates the description of an existing user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.update_user(

@@ -87,7 +87,7 @@ A dataclass containing restore job information with the following fields:
 
     If the job ID is invalid or the operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

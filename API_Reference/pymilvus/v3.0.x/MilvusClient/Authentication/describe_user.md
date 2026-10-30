@@ -2,7 +2,7 @@
 
 This operation describes a specific user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 describe_user(

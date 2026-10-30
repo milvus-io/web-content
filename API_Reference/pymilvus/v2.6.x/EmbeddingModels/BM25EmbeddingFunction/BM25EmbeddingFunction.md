@@ -47,7 +47,7 @@ BM25EmbeddingFunction(
 
     The number of worker processes to use for parallelization. Defaults to the number of CPU cores if not specified.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

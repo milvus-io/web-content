@@ -63,7 +63,7 @@ None
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, db

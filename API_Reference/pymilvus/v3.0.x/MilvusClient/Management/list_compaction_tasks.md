@@ -8,7 +8,7 @@ Terminal tasks are subject to server-side garbage collection and are not an audi
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.list_compaction_tasks(

@@ -2,7 +2,7 @@
 
 This operation lists the partitions in a specified collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_partitions(

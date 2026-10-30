@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_queries(
@@ -26,7 +26,7 @@ A dictionary containing the query embeddings.
 
 When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -38,7 +38,7 @@ When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **retu
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

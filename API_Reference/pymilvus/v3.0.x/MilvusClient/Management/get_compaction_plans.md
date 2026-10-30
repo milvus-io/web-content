@@ -2,7 +2,7 @@
 
 This operation returns the compaction plans for a specific compaction job, including the merge plans showing which segments will be combined.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_compaction_plans(

@@ -2,7 +2,7 @@
 
 This operation creates a struct field schema.
 
-## Request syntax
+## Request Syntax
 
 ```python
 MilvusClient.create_struct_field_schema(**kwargs) -> StructFieldSchema

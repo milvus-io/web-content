@@ -201,7 +201,7 @@ A dictionary that contains detailed information about the specified collection.
 
     This arises when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

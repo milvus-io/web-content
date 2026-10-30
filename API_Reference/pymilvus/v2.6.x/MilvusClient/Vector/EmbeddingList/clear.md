@@ -16,7 +16,7 @@ clear()
 
 An empty **[EmbeddingList](EmbeddingList.md)** instance.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.client.embedding_list import EmbeddingList

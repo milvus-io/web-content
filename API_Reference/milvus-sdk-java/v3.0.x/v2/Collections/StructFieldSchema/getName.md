@@ -20,7 +20,7 @@ getName()
 
 The return value will be the name of the specified Array of Struct field.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

@@ -2,7 +2,7 @@
 
 This operation drops a user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_user(

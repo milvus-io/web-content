@@ -17,7 +17,7 @@ let config = ConnectConfig::new()
 
     Creates a value initialized with the SDK defaults.
 
-## PARAMETERS
+**PARAMETERS:**
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ let config = ConnectConfig::new()
 | `database` | `String` | `""` | Database selected on connection; the `default` database is used when empty. |
 | `retry` | `RetryConfig` | `RetryConfig::new()` | Retry policy applied to V2 RPC calls. See [RetryConfig](RetryConfig.md). |
 
-## METHODS
+**METHODS:**
 
 Each field has a consuming setter, a mutable setter, and a getter.
 

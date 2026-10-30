@@ -14,7 +14,7 @@ Configured on a [ConnectConfig](ConnectConfig.md) through its `retry` field. The
 
     Creates a value initialized with the SDK defaults: `max_attempts = 75`, `max_retry_timeout = Duration::ZERO`, `initial_backoff = 10ms`, `max_backoff = 3s`, `backoff_multiplier = 3.0`, `retry_on_rate_limit = true`.
 
-## PARAMETERS
+**PARAMETERS:**
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ Configured on a [ConnectConfig](ConnectConfig.md) through its `retry` field. The
 | `backoff_multiplier` | `f64` | `3.0` | Multiplier applied to the delay after each failed attempt. |
 | `retry_on_rate_limit` | `bool` | `true` | Whether server-side rate-limit responses may be retried. |
 
-## METHODS
+**METHODS:**
 
 Each field has a consuming setter, a mutable setter, and a getter.
 

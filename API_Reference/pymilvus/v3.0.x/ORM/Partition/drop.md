@@ -38,7 +38,7 @@ drop(
 
     This arises when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import Collection, CollectionSchema, FieldSchema, DataType, Partition

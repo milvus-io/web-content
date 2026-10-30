@@ -36,7 +36,7 @@ A boolean value indicating whether the current collection has a built index or n
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType

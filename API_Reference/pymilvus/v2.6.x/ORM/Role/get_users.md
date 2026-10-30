@@ -16,7 +16,7 @@ This operation lists all users associated with the current role.
 get_users()
 ```
 
-**PARAMETERS**
+**PARAMETERS:**
 
 N/A
 
@@ -34,7 +34,7 @@ A tuple that contains the names of all users added to the current role.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Role

@@ -2,7 +2,7 @@
 
 This operation adds a single vector embedding to the current **[EmbeddingList](EmbeddingList.md)** instance.
 
-## Request syntax
+## Request Syntax
 
 ```python
 add(
@@ -31,7 +31,7 @@ The current **[EmbeddingList](EmbeddingList.md)** instance itself for method cha
 
     This exception will be raised if the provided vector embedding does not match the existing ones in dimensionality.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.client.embedding_list import EmbeddingList

@@ -67,7 +67,7 @@ The restore job ID. Use this ID with `get_restore_snapshot_state()` to track the
 
     This exception will be raised when the snapshot does not exist, the target collection already exists, or the operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

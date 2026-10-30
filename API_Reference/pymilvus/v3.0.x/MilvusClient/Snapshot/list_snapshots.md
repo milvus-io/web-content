@@ -38,7 +38,7 @@ A list of snapshot names.
 
     If the operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation blocks the current process until the specified index has been built.
 
-## Request syntax
+## Request Syntax
 
 ```python
 wait_for_index_building_complete(
@@ -71,7 +71,7 @@ None
 
     This exception will be raised if multiple indexes exist but the index name is left unspecified.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import (

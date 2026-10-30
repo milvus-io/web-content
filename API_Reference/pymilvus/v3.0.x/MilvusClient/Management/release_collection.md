@@ -2,7 +2,7 @@
 
 This operation releases the data of a specific collection from memory.
 
-## Request syntax
+## Request Syntax
 
 ```python
 release_collection(
@@ -39,7 +39,7 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType

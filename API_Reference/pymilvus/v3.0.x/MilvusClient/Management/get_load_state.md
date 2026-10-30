@@ -2,7 +2,7 @@
 
 This operation displays whether a specified collection or partition is loaded or not.
 
-## Request syntax
+## Request Syntax
 
 ```python
 get_load_state(

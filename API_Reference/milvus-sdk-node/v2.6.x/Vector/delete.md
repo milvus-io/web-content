@@ -126,7 +126,7 @@ A **ResStatus** object.
 
     This exception is raised when any error occurs during this operation.
 
-## Example
+## Examples
 
 <Tabs groupId="code" defaultValue='python' values={[{"label":"Python","value":"python"},{"label":"Java","value":"java"}]}>
 <TabItem value='python'>

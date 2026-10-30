@@ -38,7 +38,7 @@ A promise that resolves to the result of the specified checker function.
 
     This exception is raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```javascript
 await milvusClient.checkCompatibility({

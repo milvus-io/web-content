@@ -65,7 +65,7 @@ This operation returns no value.
 
     This exception will be raised when a parameter value is invalid.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

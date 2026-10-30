@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation returns the load status of a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 load_state(
@@ -78,7 +78,7 @@ The possible states are as follows:
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import (

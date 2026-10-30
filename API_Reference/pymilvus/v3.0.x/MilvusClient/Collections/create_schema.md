@@ -2,7 +2,7 @@
 
 This operation creates a collection schema.
 
-## Request syntax
+## Request Syntax
 
 ```python
 MilvusClient.create_schema(**kwargs) -> CollectionSchema

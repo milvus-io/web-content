@@ -2,7 +2,7 @@
 
 This operation conducts a scalar filtering with a specified boolean expression.
 
-## Request syntax
+## Request Syntax
 
 ```python
 query(
@@ -158,7 +158,7 @@ If the number of returned entities is less than expected, duplicate entities may
 
     This exception will be raised when a parameter value doesn't match the required data type.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

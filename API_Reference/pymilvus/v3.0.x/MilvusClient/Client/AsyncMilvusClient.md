@@ -88,7 +88,7 @@ AsyncMilvusClient(
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-## Examples
+## Example
 
 ```python
 import asyncio

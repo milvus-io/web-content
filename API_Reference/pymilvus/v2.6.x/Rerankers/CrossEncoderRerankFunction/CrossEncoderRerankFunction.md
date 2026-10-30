@@ -42,7 +42,7 @@ CrossEncoderRerankFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [cross_encoder](https://www.sbert.net/docs/package_reference/cross_encoder.html#cross-encoder).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import CrossEncoderRerankFunction

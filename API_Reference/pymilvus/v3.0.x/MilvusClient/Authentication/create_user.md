@@ -2,7 +2,7 @@
 
 This operation creates a user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_user(

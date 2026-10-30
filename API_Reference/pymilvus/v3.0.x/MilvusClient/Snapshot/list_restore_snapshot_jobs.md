@@ -90,7 +90,7 @@ A list of RestoreSnapshotJobInfo objects, each containing restore job informatio
 
     If the operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

@@ -26,7 +26,7 @@ The dictionary representation of the field schema.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType

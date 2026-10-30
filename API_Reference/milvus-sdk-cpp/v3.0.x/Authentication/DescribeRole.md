@@ -90,7 +90,7 @@ RoleDesc();
 RoleDesc(const std::string& name, std::vector<GrantItem>&& grant_items);
 ```
 
-**Methods:**
+**METHODS:**
 
 - `const std::string& Name() const`
 

@@ -2,7 +2,7 @@
 
 This operation lists all indexes of a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_indexes(
@@ -38,7 +38,7 @@ A list of index names.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType

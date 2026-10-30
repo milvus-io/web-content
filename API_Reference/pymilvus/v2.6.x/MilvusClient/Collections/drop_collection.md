@@ -2,7 +2,7 @@
 
 This operation drops a collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_collection(
@@ -38,7 +38,7 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

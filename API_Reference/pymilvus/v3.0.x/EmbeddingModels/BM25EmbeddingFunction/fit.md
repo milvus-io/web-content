@@ -2,7 +2,7 @@
 
 This operation fits various statistics that are required to calculate BM25 ranking score using the corpus given.
 
-## Request syntax
+## Request Syntax
 
 ```python
 fit(
@@ -30,7 +30,7 @@ None
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

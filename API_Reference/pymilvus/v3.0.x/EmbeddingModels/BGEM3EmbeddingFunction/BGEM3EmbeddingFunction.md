@@ -62,7 +62,7 @@ BGEM3EmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [bge_m3](https://github.com/FlagOpen/FlagEmbedding/blob/master/FlagEmbedding/bge_m3.py).
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

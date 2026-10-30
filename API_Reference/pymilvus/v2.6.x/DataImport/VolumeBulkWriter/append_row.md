@@ -31,7 +31,7 @@ This method does not return a value.
 
     Raised when the row data fails validation against the collection schema (e.g., type mismatch, missing required fields, vector dimension mismatch).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.bulk_writer.volume_bulk_writer import VolumeBulkWriter

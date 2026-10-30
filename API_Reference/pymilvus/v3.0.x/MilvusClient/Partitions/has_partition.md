@@ -2,7 +2,7 @@
 
 This operation checks whether the specified partition exists in the specified collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 has_partition(

@@ -2,7 +2,7 @@
 
 This operation lists all persistent (flushed) segments for a collection, including information about row count, sort status, and storage level.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.list_persistent_segments(

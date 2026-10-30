@@ -55,7 +55,7 @@ A **[StructFieldSchema](StructFieldSchema.md)** object contains the fields that 
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import DataType, FieldSchema, StructFieldSchema

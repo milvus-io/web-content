@@ -2,7 +2,7 @@
 
 This operation loads the unloaded data of a loaded collection into memory.
 
-## Request syntax
+## Request Syntax
 
 ```python
 refresh_load(

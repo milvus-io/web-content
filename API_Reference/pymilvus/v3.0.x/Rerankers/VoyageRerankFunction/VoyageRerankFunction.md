@@ -27,7 +27,7 @@ VoyageRerankFunction(
 
     The API key for accessing the Voyage API. For information on how to create an API key, refer to [API Key and Python Client](https://docs.voyageai.com/docs/api-key-and-installation).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import VoyageRerankFunction

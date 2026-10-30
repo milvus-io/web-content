@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_queries(
@@ -24,7 +24,7 @@ encode_queries(
 
 Compressed sparse row matrices representing the query embeddings.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -36,7 +36,7 @@ Compressed sparse row matrices representing the query embeddings.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

@@ -2,7 +2,7 @@
 
 This operation describes a specific role.
 
-## Request syntax
+## Request Syntax
 
 ```python
 describe_role(

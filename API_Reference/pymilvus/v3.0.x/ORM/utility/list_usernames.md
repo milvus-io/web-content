@@ -45,7 +45,7 @@ A list that contains the names of all existing users.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, utility

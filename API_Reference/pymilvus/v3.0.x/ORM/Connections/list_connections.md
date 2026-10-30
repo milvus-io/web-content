@@ -32,7 +32,7 @@ A list of all connection names and handler objects.
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections

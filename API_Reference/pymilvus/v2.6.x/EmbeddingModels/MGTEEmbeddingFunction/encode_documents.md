@@ -2,7 +2,7 @@
 
 This operation takes in documents and encodes them into vector embeddings.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_documents(
@@ -24,7 +24,7 @@ encode_documents(
 
 A dictionary that contains the encoded embeddings, both dense and sparse.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 *None*
 
@@ -34,7 +34,7 @@ A dictionary that contains the encoded embeddings, both dense and sparse.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.hybrid import MGTEEmbeddingFunction

@@ -23,7 +23,7 @@ class FieldPartialUpdateOp.OpType:
 
     Removes every matching incoming element from the current array.
 
-## Examples
+## Example
 
 Compares an operation message with the exported enum value.
 

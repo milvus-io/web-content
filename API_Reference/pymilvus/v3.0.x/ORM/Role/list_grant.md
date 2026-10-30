@@ -94,7 +94,7 @@ A **GrantItem** object contains the following fields:
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import Role

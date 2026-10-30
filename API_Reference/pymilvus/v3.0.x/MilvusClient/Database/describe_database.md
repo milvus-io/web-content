@@ -36,7 +36,7 @@ A dictionary that contains detailed information about the specified database.
 
 - `MilvusException` - Raised if any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

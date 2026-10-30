@@ -197,7 +197,7 @@ ConnectConfig.builder()
 
     Returns the proxy server's address specified in **[ConnectConfig](ConnectConfig.md)**.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.client.ConnectConfig;

@@ -2,7 +2,7 @@
 
 This operation describes a specific index.
 
-## Request syntax
+## Request Syntax
 
 ```python
 describe_index(

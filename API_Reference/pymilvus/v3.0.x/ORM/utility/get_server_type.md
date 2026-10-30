@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation checks the type of the Milvus instance.
 
-## Request syntax
+## Request Syntax
 
 ```python
 get_server_type(

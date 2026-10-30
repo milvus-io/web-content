@@ -135,7 +135,7 @@ A **[CollectionSchema](CollectionSchema.md)** object contains the fields that ha
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import DataType, FieldSchema, CollectionSchema

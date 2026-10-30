@@ -2,7 +2,7 @@
 
 This operation returns the version string of the connected Milvus server. Optionally returns detailed server information, including build time, git commit, and deployment mode.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_server_version(

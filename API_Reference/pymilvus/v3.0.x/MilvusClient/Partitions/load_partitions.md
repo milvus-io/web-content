@@ -2,7 +2,7 @@
 
 This operation loads a specific set of partitions in a specified collection into memory.
 
-## Request syntax
+## Request Syntax
 
 ```python
 load_partitions(

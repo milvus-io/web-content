@@ -126,7 +126,7 @@ A list of dictionaries with each dictionary representing a queried entity.
 
     This exception will be raised when a parameter value doesn't match the required data type.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType

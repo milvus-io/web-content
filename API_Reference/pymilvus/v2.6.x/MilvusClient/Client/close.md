@@ -2,7 +2,7 @@
 
 This operation closes the current Milvus client.
 
-## Request syntax
+## Request Syntax
 
 ```python
 close() -> None
@@ -20,11 +20,11 @@ None
 
 None
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

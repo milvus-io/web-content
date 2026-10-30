@@ -43,7 +43,7 @@ None
 
     This exception will be raised when the specified collection does not exist.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType

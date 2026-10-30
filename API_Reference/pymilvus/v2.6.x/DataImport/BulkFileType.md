@@ -47,7 +47,7 @@ class BulkFileType(IntEnum):
 
     Sets the file type to JSON Lines (*.jsonl*).
 
-## Examples
+## Example
 
 ```python
 from pathlib import Path

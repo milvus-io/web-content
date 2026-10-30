@@ -46,7 +46,7 @@ Raised when `source_cluster_id` or `target_pchannel` is empty. Provide both sour
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the RPC fails. Inspect the server error message for exact failure details.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

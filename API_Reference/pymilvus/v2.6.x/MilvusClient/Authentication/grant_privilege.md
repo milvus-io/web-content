@@ -2,7 +2,7 @@
 
 This operation assigns a privilege to a role.
 
-## Request syntax
+## Request Syntax
 
 ```python
 grant_privilege(

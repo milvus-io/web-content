@@ -20,7 +20,7 @@ getDataType()
 
 The return value will always be `DataType.Array`.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

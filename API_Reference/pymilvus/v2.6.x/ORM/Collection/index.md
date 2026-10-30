@@ -56,7 +56,7 @@ The returned `Index` object is deprecated and will be removed in PyMilvus 3.1. U
 
     This exception will be raised when multiple indexes exist but no index name has been specified. 
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType

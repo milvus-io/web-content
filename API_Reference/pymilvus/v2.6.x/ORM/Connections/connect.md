@@ -155,7 +155,7 @@ None
 
     This exception will be raised when the server specified in the connection parameters is not reachable/ready and the client cannot connect to it.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections

@@ -120,7 +120,7 @@ An integer that indicates an asynchronous job that has been created.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 import time

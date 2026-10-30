@@ -92,7 +92,7 @@ If you try to load a collection that is not indexed, you will receive a **[Milvu
 
 </div>
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType

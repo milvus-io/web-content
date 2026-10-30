@@ -44,7 +44,7 @@ A list of collection names.
 
     This exception will be raised when any error occurs during this operation, especially when the specified alias does not exist.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, utility

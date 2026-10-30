@@ -14,7 +14,7 @@ Configured on a [ConnectConfig](ConnectConfig.md) through its `telemetry` field.
 
     Creates telemetry settings initialized with the SDK defaults: `enabled = true`, `heartbeat_interval = 10s`, `sampling_rate = 1.0`, `error_max_count = 100`, `client_id = ""`.
 
-## PARAMETERS
+**PARAMETERS:**
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ Configured on a [ConnectConfig](ConnectConfig.md) through its `telemetry` field.
 | `error_max_count` | `usize` | `100` | Maximum number of recent errors retained by the client. A zero value is normalized to 100 when a client constructs its telemetry runtime. |
 | `client_id` | `String` | `""` | Pinned client identifier that remains stable across process restarts. An empty value asks the SDK to generate a new process-local UUID. |
 
-## METHODS
+**METHODS:**
 
 Each field has a consuming setter, a mutable setter, and a getter.
 

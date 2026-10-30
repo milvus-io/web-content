@@ -2,7 +2,7 @@
 
 This operation drops an index from a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_index(
@@ -45,7 +45,7 @@ None
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType

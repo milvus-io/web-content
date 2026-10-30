@@ -2,7 +2,7 @@
 
 This operation lists all existing aliases for a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_aliases(

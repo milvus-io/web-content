@@ -17,7 +17,7 @@ let config = ConnectConfig::new()
 
     Creates a value initialized with the SDK defaults.
 
-## PARAMETERS
+**PARAMETERS:**
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ let config = ConnectConfig::new()
 | `retry` | `RetryConfig` | `RetryConfig::new()` | Retry policy applied to V2 RPC calls. See [RetryConfig](RetryConfig.md). |
 | `telemetry` | `TelemetryConfig` | `TelemetryConfig::new()` | Client-side telemetry settings. See [TelemetryConfig](TelemetryConfig.md). |
 
-## METHODS
+**METHODS:**
 
 Each field has a consuming setter, a mutable setter, and a getter.
 

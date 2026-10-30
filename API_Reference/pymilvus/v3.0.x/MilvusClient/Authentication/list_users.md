@@ -2,7 +2,7 @@
 
 This operation lists the names of all existing users.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_users(

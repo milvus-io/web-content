@@ -4,7 +4,7 @@ This operation in [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbe
 
 To prevent potential errors when directly using the **\_\_call()\_\_** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -30,7 +30,7 @@ sentence_transformer_ef(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -42,7 +42,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

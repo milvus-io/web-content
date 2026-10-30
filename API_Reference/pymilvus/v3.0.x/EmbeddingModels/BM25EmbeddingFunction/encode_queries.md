@@ -4,7 +4,7 @@ This operation takes in a list of query strings and encodes each query into a ve
 
 When using **[BM25EmbeddingFunction](BM25EmbeddingFunction.md)**, note that **encoding_queries()** and **encoding_documents()** operations cannot be interchanged mathematically. Therefore, there is no implemented **__call__()** available.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_queries(
@@ -26,7 +26,7 @@ encode_queries(
 
 A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html) data structure, which is a sparse matrix format commonly used for query embedding representations.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ValueError**
 
@@ -38,7 +38,7 @@ A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

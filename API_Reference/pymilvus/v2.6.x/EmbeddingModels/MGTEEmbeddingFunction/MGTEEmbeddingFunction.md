@@ -62,7 +62,7 @@ MGTEEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.hybrid import MGTEEmbeddingFunction

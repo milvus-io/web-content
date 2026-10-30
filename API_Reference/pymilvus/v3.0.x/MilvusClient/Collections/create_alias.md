@@ -2,7 +2,7 @@
 
 This operation creates an alias for an existing collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_alias(

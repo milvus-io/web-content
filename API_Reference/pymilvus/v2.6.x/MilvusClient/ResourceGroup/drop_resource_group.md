@@ -33,7 +33,7 @@ None
 
 - `MilvusException` - Raised if any error occurs during this operation.
 
-## Examples
+## Example
 
 <div class="alert note">
 

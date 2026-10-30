@@ -2,7 +2,7 @@
 
 This operation takes in documents and encodes them into vector embeddings.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_documents(
@@ -26,7 +26,7 @@ A dictionary containing the document embeddings.
 
 When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -38,7 +38,7 @@ When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **retu
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

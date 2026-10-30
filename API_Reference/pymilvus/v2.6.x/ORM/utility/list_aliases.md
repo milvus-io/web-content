@@ -56,7 +56,7 @@ A list of aliases for the specified collection. If the collection has no aliases
 
     This exception will be raised when this operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility

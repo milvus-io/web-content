@@ -8,7 +8,7 @@ Dropped segment metadata is subject to server-side garbage collection. Callers t
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.list_segments(

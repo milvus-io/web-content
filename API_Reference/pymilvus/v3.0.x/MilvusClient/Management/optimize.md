@@ -88,7 +88,7 @@ When `wait=False`, returns an **OptimizeTask** that supports `done()`, `progress
 
     This exception will be raised when index build fails, compaction fails, or timeout occurs.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

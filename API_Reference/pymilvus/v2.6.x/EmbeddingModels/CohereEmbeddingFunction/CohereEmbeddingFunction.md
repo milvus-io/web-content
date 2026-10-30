@@ -67,7 +67,7 @@ CohereEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [Embed](https://docs.cohere.com/reference/embed).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import CohereEmbeddingFunction

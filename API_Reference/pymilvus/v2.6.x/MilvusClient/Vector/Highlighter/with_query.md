@@ -2,7 +2,7 @@
 
 Adds a query-term definition to a `LexicalHighlighter` configuration for highlighting text matched by filtering expressions (e.g., TEXT_MATCH). This augments `highlight_query` with one entry describing which field and terms to highlight and which filter type produced them. Highlighting runs as post-processing and does not affect retrieval, filtering, ranking, or scoring.
 
-## Request syntax
+## Request Syntax
 
 ```python
 with_query(
@@ -27,7 +27,7 @@ The filtering type that provides the terms to highlight. For text-based filterin
 
 *None*
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType, Function, FunctionType, LexicalHighlighter

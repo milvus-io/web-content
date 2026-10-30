@@ -2,7 +2,7 @@
 
 This operation conducts a vector similarity search with an optional scalar filtering expression in an iterative manner.
 
-## Request syntax
+## Request Syntax
 
 ```python
 search_iterator(
@@ -147,7 +147,7 @@ A **SearchIterator** instance that provides the following methods:
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

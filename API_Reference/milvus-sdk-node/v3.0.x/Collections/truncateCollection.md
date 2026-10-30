@@ -79,7 +79,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     This exception is raised when any error occurs during this operation.
 
-## Example
+## Examples
 
 ### Basic usage
 

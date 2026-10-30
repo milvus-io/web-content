@@ -2,7 +2,7 @@
 
 This operation takes in documents and encodes them into vector embeddings.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_documents(
@@ -24,7 +24,7 @@ encode_documents(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ValueError**
 
@@ -36,7 +36,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import MistralAIEmbeddingFunction

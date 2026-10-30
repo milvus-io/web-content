@@ -2,7 +2,7 @@
 
 This operation updates the description of an existing role.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.alter_role(

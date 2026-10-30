@@ -89,7 +89,7 @@ A **ResStatus** object.
 
     This exception is raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```javascript
 const milvusClient = new MilvusClient({
