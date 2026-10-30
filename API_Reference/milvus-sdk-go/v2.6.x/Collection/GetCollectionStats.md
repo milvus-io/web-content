@@ -6,6 +6,12 @@ This operation returns statistics about a collection, such as row count.
 func (c *Client) GetCollectionStats(ctx context.Context, opt GetCollectionOption) (map[string]string, error)
 ```
 
+**PARAMETERS:**
+
+- **collectionName** (*string*)
+
+    The name of the target collection.
+
 **RETURN TYPE:**
 
 *map[string]string, error*

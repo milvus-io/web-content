@@ -6,6 +6,16 @@ This operation creates a new partition in a collection for organizing data.
 func (c *Client) CreatePartition(ctx context.Context, opt CreatePartitionOption, callOptions ...grpc.CallOption) error
 ```
 
+**PARAMETERS:**
+
+- **collectionName** (*string*)
+
+    The name of the target collection.
+
+- **partitionName** (*string*)
+
+    The name of the new partition.
+
 **RETURN TYPE:**
 
 *error*

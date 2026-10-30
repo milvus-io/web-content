@@ -46,7 +46,7 @@ type IndexDescription struct {
 
 - **index.Index** *(embedded)*
 
-    Inherits methods from index.Index.
+    Inherits methods from index.Index. See [Index](Index/Index.md).
 
 - **State** (*index.IndexState*)
 

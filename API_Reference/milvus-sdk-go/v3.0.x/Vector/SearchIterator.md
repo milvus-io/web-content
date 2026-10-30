@@ -103,9 +103,11 @@ client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(collectionName, 
 
     Sets a custom search parameter key-value pair.
 
-**RETURNS:**
+**RETURN TYPE:**
 
 *SearchIterator, error*
+
+**RETURNS:**
 
 The SearchIterator interface provides paginated access to search results. Call `Next()` repeatedly until `io.EOF` is returned.
 

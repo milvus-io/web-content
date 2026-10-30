@@ -3,7 +3,7 @@
 Specifies the consistency guarantee level for read operations on a collection.
 
 ```go
-type ConsistencyLevel commonpb
+type ConsistencyLevel commonpb.ConsistencyLevel
 ```
 
 **Constants:**
