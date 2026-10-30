@@ -6,6 +6,12 @@ This operation drops a role from the system.
 func (c *Client) DropRole(ctx context.Context, opt DropRoleOption, callOpts ...grpc.CallOption) error
 ```
 
+**PARAMETERS:**
+
+- **roleName** (*string*)
+
+    The name of the role to drop.
+
 **RETURN TYPE:**
 
 *error*

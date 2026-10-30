@@ -6,6 +6,12 @@ This operation switches the active database for the current client connection.
 func (c *Client) UseDatabase(ctx context.Context, option UseDatabaseOption) error
 ```
 
+**PARAMETERS:**
+
+- **dbName** (*string*)
+
+    The name of the database to switch to.
+
 **RETURN TYPE:**
 
 *error*

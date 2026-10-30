@@ -6,6 +6,12 @@ This operation creates a connection to the specified Milvus server with the spec
 func New(ctx context.Context, config *ClientConfig) (*Client, error)
 ```
 
+**PARAMETERS:**
+
+- **config** (*[ClientConfig](ClientConfig.md)*)
+
+    The client configuration, including the server address, authentication, and connection options.
+
 **RETURN TYPE:**
 
 *\*Client, error*
