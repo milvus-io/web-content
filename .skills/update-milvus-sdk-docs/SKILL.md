@@ -1,6 +1,6 @@
 ---
 name: update-milvus-sdk-docs
-description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 14-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
+description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 15-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
 ---
 
 # Update Milvus SDK Reference Docs
@@ -86,16 +86,16 @@ run with a clarification instead of downgrading.
 
 
 **Format check mode**: when the user's instruction includes "检查格式",
-"格式检查", "check formatting", or "check format", run the **full 14-step
-reconciliation checklist** against the target tree — the same Steps 1–13
-(including sub-step 8b) plus Step 14 in
+"格式检查", "check formatting", or "check format", run the **full 15-step
+reconciliation checklist** against the target tree — the same Steps 1–14
+(including sub-step 8b) plus Step 15 in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
 enum format, cross-links, misplaced type pages, missing/absent inline
 expansions, unnecessary standalone pages, operation page filename and title, error
 reporting convention, About.md format compliance, example relevance, example
-heading cardinality) plus the
+heading cardinality, section heading forms) plus the
 Pass 1 response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
 versions — it audits and corrects whatever the checklist surfaces, including
@@ -104,7 +104,8 @@ the steps reveal as missing or wrong, as well as pure formatting issues (wrong
 property names, missing `**Constants:**` headers, empty member bullets, 3+
 consecutive blank lines, missing or blank code-fence language tags, incorrect
 titles, examples that describe a different API or type than the page documents,
-example headings that disagree with the number of examples in their section).
+example headings that disagree with the number of examples in their section,
+section headings that deviate from the canonical heading forms).
 **Step 10 (unnecessary standalone pages) is applied unconditionally**:
 a type page referenced by only one page is folded into that page and deleted,
 regardless of why it was created and regardless of any per-SDK placement note
@@ -116,7 +117,7 @@ titles, links, whitespace, or code snippets. Before editing, emit a
 `FORMAT CHECK BASELINE` containing the target paths/tags, a complete source
 API/type inventory, a complete Markdown page inventory, the source-to-page map,
 and a type reference matrix showing every page that references each type. Then
-execute Steps 1–14 in order. Do not replace a full pass with representative
+execute Steps 1–15 in order. Do not replace a full pass with representative
 samples; sample during diagnosis only, then reconcile every matching page.
 The matrix must be source-backed and classified before Step 5: remove every
 candidate whose name is absent from the target Java tag, then classify each
@@ -263,7 +264,7 @@ Returns a status indicating whether the operation succeeded.
 ````
 
 Type page format: `# <Type>`, description, a ```` ```cpp ```` block with
-constructors/aliases, `**PARAMETERS:**`, then `## Methods` grouping related
+constructors/aliases, `**PARAMETERS:**`, then `**METHODS:**` grouping related
 methods. Cross-page links are relative (e.g. `../Collections/DataType.md`).
 
 ## Workflow
@@ -1153,6 +1154,37 @@ non-standard variants outside this exact heading form (e.g. `## **Examples**`,
 `### Examples`) unless the tree's own convention normalizes them; flag them in
 the run summary instead.
 
+**Step 15 — Section heading forms**: normalize every section heading to the
+canonical form for its kind, so the same section reads identically across all
+SDK trees:
+- **Request-syntax block**: `## Request Syntax` (sentence-case `Syntax`, a
+  `##`-level Markdown heading) — never `## Request syntax`, `## REQUEST
+  SYNTAX`, or `### Request Syntax`.
+- **Parameter / method / return / error sections**: bold uppercase
+  with a trailing colon — `**PARAMETERS:**`, `**REQUEST METHODS:**`,
+  `**BUILDER METHODS:**`, `**RETURN TYPE:**`, `**RETURNS:**`,
+  `**EXCEPTIONS:**`, `**ERROR HANDLING:**`, `**METHODS:**` —
+  never a `##`-level heading (`## PARAMETERS`,
+  `## METHODS`), and never mixed-case or missing-colon variants
+  (`**Parameters:**`, `**Methods:**`, `**Exceptions:**`, `**Returns**`,
+  `**REQUEST METHODS**`). Renormalize every variant of a canonical section to
+  its uppercase-with-colon form. The error-section heading itself stays
+  language-specific (Step 12): `**EXCEPTIONS:**` for
+  pymilvus/java/node/csharp, `**ERROR HANDLING:**` for go/cpp — do not flatten
+  it to a generic form.
+- **Enum constant heading**: `**Constants:**` is the one canonical mixed-case
+  exception (mandated by the canonical enum format below) — never convert it to
+  `**CONSTANTS:**` and never use `## Constants`, `**VALUES:**`, `**FIELDS:**`,
+  or `**VARIANTS:**`.
+- **Example heading**: `## Example` / `## Examples` per Step 14.
+
+Convert conversions in both directions: a Markdown-heading section
+(`## PARAMETERS`, `## METHODS`) becomes the bold uppercase-with-colon form;
+a bold mixed-case form (`**Methods:**`, `**Exceptions:**`,
+`**Request syntax:**`) becomes the canonical `**METHODS:**` /
+`**EXCEPTIONS:**` / `## Request Syntax`. Preserve the section's content
+exactly; only the heading line changes.
+
 After completing all steps, run a final validation: 0 broken links, 0
 orphaned pages, 0 format violations, and produce a per-page change summary.
 
@@ -1279,6 +1311,23 @@ whose API semantics are uncertain from the source alone.
 ## Doc style guide
 
 - Titles: `# <Operation>()` for operations, `# <Type>` for classes/types.
+- **Canonical section heading forms** (applied by format-check Step 15 — keep
+  every page, and every SDK tree, on these exact forms):
+  - `## Request Syntax` — sentence-case `Syntax`, `##`-level Markdown heading
+    for the request-syntax/chain block. Never `## Request syntax`, `## REQUEST
+    SYNTAX`, or `### Request Syntax`.
+  - `**PARAMETERS:**`, `**REQUEST METHODS:**`, `**BUILDER METHODS:**`,
+    `**RETURN TYPE:**`, `**RETURNS:**`, `**EXCEPTIONS:**`,
+    `**ERROR HANDLING:**`, `**METHODS:**` — bold, all-uppercase,
+    trailing colon. Never a `##`-level heading (`## PARAMETERS`, `## METHODS`)
+    and never mixed-case or missing-colon variants (`**Parameters:**`,
+    `**Methods:**`, `**Exceptions:**`, `**Returns**`, `**REQUEST METHODS**`).
+    The one mixed-case exception is `**Constants:**` for enum value lists
+    (see "Canonical enum format").
+  - `## Example` / `## Examples` — cardinality per Step 14.
+  - The error-section heading stays language-specific (see below):
+    `**EXCEPTIONS:**` for pymilvus/java/node/csharp, `**ERROR HANDLING:**`
+    for go/cpp, none for rust.
 - Language tags: code blocks use `cpp` (or the SDK's language) — never leave it
   blank or wrong. For the TypeScript-based node SDK, use `javascript` for
   runnable examples and `## Request Syntax` blocks, and `typescript` for
