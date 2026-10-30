@@ -38,6 +38,12 @@ When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **retu
 
     This exception will be raised when the FlagEmbedding module is not installed.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

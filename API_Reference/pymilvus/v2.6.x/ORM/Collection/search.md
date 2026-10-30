@@ -23,6 +23,8 @@ search(
     output_fields: list[str] | None,
     timeout: float | None,
     round_decimal: int,
+    ranker: Optional[Union[Function, FunctionScore]] = None,
+    highlighter: Optional[Highlighter] = None,
     search_aggregation: Optional[SearchAggregation] = None
 )
 ```
@@ -112,6 +114,14 @@ search(
     The number of decimal places that Milvus rounds the calculated distances to.
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- **ranker** (*[Function](../../MilvusClient/Collections/Function/Function.md)* | *[FunctionScore](../../MilvusClient/Vector/FunctionScore.md)* | *None*) -
+
+    The ranker used to reorder the search results. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
+
+- **highlighter** (*Highlighter* | *None*) -
+
+    The highlighter used to annotate matching terms in the returned text fields. See [LexicalHighlighter](../../MilvusClient/Vector/Highlighter/LexicalHighlighter.md) and [SemanticHighlighter](../../MilvusClient/Vector/Highlighter/SemanticHighlighter.md) for details.
 
 - **search_aggregation** (*Optional[SearchAggregation]*) -
 

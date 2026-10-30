@@ -106,6 +106,12 @@ A **RefreshExternalCollectionJobInfo** object that records the details of the sp
 
     The timestamp in milliseconds at which the specified job ends.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Example
 
 ```python

@@ -2,32 +2,43 @@
 
 This is an enumeration that provides the following constants.
 
-## Constants
+```python
+class BulkInsertState:
+    ImportPending = 0
+    ImportFailed = 1
+    ImportStarted = 2
+    ImportPersisted = 5
+    ImportCompleted = 6
+    ImportFailedAndCleaned = 7
+    ImportUnknownState = 100
+```
 
-- **ImportPending** = 0
+**Constants:**
 
-    Indicates that the bulk-insert task is pending.
+- **ImportPending** (0)
 
-- **ImportFailed** = 1
+    Indicates that the bulk insert task is pending.
 
-    Indicates that the bulk-insert task failed.
+- **ImportFailed** (1)
 
-- **ImportStarted** = 2
+    Indicates that the bulk insert task has failed.
 
-    Indicates that the bulk-insert task has started.
+- **ImportStarted** (2)
 
-- **ImportPersisted** = 5
+    Indicates that the bulk insert task has started.
 
-    Indicates that the bulk-insert task has been persisted.
+- **ImportPersisted** (5)
 
-- **ImportCompleted** = 6
+    Indicates that the imported data has been persisted.
 
-    Indicates that the bulk-insert task is completed.
+- **ImportCompleted** (6)
 
-- **ImportFailedAndCleaned** = 7
+    Indicates that the bulk insert task has completed.
 
-    Indicates that the bulk-insert task failed with data cleaned.
+- **ImportFailedAndCleaned** (7)
 
-- **ImportUnknownState** = 100
+    Indicates that the bulk insert task has failed and the related data has been cleaned up.
 
-    Indicates that the bulk-insert task is in an unknown state.
+- **ImportUnknownState** (100)
+
+    Indicates that the bulk insert task state is unknown.

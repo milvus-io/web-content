@@ -8,7 +8,7 @@ This operation conducts a hybrid vector search across multiple vector fields, co
 hybrid_search(
     collection_name: str,
     reqs: List[AnnSearchRequest],
-    ranker: Union[BaseRanker, Function],
+    ranker: Union[BaseRanker, [Function](../Collections/Function/Function.md)],
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
@@ -55,7 +55,7 @@ The values substituted into expression-template placeholders.
 Default: `None`
 The alias for `expr`. Do not provide both values. The resolved expression is available through the read-only `filter` property as `request.filter`.
 
-- **ranker** (*Union[BaseRanker, Function]*) -
+- **ranker** (*Union[BaseRanker, [Function](../Collections/Function/Function.md)]*) -
 **[REQUIRED]**
 The ranker used to combine and order results from the search requests.
 

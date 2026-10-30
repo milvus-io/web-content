@@ -1,6 +1,6 @@
 # verify()
 
-This operation performs final validation checks on the CollectionSchema to detect any obvious problems.
+This operation performs final validation checks on the [CollectionSchema](../../MilvusClient/Collections/CollectionSchema/CollectionSchema.md) to detect any obvious problems.
 
 ## Request Syntax
 

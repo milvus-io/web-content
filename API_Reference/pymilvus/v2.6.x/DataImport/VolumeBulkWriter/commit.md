@@ -1,6 +1,6 @@
 # commit()
 
-This operation persists the buffered data to local files and uploads them to the remote volume configured in the VolumeBulkWriter instance.
+This operation persists the buffered data to local files and uploads them to the remote volume configured in the [VolumeBulkWriter](VolumeBulkWriter.md) instance.
 
 ## Request Syntax
 
@@ -20,7 +20,7 @@ VolumeBulkWriter.commit(
 
 - **call_back** (*Callable[[List[str]], List[str]]*) -
 
-    An optional callback function invoked after the local files are flushed. In VolumeBulkWriter, this callback is used internally to upload files to the remote volume.
+    An optional callback function invoked after the local files are flushed. In [VolumeBulkWriter](VolumeBulkWriter.md), this callback is used internally to upload files to the remote volume.
 
 **RETURN TYPE:**
 

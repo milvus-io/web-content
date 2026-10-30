@@ -13,7 +13,9 @@ Constructs the schema of a collection by defining fields, data types, and other 
 ```python
 CollectionSchema(
     fields: list,
-    description: str
+    description: str,
+    struct_fields: Optional[List[StructFieldSchema]] = None,
+    functions: Optional[List[Function]] = None,
 )
 ```
 
@@ -27,7 +29,7 @@ CollectionSchema(
 
     <div class="alert note">
     
-    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
+    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of [FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md) objects to define the full schema.
 
     </div>
 
@@ -36,6 +38,14 @@ CollectionSchema(
     The description of the schema.
 
     If a description is not provided, it will be set to an empty string.
+
+- **struct_fields** (*list[[StructFieldSchema](../../MilvusClient/Collections/StructFieldSchema/StructFieldSchema.md)]* | *None*) -
+
+    A list of **[StructFieldSchema](../../MilvusClient/Collections/StructFieldSchema/StructFieldSchema.md)** objects that define the struct fields of the collection schema.
+
+- **functions** (*list[[Function](../../MilvusClient/Collections/Function/Function.md)]* | *None*) -
+
+    A list of **[Function](../../MilvusClient/Collections/Function/Function.md)** objects that define the functions of the collection schema.
 
 - **kwargs** -
 

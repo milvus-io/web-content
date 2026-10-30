@@ -41,7 +41,7 @@ add_collection_field(
 
     The name of the new field.
 
-- **data_type** *(DataType)* –
+- **data_type** (*[DataType](DataType.md)*) –
 
     **[REQUIRED]**
 
@@ -71,7 +71,7 @@ add_collection_field(
 
         Required for `DataType.VARCHAR` fields. Sets the maximum allowed byte length for strings (1 to 65,535).
 
-    - **element_type** *(DataType)*:
+    - **element_type** (*[DataType](DataType.md)*):
 
         Required for `DataType.ARRAY` fields. Specifies the data type of elements within the array.
 

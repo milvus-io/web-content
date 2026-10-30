@@ -2,6 +2,12 @@
 
 Removes a file resource previously registered via `add_file_resource()` from the Milvus cluster. The call is idempotent: removing a name that is not currently registered completes successfully without raising an exception.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Request syntax
 
 ```python

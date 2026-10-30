@@ -2,6 +2,12 @@
 
 Registers a file that has already been uploaded to the object store configured for the Milvus cluster as a named file resource. Once registered, the resource can be referenced from analyzer parameters that accept an external dictionary — such as `extra_dict_file` on the `jieba` tokenizer, `stop_words_file` on the `stop` filter, `word_list_file` on the `decompounder` filter, and `synonyms_file` on the `synonym` filter — using `{"type": "remote", "resource_name": "<name>", "file_name": "<file_name>"}`. The target file must exist in the object store at the time of this call; the server validates `path` synchronously and fails the request if it does not resolve.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Request syntax
 
 ```python

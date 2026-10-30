@@ -2,6 +2,12 @@
 
 Returns all file resources currently registered on the Milvus cluster. Each entry is a `FileResourceInfo` object exposing the `name` under which the resource was registered via `add_file_resource()` and the `path` (object key in the configured object store) that it points to. There is no dedicated "get" API for a single resource — `list_file_resources()` is the canonical way to inspect registered resources.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Request syntax
 
 ```python

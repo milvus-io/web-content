@@ -94,7 +94,7 @@ A **ResourceGroupInfo** object contains the following fields:
 
     The name of a collection and its number of query nodes for incoming requests. 
 
-- **config** (*ResourceGroupConfig*)
+- **config** (*[ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md)*)
 
     A [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md) object that represents the configuration of the resource group.
 

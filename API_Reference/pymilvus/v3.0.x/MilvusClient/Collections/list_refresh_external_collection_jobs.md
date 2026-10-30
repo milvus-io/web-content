@@ -104,11 +104,15 @@ A list of **RefreshExternalCollectionJobInfo** objects, each recording the detai
 
     The timestamp in milliseconds at which the specified job ends.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Example
 
 ```python
-import time
-
 from pymilvus import MilvusClient
 
 # 1. Set up a milvus client
@@ -117,22 +121,15 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-job_id = client.refresh_external_collection(
+# 2. List the refresh jobs of all external collections
+jobs = client.list_refresh_external_collection_jobs()
+print(jobs)
+
+# 3. List the refresh jobs of a specific external collection
+jobs = client.list_refresh_external_collection_jobs(
     collection_name="test_collection"
 )
-
-while True:
-    progress = client.get_refresh_external_collection_progress(job_id=job_id)
-    print(f"  {progress.state}: {progress.progress}%")
-
-    if progress.state == "RefreshCompleted":
-        elapsed = progress.end_time - progress.start_time
-        print(f"  Completed in {elapsed}ms")
-        break
-    elif progress.state == "RefreshFailed":
-        print(f"  Failed: {progress.reason}")
-        break
-
-    time.sleep(2)
+for job in jobs:
+    print(job)
 ```
 

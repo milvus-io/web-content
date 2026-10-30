@@ -28,7 +28,7 @@ alter_alias(
 
     <div class="alert note">
     
-    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    A collection alias is an additional name for a collection. [Collection](../../ORM/Collection/Collection.md) aliases are useful when you want to switch your application to a new collection without any changes to your code. 
     
     In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
     

@@ -1,6 +1,6 @@
 # to_dict()
 
-This operation converts a CollectionSchema object to a dictionary representation.
+This operation converts a [CollectionSchema](CollectionSchema.md) object to a dictionary representation.
 
 ## Request Syntax
 

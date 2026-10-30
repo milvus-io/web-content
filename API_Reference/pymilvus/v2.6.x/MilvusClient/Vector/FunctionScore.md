@@ -1,6 +1,6 @@
 # FunctionScore
 
-A **FunctionScore** instance combines multiple **[Function](Function/Function.md)**s in a configurable manner. You can use a **FunctionScore** instance as a ranker to combine multiple reranking **[Function](Function/Function.md)**s.
+A **FunctionScore** instance combines multiple **[Function](../Collections/Function/Function.md)**s in a configurable manner. You can use a **FunctionScore** instance as a ranker to combine multiple reranking **[Function](../Collections/Function/Function.md)**s.
 
 ```python
 class pymilvus.FunctionScore
@@ -8,7 +8,7 @@ class pymilvus.FunctionScore
 
 ## Constructor
 
-Constructs a **FunctionScore** instance that combines multiple **[Function](Function/Function.md)**s in a configurable manner.
+Constructs a **FunctionScore** instance that combines multiple **[Function](../Collections/Function/Function.md)**s in a configurable manner.
 
 ```python
 FunctionScore(
@@ -19,13 +19,13 @@ FunctionScore(
 
 **PARAMETERS:**
 
-- **functions** (*[Function](Function/Function.md)*, *List[[Function](Function/Function.md)]*) -
+- **functions** (*[Function](../Collections/Function/Function.md)*, *List[[Function](../Collections/Function/Function.md)]*) -
 
-    A Function instance or a list of Function instances that are to be combined in the current FunctionScore instance.
+    A [Function](../Collections/Function/Function.md) instance or a list of [Function](../Collections/Function/Function.md) instances that are to be combined in the current FunctionScore instance.
 
 - **params** (*Dict*) -  
 
-    Specifies how the above Function instances are to be combined. It provides the following settings:
+    Specifies how the above [Function](../Collections/Function/Function.md) instances are to be combined. It provides the following settings:
 
     - **boost_mode** (*str*) - 
 

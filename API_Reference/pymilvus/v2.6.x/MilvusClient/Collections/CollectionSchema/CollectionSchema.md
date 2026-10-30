@@ -16,7 +16,7 @@ CollectionSchema(
 
 **PARAMETERS:**
 
-- **fields** (*List[FieldSchema]*) -
+- **fields** (*List[[FieldSchema](../FieldSchema/FieldSchema.md)]*) -
 **[REQUIRED]**
 The field schemas in the collection.
 
@@ -24,11 +24,11 @@ The field schemas in the collection.
 Default: `""`
 The description of the collection.
 
-- **struct_fields** (*Optional[List[StructFieldSchema]]*) -
+- **struct_fields** (*Optional[List[[StructFieldSchema](../StructFieldSchema/StructFieldSchema.md)]]*) -
 Default: `None`
 The optional struct-field schemas in the collection.
 
-- **functions** (*Optional[List[Function]]*) -
+- **functions** (*Optional[List[[Function](../Function/Function.md)]]*) -
 Default: `None`
 The optional function definitions attached to the collection schema.
 
@@ -41,11 +41,11 @@ The additional collection options, including dynamic-field, namespace, key, auto
 
 **RETURNS:**
 
-Collection schema instance containing the configured fields and collection-level properties.
+[Collection](../../../ORM/Collection/Collection.md) schema instance containing the configured fields and collection-level properties.
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
 ## Examples

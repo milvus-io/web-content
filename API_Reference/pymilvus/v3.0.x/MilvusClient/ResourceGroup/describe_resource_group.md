@@ -78,7 +78,7 @@ transfer_to {
 
     An object that contains collection-specific statistics on the number of incoming nodes accessed by the replicas loaded in this resource group, with the collection names as the keys and their numbers of incoming nodes as the values.
 
-- **config** (*ResourceGroupConfig*) -
+- **config** (*[ResourceGroupConfig](ResourceGroupConfig.md)*) -
 
     The configurations of the specified resource group in a [ResourceGroupConfig](ResourceGroupConfig.md) instance.
 

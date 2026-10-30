@@ -77,11 +77,11 @@ A `CompactionPlans` object with the following members:
 
         The insert channel that the segments belong to.
 
-    - **compaction_type** (*CompactionType*) -
+    - **compaction_type** (*[CompactionType](../Collections/CompactionType.md)*) -
 
         The type of this compaction.
 
-    - **state** (*CompactionTaskState*) -
+    - **state** (*[CompactionTaskState](../Collections/CompactionTaskState.md)*) -
 
         The state of this compaction plan.
 

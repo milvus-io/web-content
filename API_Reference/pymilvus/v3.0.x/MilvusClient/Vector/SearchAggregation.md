@@ -37,7 +37,7 @@ SearchAggregation(
 
     Bucket ordering rules evaluated in list order. Each item must contain one metric alias, `_count`, or `_key`, mapped to `"asc"` or `"desc"`.
 
-- **top_hits** (*TopHits | None*) -
+- **top_hits** (*[TopHits](TopHits.md) | None*) -
 
     Configures representative entities returned from each bucket.
 

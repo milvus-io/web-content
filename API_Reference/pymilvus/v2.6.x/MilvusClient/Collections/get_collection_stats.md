@@ -50,6 +50,12 @@ However, note that the displayed row count may not match the number of records i
 
 </div>
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Examples
 
 ```python

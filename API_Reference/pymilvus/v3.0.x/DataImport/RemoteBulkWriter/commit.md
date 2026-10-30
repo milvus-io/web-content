@@ -2,6 +2,12 @@
 
 This operation commits the appended data.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    Raised when the flush or upload operation fails.
+
 ## Request syntax
 
 ```python

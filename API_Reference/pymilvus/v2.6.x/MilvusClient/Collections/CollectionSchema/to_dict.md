@@ -1,6 +1,6 @@
 # to_dict()
 
-This operation converts a CollectionSchema object to a dictionary representation.
+This operation converts a [CollectionSchema](CollectionSchema.md) object to a dictionary representation.
 
 ## Request Syntax
 
@@ -22,7 +22,7 @@ The dictionary representation of the collection schema.
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

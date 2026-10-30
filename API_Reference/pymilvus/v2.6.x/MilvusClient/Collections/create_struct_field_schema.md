@@ -20,11 +20,17 @@ This operation has no parameters.
 
 **RETURN TYPE:**
 
-*[StructFieldSchema](../StructFieldSchema/StructFieldSchema.md)*
+*[StructFieldSchema](StructFieldSchema/StructFieldSchema.md)*
 
 **RETURNS:**
 
 The created struct field schema.
+
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 

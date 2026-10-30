@@ -36,6 +36,12 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the model2vec module is not installed.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

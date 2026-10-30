@@ -195,7 +195,7 @@ search(
 
     The highlighter to highlight matched terms in search operations. For details, refer to [Lexical Highlighter](https://milvus.io/docs/text-highlighter.md).
 
-- **search_aggregation** (*Optional[SearchAggregation]*) -
+- **search_aggregation** (*Optional[[SearchAggregation](SearchAggregation.md)]*) -
 
     Available in PyMilvus 3.0.1 or later. Defines a hierarchical bucket aggregation. Do not use this parameter together with `group_by_field`. When set, `limit` is ignored and the root `SearchAggregation.size` controls the number of top-level buckets.
 

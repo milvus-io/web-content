@@ -57,7 +57,7 @@ construct_from_dataframe(
 
 **RETURN TYPE:**
 
-*tuple (Collection, MutationResults)*
+*tuple ([Collection](Collection.md), MutationResults)*
 
 **RETURNS:**
 

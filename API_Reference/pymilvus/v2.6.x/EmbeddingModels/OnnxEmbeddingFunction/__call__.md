@@ -34,6 +34,12 @@ A list where each element is a NumPy array.
 
 *None*
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

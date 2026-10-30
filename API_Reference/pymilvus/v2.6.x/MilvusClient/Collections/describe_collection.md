@@ -22,13 +22,11 @@ describe_collection(
 
     Setting this to a non-existing collection results in **[MilvusException](../../Exceptions/MilvusException.md)**.
 
-- **kwargs** -
+- **timeout** (*float* | *None*) -
 
-    - **timeout** (*float* | *None*)  
+    The timeout duration for this operation. 
 
-        The timeout duration for this operation. 
-
-        Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 
@@ -149,7 +147,7 @@ A dictionary that contains detailed information about the specified collection.
 
         Whether the current field serves as the primary key of the collection.
 
-- **functions** (*list[[Function](../Function/Function.md)]*) -
+- **functions** (*list[[Function](Function/Function.md)]*) -
 
     The functions that have been defined in the schema.
 

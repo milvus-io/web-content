@@ -22,7 +22,7 @@ update_resource_groups(
 
 **PARAMETERS:**
 
-- **configs** (*Mapping[str, ResourceGroupConfig]*) -
+- **configs** (*Mapping[str, [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md)]*) -
 
     **[REQUIRED]**
 

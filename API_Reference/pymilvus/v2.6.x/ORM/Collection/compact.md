@@ -14,11 +14,16 @@ This operation compacts and merges small segments in the current collection.
 
 ```python
 compact(
-    timeout: float | None
+    is_clustering: bool = False,
+    timeout: float | None,
 )
 ```
 
 **PARAMETERS:**
+
+- **is_clustering** (*bool* | *None*) -
+
+    Whether to trigger a clustering compaction that reorganizes segment data to improve query performance. The value defaults to **False**.
 
 - **timeout** (*float* | *None*)  
 

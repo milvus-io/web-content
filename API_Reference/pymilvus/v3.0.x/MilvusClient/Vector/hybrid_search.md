@@ -55,7 +55,7 @@ The values substituted into expression-template placeholders.
 Default: `None`
 The alias for `expr`. Do not provide both values. The resolved expression is available through the read-only `filter` property as `request.filter`.
 
-- **ranker** (*Union[BaseRanker, Function]*) -
+- **ranker** (*Union[BaseRanker, [Function](../Collections/Function/Function.md)]*) -
 **[REQUIRED]**
 The ranker used to combine and order results from the search requests.
 

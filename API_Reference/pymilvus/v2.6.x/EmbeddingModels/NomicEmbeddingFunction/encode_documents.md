@@ -30,6 +30,12 @@ A list where each element is a NumPy array.
 
     This exception will be raised when `api_key` is not provided and the `NOMIC_API_KEY` environment variable is also not set.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

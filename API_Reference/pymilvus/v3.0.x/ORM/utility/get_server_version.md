@@ -61,6 +61,12 @@ connections.connect()
 server_version = utility.get_server_version()
 ```
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Related operations
 
 The following operations are related to `get_server_version()`:
