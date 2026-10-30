@@ -12,6 +12,21 @@ public void addCollectionField(AddCollectionFieldReq request)
 addCollectionField(AddCollectionFieldReq.builder()
     .collectionName(String collectionName)
     .databaseName(String databaseName)
+    .fieldName(String fieldName)
+    .description(String description)
+    .dataType(DataType dataType)
+    .maxLength(Integer maxLength)
+    .dimension(Integer dimension)
+    .elementType(DataType elementType)
+    .maxCapacity(Integer maxCapacity)
+    .isNullable(Boolean isNullable)
+    .defaultValue(Object defaultValue)
+    .enableAnalyzer(Boolean enableAnalyzer)
+    .analyzerParams(Map<String, Object> analyzerParams)
+    .enableMatch(Boolean enableMatch)
+    .typeParams(Map<String, String> typeParams)
+    .multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)
+    .structFields(List<CreateCollectionReq.FieldSchema> structFields)
     .build()
 );
 ```
@@ -25,6 +40,66 @@ The name of the target collection.
 - `databaseName(String databaseName)` -
 
 The name of the database. Defaults to the current database if not specified.
+
+- `fieldName(String fieldName)` -
+
+The name of the field to add.
+
+- `description(String description)` -
+
+A human-readable description for the field.
+
+- `dataType(DataType dataType)` -
+
+The data type of the field. Scalar, vector, array, JSON, and struct-related field types follow the same `DataType` values used when creating a collection. See [DataType](DataType.md).
+
+- `maxLength(Integer maxLength)` -
+
+The maximum number of characters for a `DataType.VarChar` field. This is required for VarChar fields unless the value is supplied through `typeParams`.
+
+- `dimension(Integer dimension)` -
+
+The vector dimension. This is required for fixed-dimension vector fields such as `DataType.FloatVector`.
+
+- `elementType(DataType elementType)` -
+
+The element type for an array field. See [DataType](DataType.md).
+
+- `maxCapacity(Integer maxCapacity)` -
+
+The maximum number of elements allowed in an array field.
+
+- `isNullable(Boolean isNullable)` -
+
+Whether the added field accepts `null` values. A vector field added to an existing collection should be nullable so that existing rows get null values.
+
+- `defaultValue(Object defaultValue)` -
+
+The default value for the added field. The runtime type must match `dataType`.
+
+- `enableAnalyzer(Boolean enableAnalyzer)` -
+
+Whether to enable text analysis for a `DataType.VarChar` field.
+
+- `analyzerParams(Map<String, Object> analyzerParams)` -
+
+Analyzer configuration for a VarChar field, such as tokenizer and filter settings.
+
+- `enableMatch(Boolean enableMatch)` -
+
+Whether to enable keyword matching for a VarChar field.
+
+- `typeParams(Map<String, String> typeParams)` -
+
+Additional field type parameters. Dedicated builder methods such as `dimension` or `maxLength` override corresponding entries in this map.
+
+- `multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)` -
+
+Multi-language analyzer configuration for a text field.
+
+- `structFields(List<CreateCollectionReq.FieldSchema> structFields)` -
+
+Nested field schemas for a struct field. See [FieldSchema](FieldSchema.md).
 
 **RETURNS:**
 
