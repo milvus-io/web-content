@@ -11,6 +11,8 @@ Most StructArray limits come from one of three places: the StructArray schema mo
 
 ## Limits at a glance
 
+The main StructArray limits are:
+
 | Area | Limit |
 | --- | --- |
 | Schema shape | A Struct can be used only as the element type of an Array field. Struct is not supported as a top-level collection field. |
@@ -26,6 +28,8 @@ Most StructArray limits come from one of three places: the StructArray schema mo
 
 ## Schema limits
 
+StructArray schemas have the following limits:
+
 | Limit | Details |
 | --- | --- |
 | Struct is not a top-level field type. | Create a StructArray field as `datatype=DataType.ARRAY` with `element_type=DataType.STRUCT` and a `struct_schema`. |
@@ -39,48 +43,50 @@ For schema creation examples, see [Create a StructArray Field](create-structarra
 
 ## Supported subfield data types
 
-StructArray subfields map to physical array-style storage. The following table lists supported and unsupported physical types.
+StructArray subfields map to physical array-style storage. The following table lists supported and unsupported physical types:
 
 | Struct subfield physical type | Support | Notes |
 | --- | --- | --- |
-| `Array` | Supported | Define the subfield as `DataType.BOOL`. |
-| `Array` | Supported | Define the subfield as `DataType.INT8`, `DataType.INT16`, `DataType.INT32`, or `DataType.INT64`. |
-| `Array` | Supported | Define the subfield as `DataType.FLOAT` or `DataType.DOUBLE`. |
-| `Array` | Supported | Define the subfield as `DataType.VARCHAR` and set `max_length`. |
-| `ArrayOfVector` | Supported | Define the subfield as `DataType.FLOAT_VECTOR` and set `dim`. |
-| `ArrayOfVector` | Supported | Define the subfield as `DataType.FLOAT16_VECTOR` and set `dim`. |
-| `ArrayOfVector` | Supported | Define the subfield as `DataType.BFLOAT16_VECTOR` and set `dim`. |
-| `ArrayOfVector` | Supported | Define the subfield as `DataType.INT8_VECTOR` and set `dim`. |
-| `ArrayOfVector` | Supported | Define the subfield as `DataType.BINARY_VECTOR` and set `dim`. |
-| `ArrayOfVector` | Not supported | Sparse vector subfields are not supported in StructArray fields. |
-| `Array` | Not supported | Use `VARCHAR`, not `String`. |
-| `Array` | Not supported | JSON subfields are not supported in StructArray fields. |
-| `Array` | Not supported | Geometry subfields and GIS functions are not supported in StructArray fields. |
-| `Array` | Not supported | Text subfields are not supported in StructArray fields. |
-| `Array` | Not supported | Timestamptz subfields and time-specific expressions are not supported in StructArray fields. |
+| `Array<Bool>` | Supported | Define the subfield as `DataType.BOOL`. |
+| `Array<Int8/Int16/Int32/Int64>` | Supported | Define the subfield as `DataType.INT8`, `DataType.INT16`, `DataType.INT32`, or `DataType.INT64`. |
+| `Array<Float/Double>` | Supported | Define the subfield as `DataType.FLOAT` or `DataType.DOUBLE`. |
+| `Array<VarChar>` | Supported | Define the subfield as `DataType.VARCHAR` and set `max_length`. |
+| `ArrayOfVector<FloatVector>` | Supported | Define the subfield as `DataType.FLOAT_VECTOR` and set `dim`. |
+| `ArrayOfVector<Float16Vector>` | Supported | Define the subfield as `DataType.FLOAT16_VECTOR` and set `dim`. |
+| `ArrayOfVector<BFloat16Vector>` | Supported | Define the subfield as `DataType.BFLOAT16_VECTOR` and set `dim`. |
+| `ArrayOfVector<Int8Vector>` | Supported | Define the subfield as `DataType.INT8_VECTOR` and set `dim`. |
+| `ArrayOfVector<BinaryVector>` | Supported | Define the subfield as `DataType.BINARY_VECTOR` and set `dim`. |
+| `ArrayOfVector<SparseFloatVector>` | Not supported | Sparse vector subfields are not supported in StructArray fields. |
+| `Array<String>` | Not supported | Use `VARCHAR`, not `String`. |
+| `Array<JSON>` | Not supported | JSON subfields are not supported in StructArray fields. |
+| `Array<Geometry>` | Not supported | Geometry subfields and GIS functions are not supported in StructArray fields. |
+| `Array<Text>` | Not supported | Text subfields are not supported in StructArray fields. |
+| `Array<Timestamptz>` | Not supported | Timestamptz subfields and time-specific expressions are not supported in StructArray fields. |
 | Nested `Array`, `ArrayOfVector`, `Struct`, or `ArrayOfStruct` | Not supported | StructArray fields do not support nested array, vector-array, Struct, or Array-of-Struct subfields. |
 
 ## Nullable and dynamic schema limits
 
-Nullable StructArray behavior and dynamic StructArray field addition are version-gated.
+The following table describes nullable StructArray behavior and dynamic StructArray field addition, subject to the availability statement below:
 
 | Capability | Limit |
 | --- | --- |
-| Nullable StructArray field | Supported in Milvus 3.0.0 and later. Set `nullable=True` on the StructArray parent; do not configure Struct subfields as nullable independently. |
-| Null value in Python | Use `None` to insert a null StructArray value in Python. Do not use `Null` or `null`. |
-| Null scope | Null applies to the whole StructArray field. For example, `chunks=None` is valid only when `chunks` is nullable. |
+| Nullable StructArray field | Subject to the availability statement below, set `nullable=True` on the StructArray parent; do not configure Struct subfields as nullable independently. |
+| NULL value in Python | Use `None` to insert a null StructArray value in Python. Do not use `Null` or `null`. |
+| Null scope | NULL applies to the whole StructArray field. For example, `chunks=None` is valid only when `chunks` is nullable. |
 | Partially null StructArray value | When a StructArray field contains a valid array value, do not mix null subfield arrays with valid subfield arrays in the same value. |
-| Dynamic add StructArray field | Supported in Milvus 3.0.0 and later. |
+| Dynamic add StructArray field | Subject to the availability statement below. |
 | Nullable requirement for dynamic add | A StructArray field added to an existing collection must be nullable because existing entities have no value for the new field. |
 | Existing entities after dynamic add | Existing entities return `null` for the added StructArray field. |
 
+
 Milvus 3.0.0 and later releases support nullable StructArray fields, nullable vector arrays, and dynamic StructArray field addition in both Standalone and Distributed deployments. Earlier Milvus versions do not support these capabilities.
 
-In Zilliz Cloud, these capabilities are available on On-Demand Clusters running Milvus 3.0.0 or later. Serving Clusters do not support them.
 
 For insert examples with nullable StructArray fields, see [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md).
 
 ## Insert limits
+
+StructArray insert payloads have the following limits:
 
 | Limit | Details |
 | --- | --- |
@@ -93,7 +99,7 @@ For insert examples with nullable StructArray fields, see [Insert Data into Stru
 
 ## Index and metric limits
 
-A StructArray vector subfield can be indexed for either EmbeddingList search or element-level search. The same vector subfield cannot use both metric families because each vector field or vector subfield accepts only one index.
+A StructArray vector subfield can be indexed for either EmbeddingList search or element-level search. The same vector subfield cannot use both metric families because each vector field or vector subfield accepts only one index. The search modes use the following metric families:
 
 | Search mode | Metric family | Result level |
 | --- | --- | --- |
@@ -107,6 +113,8 @@ StructArray vector subfields count as vector subfields when you plan your collec
 For the supported index-type and metric-type matrix, see [Index StructArray Fields](index-structarray-fields.md).
 
 ## Search limits
+
+StructArray search behavior has the following limits:
 
 | Search behavior | Support and limits |
 | --- | --- |
