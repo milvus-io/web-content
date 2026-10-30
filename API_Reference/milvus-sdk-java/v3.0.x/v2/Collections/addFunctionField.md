@@ -25,6 +25,9 @@ AddFunctionFieldReq.builder()
     .analyzerParams(analyzerParams)
     .enableMatch(enableMatch)
     .typeParams(typeParams)
+    .multiAnalyzerParams(multiAnalyzerParams)
+    .structFields(structFields)
+    .externalField(externalField)
     .function(function)
     .indexParam(indexParam)
     .build();
@@ -91,6 +94,18 @@ AddFunctionFieldReq.builder()
 - `typeParams(Map<String, String> typeParams)`
 
     Additional field type parameters.
+
+- `multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)`
+
+    Multi-language analyzer configuration for a text field.
+
+- `structFields(List<CreateCollectionReq.FieldSchema> structFields)`
+
+    Nested field schemas for a struct field. See [FieldSchema](FieldSchema.md).
+
+- `externalField(String externalField)`
+
+    The external source field that maps to this Milvus field when the collection is backed by an external source.
 
 - `function(CreateCollectionReq.Function function)`
 
