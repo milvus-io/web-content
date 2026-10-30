@@ -42,7 +42,7 @@ BGERerankFunction(
 
     Optional. The device to use for running the model. If not specified, the model will be run on the CPU. You can specify `cpu` for the CPU and `cuda:n` for the nth GPU device.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import BGERerankFunction

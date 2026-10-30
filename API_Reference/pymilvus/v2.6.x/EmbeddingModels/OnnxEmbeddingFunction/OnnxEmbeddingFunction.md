@@ -27,7 +27,7 @@ OnnxEmbeddingFunction(
 
     The repository ID on the Hugging Face Hub that contains the tokenizer configuration compatible with the specified ONNX model. In the provided code, it is set to `GPTCache/paraphrase-albert-small-v2` by default. The tokenizer handles text preprocessing, such as tokenization, padding, and encoding, ensuring compatibility with the ONNX model's input format. The tokenizer should be pre-trained and compatible with the ONNX model for the same task.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import OnnxEmbeddingFunction

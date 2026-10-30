@@ -8,7 +8,7 @@ This operation appends records to the writer.
 
     Raised when the row data fails validation against the collection schema (e.g., type mismatch, missing required fields, vector dimension mismatch).
 
-## Request syntax
+## Request Syntax
 
 ```python
 append_row(
@@ -24,7 +24,7 @@ append_row(
 
     The keys and their values in the dictionary should match the schema referenced in the current **[LocalBulkWriter](../LocalBulkWriter/LocalBulkWriter.md)**.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType

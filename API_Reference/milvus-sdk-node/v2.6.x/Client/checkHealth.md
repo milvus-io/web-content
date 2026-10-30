@@ -42,7 +42,7 @@ This method returns a promise that resolves to a **CheckHealthResponse** object.
 
     This exception is raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```javascript
 milvusClient.checkHealth()

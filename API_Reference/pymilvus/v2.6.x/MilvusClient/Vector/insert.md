@@ -2,7 +2,7 @@
 
 This operation inserts data into a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 insert(
@@ -101,7 +101,7 @@ A dictionary contains information about the number of inserted entities.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

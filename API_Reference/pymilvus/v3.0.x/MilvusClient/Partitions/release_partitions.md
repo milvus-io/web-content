@@ -2,7 +2,7 @@
 
 This operation releases the partitions in a specified collection from memory.
 
-## Request syntax
+## Request Syntax
 
 ```python
 release_partitions(

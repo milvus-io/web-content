@@ -2,7 +2,7 @@
 
 This operation saves the BM25 model parameters to a JSON file at the given path.
 
-## Request syntax
+## Request Syntax
 
 ```python
 save(path: str)
@@ -42,7 +42,7 @@ None
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

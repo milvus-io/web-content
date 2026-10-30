@@ -4,7 +4,7 @@ This operation in [Model2VecEmbeddingFunction](Model2VecEmbeddingFunction.md) ta
 
 The **\_\_call\_\_()** method of Model2VecEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -30,7 +30,7 @@ model2vec_ef(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -42,7 +42,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

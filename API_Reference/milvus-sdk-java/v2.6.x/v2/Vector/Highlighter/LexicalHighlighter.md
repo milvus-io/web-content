@@ -94,7 +94,7 @@ LexicalHighlighter.builder()
 
 A **LexicalHighlighter** instance.
 
-## Example
+## Examples
 
 Highlight search terms in BM25 full text search:
 

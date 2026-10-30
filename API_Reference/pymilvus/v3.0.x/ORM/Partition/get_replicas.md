@@ -86,7 +86,7 @@ Shards can be regarded as DML channels for distributed data write operations amo
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType

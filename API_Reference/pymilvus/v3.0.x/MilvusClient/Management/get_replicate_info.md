@@ -2,7 +2,7 @@
 
 This operation retrieves the replication checkpoint state for a source cluster and source physical channel (pchannel). It is typically used to inspect the progress of cross-cluster replication and to obtain the salvage checkpoint before a force failover.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_replicate_info(

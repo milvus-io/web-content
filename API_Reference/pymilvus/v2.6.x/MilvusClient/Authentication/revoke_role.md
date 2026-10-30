@@ -2,7 +2,7 @@
 
 This operation revokes the role assigned to a user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 revoke_role(

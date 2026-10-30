@@ -2,7 +2,7 @@
 
 This operation in [BGERerankFunction](BGERerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -59,7 +59,7 @@ Each `RerankResult` object contains:
 
     This exception will be raised when the FlagEmbedding module is not installed.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import BGERerankFunction

@@ -27,7 +27,7 @@ CohereRerankFunction(
 
     The API key for accessing the Cohere API. For information on how to create an API key, refer to [Cohere dashboard](https://dashboard.cohere.com/api-keys).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import CohereRerankFunction

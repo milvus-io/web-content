@@ -2,7 +2,7 @@
 
 This operation deletes entities by their IDs or with a boolean expression.
 
-## Request syntax
+## Request Syntax
 
 ```python
 delete(
@@ -87,7 +87,7 @@ A dictionary contains the number of deleted entities.
 
     This exception will be raised when a parameter value doesn't match the required data type.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

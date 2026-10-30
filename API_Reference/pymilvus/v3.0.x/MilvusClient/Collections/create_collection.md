@@ -2,7 +2,7 @@
 
 This operation supports creating a collection in two distinct ways: quick setup or custom setup.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_collection(

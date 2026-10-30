@@ -2,7 +2,7 @@
 
 This operation drops a custom role.
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_role(

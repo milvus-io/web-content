@@ -2,7 +2,7 @@
 
 This operation dumps messages from a WAL range for data salvage using a server-streaming RPC. It is typically used after a force failover: call `get_replicate_info()` on the old primary to obtain the salvage checkpoint, then dump the messages that were not yet synchronized to the new primary.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.dump_messages(

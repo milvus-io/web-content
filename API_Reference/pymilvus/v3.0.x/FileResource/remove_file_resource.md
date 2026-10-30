@@ -8,7 +8,7 @@ Removes a file resource previously registered via `add_file_resource()` from the
 
     This exception will be raised when any error occurs during this operation.
 
-## Request syntax
+## Request Syntax
 
 ```python
 remove_file_resource(
@@ -30,7 +30,7 @@ remove_file_resource(
 
 *None*
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

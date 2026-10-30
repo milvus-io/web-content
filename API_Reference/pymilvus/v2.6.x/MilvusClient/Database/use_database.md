@@ -8,7 +8,7 @@ This is an alias method for [`using_database()`](using_database.md).
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.use_database(

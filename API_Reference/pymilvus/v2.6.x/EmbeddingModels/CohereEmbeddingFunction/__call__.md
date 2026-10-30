@@ -4,7 +4,7 @@ This operation in [CohereEmbeddingFunction](CohereEmbeddingFunction.md) takes a 
 
 The **\_\_call\_\_()** method of CohereEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -31,7 +31,7 @@ cohere_ef(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ValueError**
 
@@ -43,7 +43,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import CohereEmbeddingFunction

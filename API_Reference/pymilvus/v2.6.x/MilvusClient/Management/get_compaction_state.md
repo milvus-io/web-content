@@ -8,7 +8,7 @@ This method was previously named `get_compact_state()`. The behavior is identica
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_compaction_state(

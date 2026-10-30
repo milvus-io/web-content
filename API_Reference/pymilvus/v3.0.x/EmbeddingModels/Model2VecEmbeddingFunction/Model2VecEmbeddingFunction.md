@@ -29,7 +29,7 @@ model.dense.Model2VecEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization when loading a model from the Hugging Face Hub, including parameters such as huggingface authentication tokens.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

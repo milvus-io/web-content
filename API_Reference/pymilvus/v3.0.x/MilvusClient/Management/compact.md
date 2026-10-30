@@ -68,7 +68,7 @@ A compaction job ID, which can be used to get the compaction status.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

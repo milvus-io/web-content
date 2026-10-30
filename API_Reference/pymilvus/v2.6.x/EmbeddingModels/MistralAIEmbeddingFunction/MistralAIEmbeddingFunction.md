@@ -32,7 +32,7 @@ MistralAIEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [Embedding API](https://docs.mistral.ai/api/#tag/embeddings/operation/embeddings_v1_embeddings_post).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import MistralAIEmbeddingFunction

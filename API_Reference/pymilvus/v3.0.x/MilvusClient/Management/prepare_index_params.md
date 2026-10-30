@@ -2,7 +2,7 @@
 
 This operation prepares index parameters to build indexes for a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 pymilvus.MilvusClient.prepare_index_params() -> IndexParams
@@ -35,7 +35,7 @@ An **IndexParams** contains a list of **IndexParam** objects.
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

@@ -27,7 +27,7 @@ JinaRerankFunction(
 
     The API key for accessing the Jina AI API.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.reranker import JinaRerankFunction

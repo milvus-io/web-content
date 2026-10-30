@@ -56,7 +56,7 @@ Mutation result containing the primary keys and counts reported for the upsert o
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-## Examples
+## Example
 
 Demonstrates upsert usage.
 

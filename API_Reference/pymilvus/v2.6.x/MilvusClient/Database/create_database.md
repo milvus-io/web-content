@@ -65,7 +65,7 @@ create_database(
 
 - `MilvusException` - Raised if any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

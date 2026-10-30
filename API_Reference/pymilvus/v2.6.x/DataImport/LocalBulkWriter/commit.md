@@ -8,7 +8,7 @@ This operation commits the appended data.
 
     Raised when the flush or upload operation fails.
 
-## Request syntax
+## Request Syntax
 
 ```python
 pymilvus.LocalBulkWriter.commit(
@@ -26,7 +26,7 @@ pymilvus.LocalBulkWriter.commit(
 
         The value defaults to **None**, indicating no callback is there to call. Use this to add post-commit actions.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import CollectionSchema, FieldSchema, DataType

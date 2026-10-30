@@ -57,7 +57,7 @@ SpladeEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [AutoModelForMaskedLM](https://huggingface.co/docs/transformers/model_doc/auto#transformers.AutoModelForMaskedLM).
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

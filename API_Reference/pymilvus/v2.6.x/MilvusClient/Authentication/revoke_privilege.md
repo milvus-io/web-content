@@ -8,7 +8,7 @@ This method replaces the previous `revoke_privileges()` (plural). The behavior i
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.revoke_privilege(

@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation lists all bulk-insert tasks.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_bulk_insert_tasks(
@@ -180,7 +180,7 @@ A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, utility

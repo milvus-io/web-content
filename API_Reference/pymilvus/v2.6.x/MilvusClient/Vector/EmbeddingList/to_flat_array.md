@@ -22,7 +22,7 @@ A flattened NumPy array containing all vector embeddings concatenated.
 
     This exception will be raised if the current **[EmbeddingList](EmbeddingList.md)** instance is empty.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.client.embedding_list import EmbeddingList

@@ -83,7 +83,7 @@ The API key for accessing the Gemini API.
            </tr>
         </table>
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

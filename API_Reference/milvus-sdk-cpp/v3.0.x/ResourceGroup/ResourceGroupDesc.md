@@ -8,7 +8,7 @@ This page documents both `ResourceGroupDesc` and `NodeInfo`. `ResourceGroupDesc`
 const ResourceGroupDesc& desc = response.Desc();
 ```
 
-**Methods:**
+**METHODS:**
 
 - `const std::string& Name() const`
 

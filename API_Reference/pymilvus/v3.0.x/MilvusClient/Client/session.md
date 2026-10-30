@@ -32,7 +32,7 @@ A session object that proxies search, query, and get operations to the specified
 
     Raised when `cluster_id` is not a string or is empty.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

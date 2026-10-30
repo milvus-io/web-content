@@ -175,7 +175,7 @@ ConnectConfig.builder()
 
 For the getter methods that expose connection details (such as `getHost()`, `getPort()`, `getAuthorization()`, `getDbName()`, `isSecure()`, and `getProxyAddress()`), refer to **[ConnectConfig](ConnectConfig.md)**, where these accessors are defined.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.client.ConnectConfig;

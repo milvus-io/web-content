@@ -20,7 +20,7 @@ getFields()
 
 The return value will be the fields of the Struct elements in an Array of Structs.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

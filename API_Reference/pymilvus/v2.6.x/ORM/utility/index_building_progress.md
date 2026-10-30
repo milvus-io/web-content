@@ -83,7 +83,7 @@ The dictionary has the following keys:
 
     This exception will be raised if multiple indexes exist but the index name is left unspecified.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import (

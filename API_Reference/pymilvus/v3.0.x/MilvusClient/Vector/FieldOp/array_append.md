@@ -16,7 +16,7 @@ FieldOp.array_append() -> FieldPartialUpdateOp
 
 Operation message that selects ARRAY_APPEND behavior.
 
-## Examples
+## Example
 
 Applies ARRAY_APPEND to the tags field.
 

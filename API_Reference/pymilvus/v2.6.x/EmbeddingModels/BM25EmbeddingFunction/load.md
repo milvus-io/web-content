@@ -2,7 +2,7 @@
 
 This operation loads BM25 model parameters from a JSON file.
 
-## Request syntax
+## Request Syntax
 
 ```python
 load(
@@ -24,7 +24,7 @@ load(
 
 None
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **OSError**
 
@@ -36,7 +36,7 @@ None
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.sparse.bm25.tokenizers import build_default_analyzer

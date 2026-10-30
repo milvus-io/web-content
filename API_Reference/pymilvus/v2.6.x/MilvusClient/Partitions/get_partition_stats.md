@@ -2,7 +2,7 @@
 
 This operation displays the statistics collected on a specific partition.
 
-## Request syntax
+## Request Syntax
 
 ```python
 get_partition_stats(

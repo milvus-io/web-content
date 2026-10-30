@@ -47,7 +47,7 @@ A list of database names.
 
 None
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, db

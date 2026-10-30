@@ -2,7 +2,7 @@
 
 This operation creates a field schema. It wraps [FieldSchema](FieldSchema/FieldSchema.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 MilvusClient.create_field_schema(

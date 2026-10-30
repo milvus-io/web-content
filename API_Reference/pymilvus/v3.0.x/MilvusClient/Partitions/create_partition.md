@@ -2,7 +2,7 @@
 
 This operation creates a partition in the target collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 create_partition(

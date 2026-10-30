@@ -43,7 +43,7 @@ Field schema instance containing the configured data type, constraints, default,
 - **[MilvusException](../../../Exceptions/MilvusException.md)**
 Raised when supplied field options are invalid. Inspect the exception message for the invalid data type or field constraint.
 
-## Examples
+## Example
 
 Creates field definitions for a collection schema.
 

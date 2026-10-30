@@ -4,7 +4,7 @@ This operation in [OnnxEmbeddingFunction](OnnxEmbeddingFunction.md) takes a list
 
 The `call` method of OnnxEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -30,7 +30,7 @@ onnx_ef(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 *None*
 
@@ -40,7 +40,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import OnnxEmbeddingFunction

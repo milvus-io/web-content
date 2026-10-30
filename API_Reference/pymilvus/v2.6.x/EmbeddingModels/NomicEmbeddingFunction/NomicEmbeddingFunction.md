@@ -39,7 +39,7 @@ NomicEmbeddingFunction(
 
         How to handle texts longer than the model can accept. One of `mean` or `truncate`.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import NomicEmbeddingFunction

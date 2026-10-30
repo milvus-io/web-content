@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation lists all indexes of a specific collection.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_indexes(
@@ -60,7 +60,7 @@ The names of all built indexes in a list.
 
     This exception will be raised if the specified collection does not exist.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import (

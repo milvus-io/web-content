@@ -16,7 +16,7 @@ Instead of creating a new instance of this class on your own, import the existin
 
 </div>
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections    

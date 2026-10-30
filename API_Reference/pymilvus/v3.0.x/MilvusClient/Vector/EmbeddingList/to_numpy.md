@@ -22,7 +22,7 @@ A 2D NumPy array containing all vector embeddings in the shape **(num_embeddings
 
     This exception will be raised if the current **[EmbeddingList](EmbeddingList.md)** instance is empty.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.client.embedding_list import EmbeddingList

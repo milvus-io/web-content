@@ -2,7 +2,7 @@
 
 This operation reassigns the alias of one collection to another.
 
-## Request syntax
+## Request Syntax
 
 ```python
 alter_alias(

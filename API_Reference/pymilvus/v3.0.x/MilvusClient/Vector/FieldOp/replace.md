@@ -16,7 +16,7 @@ FieldOp.replace() -> FieldPartialUpdateOp
 
 Operation message that selects replacement behavior. Replacement is also the default when no field operation is supplied.
 
-## Examples
+## Example
 
 Creates the explicit replacement operation value.
 

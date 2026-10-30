@@ -2,7 +2,7 @@
 
 This operation updates replication configuration across Milvus clusters. This is used to set up cross-cluster data replication by defining cluster connections and replication topology.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.update_replicate_configuration(

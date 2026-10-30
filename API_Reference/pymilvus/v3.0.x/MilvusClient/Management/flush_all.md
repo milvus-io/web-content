@@ -2,7 +2,7 @@
 
 This operation flushes all collections in the current database. This ensures all inserted data is written to persistent storage.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.flush_all(

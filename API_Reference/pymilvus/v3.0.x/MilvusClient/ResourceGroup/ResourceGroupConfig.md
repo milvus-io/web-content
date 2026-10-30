@@ -74,7 +74,7 @@ ResourceGroupConfig(
 
 A *ResourceGroupConfig* instance
 
-## Examples
+## Example
 
 ```python
 from pymilvus.client.constants import DEFAULT_RESOURCE_GROUP

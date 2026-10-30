@@ -64,7 +64,7 @@ drop_database_properties(
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

@@ -2,7 +2,7 @@
 
 This operation lists all custom roles.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_roles(

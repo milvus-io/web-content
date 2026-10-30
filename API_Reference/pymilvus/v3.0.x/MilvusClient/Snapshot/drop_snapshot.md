@@ -44,7 +44,7 @@ None
 
     If the snapshot does not exist or the operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

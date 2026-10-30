@@ -88,7 +88,7 @@ HTTP response returned by the bulk-import endpoint. Inspect the JSON payload for
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-## Examples
+## Example
 
 The example submits local files to a Milvus server.
 

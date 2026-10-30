@@ -2,7 +2,7 @@
 
 This operation creates a collection schema.
 
-## Request syntax
+## Request Syntax
 
 ```python
 MilvusClient.create_schema(**kwargs) -> CollectionSchema
@@ -70,7 +70,7 @@ A **[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)** object.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, DataType

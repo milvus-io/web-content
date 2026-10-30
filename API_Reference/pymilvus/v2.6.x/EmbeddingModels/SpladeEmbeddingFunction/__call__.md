@@ -4,7 +4,7 @@ This operation in [SpladeEmbeddingFunction](SpladeEmbeddingFunction.md) takes a 
 
 Unlike [encode_documents()](encode_documents.md) or [encode_queries()](encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **\_\_call\_\_()** method directly returns embeddings without offering the option to prepend instructions or prune results.
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -30,7 +30,7 @@ splade_ef(
 
 Compressed sparse row matrices representing the document embeddings.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -42,7 +42,7 @@ Compressed sparse row matrices representing the document embeddings.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

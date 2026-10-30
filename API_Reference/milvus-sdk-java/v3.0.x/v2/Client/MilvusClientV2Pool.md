@@ -122,7 +122,7 @@ PoolConfig poolConfig = PoolConfig.builder()
 
 Read the description on the **[MilvusClientV2](MilvusClientV2.md)** page.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.client.ConnectConfig;

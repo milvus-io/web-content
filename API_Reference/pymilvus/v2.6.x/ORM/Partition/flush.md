@@ -48,7 +48,7 @@ It is recommended that you wait for Milvus to seal all segments before conductin
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import Collection, CollectionSchema, FieldSchema, DataType, Partition

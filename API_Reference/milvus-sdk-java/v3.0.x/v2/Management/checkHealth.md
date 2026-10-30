@@ -6,7 +6,7 @@ This operation checks the health condition of the current Milvus instance.
 public CheckHealthResp checkHealth()
 ```
 
-## Request syntax
+## Request Syntax
 
 ```java
 CheckHealthResp()

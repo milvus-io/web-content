@@ -8,7 +8,7 @@ Registers a file that has already been uploaded to the object store configured f
 
     This exception will be raised when any error occurs during this operation.
 
-## Request syntax
+## Request Syntax
 
 ```python
 add_file_resource(
@@ -34,7 +34,7 @@ add_file_resource(
 
 *None*
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

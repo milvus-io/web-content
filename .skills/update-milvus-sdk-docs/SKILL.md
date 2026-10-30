@@ -1,6 +1,6 @@
 ---
 name: update-milvus-sdk-docs
-description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 13-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
+description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 14-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
 ---
 
 # Update Milvus SDK Reference Docs
@@ -86,15 +86,16 @@ run with a clarification instead of downgrading.
 
 
 **Format check mode**: when the user's instruction includes "检查格式",
-"格式检查", "check formatting", or "check format", run the **full 13-step
-reconciliation checklist** against the target tree — the same Steps 1–12
-(including sub-step 8b) plus Step 13 in
+"格式检查", "check formatting", or "check format", run the **full 14-step
+reconciliation checklist** against the target tree — the same Steps 1–13
+(including sub-step 8b) plus Step 14 in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
 enum format, cross-links, misplaced type pages, missing/absent inline
 expansions, unnecessary standalone pages, operation page filename and title, error
-reporting convention, About.md format compliance, example relevance) plus the
+reporting convention, About.md format compliance, example relevance, example
+heading cardinality) plus the
 Pass 1 response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
 versions — it audits and corrects whatever the checklist surfaces, including
@@ -102,7 +103,8 @@ backfilling enum values, request parameters, response members, and signatures
 the steps reveal as missing or wrong, as well as pure formatting issues (wrong
 property names, missing `**Constants:**` headers, empty member bullets, 3+
 consecutive blank lines, missing or blank code-fence language tags, incorrect
-titles, examples that describe a different API or type than the page documents).
+titles, examples that describe a different API or type than the page documents,
+example headings that disagree with the number of examples in their section).
 **Step 10 (unnecessary standalone pages) is applied unconditionally**:
 a type page referenced by only one page is folded into that page and deleted,
 regardless of why it was created and regardless of any per-SDK placement note
@@ -114,7 +116,7 @@ titles, links, whitespace, or code snippets. Before editing, emit a
 `FORMAT CHECK BASELINE` containing the target paths/tags, a complete source
 API/type inventory, a complete Markdown page inventory, the source-to-page map,
 and a type reference matrix showing every page that references each type. Then
-execute Steps 1–13 in order. Do not replace a full pass with representative
+execute Steps 1–14 in order. Do not replace a full pass with representative
 samples; sample during diagnosis only, then reconcile every matching page.
 The matrix must be source-backed and classified before Step 5: remove every
 candidate whose name is absent from the target Java tag, then classify each
@@ -1136,6 +1138,20 @@ match the sibling pages' verbosity. After rewriting, re-run the compile-level
 verifier (Step 4b) so the new example still compiles. Type pages that carry no
 `## Example` at all (e.g. plain enum pages with no example section) are not
 affected by this step.
+
+**Step 14 — Example heading cardinality**: the `## Example` / `## Examples`
+heading must match the number of examples actually under it. Count the fenced
+code blocks and any `###`-level named sub-examples inside the heading's section
+(the section ends at the next `## `-level heading, or end of file). If the
+section holds **two or more** code blocks or named sub-examples, use the plural
+**`## Examples`**; if it holds exactly **one**, use the singular **`## Example`**.
+Renormalize any heading that disagrees with its section (e.g. a single-block
+section titled `## Examples` becomes `## Example`; a multi-block section titled
+`## Example` becomes `## Examples`). Do not blanket-convert every `## Examples`
+to `## Example` or the reverse — the heading follows the count. Ignore
+non-standard variants outside this exact heading form (e.g. `## **Examples**`,
+`### Examples`) unless the tree's own convention normalizes them; flag them in
+the run summary instead.
 
 After completing all steps, run a final validation: 0 broken links, 0
 orphaned pages, 0 format violations, and produce a per-page change summary.

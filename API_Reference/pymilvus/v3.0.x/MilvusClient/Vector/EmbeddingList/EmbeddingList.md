@@ -52,7 +52,7 @@ EmbeddingList(
 
 An **EmbeddingList** instance.
 
-## Examples
+## Example
 
 ```python
 import numpy as np

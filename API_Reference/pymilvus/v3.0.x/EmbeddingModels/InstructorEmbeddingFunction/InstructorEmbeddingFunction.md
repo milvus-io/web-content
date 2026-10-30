@@ -52,7 +52,7 @@ InstructorEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [instructor-embedding](https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#the-encode-function).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import InstructorEmbeddingFunction

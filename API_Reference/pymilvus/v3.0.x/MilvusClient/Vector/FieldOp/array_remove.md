@@ -16,7 +16,7 @@ FieldOp.array_remove() -> FieldPartialUpdateOp
 
 Operation message that selects ARRAY_REMOVE behavior.
 
-## Examples
+## Example
 
 Applies ARRAY_REMOVE to the tags field.
 

@@ -8,7 +8,7 @@ Before dropping a partition, you must first release it.
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_partition(

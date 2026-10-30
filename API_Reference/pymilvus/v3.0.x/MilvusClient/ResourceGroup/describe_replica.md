@@ -2,7 +2,7 @@
 
 This method returns the current loaded replica information for a collection, including details about the replica nodes and segments.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.describe_replica(

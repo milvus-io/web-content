@@ -2,7 +2,7 @@
 
 This operation returns whether a flush-all operation has completed. Use this after calling `flush_all()` to check the flush status.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_flush_all_state(

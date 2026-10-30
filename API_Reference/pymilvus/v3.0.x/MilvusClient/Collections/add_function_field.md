@@ -8,7 +8,7 @@ This operation adds a function-backed field to an existing collection. It is a h
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.add_function_field(

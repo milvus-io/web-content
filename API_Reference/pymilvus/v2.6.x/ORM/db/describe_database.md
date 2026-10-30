@@ -50,7 +50,7 @@ A dictionary that contains the database information.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, db

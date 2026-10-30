@@ -2,7 +2,7 @@
 
 This operation conducts a vector similarity search with an optional scalar filtering expression.
 
-## Request syntax
+## Request Syntax
 
 ```python
 search(

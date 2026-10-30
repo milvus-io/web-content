@@ -2,7 +2,7 @@
 
 This operation returns the type of the connected Milvus server.
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.get_server_type() -> str

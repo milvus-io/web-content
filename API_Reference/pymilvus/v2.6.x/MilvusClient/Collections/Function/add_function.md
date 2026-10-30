@@ -32,7 +32,7 @@ A `CollectionSchema` object
 
     This exception will be raised when the `function` parameter is of the incorrect type.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient, Function, FunctionType

@@ -2,7 +2,7 @@
 
 This operation drops a specified collection alias.
 
-## Request syntax
+## Request Syntax
 
 ```python
 drop_alias(

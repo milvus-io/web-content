@@ -34,7 +34,7 @@ This method does not return a value.
 
     Raised when the flush or upload operation fails.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.bulk_writer.volume_bulk_writer import VolumeBulkWriter

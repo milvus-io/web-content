@@ -28,7 +28,7 @@ A list of resource group names.
 
 - `MilvusException` - Raised if any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import (

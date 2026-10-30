@@ -95,7 +95,7 @@ Search results for the combined ANN requests after applying each request's expre
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
-## Examples
+## Example
 
 The example runs a hybrid search with pagination. The top-level `offset` is applied to the final results after candidate fusion and reranking, so each `AnnSearchRequest.limit` covers the pagination window (`offset + limit`).
 

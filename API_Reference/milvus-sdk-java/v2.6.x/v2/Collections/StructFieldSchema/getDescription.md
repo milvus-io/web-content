@@ -20,7 +20,7 @@ getDescription()
 
 The return value will be the description of the specified Array of Struct field.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

@@ -82,7 +82,7 @@ Raised when `is_clustering_key` is not a Boolean value. Pass `True` or `False` f
 - **ParamError**
 Raised when a field option or default value is invalid. Check the options required by the selected data type.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import CollectionSchema, DataType, FieldSchema

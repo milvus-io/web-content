@@ -8,7 +8,7 @@ Returns all file resources currently registered on the Milvus cluster. Each entr
 
     This exception will be raised when any error occurs during this operation.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_file_resources(
@@ -34,7 +34,7 @@ Each element of the returned list exposes the following attributes:
 - **path** (*str*) -
  The object-store key of the registered file, including the `rootPath` prefix.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

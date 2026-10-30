@@ -111,7 +111,7 @@ A list of the query results.
 
     This arises when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, Partition, CollectionSchema, FieldSchema, DataType

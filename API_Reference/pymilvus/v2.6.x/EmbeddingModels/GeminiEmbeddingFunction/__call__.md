@@ -4,7 +4,7 @@ This operation in [Model2VecEmbeddingFunction](../Model2VecEmbeddingFunction/Mod
 
 The **[GeminiEmbeddingFunction()](GeminiEmbeddingFunction.md)** method of Model2VecEmbeddingFunction shares the same functionality as [encode_documents()](../Model2VecEmbeddingFunction/encode_documents.md) and [encode_queries()](../Model2VecEmbeddingFunction/encode_queries.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -30,7 +30,7 @@ gemini_ef(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -42,7 +42,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import model

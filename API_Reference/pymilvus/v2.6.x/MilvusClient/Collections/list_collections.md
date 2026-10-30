@@ -2,7 +2,7 @@
 
 This operation lists all existing collections.
 
-## Request syntax
+## Request Syntax
 
 ```python
 list_collections(**kwargs) -> Name
@@ -32,7 +32,7 @@ A list of collection names.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import MilvusClient

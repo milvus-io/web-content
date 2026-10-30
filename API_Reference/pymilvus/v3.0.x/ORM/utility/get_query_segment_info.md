@@ -50,7 +50,7 @@ A list of **QuerySegmentInfo** objects, each reporting the status of a segment.
 
 N/A
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType, utility

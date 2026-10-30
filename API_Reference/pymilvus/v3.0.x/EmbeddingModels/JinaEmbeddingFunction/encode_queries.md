@@ -2,7 +2,7 @@
 
 This operation takes in a list of query strings and encodes each query into a vector embedding.
 
-## Request syntax
+## Request Syntax
 
 ```python
 encode_queries(
@@ -24,7 +24,7 @@ encode_queries(
 
 A list where each element is a NumPy array.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 - **RuntimeError**
 
@@ -36,7 +36,7 @@ A list where each element is a NumPy array.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import JinaEmbeddingFunction

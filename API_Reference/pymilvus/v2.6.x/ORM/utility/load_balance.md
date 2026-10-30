@@ -64,7 +64,7 @@ None
 
 N/A
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, utility

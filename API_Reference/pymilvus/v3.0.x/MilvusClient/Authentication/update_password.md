@@ -2,7 +2,7 @@
 
 This operation updates the password of a specific user.
 
-## Request syntax
+## Request Syntax
 
 ```python
 update_password(

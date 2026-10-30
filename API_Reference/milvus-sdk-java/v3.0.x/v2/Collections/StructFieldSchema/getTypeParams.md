@@ -20,7 +20,7 @@ getTypeParams()
 
 The return value will be a map of the type parameters of the specified Array of Struct field.
 
-## Examples
+## Example
 
 ```java
 import io.milvus.v2.common.DataType;

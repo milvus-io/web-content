@@ -32,7 +32,7 @@ A boolean value indicating whether the current role exists or not
 
 *None*
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Role, utility

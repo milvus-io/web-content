@@ -10,7 +10,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation returns the state of a specified bulk-insert task.
 
-## Request syntax
+## Request Syntax
 
 ```python
 get_bulk_insert_state(
@@ -188,7 +188,7 @@ A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, utility

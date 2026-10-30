@@ -115,7 +115,7 @@ A **SearchIterator** for you to iterate over the search result.
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples
+## Example
 
 ```python
 from pymilvus import connections, Collection, CollectionSchema, FieldSchema, DataType

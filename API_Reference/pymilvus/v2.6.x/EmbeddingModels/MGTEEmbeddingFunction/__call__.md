@@ -4,7 +4,7 @@ This operation in [MGTEEmbeddingFunction](MGTEEmbeddingFunction.md) takes a list
 
 The **\_\_call\_\_()** method of MGTEEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
-## Request syntax
+## Request Syntax
 
 ```python
 # Instance created
@@ -31,7 +31,7 @@ ef(
 
 A dictionary that contains the encoded embeddings, both dense and sparse.
 
-**Exceptions:**
+**EXCEPTIONS:**
 
 *None*
 
@@ -41,7 +41,7 @@ A dictionary that contains the encoded embeddings, both dense and sparse.
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.hybrid import MGTEEmbeddingFunction

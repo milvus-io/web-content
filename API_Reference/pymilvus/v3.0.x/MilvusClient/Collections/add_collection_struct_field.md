@@ -8,7 +8,7 @@ Adding a struct field to an existing collection requires **nullable** to be set 
 
 </div>
 
-## Request syntax
+## Request Syntax
 
 ```python
 client.add_collection_struct_field(

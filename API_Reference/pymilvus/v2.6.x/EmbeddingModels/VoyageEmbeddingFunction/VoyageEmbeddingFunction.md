@@ -32,7 +32,7 @@ VoyageEmbeddingFunction(
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [Python API](https://docs.voyageai.com/docs/embeddings#python-api).
 
-## Examples
+## Example
 
 ```python
 from pymilvus.model.dense import VoyageEmbeddingFunction
