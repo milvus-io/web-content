@@ -51,7 +51,7 @@ However, it’s important to note that the iterator processes entities one at a 
 
 ## Examples
 
-This section demonstrates how to conduct a filtered search. Code snippets in this section assume  you already have the following entities in your collection. Each entity has four fields, namely **id**, **vector**, **color**, and **likes**.
+This section demonstrates how to conduct a filtered search. Code snippets in this section assume you already have the following entities in your collection. Each entity has four fields, namely **id**, **vector**, **color**, and **likes**. The examples use a loaded collection named `my_collection` with a five-dimensional `vector` field indexed with the `COSINE` metric.
 
 ```json
 [
@@ -74,15 +74,22 @@ If the query vectors already exist in the target collection, consider using `ids
 
 </div>
 
+The examples use PyMilvus 3.0.2, Java SDK 3.0.10, Go SDK 3.0.0 (`client/v3`), Rust SDK 3.0.2, C++ SDK 3.0.4, NodeJS SDK 3.0.6, and C# SDK 3.0.0.
+
 ### Search with standard filtering
 
 The following code snippets demonstrate a search with standard filtering, and the request in the following code snippet carries a filtering condition and several output fields.
+
+<!-- doc:block:start id="filtered-search-standard" -->
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -115,9 +122,13 @@ for hits in res:
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
@@ -128,7 +139,7 @@ FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.60234957
 SearchReq searchReq = SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(queryVector))
-        .topK(5)
+        .limit(5)
         .filter("color like \"red%\" and likes > 50")
         .outputFields(Arrays.asList("color", "likes"))
         .build();
@@ -154,23 +165,22 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 token := "root:Milvus"
 
-client, err := client.New(ctx, &client.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer client.Close(ctx)
 
@@ -185,8 +195,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     WithFilter("color like 'red%' and likes > 50").
     WithOutputFields("color", "likes"))
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 
 for _, resultSet := range resultSets {
@@ -195,11 +204,78 @@ for _, resultSet := range resultSets {
     fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
     fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
 }
+```
 
+```rust
+use milvus::v2::error::Result;
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+
+let res = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .filter("color like \"red%\" and likes > 50")
+            .output_fields(["color", "likes"])
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddFloatVector(query_vector)
+                   .WithLimit(5)
+                   .WithAnnsField("vector")
+                   .WithFilter(R"(color like "red%" and likes > 50)")
+                   .AddOutputField("color")
+                   .AddOutputField("likes");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        throw std::runtime_error(status.Message());
+    }
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const address = "http://localhost:19530";
 const token = "root:Milvus";
@@ -212,10 +288,48 @@ const res = await client.search({
     data: [query_vector],
     limit: 5,
     // highlight-start
-    filters: 'color like "red%" and likes > 50',
+    filter: 'color like "red%" and likes > 50',
     output_fields: ["color", "likes"]
     // highlight-end
 })
+```
+
+```csharp
+using System;
+using System.Linq;
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+var queryVector = new ReadOnlyMemory<float>(new[]
+{
+    0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f
+});
+
+SearchResp res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "vector",
+    Vectors = new[] { queryVector },
+    Limit = 5,
+    Parameters = new SearchParameters
+    {
+        Expression = "color like \"red%\" and likes > 50",
+        OutputFields = { "color", "likes" }
+    }
+});
+if (res.SingleResults is { } results)
+{
+    Console.WriteLine(string.Join(", ", results.SelectMany(r => r.Scores)));
+}
 ```
 
 ```bash
@@ -236,45 +350,53 @@ curl --request POST \
     "limit": 5,
     "outputFields": ["color", "likes"]
 }'
-# {"code":0,"cost":0,"data":[]}
+# Illustrative response; scores and cost can vary.
+# {"code":0,"cost":0,"data":[{"color":"red_4794","distance":0.5975796,"id":4,"likes":122},{"color":"red_9392","distance":-0.2499619,"id":6,"likes":58}],"topks":[2]}
 ```
 
-The filtering condition carried in the search request reads `color like "red%" and likes > 50`. It uses the and operator to include two conditions: the first one asks for entities that have a value starting with `red` in the `color` field, and the other asks for entities with a value greater than `50` in the `likes` field. There are only two entities meeting these requirements. With the top-K set to `3`, Milvus will calculate the distance between these two entities to the query vector and return them as the search results.
+<!-- doc:block:end id="filtered-search-standard" -->
+
+The filtering condition carried in the search request reads `color like "red%" and likes > 50`. It uses the and operator to include two conditions: the first one asks for entities that have a value starting with `red` in the `color` field, and the other asks for entities with a value greater than `50` in the `likes` field. There are only two entities meeting these requirements. With the top-K set to `5`, Milvus will calculate the distance between these two entities to the query vector and return them as the search results.
+
+The following example shows the shape of the Python results with illustrative cosine scores. Scores can vary with floating-point precision. Only the requested output fields appear in `entity`; the REST examples return those fields at the top level of each hit.
 
 ```json
 [
     {
-        "id": 4, 
-        "distance": 0.3345786594834839,
+        "id": 4,
+        "distance": 0.5975796,
         "entity": {
-            "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], 
-            "color": "red_4794", 
+            "color": "red_4794",
             "likes": 122
         }
     },
     {
-        "id": 6, 
-        "distance": 0.6638239834383389，
+        "id": 6,
+        "distance": -0.2499619,
         "entity": {
-            "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], 
-            "color": "red_9392", 
+            "color": "red_9392",
             "likes": 58
         }
-    },
+    }
 ]
 ```
 
-For more information on the operators you can use in metadata filtering, refer to [Filtering](filtering).
+For more information on the operators you can use in metadata filtering, refer to [Filtering Explained](boolean.md).
 
 ### Search with iterative filtering
 
 To conduct a filtered search with iterative filtering, you can do as follows:
 
+<!-- doc:block:start id="filtered-search-iterative" -->
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -314,6 +436,10 @@ import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
@@ -323,10 +449,10 @@ FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.60234957
 SearchReq searchReq = SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(queryVector))
-        .topK(5)
+        .limit(5)
         .filter("color like \"red%\" and likes > 50")
         .outputFields(Arrays.asList("color", "likes"))
-        .searchParams(new HashMap<>("hints", "iterative_filter"))
+        .searchParams(Collections.<String, Object>singletonMap("hints", "iterative_filter"))
         .build();
 
 SearchResp searchResp = client.search(searchReq);
@@ -350,23 +476,22 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 token := "root:Milvus"
 
-client, err := client.New(ctx, &client.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 defer client.Close(ctx)
 
@@ -382,8 +507,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     WithOutputFields("color", "likes").
     WithSearchParam("hints", "iterative_filter"))
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    panic(err)
 }
 
 for _, resultSet := range resultSets {
@@ -392,11 +516,81 @@ for _, resultSet := range resultSets {
     fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
     fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
 }
+```
 
+```rust
+use milvus::v2::error::Result;
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let query_vector = vec![0.3580376395471989f32, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592];
+
+let res = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .limit(5)
+            .filter("color like \"red%\" and likes > 50")
+            .output_fields(["color", "likes"])
+            .extra_params(HashMap::from([("hints".into(), "iterative_filter".into())]))
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.results());
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <stdexcept>
+#include <vector>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+std::vector<float> query_vector = {0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .AddFloatVector(query_vector)
+                   .WithLimit(5)
+                   .WithAnnsField("vector")
+                   .WithFilter(R"(color like "red%" and likes > 50)")
+                   .AddExtraParam("hints", "iterative_filter")
+                   .AddOutputField("color")
+                   .AddOutputField("likes");
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    throw std::runtime_error(status.Message());
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "TopK results:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        throw std::runtime_error(status.Message());
+    }
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const address = "http://localhost:19530";
 const token = "root:Milvus";
@@ -405,15 +599,56 @@ const client = new MilvusClient({address, token});
 const query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
 
 const res = await client.search({
-    collection_name: "filtered_search_collection",
+    collection_name: "my_collection",
     data: [query_vector],
     limit: 5,
     // highlight-start
-    filters: 'color like "red%" and likes > 50',
+    filter: 'color like "red%" and likes > 50',
     hints: "iterative_filter",
     output_fields: ["color", "likes"]
     // highlight-end
 })
+```
+
+```csharp
+using System;
+using System.Linq;
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+var queryVector = new ReadOnlyMemory<float>(new[]
+{
+    0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f
+});
+
+var searchParams = new SearchParameters
+{
+    Expression = "color like \"red%\" and likes > 50",
+    Hints = "iterative_filter",
+    OutputFields = { "color", "likes" }
+};
+
+SearchResp res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "vector",
+    Vectors = new[] { queryVector },
+    Limit = 5,
+    Parameters = searchParams
+});
+if (res.SingleResults is { } results)
+{
+    Console.WriteLine(string.Join(", ", results.SelectMany(r => r.Scores)));
+}
 ```
 
 ```bash
@@ -435,6 +670,8 @@ curl --request POST \
     "limit": 5,
     "outputFields": ["color", "likes"]
 }'
-# {"code":0,"cost":0,"data":[]}
+# Illustrative response; scores and cost can vary.
+# {"code":0,"cost":0,"data":[{"color":"red_4794","distance":0.5975796,"id":4,"likes":122},{"color":"red_9392","distance":-0.2499619,"id":6,"likes":58}],"topks":[2]}
 ```
 
+<!-- doc:block:end id="filtered-search-iterative" -->
