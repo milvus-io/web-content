@@ -1,6 +1,6 @@
 # create_field_schema()
 
-This operation creates a field schema. It wraps [FieldSchema](../FieldSchema/FieldSchema.md).
+This operation creates a field schema. It wraps [FieldSchema](FieldSchema/FieldSchema.md).
 
 ## Request syntax
 
@@ -43,11 +43,17 @@ This is a class method. You should call this method like this: `MilvusClient.cre
 
 **RETURN TYPE:**
 
-*[FieldSchema](../FieldSchema/FieldSchema.md)*
+*[FieldSchema](FieldSchema/FieldSchema.md)*
 
 **RETURNS:**
 
 The created field schema.
+
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 

@@ -28,7 +28,7 @@ Function(
 
     The name of the function. This identifier is used to reference the function within queries and collections.
 
-- `function_type` (*[FunctionType](../Collections/FunctionType.md)*) -
+- `function_type` (*[FunctionType](../FunctionType.md)*) -
 
     **[REQUIRED]**
 

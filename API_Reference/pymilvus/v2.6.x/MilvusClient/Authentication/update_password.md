@@ -66,10 +66,15 @@ Demonstrates update password usage.
 from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
+
+# Create a user
 client.create_user("analyst", "Milvus123", description="Analytics account")
-client.update_user("analyst", description="Updated analytics account")
-client.create_role("read_only", description="Read-only role")
-client.alter_role("read_only", description="Updated read-only role")
-print(client.describe_user("analyst"))
-print(client.describe_role("read_only"))
+
+# Update the user's password
+client.update_password(
+    user_name="analyst",
+    old_password="Milvus123",
+    new_password="Milvus456",
+    description="Analytics account",
+)
 ```

@@ -36,6 +36,12 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the model2vec module is not installed.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python
@@ -52,7 +58,7 @@ docs = [
     "Born in Maida Vale, London, Turing was raised in southern England.",
 ]
 
-docs_embeddings = gemini_ef.encode_documents(docs)
+docs_embeddings = gemini_ef(docs)
 
 # Embeddings: [array([-0.00894029,  0.00573813,  0.013351  , ..., -0.00042766,
 #        -0.00603091, -0.00341043], shape=(3072,)), array([ 0.00222347,  0.03725113,  0.01152256, ...,  0.01047272,

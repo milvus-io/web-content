@@ -1,6 +1,6 @@
 # to_dict()
 
-This operation converts a FieldSchema object to a dictionary representation.
+This operation converts a [FieldSchema](FieldSchema.md) object to a dictionary representation.
 
 ## Request Syntax
 

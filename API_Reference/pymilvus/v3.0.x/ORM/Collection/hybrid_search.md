@@ -21,6 +21,7 @@ hybrid_search(
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
     round_decimal: int = -1,
+    ranker: Optional[Function] = None,
 )
 ```
 
@@ -90,6 +91,10 @@ hybrid_search(
     The number of decimal places that Milvus rounds the calculated distances to.
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- **ranker** (*[Function](../../MilvusClient/Collections/Function/Function.md)* | *None*) -
+
+    An optional ranker that further reorders the reranked results. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
 
 **RETURN TYPE:**
 

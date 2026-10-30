@@ -32,6 +32,12 @@ A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/
 
     This exception will be raised when an unsupported operation is attempted on the embedding object.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

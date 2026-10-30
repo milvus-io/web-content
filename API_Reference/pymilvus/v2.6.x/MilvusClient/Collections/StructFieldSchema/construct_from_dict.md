@@ -26,7 +26,7 @@ A **[StructFieldSchema](StructFieldSchema.md)** object.
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

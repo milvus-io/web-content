@@ -26,7 +26,7 @@ client.list_segments(
 
     The name of the collection.
 
-- **states** (*Optional[Sequence[SegmentState]]*) -
+- **states** (*Optional[Sequence[[SegmentState](../Collections/SegmentState.md)]]*) -
 
     The segment states to include in the result. When omitted, the default retained states are used: **Growing**, **Sealed**, **Flushing**, **Flushed**, **Importing**, and **Dropped**.
 
@@ -62,7 +62,7 @@ A list of segment information objects with the following members:
 
     Whether the data in the segment is sorted.
 
-- **state** (*SegmentState*) -
+- **state** (*[SegmentState](../Collections/SegmentState.md)*) -
 
     The lifecycle state of the segment.
 

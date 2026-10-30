@@ -23,6 +23,62 @@ VolumeBulkWriter(
 
 **PARAMETERS:**
 
+- **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
+
+    **[REQUIRED]**
+
+    The schema of a target collection to which the rewritten data is to be imported.
+
+- **remote_path** (*str*) -
+
+    **[REQUIRED]**
+
+    The remote path in the volume that is to hold the rewritten data.
+
+- **cloud_endpoint** (*str*) -
+
+    **[REQUIRED]**
+
+    The endpoint of the Zilliz Cloud cluster that hosts the target volume.
+
+- **api_key** (*str*) -
+
+    **[REQUIRED]**
+
+    The API key used to authenticate with the Zilliz Cloud cluster.
+
+- **volume_name** (*str*) -
+
+    **[REQUIRED]**
+
+    The name of the target volume.
+
+- **chunk_size** (*int*) -
+
+    The maximum size of a file segment.
+
+    While rewriting your raw data, Milvus splits your raw data into segments.
+
+    The value defaults to **536,870,912** in bytes, which is **512** MB.
+
+- **file_type** (*[BulkFileType](../BulkFileType.md)*) -
+
+    The type of the output file.
+
+    The value defaults to **BulkFileType.PARQUET**. 
+
+    Possible options are **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**.
+
+- **config** (*dict*) -
+
+    Additional configurations for the writer.
+
+- **connect_type** (*ConnectType*) -
+
+    The connection type used to access the target volume.
+
+    The value defaults to **ConnectType.AUTO**.
+
 **RETURN TYPE:**
 
 *VolumeBulkWriter*
@@ -40,14 +96,34 @@ Raised when the server rejects the request or the RPC fails. Inspect the server 
 
 ```python
 # include-start zilliz
-from pymilvus.bulk_writer import VolumeFileManager, VolumeManager
+from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus.bulk_writer import VolumeBulkWriter
 
-manager = VolumeManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY")
-manager.create_volume(project_id="proj-xxxx", region_id="aws-us-west-2", volume_name="book-volume", volume_type="EXTERNAL")
-manager.describe_volume("book-volume")
-manager.list_volumes(project_id="proj-xxxx", volume_type="EXTERNAL")
+# Set up a schema
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=5),
+    ]
+)
 
-file_manager = VolumeFileManager(cloud_endpoint="https://api.cloud.zilliz.com", api_key="YOUR_API_KEY", volume_name="book-volume")
-file_manager.upload_file_to_volume(source_file_path="./data/books.parquet", target_volume_path="datasets/books/books.parquet", upload_concurrency=4)
+# Set up a volume bulk writer
+writer = VolumeBulkWriter(
+    schema=schema,
+    remote_path="/remote/output",
+    cloud_endpoint="https://api.cloud.zilliz.com",
+    api_key="YOUR_API_KEY",
+    volume_name="book-volume",
+)
+
+# Append a row to the writer
+writer.append_row(
+    {"id": 0, "vector": [0.1, 0.4, -0.8, -0.2, 0.4]}
+)
+
+# Commit the appended data and upload it to the volume
+def callback():
+    print("Commit completes")
+
+writer.commit(call_back=callback)
 # include-end
 ```

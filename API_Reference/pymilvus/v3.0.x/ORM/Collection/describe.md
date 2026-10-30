@@ -113,6 +113,8 @@ A dictionary that contains detailed information about the specified collection.
 
     - **element_type** (*int*)
 
+        The element type of the current field if it is an ARRAY field. For details, refer to [DataType](../../MilvusClient/Collections/DataType.md).
+
     - **is_primary** (*bool*)
 
         Whether the current field serves as the primary key of the collection.
@@ -131,7 +133,7 @@ A dictionary that contains detailed information about the specified collection.
 
 - **properties** (*dict*)
 
-- **num_partitions** (*int*) 
+    Additional properties of the current collection, including the resource group it belongs to.
 
     The number of partitions in the current collection.
 

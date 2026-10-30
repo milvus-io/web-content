@@ -8,6 +8,7 @@ This operation updates replication configuration across Milvus clusters. This is
 client.update_replicate_configuration(
     clusters: List[dict] = None,
     cross_cluster_topology: List[dict] = None,
+    force_promote: bool = False,
     timeout: float = None
 )
 ```
@@ -21,6 +22,10 @@ client.update_replicate_configuration(
 - **cross_cluster_topology** (*List[dict]* | *None*) -
 
     A list of replication relationships. Each dict should contain `source_cluster_id` (str) and `target_cluster_id` (str).
+
+- **force_promote** (*bool*) -
+
+    Whether to forcibly promote the replication configuration. Setting this to **True** forces the promotion even if the target cluster is not ready. The value defaults to **False**.
 
 - **timeout** (*float* | *None*) -
 

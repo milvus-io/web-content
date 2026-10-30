@@ -28,11 +28,11 @@ partition(
 
 **RETURN TYPE:**
 
-*Partition* | *NoneType*
+*[Partition](../Partition/Partition.md)* | *NoneType*
 
 **RETURNS:**
 
-A **Partition** object. If the current collection does not have a partition of the specified name, **None** is returned.
+A **[Partition](../Partition/Partition.md)** object. If the current collection does not have a partition of the specified name, **None** is returned.
 
 **EXCEPTIONS:**
 

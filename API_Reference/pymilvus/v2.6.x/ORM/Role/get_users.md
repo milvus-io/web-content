@@ -28,6 +28,12 @@ N/A
 
 A tuple that contains the names of all users added to the current role.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Examples
 
 ```python

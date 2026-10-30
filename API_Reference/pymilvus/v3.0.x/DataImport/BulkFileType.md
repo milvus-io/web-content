@@ -2,37 +2,48 @@
 
 This is an enumeration that provides the following constants.
 
-## Constants
+```python
+class BulkFileType(IntEnum):
+    NUMPY = 1
+    NPY = 1
+    JSON = 2
+    JSON_RB = 2
+    PARQUET = 3
+    CSV = 4
+    JSONL = 5
+```
 
-- **NUMPY** = 1
+**Constants:**
+
+- **NUMPY** (1)
 
     Sets the file type to **NumPy** (*.npy*).
 
-- **NPY** = 1
+- **NPY** (1)
 
     **Deprecated.** Use **NUMPY** instead.
 
     Sets the file type to **NumPy** (*.npy*).
 
-- **JSON** = 2
+- **JSON** (2)
 
     Sets the file type to **JSON** (*.json*).
 
-- **JSON_RB** = 2
+- **JSON_RB** (2)
 
     **Deprecated.** Use **JSON** instead.
 
     Sets the file type to row-based **JSON** (*.json*).
 
-- **PARQUET** = 3
+- **PARQUET** (3)
 
     Sets the file type to [Parquet](https://parquet.apache.org/) (*.parquet*).
 
-- **CSV** = 4
+- **CSV** (4)
 
     Sets the file type to **CSV** (*.csv*).
 
-- **JSONL** = 5
+- **JSONL** (5)
 
     Sets the file type to JSON Lines (*.jsonl*).
 

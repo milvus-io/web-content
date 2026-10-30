@@ -13,7 +13,9 @@ Constructs the schema of a collection by defining fields, data types, and other 
 ```python
 CollectionSchema(
     fields: list,
-    description: str
+    description: str,
+    struct_fields: Optional[List[StructFieldSchema]] = None,
+    functions: Optional[List[Function]] = None,
 )
 ```
 
@@ -23,11 +25,11 @@ CollectionSchema(
 
     **[REQUIRED]**
 
-    A list of **[FieldSchema](../../MilvusClient/FieldSchema/FieldSchema.md)** objects that define the fields in the collection schema.
+    A list of **[FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md)** objects that define the fields in the collection schema.
 
     <div class="alert note">
     
-    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
+    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of [FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md) objects to define the full schema.
 
     </div>
 
@@ -36,6 +38,14 @@ CollectionSchema(
     The description of the schema.
 
     If a description is not provided, it will be set to an empty string.
+
+- **struct_fields** (*list[[StructFieldSchema](../../MilvusClient/Collections/StructFieldSchema/StructFieldSchema.md)]* | *None*) -
+
+    A list of **[StructFieldSchema](../../MilvusClient/Collections/StructFieldSchema/StructFieldSchema.md)** objects that define the struct fields of the collection schema.
+
+- **functions** (*list[[Function](../../MilvusClient/Collections/Function/Function.md)]* | *None*) -
+
+    A list of **[Function](../../MilvusClient/Collections/Function/Function.md)** objects that define the functions of the collection schema.
 
 - **kwargs** -
 
@@ -63,7 +73,7 @@ CollectionSchema(
 
         The value should be the name of a field listed in **fields**.
 
-        As an alternative, you can set **is_primary** when creating a **[FieldSchema](../../MilvusClient/FieldSchema/FieldSchema.md)** object.
+        As an alternative, you can set **is_primary** when creating a **[FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md)** object.
 
     - **partition_key_field** (*str*)
 
@@ -73,7 +83,7 @@ CollectionSchema(
 
         Setting this makes Milvus manage all partitions in the current collection.
 
-        As an alternative, you can set **is_partition_key** when creating a **[FieldSchema](../../MilvusClient/FieldSchema/FieldSchema.md)** object.
+        As an alternative, you can set **is_partition_key** when creating a **[FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md)** object.
 
         <div class="alert note">
         
@@ -101,7 +111,7 @@ A **CollectionSchema** object.
 
 - **FieldTypeException**: 
 
-    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../MilvusClient/FieldSchema/FieldSchema.md)** object.
+    This exception will be raised when a field in the **fields** list is not a **[FieldSchema](../../MilvusClient/Collections/FieldSchema/FieldSchema.md)** object.
 
 - **PrimaryKeyException:**
 

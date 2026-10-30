@@ -4,7 +4,7 @@
 
 **Deprecated.**
 
-This method is deprecated. Use the MilvusClient [query_iterator()](../../MilvusClient/Vector/query_iterator.md) instead.
+This method is deprecated. Use the [MilvusClient](../../MilvusClient/Client/MilvusClient.md) [query_iterator()](../../MilvusClient/Vector/query_iterator.md) instead.
 
 </div>
 

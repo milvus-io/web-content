@@ -24,7 +24,7 @@ client.list_persistent_segments(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **states** (*Optional[Sequence[SegmentState]]*) -
+- **states** (*Optional[Sequence[[SegmentState](../Collections/SegmentState.md)]]*) -
 
     The segment states to include in the result. When omitted, the server preserves the legacy persistent-state filter (growing, sealed, flushed, flushing, importing, and dropped segments).
 
@@ -58,7 +58,7 @@ A list of persistent segment information objects with the following members:
 
     Whether the data in the segment is sorted.
 
-- **state** (*SegmentState*) -
+- **state** (*[SegmentState](../Collections/SegmentState.md)*) -
 
     The lifecycle state of the segment.
 

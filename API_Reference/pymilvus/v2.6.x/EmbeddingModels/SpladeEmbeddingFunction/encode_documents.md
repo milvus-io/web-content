@@ -30,6 +30,12 @@ Compressed sparse row matrices representing the document embeddings.
 
     This exception will be raised when the transformers library is not installed.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

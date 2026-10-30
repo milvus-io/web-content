@@ -64,6 +64,12 @@ utility.list_resource_groups(
 ) # ["__default_resource_group", "rg_01", "rg_02"]
 ```
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Related operations
 
 The following operations are related to `list_resource_groups()`:

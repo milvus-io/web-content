@@ -107,9 +107,9 @@ search(
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
-- **search_aggregation** (*Optional[SearchAggregation]*) -
+- **search_aggregation** (*Optional[[SearchAggregation](../../MilvusClient/Vector/SearchAggregation.md)]*) -
 
-    Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root *SearchAggregation.size* controls top-level bucket count.
+    Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root *[SearchAggregation](../../MilvusClient/Vector/SearchAggregation.md).size* controls top-level bucket count.
 
 **RETURN TYPE:**
 

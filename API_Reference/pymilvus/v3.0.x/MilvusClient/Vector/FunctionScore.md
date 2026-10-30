@@ -21,11 +21,11 @@ FunctionScore(
 
 - **functions** (*[Function](../Collections/Function/Function.md)*, *List[[Function](../Collections/Function/Function.md)]*) -
 
-    A Function instance or a list of Function instances that are to be combined in the current FunctionScore instance.
+    A [Function](../Collections/Function/Function.md) instance or a list of [Function](../Collections/Function/Function.md) instances that are to be combined in the current FunctionScore instance.
 
 - **params** (*Dict*) -  
 
-    Specifies how the above Function instances are to be combined. It provides the following settings:
+    Specifies how the above [Function](../Collections/Function/Function.md) instances are to be combined. It provides the following settings:
 
     - **boost_mode** (*str*) - 
 

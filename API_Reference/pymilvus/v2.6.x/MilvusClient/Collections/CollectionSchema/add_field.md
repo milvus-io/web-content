@@ -20,7 +20,7 @@ add_field(
 
     The name of the field.
 
-- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](../DataType.md)** (*[DataType](../DataType.md)*) - 
 
     **[REQUIRED]**
 
@@ -126,7 +126,7 @@ add_field(
 
     For more information, refer to [Nullable & Default](https://milvus.io/docs/nullable-and-default.md).
 
-- **default_value** (*[DataType](../Collections/DataType.md)*)
+- **default_value** (*[DataType](../DataType.md)*)
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
 
@@ -199,7 +199,7 @@ A **[CollectionSchema](CollectionSchema.md)** object contains the fields that ha
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

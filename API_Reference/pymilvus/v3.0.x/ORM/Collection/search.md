@@ -23,6 +23,9 @@ search(
     output_fields: list[str] | None,
     timeout: float | None,
     round_decimal: int,
+    ranker: Optional[Union[Function, FunctionScore]] = None,
+    function_chains: Optional[Union[FunctionChain, List[FunctionChain]]] = None,
+    highlighter: Optional[Highlighter] = None,
     search_aggregation: Optional[SearchAggregation] = None
 )
 ```
@@ -113,7 +116,19 @@ search(
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
-- **search_aggregation** (*Optional[SearchAggregation]*) -
+- **ranker** (*[Function](../../MilvusClient/Collections/Function/Function.md)* | *[FunctionScore](../../MilvusClient/Vector/FunctionScore.md)* | *None*) -
+
+    The ranker used to reorder the search results. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
+
+- **function_chains** (*[FunctionChain](../../MilvusClient/Collections/Function/Function.md)* | *list[[FunctionChain](../../MilvusClient/Collections/Function/Function.md)]* | *None*) -
+
+    One or more function chains to apply during the search. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
+
+- **highlighter** (*Highlighter* | *None*) -
+
+    The highlighter used to annotate matching terms in the returned text fields. See [LexicalHighlighter](../../MilvusClient/Vector/Highlighter/LexicalHighlighter.md) and [SemanticHighlighter](../../MilvusClient/Vector/Highlighter/SemanticHighlighter.md) for details.
+
+- **search_aggregation** (*Optional[[SearchAggregation](../../MilvusClient/Vector/SearchAggregation.md)]*) -
 
     Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root `SearchAggregation.size` controls the top-level bucket count.
 

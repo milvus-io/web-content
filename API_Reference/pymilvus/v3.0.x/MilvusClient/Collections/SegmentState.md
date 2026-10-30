@@ -4,36 +4,48 @@ This is an enumeration that provides the following constants. It is used to filt
 
 Available in PyMilvus v3.0.2 or later.
 
-## Constants
+```python
+class SegmentState(IntEnum):
+    SegmentStateNone = 0
+    NotExist = 1
+    Growing = 2
+    Sealed = 3
+    Flushed = 4
+    Flushing = 5
+    Dropped = 6
+    Importing = 7
+```
 
-- SegmentStateNone = 0
+**Constants:**
+
+- **SegmentStateNone** (0)
 
     Indicates that the segment state is unset.
 
-- NotExist = 1
+- **NotExist** (1)
 
     Indicates that the segment does not exist.
 
-- Growing = 2
+- **Growing** (2)
 
     Indicates that the segment is growing. Growing segments accept incoming data until they are sealed.
 
-- Sealed = 3
+- **Sealed** (3)
 
     Indicates that the segment is sealed. Sealed segments no longer accept incoming data and are candidates for compaction.
 
-- Flushed = 4
+- **Flushed** (4)
 
     Indicates that the segment is flushed. Flushed segments have been persisted to object storage.
 
-- Flushing = 5
+- **Flushing** (5)
 
     Indicates that the segment is being flushed.
 
-- Dropped = 6
+- **Dropped** (6)
 
     Indicates that the segment is dropped. Dropped segment metadata is subject to server-side garbage collection.
 
-- Importing = 7
+- **Importing** (7)
 
     Indicates that the segment is being imported through a bulk import job.

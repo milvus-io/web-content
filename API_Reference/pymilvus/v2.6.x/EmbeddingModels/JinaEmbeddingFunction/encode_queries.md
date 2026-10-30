@@ -30,6 +30,12 @@ A list where each element is a NumPy array.
 
     This exception will be raised when the response from the Jina API does not contain the `data` key.
 
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
+
 ## Examples
 
 ```python

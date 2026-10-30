@@ -19,7 +19,7 @@ FieldSchema(
 **[REQUIRED]**
 Name of the field.
 
-- **dtype** (*[DataType](../Collections/DataType.md)*) -
+- **dtype** (*[DataType](../DataType.md)*) -
 **[REQUIRED]**
 Data type of the field.
 
@@ -48,7 +48,7 @@ Dimension of a dense vector field.
     - **max_length** (*int*) -
 Maximum length of a VARCHAR field.
 
-    - **element_type** (*[DataType](../Collections/DataType.md)*) -
+    - **element_type** (*[DataType](../DataType.md)*) -
 Data type of elements in an ARRAY field.
 
     - **is_partition_key** (*bool*) -

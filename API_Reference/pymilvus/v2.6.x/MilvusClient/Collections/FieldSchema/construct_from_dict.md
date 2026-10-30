@@ -1,6 +1,6 @@
 # construct_from_dict()
 
-This operation constructs a FieldSchema object from a dictionary representation.
+This operation constructs a [FieldSchema](FieldSchema.md) object from a dictionary representation.
 
 ## Request Syntax
 
@@ -30,11 +30,11 @@ This is a class method. You should call it from the class instead of an instance
 
 **RETURNS:**
 
-A FieldSchema object.
+A [FieldSchema](FieldSchema.md) object.
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

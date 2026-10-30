@@ -55,7 +55,7 @@ create_resource_group(
 
     Optional parameters. Currently, you can set **config** to specify the configuration of the resource group.
 
-    - **config** (*ResourceGroupConfig*) -
+    - **config** (*[ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md)*) -
 
         A [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md) object that represents the configuration of the resource group.
 

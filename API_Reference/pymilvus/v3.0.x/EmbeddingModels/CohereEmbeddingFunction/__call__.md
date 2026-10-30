@@ -1,4 +1,4 @@
-# \_\_call()\_\_
+# \_\_call\_\_()
 
 This operation in [CohereEmbeddingFunction](CohereEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
@@ -36,6 +36,12 @@ A list where each element is a NumPy array.
 - **ValueError**
 
     This exception will be raised when you specify multiple embedding types or use the `int8` or `uint8` data type for CohereEmbeddingFunction initialization.
+
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Examples
 

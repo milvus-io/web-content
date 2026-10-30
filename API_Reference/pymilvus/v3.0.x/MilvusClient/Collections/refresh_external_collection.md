@@ -114,6 +114,12 @@ refresh_external_collection(
 
 An integer that indicates an asynchronous job that has been created.
 
+**EXCEPTIONS:**
+
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Examples
 
 ```python

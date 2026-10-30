@@ -1,6 +1,6 @@
 # to_dict()
 
-This operation converts a FieldSchema object to a dictionary representation.
+This operation converts a [FieldSchema](FieldSchema.md) object to a dictionary representation.
 
 ## Request Syntax
 
@@ -22,7 +22,7 @@ The dictionary representation of the field schema.
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

@@ -20,7 +20,7 @@ class pymilvus.AggregationBucket
 
     Metric values keyed by the aliases defined in `SearchAggregation.metrics`.
 
-- **hits** (*list[AggregationHit]*) -
+- **hits** (*list[[AggregationHit](AggregationHit.md)]*) -
 
     Representative entities selected by `TopHits`. The list is empty when `top_hits` is not configured at this level.
 

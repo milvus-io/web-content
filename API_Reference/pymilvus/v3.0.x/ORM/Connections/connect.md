@@ -141,7 +141,7 @@ None
 
 None
 
-## Exceptions
+**EXCEPTIONS:**
 
 - **NotImplementedError**:
 

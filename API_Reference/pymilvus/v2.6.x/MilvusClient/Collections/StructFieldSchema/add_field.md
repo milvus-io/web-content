@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **[datatype](../Collections/DataType.md)** (*[DataType](../Collections/DataType.md)*) - 
+- **[datatype](../DataType.md)** (*[DataType](../DataType.md)*) - 
 
     **[REQUIRED]**
 
@@ -51,7 +51,7 @@ A **[StructFieldSchema](StructFieldSchema.md)** object contains the fields that 
 
 **EXCEPTIONS:**
 
-- **[MilvusException](../../Exceptions/MilvusException.md)**
+- **[MilvusException](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when any error occurs during this operation.
 

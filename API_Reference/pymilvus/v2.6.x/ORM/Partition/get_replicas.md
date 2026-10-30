@@ -62,9 +62,15 @@ The `Replica` and `Group` response classes are deprecated. Use `ReplicaInfo` obj
 
         - **channel_name** (*str*)
 
+            The name of the channel that the shard belongs to.
+
         - **shard_leader** (*int*)
 
+            The ID of the query node that serves as the leader of the shard.
+
         - **shard_nodes** (*set*)
+
+            The set of query node IDs that host the shard.
 
 <div class="alert note">
 
