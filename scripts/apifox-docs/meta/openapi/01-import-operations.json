@@ -397,10 +397,7 @@
             "required": true,
             "example": "inxx-xxxxxxxxxxxxxxx",
             "schema": {
-              "type": "string",
-              "x-added-at": "2.6.x",
-              "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "type": "string"
             },
             "x-i18n": {
               "zh-CN": {
@@ -410,9 +407,9 @@
                 "description": "この操作が適用されるクラスターの ID。"
               }
             },
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-include-target": [
+              "zilliz"
+            ]
           },
           {
             "name": "Authorization",
@@ -806,10 +803,7 @@
             "required": true,
             "example": "inxx-xxxxxxxxxxxxxxx",
             "schema": {
-              "type": "string",
-              "x-added-at": "2.6.x",
-              "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "type": "string"
             },
             "x-i18n": {
               "zh-CN": {
@@ -819,9 +813,9 @@
                 "description": "Zilliz Cloud 上の特定のクラスターの ID。"
               }
             },
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-include-target": [
+              "zilliz"
+            ]
           },
           {
             "name": "pageSize",

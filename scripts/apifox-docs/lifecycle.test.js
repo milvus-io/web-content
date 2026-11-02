@@ -167,3 +167,117 @@ test('filtering rejects a retained required name without a retained property', (
     /REST_LIFECYCLE_REQUIRED_UNRESOLVED/,
   );
 });
+
+test('combinator branches may name parent-level properties in required', () => {
+  // Shape synced to web-content (milvus-io/web-content#1250): the anyOf
+  // alternatives constrain the same instance, so their `required` entries may
+  // reference properties declared only at the parent level.
+  const schema = lifecycleObject('3.0.x', '3.0.x', {
+    type: 'object',
+    properties: {
+      dbName: lifecycleField('3.0.x', {type: 'string'}),
+      collectionName: lifecycleField('3.0.x', {type: 'string'}),
+      fieldName: lifecycleField('3.0.x', {type: 'string'}),
+      fieldId: lifecycleField('3.0.x', {type: 'integer'}),
+    },
+    required: ['collectionName'],
+    anyOf: [
+      lifecycleObject('3.0.x', '3.0.x', {
+        required: ['fieldName', 'collectionName'],
+        properties: {
+          collectionName: lifecycleField('3.0.x', {type: 'string'}),
+          dbName: lifecycleField('3.0.x', {type: 'string'}),
+        },
+      }),
+      lifecycleObject('3.0.x', '3.0.x', {
+        required: ['fieldId', 'collectionName'],
+        properties: {
+          collectionName: lifecycleField('3.0.x', {type: 'string'}),
+          dbName: lifecycleField('3.0.x', {type: 'string'}),
+        },
+      }),
+    ],
+  });
+
+  const filtered = applyLifecycleForTrack(schema, '3.0.x', '#/paths/~1fields~1drop/post');
+  assert.deepEqual(filtered.value.anyOf[0].required, ['fieldName', 'collectionName']);
+  assert.deepEqual(filtered.value.anyOf[1].required, ['fieldId', 'collectionName']);
+});
+
+test('combinator branch required resolves against the parent scope regardless of key order', () => {
+  const buildSchema = () => lifecycleObject('3.0.x', '3.0.x', {
+    anyOf: [
+      lifecycleObject('3.0.x', '3.0.x', {
+        required: ['fieldName'],
+        properties: {dbName: lifecycleField('3.0.x', {type: 'string'})},
+      }),
+    ],
+    properties: {
+      fieldName: lifecycleField('3.0.x', {type: 'string'}),
+      dbName: lifecycleField('3.0.x', {type: 'string'}),
+    },
+  });
+
+  assert.deepEqual(
+    applyLifecycleForTrack(buildSchema(), '3.0.x', '$').value.anyOf[0].required,
+    ['fieldName'],
+  );
+});
+
+test('parent-level lifecycle omission also shrinks combinator branch required', () => {
+  const schema = lifecycleObject('2.6.x', '2.6.x', {
+    type: 'object',
+    properties: {
+      collectionName: lifecycleField('2.6.x', {type: 'string'}),
+      fieldName: lifecycleField('3.0.x', {type: 'string'}),
+    },
+    required: ['collectionName'],
+    anyOf: [
+      lifecycleObject('2.6.x', '2.6.x', {
+        required: ['fieldName', 'collectionName'],
+        properties: {collectionName: lifecycleField('2.6.x', {type: 'string'})},
+      }),
+    ],
+  });
+
+  const filtered = applyLifecycleForTrack(schema, '2.6.x', '$');
+  assert.ok(filtered.value.properties.collectionName);
+  assert.equal(filtered.value.properties.fieldName, undefined);
+  assert.deepEqual(filtered.value.required, ['collectionName']);
+  assert.deepEqual(filtered.value.anyOf[0].required, ['collectionName']);
+});
+
+test('combinator branch required still rejects names with no property anywhere in scope', () => {
+  const schema = lifecycleObject('3.0.x', '3.0.x', {
+    type: 'object',
+    properties: {collectionName: lifecycleField('3.0.x', {type: 'string'})},
+    required: ['collectionName'],
+    anyOf: [
+      lifecycleObject('3.0.x', '3.0.x', {
+        required: ['ghost'],
+        properties: {collectionName: lifecycleField('3.0.x', {type: 'string'})},
+      }),
+    ],
+  });
+
+  assert.throws(
+    () => applyLifecycleForTrack(schema, '3.0.x', '$'),
+    /REST_LIFECYCLE_REQUIRED_UNRESOLVED.*"ghost"/,
+  );
+});
+
+test('branches added after the track are omitted from the combinator', () => {
+  const schema = lifecycleObject('2.6.x', '2.6.x', {
+    type: 'object',
+    properties: {collectionName: lifecycleField('2.6.x', {type: 'string'})},
+    required: ['collectionName'],
+    anyOf: [
+      lifecycleObject('2.6.x', '2.6.x', {required: ['collectionName']}),
+      lifecycleObject('3.0.x', '3.0.x', {required: ['collectionName']}),
+    ],
+  });
+
+  const filtered = applyLifecycleForTrack(schema, '2.6.x', '$');
+  assert.equal(filtered.value.anyOf.length, 1);
+  assert.deepEqual(filtered.value.anyOf[0].required, ['collectionName']);
+});

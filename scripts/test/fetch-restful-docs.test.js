@@ -11,9 +11,13 @@ const {
   DEFAULT_SPAWN_CWD,
   applyMilvusLegacyCompatibility,
   projectSpecificationsForTrack,
+  projectSpecificationsForTarget,
   stageTrackSpecifications,
+  stageTargetSpecifications,
+  pruneTargetSelection,
   removeEmptyDirectories,
 } = require('../fetch-restful-docs');
+const { loadSpecifications } = require('../apifox-docs/specLoader');
 
 const lifecycle = (addedAt) => ({
   'x-added-at': addedAt,
@@ -21,9 +25,11 @@ const lifecycle = (addedAt) => ({
   'x-deprecated-since': null,
 });
 
-// Minimal fragment set exercising the three things the projection must do:
-// drop operations the target never publishes, drop operations added after
-// the track (and the tag they leave empty), and keep everything else.
+// Minimal fragment set exercising the things the projection must do: drop
+// operations the target never publishes, drop zilliz-scoped nodes inside
+// published operations (parameters, properties, x-admonition entries,
+// components), drop operations added after the track (and the tag they
+// leave empty), and keep everything else.
 function writeTrackFixture(root) {
   const fragmentDir = path.join(root, 'openapi');
   fs.mkdirSync(fragmentDir, { recursive: true });
@@ -42,6 +48,27 @@ function writeTrackFixture(root) {
           summary: 'List Collections',
           tags: ['Collection Operations (V2)'],
           ...lifecycle('2.6.x'),
+          'x-admonition': [
+            { type: 'info', title: 'Shared note', content: 'Applies to both targets.', ...lifecycle('2.6.x') },
+            {
+              type: 'info',
+              title: 'Zilliz note',
+              content: 'Zilliz Cloud only.',
+              ...lifecycle('2.6.x'),
+              'x-include-target': ['zilliz'],
+            },
+          ],
+          parameters: [
+            { name: 'dbName', in: 'query', schema: { type: 'string' }, ...lifecycle('2.6.x') },
+            {
+              name: 'clusterId',
+              in: 'query',
+              description: 'The ID of a specific cluster on Zilliz Cloud.',
+              schema: { type: 'string' },
+              ...lifecycle('2.6.x'),
+              'x-include-target': ['zilliz'],
+            },
+          ],
           requestBody: {
             content: {
               'application/json': {
@@ -51,7 +78,13 @@ function writeTrackFixture(root) {
                   properties: {
                     dbName: { type: 'string', ...lifecycle('2.6.x') },
                     onlyIn30: { type: 'string', ...lifecycle('3.0.x') },
+                    clusterId: {
+                      type: 'string',
+                      ...lifecycle('2.6.x'),
+                      'x-include-target': ['zilliz'],
+                    },
                   },
+                  required: ['dbName', 'clusterId'],
                 },
               },
             },
@@ -75,7 +108,13 @@ function writeTrackFixture(root) {
         },
       },
     },
-    components: { schemas: { Unused: { type: 'object', ...lifecycle('3.0.x') } } },
+    components: {
+      schemas: { Unused: { type: 'object', ...lifecycle('3.0.x') } },
+      'x-base-urls': {
+        MilvusVector: { url: 'https://milvus.example' },
+        ZillizVectorV2: { url: 'https://zilliz.example', 'x-include-target': ['zilliz'] },
+      },
+    },
   };
 
   fs.writeFileSync(path.join(fragmentDir, '01-fixture.json'), JSON.stringify(fragment));
@@ -139,15 +178,84 @@ test('projects fragments onto a release track', () => {
     const older = projectSpecificationsForTrack(fragmentDir, { ...selection, releaseTrack: '2.6.x' });
     assert.deepEqual(Object.keys(older.spec.paths), ['/v2/vectordb/collections/list']);
     assert.deepEqual(older.spec.tags.map(tag => tag.name), ['Collection Operations (V2)']);
-    const listSchema = older.spec.paths['/v2/vectordb/collections/list'].post.requestBody.content['application/json'].schema;
+    const listOp = older.spec.paths['/v2/vectordb/collections/list'].post;
+    assert.deepEqual(listOp['x-admonition'].map(entry => entry.title), ['Shared note']);
+    assert.deepEqual(listOp.parameters.map(param => param.name), ['dbName']);
+    const listSchema = listOp.requestBody.content['application/json'].schema;
     assert.deepEqual(Object.keys(listSchema.properties), ['dbName']);
+    assert.deepEqual(listSchema.required, ['dbName']);
     assert.equal(older.stats.omittedElements, 3);
-    assert.deepEqual(older.spec.components, {});
+    assert.equal(older.selectionOmitted, 6);
+    assert.deepEqual(older.spec.components, {
+      'x-base-urls': { MilvusVector: { url: 'https://milvus.example' } },
+    });
 
     const latest = projectSpecificationsForTrack(fragmentDir, { ...selection, releaseTrack: '3.0.x' });
     assert.deepEqual(Object.keys(latest.spec.paths).sort(), ['/v2/vectordb/collections/list', '/v2/vectordb/snapshots/create']);
     assert.deepEqual(latest.spec.tags.map(tag => tag.name), ['Collection Operations (V2)', 'Snapshot Operations (V2)']);
     assert.equal(latest.stats.omittedElements, 0);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('pruneTargetSelection drops zilliz-scoped nodes inside published operations', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'restful-prune-'));
+
+  try {
+    const fragmentDir = writeTrackFixture(tempRoot);
+    const spec = loadSpecifications(fragmentDir);
+
+    const stats = pruneTargetSelection(spec, { target: 'milvus', lang: 'en-US' });
+
+    const listOp = spec.paths['/v2/vectordb/collections/list'].post;
+    assert.deepEqual(listOp['x-admonition'].map(entry => entry.title), ['Shared note']);
+    assert.deepEqual(listOp.parameters.map(param => param.name), ['dbName']);
+    const listSchema = listOp.requestBody.content['application/json'].schema;
+    // No lifecycle projection here: the 3.0.x property survives, the
+    // zilliz-scoped one does not, and `required` is re-synced to match.
+    assert.deepEqual(Object.keys(listSchema.properties).sort(), ['dbName', 'onlyIn30']);
+    assert.deepEqual(listSchema.required, ['dbName']);
+
+    assert.equal(spec.paths['/v2/jobs/{JOB_ID}'], undefined);
+    assert.deepEqual(spec.tags.map(tag => tag.name), ['Collection Operations (V2)', 'Snapshot Operations (V2)']);
+    assert.deepEqual(spec.components['x-base-urls'], { MilvusVector: { url: 'https://milvus.example' } });
+    assert.equal(stats.omittedElements, 6);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('stages the target-pruned spec for the latest line without lifecycle projection', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'restful-stage-target-'));
+
+  try {
+    const fragmentDir = writeTrackFixture(tempRoot);
+    const staged = stageTargetSpecifications({
+      specifications: fragmentDir,
+      target: 'milvus',
+      lang: 'en-US',
+    });
+
+    assert.ok(path.isAbsolute(staged.file));
+    assert.equal(path.basename(staged.file), 'openapi-target.json');
+    const written = JSON.parse(fs.readFileSync(staged.file, 'utf-8'));
+
+    // The latest line keeps later-track additions...
+    assert.deepEqual(Object.keys(written.paths).sort(), ['/v2/vectordb/collections/list', '/v2/vectordb/snapshots/create']);
+    const listSchema = written.paths['/v2/vectordb/collections/list'].post.requestBody.content['application/json'].schema;
+    assert.deepEqual(Object.keys(listSchema.properties).sort(), ['dbName', 'onlyIn30']);
+    // ...but not zilliz-scoped nodes.
+    assert.deepEqual(written.paths['/v2/vectordb/collections/list'].post.parameters.map(param => param.name), ['dbName']);
+    assert.deepEqual(written.paths['/v2/vectordb/collections/list'].post['x-admonition'].map(entry => entry.title), ['Shared note']);
+    assert.equal(written.paths['/v2/jobs/{JOB_ID}'], undefined);
+    assert.deepEqual(written.components, {
+      'x-base-urls': { MilvusVector: { url: 'https://milvus.example' } },
+    });
+    assert.equal(staged.stats.omittedElements, 6);
+
+    staged.cleanup();
+    assert.equal(fs.existsSync(path.dirname(staged.file)), false);
   } finally {
     fs.rmSync(tempRoot, { recursive: true, force: true });
   }
@@ -193,6 +301,66 @@ test('the real fragment set projects onto 2.6.x without 3.0.x additions', () => 
   for (const tag of spec.tags) {
     assert.ok(serialized.includes(`"tags":["${tag.name}"`), `tag ${tag.name} has no operation left`);
   }
+});
+
+// Vocabulary that only exists on Zilliz Cloud. The zdoc fragment set is
+// shared with the milvus.io RESTful reference, so zilliz-only prose must be
+// scoped (x-include-target on the node, <include target="zilliz"> around
+// the sentence) before it reaches the milvus publication target. Mirrors
+// upstream's milvusTargetHygiene guard, but through the wrapper's own
+// projection paths — both the 2.6.x track projection and the latest-line
+// target pruning. "usage tracking" stays off the list: tiered-storage usage
+// tracking is a Milvus kernel feature both targets document.
+const ZILLIZ_ONLY_TOKENS = [
+  'Zilliz Cloud',
+  'on-demand compute',
+  'serving cluster',
+  'Dedicated cluster',
+  'Serverless',
+  'BDU',
+  'Public Preview',
+];
+
+function collectStrings(node, out = []) {
+  if (typeof node === 'string') {
+    out.push(node);
+    return out;
+  }
+  if (Array.isArray(node)) {
+    for (const child of node) collectStrings(child, out);
+    return out;
+  }
+  if (node && typeof node === 'object') {
+    for (const [key, child] of Object.entries(node)) {
+      // Translations never render on the en-US publication target.
+      if (key === 'x-i18n') continue;
+      collectStrings(child, out);
+    }
+  }
+  return out;
+}
+
+test('the projected real fragment set carries no zilliz-only vocabulary on the milvus target', () => {
+  const { resolveIncludeSpans } = require('../apifox-docs/includeSpans');
+  const fragmentDir = path.join(DEFAULT_SPAWN_CWD, 'scripts', 'apifox-docs', 'meta', 'openapi');
+  const selection = { target: 'milvus', lang: 'en-US' };
+
+  const trackSpec = projectSpecificationsForTrack(fragmentDir, { ...selection, releaseTrack: '2.6.x' }).spec;
+  const latestSpec = projectSpecificationsForTarget(fragmentDir, selection).spec;
+
+  const offenders = [];
+  for (const [label, spec] of [['2.6.x', trackSpec], ['latest', latestSpec]]) {
+    for (const raw of collectStrings(spec)) {
+      const resolved = resolveIncludeSpans(raw, 'milvus');
+      for (const token of ZILLIZ_ONLY_TOKENS) {
+        if (resolved.toLowerCase().includes(token.toLowerCase())) {
+          offenders.push(`${label} :: [${token}] ${resolved.replace(/\s+/g, ' ').slice(0, 140)}`);
+          break;
+        }
+      }
+    }
+  }
+  assert.deepEqual(offenders, []);
 });
 
 test('removes nested empty directories but keeps populated ones', () => {

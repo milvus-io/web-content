@@ -2074,7 +2074,10 @@
                 "title": "Milvus バージョンの互換性",
                 "content": "サーバーサイドのソート、グループ化、および検索集約のパラメータ（<code>orderByFields</code>、<code>groupByFields</code>、<code>searchAggregation</code>）は、Milvus v3.0.x 以降と互換性のあるクラスターでのみ有効です。Zilliz Cloud では、サーバーレスクラスタは Milvus v3.0.x と互換性があり、Dedicated クラスタは v3.0.x Public Preview にアップグレードしない限り Milvus v2.6.x と互換性があります。"
               }
-            }
+            },
+            "x-include-target": [
+              "zilliz"
+            ]
           }
         ]
       }
@@ -3131,7 +3134,10 @@
                 "title": "Milvus バージョンの互換性",
                 "content": "サーバーサイドのソート、グループ化、および検索集約のパラメータ（<code>orderByFields</code>、<code>groupByFields</code>、<code>searchAggregation</code>）は、Milvus v3.0.x 以降と互換性のあるクラスターでのみ有効です。Zilliz Cloud では、サーバーレスクラスタは Milvus v3.0.x と互換性があり、Dedicated クラスタは v3.0.x Public Preview にアップグレードしない限り Milvus v2.6.x と互換性があります。"
               }
-            }
+            },
+            "x-include-target": [
+              "zilliz"
+            ]
           }
         ]
       }
@@ -4332,7 +4338,10 @@
                 "title": "Milvus バージョンの互換性",
                 "content": "サーバーサイドのソート、グループ化、および検索集約のパラメータ（<code>orderByFields</code>、<code>groupByFields</code>、<code>searchAggregation</code>）は、Milvus v3.0.x 以降と互換性のあるクラスターでのみ有効です。Zilliz Cloud では、サーバーレスクラスタは Milvus v3.0.x と互換性があり、Dedicated クラスタは v3.0.x Public Preview にアップグレードしない限り Milvus v2.6.x と互換性があります。"
               }
-            }
+            },
+            "x-include-target": [
+              "zilliz"
+            ]
           }
         ]
       }
@@ -4903,7 +4912,10 @@
               "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
             }
           },
-          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\"",
+          "x-include-target": [
+            "zilliz"
+          ]
         },
         {
           "key": "on-demand-compute",
@@ -4920,7 +4932,10 @@
               "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
             }
           },
-          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\"",
+          "x-include-target": [
+            "zilliz"
+          ]
         }
       ]
     },
