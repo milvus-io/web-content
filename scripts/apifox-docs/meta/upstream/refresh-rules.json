@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "internalFieldDenylist": [
+    "accessKey",
+    "secretKey",
+    "token",
+    "innerCall"
+  ],
+  "scenarioBranchesFrozen": true,
+  "zhTitleRequiredForNewOperations": true,
+  "requiredArrayAbsenceRequiresConfirmation": true,
+  "policies": [
+    {
+      "id": "api-truth-upstream",
+      "rule": "Paths, parameters, fields, constraints, and deprecation state follow the upstream spec or code at the pinned commit; evidence is the upstream JSON path recorded on each diff entry."
+    },
+    {
+      "id": "doc-design-zdoc",
+      "rule": "Tag structure and naming, oneOf/anyOf scenario branches, x-* authoring attributes, admonitions, and base-url tabs follow the zdoc fragments. Never merge, flatten, or add fields to scenario branches; an upstream merged object is the union of branch fields."
+    },
+    {
+      "id": "unattributed-fields-need-humans",
+      "rule": "An upstream field covered by no scenario branch is a ledger candidate: propose a ledgerDraft with reasoning, never write it into a branch."
+    },
+    {
+      "id": "internal-fields-forbidden",
+      "rule": "Fields in internalFieldDenylist are internal to the platform and must never appear in documentation."
+    },
+    {
+      "id": "required-array-absence",
+      "rule": "When the upstream spec carries no required array for a body, treat the absence as a suspected generator loss: do not relax fragment required arrays until R&D confirms per operation."
+    },
+    {
+      "id": "zh-cn-sku-semantics",
+      "rule": "zh-CN text reflects the China-region product definition; never align zh-CN descriptions to en-US or upstream wording. Only refresh zh-CN when the upstream change is a pure API-truth change that applies to the China region too."
+    },
+    {
+      "id": "ja-jp-follows-en",
+      "rule": "ja-JP text lives in the fragments' per-node x-i18n objects, which the applier keeps frozen like every other x-* attribute; the automated change set therefore cannot write Japanese. Every en-US prose change must record in its evidence which ja pages need the matching update, and the ja lane applies them as a follow-up; do not claim ja parity inside the change set."
+    },
+    {
+      "id": "removal-needs-decision",
+      "rule": "An operation missing upstream is not proof it was retired. It needs a ledger decision (rejected/deferred/external) and, when retired, the nginx 301 retirement checklist; never delete it in a refresh change set."
+    },
+    {
+      "id": "new-operations-need-titles",
+      "rule": "Adopting a new operation requires a titles.json zh-CN title mapping in the same change (the Chinese build fails without it)."
+    },
+    {
+      "id": "lifecycle-binds-to-diff",
+      "rule": "x-added-at / x-last-modified / x-deprecated-since are milvus data-plane lifecycle attributes. When the diff entry carries a lifecycle suggestion, lifecycle entries copy the suggested value for that leaf exactly; deviations need override with a reason. Only contract drift earns lifecycle writes (additions take the suggested triple; constraint/required drift takes x-last-modified; deprecation flips take x-last-modified plus x-deprecated-since). Prose-only and unattributed drift gets none."
+    }
+  ]
+}

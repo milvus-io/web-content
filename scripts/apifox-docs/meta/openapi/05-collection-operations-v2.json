@@ -1716,6 +1716,18 @@
                         "description": "対象コレクションの名前です。\n存在しないコレクションを指定するとエラーになります。"
                       }
                     }
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -2372,6 +2384,18 @@
                         "description": "対象の collection の名前です。\n存在しない collection を指定するとエラーになります。"
                       }
                     }
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -2501,6 +2525,18 @@
                         "description": "対象の collection の名前です。\n存在しない collection を指定するとエラーになります。"
                       }
                     }
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -2701,6 +2737,7 @@
             "description": "この操作は、既存のコレクションのスキーマに function を追加します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -2746,7 +2783,122 @@
                     "x-deprecated-since": null
                   },
                   "function": {
-                    "$ref": "#/components/schemas/FunctionSchema",
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的描述。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の説明。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "inputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the input fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输入字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の入力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の名前。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "outputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the output fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输出字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の出力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "params": {
+                        "type": "object",
+                        "description": "Configuration parameters specific to the current function. Once the function type is set to `BM25`, no parameter is required. For applicable parameters to functions of `TEXTEMBEDDING` or `RERANK`, refer to <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "当前 Function 的配置参数。当函数类型为 `BM25`，无须设置该参数。当函数类型为其它两类时，可以查看<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>获取详细的可用参数列表。"
+                          },
+                          "ja-JP": {
+                            "description": "現在の function に固有の構成パラメータ。function type が `BM25` に設定されている場合、パラメータは不要です。`TEXTEMBEDDING` または `RERANK` の function に適用可能なパラメータについては、<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> および <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a> を参照してください。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "BM25",
+                          "TEXTEMBEDDING",
+                          "RERANK"
+                        ],
+                        "description": "The type of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的类型。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function のタイプ。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "inputFieldNames",
+                      "name",
+                      "outputFieldNames",
+                      "type"
+                    ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null,
@@ -2919,7 +3071,122 @@
                     "x-deprecated-since": null
                   },
                   "function": {
-                    "$ref": "#/components/schemas/FunctionSchema",
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的描述。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の説明。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "inputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the input fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输入字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の入力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の名前。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "outputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the output fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输出字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の出力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "params": {
+                        "type": "object",
+                        "description": "Configuration parameters specific to the current function. Once the function type is set to `BM25`, no parameter is required. For applicable parameters to functions of `TEXTEMBEDDING` or `RERANK`, refer to <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "当前 Function 的配置参数。当函数类型为 `BM25`，无须设置该参数。当函数类型为其它两类时，可以查看<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>获取详细的可用参数列表。"
+                          },
+                          "ja-JP": {
+                            "description": "現在の function に固有の構成パラメータ。function type が `BM25` に設定されている場合、パラメータは不要です。`TEXTEMBEDDING` または `RERANK` の function に適用可能なパラメータについては、<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> および <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a> を参照してください。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "BM25",
+                          "TEXTEMBEDDING",
+                          "RERANK"
+                        ],
+                        "description": "The type of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的类型。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function のタイプ。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "inputFieldNames",
+                      "name",
+                      "outputFieldNames",
+                      "type"
+                    ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null,
@@ -3034,6 +3301,7 @@
             "description": "この操作は、コレクションのスキーマから関数を削除します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -4522,6 +4790,7 @@
             "description": "この操作は、1 回のスキーマ変更で、関数、その出力フィールド、およびフィールドインデックスを既存のコレクションに追加します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -4567,7 +4836,122 @@
                     }
                   },
                   "function": {
-                    "$ref": "#/components/schemas/FunctionSchema",
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的描述。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の説明。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "inputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the input fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输入字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の入力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的名称。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の名前。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "outputFieldNames": {
+                        "type": "array",
+                        "description": "The names of the output fields for the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的输出字段名称列表。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function の出力フィールド名。"
+                          }
+                        },
+                        "items": {
+                          "type": "string",
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "params": {
+                        "type": "object",
+                        "description": "Configuration parameters specific to the current function. Once the function type is set to `BM25`, no parameter is required. For applicable parameters to functions of `TEXTEMBEDDING` or `RERANK`, refer to <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "当前 Function 的配置参数。当函数类型为 `BM25`，无须设置该参数。当函数类型为其它两类时，可以查看<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> and <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a>获取详细的可用参数列表。"
+                          },
+                          "ja-JP": {
+                            "description": "現在の function に固有の構成パラメータ。function type が `BM25` に設定されている場合、パラメータは不要です。`TEXTEMBEDDING` または `RERANK` の function に適用可能なパラメータについては、<a href=\"https://milvus.io/docs/embedding-function-overview.md\">Embedding Functions</a> および <a href=\"https://milvus.io/docs/embedding-function-overview.md\">Reranking Functions</a> を参照してください。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "BM25",
+                          "TEXTEMBEDDING",
+                          "RERANK"
+                        ],
+                        "description": "The type of the function to create.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Function 的类型。"
+                          },
+                          "ja-JP": {
+                            "description": "作成する function のタイプ。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "inputFieldNames",
+                      "name",
+                      "outputFieldNames",
+                      "type"
+                    ],
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
                     "x-deprecated-since": null,
@@ -4724,6 +5108,7 @@
             "description": "この操作は、既存のコレクションから関数フィールドを削除します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -4873,6 +5258,7 @@
             "description": "この操作は、フィールド名またはフィールド ID を使用して、既存のコレクションからフィールドを削除します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -4955,13 +5341,49 @@
                 "anyOf": [
                   {
                     "required": [
-                      "fieldName"
-                    ]
+                      "fieldName",
+                      "collectionName"
+                    ],
+                    "properties": {
+                      "collectionName": {
+                        "type": "string",
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "dbName": {
+                        "type": "string",
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
                   },
                   {
                     "required": [
-                      "fieldId"
-                    ]
+                      "fieldId",
+                      "collectionName"
+                    ],
+                    "properties": {
+                      "collectionName": {
+                        "type": "string",
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "dbName": {
+                        "type": "string",
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "x-added-at": "3.0.x",
+                    "x-last-modified": "3.0.x",
+                    "x-deprecated-since": null
                   }
                 ],
                 "x-added-at": "3.0.x",
@@ -5052,6 +5474,7 @@
             "description": "この操作は、既存のコレクションに StructArray フィールドを追加します。"
           }
         },
+        "x-beta": "PUBLIC",
         "tags": [
           "Collection Operations (V2)"
         ],
@@ -6099,6 +6522,24 @@
                 "description": "コレクションの追加パラメーター。"
               }
             }
+          },
+          "consistencyLevel": {
+            "type": "string",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "properties": {
+            "type": "object",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "vectorFieldType": {
+            "type": "string",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
           }
         },
         "required": [
@@ -6963,11 +7404,26 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          },
+          "consistencyLevel": {
+            "type": "string",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "properties": {
+            "type": "object",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "required": [
+          "collectionName"
+        ]
       },
       "ExternalSetupCollection": {
         "x-tab-label": "external setup",
@@ -7069,11 +7525,26 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          },
+          "consistencyLevel": {
+            "type": "string",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "properties": {
+            "type": "object",
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "required": [
+          "collectionName"
+        ]
       },
       "CustomCollectionParams": {
         "description": "Extra parameters for the collection.",
@@ -7899,6 +8370,12 @@
           },
           "partitionNames": {
             "type": "array",
+            "items": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
+            },
             "description": "A list of partition names. If any partition names are specified, releasing any of these partitions results in the return of a NotLoad state.",
             "x-i18n": {
               "zh-CN": {
@@ -8020,6 +8497,18 @@
               "ja-JP": {
                 "description": "対象の collection の名前です。\n存在しない collection に設定するとエラーになります。"
               }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "partitionNames": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",

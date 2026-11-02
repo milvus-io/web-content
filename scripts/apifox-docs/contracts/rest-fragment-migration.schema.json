@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zilliz.com/contracts/rest-fragment-migration.schema.json",
+  "title": "REST fragment migration state machine",
+  "description": "Bookkeeping for the fragment-to-canonical transition (legacy-shadow-required -> shadow-equivalent -> canonical). The rest-upstream migration gate validates this file against the fragments it classifies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "legacyRoot", "canonicalContract", "allowedStates", "fragments"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "legacyRoot": {"type": "string", "minLength": 1},
+    "canonicalContract": {"type": "string", "minLength": 1},
+    "allowedStates": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"enum": ["legacy-shadow-required", "shadow-equivalent", "canonical"]}
+    },
+    "fragments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "apiSurface", "service", "operationCount", "migrationState"],
+        "properties": {
+          "file": {"type": "string", "pattern": "^[0-9]{2}-[a-z0-9-]+\\.json$"},
+          "apiSurface": {"enum": ["data-plane", "control-plane"]},
+          "service": {"type": "string", "minLength": 1},
+          "operationCount": {"type": "integer", "minimum": 0},
+          "migrationState": {"enum": ["legacy-shadow-required", "shadow-equivalent", "canonical"]}
+        }
+      }
+    }
+  }
+}

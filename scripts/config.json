@@ -9,6 +9,15 @@
         "targets": {
           "outputDir": "API_Reference_MDX/milvus-restful/v3.0.x"
         }
+      },
+      "milvus-v2.6.x": {
+        "specifications": "scripts/apifox-docs/meta/openapi",
+        "lang": "en-US",
+        "target": "milvus",
+        "releaseTrack": "2.6.x",
+        "targets": {
+          "outputDir": "API_Reference_MDX/milvus-restful/v2.6.x"
+        }
       }
     }
   },

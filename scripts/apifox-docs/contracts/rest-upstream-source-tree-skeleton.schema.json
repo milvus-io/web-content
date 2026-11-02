@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zilliz.com/contracts/rest-upstream-source-tree-skeleton.schema.json",
+  "title": "REST Upstream Source-Tree Skeleton",
+  "description": "Structural skeleton extracted deterministically from a pinned source checkout (design §6.1). Carries API truth only: routes, handler names, request field names, Go-level types, and binding-required membership. Prose, response shapes, and doc-layer constraints are out of scope.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "extractedFrom", "operations", "components"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "extractedFrom": {"$ref": "#/$defs/extractedFrom"},
+    "operations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/operation"}},
+    "components": {"$ref": "#/$defs/components"}
+  },
+  "$defs": {
+    "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+    "relativePath": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(^|/)\\.\\.\\.?(?:/|$)).+$"},
+    "extractedFrom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "sourceDir", "mountPrefix"],
+      "properties": {
+        "repository": {"$ref": "#/$defs/repository"},
+        "sourceDir": {"$ref": "#/$defs/relativePath"},
+        "mountPrefix": {"type": "string", "pattern": "^/"}
+      }
+    },
+    "httpMethod": {"enum": ["get", "put", "post", "delete", "patch", "options", "head", "trace"]},
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "method", "handler", "requestStruct", "requestSchema"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^/"},
+        "method": {"$ref": "#/$defs/httpMethod"},
+        "handler": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"},
+        "requestStruct": {"type": "string", "pattern": "^[A-Z][A-Za-z0-9_]*$"},
+        "deprecated": {"const": true},
+        "requestSchema": {"$ref": "#/$defs/schema"}
+      }
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {"enum": ["string", "boolean", "integer", "number", "array", "object"]},
+        "items": {"$ref": "#/$defs/schema"},
+        "properties": {"type": "object", "additionalProperties": {"$ref": "#/$defs/schema"}},
+        "required": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "$ref": {"type": "string", "pattern": "^#/components/schemas/[A-Za-z][A-Za-z0-9_]*$"},
+        "x-milvus-opaque": {
+          "description": "Extractor blind spot: the container's JSON content is not enumerable from the route-table structs (generic maps forwarded to gRPC, interface{}/json.RawMessage). The fragment's hand-authored documentation is the authority below this node.",
+          "const": true
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemas"],
+      "properties": {
+        "schemas": {"type": "object", "additionalProperties": {"$ref": "#/$defs/schema"}}
+      }
+    }
+  }
+}

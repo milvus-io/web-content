@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zilliz.com/contracts/rest-upstream-branch-plan.schema.json",
+  "title": "REST Upstream Branch Plan",
+  "description": "Model output of the branch-placement stage (2026-10-30 merge model): which existing scenario tab(s) receive each newly added upstream field, plus reorganization PROPOSALS that the pipeline only reports and never executes. The model names branches and fields; every structural byte still comes from the diff's own upstream subtrees.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["placements"],
+  "properties": {
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["diffEntryId", "targets"],
+        "properties": {
+          "diffEntryId": {"type": "string", "minLength": 1},
+          "targets": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "reorganizations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["opKey", "scope", "action", "reason"],
+        "properties": {
+          "opKey": {"type": "string", "pattern": "^(get|put|post|delete|patch|options|head|trace) /[^\\s]+$"},
+          "scope": {"enum": ["requestBody", "response"]},
+          "action": {"enum": ["split", "relabel", "merge", "note"]},
+          "reason": {"type": "string", "minLength": 1},
+          "branches": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["xTabLabel"],
+              "properties": {
+                "xTabLabel": {"type": "string", "minLength": 1},
+                "fields": {"type": "array", "items": {"type": "string", "minLength": 1}}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

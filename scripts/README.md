@@ -72,6 +72,15 @@ REST API reference generation is configured under `apifox.restful`:
         "targets": {
           "outputDir": "API_Reference_MDX/milvus-restful/v3.0.x"
         }
+      },
+      "milvus-v2.6.x": {
+        "specifications": "scripts/apifox-docs/meta/openapi",
+        "lang": "en-US",
+        "target": "milvus",
+        "releaseTrack": "2.6.x",
+        "targets": {
+          "outputDir": "API_Reference_MDX/milvus-restful/v2.6.x"
+        }
       }
     }
   }
@@ -80,6 +89,15 @@ REST API reference generation is configured under `apifox.restful`:
 
 Use `node fetch-restful-docs.js -e <entry>` to generate one configured entry.
 CLI flags override values from `config.json`.
+
+The spec fragments under `scripts/apifox-docs/meta/openapi` carry Milvus
+lifecycle attributes (`x-added-at`, `x-last-modified`, `x-deprecated-since`)
+on every managed operation, parameter, and property. The latest release line
+is generated from the full fragment set, exactly like zdoc's own latest-only
+pages. A historical line sets `releaseTrack` (or passes `-r <track>`): the
+fragments are projected onto that track first — operations and fields added
+after it are dropped, and anything deprecated on or before it is marked
+`deprecated` — and the projected spec is what the generator renders.
 
 ## Environment
 
@@ -182,6 +200,13 @@ Generate a named entry:
 node fetch-restful-docs.js -e milvus-v3.0.x
 ```
 
+Generate a historical release line (the entry pins `releaseTrack`, so no
+flag is needed; `-r` overrides it):
+
+```bash
+node fetch-restful-docs.js -e milvus-v2.6.x
+```
+
 Override config values from the CLI:
 
 ```bash
@@ -189,7 +214,8 @@ node fetch-restful-docs.js \
   -s scripts/apifox-docs/meta/openapi \
   -l en-US \
   -t milvus \
-  -o API_Reference_MDX/milvus-restful/v3.0.x
+  -r 2.6.x \
+  -o API_Reference_MDX/milvus-restful/v2.6.x
 ```
 
 Use `--upload-s3` only when AWS credentials and bucket settings are available.
@@ -215,9 +241,13 @@ Two sync sources remain:
 
 - `milvus-lib` syncs the `milvus*` files in `scripts/lib` from `../milvus-docs`.
 - `apifox-docs` syncs `scripts/apifox-docs` wholesale from
-  `zilliztech/zdoc` (`packages/docs-tooling/src/reference/rest`). After each
-  sync, delete the synced `on-demand-cluster-segment.test.js` — it requires a
-  zdoc-generated sidebar artifact that does not exist in this repository.
+  `zilliztech/zdoc` (`packages/docs-tooling/src/reference/rest`). The
+  manifest excludes the few upstream files that cannot work as loose copies
+  (`on-demand-cluster-segment.test.js`, which needs a zdoc-generated sidebar
+  artifact, and `meta/lifecycle-evidence/`, a 2.5 MB file the GitHub contents
+  API cannot deliver). The synced tooling needs the `ajv` and `js-yaml`
+  packages declared in `package.json`; add any new upstream runtime
+  dependency there before re-running the sync.
 
 The lark/feishu files under `scripts/lark-docs/`, `scripts/lib`, and
 `scripts/mdx-parse/` are a **frozen in-repo fork**: zdoc moved them into

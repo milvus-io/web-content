@@ -350,6 +350,12 @@
                         "description": "データベース名。指定しない場合は、デフォルトのデータベースが使用されます。"
                       }
                     }
+                  },
+                  "description": {
+                    "type": "string",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -1634,6 +1640,12 @@
                         "description": "データベースの名前。指定しない場合は、デフォルトのデータベースが使用されます。"
                       }
                     }
+                  },
+                  "description": {
+                    "type": "string",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [

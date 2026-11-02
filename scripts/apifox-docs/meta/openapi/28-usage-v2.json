@@ -70,25 +70,27 @@
                 "properties": {
                   "start": {
                     "type": "string",
-                    "description": "The start time of the query period, in the format of `YYYY-MM-DD`.",
+                    "format": "date-time",
+                    "description": "The start of the query period, in RFC 3339 format (for example, `2026-09-16T00:00:00Z`). Must be midnight UTC. A non-UTC offset is converted to UTC first, which shifts the day. A start that is not midnight UTC silently returns that day's bucket with an empty `items` array and a `total` of `0`.",
                     "x-i18n": {
                       "zh-CN": {
-                        "description": "查询时间段开始日期，格式为 `YYYY-MM-DD`。"
+                        "description": "查询时间段的开始时间，采用 RFC 3339 格式（例如 `2026-09-16T00:00:00Z`）。必须为 UTC 零点整。非 UTC 时区偏移会先被换算为 UTC，日期随之偏移。开始时间不是 UTC 零点时，接口不报错，静默返回当天 `items` 为空、`total` 为 `0` 的日区间。"
                       },
                       "ja-JP": {
-                        "description": "照会期間の開始時刻です。形式は `YYYY-MM-DD` です。"
+                        "description": "照会期間の開始時刻です。RFC 3339 形式（例: `2026-09-16T00:00:00Z`）で指定します。UTC の 0 時ちょうどである必要があります。UTC 以外のオフセットは先に UTC へ変換され、日付がずれます。開始時刻が UTC 0 時でない場合、エラーにはならず、その日の `items` が空で `total` が `0` の区間が返されます。"
                       }
                     }
                   },
                   "end": {
                     "type": "string",
-                    "description": "The end time of the query period, in the format of `YYYY-MM-DD`.",
+                    "format": "date-time",
+                    "description": "The end of the query period, in RFC 3339 format (for example, `2026-09-17T00:00:00Z`). The end date is inclusive: setting `end` equal to `start` returns a single daily bucket.",
                     "x-i18n": {
                       "zh-CN": {
-                        "description": "查询时间段结束日期，格式为 `YYYY-MM-DD`。"
+                        "description": "查询时间段的结束时间，采用 RFC 3339 格式（例如 `2026-09-17T00:00:00Z`）。结束日期为包含边界：`end` 与 `start` 相同时仅返回一个日区间。"
                       },
                       "ja-JP": {
-                        "description": "照会期間の終了時刻です。形式は `YYYY-MM-DD` です。"
+                        "description": "照会期間の終了時刻です。RFC 3339 形式（例: `2026-09-17T00:00:00Z`）で指定します。終了日は境界に含まれます。`end` を `start` と同じ値にすると、1 日分の区間のみ返されます。"
                       }
                     }
                   }
@@ -96,7 +98,7 @@
               },
               "example": {
                 "start": "2024-01-01T00:00:00Z",
-                "end": "2024-02-0100:00:00Z"
+                "end": "2024-02-01T00:00:00Z"
               }
             }
           },
@@ -151,6 +153,15 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "The usage query result. The full requested range is returned in a single response.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用量查询结果。整个查询区间在单次响应中完整返回。"
+                            },
+                            "ja-JP": {
+                              "description": "使用量照会の結果です。照会した全期間が 1 回のレスポンスで返されます。"
+                            }
+                          },
                           "properties": {
                             "results": {
                               "type": "array",
@@ -159,6 +170,7 @@
                                 "properties": {
                                   "intervalStart": {
                                     "type": "string",
+                                    "format": "date-time",
                                     "description": "The start time of the interval to query, in the format of `YYYY-MM-DDTHH:mm:ssZ`.",
                                     "x-i18n": {
                                       "zh-CN": {
@@ -171,6 +183,7 @@
                                   },
                                   "intervalEnd": {
                                     "type": "string",
+                                    "format": "date-time",
                                     "description": "The end time of the interval to query, in the format of `YYYY-MM-DDTHH:mm:ssZ`.",
                                     "x-i18n": {
                                       "zh-CN": {
@@ -239,7 +252,15 @@
                                             "read_vcu",
                                             "write_vcu",
                                             "storage_serverless",
-                                            "pipeline_tokens"
+                                            "pipeline_tokens",
+                                            "stage",
+                                            "data_transfer_new",
+                                            "lakebase_storage",
+                                            "lakebase_storage_request",
+                                            "query_cu_ondemand",
+                                            "indexing_cu",
+                                            "cold_data_access",
+                                            "audit_log_cu"
                                           ]
                                         },
                                         "properties": {
@@ -311,6 +332,54 @@
                                                 },
                                                 "ja-JP": {
                                                   "description": "このコスト項目を生成するクラスターの ID です。"
+                                                }
+                                              }
+                                            },
+                                            "resourceType": {
+                                              "type": "string",
+                                              "description": "The type of the billed resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "计费资源类型。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "課金対象リソースの種類です。"
+                                                }
+                                              }
+                                            },
+                                            "resourceId": {
+                                              "type": "string",
+                                              "description": "The ID of the billed resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "计费资源 ID。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "課金対象リソースの ID です。"
+                                                }
+                                              }
+                                            },
+                                            "volumeName": {
+                                              "type": "string",
+                                              "description": "The name of the volume.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "Volume 名称。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "ボリュームの名前です。"
+                                                }
+                                              }
+                                            },
+                                            "requestClass": {
+                                              "type": "string",
+                                              "description": "The class of the billed request.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "计费请求的类别。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "課金対象リクエストのクラスです。"
                                                 }
                                               }
                                             }
@@ -394,60 +463,19 @@
                                         },
                                         "amount": {
                                           "type": "number",
-                                          "description": "The actual cost recorded in the cost item in cents.",
+                                          "description": "The cost amount of the item, in the currency of the interval (`currency`).",
                                           "x-i18n": {
                                             "zh-CN": {
-                                              "description": "当前费用项对应的已使用的资源实际费用。"
+                                              "description": "当前费用项的费用金额，币种与该时间区间的 `currency` 一致。"
                                             },
                                             "ja-JP": {
-                                              "description": "コスト項目に記録された実際のコストです。単位はセントです。"
+                                              "description": "このコスト項目の金額です。通貨は当該区間の `currency` に従います。"
                                             }
                                           }
                                         }
                                       }
                                     }
                                   }
-                                }
-                              }
-                            },
-                            "currentPage": {
-                              "type": "integer",
-                              "description": "The current page number of the query result.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "查询结果当前页码。"
-                                },
-                                "ja-JP": {
-                                  "description": "照会結果の現在のページ番号です。"
-                                }
-                              },
-                              "minimum": 1,
-                              "default": 1
-                            },
-                            "pageSize": {
-                              "type": "integer",
-                              "description": "The number of items per page of the query result.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "查询结果每页显示条目数。"
-                                },
-                                "ja-JP": {
-                                  "description": "照会結果の 1 ページあたりの項目数です。"
-                                }
-                              },
-                              "minimum": 1,
-                              "maximum": 100,
-                              "default": 10
-                            },
-                            "total": {
-                              "type": "integer",
-                              "description": "The total number of items of the query result.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "查询结果总条目数。"
-                                },
-                                "ja-JP": {
-                                  "description": "照会結果の項目総数です。"
                                 }
                               }
                             }
@@ -565,10 +593,7 @@
                               }
                             ]
                           }
-                        ],
-                        "currentPage": 1,
-                        "pageSize": 100,
-                        "total": 10000
+                        ]
                       }
                     }
                   },
@@ -637,10 +662,7 @@
                               }
                             ]
                           }
-                        ],
-                        "currentPage": 1,
-                        "pageSize": 100,
-                        "total": 10000
+                        ]
                       }
                     }
                   },

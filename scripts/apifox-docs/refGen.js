@@ -29,6 +29,15 @@ const CONFIG = {
   maxRefDepth: 20,
 }
 
+/** Map an x-next-channel value onto the release-channel vocabulary used by
+ * the docs runtime (releaseChannel.ts). Returns null for unmarked content so
+ * templates fall back to the CURRENT default. */
+function resolveNextChannel(value) {
+  if (value === 'include') return 'next'
+  if (value === 'exclude') return 'retire-in-next'
+  return null
+}
+
 class refGen {
   constructor(options) {
     this.options = options
@@ -237,6 +246,12 @@ class refGen {
         if (existingRoute) throw new Error(`REST_PAGE_ROUTE_CONFLICT: ${route_key} for ${existingRoute} and ${method}`)
         this.routeRegistry.set(route_key, `${method.toUpperCase()} ${page_url}`)
 
+        // x-next-channel stages this operation for the NEXT release channel,
+        // mirroring the <NextChannel> authoring tag: "include" ships only on
+        // NEXT (page hidden wherever the runtime channel is unknown/current),
+        // "exclude" ships the final CURRENT wording and retires in NEXT.
+        const next_channel = resolveNextChannel(specification['x-next-channel'])
+
         // Check x-beta on operation, then tag, then fall back to defaults
         let beta_tag = specification['x-beta']
         if (!beta_tag && tagObj?.['x-beta']) {
@@ -334,6 +349,7 @@ class refGen {
           page_slug,
           page_route,
           beta_tag,
+          next_channel,
           page_url,
           page_method,
           specs,
@@ -558,3 +574,4 @@ class refGen {
 }
 
 module.exports = refGen
+module.exports.resolveNextChannel = resolveNextChannel

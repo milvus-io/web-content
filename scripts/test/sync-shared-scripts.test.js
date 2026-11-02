@@ -65,7 +65,16 @@ test('apifox-docs sync entry excludes locally-managed deviations', () => {
     true,
     'must exclude the zdoc-coupled sidebar test'
   );
-  assert.equal(entry.exclude.length, 1, 'route-scope exclusion was dropped after zdoc#714 — keep it dropped');
+  assert.equal(
+    patterns.some((source) => source.includes('lifecycle-evidence')),
+    true,
+    'must exclude the >1 MB evidence file the GitHub contents API cannot deliver'
+  );
+  assert.equal(
+    patterns.some((source) => source.includes('route-scope')),
+    false,
+    'route-scope exclusion was dropped after zdoc#714 — keep it dropped'
+  );
 });
 
 test('fetchRemoteTree honors exclude patterns', async () => {

@@ -144,7 +144,7 @@ function mergeComponents(spec, content) {
     }
 }
 
-function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
+function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}, refStack = new Set()) {
     if (!obj || typeof obj !== 'object') {
         return obj
     }
@@ -162,12 +162,23 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
     visited.add(obj)
 
     if (Array.isArray(obj)) {
-        return obj.map(item => resolveRefs(item, spec, visited, depth, options))
+        return obj.map(item => resolveRefs(item, spec, visited, depth, options, refStack))
     }
 
     if (obj.$ref) {
         const refPath = obj.$ref
         if (refPath.startsWith('#/')) {
+            // Recursive components (e.g. SearchAggregationRequest referencing
+            // itself for sub-aggregations) must stop expanding when the same
+            // ref is already being expanded up the current branch — otherwise
+            // the single depth counter is the only brake and a self reference
+            // unrolls to maxRefDepth copies (the "SubAggregation repeated at
+            // every level" page bloat). A re-entered ref stays a plain $ref
+            // leaf plus the wrapper's own sibling metadata.
+            if (refStack.has(refPath)) {
+                return { ...obj }
+            }
+
             const pathParts = refPath.substring(2).split('/').map(p => p.replace(/~1/g, '/').replace(/~0/g, '~'))
             let resolved = spec
 
@@ -182,7 +193,7 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
                 }
             }
 
-            const resolvedRef = resolveRefs(resolved, spec, new Set(), depth + 1, options)
+            const resolvedRef = resolveRefs(resolved, spec, new Set(), depth + 1, options, new Set([...refStack, refPath]))
             const siblingEntries = Object.entries(obj).filter(([key]) => key !== '$ref')
 
             if (siblingEntries.length === 0 || !resolvedRef || typeof resolvedRef !== 'object' || Array.isArray(resolvedRef)) {
@@ -191,7 +202,7 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
 
             const resolvedSiblings = {}
             for (const [key, value] of siblingEntries) {
-                resolvedSiblings[key] = resolveRefs(value, spec, visited, depth, options)
+                resolvedSiblings[key] = resolveRefs(value, spec, visited, depth, options, refStack)
             }
 
             return {
@@ -205,17 +216,12 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}) {
     const resolved = {}
     for (const [key, value] of Object.entries(obj)) {
         if (key === 'description' && typeof value === 'object') {
-            if (value.type && (value.description || value.value)) {
-                resolved[key] = value
-            } else if (typeof value === 'object' && (value.description !== undefined || value.value !== undefined)) {
-                resolved[key] = value
-            } else if (typeof value === 'object') {
-                resolved[key] = JSON.stringify(value)
-            } else {
-                resolved[key] = value
-            }
+            // A "description" key may legitimately hold a schema object (for
+            // example a request property named "description"); keep it intact
+            // instead of stringifying it into display text.
+            resolved[key] = value
         } else {
-            resolved[key] = resolveRefs(value, spec, visited, depth, options)
+            resolved[key] = resolveRefs(value, spec, visited, depth, options, refStack)
         }
     }
 

@@ -6,6 +6,7 @@ const {deterministicStringify} = require('./integratedSpecArtifacts')
 
 const SHA = /^[0-9a-f]{40}$/
 const DIGEST = /^sha256:[0-9a-f]{64}$/
+const OP_KEY = /^(get|put|post|delete|patch|options|head|trace) \/[^\s]+$/
 const RECEIPT_KEYS = [
   'schemaVersion',
   'document',
@@ -21,6 +22,12 @@ const RECEIPT_KEYS = [
   'exclusions',
   'receiptSha256',
 ]
+// SchemaVersion 2 adds the upstream ledger accounting (design §7 T4 / open
+// decision D2): the digest-bound proof that every upstream@pin operation the
+// fragments do not document carries a ledger decision.
+const RECEIPT_KEYS_V2 = [...RECEIPT_KEYS, 'upstreamAccounting']
+const ACCOUNTING_KEYS = ['schemaVersion', 'source', 'upstreamPin', 'diffDigest', 'summary', 'unaccountedOpKeys']
+const ACCOUNTING_SUMMARY_KEYS = ['upstreamAdded', 'ledgered', 'unaccounted']
 const GENERATOR_KEYS = ['repository', 'revision', 'configDigest']
 const REVIEW_KEYS = ['manifestDigest', 'approvalDigest']
 
@@ -73,9 +80,43 @@ function receiptBody(receipt) {
   return body
 }
 
+function validateUpstreamAccounting(value) {
+  exactKeys(value, ACCOUNTING_KEYS, 'REST completeness receipt upstreamAccounting')
+  if (value.schemaVersion !== '1.0') throw new Error('REST completeness receipt upstreamAccounting schemaVersion is invalid')
+  if (typeof value.source !== 'string' || !value.source) throw new Error('REST completeness receipt upstreamAccounting source is invalid')
+  if (!SHA.test(value.upstreamPin || '')) throw new Error('REST completeness receipt upstreamAccounting upstreamPin is invalid')
+  if (!DIGEST.test(value.diffDigest || '')) throw new Error('REST completeness receipt upstreamAccounting diffDigest is invalid')
+  exactKeys(value.summary, ACCOUNTING_SUMMARY_KEYS, 'REST completeness receipt upstreamAccounting summary')
+  for (const key of ACCOUNTING_SUMMARY_KEYS) {
+    if (!Number.isSafeInteger(value.summary[key]) || value.summary[key] < 0) throw new Error(`REST completeness receipt upstreamAccounting summary.${key} is invalid`)
+  }
+  if (value.summary.upstreamAdded !== value.summary.ledgered + value.summary.unaccounted) {
+    throw new Error('REST completeness receipt upstreamAccounting summary is inconsistent')
+  }
+  if (!Array.isArray(value.unaccountedOpKeys)) throw new Error('REST completeness receipt upstreamAccounting unaccountedOpKeys must be an array')
+  const seen = new Set()
+  let previous = null
+  for (const [index, opKey] of value.unaccountedOpKeys.entries()) {
+    if (typeof opKey !== 'string' || !OP_KEY.test(opKey)) throw new Error(`REST completeness receipt upstreamAccounting unaccountedOpKeys[${index}] is invalid`)
+    if (seen.has(opKey) || (previous !== null && previous >= opKey)) throw new Error('REST completeness receipt upstreamAccounting unaccountedOpKeys must be unique and canonically ordered')
+    seen.add(opKey)
+    previous = opKey
+  }
+  if (value.summary.unaccounted !== value.unaccountedOpKeys.length) throw new Error('REST completeness receipt upstreamAccounting summary disagrees with the op key list')
+  // A completeness receipt with undecided upstream operations is not complete.
+  if (value.summary.unaccounted > 0) throw new Error('REST completeness receipt upstreamAccounting is incomplete: undecided upstream operations remain')
+  return value
+}
+
 function validateRestCompletenessReceipt(value) {
-  exactKeys(value, RECEIPT_KEYS, 'REST completeness receipt')
-  if (value.schemaVersion !== 1 || value.document !== 'rest-generation-completeness') throw new Error('REST completeness receipt identity is invalid')
+  if (value.schemaVersion === 2) {
+    exactKeys(value, RECEIPT_KEYS_V2, 'REST completeness receipt')
+    validateUpstreamAccounting(value.upstreamAccounting)
+  } else {
+    if (value.schemaVersion !== 1) throw new Error('REST completeness receipt identity is invalid')
+    exactKeys(value, RECEIPT_KEYS, 'REST completeness receipt')
+  }
+  if (value.document !== 'rest-generation-completeness') throw new Error('REST completeness receipt identity is invalid')
   for (const key of ['sourceBaselineSha', 'sourceCheckpointSha']) if (!SHA.test(value[key] || '')) throw new Error(`REST completeness receipt ${key} is invalid`)
   if (typeof value.collectionId !== 'string' || !value.collectionId) throw new Error('REST completeness receipt collectionId is invalid')
   if (!['data-plane', 'control-plane'].includes(value.apiSurface)) throw new Error('REST completeness receipt apiSurface is invalid')
@@ -102,14 +143,15 @@ function validateRestCompletenessReceipt(value) {
   return value
 }
 
-function createRestCompletenessReceipt({collectionDirectory, sourceBaselineSha, sourceCheckpointSha, outputInventory = [], exclusions = []}) {
+function createRestCompletenessReceipt({collectionDirectory, sourceBaselineSha, sourceCheckpointSha, outputInventory = [], exclusions = [], upstreamAccounting = null}) {
   for (const [label, value] of [['sourceBaselineSha', sourceBaselineSha], ['sourceCheckpointSha', sourceCheckpointSha]]) {
     if (!SHA.test(value || '')) throw new Error(`REST completeness receipt ${label} is invalid`)
   }
   const collection = loadFragmentCollection(collectionDirectory)
   const provenance = collection.provenance
+  const schemaVersion = upstreamAccounting ? 2 : 1
   const body = {
-    schemaVersion: 1,
+    schemaVersion,
     document: 'rest-generation-completeness',
     sourceBaselineSha,
     sourceCheckpointSha,
@@ -122,6 +164,14 @@ function createRestCompletenessReceipt({collectionDirectory, sourceBaselineSha, 
     outputInventory: structuredClone(outputInventory),
     exclusions: structuredClone(exclusions),
     receiptSha256: 'sha256:'.padEnd(71, '0'),
+  }
+  if (upstreamAccounting) {
+    // Cross-bind the accounting to the receipt identity: a statement about a
+    // different upstream revision is not evidence about this checkpoint.
+    if (upstreamAccounting.upstreamPin !== sourceCheckpointSha) {
+      throw new Error('REST completeness receipt upstreamAccounting upstreamPin must equal the receipt sourceCheckpointSha')
+    }
+    body.upstreamAccounting = structuredClone(upstreamAccounting)
   }
   body.outputInventory.sort((left, right) => compareText(left.path, right.path))
   body.exclusions.sort((left, right) => compareText(left.path, right.path))

@@ -1,13 +1,19 @@
 #!/usr/bin/env node
 const fs = require('node:fs')
+const os = require('node:os')
 const path = require('node:path')
 const { spawnSync } = require('node:child_process')
 const { program } = require('commander')
+const { loadSpecifications } = require('./apifox-docs/specLoader')
+const { applyLifecycleForTrack } = require('./apifox-docs/lifecycle')
+const { normalizeReleaseTrack } = require('./apifox-docs/releaseTrack')
+const { assertNoDanglingLocalRefs, pruneUnreachableComponents } = require('./apifox-docs/componentGraph')
 
 const DEFAULT_CONFIG_PATH = path.resolve(__dirname, 'config.json')
 const DEFAULT_SPAWN_CWD = path.resolve(__dirname, '..')
 const PLANE_DIRS = ['data-plane', 'control-plane']
 const VERSION_DIRS = ['v1', 'v2']
+const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head', 'trace'])
 const LEGACY_MILVUS_RENAMES = {
     'import-operations': 'Import',
     'import.mdx': 'Import.mdx',
@@ -29,6 +35,7 @@ function resolveRestfulOptions({ config, entryName, cli }) {
     const outputPath = cli.outputPath ?? restfulEntry.targets?.outputDir
     const strings = cli.strings ?? restfulEntry.strings
     const uploadS3 = cli.uploadS3 ?? restfulEntry.uploadS3 ?? false
+    const rawReleaseTrack = cli.releaseTrack ?? restfulEntry.releaseTrack
 
     if (!specifications) {
         throw new Error(`Missing specifications for restful entry "${entryName}"`)
@@ -43,6 +50,15 @@ function resolveRestfulOptions({ config, entryName, cli }) {
         throw new Error(`Missing output path for restful entry "${entryName}"`)
     }
 
+    let releaseTrack
+    if (rawReleaseTrack !== undefined && rawReleaseTrack !== null) {
+        try {
+            releaseTrack = normalizeReleaseTrack(rawReleaseTrack)
+        } catch (err) {
+            throw new Error(`Invalid releaseTrack ${JSON.stringify(rawReleaseTrack)} for restful entry "${entryName}": expected major.minor.x such as 2.6.x`, { cause: err })
+        }
+    }
+
     return {
         specifications,
         lang,
@@ -50,6 +66,7 @@ function resolveRestfulOptions({ config, entryName, cli }) {
         outputPath,
         strings,
         uploadS3,
+        releaseTrack,
     }
 }
 
@@ -80,6 +97,145 @@ function loadConfig(configPath) {
 function defaultEntryName(config) {
     const keys = Object.keys(config?.apifox?.restful || {})
     return keys[0]
+}
+
+function hasHttpMethod(pathItem) {
+    return !!pathItem && typeof pathItem === 'object' && Object.keys(pathItem).some(method => HTTP_METHODS.has(method))
+}
+
+function asList(value) {
+    if (value === undefined || value === null) {
+        return null
+    }
+    return Array.isArray(value) ? value : [value]
+}
+
+// Same operation/tag-level publication filter refGen applies while
+// rendering. Running it before the lifecycle projection keeps operations the
+// target never publishes (for example Zilliz-Cloud-only pipeline endpoints)
+// from being lifecycle-validated, mirroring integratedSpecBuilder.
+function selectionAllows(node, { target, lang }) {
+    if (!node || typeof node !== 'object') {
+        return true
+    }
+
+    const targets = asList(node['x-include-target'])
+    if (targets && !targets.includes(target)) {
+        return false
+    }
+
+    const langs = asList(node['x-include-langs'])
+    if (langs && !langs.includes(lang)) {
+        return false
+    }
+
+    return true
+}
+
+function filterPublishedOperations(spec, selection) {
+    const tagByName = new Map((spec.tags || []).map(tag => [tag?.name, tag]))
+
+    for (const pathItem of Object.values(spec.paths || {})) {
+        if (!pathItem || typeof pathItem !== 'object') {
+            continue
+        }
+        for (const [method, operation] of Object.entries(pathItem)) {
+            if (!HTTP_METHODS.has(method)) {
+                continue
+            }
+            const tagObj = tagByName.get(operation?.tags?.[0])
+            if (!selectionAllows(operation, selection) || (tagObj && !selectionAllows(tagObj, selection))) {
+                delete pathItem[method]
+            }
+        }
+    }
+
+    if (Array.isArray(spec.tags)) {
+        spec.tags = spec.tags.filter(tag => selectionAllows(tag, selection))
+    }
+}
+
+// Project the merged fragment set onto one Milvus release track. The
+// fragments carry lifecycle attributes (x-added-at / x-deprecated-since) for
+// every managed node; applyLifecycleForTrack drops nodes added after the
+// track and marks nodes deprecated on or before it. Paths and tags that end
+// up empty are dropped the same way integratedSpecBuilder does, so refGen
+// neither warns on method-less paths nor creates group folders for them.
+function projectSpecificationsForTrack(specifications, { releaseTrack, target, lang }) {
+    const merged = loadSpecifications(specifications)
+    filterPublishedOperations(merged, { target, lang })
+
+    const { value: spec, stats } = applyLifecycleForTrack(merged, releaseTrack)
+
+    for (const [endpoint, pathItem] of Object.entries(spec.paths || {})) {
+        if (!hasHttpMethod(pathItem)) {
+            delete spec.paths[endpoint]
+        }
+    }
+
+    const usedTags = new Set()
+    for (const pathItem of Object.values(spec.paths || {})) {
+        for (const [method, operation] of Object.entries(pathItem)) {
+            if (!HTTP_METHODS.has(method)) {
+                continue
+            }
+            for (const tag of operation.tags || []) {
+                usedTags.add(tag)
+            }
+        }
+    }
+    if (Array.isArray(spec.tags)) {
+        spec.tags = spec.tags.filter(tag => usedTags.has(tag?.name))
+    }
+
+    // specLoader inlines local $refs per fragment, so most components are
+    // unreachable leftovers; prune them before the dangling-ref check, as
+    // integratedSpecBuilder does, so only references the pages actually
+    // resolve are validated.
+    const pruned = pruneUnreachableComponents(spec)
+    assertNoDanglingLocalRefs(pruned.spec)
+
+    return { spec: pruned.spec, stats }
+}
+
+// Writes the projected spec to a temp file so apifox-docs/index.js can load
+// it through its single-file specification path. Returns the file plus a
+// cleanup callback for the temp directory. Relative specification paths are
+// repo-root relative, matching the cwd the apifox-docs child runs with.
+function stageTrackSpecifications({ specifications, releaseTrack, target, lang }) {
+    const specificationsPath = path.isAbsolute(specifications)
+        ? specifications
+        : path.join(DEFAULT_SPAWN_CWD, specifications)
+    const { spec, stats } = projectSpecificationsForTrack(specificationsPath, { releaseTrack, target, lang })
+    const stageDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fetch-restful-docs-'))
+    const file = path.join(stageDir, `openapi-${releaseTrack}.json`)
+    fs.writeFileSync(file, JSON.stringify(spec))
+
+    return {
+        file,
+        stats,
+        cleanup() {
+            fs.rmSync(stageDir, { recursive: true, force: true })
+        },
+    }
+}
+
+function removeEmptyDirectories(basePath) {
+    if (!fs.existsSync(basePath) || !fs.statSync(basePath).isDirectory()) {
+        return false
+    }
+
+    for (const entry of fs.readdirSync(basePath, { withFileTypes: true })) {
+        if (entry.isDirectory()) {
+            removeEmptyDirectories(path.join(basePath, entry.name))
+        }
+    }
+
+    if (fs.readdirSync(basePath).length === 0) {
+        fs.rmdirSync(basePath)
+        return true
+    }
+    return false
 }
 
 function movePath(sourcePath, targetPath) {
@@ -194,6 +350,43 @@ function applyMilvusLegacyCompatibility(outputPath) {
     }
 }
 
+function generateRestfulDocs(resolved) {
+    let staged = null
+    let childOptions = resolved
+
+    try {
+        if (resolved.releaseTrack) {
+            staged = stageTrackSpecifications(resolved)
+            console.log(`Projected specifications onto release track ${resolved.releaseTrack}: omitted ${staged.stats.omittedElements} element(s), marked ${staged.stats.deprecatedElements} deprecated`)
+            childOptions = { ...resolved, specifications: staged.file }
+        }
+
+        const result = spawnSync(process.execPath, buildApifoxArgs(childOptions), {
+            stdio: 'inherit',
+            cwd: DEFAULT_SPAWN_CWD,
+        })
+        if (result.error) {
+            throw result.error
+        }
+        if (result.status !== 0) {
+            return result.status || 1
+        }
+    } finally {
+        staged?.cleanup()
+    }
+
+    const absoluteOutputPath = path.isAbsolute(resolved.outputPath)
+        ? resolved.outputPath
+        : path.join(DEFAULT_SPAWN_CWD, resolved.outputPath)
+
+    if (resolved.target === 'milvus') {
+        applyMilvusLegacyCompatibility(absoluteOutputPath)
+    }
+    removeEmptyDirectories(absoluteOutputPath)
+
+    return 0
+}
+
 function runCli() {
     program
         .name('fetch-restful-docs')
@@ -205,6 +398,7 @@ function runCli() {
         .option('-o, --output-path <outputPath>', 'Target path of the API Reference')
         .option('-i, --strings <strings>', 'Localization strings for Chinese docs')
         .option('-t, --target <target>', 'Publication target of the API Reference')
+        .option('-r, --release-track <releaseTrack>', 'Milvus release track to project the fragments onto, e.g. 2.6.x')
         .option('--upload-s3', 'Upload merged OpenAPI specs to S3 and update about page', false)
         .action((opts) => {
             const config = loadConfig(opts.config)
@@ -223,25 +417,13 @@ function runCli() {
                     outputPath: opts.outputPath,
                     strings: opts.strings,
                     uploadS3: opts.uploadS3,
+                    releaseTrack: opts.releaseTrack,
                 },
             })
 
-            const result = spawnSync(process.execPath, buildApifoxArgs(resolved), {
-                stdio: 'inherit',
-                cwd: DEFAULT_SPAWN_CWD,
-            })
-            if (result.error) {
-                throw result.error
-            }
-            if (result.status !== 0) {
-                process.exit(result.status || 1)
-            }
-
-            if (resolved.target === 'milvus') {
-                const compatibilityOutputPath = path.isAbsolute(resolved.outputPath)
-                    ? resolved.outputPath
-                    : path.join(DEFAULT_SPAWN_CWD, resolved.outputPath)
-                applyMilvusLegacyCompatibility(compatibilityOutputPath)
+            const status = generateRestfulDocs(resolved)
+            if (status !== 0) {
+                process.exit(status)
             }
         })
 
@@ -254,7 +436,11 @@ module.exports = {
     resolveRestfulOptions,
     buildApifoxArgs,
     loadConfig,
+    projectSpecificationsForTrack,
+    stageTrackSpecifications,
+    removeEmptyDirectories,
     applyMilvusLegacyCompatibility,
+    generateRestfulDocs,
 }
 
 if (require.main === module) {
