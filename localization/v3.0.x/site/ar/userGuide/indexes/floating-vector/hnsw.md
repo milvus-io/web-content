@@ -3,9 +3,9 @@ id: hnsw.md
 title: HNSW
 summary: >-
   مؤشر HNSW هو خوارزمية فهرسة قائمة على الرسوم البيانية يمكنها تحسين الأداء عند
-  البحث عن متجهات عائمة عالية الأبعاد. ويوفر دقة بحث ممتازة وزمن استجابة منخفض،
-  في حين أنه يتطلب استهلاكًا كبيرًا للذاكرة للحفاظ على هيكل الرسم البياني الهرمي
-  الخاص به.
+  البحث عن متجهات عائمة عالية الأبعاد. ويوفر دقة بحث ممتازة وزمن استجابة
+  منخفضًا، في حين يتطلب استهلاكًا كبيرًا للذاكرة للحفاظ على بنيته الهرمية
+  القائمة على الرسوم البيانية.
 ---
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: عدد المرشحين الذين يتم أخذهم في الاعتبار أثناء إنشاء الفهرس. عادةً ما يؤدي ارتفاع قيمة « <code translate="no">efConstruction</code> » إلى رسم بياني ذي جودة أفضل، ولكنه يتطلب مزيدًا من الوقت لإنشائه.</p></li>
 <li><p><code translate="no">ef</code>: عدد الجيران الذين يتم تقييمهم أثناء عملية البحث. تؤدي زيادة قيمة <code translate="no">ef</code> إلى تحسين احتمالية العثور على أقرب الجيران، ولكنها تبطئ عملية البحث.</p></li>
 </ul>
-<p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/hnsw.md#Index-params">معلمات الفهرس</a>.</p>
+<p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/hnsw.md#Index-params">«معلمات الفهرس</a>».</p>
 <h2 id="Build-index" class="common-anchor-header">إنشاء الفهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,8 +75,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم هذا المثال عميلاً متصلاً باسم <code translate="no">client</code> ومجموعة موجودة باسم <code translate="no">your_collection_name</code>. تحتوي المجموعة على حقل متجه خماسي الأبعاد باسم <code translate="no">your_vector_field_name</code>.</p>
-<p>حدد معلمات الفهرس باستخدام <code translate="no">add_index()</code> ، ثم قم بإنشاء الفهرس باستخدام <code translate="no">create_index()</code>.</p>
+    </button></h2><p>يستخدم هذا المثال مؤشرًا متصلًا ( <code translate="no">MilvusClient</code> ) باسم <code translate="no">client</code> ومجموعة موجودة باسم <code translate="no">your_collection_name</code>. تحتوي المجموعة على حقل خماسي الأبعاد ( <code translate="no">FLOAT_VECTOR</code> ) باسم <code translate="no">your_vector_field_name</code>. راجع <a href="/docs/ar/install-pymilvus.md">«تثبيت Milvus Python SDK»</a> لمعرفة توافق SDK <a href="/docs/ar/create-collection.md">و«إنشاء مجموعة»</a> لمعرفة المخطط وإعداد الاتصال. استبدل اسم الحقل وبُعد الاستعلام معًا عند تكييف المثال مع التضمينات الخاصة بك.</p>
+<p>حدد معلمات الفهرس باستخدام <code translate="no">add_index()</code> ، ثم أنشئ الفهرس باستخدام <code translate="no">create_index()</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -100,7 +100,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا التكوين:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، قم بتعيين القيمة إلى <code translate="no">HNSW</code>.</p></li>
+<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، اضبط القيمة على <code translate="no">HNSW</code>.</p></li>
 <li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تشمل القيم المدعومة <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p></li>
 <li><p><code translate="no">params</code>: خيارات تكوين إضافية لإنشاء الفهرس.</p>
 <ul>
@@ -232,3 +232,26 @@ res = client.search(
      <td><p>عادةً ما يؤدي ارتفاع قيمة <code translate="no">ef</code> إلى <strong>زيادة دقة البحث</strong> ، حيث يتم أخذ المزيد من الجيران المحتملين في الاعتبار. ومع ذلك، <strong>يؤدي</strong> هذا أيضًا <strong>إلى زيادة وقت البحث</strong>. فكر في زيادة <code translate="no">ef</code> عندما يكون تحقيق نسبة استرجاع عالية أمرًا بالغ الأهمية، ولا تمثل سرعة البحث مصدر قلق كبير.</p><p>فكر في تقليل قيمة <code translate="no">ef</code> لإعطاء الأولوية لعمليات البحث الأسرع، خاصة في الحالات التي يكون فيها انخفاض طفيف في الدقة مقبولًا.</p><p>في معظم الحالات، نوصيك بتعيين قيمة ضمن هذا النطاق: [K، 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">تقييم المفاضلات<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>استخدم بيانات واستعلامات تمثيلية لاختيار المعلمات بدلاً من التعامل مع القيم النموذجية على أنها القيم الافتراضية للإنتاج:</p>
+<ol>
+<li>قم بتثبيت نموذج التضمين، والمقياس، و <code translate="no">limit</code> ، وأي <a href="/docs/ar/filtered-search.md">شروط تصفية</a>. احسب أقرب الجيران بدقة لنفس الاستعلامات والكيانات المؤهلة، على سبيل المثال باستخدام فهرس <a href="/docs/ar/flat.md">FLAT،</a> لقياس معدل الاسترجاع.</li>
+<li>قم بمسح قيمة <code translate="no">ef</code> في وقت البحث عند مستوى التزامن المستهدف. سجل معدل الاسترجاع والإنتاجية وزمن الوصول المتأخر معًا. لا تتطلب زيادة قيمة <code translate="no">ef</code> إعادة بناء الفهرس.</li>
+<li>إذا لم تتمكن عملية ضبط وقت البحث من تحقيق الهدف، فقارن بين الفهارس المعاد بناؤها باستخدام قيم مختلفة لـ <code translate="no">M</code> و <code translate="no">efConstruction</code>. سجل وقت إنشاء الفهرس واستخدام الذاكرة بالإضافة إلى أداء الاستعلام.</li>
+<li>أدرج استراتيجية التحميل وحالة ذاكرة التخزين المؤقت في الاختبار. عند استخدام <a href="/docs/ar/tiered-storage-overview.md">التخزين المتدرج (Tiered Storage)</a>، قم بقياس الاستعلامات التي تجلب البيانات غير المخزنة في ذاكرة التخزين المؤقت بشكل منفصل عن استعلامات ذاكرة التخزين المؤقت الدافئة.</li>
+</ol>
+<p>في حالة وجود قيود على الذاكرة أو أهداف مختلفة للاسترجاع وزمن الوصول، قارن بين البدائل الواردة في <a href="/docs/ar/index-explained.md">«شرح الفهرس</a>».</p>

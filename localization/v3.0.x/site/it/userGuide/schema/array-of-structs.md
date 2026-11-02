@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Uno <strong>StructArray</strong>, noto anche come array di Struct, memorizza un insieme ordinato di elementi Struct in ciascuna entità. Ogni elemento Struct nell’array segue lo stesso schema. Un elemento Struct può contenere sottocampi scalari, sottocampi vettoriali o entrambi.</p>
-<p>Ad esempio, una raccolta può memorizzare un articolo come entità e memorizzarne i segmenti in un campo StructArray denominato <code translate="no">chunks</code>. Ogni segmento può includere testo, metadati della sezione, punteggi di qualità e uno o più embedding vettoriali.</p>
+<p>Ad esempio, una raccolta può memorizzare un articolo come entità e memorizzarne i segmenti in un campo StructArray denominato <code translate="no">chunks</code>. Ogni segmento può includere testo, metadati della sezione, punteggi di qualità e una o più rappresentazioni vettoriali.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -123,13 +123,13 @@ summary: >-
 <tbody>
 <tr><td>Modellare un oggetto padre con molti figli strutturati.</td><td>Crea un campo StructArray.</td><td>L'entità contiene elementi Struct ordinati.</td><td><a href="/docs/it/create-structarray-field.md">Crea un campo StructArray</a></td></tr>
 <tr><td>Inserisci record padre con dati figlio annidati.</td><td>Inserire entità il cui campo StructArray sia un elenco di oggetti Struct.</td><td>Inserimento a livello di entità.</td><td><a href="/docs/it/insert-data-into-structarray-fields.md">Inserimento di dati nei campi StructArray</a></td></tr>
-<tr><td>Eseguire ColBERT, ColPali o il recupero a interazione tardiva a livello di documento.</td><td>Utilizzare la ricerca EmbeddingList con un indice <code translate="no">MAX_SIM*</code>.</td><td>A livello di entità.</td><td><a href="/docs/it/search-with-embedding-lists.md">Ricerca con Embedding List</a></td></tr>
+<tr><td>Eseguire ColBERT, ColPali o il recupero a interazione tardiva a livello di documento.</td><td>Utilizzare la ricerca EmbeddingList con un indice <code translate="no">MAX_SIM*</code>.</td><td>Livello entità.</td><td><a href="/docs/it/search-with-embedding-lists.md">Ricerca con Embedding List</a></td></tr>
 <tr><td>Cerca singoli chunk, clip o patch.</td><td>Utilizza la ricerca a livello di elemento con una metrica vettoriale regolare.</td><td>Livello di elemento Struct, con offset quando disponibile.</td><td><a href="/docs/it/basic-vector-search-with-structarray.md">Ricerca vettoriale di base con StructArray</a></td></tr>
 <tr><td>Limita la ricerca vettoriale a livello di elemento agli elementi che soddisfano condizioni scalari.</td><td>Utilizza ` <code translate="no">element_filter</code>`.</td><td>Filtraggio a livello di elemento; la forma del risultato dipende dal tipo di ricerca.</td><td><a href="/docs/it/filtered-search-with-structarray.md">Ricerca filtrata con StructArray</a></td></tr>
 <tr><td>Selezionare le entità in base al numero di elementi Struct che soddisfano una condizione.</td><td>Utilizzare <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code>.</td><td>Livello entità.</td><td><a href="/docs/it/struct-array-operators.md">Operatori StructArray</a></td></tr>
 <tr><td>Utilizzare limiti di punteggio o di distanza sui sottocampi vettoriali di StructArray.</td><td>Utilizzare la ricerca per intervallo a livello di elemento.</td><td>Livello degli elementi di Struct.</td><td><a href="/docs/it/range-search-with-structarray.md">Ricerca per intervallo con StructArray</a></td></tr>
-<tr><td>Restituisce al massimo un risultato per entità padre dopo una ricerca a livello di elemento.</td><td>Utilizzare la ricerca raggruppata per chiave primaria.</td><td>Livello entità dopo il raggruppamento.</td><td><a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a></td></tr>
-<tr><td>Combina la ricerca sugli elementi di StructArray con un altro campo vettoriale.</td><td>Utilizzare la ricerca ibrida con un AnnSearchRequest mirato a un sottocampo vettoriale di StructArray.</td><td>Ricerca secondaria a livello di elemento, riordino a livello di entità.</td><td><a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a></td></tr>
+<tr><td>Restituisce al massimo un risultato per entità padre dopo la ricerca a livello di elemento.</td><td>Utilizzare la ricerca raggruppata per chiave primaria.</td><td>Livello entità dopo il raggruppamento.</td><td><a href="/docs/it/grouping-search-with-structarray.md">Ricerca raggruppata con StructArray</a></td></tr>
+<tr><td>Combina la ricerca sugli elementi di StructArray con un altro campo vettoriale.</td><td>Utilizzare la ricerca ibrida con un AnnSearchRequest mirato a un sottocampo vettoriale di StructArray.</td><td>Ricerca secondaria a livello di elemento, riordino dei risultati a livello di entità.</td><td><a href="/docs/it/hybrid-search-with-structarray.md">Ricerca ibrida con StructArray</a></td></tr>
 </tbody>
 </table>
 <h2 id="Understand-the-two-search-models" class="common-anchor-header">Comprendere i due modelli di ricerca<button data-href="#Understand-the-two-search-models" class="anchor-icon" translate="no">
@@ -150,8 +150,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>Ricerca EmbeddingList</h3></th>
-      <th scope="col"><h3>Ricerca a livello di elemento</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">Ricerca EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">Ricerca a livello di elemento</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -162,7 +162,7 @@ summary: >-
           <li>Dati della query: lista di embedding.</li>
           <li>Famiglia di metriche: <code translate="no">MAX_SIM*</code>.</li>
           <li>Granularità dei risultati: livello di entità.</li>
-          <li>Ideale per: recupero con interazione tardiva a livello di documento o di pagina.</li>
+          <li>Ideale per: recupero in fase avanzata a livello di documento o di pagina.</li>
         </ul>
       </td>
       <td>
@@ -177,9 +177,8 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Avviso</p>
-<p>Se la tua raccolta richiede sia la ricerca EmbeddingList che quella a livello di elemento, utilizza due sottocampi vettoriali separati. Un campo vettoriale o un sottocampo vettoriale accetta un solo indice e le due modalità di ricerca richiedono famiglie di metriche diverse.</p>
+<div class="alert warning">
+<p>Se la tua raccolta richiede sia la ricerca EmbeddingList che quella a livello di elemento, utilizza due sottocampi vettoriali separati. Un campo vettoriale o un sottocampo vettoriale accetta un solo indice, e le due modalità di ricerca richiedono famiglie di metriche diverse.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Mappa della documentazione<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"

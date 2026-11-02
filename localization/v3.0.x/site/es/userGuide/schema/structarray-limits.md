@@ -40,7 +40,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Los principales límites de StructArray son:</p>
+<table>
 <thead>
 <tr><th>Área</th><th>Límite</th></tr>
 </thead>
@@ -72,7 +73,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Los esquemas de StructArray tienen los siguientes límites:</p>
+<table>
 <thead>
 <tr><th>Límite</th><th>Detalles</th></tr>
 </thead>
@@ -101,27 +103,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los subcampos de StructArray se asignan a un almacenamiento físico de tipo matriz. La siguiente tabla enumera los tipos físicos admitidos y no admitidos.</p>
+    </button></h2><p>Los subcampos de StructArray se asignan a un almacenamiento físico de tipo matriz. En la siguiente tabla se enumeran los tipos físicos admitidos y no admitidos:</p>
 <table>
 <thead>
 <tr><th>Tipo físico del subcampo de Struct</th><th>Compatibilidad</th><th>Notas</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como ` <code translate="no">DataType.BOOL</code>`.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8</code> », « <code translate="no">DataType.INT16</code> », « <code translate="no">DataType.INT32</code> » o « <code translate="no">DataType.INT64</code> ».</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.FLOAT</code> o <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.VARCHAR</code> » y establezca « <code translate="no">max_length</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BFLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BINARY_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>No compatible</td><td>Los subcampos de vectores dispersos no son compatibles con los campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Utilice « <code translate="no">VARCHAR</code> », no « <code translate="no">String</code> ».</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos JSON no son compatibles con los campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos de geometría y las funciones SIG no son compatibles con los campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos de texto no son compatibles con los campos StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>No compatible</td><td>Los subcampos «timestamptz» y las expresiones específicas de tiempo no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BOOL</code> ».</td></tr>
+<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8</code> », « <code translate="no">DataType.INT16</code> », « <code translate="no">DataType.INT32</code> » o « <code translate="no">DataType.INT64</code> ».</td></tr>
+<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Compatible</td><td>Defina el subcampo como <code translate="no">DataType.FLOAT</code> o <code translate="no">DataType.DOUBLE</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.VARCHAR</code> » y establezca « <code translate="no">max_length</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.FLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BFLOAT16_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.INT8_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Compatible</td><td>Defina el subcampo como « <code translate="no">DataType.BINARY_VECTOR</code> » y establezca « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>No compatible</td><td>Los subcampos de vectores dispersos no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>No compatible</td><td>Utilice « <code translate="no">VARCHAR</code> », no « <code translate="no">String</code> ».</td></tr>
+<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>No compatible</td><td>Los subcampos JSON no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>No compatible</td><td>Los subcampos de geometría y las funciones SIG no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>No compatible</td><td>Los subcampos de texto no son compatibles con los campos StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>No compatible</td><td>Los subcampos «timestamptz» y las expresiones específicas de tiempo no son compatibles con los campos StructArray.</td></tr>
 <tr><td><code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> o <code translate="no">ArrayOfStruct</code></td><td>No compatible</td><td>Los campos StructArray no admiten subcampos anidados de tipo matriz, matriz vectorial, Struct o matriz de Struct.</td></tr>
 </tbody>
 </table>
@@ -140,23 +142,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El comportamiento de los StructArray nulos y la adición dinámica de campos StructArray dependen de la versión.</p>
+    </button></h2><p>La siguiente tabla describe el comportamiento de los StructArray nulos y la adición dinámica de campos StructArray, con sujeción a la declaración de disponibilidad que figura a continuación:</p>
 <table>
 <thead>
 <tr><th>Capacidad</th><th>Límite</th></tr>
 </thead>
 <tbody>
-<tr><td>Campo StructArray nulo</td><td>Compatible con Milvus 3.0.0 y versiones posteriores. Establece ` <code translate="no">nullable=True</code> ` en el StructArray padre; no configures los subcampos de Struct como nulos de forma independiente.</td></tr>
-<tr><td>Valor nulo en Python</td><td>Utiliza ` <code translate="no">None</code> ` para insertar un valor nulo de `StructArray` en Python. No utilices ` <code translate="no">Null</code> ` ni ` <code translate="no">null</code>`.</td></tr>
-<tr><td>Ámbito de «null»</td><td>El valor nulo se aplica a todo el campo StructArray. Por ejemplo, <code translate="no">chunks=None</code> solo es válido cuando <code translate="no">chunks</code> es nulo.</td></tr>
+<tr><td>Campo StructArray nulo</td><td>Sujeto a la declaración de disponibilidad que figura a continuación, establezca « <code translate="no">nullable=True</code> » en el StructArray padre; no configure los subcampos de Struct como nulos de forma independiente.</td></tr>
+<tr><td>Valor NULL en Python</td><td>Utilice ` <code translate="no">None</code> ` para insertar un valor `StructArray` nulo en Python. No utilice ` <code translate="no">Null</code> ` ni ` <code translate="no">null</code>`.</td></tr>
+<tr><td>Ámbito de «null»</td><td>El valor NULL se aplica a todo el campo StructArray. Por ejemplo, <code translate="no">chunks=None</code> solo es válido cuando <code translate="no">chunks</code> es nulo.</td></tr>
 <tr><td>Valor de StructArray parcialmente nulo</td><td>Cuando un campo StructArray contiene un valor de matriz válido, no mezcles matrices de subcampos nulos con matrices de subcampos válidos en el mismo valor.</td></tr>
-<tr><td>Añadir dinámicamente un campo StructArray</td><td>Compatible con Milvus 3.0.0 y versiones posteriores.</td></tr>
+<tr><td>Añadir dinámicamente un campo StructArray</td><td>Sujeto a la declaración de disponibilidad que figura a continuación.</td></tr>
 <tr><td>Requisito de ser nulo para la adición dinámica</td><td>Un campo StructArray añadido a una colección existente debe ser nulo, ya que las entidades existentes no tienen ningún valor para el nuevo campo.</td></tr>
 <tr><td>Entidades existentes tras la adición dinámica</td><td>Las entidades existentes devuelven « <code translate="no">null</code> » para el campo StructArray añadido.</td></tr>
 </tbody>
 </table>
 <p>Milvus 3.0.0 y versiones posteriores admiten campos StructArray nulos, matrices vectoriales nulas y la adición dinámica de campos StructArray tanto en implementaciones independientes como distribuidas. Las versiones anteriores de Milvus no admiten estas capacidades.</p>
-<p>En Zilliz Cloud, estas capacidades están disponibles en los clústeres bajo demanda que ejecutan Milvus 3.0.0 o posterior. Los clústeres de servicio no las admiten.</p>
 <p>Para ver ejemplos de inserción con campos StructArray nulos, consulta <a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos StructArray</a>.</p>
 <h2 id="Insert-limits" class="common-anchor-header">Límites de inserción<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -173,12 +174,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Las cargas útiles de inserción de StructArray tienen los siguientes límites:</p>
+<table>
 <thead>
 <tr><th>Límite</th><th>Detalles</th></tr>
 </thead>
 <tbody>
-<tr><td>Forma de la carga útil</td><td>Inserte el campo StructArray como una matriz de objetos Struct, como, por ejemplo, <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
+<tr><td>Forma de la carga útil</td><td>Inserta el campo StructArray como una matriz de objetos Struct, como por ejemplo <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
 <tr><td>Nombres de subcampos</td><td>Dentro de cada objeto Struct, utilice nombres de subcampos como <code translate="no">text</code> y <code translate="no">emb</code>, no rutas como <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Alineación con el esquema</td><td>Cada elemento Struct debe coincidir con el esquema de Struct.</td></tr>
 <tr><td>Capacidad</td><td>El número de elementos Struct en una entidad no debe superar <code translate="no">max_capacity</code>.</td></tr>
@@ -201,7 +203,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un subcampo vectorial StructArray puede indexarse tanto para la búsqueda en EmbeddingList como para la búsqueda a nivel de elemento. Un mismo subcampo vectorial no puede utilizar ambas familias de métricas, ya que cada campo vectorial o subcampo vectorial solo admite un índice.</p>
+    </button></h2><p>Un subcampo vectorial StructArray puede indexarse tanto para la búsqueda en EmbeddingList como para la búsqueda a nivel de elemento. Un mismo subcampo vectorial no puede utilizar ambas familias métricas, ya que cada campo vectorial o subcampo vectorial solo admite un índice. Los modos de búsqueda utilizan las siguientes familias métricas:</p>
 <table>
 <thead>
 <tr><th>Modo de búsqueda</th><th>Familia de métricas</th><th>Nivel de resultado</th></tr>
@@ -229,12 +231,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>El comportamiento de búsqueda de StructArray tiene las siguientes limitaciones:</p>
+<table>
 <thead>
-<tr><th>Comportamiento de la búsqueda</th><th>Compatibilidad y límites</th></tr>
+<tr><th>Comportamiento de búsqueda</th><th>Compatibilidad y límites</th></tr>
 </thead>
 <tbody>
-<tr><td>Búsqueda básica en EmbeddingList</td><td>Compatible con subcampos vectoriales de StructArray indexados con métric <code translate="no">MAX_SIM*</code>. Devuelve resultados a nivel de entidad.</td></tr>
+<tr><td>Búsqueda básica en EmbeddingList</td><td>Compatible con subcampos vectoriales de StructArray indexados con métricas de « <code translate="no">MAX_SIM*</code> ». Devuelve resultados a nivel de entidad.</td></tr>
 <tr><td>Búsqueda básica a nivel de elemento</td><td>Compatible con subcampos vectoriales de StructArray indexados con métricas vectoriales regulares. Puede devolver las coordenadas de los elementos coincidentes.</td></tr>
 <tr><td>Búsqueda por rango</td><td>Compatible según el modo de búsqueda y la compatibilidad con índices y métricas de la versión de destino. Para conocer el comportamiento del rango de búsqueda híbrida en solicitudes de StructArray a nivel de elemento, consulta tu versión de destino.</td></tr>
 <tr><td>Búsqueda por agrupación</td><td>La búsqueda agrupada a nivel de elemento puede devolver posiciones. El comportamiento de la búsqueda híbrida agrupada para solicitudes de StructArray a nivel de elemento depende de la versión.</td></tr>
@@ -261,7 +264,7 @@ summary: >-
 <p>A grandes rasgos:</p>
 <ul>
 <li><p>Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de operadores de StructArray.</p></li>
-<li><p>Las expresiones de filtro a nivel de fila también pueden hacer referencia directamente a rutas de StructArray: « <code translate="no">chunks[0][section]</code> » para la posición de un elemento, « <code translate="no">array_length(chunks)</code> » para el recuento de elementos, « <code translate="no">array_contains(chunks[section], ...)</code> » para valores de subcampos en distintos elementos y « <code translate="no">chunks is null</code> » en un campo de StructArray que admita valores nulos.</p></li>
+<li><p>Las expresiones de filtro a nivel de fila también pueden hacer referencia directamente a rutas de StructArray: « <code translate="no">chunks[0][section]</code> » para la posición de un elemento, « <code translate="no">array_length(chunks)</code> » para el recuento de elementos, « <code translate="no">array_contains(chunks[section], ...)</code> » para valores de subcampos en distintos elementos y « <code translate="no">chunks is null</code> » en un campo StructArray que admita valores nulos.</p></li>
 <li><p>Utiliza subcampos escalares para los predicados escalares.</p></li>
 <li><p>No utilices subcampos vectoriales como entradas de predicados escalares de « <code translate="no">$[...]</code> ».</p></li>
 <li><p>La sintaxis de ruta JSON, las funciones JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, las funciones de geometría/SIG y las expresiones Timestamptz no son compatibles con los predicados a nivel de elemento de StructArray.</p></li>

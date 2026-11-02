@@ -3,7 +3,7 @@ id: quickstart.md
 summary: Mulailah menggunakan Milvus.
 title: Panduan Cepat
 ---
-<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Panduan Cepat Menggunakan Milvus Lite<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
+<h1 id="Quickstart" class="common-anchor-header">Panduan Cepat<button data-href="#Quickstart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,9 @@ title: Panduan Cepat
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Vektor, format data keluaran dari model Jaringan Saraf Tiruan, dapat mengenkode informasi secara efektif dan memainkan peran penting dalam aplikasi AI seperti basis pengetahuan, pencarian semantik, Retrieval Augmented Generation (RAG), dan lainnya.</p>
+<p>Vektor, format data keluaran dari model Jaringan Saraf Tiruan, dapat secara efektif mengkodekan informasi dan memainkan peran penting dalam aplikasi AI seperti basis pengetahuan, pencarian semantik, Retrieval Augmented Generation (RAG), dan lainnya.</p>
 <p>Milvus adalah basis data vektor sumber terbuka yang cocok untuk aplikasi AI dalam skala apa pun, mulai dari menjalankan chatbot demo di Jupyter notebook hingga membangun sistem pencarian berskala web yang melayani miliaran pengguna. Dalam panduan ini, kami akan memandu Anda langkah demi langkah tentang cara menginstal Milvus secara lokal dalam hitungan menit dan menggunakan pustaka klien Python untuk menghasilkan, menyimpan, dan mencari vektor.</p>
-<h2 id="Install-Milvus" class="common-anchor-header">Menginstal Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">Instal Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,51 @@ title: Panduan Cepat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam panduan ini, kami menggunakan Milvus Lite, sebuah pustaka Python yang disertakan dalam <code translate="no">pymilvus</code> yang dapat disematkan ke dalam aplikasi klien. Milvus juga mendukung penerapan pada <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> untuk kasus penggunaan produksi.</p>
-<p>Sebelum memulai, pastikan Anda memiliki Python 3.8+ yang tersedia di lingkungan lokal. Instal <code translate="no">pymilvus</code> yang berisi pustaka klien Python dan Milvus Lite:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+    </button></h2><p>Pilih salah satu cara: gunakan Milvus Lite untuk contoh lokal, atau sambungkan ke server Milvus yang sudah Anda deploy. Kedua cara tersebut menggunakan contoh pengumpulan dan kueri di bawah ini.</p>
+<h3 id="Use-a-local-database" class="common-anchor-header">Gunakan basis data lokal<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Panduan ini menggunakan Milvus Lite, sebuah dependensi opsional dari SDK Python PyMilvus yang berjalan secara lokal. Untuk penyebaran server, lihat <a href="/docs/id/install_standalone-docker.md">Docker</a> atau <a href="/docs/id/install_cluster-milvusoperator.md">Kubernetes</a>.</p>
+<p>Gunakan Python 3.10 atau yang lebih baru di macOS, Linux, atau Windows, dengan paket biner (wheels) yang tersedia untuk dependensi Milvus Lite seperti <code translate="no">faiss-cpu</code> dan <code translate="no">pyarrow</code>. Contoh-contoh ini menggunakan PyMilvus 3.0.2 dan Milvus Lite 3.2.2. Instal kedua paket tersebut secara eksplisit:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Di Windows, pip melewatkan dependensi tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.2; perintah di atas secara eksplisit menyebutkan <code translate="no">milvus-lite</code>, sehingga jalur lokal juga berfungsi di sana. Untuk persyaratan instalasi SDK saja, lihat <a href="/docs/id/install-pymilvus.md">Install Milvus Python SDK</a>.</p>
 <div class="alert note">
 <blockquote>
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>me-restart runtime</strong>. (Klik menu “Runtime” di bagian atas layar, lalu pilih “Restart session” dari menu dropdown).</p>
 </blockquote>
 </div>
+<h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">Gunakan server Milvus yang sudah ada<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda telah menginstal Milvus dengan Docker atau Kubernetes, atau memiliki titik akhir Zilliz Cloud, instal hanya SDK-nya saja. PyMilvus 3.0.2 memerlukan Python 3.9 atau yang lebih baru; Anda tidak memerlukan dependensi Lite lokal untuk jalur ini:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Gunakan blok koneksi server di bagian berikutnya alih-alih membuka jalur <code translate="no">.db</code>. Pastikan versi SDK kompatibel dengan server Anda; lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Menyiapkan Basis Data Vektor<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,11 +97,49 @@ title: Panduan Cepat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk membuat basis data vektor Milvus lokal, cukup buat instance <code translate="no">MilvusClient</code> dengan menentukan nama file untuk menyimpan semua data, seperti "milvus_demo.db".</p>
+    </button></h2><p>Pilih tepat satu blok koneksi di bawah ini.</p>
+<h3 id="Local-Milvus-Lite" class="common-anchor-header">Milvus Lite Lokal<button data-href="#Local-Milvus-Lite" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat basis data vektor Milvus lokal, buat instance <code translate="no">MilvusClient</code> dengan jalur penyimpanan, seperti <code translate="no">milvus_demo.db</code>. Milvus Lite 3.x akan membuat direktori di jalur ini, bahkan jika namanya berakhir dengan <code translate="no">.db</code>.</p>
+<p>Jika Anda memiliki berkas basis data yang dibuat oleh Milvus Lite 2.x, ekspor berkas tersebut menggunakan versi lama sebelum melakukan migrasi. Jangan membuka berkas tersebut secara langsung dengan Milvus Lite 3.x. Lihat <a href="/docs/id/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migrasi data dari Milvus Lite</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Existing-Milvus-server" class="common-anchor-header">Server Milvus yang sudah ada<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk penyebaran Docker lokal, sambungkan ke titik akhir servernya. Untuk Zilliz Cloud, ganti URI dengan titik akhir kluster dan token dengan kunci API Anda:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Gunakan kredensial yang telah Anda konfigurasikan jika Anda telah mengubahnya. Contoh-contoh selanjutnya menggunakan " <code translate="no">client</code> " yang Anda pilih; contoh-contoh tersebut tidak memerlukan database Lite lokal terpisah.</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">Buat Koleksi<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +155,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Di Milvus, kita memerlukan koleksi untuk menyimpan vektor dan metadata terkaitnya. Anda dapat menganggapnya sebagai tabel dalam basis data SQL tradisional. Saat membuat koleksi, Anda dapat mendefinisikan parameter skema dan indeks untuk mengonfigurasi spesifikasi vektor seperti dimensi, jenis indeks, dan metrik jarak. Ada juga konsep-konsep kompleks untuk mengoptimalkan indeks demi kinerja pencarian vektor. Untuk saat ini, mari kita fokus pada dasar-dasarnya saja dan gunakan pengaturan default untuk semua yang memungkinkan. Setidaknya, Anda hanya perlu menetapkan nama koleksi dan dimensi bidang vektor dari koleksi tersebut.</p>
+    </button></h2><p>Di Milvus, kita memerlukan koleksi untuk menyimpan vektor dan metadata terkaitnya. Anda dapat menganggapnya sebagai tabel dalam basis data SQL tradisional. Saat membuat koleksi, Anda dapat mendefinisikan parameter skema dan indeks untuk mengonfigurasi spesifikasi vektor seperti dimensi, jenis indeks, dan metrik jarak. Ada juga konsep-konsep kompleks untuk mengoptimalkan indeks demi kinerja pencarian vektor. Untuk saat ini, mari kita fokus pada dasar-dasarnya saja dan gunakan pengaturan default untuk semua yang memungkinkan. Setidaknya, Anda hanya perlu menetapkan nama koleksi dan dimensi bidang vektor koleksi tersebut.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -92,7 +166,7 @@ client.create_collection(
 <p>Dalam pengaturan di atas,</p>
 <ul>
 <li>Kunci utama dan bidang vektor menggunakan nama defaultnya (“id” dan “vector”).</li>
-<li>Jenis metrik (definisi jarak vektor) disetel ke nilai defaultnya (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
+<li>Jenis metrik (definisi jarak vektor) diatur ke nilai defaultnya (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>Bidang kunci utama menerima bilangan bulat dan tidak bertambah secara otomatis (yaitu, tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>).
 Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">petunjuk</a> ini.</li>
 </ul>
@@ -111,7 +185,7 @@ Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam panduan ini, kami menggunakan vektor untuk melakukan pencarian semantik pada teks. Kami perlu menghasilkan vektor untuk teks dengan mengunduh model embedding. Hal ini dapat dilakukan dengan mudah menggunakan fungsi utilitas dari pustak <code translate="no">pymilvus[model]</code>.</p>
+    </button></h2><p>Dalam panduan ini, kami menggunakan vektor untuk melakukan pencarian semantik pada teks. Kami perlu menghasilkan vektor untuk teks dengan mengunduh model embedding. Hal ini dapat dilakukan dengan mudah menggunakan fungsi utilitas dari perpustaka <code translate="no">pymilvus[model]</code>.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Mewakili teks dengan vektor<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +202,7 @@ Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan
         ></path>
       </svg>
     </button></h2><p>Pertama, instal pustaka model. Paket ini mencakup alat ML penting seperti PyTorch. Pengunduhan paket mungkin memerlukan waktu jika lingkungan lokal Anda belum pernah menginstal PyTorch.</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Buat embedding vektor dengan model default. Milvus mengharapkan data dimasukkan dalam bentuk daftar kamus, di mana setiap kamus mewakili satu catatan data, yang disebut sebagai entitas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -180,7 +254,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda tidak dapat mengunduh model karena masalah jaringan, sebagai solusi sementara, Anda dapat menggunakan vektor acak untuk mewakili teks dan tetap menyelesaikan contoh ini. Perlu diperhatikan bahwa hasil pencarian tidak akan mencerminkan kesamaan semantik karena vektor-vektor tersebut adalah vektor palsu.</p>
+    </button></h2><p>Jika Anda tidak dapat mengunduh model karena masalah jaringan, sebagai solusi sementara, Anda dapat menggunakan vektor acak untuk merepresentasikan teks dan tetap menyelesaikan contoh ini. Perlu diperhatikan bahwa hasil pencarian tidak akan mencerminkan kesamaan semantik karena vektor-vektor tersebut adalah vektor palsu.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -190,7 +264,21 @@ docs = [
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># Use fake representation with random vectors (768 dimension).</span>
-vectors = [[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> docs]
+<span class="hljs-comment"># Keep the same interface as the model-backed path so the remaining examples run.</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoEmbeddingFunction</span>:
+    dim = <span class="hljs-number">768</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.rng = random.Random(<span class="hljs-number">42</span>)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_documents</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> [[<span class="hljs-variable language_">self</span>.rng.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> texts]
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_queries</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.encode_documents(texts)
+
+embedding_fn = DemoEmbeddingFunction()
+vectors = embedding_fn.encode_documents(docs)
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
@@ -394,12 +482,14 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Karena semua data Milvus Lite disimpan dalam file lokal, Anda dapat memuat semua data ke dalam memori bahkan setelah program berakhir, dengan membuat koleksi yang sudah ada ( <code translate="no">MilvusClient</code> ) dari file yang ada. Misalnya, ini akan memulihkan koleksi dari file “milvus_demo.db” dan melanjutkan penulisan data ke dalamnya.</p>
+    </button></h2><p>Bagian ini berlaku untuk jalur Lite lokal. Untuk penyebaran server, sambungkan kembali dengan URI server dan kredensial yang sama.</p>
+<p>Milvus Lite menyimpan data di jalur penyimpanan lokalnya. Tutup klien sebelum membuka kembali jalur yang sama untuk melanjutkan penggunaan koleksi yang sudah ada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.close()
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-the-collection" class="common-anchor-header">Menghapus Koleksi<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
+<h2 id="Drop-the-collection" class="common-anchor-header">Hapus koleksi<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -414,7 +504,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda ingin menghapus semua data dalam suatu koleksi, Anda dapat menghapus koleksi tersebut dengan</p>
+    </button></h2><p>Jika Anda ingin menghapus semua data dalam sebuah koleksi, Anda dapat menghapus koleksi tersebut dengan</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Drop collection</span>
 client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -433,10 +523,16 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite sangat cocok untuk memulai dengan program Python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam lingkungan produksi, Anda dapat mempelajari cara mengimplementasikan Milvus di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode deployment Milvus menggunakan API yang sama, sehingga kode sisi klien Anda tidak perlu banyak diubah jika beralih ke mode deployment lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> dari server Milvus yang di-deploy di mana saja:</p>
+    </button></h2><p>Setelah menyelesaikan contoh lokal ini, pilih langkah selanjutnya:</p>
+<ul>
+<li>Buat aplikasi dengan <a href="/docs/id/build-rag-with-milvus.md">Retrieval Augmented Generation (RAG)</a>.</li>
+<li>Rancang bidang dan filter untuk data Anda sendiri dengan <a href="/docs/id/schema-hands-on.md">Data Model Design for Search</a>.</li>
+<li>Bandingkan persyaratan lokal dan server dengan <a href="/docs/id/install-overview.md">Milvus Deployment Options</a>.</li>
+</ul>
+<p>Milvus Lite sangat cocok untuk memulai dengan program Python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam produksi, Anda dapat mempelajari cara mengimplementasikan Milvus di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode penerapan Milvus menggunakan API yang sama, sehingga kode sisi klien Anda tidak perlu banyak diubah jika beralih ke mode penerapan lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> dari server Milvus yang diterapkan di mana saja:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk memigrasikan data dari Milvus Lite ke Milvus yang diimplementasikan di Docker atau Kubernetes, lihat <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migrasi data dari Milvus Lite</a>.</p>
+<p>Untuk memigrasikan data dari Milvus Lite ke Milvus yang diimplementasikan di Docker atau Kubernetes, lihat <a href="/docs/id/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migrasi data dari Milvus Lite</a>.</p>
 <p>Milvus menyediakan API REST dan gRPC, dengan pustaka klien dalam bahasa pemrograman seperti <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C#, dan <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>Untuk desain skema, Milvus mendukung desain skema yang fleksibel, di mana Anda dapat menentukan bidang dan tipe datanya, termasuk bidang vektor. Anda juga dapat menentukan tipe indeks dan parameter untuk setiap bidang. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/schema-hands-on.md">Desain Model Data untuk Pencarian</a>.</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus untuk Agen AI<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">

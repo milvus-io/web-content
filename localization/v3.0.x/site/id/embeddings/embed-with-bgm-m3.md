@@ -21,13 +21,14 @@ title: BGE M3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> dinamai berdasarkan kemampuannya dalam Multibahasa, Multifungsi, dan Multigranularitas. Dengan kemampuan mendukung lebih dari 100 bahasa, BGE-M3 menetapkan standar baru dalam tugas-tugas pencarian multibahasa dan lintas bahasa. Kemampuan uniknya untuk melakukan pencarian padat (dense retrieval), pencarian multi-vektor (multi-vector retrieval), dan pencarian jarang (sparse retrieval) dalam satu kerangka kerja menjadikannya pilihan ideal untuk berbagai aplikasi pencarian informasi (IR).</p>
-<p>Milvus terintegrasi dengan model BGE-M3 menggunakan kelas <strong>BGEM3EmbeddingFunction</strong>. Kelas ini menangani perhitungan embedding dan mengembalikannya dalam format yang kompatibel dengan Milvus untuk pengindeksan dan pencarian.</p>
+    </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> dinamai berdasarkan kemampuannya dalam Multibahasa, Multifungsi, dan Multigranularitas. Dengan kemampuan mendukung lebih dari 100 bahasa, BGE-M3 menetapkan standar baru dalam tugas-tugas pencarian multibahasa dan lintas bahasa. Kemampuannya yang unik untuk melakukan pencarian padat (dense retrieval), pencarian multi-vektor (multi-vector retrieval), dan pencarian jarang (sparse retrieval) dalam satu kerangka kerja menjadikannya pilihan ideal untuk berbagai aplikasi pencarian informasi (IR).</p>
+<p>Milvus terintegrasi dengan model BGE-M3 menggunakan kelas ` <strong>BGEM3EmbeddingFunction</strong> `. Kelas ini menangani perhitungan embedding dan mengembalikannya dalam format yang kompatibel dengan Milvus untuk pengindeksan dan pencarian.</p>
+<p>Contoh ini menghasilkan embedding dalam proses Python Anda; contoh ini tidak terhubung ke server Milvus. Bobot model diunduh saat pertama kali digunakan, sehingga Anda memerlukan akses jaringan ke host model atau cache model lokal yang telah terisi. Inferensi CPU didukung dengan <code translate="no">use_fp16=False</code>.</p>
 <p>Untuk menggunakan fitur ini, instal dependensi yang diperlukan:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian, buat instansi <strong>BGEM3EmbeddingFunction</strong>:</p>
+<p>Kemudian, buat objek <strong>BGEM3EmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 bge_m3_ef = BGEM3EmbeddingFunction(
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Menyimpan dan mencari embedding<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Membuat embedding adalah langkah pertama. Untuk menggunakan hasil ini dalam proses pencarian, tentukan sebuah koleksi dan indeks setiap bidang vektor:</p>
+<ul>
+<li>Mapping <code translate="no">docs_embeddings[&quot;dense&quot;]</code> ke bidang <code translate="no">FLOAT_VECTOR</code> dengan dimensi <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>.</li>
+<li>Mapping ` <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> ` ke bidang ` <code translate="no">SPARSE_FLOAT_VECTOR</code> `, yang tidak memerlukan dimensi tetap dalam skema Milvus. Gunakan metrik ` <code translate="no">IP</code> ` untuk vektor-vektor langka yang dipelajari ini. Lihat <a href="/docs/id/sparse_vector.md">Vektor Langka</a>.</li>
+<li>Simpan ID setiap dokumen serta teks sumber atau metadata bersama vektornya agar hasil pencarian dapat dilacak kembali ke sumbernya.</li>
+<li>Enkode kueri dengan model dan pengaturan yang sama seperti dokumen. Kirimkan satu permintaan ` <code translate="no">hybrid_search()</code> ` dengan satu ` <code translate="no">AnnSearchRequest</code> ` untuk bidang padat dan satu untuk bidang langka, lalu biarkan pemeringkat sisi server seperti RRF atau pemeringkat tertimbang menggabungkan hasilnya.</li>
+</ul>
+<p>Ikuti <a href="/docs/id/hybrid_search_with_milvus.md">panduan Hybrid Search dengan Milvus</a> untuk skema koleksi, indeks, penyisipan, dan permintaan pencarian hibrida. Contoh-contoh pada halaman ini menggunakan keluaran padat dan jarang dari wrapper; contoh-contoh tersebut tidak mendemonstrasikan keluaran multi-vektor ColBERT opsional dari BGE-M3.</p>

@@ -117,10 +117,10 @@ summary: >-
     </button></h2><p>Utiliza la siguiente matriz para elegir la ruta adecuada de StructArray.</p>
 <table>
 <thead>
-<tr><th>Objetivo</th><th>Ruta recomendada</th><th>Granularidad del resultado</th><th>Empieza por aquí</th></tr>
+<tr><th>Objetivo</th><th>Ruta recomendada</th><th>Granularidad del resultado</th><th>Empieza aquí</th></tr>
 </thead>
 <tbody>
-<tr><td>Modela un objeto padre con muchos hijos estructurados.</td><td>Crea un campo StructArray.</td><td>La entidad contiene elementos Struct ordenados.</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td></tr>
+<tr><td>Modelar un objeto padre con muchos hijos estructurados.</td><td>Crea un campo StructArray.</td><td>La entidad contiene elementos Struct ordenados.</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td></tr>
 <tr><td>Inserta registros principales con datos secundarios anidados.</td><td>Insertar entidades cuyo campo StructArray sea una lista de objetos Struct.</td><td>Inserción a nivel de entidad.</td><td><a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos «StructArray»</a></td></tr>
 <tr><td>Ejecutar ColBERT, ColPali o la recuperación de interacción tardía a nivel de documento.</td><td>Utilizar la búsqueda EmbeddingList con un índice « <code translate="no">MAX_SIM*</code> ».</td><td>Nivel de entidad.</td><td><a href="/docs/es/search-with-embedding-lists.md">Buscar con listas de incrustación</a></td></tr>
 <tr><td>Busca fragmentos, clips o parches individuales.</td><td>Utiliza la búsqueda a nivel de elemento con una métrica vectorial estándar.</td><td>Nivel de elemento de estructura, con desplazamiento cuando esté disponible.</td><td><a href="/docs/es/basic-vector-search-with-structarray.md">Búsqueda vectorial básica con StructArray</a></td></tr>
@@ -149,8 +149,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>Búsqueda en EmbeddingList</h3></th>
-      <th scope="col"><h3>Búsqueda a nivel de elemento</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">Búsqueda en EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">Búsqueda a nivel de elemento</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -176,11 +176,10 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Advertencia</p>
-<p>Si tu colección necesita tanto la búsqueda mediante EmbeddingList como la búsqueda a nivel de elemento, utiliza dos subcampos vectoriales independientes. Un campo vectorial o un subcampo vectorial solo admite un índice, y los dos modos de búsqueda requieren familias de métricas diferentes.</p>
+<div class="alert warning">
+<p>Si tu colección necesita tanto la búsqueda en EmbeddingList como la búsqueda a nivel de elemento, utiliza dos subcampos vectoriales independientes. Un campo vectorial o un subcampo vectorial solo admite un índice, y los dos modos de búsqueda requieren familias de métricas diferentes.</p>
 </div>
-<h2 id="Documentation-map" class="common-anchor-header">Mapa de documentación<button data-href="#Documentation-map" class="anchor-icon" translate="no">
+<h2 id="Documentation-map" class="common-anchor-header">Mapa de la documentación<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +232,7 @@ summary: >-
 <li><p>Struct se puede utilizar como tipo de elemento de un campo Array. No se utiliza como campo de colección de nivel superior.</p></li>
 <li><p>Todos los elementos Struct de un mismo campo StructArray comparten un esquema predefinido.</p></li>
 <li><p>Los subcampos vectoriales requieren índices. La búsqueda en EmbeddingList utiliza métricas de « <code translate="no">MAX_SIM*</code> », mientras que la búsqueda a nivel de elemento utiliza métricas vectoriales normales.</p></li>
-<li><p><code translate="no">element_filter</code> y « <code translate="no">MATCH_*</code> » son para subcampos escalares dentro de campos «StructArray». Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de estos operadores. Los filtros a nivel de fila también pueden hacer referencia directamente a rutas «StructArray», como « <code translate="no">chunks[0][section]</code> », « <code translate="no">array_length(chunks)</code> » y « <code translate="no">array_contains(chunks[section], ...)</code> ».</p></li>
+<li><p><code translate="no">element_filter</code> y « <code translate="no">MATCH_*</code> » son para subcampos escalares dentro de campos «StructArray». Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de estos operadores. Los filtros a nivel de fila también pueden hacer referencia directa a rutas de «StructArray», como « <code translate="no">chunks[0][section]</code> », « <code translate="no">array_length(chunks)</code> » y « <code translate="no">array_contains(chunks[section], ...)</code> ».</p></li>
 <li><p>Algunas combinaciones de búsqueda dependen de la versión o son específicas de un modo. Consulta <a href="/docs/es/structarray-limits.md">los límites de StructArray</a> antes de utilizar la búsqueda por rango, la búsqueda por agrupación, la búsqueda híbrida, los campos nulos o los campos añadidos dinámicamente.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">

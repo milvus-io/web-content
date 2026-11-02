@@ -23,6 +23,7 @@ title: BGE M3
       </svg>
     </button></h1><p>Название<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> обусловлено его возможностями в области многоязычности, многофункциональности и многоуровневой детализации. Поддерживая более 100 языков, BGE-M3 устанавливает новые стандарты в задачах многоязычного и межъязыкового поиска. Его уникальная способность выполнять плотный поиск, многовекторный поиск и разреженный поиск в рамках единой архитектуры делает его идеальным выбором для широкого спектра приложений информационного поиска (IR).</p>
 <p>Milvus интегрируется с моделью BGE-M3 с помощью класса ` <strong>BGEM3EmbeddingFunction</strong> `. Этот класс обрабатывает вычисление вложений и возвращает их в формате, совместимом с Milvus, для индексирования и поиска.</p>
+<p>В данном примере встраивания генерируются в вашем процессе Python; подключение к серверу Milvus не осуществляется. Веса модели загружаются при первом использовании, поэтому вам потребуется доступ к хосту модели или заполненный локальный кэш модели. Инференция на ЦП поддерживается с помощью <code translate="no">use_fp16=False</code>.</p>
 <p>Чтобы воспользоваться этой функцией, установите необходимые зависимости:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Хранение и поиск вложений<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Генерация вложений — это лишь первый шаг. Чтобы использовать эти результаты для поиска, определите коллекцию и проиндексируйте каждое векторное поле:</p>
+<ul>
+<li>Сопоставьте поле « <code translate="no">docs_embeddings[&quot;dense&quot;]</code> » полю « <code translate="no">FLOAT_VECTOR</code> » с измерением « <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code> ».</li>
+<li>Сопоставьте <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> полю <code translate="no">SPARSE_FLOAT_VECTOR</code>, которое не требует фиксированного размера в схеме Milvus. Используйте метрику <code translate="no">IP</code> для этих обученных разреженных векторов. См. раздел <a href="/docs/ru/sparse_vector.md">«Разреженные векторы</a>».</li>
+<li>Сохраняйте ID каждого документа и исходный текст или метаданные вместе с его векторами, чтобы результаты поиска можно было отследить до источника.</li>
+<li>Кодируйте запросы с использованием той же модели и тех же настроек, что и для документов. Отправьте один запрос <code translate="no">hybrid_search()</code> с одним <code translate="no">AnnSearchRequest</code> для плотного поля и одним для разреженного поля, а затем позвольте серверному ранжеру, такому как RRF, или ранжеру с взвешенным ранжированием объединить результаты.</li>
+</ul>
+<p>Следуйте инструкциям <a href="/docs/ru/hybrid_search_with_milvus.md">по гибридному поиску с Milvus</a> для схемы коллекции, индексов, вставки и запросов гибридного поиска. Примеры на этой странице используют плотные и разреженные выводы обертки; они не демонстрируют опциональный мультивекторный вывод ColBERT модели BGE-M3.</p>

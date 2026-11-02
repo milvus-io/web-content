@@ -23,6 +23,7 @@ title: BGE M3
       </svg>
     </button></h1><p>سمي<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> بهذا الاسم نظراً لقدراته في التعدد اللغوي، والتعدد الوظيفي، والتعدد الدرجاتي. وبفضل قدرته على دعم أكثر من 100 لغة، يضع BGE-M3 معايير جديدة في مهام الاسترجاع متعدد اللغات وعبر اللغات. وتجعله قدرته الفريدة على إجراء عمليات الاسترجاع الكثيف، والاسترجاع متعدد المتجهات، والاسترجاع المتفرق ضمن إطار عمل واحد خيارًا مثاليًا لمجموعة واسعة من تطبيقات استرجاع المعلومات (IR).</p>
 <p>يتكامل Milvus مع نموذج BGE M3 باستخدام فئة <strong>BGEM3EmbeddingFunction</strong>. تتولى هذه الفئة حساب التضمينات وتُرجعها بتنسيق متوافق مع Milvus من أجل الفهرسة والبحث.</p>
+<p>يُنشئ هذا المثال التضمينات في عملية Python الخاصة بك؛ ولا يتصل بخادم Milvus. يتم تنزيل أوزان النموذج عند الاستخدام الأول، لذا تحتاج إلى وصول شبكي إلى مضيف النموذج أو ذاكرة تخزين مؤقتة محلية للنموذج مملوءة. يتم دعم الاستدلال على وحدة المعالجة المركزية (CPU) باستخدام <code translate="no">use_fp16=False</code>.</p>
 <p>لاستخدام هذه الميزة، قم بتثبيت التبعيات الضرورية:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -39,11 +40,11 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <p><strong>المعلمات</strong>:</p>
 <ul>
 <li><p><strong>model_name</strong> (<em>سلسلة</em>)</p>
-<p>اسم النموذج المراد استخدامه للترميز. القيمة الافتراضية هي <strong>BAAI/bge-m3</strong>.</p></li>
+<p>اسم النموذج المراد استخدامه للتشفير. القيمة الافتراضية هي <strong>BAAI/bge-m3</strong>.</p></li>
 <li><p><strong>device</strong> (<em>سلسلة</em>)</p>
-<p>الجهاز المراد استخدامه، حيث يمثل <strong>cpu</strong> وحدة المعالجة المركزية (CPU)، ويمثل <strong>cuda:n</strong> جهاز GPU رقم n.</p></li>
+<p>الجهاز المراد استخدامه، حيث يمثل <strong>cpu</strong> وحدة المعالجة المركزية (CPU) ويمثل <strong>cuda:n</strong> جهاز GPU رقم n.</p></li>
 <li><p><strong>use_fp16</strong> (<em>منطقية</em>)</p>
-<p>تحديد ما إذا كان سيتم استخدام دقة العدد العائم 16 بت (fp16). حدد <strong>False</strong> عندما يكون <strong>الجهاز</strong> هو <strong>cpu</strong>.</p></li>
+<p>تحديد ما إذا كان سيتم استخدام دقة العائمة ذات 16 بت (fp16). حدد <strong>False</strong> عندما يكون <strong>الجهاز</strong> هو <strong>cpu</strong>.</p></li>
 </ul>
 <p>لإنشاء التضمينات للمستندات، استخدم الطريقة <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -70,7 +71,7 @@ docs_embeddings = bge_m3_ef.encode_documents(docs)
 Dense document dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse document dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>لإنشاء التضمينات للاستعلامات، استخدم الطريقة <strong>encode_queries()</strong>:</p>
+<p>لإنشاء التضمينات للاستعلامات، استخدم الأسلوب <strong>encode_queries()</strong>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">تخزين التضمينات والبحث فيها<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يعد إنشاء التضمينات الخطوة الأولى. لاستخدام هذه النتائج في الاسترجاع، قم بتعريف مجموعة وفهرسة كل حقل متجه:</p>
+<ul>
+<li>قم بتعيين <code translate="no">docs_embeddings[&quot;dense&quot;]</code> إلى حقل <code translate="no">FLOAT_VECTOR</code> ذي البعد <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>.</li>
+<li>قم بتعيين <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> إلى حقل <code translate="no">SPARSE_FLOAT_VECTOR</code> ، الذي لا يتطلب أبعادًا ثابتة في مخطط Milvus. استخدم مقياس <code translate="no">IP</code> لهذه المتجهات المتفرقة المُكتسبة. انظر <a href="/docs/ar/sparse_vector.md">المتجهات المتفرقة</a>.</li>
+<li>قم بتخزين معرّف كل مستند والنص الأصلي أو البيانات الوصفية جنبًا إلى جنب مع متجهاته بحيث يمكن تتبع نتائج البحث إلى المصدر.</li>
+<li>قم بترميز الاستعلامات باستخدام نفس النموذج والإعدادات المستخدمة في المستندات. أرسل طلبًا واحدًا من نوع " <code translate="no">hybrid_search()</code> " باستخدام معلمة " <code translate="no">AnnSearchRequest</code> " واحدة للحقل الكثيف وأخرى للحقل المتفرق، ودع أداة ترتيب من جانب الخادم مثل RRF أو أداة ترتيب مرجحة تدمج النتائج.</li>
+</ul>
+<p>اتبع <a href="/docs/ar/hybrid_search_with_milvus.md">«البحث الهجين» باستخدام Milvus</a> فيما يتعلق بمخطط المجموعة، والفهارس، والإدراج، وطلبات البحث الهجين. تستخدم الأمثلة الواردة في هذه الصفحة المخرجات الكثيفة والمتفرقة للغلاف؛ وهي لا توضح مخرجات ColBERT متعددة المتجهات الاختيارية لـ BGE-M3.</p>

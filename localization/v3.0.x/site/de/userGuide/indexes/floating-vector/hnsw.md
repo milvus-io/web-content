@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>HNSW-Index</strong> ist ein <strong>graphbasierter</strong> Indizierungsalgorithmus, der die Leistung bei der Suche nach hochdimensionalen Gleitkomma-Vektoren verbessern kann. Er bietet eine <strong>hervorragende</strong> Suchgenauigkeit und <strong>geringe</strong> Latenz, erfordert jedoch einen <strong>hohen</strong> Speicheraufwand zur Aufrechterhaltung seiner hierarchischen Graphstruktur.</p>
+    </button></h1><p>Der <strong>HNSW-Index</strong> ist ein <strong>graphbasierter</strong> Indizierungsalgorithmus, der die Leistung bei der Suche nach hochdimensionalen Gleitkomma-Vektoren verbessern kann. Er bietet eine <strong>hervorragende</strong> Suchgenauigkeit und <strong>geringe</strong> Latenz, erfordert jedoch einen <strong>hohen</strong> Speicherbedarf, um seine hierarchische Graphstruktur aufrechtzuerhalten.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,11 +56,11 @@ summary: >-
  </span></p>
 <p>Die Leistung von HNSW hängt von mehreren Schlüsselparametern ab, die sowohl die Struktur des Graphen als auch das Suchverhalten steuern. Dazu gehören:</p>
 <ul>
-<li><p><code translate="no">M</code>: Die maximale Anzahl an Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Hierarchieebene haben kann. Ein höherer Wert für „ <code translate="no">M</code> “ führt zu einem dichteren Graphen und erhöht den Recall sowie die Genauigkeit, da die Suche mehr Pfade zu erkunden hat; dies beansprucht jedoch auch mehr Speicher und verlangsamt die Einfügungszeit aufgrund zusätzlicher Verbindungen. Wie in der Abbildung oben dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphstruktur, in der Knoten über mehrere Pfade andere Knoten erreichen können.</p></li>
+<li><p><code translate="no">M</code>: Die maximale Anzahl an Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Hierarchieebene haben kann. Ein höherer Wert für „ <code translate="no">M</code> “ führt zu einem dichteren Graphen und erhöht den Recall sowie die Genauigkeit, da die Suche über mehr Pfade verfügt, die erkundet werden können; dies beansprucht jedoch auch mehr Speicher und verlangsamt die Einfügungszeit aufgrund der zusätzlichen Verbindungen. Wie in der Abbildung oben dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphstruktur, in der Knoten über mehrere Pfade andere Knoten erreichen können.</p></li>
 <li><p><code translate="no">efConstruction</code>: Die Anzahl der Kandidaten, die bei der Indexerstellung berücksichtigt werden. Ein höherer Wert für „ <code translate="no">efConstruction</code> “ führt im Allgemeinen zu einem qualitativ besseren Graphen, erfordert jedoch mehr Zeit für die Erstellung.</p></li>
 <li><p><code translate="no">ef</code>: Die Anzahl der Nachbarn, die bei einer Suche ausgewertet werden. Eine Erhöhung von „ <code translate="no">ef</code> “ verbessert die Wahrscheinlichkeit, die nächsten Nachbarn zu finden, verlangsamt jedoch den Suchvorgang.</p></li>
 </ul>
-<p>Einzelheiten dazu, wie Sie diese Einstellungen an Ihre Anforderungen anpassen können, finden Sie unter <a href="/docs/de/hnsw.md#Index-params">„Indexparameter</a>“.</p>
+<p>Einzelheiten dazu, wie Sie diese Einstellungen an Ihre Anforderungen anpassen können, finden Sie unter <a href="/docs/de/hnsw.md#Index-params">„Index-Parameter</a>“.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Beispiel wird ein verbundener Client namens „ <code translate="no">client</code> “ und eine vorhandene Sammlung namens „ <code translate="no">your_collection_name</code> “ verwendet. Die Sammlung enthält ein fünfdimensionales Vektorfeld namens „ <code translate="no">your_vector_field_name</code> “.</p>
+    </button></h2><p>In diesem Beispiel werden ein vernetzter Index namens „ <code translate="no">MilvusClient</code> “ ( <code translate="no">client</code> ) und eine vorhandene Sammlung namens „ <code translate="no">your_collection_name</code> “ verwendet. Die Sammlung enthält ein fünfdimensionales Feld namens „ <code translate="no">FLOAT_VECTOR</code> “ ( <code translate="no">your_vector_field_name</code>). Informationen zur SDK-Kompatibilität finden Sie unter <a href="/docs/de/install-pymilvus.md">„Install Milvus Python SDK“</a>, Informationen zum Schema und zur Verbindungseinrichtung unter <a href="/docs/de/create-collection.md">„Create Collection</a> “. Ersetzen Sie den Feldnamen und die Abfragedimension gemeinsam, wenn Sie das Beispiel an Ihre Einbettungen anpassen.</p>
 <p>Definieren Sie die Indexparameter mit „ <code translate="no">add_index()</code> “ und erstellen Sie anschließend den Index mit „ <code translate="no">create_index()</code> “.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -126,7 +126,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Laden Sie nach dem Erstellen des Index und dem Einfügen von Entitäten die Sammlung und suchen Sie in ihrem Vektorfeld. Für gewöhnliche kNN-Suchen setzen Sie „ <code translate="no">ef</code> “ auf mindestens „ <code translate="no">limit</code> “.</p>
+    </button></h2><p>Laden Sie nach dem Erstellen des Index und dem Einfügen von Entitäten die Sammlung und führen Sie eine Suche in ihrem Vektorfeld durch. Für gewöhnliche kNN-Suchen setzen Sie „ <code translate="no">ef</code> “ auf mindestens „ <code translate="no">limit</code> “.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of neighbors to consider during the search</span>
@@ -188,7 +188,7 @@ res = client.search(
      <th><p>Parameter</p></th>
      <th><p>Beschreibung</p></th>
      <th><p>Wertebereich</p></th>
-     <th><p>Empfehlung zur Optimierung</p></th>
+     <th><p>Optimierungsempfehlung</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">M</code></p></td>
@@ -228,8 +228,31 @@ res = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Steuert die Reichweite der Suche bei der Ermittlung der nächsten Nachbarn. Er bestimmt, wie viele Knoten besucht und als potenzielle nächste Nachbarn bewertet werden. Dieser Parameter wirkt sich nur auf den Suchvorgang aus und gilt ausschließlich für die unterste Ebene des Graphen.</p></td>
+     <td><p>Steuert die Reichweite der Suche bei der Ermittlung der nächsten Nachbarn. Er legt fest, wie viele Knoten besucht und als potenzielle nächste Nachbarn bewertet werden. Dieser Parameter wirkt sich nur auf den Suchvorgang aus und gilt ausschließlich für die unterste Ebene des Graphen.</p></td>
      <td><p><strong>Typ</strong>: Ganzzahl <strong>Bereich</strong>: [1, <em>int_max</em>]</p><p><strong>Standardwert</strong>: <code translate="no">max(limit, 16)</code> für die gewöhnliche kNN-Suche; <code translate="no">512</code> für die Bereichssuche.</p><p>Bei der gewöhnlichen kNN-Suche muss ein expliziter Wert für ` <code translate="no">ef</code> ` größer oder gleich ` <code translate="no">limit</code> ` sein (die Anzahl der zurückzugebenden nächsten Nachbarn).</p></td>
      <td><p>Ein größerer Wert für „ <code translate="no">ef</code> “ führt im Allgemeinen zu <strong>einer höheren Suchgenauigkeit</strong>, da mehr potenzielle Nachbarn berücksichtigt werden. Dies <strong>verlängert</strong> jedoch auch <strong>die Suchzeit</strong>. Erwägen Sie eine Erhöhung von „ <code translate="no">ef</code> “, wenn eine hohe Wiederauffindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist.</p><p>Erwägen Sie eine Verringerung von „ <code translate="no">ef</code> “, um einer schnelleren Suche Vorrang zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p><p>In den meisten Fällen empfehlen wir, einen Wert innerhalb dieses Bereichs festzulegen: [K, 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">Bewerten Sie die Vor- und Nachteile<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Verwenden Sie repräsentative Daten und Abfragen zur Auswahl der Parameter, anstatt die Beispielwerte als Standardwerte für die Produktion zu betrachten:</p>
+<ol>
+<li>Legen Sie das Einbettungsmodell, die Metrik, den „ <code translate="no">limit</code> “ sowie etwaige <a href="/docs/de/filtered-search.md">Filterbedingungen</a> fest. Berechnen Sie die exakten nächsten Nachbarn für dieselben Abfragen und in Frage kommenden Entitäten, beispielsweise mit einem <a href="/docs/de/flat.md">FLAT-Index</a>, um den Recall zu messen.</li>
+<li>Durchlaufen Sie die Suchzeit- <code translate="no">ef</code> bei Ihrer angestrebten Parallelität. Erfassen Sie dabei Recall, Durchsatz und Tail-Latenz gemeinsam. Eine Erhöhung von „ <code translate="no">ef</code> “ erfordert keinen Neuaufbau des Index.</li>
+<li>Wenn die Optimierung zur Laufzeit das Ziel nicht erreichen kann, vergleichen Sie neu erstellte Indizes mit unterschiedlichen „ <code translate="no">M</code> “ und „ <code translate="no">efConstruction</code> “. Erfassen Sie die Indexerstellungszeit und den Speicherverbrauch sowie die Abfrageleistung.</li>
+<li>Beziehen Sie die Ladestrategie und den Cache-Status in den Test ein. Bei Verwendung von <a href="/docs/de/tiered-storage-overview.md">„Tiered Storage</a>“ messen Sie Abfragen, die nicht im Cache befindliche Daten abrufen, getrennt von Abfragen aus dem „Warm-Cache“.</li>
+</ol>
+<p>Bei Speicherbeschränkungen oder anderen Zielwerten für Recall und Latenz vergleichen Sie die Alternativen unter <a href="/docs/de/index-explained.md">„Index Explained</a>“.</p>

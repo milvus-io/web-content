@@ -40,11 +40,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Algoritma Hierarchical Navigable Small World (HNSW) membangun grafik berlapis-lapis, mirip seperti peta dengan tingkat zoom yang berbeda-beda. <strong>Lapisan terbawah</strong> berisi semua titik data, sedangkan <strong>lapisan atas</strong> terdiri dari himpunan bagian titik data yang diambil dari lapisan bawah.</p>
-<p>Dalam hierarki ini, setiap lapisan berisi simpul yang mewakili titik data, yang dihubungkan oleh tepi yang menunjukkan kedekatannya. Lapisan yang lebih tinggi memungkinkan lompatan jarak jauh untuk dengan cepat mendekati target, sedangkan lapisan yang lebih bawah memungkinkan pencarian yang lebih terperinci untuk hasil yang paling akurat.</p>
+<p>Dalam hierarki ini, setiap lapisan berisi simpul yang mewakili titik data, yang dihubungkan oleh tepi yang menunjukkan kedekatannya. Lapisan yang lebih tinggi memungkinkan lompatan jarak jauh untuk dengan cepat mendekati target, sedangkan lapisan yang lebih rendah memungkinkan pencarian yang lebih terperinci untuk hasil yang paling akurat.</p>
 <p>Begini cara kerjanya:</p>
 <ol>
 <li><p><strong>Titik masuk</strong>: Pencarian dimulai dari titik masuk tetap di lapisan teratas, yang merupakan simpul yang telah ditentukan sebelumnya dalam grafik.</p></li>
-<li><p><strong>Pencarian serakah</strong>: Algoritma ini secara serakah berpindah ke tetangga terdekat di lapisan saat ini hingga tidak dapat lagi mendekati vektor kueri. Lapisan atas berfungsi sebagai alat navigasi, bertindak sebagai filter kasar untuk menemukan titik masuk potensial bagi pencarian yang lebih mendetail di tingkat yang lebih rendah.</p></li>
+<li><p><strong>Pencarian serakah</strong>: Algoritma ini secara serakah berpindah ke tetangga terdekat di lapisan saat ini hingga tidak dapat lagi mendekati vektor kueri. Lapisan atas berfungsi sebagai alat navigasi, bertindak sebagai filter kasar untuk menemukan titik masuk potensial bagi pencarian yang lebih mendetail di lapisan bawah.</p></li>
 <li><p><strong>Penurunan lapisan</strong>: Setelah titik <strong>minimum lokal</strong> tercapai di lapisan saat ini, algoritma melompat ke lapisan yang lebih rendah, menggunakan koneksi yang telah ditetapkan sebelumnya, dan mengulangi pencarian rakus.</p></li>
 <li><p><strong>Penyempurnaan</strong><strong>akhir</strong>: Proses ini berlanjut hingga lapisan terbawah tercapai, di mana langkah penyempurnaan akhir mengidentifikasi tetangga terdekat.</p></li>
 </ol>
@@ -76,8 +76,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh ini menggunakan klien terhubung bernama ` <code translate="no">client</code> ` dan koleksi yang sudah ada bernama ` <code translate="no">your_collection_name</code>`. Koleksi tersebut memiliki bidang vektor lima dimensi bernama ` <code translate="no">your_vector_field_name</code>`.</p>
-<p>Tentukan parameter indeks dengan <code translate="no">add_index()</code>, lalu buat indeks dengan <code translate="no">create_index()</code>.</p>
+    </button></h2><p>Contoh ini menggunakan <code translate="no">MilvusClient</code> yang terhubung bernama <code translate="no">client</code> dan koleksi yang sudah ada bernama <code translate="no">your_collection_name</code>. Koleksi tersebut memiliki bidang <code translate="no">FLOAT_VECTOR</code> lima dimensi bernama <code translate="no">your_vector_field_name</code>. Lihat <a href="/docs/id/install-pymilvus.md">Install Milvus Python SDK</a> untuk kompatibilitas SDK dan <a href="/docs/id/create-collection.md">Create Collection</a> untuk skema serta pengaturan koneksi. Ganti nama bidang dan dimensi kueri secara bersamaan saat menyesuaikan contoh ini dengan embeddings Anda.</p>
+<p>Tentukan parameter indeks dengan ` <code translate="no">add_index()</code>`, lalu buat indeks dengan ` <code translate="no">create_index()</code>`.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -101,7 +101,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam konfigurasi ini:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">HNSW</code>.</p></li>
+<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibuat. Dalam contoh ini, tetapkan nilainya ke <code translate="no">HNSW</code>.</p></li>
 <li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antar vektor. Nilai yang didukung meliputi <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
@@ -230,6 +230,29 @@ res = client.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>Mengontrol cakupan pencarian selama proses pengambilan tetangga terdekat. Parameter ini menentukan berapa banyak simpul yang dikunjungi dan dievaluasi sebagai calon tetangga terdekat.  Parameter ini hanya memengaruhi proses pencarian dan berlaku secara eksklusif pada lapisan terbawah graf.</p></td>
      <td><p><strong>Tipe</strong>: Bilangan Bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p><p><strong>Nilai default</strong>: <code translate="no">max(limit, 16)</code> untuk pencarian kNN biasa; <code translate="no">512</code> untuk pencarian rentang.</p><p>Untuk pencarian kNN biasa, nilai <code translate="no">ef</code> yang ditentukan secara eksplisit harus lebih besar dari atau sama dengan <code translate="no">limit</code> (jumlah tetangga terdekat yang akan dikembalikan).</p></td>
-     <td><p>Nilai <code translate="no">ef</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak tetangga potensial dipertimbangkan. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong>. Pertimbangkan untuk meningkatkan <code translate="no">ef</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian bukanlah prioritas utama.</p><p>Pertimbangkan untuk menurunkan nilai ` <code translate="no">ef</code> ` guna memprioritaskan kecepatan pencarian, terutama dalam skenario di mana penurunan akurasi yang sedikit dapat diterima.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam rentang berikut: [K, 10K].</p></td>
+     <td><p>Nilai <code translate="no">ef</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak tetangga potensial dipertimbangkan. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong>. Pertimbangkan untuk meningkatkan <code translate="no">ef</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian bukanlah prioritas utama.</p><p>Pertimbangkan untuk menurunkan nilai ` <code translate="no">ef</code> ` guna memprioritaskan kecepatan pencarian, terutama dalam skenario di mana penurunan akurasi yang sedikit dapat diterima.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam rentang ini: [K, 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">Evaluasi trade-off<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Gunakan data dan kueri yang representatif untuk memilih parameter, bukan menganggap nilai contoh sebagai nilai default produksi:</p>
+<ol>
+<li>Tetapkan model embedding, metrik, ` <code translate="no">limit</code>`, dan <a href="/docs/id/filtered-search.md">kondisi filter</a> apa pun. Hitung tetangga terdekat yang tepat untuk kueri dan entitas yang memenuhi syarat yang sama, misalnya dengan indeks <a href="/docs/id/flat.md">FLAT</a>, untuk mengukur recall.</li>
+<li>Lakukan penyapuan terhadap nilai ` <code translate="no">ef</code> ` pada waktu pencarian pada tingkat konkurensi target Anda. Catat nilai recall, throughput, dan latensi ekor secara bersamaan. Meningkatkan nilai ` <code translate="no">ef</code> ` tidak memerlukan pembuatan ulang indeks.</li>
+<li>Jika penyetelan saat pencarian tidak dapat memenuhi target, bandingkan indeks yang dibangun ulang dengan nilai <code translate="no">M</code> dan <code translate="no">efConstruction</code> yang berbeda. Catat waktu pembuatan indeks dan penggunaan memori serta kinerja kueri.</li>
+<li>Sertakan strategi pemuatan dan status cache dalam pengujian. Saat menggunakan <a href="/docs/id/tiered-storage-overview.md">Tiered Storage</a>, ukur kueri yang mengambil data yang tidak tersimpan dalam cache secara terpisah dari kueri cache hangat.</li>
+</ol>
+<p>Untuk batasan memori atau target recall dan latensi yang berbeda, bandingkan alternatif-alternatif yang <a href="/docs/id/index-explained.md">dijelaskan</a> dalam <a href="/docs/id/index-explained.md">"Index Explained</a>".</p>

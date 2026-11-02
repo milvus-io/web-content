@@ -21,13 +21,14 @@ title: BGE M3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El nombre<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> hace referencia a sus capacidades en materia de multilingüismo, multifuncionalidad y multigranularidad. Capaz de admitir más de 100 idiomas, el BGE-M3 establece nuevos estándares en tareas de recuperación multilingüe e interlingüística. Su capacidad única para realizar búsquedas densas, multivectoriales y dispersas dentro de un único marco lo convierte en la opción ideal para una amplia gama de aplicaciones de recuperación de información (IR).</p>
+    </button></h1><p>El nombre<a href="https://arxiv.org/abs/2402.03216">BGE-M3</a> hace referencia a sus capacidades en materia de multilingüismo, multifuncionalidad y multigranularidad. Con capacidad para admitir más de 100 idiomas, el BGE-M3 establece nuevos estándares en tareas de recuperación multilingüe e interlingüística. Su capacidad única para realizar búsquedas densas, multivectoriales y dispersas dentro de un único marco lo convierte en la opción ideal para una amplia gama de aplicaciones de recuperación de información (IR).</p>
 <p>Milvus se integra con el modelo BGE-M3 mediante la clase <strong>`BGEM3EmbeddingFunction</strong> `. Esta clase se encarga del cálculo de las representaciones y las devuelve en un formato compatible con Milvus para su indexación y búsqueda.</p>
+<p>Este ejemplo genera representaciones en tu proceso de Python; no se conecta a un servidor de Milvus. Los pesos del modelo se descargan la primera vez que se utiliza, por lo que necesitas acceso a la red para conectarte al servidor del modelo o disponer de una caché local del modelo ya poblada. La inferencia en CPU es compatible con <code translate="no">use_fp16=False</code>.</p>
 <p>Para utilizar esta función, instala las dependencias necesarias:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, crea una instancia de <strong>BGEM3EmbeddingFunction</strong>:</p>
+<p>A continuación, instancie la clase ` <strong>BGEM3EmbeddingFunction</strong>`:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 bge_m3_ef = BGEM3EmbeddingFunction(
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Almacenar y buscar las representaciones<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La generación de representaciones es el primer paso. Para utilizar estos resultados en la recuperación, define una colección e indexa cada campo vectorial:</p>
+<ul>
+<li>Asigna <code translate="no">docs_embeddings[&quot;dense&quot;]</code> a un campo <code translate="no">FLOAT_VECTOR</code> con la dimensión <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>.</li>
+<li>Asigne <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> a un campo <code translate="no">SPARSE_FLOAT_VECTOR</code>, que no requiere una dimensión fija en el esquema de Milvus. Utilice una métrica <code translate="no">IP</code> para estos vectores dispersos aprendidos. Véase <a href="/docs/es/sparse_vector.md">«Vector disperso</a>».</li>
+<li>Almacena el ID de cada documento y el texto original o los metadatos junto con sus vectores, de modo que los resultados de la búsqueda puedan remontarse a la fuente.</li>
+<li>Codifica las consultas con el mismo modelo y la misma configuración que los documentos. Envía una única solicitud <code translate="no">hybrid_search()</code> con un <code translate="no">AnnSearchRequest</code> para el campo denso y otro para el campo disperso, y deja que un clasificador del lado del servidor, como RRF o un clasificador ponderado, fusione los resultados.</li>
+</ul>
+<p>Sigue <a href="/docs/es/hybrid_search_with_milvus.md">la guía «Búsqueda híbrida con Milvus»</a> para el esquema de la colección, los índices, la inserción y las solicitudes de búsqueda híbrida. Los ejemplos de esta página utilizan las salidas densas y dispersas del envoltorio; no muestran la salida multivectorial ColBERT opcional de BGE-M3.</p>

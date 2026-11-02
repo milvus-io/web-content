@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -395,7 +389,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e AutoID",
+            "label": "Campo principal e identificação automática",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -761,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externa",
+            "label": "Alterar o esquema de cobrança externo",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1651,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o Código Claude",
+        "label": "Servidor MCP para o código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2138,7 +2132,7 @@
                 "children": []
               },
               {
-                "label": "Conceder Privilégios",
+                "label": "Conceder privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -2502,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "Codificador Cruzado",
+                "label": "Codificador cruzado",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
@@ -2514,7 +2508,7 @@
                 "children": []
               },
               {
-                "label": "Jina AI",
+                "label": "Jina IA",
                 "id": "rerankers-jina.md",
                 "order": 5,
                 "children": []
@@ -3206,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com representações Matryoshka",
+        "label": "Pesquisa em funil com incorporações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

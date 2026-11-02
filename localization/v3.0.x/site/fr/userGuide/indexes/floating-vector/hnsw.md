@@ -3,8 +3,8 @@ id: hnsw.md
 title: HNSW
 summary: >-
   L'index HNSW est un algorithme d'indexation basé sur des graphes qui permet
-  d'améliorer les performances lors de la recherche de vecteurs flottants à
-  haute dimension. Il offre une excellente précision de recherche et une faible
+  d'améliorer les performances lors de la recherche de vecteurs flottants de
+  grande dimension. Il offre une excellente précision de recherche et une faible
   latence, mais nécessite une importante consommation de mémoire pour maintenir
   sa structure hiérarchique en graphe.
 ---
@@ -61,7 +61,7 @@ summary: >-
 <li><p><code translate="no">ef</code>: Nombre de voisins évalués lors d’une recherche. L’augmentation de l’ <code translate="no">ef</code> améliore les chances de trouver les voisins les plus proches, mais ralentit le processus de recherche.</p></li>
 </ul>
 <p>Pour plus de détails sur la manière d’ajuster ces paramètres en fonction de vos besoins, consultez la section « <a href="/docs/fr/hnsw.md#Index-params">Paramètres d’index</a> ».</p>
-<h2 id="Build-index" class="common-anchor-header">Créer un index<button data-href="#Build-index" class="anchor-icon" translate="no">
+<h2 id="Build-index" class="common-anchor-header">Construire l’index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +76,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cet exemple utilise un client connecté nommé « <code translate="no">client</code> » et une collection existante nommée « <code translate="no">your_collection_name</code> ». La collection contient un champ vectoriel à cinq dimensions nommé « <code translate="no">your_vector_field_name</code> ».</p>
-<p>Définissez les paramètres d’index avec <code translate="no">add_index()</code>, puis créez l’index avec <code translate="no">create_index()</code>.</p>
+    </button></h2><p>Cet exemple utilise une <code translate="no">MilvusClient</code> connectée nommée <code translate="no">client</code> et une collection existante nommée <code translate="no">your_collection_name</code>. La collection comporte un champ d’ <code translate="no">FLOAT_VECTOR</code> s à cinq dimensions nommé <code translate="no">your_vector_field_name</code>. Consultez les sections « <a href="/docs/fr/install-pymilvus.md">Installer le SDK Python de Milvus</a> » pour la compatibilité du SDK et <a href="/docs/fr/create-collection.md">« Créer une collection</a> » pour le schéma et la configuration de la connexion. Remplacez à la fois le nom du champ et la dimension de requête lorsque vous adaptez l’exemple à vos embeddings.</p>
+<p>Définissez les paramètres d’index à l’aide de <code translate="no">add_index()</code>, puis créez l’index à l’aide de <code translate="no">create_index()</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -102,7 +102,7 @@ client.create_index(
 <p>Dans cette configuration :</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Le type d’index à créer. Dans cet exemple, définissez la valeur sur <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: La méthode utilisée pour calculer la distance entre les vecteurs. Les valeurs prises en charge sont notamment <code translate="no">COSINE</code>, <code translate="no">L2</code> et <code translate="no">IP</code>. Pour plus de détails, reportez-vous à <a href="/docs/fr/metric.md">la section Types de métriques</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: La méthode utilisée pour calculer la distance entre les vecteurs. Les valeurs prises en charge incluent <code translate="no">COSINE</code>, <code translate="no">L2</code> et <code translate="no">IP</code>. Pour plus de détails, reportez-vous à <a href="/docs/fr/metric.md">la section Types de métriques</a>.</p></li>
 <li><p><code translate="no">params</code>: Options de configuration supplémentaires pour la création de l’index.</p>
 <ul>
 <li><p><code translate="no">M</code>: Nombre maximal de voisins auxquels chaque nœud peut se connecter.</p></li>
@@ -233,3 +233,26 @@ res = client.search(
      <td><p>Une valeur <code translate="no">ef</code> plus élevée conduit généralement à <strong>une meilleure précision de recherche</strong>, car un plus grand nombre de voisins potentiels est pris en compte. Cependant, cela <strong>augmente</strong> également <strong>la durée de la recherche</strong>. Envisagez d’augmenter la valeur <code translate="no">ef</code> lorsque l’obtention d’un rappel élevé est essentielle et que la vitesse de recherche est moins importante.</p><p>Envisagez de réduire l’ <code translate="no">ef</code> pour privilégier des recherches plus rapides, en particulier dans les cas où une légère perte de précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [K, 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">Évaluez les compromis<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilisez des données et des requêtes représentatives pour choisir les paramètres plutôt que de considérer les valeurs d’exemple comme des valeurs par défaut en production :</p>
+<ol>
+<li>Définissez le modèle d’embedding, la métrique, l’ <code translate="no">limit</code> et toutes <a href="/docs/fr/filtered-search.md">les conditions de filtrage</a>. Calculez les voisins les plus proches exacts pour les mêmes requêtes et les mêmes entités éligibles, par exemple avec un index <a href="/docs/fr/flat.md">FLAT</a>, afin de mesurer le rappel.</li>
+<li>Parcourez les <code translate="no">ef</code> de temps de recherche à votre niveau de concurrence cible. Enregistrez simultanément le rappel, le débit et la latence de queue. L’augmentation de l’ <code translate="no">ef</code> ne nécessite pas la reconstruction de l’index.</li>
+<li>Si l’optimisation au moment de la recherche ne permet pas d’atteindre l’objectif, comparez des index reconstruits avec différentes <code translate="no">M</code> et <code translate="no">efConstruction</code>. Enregistrez le temps de construction de l’index et l’utilisation de la mémoire, ainsi que les performances des requêtes.</li>
+<li>Intégrez la stratégie de chargement et l’état du cache dans le test. Lorsque vous utilisez <a href="/docs/fr/tiered-storage-overview.md">le stockage hiérarchisé</a>, mesurez séparément les requêtes qui récupèrent des données non mises en cache et celles qui utilisent le cache « warm ».</li>
+</ol>
+<p>En cas de contraintes de mémoire ou d’objectifs différents en matière de rappel et de latence, comparez les alternatives présentées dans la section « <a href="/docs/fr/index-explained.md">Index Explained</a> ».</p>

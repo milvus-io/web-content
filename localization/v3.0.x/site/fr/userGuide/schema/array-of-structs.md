@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilisez StructArray lorsqu'une entité doit stocker une liste ordonnée d'éléments structurés, tels qu'un document comportant plusieurs segments, une page comportant plusieurs éléments visuels ou une vidéo comportant plusieurs extraits. StructArray conserve ces éléments au sein de l'entité parente tout en permettant la recherche vectorielle et le filtrage scalaire sur les champs de chaque élément.</p>
-<h2 id="What-is-StructArray" class="common-anchor-header">Qu’est-ce qu’un StructArray ?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
+<h2 id="What-is-StructArray" class="common-anchor-header">Qu’est-ce que StructArray ?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +126,7 @@ summary: >-
 <tr><td>Exécuter ColBERT, ColPali ou une recherche par interaction tardive au niveau du document.</td><td>Utiliser la recherche EmbeddingList avec un index « <code translate="no">MAX_SIM*</code> ».</td><td>Niveau de l’entité.</td><td><a href="/docs/fr/search-with-embedding-lists.md">Recherche avec les listes d’embedding</a></td></tr>
 <tr><td>Recherchez des segments, des extraits ou des fragments individuels.</td><td>Utilisez la recherche au niveau des éléments avec une métrique vectorielle standard.</td><td>Niveau des éléments de structure, avec décalage lorsque celui-ci est disponible.</td><td><a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a></td></tr>
 <tr><td>Limitez la recherche vectorielle au niveau des éléments à ceux qui répondent à des conditions scalaires.</td><td>Utilisez ` <code translate="no">element_filter</code>`.</td><td>Filtrage au niveau des éléments ; la forme du résultat dépend du type de recherche.</td><td><a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a></td></tr>
-<tr><td>Sélectionnez des entités en fonction du nombre d’éléments Struct qui satisfont une condition.</td><td>Utilisez <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Niveau de l’entité.</td><td><a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a></td></tr>
+<tr><td>Sélectionnez des entités en fonction du nombre d’éléments Struct qui satisfont une condition.</td><td>Utilisez <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Niveau de l'entité.</td><td><a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a></td></tr>
 <tr><td>Utilisez des limites de score ou de distance sur les sous-champs vectoriels de StructArray.</td><td>Utilisez la recherche par plage au niveau des éléments.</td><td>Niveau des éléments de Struct.</td><td><a href="/docs/fr/range-search-with-structarray.md">Recherche par plage avec StructArray</a></td></tr>
 <tr><td>Renvoyer au maximum un résultat par entité parente après une recherche au niveau des éléments.</td><td>Utiliser la recherche par regroupement selon la clé primaire.</td><td>Niveau de l'entité après regroupement.</td><td><a href="/docs/fr/grouping-search-with-structarray.md">Recherche groupée avec StructArray</a></td></tr>
 <tr><td>Combiner la recherche d'éléments StructArray avec un autre champ vectoriel.</td><td>Utiliser une recherche hybride avec une requête AnnSearchRequest ciblant un sous-champ vectoriel de StructArray.</td><td>Sous-recherche au niveau des éléments, reclassement au niveau des entités.</td><td><a href="/docs/fr/hybrid-search-with-structarray.md">Recherche hybride avec StructArray</a></td></tr>
@@ -150,8 +150,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>Recherche EmbeddingList</h3></th>
-      <th scope="col"><h3>Recherche au niveau des éléments</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">Recherche EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">Recherche au niveau des éléments</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -162,7 +162,7 @@ summary: >-
           <li>Données de requête : liste d’embeddings.</li>
           <li>Famille de métriques : <code translate="no">MAX_SIM*</code>.</li>
           <li>Granularité des résultats : niveau de l’entité.</li>
-          <li>Idéal pour : la recherche en phase tardive au niveau du document ou de la page.</li>
+          <li>Idéal pour : la recherche à interaction tardive au niveau du document ou de la page.</li>
         </ul>
       </td>
       <td>
@@ -177,8 +177,7 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Avertissement</p>
+<div class="alert warning">
 <p>Si votre collection nécessite à la fois une recherche EmbeddingList et une recherche au niveau des éléments, utilisez deux sous-champs vectoriels distincts. Un champ vectoriel ou un sous-champ vectoriel n'accepte qu'un seul index, et les deux modes de recherche requièrent des familles de métriques différentes.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Plan de la documentation<button data-href="#Documentation-map" class="anchor-icon" translate="no">

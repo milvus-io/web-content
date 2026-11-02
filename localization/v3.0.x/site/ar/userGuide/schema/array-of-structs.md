@@ -149,8 +149,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>البحث في EmbeddingList</h3></th>
-      <th scope="col"><h3>البحث على مستوى العناصر</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">البحث في EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">البحث على مستوى العناصر</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -170,15 +170,14 @@ summary: >-
           <li>بيانات الاستعلام: متجه عادي.</li>
           <li>مجموعة المقاييس: مقاييس المتجهات العادية.</li>
           <li>درجة تفصيل النتائج: مستوى عنصر Struct.</li>
-          <li>الأفضل لـ: الاسترجاع على مستوى المقطع أو المقطع المصغر أو الرقعة.</li>
+          <li>الأفضل لـ: الاسترجاع على مستوى المقطع أو المقطع القصير أو الرقعة.</li>
         </ul>
       </td>
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>تحذير</p>
-<p>إذا كانت مجموعتك تحتاج إلى كل من البحث في EmbeddingList والبحث على مستوى العنصر، فاستخدم حقلين فرعيين متجهين منفصلين. لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد، ويتطلب وضعا البحث عائلات مقاييس مختلفة.</p>
+<div class="alert warning">
+<p>إذا كانت مجموعتك تحتاج إلى كل من البحث في EmbeddingList والبحث على مستوى العناصر، فاستخدم حقلين فرعيين متجهين منفصلين. لا يقبل الحقل المتجه أو الحقل الفرعي المتجه سوى فهرس واحد، ويتطلب وضعا البحث عائلات مقاييس مختلفة.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">خريطة الوثائق<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"

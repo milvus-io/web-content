@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -1545,7 +1539,7 @@
             "children": []
           },
           {
-            "label": "Contoh Penggunaan",
+            "label": "Kasus Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1956,7 +1950,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kluster Skala",
+            "label": "Kelompok Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -2502,7 +2496,7 @@
                 "children": []
               },
               {
-                "label": "Encoder Silang",
+                "label": "Enkoder Silang",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []

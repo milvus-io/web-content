@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -454,7 +448,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufteilung",
+                "label": "JSON-Aufspaltung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -735,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
+                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1221,7 +1215,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie eine Suchstrategie für die „EmbeddingList“ aus",
+                "label": "Wählen Sie eine Suchstrategie für „EmbeddingList“ aus",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -1407,7 +1401,7 @@
                     "children": []
                   },
                   {
-                    "label": "Anleitung: Implementierung einer zeitbasierten Rangfolge in Milvus",
+                    "label": "Anleitung: Implementierung eines zeitbasierten Rankings in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -2722,7 +2716,7 @@
         ]
       },
       {
-        "label": "Vertreter",
+        "label": "Agenten",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2775,7 +2769,7 @@
             "children": []
           },
           {
-            "label": "Grundlegendes zum Arbeitsspeicher",
+            "label": "Grundlegendes zum Gedächtnis",
             "id": "basic_memory_with_milvus.md",
             "order": 8,
             "children": []
@@ -2789,7 +2783,7 @@
         ]
       },
       {
-        "label": "Bewertung und Beobachtbarkeit",
+        "label": "Auswertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [

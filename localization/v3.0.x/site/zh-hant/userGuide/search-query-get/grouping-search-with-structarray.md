@@ -2,8 +2,8 @@
 id: grouping-search-with-structarray.md
 title: 使用 StructArray 進行分組搜尋
 summary: >-
-  請使用此頁面，根據父實體將 StructArray 的元素層級搜尋結果進行分組。當多個 Struct
-  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被合併，因此每個父實體最多只會出現一次。
+  請使用此頁面，將 StructArray 的元素層級搜尋結果依父實體進行分組。當多個 Struct
+  元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。透過分組功能，這些元素搜尋結果將被彙總，使每個父實體至多只出現一次。
 ---
 <h1 id="Grouping-Search-with-StructArray" class="common-anchor-header">使用 StructArray 進行分組搜尋<button data-href="#Grouping-Search-with-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,9 @@ summary: >-
       </svg>
     </button></h1><p>請使用此頁面，根據父實體對 StructArray 的元素層級搜尋結果進行分組。當多個 Struct 元素符合查詢條件時，元素層級搜尋可能會從同一實體中返回多個搜尋結果。分組功能會將這些元素搜尋結果合併，使每個父實體最多只出現一次。</p>
 <p>本頁面使用《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。該集合包含一個名為<code translate="no">chunks</code> 的 StructArray 欄位。其中<code translate="no">chunks[emb]</code> 向量子欄位已針對元素層級搜尋進行索引，並採用標準向量度量標準。</p>
-<h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分組機制如何套用至 StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
+<p>範例中使用預設的群組大小「1」。</p>
+<p>在執行這些範例之前，請先建立集合、插入範例資料、建立所需的向量索引，並載入該集合。請針對此處顯示的欄位使用 4 維向量。除非重新定義，否則每個程式碼區塊均假設已使用與前一個範例相同語言的連線及變數。</p>
+<h2 id="How-grouping-applies-to-StructArray" class="common-anchor-header">分組如何套用至 StructArray<button data-href="#How-grouping-applies-to-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,11 +46,11 @@ summary: >-
 <tbody>
 <tr><td>EmbeddingList 搜尋</td><td>不支援。</td><td>不適用。</td></tr>
 <tr><td>元素層級搜尋</td><td>透過主鍵分組可支援此功能。</td><td>每個父實體最多返回一個結果。元素層級的元資料會被保留，因此當 API 或 SDK 公開時，可返回所選元素的索引或偏移量。</td></tr>
-<tr><td>混合搜尋</td><td>僅在所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時才受支援。</td><td>在處理最終結果之前，元素層級的子搜尋會依據主鍵進行分組。</td></tr>
+<tr><td>混合搜尋</td><td>僅在所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時才受支援。</td><td>元素層級的子搜尋會在最終結果處理前，依據主鍵進行分組。</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>當未分組的元素層級搜尋會返回過多重複的父實體時，請使用分組功能。若您希望將每個符合條件的 Struct 元素視為獨立的搜尋結果，請使用不帶 `<code translate="no">group_by_field</code>`<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">的 StructArray 基本向量搜尋</a>。</p>
+<p>當未分組的元素層級搜尋會返回過多重複的父實體時，請使用分組功能。若您希望每個匹配的 Struct 元素皆作為獨立的搜尋結果，請使用不帶 `<code translate="no">group_by_field</code>`<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">的 StructArray 基本向量搜尋</a>。</p>
 </div>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +74,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>元素層級向量子欄位</td><td>請使用 StructArray 向量子欄位（例如<code translate="no">chunks[emb]</code> ），並以常規向量度量作為索引。</td></tr>
-<tr><td>常規向量查詢</td><td>請使用一般查詢向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
+<tr><td>常規向量查詢</td><td>請使用常規查詢向量，而非<code translate="no">EmbeddingList</code> 。</td></tr>
 <tr><td>主鍵分組</td><td>請將集合主鍵設定為 `<code translate="no">group_by_field</code>`，例如 `<code translate="no">doc_id</code>`。</td></tr>
 <tr><td>不使用範圍參數</td><td>請勿將分組搜尋與範圍搜尋參數（例如<code translate="no">radius</code> 或<code translate="no">range_filter</code> ）結合使用。</td></tr>
 </tbody>
@@ -94,6 +96,16 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>以下範例會先搜尋個別區塊，然後根據父實體的主鍵將元素搜尋結果進行分組。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -122,13 +134,227 @@ results = client.search(
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> results:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(
-            <span class="hljs-string">&quot;doc_id:&quot;</span>, hit[<span class="hljs-string">&quot;id&quot;</span>],
+            <span class="hljs-string">&quot;doc_id:&quot;</span>, hit[<span class="hljs-string">&quot;doc_id&quot;</span>],
             <span class="hljs-string">&quot;distance:&quot;</span>, hit[<span class="hljs-string">&quot;distance&quot;</span>],
             <span class="hljs-string">&quot;offset:&quot;</span>, hit.get(<span class="hljs-string">&quot;offset&quot;</span>),
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>若未進行分組，當多個區塊符合查詢條件時，相同的 `<code translate="no">doc_id</code> ` 可能會出現多次。使用 `<code translate="no">group_by_field=&quot;doc_id&quot;</code>` 時，每個父實體最多只會出現一次。分組可保留元素層級的元資料，因此當 API 或 SDK 公開相關資訊時，分組後的結果仍可包含所選的 Struct 元素索引或偏移量。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>});
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .topK(<span class="hljs-number">5</span>)
+        .groupByFieldName(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .outputFields(Arrays.asList(
+                <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>,
+                <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+        .build());
+
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResp.getSearchResults()) {
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(<span class="hljs-string">&quot;doc_id: &quot;</span> + result.getId()
+                + <span class="hljs-string">&quot;, distance: &quot;</span> + result.getScore()
+                + <span class="hljs-string">&quot;, offset: &quot;</span> + result.getElementOffset()
+                + <span class="hljs-string">&quot;, entity: &quot;</span> + result.getEntity());
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>}
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    <span class="hljs-number">5</span>,
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>).
+    WithGroupByField(<span class="hljs-string">&quot;doc_id&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;doc_id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;doc_id&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client.<span class="hljs-title function_ invoke__">search</span>(
+    SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]]))
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>])
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+        .<span class="hljs-title function_ invoke__">group_by_field</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;doc_id: {:?}, distance: {:?}, offset: {:?}, entity: {:?}&quot;</span>,
+            row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)?, row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;score&quot;</span>)?, row.<span class="hljs-title function_ invoke__">element_offset</span>(), row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>};
+
+milvus::SearchRequest request;
+request.<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+       .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+       .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[section]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[page]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[quality_score]&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>];
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span>,
+  <span class="hljs-attr">data</span>: query_vector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;doc_id&quot;</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>],
+});
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> hit <span class="hljs-keyword">of</span> res.<span class="hljs-property">results</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;doc_id:&quot;</span>, hit.<span class="hljs-property">doc_id</span>, <span class="hljs-string">&quot;distance:&quot;</span>, hit.<span class="hljs-property">score</span>, <span class="hljs-string">&quot;offset:&quot;</span>, hit.<span class="hljs-property">offset</span>);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>];
+
+SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        GroupByField = <span class="hljs-string">&quot;doc_id&quot;</span>,
+        OutputFields = { <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span> }
+    }
+});
+
+<span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">long</span> id <span class="hljs-keyword">in</span> results.Ids.LongIds ?? [])
+{
+    Console.WriteLine(<span class="hljs-string">$&quot;doc_id: <span class="hljs-subst">{id}</span>&quot;</span>);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;data&quot;: [
+        [0.19, 0.24, 0.30, 0.37]
+    ],
+    &quot;annsField&quot;: &quot;chunks[emb]&quot;,
+    &quot;limit&quot;: 5,
+    &quot;groupingField&quot;: &quot;doc_id&quot;,
+    &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[page]&quot;, &quot;chunks[quality_score]&quot;]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>若未進行分組，當多個區塊符合查詢條件時，相同的 `<code translate="no">doc_id</code> ` 可能會出現多次。透過 `<code translate="no">group_by_field=&quot;doc_id&quot;</code>`，每個父實體至多只會出現一次。分組會保留元素層級的元資料，因此當 API 或 SDK 公開相關資訊時，分組後的結果仍可包含所選的 Struct 元素索引或偏移量。</p>
 <h2 id="Add-scalar-filters" class="common-anchor-header">新增標量篩選條件<button data-href="#Add-scalar-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,8 +370,20 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以將分組搜尋與 StructArray 標量篩選結合使用。當標量條件需限制哪些 Struct 元素參與元素層級向量搜尋時，請使用 `<code translate="no">element_filter</code> `。</p>
-<pre><code translate="no" class="language-python">filter_expr = (
+    </button></h2><p>您可以將分組搜尋與 StructArray 標量篩選結合使用。當標量條件需限制哪些 Struct 元素參與元素層級向量搜尋時，請使用<code translate="no">element_filter</code> 。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
+
+filter_expr = (
     <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; &#x27;</span>
     <span class="hljs-string">&#x27;element_filter(chunks, &#x27;</span>
     <span class="hljs-string">&#x27;$[section] == &quot;index&quot; &amp;&amp; &#x27;</span>
@@ -169,6 +407,178 @@ results = client.search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>});
+
+<span class="hljs-type">String</span> <span class="hljs-variable">filterExpr</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;category == \&quot;search\&quot; &amp;&amp; &quot;</span>
+        + <span class="hljs-string">&quot;element_filter(chunks, &quot;</span>
+        + <span class="hljs-string">&quot;$[section] == \&quot;index\&quot; &amp;&amp; &quot;</span>
+        + <span class="hljs-string">&quot;$[quality_score] &gt; 0.9)&quot;</span>;
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .filter(filterExpr)
+        .topK(<span class="hljs-number">5</span>)
+        .groupByFieldName(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .outputFields(Arrays.asList(
+                <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>,
+                <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>}
+
+filterExpr := <span class="hljs-string">&quot;category == \&quot;search\&quot; &amp;&amp; &quot;</span> +
+    <span class="hljs-string">&quot;element_filter(chunks, &quot;</span> +
+    <span class="hljs-string">&quot;$[section] == \&quot;index\&quot; &amp;&amp; &quot;</span> +
+    <span class="hljs-string">&quot;$[quality_score] &gt; 0.9)&quot;</span>
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    <span class="hljs-number">5</span>,
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>).
+    WithFilter(filterExpr).
+    WithGroupByField(<span class="hljs-string">&quot;doc_id&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;doc_id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;doc_id&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter_expr</span> = <span class="hljs-string">&quot;category == \&quot;search\&quot; &amp;&amp; element_filter(chunks, $[section] == \&quot;index\&quot; &amp;&amp; $[quality_score] &gt; 0.9)&quot;</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client.<span class="hljs-title function_ invoke__">search</span>(
+    SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]]))
+        .<span class="hljs-title function_ invoke__">filter</span>(filter_expr)
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>])
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+        .<span class="hljs-title function_ invoke__">group_by_field</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;doc_id: {:?}, distance: {:?}, offset: {:?}, entity: {:?}&quot;</span>,
+            row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)?, row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;score&quot;</span>)?, row.<span class="hljs-title function_ invoke__">element_offset</span>(), row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>};
+
+std::string filter_expr = <span class="hljs-string">&quot;category == \&quot;search\&quot; &amp;&amp; &quot;</span>
+                          <span class="hljs-string">&quot;element_filter(chunks, &quot;</span>
+                          <span class="hljs-string">&quot;$[section] == \&quot;index\&quot; &amp;&amp; &quot;</span>
+                          <span class="hljs-string">&quot;$[quality_score] &gt; 0.9)&quot;</span>;
+
+milvus::SearchRequest request;
+request.<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+       .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+       .<span class="hljs-built_in">WithFilter</span>(filter_expr)
+       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+       .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[section]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[quality_score]&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>];
+
+<span class="hljs-keyword">const</span> filter_expr = <span class="hljs-string">&#x27;category == &quot;search&quot; &amp;&amp; element_filter(chunks, $[section] == &quot;index&quot; &amp;&amp; $[quality_score] &gt; 0.9)&#x27;</span>;
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span>,
+  <span class="hljs-attr">data</span>: query_vector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+  <span class="hljs-attr">filter</span>: filter_expr,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;doc_id&quot;</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>];
+
+<span class="hljs-built_in">string</span> filterExpr = <span class="hljs-string">&quot;category == \&quot;search\&quot; &amp;&amp; element_filter(chunks, $[section] == \&quot;index\&quot; &amp;&amp; $[quality_score] &gt; 0.9)&quot;</span>;
+
+SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = filterExpr,
+        GroupByField = <span class="hljs-string">&quot;doc_id&quot;</span>,
+        OutputFields = { <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;data&quot;: [
+        [0.19, 0.24, 0.30, 0.37]
+    ],
+    &quot;annsField&quot;: &quot;chunks[emb]&quot;,
+    &quot;filter&quot;: &quot;category == \&quot;search\&quot; &amp;&amp; element_filter(chunks, $[section] == \&quot;index\&quot; &amp;&amp; $[quality_score] &gt; 0.9)&quot;,
+    &quot;limit&quot;: 5,
+    &quot;groupingField&quot;: &quot;doc_id&quot;,
+    &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;category&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>頂層謂詞用於篩選候選實體。<code translate="no">element_filter</code> 謂詞則將元素層級向量搜尋限制在符合條件的 Struct 元素上。隨後，分組功能會根據主鍵將符合條件的元素搜尋結果進行彙總。</p>
 <h2 id="Use-grouping-in-hybrid-search" class="common-anchor-header">在混合搜尋中使用分組<button data-href="#Use-grouping-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,13 +595,25 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>與 StructArray 結合的混合分組是一項元素層級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，此功能才受支援。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 層級的請求。</p>
-<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位具有兩個元素級向量子欄位：<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且兩者均使用標準向量度量進行索引。</p>
+    </button></h2><p>與 StructArray 結合的混合分組是一項元素級功能。僅當所有子搜尋皆針對同一 StructArray 欄位下的元素級向量欄位時，才支援此功能。請勿在分組的 StructArray 混合搜尋中使用 EmbeddingList 級別的請求。</p>
+<p>以下範例假設<code translate="no">chunks</code> 的 StructArray 欄位具有兩個元素層級向量子欄位：<code translate="no">chunks[emb]</code> 和<code translate="no">chunks[code_emb]</code> ，且兩者皆使用<code translate="no">COSINE</code> 進行索引。在建立集合時，請定義並填入額外的 4 維<code translate="no">code_emb</code> 子欄位；此子欄位未包含在上述連結的基礎架構中。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest, RRFRanker
+
+query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
+code_query_vector = [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>]
 
 index_chunk_req = AnnSearchRequest(
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+    param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>},
     limit=<span class="hljs-number">10</span>,
     expr=<span class="hljs-string">&#x27;element_filter(chunks, $[section] == &quot;index&quot;)&#x27;</span>,
 )
@@ -199,6 +621,7 @@ index_chunk_req = AnnSearchRequest(
 code_chunk_req = AnnSearchRequest(
     data=[code_query_vector],
     anns_field=<span class="hljs-string">&quot;chunks[code_emb]&quot;</span>,
+    param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>},
     limit=<span class="hljs-number">10</span>,
     expr=<span class="hljs-string">&#x27;element_filter(chunks, $[has_code] == true)&#x27;</span>,
 )
@@ -217,7 +640,188 @@ results = client.hybrid_search(
     ],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，兩個子請求皆針對同一 StructArray 欄位（<code translate="no">chunks</code> ）下的元素層級向量子欄位。若混合了一般向量欄位、不同的 StructArray 欄位或 EmbeddingList 層級的請求，混合搜尋將不支援元素層級的分組操作。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>});
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">codeQueryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.18f</span>, <span class="hljs-number">0.23f</span>, <span class="hljs-number">0.29f</span>, <span class="hljs-number">0.36f</span>});
+
+<span class="hljs-type">AnnSearchReq</span> <span class="hljs-variable">indexChunkReq</span> <span class="hljs-operator">=</span> AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .vectors(Collections.singletonList(queryVector))
+        .metricType(IndexParam.MetricType.COSINE)
+        .limit(<span class="hljs-number">10</span>)
+        .filter(<span class="hljs-string">&quot;element_filter(chunks, $[section] == \&quot;index\&quot;)&quot;</span>)
+        .build();
+
+<span class="hljs-type">AnnSearchReq</span> <span class="hljs-variable">codeChunkReq</span> <span class="hljs-operator">=</span> AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;chunks[code_emb]&quot;</span>)
+        .vectors(Collections.singletonList(codeQueryVector))
+        .metricType(IndexParam.MetricType.COSINE)
+        .limit(<span class="hljs-number">10</span>)
+        .filter(<span class="hljs-string">&quot;element_filter(chunks, $[has_code] == true)&quot;</span>)
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(HybridSearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .searchRequests(Arrays.asList(indexChunkReq, codeChunkReq))
+        .ranker(RRFRanker.builder().build())
+        .limit(<span class="hljs-number">5</span>)
+        .groupByFieldName(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .outFields(Arrays.asList(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">index_chunk_req</span> = SubSearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+    .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]]))
+    .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">&quot;element_filter(chunks, $[section] == \&quot;index\&quot;)&quot;</span>)
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">code_chunk_req</span> = SubSearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[code_emb]&quot;</span>)
+    .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>]]))
+    .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">&quot;element_filter(chunks, $[has_code] == true)&quot;</span>)
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client.<span class="hljs-title function_ invoke__">hybrid_search</span>(
+    HybridSearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .<span class="hljs-title function_ invoke__">sub_requests</span>(<span class="hljs-built_in">vec!</span>[index_chunk_req, code_chunk_req])
+        .<span class="hljs-title function_ invoke__">rerank</span>(RRFRerank::<span class="hljs-title function_ invoke__">new</span>())
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+        .<span class="hljs-title function_ invoke__">group_by_field</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;doc_id: {:?}, distance: {:?}, offset: {:?}, entity: {:?}&quot;</span>,
+            row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)?, row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;score&quot;</span>)?, row.<span class="hljs-title function_ invoke__">element_offset</span>(), row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>};
+std::vector&lt;<span class="hljs-type">float</span>&gt; code_query_vector = {<span class="hljs-number">0.18f</span>, <span class="hljs-number">0.23f</span>, <span class="hljs-number">0.29f</span>, <span class="hljs-number">0.36f</span>};
+
+<span class="hljs-keyword">auto</span> index_chunk_req = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;();
+index_chunk_req-&gt;<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+                .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;element_filter(chunks, $[section] == \&quot;index\&quot;)&quot;</span>)
+                .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+<span class="hljs-keyword">auto</span> code_chunk_req = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::SubSearchRequest&gt;();
+code_chunk_req-&gt;<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[code_emb]&quot;</span>)
+               .<span class="hljs-built_in">AddFloatVector</span>(code_query_vector)
+               .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;element_filter(chunks, $[has_code] == true)&quot;</span>)
+               .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+milvus::HybridSearchRequest request;
+request.<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+       .<span class="hljs-built_in">AddSubRequest</span>(index_chunk_req)
+       .<span class="hljs-built_in">AddSubRequest</span>(code_chunk_req)
+       .<span class="hljs-built_in">WithRerank</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::RRFRerank&gt;(<span class="hljs-number">60</span>))
+       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+       .<span class="hljs-built_in">WithGroupByField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[section]&quot;</span>);
+
+milvus::HybridSearchResponse response;
+status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>];
+<span class="hljs-built_in">float</span>[] codeQueryVector = [<span class="hljs-number">0.18f</span>, <span class="hljs-number">0.23f</span>, <span class="hljs-number">0.29f</span>, <span class="hljs-number">0.36f</span>];
+
+AnnSearchReq indexChunkReq = <span class="hljs-keyword">new</span>()
+{
+    VectorFieldName = <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+    Vectors = [queryVector],
+    MetricType = MetricType.Cosine,
+    Limit = <span class="hljs-number">10</span>,
+    Expression = <span class="hljs-string">&quot;element_filter(chunks, $[section] == \&quot;index\&quot;)&quot;</span>
+};
+
+AnnSearchReq codeChunkReq = <span class="hljs-keyword">new</span>()
+{
+    VectorFieldName = <span class="hljs-string">&quot;chunks[code_emb]&quot;</span>,
+    Vectors = [codeQueryVector],
+    MetricType = MetricType.Cosine,
+    Limit = <span class="hljs-number">10</span>,
+    Expression = <span class="hljs-string">&quot;element_filter(chunks, $[has_code] == true)&quot;</span>
+};
+
+SearchResp results = <span class="hljs-keyword">await</span> client.HybridSearchAsync(<span class="hljs-keyword">new</span> HybridSearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    SearchRequests = [indexChunkReq, codeChunkReq],
+    Reranker = <span class="hljs-keyword">new</span> RrfReranker(),
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        GroupByField = <span class="hljs-string">&quot;doc_id&quot;</span>,
+        OutputFields = { <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;search&quot;: [
+        {
+            &quot;annsField&quot;: &quot;chunks[emb]&quot;,
+            &quot;data&quot;: [[0.19, 0.24, 0.30, 0.37]],
+            &quot;limit&quot;: 10,
+            &quot;filter&quot;: &quot;element_filter(chunks, $[section] == \&quot;index\&quot;)&quot;
+        },
+        {
+            &quot;annsField&quot;: &quot;chunks[code_emb]&quot;,
+            &quot;data&quot;: [[0.18, 0.23, 0.29, 0.36]],
+            &quot;limit&quot;: 10,
+            &quot;filter&quot;: &quot;element_filter(chunks, $[has_code] == true)&quot;
+        }
+    ],
+    &quot;rerank&quot;: { &quot;strategy&quot;: &quot;rrf&quot;, &quot;params&quot;: {} },
+    &quot;limit&quot;: 5,
+    &quot;groupingField&quot;: &quot;doc_id&quot;,
+    &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus 3.0.2 隨附的 Go 客戶端原始碼並未透過<code translate="no">NewHybridSearchOption</code> 提供最終混合分組功能。在每個子請求中設定<code translate="no">WithGroupByField</code> 並不會配置最終混合分組。NodeJS 3.0.6 亦未將頂層的<code translate="no">group_by_field</code> 納入混合排名參數中。請針對此範例使用上述任一 API。</p>
+<p>在此範例中，兩個子請求皆針對同一 StructArray 欄位<code translate="no">chunks</code> 下的元素級向量場。若混合了常規向量場、不同的 StructArray 欄位或 EmbeddingList 級請求，混合搜尋將不支援元素級的分組。</p>
 <h2 id="Interpret-grouped-results" class="common-anchor-header">解析分組結果<button data-href="#Interpret-grouped-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,7 +842,7 @@ results = client.hybrid_search(
 <tr><th>結果項目</th><th>含義</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>分組父實體的主鍵。</td></tr>
+<tr><td>主鍵（本範例中為<code translate="no">doc_id</code> ）</td><td>分組父實體的主鍵。</td></tr>
 <tr><td><code translate="no">distance</code> 或分數</td><td>該父實體所選 Struct 元素的分數或距離。</td></tr>
 <tr><td><code translate="no">offset</code></td><td>選取之 Struct 元素在回傳時的零起始位置。</td></tr>
 <tr><td>重複的主鍵</td><td>按主鍵分組時不應出現此情況。</td></tr>
@@ -261,12 +865,12 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋和 EmbeddingList 層級的混合搜尋不支援「按...分組」。</p></li>
+<li><p>分組搜尋僅適用於元素層級的 StructArray 向量搜尋。EmbeddingList 搜尋和 EmbeddingList 層級的混合搜尋不支援按主鍵分組。</p></li>
 <li><p>請將主鍵用作 `<code translate="no">group_by_field</code>`。StructArray 元素層級的分組並非針對任意標量欄位的通用分組功能。</p></li>
 <li><p>請勿將分組搜尋與範圍搜尋結合使用。</p></li>
-<li><p>請勿在分組搜尋中使用<code translate="no">EmbeddingList</code> 查詢或<code translate="no">MAX_SIM*</code> 指標。</p></li>
+<li><p>請勿在分組搜尋中使用 `<code translate="no">EmbeddingList</code> ` 查詢或 `<code translate="no">MAX_SIM*</code> ` 指標。</p></li>
 <li><p>僅當所有子搜尋皆針對同一 StructArray 欄位下的元素層級向量欄位時，才支援混合分組。</p></li>
-<li><p>當混合搜尋同時包含一般向量場、不同的 StructArray 場或 EmbeddingList 層級請求時，則不支援混合分組。</p></li>
+<li><p>當混合搜尋同時包含一般向量場、不同的 StructArray 場或 EmbeddingList 層級的請求時，則不支援混合分組。</p></li>
 </ul>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -284,10 +888,10 @@ results = client.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>將分組功能用於<code translate="no">chunks[emb_list_vector]</code> ，該功能原本是針對 EmbeddingList 搜尋設計的。</p></li>
-<li><p>根據非主鍵標量欄位進行分組。</p></li>
+<li><p>將分組功能用於 `<code translate="no">chunks[emb_list_vector]</code>`，該功能原本是針對 `EmbeddingList` 搜尋設計的。</p></li>
+<li><p>根據非主鍵的標量欄位進行分組。</p></li>
 <li><p>根據多個欄位進行分組。元素層級的 StructArray 分組僅支援主鍵分組。</p></li>
-<li><p>預期分組結果會代表每個匹配的 Struct 元素。分組功能每項父實體最多只會返回一個結果。</p></li>
+<li><p>預期分組結果會代表每個匹配的 Struct 元素。分組每項父實體最多只會返回一個結果。</p></li>
 <li><p>假設分組後的元素層級搜尋會重新計算 EmbeddingList 風格的<code translate="no">MAX_SIM*</code> 分數。分組會彙總元素層級的搜尋結果；它並不會改變評分模型。</p></li>
 <li><p>將<code translate="no">group_by_field</code> 與<code translate="no">radius</code> 或<code translate="no">range_filter</code> 結合使用。</p></li>
 </ul>

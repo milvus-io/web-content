@@ -40,6 +40,7 @@ title: Milvus mit Docker Compose ausführen (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
+<li>Installieren Sie das <a href="https://docs.docker.com/compose/install/linux/">Docker Compose-Plugin</a> (V2 oder höher) und überprüfen Sie es mit dem Befehl „ <code translate="no">docker compose version</code> “. Diese Anleitung verwendet den Befehl „ <code translate="no">docker compose</code> “ und nicht den veralteten Befehl „ <code translate="no">docker-compose</code> “ (V1).</li>
 <li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Hardware- und Softwareanforderungen</a>.</li>
 </ul>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -57,7 +58,7 @@ title: Milvus mit Docker Compose ausführen (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus stellt im Milvus-Repository eine Docker-Compose-Konfigurationsdatei bereit. Um Milvus mit Docker Compose zu installieren, führen Sie einfach folgenden Befehl aus</p>
+    </button></h2><p>Milvus stellt im Milvus-Repository eine Docker-Compose-Konfigurationsdatei bereit. Laden Sie die Konfiguration für v3.0.3 herunter und starten Sie eine neue Bereitstellung:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
@@ -69,16 +70,17 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Standardbereitstellung (v3.0.3):</strong> „ <code translate="no">docker compose up -d</code> “ startet drei Container – <code translate="no">milvus-etcd</code> (Metadaten), <code translate="no">milvus-minio</code> (Objektspeicher) und <code translate="no">milvus-standalone</code>. Die Nachrichtenwarteschlange ist <strong>Woodpecker (eingebettet, mit MinIO/Objektspeicher als WAL-Backend)</strong>, sodass kein separater Nachrichtenwarteschlangen-Container erforderlich ist.</p>
+<p><strong>Standard-Bereitstellung (v3.0.3):</strong> <code translate="no">docker compose up -d</code> startet drei lang laufende Container – <code translate="no">milvus-etcd</code> (Metadaten), <code translate="no">milvus-minio</code> (Objektspeicher) und <code translate="no">milvus-standalone</code>. Als Nachrichtenwarteschlange wird <strong>Woodpecker</strong> verwendet <strong>(eingebettet, mit MinIO/Objektspeicher als WAL-Backend)</strong>, sodass kein separater Container für die Nachrichtenwarteschlange erforderlich ist.</p>
+<p>Die Konfiguration führt außerdem den einmalig ausgeführten Dienst „ <code translate="no">milvus-volume-init</code> “ aus, um die Eigentumsrechte für das Datenverzeichnis vorzubereiten. Nach Abschluss dieser Aufgabe wird der Dienst beendet.</p>
 <p><strong>Standard-Nachrichtenwarteschlange je nach Version:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> – Standard-Nachrichtenwarteschlange ist <strong>RocksMQ</strong>.</li>
 <li><strong>2.6.x und höher</strong> – Standard-Nachrichtenwarteschlange ist <strong>Woodpecker (eingebettet)</strong>.</li>
 </ul>
-<p>Laden Sie stets die aktuellste Docker-Compose-Konfiguration herunter, um die Kompatibilität mit den Funktionen von Version 3.0.3 sicherzustellen.</p>
+<p>Verwenden Sie die Konfiguration, die der von Ihnen zu installierenden Version beiliegt. Bei einer bestehenden Bereitstellung befolgen Sie bitte die Upgrade-Anweisungen, anstatt die Konfiguration durch eine Datei für die Neuinstallation zu ersetzen.</p>
 <ul>
-<li><p>Falls die Ausführung des obigen Befehls fehlgeschlagen ist, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Sollte dies der Fall sein, empfehlen wir Ihnen aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a>, auf Docker Compose V2 umzusteigen.</p></li>
-<li><p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p></li>
+<li><p>Falls „ <code translate="no">docker compose</code> “ nicht verfügbar ist, installieren Sie das Compose-Plugin anhand der <a href="https://docs.docker.com/compose/install/linux/">Docker-Anweisungen</a>.</p></li>
+<li><p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p></li>
 </ul>
 </div>
 <p>Nach dem Start von Milvus</p>
@@ -98,7 +100,8 @@ milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         
 milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch über <code translate="no">http://127.0.0.1:9091/webui/</code> auf die Milvus-WebUI zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Weitere Informationen finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus-WebUI</a>.</p>
+<p>Sie können auch über <code translate="no">http://127.0.0.1:9091/webui/</code> auf die Milvus-WebUI zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Weitere Informationen finden Sie unter <a href="/docs/de/milvus-webui.md">„Milvus-WebUI</a>“.</p>
+<p>Um den laufenden Server zu testen, befolgen Sie den Abschnitt <strong>„Einen vorhandenen Milvus-Server verwenden“</strong> im <a href="/docs/de/quickstart.md">Schnellstart</a> und stellen Sie eine Verbindung zu <code translate="no">http://localhost:19530</code> her. Verwenden Sie nicht den lokalen Verbindungsblock „ <code translate="no">.db</code> “, da dieser eine separate Milvus-Lite-Datenbank startet.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +123,7 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Fügen Sie zusätzliche Konfigurationen hinzu, um die Standardkonfigurationen zu überschreiben.
-Im Folgenden wird davon ausgegangen, dass Sie die Standardkonfiguration in „ <code translate="no">proxy.healthCheckTimeout</code> “ überschreiben müssen. Informationen zu den entsprechenden Konfigurationselementen finden Sie unter <a href="/docs/de/system_configuration.md">„Systemkonfiguration</a>“.</p>
+Im Folgenden wird davon ausgegangen, dass Sie die Standardkonfiguration von „ <code translate="no">proxy.healthCheckTimeout</code> “ überschreiben müssen. Informationen zu den entsprechenden Konfigurationselementen finden Sie unter <a href="/docs/de/system_configuration.md">„Systemkonfiguration</a>“.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -153,7 +156,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Upgrade von Milvus 2.5.x auf 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
+<h2 id="Upgrade-an-existing-deployment" class="common-anchor-header">Ein bestehendes Deployment aktualisieren<button data-href="#Upgrade-an-existing-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,13 +171,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.3 müssen Sie Ihre aktuelle Auswahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
-<p>Da in 2.6.x die Standard-Nachrichtenwarteschlange auf „Woodpecker“ umgestellt wird, muss eine Instanz, auf der unter 2.5.x <strong>„RocksMQ“</strong> läuft, <strong>„RocksMQ“ vor dem Upgrade explizit festlegen</strong> – andernfalls würde das Upgrade versuchen, die Nachrichtenwarteschlange zu ändern, was nicht unterstützt wird. Nachdem Sie die Docker-Compose-Datei für 2.6.x heruntergeladen haben, setzen Sie den Typ der Nachrichtenwarteschlange in Ihrer „ <code translate="no">user.yaml</code> “-Überschreibung wieder auf „ <code translate="no">rocksmq</code> “ zurück und führen Sie dann das Upgrade durch:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
+    </button></h2><p>Befolgen Sie für eine eigenständige Milvus 2.6.x-Bereitstellung die Anleitung <a href="/docs/de/upgrade_milvus_standalone-docker.md">„Milvus Standalone mit Docker Compose aktualisieren</a>“. Sichern Sie Metadaten und persistente Daten, bewahren Sie die bestehenden Abhängigkeiten und die Konfiguration bei und überprüfen Sie den dokumentierten Upgrade-Pfad von der Quelle zum Ziel, bevor Sie das Milvus-Image ändern. Ersetzen Sie die Compose-Datei einer älteren Bereitstellung nicht durch die oben genannte Konfiguration für eine Neuinstallation.</p>
+<p><strong>Einschränkungen bei Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0.3 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
+<p>Milvus 2.6.x und höher verwenden standardmäßig Woodpecker, während 2.5.x-Bereitstellungen standardmäßig <strong>RocksMQ</strong> verwenden. Wenn die Bereitstellung, die Sie aktualisieren, noch RocksMQ ausführt, legen Sie dies unter „ <code translate="no">user.yaml</code> “ fest, bevor Sie das Milvus-Image ändern, damit die aktualisierte Instanz ihre bestehende Nachrichtenwarteschlange beibehält, anstatt mit dem neuen Standard zu starten:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Informationen zum Wechseln der Nachrichtenwarteschlange <em>nach</em> dem Upgrade finden Sie unter <a href="/docs/de/switch-mq-type.md">„Nachrichtenwarteschlange wechseln</a>“.</p>
+<p>Nachdem die aktualisierte Instanz unter v3.0.3 läuft, können Sie mit <a href="/docs/de/switch-mq-type.md">der Funktion „Switch Message Queue“</a>, die ab Milvus 3.0 verfügbar ist, von RocksMQ zu Woodpecker wechseln.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Optionale Abhängigkeiten<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +194,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Diese Bereitstellung nutzt <strong>Woodpecker</strong> (eingebettet, MinIO-WAL-Backend) für die Nachrichtenübermittlung, <strong>etcd</strong> für Metadaten und <strong>MinIO</strong> für den Objektspeicher. Informationen zur Verwendung einer anderen Nachrichtenwarteschlange oder zur Anbindung eines externen Objektspeichers bzw. externer Metadaten finden Sie unter:</p>
+    </button></h2><p>Diese Bereitstellung nutzt <strong>Woodpecker</strong> (eingebettet, MinIO-WAL-Backend) für die Nachrichtenübermittlung, <strong>etcd</strong> für Metadaten und <strong>MinIO</strong> für den Objektspeicher. Informationen zur Verwendung einer anderen Nachrichtenwarteschlange oder zur Anbindung eines externen Objektspeichers bzw. externer Metadaten finden Sie hier:</p>
 <ul>
 <li>Nachrichtenwarteschlange: <a href="/docs/de/woodpecker.md">Woodpecker</a> (Standard) · <a href="/docs/de/mq_pulsar.md">Pulsar</a> · <a href="/docs/de/mq_kafka.md">Kafka</a> · <a href="/docs/de/mq_rocksmq.md">RocksMQ</a></li>
 <li>Objektspeicher: <a href="/docs/de/deploy_s3.md">MinIO</a> (Standard) · <a href="/docs/de/deploy_s3.md">AWS S3</a> · <a href="/docs/de/abs.md">Azure Blob</a> · <a href="/docs/de/gcs.md">GCP Cloud Storage</a> · <a href="/docs/de/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/de/deploy_s3.md">Tencent COS</a> · <a href="/docs/de/deploy_s3.md">Huawei OBS</a> · <a href="/docs/de/deploy_s3.md">S3-kompatibel</a></li>
@@ -226,7 +230,7 @@ EOF
 <li><a href="/docs/de/single-vector-search.md">Suche nach einzelnen Vektoren</a></li>
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Milvus mit Helm-Chart aktualisieren</a>.</p></li>
+<li><p><a href="/docs/de/upgrade_milvus_standalone-docker.md">Milvus Standalone mit Docker Compose aktualisieren</a>.</p></li>
 <li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
 <li><p>Stellen Sie Ihren Milvus-Cluster in der Cloud bereit:</p>
 <ul>
@@ -236,7 +240,7 @@ EOF
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung bei Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

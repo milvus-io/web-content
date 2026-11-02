@@ -38,6 +38,7 @@ title: Docker Compose를 사용하여 Milvus 실행하기 (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Docker를 설치하십시오</a>.</li>
+<li><a href="https://docs.docker.com/compose/install/linux/">Docker Compose 플러그인</a> (V2 이상)을 설치하고 <code translate="no">docker compose version</code> 명령어로 정상 작동 여부를 확인하십시오. 이 안내서에서는 구형 <code translate="no">docker-compose</code> V1 명령어가 아닌 <code translate="no">docker compose</code> 명령어를 사용합니다.</li>
 <li>설치 전에<a href="/docs/ko/prerequisite-docker.md">하드웨어 및 소프트웨어 요구 사항을 확인하십시오</a>.</li>
 </ul>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -55,7 +56,7 @@ title: Docker Compose를 사용하여 Milvus 실행하기 (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 Milvus 저장소에서 Docker Compose 구성 파일을 제공합니다. Docker Compose를 사용하여 Milvus를 설치하려면 다음 명령을 실행하기만 하면 됩니다.</p>
+    </button></h2><p>Milvus는 Milvus 저장소에서 Docker Compose 구성 파일을 제공합니다. v3.0.3용 구성 파일을 다운로드하고 새로운 배포를 시작하십시오:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
@@ -67,16 +68,17 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>기본 배포(v3.0.3):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (오브젝트 스토리지), <code translate="no">milvus-standalone</code> 등 세 개의 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드, WAL 백엔드로 MinIO/오브젝트 스토리지 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
+<p><strong>기본 배포(v3.0.3):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (오브젝트 스토리지), <code translate="no">milvus-standalone</code> 등 세 개의 장기 실행 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드형, WAL 백엔드로 MinIO/오브젝트 스토리지 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
+<p>또한 이 구성은 데이터 디렉터리의 소유권 설정을 준비하기 위해 일회성 <code translate="no">milvus-volume-init</code> 서비스를 실행합니다. 이 서비스는 해당 작업을 완료한 후 종료됩니다.</p>
 <p><strong>버전별 메시지 큐 기본값:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — 기본 메시지 큐는 <strong>RocksMQ입니다</strong>.</li>
 <li><strong>2.6.x 이상</strong> — 기본 메시지 큐는 <strong>Woodpecker(임베디드)</strong>입니다.</li>
 </ul>
-<p>v3.0.3 기능과의 호환성을 보장하려면 항상 최신 Docker Compose 구성을 다운로드하십시오.</p>
+<p>설치하려는 릴리스에 첨부된 구성을 사용하십시오. 기존 배포 환경의 경우, 구성을 신규 설치 파일로 대체하는 대신 업그레이드 지침을 따르십시오.</p>
 <ul>
-<li><p>위 명령어를 실행하는 데 실패한 경우, 시스템에 Docker Compose V1이 설치되어 있는지 확인하십시오. 설치되어 있는 경우, <a href="https://docs.docker.com/compose/">이 페이지의</a> 참고 사항을 고려하여 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
-<li><p>이미지 가져오기에 문제가 발생하면, 문제에 대한 자세한 내용을 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p></li>
+<li><p><code translate="no">docker compose</code> 를 사용할 수 없는 경우, <a href="https://docs.docker.com/compose/install/linux/">Docker 지침</a>에 따라 Compose 플러그인을 설치하십시오.</p></li>
+<li><p>이미지 가져오기 과정에서 문제가 발생하면, 문제 세부 정보를 포함하여 <a href="mailto:community@zilliz.com">community@zilliz.com으로</a> 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p></li>
 </ul>
 </div>
 <p>Milvus를 시작한 후,</p>
@@ -97,6 +99,7 @@ milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>또한 <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 Milvus WebUI에 접속하여 Milvus 인스턴스에 대한 자세한 정보를 확인할 수 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하십시오.</p>
+<p>실행 중인 서버를 테스트하려면 <a href="/docs/ko/quickstart.md">퀵스타트(Quickstart</a> )의 <strong>‘기존 Milvus 서버 사용’</strong> 경로를 따르고 <code translate="no">http://localhost:19530</code> 에 연결하십시오. 별도의 Milvus Lite 데이터베이스를 시작하는 로컬 <code translate="no">.db</code> 연결 블록은 사용하지 마십시오.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,12 +115,12 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>사용자 환경에 맞게 Milvus 구성을 업데이트하려면 <code translate="no">milvus-standalone</code> 컨테이너 내의 <code translate="no">/milvus/configs/user.yaml</code> 파일을 수정해야 합니다.</p>
+    </button></h2><p>필요에 따라 Milvus 구성을 업데이트하려면 <code translate="no">milvus-standalone</code> 컨테이너 내의 <code translate="no">/milvus/configs/user.yaml</code> 파일을 수정해야 합니다.</p>
 <ol>
-<li><p><code translate="no">milvus-standalone</code> 컨테이너에 접속합니다.</p>
+<li><p><code translate="no">milvus-standalone</code> 컨테이너에 액세스합니다.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>기본 설정을 재정의할 추가 구성을 추가하십시오.
+<li><p>기본 설정을 재정의할 추가 구성을 추가합니다.
 다음 내용은 기본 <code translate="no">proxy.healthCheckTimeout</code> 를 재정의해야 한다고 가정합니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
@@ -151,7 +154,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">Milvus 2.5.x에서 2.6.x로 업그레이드<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
+<h2 id="Upgrade-an-existing-deployment" class="common-anchor-header">기존 배포 업그레이드<button data-href="#Upgrade-an-existing-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,13 +169,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
-<p>2.6.x에서는 기본 메시지 큐가 Woodpecker로 변경되므로, 2.5.x에서 <strong>RocksMQ를</strong> 실행 중인 인스턴스는 <strong>업그레이드 전에 RocksMQ를 명시적으로 고정해야</strong> 합니다. 그렇지 않으면 업그레이드가 메시지 큐를 변경하려고 시도하게 되며, 이는 지원되지 않습니다. 2.6.x Docker Compose 파일을 다운로드한 후, ` <code translate="no">user.yaml</code> ` 오버라이드에서 메시지 큐 유형을 다시 ` <code translate="no">rocksmq</code> `로 설정한 다음 업그레이드하십시오:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
+    </button></h2><p>Milvus 2.6.x 독립형 배포의 경우, <a href="/docs/ko/upgrade_milvus_standalone-docker.md">‘Docker Compose를 사용하여 Milvus 독립형 업그레이드’를</a> 따르십시오. 메타데이터와 영구 데이터를 백업하고, 기존 종속성과 구성을 보존하며, Milvus 이미지를 변경하기 전에 문서화된 소스에서 대상으로의 업그레이드 경로를 확인하십시오. 이전 배포의 Compose 파일을 위의 새 설치 구성으로 대체하지 마십시오.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p>Milvus 2.6.x 이상은 기본적으로 Woodpecker를 사용하며, 2.5.x 배포 환경은 기본적으로 <strong>RocksMQ를</strong> 사용합니다. 업그레이드하려는 배포 환경에서 여전히 RocksMQ가 실행 중이라면, Milvus 이미지를 변경하기 전에 ` <code translate="no">user.yaml</code> `에서 이를 고정하여, 업그레이드된 인스턴스가 새로운 기본값으로 시작하는 대신 기존 메시지 큐를 유지하도록 하십시오.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>업그레이드 <em>후</em> 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 변경’을</a> 참조하십시오.</p>
+<p>업그레이드된 인스턴스가 v3.0.3에서 실행되고 나면, Milvus 3.0 이상에서 사용할 수 있는 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환(Switch Message Queue</a>)’ 기능을 통해 RocksMQ에서 Woodpecker로 전환할 수 있습니다.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">선택적 종속성<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -224,7 +228,7 @@ EOF
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">Helm 차트를 사용하여 Milvus 업그레이드하기</a>.</p></li>
+<li><p><a href="/docs/ko/upgrade_milvus_standalone-docker.md">Docker Compose를 사용하여 Milvus Standalone 업그레이드하기</a>.</p></li>
 <li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a>.</p></li>
 <li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>

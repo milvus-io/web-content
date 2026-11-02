@@ -55,23 +55,21 @@ title: Executar o Milvus no Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. O script está disponível no <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositório</a> do <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus</a>. Para instalar o Milvus no Docker, basta executar</p>
+    </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. O script está disponível no <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositório do Milvus</a>. Descarregue e verifique o script antes de iniciar uma nova implementação:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Inspect the Docker image selected by the script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">grep -n <span class="hljs-string">&quot;milvusdb/milvus:&quot;</span> standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start the Docker container</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novidades na versão 3.0.3:</strong></p>
-<ul>
-<li><strong>Nó de streaming</strong>: Capacidades de processamento de dados melhoradas</li>
-<li><strong>Woodpecker MQ (predefinição)</strong>: Esta implementação no Docker executa o Woodpecker como fila de mensagens, utilizando o <strong>sistema de ficheiros local</strong> como backend WAL, pelo que não é necessário qualquer serviço externo de fila de mensagens. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>Arquitetura otimizada</strong>: componentes consolidados para um melhor desempenho</li>
-</ul>
-<p>Descarregue sempre o script mais recente para garantir que obtém as configurações e melhorias de arquitetura mais recentes.</p>
-<p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p>
+<p>O script é descarregado a partir do ramo « <code translate="no">master</code> » do Milvus. A etiqueta da imagem do Docker está definida no script e pode diferir da v3.0.3. Para instalar essa versão específica, utilize a configuração com versão indicada em <a href="/docs/pt/install_standalone-docker-compose.md">«Executar o Milvus com o Docker Compose</a>».</p>
+<p>Esta implementação do Docker executa <strong>o Woodpecker</strong> com o <strong>sistema de ficheiros local</strong> como backend WAL, pelo que não é necessário qualquer serviço externo de fila de mensagens. Consulte <a href="/docs/pt/woodpecker.md">Woodpecker</a>.</p>
+<p>Se pretender utilizar <a href="/docs/pt/milvus_backup_overview.md">o Backup</a> no modo de implementação autónoma, recomenda-se a utilização do método de implementação <a href="/docs/pt/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e iremos prestar-lhe o apoio necessário.</p>
 </div>
 <p>Após executar o script de instalação:</p>
 <ul>
@@ -80,6 +78,11 @@ title: Executar o Milvus no Docker (Linux)
 <li>Para alterar a configuração predefinida do Milvus, adicione as suas definições ao ficheiro <strong>user.yaml</strong> na pasta atual e, em seguida, reinicie o serviço.</li>
 <li>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul>
+<p>Verifique a imagem atual e o estado de integridade:</p>
+<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Aguarde até que <code translate="no">healthy</code> esteja disponível antes de seguir <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a>. Ao utilizar este servidor, ligue o SDK a <code translate="no">http://localhost:19530</code>; uma URI local <code translate="no">.db</code> inicia, em vez disso, o Milvus Lite.</p>
 <p>Pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/milvus-webui.md">interface Web do Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Atualizar as configurações do Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +99,7 @@ title: Executar o Milvus no Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <strong>user.yaml</strong> na pasta atual. Por exemplo, para alterar o endereço <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode modificar o ficheiro da seguinte forma:</p>
+    </button></h2><p>Pode modificar as configurações do Milvus no ficheiro <strong>user.yaml</strong> na pasta atual. Por exemplo, para alterar <code translate="no">proxy.healthCheckTimeout</code> para <code translate="no">1000</code> ms, pode modificar o ficheiro da seguinte forma:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -122,20 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode atualizar para a versão mais recente do Milvus utilizando o comando de atualização integrado. Isto descarrega automaticamente a configuração mais recente e a imagem do Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>O comando de atualização, automaticamente:</p>
-<ul>
-<li>Descarrega o script de instalação mais recente com as configurações atualizadas</li>
-<li>Recupera a imagem Docker mais recente do Milvus</li>
-<li>Reinicia o contentor com a nova versão</li>
-<li>Preserva os seus dados e configurações existentes</li>
-</ul>
-<p>Esta é a forma recomendada de atualizar a sua implementação autónoma do Milvus.</p>
-</div>
+    </button></h2><p>O comando <code translate="no">upgrade</code> do script descarrega o script a partir de <code translate="no">master</code> e recria o contentor utilizando a imagem selecionada por esse script. Não valida um caminho de versão de origem para destino suportado e pode recriar ficheiros de configuração gerados. Não considere isto como uma garantia de que uma implementação antiga arbitrária possa ser atualizada com segurança para a v3.0.3.</p>
+<p>Antes de uma atualização, faça uma cópia de segurança dos metadados, dos dados persistentes, de <code translate="no">embedEtcd.yaml</code> e de <code translate="no">user.yaml</code>. Verifique a versão de destino, a fila de mensagens e a compatibilidade de armazenamento, e valide a recuperação num ambiente que não seja de produção. Para implementações geridas com o Docker Compose, siga <a href="/docs/pt/upgrade_milvus_standalone-docker.md">as instruções em «Atualizar o Milvus Standalone com o Docker Compose»</a>; não aplique esse procedimento diretamente a um contentor gerido por script.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Parar e eliminar o Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,9 +200,9 @@ EOF
 <li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
-<li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus utilizando o Helm Chart</a>.</p></li>
+<li><p>Consulte as considerações relativas à atualização nesta página antes de alterar a versão do Milvus.</p></li>
 <li><p><a href="/docs/pt/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
+<li><p>Implemente o seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

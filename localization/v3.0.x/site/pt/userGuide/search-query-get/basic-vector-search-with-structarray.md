@@ -2,7 +2,7 @@
 id: basic-vector-search-with-structarray.md
 title: Pesquisa vetorial básica com StructArray
 summary: >-
-  Utilize esta página para efetuar uma pesquisa vetorial nos subcampos vetoriais
+  Utilize esta página para efetuar uma pesquisa vetorial em subcampos vetoriais
   dentro de um campo StructArray. O StructArray suporta dois modos básicos de
   pesquisa vetorial: a pesquisa EmbeddingList, que avalia uma lista de
   incorporações armazenada em cada entidade, e a pesquisa ao nível do elemento,
@@ -40,16 +40,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Certifique-se de que o esquema da coleção, os dados e os índices já estão preparados.</p>
+    </button></h2><p>Certifique-se de que o esquema da coleção, os dados e os índices já estão preparados. Os vetores de exemplo têm quatro dimensões. Cada exemplo de pesquisa inicializa um cliente e aguarda o carregamento de <code translate="no">tech_articles</code> antes de iniciar a pesquisa. Para o cURL, instale <code translate="no">jq</code> para verificar a resposta do estado de carregamento.</p>
 <table>
 <thead>
-<tr><th>Requisito</th><th>Onde preparar</th></tr>
+<tr><th>Requisitos</th><th>Onde preparar</th></tr>
 </thead>
 <tbody>
 <tr><td>Crie um campo StructArray, como <code translate="no">chunks</code>.</td><td><a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a></td></tr>
-<tr><td>Inserir entidades cujo campo « <code translate="no">chunks</code> » contenha objetos Struct.</td><td><a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados nos campos StructArray</a></td></tr>
-<tr><td>Crie um índice « <code translate="no">MAX_SIM*</code> » no « <code translate="no">chunks[emb_list_vector]</code> » para a pesquisa «EmbeddingList».</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
-<tr><td>Criar um índice métrico vetorial regular em « <code translate="no">chunks[emb]</code> » para pesquisa ao nível dos elementos.</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
+<tr><td>Inserir entidades cujo campo <code translate="no">chunks</code> contenha objetos Struct.</td><td><a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados nos campos StructArray</a></td></tr>
+<tr><td>Crie um índice « <code translate="no">MAX_SIM*</code> » em « <code translate="no">chunks[emb_list_vector]</code> » para a pesquisa «EmbeddingList».</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
+<tr><td>Criar um índice métrico vetorial regular em « <code translate="no">chunks[emb]</code> » para pesquisa ao nível do elemento.</td><td><a href="/docs/pt/index-structarray-fields.md">Indexar campos StructArray</a></td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -78,11 +78,11 @@ summary: >-
 <tbody>
 <tr><td>Subcampo de destino</td><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>Dados da consulta</td><td>Uma lista de incorporação que contém um ou mais vetores.</td><td>Um vetor normal.</td></tr>
-<tr><td>Família de métricas</td><td><code translate="no">MAX_SIM*</code>, como <code translate="no">MAX_SIM_COSINE</code>.</td><td>Métricas de vetores regulares, como <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
+<tr><td>Família de métricas</td><td><code translate="no">MAX_SIM*</code>, como <code translate="no">MAX_SIM_COSINE</code>.</td><td>Métricas de vetores regulares, tais como <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>.</td></tr>
 <tr><td>O que representa um resultado</td><td>Uma entidade correspondente cujo subcampo vetorial StructArray é semelhante à lista de embeddings da consulta.</td><td>Um elemento Struct correspondente dentro do campo StructArray.</td></tr>
-<tr><td>Granularidade do resultado</td><td>Nível de entidade.</td><td>Nível do elemento Struct.</td></tr>
-<tr><td>Deslocamento</td><td>Não aplicável.</td><td>Identifica a posição, a partir do zero, do elemento Struct correspondente quando devolvido.</td></tr>
-<tr><td>Utilização típica</td><td>ColBERT, ColPali e outros padrões de recuperação de interação tardia.</td><td>Recuperação ao nível de fragmento, de passagem, de clipe, de patch ou de facto.</td></tr>
+<tr><td>Granularidade do resultado</td><td>Nível da entidade.</td><td>Nível do elemento Struct.</td></tr>
+<tr><td>Deslocamento</td><td>Não aplicável.</td><td>Identifica a posição, com início em zero, do elemento Struct correspondente quando devolvido.</td></tr>
+<tr><td>Utilização típica</td><td>ColBERT, ColPali e outros padrões de recuperação de interação tardia.</td><td>Recuperação ao nível do bloco, da passagem, do excerto, do fragmento ou do facto.</td></tr>
 </tbody>
 </table>
 <h2 id="Run-EmbeddingList-search" class="common-anchor-header">Executar pesquisa EmbeddingList<button data-href="#Run-EmbeddingList-search" class="anchor-icon" translate="no">
@@ -101,6 +101,16 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Utilize a pesquisa EmbeddingList quando a própria consulta contiver vários vetores e o subcampo do vetor StructArray de destino estiver indexado com uma métrica de « <code translate="no">MAX_SIM*</code> ». O resultado é uma correspondência ao nível da entidade.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
@@ -108,6 +118,8 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>,
 )
+
+client.load_collection(collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>)
 
 query = EmbeddingList()
 query.add([<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.44</span>])
@@ -129,11 +141,302 @@ results = client.search(
 
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> results:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
+        <span class="hljs-built_in">print</span>(hit[<span class="hljs-string">&quot;doc_id&quot;</span>], hit[<span class="hljs-string">&quot;distance&quot;</span>], hit[<span class="hljs-string">&quot;entity&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste modo de pesquisa, a « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos «StructArray», mas o próprio resultado representa a entidade-pai correspondente, em vez de um elemento «Struct» específico.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddingList;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .build());
+
+<span class="hljs-type">EmbeddingList</span> <span class="hljs-variable">query</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddingList</span>();
+query.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(Arrays.asList(<span class="hljs-number">0.12f</span>, <span class="hljs-number">0.21f</span>, <span class="hljs-number">0.32f</span>, <span class="hljs-number">0.44f</span>)));
+query.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(Arrays.asList(<span class="hljs-number">0.18f</span>, <span class="hljs-number">0.23f</span>, <span class="hljs-number">0.29f</span>, <span class="hljs-number">0.36f</span>)));
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>)
+        .data(Collections.singletonList(query))
+        .limit(<span class="hljs-number">3</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>))
+        .build());
+
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; hits : resp.getSearchResults()) {
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : hits) {
+        System.out.println(hit.getId() + <span class="hljs-string">&quot; &quot;</span> + hit.getScore() + <span class="hljs-string">&quot; &quot;</span> + hit.getEntity());
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;tech_articles&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err := loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+query := entity.FloatVectorArray{
+    {<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.44</span>},
+    {<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>},
+}
+
+results, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    <span class="hljs-number">3</span>,
+    []entity.Vector{query},
+).WithANNSField(<span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>).WithOutputFields(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+<span class="hljs-keyword">for</span> _, result := <span class="hljs-keyword">range</span> results {
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; result.ResultCount; i++ {
+        id, err := result.IDs.Get(i)
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> { <span class="hljs-built_in">panic</span>(err) }
+        fmt.Println(id, result.Scores[i])
+        <span class="hljs-keyword">for</span> _, field := <span class="hljs-keyword">range</span> result.Fields {
+            value, err := field.Get(i)
+            <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> { <span class="hljs-built_in">panic</span>(err) }
+            fmt.Println(field.Name(), value)
+        }
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+    .<span class="hljs-title function_ invoke__">sync</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query</span> = EmbeddingList::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">vectors</span>(<span class="hljs-built_in">vec!</span>[
+    <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.44</span>],
+    <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>],
+]);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">EmbeddingLists</span>(<span class="hljs-built_in">vec!</span>[query]))
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>).<span class="hljs-built_in">WithSync</span>(<span class="hljs-literal">true</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+
+milvus::EmbeddingList query;
+query.<span class="hljs-built_in">AddFloatVector</span>({<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.44</span>});
+query.<span class="hljs-built_in">AddFloatVector</span>({<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>});
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>)
+                   .<span class="hljs-built_in">AddEmbeddingList</span>(std::<span class="hljs-built_in">move</span>(query))
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;category&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[section]&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span> });
+
+<span class="hljs-keyword">const</span> query = [
+  [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.21</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.44</span>],
+  [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>, <span class="hljs-number">0.29</span>, <span class="hljs-number">0.36</span>],
+];
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span>,
+  <span class="hljs-attr">data</span>: query,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">output_fields</span>: [
+    <span class="hljs-string">&quot;doc_id&quot;</span>,
+    <span class="hljs-string">&quot;title&quot;</span>,
+    <span class="hljs-string">&quot;category&quot;</span>,
+    <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-string">&quot;chunks[section]&quot;</span>,
+  ],
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(results.<span class="hljs-property">results</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text.Json;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    Sync = <span class="hljs-literal">true</span>
+});
+
+<span class="hljs-keyword">var</span> query = <span class="hljs-keyword">new</span> EmbeddingList();
+query.Add(<span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.12f</span>, <span class="hljs-number">0.21f</span>, <span class="hljs-number">0.32f</span>, <span class="hljs-number">0.44f</span> }));
+query.Add(<span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.18f</span>, <span class="hljs-number">0.23f</span>, <span class="hljs-number">0.29f</span>, <span class="hljs-number">0.36f</span> }));
+
+SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;chunks[emb_list_vector]&quot;</span>,
+    EmbeddingLists = <span class="hljs-keyword">new</span>[] { query },
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span> }
+    }
+});
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> result <span class="hljs-keyword">in</span> results.SingleResults!)
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; result.Scores.Count; i++)
+        Console.WriteLine(JsonSerializer.Serialize(result.GetRow(i)));
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">set</span> -euo pipefail
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --fail-with-body --silent --show-error --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{&quot;collectionName&quot;:&quot;tech_articles&quot;}&#x27;</span> | jq -e <span class="hljs-string">&#x27;.code == 0&#x27;</span> &gt;/dev/null
+
+loaded=<span class="hljs-literal">false</span>
+<span class="hljs-keyword">for</span> attempt <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 60); <span class="hljs-keyword">do</span>
+  state=$(curl --fail-with-body --silent --show-error --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --data-raw <span class="hljs-string">&#x27;{&quot;collectionName&quot;:&quot;tech_articles&quot;}&#x27;</span> | jq -er <span class="hljs-string">&#x27;if .code == 0 then .data.loadState else error(&quot;load-state request failed&quot;) end&#x27;</span>)
+  <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$state</span>&quot;</span> = <span class="hljs-string">&quot;LoadStateLoaded&quot;</span> ]; <span class="hljs-keyword">then</span>
+    loaded=<span class="hljs-literal">true</span>
+    <span class="hljs-built_in">break</span>
+  <span class="hljs-keyword">fi</span>
+  <span class="hljs-built_in">sleep</span> 1
+<span class="hljs-keyword">done</span>
+[ <span class="hljs-string">&quot;<span class="hljs-variable">$loaded</span>&quot;</span> = <span class="hljs-literal">true</span> ] || { <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Collection did not finish loading&quot;</span> &gt;&amp;2; <span class="hljs-built_in">exit</span> 1; }
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;data&quot;: [
+      [
+        [0.12, 0.21, 0.32, 0.44],
+        [0.18, 0.23, 0.29, 0.36]
+      ]
+    ],
+    &quot;annsField&quot;: &quot;chunks[emb_list_vector]&quot;,
+    &quot;limit&quot;: 3,
+    &quot;outputFields&quot;: [
+      &quot;doc_id&quot;,
+      &quot;title&quot;,
+      &quot;category&quot;,
+      &quot;chunks[text]&quot;,
+      &quot;chunks[section]&quot;
+    ]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Neste modo de pesquisa, a métrica « <code translate="no">limit</code> » controla quantas entidades são devolvidas para cada consulta. O resultado pode incluir subcampos «StructArray», mas o próprio resultado representa a entidade-pai correspondente, em vez de um elemento «Struct» específico.</p>
 <div class="alert note">
-<p>Para um guia passo a passo completo ao estilo ColBERT ou ColPali, consulte <a href="/docs/pt/search-with-embedding-lists.md">«Pesquisa com listas de incorporação</a>». Esta página aborda apenas o comportamento básico da pesquisa no StructArray.</p>
+<p>Para um guia passo a passo completo ao estilo ColBERT ou ColPali, consulte <a href="/docs/pt/search-with-embedding-lists.md">«Pesquisa com listas de incorporação</a>». Esta página aborda apenas o comportamento básico da pesquisa com StructArray.</p>
 </div>
 <h2 id="Run-element-level-search" class="common-anchor-header">Executar pesquisa ao nível do elemento<button data-href="#Run-element-level-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,8 +453,27 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize a pesquisa ao nível do elemento quando cada elemento Struct deva participar na pesquisa vetorial de forma independente. A consulta é um vetor normal e o subcampo do vetor de destino deve ser indexado com uma métrica de vetor normal.</p>
-<pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
+    </button></h2><p>Utilize a pesquisa ao nível do elemento quando cada elemento Struct deva participar na pesquisa vetorial de forma independente. A consulta é um vetor normal, e o subcampo do vetor de destino deve ser indexado com uma métrica de vetor normal.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>,
+)
+
+client.load_collection(collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>)
+
+query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>]
 
 results = client.search(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
@@ -171,13 +493,292 @@ results = client.search(
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> results:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(
-            <span class="hljs-string">&quot;doc_id:&quot;</span>, hit[<span class="hljs-string">&quot;id&quot;</span>],
+            <span class="hljs-string">&quot;doc_id:&quot;</span>, hit[<span class="hljs-string">&quot;doc_id&quot;</span>],
             <span class="hljs-string">&quot;distance:&quot;</span>, hit[<span class="hljs-string">&quot;distance&quot;</span>],
             <span class="hljs-string">&quot;offset:&quot;</span>, hit.get(<span class="hljs-string">&quot;offset&quot;</span>),
             <span class="hljs-string">&quot;entity:&quot;</span>, hit[<span class="hljs-string">&quot;entity&quot;</span>],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>Na pesquisa ao nível do elemento, cada resultado representa um elemento Struct correspondente. O valor « <code translate="no">offset</code> » é a posição, com início em zero, desse elemento no campo StructArray. A mesma entidade pode aparecer mais do que uma vez se mais do que um elemento Struct corresponder à consulta. O valor « <code translate="no">limit</code> » aplica-se aos resultados dos elementos, e não a entidades-pai únicas.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .build());
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(Arrays.asList(<span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span>))))
+        .limit(<span class="hljs-number">5</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+        .build());
+
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; hits : resp.getSearchResults()) {
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult hit : hits) {
+        System.out.println(<span class="hljs-string">&quot;doc_id: &quot;</span> + hit.getId()
+                + <span class="hljs-string">&quot; distance: &quot;</span> + hit.getScore()
+                + <span class="hljs-string">&quot; offset: &quot;</span> + hit.getElementOffset()
+                + <span class="hljs-string">&quot; entity: &quot;</span> + hit.getEntity());
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;tech_articles&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err := loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+<span class="hljs-comment">// Go client/v3.0.0 does not expose element offsets in ResultSet.</span>
+results, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    <span class="hljs-number">5</span>,
+    []entity.Vector{entity.FloatVector{<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>}},
+).WithANNSField(<span class="hljs-string">&quot;chunks[emb]&quot;</span>).WithOutputFields(<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+<span class="hljs-keyword">for</span> _, result := <span class="hljs-keyword">range</span> results {
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; result.ResultCount; i++ {
+        id, err := result.IDs.Get(i)
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> { <span class="hljs-built_in">panic</span>(err) }
+        fmt.Println(<span class="hljs-string">&quot;doc_id:&quot;</span>, id, <span class="hljs-string">&quot;distance:&quot;</span>, result.Scores[i])
+        <span class="hljs-keyword">for</span> _, field := <span class="hljs-keyword">range</span> result.Fields {
+            value, err := field.Get(i)
+            <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> { <span class="hljs-built_in">panic</span>(err) }
+            fmt.Println(field.Name(), value)
+        }
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+    .<span class="hljs-title function_ invoke__">sync</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-keyword">let</span> <span class="hljs-variable">entity</span> = row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?;
+        <span class="hljs-built_in">println!</span>(
+            <span class="hljs-string">&quot;doc_id: {:?} distance: {:?} offset: {:?} entity: {:?}&quot;</span>,
+            row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)?, row.<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;score&quot;</span>)?, row.<span class="hljs-title function_ invoke__">element_offset</span>(), entity
+        );
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>).<span class="hljs-built_in">WithSync</span>(<span class="hljs-literal">true</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;chunks[emb]&quot;</span>)
+                   .<span class="hljs-built_in">WithFloatVectors</span>({{<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>}})
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;doc_id&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[text]&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[section]&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[page]&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;chunks[quality_score]&quot;</span>);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>());
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) { <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(status.<span class="hljs-built_in">Message</span>()); }
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span> });
+
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.19</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.30</span>, <span class="hljs-number">0.37</span>];
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span>,
+  <span class="hljs-attr">data</span>: query_vector,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-attr">output_fields</span>: [
+    <span class="hljs-string">&quot;doc_id&quot;</span>,
+    <span class="hljs-string">&quot;title&quot;</span>,
+    <span class="hljs-string">&quot;chunks[text]&quot;</span>,
+    <span class="hljs-string">&quot;chunks[section]&quot;</span>,
+    <span class="hljs-string">&quot;chunks[page]&quot;</span>,
+    <span class="hljs-string">&quot;chunks[quality_score]&quot;</span>,
+  ],
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(results.<span class="hljs-property">results</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text.Json;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    Sync = <span class="hljs-literal">true</span>
+});
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.19f</span>, <span class="hljs-number">0.24f</span>, <span class="hljs-number">0.30f</span>, <span class="hljs-number">0.37f</span> });
+
+SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;chunks[emb]&quot;</span>,
+    Vectors = <span class="hljs-keyword">new</span>[] { queryVector },
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;chunks[text]&quot;</span>, <span class="hljs-string">&quot;chunks[section]&quot;</span>, <span class="hljs-string">&quot;chunks[page]&quot;</span>, <span class="hljs-string">&quot;chunks[quality_score]&quot;</span> }
+    }
+});
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> result <span class="hljs-keyword">in</span> results.SingleResults!)
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; result.Scores.Count; i++)
+        Console.WriteLine(JsonSerializer.Serialize(result.GetRow(i)));
+}
+<span class="hljs-comment">// One query: ElementIndices aligns with its hit order.</span>
+Console.WriteLine(JsonSerializer.Serialize(results.ElementIndices));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">set</span> -euo pipefail
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --fail-with-body --silent --show-error --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{&quot;collectionName&quot;:&quot;tech_articles&quot;}&#x27;</span> | jq -e <span class="hljs-string">&#x27;.code == 0&#x27;</span> &gt;/dev/null
+
+loaded=<span class="hljs-literal">false</span>
+<span class="hljs-keyword">for</span> attempt <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 60); <span class="hljs-keyword">do</span>
+  state=$(curl --fail-with-body --silent --show-error --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --data-raw <span class="hljs-string">&#x27;{&quot;collectionName&quot;:&quot;tech_articles&quot;}&#x27;</span> | jq -er <span class="hljs-string">&#x27;if .code == 0 then .data.loadState else error(&quot;load-state request failed&quot;) end&#x27;</span>)
+  <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$state</span>&quot;</span> = <span class="hljs-string">&quot;LoadStateLoaded&quot;</span> ]; <span class="hljs-keyword">then</span>
+    loaded=<span class="hljs-literal">true</span>
+    <span class="hljs-built_in">break</span>
+  <span class="hljs-keyword">fi</span>
+  <span class="hljs-built_in">sleep</span> 1
+<span class="hljs-keyword">done</span>
+[ <span class="hljs-string">&quot;<span class="hljs-variable">$loaded</span>&quot;</span> = <span class="hljs-literal">true</span> ] || { <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Collection did not finish loading&quot;</span> &gt;&amp;2; <span class="hljs-built_in">exit</span> 1; }
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/search&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;data&quot;: [
+      [0.19, 0.24, 0.30, 0.37]
+    ],
+    &quot;annsField&quot;: &quot;chunks[emb]&quot;,
+    &quot;limit&quot;: 5,
+    &quot;outputFields&quot;: [
+      &quot;doc_id&quot;,
+      &quot;title&quot;,
+      &quot;chunks[text]&quot;,
+      &quot;chunks[section]&quot;,
+      &quot;chunks[page]&quot;,
+      &quot;chunks[quality_score]&quot;
+    ]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Na pesquisa ao nível do elemento, cada resultado representa um elemento Struct correspondente. O valor « <code translate="no">offset</code> » é a posição, com início em zero, desse elemento no campo StructArray. A mesma entidade pode aparecer mais do que uma vez se mais do que um elemento Struct corresponder à consulta. O valor « <code translate="no">limit</code> » aplica-se aos resultados dos elementos, não às entidades-pai únicas.</p>
 <h2 id="Interpret-results" class="common-anchor-header">Interpretar resultados<button data-href="#Interpret-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,13 +799,14 @@ results = client.search(
 <tr><th>Item de resultado</th><th>Pesquisa EmbeddingList</th><th>Pesquisa ao nível do elemento</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">id</code></td><td>Chave primária da entidade correspondente.</td><td>Chave primária da entidade que contém o elemento Struct correspondente.</td></tr>
+<tr><td>Chave primária (<code translate="no">doc_id</code> neste esquema)</td><td>Chave primária da entidade correspondente.</td><td>Chave primária da entidade que contém o elemento Struct correspondente.</td></tr>
 <tr><td><code translate="no">distance</code> ou pontuação</td><td>Pontuação ou distância entre a lista de embeddings da consulta e a lista de embeddings armazenada.</td><td>Pontuação ou distância entre o vetor da consulta e o vetor do elemento Struct correspondente.</td></tr>
 <tr><td><code translate="no">offset</code></td><td>Não aplicável.</td><td>Posição, a partir de zero, do elemento Struct correspondente quando devolvido.</td></tr>
 <tr><td>Chaves primárias repetidas</td><td>Não é esperado para uma única consulta, uma vez que os resultados são ao nível da entidade.</td><td>Possível, uma vez que vários elementos Struct na mesma entidade podem corresponder.</td></tr>
-<tr><td>Campos de saída StructArray solicitados</td><td>Devolvidos a partir da entidade correspondente.</td><td>Devolvidos com a forma de correspondência ao nível do elemento suportada pela API e pelo SDK de destino.</td></tr>
+<tr><td>Campos de saída StructArray solicitados</td><td>Devolvidos a partir da entidade correspondente.</td><td>Devolvidos com a forma de resultados ao nível do elemento suportada pela API e pelo SDK de destino.</td></tr>
 </tbody>
 </table>
+<p>Os exemplos em Python utilizam o PyMilvus 3.0.2 e acedem à chave primária pelo nome do esquema, <code translate="no">doc_id</code>. Os acessores de resultados variam consoante o SDK. O cliente Go/v3.0.0 não expõe os deslocamentos dos elementos em <code translate="no">ResultSet</code>; outros exemplos apresentam os deslocamentos apenas através da interface de resultados suportada pelo respetivo SDK.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,10 +823,10 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizar « <code translate="no">chunks.emb</code> » em vez da sintaxe de caminho de subcampo exigida « <code translate="no">chunks[emb]</code> ».</p></li>
+<li><p>Utilizar <code translate="no">chunks.emb</code> em vez da sintaxe de caminho do subcampo exigida <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Utilizar uma consulta EmbeddingList num subcampo vetorial indexado com uma métrica vetorial normal.</p></li>
-<li><p>Utilizar uma consulta vetorial normal num subcampo vetorial indexado com uma métrica « <code translate="no">MAX_SIM*</code> ».</p></li>
-<li><p>Esperar que a pesquisa ao nível do elemento « <code translate="no">limit</code> » devolva esse número de entidades-pai únicas. Ela devolve resultados ao nível do elemento.</p></li>
+<li><p>Utilizar uma consulta de vetor normal contra um subcampo de vetor indexado com uma métrica <code translate="no">MAX_SIM*</code>.</p></li>
+<li><p>Esperar que a pesquisa ao nível do elemento <code translate="no">limit</code> devolva esse número de entidades-pai únicas. Ela devolve resultados ao nível do elemento.</p></li>
 <li><p>Esperar que a pesquisa «EmbeddingList» devolva um deslocamento específico de um elemento. Devolve correspondências ao nível da entidade.</p></li>
 <li><p>Reutilizar um subcampo vetorial para ambos os modos de pesquisa. Utilize subcampos vetoriais separados, uma vez que cada subcampo vetorial aceita apenas um índice.</p></li>
 </ul>

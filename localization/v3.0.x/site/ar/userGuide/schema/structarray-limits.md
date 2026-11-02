@@ -38,12 +38,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>القيود الرئيسية لـ StructArray هي:</p>
+<table>
 <thead>
 <tr><th>المجال</th><th>الحد</th></tr>
 </thead>
 <tbody>
-<tr><td>شكل المخطط</td><td>لا يمكن استخدام Struct إلا كنوع عنصر لحقل Array. لا يُدعم Struct كحقل مجموعة من المستوى الأعلى.</td></tr>
+<tr><td>شكل المخطط</td><td>لا يمكن استخدام Struct إلا كنوع عنصر لحقل Array. ولا يُدعم Struct كحقل تجميع من المستوى الأعلى.</td></tr>
 <tr><td>مخطط الحقل الفرعي</td><td>تشترك جميع عناصر Struct الموجودة في حقل StructArray نفسه في مخطط Struct واحد محدد مسبقًا.</td></tr>
 <tr><td>السعة</td><td><code translate="no">max_capacity</code> مطلوب ويحدد عدد عناصر Struct التي يمكن لكيان واحد تخزينها في حقل StructArray.</td></tr>
 <tr><td>تغييرات الحقول الفرعية</td><td>بعد إنشاء حقل StructArray، لا يمكنك إضافة حقول فرعية إلى حقل StructArray الموجود.</td></tr>
@@ -51,7 +52,7 @@ summary: >-
 <tr><td>إدراج الشكل</td><td>أدخل حقل StructArray كمصفوفة من الكائنات. لا تستخدم صيغة المسار داخل حمولات الإدراج.</td></tr>
 <tr><td>فهارس المتجهات</td><td>يقبل حقل المتجه أو الحقل الفرعي للمتجه فهرسًا واحدًا فقط. استخدم حقول فرعية منفصلة للمتجهات للبحث في EmbeddingList والبحث على مستوى العناصر.</td></tr>
 <tr><td>الدوال</td><td>لا يتم دعم وظائف الحقول للحقول أو الحقول الفرعية داخل حقل StructArray.</td></tr>
-<tr><td>الحقول القابلة للقيمة "Null"</td><td>تخضع الحقول StructArray القابلة للقيمة الفارغة لقيود الإصدار. وعندما تكون مدعومة، تنطبق القيمة الفارغة على حقل StructArray بأكمله، وليس على عنصر Struct فردي بشكل مستقل.</td></tr>
+<tr><td>الحقول القابلة للقيمة الفارغة</td><td>تخضع الحقول StructArray القابلة للقيمة الفارغة لقيود الإصدار. وعندما تكون مدعومة، تنطبق القيمة الفارغة على حقل StructArray بأكمله، وليس على عنصر Struct فردي بشكل مستقل.</td></tr>
 <tr><td>حقل الإضافة الديناميكي</td><td>تخضع إضافة حقل StructArray إلى مجموعة موجودة للإصدار وتتطلب أن يكون الحقل المضاف قابلاً للقيمة null.</td></tr>
 </tbody>
 </table>
@@ -70,7 +71,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>تخضع مخططات StructArray للقيود التالية:</p>
+<table>
 <thead>
 <tr><th>الحد</th><th>التفاصيل</th></tr>
 </thead>
@@ -99,31 +101,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتم تعيين الحقول الفرعية لـ StructArray إلى تخزين مادي على غرار المصفوفات. يسرد الجدول التالي الأنواع المادية المدعومة وغير المدعومة.</p>
+    </button></h2><p>يتم تعيين الحقول الفرعية لـ StructArray إلى تخزين مادي على غرار المصفوفات. يسرد الجدول التالي الأنواع المادية المدعومة وغير المدعومة:</p>
 <table>
 <thead>
 <tr><th>النوع المادي للحقل الفرعي في Struct</th><th>الدعم</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>مدعوم</td><td>قم بتعريف الحقل الفرعي على النحو التالي: <code translate="no">DataType.BOOL</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.INT8</code> أو <code translate="no">DataType.INT16</code> أو <code translate="no">DataType.INT32</code> أو <code translate="no">DataType.INT64</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT</code> أو <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.VARCHAR</code> وقم بتعيين <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT16_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.BFLOAT16_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.INT8_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.BINARY_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>غير مدعوم</td><td>لا يتم دعم الحقول الفرعية للمتجهات المتفرقة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>استخدم <code translate="no">VARCHAR</code> ، وليس <code translate="no">String</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية JSON غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية للهندسة ووظائف نظم المعلومات الجغرافية (GIS) غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية النصية غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المرتبطة بوقت محدد غير مدعومة في حقول StructArray.</td></tr>
-<tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا تدعم حقول StructArray الحقول الفرعية المتداخلة من نوع المصفوفة أو المصفوفة المتجهة أو Struct أو Array-of-Struct.</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>مدعوم</td><td>قم بتعريف الحقل الفرعي على النحو التالي: <code translate="no">DataType.BOOL</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.INT8</code> أو <code translate="no">DataType.INT16</code> أو <code translate="no">DataType.INT32</code> أو <code translate="no">DataType.INT64</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT</code> أو <code translate="no">DataType.DOUBLE</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.VARCHAR</code> وقم بتعيين <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.FLOAT16_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.BFLOAT16_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.INT8_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>مدعوم</td><td>حدد الحقل الفرعي على أنه <code translate="no">DataType.BINARY_VECTOR</code> وقم بتعيين <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>غير مدعوم</td><td>لا يتم دعم الحقول الفرعية للمتجهات المتفرقة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>غير مدعوم</td><td>استخدم <code translate="no">VARCHAR</code> ، وليس <code translate="no">String</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>غير مدعوم</td><td>لا يتم دعم الحقول الفرعية JSON في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>غير مدعوم</td><td>الحقول الفرعية للهندسة ووظائف نظم المعلومات الجغرافية (GIS) غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>غير مدعوم</td><td>الحقول الفرعية النصية غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>غير مدعوم</td><td>الحقول الفرعية من نوع Timestamptz والتعبيرات المرتبطة بوقت محدد غير مدعومة في حقول StructArray.</td></tr>
+<tr><td><code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code></td><td>غير مدعوم</td><td>لا تدعم حقول StructArray الحقول الفرعية المتداخلة من نوع المصفوفة أو مصفوفة المتجهات أو Struct أو Array-of-Struct.</td></tr>
 </tbody>
 </table>
-<h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">حدود المخطط القابل للفراغ والديناميكي<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
+<h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">حدود المخطط القابل للقيمة الفارغة والديناميكي<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,24 +140,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعتمد سلوك StructArray القابل للقيمة الفارغة وإضافة حقول StructArray الديناميكية على الإصدار.</p>
+    </button></h2><p>يصف الجدول التالي سلوك StructArray القابل للقيمة الفارغة وإضافة حقول StructArray الديناميكية، مع مراعاة بيان التوفر أدناه:</p>
 <table>
 <thead>
 <tr><th>القدرة</th><th>الحد</th></tr>
 </thead>
 <tbody>
-<tr><td>حقل StructArray القابل للقيمة الفارغة</td><td>مدعوم في Milvus 3.0.0 والإصدارات الأحدث. قم بتعيين <code translate="no">nullable=True</code> على StructArray الأصلي؛ لا تقم بتكوين الحقول الفرعية لـ Struct على أنها قابلة للفراغ بشكل مستقل.</td></tr>
-<tr><td>القيمة الفارغة في Python</td><td>استخدم <code translate="no">None</code> لإدراج قيمة StructArray فارغة في Python. لا تستخدم <code translate="no">Null</code> أو <code translate="no">null</code>.</td></tr>
-<tr><td>نطاق القيمة الفارغة</td><td>ينطبق القيمة الفارغة على حقل StructArray بأكمله. على سبيل المثال، <code translate="no">chunks=None</code> صالحة فقط عندما يكون <code translate="no">chunks</code> قابلاً للقيمة الفارغة.</td></tr>
+<tr><td>حقل StructArray القابل للقيمة الفارغة</td><td>مع مراعاة بيان التوفر أدناه، قم بتعيين " <code translate="no">nullable=True</code> " على StructArray الأصلي؛ ولا تقم بتكوين الحقول الفرعية لـ Struct على أنها قابلة للقيمة الفارغة بشكل مستقل.</td></tr>
+<tr><td>القيمة NULL في Python</td><td>استخدم <code translate="no">None</code> لإدراج قيمة StructArray فارغة في Python. لا تستخدم <code translate="no">Null</code> أو <code translate="no">null</code>.</td></tr>
+<tr><td>نطاق القيمة "NULL"</td><td>تنطبق القيمة NULL على حقل StructArray بأكمله. على سبيل المثال، لا يكون <code translate="no">chunks=None</code> صالحًا إلا عندما يكون <code translate="no">chunks</code> قابلاً للقيمة null.</td></tr>
 <tr><td>قيمة StructArray فارغة جزئيًا</td><td>عندما يحتوي حقل StructArray على قيمة صفيف صالحة، لا تخلط صفيفات الحقول الفرعية التي يمكن أن تكون null مع صفيفات الحقول الفرعية الصالحة في نفس القيمة.</td></tr>
-<tr><td>إضافة حقل StructArray ديناميكيًا</td><td>مدعوم في Milvus 3.0.0 والإصدارات الأحدث.</td></tr>
-<tr><td>متطلبات القابلية للقيمة الفارغة للإضافة الديناميكية</td><td>يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة null لأن الكيانات الموجودة لا تحتوي على قيمة للحقل الجديد.</td></tr>
+<tr><td>إضافة حقل StructArray ديناميكيًا</td><td>مع مراعاة بيان التوفر أدناه.</td></tr>
+<tr><td>متطلبات القابلية للصفر للإضافة الديناميكية</td><td>يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة null لأن الكيانات الموجودة لا تحتوي على قيمة للحقل الجديد.</td></tr>
 <tr><td>الكيانات الموجودة بعد الإضافة الديناميكية</td><td>تُرجع الكيانات الموجودة قيمة " <code translate="no">null</code> " لحقل StructArray المضاف.</td></tr>
 </tbody>
 </table>
 <p>يدعم Milvus 3.0.0 والإصدارات الأحدث حقول StructArray القابلة للقيمة الفارغة، ومصفوفات المتجهات القابلة للقيمة الفارغة، والإضافة الديناميكية لحقول StructArray في كل من عمليات النشر المستقلة والموزعة. لا تدعم إصدارات Milvus السابقة هذه الإمكانيات.</p>
-<p>في Zilliz Cloud، تتوفر هذه الإمكانيات على المجموعات حسب الطلب (On-Demand Clusters) التي تعمل بنظام Milvus 3.0.0 أو أحدث. ولا تدعمها مجموعات الخدمة (Serving Clusters).</p>
-<p>للاطلاع على أمثلة الإدراج باستخدام حقول StructArray القابلة للقيمة null، راجع <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>.</p>
+<p>للاطلاع على أمثلة الإدراج باستخدام حقول StructArray القابلة للقيمة الفارغة، راجع <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>.</p>
 <h2 id="Insert-limits" class="common-anchor-header">حدود الإدراج<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,7 +172,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>تخضع حمولات الإدراج في StructArray للحدود التالية:</p>
+<table>
 <thead>
 <tr><th>الحد</th><th>التفاصيل</th></tr>
 </thead>
@@ -199,13 +201,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في EmbeddingList أو للبحث على مستوى العناصر. ولا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد.</p>
+    </button></h2><p>يمكن فهرسة حقل فرعي متجه من نوع StructArray إما للبحث في قائمة التضمين (EmbeddingList) أو للبحث على مستوى العناصر. لا يمكن للحقل الفرعي المتجه نفسه استخدام مجموعتي المقاييس معًا لأن كل حقل متجه أو حقل فرعي متجه لا يقبل سوى فهرس واحد فقط. تستخدم أوضاع البحث مجموعات المقاييس التالية:</p>
 <table>
 <thead>
 <tr><th>وضع البحث</th><th>مجموعة المقاييس</th><th>مستوى النتيجة</th></tr>
 </thead>
 <tbody>
-<tr><td>البحث في EmbeddingList</td><td><code translate="no">MAX_SIM</code>، أو مقاييس " <code translate="no">MAX_SIM_COSINE</code>" أو " <code translate="no">MAX_SIM_IP</code>" أو " <code translate="no">MAX_SIM_L2</code>" أو " <code translate="no">MAX_SIM_*</code> " الثنائية</td><td>نتائج على مستوى الكيان.</td></tr>
+<tr><td>البحث في EmbeddingList</td><td><code translate="no">MAX_SIM</code>، أو مقاييس « <code translate="no">MAX_SIM_COSINE</code> » أو « <code translate="no">MAX_SIM_IP</code> » أو « <code translate="no">MAX_SIM_L2</code> » أو « <code translate="no">MAX_SIM_*</code> » الثنائية</td><td>نتائج على مستوى الكيان.</td></tr>
 <tr><td>البحث على مستوى العنصر</td><td>مقاييس متجهة عادية مثل <code translate="no">L2</code> ، <code translate="no">IP</code> ، <code translate="no">COSINE</code> ، <code translate="no">HAMMING</code> ، أو <code translate="no">JACCARD</code></td><td>نتائج على مستوى العنصر يمكن أن تتضمن إزاحة العنصر المطابق.</td></tr>
 </tbody>
 </table>
@@ -227,15 +229,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>يخضع سلوك البحث في StructArray للحدود التالية:</p>
+<table>
 <thead>
-<tr><th>سلوك البحث</th><th>الدعم والحدود</th></tr>
+<tr><th>سلوك البحث</th><th>الدعم والقيود</th></tr>
 </thead>
 <tbody>
-<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
+<tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات في StructArray المفهرسة باستخدام مقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
 <tr><td>البحث الأساسي على مستوى العناصر</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس المتجهات العادية. يمكن أن يعرض إزاحات العناصر المطابقة.</td></tr>
 <tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العناصر، تحقق من الإصدار المستهدف.</td></tr>
-<tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر إزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
+<tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر الإزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
 <tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما يدعم الإصدار المستهدف تركيبة البحث تلك. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
 <tr><td>إخراج الإزاحة</td><td>يتوفر الإزاحة لنتائج البحث على مستوى العنصر. يُرجع بحث EmbeddingList نتائج على مستوى الكيان ولا يستخدم إزاحات العناصر كوحدة النتيجة الأساسية.</td></tr>
 </tbody>

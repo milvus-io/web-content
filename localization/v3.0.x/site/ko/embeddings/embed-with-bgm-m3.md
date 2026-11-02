@@ -20,7 +20,8 @@ title: BGE M3
         ></path>
       </svg>
     </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3는</a> 다국어 지원(Multi-Linguality), 다기능성(Multi-Functionality), 다단계 세분화(Multi-Granularity) 기능을 바탕으로 명명되었습니다. 100개 이상의 언어를 지원하는 BGE-M3는 다국어 및 교차 언어 검색 작업 분야에서 새로운 기준을 제시합니다. 단일 프레임워크 내에서 밀집 검색, 다중 벡터 검색, 스파스 검색을 수행할 수 있는 독보적인 능력 덕분에 BGE-M3는 광범위한 정보 검색(IR) 애플리케이션에 이상적인 선택입니다.</p>
-<p>Milvus는 <strong>BGEM3EmbeddingFunction</strong> 클래스를 사용하여 BGE-M3 모델과 통합됩니다. 이 클래스는 임베딩 계산을 처리하며, 인덱싱 및 검색을 위해 Milvus와 호환되는 형식으로 임베딩을 반환합니다.</p>
+<p>Milvus는 <strong>BGEM3EmbeddingFunction</strong> 클래스를 사용하여 BGE-M3 모델과 통합됩니다. 이 클래스는 임베딩 계산을 처리하고, 인덱싱 및 검색을 위해 Milvus와 호환되는 형식으로 임베딩을 반환합니다.</p>
+<p>이 예제는 Python 프로세스 내에서 임베딩을 생성하며, Milvus 서버에는 연결하지 않습니다. 모델 가중치는 첫 사용 시 다운로드되므로, 모델 호스트에 대한 네트워크 접속 권한이나 데이터가 채워진 로컬 모델 캐시가 필요합니다. CPU 추론은 <code translate="no">use_fp16=False</code> 을 통해 지원됩니다.</p>
 <p>이 기능을 사용하려면 필요한 종속성을 설치하십시오:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -89,3 +90,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">임베딩 저장 및 검색<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>임베딩 생성은 첫 번째 단계입니다. 이 출력 결과를 검색에 사용하려면 컬렉션을 정의하고 각 벡터 필드에 인덱스를 생성하십시오:</p>
+<ul>
+<li><code translate="no">docs_embeddings[&quot;dense&quot;]</code> 를 차원 <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code> 을 갖는 <code translate="no">FLOAT_VECTOR</code> 필드에 매핑합니다.</li>
+<li><code translate="no">docs_embeddings[&quot;sparse&quot;]</code> 를 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드로 매핑합니다. 이 필드는 Milvus 스키마에서 고정된 차원을 요구하지 않습니다. 학습된 스파스 벡터에는 <code translate="no">IP</code> 메트릭을 사용하십시오. <a href="/docs/ko/sparse_vector.md">‘스파스 벡터’를</a> 참조하십시오.</li>
+<li>각 문서의 ID와 원본 텍스트 또는 메타데이터를 해당 벡터와 함께 저장하여, 검색 결과를 원본으로 거슬러 올라갈 수 있도록 하십시오.</li>
+<li>쿼리를 문서와 동일한 모델 및 설정으로 인코딩하십시오. 밀집 필드용 <code translate="no">AnnSearchRequest</code> 하나와 스파스 필드용 하나를 포함한 단일 <code translate="no">hybrid_search()</code> 요청을 발행하고, RRF와 같은 서버 측 랭커나 가중치 랭커가 결과를 융합하도록 하십시오.</li>
+</ul>
+<p>컬렉션 스키마, 인덱스, 삽입 및 하이브리드 검색 요청에 대해서는 <a href="/docs/ko/hybrid_search_with_milvus.md">Milvus를 사용한 하이브리드 검색</a> 가이드를 따르십시오. 이 페이지의 예제는 래퍼의 밀집형 및 희소형 출력을 사용하며, BGE-M3의 선택적 ColBERT 다중 벡터 출력은 시연하지 않습니다.</p>

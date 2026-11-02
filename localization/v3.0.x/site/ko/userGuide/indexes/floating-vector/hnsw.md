@@ -58,7 +58,7 @@ summary: >-
 <li><p><code translate="no">ef</code>: 검색 중에 평가되는 이웃 노드의 수입니다. <code translate="no">ef</code> 값을 높이면 가장 가까운 이웃을 찾을 확률은 높아지지만, 검색 속도는 느려집니다.</p></li>
 </ul>
 <p>사용자의 필요에 맞게 이러한 설정을 조정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/hnsw.md#Index-params">‘인덱스 매개변수</a>(Index params)’를 참조하십시오.</p>
-<h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
+<h2 id="Build-index" class="common-anchor-header">색인 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,8 +73,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 예제에서는 ‘ <code translate="no">client</code> ’라는 이름의 연결된 클라이언트와 ‘ <code translate="no">your_collection_name</code> ’라는 이름의 기존 컬렉션을 사용합니다. 이 컬렉션에는 ‘ <code translate="no">your_vector_field_name</code> ’라는 5차원 벡터 필드가 있습니다.</p>
-<p><code translate="no">add_index()</code> 를 사용하여 인덱스 매개 변수를 정의한 다음, <code translate="no">create_index()</code> 를 사용하여 인덱스를 생성합니다.</p>
+    </button></h2><p>이 예제에서는 <code translate="no">client</code> 라는 연결된 <code translate="no">MilvusClient</code> 와 <code translate="no">your_collection_name</code> 라는 기존 컬렉션을 사용합니다. 이 컬렉션에는 <code translate="no">your_vector_field_name</code> 라는 5차원 <code translate="no">FLOAT_VECTOR</code> 필드가 있습니다. SDK 호환성에 대해서는 <a href="/docs/ko/install-pymilvus.md">‘Milvus Python SDK 설치’를</a>, 스키마 및 연결 설정에 대해서는 <a href="/docs/ko/create-collection.md">‘컬렉션 생성’을</a> 참조하십시오. 이 예제를 사용자의 임베딩에 적용할 때는 필드 이름과 쿼리 차원을 함께 변경하십시오.</p>
+<p><code translate="no">add_index()</code> 를 사용하여 인덱스 매개변수를 정의한 다음, <code translate="no">create_index()</code> 를 사용하여 인덱스를 구축하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -99,7 +99,7 @@ client.create_index(
 <p>이 구성에서:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 생성할 인덱스의 유형입니다. 이 예제에서는 값을 <code translate="no">HNSW</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 방법입니다. 지원되는 값으로는 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 등이 있습니다. 자세한 내용은 <a href="/docs/ko/metric.md">‘메트릭 유형’을</a> 참조하십시오.</p></li>
+<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 방법입니다. 지원되는 값으로는 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 등이 있습니다. 자세한 내용은 <a href="/docs/ko/metric.md">'메트릭 유형'을</a> 참조하십시오.</p></li>
 <li><p><code translate="no">params</code>: 인덱스 생성을 위한 추가 구성 옵션입니다.</p>
 <ul>
 <li><p><code translate="no">M</code>: 각 노드가 연결할 수 있는 이웃의 최대 수입니다.</p></li>
@@ -191,7 +191,7 @@ res = client.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>그래프에서 각 노드가 가질 수 있는 최대 연결 수(또는 에지 수)로, 발신 및 수신 에지를 모두 포함합니다. 이 매개변수는 인덱스 구축과 검색 모두에 직접적인 영향을 미칩니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [2, 2048]</p><p><strong>기본값</strong>: <code translate="no">30</code> (노드당 최대 30개의 나가는 에지 및 30개의 들어오는 에지)</p></td>
-     <td><p><code translate="no">M</code> 값이 클수록 일반적으로 <strong>정확도는 높아지지만</strong>, <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축 및 검색 속</strong>도가 <strong>모두 느려집니다</strong>. 고차원 데이터셋을 처리하거나 높은 리콜률이 중요한 경우에는 <code translate="no">M</code> 값을 늘리는 것을 고려하십시오.</p><p>메모리 사용량과 검색 속도가 가장 중요한 고려 사항인 경우에는 <code translate="no">M</code> 값을 줄이는 것을 고려해 보십시오.</p><p>대부분의 경우, [5, 100] 범위 내의 값을 설정하는 것이 좋습니다.</p></td>
+     <td><p><code translate="no">M</code> 값이 클수록 일반적으로 <strong>정확도는 높아지지만</strong>, <strong>메모리 오버헤드가 증가하고</strong> <strong>인덱스 구축 및 검색</strong> 속도가 <strong>모두 느려집니다</strong>. 고차원 데이터셋을 처리하거나 높은 리콜률이 중요한 경우에는 <code translate="no">M</code> 값을 늘리는 것을 고려하십시오.</p><p>메모리 사용량과 검색 속도가 가장 중요한 고려 사항인 경우에는 <code translate="no">M</code> 값을 줄이는 것을 고려해 보십시오.</p><p>대부분의 경우, [5, 100] 범위 내의 값을 설정하는 것이 좋습니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -225,8 +225,31 @@ res = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>가장 가까운 이웃 검색 시 검색 범위를 제어합니다. 이 매개변수는 잠재적인 가장 가까운 이웃으로 방문 및 평가될 노드의 수를 결정합니다. 이 매개변수는 검색 프로세스에만 영향을 미치며 그래프의 최하위 계층에만 적용됩니다.</p></td>
+     <td><p>가장 가까운 이웃 검색 시 검색 범위를 제어합니다. 이 매개변수는 잠재적인 가장 가까운 이웃으로 방문 및 평가될 노드의 수를 결정합니다. 이 매개변수는 검색 프로세스에만 영향을 미치며, 그래프의 최하위 계층에만 적용됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: 일반 kNN 검색의 경우 <code translate="no">max(limit, 16)</code>, 범위 검색의 경우 <code translate="no">512</code>.</p><p>일반 kNN 검색의 경우, 명시적으로 지정된 <code translate="no">ef</code> 값은 <code translate="no">limit</code> (반환할 가장 가까운 이웃의 수)보다 크거나 같아야 합니다.</p></td>
      <td><p><code translate="no">ef</code> 값이 클수록 더 많은 잠재적 이웃이 고려되므로 일반적으로 <strong>검색 정확도가 높아집니다</strong>. 그러나 이로 인해 <strong>검색 시간도 증가합니다</strong>. 높은 리콜률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않아도 되는 경우에는 <code translate="no">ef</code> 값을 늘리는 것을 고려해 보십시오.</p><p>특히 정확도가 약간 낮아져도 괜찮은 상황에서는 더 빠른 검색을 우선시하기 위해 <code translate="no">ef</code> 값을 줄이는 것을 고려해 보십시오.</p><p>대부분의 경우, [K, 10K] 범위 내의 값을 설정하는 것을 권장합니다.</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">장단점을 평가하십시오<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>예시 값을 실제 운영 환경의 기본값으로 간주하기보다는, 대표적인 데이터와 쿼리를 사용하여 매개변수를 선택하십시오:</p>
+<ol>
+<li>임베딩 모델, 메트릭, <code translate="no">limit</code> 및 모든 <a href="/docs/ko/filtered-search.md">필터 조건을</a> 고정하십시오. 예를 들어 <a href="/docs/ko/flat.md">FLAT</a> 인덱스를 사용하여 동일한 쿼리와 적격 엔티티에 대해 정확한 가장 가까운 이웃을 계산하여 리콜을 측정하십시오.</li>
+<li>목표 동시 처리량에서 검색 시 <code translate="no">ef</code> 값을 단계별로 변경해 보십시오. 리콜, 처리량 및 테일 지연 시간을 함께 기록하십시오. <code translate="no">ef</code> 값을 늘릴 때 인덱스를 재구축할 필요는 없습니다.</li>
+<li>검색 시간 튜닝으로 목표치를 달성할 수 없는 경우, 서로 다른 <code translate="no">M</code> 및 <code translate="no">efConstruction</code> 을 가진 재구축된 인덱스를 비교하십시오. 인덱스 구축 시간과 메모리 사용량, 쿼리 성능을 기록하십시오.</li>
+<li>테스트에 로딩 전략과 캐시 상태를 포함시키십시오. <a href="/docs/ko/tiered-storage-overview.md">계층형 스토리지(Tiered Storage</a>)를 사용할 경우, 캐시에 저장되지 않은 데이터를 가져오는 쿼리와 웜 캐시(warm-cache) 쿼리를 별도로 측정하십시오.</li>
+</ol>
+<p>메모리 제약이 있거나 리콜 및 지연 시간 목표가 다른 경우, <a href="/docs/ko/index-explained.md">‘인덱스 설명</a>( <a href="/docs/ko/index-explained.md">Index Explained</a>)’에 제시된 대안들을 비교하십시오.</p>

@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -735,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для ваших задач",
+                "label": "Выберите анализатор, подходящий для вашего сценария использования",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1124,7 +1118,7 @@
                 "children": []
               },
               {
-                "label": "Операторы с массивами",
+                "label": "Операторы над массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1377,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Рейтинг распада",
+                "label": "Рейтинг разложения",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1421,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор модели ранжирования",
+                    "label": "Обзор Model Ranker",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2150,7 +2144,7 @@
                 "children": []
               },
               {
-                "label": "Удаление пользователей и ролей",
+                "label": "Удалить пользователей и роли",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2228,7 +2222,7 @@
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном бакете",
+                "label": "Перенос данных между экземплярами в одном хранилище",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
@@ -3175,7 +3169,7 @@
         "children": []
       },
       {
-        "label": "Контекстный поиск",
+        "label": "Контекстуальный поиск",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3206,7 +3200,7 @@
         "children": []
       },
       {
-        "label": "Поиск по воронке с использованием вложений «матрешки»",
+        "label": "Поиск по воронке с использованием вложений «матрешка»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

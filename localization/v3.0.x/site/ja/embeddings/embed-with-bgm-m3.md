@@ -20,7 +20,8 @@ title: BGE M3
         ></path>
       </svg>
     </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3という名称は</a>、多言語対応（Multi-Linguality）、多機能性（Multi-Functionality）、および多粒度対応（Multi-Granularity）というその機能に由来しています。100以上の言語に対応可能なBGE-M3は、多言語および言語横断的な検索タスクにおいて新たな基準を打ち立てています。 単一のフレームワーク内で高密度検索、マルチベクトル検索、およびスパース検索を実行できる独自の機能により、幅広い情報検索（IR）アプリケーションに最適な選択肢となっています。</p>
-<p>Milvusは、<strong>BGEM3EmbeddingFunctionクラス</strong>を使用してBGE-M3モデルと統合されます。このクラスは、埋め込みの計算を処理し、インデックス作成や検索のためにMilvusと互換性のある形式で埋め込みを返します。</p>
+<p>Milvusは、<strong>BGEM3EmbeddingFunctionクラス</strong>を使用してBGE-M3モデルと統合されます。このクラスは、埋め込みの計算を処理し、インデックス作成や検索のためにMilvusと互換性のある形式でそれらを返します。</p>
+<p>この例では、Pythonプロセス内で埋め込みを生成します。Milvusサーバーには接続しません。モデルの重みは初回使用時にダウンロードされるため、モデルホストへのネットワークアクセス、またはデータが格納されたローカルモデルキャッシュが必要です。<code translate="no">use_fp16=False</code> を使用することで、CPU推論がサポートされます。</p>
 <p>この機能を使用するには、必要な依存関係をインストールしてください：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -34,7 +35,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(
     use_fp16=<span class="hljs-literal">False</span> <span class="hljs-comment"># Specify whether to use fp16. Set to `False` if `device` is `cpu`.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>パラメータ</strong>：</p>
+<p><strong>パラメータ</strong>:</p>
 <ul>
 <li><p><strong>model_name</strong>(<em>文字列</em>)</p>
 <p>エンコーディングに使用するモデルの名前。デフォルト値は<strong>BAAI/bge-m3</strong> です。</p></li>
@@ -89,3 +90,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">埋め込みベクトルの保存と検索<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>埋め込みの生成は最初のステップです。これらの出力を検索に利用するには、コレクションを定義し、各ベクトルフィールドにインデックスを付けます:</p>
+<ul>
+<li><code translate="no">docs_embeddings[&quot;dense&quot;]</code> を、次元<code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code> を持つ<code translate="no">FLOAT_VECTOR</code> フィールドにマッピングします。</li>
+<li><code translate="no">docs_embeddings[&quot;sparse&quot;]</code> を<code translate="no">SPARSE_FLOAT_VECTOR</code> フィールドにマッピングします。このフィールドは、Milvusスキーマにおいて固定次元を必要としません。これらの学習済みスパースベクトルには、<code translate="no">IP</code> メトリックを使用します。<a href="/docs/ja/sparse_vector.md">「スパースベクトル」を</a>参照してください。</li>
+<li>各ドキュメントのIDとソーステキストまたはメタデータを、そのベクトルとともに保存し、検索結果がソースまで遡れるようにします。</li>
+<li>クエリは、ドキュメントと同じモデルと設定でエンコードします。密ベクトルフィールド用と疎ベクトルフィールド用にそれぞれ1つずつ<code translate="no">AnnSearchRequest</code> を指定した単一の<code translate="no">hybrid_search()</code> リクエストを発行し、RRFなどのサーバーサイドランカーまたは重み付きランカーに結果を融合させます。</li>
+</ul>
+<p>コレクションスキーマ、インデックス、挿入、およびハイブリッド検索リクエストについては、<a href="/docs/ja/hybrid_search_with_milvus.md">「Milvus を使用したハイブリッド検索」</a>の手順に従ってください。このページの実例では、ラッパーの密（dense）および疎（sparse）出力を使用しており、BGE-M3 のオプションである ColBERT マルチベクトル出力については説明していません。</p>

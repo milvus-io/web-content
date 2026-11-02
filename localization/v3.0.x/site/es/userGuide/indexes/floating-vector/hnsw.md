@@ -44,7 +44,7 @@ summary: >-
 <p>Así es como funciona:</p>
 <ol>
 <li><p><strong>Punto de entrada</strong>: La búsqueda comienza en un punto de entrada fijo en la capa superior, que es un nodo predeterminado del grafo.</p></li>
-<li><p><strong>Búsqueda «greedy</strong>»: El algoritmo se desplaza de forma «greedy» hacia el vecino más cercano en la capa actual hasta que no puede acercarse más al vector de consulta. Las capas superiores tienen una función de navegación, actuando como un filtro grueso para localizar posibles puntos de entrada para la búsqueda más detallada en los niveles inferiores.</p></li>
+<li><p><strong>Búsqueda «greedy</strong>»: El algoritmo se desplaza de forma «greedy» hacia el vecino más cercano en la capa actual hasta que no puede acercarse más al vector de consulta. Las capas superiores tienen una función de navegación, actuando como un filtro de bajo nivel para localizar posibles puntos de entrada para la búsqueda más detallada en los niveles inferiores.</p></li>
 <li><p><strong>Descenso por capas</strong>: una vez alcanzado un <strong>mínimo local</strong> en la capa actual, el algoritmo salta a la capa inferior, utilizando una conexión preestablecida, y repite la búsqueda «greedy».</p></li>
 <li><p><strong>Refinamiento</strong><strong>final</strong>: Este proceso continúa hasta alcanzar la capa inferior, donde un paso de refinamiento final identifica a los vecinos más cercanos.</p></li>
 </ol>
@@ -76,8 +76,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En este ejemplo se utiliza un cliente conectado denominado « <code translate="no">client</code> » y una colección existente denominada « <code translate="no">your_collection_name</code> ». La colección contiene un campo vectorial de cinco dimensiones denominado « <code translate="no">your_vector_field_name</code> ».</p>
-<p>Defina los parámetros del índice con <code translate="no">add_index()</code> y, a continuación, cree el índice con <code translate="no">create_index()</code>.</p>
+    </button></h2><p>Este ejemplo utiliza un <code translate="no">MilvusClient</code> conectado denominado <code translate="no">client</code> y una colección existente denominada <code translate="no">your_collection_name</code>. La colección tiene un campo de cinco dimensiones <code translate="no">FLOAT_VECTOR</code> denominado <code translate="no">your_vector_field_name</code>. Consulta <a href="/docs/es/install-pymilvus.md">Instalar el SDK de Milvus para Python</a> para conocer la compatibilidad del SDK y <a href="/docs/es/create-collection.md">Crear una colección</a> para ver el esquema y la configuración de la conexión. Sustituye el nombre del campo y la dimensión de la consulta al adaptar el ejemplo a tus representaciones.</p>
+<p>Defina los parámetros del índice con « <code translate="no">add_index()</code> » y, a continuación, cree el índice con « <code translate="no">create_index()</code> ».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -101,7 +101,7 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>En esta configuración:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: El tipo de índice que se va a crear. En este ejemplo, establezca el valor en <code translate="no">HNSW</code>.</p></li>
+<li><p><code translate="no">index_type</code>: El tipo de índice que se va a crear. En este ejemplo, establece el valor en <code translate="no">HNSW</code>.</p></li>
 <li><p><code translate="no">metric_type</code>: El método utilizado para calcular la distancia entre vectores. Los valores admitidos incluyen <code translate="no">COSINE</code>, <code translate="no">L2</code> y <code translate="no">IP</code>. Para obtener más detalles, consulte <a href="/docs/es/metric.md">Tipos</a> de <a href="/docs/es/metric.md">métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para la creación del índice.</p>
 <ul>
@@ -198,7 +198,7 @@ res = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Número de vecinos candidatos que se tienen en cuenta para la conexión durante la construcción del índice. Se evalúa un conjunto más amplio de candidatos para cada nuevo elemento, pero el número máximo de conexiones que se establecen realmente sigue estando limitado por <code translate="no">M</code>.</p></td>
+     <td><p>Número de vecinos candidatos que se tienen en cuenta para la conexión durante la construcción del índice. Para cada nuevo elemento se evalúa un conjunto más amplio de candidatos, pero el número máximo de conexiones que se establecen realmente sigue estando limitado por <code translate="no">M</code>.</p></td>
      <td><p><strong>Tipo</strong>: Entero. <strong>Rango</strong>: [1, <em>int_max</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">360</code></p></td>
      <td><p>Un valor más alto de « <code translate="no">efConstruction</code> » suele dar lugar a un <strong>índice más preciso</strong>, ya que se exploran más conexiones potenciales. Sin embargo, esto también conlleva <strong>un tiempo de indexación más largo y un mayor uso de memoria</strong> durante la construcción. Considera la posibilidad de aumentar « <code translate="no">efConstruction</code> » para mejorar la precisión, especialmente en situaciones en las que el tiempo de indexación no sea tan crítico.</p><p>Considere la posibilidad de reducir el valor de « <code translate="no">efConstruction</code> » para acelerar la construcción del índice cuando las limitaciones de recursos sean un problema.</p><p>En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [50, 500].</p></td>
    </tr>
@@ -233,3 +233,26 @@ res = client.search(
      <td><p>Un valor mayor de <code translate="no">ef</code> suele traducirse en <strong>una mayor precisión de búsqueda</strong>, ya que se tienen en cuenta más vecinos potenciales. Sin embargo, esto también <strong>aumenta el tiempo de búsqueda</strong>. Considera la posibilidad de aumentar <code translate="no">ef</code> cuando sea fundamental lograr un alto nivel de recuperación y la velocidad de búsqueda no sea una prioridad.</p><p>Considere la posibilidad de reducir el « <code translate="no">ef</code> » para dar prioridad a búsquedas más rápidas, especialmente en situaciones en las que sea aceptable una ligera reducción de la precisión.</p><p>En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [K, 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">Evalúa las ventajas e inconvenientes<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilice datos y consultas representativos para elegir los parámetros, en lugar de considerar los valores de ejemplo como valores predeterminados de producción:</p>
+<ol>
+<li>Fija el modelo de incrustación, la métrica, el valor de « <code translate="no">limit</code> » y cualquier <a href="/docs/es/filtered-search.md">condición de filtro</a>. Calcula los vecinos más cercanos exactos para las mismas consultas y entidades elegibles, por ejemplo, con un índice <a href="/docs/es/flat.md">FLAT</a>, para medir la recuperación.</li>
+<li>Recorra el « <code translate="no">ef</code> » en tiempo de búsqueda con la concurrencia objetivo. Registre conjuntamente la recuperación, el rendimiento y la latencia de cola. Aumentar el « <code translate="no">ef</code> » no requiere reconstruir el índice.</li>
+<li>Si el ajuste en tiempo de búsqueda no permite alcanzar el objetivo, compara los índices reconstruidos con diferentes valores de « <code translate="no">M</code> » y « <code translate="no">efConstruction</code> ». Registra el tiempo de creación del índice y el uso de memoria, así como el rendimiento de las consultas.</li>
+<li>Incluya la estrategia de carga y el estado de la caché en la prueba. Cuando utilice <a href="/docs/es/tiered-storage-overview.md">almacenamiento por niveles</a>, mida las consultas que recuperan datos no almacenados en caché por separado de las consultas con caché «caliente».</li>
+</ol>
+<p>En caso de limitaciones de memoria o de que los objetivos de recuperación y latencia sean diferentes, compare las alternativas descritas en <a href="/docs/es/index-explained.md">«Index Explained</a>».</p>

@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -299,7 +293,7 @@
     ]
   },
   {
-    "label": "사용자 안내서",
+    "label": "사용자 가이드",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -1235,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "검색 이터레이터",
+            "label": "검색 반복자",
             "id": "with-iterators.md",
             "order": 15,
             "children": []
@@ -1359,7 +1353,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "가중 순위 결정기",
+                "label": "가중 순위 산정기",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -3265,7 +3259,7 @@
             "children": []
           },
           {
-            "label": "DNA 염기서열 분류",
+            "label": "DNA 서열 분류",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

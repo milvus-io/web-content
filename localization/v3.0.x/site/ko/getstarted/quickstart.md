@@ -3,7 +3,7 @@ id: quickstart.md
 summary: Milvus를 시작해 보세요.
 title: 빠른 시작
 ---
-<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Milvus Lite 빠른 시작<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
+<h1 id="Quickstart" class="common-anchor-header">빠른 시작<button data-href="#Quickstart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: 빠른 시작
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>신경망 모델의 출력 데이터 형식인 벡터는 정보를 효과적으로 인코딩할 수 있으며, 지식 기반, 시맨틱 검색, RAG(Retrieval Augmented Generation) 등 다양한 AI 애플리케이션에서 핵심적인 역할을 수행합니다.</p>
-<p>Milvus는 Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모의 검색 시스템을 구축하는 것까지, 모든 규모의 AI 애플리케이션에 적합한 오픈소스 벡터 데이터베이스입니다. 이 가이드에서는 단 몇 분 만에 로컬에 Milvus를 설정하고, Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 단계별로 안내해 드립니다.</p>
+<p>Milvus는 Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모의 검색 시스템을 구축하는 것까지, 모든 규모의 AI 애플리케이션에 적합한 오픈소스 벡터 데이터베이스입니다. 이 가이드에서는 단 몇 분 만에 로컬에 Milvus를 설정하고, Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 단계별로 안내해 드리겠습니다.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,15 +37,51 @@ title: 빠른 시작
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 가이드에서는 <code translate="no">pymilvus</code> 에 포함되어 있으며 클라이언트 애플리케이션에 임베드할 수 있는 파이썬 라이브러리인 Milvus Lite를 사용합니다. Milvus는 또한 프로덕션 사용 사례를 위해 <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes에</a> 배포하는 것도 지원합니다.</p>
-<p>시작하기 전에 로컬 환경에 Python 3.8 이상이 설치되어 있는지 확인하십시오. Python 클라이언트 라이브러리와 Milvus Lite가 모두 포함된 <code translate="no">pymilvus</code> 를 설치하십시오:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+    </button></h2><p>다음 중 한 가지 방법을 선택하세요: 로컬 예제를 위해 Milvus Lite를 사용하거나, 이미 배포한 Milvus 서버에 연결하세요. 두 방법 모두 아래의 컬렉션 및 쿼리 예제를 사용합니다.</p>
+<h3 id="Use-a-local-database" class="common-anchor-header">로컬 데이터베이스 사용<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 가이드에서는 로컬에서 실행되는 PyMilvus Python SDK의 선택적 종속성인 Milvus Lite를 사용합니다. 서버 배포에 대해서는 <a href="/docs/ko/install_standalone-docker.md">Docker</a> 또는 <a href="/docs/ko/install_cluster-milvusoperator.md">Kubernetes를</a> 참조하십시오.</p>
+<p>macOS, Linux 또는 Windows에서 Python 3.10 이상을 사용하며, <code translate="no">faiss-cpu</code> 및 <code translate="no">pyarrow</code> 와 같은 Milvus Lite의 종속성에 대한 바이너리 휠을 사용할 수 있어야 합니다. 예제에서는 PyMilvus 3.0.2와 Milvus Lite 3.2.2를 사용합니다. 두 패키지를 명시적으로 설치하십시오:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Windows에서 pip는 PyMilvus 3.0.2의 <code translate="no">milvus-lite</code> 추가 구성 요소를 건너뜁니다. 위의 명령어에서는 <code translate="no">milvus-lite</code> 를 명시적으로 지정하므로, 해당 로컬 경로도 정상적으로 작동합니다. SDK 전용 설치 요건에 대해서는 <a href="/docs/ko/install-pymilvus.md">‘Milvus Python SDK 설치’를</a> 참조하십시오.</p>
 <div class="alert note">
 <blockquote>
 <p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 “Runtime” 메뉴를 클릭하고 드롭다운 메뉴에서 “Restart session”을 선택하세요).</p>
 </blockquote>
 </div>
+<h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">기존 Milvus 서버 사용<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이미 Docker나 Kubernetes를 통해 Milvus를 설치했거나 Zilliz Cloud 엔드포인트를 보유하고 있는 경우, SDK만 설치하면 됩니다. PyMilvus 3.0.2는 Python 3.9 이상이 필요하며, 이 경로를 사용할 때는 로컬 Lite 종속성이 필요하지 않습니다:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">.db</code> 경로를 여는 대신 다음 섹션의 서버 연결 블록을 사용하십시오. SDK 버전이 사용 중인 서버와 호환되는지 확인하십시오. <a href="/docs/ko/release_notes.md">릴리스 노트를</a> 참조하십시오.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">벡터 데이터베이스 설정<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,11 +97,49 @@ title: 빠른 시작
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>로컬 Milvus 벡터 데이터베이스를 생성하려면, “milvus_demo.db”와 같이 모든 데이터를 저장할 파일 이름을 지정하여 <code translate="no">MilvusClient</code> 를 인스턴스화하기만 하면 됩니다.</p>
+    </button></h2><p>아래 연결 블록 중 정확히 하나를 선택하십시오.</p>
+<h3 id="Local-Milvus-Lite" class="common-anchor-header">로컬 Milvus Lite<button data-href="#Local-Milvus-Lite" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 Milvus 벡터 데이터베이스를 생성하려면 <code translate="no">milvus_demo.db</code> 와 같은 저장 경로를 지정하여 <code translate="no">MilvusClient</code> 를 인스턴스화하십시오. Milvus Lite 3.x는 경로 이름이 <code translate="no">.db</code> 로 끝나는 경우에도 이 경로에 디렉터리를 생성합니다.</p>
+<p>Milvus Lite 2.x로 생성된 데이터베이스 파일이 있는 경우, 마이그레이션 전에 이전 버전으로 내보내십시오. 해당 파일을 Milvus Lite 3.x에서 직접 열지 마십시오. <a href="/docs/ko/milvus_lite.md#Migrating-data-from-Milvus-Lite">‘Milvus Lite에서 데이터 마이그레이션’을</a> 참조하십시오.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Existing-Milvus-server" class="common-anchor-header">기존 Milvus 서버<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>로컬 Docker 배포의 경우, 서버 엔드포인트에 연결하십시오. Zilliz Cloud의 경우, URI를 클러스터 엔드포인트로, 토큰을 API 키로 대체하십시오:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>인증 정보를 변경한 경우, 설정된 인증 정보를 사용하십시오. 나머지 예제에서는 사용자가 선택한 <code translate="no">client</code> 를 사용하며, 별도의 로컬 Lite 데이터베이스는 필요하지 않습니다.</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +155,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서는 벡터와 관련 메타데이터를 저장하기 위해 컬렉션이 필요합니다. 이를 기존 SQL 데이터베이스의 테이블로 생각하면 됩니다. 컬렉션을 생성할 때 스키마 및 인덱스 매개변수를 정의하여 차원, 인덱스 유형, 거리 측정 기준과 같은 벡터 사양을 구성할 수 있습니다. 벡터 검색 성능을 위해 인덱스를 최적화하는 복잡한 개념들도 있습니다. 지금은 기본 사항에만 집중하고 가능한 한 모든 항목에 기본값을 사용하도록 하겠습니다. 최소한 컬렉션 이름과 컬렉션의 벡터 필드 차원만 설정하면 됩니다.</p>
+    </button></h2><p>Milvus에서는 벡터와 관련 메타데이터를 저장하기 위해 컬렉션이 필요합니다. 이를 기존 SQL 데이터베이스의 테이블로 생각하면 됩니다. 컬렉션을 생성할 때 스키마 및 인덱스 매개변수를 정의하여 차원, 인덱스 유형, 거리 메트릭과 같은 벡터 사양을 구성할 수 있습니다. 벡터 검색 성능을 위해 인덱스를 최적화하는 복잡한 개념들도 있습니다. 지금은 기본 사항에만 집중하고 가능한 한 모든 항목에 기본값을 사용하도록 하겠습니다. 최소한 컬렉션 이름과 컬렉션의 벡터 필드 차원만 설정하면 됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -128,7 +202,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>먼저 모델 라이브러리를 설치합니다. 이 패키지에는 PyTorch와 같은 필수 ML 도구가 포함되어 있습니다. 로컬 환경에 PyTorch가 설치된 적이 없다면 패키지 다운로드에 다소 시간이 걸릴 수 있습니다.</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>기본 모델을 사용하여 벡터 임베딩을 생성합니다. Milvus는 데이터가 사전(dictionary) 목록 형태로 정리되어 입력되기를 기대하며, 각 사전은 ‘엔티티(entity)’라고 불리는 데이터 레코드를 나타냅니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -190,7 +264,21 @@ docs = [
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># Use fake representation with random vectors (768 dimension).</span>
-vectors = [[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> docs]
+<span class="hljs-comment"># Keep the same interface as the model-backed path so the remaining examples run.</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoEmbeddingFunction</span>:
+    dim = <span class="hljs-number">768</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.rng = random.Random(<span class="hljs-number">42</span>)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_documents</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> [[<span class="hljs-variable language_">self</span>.rng.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> texts]
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_queries</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.encode_documents(texts)
+
+embedding_fn = DemoEmbeddingFunction()
+vectors = embedding_fn.encode_documents(docs)
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
@@ -362,7 +450,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>데이터를 정리하려면, 기본 키를 지정하여 엔티티를 삭제하거나 특정 필터 표현식과 일치하는 모든 엔티티를 삭제할 수 있습니다.</p>
+    </button></h2><p>데이터를 정리하려면 기본 키를 지정하여 엔티티를 삭제하거나, 특정 필터 표현식과 일치하는 모든 엔티티를 삭제할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 
@@ -394,9 +482,11 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite의 모든 데이터는 로컬 파일에 저장되므로, 기존 파일을 사용하여 ` <code translate="no">MilvusClient</code> `를 생성하면 프로그램이 종료된 후에도 모든 데이터를 메모리에 불러올 수 있습니다. 예를 들어, 다음 코드는 “milvus_demo.db” 파일에서 컬렉션을 복원하고 해당 파일에 데이터를 계속 기록합니다.</p>
+    </button></h2><p>이 섹션은 로컬 Lite 경로에 적용됩니다. 서버 배포의 경우, 대신 동일한 서버 URI와 자격 증명을 사용하여 다시 연결하십시오.</p>
+<p>Milvus Lite는 로컬 저장소 경로에 데이터를 저장합니다. 기존 컬렉션을 계속 사용하려면 클라이언트를 닫은 후 동일한 경로를 다시 열어주세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.close()
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">컬렉션 삭제<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
@@ -433,10 +523,16 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite는 로컬 파이썬 프로그램을 시작하기에 매우 적합합니다. 대규모 데이터를 보유하고 있거나 프로덕션 환경에서 Milvus를 사용하고자 하는 경우, <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes에</a> Milvus를 배포하는 방법에 대해 알아볼 수 있습니다. Milvus의 모든 배포 모드는 동일한 API를 사용하므로, 다른 배포 모드로 전환하더라도 클라이언트 측 코드를 크게 변경할 필요가 없습니다. 어디에 배포된 Milvus 서버의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI와 토큰만</a> 지정하면 됩니다:</p>
+    </button></h2><p>로컬 예제를 완료한 후 다음 단계를 선택하세요:</p>
+<ul>
+<li><a href="/docs/ko/build-rag-with-milvus.md">RAG(Retrieval Augmented Generation)</a>를 사용하여 애플리케이션을 구축하세요.</li>
+<li><a href="/docs/ko/schema-hands-on.md">'검색용 데이터 모델 설계'를</a> 사용하여 자체 데이터에 대한 필드 및 필터를 설계하세요.</li>
+<li><a href="/docs/ko/install-overview.md">Milvus 배포 옵션을</a> 통해 로컬 및 서버 요구 사항을 비교해 보세요.</li>
+</ul>
+<p>Milvus Lite는 로컬 Python 프로그램을 시작하기에 매우 적합합니다. 대규모 데이터를 보유하고 있거나 Milvus를 프로덕션 환경에서 사용하고자 하는 경우, <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes에</a> Milvus를 배포하는 방법에 대해 알아볼 수 있습니다. Milvus의 모든 배포 모드는 동일한 API를 사용하므로, 다른 배포 모드로 전환하더라도 클라이언트 측 코드를 크게 변경할 필요가 없습니다. 어디에 배포된 Milvus 서버의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI와 토큰만</a> 지정하면 됩니다:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Lite에서 Docker 또는 Kubernetes에 배포된 Milvus로 데이터를 마이그레이션하려면 <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">‘Milvus Lite에서 데이터 마이그레이션’을</a> 참조하십시오.</p>
+<p>Milvus Lite에서 Docker 또는 Kubernetes에 배포된 Milvus로 데이터를 마이그레이션하려면 <a href="/docs/ko/milvus_lite.md#Migrating-data-from-Milvus-Lite">‘Milvus Lite에서 데이터 마이그레이션’을</a> 참조하십시오.</p>
 <p>Milvus는 REST 및 gRPC API를 제공하며, <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C#, <a href="https://milvus.io/docs/install-node.md">Node.js</a> 등의 언어로 작성된 클라이언트 라이브러리를 지원합니다.</p>
 <p>스키마 설계와 관련하여 Milvus는 유연한 스키마 설계를 지원하며, 여기서 벡터 필드를 포함한 필드와 해당 데이터 유형을 정의할 수 있습니다. 또한 각 필드에 대한 인덱스 유형과 매개변수를 정의할 수도 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/schema-hands-on.md">‘검색을 위한 데이터 모델 설계’를</a> 참조하십시오.</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">AI 에이전트용 Milvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">

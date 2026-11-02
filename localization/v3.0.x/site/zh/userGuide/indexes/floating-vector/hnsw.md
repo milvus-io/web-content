@@ -71,8 +71,8 @@ summary: HNSW 索引是一种基于图的索引算法，可在搜索高维浮点
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本示例使用名为<code translate="no">client</code> 的已连接客户端，以及名为<code translate="no">your_collection_name</code> 的现有 Collection。该 Collection 包含一个名为<code translate="no">your_vector_field_name</code> 的五维向量字段。</p>
-<p>使用<code translate="no">add_index()</code> 定义索引参数，然后使用<code translate="no">create_index()</code> 构建索引。</p>
+    </button></h2><p>本示例使用名为<code translate="no">client</code> 的连通<code translate="no">MilvusClient</code> ，以及名为<code translate="no">your_collection_name</code> 的现有 Collection。该 Collection 包含一个名为<code translate="no">your_vector_field_name</code> 的五维<code translate="no">FLOAT_VECTOR</code> 字段。有关 SDK 兼容性，请参阅<a href="/docs/zh/install-pymilvus.md">《安装 Milvus Python SDK》</a>；有关 Schema 和连接设置，请参阅<a href="/docs/zh/create-collection.md">《创建 Collection</a>》。在将本示例适配到您的 Embeddings 时，请同时替换字段名和查询维度。</p>
+<p>使用 `<code translate="no">add_index()</code>` 定义索引参数，然后使用 `<code translate="no">create_index()</code>` 构建索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -97,11 +97,11 @@ client.create_index(
 <p>在此配置中：</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 要构建的索引类型。在此示例中，将值设置为<code translate="no">HNSW</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>: 用于计算向量之间距离的方法。支持的值包括<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 。详情请参阅<a href="/docs/zh/metric.md">“度量类型”</a>。</p></li>
+<li><p><code translate="no">metric_type</code>: 用于计算向量之间距离的方法。支持的值包括<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 。详情请参阅《<a href="/docs/zh/metric.md">度量类型</a>》。</p></li>
 <li><p><code translate="no">params</code>: 构建索引的其他配置选项。</p>
 <ul>
 <li><p><code translate="no">M</code>: 每个节点可连接的邻居最大数量。</p></li>
-<li><p><code translate="no">efConstruction</code>: 在索引构建过程中，用于连接考虑的候选邻居数量。</p></li>
+<li><p><code translate="no">efConstruction</code>: 在索引构建过程中，用于考虑连接的候选邻居数量。</p></li>
 </ul>
 <p>该示例将<code translate="no">M=64</code> 和<code translate="no">efConstruction=100</code> 设置为调优覆盖值。有关默认值和有效范围，请参阅<a href="/docs/zh/hnsw.md#Index-building-params">“索引构建参数”</a>。</p></li>
 </ul>
@@ -144,7 +144,7 @@ res = client.search(
 <ul>
 <li><code translate="no">ef</code>: 搜索时考虑的邻居数量。</li>
 </ul>
-<p>要了解<code translate="no">HNSW</code> 索引可用的更多搜索参数，请参阅<a href="/docs/zh/hnsw.md#Index-specific-search-params">“索引特定搜索参数</a>”。</p></li>
+<p>要了解<code translate="no">HNSW</code> 索引可用的更多搜索参数，请参阅《<a href="/docs/zh/hnsw.md#Index-specific-search-params">索引特定搜索参数</a>》。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">索引参数<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,9 +193,9 @@ res = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>在构建索引时，用于连接的候选邻居数量。对于每个新元素，系统会评估更大的候选邻居池，但实际建立的连接最大数量仍受<code translate="no">M</code> 的限制。</p></td>
+     <td><p>在索引构建过程中，用于连接的候选邻居数量。对于每个新元素，系统会评估更大的候选邻居池，但实际建立的连接最大数量仍受<code translate="no">M</code> 的限制。</p></td>
      <td><p><strong>类型</strong>：整数<strong>范围</strong>：[1,<em>int_max</em>]</p><p><strong>默认值</strong>：<code translate="no">360</code></p></td>
-     <td><p>较高的<code translate="no">efConstruction</code> 通常会生成<strong>更精确的索引，</strong>因为会探索更多的潜在连接。但这也会导致<strong>索引构建时间延长，并增加</strong>构建过程中的<strong>内存占用</strong>。若需提高精度，建议增加<code translate="no">efConstruction</code> ，特别是在索引时间不是关键因素的情况下。</p><p>当资源受限时，请考虑降低<code translate="no">efConstruction</code> 以加快索引构建速度。</p><p>在大多数情况下，建议您将该值设置在 [50, 500] 范围内。</p></td>
+     <td><p>较高的<code translate="no">efConstruction</code> 通常会生成<strong>更精确的索引，</strong>因为会探索更多的潜在连接。但这也会导致<strong>索引构建时间延长，并增加</strong>构建过程中的<strong>内存占用</strong>。若需提高精度，建议增加<code translate="no">efConstruction</code> ，特别是在索引时间要求不那么紧迫的情况下。</p><p>当资源受限时，请考虑降低<code translate="no">efConstruction</code> 以加快索引构建速度。</p><p>在大多数情况下，建议您将该值设置在 [50, 500] 范围内。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">索引特定的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -224,7 +224,30 @@ res = client.search(
    <tr>
      <td><p><code translate="no">ef</code></p></td>
      <td><p>控制最近邻检索过程中的搜索范围。它决定了将访问并评估多少个节点作为潜在的最近邻。该参数仅影响搜索过程，且仅适用于图的最底层。</p></td>
-     <td><p><strong>类型</strong>：整数<strong>范围</strong>：[1,<em>int_max</em>]</p><p><strong>默认值</strong>：普通 kNN 搜索时为<code translate="no">max(limit, 16)</code> ；范围搜索时为<code translate="no">512</code> 。</p><p>对于普通kNN搜索，显式指定的<code translate="no">ef</code> 必须大于或等于<code translate="no">limit</code> （即要返回的最近邻节点数）。</p></td>
-     <td><p>较大的<code translate="no">ef</code> 通常会<strong>提高搜索准确率</strong>，因为会考虑更多的潜在邻居。但是，这也会<strong>增加搜索时间</strong>。当实现高召回率至关重要，而搜索速度不是主要考虑因素时，请考虑增加<code translate="no">ef</code> 。</p><p>若需优先保证搜索速度，特别是当允许精度略有降低时，请考虑降低<code translate="no">ef</code> 。</p><p>在大多数情况下，我们建议您将该值设置在 [K, 10K] 范围内。</p></td>
+     <td><p><strong>类型</strong>：整数<strong>范围</strong>：[1,<em>int_max</em>]</p><p><strong>默认值</strong>：普通kNN搜索时为<code translate="no">max(limit, 16)</code> ；范围搜索时为<code translate="no">512</code> 。</p><p>对于普通kNN搜索，显式指定的<code translate="no">ef</code> 必须大于或等于<code translate="no">limit</code> （即要返回的最近邻节点数）。</p></td>
+     <td><p>更大的<code translate="no">ef</code> 通常会<strong>提高搜索精度</strong>，因为会考虑更多的潜在邻居。但是，这也会<strong>增加搜索时间</strong>。当实现高召回率至关重要，而搜索速度不是主要考虑因素时，请考虑增加<code translate="no">ef</code> 。</p><p>若需优先保证搜索速度，特别是当允许精度略有降低时，请考虑降低<code translate="no">ef</code> 。</p><p>在大多数情况下，建议您将该值设置在 [K, 10K] 范围内。</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">评估权衡<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>请使用具有代表性的数据和查询来选择参数，而不是将示例值视为生产环境的默认值：</p>
+<ol>
+<li>固定嵌入模型、度量指标、<code translate="no">limit</code> 以及任何<a href="/docs/zh/filtered-search.md">过滤条件</a>。针对相同的查询和符合条件的实体计算精确最近邻（例如使用<a href="/docs/zh/flat.md">FLAT</a>索引），以衡量召回率。</li>
+<li>在目标并发量下，对搜索时的<code translate="no">ef</code> 进行扫查。同时记录召回率、吞吐量和尾部延迟。增加<code translate="no">ef</code> 无需重建索引。</li>
+<li>如果搜索时调优无法达到目标，请比较具有不同<code translate="no">M</code> 和<code translate="no">efConstruction</code> 的重建索引。同时记录索引构建时间、内存使用情况以及查询性能。</li>
+<li>在测试中包含加载策略和缓存状态。使用<a href="/docs/zh/tiered-storage-overview.md">分层存储</a>时，请将检索未缓存数据的查询与热缓存查询分别进行测量。</li>
+</ol>
+<p>若受内存限制或需调整召回率和延迟目标，请参考<a href="/docs/zh/index-explained.md">《索引详解》</a>中的替代方案进行比较。</p>

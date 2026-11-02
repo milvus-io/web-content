@@ -56,12 +56,12 @@ summary: >-
  </span></p>
 <p>Le prestazioni di HNSW dipendono da diversi parametri chiave che controllano sia la struttura del grafo sia il comportamento di ricerca. Tra questi figurano:</p>
 <ul>
-<li><p><code translate="no">M</code>: Il numero massimo di archi o connessioni che ogni nodo può avere nel grafo a ciascun livello della gerarchia. Un valore più alto di <code translate="no">M</code> determina un grafo più denso e aumenta il richiamo e l’accuratezza, poiché la ricerca dispone di più percorsi da esplorare; ciò comporta però un maggiore consumo di memoria e un rallentamento dei tempi di inserimento a causa delle connessioni aggiuntive. Come mostrato nell’immagine sopra, <strong>M = 5</strong> indica che ogni nodo nel grafo HNSW è collegato direttamente a un massimo di 5 altri nodi. Ciò crea una struttura del grafo moderatamente densa in cui i nodi dispongono di più percorsi per raggiungere altri nodi.</p></li>
+<li><p><code translate="no">M</code>: Il numero massimo di spigoli o connessioni che ogni nodo può avere nel grafo a ciascun livello della gerarchia. Un valore più alto di <code translate="no">M</code> determina un grafo più denso e aumenta il richiamo e l’accuratezza, poiché la ricerca dispone di più percorsi da esplorare; ciò comporta però un maggiore consumo di memoria e un rallentamento dei tempi di inserimento a causa delle connessioni aggiuntive. Come mostrato nell’immagine sopra, <strong>M = 5</strong> indica che ogni nodo nel grafo HNSW è collegato direttamente a un massimo di 5 altri nodi. Ciò crea una struttura del grafo moderatamente densa in cui i nodi dispongono di più percorsi per raggiungere altri nodi.</p></li>
 <li><p><code translate="no">efConstruction</code>: Il numero di candidati presi in considerazione durante la costruzione dell’indice. Un valore più alto di “ <code translate="no">efConstruction</code> ” (numero di vicini) comporta generalmente un grafico di qualità migliore, ma richiede più tempo per la costruzione.</p></li>
 <li><p><code translate="no">ef</code>: Il numero di vicini valutati durante una ricerca. Aumentando l’ <code translate="no">ef</code> e si migliora la probabilità di trovare i vicini più prossimi, ma si rallenta il processo di ricerca.</p></li>
 </ul>
 <p>Per i dettagli su come regolare queste impostazioni in base alle proprie esigenze, consultare <a href="/docs/it/hnsw.md#Index-params">Parametri dell’indice</a>.</p>
-<h2 id="Build-index" class="common-anchor-header">Creazione dell’indice<button data-href="#Build-index" class="anchor-icon" translate="no">
+<h2 id="Build-index" class="common-anchor-header">Crea indice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +76,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questo esempio utilizza un client connesso denominato <code translate="no">client</code> e una collezione esistente denominata <code translate="no">your_collection_name</code>. La collezione contiene un campo vettoriale a cinque dimensioni denominato <code translate="no">your_vector_field_name</code>.</p>
-<p>Definire i parametri dell’indice con <code translate="no">add_index()</code>, quindi creare l’indice con <code translate="no">create_index()</code>.</p>
+    </button></h2><p>Questo esempio utilizza un’ <code translate="no">MilvusClient</code> e connessa denominata <code translate="no">client</code> e una collezione esistente denominata <code translate="no">your_collection_name</code>. La collezione presenta un campo <code translate="no">FLOAT_VECTOR</code> a cinque dimensioni denominato <code translate="no">your_vector_field_name</code>. Consultare <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a> per la compatibilità dell’SDK e <a href="/docs/it/create-collection.md">Creare una collezione</a> per lo schema e la configurazione della connessione. Sostituire il nome del campo e la dimensione della query insieme quando si adatta l’esempio ai propri embedding.</p>
+<p>Definire i parametri dell’indice con ` <code translate="no">add_index()</code>`, quindi creare l’indice con ` <code translate="no">create_index()</code>`.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -102,7 +102,7 @@ client.create_index(
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da creare. In questo esempio, impostare il valore su <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati includono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per ulteriori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metrica</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati includono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per ulteriori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la creazione dell’indice.</p>
 <ul>
 <li><p><code translate="no">M</code>: Numero massimo di vicini a cui ogni nodo può connettersi.</p></li>
@@ -182,7 +182,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La tabella seguente elenca i parametri che è possibile configurare in <code translate="no">params</code> durante <a href="/docs/it/hnsw.md#Build-index">la creazione di un indice</a>.</p>
+    </button></h3><p>La tabella seguente elenca i parametri configurabili in <code translate="no">params</code> durante <a href="/docs/it/hnsw.md#Build-index">la creazione di un indice</a>.</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -228,8 +228,31 @@ res = client.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Controlla l’ampiezza della ricerca durante il recupero del vicino più prossimo. Determina quanti nodi vengono visitati e valutati come potenziali vicini più prossimi.  Questo parametro influisce solo sul processo di ricerca e si applica esclusivamente allo strato inferiore del grafico.</p></td>
+     <td><p>Controlla l'ampiezza della ricerca durante il recupero del vicino più prossimo. Determina quanti nodi vengono visitati e valutati come potenziali vicini più prossimi.  Questo parametro influisce solo sul processo di ricerca e si applica esclusivamente allo strato inferiore del grafico.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p><p><strong>Valore predefinito</strong>: <code translate="no">max(limit, 16)</code> per la ricerca kNN ordinaria; <code translate="no">512</code> per la ricerca per intervallo.</p><p>Per la ricerca kNN ordinaria, un valore esplicito di ` <code translate="no">ef</code> ` deve essere maggiore o uguale a ` <code translate="no">limit</code> ` (il numero di vicini più prossimi da restituire).</p></td>
      <td><p>Un valore maggiore di <code translate="no">ef</code> comporta generalmente <strong>una maggiore precisione della ricerca</strong>, poiché vengono presi in considerazione più potenziali vicini. Tuttavia, ciò <strong>aumenta</strong> anche <strong>il tempo di ricerca</strong>. Si consiglia di aumentare <code translate="no">ef</code> quando è fondamentale ottenere un recall elevato e la velocità di ricerca è meno importante.</p><p>Si consiglia di ridurre il valore di ` <code translate="no">ef</code> ` per dare priorità a ricerche più veloci, specialmente in scenari in cui è accettabile una leggera riduzione della precisione.</p><p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [K, 10K].</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">Valutare i compromessi<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilizzate dati e query rappresentativi per scegliere i parametri, anziché considerare i valori di esempio come impostazioni predefinite di produzione:</p>
+<ol>
+<li>Fissare il modello di embedding, la metrica, l’ <code translate="no">limit</code> e <a href="/docs/it/filtered-search.md">le</a> eventuali <a href="/docs/it/filtered-search.md">condizioni di filtro</a>. Calcolare i vicini più prossimi esatti per le stesse query e le entità idonee, ad esempio con un indice <a href="/docs/it/flat.md">FLAT</a>, per misurare il recall.</li>
+<li>Varia l’ <code translate="no">ef</code> e del tempo di ricerca alla concorrenza desiderata. Registra insieme il recall, il throughput e la latenza di coda. L’aumento dell’ <code translate="no">ef</code> e non richiede la ricostruzione dell’indice.</li>
+<li>Se l’ottimizzazione in fase di ricerca non riesce a soddisfare l’obiettivo, confrontare gli indici ricostruiti con diversi valori di <code translate="no">M</code> e <code translate="no">efConstruction</code>. Registrare il tempo di creazione dell’indice e l’utilizzo della memoria, oltre alle prestazioni delle query.</li>
+<li>Includere nel test la strategia di caricamento e lo stato della cache. Quando si utilizza <a href="/docs/it/tiered-storage-overview.md">l’archiviazione a livelli (Tiered Storage)</a>, misurare separatamente le query che recuperano dati non memorizzati nella cache rispetto alle query con cache “warm”.</li>
+</ol>
+<p>In caso di limitazioni di memoria o di obiettivi diversi per il recall e la latenza, confrontare le alternative descritte in <a href="/docs/it/index-explained.md">"Index Explained</a>".</p>

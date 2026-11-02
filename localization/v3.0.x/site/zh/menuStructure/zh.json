@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker（Linux）",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose（Linux）",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop（Windows）",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -322,7 +316,7 @@
             "children": []
           },
           {
-            "label": "Create Collection",
+            "label": "创建Collection",
             "id": "create-collection.md",
             "order": 1,
             "children": []
@@ -485,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段",
+                "label": "将数据插入 StructArray 字段中",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
@@ -697,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "解合器",
+                    "label": "解聚剂",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -755,7 +749,7 @@
             "children": []
           },
           {
-            "label": "修改集合 Schema",
+            "label": "修改Collection Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1365,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名系统",
+                "label": "RRF 排名器",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1433,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1599,7 +1593,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 的 Agents.md",
+            "label": "Milvus 版 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1651,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "Claude Code 的 MCP 服务器",
+        "label": "Claude 代码的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2001,7 +1995,7 @@
         ]
       },
       {
-        "label": "监控、警报与日志",
+        "label": "监控、警报和日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2234,7 +2228,7 @@
                 "children": []
               },
               {
-                "label": "在不同存储桶之间的实例之间进行迁移",
+                "label": "在不同存储桶的实例之间迁移",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []

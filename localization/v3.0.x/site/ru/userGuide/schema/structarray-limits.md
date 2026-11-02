@@ -39,13 +39,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Основные ограничения StructArray:</p>
+<table>
 <thead>
 <tr><th>Область</th><th>Ограничение</th></tr>
 </thead>
 <tbody>
-<tr><td>Форма схемы</td><td>Struct можно использовать только в качестве типа элемента поля Array. Struct не поддерживается в качестве поля коллекции верхнего уровня.</td></tr>
-<tr><td>Схема подполя</td><td>Все элементы Struct в одном поле StructArray используют одну предопределенную схему Struct.</td></tr>
+<tr><td>Форма схемы</td><td>Struct можно использовать только в качестве типа элемента поля массива. Struct не поддерживается в качестве поля коллекции верхнего уровня.</td></tr>
+<tr><td>Схема подполей</td><td>Все элементы Struct в одном поле StructArray используют одну предопределенную схему Struct.</td></tr>
 <tr><td>Емкость</td><td><code translate="no">max_capacity</code> является обязательным параметром и ограничивает количество элементов Struct, которые одна сущность может хранить в поле StructArray.</td></tr>
 <tr><td>Изменения подполей</td><td>После создания поля StructArray вы не сможете добавлять подполя в это существующее поле StructArray.</td></tr>
 <tr><td>Путь к подполю</td><td>Используйте пути в формате <code translate="no">structArray[subfield]</code>, например <code translate="no">chunks[emb]</code>, для индексов, целей поиска, полей вывода и фильтров. Не используйте <code translate="no">chunks.emb</code>.</td></tr>
@@ -71,12 +72,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Схемы StructArray имеют следующие ограничения:</p>
+<table>
 <thead>
 <tr><th>Ограничение</th><th>Подробности</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct не является типом поля верхнего уровня.</td><td>Создайте поле StructArray как « <code translate="no">datatype=DataType.ARRAY</code> » с « <code translate="no">element_type=DataType.STRUCT</code> » и « <code translate="no">struct_schema</code> ».</td></tr>
+<tr><td>Struct не является типом поля верхнего уровня.</td><td>Создайте поле StructArray как <code translate="no">datatype=DataType.ARRAY</code> с <code translate="no">element_type=DataType.STRUCT</code> и <code translate="no">struct_schema</code>.</td></tr>
 <tr><td>Все элементы используют одну схему.</td><td>Каждый элемент Struct в поле StructArray соответствует тому же списку подполей и тем же типам данных подполей.</td></tr>
 <tr><td><code translate="no">max_capacity</code> обязательно.</td><td>Количество элементов Struct в одной сущности не должно превышать значение <code translate="no">max_capacity</code>, настроенное для поля StructArray.</td></tr>
 <tr><td>Существующие подполя являются фиксированными.</td><td>К существующему полю StructArray нельзя добавлять новые подполя. Чтобы изменить схему подполей, удалите поле StructArray и добавьте его заново с обновленной схемой.</td></tr>
@@ -100,31 +102,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поподполя StructArray сопоставляются с физическим хранением в виде массива. В следующей таблице перечислены поддерживаемые и неподдерживаемые физические типы.</p>
+    </button></h2><p>Поподполя StructArray сопоставляются физическому хранению в виде массива. В следующей таблице перечислены поддерживаемые и неподдерживаемые физические типы:</p>
 <table>
 <thead>
 <tr><th>Физический тип подполя Struct</th><th>Поддержка</th><th>Примечания</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>Поддерживается</td><td>Определите подполе как ` <code translate="no">DataType.BOOL</code>`.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> или <code translate="no">DataType.INT64</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.FLOAT</code> или <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.VARCHAR</code> и установите <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.FLOAT_VECTOR</code> и установите <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.FLOAT16_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.BFLOAT16_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.INT8_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.BINARY_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Не поддерживается</td><td>Подполя в виде разреженных векторов не поддерживаются в полях StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>Используйте <code translate="no">VARCHAR</code>, а не <code translate="no">String</code>.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpola JSON не поддерживаются в полях StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Геометрия» и функции ГИС не поддерживаются в полях StructArray.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>По podpolu «Текст» в полях StructArray не поддерживаются.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Не поддерживается</td><td>В полях StructArray не поддерживаются подполя Timestamptz и выражения, зависящие от времени.</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Поддерживается</td><td>Определите подполе как ` <code translate="no">DataType.BOOL</code>`.</td></tr>
+<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code> или <code translate="no">DataType.INT64</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.FLOAT</code> или <code translate="no">DataType.DOUBLE</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.VARCHAR</code> и установите <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>Поддерживается</td><td>Определите подполе как <code translate="no">DataType.FLOAT_VECTOR</code> и установите <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.FLOAT16_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.BFLOAT16_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.INT8_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Поддерживается</td><td>Определите подполе как « <code translate="no">DataType.BINARY_VECTOR</code> » и установите значение « <code translate="no">dim</code> ».</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Не поддерживается</td><td>Подполя в виде разреженных векторов не поддерживаются в полях StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>Не поддерживается</td><td>Используйте <code translate="no">VARCHAR</code>, а не <code translate="no">String</code>.</td></tr>
+<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>Не поддерживается</td><td>По podpola JSON не поддерживаются в полях StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>Не поддерживается</td><td>По podpolu «Геометрия» и функции ГИС не поддерживаются в полях StructArray.</td></tr>
+<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>Не поддерживается</td><td>По podpolu «Текст» в полях StructArray не поддерживаются.</td></tr>
+<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>Не поддерживается</td><td>В полях StructArray не поддерживаются подполя Timestamptz и выражения, связанные со временем.</td></tr>
 <tr><td>Вложенные « <code translate="no">Array</code> », « <code translate="no">ArrayOfVector</code> », « <code translate="no">Struct</code> » или <code translate="no">ArrayOfStruct</code></td><td>Не поддерживается</td><td>Поля StructArray не поддерживают вложенные подполя типа массива, вектор-массива, Struct или массива структур.</td></tr>
 </tbody>
 </table>
-<h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">Ограничения, связанные с допускающими нулевые значения и динамическими схемами<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
+<h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">Ограничения, связанные с допускаемыми нулевыми значениями и динамической схемой<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,24 +141,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поведение StructArray с допустимыми нулевыми значениями и динамическое добавление полей StructArray зависят от версии.</p>
+    </button></h2><p>В следующей таблице описано поведение StructArray с возможностью принятия нулевых значений и динамическое добавление полей StructArray с учетом приведенного ниже заявления о доступности:</p>
 <table>
 <thead>
-<tr><th>Возможности</th><th>Ограничение</th></tr>
+<tr><th>Возможность</th><th>Ограничение</th></tr>
 </thead>
 <tbody>
-<tr><td>Поле StructArray с возможностью принятия нулевого значения</td><td>Поддерживается в Milvus 3.0.0 и более поздних версиях. Установите флаг « <code translate="no">nullable=True</code> » для родительского объекта StructArray; не настраивайте подполя Struct как допускающие нулевые значения отдельно.</td></tr>
-<tr><td>Нулевое значение в Python</td><td>Используйте ` <code translate="no">None</code> ` для вставки нулевого значения StructArray в Python. Не используйте ` <code translate="no">Null</code> ` или ` <code translate="no">null</code>`.</td></tr>
-<tr><td>Область действия нулевого значения</td><td>Значение null применяется ко всему полю StructArray. Например, <code translate="no">chunks=None</code> допустимо только в том случае, если <code translate="no">chunks</code> допускает значение null.</td></tr>
-<tr><td>Частично нулевое значение StructArray</td><td>Если поле StructArray содержит допустимое значение массива, не смешивайте массивы подполей с нулевым значением с массивами подполей с допустимым значением в одном и том же значении.</td></tr>
-<tr><td>Динамическое добавление поля StructArray</td><td>Поддерживается в Milvus 3.0.0 и более поздних версиях.</td></tr>
-<tr><td>Требование к допускаемости нулевых значений при динамическом добавлении</td><td>Поле StructArray, добавляемое в существующую коллекцию, должно быть допускать значение null, поскольку существующие сущности не имеют значения для нового поля.</td></tr>
-<tr><td>Сущности после динамического добавления</td><td>Существующие сущности возвращают значение « <code translate="no">null</code> » для добавленного поля StructArray.</td></tr>
+<tr><td>Поле StructArray, допускающее значение null</td><td>С учетом приведенного ниже заявления о доступности установите флаг « <code translate="no">nullable=True</code> » для родительского объекта StructArray; не настраивайте подполя Struct как допускающие значение NULL независимо.</td></tr>
+<tr><td>Значение NULL в Python</td><td>Используйте ` <code translate="no">None</code> ` для вставки нулевого значения StructArray в Python. Не используйте ` <code translate="no">Null</code> ` или ` <code translate="no">null</code>`.</td></tr>
+<tr><td>Область действия значения null</td><td>Значение NULL распространяется на всё поле StructArray. Например, <code translate="no">chunks=None</code> допустимо только в том случае, если <code translate="no">chunks</code> допускает значение null.</td></tr>
+<tr><td>Частично нулевое значение StructArray</td><td>Если поле StructArray содержит допустимое значение массива, не смешивайте массивы подполей с нулевым значением с массивами подполей с допустимыми значениями в одном и том же значении.</td></tr>
+<tr><td>Динамическое добавление поля StructArray</td><td>С учетом приведенного ниже заявления о доступности.</td></tr>
+<tr><td>Требование к возможности принятия значения null при динамическом добавлении</td><td>Поле StructArray, добавленное в существующую коллекцию, должно допускать значение null, поскольку существующие сущности не имеют значения для нового поля.</td></tr>
+<tr><td>Сущности после динамического добавления</td><td>Сущности возвращают значение « <code translate="no">null</code> » для добавленного поля StructArray.</td></tr>
 </tbody>
 </table>
-<p>Milvus версии 3.0.0 и более поздние поддерживают поля StructArray, допускающие значение null, векторные массивы, допускающие значение null, а также динамическое добавление полей StructArray как в автономных, так и в распределенных развертываниях. Более ранние версии Milvus не поддерживают эти возможности.</p>
-<p>В Zilliz Cloud эти возможности доступны на кластерах On-Demand, работающих под управлением Milvus 3.0.0 или более поздних версий. Сервисные кластеры их не поддерживают.</p>
-<p>Примеры вставки <a href="/docs/ru/insert-data-into-structarray-fields.md">данных</a> с полями StructArray, допускающими значение null, см. в разделе <a href="/docs/ru/insert-data-into-structarray-fields.md">«Вставка данных в поля StructArray</a>».</p>
+<p>В версиях Milvus 3.0.0 и более поздних поддерживаются поля StructArray, допускающие значение null, векторные массивы, допускающие значение null, а также динамическое добавление полей StructArray как в автономных, так и в распределенных развертываниях. Более ранние версии Milvus не поддерживают эти возможности.</p>
+<p>Примеры вставки с полями StructArray, допускающими значение null, см. в разделе <a href="/docs/ru/insert-data-into-structarray-fields.md">«Вставка данных в поля StructArray</a>».</p>
 <h2 id="Insert-limits" class="common-anchor-header">Ограничения на вставку<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,12 +173,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Для данных вставки в StructArray действуют следующие ограничения:</p>
+<table>
 <thead>
 <tr><th>Ограничение</th><th>Подробности</th></tr>
 </thead>
 <tbody>
-<tr><td>Формат полезных данных</td><td>Вставьте поле StructArray в виде массива объектов Struct, например <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
+<tr><td>Формат данных</td><td>Вставьте поле StructArray в виде массива объектов Struct, например <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
 <tr><td>Имена подполей</td><td>Внутри каждого объекта Struct используйте имена подполей, такие как <code translate="no">text</code> и <code translate="no">emb</code>, а не пути, такие как <code translate="no">chunks[text]</code>.</td></tr>
 <tr><td>Соответствие схеме</td><td>Каждый элемент Struct должен соответствовать схеме Struct.</td></tr>
 <tr><td>Емкость</td><td>Количество элементов Struct в одной сущности не должно превышать <code translate="no">max_capacity</code>.</td></tr>
@@ -200,10 +202,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Векторное подполе StructArray может быть индексировано либо для поиска по EmbeddingList, либо для поиска на уровне элементов. Одно и то же векторное подполе не может использовать обе семьи метрик, поскольку каждое векторное поле или векторное подполе принимает только один индекс.</p>
+    </button></h2><p>Векторное подполе StructArray может быть индексировано либо для поиска по EmbeddingList, либо для поиска на уровне элементов. Одно и то же векторное подполе не может использовать обе семьи метрик, поскольку каждое векторное поле или векторное подполе принимает только один индекс. В режимах поиска используются следующие семьи метрик:</p>
 <table>
 <thead>
-<tr><th>Режим поиска</th><th>Семейство метрик</th><th>Уровень результатов</th></tr>
+<tr><th>Режим поиска</th><th>Семейство метрик</th><th>Уровень результата</th></tr>
 </thead>
 <tbody>
 <tr><td>Поиск по EmbeddingList</td><td><code translate="no">MAX_SIM</code>, метрики « <code translate="no">MAX_SIM_COSINE</code> », « <code translate="no">MAX_SIM_IP</code> », « <code translate="no">MAX_SIM_L2</code> » или бинарные метрики « <code translate="no">MAX_SIM_*</code> »</td><td>Результаты на уровне сущностей.</td></tr>
@@ -211,7 +213,7 @@ summary: >-
 </tbody>
 </table>
 <p>Используйте отдельные векторные подполя, если требуются оба режима. Например, используйте <code translate="no">chunks[emb_list_vector]</code> для поиска по EmbeddingList и <code translate="no">chunks[emb]</code> для поиска на уровне элементов.</p>
-<p>При планировании схемы коллекции векторные подполя StructArray учитываются как векторные подполя. Общее количество векторных полей и векторных подполей должно укладываться в пределы, установленные для целевой версии и уровня обслуживания.</p>
+<p>Подполя вектора StructArray учитываются как подполя вектора при планировании схемы коллекции. Общее количество векторных полей и подполей вектора должно укладываться в пределы, установленные для целевой версии и уровня обслуживания.</p>
 <p>Поддерживаемые матрицы типов индекса и метрики см. в разделе <a href="/docs/ru/index-structarray-fields.md">«Поля StructArray индекса</a>».</p>
 <h2 id="Search-limits" class="common-anchor-header">Ограничения поиска<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,15 +230,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Поведение поиска по StructArray имеет следующие ограничения:</p>
+<table>
 <thead>
 <tr><th>Поведение поиска</th><th>Поддержка и ограничения</th></tr>
 </thead>
 <tbody>
-<tr><td>Базовый поиск по EmbeddingList</td><td>Поддерживается для векторных подполей StructArray, индексированных с помощью метрик типа « <code translate="no">MAX_SIM*</code> ». Возвращает результаты на уровне сущностей.</td></tr>
+<tr><td>Базовый поиск в EmbeddingList</td><td>Поддерживается для подполей вектора StructArray, индексированных с помощью метрик <code translate="no">MAX_SIM*</code>. Возвращает результаты на уровне сущностей.</td></tr>
 <tr><td>Базовый поиск на уровне элементов</td><td>Поддерживается для подполей вектора StructArray, индексированных с помощью обычных векторных метрик. Может возвращать смещения совпадающих элементов.</td></tr>
 <tr><td>Поиск по диапазону</td><td>Поддерживается в зависимости от режима поиска и поддержки индексов/метрик целевой версии. Для получения информации о поведении гибридного поиска по диапазону при запросах StructArray на уровне элементов проверьте вашу целевую версию.</td></tr>
-<tr><td>Групповой поиск</td><td>Поиск с группировкой на уровне элементов может возвращать смещения. Поведение гибридного поиска с группировкой для запросов StructArray на уровне элементов зависит от версии.</td></tr>
+<tr><td>Поиск с группировкой</td><td>Поиск с группировкой на уровне элементов может возвращать смещения. Поведение гибридного поиска с группировкой для запросов StructArray на уровне элементов зависит от версии.</td></tr>
 <tr><td>Гибридный поиск</td><td>Запрос гибридного поиска может включать запросы на подполя вектора StructArray только в том случае, если целевая версия поддерживает данную комбинацию поиска. Каждый запрос по-прежнему следует семейству метрик индексированного подполя вектора.</td></tr>
 <tr><td>Вывод смещений</td><td>Смещение доступно для результатов поиска на уровне элементов. Поиск EmbeddingList возвращает результаты на уровне сущностей и не использует смещения элементов в качестве основной единицы результата.</td></tr>
 </tbody>

@@ -42,7 +42,7 @@ title: 安裝 Milvus 獨立執行版本的系統需求
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>Intel 第二代 Core 處理器或更高規格</li><li>Apple Silicon</li></ul></td><td><ul><li>獨立模式：4 核心或以上</li><li>叢集模式：8 核心或以上</li></ul></td><td></td></tr>
-<tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>在 Milvus 中進行向量相似性搜尋與索引建置，需要 CPU 支援單一指令、多資料 (SIMD) 擴充集。請確保 CPU 至少支援下列 SIMD 擴充集之一。如需更多資訊，請參閱「<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">支援 AVX 的 CPU</a>」。</td></tr>
+<tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>在 Milvus 中進行向量相似性搜尋與索引建置，需要 CPU 支援單一指令、多資料 (SIMD) 擴充集。請確保 CPU 至少支援下列 SIMD 擴充集之一。如需更多資訊，請參閱「<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">具備 AVX 的 CPU</a>」。</td></tr>
 <tr><td>記憶體</td><td><ul><li>獨立系統：8G</li><li>叢集：32G</li></ul></td><td><ul><li>獨立系統：16G</li><li>叢集：128G</li></ul></td><td>RAM 的大小取決於資料量。</td></tr>
 <tr><td>硬碟</td><td>SATA 3.0 SSD 或更高規格</td><td>NVMe SSD 或更高規格</td><td>硬碟容量取決於資料量。</td></tr>
 </tbody>
@@ -67,21 +67,24 @@ title: 安裝 Milvus 獨立執行版本的系統需求
 <tr><th>作業系統</th><th>軟體</th><th>備註</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 或更新版本</td><td>Docker Desktop</td><td>請將 Docker 虛擬機器 (VM) 設定為至少使用 2 個虛擬 CPU (vCPU) 及 8 GB 的初始記憶體。否則，安裝可能會失敗。<br/>如需更多資訊，請參閱《<a href="https://docs.docker.com/desktop/mac/install/">在 Mac 上安裝 Docker Desktop</a>》。</td></tr>
-<tr><td>Linux 平台</td><td><ul><li>Docker 19.03 或更新版本</li><li>Docker Compose 1.25.1 或更新版本</li></ul></td><td>如需更多資訊，請參閱《<a href="https://docs.docker.com/engine/install/">安裝 Docker Engine</a>》及《<a href="https://docs.docker.com/compose/install/">安裝 Docker Compose</a>》。</td></tr>
-<tr><td>已啟用 WSL 2 的 Windows</td><td>Docker Desktop</td><td>我們建議您將源碼及其他透過綁定掛載方式存入 Linux 容器的資料，儲存於 Linux 檔案系統中，而非 Windows 檔案系統。<br/>如需更多資訊，請參閱《<a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">在採用 WSL 2 後端的 Windows 上安裝 Docker Desktop</a>》。</td></tr>
+<tr><td>Docker Desktop 支援的 macOS 版本</td><td>Docker Desktop</td><td>請為 Docker 虛擬機器 (VM) 分配至少 8 GB 的記憶體，並根據上述硬體建議設定其 CPU 數量。<br/>如需更多資訊，請參閱《<a href="https://docs.docker.com/desktop/setup/install/mac-install/">在 Mac 上安裝 Docker Desktop</a>》。</td></tr>
+<tr><td>Linux 平台</td><td><ul><li>Docker 19.03 或更新版本</li><li>Docker Compose 外掛程式 V2 或更新版本（適用於 Compose 部署）</li></ul></td><td>如需更多資訊，請參閱《<a href="https://docs.docker.com/engine/install/">安裝 Docker Engine</a>》及《<a href="https://docs.docker.com/compose/install/">安裝 Docker Compose</a>》。</td></tr>
+<tr><td>已啟用 WSL 2 的 Windows</td><td>Docker Desktop</td><td>我們建議您將源碼及其他透過綁定掛載存入 Linux 容器的資料，儲存於 Linux 檔案系統中，而非 Windows 檔案系統。<br/>如需更多資訊，請參閱《<a href="https://docs.docker.com/desktop/features/wsl/">在採用 WSL 2 後端的 Windows 上安裝 Docker Desktop</a>》。</td></tr>
 </tbody>
 </table>
-<p>當您使用 Docker 腳本或 Docker Compose 配置安裝 Milvus Standalone 時，系統將自動取得並設定以下依賴項：</p>
+<p>Compose 指南使用<code translate="no">docker compose</code> ，而非舊版的<code translate="no">docker-compose</code> V1 指令。在遵循指南之前，請先驗證該外掛程式：</p>
+<pre><code translate="no" class="language-bash">docker compose version
+<button class="copy-code-btn"></button></code></pre>
+<p>安裝方式將決定依賴項的提供方式。請使用下載的腳本或 Compose 檔案中指定固定的映像檔版本：</p>
 <table>
 <thead>
-<tr><th>軟體</th><th>版本</th><th>備註</th></tr>
+<tr><th>元件</th><th>Docker 腳本</th><th>Docker Compose</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>請參閱<a href="#Additional-disk-requirements">額外的磁碟需求</a>。</td></tr>
-<tr><td>MinIO</td><td>發行版.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>隨 Milvus 一併提供</td><td>預設訊息佇列（內嵌）；無需安裝獨立服務。</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>可選 — 僅當您將訊息佇列切換至 Pulsar 時才需安裝；預設不會安裝。</td></tr>
+<tr><td>etcd</td><td>嵌入 Milvus 容器中</td><td>獨立容器；請參閱<a href="#Additional-disk-requirements">額外的磁碟需求</a>。</td></tr>
+<tr><td>物件儲存</td><td>本機檔案系統；無 MinIO 容器</td><td>MinIO 容器，其映像檔已固定於 Compose 檔案中</td></tr>
+<tr><td>Woodpecker</td><td>與 Milvus 捆綁；採用本機檔案系統作為 WAL 後端</td><td>與 Milvus 捆綁；採用 MinIO／物件儲存作為 WAL 後端</td></tr>
+<tr><td>Pulsar</td><td>可選的外部服務；預設不會安裝</td><td>可選的外部服務；預設不安裝</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">額外的磁碟需求<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
@@ -104,7 +107,7 @@ title: 安裝 Milvus 獨立執行版本的系統需求
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>理想情況下，專門用於 etcd 的磁碟應達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的規格要求。</p>
+<p>理想情況下，專用於 etcd 的磁碟應達到超過 500 IOPS，且第 99 百分位 fsync 延遲應低於 10 毫秒。請參閱 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以了解更詳細的規格要求。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

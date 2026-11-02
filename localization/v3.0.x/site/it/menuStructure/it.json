@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -1637,7 +1631,7 @@
         ]
       },
       {
-        "label": "Abilità di Milvus",
+        "label": "Abilità Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -2164,7 +2158,7 @@
             "children": []
           },
           {
-            "label": "Connettiti a Kafka con SASL/SSL",
+            "label": "Connettiti a Kafka tramite SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []

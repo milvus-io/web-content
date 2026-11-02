@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, Vektor-Unterfelder oder beides enthalten.</p>
+    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, vektorielle Unterfelder oder beides enthalten.</p>
 <p>Beispielsweise kann eine Sammlung einen Artikel als Entität speichern und dessen Chunks in einem StructArray-Feld namens „ <code translate="no">chunks</code> “ ablegen. Jeder Chunk kann Text, Abschnittsmetadaten, Qualitätsbewertungen und eine oder mehrere Vektor-Einbettungen enthalten.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
@@ -94,9 +94,9 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Dokumentenabruf</td><td>Speichern Sie ein Dokument als Entität, während Sie dessen Chunks durchsuchen.</td><td><code translate="no">chunks</code></td></tr>
-<tr><td>Abruf bei späterer Interaktion</td><td>Speichern Sie ein Dokument oder eine Seite als Einbettungsliste und bewerten Sie diese mit „ <code translate="no">MAX_SIM*</code> “.</td><td><code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">patches[emb]</code></td></tr>
+<tr><td>Abruf bei späterer Interaktion</td><td>Speichern Sie ein Dokument oder eine Seite als Einbettungsliste und bewerten Sie es/sie mit „ <code translate="no">MAX_SIM*</code> “.</td><td><code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">patches[emb]</code></td></tr>
 <tr><td>Abruf auf Elementebene</td><td>Geben Sie den relevantesten Chunk, Clip, Patch oder die relevanteste Beobachtung zurück, einschließlich des Array-Offsets.</td><td><code translate="no">chunks[emb]</code></td></tr>
-<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von „Struct“-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
+<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von Struct-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
 <tr><td>Reduzierung doppelter übergeordneter Ergebnisse</td><td>Behalten Sie untergeordnete Elemente unter derselben übergeordneten Entität bei, anstatt jedes untergeordnete Element als separate Zeile zu speichern.</td><td><code translate="no">chunks</code>, <code translate="no">clips</code>, <code translate="no">patches</code></td></tr>
 </tbody>
 </table>
@@ -150,8 +150,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>EmbeddingList-Suche</h3></th>
-      <th scope="col"><h3>Suche auf Elementebene</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">EmbeddingList-Suche</h3></th>
+      <th scope="col"><h3 id="element-level-search">Suche auf Elementebene</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -177,9 +177,8 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Warnung</p>
-<p>Wenn Ihre Sammlung sowohl die EmbeddingList-Suche als auch die Suche auf Elementebene benötigt, verwenden Sie zwei separate Vektor-Unterfelder. Ein Vektorfeld oder Vektor-Unterfeld akzeptiert nur einen Index, und die beiden Suchmodi erfordern unterschiedliche Metrikfamilien.</p>
+<div class="alert warning">
+<p>Wenn Ihre Sammlung sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigt, verwenden Sie zwei separate Vektor-Unterfelder. Ein Vektorfeld oder Vektor-Unterfeld akzeptiert nur einen Index, und die beiden Suchmodi erfordern unterschiedliche Metrikfamilien.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Übersicht über die Dokumentation<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +195,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Dokumentation zu „StructArray“ ist in Modellierungs- und Suchseiten unterteilt. Verwenden Sie die Modellierungsseiten, um Daten zu definieren und vorzubereiten. Verwenden Sie die Suchseiten, um das richtige Abruf- und Filterverhalten auszuwählen.</p>
+    </button></h2><p>Die StructArray-Dokumentation ist in Modellierungs- und Suchseiten unterteilt. Verwenden Sie die Modellierungsseiten, um Daten zu definieren und vorzubereiten. Verwenden Sie die Suchseiten, um das richtige Abruf- und Filterverhalten auszuwählen.</p>
 <table>
 <thead>
 <tr><th>Bereich</th><th>Seite</th><th>Verwenden Sie sie für</th></tr>

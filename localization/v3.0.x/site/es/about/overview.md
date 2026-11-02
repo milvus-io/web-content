@@ -8,7 +8,7 @@ summary: >-
   ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible
   tanto como software de código abierto como servicio en la nube.
 ---
-<h1 id="What-is-Milvus" class="common-anchor-header">¿Qué es el Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
+<h1 id="What-is-Milvus" class="common-anchor-header">¿Qué es Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+    </button></h1><p>Milvus es una base de datos vectorial para almacenar representaciones y buscarlas junto con metadatos estructurados. Úsala como capa de recuperación en aplicaciones como RAG, búsqueda semántica y memoria de agentes: tu aplicación proporciona los datos, el modelo de representación y las reglas de acceso, mientras que Milvus almacena, indexa y recupera las entidades coincidentes.</p>
+<p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
 <audio id="milvus-audio" style="display: none;">
 <source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
 </audio>
@@ -36,14 +37,14 @@ summary: >-
     cursor: pointer;
     margin-left: 4px;
   " onclick="document.getElementById('milvus-audio').play()"></span>
-</span></span> es un ave rapaz del género Milvus, perteneciente a la familia de los halcones Accipitridae, famosa por su velocidad en vuelo, su aguda visión y su notable capacidad de adaptación.</p>
+</span></span> es un ave rapaz del género Milvus, perteneciente a la familia de los halcones Accipitridae, famosa por su velocidad en el vuelo, su aguda visión y su notable capacidad de adaptación.</p>
 <style>
   audio::-webkit-media-controls {
     display: none !important;
   }
 </style>
 <p>Zilliz adopta el nombre de Milvus para su base de datos vectorial de código abierto, de alto rendimiento y altamente escalable, que funciona de manera eficiente en una amplia gama de entornos, desde un ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible tanto como software de código abierto como servicio en la nube.</p>
-<p>Desarrollada por Zilliz y que pronto será cedida a la LF AI &amp; Data Foundation, dependiente de la Linux Foundation, Milvus se ha convertido en uno de los proyectos de bases de datos vectoriales de código abierto más importantes del mundo. Se distribuye bajo la licencia Apache 2.0, y la mayoría de los colaboradores son expertos de la comunidad de computación de alto rendimiento (HPC), especializados en la creación de sistemas a gran escala y en la optimización de código adaptado al hardware. Entre los colaboradores principales se encuentran profesionales de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba y Microsoft.</p>
+<p>Desarrollada por Zilliz y que pronto se donará a la LF AI &amp; Data Foundation, dependiente de la Linux Foundation, Milvus se ha convertido en uno de los proyectos de bases de datos vectoriales de código abierto líderes a nivel mundial. Se distribuye bajo la licencia Apache 2.0, y la mayoría de los colaboradores son expertos de la comunidad de computación de alto rendimiento (HPC), especializados en la creación de sistemas a gran escala y en la optimización de código adaptado al hardware. Entre los colaboradores principales se encuentran profesionales de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba y Microsoft.</p>
 <p>Curiosamente, todos los proyectos de código abierto de Zilliz llevan el nombre de un pájaro, una convención de nomenclatura que simboliza la libertad, la visión de futuro y la evolución ágil de la tecnología.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Datos no estructurados, representaciones vectoriales y Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -117,7 +118,7 @@ summary: >-
    <span>Arquitectura de sistema altamente desacoplada de Milvus</span>
   
  </span></p>
-<p>Milvus es, en sí mismo, totalmente «stateless», por lo que puede escalarse fácilmente con la ayuda de Kubernetes o de nubes públicas. Además, los componentes de Milvus están bien desacoplados, y las tres tareas más críticas —búsqueda, inserción de datos e indexación/compactación— están diseñadas como procesos fácilmente paralelizables, con la lógica compleja separada. Esto garantiza que los correspondientes nodos de consulta, de datos y de índice puedan escalar tanto vertical como horizontalmente de forma independiente, optimizando el rendimiento y la rentabilidad.</p>
+<p>Milvus es, en sí mismo, totalmente «stateless», por lo que puede escalarse fácilmente con la ayuda de Kubernetes o de las nubes públicas. Además, los componentes de Milvus están bien desacoplados, y las tres tareas más críticas —búsqueda, inserción de datos e indexación/compactación— están diseñadas como procesos fácilmente paralelizables, con la lógica compleja separada. Esto garantiza que los correspondientes nodos de consulta, de datos y de índice puedan escalar tanto vertical como horizontalmente de forma independiente, optimizando el rendimiento y la rentabilidad.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Tipos de búsquedas compatibles con Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,15 +134,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus admite diversos tipos de funciones de búsqueda para satisfacer las necesidades de diferentes casos de uso:</p>
+    </button></h2><p>Milvus admite varios tipos de funciones de búsqueda para satisfacer las demandas de diferentes casos de uso:</p>
 <ul>
 <li><a href="/docs/es/single-vector-search.md#Basic-search">Búsqueda ANN</a>: encuentra los K vectores más cercanos a tu vector de consulta.</li>
 <li><a href="/docs/es/single-vector-search.md#Filtered-search">Búsqueda con filtrado</a>: realiza una búsqueda ANN bajo condiciones de filtrado especificadas.</li>
 <li><a href="/docs/es/single-vector-search.md#Range-search">Búsqueda por rango</a>: encuentra vectores dentro de un radio especificado respecto al vector de consulta.</li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>: realiza una búsqueda ANN basada en múltiples campos vectoriales.</li>
 <li><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>: búsqueda de texto completo basada en BM25.</li>
-<li><a href="/docs/es/weighted-ranker.md">Reordenación</a>: Ajusta el orden de los resultados de la búsqueda basándose en criterios adicionales o en un algoritmo secundario, refinando los resultados iniciales de la búsqueda ANN.</li>
-<li><a href="/docs/es/get-and-scalar-query.md#Get-Entities-by-ID">Recuperación</a>: Recupera datos mediante sus claves primarias.</li>
+<li><a href="/docs/es/weighted-ranker.md">Reordenación</a>: Ajusta el orden de los resultados de búsqueda basándose en criterios adicionales o en un algoritmo secundario, refinando los resultados iniciales de la búsqueda ANN.</li>
+<li><a href="/docs/es/get-and-scalar-query.md#Get-Entities-by-ID">Recuperación</a>: recupera datos mediante sus claves primarias.</li>
 <li><a href="/docs/es/get-and-scalar-query.md#Use-Basic-Operators">Consulta</a>: recupera datos mediante expresiones específicas.</li>
 </ul>
 <h2 id="Comprehensive-Feature-Set" class="common-anchor-header">Conjunto completo de funciones<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
@@ -159,7 +160,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Además de las funciones de búsqueda clave mencionadas anteriormente, Milvus también ofrece un conjunto de funciones implementadas en torno a las búsquedas de la red neuronal artificial (ANN) para que puedas aprovechar al máximo sus capacidades.</p>
+    </button></h2><p>Además de las funciones de búsqueda clave mencionadas anteriormente, Milvus también ofrece un conjunto de funciones implementadas en torno a las búsquedas con redes neuronales artificiales (ANN) para que puedas aprovechar al máximo sus capacidades.</p>
 <h3 id="API-and-SDK" class="common-anchor-header">API y SDK<button data-href="#API-and-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,7 +181,7 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/pymilvus/v2.6.x/About.md">PyMilvus</a> (SDK de Python) (oficial)</li>
 <li><a href="https://milvus.io/api-reference/go/v2.6.x/About.md">SDK de Go</a> (oficial)</li>
 <li><a href="https://milvus.io/api-reference/java/v2.6.x/About.md">SDK de Java</a> (oficial)</li>
-<li>SDK para<a href="https://milvus.io/api-reference/node/v2.6.x/About.md">Node.js</a> (JavaScript) (oficial)</li>
+<li>SDK de<a href="https://milvus.io/api-reference/node/v2.6.x/About.md">Node.js</a> (JavaScript) (oficial)</li>
 <li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (aportado por Microsoft)</li>
 <li><a href="https://milvus.io/api-reference/cpp/v2.6.x/About.md">SDK de C++</a> (oficial)</li>
 <li>SDK de Rust (en desarrollo)</li>
@@ -207,7 +208,7 @@ summary: >-
 <li><a href="/docs/es/use-json-fields.md">Compatibilidad con JSON</a></li>
 <li><a href="/docs/es/array_data_type.md">Compatibilidad con matrices</a></li>
 <li><a href="/docs/es/geometry-field.md">Geolocalización</a></li>
-<li>Texto (en desarrollo)</li>
+<li><a href="/docs/es/text.md">Texto</a> (Milvus 3.0 y posteriores; requiere Storage V3)</li>
 </ul>
 <h3 id="Why-Milvus" class="common-anchor-header">¿Por qué Milvus?<button data-href="#Why-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,15 +227,15 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><strong>Alto rendimiento a gran escala y alta disponibilidad</strong></p>
-<p>Milvus cuenta con una <a href="/docs/es/architecture_overview.md">arquitectura distribuida</a> que separa <a href="/docs/es/data_processing.md#Data-query">la computación</a> del <a href="/docs/es/data_processing.md#Data-insertion">almacenamiento</a>. Milvus puede escalar horizontalmente y adaptarse a diversos patrones de tráfico, logrando un rendimiento óptimo al aumentar de forma independiente los nodos de consulta para cargas de trabajo con gran volumen de lecturas y los nodos de datos para cargas de trabajo con gran volumen de escrituras. Los microservicios sin estado en K8s permiten <a href="/docs/es/coordinator_ha.md#Coordinator-HA">una rápida recuperación</a> ante fallos, lo que garantiza una alta disponibilidad. La compatibilidad con <a href="/docs/es/replica.md">réplicas</a> mejora aún más la tolerancia a fallos y el rendimiento al cargar segmentos de datos en múltiples nodos de consulta. Consulta <a href="https://zilliz.com/vector-database-benchmark-tool">la prueba de rendimiento</a> para comparar el rendimiento.</p></li>
+<p>Milvus cuenta con una <a href="/docs/es/architecture_overview.md">arquitectura distribuida</a> que separa <a href="/docs/es/data_processing.md#Data-query">la computación</a> del <a href="/docs/es/data_processing.md#Data-insertion">almacenamiento</a>. Milvus puede escalar horizontalmente y adaptarse a diversos patrones de tráfico, logrando un rendimiento óptimo al aumentar de forma independiente los nodos de consulta para cargas de trabajo con gran volumen de lecturas y los nodos de datos para cargas de trabajo con gran volumen de escrituras. Los microservicios sin estado en K8s permiten <a href="/docs/es/coordinator_ha.md#Coordinator-HA">una rápida recuperación</a> ante fallos, lo que garantiza una alta disponibilidad. La compatibilidad con <a href="/docs/es/replica.md">réplicas</a> mejora aún más la tolerancia a fallos y el rendimiento al cargar segmentos de datos en varios nodos de consulta. Consulta <a href="https://zilliz.com/vector-database-benchmark-tool">la prueba de rendimiento</a> para comparar el rendimiento.</p></li>
 <li><p><strong>Compatibilidad con diversos tipos de índices vectoriales y aceleración por hardware</strong></p>
-<p>Milvus separa el sistema del motor de búsqueda vectorial principal, lo que le permite admitir todos los principales tipos de índices vectoriales optimizados para diferentes escenarios, incluidos HNSW, IVF, FLAT (fuerza bruta), SCANN y DiskANN, con variaciones <a href="/docs/es/index-explained.md">basadas en la cuantificación</a> y <a href="/docs/es/mmap.md">mmap</a>. Milvus optimiza la búsqueda vectorial para funciones avanzadas como <a href="/docs/es/boolean.md">el filtrado de metadatos</a> y <a href="/docs/es/range-search.md">la búsqueda por rango</a>. Además, Milvus implementa aceleración por hardware para mejorar el rendimiento de la búsqueda vectorial y admite la indexación por GPU, como <a href="/docs/es/gpu-cagra.md">CAGRA</a> de NVIDIA.</p></li>
+<p>Milvus separa el sistema del motor de búsqueda vectorial principal, lo que le permite admitir todos los principales tipos de índices vectoriales optimizados para diferentes escenarios, incluidos HNSW, IVF, FLAT (fuerza bruta), SCANN y DiskANN, con variantes <a href="/docs/es/index-explained.md">basadas en cuantificación</a> y <a href="/docs/es/mmap.md">mmap</a>. Milvus optimiza la búsqueda vectorial para funciones avanzadas como <a href="/docs/es/boolean.md">el filtrado de metadatos</a> y <a href="/docs/es/range-search.md">la búsqueda por rango</a>. Además, Milvus implementa aceleración por hardware para mejorar el rendimiento de la búsqueda vectorial y admite la indexación mediante GPU, como <a href="/docs/es/gpu-cagra.md">CAGRA</a> de NVIDIA.</p></li>
 <li><p><strong>Multitenencia flexible y almacenamiento «caliente»/«frío»</strong></p>
-<p>Milvus admite <a href="/docs/es/multi_tenancy.md#Multi-tenancy-strategies">la multitenencia</a> mediante el aislamiento a nivel de base de datos, colección, partición o clave de partición. Estas estrategias flexibles permiten que un único clúster gestione desde cientos hasta millones de usuarios, al tiempo que garantizan un rendimiento de búsqueda optimizado y un control de acceso flexible. Milvus mejora la rentabilidad gracias al almacenamiento «caliente» y «frío». Los datos «calientes», a los que se accede con frecuencia, pueden almacenarse en memoria o en SSD para obtener un mejor rendimiento, mientras que los datos «fríos», a los que se accede con menos frecuencia, se guardan en un almacenamiento más lento y económico. Este mecanismo puede reducir significativamente los costes al tiempo que mantiene un alto rendimiento para las tareas críticas.</p></li>
+<p>Milvus admite <a href="/docs/es/multi_tenancy.md#Multi-tenancy-strategies">la multitenencia</a> mediante el aislamiento a nivel de base de datos, colección, partición o clave de partición. Elige una estrategia de aislamiento en función del número de inquilinos, el control de acceso y la carga de trabajo. Con <a href="/docs/es/tiered-storage-overview.md">el almacenamiento por niveles</a>, disponible en Milvus 2.6.4 y versiones posteriores, los QueryNodes almacenan en caché los datos del almacenamiento de objetos persistente bajo demanda. Esto puede reducir los requisitos de recursos locales, pero una consulta que necesite datos no almacenados en caché conlleva una E/S adicional y puede presentar una mayor latencia. Configura <a href="/docs/es/warm-up.md">el «Warm Up»</a> y <a href="/docs/es/eviction.md">la expulsión</a> según tus patrones de acceso, y mide tanto las consultas «frías» como las «templadas».</p></li>
 <li><p><strong>Vector disperso para la búsqueda de texto completo y la búsqueda híbrida</strong></p>
-<p>Además de la búsqueda semántica mediante vectores densos, Milvus también admite de forma nativa <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25, así como incrustaciones dispersas aprendidas, como SPLADE y BGE-M3. Los usuarios pueden almacenar vectores dispersos y vectores densos en la misma colección, y definir funciones para reordenar los resultados de múltiples solicitudes de búsqueda. Véanse ejemplos de <a href="/docs/es/full_text_search_with_milvus.md">búsqueda híbrida con búsqueda semántica + búsqueda de texto completo</a>.</p></li>
+<p>Además de la búsqueda semántica mediante vectores densos, Milvus también admite de forma nativa <a href="/docs/es/full-text-search.md">la búsqueda de texto completo</a> con BM25, así como incrustaciones dispersas aprendidas, como SPLADE y BGE-M3. Los usuarios pueden almacenar vectores dispersos y vectores densos en la misma colección, y definir funciones para reordenar los resultados de múltiples solicitudes de búsqueda. Consulte ejemplos de <a href="/docs/es/full_text_search_with_milvus.md">búsqueda híbrida con búsqueda semántica + búsqueda de texto completo</a>.</p></li>
 <li><p><strong>Seguridad de los datos y control de acceso detallado</strong></p>
-<p>Milvus garantiza la seguridad de los datos mediante la implementación de <a href="/docs/es/authenticate.md">la autenticación obligatoria de usuarios</a>, <a href="/docs/es/tls.md">el cifrado TLS</a> y <a href="/docs/es/rbac.md">el control de acceso basado en roles (RBAC)</a>. La autenticación de usuarios garantiza que solo los usuarios autorizados con credenciales válidas puedan acceder a la base de datos, mientras que el cifrado TLS protege todas las comunicaciones dentro de la red. Además, el RBAC permite un control de acceso detallado mediante la asignación de permisos específicos a los usuarios en función de sus roles. Estas características convierten a Milvus en una opción sólida y segura para aplicaciones empresariales, ya que protege los datos confidenciales frente al acceso no autorizado y posibles brechas de seguridad.</p></li>
+<p>Milvus garantiza la seguridad de los datos mediante la implementación de <a href="/docs/es/authenticate.md">la autenticación obligatoria de usuarios</a>, <a href="/docs/es/tls.md">el cifrado TLS</a> y <a href="/docs/es/rbac.md">el control de acceso basado en roles (RBAC)</a>. La autenticación de usuarios garantiza que solo los usuarios autorizados con credenciales válidas puedan acceder a la base de datos, mientras que el cifrado TLS protege todas las comunicaciones dentro de la red. Además, el RBAC permite un control de acceso detallado mediante la asignación de permisos específicos a los usuarios en función de sus roles. Estas características convierten a Milvus en una opción sólida y segura para aplicaciones empresariales, ya que protege los datos confidenciales frente al acceso no autorizado y posibles violaciones de seguridad.</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">Integraciones de IA<button data-href="#AI-Integrations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +287,29 @@ Milvus Backup es una herramienta que permite a los usuarios realizar copias de s
 <li><p>Milvus Capture Data Change (CDC)
 Milvus CDC puede replicar los cambios en los datos de un clúster de Milvus a otro para la recuperación ante desastres en modo primario-secundario. Para más detalles, consulta <a href="/docs/es/milvus_cdc_overview.md">«Milvus CDC</a>».</p></li>
 <li><p>Conectores de Milvus
-Milvus ha desarrollado un conjunto de conectores para que puedas integrar Milvus a la perfección con herramientas de terceros, como Apache Spark. Actualmente, puedes utilizar nuestro conector Spark para enviar tus datos de Milvus a Apache Spark con el fin de procesarlos mediante aprendizaje automático. Para obtener más información, consulta <a href="/docs/es/integrate_with_spark.md">«Conector Spark-Milvus</a>».</p></li>
+Milvus ha diseñado un conjunto de conectores para que puedas integrar Milvus a la perfección con herramientas de terceros, como Apache Spark. Actualmente, puedes utilizar nuestro conector Spark para enviar tus datos de Milvus a Apache Spark con el fin de procesarlos mediante aprendizaje automático. Para obtener más información, consulta <a href="/docs/es/integrate_with_spark.md">«Conector Spark-Milvus</a>».</p></li>
 <li><p>Servicios de transmisión vectorial (VTS)
-Milvus ofrece un conjunto de herramientas para que puedas transferir tus datos entre una instancia de Milvus y diversas fuentes de datos, entre las que se incluyen clústeres de Zilliz, Elasticsearch, Postgres (PgVector) y otra instancia de Milvus. Para obtener más información, consulta <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
+Milvus proporciona un conjunto de herramientas para que pueda transferir sus datos entre una instancia de Milvus y diversas fuentes de datos, entre las que se incluyen clústeres de Zilliz, Elasticsearch, Postgres (PgVector) y otra instancia de Milvus. Para obtener más información, consulte <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
+</ul>
+<h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Elige una guía en función de la tarea que desees realizar:</p>
+<ul>
+<li>Ejecuta <a href="/docs/es/quickstart.md">la guía de inicio rápido</a> para crear una colección, insertar entidades y buscarlas.</li>
+<li>Utilice <a href="/docs/es/create-collection.md">«Crear colección</a> » para definir campos vectoriales, claves primarias y metadatos para sus datos.</li>
+<li>Sigue la guía <a href="/docs/es/build-rag-with-milvus.md">«Crear un RAG con Milvus</a> » para conectar la recuperación a una aplicación.</li>
+<li>Lee <a href="/docs/es/index-explained.md">«Explicación de los índices</a> » para comparar las ventajas e inconvenientes de los distintos índices según tu carga de trabajo.</li>
 </ul>

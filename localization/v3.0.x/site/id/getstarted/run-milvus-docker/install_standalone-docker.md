@@ -55,31 +55,34 @@ title: Menjalankan Milvus di Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Skrip tersebut tersedia di <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositori Milvus</a>. Untuk menginstal Milvus di Docker, cukup jalankan</p>
+    </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Skrip tersebut tersedia di <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositori Milvus</a>. Unduh dan periksa skrip tersebut sebelum memulai deployment baru:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Inspect the Docker image selected by the script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">grep -n <span class="hljs-string">&quot;milvusdb/milvus:&quot;</span> standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start the Docker container</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v3.0.3:</strong></p>
-<ul>
-<li><strong>Node Streaming</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
-<li><strong>Woodpecker MQ (default)</strong>: Penyebaran Docker ini menjalankan Woodpecker sebagai antrian pesan dengan <strong>sistem berkas lokal</strong> sebagai backend WAL-nya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang dikonsolidasikan untuk kinerja yang lebih baik</li>
-</ul>
-<p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
-<p>Jika Anda ingin menggunakan <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> dalam mode penyebaran mandiri, disarankan untuk menggunakan metode penyebaran <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Skrip ini diunduh dari cabang Milvus <code translate="no">master</code>. Tag gambar Docker-nya ditentukan dalam skrip dan dapat berbeda dari v3.0.3. Untuk menginstal rilis tersebut secara tepat, gunakan konfigurasi berversi di <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>.</p>
+<p>Deploymen Docker ini menjalankan <strong>Woodpecker</strong> dengan <strong>sistem file lokal</strong> sebagai backend WAL-nya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
+<p>Jika Anda ingin menggunakan <a href="/docs/id/milvus_backup_overview.md">Backup</a> dalam mode penyebaran mandiri, disarankan untuk menggunakan metode penyebaran <a href="/docs/id/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p>
 </div>
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>
-<li>Sebuah kontainer Docker bernama milvus-standalone telah dimulai di port <strong>19530</strong>.</li>
+<li>Sebuah kontainer Docker bernama milvus-standalone telah dimulai pada port <strong>19530</strong>.</li>
 <li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
 <li>Untuk mengubah konfigurasi Milvus default, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
+<p>Verifikasi gambar aktual dan status kesehatan:</p>
+<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Tunggu hingga status menjadi " <code translate="no">healthy</code> " sebelum melanjutkan ke <a href="/docs/id/quickstart.md">Panduan Cepat</a>. Saat menggunakan server ini, hubungkan SDK ke <code translate="no">http://localhost:19530</code>; sedangkan URI lokal <code translate="no">.db</code> akan menjalankan Milvus Lite.</p>
 <p>Anda dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Perbarui konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +99,7 @@ title: Menjalankan Milvus di Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat memodifikasi konfigurasi Milvus di berkas <strong>user.yaml</strong> di folder saat ini. Misalnya, untuk mengubah <code translate="no">proxy.healthCheckTimeout</code> menjadi <code translate="no">1000</code> ms, Anda dapat memodifikasi berkas tersebut sebagai berikut:</p>
+    </button></h2><p>Anda dapat mengubah konfigurasi Milvus di berkas <strong>user.yaml</strong> yang ada di folder saat ini. Misalnya, untuk mengubah <code translate="no">proxy.healthCheckTimeout</code> menjadi <code translate="no">1000</code> ms, Anda dapat memodifikasi berkas tersebut sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -122,20 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat melakukan pembaruan ke versi terbaru Milvus menggunakan perintah pembaruan bawaan. Perintah ini secara otomatis mengunduh konfigurasi terbaru dan gambar Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>Perintah pembaruan secara otomatis:</p>
-<ul>
-<li>Mengunduh skrip instalasi terbaru dengan konfigurasi yang diperbarui</li>
-<li>Mengunduh gambar Docker Milvus terbaru</li>
-<li>Memulai ulang kontainer dengan versi baru</li>
-<li>Menjaga data dan konfigurasi yang sudah ada</li>
-</ul>
-<p>Ini adalah cara yang disarankan untuk melakukan pembaruan pada deployment Milvus standalone Anda.</p>
-</div>
+    </button></h2><p>Perintah ` <code translate="no">upgrade</code> ` pada skrip ini mengunduh skrip dari <code translate="no">master</code> dan membuat ulang kontainer menggunakan gambar yang dipilih oleh skrip tersebut. Perintah ini tidak memvalidasi jalur versi sumber-ke-tujuan yang didukung dan dapat membuat ulang berkas konfigurasi yang dihasilkan. Jangan anggap ini sebagai jaminan bahwa deployment versi lama sembarang dapat diperbarui dengan aman ke v3.0.3.</p>
+<p>Sebelum melakukan peningkatan versi, buat cadangan metadata, data persisten, <code translate="no">embedEtcd.yaml</code>, dan <code translate="no">user.yaml</code>. Periksa versi tujuan, antrian pesan, dan kompatibilitas penyimpanan, serta validasi pemulihan di lingkungan non-produksi. Untuk deployment yang dikelola dengan Docker Compose, ikuti <a href="/docs/id/upgrade_milvus_standalone-docker.md">panduan "Upgrade Milvus Standalone with Docker Compose</a>"; jangan terapkan prosedur tersebut secara langsung pada kontainer yang dikelola oleh skrip.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Hentikan dan hapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +164,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Secara default, deployment ini menjalankan <strong>Woodpecker</strong> (WAL sistem file lokal) sebagai antrian pesan dan <strong>etcd tertanam</strong> untuk metadata — tidak perlu menginstal apa pun lagi. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek eksternal / metadata, lihat:</p>
+    </button></h2><p>Secara default, penyebaran ini menjalankan <strong>Woodpecker</strong> (WAL sistem file lokal) sebagai antrian pesan dan <strong>etcd tertanam</strong> untuk metadata — tidak ada yang perlu diinstal lagi. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek eksternal / metadata, lihat:</p>
 <ul>
 <li>Antrian pesan: <a href="/docs/id/woodpecker.md">Woodpecker</a> (default) · <a href="/docs/id/mq_pulsar.md">Pulsar</a> · <a href="/docs/id/mq_kafka.md">Kafka</a> · <a href="/docs/id/mq_rocksmq.md">RocksMQ</a></li>
 <li>Penyimpanan objek: <a href="/docs/id/deploy_s3.md">MinIO</a> (default) · <a href="/docs/id/deploy_s3.md">AWS S3</a> · <a href="/docs/id/abs.md">Azure Blob</a> · <a href="/docs/id/gcs.md">GCP Cloud Storage</a> · <a href="/docs/id/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/id/deploy_s3.md">Tencent COS</a> · <a href="/docs/id/deploy_s3.md">Huawei OBS</a> · <a href="/docs/id/deploy_s3.md">S3-compatible</a></li>
@@ -209,7 +200,7 @@ EOF
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Helm Chart</a>.</p></li>
+<li><p>Tinjau pertimbangan peningkatan versi di halaman ini sebelum mengubah versi Milvus.</p></li>
 <li><p><a href="/docs/id/scaleout.md">Skalakan kluster Milvus Anda</a>.</p></li>
 <li><p>Terapkan kluster Milvus Anda di cloud:</p>
 <ul>

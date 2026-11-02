@@ -55,22 +55,20 @@ title: تشغيل Milvus في Docker (لينكس)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
+    </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع Milvus</a>. قم بتنزيل البرنامج النصي وفحصه قبل بدء عملية نشر جديدة:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Inspect the Docker image selected by the script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">grep -n <span class="hljs-string">&quot;milvusdb/milvus:&quot;</span> standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start the Docker container</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 3.0.3:</strong></p>
-<ul>
-<li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
-<li><strong>Woodpecker MQ (الافتراضي)</strong>: يعمل هذا النشر في Docker على تشغيل Woodpecker كقائمة انتظار الرسائل مع استخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، وبالتالي لا توجد حاجة لخدمة قائمة انتظار رسائل خارجية. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</li>
-<li><strong>البنية المُحسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
-</ul>
-<p>قم دائمًا بتنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
-<p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>يتم تنزيل البرنامج النصي من فرع Milvus <code translate="no">master</code>. يتم تعريف علامة صورة Docker الخاصة به في البرنامج النصي وقد تختلف عن الإصدار v3.0.3. لتثبيت هذا الإصدار بالضبط، استخدم التكوين المحدد الإصدار في <a href="/docs/ar/install_standalone-docker-compose.md">«تشغيل Milvus باستخدام Docker Compose</a>».</p>
+<p>يعمل هذا النشر عبر Docker على تشغيل <strong>Woodpecker</strong> باستخدام <strong>نظام الملفات المحلي</strong> كخلفية WAL، لذا لا توجد حاجة لخدمة خارجية لقائمة انتظار الرسائل. انظر <a href="/docs/ar/woodpecker.md">Woodpecker</a>.</p>
+<p>إذا كنت ترغب في استخدام <a href="/docs/ar/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، يُنصح باستخدام طريقة النشر <a href="/docs/ar/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <p>بعد تشغيل البرنامج النصي للتثبيت:</p>
@@ -80,7 +78,12 @@ title: تشغيل Milvus في Docker (لينكس)
 <li>لتغيير التكوين الافتراضي لـ Milvus، أضف إعداداتك إلى ملف <strong>user.yaml</strong> الموجود في المجلد الحالي، ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>volumes/milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. لمزيد من التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب</a> ل <a href="/docs/ar/milvus-webui.md">ـ Milvus</a>.</p>
+<p>تحقق من الصورة الفعلية وحالة الصحة:</p>
+<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>انتظر ظهور رسالة « <code translate="no">healthy</code> » قبل اتباع <a href="/docs/ar/quickstart.md">«Quickstart</a>». عند استخدام هذا الخادم، قم بتوصيل SDK بـ <code translate="no">http://localhost:19530</code> ؛ أما عنوان URI المحلي <code translate="no">.db</code> فيقوم بتشغيل Milvus Lite بدلاً من ذلك.</p>
+<p>يمكنك الوصول إلى واجهة المستخدم على الويب لـ Milvus على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">واجهة المستخدم على الويب لـ Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك الترقية إلى أحدث إصدار من Milvus باستخدام أمر الترقية المدمج. يؤدي هذا تلقائيًا إلى تنزيل أحدث إعدادات وصورة Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>يقوم أمر الترقية تلقائيًا بما يلي:</p>
-<ul>
-<li>تنزيل أحدث برنامج نصي للتثبيت مع التكوينات المحدثة</li>
-<li>سحب أحدث صورة Docker لـ Milvus</li>
-<li>إعادة تشغيل الحاوية بالإصدار الجديد</li>
-<li>يحتفظ ببياناتك وإعداداتك الحالية</li>
-</ul>
-<p>هذه هي الطريقة الموصى بها لترقية النشر المستقل لـ Milvus.</p>
-</div>
+    </button></h2><p>يقوم الأمر <code translate="no">upgrade</code> في البرنامج النصي بتنزيل البرنامج النصي من <code translate="no">master</code> وإعادة إنشاء الحاوية باستخدام الصورة المحددة بواسطة ذلك البرنامج النصي. ولا يقوم هذا الأمر بالتحقق من صحة مسار الإصدار المدعوم من المصدر إلى الهدف، ويمكنه إعادة إنشاء ملفات التكوين التي تم إنشاؤها. لا تعتبر ذلك ضمانًا بأن أي نشر قديم عشوائي يمكن ترقيته بأمان إلى الإصدار v3.0.3.</p>
+<p>قبل الترقية، قم بعمل نسخة احتياطية من البيانات الوصفية والبيانات الدائمة و <code translate="no">embedEtcd.yaml</code> و <code translate="no">user.yaml</code>. تحقق من الإصدار الهدف وقائمة انتظار الرسائل وتوافق التخزين، وتحقق من صحة عملية الاستعادة في بيئة غير إنتاجية. بالنسبة لعمليات النشر التي تُدار باستخدام Docker Compose، اتبع <a href="/docs/ar/upgrade_milvus_standalone-docker.md">إرشادات «ترقية Milvus Standalone باستخدام Docker Compose»</a>؛ ولا تقم بتطبيق هذا الإجراء مباشرةً على حاوية تُدار بواسطة البرنامج النصي.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">إيقاف Milvus وحذفه<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,9 +164,9 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يلزم تثبيت أي شيء آخر. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية خارجية، انظر:</p>
+    </button></h2><p>بشكل افتراضي، يعمل هذا النشر على <strong>Woodpecker</strong> (WAL لنظام الملفات المحلي) كقائمة انتظار الرسائل <strong>وetcd مدمج</strong> للبيانات الوصفية — ولا يوجد شيء آخر لتثبيته. لاستخدام قائمة انتظار رسائل مختلفة أو توصيل تخزين كائنات خارجي / بيانات وصفية، انظر:</p>
 <ul>
-<li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (الافتراضي) · <a href="/docs/ar/mq_pulsar.md">Pulsar</a> · <a href="/docs/ar/mq_kafka.md">Kafka</a> · <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></li>
+<li>قائمة انتظار الرسائل: <a href="/docs/ar/woodpecker.md">Woodpecker</a> (افتراضي) · <a href="/docs/ar/mq_pulsar.md">Pulsar</a> · <a href="/docs/ar/mq_kafka.md">Kafka</a> · <a href="/docs/ar/mq_rocksmq.md">RocksMQ</a></li>
 <li>تخزين الكائنات: <a href="/docs/ar/deploy_s3.md">MinIO</a> (افتراضي) · <a href="/docs/ar/deploy_s3.md">AWS S3</a> · <a href="/docs/ar/abs.md">Azure Blob</a> · <a href="/docs/ar/gcs.md">GCP Cloud Storage</a> · <a href="/docs/ar/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/ar/deploy_s3.md">Tencent COS</a> · <a href="/docs/ar/deploy_s3.md">Huawei OBS</a> · <a href="/docs/ar/deploy_s3.md">متوافق مع S3</a></li>
 <li>البيانات الوصفية: <a href="/docs/ar/deploy_etcd.md">etcd</a></li>
 </ul>
@@ -209,9 +200,9 @@ EOF
 <li><a href="/docs/ar/single-vector-search.md">البحث أحادي المتجه</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
-<li><p><a href="/docs/ar/upgrade_milvus_cluster-helm.md">ترقية Milvus باستخدام Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
-<li><p>نشر مجموعة Milvus الخاصة بك على السحابة:</p>
+<li><p>راجع اعتبارات الترقية الواردة في هذه الصفحة قبل تغيير إصدار Milvus.</p></li>
+<li><p><a href="/docs/ar/scaleout.md">قم بتوسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
+<li><p>انشر مجموعة Milvus الخاصة بك على السحابة:</p>
 <ul>
 <li><a href="/docs/ar/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ar/gcp.md">Google Cloud</a></li>

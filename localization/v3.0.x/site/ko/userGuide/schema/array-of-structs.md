@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>StructArray</strong>(구조체 배열이라고도 함)는 각 엔티티 내에 정렬된 Struct 요소 집합을 저장합니다. 배열 내의 모든 Struct 요소는 동일한 스키마를 따릅니다. Struct 요소는 스칼라 하위 필드, 벡터 하위 필드 또는 둘 다를 포함할 수 있습니다.</p>
-<p>예를 들어, 컬렉션은 하나의 기사를 엔티티로 저장하고, 그 청크들을 ` <code translate="no">chunks</code>`라는 StructArray 필드에 저장할 수 있습니다. 각 청크에는 텍스트, 섹션 메타데이터, 품질 점수, 그리고 하나 이상의 벡터 임베딩이 포함될 수 있습니다.</p>
+<p>예를 들어, 컬렉션은 하나의 기사를 엔티티로 저장하고, 그 청크들을 ‘ <code translate="no">chunks</code> ’라는 이름의 StructArray 필드에 저장할 수 있습니다. 각 청크에는 텍스트, 섹션 메타데이터, 품질 점수, 그리고 하나 이상의 벡터 임베딩이 포함될 수 있습니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -122,10 +122,10 @@ summary: >-
 <tr><td>중첩된 자식 데이터가 포함된 부모 레코드를 삽입합니다.</td><td>StructArray 필드가 Struct 객체 목록인 엔티티를 삽입합니다.</td><td>엔티티 수준 삽입.</td><td><a href="/docs/ko/insert-data-into-structarray-fields.md">StructArray 필드에 데이터 삽입</a></td></tr>
 <tr><td>ColBERT, ColPali 또는 문서 수준 후기 상호작용 검색을 실행합니다.</td><td><code translate="no">MAX_SIM*</code> 인덱스를 사용하여 EmbeddingList 검색을 수행합니다.</td><td>엔티티 수준.</td><td><a href="/docs/ko/search-with-embedding-lists.md">임베딩 목록을 사용하여 검색</a></td></tr>
 <tr><td>개별 청크, 클립 또는 패치를 검색합니다.</td><td>일반 벡터 메트릭을 사용하여 요소 수준 검색을 수행합니다.</td><td>Struct 요소 수준이며, 가능한 경우 오프셋을 사용합니다.</td><td><a href="/docs/ko/basic-vector-search-with-structarray.md">StructArray를 사용한 기본 벡터 검색</a></td></tr>
-<tr><td>스칼라 조건에 일치하는 요소로만 요소 수준 벡터 검색을 제한합니다.</td><td><code translate="no">element_filter</code> 를 사용합니다.</td><td>요소 수준 필터링; 결과의 모양은 검색 유형에 따라 다릅니다.</td><td><a href="/docs/ko/filtered-search-with-structarray.md">StructArray를 사용한 필터링된 검색</a></td></tr>
-<tr><td>조건을 만족하는 Struct 요소의 수에 따라 엔티티를 선택합니다.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> 또는 <code translate="no">MATCH_EXACT</code> 을 사용하십시오.</td><td>엔티티 수준.</td><td><a href="/docs/ko/struct-array-operators.md">StructArray 연산자</a></td></tr>
+<tr><td>스칼라 조건에 일치하는 요소로만 요소 수준 벡터 검색을 제한합니다.</td><td><code translate="no">element_filter</code> 를 사용합니다.</td><td>요소 수준 필터링; 결과 형상은 검색 유형에 따라 다릅니다.</td><td><a href="/docs/ko/filtered-search-with-structarray.md">StructArray를 사용한 필터링된 검색</a></td></tr>
+<tr><td>조건을 만족하는 Struct 요소의 수에 따라 엔티티를 선택합니다.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> 또는 <code translate="no">MATCH_EXACT</code> 을(를) 사용하십시오.</td><td>엔티티 수준.</td><td><a href="/docs/ko/struct-array-operators.md">StructArray 연산자</a></td></tr>
 <tr><td>StructArray 벡터 하위 필드에 점수 또는 거리 경계를 사용합니다.</td><td>요소 수준 범위 검색을 사용합니다.</td><td>Struct 요소 수준.</td><td><a href="/docs/ko/range-search-with-structarray.md">StructArray를 사용한 범위 검색</a></td></tr>
-<tr><td>요소 수준 검색 후 부모 엔티티당 최대 하나의 결과만 반환합니다.</td><td>기본 키를 사용한 그룹화 검색을 사용합니다.</td><td>그룹화 후 엔티티 수준.</td><td><a href="/docs/ko/grouping-search-with-structarray.md">StructArray를 사용한 그룹화 검색</a></td></tr>
+<tr><td>요소 수준 검색 후 부모 엔티티당 최대 하나의 결과만 반환합니다.</td><td>기본 키를 사용한 그룹화 검색을 사용하십시오.</td><td>그룹화 후 엔티티 수준.</td><td><a href="/docs/ko/grouping-search-with-structarray.md">StructArray를 사용한 그룹화 검색</a></td></tr>
 <tr><td>StructArray 요소 검색을 다른 벡터 필드와 결합합니다.</td><td>StructArray 벡터 하위 필드를 대상으로 하는 하나의 AnnSearchRequest를 사용하여 하이브리드 검색을 수행합니다.</td><td>요소 수준 하위 검색, 엔티티 수준 재순위 지정.</td><td><a href="/docs/ko/hybrid-search-with-structarray.md">StructArray를 활용한 하이브리드 검색</a></td></tr>
 </tbody>
 </table>
@@ -147,8 +147,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>EmbeddingList 검색</h3></th>
-      <th scope="col"><h3>요소 수준 검색</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">EmbeddingList 검색</h3></th>
+      <th scope="col"><h3 id="element-level-search">요소 수준 검색</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -174,9 +174,8 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>경고</p>
-<p>컬렉션에 EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 사용하십시오. 벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용하며, 두 검색 모드에는 서로 다른 메트릭 패밀리가 필요합니다.</p>
+<div class="alert warning">
+<p>컬렉션에 EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 사용하십시오. 벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용하며, 두 검색 모드는 서로 다른 메트릭 패밀리를 필요로 합니다.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">문서 지도<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,8 +250,8 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>스키마를 설계하려면 <a href="/docs/ko/create-structarray-field.md">'StructArray 필드 만들기'를</a> 참조하십시오.</p></li>
-<li><p>데이터를 준비하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">‘StructArray 필드에 데이터 삽입’을</a> 참조하십시오.</p></li>
+<li><p>데이터를 준비하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">'StructArray 필드에 데이터 삽입'을</a> 참조하십시오.</p></li>
 <li><p>인덱스를 선택하려면 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 인덱싱’을</a> 참조하십시오.</p></li>
-<li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">'StructArray를 사용한 기본 벡터</a> 검색'부터 시작하십시오.</p></li>
+<li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터</a> 검색’부터 시작하십시오.</p></li>
 <li><p>StructArray 스칼라 하위 필드를 필터링하려면 <a href="/docs/ko/struct-array-operators.md">‘StructArray 연산자’</a> 및 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>
 </ol>

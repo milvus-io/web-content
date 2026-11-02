@@ -43,7 +43,7 @@ title: Requisitos para a instalação do Milvus Standalone
 <tbody>
 <tr><td>CPU</td><td><ul><li>CPU Intel Core de 2.ª geração ou superior</li><li>Apple Silicon</li></ul></td><td><ul><li>Autónomo: 4 núcleos ou mais</li><li>Cluster: 8 núcleos ou mais</li></ul></td><td></td></tr>
 <tr><td>Conjunto de instruções da CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>A pesquisa de similaridade de vetores e a criação de índices no Milvus requerem que a CPU suporte conjuntos de extensões de instrução única, dados múltiplos (SIMD). Certifique-se de que a CPU suporta, pelo menos, uma das extensões SIMD listadas. Consulte <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPUs com AVX</a> para obter mais informações.</td></tr>
-<tr><td>RAM</td><td><ul><li>Autónomo: 8G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Autónomo: 16 G</li><li>Cluster: 128 G</li></ul></td><td>A capacidade da RAM depende do volume de dados.</td></tr>
+<tr><td>RAM</td><td><ul><li>Autónomo: 8 G</li><li>Cluster: 32 G</li></ul></td><td><ul><li>Autónomo: 16 G</li><li>Cluster: 128 G</li></ul></td><td>A capacidade da RAM depende do volume de dados.</td></tr>
 <tr><td>Disco rígido</td><td>SSD SATA 3.0 ou superior</td><td>SSD NVMe ou superior</td><td>A capacidade do disco rígido depende do volume de dados.</td></tr>
 </tbody>
 </table>
@@ -67,21 +67,24 @@ title: Requisitos para a instalação do Milvus Standalone
 <tr><th>Sistema operativo</th><th>Software</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 ou posterior</td><td>Docker Desktop</td><td>Configure a máquina virtual (VM) do Docker para utilizar, no mínimo, 2 CPUs virtuais (vCPUs) e 8 GB de memória inicial. Caso contrário, a instalação poderá falhar. <br/>Consulte <a href="https://docs.docker.com/desktop/mac/install/">Instalar o Docker Desktop no Mac</a> para obter mais informações.</td></tr>
-<tr><td>Plataformas Linux</td><td><ul><li>Docker 19.03 ou posterior</li><li>Docker Compose 1.25.1 ou posterior</li></ul></td><td>Consulte <a href="https://docs.docker.com/engine/install/">Instalar o Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Instalar o Docker Compose</a> para obter mais informações.</td></tr>
-<tr><td>Windows com o WSL 2 ativado</td><td>Docker Desktop</td><td>Recomendamos que armazene o código-fonte e outros dados montados por ligação em contentores Linux no sistema de ficheiros Linux, em vez de no sistema de ficheiros do Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar o Docker Desktop no Windows com backend WSL 2</a> para obter mais informações.</td></tr>
+<tr><td>macOS compatível com o Docker Desktop</td><td>Docker Desktop</td><td>Atribua pelo menos 8 GB de memória à máquina virtual (VM) do Docker e defina o tamanho das suas CPUs de acordo com as recomendações de hardware acima. <br/>Consulte <a href="https://docs.docker.com/desktop/setup/install/mac-install/">Instalar o Docker Desktop no Mac</a> para obter mais informações.</td></tr>
+<tr><td>Plataformas Linux</td><td><ul><li>Docker 19.03 ou posterior</li><li>Plugin do Docker Compose V2 ou posterior (para implementações do Compose)</li></ul></td><td>Consulte <a href="https://docs.docker.com/engine/install/">Instalar o Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Instalar o Docker Compose</a> para obter mais informações.</td></tr>
+<tr><td>Windows com o WSL 2 ativado</td><td>Docker Desktop</td><td>Recomendamos que armazene o código-fonte e outros dados montados por ligação em contentores Linux no sistema de ficheiros Linux, em vez de no sistema de ficheiros do Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/features/wsl/">Instalar o Docker Desktop no Windows com backend WSL 2</a> para obter mais informações.</td></tr>
 </tbody>
 </table>
-<p>As seguintes dependências serão obtidas e configuradas automaticamente quando o Milvus Standalone for instalado utilizando o script do Docker ou a configuração do Docker Compose:</p>
+<p>Os guias do Compose utilizam o comando « <code translate="no">docker compose</code> », e não o comando antigo « <code translate="no">docker-compose</code> » V1. Verifique o plugin antes de seguir os passos:</p>
+<pre><code translate="no" class="language-bash">docker compose version
+<button class="copy-code-btn"></button></code></pre>
+<p>O método de instalação determina como as dependências são fornecidas. Utilize as versões das imagens indicadas no script descarregado ou no ficheiro Compose:</p>
 <table>
 <thead>
-<tr><th>Software</th><th>Versão</th><th>Nota</th></tr>
+<tr><th>Componente</th><th>Script do Docker</th><th>Docker Compose</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">os requisitos adicionais de espaço em disco</a>.</td></tr>
-<tr><td>MinIO</td><td>LANÇAMENTO.2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>Incluído no Milvus</td><td>Fila de mensagens predefinida (incorporada); não é necessário instalar nenhum serviço separado.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>Opcional — apenas se mudar a fila de mensagens para o Pulsar; não é instalado por predefinição.</td></tr>
+<tr><td>etcd</td><td>Incorporado no contentor Milvus</td><td>Contentor separado; consulte <a href="#Additional-disk-requirements">os requisitos adicionais de disco</a>.</td></tr>
+<tr><td>Armazenamento de objetos</td><td>Sistema de ficheiros local; sem contentor MinIO</td><td>Contentor MinIO com a sua imagem fixada no ficheiro Compose</td></tr>
+<tr><td>Woodpecker</td><td>Incluído no Milvus; backend WAL no sistema de ficheiros local</td><td>Integrado com o Milvus; backend WAL do MinIO/armazenamento de objetos</td></tr>
+<tr><td>Pulsar</td><td>Serviço externo opcional; não instalado por predefinição</td><td>Serviço externo opcional; não instalado por predefinição</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">Requisitos adicionais de disco<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">

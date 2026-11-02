@@ -22,7 +22,8 @@ title: BGE M3
         ></path>
       </svg>
     </button></h1><p><a href="https://arxiv.org/abs/2402.03216">O BGE-M3</a> deve o seu nome às suas capacidades em multilinguismo, multifuncionalidade e multigranularidade. Capaz de suportar mais de 100 línguas, o BGE-M3 estabelece novos padrões de referência em tarefas de recuperação multilingue e interlinguística. A sua capacidade única de realizar recuperação densa, recuperação multivectorial e recuperação esparsa numa única estrutura torna-o a escolha ideal para uma vasta gama de aplicações de recuperação de informação (IR).</p>
-<p>O Milvus integra-se com o modelo BGE-M3 através da classe <strong>BGEM3EmbeddingFunction</strong>. Esta classe trata do cálculo das representações e devolve-as num formato compatível com o Milvus para indexação e pesquisa.</p>
+<p>O Milvus integra-se com o modelo BGE-M3 através da classe <strong>`BGEM3EmbeddingFunction</strong> `. Esta classe trata do cálculo das representações e devolve-as num formato compatível com o Milvus para indexação e pesquisa.</p>
+<p>Este exemplo gera embeddings no seu processo Python; não estabelece ligação a um servidor Milvus. Os pesos do modelo são descarregados na primeira utilização, pelo que é necessário acesso à rede para o host do modelo ou um cache de modelo local preenchido. A inferência na CPU é suportada com <code translate="no">use_fp16=False</code>.</p>
 <p>Para utilizar esta funcionalidade, instale as dependências necessárias:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Armazenar e pesquisar as representações<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>A geração de embeddings é o primeiro passo. Para utilizar estes resultados na recuperação, defina uma coleção e indexe cada campo vetorial:</p>
+<ul>
+<li>Mapeie ` <code translate="no">docs_embeddings[&quot;dense&quot;]</code> ` para um campo ` <code translate="no">FLOAT_VECTOR</code> ` com a dimensão ` <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>`.</li>
+<li>Mapeie <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> para um campo <code translate="no">SPARSE_FLOAT_VECTOR</code>, que não requer uma dimensão fixa no esquema do Milvus. Utilize uma métrica <code translate="no">IP</code> para estes vetores esparsos aprendidos. Consulte <a href="/docs/pt/sparse_vector.md">«Vetor esparso</a>».</li>
+<li>Armazene o ID de cada documento e o texto de origem ou metadados juntamente com os respetivos vetores, para que os resultados da pesquisa possam ser rastreados até à fonte.</li>
+<li>Codifique as consultas com o mesmo modelo e as mesmas definições que os documentos. Emita um único pedido <code translate="no">hybrid_search()</code> com um <code translate="no">AnnSearchRequest</code> para o campo denso e outro para o campo esparso, e deixe que um classificador do lado do servidor, como o RRF ou um classificador ponderado, combine os resultados.</li>
+</ul>
+<p>Siga <a href="/docs/pt/hybrid_search_with_milvus.md">o Hybrid Search com o Milvus</a> para o esquema da coleção, os índices, a inserção e as solicitações de pesquisa híbrida. Os exemplos nesta página utilizam as saídas «dense» e «sparse» do wrapper; não demonstram a saída multivetorial ColBERT opcional do BGE-M3.</p>

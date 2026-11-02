@@ -55,32 +55,35 @@ title: 在 Docker 中运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。该脚本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 代码库中</a>获取。要在 Docker 中安装 Milvus，只需运行</p>
+    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。该脚本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 代码库中</a>获取。在开始新部署之前，请先下载并检查该脚本：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Inspect the Docker image selected by the script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">grep -n <span class="hljs-string">&quot;milvusdb/milvus:&quot;</span> standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start the Docker container</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v3.0.3 版本的新功能：</strong></p>
-<ul>
-<li><strong>流式处理节点</strong>：增强了数据处理能力</li>
-<li><strong>Woodpecker MQ（默认）</strong>：此 Docker 部署将 Woodpecker 用作消息队列，并使用<strong>本地文件系统</strong>作为其 WAL 后端，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</li>
-<li><strong>优化架构</strong>：整合组件以提升性能</li>
-</ul>
-<p>请务必下载最新脚本，以确保获得最新的配置和架构改进。</p>
-<p>如果您希望在独立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup，</a>建议采用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
+<p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载。脚本中定义了其 Docker 镜像标签，该标签可能与 v3.0.3 不同。若要安装该确切版本，请使用《<a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>》中的带版本号的配置。</p>
+<p>此 Docker 部署将<strong>Woodpecker</strong>的 WAL 后端设置为<strong>本地文件系统</strong>，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
+<p>如果您希望在独立部署模式下使用<a href="/docs/zh/milvus_backup_overview.md">Backup，</a>建议采用<a href="/docs/zh/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
 </div>
 <p>运行安装脚本后：</p>
 <ul>
-<li>一个名为 Milvus Standalone 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
+<li>一个名为 Milvus Standalone 的 Docker 容器已在<strong>19530</strong> 端口启动。</li>
 <li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
-<li>Milvus 数据卷已映射到当前目录下的<strong>volumes/milvus</strong>目录中。</li>
+<li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
 </ul>
-<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>验证实际镜像及运行状态：</p>
+<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>请等待<code translate="no">healthy</code> 状态出现后再继续执行<a href="/docs/zh/quickstart.md">快速入门指南</a>。使用此服务器时，请将 SDK 连接至<code translate="no">http://localhost:19530</code> ；若使用本地<code translate="no">.db</code> URI，则会启动 Milvus Lite。</p>
+<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用内置的升级命令将 Milvus 升级到最新版本。这将自动下载最新的配置和 Milvus 镜像：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>该升级命令会自动：</p>
-<ul>
-<li>下载包含更新配置的最新安装脚本</li>
-<li>拉取最新的 Milvus Docker 镜像</li>
-<li>使用新版本重启容器</li>
-<li>保留您现有的数据和配置</li>
-</ul>
-<p>这是升级 Milvus Standalone 部署的推荐方法。</p>
-</div>
+    </button></h2><p>脚本中的 `<code translate="no">upgrade</code> ` 命令会从<code translate="no">master</code> 下载脚本，并使用该脚本选定的镜像重新创建容器。该命令不会验证源版本到目标版本的兼容性路径，且可能会重新生成已生成的配置文件。请勿将其视为任意旧版部署均可安全升级至 v3.0.3 的保证。</p>
+<p>升级前，请备份元数据、持久化数据、<code translate="no">embedEtcd.yaml</code> 以及<code translate="no">user.yaml</code> 。请检查目标版本、消息队列和存储的兼容性，并在非生产环境中验证恢复功能。对于使用 Docker Compose 管理的部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》<a href="/docs/zh/upgrade_milvus_standalone-docker.md">中的</a>说明；请勿将该流程直接应用于由脚本管理的容器。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止并删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +164,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>默认情况下，此部署使用<strong>Woodpecker</strong>（本地文件系统 WAL）作为消息队列，并使用<strong>嵌入式 etcd</strong>管理元数据——无需安装其他组件。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
+    </button></h2><p>默认情况下，此部署使用<strong>Woodpecker</strong>（本地文件系统 WAL）作为消息队列，并使用<strong>嵌入式 etcd</strong>存储元数据——无需安装其他组件。若要使用其他消息队列或连接外部对象存储/元数据，请参阅：</p>
 <ul>
 <li>消息队列：<a href="/docs/zh/woodpecker.md">Woodpecker</a>（默认）·<a href="/docs/zh/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh/mq_kafka.md">Kafka</a>·<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></li>
 <li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">S3 兼容</a></li>
@@ -209,7 +200,7 @@ EOF
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p>在更改 Milvus 版本之前，请先查阅本页面上的升级注意事项。</p></li>
 <li><p><a href="/docs/zh/scaleout.md">扩展您的 Milvus 集群</a>。</p></li>
 <li><p>在云端部署您的 Milvus 集群：</p>
 <ul>

@@ -19,8 +19,9 @@ title: BGE M3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a>的命名源于其在多语言、多功能和多粒度方面的能力。BGE-M3 支持超过 100 种语言，在多语言和跨语言检索任务中树立了新的标杆。 它具备在单一框架内执行密集检索、多向量检索和稀疏检索的独特能力，使其成为各类信息检索（IR）应用的理想选择。</p>
+    </button></h1><p><a href="https://arxiv.org/abs/2402.03216">BGE-M3</a>的命名源于其在多语言、多功能和多粒度方面的能力。BGE-M3 支持 100 多种语言，在多语言和跨语言检索任务中树立了新的标杆。 它具备在单一框架内执行密集检索、多向量检索和稀疏检索的独特能力，使其成为各类信息检索（IR）应用的理想选择。</p>
 <p>Milvus 通过<strong>BGEM3EmbeddingFunction</strong>类与 BGE-M3 模型集成。该类负责处理 Embeddings 的计算，并以与 Milvus 兼容的格式返回结果，以便进行索引和搜索。</p>
+<p>此示例在您的 Python 进程中生成 Embeddings；它不会连接到 Milvus 服务器。模型权重会在首次使用时下载，因此您需要能够访问模型主机，或者拥有已填充的本地模型缓存。<code translate="no">use_fp16=False</code> 支持 CPU 推理。</p>
 <p>要使用此功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -89,3 +90,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">存储和检索Embeddings<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>生成Embeddings向量是第一步。若要将这些输出用于检索，请定义一个Collection，并为每个向量字段建立索引：</p>
+<ul>
+<li>将 `<code translate="no">docs_embeddings[&quot;dense&quot;]</code> ` 映射到维度为 `<code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>` 的 `<code translate="no">FLOAT_VECTOR</code> ` 字段。</li>
+<li>将<code translate="no">docs_embeddings[&quot;sparse&quot;]</code> 映射到<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段，该字段在Milvus Schema中不需要固定维度。对于这些已学习的稀疏向量，请使用<code translate="no">IP</code> 度量。参见<a href="/docs/zh/sparse_vector.md">“稀疏向量”</a>。</li>
+<li>将每个文档的ID及其源文本或元数据与相应的向量一同存储，以便搜索结果可追溯至源头。</li>
+<li>使用与文档相同的模型和设置对查询进行编码。发出单个<code translate="no">hybrid_search()</code> 请求，其中包含一个用于稠密字段的<code translate="no">AnnSearchRequest</code> 和一个用于稀疏字段的 ，并让 RRF 等服务器端排序器或加权排序器融合结果。</li>
+</ul>
+<p>请参考《<a href="/docs/zh/hybrid_search_with_milvus.md">使用 Milvus 进行混合搜索</a>》一文，了解 Collection Schema、索引、插入及混合搜索请求的相关内容。本页示例使用的是包装器的密集型和稀疏型输出；未演示 BGE-M3 的可选 ColBERT 多向量输出。</p>

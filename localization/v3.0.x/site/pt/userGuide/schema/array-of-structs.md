@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Utilize o StructArray quando uma entidade precisar de armazenar uma lista ordenada de elementos estruturados, tais como um documento com vários fragmentos, uma página com vários elementos visuais ou um vídeo com vários clipes. O StructArray mantém estes elementos dentro da entidade principal, permitindo simultaneamente a pesquisa vetorial e a filtragem escalar nos campos dentro de cada elemento.</p>
+    </button></h1><p>Utilize o StructArray quando uma entidade precisar de armazenar uma lista ordenada de elementos estruturados, tais como um documento com vários segmentos, uma página com vários elementos visuais ou um vídeo com vários clipes. O StructArray mantém estes elementos dentro da entidade principal, permitindo simultaneamente a pesquisa vetorial e a filtragem escalar nos campos dentro de cada elemento.</p>
 <h2 id="What-is-StructArray" class="common-anchor-header">O que é o StructArray?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ summary: >-
 <tr><td>Modele um objeto pai com muitos filhos estruturados.</td><td>Crie um campo StructArray.</td><td>A entidade contém elementos Struct ordenados.</td><td><a href="/docs/pt/create-structarray-field.md">Criar um campo StructArray</a></td></tr>
 <tr><td>Inserir registos pai com dados filhos aninhados.</td><td>Inserir entidades cujo campo StructArray seja uma lista de objetos Struct.</td><td>Inserção ao nível da entidade.</td><td><a href="/docs/pt/insert-data-into-structarray-fields.md">Inserir dados em campos «StructArray»</a></td></tr>
 <tr><td>Executar ColBERT, ColPali ou recuperação de interação tardia ao nível do documento.</td><td>Utilizar a pesquisa EmbeddingList com um índice « <code translate="no">MAX_SIM*</code> ».</td><td>Nível de entidade.</td><td><a href="/docs/pt/search-with-embedding-lists.md">Pesquisar com listas de incorporação</a></td></tr>
-<tr><td>Pesquise fragmentos, clipes ou partes individuais.</td><td>Utilize a pesquisa ao nível do elemento com uma métrica vetorial regular.</td><td>Nível de elemento de estrutura, com deslocamento, quando disponível.</td><td><a href="/docs/pt/basic-vector-search-with-structarray.md">Pesquisa vetorial básica com StructArray</a></td></tr>
+<tr><td>Pesquise fragmentos, clipes ou trechos individuais.</td><td>Utilize a pesquisa ao nível do elemento com uma métrica vetorial regular.</td><td>Nível de elemento de estrutura, com deslocamento, quando disponível.</td><td><a href="/docs/pt/basic-vector-search-with-structarray.md">Pesquisa vetorial básica com StructArray</a></td></tr>
 <tr><td>Restringir a pesquisa vetorial ao nível do elemento aos elementos que correspondam a condições escalares.</td><td>Utilize ` <code translate="no">element_filter</code>`.</td><td>Filtragem ao nível do elemento; a forma do resultado depende do tipo de pesquisa.</td><td><a href="/docs/pt/filtered-search-with-structarray.md">Pesquisa filtrada com StructArray</a></td></tr>
 <tr><td>Selecione entidades com base no número de elementos Struct que satisfazem uma condição.</td><td>Utilize <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Nível da entidade.</td><td><a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a></td></tr>
 <tr><td>Utilize limites de pontuação ou distância nos subcampos do vetor StructArray.</td><td>Utilize a pesquisa por intervalo ao nível do elemento.</td><td>Nível de elemento da Struct.</td><td><a href="/docs/pt/range-search-with-structarray.md">Pesquisa por intervalo com StructArray</a></td></tr>
@@ -150,8 +150,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>Pesquisa EmbeddingList</h3></th>
-      <th scope="col"><h3>Pesquisa ao nível do elemento</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">Pesquisa EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">Pesquisa ao nível do elemento</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -177,9 +177,8 @@ summary: >-
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Aviso</p>
-<p>Se a sua coleção necessitar tanto de pesquisa EmbeddingList como de pesquisa ao nível do elemento, utilize dois subcampos vetoriais separados. Um campo vetorial ou subcampo vetorial aceita apenas um índice, e os dois modos de pesquisa requerem famílias de métricas diferentes.</p>
+<div class="alert warning">
+<p>Se a sua coleção necessitar tanto da pesquisa EmbeddingList como da pesquisa ao nível do elemento, utilize dois subcampos vetoriais separados. Um campo vetorial ou subcampo vetorial aceita apenas um índice, e os dois modos de pesquisa requerem famílias de métricas diferentes.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Mapa da documentação<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"

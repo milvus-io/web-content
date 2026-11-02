@@ -37,12 +37,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>StructArrayの主な制限は以下の通りです：</p>
+<table>
 <thead>
 <tr><th>領域</th><th>制限</th></tr>
 </thead>
 <tbody>
-<tr><td>スキーマの形状</td><td>Struct は、Array フィールドの要素型としてのみ使用できます。Struct は、トップレベルのコレクションフィールドとしてはサポートされていません。</td></tr>
+<tr><td>スキーマの形状</td><td>Structは、Arrayフィールドの要素型としてのみ使用できます。Structは、最上位のコレクションフィールドとしてはサポートされていません。</td></tr>
 <tr><td>サブフィールドのスキーマ</td><td>同じ StructArray フィールド内のすべての Struct 要素は、1 つの事前定義された Struct スキーマを共有します。</td></tr>
 <tr><td>容量</td><td><code translate="no">max_capacity</code> は必須であり、1つのエンティティが StructArray フィールドに格納できる Struct 要素の数を制限します。</td></tr>
 <tr><td>サブフィールドの変更</td><td>StructArray フィールドが作成された後、その既存の StructArray フィールドにサブフィールドを追加することはできません。</td></tr>
@@ -69,12 +70,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>StructArray スキーマには、以下の制限があります。</p>
+<table>
 <thead>
 <tr><th>制限</th><th>詳細</th></tr>
 </thead>
 <tbody>
-<tr><td>Struct はトップレベルのフィールド型ではありません。</td><td>StructArray フィールドを、<code translate="no">datatype=DataType.ARRAY</code> 、<code translate="no">element_type=DataType.STRUCT</code> 、および<code translate="no">struct_schema</code> として作成します。</td></tr>
+<tr><td>Structはトップレベルのフィールド型にはできません。</td><td>StructArrayフィールドを、`<code translate="no">datatype=DataType.ARRAY</code> `として、`<code translate="no">element_type=DataType.STRUCT</code> `および`<code translate="no">struct_schema</code>`を指定して作成します。</td></tr>
 <tr><td>すべての要素は 1 つのスキーマを共有します。</td><td>StructArray フィールド内のすべての Struct 要素は、同じサブフィールドリストおよびサブフィールドのデータ型に従います。</td></tr>
 <tr><td><code translate="no">max_capacity</code> は必須です。</td><td>1 つのエンティティに含まれる Struct 要素の数は、StructArray フィールドに設定された<code translate="no">max_capacity</code> を超えてはなりません。</td></tr>
 <tr><td>既存のサブフィールドは固定されています。</td><td>既存のサブフィールドは固定されています。既存の StructArray フィールドに新しいサブフィールドを追加することはできません。サブフィールドのスキーマを変更するには、StructArray フィールドを削除し、更新されたスキーマで再度追加してください。</td></tr>
@@ -104,21 +106,21 @@ summary: >-
 <tr><th>Struct サブフィールドの物理型</th><th>サポート</th><th>備考</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>サポート対象</td><td>サブフィールドを `<code translate="no">DataType.BOOL</code>` として定義します。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.INT8</code> 、<code translate="no">DataType.INT16</code> 、<code translate="no">DataType.INT32</code> 、または<code translate="no">DataType.INT64</code> として定義します。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.FLOAT</code> または<code translate="no">DataType.DOUBLE</code> として定義します。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポート対象サブフィールドを xml-ph-0000@deepl.internal または xml-ph-0001@deepl.internal として定義します。</td><td>サブフィールドを<code translate="no">DataType.VARCHAR</code> として定義し、<code translate="no">max_length</code> を設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポートされています</td><td>サブフィールドを<code translate="no">DataType.FLOAT_VECTOR</code> として定義し、<code translate="no">dim</code> を設定します。サポート対象</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.FLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BFLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.INT8_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>サポートされていません</td><td>StructArray フィールドでは、スパースベクトルのサブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>`<code translate="no">String</code>` ではなく、`<code translate="no">VARCHAR</code>` を使用してください。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、ジオメトリのサブフィールドおよび GIS 関数はサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
-<tr><td><code translate="no">Array</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時刻指定式はサポートされていません。</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>サポート対象</td><td>サブフィールドを `<code translate="no">DataType.BOOL</code>` として定義します。</td></tr>
+<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.INT8</code> 、<code translate="no">DataType.INT16</code> 、<code translate="no">DataType.INT32</code> 、または<code translate="no">DataType.INT64</code> として定義します。</td></tr>
+<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>サポート対象</td><td>サブフィールドを<code translate="no">DataType.FLOAT</code> または<code translate="no">DataType.DOUBLE</code> として定義します。</td></tr>
+<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>サポート対象サブフィールドを xml-ph-0000@deepl.internal または xml-ph-0001@deepl.internal として定義します。</td><td>サブフィールドを<code translate="no">DataType.VARCHAR</code> として定義し、<code translate="no">max_length</code> を設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>サポートされています</td><td>サブフィールドを<code translate="no">DataType.FLOAT_VECTOR</code> として定義し、<code translate="no">dim</code> を設定します。サポート対象</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.FLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BFLOAT16_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.INT8_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>サポート対象</td><td>サブフィールドを「<code translate="no">DataType.BINARY_VECTOR</code> 」として定義し、「<code translate="no">dim</code> 」に設定します。</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>サポートされていません</td><td>StructArray フィールドでは、スパースベクトルのサブフィールドはサポートされていません。</td></tr>
+<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>サポートされていません</td><td>`<code translate="no">String</code>` ではなく、`<code translate="no">VARCHAR</code>` を使用してください。</td></tr>
+<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>サポートされていません</td><td>StructArray フィールドでは、JSON サブフィールドはサポートされていません。</td></tr>
+<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>サポートされていません</td><td>StructArray フィールドでは、ジオメトリのサブフィールドおよび GIS 関数はサポートされていません。</td></tr>
+<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Text サブフィールドはサポートされていません。</td></tr>
+<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>サポートされていません</td><td>StructArray フィールドでは、Timestamptz サブフィールドおよび時刻指定式はサポートされていません。</td></tr>
 <tr><td>StructArray フィールドでは、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code></td><td>サポートされていません</td><td>StructArray フィールドは、ネストされた配列、ベクトル配列、Struct、または Array-of-Struct サブフィールドをサポートしていません。</td></tr>
 </tbody>
 </table>
@@ -137,24 +139,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Null 許容 StructArray の動作および動的な StructArray フィールドの追加は、バージョンに依存します。</p>
+    </button></h2><p>以下の表は、以下の利用可能性に関する記述に従い、Null 許容 StructArray の動作および動的な StructArray フィールドの追加について説明しています。</p>
 <table>
 <thead>
 <tr><th>機能</th><th>制限</th></tr>
 </thead>
 <tbody>
-<tr><td>Null 許容 StructArray フィールド</td><td>Milvus 3.0.0 以降でサポートされています。StructArray の親に対して `<code translate="no">nullable=True</code> ` を設定してください。Struct のサブフィールドを個別にヌル許容として設定しないでください。</td></tr>
-<tr><td>Python における null 値</td><td>PythonでStructArrayのNull値を挿入するには、<code translate="no">None</code> を使用してください。<code translate="no">Null</code> や<code translate="no">null</code> は使用しないでください。</td></tr>
-<tr><td>Nullの適用範囲</td><td>Null は StructArray フィールド全体に適用されます。たとえば、<code translate="no">chunks=None</code> は、<code translate="no">chunks</code> が null 許容である場合にのみ有効です。</td></tr>
-<tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でnullのサブフィールド配列と有効なサブフィールド配列を混在させてはなりません。</td></tr>
-<tr><td>StructArray フィールドの動的追加</td><td>Milvus 3.0.0 以降でサポートされています。</td></tr>
-<tr><td>動的追加の null 許容要件</td><td>既存のコレクションに追加される StructArray フィールドは、既存エンティティには新しいフィールドの値がないため、null 許容でなければなりません。</td></tr>
-<tr><td>動的追加後の既存のエンティティ</td><td>既存エンティティは、追加された StructArray フィールドに対して `<code translate="no">null</code> ` を返します。</td></tr>
+<tr><td>Null可能な StructArray フィールド</td><td>以下の可用性に関する注意事項に従い、StructArrayの親に対して<code translate="no">nullable=True</code> を設定してください。Structのサブフィールドを個別にNULL許容として設定しないでください。</td></tr>
+<tr><td>Python における NULL 値</td><td>PythonでStructArrayのNULL値を挿入するには、<code translate="no">None</code> を使用してください。<code translate="no">Null</code> や<code translate="no">null</code> は使用しないでください。</td></tr>
+<tr><td>NULLの適用範囲</td><td>NULLはStructArrayフィールド全体に適用されます。たとえば、<code translate="no">chunks=None</code> は、<code translate="no">chunks</code> がNULL可能である場合にのみ有効です。</td></tr>
+<tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でNULLのサブフィールド配列と有効なサブフィールド配列を混在させないでください。</td></tr>
+<tr><td>動的に追加される StructArray フィールド</td><td>以下の利用可能性に関する記述に従います。</td></tr>
+<tr><td>動的追加におけるNullable要件</td><td>既存のコレクションに追加される StructArray フィールドは、既存のエンティティには新しいフィールドの値がないため、null 許容でなければなりません。</td></tr>
+<tr><td>動的追加後の既存のエンティティ</td><td>既存エンティティは、追加されたStructArrayフィールドに対して<code translate="no">null</code> を返します。</td></tr>
 </tbody>
 </table>
-<p>Milvus 3.0.0以降のリリースでは、スタンドアロンおよび分散デプロイメントの両方で、NullableなStructArrayフィールド、Nullableなベクトル配列、および動的なStructArrayフィールドの追加がサポートされています。以前のバージョンのMilvusでは、これらの機能はサポートされていません。</p>
-<p>Zilliz Cloud では、Milvus 3.0.0 以降を実行しているオンデマンド・クラスタでこれらの機能を利用できます。サービング・クラスタではサポートされていません。</p>
-<p>Null 許容の StructArray フィールドを使用した挿入の例については、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArray フィールドへのデータの挿入</a>」を参照してください。</p>
+<p>Milvus 3.0.0 以降のリリースでは、スタンドアロンおよび分散デプロイメントの両方で、Null 許容の StructArray フィールド、Null 許容のベクトル配列、および動的な StructArray フィールドの追加がサポートされています。以前のバージョンの Milvus では、これらの機能はサポートされていません。</p>
+<p>Null許容のStructArrayフィールドを使用した挿入の例については、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArrayフィールドへのデータ挿入</a>」を参照してください。</p>
 <h2 id="Insert-limits" class="common-anchor-header">挿入の制限<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,12 +171,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>StructArray の挿入ペイロードには、以下の制限があります。</p>
+<table>
 <thead>
 <tr><th>制限</th><th>詳細</th></tr>
 </thead>
 <tbody>
-<tr><td>ペイロードの形状</td><td>StructArray フィールドを、<code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code> のような Struct オブジェクトの配列として挿入します。</td></tr>
+<tr><td>ペイロードの形状</td><td>StructArrayフィールドは、<code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code> のようなStructオブジェクトの配列として挿入してください。</td></tr>
 <tr><td>サブフィールド名</td><td>各 Struct オブジェクト内では、<code translate="no">chunks[text]</code> のようなパスではなく、<code translate="no">text</code> や<code translate="no">emb</code> のようなサブフィールド名を使用してください。</td></tr>
 <tr><td>スキーマとの整合性</td><td>各 Struct 要素は、Struct スキーマと一致している必要があります。</td></tr>
 <tr><td>容量</td><td>1 つのエンティティに含まれる Struct 要素の数は、<code translate="no">max_capacity</code> を超えてはなりません。</td></tr>
@@ -198,7 +200,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray ベクトルサブフィールドは、EmbeddingList 検索または要素レベル検索のいずれかに対してインデックス付けできます。各ベクトルフィールドまたはベクトルサブフィールドは 1 つのインデックスのみを受け入れるため、同じベクトルサブフィールドで両方のメトリックファミリーを使用することはできません。</p>
+    </button></h2><p>StructArrayのベクトルサブフィールドは、EmbeddingList検索または要素レベル検索のいずれかに対してインデックス付けできます。各ベクトルフィールドまたはベクトルサブフィールドは1つのインデックスのみを受け入れるため、同じベクトルサブフィールドで両方のメトリックファミリーを使用することはできません。検索モードでは、以下のメトリックファミリーが使用されます：</p>
 <table>
 <thead>
 <tr><th>検索モード</th><th>メトリックファミリー</th><th>結果レベル</th></tr>
@@ -226,14 +228,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>StructArray の検索動作には、以下の制限があります。</p>
+<table>
 <thead>
 <tr><th>検索の動作</th><th>サポートと制限</th></tr>
 </thead>
 <tbody>
-<tr><td>基本的な EmbeddingList 検索</td><td><code translate="no">MAX_SIM*</code> メトリックでインデックス付けされた StructArray ベクトルサブフィールドでサポートされています。エンティティレベルの結果を返します。</td></tr>
-<tr><td>基本的な要素レベル検索</td><td>通常のベクトルメトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。一致した要素のオフセットを返すことができます。</td></tr>
-<tr><td>範囲検索</td><td>検索モードおよびターゲットバージョンのインデックス／メトリック対応状況に応じてサポートされます。要素レベルのStructArrayリクエストにおけるハイブリッド検索範囲の挙動については、ターゲットバージョンを確認してください。</td></tr>
+<tr><td>基本的な EmbeddingList 検索</td><td><code translate="no">MAX_SIM*</code> メトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。エンティティレベルの結果を返します。</td></tr>
+<tr><td>基本的な要素レベルの検索</td><td>通常のベクトルメトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。一致した要素のオフセットを返すことができます。</td></tr>
+<tr><td>範囲検索</td><td>検索モードおよびターゲットバージョンのインデックス／メトリック対応状況に応じてサポートされます。要素レベルの StructArray リクエストにおけるハイブリッド検索範囲の挙動については、ターゲットバージョンを確認してください。</td></tr>
 <tr><td>グループ化検索</td><td>要素レベルのグループ化検索では、オフセットを返すことができます。要素レベルの StructArray リクエストにおけるハイブリッド検索のグループ化動作は、バージョンに依存します。</td></tr>
 <tr><td>ハイブリッド検索</td><td>ハイブリッド検索リクエストには、対象バージョンがその検索の組み合わせをサポートしている場合にのみ、StructArrayベクトルサブフィールドのリクエストを含めることができます。各リクエストは、引き続きインデックス化されたベクトルサブフィールドのメトリックファミリーに従います。</td></tr>
 <tr><td>オフセット出力</td><td>オフセットは、要素レベルの検索結果で利用可能です。EmbeddingList検索はエンティティレベルの結果を返し、主要な結果単位として要素オフセットを使用しません。</td></tr>

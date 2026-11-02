@@ -38,6 +38,7 @@ title: 使用 Docker Compose 執行 Milvus（Linux）
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">安裝 Docker</a>。</li>
+<li>安裝<a href="https://docs.docker.com/compose/install/linux/">Docker Compose 外掛程式</a>（V2 或更新版本），並透過 `<code translate="no">docker compose version</code>` 指令進行驗證。本說明使用 `<code translate="no">docker compose</code>` 指令，而非舊版 `<code translate="no">docker-compose</code> ` V1 指令。</li>
 <li>安裝前<a href="/docs/zh-hant/prerequisite-docker.md">請先確認硬體與軟體的系統需求</a>。</li>
 </ul>
 <h2 id="Install-Milvus" class="common-anchor-header">安裝 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -55,7 +56,7 @@ title: 使用 Docker Compose 執行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其儲存庫中提供了一個 Docker Compose 配置檔案。若要使用 Docker Compose 安裝 Milvus，只需執行</p>
+    </button></h2><p>Milvus 在其儲存庫中提供了一個 Docker Compose 配置檔案。請下載 v3.0.3 的配置檔案並啟動新的部署：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
@@ -67,24 +68,25 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>預設部署（v3.0.3）：</strong> <code translate="no">docker compose up -d</code> 會啟動三個容器 —<code translate="no">milvus-etcd</code> （元資料）、<code translate="no">milvus-minio</code> （物件儲存）以及<code translate="no">milvus-standalone</code> 。訊息佇列採用<strong>Woodpecker（內嵌式，以 MinIO / 物件儲存作為其 WAL 後端）</strong>，因此無需額外建立訊息佇列容器。</p>
-<p><strong>各版本的預設訊息佇列：</strong></p>
+<p><strong>預設部署（v3.0.3）：</strong> <code translate="no">docker compose up -d</code> 會啟動三個長期運行的容器 —<code translate="no">milvus-etcd</code> （元資料）、<code translate="no">milvus-minio</code> （物件儲存）以及<code translate="no">milvus-standalone</code> 。訊息佇列採用<strong>Woodpecker（內嵌式，以 MinIO / 物件儲存作為其 WAL 後端）</strong>，因此無需額外建立訊息佇列容器。</p>
+<p>此設定還會執行一次性的<code translate="no">milvus-volume-init</code> 服務，以準備資料目錄的所有權。完成該任務後，該服務即會退出。</p>
+<p><strong>各版本的訊息佇列預設值：</strong></p>
 <ul>
 <li><strong>2.5.x</strong>— 預設訊息佇列為<strong>RocksMQ</strong>。</li>
 <li><strong>2.6.x 及後續版本</strong>— 預設訊息佇列為<strong>Woodpecker（內嵌式）</strong>。</li>
 </ul>
-<p>請務必下載最新的 Docker Compose 配置檔，以確保與 v3.0.3 功能相容。</p>
+<p>請使用您打算安裝的發行版所附帶的配置檔。若為現有部署環境，請遵循升級說明，而非將其配置檔替換為新安裝的配置檔。</p>
 <ul>
-<li><p>若您無法執行上述指令，請檢查系統是否已安裝 Docker Compose V1。若屬此情況，建議您根據<a href="https://docs.docker.com/compose/">本頁</a>說明遷移至 Docker Compose V2。</p></li>
+<li><p>若無法取得<code translate="no">docker compose</code> ，請依照<a href="https://docs.docker.com/compose/install/linux/">Docker 說明</a>安裝 Compose 外掛程式。</p></li>
 <li><p>若在拉取映像檔時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>聯絡我們，並提供問題詳情，我們將為您提供必要的支援。</p></li>
 </ul>
 </div>
 <p>啟動 Milvus 後，</p>
 <ul>
-<li>名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器已啟動。
+<li>名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器即已啟動。
 <ul>
 <li><strong>milvus-etcd</strong>容器不會向主機公開任何埠號，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器在本地端提供<strong>9000</strong>和<strong>9001</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>目錄。</li>
+<li><strong>milvus-minio</strong>容器在本地端提供<strong>9000</strong>和<strong>9001</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>。</li>
 <li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
@@ -96,8 +98,9 @@ milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         
 milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>您亦可透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 實例。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可選) 更新 Milvus 設定<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<p>您也可以透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 實例。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>若要測試正在運行的伺服器，請依照<a href="/docs/zh-hant/quickstart.md">《快速入門》</a>中的<strong>「使用現有 Milvus 伺服器</strong>」路徑，並連線至<code translate="no">http://localhost:19530</code> 。請勿使用「<code translate="no">.db</code> 」的本地連線區塊，該區塊會啟動一個獨立的 Milvus Lite 資料庫。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可選）更新 Milvus 設定<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,7 +154,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrading-from-Milvus-25x-to-26x" class="common-anchor-header">從 Milvus 2.5.x 升級至 2.6.x<button data-href="#Upgrading-from-Milvus-25x-to-26x" class="anchor-icon" translate="no">
+<h2 id="Upgrade-an-existing-deployment" class="common-anchor-header">升級現有部署<button data-href="#Upgrade-an-existing-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,13 +169,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0.3 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
-<p>由於 2.6.x 將預設訊息佇列變更為 Woodpecker，因此在 2.5.x 上運行<strong>RocksMQ</strong>的實例必須<strong>在升級前明確鎖定 RocksMQ</strong>— 否則升級過程會嘗試變更訊息佇列，而此操作目前不被支援。 下載 2.6.x 版的 Docker Compose 檔案後，請在您的 `<code translate="no">user.yaml</code> ` 覆寫設定中將訊息佇列類型改回 `<code translate="no">rocksmq</code> `，然後進行升級：</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the 2.5.x → 2.6.x upgrade</span>
+    </button></h2><p>對於 Milvus 2.6.x 獨立部署，請參閱《<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立部署</a>》。在變更 Milvus 映像檔之前，請備份元資料和持久化資料、保留現有的依賴項和設定，並驗證文件中所述的「來源至目標」升級路徑。 請勿將舊版部署的 Compose 檔案替換為上述新安裝的配置。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0.3 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p>Milvus 2.6.x 及後續版本預設使用 Woodpecker，而 2.5.x 部署則預設使用<strong>RocksMQ</strong>。若您正在升級的部署仍運行 RocksMQ，請在變更 Milvus 映像檔之前，於 `<code translate="no">user.yaml</code> ` 中將其固定，以便升級後的實例保留現有的訊息佇列，而非採用新的預設值：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要在<em>升級後</em>切換訊息佇列，請參閱「<a href="/docs/zh-hant/switch-mq-type.md">切換訊息佇列</a>」。</p>
+<p>當升級後的實例已在 v3.0.3 上運行後，您可以透過「<a href="/docs/zh-hant/switch-mq-type.md">切換訊息佇列」（Switch Message Queue</a>）功能從 RocksMQ 切換至 Woodpecker，此功能自 Milvus 3.0 及後續版本起提供。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">可選依賴項<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,7 +192,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>此部署使用<strong>Woodpecker</strong>（嵌入式，MinIO WAL 後端）處理訊息傳遞、<strong>etcd</strong>管理元資料，以及<strong>MinIO</strong>作為物件儲存。若要使用其他訊息佇列或連接外部物件儲存／元資料，請參閱：</p>
+    </button></h2><p>此部署使用<strong>Woodpecker</strong>（內嵌式，MinIO WAL 後端）處理訊息傳遞、<strong>etcd</strong>管理元資料，以及<strong>MinIO</strong>作為物件儲存。若要使用其他訊息佇列或連接外部物件儲存／元資料，請參閱：</p>
 <ul>
 <li>訊息佇列：<a href="/docs/zh-hant/woodpecker.md">Woodpecker</a>（預設）·<a href="/docs/zh-hant/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh-hant/mq_kafka.md">Kafka</a>·<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a></li>
 <li>物件儲存：<a href="/docs/zh-hant/deploy_s3.md">MinIO</a>（預設）·<a href="/docs/zh-hant/deploy_s3.md">AWS S3</a>·<a href="/docs/zh-hant/abs.md">Azure Blob</a>·<a href="/docs/zh-hant/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh-hant/deploy_s3.md">阿里雲 OSS</a>·<a href="/docs/zh-hant/deploy_s3.md">騰訊 COS</a>·<a href="/docs/zh-hant/deploy_s3.md">華為 OBS</a>·<a href="/docs/zh-hant/deploy_s3.md">S3 相容</a></li>
@@ -224,15 +228,15 @@ EOF
 <li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立執行版本</a>。</p></li>
 <li><p><a href="/docs/zh-hant/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
-<li><p>在雲端部署您的 Milvus 叢集：</p>
+<li><p>將您的 Milvus 叢集部署至雲端：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直覺式網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

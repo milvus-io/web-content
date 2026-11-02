@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -1041,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
+            "label": "Búsqueda básica con redes neuronales artificiales",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1241,7 +1235,7 @@
             "children": []
           },
           {
-            "label": "Utilizar la clave de partición",
+            "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []

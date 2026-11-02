@@ -150,8 +150,8 @@ summary: >-
     </button></h2><table>
   <thead>
     <tr>
-      <th scope="col"><h3>Pencarian EmbeddingList</h3></th>
-      <th scope="col"><h3>Pencarian tingkat elemen</h3></th>
+      <th scope="col"><h3 id="embeddinglist-search">Pencarian EmbeddingList</h3></th>
+      <th scope="col"><h3 id="element-level-search">Pencarian tingkat elemen</h3></th>
     </tr>
   </thead>
   <tbody>
@@ -171,14 +171,13 @@ summary: >-
           <li>Data kueri: vektor biasa.</li>
           <li>Keluarga metrik: metrik vektor biasa.</li>
           <li>Tingkat granularitas hasil: tingkat elemen Struct.</li>
-          <li>Paling cocok untuk: pencarian tingkat potongan, tingkat klip, atau tingkat patch.</li>
+          <li>Cocok untuk: pencarian tingkat chunk, tingkat klip, atau tingkat patch.</li>
         </ul>
       </td>
     </tr>
   </tbody>
 </table>
-<div class="alert note">
-<p>Peringatan</p>
+<div class="alert warning">
 <p>Jika koleksi Anda memerlukan pencarian EmbeddingList dan pencarian tingkat elemen, gunakan dua subbidang vektor terpisah. Bidang vektor atau subbidang vektor hanya menerima satu indeks, dan kedua mode pencarian tersebut memerlukan keluarga metrik yang berbeda.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Peta dokumentasi<button data-href="#Documentation-map" class="anchor-icon" translate="no">
@@ -196,13 +195,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dokumentasi StructArray dibagi menjadi halaman pemodelan dan halaman pencarian. Gunakan halaman pemodelan untuk mendefinisikan dan mempersiapkan data. Gunakan halaman pencarian untuk memilih perilaku pengambilan dan penyaringan yang tepat.</p>
+    </button></h2><p>Dokumentasi StructArray dibagi menjadi halaman pemodelan dan halaman pencarian. Gunakan halaman pemodelan untuk mendefinisikan dan menyiapkan data. Gunakan halaman pencarian untuk memilih perilaku pengambilan dan penyaringan yang tepat.</p>
 <table>
 <thead>
 <tr><th>Area</th><th>Halaman</th><th>Gunakan untuk</th></tr>
 </thead>
 <tbody>
-<tr><td>Pemodelan</td><td><a href="/docs/id/create-structarray-field.md">Buat Bidang StructArray</a></td><td>Tentukan skema Struct dan tambahkan bidang StructArray.</td></tr>
+<tr><td>Pemodelan</td><td><a href="/docs/id/create-structarray-field.md">Membuat Bidang StructArray</a></td><td>Tentukan skema Struct dan tambahkan bidang StructArray.</td></tr>
 <tr><td>Pemodelan</td><td><a href="/docs/id/insert-data-into-structarray-fields.md">Masukkan Data ke dalam Bidang StructArray</a></td><td>Siapkan dan masukkan data StructArray bersarang.</td></tr>
 <tr><td>Pemodelan</td><td><a href="/docs/id/index-structarray-fields.md">Buat indeks pada bidang StructArray</a></td><td>Buat indeks vektor dan skalar pada subbidang StructArray.</td></tr>
 <tr><td>Referensi</td><td><a href="/docs/id/structarray-limits.md">Batasan StructArray</a></td><td>Periksa batasan skema, tipe data, indeks, pencarian, filter, dan versi.</td></tr>
@@ -254,7 +253,7 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>Untuk merancang skema, baca <a href="/docs/id/create-structarray-field.md">Buat Bidang StructArray</a>.</p></li>
-<li><p>Untuk mempersiapkan data, baca " <a href="/docs/id/insert-data-into-structarray-fields.md">Sisipkan Data ke dalam Bidang StructArray</a>".</p></li>
+<li><p>Untuk mempersiapkan data, baca " <a href="/docs/id/insert-data-into-structarray-fields.md">Sisipkan Data ke Bidang StructArray</a>".</p></li>
 <li><p>Untuk memilih indeks, baca " <a href="/docs/id/index-structarray-fields.md">Index StructArray Fields</a>".</p></li>
 <li><p>Untuk mencari subbidang vektor StructArray, mulailah dengan " <a href="/docs/id/basic-vector-search-with-structarray.md">Pencarian Vektor Dasar dengan StructArray</a>".</p></li>
 <li><p>Untuk menyaring subbidang skalar StructArray, baca " <a href="/docs/id/struct-array-operators.md">Operator StructArray</a> " dan " <a href="/docs/id/filtered-search-with-structarray.md">Pencarian yang Disaring dengan StructArray</a>".</p></li>

@@ -22,12 +22,13 @@ title: BGE M3
         ></path>
       </svg>
     </button></h1><p><a href="https://arxiv.org/abs/2402.03216">Le BGE-M3</a> tire son nom de ses capacités en matière de multilinguisme, de multifonctionnalité et de multi-granularité. Capable de prendre en charge plus de 100 langues, le BGE-M3 établit de nouvelles références dans les tâches de recherche multilingue et interlinguistique. Sa capacité unique à effectuer une recherche dense, une recherche multivectorielle et une recherche clairsemée au sein d’un même cadre en fait un choix idéal pour un large éventail d’applications de recherche d’informations (IR).</p>
-<p>Milvus s'intègre au modèle BGE-M3 à l'aide de la classe <strong>BGEM3EmbeddingFunction</strong>. Cette classe gère le calcul des représentations et les renvoie dans un format compatible avec Milvus pour l'indexation et la recherche.</p>
+<p>Milvus s'intègre au modèle BGE-M3 via la classe <strong>`BGEM3EmbeddingFunction</strong> `. Cette classe gère le calcul des représentations et les renvoie dans un format compatible avec Milvus pour l'indexation et la recherche.</p>
+<p>Cet exemple génère des représentations dans votre processus Python ; il ne se connecte pas à un serveur Milvus. Les poids du modèle sont téléchargés lors de la première utilisation ; vous devez donc disposer d’un accès réseau à l’hôte du modèle ou d’un cache de modèle local rempli. L’inférence sur CPU est prise en charge avec <code translate="no">use_fp16=False</code>.</p>
 <p>Pour utiliser cette fonctionnalité, installez les dépendances nécessaires :</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ensuite, instanciez la classe <strong>BGEM3EmbeddingFunction</strong>:</p>
+<p>Ensuite, instanciez la classe ` <strong>BGEM3EmbeddingFunction</strong>` :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 bge_m3_ef = BGEM3EmbeddingFunction(
@@ -39,7 +40,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(
 <p><strong>Paramètres</strong>:</p>
 <ul>
 <li><p><strong>model_name</strong> (<em>chaîne de caractères</em>)</p>
-<p>Nom du modèle à utiliser pour l'encodage. La valeur par défaut est <strong>BAAI/bge-m3</strong>.</p></li>
+<p>Nom du modèle à utiliser pour l’encodage. La valeur par défaut est <strong>BAAI/bge-m3</strong>.</p></li>
 <li><p><strong>device</strong> (<em>chaîne de caractères</em>)</p>
 <p>Le périphérique à utiliser : « <strong>cpu</strong> » pour le processeur et « <strong>cuda:n »</strong> pour le n-ième périphérique GPU.</p></li>
 <li><p><strong>use_fp16</strong> (<em>booléen</em>)</p>
@@ -91,3 +92,26 @@ query_embeddings = bge_m3_ef.encode_queries(queries)
 Dense query dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 Sparse query dim: <span class="hljs-number">250002</span> (<span class="hljs-number">1</span>, <span class="hljs-number">250002</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Store-and-search-the-embeddings" class="common-anchor-header">Stockage et recherche des représentations<button data-href="#Store-and-search-the-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La génération des représentations est la première étape. Pour utiliser ces résultats à des fins de recherche, définissez une collection et indexez chaque champ vectoriel :</p>
+<ul>
+<li>Mappez <code translate="no">docs_embeddings[&quot;dense&quot;]</code> vers un champ <code translate="no">FLOAT_VECTOR</code> avec la dimension <code translate="no">bge_m3_ef.dim[&quot;dense&quot;]</code>.</li>
+<li>Mappez <code translate="no">docs_embeddings[&quot;sparse&quot;]</code> vers un champ <code translate="no">SPARSE_FLOAT_VECTOR</code>, qui ne nécessite pas de dimension fixe dans le schéma Milvus. Utilisez une métrique <code translate="no">IP</code> pour ces vecteurs clairsemés appris. Voir <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</li>
+<li>Stockez l’ID de chaque document ainsi que son texte source ou ses métadonnées aux côtés de ses vecteurs afin que les résultats de recherche puissent être rattachés à leur source.</li>
+<li>Encodez les requêtes avec le même modèle et les mêmes paramètres que les documents. Envoyez une seule requête « <code translate="no">hybrid_search()</code> » avec une requête « <code translate="no">AnnSearchRequest</code> » pour le champ dense et une autre pour le champ clairsemé, puis laissez un système de classement côté serveur, tel que RRF ou un système de classement pondéré, fusionner les résultats.</li>
+</ul>
+<p>Suivez les instructions de « <a href="/docs/fr/hybrid_search_with_milvus.md">Hybrid Search with Milvus</a> » pour le schéma de collection, les index, l’insertion et les requêtes de recherche hybride. Les exemples présentés sur cette page utilisent les sorties denses et clairsemées du wrapper ; ils ne présentent pas la sortie multivectorielle ColBERT optionnelle de BGE-M3.</p>

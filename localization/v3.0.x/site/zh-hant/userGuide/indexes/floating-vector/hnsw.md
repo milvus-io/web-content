@@ -18,7 +18,7 @@ summary: HNSW 索引是一種基於圖的索引演算法，能在搜尋高維度
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW</strong>索引是一種<strong>基於圖的</strong>索引演算法，可在搜尋高維度浮點向量時提升效能。它不僅具備<strong>卓越的</strong>搜尋準確度與<strong>低延遲</strong>，但為了維持其階層式圖結構，需要<strong>較高的</strong>記憶體開銷。</p>
+    </button></h1><p><strong>HNSW</strong>索引是一種<strong>基於圖的</strong>索引演算法，能在搜尋高維度浮點向量時提升效能。它不僅具備<strong>卓越的</strong>搜尋準確度與<strong>低延遲</strong>，但為了維持其階層式圖結構，需要<strong>較高的</strong>記憶體開銷。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,11 +35,11 @@ summary: HNSW 索引是一種基於圖的索引演算法，能在搜尋高維度
         ></path>
       </svg>
     </button></h2><p>分層可導航小世界（HNSW）演算法會建構一個多層次圖，類似於具有不同縮放層級的地圖。<strong>最底層</strong>包含所有資料點，<strong>而上層</strong>則由從底層採樣而來的資料點子集組成。</p>
-<p>在此層級結構中，每一層都包含代表資料點的節點，並透過表示其距離遠近的邊相互連接。較高層級可提供長距離跳躍以快速接近目標，而較低層級則能進行細粒度的搜尋以獲得最精確的結果。</p>
+<p>在此層級結構中，每一層都包含代表資料點的節點，並透過表示其距離的邊相互連接。較高層級可提供長距離跳躍以快速接近目標，而較低層級則能進行細粒度的搜尋以獲得最精確的結果。</p>
 <p>其運作方式如下：</p>
 <ol>
 <li><p><strong>起點</strong>：搜尋從頂層的固定起點開始，該起點是圖中預先指定的節點。</p></li>
-<li><p><strong>貪婪搜尋</strong>：演算法會貪婪地移動至當前層級中最鄰近的節點，直到無法再更接近查詢向量為止。上層主要負責導航功能，作為粗略篩選機制，用以定位下層精細搜尋的潛在起點。</p></li>
+<li><p><strong>貪婪搜尋</strong>：演算法會貪婪地移動至當前層級中最鄰近的節點，直到無法再更接近查詢向量為止。上層主要發揮導航功能，作為粗略篩選機制，用以定位下層精細搜尋的潛在起點。</p></li>
 <li><p><strong>層級下降</strong>：當在當前層級達到<strong>局部極小值</strong>時，演算法會透過預先建立的連結跳轉至較低層級，並重複貪婪搜尋。</p></li>
 <li><p><strong>最終精細化</strong>：此過程持續進行直至抵達最底層，此時透過最終精細化步驟來識別最近鄰。</p></li>
 </ol>
@@ -71,8 +71,8 @@ summary: HNSW 索引是一種基於圖的索引演算法，能在搜尋高維度
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>此範例使用名為<code translate="no">client</code> 的已連線客戶端，以及名為<code translate="no">your_collection_name</code> 的現有集合。該集合包含一個名為<code translate="no">your_vector_field_name</code> 的五維向量場。</p>
-<p>先使用<code translate="no">add_index()</code> 定義索引參數，然後使用<code translate="no">create_index()</code> 建立索引。</p>
+    </button></h2><p>此範例使用名為<code translate="no">client</code> 的連通<code translate="no">MilvusClient</code> ，以及名為<code translate="no">your_collection_name</code> 的現有集合。該集合包含一個名為<code translate="no">your_vector_field_name</code> 的五維<code translate="no">FLOAT_VECTOR</code> 欄位。有關 SDK 相容性，請參閱《<a href="/docs/zh-hant/install-pymilvus.md">安裝 Milvus Python SDK</a>》；關於資料結構與連線設定，請參閱<a href="/docs/zh-hant/create-collection.md">《建立集合》</a>。將範例套用至您的嵌入向量時，請一併替換欄位名稱與查詢維度。</p>
+<p>請使用 `<code translate="no">add_index()</code>` 定義索引參數，然後使用 `<code translate="no">create_index()</code>` 建立索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -94,16 +94,16 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>在此配置中：</p>
+<p>在此設定中：</p>
 <ul>
-<li><p><code translate="no">index_type</code>：要建立的索引類型。在此範例中，將值設定為<code translate="no">HNSW</code> 。</p></li>
+<li><p><code translate="no">index_type</code>: 將要建立的索引類型。在此範例中，請將值設定為<code translate="no">HNSW</code> 。</p></li>
 <li><p><code translate="no">metric_type</code>: 用於計算向量之間距離的方法。支援的值包括<code translate="no">COSINE</code> 、<code translate="no">L2</code> 以及<code translate="no">IP</code> 。詳細資訊請參閱「<a href="/docs/zh-hant/metric.md">度量類型</a>」。</p></li>
 <li><p><code translate="no">params</code>: 建立索引的額外設定選項。</p>
 <ul>
 <li><p><code translate="no">M</code>: 每個節點可連接的鄰居最大數量。</p></li>
 <li><p><code translate="no">efConstruction</code>: 在索引建構過程中，用於評估連線的候選鄰居數量。</p></li>
 </ul>
-<p>此範例將 `<code translate="no">M=64</code> ` 和 `<code translate="no">efConstruction=100</code> ` 設定為調校覆寫值。有關預設值和允許的範圍，請參閱「<a href="/docs/zh-hant/hnsw.md#Index-building-params">索引建置參數</a>」。</p></li>
+<p>此範例將 `<code translate="no">M=64</code> ` 和 `<code translate="no">efConstruction=100</code> ` 設定為調校覆寫值。有關預設值和有效範圍，請參閱「<a href="/docs/zh-hant/hnsw.md#Index-building-params">索引建置參數</a>」。</p></li>
 </ul>
 <p>若要同時建立集合及其索引，請將索引參數傳遞給<code translate="no">create_collection()</code> 。詳細資訊請參閱「<a href="/docs/zh-hant/create-collection.md">建立集合</a>」。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上進行搜尋<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -162,7 +162,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h2><p>下表列出了索引建立與搜尋的相關參數。若未指定某些參數，伺服器設定可覆寫其預設值。</p>
-<h3 id="Index-building-params" class="common-anchor-header">建立索引參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,7 +189,7 @@ res = client.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>每個節點在圖中可擁有的最大連接數（或邊數），包含出邊與入邊。此參數會直接影響索引建構與搜尋。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[2, 2048]</p><p><strong>預設值</strong>：<code translate="no">30</code> （每個節點最多 30 條出邊和 30 條入邊）</p></td>
-     <td><p>較大的<code translate="no">M</code> 通常能<strong>提升準確度</strong>，但<strong>會增加記憶體開銷</strong>，<strong>並減緩索引建置與搜尋速度</strong>。若資料集維度較高，或當高召回率至關重要時，請考慮增加<code translate="no">M</code> 。</p><p>若記憶體使用量與搜尋速度是首要考量，請考慮降低<code translate="no">M</code> 的值。</p><p>在大多數情況下，我們建議您將數值設定在此範圍內：[5, 100]。</p></td>
+     <td><p>較大的<code translate="no">M</code> 通常能<strong>提升準確度</strong>，但<strong>會增加記憶體開銷</strong>，<strong>並減緩索引建置與搜尋速度</strong>。若資料集維度較高，或當高召回率至關重要時，請考慮增加<code translate="no">M</code> 。</p><p>若記憶體使用量與搜尋速度是首要考量，請考慮降低<code translate="no">M</code> 的數值。</p><p>在大多數情況下，我們建議您將數值設定在此範圍內：[5, 100]。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>
@@ -225,6 +225,29 @@ res = client.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>控制最近鄰檢索過程中的搜尋範圍。此參數決定將造訪並評估多少個節點作為潛在的最近鄰。此參數僅影響搜尋過程，且僅適用於圖的底層。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1,<em>int_max</em>]</p><p><strong>預設值</strong>：<code translate="no">max(limit, 16)</code> （適用於一般 kNN 搜尋）；<code translate="no">512</code> （適用於範圍搜尋）。</p><p>對於一般 kNN 搜尋，顯式設定的<code translate="no">ef</code> 必須大於或等於<code translate="no">limit</code> （即要回傳的最近鄰節點數）。</p></td>
-     <td><p>較大的<code translate="no">ef</code> 通常會因納入更多潛在鄰居而<strong>提高搜尋準確度</strong>。然而，這也會<strong>增加搜尋時間</strong>。當達成高召回率至關重要，且搜尋速度並非首要考量時，建議考慮增加<code translate="no">ef</code> 。</p><p>若需優先確保搜尋速度，特別是當搜尋精度稍有下降尚可接受時，請考慮降低<code translate="no">ef</code> 的數值。</p><p>在大多數情況下，我們建議您將數值設定在此範圍內：[K, 10K]。</p></td>
+     <td><p>較大的<code translate="no">ef</code> 通常會因納入更多潛在鄰居而<strong>提高搜尋準確度</strong>。然而，這也會<strong>增加搜尋時間</strong>。當達成高召回率至關重要，且搜尋速度並非首要考量時，建議考慮增加<code translate="no">ef</code> 。</p><p>若需優先確保搜尋速度，特別是當搜尋準確度可接受輕微下降時，請考慮降低<code translate="no">ef</code> 的數值。</p><p>在大多數情況下，我們建議您將數值設定在此範圍內：[K, 10K]。</p></td>
    </tr>
 </table>
+<h2 id="Evaluate-the-trade-offs" class="common-anchor-header">評估取捨<button data-href="#Evaluate-the-trade-offs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>請使用具代表性的資料和查詢來選擇參數，而非將範例值視為生產環境的預設值：</p>
+<ol>
+<li>固定嵌入模型、指標、<code translate="no">limit</code> 以及任何<a href="/docs/zh-hant/filtered-search.md">篩選條件</a>。針對相同的查詢和符合條件的實體計算精確最近鄰（例如使用<a href="/docs/zh-hant/flat.md">FLAT</a>索引），以測量召回率。</li>
+<li>在目標並發數下，逐步調整搜尋時的<code translate="no">ef</code> 。同時記錄召回率、吞吐量及尾部延遲。增加<code translate="no">ef</code> 無需重建索引。</li>
+<li>若搜尋時段的調校無法達到目標，請比較採用不同<code translate="no">M</code> 和<code translate="no">efConstruction</code> 重建的索引。同時記錄索引建置時間、記憶體使用量以及查詢效能。</li>
+<li>請將載入策略與快取狀態納入測試範圍。若使用<a href="/docs/zh-hant/tiered-storage-overview.md">分層儲存</a>，請將擷取未快取資料的查詢與暖快取查詢分開測量。</li>
+</ol>
+<p>若受記憶體限制，或有不同的回溯率與延遲目標，請參閱《<a href="/docs/zh-hant/index-explained.md">索引詳解</a>》中的替代方案進行比較。</p>

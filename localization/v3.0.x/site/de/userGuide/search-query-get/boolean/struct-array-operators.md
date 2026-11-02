@@ -50,14 +50,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Wählen Sie einen Operator entsprechend Ihrem Filterziel aus:</p>
+<table>
 <thead>
 <tr><th>Ziel</th><th>Verwendung</th></tr>
 </thead>
 <tbody>
 <tr><td>Beschränken Sie die Vektorsuche auf Elementebene auf Elemente, die skalare Bedingungen erfüllen.</td><td><code translate="no">element_filter</code></td></tr>
-<tr><td>Erfüllen mehrerer skalarer Bedingungen innerhalb desselben Struct-Elements.</td><td><code translate="no">element_filter</code></td></tr>
-<tr><td>Gibt nur Entitäten zurück, bei denen mindestens ein Struct-Element ein Prädikat erfüllt.</td><td><code translate="no">MATCH_ANY</code></td></tr>
+<tr><td>Erfüllen Sie mehrere skalare Bedingungen innerhalb desselben Struct-Elements.</td><td><code translate="no">element_filter</code></td></tr>
+<tr><td>Geben Sie nur Entitäten zurück, bei denen mindestens ein Struct-Element ein Prädikat erfüllt.</td><td><code translate="no">MATCH_ANY</code></td></tr>
 <tr><td>Gibt nur Entitäten zurück, bei denen alle Struct-Elemente ein Prädikat erfüllen.</td><td><code translate="no">MATCH_ALL</code></td></tr>
 <tr><td>Gibt nur Entitäten zurück, bei denen mindestens, höchstens oder genau <code translate="no">N</code> Struct-Elemente ein Prädikat erfüllen.</td><td><code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> oder <code translate="no">MATCH_EXACT</code></td></tr>
 <tr><td>Überprüfen Sie das Struct-Element an einer bestimmten Position, z. B. im ersten Chunk.</td><td>Ein Positionspfad wie <code translate="no">chunks[0][section]</code></td></tr>
@@ -65,6 +66,69 @@ summary: >-
 <tr><td>Prüfen Sie, ob ein beliebiges Struktur-Element einen Unterfeldwert enthält, ohne Bedingungen für dasselbe Element zu kombinieren.</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code> oder <code translate="no">array_contains_all</code> auf einem Unterfeldpfad wie <code translate="no">chunks[section]</code></td></tr>
 </tbody>
 </table>
+<h2 id="Example-data" class="common-anchor-header">Beispieldaten<button data-href="#Example-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Die folgenden Beispiele für Teilentitäten zeigen nur die „ <code translate="no">chunks</code> “-Felder von <strong>Entität A</strong> und <strong>Entität B</strong>. Es handelt sich nicht um vollständige Einfüge-Nutzdaten.</p>
+<p><strong>Entität A</strong>:</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;chunks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.74</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.72</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.83</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.87</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Entität B</strong>:</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;chunks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.95</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.92</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;quality_score&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.97</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;has_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Element-Filter" class="common-anchor-header">Elementfilter<button data-href="#Element-Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,20 +146,23 @@ summary: >-
       </svg>
     </button></h2><p>Verwenden Sie „ <code translate="no">element_filter(structArrayField, predicate)</code> “, um Struct-Elemente in einem StructArray-Feld abzugleichen.</p>
 <p>Verwenden Sie innerhalb des Prädikats „ <code translate="no">$[subfield]</code> “, um auf ein skalares Unterfeld des aktuellen Struct-Elements zu verweisen.</p>
-<pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span>)
+<pre><code translate="no" class="language-text">element_filter(chunks, $[section] == &quot;index&quot;)
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn innerhalb des Prädikats mehrere Bedingungen verwendet werden, beziehen sich alle „ <code translate="no">$[subfield]</code> “-Referenzen auf dasselbe Struct-Element:</p>
-<pre><code translate="no" class="language-python">element_filter(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; $[quality_score] &gt; <span class="hljs-number">0.9</span>)
+<p>Sowohl Entität A als auch Entität B erfüllen die Bedingung: Bei allen sieben angezeigten Elementen ist „ <code translate="no">section</code> “ auf „ <code translate="no">&quot;index&quot;</code> “ gesetzt.</p>
+<p>Wenn innerhalb des Prädikats mehrere Bedingungen verwendet werden, beziehen sich alle „ <code translate="no">$[subfield]</code> “-Verweise auf dasselbe Struct-Element:</p>
+<pre><code translate="no" class="language-text">element_filter(chunks, $[section] == &quot;index&quot; &amp;&amp; $[quality_score] &gt; 0.9)
 <button class="copy-code-btn"></button></code></pre>
+<p>Nur Entität B entspricht den Kriterien: Alle drei ihrer Elemente erfüllen beide Bedingungen.</p>
 <p>Wenn Sie ein Prädikat auf Entitätsebene mit „ <code translate="no">element_filter</code> “ kombinieren, setzen Sie „ <code translate="no">element_filter</code> “ an das Ende des Ausdrucks:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Correct</span>
-category == <span class="hljs-string">&quot;index&quot;</span> &amp;&amp; element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>)
+<pre><code translate="no" class="language-text"># Correct
+category == &quot;index&quot; &amp;&amp; element_filter(chunks, $[quality_score] &gt; 0.9)
 
-<span class="hljs-comment"># Incorrect</span>
-element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>) &amp;&amp; category == <span class="hljs-string">&quot;index&quot;</span>
+# Incorrect
+element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;index&quot;
 <button class="copy-code-btn"></button></code></pre>
+<p>Das Beispiel „ <code translate="no">category</code> “ veranschaulicht die Reihenfolge der Ausdrücke unabhängig von den Beispieldaten, in denen „ <code translate="no">category</code> “ nicht definiert ist.</p>
 <p><code translate="no">element_filter</code> kann in einem Filterausdruck nur einmal vorkommen. Verschachteln Sie „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “ nicht innerhalb eines anderen „ <code translate="no">element_filter</code> “.</p>
-<h2 id="Match-Family-Operators" class="common-anchor-header">Operatoren für die Übereinstimmung mit Familien<button data-href="#Match-Family-Operators" class="anchor-icon" translate="no">
+<h2 id="Match-Family-Operators" class="common-anchor-header">Operatoren der Match-Familie<button data-href="#Match-Family-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,16 +177,16 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie „ <code translate="no">MATCH_*</code> “-Operatoren, wenn eine Entität danach ausgewählt werden soll, wie viele „Struct“-Elemente ein Prädikat erfüllen.</p>
+    </button></h2><p>Verwenden Sie „ <code translate="no">MATCH_*</code> “-Operatoren, wenn eine Entität danach ausgewählt werden soll, wie viele „Struct“-Elemente ein Prädikat erfüllen. Die Operatoren haben folgende Bedeutungen:</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Bedeutung</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>Mindestens ein Struct-Element erfüllt das Prädikat.</td></tr>
-<tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Alle Struct-Elemente erfüllen das Prädikat.</td></tr>
-<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
-<tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Höchstens <code translate="no">N</code> -Struktur-Elemente erfüllen das Prädikat.</td></tr>
+<tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Alle „Struct“-Elemente erfüllen das Prädikat.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens „ <code translate="no">N</code> “ Struct-Elemente erfüllen das Prädikat.</td></tr>
+<tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Höchstens <code translate="no">N</code> -Struct-Elemente erfüllen das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>Genau <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
 </tbody>
 </table>
@@ -139,10 +206,11 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_ANY</code> ergibt „ <code translate="no">true</code> “, wenn mindestens ein Element im StructArray das Prädikat erfüllt.</p>
-<pre><code translate="no" class="language-python">MATCH_ANY(chunks, $[section] == <span class="hljs-string">&quot;index&quot;</span>)
+    </button></h3><p><code translate="no">MATCH_ANY</code> ergibt „ <code translate="no">true</code> “, wenn mindestens ein Element im „StructArray“ das Prädikat erfüllt.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[section] == &quot;index&quot;)
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einem leeren `StructArray` gibt ` <code translate="no">MATCH_ANY</code> ` den Wert ` <code translate="no">false</code>` zurück.</p>
+<p>Sowohl Entität A als auch Entität B stimmen überein, da jede mindestens ein Element enthält, bei dem „ <code translate="no">section</code> “ auf „ <code translate="no">&quot;index&quot;</code> “ gesetzt ist.</p>
+<p>Bei einem leeren StructArray gibt „ <code translate="no">MATCH_ANY</code> “ den Wert „ <code translate="no">false</code> “ zurück.</p>
 <h3 id="MATCHALL" class="common-anchor-header">MATCH_ALL<button data-href="#MATCHALL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,9 +227,10 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
         ></path>
       </svg>
     </button></h3><p><code translate="no">MATCH_ALL</code> ergibt „ <code translate="no">true</code> “, wenn jedes Element im StructArray das Prädikat erfüllt.</p>
-<pre><code translate="no" class="language-python">MATCH_ALL(chunks, $[has_code] == true)
+<pre><code translate="no" class="language-text">MATCH_ALL(chunks, $[has_code] == true)
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einem leeren StructArray gibt „ <code translate="no">MATCH_ALL</code> “ „ <code translate="no">true</code> “ zurück.</p>
+<p>Sowohl Entität A als auch Entität B stimmen überein, da bei jedem angezeigten Element <code translate="no">has_code</code> auf <code translate="no">true</code> gesetzt ist.</p>
+<p>Bei einem leeren StructArray gibt „ <code translate="no">MATCH_ALL</code> “ den Wert „ <code translate="no">true</code> “ zurück.</p>
 <h3 id="MATCHLEAST" class="common-anchor-header">MATCH_LEAST<button data-href="#MATCHLEAST" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,9 +247,10 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
         ></path>
       </svg>
     </button></h3><p><code translate="no">MATCH_LEAST</code> ergibt „ <code translate="no">true</code> “, wenn die Anzahl der Elemente, die das Prädikat erfüllen, größer oder gleich „ <code translate="no">threshold</code> “ ist.</p>
-<pre><code translate="no" class="language-python">MATCH_LEAST(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span>, threshold=<span class="hljs-number">2</span>)
+<pre><code translate="no" class="language-text">MATCH_LEAST(chunks, $[quality_score] &gt; 0.9, threshold=2)
 <button class="copy-code-btn"></button></code></pre>
-<p>Für ` <code translate="no">MATCH_LEAST</code>` muss ` <code translate="no">threshold</code> ` eine positive ganze Zahl sein.</p>
+<p>Nur Entität B entspricht der Bedingung: Entität A hat keine qualifizierten Elemente, Entität B hingegen drei.</p>
+<p>Für „ <code translate="no">MATCH_LEAST</code> “ muss „ <code translate="no">threshold</code> “ eine positive ganze Zahl sein.</p>
 <h3 id="MATCHMOST" class="common-anchor-header">MATCH_MOST<button data-href="#MATCHMOST" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -196,10 +266,11 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_MOST</code> ergibt „ <code translate="no">true</code> “, wenn die Anzahl der Elemente, die das Prädikat erfüllen, kleiner oder gleich „ <code translate="no">threshold</code> “ ist.</p>
-<pre><code translate="no" class="language-python">MATCH_MOST(chunks, $[has_code] == true, threshold=<span class="hljs-number">1</span>)
+    </button></h3><p><code translate="no">MATCH_MOST</code> ergibt den Wert „ <code translate="no">true</code> “, wenn die Anzahl der Elemente, die das Prädikat erfüllen, kleiner oder gleich „ <code translate="no">threshold</code> “ ist.</p>
+<pre><code translate="no" class="language-text">MATCH_MOST(chunks, $[has_code] == true, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
-<p>Für ` <code translate="no">MATCH_MOST</code>` kann ` <code translate="no">threshold</code> ` Null oder eine positive ganze Zahl sein.</p>
+<p>Keine der Entitäten erfüllt die Bedingung: Entität A hat vier qualifizierte Elemente, Entität B hat drei.</p>
+<p>Bei „ <code translate="no">MATCH_MOST</code> “ kann „ <code translate="no">threshold</code> “ Null oder eine positive ganze Zahl sein.</p>
 <h3 id="MATCHEXACT" class="common-anchor-header">MATCH_EXACT<button data-href="#MATCHEXACT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,9 +286,10 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_EXACT</code> ergibt „ <code translate="no">true</code> “, wenn die Anzahl der Elemente, die das Prädikat erfüllen, genau gleich „ <code translate="no">threshold</code> “ ist.</p>
-<pre><code translate="no" class="language-python">MATCH_EXACT(chunks, $[section] == <span class="hljs-string">&quot;filter&quot;</span>, threshold=<span class="hljs-number">1</span>)
+    </button></h3><p><code translate="no">MATCH_EXACT</code> ergibt den Wert „ <code translate="no">true</code> “, wenn die Anzahl der Elemente, die das Prädikat erfüllen, genau gleich „ <code translate="no">threshold</code> “ ist.</p>
+<pre><code translate="no" class="language-text">MATCH_EXACT(chunks, $[section] == &quot;filter&quot;, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
+<p>Keine der beiden Entitäten passt, da keine ein Element enthält, bei dem <code translate="no">section</code> auf <code translate="no">&quot;filter&quot;</code> gesetzt ist.</p>
 <p>Für ` <code translate="no">MATCH_EXACT</code>` kann ` <code translate="no">threshold</code> ` Null oder eine positive ganze Zahl sein.</p>
 <h2 id="Row-level-predicates-on-StructArray-paths" class="common-anchor-header">Prädikate auf Zeilenebene für StructArray-Pfade<button data-href="#Row-level-predicates-on-StructArray-paths" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -234,8 +306,8 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neben ` <code translate="no">element_filter</code> ` und ` <code translate="no">MATCH_*</code>` kann ein regulärer Filterausdruck direkt auf ein StructArray-Feld oder eines seiner skalaren Unterfelder verweisen. Diese Prädikate werden auf Entitätsebene ausgewertet und geben keine Element-Offsets zurück.</p>
-<h3 id="Access-a-Struct-element-by-position" class="common-anchor-header">Zugriff auf ein Struct-Element über die Position<button data-href="#Access-a-Struct-element-by-position" class="anchor-icon" translate="no">
+    </button></h2><p>Neben „ <code translate="no">element_filter</code> “ und „ <code translate="no">MATCH_*</code> “ kann ein regulärer Filterausdruck direkt auf ein StructArray-Feld oder eines seiner skalaren Unterfelder verweisen. Diese Prädikate werden auf Entitätsebene ausgewertet und geben keine Element-Offsets zurück.</p>
+<h3 id="Subfield-access" class="common-anchor-header">Zugriff auf Unterfelder<button data-href="#Subfield-access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,21 +322,26 @@ element_filter(chunks, $[quality_score] &gt; <span class="hljs-number">0.9</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">structArrayField[index][subfield]</code> “, um auf ein skalares Unterfeld des Struct-Elements an einer nullbasierten Position zu verweisen. Geben Sie zuerst die Position und dann den Namen des Unterfelds an.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk belongs to the &quot;index&quot; section.</span>
-chunks[<span class="hljs-number">0</span>][section] == <span class="hljs-string">&quot;index&quot;</span>
-
-<span class="hljs-comment"># The second chunk has a high quality score.</span>
-chunks[<span class="hljs-number">1</span>][quality_score] &gt; <span class="hljs-number">0.9</span>
-
-<span class="hljs-comment"># The first chunk is on page 1, 2, or 3.</span>
-chunks[<span class="hljs-number">0</span>][page] <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-
-<span class="hljs-comment"># Chained range on a positional path.</span>
-<span class="hljs-number">0.8</span> &lt; chunks[<span class="hljs-number">0</span>][quality_score] &lt; <span class="hljs-number">0.95</span>
+    </button></h3><h4 id="Access-a-Struct-element-by-position" class="common-anchor-header">Zugriff auf ein Struct-Element über die Position</h4><p>Verwenden Sie „ <code translate="no">structArrayField[index][subfield]</code> “, um auf ein skalares Unterfeld des Struct-Elements an einer nullbasierten Position zu verweisen. Geben Sie zuerst die Position und dann den Namen des Unterfelds an. Der umgekehrte Pfad „ <code translate="no">chunks[quality_score][0] &gt; 0.8</code> “ ist ungültig.</p>
+<p>Testen Sie beispielsweise den Qualitätswert des ersten Elements:</p>
+<pre><code translate="no" class="language-text">chunks[0][quality_score] &gt; 0.8
 <button class="copy-code-btn"></button></code></pre>
-<p>Positionspfade unterstützen Vergleichsprädikate, „ <code translate="no">in</code> “, „ <code translate="no">not in</code> “ sowie verkettete Bereichsprädikate für skalare Unterfelder. Eine Entität entspricht nicht der Suche, wenn ihr „StructArray“-Feld an dieser Position kein Element enthält.</p>
-<h3 id="Count-Struct-elements" class="common-anchor-header">Anzahl der Struct-Elemente<button data-href="#Count-Struct-elements" class="anchor-icon" translate="no">
+<p>Nur Entität B entspricht diesem Ausdruck.</p>
+<pre><code translate="no" class="language-text"># The first chunk belongs to the &quot;index&quot; section.
+chunks[0][section] == &quot;index&quot;
+
+# The second chunk has a high quality score.
+chunks[1][quality_score] &gt; 0.9
+
+# The first chunk is on page 1, 2, or 3.
+chunks[0][page] in [1, 2, 3]
+
+# Chained range on a positional path.
+0.8 &lt; chunks[0][quality_score] &lt; 0.95
+<button class="copy-code-btn"></button></code></pre>
+<p>Bei Entität A und Entität B trifft das Prädikat im ersten Abschnitt auf beide Entitäten zu, das zweite Score-Prädikat trifft nur auf Entität B zu und der strenge Score-Bereich trifft auf keine der beiden zu. Das Prädikat „ <code translate="no">page</code> “ ist ein allgemeines Beispiel; die Beispieldaten definieren „ <code translate="no">page</code> “ nicht.</p>
+<p>Positionspfade unterstützen Vergleichsprädikate, „ <code translate="no">in</code> “, „ <code translate="no">not in</code> “ sowie verkettete Bereichsprädikate für skalare Unterfelder. Eine Entität passt nicht, wenn ihr „StructArray“-Feld an dieser Position kein Element enthält.</p>
+<h3 id="ARRAY-operators" class="common-anchor-header">ARRAY-Operatoren<button data-href="#ARRAY-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -279,14 +356,35 @@ chunks[<span class="hljs-number">0</span>][page] <span class="hljs-keyword">in</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">array_length(structArrayField)</code> “, um nach der Anzahl der Struct-Elemente in einer Entität zu filtern. „ <code translate="no">array_length</code> “ auf einem Unterfeldpfad, wie z. B. „ <code translate="no">array_length(chunks[section])</code> “, liefert dieselbe Anzahl, da jedes Unterfeld einen Wert pro Struct-Element enthält.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Articles with at least three chunks.</span>
-array_length(chunks) &gt;= <span class="hljs-number">3</span>
+    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Anzahl der Struct-Elemente</h4><p>Verwenden Sie „ <code translate="no">array_length(structArrayField)</code> “, um nach der Anzahl der Struct-Elemente in einer Entität zu filtern. „ <code translate="no">array_length</code> “ auf einem Unterfeldpfad, wie z. B. „ <code translate="no">array_length(chunks[section])</code> “, liefert dieselbe Anzahl, da jedes Unterfeld einen Wert pro Struct-Element enthält.</p>
+<pre><code translate="no" class="language-text"># Articles with at least three chunks.
+array_length(chunks) &gt;= 3
 
-<span class="hljs-comment"># Articles with exactly one chunk.</span>
-array_length(chunks) == <span class="hljs-number">1</span>
+# Articles with exactly one chunk.
+array_length(chunks) == 1
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-subfield-values-across-elements" class="common-anchor-header">Unterfeldwerte über Elemente hinweg prüfen<button data-href="#Test-subfield-values-across-elements" class="anchor-icon" translate="no">
+<p>Die Prädikate zur Anzahl der übergeordneten Felder treffen bei „ <code translate="no">&gt;= 3</code> “ auf beide Entitäten zu, bei „ <code translate="no">== 1</code> “ hingegen auf keine. Sie können Werte auch auf einem Unterfeldpfad zählen:</p>
+<pre><code translate="no" class="language-text">ARRAY_LENGTH(chunks[quality_score]) == 3
+<button class="copy-code-btn"></button></code></pre>
+<p>Nur Entität B entspricht den Kriterien, da ihr Unterfeld „ <code translate="no">quality_score</code> “ drei Werte enthält.</p>
+<h4 id="Test-subfield-values-across-elements" class="common-anchor-header">Unterfeldwerte über Elemente hinweg prüfen</h4><p>Prüfen Sie beispielsweise, ob ein Qualitätswert mit „ <code translate="no">0.74</code> “ übereinstimmt:</p>
+<pre><code translate="no" class="language-text">ARRAY_CONTAINS(chunks[quality_score], 0.74)
+<button class="copy-code-btn"></button></code></pre>
+<p>Nur Entität A passt.</p>
+<p>Verwenden Sie „ <code translate="no">array_contains</code> “, „ <code translate="no">array_contains_any</code> “ oder „ <code translate="no">array_contains_all</code> “ in einem skalaren Unterfeldpfad, um die Werte dieses Unterfelds über alle „Struct“-Elemente der Entität hinweg zu prüfen. Jeder Unterfeldpfad wird separat ausgewertet, sodass Bedingungen für verschiedene Unterfelder von unterschiedlichen „Struct“-Elementen erfüllt werden können.</p>
+<pre><code translate="no" class="language-text"># At least one chunk belongs to the &quot;index&quot; section.
+array_contains(chunks[section], &quot;index&quot;)
+
+# At least one chunk belongs to the &quot;index&quot; or the &quot;search&quot; section.
+array_contains_any(chunks[section], [&quot;index&quot;, &quot;search&quot;])
+
+# The chunks cover both the &quot;index&quot; and the &quot;search&quot; sections,
+# not necessarily in the same chunk.
+array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
+<button class="copy-code-btn"></button></code></pre>
+<p>Bei den Beispieldaten stimmen die Ausdrücke „ <code translate="no">array_contains</code> “ und „ <code translate="no">array_contains_any</code> “ mit beiden Entitäten überein. Der Ausdruck „ <code translate="no">array_contains_all</code> “ stimmt mit keiner überein, da keine der Entitäten einen Abschnitt „ <code translate="no">&quot;search&quot;</code> “ enthält. Diese Beispiele veranschaulichen keine Bedingungen, die von verschiedenen Elementen in verschiedenen Unterfeldern erfüllt werden.</p>
+<p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> wählt dieselben Entitäten aus wie <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>. Verwenden Sie <code translate="no">MATCH_*</code> oder <code translate="no">element_filter</code>, wenn mehrere Bedingungen für dasselbe Struct-Element erfüllt sein müssen, da <code translate="no">$[...]</code> -Prädikate pro Element ausgewertet werden.</p>
+<h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">Prüfen, ob ein nullfähiges StructArray-Feld den Wert „null“ hat<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -301,40 +399,14 @@ array_length(chunks) == <span class="hljs-number">1</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">array_contains</code> “, „ <code translate="no">array_contains_any</code> “ oder „ <code translate="no">array_contains_all</code> “ auf einen skalaren Unterfeldpfad, um die Werte dieses Unterfelds über alle Struct-Elemente in der Entität hinweg zu prüfen. Jeder Unterfeldpfad wird separat ausgewertet, sodass Bedingungen für verschiedene Unterfelder von unterschiedlichen Struct-Elementen erfüllt werden können.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># At least one chunk belongs to the &quot;index&quot; section.</span>
-array_contains(chunks[section], <span class="hljs-string">&quot;index&quot;</span>)
+    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. „NULL“ gilt für das gesamte „StructArray“-Feld, daher akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
+<pre><code translate="no" class="language-text"># Entities that have no chunks value.
+chunks is null
 
-<span class="hljs-comment"># At least one chunk belongs to the &quot;index&quot; or the &quot;search&quot; section.</span>
-array_contains_any(chunks[section], [<span class="hljs-string">&quot;index&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>])
-
-<span class="hljs-comment"># The chunks cover both the &quot;index&quot; and the &quot;search&quot; sections,</span>
-<span class="hljs-comment"># not necessarily in the same chunk.</span>
-array_contains_all(chunks[section], [<span class="hljs-string">&quot;index&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>])
+# Entities that have a chunks value.
+chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> wählt dieselben Entitäten aus wie <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code>. Verwenden Sie <code translate="no">MATCH_*</code> oder <code translate="no">element_filter</code>, wenn mehrere Bedingungen für dasselbe Struct-Element erfüllt sein müssen, da die Prädikate von <code translate="no">$[...]</code> pro Element ausgewertet werden.</p>
-<h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">Prüfen, ob ein nullfähiges „StructArray“-Feld null ist<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. „Null“ gilt für das gesamte „StructArray“-Feld, daher akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Entities that have no chunks value.</span>
-chunks <span class="hljs-keyword">is</span> null
-
-<span class="hljs-comment"># Entities that have a chunks value.</span>
-chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null
-<button class="copy-code-btn"></button></code></pre>
+<p>Informationen zur Anwendbarkeit finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„Einschränkungen für nullfähige und dynamische Schemata</a>“. Entität A und Entität B weisen beide nicht-NULL-Werte vom Typ „StructArray“ auf.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Unterstützte Prädikate<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -350,7 +422,7 @@ chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Syntax „ <code translate="no">$[...]</code> “ steht für den Skalarwert des aktuellen Struct-Elements. Die Unterstützung von Prädikaten hängt vom Typ des skalaren Unterfelds ab.</p>
+    </button></h2><p>Die Syntax „ <code translate="no">$[...]</code> “ stellt den Skalarwert des aktuellen Struct-Elements dar. Die Unterstützung von Prädikaten hängt vom Typ des skalaren Unterfelds ab:</p>
 <table>
 <thead>
 <tr><th>Unterfeldtyp</th><th>Unterstützung von Prädikaten auf Elementebene</th></tr>
@@ -363,7 +435,7 @@ chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span
 <tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die „EmbeddingList“-Suche oder die Vektorsuche auf Elementebene.</td></tr>
 </tbody>
 </table>
-<p>Logische Operatoren wie „ <code translate="no">&amp;&amp;</code> “, „ <code translate="no">\|\|</code> “ und „ <code translate="no">!</code> “ gelten für Prädikatsausdrücke. Schreiben Sie beispielsweise „ <code translate="no">!($[has_code] == true)</code> “ anstelle von „ <code translate="no">!$[has_code]</code> “.</p>
+<p>Logische Operatoren wie „ <code translate="no">&amp;&amp;</code> “, „ <code translate="no">||</code> “ und „ <code translate="no">!</code> “ gelten für Prädikatsausdrücke. Schreiben Sie beispielsweise „ <code translate="no">!($[has_code] == true)</code> “ anstelle von „ <code translate="no">!$[has_code]</code> “.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Nicht unterstützte Prädikate<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -406,7 +478,8 @@ chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
+    </button></h2><p>Beachten Sie folgende Syntaxregeln:</p>
+<ul>
 <li><p><code translate="no">MATCH_*</code> Bei Operatornamen wird die Groß-/Kleinschreibung nicht berücksichtigt.</p></li>
 <li><p>Verwenden Sie „ <code translate="no">$[subfield]</code> “ nur innerhalb von „ <code translate="no">element_filter</code> “- oder „ <code translate="no">MATCH_*</code> “-Prädikaten. Beispielsweise wird „ <code translate="no">array_length($[section])</code> “ abgelehnt.</p></li>
 <li><p>Verwenden Sie „ <code translate="no">$[subfield]</code> “ nicht als JSON-Pfad, Array-Container oder Vektorfeldreferenz.</p></li>
@@ -414,7 +487,7 @@ chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span
 <li><p>Verwenden Sie benannte „ <code translate="no">threshold=N</code> “ für „ <code translate="no">MATCH_LEAST</code> “, „ <code translate="no">MATCH_MOST</code> “ und „ <code translate="no">MATCH_EXACT</code> “.</p></li>
 <li><p>Schreiben Sie bei positionsbezogenen Pfaden die Elementposition vor den Namen des Unterfelds: „ <code translate="no">chunks[0][section]</code> “, nicht „ <code translate="no">chunks[section][0]</code> “.</p></li>
 <li><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ und „ <code translate="no">IS NOT NULL</code> “ nur für das gesamte StructArray-Feld, z. B. „ <code translate="no">chunks is null</code> “. Verwenden Sie sie nicht in einem Unterfeldpfad wie „ <code translate="no">chunks[section]</code> “ oder in „ <code translate="no">$[subfield]</code> “.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> Bei einem leeren StructArray wird <code translate="no">false</code> zurückgegeben.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> Bei einem leeren StructArray wird „ <code translate="no">false</code> “ zurückgegeben.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> Bei einem leeren StructArray wird „ <code translate="no">true</code> “ zurückgegeben.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">Siehe auch<button data-href="#See-also" class="anchor-icon" translate="no">
@@ -432,7 +505,8 @@ chunks <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
+    </button></h2><p>Weitere Hinweise finden Sie unter:</p>
+<ul>
 <li><p><a href="/docs/de/filtered-search-with-structarray.md">Gefilterte Suche mit StructArray</a></p></li>
 <li><p><a href="/docs/de/basic-vector-search-with-structarray.md">Einfache Vektorsuche mit StructArray</a></p></li>
 <li><p><a href="/docs/de/index-structarray-fields.md">StructArray-Felder indizieren</a></p></li>

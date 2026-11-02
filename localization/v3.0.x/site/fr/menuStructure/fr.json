@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -1383,7 +1377,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du « Decay Ranker »",
+                    "label": "Présentation du classement « Decay »",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2222,7 +2216,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration dans une seule instance",
+                "label": "Sauvegarde et restauration au sein d'une même instance",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

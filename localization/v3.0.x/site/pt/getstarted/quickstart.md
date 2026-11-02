@@ -3,7 +3,7 @@ id: quickstart.md
 summary: Comece a utilizar o Milvus.
 title: Introdução rápida
 ---
-<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Introdução rápida ao Milvus Lite<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
+<h1 id="Quickstart" class="common-anchor-header">Introdução rápida<button data-href="#Quickstart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,51 @@ title: Introdução rápida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste guia, utilizamos o Milvus Lite, uma biblioteca Python incluída em <code translate="no">pymilvus</code> que pode ser incorporada na aplicação cliente. O Milvus também suporta a implementação no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> para casos de utilização em produção.</p>
-<p>Antes de começar, certifique-se de que tem o Python 3.8 ou superior disponível no ambiente local. Instale o <code translate="no">pymilvus</code>, que contém tanto a biblioteca cliente Python como o Milvus Lite:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+    </button></h2><p>Escolha uma das opções: utilize o Milvus Lite para um exemplo local ou ligue-se a um servidor Milvus que já tenha implementado. Ambas as opções utilizam os exemplos de recolha e consulta apresentados abaixo.</p>
+<h3 id="Use-a-local-database" class="common-anchor-header">Utilizar uma base de dados local<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Este guia utiliza o Milvus Lite, uma dependência opcional do SDK PyMilvus para Python que funciona localmente. Para uma implementação em servidor, consulte <a href="/docs/pt/install_standalone-docker.md">o Docker</a> ou <a href="/docs/pt/install_cluster-milvusoperator.md">o Kubernetes</a>.</p>
+<p>Utilize o Python 3.10 ou posterior no macOS, Linux ou Windows, com pacotes binários «wheels» disponíveis para as dependências do Milvus Lite, tais como <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code>. Os exemplos utilizam o PyMilvus 3.0.2 e o Milvus Lite 3.2.2. Instale ambos os pacotes explicitamente:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>No Windows, o pip ignora o extra <code translate="no">milvus-lite</code> do PyMilvus 3.0.2; o comando acima indica explicitamente <code translate="no">milvus-lite</code>, pelo que o caminho local também funciona nesse caso. Para os requisitos de instalação apenas do SDK, consulte <a href="/docs/pt/install-pymilvus.md">Instalar o SDK Python do Milvus</a>.</p>
 <div class="alert note">
 <blockquote>
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ser necessário <strong>reiniciar o ambiente de execução</strong>. (Clique no menu «Runtime» na parte superior do ecrã e selecione «Restart session» no menu suspenso).</p>
 </blockquote>
 </div>
+<h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">Utilizar um servidor Milvus existente<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se já tiver instalado o Milvus com o Docker ou o Kubernetes, ou se tiver um endpoint do Zilliz Cloud, instale apenas o SDK. O PyMilvus 3.0.2 requer o Python 3.9 ou posterior; não necessita da dependência local do Lite para este caminho:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Utilize o bloco de ligação ao servidor na secção seguinte, em vez de abrir um caminho do tipo <code translate="no">.db</code>. Confirme se a versão do SDK é compatível com o seu servidor; consulte <a href="/docs/pt/release_notes.md">as Notas de Lançamento</a>.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar a base de dados vetorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,11 +97,49 @@ title: Introdução rápida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para criar uma base de dados vetorial Milvus local, basta instanciar um ` <code translate="no">MilvusClient</code> `, especificando um nome de ficheiro para armazenar todos os dados, como «milvus_demo.db».</p>
+    </button></h2><p>Escolha exatamente um bloco de ligação abaixo.</p>
+<h3 id="Local-Milvus-Lite" class="common-anchor-header">Milvus Lite local<button data-href="#Local-Milvus-Lite" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para criar uma base de dados vetorial Milvus local, instancie um ` <code translate="no">MilvusClient</code> ` com um caminho de armazenamento, como ` <code translate="no">milvus_demo.db</code>`. O Milvus Lite 3.x cria um diretório neste caminho, mesmo quando o seu nome termina em ` <code translate="no">.db</code>`.</p>
+<p>Se tiver um ficheiro de base de dados criado pelo Milvus Lite 2.x, exporte-o com a versão antiga antes de proceder à migração. Não abra esse ficheiro diretamente com o Milvus Lite 3.x. Consulte <a href="/docs/pt/milvus_lite.md#Migrating-data-from-Milvus-Lite">«Migração de dados do Milvus Lite</a>».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Existing-Milvus-server" class="common-anchor-header">Servidor Milvus existente<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para uma implementação local do Docker, ligue-se ao ponto final do servidor. Para o Zilliz Cloud, substitua o URI pelo ponto final do cluster e o token pela sua chave API:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Utilize as credenciais que configurou, caso as tenha alterado. Os exemplos restantes utilizam o « <code translate="no">client</code> » que selecionou; não requerem uma base de dados Lite local separada.</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">Criar uma coleção<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +155,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar vetores e os seus metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar especificações vetoriais, tais como dimensionalidade, tipos de índice e métricas de distância. Existem também conceitos complexos para otimizar o índice com vista ao desempenho da pesquisa de vetores. Por agora, vamos concentrar-nos apenas no básico e utilizar as predefinições sempre que possível. No mínimo, só precisa de definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
+    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar vetores e os seus metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar especificações de vetores, tais como dimensionalidade, tipos de índice e métricas de distância. Existem também conceitos complexos para otimizar o índice com vista ao desempenho da pesquisa de vetores. Por enquanto, vamos concentrar-nos apenas no básico e utilizar as predefinições sempre que possível. No mínimo, só precisa de definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -128,7 +202,7 @@ Em alternativa, pode definir formalmente o esquema da coleção seguindo estas <
         ></path>
       </svg>
     </button></h2><p>Primeiro, instale a biblioteca de modelos. Este pacote inclui ferramentas essenciais de ML, como o PyTorch. O download do pacote pode demorar algum tempo se o seu ambiente local nunca tiver instalado o PyTorch.</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Gerar embeddings vetoriais com o modelo predefinido. O Milvus espera que os dados sejam inseridos organizados como uma lista de dicionários, em que cada dicionário representa um registo de dados, denominado «entidade».</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -165,7 +239,7 @@ data = [
 Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
 Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Em alternativa] Utilize uma representação fictícia com vetores aleatórios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
+<h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Alternativamente] Utilize uma representação fictícia com vetores aleatórios<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,7 +264,21 @@ docs = [
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># Use fake representation with random vectors (768 dimension).</span>
-vectors = [[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> docs]
+<span class="hljs-comment"># Keep the same interface as the model-backed path so the remaining examples run.</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoEmbeddingFunction</span>:
+    dim = <span class="hljs-number">768</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.rng = random.Random(<span class="hljs-number">42</span>)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_documents</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> [[<span class="hljs-variable language_">self</span>.rng.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> texts]
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_queries</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.encode_documents(texts)
+
+embedding_fn = DemoEmbeddingFunction()
+vectors = embedding_fn.encode_documents(docs)
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
@@ -271,7 +359,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>O resultado é uma lista de resultados, cada um correspondendo a uma consulta de pesquisa vetorial. Cada consulta contém uma lista de resultados, em que cada resultado contém a chave primária da entidade, a distância em relação ao vetor de consulta e os detalhes da entidade com o atributo « <code translate="no">output_fields</code> » especificado.</p>
+<p>O resultado é uma lista de resultados, cada um correspondendo a uma consulta de pesquisa vetorial. Cada consulta contém uma lista de resultados, em que cada resultado contém a chave primária da entidade, a distância em relação ao vetor de consulta e os detalhes da entidade com o parâmetro « <code translate="no">output_fields</code> » especificado.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">Pesquisa vetorial com filtragem de metadados<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -394,9 +482,11 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma vez que todos os dados do Milvus Lite são armazenados num ficheiro local, pode carregar todos os dados na memória mesmo após o programa terminar, criando uma coleção de dados ( <code translate="no">MilvusClient</code> ) a partir do ficheiro existente. Por exemplo, isto irá recuperar as coleções do ficheiro «milvus_demo.db» e continuar a escrever dados nesse ficheiro.</p>
+    </button></h2><p>Esta secção aplica-se ao caminho local do Lite. Para uma implementação em servidor, volte a ligar-se utilizando o mesmo URI do servidor e as mesmas credenciais.</p>
+<p>O Milvus Lite armazena os dados no seu caminho de armazenamento local. Feche o cliente antes de reabrir o mesmo caminho para continuar a utilizar as coleções existentes:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.close()
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">Eliminar a coleção<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
@@ -433,10 +523,16 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Lite é excelente para dar os primeiros passos com um programa Python local. Se tiver dados em grande escala ou pretender utilizar o Milvus em produção, pode informar-se sobre como implementar o Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">no Kubernetes</a>. Todos os modos de implementação do Milvus partilham a mesma API, pelo que o seu código do lado do cliente não precisa de sofrer grandes alterações se mudar para outro modo de implementação. Basta especificar a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e o token</a> de um servidor Milvus implementado em qualquer local:</p>
+    </button></h2><p>Após concluir o exemplo local, escolha o próximo passo:</p>
+<ul>
+<li>Crie uma aplicação com <a href="/docs/pt/build-rag-with-milvus.md">a Retrieval Augmented Generation (RAG)</a>.</li>
+<li>Conceba campos e filtros para os seus próprios dados com <a href="/docs/pt/schema-hands-on.md">o «Data Model Design for Search</a>».</li>
+<li>Compare os requisitos locais e do servidor com <a href="/docs/pt/install-overview.md">as Opções de Implementação do Milvus</a>.</li>
+</ul>
+<p>O Milvus Lite é ideal para dar os primeiros passos com um programa Python local. Se tiver dados em grande escala ou pretender utilizar o Milvus em produção, pode informar-se sobre como implementar o Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">no Kubernetes</a>. Todos os modos de implementação do Milvus partilham a mesma API, pelo que o seu código do lado do cliente não precisa de sofrer grandes alterações se mudar para outro modo de implementação. Basta especificar o <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e o token</a> de um servidor Milvus implementado em qualquer local:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Para migrar dados do Milvus Lite para o Milvus implementado no Docker ou no Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">«Migrar dados do Milvus Lite</a>».</p>
+<p>Para migrar dados do Milvus Lite para o Milvus implementado no Docker ou no Kubernetes, consulte <a href="/docs/pt/milvus_lite.md#Migrating-data-from-Milvus-Lite">«Migração de dados do Milvus Lite</a>».</p>
 <p>O Milvus disponibiliza APIs REST e gRPC, com bibliotecas de cliente em linguagens como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# e <a href="https://milvus.io/docs/install-node.md">Node.js.</a></p>
 <p>No que diz respeito ao desenho de esquemas, o Milvus suporta um desenho flexível, onde pode definir os campos e os seus tipos de dados, incluindo campos vetoriais. Também pode definir o tipo de índice e os parâmetros para cada campo. Para mais informações, consulte <a href="https://milvus.io/docs/schema-hands-on.md">«Desenho do modelo de dados para pesquisa</a>».</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus para agentes de IA<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">

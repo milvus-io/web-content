@@ -80,27 +80,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (لينكس)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (لينكس)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (ويندوز)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -279,7 +273,7 @@
         "children": []
       },
       {
-        "label": "أنواع المقاييس",
+        "label": "أنواع الوحدات المترية",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -479,7 +473,7 @@
                 "children": []
               },
               {
-                "label": "إنشاء حقل StructArray",
+                "label": "إنشاء حقل من نوع StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -1297,7 +1291,7 @@
                 "children": []
               },
               {
-                "label": "Vertex AI",
+                "label": "فيرتكس إيه آي",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1365,7 +1359,7 @@
                 "children": []
               },
               {
-                "label": "مُصنِّف RRF",
+                "label": "مصنف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1427,7 +1421,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف vLLM",
+                    "label": "مُصنِّف نماذج اللغة الكبيرة (vLLM)",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -2114,7 +2108,7 @@
             "children": []
           },
           {
-            "label": "تمكين نظام RBAC",
+            "label": "تمكين RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2446,7 +2440,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال آي آي",
+                "label": "ميسترال أي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
@@ -2910,7 +2904,7 @@
             "children": []
           },
           {
-            "label": "ميسترال آي آي",
+            "label": "ميسترال أي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []

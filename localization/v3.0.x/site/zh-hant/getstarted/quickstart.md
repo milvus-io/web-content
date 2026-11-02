@@ -3,7 +3,7 @@ id: quickstart.md
 summary: 開始使用 Milvus。
 title: 快速入門
 ---
-<h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Milvus Lite 快速入門<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
+<h1 id="Quickstart" class="common-anchor-header">快速入門<button data-href="#Quickstart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: 快速入門
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>向量作為神經網路模型的輸出資料格式，能有效編碼資訊，並在知識庫、語義搜尋、檢索增強生成（RAG）等 AI 應用中扮演關鍵角色。</p>
+<p>向量作為神經網路模型的輸出資料格式，能有效編碼資訊，並在知識庫、語義搜尋、檢索增強生成（RAG）等人工智慧應用中扮演關鍵角色。</p>
 <p>Milvus 是一款開源向量資料庫，適用於各種規模的 AI 應用，從在 Jupyter 筆記本中運行示範型聊天機器人，到建置服務數十億用戶的網路級搜尋系統皆能勝任。在本指南中，我們將引導您在數分鐘內於本地端設定 Milvus，並使用 Python 客戶端函式庫來生成、儲存及搜尋向量。</p>
 <h2 id="Install-Milvus" class="common-anchor-header">安裝 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,15 +37,51 @@ title: 快速入門
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本指南將使用 Milvus Lite，這是<code translate="no">pymilvus</code> 中包含的一套 Python 函式庫，可嵌入至客戶端應用程式中。Milvus 亦支援在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上部署，以滿足生產環境的使用需求。</p>
-<p>開始之前，請確保您的本地環境已安裝 Python 3.8 或更高版本。安裝<code translate="no">pymilvus</code> ，其中包含 Python 客戶端函式庫和 Milvus Lite：</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+    </button></h2><p>請選擇其中一種方式：使用 Milvus Lite 進行本地示範，或連線至您已部署的 Milvus 伺服器。兩種方式皆可套用下文的資料收集與查詢範例。</p>
+<h3 id="Use-a-local-database" class="common-anchor-header">使用本地資料庫<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>本指南使用 Milvus Lite，這是 PyMilvus Python SDK 的可選依賴項，可在本地端運行。若需進行伺服器部署，請參閱<a href="/docs/zh-hant/install_standalone-docker.md">Docker</a>或<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
+<p>請在 macOS、Linux 或 Windows 系統上使用 Python 3.10 或更新版本，並確保 Milvus Lite 的依賴項（例如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）有可用的二進位 wheel 檔。範例中使用 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。請明確安裝這兩個套件：</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>在 Windows 上，pip 會跳過 PyMilvus 3.0.2 的<code translate="no">milvus-lite</code> 額外元件；上述指令明確指定了<code translate="no">milvus-lite</code> ，因此該本地路徑在此處同樣有效。若需僅安裝 SDK 的相關要求，請參閱《<a href="/docs/zh-hant/install-pymilvus.md">安裝 Milvus Python SDK》</a>。</p>
 <div class="alert note">
 <blockquote>
 <p>若您使用 Google Colab，為啟用剛安裝的依賴項，可能需要<strong>重新啟動執行環境</strong>。（點擊螢幕頂端的「Runtime」選單，並從下拉式選單中選擇「Restart session」）。</p>
 </blockquote>
 </div>
+<h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">使用現有的 Milvus 伺服器<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若您已透過 Docker 或 Kubernetes 安裝 Milvus，或擁有 Zilliz Cloud 端點，則只需安裝 SDK 即可。PyMilvus 3.0.2 需要 Python 3.9 或更新版本；此路徑下無需本地 Lite 依賴項：</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>請改用下一節中的伺服器連線區塊，而非開啟<code translate="no">.db</code> 路徑。請確認 SDK 版本與您的伺服器相容；<a href="/docs/zh-hant/release_notes.md">詳見發行說明</a>。</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">設定向量資料庫<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,11 +97,49 @@ title: 快速入門
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要建立本機 Milvus 向量資料庫，只需透過指定檔案名稱（例如「milvus_demo.db」）來儲存所有資料，並實例化<code translate="no">MilvusClient</code> 即可。</p>
+    </button></h2><p>請從下方精確選擇一個連線區塊。</p>
+<h3 id="Local-Milvus-Lite" class="common-anchor-header">本機 Milvus Lite<button data-href="#Local-Milvus-Lite" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要建立本機 Milvus 向量資料庫，請使用儲存路徑（例如<code translate="no">milvus_demo.db</code> ）來實例化<code translate="no">MilvusClient</code> 。即使路徑名稱以<code translate="no">.db</code> 結尾，Milvus Lite 3.x 仍會在該路徑下建立目錄。</p>
+<p>若您擁有由 Milvus Lite 2.x 建立的資料庫檔案，請在遷移前使用舊版本將其匯出。請勿直接使用 Milvus Lite 3.x 開啟該檔案。請參閱《<a href="/docs/zh-hant/milvus_lite.md#Migrating-data-from-Milvus-Lite">從 Milvus Lite 遷移資料</a>》。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Existing-Milvus-server" class="common-anchor-header">現有的 Milvus 伺服器<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若為本機 Docker 部署，請連線至其伺服器端點。若為 Zilliz Cloud，請將 URI 替換為叢集端點，並將 token 替換為您的 API 金鑰：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>若您已變更憑證設定，請使用您所設定的憑證。後續範例將使用您選定的<code translate="no">client</code> ；這些範例無需另行建立本機 Lite 資料庫。</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">建立集合<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +155,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將其視為傳統 SQL 資料庫中的資料表。建立集合時，您可以定義模式和索引參數，以設定向量規格，例如維度、索引類型和距離度量。 此外，還有一些複雜的概念可用於優化索引以提升向量搜尋效能。目前，我們先專注於基礎內容，並盡可能使用預設值。至少，您只需設定集合名稱以及該集合中向量欄位的維度。</p>
+    </button></h2><p>在 Milvus 中，我們需要一個集合來儲存向量及其相關的元資料。您可以將其視為傳統 SQL 資料庫中的資料表。建立集合時，您可以定義模式和索引參數，以設定向量規格，例如維度、索引類型和距離度量。 此外，還有一些複雜的概念可用於優化索引，以提升向量搜尋效能。目前，我們先專注於基礎內容，並盡可能使用預設值。至少，您只需設定集合名稱以及該集合中向量欄位的維度。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -128,7 +202,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>首先，安裝模型函式庫。此套件包含 PyTorch 等必要的機器學習工具。若您的本地環境從未安裝過 PyTorch，下載此套件可能會花費一些時間。</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>使用預設模型生成向量嵌入。Milvus 預期資料應以字典清單的形式插入，其中每個字典代表一筆資料記錄，稱為「實體」。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -190,7 +264,21 @@ docs = [
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># Use fake representation with random vectors (768 dimension).</span>
-vectors = [[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> docs]
+<span class="hljs-comment"># Keep the same interface as the model-backed path so the remaining examples run.</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoEmbeddingFunction</span>:
+    dim = <span class="hljs-number">768</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.rng = random.Random(<span class="hljs-number">42</span>)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_documents</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> [[<span class="hljs-variable language_">self</span>.rng.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> texts]
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_queries</span>(<span class="hljs-params">self, texts</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.encode_documents(texts)
+
+embedding_fn = DemoEmbeddingFunction()
+vectors = embedding_fn.encode_documents(docs)
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
@@ -255,7 +343,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 同時可處理一個或多個向量搜尋請求。query_vectors 變數的值為一個向量清單，其中每個向量皆為浮點數陣列。</p>
+    </button></h3><p>Milvus 同時可處理一個或多個向量搜尋請求。query_vectors 變數的值是一個向量清單，其中每個向量皆為浮點數陣列。</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -362,7 +450,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要清除資料，您可以透過指定主鍵來刪除實體，或刪除所有符合特定篩選表達式的實體。</p>
+    </button></h2><p>若要清除資料，您可以透過指定主鍵來刪除實體，或刪除所有符合特定篩選條件的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 
@@ -394,9 +482,11 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>由於 Milvus Lite 的所有資料皆儲存於本機檔案中，即使程式結束後，您仍可透過建立一個以現有檔案為基礎的<code translate="no">MilvusClient</code> ，將所有資料載入記憶體中。例如，此操作將從「milvus_demo.db」檔案中還原集合，並繼續將資料寫入其中。</p>
+    </button></h2><p>本節內容適用於本機 Lite 路徑。若為伺服器部署，請改為使用相同的伺服器 URI 和憑證重新連線。</p>
+<p>Milvus Lite 會將資料儲存於其本機儲存路徑下。若要繼續使用現有的集合，請先關閉客戶端，再重新開啟相同的路徑：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.close()
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">刪除集合<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
@@ -433,10 +523,16 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 非常適合用於開始開發本機 Python 程式。若您擁有大規模資料，或希望在生產環境中使用 Milvus，您可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式皆採用相同的 API，因此若要切換至其他部署模式，您的客戶端程式碼無需進行大幅修改。只需指定部署於任何位置的 Milvus 伺服器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和 Token</a>即可：</p>
+    </button></h2><p>完成本本機範例後，請選擇下一步：</p>
+<ul>
+<li>使用「<a href="/docs/zh-hant/build-rag-with-milvus.md">檢索增強生成」（RAG）</a>建立應用程式。</li>
+<li>使用<a href="/docs/zh-hant/schema-hands-on.md">「搜尋資料模型設計」</a>為您的資料設計欄位和篩選條件。</li>
+<li>透過<a href="/docs/zh-hant/install-overview.md">Milvus 部署選項</a>，比較本地端與伺服器的需求。</li>
+</ul>
+<p>Milvus Lite 非常適合用於開始開發本機 Python 程式。如果您擁有大規模資料，或希望在生產環境中使用 Milvus，您可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式皆採用相同的 API，因此若要切換至其他部署模式，您的客戶端程式碼無需進行大幅修改。只需指定部署於任何位置的 Milvus 伺服器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和 Token</a>即可：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>若要將資料從 Milvus Lite 遷移至部署於 Docker 或 Kubernetes 上的 Milvus，請參閱《<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">從 Milvus Lite 遷移資料</a>》。</p>
+<p>若要將資料從 Milvus Lite 遷移至部署於 Docker 或 Kubernetes 上的 Milvus，請參閱《<a href="/docs/zh-hant/milvus_lite.md#Migrating-data-from-Milvus-Lite">從 Milvus Lite 遷移資料</a>》。</p>
 <p>Milvus 提供 REST 和 gRPC API，並具備<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 及<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等語言的客戶端函式庫。</p>
 <p>在資料結構設計方面，Milvus 支援靈活的資料結構設計，您可定義各欄位及其資料類型（包含向量欄位），並為每個欄位設定索引類型與參數。如需更多資訊，請參閱<a href="https://milvus.io/docs/schema-hands-on.md">《搜尋的資料模型設計》</a>。</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">適用於 AI 代理的 Milvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">

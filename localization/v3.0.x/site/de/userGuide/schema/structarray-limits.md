@@ -39,13 +39,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Die wichtigsten StructArray-Einschränkungen sind:</p>
+<table>
 <thead>
 <tr><th>Bereich</th><th>Einschränkung</th></tr>
 </thead>
 <tbody>
-<tr><td>Schemaform</td><td>Ein „Struct“ kann nur als Elementtyp eines Array-Feldes verwendet werden. „Struct“ wird nicht als Sammlungsfeld auf oberster Ebene unterstützt.</td></tr>
-<tr><td>Schema für Unterfelder</td><td>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Struct-Schema.</td></tr>
+<tr><td>Schemaform</td><td>Ein Struct kann nur als Elementtyp eines Array-Feldes verwendet werden. Struct wird nicht als Sammlungsfeld auf oberster Ebene unterstützt.</td></tr>
+<tr><td>Schema der Unterfelder</td><td>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Struct-Schema.</td></tr>
 <tr><td>Kapazität</td><td><code translate="no">max_capacity</code> ist erforderlich und begrenzt die Anzahl der Struct-Elemente, die eine Entität im StructArray-Feld speichern kann.</td></tr>
 <tr><td>Änderungen an Unterfeldern</td><td>Nachdem ein StructArray-Feld erstellt wurde, können Sie diesem bestehenden StructArray-Feld keine Unterfelder mehr hinzufügen.</td></tr>
 <tr><td>Pfad für Unterfelder</td><td>Verwenden Sie „ <code translate="no">structArray[subfield]</code> “-Pfade wie beispielsweise <code translate="no">chunks[emb]</code> für Indizes, Suchziele, Ausgabefelder und Filter. Verwenden Sie nicht <code translate="no">chunks.emb</code>.</td></tr>
@@ -56,7 +57,7 @@ summary: >-
 <tr><td>Dynamisches Hinzufügen eines Feldes</td><td>Das Hinzufügen eines StructArray-Feldes zu einer bestehenden Sammlung ist versionsabhängig und setzt voraus, dass das hinzugefügte Feld nullfähig ist.</td></tr>
 </tbody>
 </table>
-<h2 id="Schema-limits" class="common-anchor-header">Schema-Einschränkungen<button data-href="#Schema-limits" class="anchor-icon" translate="no">
+<h2 id="Schema-limits" class="common-anchor-header">Schema-Beschränkungen<button data-href="#Schema-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,13 +72,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>StructArray-Schemas unterliegen folgenden Einschränkungen:</p>
+<table>
 <thead>
 <tr><th>Beschränkung</th><th>Details</th></tr>
 </thead>
 <tbody>
-<tr><td>„Struct“ ist kein Feldtyp auf oberster Ebene.</td><td>Erstellen Sie ein „StructArray“-Feld als „ <code translate="no">datatype=DataType.ARRAY</code> “ mit „ <code translate="no">element_type=DataType.STRUCT</code> “ und einem „ <code translate="no">struct_schema</code> “.</td></tr>
-<tr><td>Alle Elemente teilen sich ein Schema.</td><td>Jedes „Struct“-Element in einem „StructArray“-Feld folgt derselben Unterfeldliste und denselben Unterfelddatentypen.</td></tr>
+<tr><td>„Struct“ ist kein Feldtyp auf oberster Ebene.</td><td>Erstellen Sie ein StructArray-Feld als „ <code translate="no">datatype=DataType.ARRAY</code> “ mit „ <code translate="no">element_type=DataType.STRUCT</code> “ und „ <code translate="no">struct_schema</code> “.</td></tr>
+<tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element in einem „StructArray“-Feld folgt derselben Unterfeldliste und denselben Unterfelddatentypen.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf das für das StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
 <tr><td>Vorhandene Unterfelder sind fest vorgegeben.</td><td>Sie können einem bestehenden StructArray-Feld keine neuen Unterfelder anhängen. Um das Unterfeldschema zu ändern, löschen Sie das StructArray-Feld und fügen Sie es mit dem aktualisierten Schema erneut hinzu.</td></tr>
 <tr><td>Verschachtelte StructArrays werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
@@ -100,27 +102,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray-Unterfelder werden physisch im Array-Stil gespeichert. Die folgende Tabelle listet unterstützte und nicht unterstützte physische Typen auf.</p>
+    </button></h2><p>StructArray-Unterfelder werden physisch im Array-Stil gespeichert. Die folgende Tabelle listet unterstützte und nicht unterstützte physische Typen auf:</p>
 <table>
 <thead>
 <tr><th>Physikalischer Typ des Struct-Unterfelds</th><th>Unterstützung</th><th>Hinweise</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BOOL</code> “.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8</code> “, „ <code translate="no">DataType.INT16</code> “, „ <code translate="no">DataType.INT32</code> “ oder „ <code translate="no">DataType.INT64</code> “.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT</code> “ oder „ <code translate="no">DataType.DOUBLE</code> “.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.VARCHAR</code> “ und legen Sie „ <code translate="no">max_length</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BFLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BINARY_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Verwenden Sie „ <code translate="no">VARCHAR</code> “ und nicht „ <code translate="no">String</code> “.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>JSON-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Geometrie-Unterfelder und GIS-Funktionen werden in StructArray-Feldern nicht unterstützt.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Text-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
-<tr><td><code translate="no">Array</code></td><td>Nicht unterstützt</td><td>Timestamptz-Unterfelder und zeitbezogene Ausdrücke werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als ` <code translate="no">DataType.BOOL</code>`.</td></tr>
+<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8</code> “, „ <code translate="no">DataType.INT16</code> “, „ <code translate="no">DataType.INT32</code> “ oder „ <code translate="no">DataType.INT64</code> “.</td></tr>
+<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT</code> “ oder „ <code translate="no">DataType.DOUBLE</code> “.</td></tr>
+<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.VARCHAR</code> “ und legen Sie „ <code translate="no">max_length</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BFLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BINARY_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>Nicht unterstützt</td><td>Verwenden Sie „ <code translate="no">VARCHAR</code> “ und nicht „ <code translate="no">String</code> “.</td></tr>
+<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>Nicht unterstützt</td><td>JSON-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>Nicht unterstützt</td><td>Geometrie-Unterfelder und GIS-Funktionen werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>Nicht unterstützt</td><td>Text-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>Nicht unterstützt</td><td>Timestamptz-Unterfelder und zeitbezogene Ausdrücke werden in StructArray-Feldern nicht unterstützt.</td></tr>
 <tr><td>Verschachtelte „ <code translate="no">Array</code> “, „ <code translate="no">ArrayOfVector</code> “, „ <code translate="no">Struct</code> “ oder <code translate="no">ArrayOfStruct</code></td><td>Nicht unterstützt</td><td>StructArray-Felder unterstützen keine verschachtelten Array-, Vektor-Array-, Struct- oder Array-of-Struct-Unterfelder.</td></tr>
 </tbody>
 </table>
@@ -139,24 +141,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Verhalten von nullfähigen StructArrays und das dynamische Hinzufügen von StructArray-Feldern sind versionsabhängig.</p>
+    </button></h2><p>Die folgende Tabelle beschreibt das Verhalten von nullfähigen StructArrays und das dynamische Hinzufügen von StructArray-Feldern, vorbehaltlich der nachstehenden Verfügbarkeitserklärung:</p>
 <table>
 <thead>
-<tr><th>Funktionalität</th><th>Einschränkung</th></tr>
+<tr><th>Fähigkeit</th><th>Einschränkung</th></tr>
 </thead>
 <tbody>
-<tr><td>Nullfähiges StructArray-Feld</td><td>Unterstützt ab Milvus 3.0.0. Setzen Sie „ <code translate="no">nullable=True</code> “ für das übergeordnete StructArray; konfigurieren Sie Struct-Unterfelder nicht separat als nullfähig.</td></tr>
-<tr><td>Null-Wert in Python</td><td>Verwenden Sie „ <code translate="no">None</code> “, um einen Nullwert in ein StructArray in Python einzufügen. Verwenden Sie nicht „ <code translate="no">Null</code> “ oder „ <code translate="no">null</code> “.</td></tr>
-<tr><td>Gültigkeitsbereich von „null“</td><td>„Null“ gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
+<tr><td>Nullfähiges StructArray-Feld</td><td>Vorbehaltlich der nachstehenden Verfügbarkeitserklärung setzen Sie „ <code translate="no">nullable=True</code> “ für das übergeordnete StructArray; konfigurieren Sie Struct-Unterfelder nicht separat als nullfähig.</td></tr>
+<tr><td>NULL-Wert in Python</td><td>Verwenden Sie „ <code translate="no">None</code> “, um einen null-Wert für ein StructArray in Python einzufügen. Verwenden Sie nicht „ <code translate="no">Null</code> “ oder „ <code translate="no">null</code> “.</td></tr>
+<tr><td>Gültigkeitsbereich von „NULL“</td><td>NULL gilt für das gesamte StructArray-Feld. Beispielsweise ist „ <code translate="no">chunks=None</code> “ nur gültig, wenn „ <code translate="no">chunks</code> “ nullfähig ist.</td></tr>
 <tr><td>Teilweise null-fähige StructArray-Werte</td><td>Wenn ein StructArray-Feld einen gültigen Array-Wert enthält, dürfen Sie in demselben Wert keine null-Subfeld-Arrays mit gültigen Subfeld-Arrays mischen.</td></tr>
-<tr><td>Dynamisches Hinzufügen eines StructArray-Feldes</td><td>Unterstützt ab Milvus 3.0.0.</td></tr>
-<tr><td>Nullbarkeitsanforderung für das dynamische Hinzufügen</td><td>Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, da bestehende Entitäten noch keinen Wert für das neue Feld haben.</td></tr>
+<tr><td>Dynamisches Hinzufügen eines StructArray-Feldes</td><td>Vorbehaltlich der nachstehenden Verfügbarkeitserklärung.</td></tr>
+<tr><td>Nullbarkeitsanforderung für dynamisches Hinzufügen</td><td>Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, da bestehende Entitäten keinen Wert für das neue Feld haben.</td></tr>
 <tr><td>Bestehende Entitäten nach dem dynamischen Hinzufügen</td><td>Bestehende Entitäten geben für das hinzugefügte StructArray-Feld „ <code translate="no">null</code> “ zurück.</td></tr>
 </tbody>
 </table>
 <p>Milvus 3.0.0 und spätere Versionen unterstützen nullfähige StructArray-Felder, nullfähige Vektor-Arrays und das dynamische Hinzufügen von StructArray-Feldern sowohl in Standalone- als auch in verteilten Bereitstellungen. Frühere Milvus-Versionen unterstützen diese Funktionen nicht.</p>
-<p>In der Zilliz Cloud sind diese Funktionen auf On-Demand-Clustern verfügbar, auf denen Milvus 3.0.0 oder höher ausgeführt wird. Serving-Cluster unterstützen sie nicht.</p>
-<p>Beispiele für das Einfügen von <a href="/docs/de/insert-data-into-structarray-fields.md">Daten</a> in nullfähige „StructArray“-Felder finden Sie unter <a href="/docs/de/insert-data-into-structarray-fields.md">„Daten in StructArray-Felder einfügen</a>“.</p>
+<p>Beispiele für das Einfügen von <a href="/docs/de/insert-data-into-structarray-fields.md">Daten</a> in nullfähige StructArray-Felder finden Sie unter <a href="/docs/de/insert-data-into-structarray-fields.md">„Daten in StructArray-Felder einfügen</a>“.</p>
 <h2 id="Insert-limits" class="common-anchor-header">Einschränkungen beim Einfügen<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,7 +173,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Für StructArray-Einfüge-Payloads gelten die folgenden Beschränkungen:</p>
+<table>
 <thead>
 <tr><th>Beschränkung</th><th>Details</th></tr>
 </thead>
@@ -200,7 +202,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein StructArray-Vektor-Unterfeld kann entweder für die „EmbeddingList“-Suche oder für die Suche auf Elementebene indiziert werden. Dasselbe Vektor-Unterfeld kann nicht beide Metrikfamilien verwenden, da jedes Vektorfeld oder Vektor-Unterfeld nur einen Index akzeptiert.</p>
+    </button></h2><p>Ein StructArray-Vektor-Unterfeld kann entweder für die „EmbeddingList“-Suche oder für die Suche auf Elementebene indiziert werden. Dasselbe Vektor-Unterfeld kann nicht beide Metrikfamilien verwenden, da jedes Vektorfeld oder Vektor-Unterfeld nur einen Index akzeptiert. Die Suchmodi verwenden die folgenden Metrikfamilien:</p>
 <table>
 <thead>
 <tr><th>Suchmodus</th><th>Metrikfamilie</th><th>Ergebnisebene</th></tr>
@@ -228,12 +230,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
+    </button></h2><p>Das Suchverhalten von StructArray unterliegt folgenden Einschränkungen:</p>
+<table>
 <thead>
 <tr><th>Suchverhalten</th><th>Unterstützung und Einschränkungen</th></tr>
 </thead>
 <tbody>
-<tr><td>Einfache „EmbeddingList“-Suche</td><td>Wird für StructArray-Vektor-Unterfelder unterstützt, die mit „ <code translate="no">MAX_SIM*</code> “-Metriken indiziert sind. Liefert Ergebnisse auf Entitätsebene.</td></tr>
+<tr><td>Grundlegende Suche in „EmbeddingList“</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit „ <code translate="no">MAX_SIM*</code> “-Metriken indiziert sind. Liefert Ergebnisse auf Entitätsebene.</td></tr>
 <tr><td>Einfache Suche auf Elementebene</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit regulären Vektormetriken indiziert sind. Kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
 <tr><td>Bereichssuche</td><td>Wird je nach Suchmodus und Index-/Metrikunterstützung der Zielversion unterstützt. Für das Verhalten bei der hybriden Bereichssuche bei StructArray-Anfragen auf Elementebene überprüfen Sie bitte Ihre Zielversion.</td></tr>
 <tr><td>Gruppierte Suche</td><td>Die gruppierte Suche auf Elementebene kann Offsets zurückgeben. Das Verhalten der hybriden Gruppierungssuche bei StructArray-Anfragen auf Elementebene ist versionsabhängig.</td></tr>

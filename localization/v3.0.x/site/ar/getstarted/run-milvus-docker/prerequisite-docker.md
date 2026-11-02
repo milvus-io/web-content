@@ -41,9 +41,9 @@ title: متطلبات تثبيت Milvus Standalone
 <tr><th>المكون</th><th>المتطلب</th><th>التوصية</th><th>ملاحظة</th></tr>
 </thead>
 <tbody>
-<tr><td>وحدة المعالجة المركزية</td><td><ul><li>معالج Intel Core من الجيل الثاني أو أعلى</li><li>Apple Silicon</li></ul></td><td><ul><li>مستقل: 4 نوى أو أكثر</li><li>المجموعة: 8 نوى أو أكثر</li></ul></td><td></td></tr>
-<tr><td>مجموعة تعليمات وحدة المعالجة المركزية</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>يتطلب البحث عن التشابه بين المتجهات وإنشاء الفهارس داخل Milvus أن تدعم وحدة المعالجة المركزية (CPU) مجموعات امتدادات التعليمات الفردية والبيانات المتعددة (SIMD). تأكد من أن وحدة المعالجة المركزية تدعم واحدًا على الأقل من امتدادات SIMD المذكورة. راجع <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">وحدات المعالجة المركزية المزودة بـ AVX</a> لمزيد من المعلومات.</td></tr>
-<tr><td>ذاكرة الوصول العشوائي (RAM)</td><td><ul><li>نظام مستقل: 8G</li><li>المجموعة: 32G</li></ul></td><td><ul><li>جهاز مستقل: 16G</li><li>المجموعة: 128G</li></ul></td><td>يعتمد حجم ذاكرة الوصول العشوائي (RAM) على حجم البيانات.</td></tr>
+<tr><td>وحدة المعالجة المركزية</td><td><ul><li>معالج Intel Core من الجيل الثاني أو أحدث</li><li>Apple Silicon</li></ul></td><td><ul><li>مستقل: 4 نوى أو أكثر</li><li>مجموعة: 8 نوى أو أكثر</li></ul></td><td></td></tr>
+<tr><td>مجموعة تعليمات وحدة المعالجة المركزية</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>يتطلب البحث عن التشابه بين المتجهات وإنشاء الفهرس داخل Milvus دعم وحدة المعالجة المركزية لمجموعات امتدادات التعليمات الفردية والبيانات المتعددة (SIMD). تأكد من أن وحدة المعالجة المركزية تدعم واحدًا على الأقل من امتدادات SIMD المذكورة. راجع <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">وحدات المعالجة المركزية المزودة بـ AVX</a> لمزيد من المعلومات.</td></tr>
+<tr><td>ذاكرة الوصول العشوائي (RAM)</td><td><ul><li>جهاز مستقل: 8G</li><li>المجموعة: 32G</li></ul></td><td><ul><li>جهاز مستقل: 16G</li><li>المجموعة: 128G</li></ul></td><td>يعتمد حجم ذاكرة الوصول العشوائي (RAM) على حجم البيانات.</td></tr>
 <tr><td>محرك الأقراص الثابتة</td><td>محرك أقراص SSD SATA 3.0 أو أعلى</td><td>محرك أقراص SSD من نوع NVMe أو أعلى</td><td>يعتمد حجم القرص الصلب على حجم البيانات.</td></tr>
 </tbody>
 </table>
@@ -67,21 +67,24 @@ title: متطلبات تثبيت Milvus Standalone
 <tr><th>نظام التشغيل</th><th>البرامج</th><th>ملاحظة</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 أو أحدث</td><td>Docker Desktop</td><td>اضبط الجهاز الظاهري (VM) لـ Docker بحيث يستخدم ما لا يقل عن 2 وحدة معالجة مركزية افتراضية (vCPU) وذاكرة أولية تبلغ 8 جيجابايت. وإلا، فقد يفشل التثبيت. <br/>انظر <a href="https://docs.docker.com/desktop/mac/install/">تثبيت Docker Desktop على Mac</a> لمزيد من المعلومات.</td></tr>
-<tr><td>أنظمة Linux</td><td><ul><li>Docker 19.03 أو أحدث</li><li>Docker Compose 1.25.1 أو أحدث</li></ul></td><td>انظر <a href="https://docs.docker.com/engine/install/">تثبيت محرك دوكر</a> <a href="https://docs.docker.com/compose/install/">وتثبيت دوكر كومبوز</a> لمزيد من المعلومات.</td></tr>
-<tr><td>نظام Windows مع تمكين WSL 2</td><td>Docker Desktop</td><td>نوصي بتخزين شفرة المصدر والبيانات الأخرى المربوطة في حاويات Linux في نظام ملفات Linux بدلاً من نظام ملفات Windows.<br/>انظر <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">تثبيت Docker Desktop على Windows مع WSL 2 كخلفية</a> لمزيد من المعلومات.</td></tr>
+<tr><td>macOS المدعوم بواسطة Docker Desktop</td><td>Docker Desktop</td><td>خصص ذاكرة لا تقل عن 8 جيجابايت للآلة الافتراضية (VM) الخاصة بـ Docker وقم بتحديد حجم وحدات المعالجة المركزية (CPUs) وفقًا لتوصيات الأجهزة المذكورة أعلاه. <br/>انظر <a href="https://docs.docker.com/desktop/setup/install/mac-install/">تثبيت Docker Desktop على Mac</a> لمزيد من المعلومات.</td></tr>
+<tr><td>أنظمة Linux</td><td><ul><li>Docker 19.03 أو إصدار أحدث</li><li>المكوّن الإضافي Docker Compose الإصدار 2 أو أحدث (لنشر Compose)</li></ul></td><td>انظر <a href="https://docs.docker.com/engine/install/">تثبيت محرك دوكر</a> <a href="https://docs.docker.com/compose/install/">وتثبيت دوكر كومبوز</a> لمزيد من المعلومات.</td></tr>
+<tr><td>نظام Windows مع تمكين WSL 2</td><td>Docker Desktop</td><td>نوصي بتخزين شفرة المصدر والبيانات الأخرى المربوطة في حاويات Linux في نظام ملفات Linux بدلاً من نظام ملفات Windows.<br/>راجع <a href="https://docs.docker.com/desktop/features/wsl/">تثبيت Docker Desktop على نظام Windows مع WSL 2 كخلفية</a> لمزيد من المعلومات.</td></tr>
 </tbody>
 </table>
-<p>سيتم الحصول على التبعيات التالية وتكوينها تلقائيًا عند تثبيت Milvus Standalone باستخدام البرنامج النصي لـ Docker أو تكوين Docker Compose:</p>
+<p>تستخدم أدلة Compose الأمر <code translate="no">docker compose</code> ، وليس الأمر القديم <code translate="no">docker-compose</code> V1. تحقق من المكون الإضافي قبل اتباع هذه الإرشادات:</p>
+<pre><code translate="no" class="language-bash">docker compose version
+<button class="copy-code-btn"></button></code></pre>
+<p>تحدد طريقة التثبيت كيفية توفير التبعيات. استخدم إصدارات الصور المثبتة في البرنامج النصي الذي تم تنزيله أو ملف Compose:</p>
 <table>
 <thead>
-<tr><th>البرامج</th><th>الإصدار</th><th>ملاحظة</th></tr>
+<tr><th>المكون</th><th>نص Docker</th><th>Docker Compose</th></tr>
 </thead>
 <tbody>
-<tr><td>etcd</td><td>3.5.0</td><td>انظر <a href="#Additional-disk-requirements">متطلبات القرص الإضافية</a>.</td></tr>
-<tr><td>MinIO</td><td>الإصدار 2024-12-18T13-15-44Z</td><td></td></tr>
-<tr><td>Woodpecker</td><td>مُضمّن مع Milvus</td><td>قائمة انتظار الرسائل الافتراضية (مضمنة)؛ لا توجد خدمة منفصلة لتثبيتها.</td></tr>
-<tr><td>Pulsar</td><td>2.8.2</td><td>اختياري — فقط إذا قمت بتحويل قائمة انتظار الرسائل إلى Pulsar؛ غير مثبت بشكل افتراضي.</td></tr>
+<tr><td>etcd</td><td>مضمن في حاوية Milvus</td><td>حاوية منفصلة؛ انظر <a href="#Additional-disk-requirements">متطلبات القرص الإضافية</a>.</td></tr>
+<tr><td>تخزين الكائنات</td><td>نظام الملفات المحلي؛ لا توجد حاوية MinIO</td><td>حاوية MinIO مع تثبيت صورتها في ملف Compose</td></tr>
+<tr><td>Woodpecker</td><td>مُدمج مع Milvus؛ نظام الملفات المحلي كخلفية لـ WAL</td><td>مُدمج مع Milvus؛ خلفية WAL تعمل بنظام MinIO/تخزين الكائنات</td></tr>
+<tr><td>Pulsar</td><td>خدمة خارجية اختيارية؛ غير مثبتة افتراضيًا</td><td>خدمة خارجية اختيارية؛ غير مثبتة بشكل افتراضي</td></tr>
 </tbody>
 </table>
 <h3 id="Additional-disk-requirements" class="common-anchor-header">متطلبات القرص الإضافية<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
