@@ -39,13 +39,75 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>To use the default options, specify <code translate="no">&quot;pinyin&quot;</code> in the <code translate="no">filter</code> section of <code translate="no">analyzer_params</code>.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-wrapper-line">    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;pinyin&quot;</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>:    []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;pinyin&quot;</span>},
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = serde_json::json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+    {<span class="hljs-string">&quot;filter&quot;</span>, {<span class="hljs-string">&quot;pinyin&quot;</span>}}
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> System.Collections.Generic;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+    [<span class="hljs-string">&quot;filter&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;pinyin&quot;</span> }
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+analyzerParams=<span class="hljs-string">&#x27;{
+  &quot;tokenizer&quot;: &quot;jieba&quot;,
+  &quot;filter&quot;: [&quot;pinyin&quot;]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>This shorthand keeps the original Chinese tokens and emits character-level Pinyin tokens. It does not emit joined Pinyin or Pinyin initials unless you enable those options explicitly.</p>
 <p>For full control, specify the filter as an object and configure the Pinyin token forms that Milvus emits.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;filter&quot;</span>: [</span>
@@ -58,6 +120,104 @@ beta: Milvus 3.0.x
 <span class="highlighted-comment-line">        }</span>
 <span class="highlighted-comment-line">    ],</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+Map&lt;String, Object&gt; pinyinFilter = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+pinyinFilter.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">true</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">false</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(pinyinFilter));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        {
+            <span class="hljs-string">&quot;type&quot;</span>:                       <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>:              <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>:           <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>:    <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">false</span>,
+        },
+    },
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = serde_json::json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">false</span>
+        }
+    ]
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+    {<span class="hljs-string">&quot;filter&quot;</span>, {
+        {
+            {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>},
+            {<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>},
+            {<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">true</span>},
+            {<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>},
+            {<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">false</span>}
+        }
+    }}
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">false</span>,
+        },
+    ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> System.Collections.Generic;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+    [<span class="hljs-string">&quot;filter&quot;</span>] = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+        {
+            [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;pinyin&quot;</span>,
+            [<span class="hljs-string">&quot;keep_original&quot;</span>] = <span class="hljs-literal">true</span>,
+            [<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>] = <span class="hljs-literal">true</span>,
+            [<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>] = <span class="hljs-literal">false</span>,
+            [<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>] = <span class="hljs-literal">false</span>
+        }
+    }
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+analyzerParams=<span class="hljs-string">&#x27;{
+  &quot;tokenizer&quot;: &quot;jieba&quot;,
+  &quot;filter&quot;: [
+    {
+      &quot;type&quot;: &quot;pinyin&quot;,
+      &quot;keep_original&quot;: true,
+      &quot;keep_full_pinyin&quot;: true,
+      &quot;keep_joined_full_pinyin&quot;: false,
+      &quot;keep_separate_first_letter&quot;: false
+    }
+  ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The filter accepts the following parameters.</p>
 <table>
@@ -88,11 +248,101 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>Before applying the analyzer configuration to your collection schema, verify its behavior with <code translate="no">run_analyzer</code>.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
 sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;中文测试&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;中文测试&quot;</span>}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">sample_text</span> = <span class="hljs-string">&quot;中文测试&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+std::string sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-keyword">const</span> sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">var</span> sampleText = <span class="hljs-string">&quot;中文测试&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-comment"># The run_analyzer request is sent directly to the endpoint below.</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Match-Chinese-text-with-character-level-Pinyin" class="common-anchor-header">Match Chinese text with character-level Pinyin<button data-href="#Match-Chinese-text-with-character-level-Pinyin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,6 +360,16 @@ sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
         ></path>
       </svg>
     </button></h3><p>The default <code translate="no">pinyin</code> filter keeps the original Chinese tokens and emits character-level Pinyin tokens.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],
@@ -117,6 +377,109 @@ sample_text = <span class="hljs-string">&quot;中文测试&quot;</span>
 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;pinyin&quot;</span>));
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+
+analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>:    []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;pinyin&quot;</span>},
+}
+
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+fmt.Println(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
+});
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">run_analyzer</span>(
+        RunAnalyzerRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">texts</span>(<span class="hljs-built_in">vec!</span>[sample_text])
+            .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+    {<span class="hljs-string">&quot;filter&quot;</span>, {<span class="hljs-string">&quot;pinyin&quot;</span>}}
+};
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">RunAnalyzerRequest</span>()
+                       .<span class="hljs-built_in">AddText</span>(sample_text)
+                       .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client-&gt;<span class="hljs-built_in">RunAnalyzer</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+    <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">filter</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>],
+};
+
+<span class="hljs-keyword">const</span> char_result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">runAnalyzer</span>({
+    <span class="hljs-attr">text</span>: sample_text,
+    analyzer_params,
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(char_result.<span class="hljs-property">results</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+    [<span class="hljs-string">&quot;filter&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;pinyin&quot;</span> }
+};
+
+RunAnalyzerResp result = <span class="hljs-keyword">await</span> client.RunAnalyzerAsync(<span class="hljs-keyword">new</span> RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = <span class="hljs-keyword">new</span>[] { sampleText }
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, result.Results.SelectMany(r =&gt; r.Tokens).Select(t =&gt; t.Token)));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/common/run_analyzer&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+        &quot;text&quot;: [&quot;中文测试&quot;],
+        &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;jieba\&quot;, \&quot;filter\&quot;: [\&quot;pinyin\&quot;]}&quot;
+     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Expected output:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhong&#x27;, &#x27;wen&#x27;, &#x27;测试&#x27;, &#x27;ce&#x27;, &#x27;shi&#x27;]
@@ -137,6 +500,16 @@ result = client.run_analyzer(sample_text, analyzer_params)
         ></path>
       </svg>
     </button></h3><p>Enable <code translate="no">keep_joined_full_pinyin</code> when you need a Chinese term to match its full joined Pinyin form.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -152,6 +525,157 @@ result = client.run_analyzer(sample_text, analyzer_params)
 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+Map&lt;String, Object&gt; pinyinFilter = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+pinyinFilter.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">true</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">false</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(pinyinFilter));
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+
+analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        {
+            <span class="hljs-string">&quot;type&quot;</span>:                       <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>:              <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>:           <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>:    <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">false</span>,
+        },
+    },
+}
+
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+fmt.Println(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">false</span>
+        }
+    ]
+});
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">run_analyzer</span>(
+        RunAnalyzerRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">texts</span>(<span class="hljs-built_in">vec!</span>[sample_text])
+            .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+    {<span class="hljs-string">&quot;filter&quot;</span>, {
+        {
+            {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>},
+            {<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>},
+            {<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>},
+            {<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">true</span>},
+            {<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">false</span>}
+        }
+    }}
+};
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">RunAnalyzerRequest</span>()
+                       .<span class="hljs-built_in">AddText</span>(sample_text)
+                       .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client-&gt;<span class="hljs-built_in">RunAnalyzer</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+    <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">filter</span>: [
+        {
+            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-attr">keep_original</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">keep_full_pinyin</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">keep_joined_full_pinyin</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">keep_separate_first_letter</span>: <span class="hljs-literal">false</span>,
+        },
+    ],
+};
+
+<span class="hljs-keyword">const</span> joined_result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">runAnalyzer</span>({
+    <span class="hljs-attr">text</span>: sample_text,
+    analyzer_params,
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(joined_result.<span class="hljs-property">results</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+    [<span class="hljs-string">&quot;filter&quot;</span>] = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+        {
+            [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;pinyin&quot;</span>,
+            [<span class="hljs-string">&quot;keep_original&quot;</span>] = <span class="hljs-literal">true</span>,
+            [<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>] = <span class="hljs-literal">false</span>,
+            [<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>] = <span class="hljs-literal">true</span>,
+            [<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>] = <span class="hljs-literal">false</span>
+        }
+    }
+};
+
+RunAnalyzerResp result = <span class="hljs-keyword">await</span> client.RunAnalyzerAsync(<span class="hljs-keyword">new</span> RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = <span class="hljs-keyword">new</span>[] { sampleText }
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, result.Results.SelectMany(r =&gt; r.Tokens).Select(t =&gt; t.Token)));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/common/run_analyzer&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+        &quot;text&quot;: [&quot;中文测试&quot;],
+        &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;jieba\&quot;, \&quot;filter\&quot;: [{\&quot;type\&quot;: \&quot;pinyin\&quot;, \&quot;keep_original\&quot;: true, \&quot;keep_full_pinyin\&quot;: false, \&quot;keep_joined_full_pinyin\&quot;: true, \&quot;keep_separate_first_letter\&quot;: false}]}&quot;
+     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Expected output:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zhongwen&#x27;, &#x27;测试&#x27;, &#x27;ceshi&#x27;]
@@ -172,6 +696,16 @@ result = client.run_analyzer(sample_text, analyzer_params)
         ></path>
       </svg>
     </button></h3><p>Enable <code translate="no">keep_separate_first_letter</code> when you need a Chinese term to match the initials of its Pinyin form.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -187,6 +721,157 @@ result = client.run_analyzer(sample_text, analyzer_params)
 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+Map&lt;String, Object&gt; pinyinFilter = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+pinyinFilter.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>);
+pinyinFilter.put(<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">true</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(pinyinFilter));
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+
+analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        {
+            <span class="hljs-string">&quot;type&quot;</span>:                       <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>:              <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>:           <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>:    <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">true</span>,
+        },
+    },
+}
+
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+fmt.Println(result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-string">&quot;keep_original&quot;</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">&quot;keep_full_pinyin&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>: <span class="hljs-literal">true</span>
+        }
+    ]
+});
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">run_analyzer</span>(
+        RunAnalyzerRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">texts</span>(<span class="hljs-built_in">vec!</span>[sample_text])
+            .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+    {<span class="hljs-string">&quot;filter&quot;</span>, {
+        {
+            {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;pinyin&quot;</span>},
+            {<span class="hljs-string">&quot;keep_original&quot;</span>, <span class="hljs-literal">true</span>},
+            {<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>},
+            {<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>, <span class="hljs-literal">false</span>},
+            {<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>, <span class="hljs-literal">true</span>}
+        }
+    }}
+};
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">RunAnalyzerRequest</span>()
+                       .<span class="hljs-built_in">AddText</span>(sample_text)
+                       .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client-&gt;<span class="hljs-built_in">RunAnalyzer</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+    <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">filter</span>: [
+        {
+            <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;pinyin&quot;</span>,
+            <span class="hljs-attr">keep_original</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">keep_full_pinyin</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">keep_joined_full_pinyin</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">keep_separate_first_letter</span>: <span class="hljs-literal">true</span>,
+        },
+    ],
+};
+
+<span class="hljs-keyword">const</span> initials_result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">runAnalyzer</span>({
+    <span class="hljs-attr">text</span>: sample_text,
+    analyzer_params,
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(initials_result.<span class="hljs-property">results</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+    [<span class="hljs-string">&quot;filter&quot;</span>] = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+        {
+            [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;pinyin&quot;</span>,
+            [<span class="hljs-string">&quot;keep_original&quot;</span>] = <span class="hljs-literal">true</span>,
+            [<span class="hljs-string">&quot;keep_full_pinyin&quot;</span>] = <span class="hljs-literal">false</span>,
+            [<span class="hljs-string">&quot;keep_joined_full_pinyin&quot;</span>] = <span class="hljs-literal">false</span>,
+            [<span class="hljs-string">&quot;keep_separate_first_letter&quot;</span>] = <span class="hljs-literal">true</span>
+        }
+    }
+};
+
+RunAnalyzerResp result = <span class="hljs-keyword">await</span> client.RunAnalyzerAsync(<span class="hljs-keyword">new</span> RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = <span class="hljs-keyword">new</span>[] { sampleText }
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, result.Results.SelectMany(r =&gt; r.Tokens).Select(t =&gt; t.Token)));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/common/run_analyzer&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+        &quot;text&quot;: [&quot;中文测试&quot;],
+        &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;jieba\&quot;, \&quot;filter\&quot;: [{\&quot;type\&quot;: \&quot;pinyin\&quot;, \&quot;keep_original\&quot;: true, \&quot;keep_full_pinyin\&quot;: false, \&quot;keep_joined_full_pinyin\&quot;: false, \&quot;keep_separate_first_letter\&quot;: true}]}&quot;
+     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Expected output:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;中文&#x27;, &#x27;zw&#x27;, &#x27;测试&#x27;, &#x27;cs&#x27;]
