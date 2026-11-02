@@ -37,7 +37,7 @@ test('documents latest and track publication policies', () => {
   assert.match(doc, /track/i);
   assert.match(doc, /zilliz/i);
   assert.match(doc, /milvus/i);
-  assert.match(doc, /api-version|api surface/i);
+  assert.match(doc, /api-version|api[- ]surface/i);
   assert.match(doc, /release-track|release track/i);
 });
 
@@ -46,4 +46,22 @@ test('documents staged enforcement from audit to required', () => {
   assert.match(doc, /audit-compatible|audit compatible/i);
   assert.match(doc, /bootstrap/i);
   assert.match(doc, /post-bootstrap|hard validation|required/i);
+});
+
+test('documents x-next-channel staging aligned with the NextChannel tag', () => {
+  const doc = readDoc();
+  assert.match(doc, /x-next-channel/i);
+  assert.match(doc, /include.*exclude|exclude.*include/is);
+  assert.match(doc, /retire-in-next/i);
+  assert.match(doc, /<NextChannel/i);
+  assert.match(doc, /fail-closed|fails? closed/i);
+});
+
+test('documents x-zilliz-cluster-types with the manifests-locked domain', () => {
+  const doc = readDoc();
+  assert.match(doc, /x-zilliz-cluster-types/i);
+  for (const v of ['serverless', 'memory', 'disk', 'tiered', 'byoc-memory', 'byoc-disk', 'byoc-tiered']) {
+    assert.match(doc, new RegExp(`\`${v}\``));
+  }
+  assert.match(doc, /absent.*all cluster types|fail-open/i);
 });

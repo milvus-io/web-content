@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zilliz.com/contracts/rest-upstream-lock.schema.json",
+  "title": "REST Upstream Lock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sources"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}}
+  },
+  "$defs": {
+    "sha1": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "isoTimestamp": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"},
+    "sourceId": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+    "relativePath": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(^|/)\\.\\.\\.?(?:/|$)).+$"},
+    "trackedRef": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"},
+    "artifact": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path"],
+          "properties": {
+            "kind": {"const": "spec-file"},
+            "path": {"$ref": "#/$defs/relativePath"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "paths"],
+          "properties": {
+            "kind": {"const": "source-tree"},
+            "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/relativePath"}}
+          }
+        }
+      ]
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit"],
+      "properties": {
+        "commit": {"$ref": "#/$defs/sha1"},
+        "contentSha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "repository", "artifact", "pin", "trackedRef", "apiSurface", "publicationTarget"],
+      "properties": {
+        "id": {"$ref": "#/$defs/sourceId"},
+        "repository": {"$ref": "#/$defs/repository"},
+        "artifact": {"$ref": "#/$defs/artifact"},
+        "pin": {"$ref": "#/$defs/pin"},
+        "trackedRef": {"$ref": "#/$defs/trackedRef"},
+        "apiSurface": {"enum": ["data-plane", "control-plane"]},
+        "publicationTarget": {"enum": ["zilliz", "milvus"]},
+        "upstreamOasVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "lastVerifiedAt": {"$ref": "#/$defs/isoTimestamp"}
+      }
+    }
+  }
+}

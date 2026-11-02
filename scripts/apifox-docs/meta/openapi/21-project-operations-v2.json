@@ -1404,13 +1404,13 @@
                 "properties": {
                   "plan": {
                     "type": "string",
-                    "description": "The subscription plan to upgrade to. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                    "description": "The subscription plan to upgrade to. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`. If you need to upgrade your project to `BusinessCritical`, please [contact us](https://support.zilliz.com/hc/en-us).",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "升级到的订阅计划。当前仅支持 `Enterprise` 一种。"
                       },
                       "ja-JP": {
-                        "description": "アップグレード先のサブスクリプションプラン。指定可能な値は `Standard`、`Enterprise`、または `BusinessCritical` です。"
+                        "description": "アップグレード先のサブスクリプションプラン。指定可能な値は `Standard`、`Enterprise`、または `BusinessCritical` です。プロジェクトを `BusinessCritical` にアップグレードする必要がある場合は、[お問い合わせください](https://support.zilliz.com/hc/en-us)。"
                       }
                     },
                     "default": "Standard"

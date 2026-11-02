@@ -357,6 +357,7 @@
     "/v2/migrations/toExisting": {
       "post": {
         "summary": "Migrate to Existing Cluster",
+        "x-beta": "ON REQUEST",
         "deprecated": false,
         "description": "Migrate data from a cluster to another.",
         "x-i18n": {

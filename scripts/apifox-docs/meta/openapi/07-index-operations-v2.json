@@ -552,6 +552,12 @@
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null
+                  },
+                  "timestamp": {
+                    "type": "integer",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "x-i18n-langs": [
@@ -1761,6 +1767,12 @@
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null
+                  },
+                  "timestamp": {
+                    "type": "integer",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "x-i18n-langs": [
@@ -2014,6 +2026,18 @@
                       "ja-JP": {
                         "description": "既存のコレクションの名前です。存在しないコレクションを設定するとエラーになります。"
                       }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "partitionNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "x-added-at": "2.6.x",
+                      "x-last-modified": "2.6.x",
+                      "x-deprecated-since": null
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",

@@ -19,10 +19,10 @@
 // zdoc 1e9ae4723c). Unlike the lark files, the rest tooling is
 // self-contained (CommonJS, own package.json, runtime files have no
 // cross-package requires), so a whole-directory sync works. Requires the
-// `ajv` dependency in scripts/package.json. One synced test file,
-// on-demand-cluster-segment.test.js, requires a zdoc-generated sidebar
-// artifact and must be deleted locally after each sync — see the
-// "Shared script copies" section in scripts/README.md.
+// `ajv` and `js-yaml` dependencies in scripts/package.json (the latter is
+// pulled in by upstreamDiff/cli.js, which index.js loads at startup). Files
+// that cannot work as loose copies are kept out via `exclude` below — see
+// the "Shared script copies" section in scripts/README.md.
 
 module.exports = [
   {
@@ -41,6 +41,11 @@ module.exports = [
     exclude: [
       // Requires a zdoc-generated sidebar artifact that does not exist here.
       /^on-demand-cluster-segment\.test\.js$/,
+      // zdoc-side track-attribution evidence (2.5 MB). The contents API does
+      // not inline files over 1 MB, so the sync would write it as 0 bytes
+      // (that is how the empty file landed here originally); nothing in this
+      // copy reads it, so keep it out entirely.
+      /^meta\/lifecycle-evidence\//,
     ],
   },
 ];

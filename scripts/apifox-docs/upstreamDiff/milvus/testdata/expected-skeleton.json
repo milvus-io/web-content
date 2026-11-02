@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "extractedFrom": {
+    "repository": "milvus-io/milvus",
+    "sourceDir": "internal/distributed/proxy/httpserver",
+    "mountPrefix": "/v2/vectordb"
+  },
+  "operations": [
+    {
+      "path": "/v2/vectordb/collections/create",
+      "method": "post",
+      "handler": "createCollection",
+      "requestStruct": "CreateCollectionReq",
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateCollectionReq"
+      }
+    },
+    {
+      "path": "/v2/vectordb/collections/get_progress",
+      "method": "post",
+      "handler": "getProgress",
+      "requestStruct": "JobIDReq",
+      "deprecated": true,
+      "requestSchema": {
+        "$ref": "#/components/schemas/JobIDReq"
+      }
+    },
+    {
+      "path": "/v2/vectordb/collections/list",
+      "method": "post",
+      "handler": "listCollections",
+      "requestStruct": "CollectionNameReq",
+      "requestSchema": {
+        "$ref": "#/components/schemas/CollectionNameReq"
+      }
+    },
+    {
+      "path": "/v2/vectordb/entities/delete",
+      "method": "post",
+      "handler": "deleteEntities",
+      "requestStruct": "CollectionDataReq",
+      "requestSchema": {
+        "$ref": "#/components/schemas/CollectionDataReq"
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "CollectionDataReq": {
+        "type": "object",
+        "properties": {
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "any": {
+            "x-milvus-opaque": true
+          },
+          "collectionName": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "x-milvus-opaque": true
+            }
+          },
+          "dbName": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "x-milvus-opaque": true
+          },
+          "raw": {
+            "x-milvus-opaque": true
+          }
+        },
+        "required": [
+          "collectionName",
+          "data"
+        ]
+      },
+      "CollectionNameReq": {
+        "type": "object",
+        "properties": {
+          "Untagged": {
+            "type": "string"
+          },
+          "collectionName": {
+            "type": "string"
+          },
+          "dbName": {
+            "type": "string"
+          },
+          "partitionNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "CollectionSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldSchema"
+            }
+          }
+        },
+        "required": [
+          "fields"
+        ]
+      },
+      "CreateCollectionReq": {
+        "type": "object",
+        "properties": {
+          "collectionName": {
+            "type": "string"
+          },
+          "dbName": {
+            "type": "string"
+          },
+          "dimension": {
+            "type": "integer"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/CollectionSchema"
+          }
+        },
+        "required": [
+          "collectionName"
+        ]
+      },
+      "FieldSchema": {
+        "type": "object",
+        "properties": {
+          "dataType": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataType",
+          "name"
+        ]
+      },
+      "JobIDReq": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      }
+    }
+  }
+}

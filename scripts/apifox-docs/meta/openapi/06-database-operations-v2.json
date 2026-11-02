@@ -460,7 +460,15 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "x-zilliz-cluster-types": [
+          "memory",
+          "disk",
+          "tiered",
+          "byoc-memory",
+          "byoc-disk",
+          "byoc-tiered"
+        ]
       }
     },
     "/v2/vectordb/databases/list": {

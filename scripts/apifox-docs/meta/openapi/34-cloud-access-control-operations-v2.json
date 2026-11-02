@@ -1343,7 +1343,10 @@
     "/v2/groups": {
       "get": {
         "summary": "List Groups",
-        "x-include-langs": ["en-US", "ja-JP"],
+        "x-include-langs": [
+          "en-US",
+          "ja-JP"
+        ],
         "description": "Lists SCIM groups in the calling organization.",
         "tags": [
           "Cloud Access Control Operations (V2)"
@@ -1572,7 +1575,10 @@
     "/v2/groups/{groupId}/roles": {
       "get": {
         "summary": "List Group Roles",
-        "x-include-langs": ["en-US", "ja-JP"],
+        "x-include-langs": [
+          "en-US",
+          "ja-JP"
+        ],
         "description": "Lists roles directly assigned to a SCIM group.",
         "tags": [
           "Cloud Access Control Operations (V2)"
@@ -1766,7 +1772,10 @@
     "/v2/groups/{groupId}/members": {
       "get": {
         "summary": "List Group Members",
-        "x-include-langs": ["en-US", "ja-JP"],
+        "x-include-langs": [
+          "en-US",
+          "ja-JP"
+        ],
         "description": "Lists the members of a SCIM group.",
         "tags": [
           "Cloud Access Control Operations (V2)"
@@ -1993,7 +2002,10 @@
     "/v2/groups/{groupId}/roles/{roleId}": {
       "put": {
         "summary": "Grant Role To Group",
-        "x-include-langs": ["en-US", "ja-JP"],
+        "x-include-langs": [
+          "en-US",
+          "ja-JP"
+        ],
         "description": "Grants one role directly to a SCIM group.",
         "tags": [
           "Cloud Access Control Operations (V2)"
@@ -2208,7 +2220,10 @@
       },
       "delete": {
         "summary": "Revoke Role From Group",
-        "x-include-langs": ["en-US", "ja-JP"],
+        "x-include-langs": [
+          "en-US",
+          "ja-JP"
+        ],
         "description": "Revokes one directly assigned role from a SCIM group.",
         "tags": [
           "Cloud Access Control Operations (V2)"

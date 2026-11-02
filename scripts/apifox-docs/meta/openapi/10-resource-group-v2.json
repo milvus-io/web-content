@@ -89,59 +89,9 @@
                   },
                   "config": {
                     "type": "object",
-                    "description": "The configurations of the resource group to create.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "资源组配置。"
-                      },
-                      "ja-JP": {
-                        "description": "作成するリソースグループの構成。"
-                      }
-                    },
                     "properties": {
-                      "requests": {
-                        "type": "object",
-                        "description": "The number of query nodes to allocate to the resource group.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "资源组中需要的 QueryNodes 的数量。"
-                          },
-                          "ja-JP": {
-                            "description": "リソースグループに割り当てる query node の数。"
-                          }
-                        },
-                        "properties": {
-                          "node_num": {
-                            "type": "integer",
-                            "description": "The number of query nodes to allocate to the resource group.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "资源组中需要的 QueryNodes 的数量。"
-                              },
-                              "ja-JP": {
-                                "description": "リソースグループに割り当てる query node の数。"
-                              }
-                            },
-                            "x-added-at": "2.6.x",
-                            "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
-                          }
-                        },
-                        "x-added-at": "2.6.x",
-                        "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
-                      },
                       "limits": {
                         "type": "object",
-                        "description": "The maximum number of query nodes to allocate to the resource group.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "资源组中需要的 QueryNodes 的最大数量。"
-                          },
-                          "ja-JP": {
-                            "description": "リソースグループに割り当てる query node の最大数。"
-                          }
-                        },
                         "properties": {
                           "node_num": {
                             "type": "integer",
@@ -159,32 +109,69 @@
                             "x-deprecated-since": null
                           }
                         },
+                        "description": "The maximum number of query nodes to allocate to the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "资源组中需要的 QueryNodes 的最大数量。"
+                          },
+                          "ja-JP": {
+                            "description": "リソースグループに割り当てる query node の最大数。"
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "node_filter": {
+                        "type": "object",
+                        "properties": {
+                          "node_labels": {
+                            "type": "object",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "requests": {
+                        "type": "object",
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "description": "The number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "资源组中需要的 QueryNodes 的数量。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てる query node の数。"
+                              }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "description": "The number of query nodes to allocate to the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "资源组中需要的 QueryNodes 的数量。"
+                          },
+                          "ja-JP": {
+                            "description": "リソースグループに割り当てる query node の数。"
+                          }
+                        },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
                         "x-deprecated-since": null
                       },
                       "transfer_from": {
                         "type": "array",
-                        "description": "The list of source resource groups to transfer query nodes from.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "需要从哪些源资源组中转移 QueryNodes。"
-                          },
-                          "ja-JP": {
-                            "description": "query node の転送元となるソースリソースグループのリスト。"
-                          }
-                        },
                         "items": {
                           "type": "object",
-                          "description": "A source resource group to transfer query nodes from.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "当前源资源组。"
-                            },
-                            "ja-JP": {
-                              "description": "query node の転送元となるソースリソースグループ。"
-                            }
-                          },
                           "properties": {
                             "resource_group": {
                               "type": "string",
@@ -202,9 +189,30 @@
                               "x-deprecated-since": null
                             }
                           },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "description": "A source resource group to transfer query nodes from.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前源资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "query node の転送元となるソースリソースグループ。"
+                            }
+                          },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
                           "x-deprecated-since": null
+                        },
+                        "description": "The list of source resource groups to transfer query nodes from.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "需要从哪些源资源组中转移 QueryNodes。"
+                          },
+                          "ja-JP": {
+                            "description": "query node の転送元となるソースリソースグループのリスト。"
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
@@ -212,26 +220,8 @@
                       },
                       "transfer_to": {
                         "type": "array",
-                        "description": "The list of target resource groups to transfer query nodes to.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
-                          },
-                          "ja-JP": {
-                            "description": "query node の転送先となるターゲットリソースグループのリスト。"
-                          }
-                        },
                         "items": {
                           "type": "object",
-                          "description": "A target resource group to transfer query nodes to.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "当前目标资源组。"
-                            },
-                            "ja-JP": {
-                              "description": "query node の転送先となるターゲットリソースグループ。"
-                            }
-                          },
                           "properties": {
                             "resource_group": {
                               "type": "string",
@@ -249,13 +239,49 @@
                               "x-deprecated-since": null
                             }
                           },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "description": "A target resource group to transfer query nodes to.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前目标资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "query node の転送先となるターゲットリソースグループ。"
+                            }
+                          },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
                           "x-deprecated-since": null
                         },
+                        "description": "The list of target resource groups to transfer query nodes to.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "需要将 QueryNodes 转移到哪些目标资源组中。"
+                          },
+                          "ja-JP": {
+                            "description": "query node の転送先となるターゲットリソースグループのリスト。"
+                          }
+                        },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
                         "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "limits",
+                      "requests",
+                      "transfer_from",
+                      "transfer_to"
+                    ],
+                    "description": "The configurations of the resource group to create.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "资源组配置。"
+                      },
+                      "ja-JP": {
+                        "description": "作成するリソースグループの構成。"
                       }
                     },
                     "x-added-at": "2.6.x",
@@ -948,6 +974,108 @@
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "limits": {
+                        "type": "object",
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "node_filter": {
+                        "type": "object",
+                        "properties": {
+                          "node_labels": {
+                            "type": "object",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "requests": {
+                        "type": "object",
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "transfer_from": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "transfer_to": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "limits",
+                      "requests",
+                      "transfer_from",
+                      "transfer_to"
+                    ],
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
                   }
                 },
                 "required": [
@@ -1612,6 +1740,108 @@
                         "description": "削除するリソースグループの名前。"
                       }
                     },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "limits": {
+                        "type": "object",
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "node_filter": {
+                        "type": "object",
+                        "properties": {
+                          "node_labels": {
+                            "type": "object",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "requests": {
+                        "type": "object",
+                        "properties": {
+                          "node_num": {
+                            "type": "integer",
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
+                          }
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "transfer_from": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      },
+                      "transfer_to": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "resource_group": {
+                              "type": "string",
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            }
+                          },
+                          "required": [
+                            "resource_group"
+                          ],
+                          "x-added-at": "2.6.x",
+                          "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "x-added-at": "2.6.x",
+                        "x-last-modified": "2.6.x",
+                        "x-deprecated-since": null
+                      }
+                    },
+                    "required": [
+                      "limits",
+                      "requests",
+                      "transfer_from",
+                      "transfer_to"
+                    ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
                     "x-deprecated-since": null

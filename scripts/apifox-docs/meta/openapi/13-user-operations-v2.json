@@ -626,7 +626,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {},
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
                 "description": "An empty object.",
                 "x-i18n": {
                   "zh-CN": {

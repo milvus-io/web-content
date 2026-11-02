@@ -1940,23 +1940,209 @@
     "/v2/projects/{projectId}/jobs/backfill": {
       "post": {
         "summary": "Create Spark Backfill Job",
+        "x-beta": "ON REQUEST",
         "description": "Creates a Spark Backfill job. The project is selected by the projectId path parameter.",
-        "x-i18n": {"zh-CN": {"summary": "创建 Spark 回填任务", "description": "创建 Spark 回填任务。项目由 projectId 路径参数指定。"}, "ja-JP": {"summary": "Spark バックフィルジョブを作成", "description": "Spark バックフィルジョブを作成します。プロジェクトは projectId パスパラメーターで指定します。"}},
-        "tags": ["Spark Job (V2)"],
-        "parameters": [{"name":"Authorization","in":"header","required":true,"description":"The authorization token.","x-i18n":{"zh-CN":{"description":"授权令牌。"},"ja-JP":{"description":"認証トークン。"}},"schema":{"type":"string"}}, {"name":"Idempotency-Key","in":"header","required":false,"description":"A unique key that makes repeated create requests idempotent.","x-i18n":{"zh-CN":{"description":"用于确保重复创建请求幂等的唯一键。"},"ja-JP":{"description":"作成リクエストを繰り返しても冪等となる一意のキーです。"}},"schema":{"type":"string"}}, {"name":"projectId","in":"path","required":true,"description":"The project ID.","x-i18n":{"zh-CN":{"description":"项目 ID。"},"ja-JP":{"description":"プロジェクト ID。"}},"schema":{"type":"string"}}],
-        "requestBody": {"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateSparkBackfillJobRequestV2"}}}},
-        "responses": {"201":{"description":"Backfill job created.","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SparkJobSummary"}}}},"400":{"description":"Invalid Backfill request."},"401":{"description":"Unauthorized."},"404":{"description":"Project or referenced resource not found."}}
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Spark 回填任务",
+            "description": "创建 Spark 回填任务。项目由 projectId 路径参数指定。"
+          },
+          "ja-JP": {
+            "summary": "Spark バックフィルジョブを作成",
+            "description": "Spark バックフィルジョブを作成します。プロジェクトは projectId パスパラメーターで指定します。"
+          }
+        },
+        "tags": [
+          "Spark Job (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "The authorization token.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授权令牌。"
+              },
+              "ja-JP": {
+                "description": "認証トークン。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "description": "A unique key that makes repeated create requests idempotent.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于确保重复创建请求幂等的唯一键。"
+              },
+              "ja-JP": {
+                "description": "作成リクエストを繰り返しても冪等となる一意のキーです。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSparkBackfillJobRequestV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Backfill job created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SparkJobSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Backfill request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Project or referenced resource not found."
+          }
+        }
       }
     },
     "/v2/projects/{projectId}/jobs/backfill/precheck": {
       "post": {
         "summary": "Create Spark Backfill Precheck Job",
+        "x-beta": "ON REQUEST",
         "description": "Creates a Spark Backfill precheck job. It validates target schema, fields, source sample, and column mapping without modifying Collection data. Confirm data.precheckReport.passed before submitting Backfill.",
-        "x-i18n": {"zh-CN": {"summary": "创建 Spark 回填预检任务", "description": "创建 Spark 回填预检任务。预检会验证目标 schema、字段、源数据样本和列映射，不会修改 Collection 数据。提交回填任务前，请确认 data.precheckReport.passed 为 true。"}, "ja-JP": {"summary": "Spark バックフィルの事前チェックジョブを作成", "description": "Spark バックフィルの事前チェックジョブを作成します。対象スキーマ、フィールド、入力サンプル、カラムマッピングを検証しますが、Collection データは変更しません。バックフィルを送信する前に data.precheckReport.passed を確認してください。"}},
-        "tags": ["Spark Job (V2)"],
-        "parameters": [{"name":"Authorization","in":"header","required":true,"description":"The authorization token.","x-i18n":{"zh-CN":{"description":"授权令牌。"},"ja-JP":{"description":"認証トークン。"}},"schema":{"type":"string"}}, {"name":"Idempotency-Key","in":"header","required":false,"description":"A unique key that makes repeated create requests idempotent.","x-i18n":{"zh-CN":{"description":"用于确保重复创建请求幂等的唯一键。"},"ja-JP":{"description":"作成リクエストを繰り返しても冪等となる一意のキーです。"}},"schema":{"type":"string"}}, {"name":"projectId","in":"path","required":true,"description":"The project ID.","x-i18n":{"zh-CN":{"description":"项目 ID。"},"ja-JP":{"description":"プロジェクト ID。"}},"schema":{"type":"string"}}],
-        "requestBody": {"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateSparkBackfillPrecheckJobRequestV2"}}}},
-        "responses": {"201":{"description":"Backfill precheck job created.","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SparkJobSummary"}}}},"400":{"description":"Invalid Backfill precheck request."},"401":{"description":"Unauthorized."},"404":{"description":"Project or referenced resource not found."}}
+        "x-i18n": {
+          "zh-CN": {
+            "summary": "创建 Spark 回填预检任务",
+            "description": "创建 Spark 回填预检任务。预检会验证目标 schema、字段、源数据样本和列映射，不会修改 Collection 数据。提交回填任务前，请确认 data.precheckReport.passed 为 true。"
+          },
+          "ja-JP": {
+            "summary": "Spark バックフィルの事前チェックジョブを作成",
+            "description": "Spark バックフィルの事前チェックジョブを作成します。対象スキーマ、フィールド、入力サンプル、カラムマッピングを検証しますが、Collection データは変更しません。バックフィルを送信する前に data.precheckReport.passed を確認してください。"
+          }
+        },
+        "tags": [
+          "Spark Job (V2)"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "The authorization token.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "授权令牌。"
+              },
+              "ja-JP": {
+                "description": "認証トークン。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "description": "A unique key that makes repeated create requests idempotent.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "用于确保重复创建请求幂等的唯一键。"
+              },
+              "ja-JP": {
+                "description": "作成リクエストを繰り返しても冪等となる一意のキーです。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "The project ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。"
+              },
+              "ja-JP": {
+                "description": "プロジェクト ID。"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSparkBackfillPrecheckJobRequestV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Backfill precheck job created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SparkJobSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Backfill precheck request."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "404": {
+            "description": "Project or referenced resource not found."
+          }
+        }
       }
     }
   },
@@ -2912,33 +3098,259 @@
       "CreateSparkBackfillJobRequestV2": {
         "type": "object",
         "description": "Request to create a Spark Backfill job.",
-        "x-i18n": {"zh-CN": {"description": "创建 Spark 回填任务的请求体。"}, "ja-JP": {"description": "Spark バックフィルジョブを作成するリクエスト。"}},
-        "properties": {
-          "clusterId": {"type": "string", "description": "The target cluster ID.", "x-i18n": {"zh-CN": {"description": "目标集群 ID。"}, "ja-JP": {"description": "対象クラスター ID。"}}},
-          "dbName": {"type": "string", "description": "The database name.", "x-i18n": {"zh-CN": {"description": "数据库名称。"}, "ja-JP": {"description": "データベース名。"}}},
-          "collectionName": {"type": "string", "description": "The collection name.", "x-i18n": {"zh-CN": {"description": "集合名称。"}, "ja-JP": {"description": "コレクション名。"}}},
-          "fields": {"type": "array", "items": {"type": "string"}, "description": "The target fields.", "x-i18n": {"zh-CN": {"description": "目标字段。"}, "ja-JP": {"description": "対象フィールド。"}}},
-          "columnMapping": {"type": "object", "additionalProperties": {"type": "string"}, "description": "Source-to-target column mapping.", "x-i18n": {"zh-CN": {"description": "源列到目标列的映射。"}, "ja-JP": {"description": "ソース列から対象列へのマッピング。"}}},
-          "mode": {"type": "string", "description": "The backfill mode.", "x-i18n": {"zh-CN": {"description": "回填模式。"}, "ja-JP": {"description": "バックフィルモード。"}}},
-          "resourceSize": {"type": "string", "enum": ["SMALL", "MEDIUM", "LARGE", "XLARGE", "2XLARGE", "3XLARGE"], "description": "The Spark resource size.", "x-i18n": {"zh-CN": {"description": "Spark 资源规格。"}, "ja-JP": {"description": "Spark のリソースサイズ。"}}},
-          "timeoutSeconds": {"type": "integer", "format": "int64", "description": "The timeout in seconds.", "x-i18n": {"zh-CN": {"description": "超时时间（秒）。"}, "ja-JP": {"description": "タイムアウト（秒）。"}}}
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Spark 回填任务的请求体。"
+          },
+          "ja-JP": {
+            "description": "Spark バックフィルジョブを作成するリクエスト。"
+          }
         },
-        "required": ["clusterId", "dbName", "collectionName", "fields", "columnMapping", "mode", "resourceSize", "timeoutSeconds"]
+        "properties": {
+          "clusterId": {
+            "type": "string",
+            "description": "The target cluster ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标集群 ID。"
+              },
+              "ja-JP": {
+                "description": "対象クラスター ID。"
+              }
+            }
+          },
+          "dbName": {
+            "type": "string",
+            "description": "The database name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              },
+              "ja-JP": {
+                "description": "データベース名。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The collection name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集合名称。"
+              },
+              "ja-JP": {
+                "description": "コレクション名。"
+              }
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The target fields.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标字段。"
+              },
+              "ja-JP": {
+                "description": "対象フィールド。"
+              }
+            }
+          },
+          "columnMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Source-to-target column mapping.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "源列到目标列的映射。"
+              },
+              "ja-JP": {
+                "description": "ソース列から対象列へのマッピング。"
+              }
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "The backfill mode.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "回填模式。"
+              },
+              "ja-JP": {
+                "description": "バックフィルモード。"
+              }
+            }
+          },
+          "resourceSize": {
+            "type": "string",
+            "enum": [
+              "SMALL",
+              "MEDIUM",
+              "LARGE",
+              "XLARGE",
+              "2XLARGE",
+              "3XLARGE"
+            ],
+            "description": "The Spark resource size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Spark 资源规格。"
+              },
+              "ja-JP": {
+                "description": "Spark のリソースサイズ。"
+              }
+            }
+          },
+          "timeoutSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The timeout in seconds.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "超时时间（秒）。"
+              },
+              "ja-JP": {
+                "description": "タイムアウト（秒）。"
+              }
+            }
+          }
+        },
+        "required": [
+          "clusterId",
+          "dbName",
+          "collectionName",
+          "fields",
+          "columnMapping",
+          "mode",
+          "resourceSize",
+          "timeoutSeconds"
+        ]
       },
       "CreateSparkBackfillPrecheckJobRequestV2": {
         "type": "object",
         "description": "Request to create a Spark Backfill precheck job.",
-        "x-i18n": {"zh-CN": {"description": "创建 Spark 回填预检任务的请求体。"}, "ja-JP": {"description": "Spark バックフィルの事前チェックジョブを作成するリクエスト。"}},
-        "properties": {
-          "clusterId": {"type": "string", "description": "The target cluster ID.", "x-i18n": {"zh-CN": {"description": "目标集群 ID。"}, "ja-JP": {"description": "対象クラスター ID。"}}},
-          "dbName": {"type": "string", "description": "The database name.", "x-i18n": {"zh-CN": {"description": "数据库名称。"}, "ja-JP": {"description": "データベース名。"}}},
-          "collectionName": {"type": "string", "description": "The collection name.", "x-i18n": {"zh-CN": {"description": "集合名称。"}, "ja-JP": {"description": "コレクション名。"}}},
-          "fields": {"type": "array", "items": {"type": "string"}, "description": "The target fields.", "x-i18n": {"zh-CN": {"description": "目标字段。"}, "ja-JP": {"description": "対象フィールド。"}}},
-          "columnMapping": {"type": "object", "additionalProperties": {"type": "string"}, "description": "Source-to-target column mapping.", "x-i18n": {"zh-CN": {"description": "源列到目标列的映射。"}, "ja-JP": {"description": "ソース列から対象列へのマッピング。"}}},
-          "resourceSize": {"type": "string", "enum": ["SMALL", "MEDIUM", "LARGE", "XLARGE", "2XLARGE", "3XLARGE"], "description": "The Spark resource size.", "x-i18n": {"zh-CN": {"description": "Spark 资源规格。"}, "ja-JP": {"description": "Spark のリソースサイズ。"}}},
-          "timeoutSeconds": {"type": "integer", "format": "int64", "description": "The timeout in seconds.", "x-i18n": {"zh-CN": {"description": "超时时间（秒）。"}, "ja-JP": {"description": "タイムアウト（秒）。"}}}
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Spark 回填预检任务的请求体。"
+          },
+          "ja-JP": {
+            "description": "Spark バックフィルの事前チェックジョブを作成するリクエスト。"
+          }
         },
-        "required": ["clusterId", "dbName", "collectionName", "fields", "columnMapping", "resourceSize", "timeoutSeconds"]
+        "properties": {
+          "clusterId": {
+            "type": "string",
+            "description": "The target cluster ID.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标集群 ID。"
+              },
+              "ja-JP": {
+                "description": "対象クラスター ID。"
+              }
+            }
+          },
+          "dbName": {
+            "type": "string",
+            "description": "The database name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "数据库名称。"
+              },
+              "ja-JP": {
+                "description": "データベース名。"
+              }
+            }
+          },
+          "collectionName": {
+            "type": "string",
+            "description": "The collection name.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集合名称。"
+              },
+              "ja-JP": {
+                "description": "コレクション名。"
+              }
+            }
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The target fields.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "目标字段。"
+              },
+              "ja-JP": {
+                "description": "対象フィールド。"
+              }
+            }
+          },
+          "columnMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Source-to-target column mapping.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "源列到目标列的映射。"
+              },
+              "ja-JP": {
+                "description": "ソース列から対象列へのマッピング。"
+              }
+            }
+          },
+          "resourceSize": {
+            "type": "string",
+            "enum": [
+              "SMALL",
+              "MEDIUM",
+              "LARGE",
+              "XLARGE",
+              "2XLARGE",
+              "3XLARGE"
+            ],
+            "description": "The Spark resource size.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Spark 资源规格。"
+              },
+              "ja-JP": {
+                "description": "Spark のリソースサイズ。"
+              }
+            }
+          },
+          "timeoutSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The timeout in seconds.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "超时时间（秒）。"
+              },
+              "ja-JP": {
+                "description": "タイムアウト（秒）。"
+              }
+            }
+          }
+        },
+        "required": [
+          "clusterId",
+          "dbName",
+          "collectionName",
+          "fields",
+          "columnMapping",
+          "resourceSize",
+          "timeoutSeconds"
+        ]
       },
       "CreateSparkJobRequest": {
         "type": "object",

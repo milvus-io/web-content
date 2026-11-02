@@ -255,10 +255,56 @@ function testIgnoresCanonicalFragmentIdentityDuringLegacyMerge() {
     });
 }
 
+function testResolveRefsStopsAtReEnteredSelfReference() {
+    // SearchAggregationRequest.subAggregation references the component itself.
+    // Before the ref stack this unrolled maxRefDepth copies; now the second
+    // visit of the same ref on one branch stays a plain $ref leaf with its
+    // wrapper metadata, and non-recursive refs still expand in full.
+    const spec = {
+        components: {
+            schemas: {
+                Metric: { type: 'object', properties: { name: { type: 'string' } } },
+                Aggregation: {
+                    type: 'object',
+                    properties: {
+                        fields: { type: 'array', items: { type: 'string' } },
+                        metric: { $ref: '#/components/schemas/Metric' },
+                        subAggregation: {
+                            $ref: '#/components/schemas/Aggregation',
+                            'x-added-at': '3.0.x',
+                        },
+                    },
+                },
+            },
+        },
+    };
+
+    const resolved = resolveRefs({ $ref: '#/components/schemas/Aggregation' }, spec, new Set(), 0, { silentUnresolved: true });
+
+    assert.deepEqual(resolved.properties.metric, { type: 'object', properties: { name: { type: 'string' } } });
+    assert.deepEqual(resolved.properties.subAggregation, {
+        $ref: '#/components/schemas/Aggregation',
+        'x-added-at': '3.0.x',
+    });
+    assert.equal(JSON.stringify(resolved).split('subAggregation').length - 1, 1);
+
+    // The same ref on two sibling branches is not a cycle: both expand.
+    const siblings = resolveRefs({
+        type: 'object',
+        properties: {
+            a: { $ref: '#/components/schemas/Metric' },
+            b: { $ref: '#/components/schemas/Metric' },
+        },
+    }, spec, new Set(), 0, { silentUnresolved: true });
+    assert.deepEqual(siblings.properties.a, siblings.properties.b);
+    assert.equal(siblings.properties.a.type, 'object');
+}
+
 function run() {
     testPathRefsResolveAgainstTheirSourceFileBeforeMerge();
     testPreResolutionLeavesCrossFileRefsForMergedResolutionWithoutWarning();
     testResolveRefsPreservesSiblingMetadataOnRefWrapper();
+    testResolveRefsStopsAtReEnteredSelfReference();
     testPreservesAndMergesCompleteTopLevelObjects();
     testDeduplicatesTagsByName();
     testRejectsConflictingOpenApiVersion();

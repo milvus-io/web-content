@@ -25,6 +25,8 @@ These attributes live inside the OpenAPI JSON files (`meta/openapi/*.json`) and 
 | `x-added-at` | Milvus data-plane operations and public contract elements | Yes | — | First managed minor track in which the element exists. Format: `major.minor.x`. |
 | `x-last-modified` | Milvus data-plane operations and public contract elements | Yes | — | Most recent managed minor track in which the element changed. Audit-only; never controls visibility. |
 | `x-deprecated-since` | Milvus data-plane operations and public contract elements | Yes | — | First managed minor track in which the element is deprecated; `null` means not deprecated. |
+| `x-next-channel` | Operations, parameters, schema properties | Yes | — | Stages the element for the NEXT release channel; mirrors the `<NextChannel>` authoring tag. Values: `include` \| `exclude`. |
+| `x-zilliz-cluster-types` | Operations, parameters, schema properties | Yes | — | Restricts the element to the listed Zilliz cluster types (CU categories). Absent ⇒ all types. Values below. |
 
 *Build-time stripping in `s3Uploader.js` preserves `x-i18n` only when generating the `zh-CN` S3 artifact.
 
@@ -63,6 +65,36 @@ Usage locations:
 - **Parameters / Properties**: Hide fields in the `RestSpecs` UI.
 - **Examples**: Hide request/response examples.
 
+**Same-endpoint dual-implementation modeling rules** (contract; enforced by
+`dualTargetStructure.contract.test.js` and the target-survival gate in
+`scripts/verify-rest-lifecycle-evidence.mjs`). When one route is implemented
+by both publication targets with divergent payloads — the import family is
+the canonical case: the open-source Milvus data plane implements
+`files`+`options` bulk import while the Zilliz Cloud control plane implements
+volume- and object-storage-based import behind the same paths — the
+divergence is modeled inside the single operation instead of pretending it is
+one API:
+
+- The `oneOf`/`anyOf` branch axis is the **implementation**; branches of
+  different implementations each carry an explicit `x-include-target` and are
+  never merged through field-level marks. One implementation's internal
+  variants (deployment options, protocol shapes) stay inside branches already
+  scoped to that implementation.
+- A branch without `x-include-target` counts as shared and must not contain
+  fields whose target sets are disjoint.
+- An operation pinned to one target must not contain nodes of the other
+  target; where implementations use different routes, keep separate
+  operations with operation-level `x-include-target` (for example
+  `describe` versus `get_progress`), and an alias route stays attached to the
+  target whose code registers it.
+- Visibility is `x-include-target`'s job; availability on a target is the job
+  of `x-beta` / `x-zilliz-availability` / `x-zilliz-cluster-types`. Never hide
+  a field a target's API actually accepts by marking it for the other target.
+- Lifecycle keys (`x-added-at`/`x-last-modified`/`x-deprecated-since`) and
+  their evidence rows are Milvus-track attestations: they belong only on
+  nodes that survive the milvus target filter, and the target-survival gate
+  fails any evidence pointer the filter removes.
+
 ### 1.2.1 `x-include-langs`
 
 Conditionally includes tags or operations by documentation language at build time. If this attribute is present and the current language is not in the list, the page is not generated.
@@ -93,7 +125,7 @@ Controls the visibility badge shown on API reference pages. The effective value 
 }
 ```
 
-Valid values: `DEPRECATED`, `FALSE`, `PRIVATE`, `PUBLIC`.
+Valid values: `DEPRECATED`, `FALSE`, `PRIVATE`, `PUBLIC`, `ON REQUEST`. `ON REQUEST` marks contact-to-enable features (release-notes tier of the same name); it is valid at operation and tag level — the `Snapshot Operations (V2)` tag in `38-snapshot-operations-v2.json` is the in-tree example.
 
 ### 1.4 `x-admonition`
 
@@ -367,6 +399,80 @@ Lifecycle enforcement is staged:
 1. **Tooling merge:** lifecycle validation is audit-compatible for incomplete legacy fragments.
 2. **Bootstrap migration:** all managed Milvus data-plane operations and fields are populated.
 3. **Post-bootstrap:** missing lifecycle metadata is a hard validation failure.
+
+
+### 1.12 `x-next-channel`
+
+Registers an operation, parameter, or schema property for the **NEXT release
+channel** — the staged-for-next-release registry, behaviorally aligned with the
+`<NextChannel action="include|exclude">` authoring tag and the
+`current` / `next` / `retire-in-next` channel vocabulary used across the docs
+(`releaseChannel.ts`, page frontmatter `channel`, sidebar `customProps.channel`).
+
+```json
+{
+  "x-next-channel": "include"
+}
+```
+
+| Value | Meaning | Operation-level rendering |
+|-------|---------|---------------------------|
+| `include` | Ships in the NEXT release; hidden on CURRENT production | generated page gets frontmatter `channel: next` and `sidebar_custom_props.channel: next` — hidden wherever the runtime `RELEASE_CHANNEL` is unknown or `current` (fail-closed, exactly like guides NEXT pages) |
+| `exclude` | Retires in the NEXT release; CURRENT keeps the final wording | generated page gets `channel: retire-in-next` — stays served on CURRENT, ships its final wording, and is removed wholesale in NEXT |
+
+Placement scope matches `x-include-target`: operations, parameters, and schema
+properties. Operation-level marks drive page rendering today (`refGen.js`
+`resolveNextChannel`); parameter/property-level marks are registry-only for now
+and feed the availability matrices until per-field rendering lands.
+
+Relationship to the other attributes:
+
+- Orthogonal to the Milvus lifecycle triple: `x-added-at` records the release
+  **track** an element belongs to; `x-next-channel` records the **site channel**
+  staging decision. A staged element may carry both (`x-added-at: "3.0.x"` +
+  `x-next-channel: "include"`).
+- When the staged release ships, remove `x-next-channel` in the same change
+  that publishes the content, leaving the lifecycle triple as the record.
+- Complements `x-beta`: `x-beta` communicates maturity (GA / preview tiers) of
+  **published** content; `x-next-channel` gates **unpublished** content.
+
+Like all internal `x-*` keys, it is stripped from public generated specs.
+
+
+### 1.13 `x-zilliz-cluster-types`
+
+Records which Zilliz Cloud cluster types (CU categories) an operation,
+parameter, or schema property applies to. Zilliz does not version its REST
+surface; availability varies by cluster type instead, and this attribute is
+the registry the availability program writes into (marks land through
+reviewed PRs backed by live-matrix evidence — never auto-written).
+
+```json
+{
+  "x-zilliz-cluster-types": ["memory", "disk", "tiered", "byoc-memory", "byoc-disk", "byoc-tiered"]
+}
+```
+
+| Value | Console name (zilliz-cloud-config manifests) |
+|-------|----------------------------------------------|
+| `serverless` | Serverless |
+| `memory` | Performance-optimized |
+| `disk` | Cost-optimized |
+| `tiered` | Capacity-optimized |
+| `byoc-memory` / `byoc-disk` / `byoc-tiered` | the BYOC equivalents (no BYOC serverless exists) |
+
+Semantics: whitelist array mirroring `x-include-target`; **absent ⇒ available
+on all cluster types** (fail-open). Zilliz-only (ignored for
+`target === 'milvus'`, like `x-base-urls`). Placement scope matches
+`x-include-target`. Phase 1 (current): machine-readable — consumed by the
+availability matrices and `rest-zilliz-priors`; rendering is a separate
+decision. Stripped from public specs with all internal `x-*` keys.
+
+First evidence-backed mark: `databases/create` carries the six dedicated
+types — the UAT3 serverless matrix proved `databases/create` is
+platform-denied on serverless (PrivilegeCreateDatabase, even for the cluster
+admin account), while dedicated clusters create databases normally; BYOC
+shares the dedicated data plane.
 
 ---
 
@@ -642,6 +748,68 @@ node packages/docs-tooling/src/reference/rest/index.js generate-integrated-spec 
 S3 failure never invalidates or deletes the successfully generated local artifact. Local artifact paths and upload status are reported separately.
 
 Control-plane publication always prepares both `en-US` and `zh-CN` artifacts from one validated collection. Existing files under `meta/openapi` remain inputs to `fetch-apifox-docs`; they are not accepted by `generate-integrated-spec` until a producer-backed manifest, fragment identity, and review provenance are available.
+
+### 5.3 `rest-upstream-*` (upstream refresh pipeline, P0 tooling)
+
+These commands implement the deterministic half of the upstream refresh flow
+described in `.claude/specs/2026-10-28-rest-upstream-pipeline-design.md`. They
+never publish and never touch `content/`, `generated/`, or `i18n/`.
+
+Inputs under `meta/upstream/`:
+
+| File | Role |
+|------|------|
+| `rest-upstream-lock.json` | Per-source upstream pin (`repository`, `artifact`, full-SHA `pin.commit`, optional `contentSha256`, `trackedRef`, `apiSurface`, `publicationTarget`). The lock not moving means "upstream drift is reported, not adopted"; adopting upstream is a PR that bumps the pin together with the fragment changes. Contract: `contracts/rest-upstream-lock.schema.json`. |
+| `ledger.json` | Append-only adoption decisions per `(source, opKey)`: `adopted` (requires `fragment`), `rejected`, `deferred`, `external`. `opKey` is the lowercase OpenAPI method plus path, e.g. `post /v2/projects`. Contract: `contracts/rest-upstream-ledger.schema.json`. |
+| `refresh-rules.json` | Machine-readable ruleset: `internalFieldDenylist` (never documented) plus the policy text the refresh agent must follow. |
+
+Commands (run through `node packages/docs-tooling/src/reference/rest/index.js <command>`):
+
+| Command | Purpose |
+|---------|---------|
+| `rest-upstream-lock [--lock <path>]` | Validate the lock and list pinned sources. |
+| `rest-upstream-format [--dir <path>] [--write]` | Check that every fragment is byte-canonical (`JSON.stringify(doc, null, 2)` + newline, raw UTF-8). The hermetic suite enforces this for `meta/openapi/**`; `--write` normalizes offenders in place. |
+| `rest-upstream-diff --source <id> --spec <file> --out <dir> [--upstream-commit <sha>] [--expect-pinned] [--migration <path>]` | Downgrade a fetched upstream spec (3.1 → 3.0.3, fail-closed on unmappable constructs) and diff it against the fragments. Writes deterministic `diff.json` plus a human `diff.md`. Categories: `upstream-added`, `fragment-only`, `upstream-modified`, `upstream-added-field`, `upstream-added-param`, `unattributed`, `zdoc-only`. Entry ids are `category|opKey|fragment|scope|branch|responseStatus|field|changeKind|changeKey` and are unique per diff. Operations that exist upstream are compared wherever a fragment documents them; `fragment-only` is reported only for fragments whose `fragment-migration.json` `apiSurface` matches the source (a data-plane fragment missing from the control-plane spec is expected), and every fragment must be classified there. |
+| `rest-upstream-apply --diff <file> --change-set <file> --out <dir>` | Apply an agent-authored change set (contract: `contracts/rest-upstream-change-set.schema.json`) to copies of the fragments and `titles.json`, then reconcile. Writes the applied fragments, `titles.json`, and `applied.json` (applied log, ledger drafts, title log, unaddressed diff entries). |
+
+Branch-aware diff semantics (user decision 2026-10-28): scenario `oneOf`/`anyOf`
+branches are documentation assets. An upstream merged object is treated as the
+union of all branch fields, fields a branch deliberately omits are never
+proposed for it, and fields covered by no branch surface once as
+`unattributed`. Responses are matched to the best-overlapping branch; the other
+tabs stay untouched. An upstream body without a `required` array yields one
+`requires-manual-confirmation` item per operation instead of per-field required
+changes (suspected generator loss, confirm with R&D).
+
+Applier guarantees: the change set must carry the `sha256:` digest of the exact
+`diff.json` it was authored against and every entry must name an existing diff
+entry id (unsourced edits are rejected); writes are limited to prose
+(`summary`/`description`/`example`), constraint, and lifecycle leaves with
+type-checked values; internal field names are refused as keys and as
+`required` members; and the structural skeleton (properties, branches, `x-*`
+keys) must be identical before and after. Each write is additionally **bound to
+the cited drift**: a prose entry must cite a `summary`/`description` drift and
+write that leaf; a constraint entry must cite a `constraint`/`required`/
+`deprecated` drift, write the reported key on the reported parameter or field
+(inside the very oneOf/anyOf branch the drift names — matched by `x-tab-label`
+— when the drift was branch-scoped, in the fragment the drift was reported in), and carry exactly the upstream value the diff
+recorded; title additions must cite an `upstream-added` operation and removals
+a `fragment-only` one. Deviating from the upstream value, applying a drift
+flagged `requiresConfirmation` (`required-array` absent upstream or
+`required-relaxation`), or writing lifecycle attributes requires
+`override: true` plus `overrideReason`, and every override is listed in
+`applied.json` for the reviewer. Structural changes such as new operations or
+fields remain a human/ledger lane.
+
+Known limits of the P0 diff (deliberate, revisit in P2/P3): oneOf/anyOf
+branches nested inside a property (for example vector `data` rows/columns) are
+compared as opaque values, so drift inside them is not reported; description
+comparison collapses whitespace, so Markdown-only changes (line breaks, code
+block indentation) are not reported; when the upstream body is itself branched
+its per-branch `required` arrays are not compared and one confirmation item is
+emitted instead. `reconcile()` guards direct library misuse; through the CLI the
+applied log is produced by the applier itself, so its stray/incomplete checks
+cannot trip there.
 
 ## 6. Attribute Resolution Quick Reference
 

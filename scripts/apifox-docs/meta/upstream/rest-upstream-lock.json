@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [
+    {
+      "id": "zilliz-cloud-control-plane",
+      "repository": "zilliztech/zilliz-cloud",
+      "artifact": {
+        "kind": "spec-file",
+        "path": "vdc/global/cloud-control-api/openapi.yaml"
+      },
+      "pin": {
+        "commit": "e64f3bd77c94971d2352ca61eb86d1a1f11bf2cb",
+        "contentSha256": "eda48ab6ca21815ac6c46cdebaabfb845575e2a3ad5386b7318f713d714c5d27"
+      },
+      "trackedRef": "master",
+      "apiSurface": "control-plane",
+      "publicationTarget": "zilliz",
+      "upstreamOasVersion": "3.1.0",
+      "lastVerifiedAt": "2026-10-28T09:42:35Z"
+    },
+    {
+      "id": "milvus-data-plane",
+      "repository": "milvus-io/milvus",
+      "artifact": {
+        "kind": "source-tree",
+        "paths": [
+          "internal/distributed/proxy/httpserver/"
+        ]
+      },
+      "pin": {
+        "commit": "5f7e11248f5760b74a6395c52b7e41ebd015f8ef"
+      },
+      "trackedRef": "master",
+      "apiSurface": "data-plane",
+      "publicationTarget": "milvus",
+      "lastVerifiedAt": "2026-11-01T02:01:48.427Z"
+    }
+  ]
+}

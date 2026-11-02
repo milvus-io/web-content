@@ -18,9 +18,7 @@
           "name": "快照 (V2)"
         }
       },
-      "x-include-target": [
-        "milvus"
-      ]
+      "x-beta": "ON REQUEST"
     }
   ],
   "servers": [],
@@ -247,10 +245,7 @@
         "security": [],
         "x-added-at": "3.0.x",
         "x-last-modified": "3.0.x",
-        "x-deprecated-since": null,
-        "x-include-target": [
-          "milvus"
-        ]
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/jobs/snapshot/export": {
@@ -552,10 +547,7 @@
         "security": [],
         "x-added-at": "3.0.x",
         "x-last-modified": "3.0.x",
-        "x-deprecated-since": null,
-        "x-include-target": [
-          "milvus"
-        ]
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/jobs/snapshot/list": {
@@ -823,10 +815,7 @@
         "security": [],
         "x-added-at": "3.0.x",
         "x-last-modified": "3.0.x",
-        "x-deprecated-since": null,
-        "x-include-target": [
-          "milvus"
-        ]
+        "x-deprecated-since": null
       }
     },
     "/v2/vectordb/jobs/snapshot/restore_external": {
@@ -1112,10 +1101,7 @@
         "security": [],
         "x-added-at": "3.0.x",
         "x-last-modified": "3.0.x",
-        "x-deprecated-since": null,
-        "x-include-target": [
-          "milvus"
-        ]
+        "x-deprecated-since": null
       }
     }
   },

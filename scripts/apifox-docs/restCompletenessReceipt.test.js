@@ -90,3 +90,111 @@ test('rest deletion evidence requires baseline presence and complete checkpoint 
   fs.rmSync(collection, {recursive: true, force: true})
   fs.rmSync(generatedRoot, {recursive: true, force: true})
 })
+
+// SchemaVersion 2 embeds the upstream ledger accounting (design §7 T4 / D2);
+// creating the receipt cross-binds its upstreamPin to sourceCheckpointSha.
+const ACCOUNTING = {
+  schemaVersion: '1.0',
+  source: 'zilliz-cloud-control-plane',
+  upstreamPin: SHA_B,
+  diffDigest: `sha256:${'3'.repeat(64)}`,
+  summary: {upstreamAdded: 2, ledgered: 2, unaccounted: 0},
+  unaccountedOpKeys: [],
+}
+
+test('receipts carry the upstream accounting as schemaVersion 2 when supplied', () => {
+  const collection = writeCollection([{id: 'projects', spec: fragment('projects', '/v2/projects', 'listProjects')}])
+  try {
+    const receipt = createRestCompletenessReceipt({
+      collectionDirectory: collection,
+      sourceBaselineSha: SHA_A,
+      sourceCheckpointSha: SHA_B,
+      upstreamAccounting: ACCOUNTING,
+    })
+    assert.equal(receipt.schemaVersion, 2)
+    assert.deepEqual(receipt.upstreamAccounting, ACCOUNTING)
+    assert.equal(validateRestCompletenessReceipt(receipt), receipt)
+  } finally {
+    fs.rmSync(collection, {recursive: true, force: true})
+  }
+})
+
+test('schemaVersion 1 receipts stay byte-compatible without accounting', () => {
+  const collection = writeCollection([{id: 'projects', spec: fragment('projects', '/v2/projects', 'listProjects')}])
+  try {
+    const receipt = createRestCompletenessReceipt({
+      collectionDirectory: collection,
+      sourceBaselineSha: SHA_A,
+      sourceCheckpointSha: SHA_B,
+    })
+    assert.equal(receipt.schemaVersion, 1)
+    assert.ok(!('upstreamAccounting' in receipt))
+    assert.equal(validateRestCompletenessReceipt(receipt), receipt)
+  } finally {
+    fs.rmSync(collection, {recursive: true, force: true})
+  }
+})
+
+test('v2 accounting must be about the receipt checkpoint: a foreign upstreamPin is rejected at creation', () => {
+  const collection = writeCollection([{id: 'projects', spec: fragment('projects', '/v2/projects', 'listProjects')}])
+  try {
+    assert.throws(
+      () => createRestCompletenessReceipt({
+        collectionDirectory: collection,
+        sourceBaselineSha: SHA_A,
+        sourceCheckpointSha: SHA_B,
+        upstreamAccounting: {...ACCOUNTING, upstreamPin: SHA_A},
+      }),
+      /upstreamAccounting upstreamPin must equal the receipt sourceCheckpointSha/,
+    )
+  } finally {
+    fs.rmSync(collection, {recursive: true, force: true})
+  }
+})
+
+test('v2 accounting fails closed on undecided operations, inconsistent summaries, and wrong shapes', () => {
+  const collection = writeCollection([{id: 'projects', spec: fragment('projects', '/v2/projects', 'listProjects')}])
+  try {
+    const build = accounting => createRestCompletenessReceipt({
+      collectionDirectory: collection,
+      sourceBaselineSha: SHA_A,
+      sourceCheckpointSha: SHA_B,
+      upstreamAccounting: accounting,
+    })
+    assert.throws(() => build({...ACCOUNTING, summary: {upstreamAdded: 2, ledgered: 1, unaccounted: 1}, unaccountedOpKeys: ['get /v2/projects']}),
+      /upstreamAccounting is incomplete: undecided upstream operations remain/)
+    assert.throws(() => build({...ACCOUNTING, summary: {upstreamAdded: 3, ledgered: 2, unaccounted: 0}}),
+      /summary is inconsistent/)
+    assert.throws(() => build({...ACCOUNTING, upstreamPin: 'short'}), /upstreamAccounting upstreamPin/)
+    assert.throws(() => build({...ACCOUNTING, unaccountedOpKeys: ['get /v2/projects']}),
+      /summary disagrees with the op key list/)
+    assert.throws(() => build({...ACCOUNTING, diffDigest: 'sha256:short'}), /upstreamAccounting diffDigest is invalid/)
+    // a hand-edited v2 receipt with a stale checksum fails the integrity gate
+    const tampered = JSON.parse(JSON.stringify(build({...ACCOUNTING, unaccountedOpKeys: []})))
+    tampered.upstreamAccounting.summary.ledgered = 99
+    assert.throws(() => validateRestCompletenessReceipt(tampered), /checksum mismatch|summary is inconsistent/)
+  } finally {
+    fs.rmSync(collection, {recursive: true, force: true})
+  }
+})
+
+test('v2 accounting op keys must be canonical method-path pairs, unique and ordered', () => {
+  const collection = writeCollection([{id: 'projects', spec: fragment('projects', '/v2/projects', 'listProjects')}])
+  try {
+    const build = unaccountedOpKeys => createRestCompletenessReceipt({
+      collectionDirectory: collection,
+      sourceBaselineSha: SHA_A,
+      sourceCheckpointSha: SHA_B,
+      upstreamAccounting: {...ACCOUNTING,
+        summary: {upstreamAdded: 1, ledgered: 0, unaccounted: 1},
+        unaccountedOpKeys},
+    })
+    assert.throws(() => build(['GET /v2/projects']), /unaccountedOpKeys\[0\] is invalid/)
+    assert.throws(() => build(['get /v2/projects', 'get /v2/projects']), /unique and canonically ordered/)
+    assert.throws(() => build(['get /v2/usage', 'get /v2/projects']), /unique and canonically ordered/)
+    // a single undecided op key is shape-valid but fails the completeness gate
+    assert.throws(() => build(['get /v2/projects']), /incomplete: undecided upstream operations remain/)
+  } finally {
+    fs.rmSync(collection, {recursive: true, force: true})
+  }
+})

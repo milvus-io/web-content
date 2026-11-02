@@ -112,7 +112,6 @@
   "创建 Alias": "create-alias",
   "Hybrid Search": "hybrid-search",
   "创建导入任务": "create-import-jobs",
-  "查看导入任务进度": "get-import-job-progress",
   "创建 Dedicated 集群": "create-dedicated-cluster",
   "创建 Free 集群": "create-free-cluster",
   "查询集群指标": "query-cluster-metrics",
@@ -221,5 +220,7 @@
   "导出快照": "export-snapshot",
   "查看恢复快照任务列表": "list-restore-snapshot-jobs",
   "从外部存储恢复快照": "restore-external-snapshot",
-  "解析成员": "resolve-member"
+  "解析成员": "resolve-member",
+  "获取导入任务进度": "get-import-job-progress",
+  "查看导入任务进度": "get-import-job-progress-alias"
 }
