@@ -124,11 +124,16 @@ function applyLifecycleForTrack(node, releaseTrack, jsonPointer = '$', options =
     return `${pointer}[${JSON.stringify(key)}]`;
   }
 
-  function walk(value, pointer) {
+  // Object scope a combinator branch resolves `required` names against: the
+  // nearest enclosing schema that declares `properties` at the same instance
+  // path. Combinators (anyOf/oneOf/allOf) keep the instance path, so their
+  // branches may name parent-level properties; descending into `properties`
+  // or `items` starts a fresh instance and resets the scope to null.
+  function walk(value, pointer, scope = null) {
     if (Array.isArray(value)) {
       const result = [];
       for (let index = 0; index < value.length; index++) {
-        const child = walk(value[index], pointerFor(pointer, index));
+        const child = walk(value[index], pointerFor(pointer, index), scope);
         if (child !== OMIT) result.push(child);
       }
       return result;
@@ -145,24 +150,45 @@ function applyLifecycleForTrack(node, releaseTrack, jsonPointer = '$', options =
       }
     }
 
-    const result = {};
+    const entries = Object.entries(value);
+    const propertiesEntry = entries.find(([key, child]) =>
+      key === 'properties' && child && typeof child === 'object' && !Array.isArray(child));
+
+    // Property results are computed before the remaining entries so that
+    // combinator branches can resolve `required` against this object's own
+    // property scope regardless of JSON key order. Output key order of the
+    // parent is preserved because insertion still follows `entries`.
+    let retainedPropertyResults = null;
     const omittedByLifecycle = new Set();
-    for (const [key, child] of Object.entries(value)) {
-      if (key === 'properties' && child && typeof child === 'object' && !Array.isArray(child)) {
-        result.properties = {};
-        for (const [propertyName, propertySchema] of Object.entries(child)) {
-          const propertyResult = walk(propertySchema, pointerFor(pointerFor(pointer, key), propertyName));
-          if (propertyResult === OMIT) {
-            omittedByLifecycle.add(propertyName);
-          } else {
-            result.properties = result.properties || {};
-            result.properties[propertyName] = propertyResult;
-          }
+    if (propertiesEntry) {
+      retainedPropertyResults = new Map();
+      for (const [propertyName, propertySchema] of Object.entries(propertiesEntry[1])) {
+        const propertyResult = walk(propertySchema, pointerFor(pointerFor(pointer, 'properties'), propertyName));
+        if (propertyResult === OMIT) {
+          omittedByLifecycle.add(propertyName);
+        } else {
+          retainedPropertyResults.set(propertyName, propertyResult);
         }
+      }
+    }
+
+    const result = {};
+    for (const [key, child] of entries) {
+      if (retainedPropertyResults && key === 'properties') {
+        result.properties = Object.fromEntries(retainedPropertyResults);
         continue;
       }
 
-      const childResult = walk(child, pointerFor(pointer, key));
+      let childScope = scope;
+      if (key === 'anyOf' || key === 'oneOf' || key === 'allOf') {
+        childScope = retainedPropertyResults
+          ? {retained: new Set(retainedPropertyResults.keys()), omitted: omittedByLifecycle}
+          : scope;
+      } else if (key === 'items' && child && typeof child === 'object' && !Array.isArray(child)) {
+        childScope = null;
+      }
+
+      const childResult = walk(child, pointerFor(pointer, key), childScope);
       if (childResult !== OMIT) result[key] = childResult;
     }
 
@@ -174,7 +200,11 @@ function applyLifecycleForTrack(node, releaseTrack, jsonPointer = '$', options =
     if (Array.isArray(result.required) && result.properties && typeof result.properties === 'object' && !Array.isArray(result.properties)) {
 
       const retainedProperties = new Set(Object.keys(result.properties));
-      const unresolved = result.required.filter(name => !retainedProperties.has(name) && !omittedByLifecycle.has(name));
+      const resolvesInScope = name =>
+        retainedProperties.has(name) ||
+        omittedByLifecycle.has(name) ||
+        (scope !== null && (scope.retained.has(name) || scope.omitted.has(name)));
+      const unresolved = result.required.filter(name => !resolvesInScope(name));
       if (unresolved.length > 0) {
         throw lifecycleError(
           'REST_LIFECYCLE_REQUIRED_UNRESOLVED',
@@ -182,7 +212,8 @@ function applyLifecycleForTrack(node, releaseTrack, jsonPointer = '$', options =
           `required field ${unresolved.map(name => JSON.stringify(name)).join(', ')} has no retained property`,
         );
       }
-      result.required = result.required.filter(name => retainedProperties.has(name));
+      result.required = result.required.filter(name =>
+        retainedProperties.has(name) || (scope !== null && scope.retained.has(name)));
     }
 
     return result;

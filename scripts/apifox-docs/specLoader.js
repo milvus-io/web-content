@@ -216,15 +216,10 @@ function resolveRefs(obj, spec, visited = new Set(), depth = 0, options = {}, re
     const resolved = {}
     for (const [key, value] of Object.entries(obj)) {
         if (key === 'description' && typeof value === 'object') {
-            if (value.type && (value.description || value.value)) {
-                resolved[key] = value
-            } else if (typeof value === 'object' && (value.description !== undefined || value.value !== undefined)) {
-                resolved[key] = value
-            } else if (typeof value === 'object') {
-                resolved[key] = JSON.stringify(value)
-            } else {
-                resolved[key] = value
-            }
+            // A "description" key may legitimately hold a schema object (for
+            // example a request property named "description"); keep it intact
+            // instead of stringifying it into display text.
+            resolved[key] = value
         } else {
             resolved[key] = resolveRefs(value, spec, visited, depth, options, refStack)
         }
