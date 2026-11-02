@@ -43,8 +43,8 @@ EmbeddingList search treats the vectors in a StructArray vector subfield as an e
 
 ## Create vector indexes
 
-
 The following example creates two vector indexes. The first index uses a `MAX_SIM*` metric for EmbeddingList search. The second index uses a regular vector metric for element-level search.
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -242,6 +242,7 @@ curl --request POST \
 }'
 ```
 
+
 <div class="alert note">
 
 Warning
@@ -249,11 +250,10 @@ Do not create a `MAX_SIM*` index and a regular vector-metric index on the same v
 
 </div>
 
-
 ## Create scalar indexes
 
-
 Create scalar indexes on StructArray scalar subfields when you use them in filters. Use the same `structArray[subfield]` path syntax.
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -454,8 +454,8 @@ curl --request POST \
 }'
 ```
 
-Scalar indexes are optional but useful when StructArray scalar subfields appear frequently in filters, such as `element_filter(chunks, $[quality_score] > 0.9)` or `MATCH_ANY(chunks, $[section] == "index")`.
 
+Scalar indexes are optional but useful when StructArray scalar subfields appear frequently in filters, such as `element_filter(chunks, $[quality_score] > 0.9)` or `MATCH_ANY(chunks, $[section] == "index")`.
 
 ## Applicable metric types
 
