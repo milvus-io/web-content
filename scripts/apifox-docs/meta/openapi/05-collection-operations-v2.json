@@ -5768,7 +5768,10 @@
               "prompt": "サービングクラスターを使用している場合は、クラスターエンドポイントを使用してください。\n<ul><li><p><b>Free & Serverless</b></p><p><code>https://{cluster-id}.serverless.{region}.vectordb.zillizcloud.com</code></p></li><li><p><b>Dedicated</b></p><p><code>https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530</code></p></li></ul>"
             }
           },
-          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\""
+          "shell": "export CLUSTER_ENDPOINT=\"https://{cluster-id}.{region}.vectordb.zillizcloud.com:19530\"",
+          "x-include-target": [
+            "zilliz"
+          ]
         },
         {
           "key": "on-demand-compute",
@@ -5785,7 +5788,10 @@
               "prompt": "<p>オンデマンドクラスターを使用している場合は、オンデマンドコンピュートエンドポイントを使用してください。</p><p><code>https://{project-id}.{region}.api.zillizcloud.com</code></p>"
             }
           },
-          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\""
+          "shell": "export PROJECT_ENDPOINT=\"https://{project-id}.{region}.api.zillizcloud.com\"",
+          "x-include-target": [
+            "zilliz"
+          ]
         }
       ]
     },
@@ -8994,13 +9000,13 @@
           },
           "isPartitionKey": {
             "type": "boolean",
-            "description": "Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, <include target=\"milvus\">Milvus</include><include target=\"milvus\">Zilliz Cloud</include> manages all partitions in the current collection.",
+            "description": "Whether the current field serves as the partition key. Setting this to True makes the current field serve as the partition key. In this case, <include target=\"milvus\">Milvus</include><include target=\"zilliz\">Zilliz Cloud</include> manages all partitions in the current collection.",
             "x-i18n": {
               "zh-CN": {
-                "description": "当前字段是否为 Partition Key。将该参数设置为 `True` 则当前字段将作为 Partition Key。在这种情况下，<include target=\"milvus\">Milvus</include><include target=\"milvus\">Zilliz Cloud</include> 会管理当前 Collection 中的所有 Partition。"
+                "description": "当前字段是否为 Partition Key。将该参数设置为 `True` 则当前字段将作为 Partition Key。在这种情况下，<include target=\"milvus\">Milvus</include><include target=\"zilliz\">Zilliz Cloud</include> 会管理当前 Collection 中的所有 Partition。"
               },
               "ja-JP": {
-                "description": "現在のフィールドが partition key として機能するかどうか。これを True に設定すると、現在のフィールドが partition key として機能します。この場合、<include target=\"milvus\">Milvus</include><include target=\"milvus\">Zilliz Cloud</include> が現在のコレクション内のすべての partition を管理します。"
+                "description": "現在のフィールドが partition key として機能するかどうか。これを True に設定すると、現在のフィールドが partition key として機能します。この場合、<include target=\"milvus\">Milvus</include><include target=\"zilliz\">Zilliz Cloud</include> が現在のコレクション内のすべての partition を管理します。"
               }
             },
             "x-added-at": "2.6.x",

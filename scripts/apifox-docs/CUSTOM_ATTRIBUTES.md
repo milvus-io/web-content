@@ -64,6 +64,15 @@ Usage locations:
 - **Operations**: Skip individual endpoints.
 - **Parameters / Properties**: Hide fields in the `RestSpecs` UI.
 - **Examples**: Hide request/response examples.
+- **`x-admonition` entries**: Scope a single callout to one target (entries
+  are filtered individually at build time).
+- **`components.x-base-urls` entries**: Scope endpoint-picker metadata.
+
+Any prose that mentions Zilliz-only concepts (Zilliz Cloud, serving/on-demand
+clusters, serverless deployments, …) inside a node that is published to both
+targets must be scoped with this attribute or with the inline
+`<include target="zilliz">…</include>` span. `milvusTargetHygiene.test.js`
+guards the milvus-target projection against unscoped zilliz-only vocabulary.
 
 **Same-endpoint dual-implementation modeling rules** (contract; enforced by
 `dualTargetStructure.contract.test.js` and the target-survival gate in
@@ -678,7 +687,7 @@ Includes the wrapped text **only if** the current target does **not** match.
 
 ### Processing
 
-- Build time: `refGen.js` → `__filter_content()` → `__match_filter_tags()`
+- Build time: `refGen.js` → `__filter_content()` → `includeSpans.js` (`resolveIncludeSpans()`)
 - Runtime: `RestSpecs/utils.js` → `textFilter()`
 
 Both processors strip the tags and return the inner text if the condition is satisfied, or remove the entire block if it is not.

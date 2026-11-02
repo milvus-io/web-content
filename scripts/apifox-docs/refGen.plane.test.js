@@ -37,7 +37,10 @@ const explicit = new RefGen({
 assert.equal(explicit.getPlane('collection-operations-v2', 'zilliz'), 'control-plane')
 
 const listCloudRoleParameters = cloudAccessControlSpec.paths['/v2/roles'].get.parameters
-assert.equal(listCloudRoleParameters.some(parameter => parameter.name === 'roleType'), false)
+assert.equal(
+  listCloudRoleParameters.find(parameter => parameter.name === 'roleType')?.description,
+  'The role scope to filter by.',
+)
 assert.equal(
   listCloudRoleParameters.find(parameter => parameter.name === 'projectId').description,
   'The project ID used to filter roles.',

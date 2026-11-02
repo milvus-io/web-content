@@ -323,7 +323,42 @@ function testChineseSidebarInventoryExceptionsAreExplicit() {
       route: '/v2/projects/{projectId}/plan',
       method: 'patch',
       summary: 'Upgrade Project',
-      includeLangs: ['en-US'],
+      includeLangs: ['en-US', 'ja-JP'],
+    },
+    {
+      fileName: '34-cloud-access-control-operations-v2.json',
+      route: '/v2/groups',
+      method: 'get',
+      summary: 'List Groups',
+      includeLangs: ['en-US', 'ja-JP'],
+    },
+    {
+      fileName: '34-cloud-access-control-operations-v2.json',
+      route: '/v2/groups/{groupId}/roles',
+      method: 'get',
+      summary: 'List Group Roles',
+      includeLangs: ['en-US', 'ja-JP'],
+    },
+    {
+      fileName: '34-cloud-access-control-operations-v2.json',
+      route: '/v2/groups/{groupId}/members',
+      method: 'get',
+      summary: 'List Group Members',
+      includeLangs: ['en-US', 'ja-JP'],
+    },
+    {
+      fileName: '34-cloud-access-control-operations-v2.json',
+      route: '/v2/groups/{groupId}/roles/{roleId}',
+      method: 'put',
+      summary: 'Grant Role To Group',
+      includeLangs: ['en-US', 'ja-JP'],
+    },
+    {
+      fileName: '34-cloud-access-control-operations-v2.json',
+      route: '/v2/groups/{groupId}/roles/{roleId}',
+      method: 'delete',
+      summary: 'Revoke Role From Group',
+      includeLangs: ['en-US', 'ja-JP'],
     },
   ])
 }

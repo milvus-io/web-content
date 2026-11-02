@@ -300,6 +300,58 @@ function testResolveRefsStopsAtReEnteredSelfReference() {
     assert.equal(siblings.properties.a.type, 'object');
 }
 
+function testDescriptionKeyedSchemaPropertySurvivesTheMergeAsAnObject() {
+    // A request property named "description" is a schema, not display text.
+    // The loader used to stringify object-valued description keys that carry
+    // no .description/.value sub-key, which corrupted exactly these nodes
+    // (milvus-io/web-content#1250 regenerated pages with a JSON blob).
+    const descriptionProperty = {
+        type: 'string',
+        'x-added-at': '2.6.x',
+        'x-last-modified': '2.6.x',
+        'x-deprecated-since': null,
+    };
+    const merged = resolveRefs({
+        type: 'object',
+        properties: {description: {...descriptionProperty}},
+        required: ['description'],
+    }, {components: {schemas: {}}}, new Set(), 0, {silentUnresolved: true});
+
+    assert.deepEqual(merged.properties.description, descriptionProperty);
+
+    withTempDir(dir => {
+        fs.writeFileSync(path.join(dir, '01-roles.json'), JSON.stringify({
+            openapi: '3.0.1',
+            info: {title: 'roles', version: '1.0.0'},
+            tags: [{name: 'roles'}],
+            paths: {
+                '/v2/vectordb/roles/describe': {
+                    post: {
+                        summary: 'Describe Role',
+                        tags: ['roles'],
+                        requestBody: {
+                            content: {
+                                'application/json': {
+                                    schema: {
+                                        type: 'object',
+                                        properties: {description: {...descriptionProperty}},
+                                        required: ['description'],
+                                    },
+                                },
+                            },
+                        },
+                        responses: {},
+                    },
+                },
+            },
+        }, null, 2));
+
+        const spec = loadSpecifications(dir);
+        const schema = spec.paths['/v2/vectordb/roles/describe'].post.requestBody.content['application/json'].schema;
+        assert.deepEqual(schema.properties.description, descriptionProperty);
+    });
+}
+
 function run() {
     testPathRefsResolveAgainstTheirSourceFileBeforeMerge();
     testPreResolutionLeavesCrossFileRefsForMergedResolutionWithoutWarning();
@@ -310,6 +362,7 @@ function run() {
     testRejectsConflictingOpenApiVersion();
     testRejectsIncompatibleInfoVersion();
     testIgnoresCanonicalFragmentIdentityDuringLegacyMerge();
+    testDescriptionKeyedSchemaPropertySurvivesTheMergeAsAnObject();
     console.log('apifox spec loader tests passed');
 }
 

@@ -125,6 +125,39 @@ function cleanEmptyPaths(spec) {
   }
 }
 
+// Snapshot tag-level selection before filterSelection(spec.tags) removes
+// tags that are outside the publication target; track projections consult
+// this afterwards to drop operations that only survive because operation
+// nodes carry no target marker of their own.
+function buildTagSelection(spec, options) {
+  const tagSelection = new Map();
+  for (const tag of spec.tags || []) {
+    if (tag && typeof tag === 'object' && tag.name !== undefined) {
+      tagSelection.set(tag.name, selectionAllows(tag, options));
+    }
+  }
+  return tagSelection;
+}
+
+// A track projection is a versioned release-line document: operations whose
+// primary tag excludes the publication target have no place in it, even when
+// the operation node itself is unscoped. Operations without a primary tag
+// stay subject to their own markers only, matching the upstream wrapper.
+function dropOperationsOutsideTagSelection(spec, tagSelection, stats) {
+  for (const methods of Object.values(spec.paths || {})) {
+    if (!methods || typeof methods !== 'object') continue;
+    for (const [method, operation] of Object.entries(methods)) {
+      if (!HTTP_METHODS.has(method)) continue;
+      const tagName = operation?.tags?.[0];
+      if (tagName === undefined || tagName === null) continue;
+      if (tagSelection.get(tagName) === false) {
+        delete methods[method];
+        stats.omittedElements++;
+      }
+    }
+  }
+}
+
 function pruneUnusedTags(spec) {
   const used = new Set();
   for (const {operation} of collectHttpOperations(spec)) {
@@ -348,6 +381,7 @@ function buildIntegratedSpec(specifications, options) {
   filterProtocolVersion(spec, protocolVersion);
 
   const filterStats = {omittedElements: 0};
+  const tagSelection = buildTagSelection(spec, options);
   spec.tags = filterSelection(spec.tags || [], options, filterStats, '$.tags');
   spec.paths = filterSelection(spec.paths || {}, options, filterStats, '$.paths');
   if (spec.webhooks) spec.webhooks = filterSelection(spec.webhooks, options, filterStats, '$.webhooks');
@@ -360,6 +394,13 @@ function buildIntegratedSpec(specifications, options) {
   const omittedOperations = Math.max(0, initialOperationCount - operationCount);
 
   if (releaseTrack) {
+    dropOperationsOutsideTagSelection(spec, tagSelection, filterStats);
+    cleanEmptyPaths(spec);
+    pruneUnusedTags(spec);
+    // Prune components orphaned by the target selection before the lifecycle
+    // gate: the gate only judges nodes that survive into the track document,
+    // and unreachable components are stripped from it regardless.
+    spec = pruneUnreachableComponents(spec).spec;
     requireTrackLifecycle(spec);
     const lifecycleResult = applyLifecycleForTrack(spec, releaseTrack, '$');
     spec.paths = lifecycleResult.value.paths || {};
@@ -408,4 +449,6 @@ function buildIntegratedSpec(specifications, options) {
 
 module.exports = {
   buildIntegratedSpec,
+  filterSelection,
+  selectionAllows,
 };

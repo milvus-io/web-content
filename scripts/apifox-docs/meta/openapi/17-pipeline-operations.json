@@ -9009,8 +9009,7 @@
                       }
                     },
                     "required": [
-                      "data",
-                      "code"
+                      "data"
                     ]
                   }
                 ]

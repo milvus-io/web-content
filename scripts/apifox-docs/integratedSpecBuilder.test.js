@@ -215,6 +215,72 @@ test('target and language filters prune operations, properties, and examples', (
   assert.equal(built.spec.components.schemas.Unused, undefined);
 });
 
+test('track projection drops operations whose primary tag excludes the target', () => {
+  // Mirror the fragment set: a fully stamped milvus-visible operation plus a
+  // zilliz-only-tagged operation that carries no target marker or lifecycle
+  // stamps of its own. The tag filter must drop it before the lifecycle gate.
+  const spec = fixture('milvus-2.6.x.json');
+  spec.tags.push({name: 'Cloud Only Operations', 'x-include-target': ['zilliz']});
+  spec.paths['/v1/clouds'] = {
+    get: {
+      summary: 'List Clouds',
+      tags: ['Cloud Only Operations'],
+      responses: {200: {description: 'OK'}},
+    },
+  };
+
+  const track = buildIntegratedSpec(spec, {
+    publicationPolicy: 'track',
+    target: 'milvus',
+    language: 'en-US',
+    apiSurface: 'data-plane',
+    releaseTrack: '2.6.x',
+  });
+
+  assert.equal(track.spec.paths['/v1/clouds'], undefined);
+  assert.ok(track.spec.paths['/v2/vectordb/entities/search']);
+  assert.equal(track.spec.tags.some(tag => tag.name === 'Cloud Only Operations'), false);
+  assert.equal(track.stats.contractElements.omitted >= 1, true);
+});
+
+test('track projection still fails closed on unstamped operations without an excluding tag', () => {
+  const spec = fixture('milvus-2.6.x.json');
+  spec.paths['/v1/untagged'] = {
+    get: {
+      summary: 'Untagged operation without lifecycle stamps',
+      responses: {200: {description: 'OK'}},
+    },
+  };
+
+  assert.throws(() => buildIntegratedSpec(spec, {
+    publicationPolicy: 'track',
+    target: 'milvus',
+    language: 'en-US',
+    apiSurface: 'data-plane',
+    releaseTrack: '2.6.x',
+  }), /REST_LIFECYCLE_MISSING/);
+});
+
+test('latest publication keeps operations whose primary tag excludes the target', () => {
+  // Latest artifacts keep their historical behavior: operation nodes stay
+  // subject to their own markers only, so the protocol version filter (not
+  // the tag) decides what survives.
+  const spec = fixture('canonical.json');
+  spec.paths['/v2/projects'].post['x-added-at'] = '2.6.x';
+  spec.paths['/v2/projects'].post['x-last-modified'] = '2.6.x';
+  spec.paths['/v2/projects'].post['x-deprecated-since'] = null;
+
+  const latest = buildIntegratedSpec(spec, {
+    publicationPolicy: 'latest',
+    target: 'milvus',
+    language: 'en-US',
+    apiSurface: 'data-plane',
+    protocolVersion: 'v2',
+  });
+
+  assert.ok(latest.spec.paths['/v2/projects']);
+});
+
 test('control-plane accepts only zilliz latest without track or protocol version', () => {
   const built = buildIntegratedSpec(fixture('canonical.json'), {
     publicationPolicy: 'latest', target: 'zilliz', language: 'en-US', apiSurface: 'control-plane',

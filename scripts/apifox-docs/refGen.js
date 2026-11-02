@@ -2,6 +2,7 @@ const nunjucks = require("nunjucks")
 const fs = require('node:fs')
 const path = require('node:path')
 const { resolveRefs } = require('./specLoader')
+const { resolveIncludeSpans } = require('./includeSpans')
 
 const META_DIR = path.join(__dirname, 'meta')
 const TEMPLATES_DIR = path.join(__dirname, 'templates')
@@ -500,75 +501,13 @@ class refGen {
   }
 
   __filter_content (markdown, targets) {
-    if (typeof markdown !== 'string') {
-      return ''
-    }
+    const resolved = resolveIncludeSpans(typeof markdown === 'string' ? markdown : '', targets)
 
-    const matches = this.__match_filter_tags(markdown)
-
-    if (matches.length > 0) {
-        var preText = markdown.slice(0, matches[0].startIndex)
-        var matchText = markdown.slice(matches[0].startIndex, matches[0].endIndex)
-        var postText = markdown.slice(matches[0].endIndex)
-        var isTargetValid = targets.split('.').includes(matches[0].target.trim())
-        var startTagLength = `<${matches[0].tag} target="${matches[0].target}">`.length
-        var endTagLength = `</${matches[0].tag}>`.length
-
-        if (matches[0].tag == 'include' && isTargetValid || matches[0].tag == 'exclude' && !isTargetValid) {
-            matchText = matchText.slice(startTagLength, -endTagLength)
-        }
-
-        if (matches[0].tag == 'include' && !isTargetValid || matches[0].tag == 'exclude' &&  isTargetValid) {
-            matchText = ""
-        }
-
-        markdown = this.__filter_content(preText + matchText + postText, targets)
-    }
-
-    return markdown.replace(/(\s*\n){3,}/g, '\n\n')
+    return resolved.replace(/(\s*\n){3,}/g, '\n\n')
         .replace(/<br>/g, '<br/>')
-        .replace(/(<br\/>){2,}/, "<br/>")
-        .replace("<br\/></p>", "</p>")
+        .replace(/(<br\/>){2,}/g, "<br/>")
+        .replace(/<br\/><\/p>/g, "</p>")
         .replace(/\n\s*<tr>\n(\s*<td.*><p><\/p><\/td>\n)*\s*<\/tr>/g, '');
-  }
-
-  __match_filter_tags(markdown) {
-      const startTagRegex = /<(include|exclude) target="(.+?)"/gm
-      const endTagRegex = /<\/(include|exclude)>/gm
-      const matches = [... markdown.matchAll(startTagRegex)]
-      var returns = []
-
-      matches.forEach(match => {
-          var tag = match[1]
-          var rest = markdown.slice(match.index)
-
-          var closeTagRegex = new RegExp(`</${tag}>`, 'gm')
-          var closeTagMatch = [... rest.matchAll(closeTagRegex)]
-
-          var startIndex = match.index
-          var endIndex = 0
-
-          for (let i = 0; i < closeTagMatch.length; i++) {
-              var t = markdown.slice(startIndex, startIndex+closeTagMatch[i].index+closeTagMatch[i][0].length)
-
-              var startCount = t.match(startTagRegex) ? t.match(startTagRegex).length : 0
-              var endCount = t.match(endTagRegex) ? t.match(endTagRegex).length : 0
-
-              if (startCount === endCount) {
-                  endIndex = startIndex + closeTagMatch[i].index + closeTagMatch[i][0].length
-                  break
-              }
-          }
-
-          returns.push({
-              tag: tag,
-              target: match[2],
-              startIndex: startIndex,
-              endIndex: endIndex
-          })
-      })
-
-      return returns
   }
 
 }

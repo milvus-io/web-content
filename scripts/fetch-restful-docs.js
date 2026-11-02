@@ -8,6 +8,7 @@ const { loadSpecifications } = require('./apifox-docs/specLoader')
 const { applyLifecycleForTrack } = require('./apifox-docs/lifecycle')
 const { normalizeReleaseTrack } = require('./apifox-docs/releaseTrack')
 const { assertNoDanglingLocalRefs, pruneUnreachableComponents } = require('./apifox-docs/componentGraph')
+const { filterSelection, selectionAllows } = require('./apifox-docs/integratedSpecBuilder')
 
 const DEFAULT_CONFIG_PATH = path.resolve(__dirname, 'config.json')
 const DEFAULT_SPAWN_CWD = path.resolve(__dirname, '..')
@@ -103,39 +104,23 @@ function hasHttpMethod(pathItem) {
     return !!pathItem && typeof pathItem === 'object' && Object.keys(pathItem).some(method => HTTP_METHODS.has(method))
 }
 
-function asList(value) {
-    if (value === undefined || value === null) {
-        return null
-    }
-    return Array.isArray(value) ? value : [value]
-}
-
-// Same operation/tag-level publication filter refGen applies while
-// rendering. Running it before the lifecycle projection keeps operations the
-// target never publishes (for example Zilliz-Cloud-only pipeline endpoints)
-// from being lifecycle-validated, mirroring integratedSpecBuilder.
-function selectionAllows(node, { target, lang }) {
-    if (!node || typeof node !== 'object') {
-        return true
-    }
-
-    const targets = asList(node['x-include-target'])
-    if (targets && !targets.includes(target)) {
-        return false
-    }
-
-    const langs = asList(node['x-include-langs'])
-    if (langs && !langs.includes(lang)) {
-        return false
-    }
-
-    return true
-}
-
-function filterPublishedOperations(spec, selection) {
+// Deep publication-target pruning, reusing the integrated-spec builder's
+// selection machinery so the wrapper and zdoc's own pipeline drop the same
+// nodes: any operation, parameter, schema property, x-admonition entry, or
+// component whose x-include-target / x-include-langs markers exclude the
+// target goes before the lifecycle projection (or, on the latest line,
+// before generation) — refGen only skips whole operations and tags while
+// rendering, and the generated pages embed the operation JSON verbatim, so
+// node-level scoping must be resolved here rather than left to the site
+// runtime. The primary-tag cascade runs against the not-yet-pruned tag list
+// because filterSelection on spec.paths only drops what the operation node
+// itself marks.
+function pruneTargetSelection(spec, { target, lang }) {
+    const options = { target, language: lang }
+    const stats = { omittedElements: 0 }
     const tagByName = new Map((spec.tags || []).map(tag => [tag?.name, tag]))
 
-    for (const pathItem of Object.values(spec.paths || {})) {
+    for (const [endpoint, pathItem] of Object.entries(spec.paths || {})) {
         if (!pathItem || typeof pathItem !== 'object') {
             continue
         }
@@ -144,26 +129,37 @@ function filterPublishedOperations(spec, selection) {
                 continue
             }
             const tagObj = tagByName.get(operation?.tags?.[0])
-            if (!selectionAllows(operation, selection) || (tagObj && !selectionAllows(tagObj, selection))) {
+            if (!selectionAllows(operation, options) || (tagObj && !selectionAllows(tagObj, options))) {
                 delete pathItem[method]
+                stats.omittedElements++
             }
+        }
+        if (!hasHttpMethod(pathItem)) {
+            delete spec.paths[endpoint]
         }
     }
 
-    if (Array.isArray(spec.tags)) {
-        spec.tags = spec.tags.filter(tag => selectionAllows(tag, selection))
+    spec.tags = filterSelection(spec.tags || [], options, stats, '$.tags')
+    spec.paths = filterSelection(spec.paths || {}, options, stats, '$.paths')
+    if (spec.components) {
+        spec.components = filterSelection(spec.components, options, stats, '$.components')
     }
+
+    return stats
 }
 
 // Project the merged fragment set onto one Milvus release track. The
 // fragments carry lifecycle attributes (x-added-at / x-deprecated-since) for
 // every managed node; applyLifecycleForTrack drops nodes added after the
-// track and marks nodes deprecated on or before it. Paths and tags that end
-// up empty are dropped the same way integratedSpecBuilder does, so refGen
-// neither warns on method-less paths nor creates group folders for them.
+// track and marks nodes deprecated on or before it. Target selection is
+// pruned first (see pruneTargetSelection) so nodes the target never
+// publishes are not lifecycle-validated either, mirroring
+// integratedSpecBuilder. Paths and tags that end up empty are dropped the
+// same way integratedSpecBuilder does, so refGen neither warns on
+// method-less paths nor creates group folders for them.
 function projectSpecificationsForTrack(specifications, { releaseTrack, target, lang }) {
     const merged = loadSpecifications(specifications)
-    filterPublishedOperations(merged, { target, lang })
+    const selection = pruneTargetSelection(merged, { target, lang })
 
     const { value: spec, stats } = applyLifecycleForTrack(merged, releaseTrack)
 
@@ -195,7 +191,7 @@ function projectSpecificationsForTrack(specifications, { releaseTrack, target, l
     const pruned = pruneUnreachableComponents(spec)
     assertNoDanglingLocalRefs(pruned.spec)
 
-    return { spec: pruned.spec, stats }
+    return { spec: pruned.spec, stats, selectionOmitted: selection.omittedElements }
 }
 
 // Writes the projected spec to a temp file so apifox-docs/index.js can load
@@ -206,9 +202,46 @@ function stageTrackSpecifications({ specifications, releaseTrack, target, lang }
     const specificationsPath = path.isAbsolute(specifications)
         ? specifications
         : path.join(DEFAULT_SPAWN_CWD, specifications)
-    const { spec, stats } = projectSpecificationsForTrack(specificationsPath, { releaseTrack, target, lang })
+    const { spec, stats, selectionOmitted } = projectSpecificationsForTrack(specificationsPath, { releaseTrack, target, lang })
     const stageDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fetch-restful-docs-'))
     const file = path.join(stageDir, `openapi-${releaseTrack}.json`)
+    fs.writeFileSync(file, JSON.stringify(spec))
+
+    return {
+        file,
+        stats,
+        selectionOmitted,
+        cleanup() {
+            fs.rmSync(stageDir, { recursive: true, force: true })
+        },
+    }
+}
+
+// Latest-line projection: no lifecycle projection (the latest release line
+// documents the full fragment set), but the same target pruning as the
+// track path — the milvus.io runtime resolves prose include-spans but does
+// not filter every scoped node kind, so zilliz-scoped parameters,
+// properties, and x-admonition entries must not reach the page specs.
+function projectSpecificationsForTarget(specifications, { target, lang }) {
+    const spec = loadSpecifications(specifications)
+    const stats = pruneTargetSelection(spec, { target, lang })
+
+    const pruned = pruneUnreachableComponents(spec)
+    assertNoDanglingLocalRefs(pruned.spec)
+
+    return { spec: pruned.spec, stats }
+}
+
+// Latest-line staging: writes the target-pruned spec to a temp file so
+// apifox-docs/index.js can load it through its single-file specification
+// path. Returns the file plus a cleanup callback for the temp directory.
+function stageTargetSpecifications({ specifications, target, lang }) {
+    const specificationsPath = path.isAbsolute(specifications)
+        ? specifications
+        : path.join(DEFAULT_SPAWN_CWD, specifications)
+    const { spec, stats } = projectSpecificationsForTarget(specificationsPath, { target, lang })
+    const stageDir = fs.mkdtempSync(path.join(os.tmpdir(), 'fetch-restful-docs-'))
+    const file = path.join(stageDir, 'openapi-target.json')
     fs.writeFileSync(file, JSON.stringify(spec))
 
     return {
@@ -357,7 +390,11 @@ function generateRestfulDocs(resolved) {
     try {
         if (resolved.releaseTrack) {
             staged = stageTrackSpecifications(resolved)
-            console.log(`Projected specifications onto release track ${resolved.releaseTrack}: omitted ${staged.stats.omittedElements} element(s), marked ${staged.stats.deprecatedElements} deprecated`)
+            console.log(`Projected specifications onto release track ${resolved.releaseTrack}: omitted ${staged.selectionOmitted} element(s) by target selection, omitted ${staged.stats.omittedElements} by lifecycle, marked ${staged.stats.deprecatedElements} deprecated`)
+            childOptions = { ...resolved, specifications: staged.file }
+        } else {
+            staged = stageTargetSpecifications(resolved)
+            console.log(`Pruned specifications onto target ${resolved.target}: omitted ${staged.stats.omittedElements} element(s) by target selection`)
             childOptions = { ...resolved, specifications: staged.file }
         }
 
@@ -437,7 +474,10 @@ module.exports = {
     buildApifoxArgs,
     loadConfig,
     projectSpecificationsForTrack,
+    projectSpecificationsForTarget,
     stageTrackSpecifications,
+    stageTargetSpecifications,
+    pruneTargetSelection,
     removeEmptyDirectories,
     applyMilvusLegacyCompatibility,
     generateRestfulDocs,
