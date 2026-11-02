@@ -366,6 +366,6 @@ curl -X POST "http://localhost:19530/v2/vectordb/common/run_analyzer" \
 
 ### Expected output
 
-```python
+```plaintext
 ['Cafe', 'Moller', 'serves', 'creme', 'brulee', 'and', 'pinatas']
 ```

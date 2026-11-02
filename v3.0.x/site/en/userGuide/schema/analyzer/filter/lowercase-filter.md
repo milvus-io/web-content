@@ -367,6 +367,6 @@ curl --request POST \
 
 ### Expected output
 
-```python
+```plaintext
 ['the', 'lowercase', 'filter', 'ensures', 'uniformity', 'in', 'text', 'processing']
 ```
