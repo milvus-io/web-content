@@ -15,8 +15,11 @@ The `cnalphanumonly` filter is built into Milvus. To use it, simply specify its 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -28,9 +31,28 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "jieba");
 analyzerParams.put("filter", Collections.singletonList("cnalphanumonly"));
+```
+
+```go
+analyzerParams := map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
+```
+
+```rust
+let analyzer_params = serde_json::json!({"tokenizer": "jieba", "filter": ["cnalphanumonly"]});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cnalphanumonly"}}
+};
 ```
 
 ```javascript
@@ -40,8 +62,14 @@ const analyzer_params = {
 };
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
+```csharp
+using System.Collections.Generic;
+
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = "jieba",
+    ["filter"] = new[] { "cnalphanumonly" }
+};
 ```
 
 ```bash
@@ -67,8 +95,11 @@ Before applying the analyzer configuration to your collection schema, verify its
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -80,30 +111,67 @@ analyzer_params = {
 ```
 
 ```java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "jieba");
 analyzerParams.put("filter", Collections.singletonList("cnalphanumonly"));
 ```
 
-```javascript
-// javascript
+```go
+analyzerParams := map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
+```rust
+let analyzer_params = serde_json::json!({"tokenizer": "jieba", "filter": ["cnalphanumonly"]});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"},
+    {"filter", {"cnalphanumonly"}}
+};
+```
+
+```javascript
+const analyzer_params = {
+    "tokenizer": "jieba",
+    "filter": ["cnalphanumonly"],
+};
+```
+
+```csharp
+using System.Collections.Generic;
+
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = "jieba",
+    ["filter"] = new[] { "cnalphanumonly" }
+};
 ```
 
 ```bash
 # restful
+analyzerParams='{
+  "tokenizer": "jieba",
+  "filter": [
+    "cnalphanumonly"
+  ]
+}'
 ```
 
-### Verification using `run_analyzer` | Milvus 2.5.11+
+### Verification using `run_analyzer`
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -112,7 +180,10 @@ from pymilvus import (
     MilvusClient,
 )
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Sample text to analyze
 sample_text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。"
@@ -123,6 +194,7 @@ print("Analyzer output:", result)
 ```
 
 ```java
+import java.util.*;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.RunAnalyzerReq;
@@ -130,6 +202,7 @@ import io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
 ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 
@@ -143,21 +216,18 @@ RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
 List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
-```javascript
-// javascript
-```
-
 ```go
 import (
     "context"
-    "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
+ctx := context.Background()
+
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "http://localhost:19530",
     APIKey:  "root:Milvus",
 })
 if err != nil {
@@ -165,25 +235,129 @@ if err != nil {
     // handle error
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []string{"Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。"}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+for _, r := range result {
+    for _, token := range r.Tokens {
+        fmt.Println("Analyzer output:", token.Text)
+    }
+}
+```
+
+```rust
+use milvus::v2::error::Result;
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let sample_text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+let result = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(vec![sample_text])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+
+println!("Analyzer output: {:?}", result);
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <string>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::string text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+auto request = milvus::RunAnalyzerRequest()
+                       .AddText(text)
+                       .WithAnalyzerParams(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+// Sample text to analyze
+const sample_text = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+
+// Run the jieba tokenizer with the defined configuration
+const result = await client.runAnalyzer({
+    text: sample_text,
+    analyzer_params: analyzer_params
+});
+console.log("Analyzer output:", result);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+// Sample text to analyze
+var sampleText = "Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。";
+
+// Run the jieba tokenizer with the defined configuration
+RunAnalyzerResp result = await client.RunAnalyzerAsync(new RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = new[] { sampleText }
+});
+Console.WriteLine("Analyzer output: " + string.Join(", ", result.Results.SelectMany(r => r.Tokens).Select(t => t.Token)));
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "text": ["Milvus 是 LF AI & Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。"],
+    "analyzerParams": "{\"tokenizer\": \"jieba\", \"filter\": [\"cnalphanumonly\"]}"
+}'
 ```
 
 ### Expected output
 
-```python
-['Milvus', '是', 'LF', 'AI', 'Data', 'Foundation', '下的一个开源项目', '以', 'Apache', '2', '0', '许可发布']
+```plaintext
+['Milvus', '是', 'LF', 'AI', 'Data', 'Foundation', '下', '的', '一个', '开源', '项目', '以', 'Apache', '2.0', '许可', '发布']
 ```
-
