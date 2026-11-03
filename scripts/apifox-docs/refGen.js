@@ -3,6 +3,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { resolveRefs } = require('./specLoader')
 const { resolveIncludeSpans } = require('./includeSpans')
+const { resolveBetaForTarget } = require('./betaTier')
 
 const META_DIR = path.join(__dirname, 'meta')
 const TEMPLATES_DIR = path.join(__dirname, 'templates')
@@ -139,9 +140,13 @@ class refGen {
     return controlKeywords.some(k => normalizedSlug.includes(k.toLowerCase())) ? 'control-plane' : 'data-plane'
   }
 
-  getBetaTag(slug, version) {
+  getBetaTag(slug, version, target) {
     for (const [keyword, tag] of Object.entries(CONFIG.betaOverrides)) {
-      if (slug.includes(keyword)) return tag
+      if (!slug.includes(keyword)) continue
+      // Zilliz release-notes tiers (PRIVATE here) do not badge the milvus
+      // target; fall through to the target-neutral default.
+      const tier = resolveBetaForTarget(tag, target)
+      if (tier) return tier
     }
     return CONFIG.betaDefaults[version] || 'FALSE'
   }
@@ -253,13 +258,16 @@ class refGen {
         // "exclude" ships the final CURRENT wording and retires in NEXT.
         const next_channel = resolveNextChannel(specification['x-next-channel'])
 
-        // Check x-beta on operation, then tag, then fall back to defaults
-        let beta_tag = specification['x-beta']
-        if (!beta_tag && tagObj?.['x-beta']) {
-          beta_tag = tagObj['x-beta']
+        // Check x-beta on operation, then tag, then fall back to defaults.
+        // Zilliz release-notes tiers (PUBLIC, ON REQUEST, PRIVATE, ...) are
+        // zdoc-site marks: under the milvus target they resolve as unset and
+        // the chain falls through (betaTier.js owns the vocabulary).
+        let beta_tag = resolveBetaForTarget(specification['x-beta'], target)
+        if (!beta_tag) {
+          beta_tag = resolveBetaForTarget(tagObj?.['x-beta'], target)
         }
         if (!beta_tag) {
-          beta_tag = this.getBetaTag(page_slug, version)
+          beta_tag = this.getBetaTag(page_slug, version, target)
         }
 
         // Auto-deprecate all v1 endpoints
@@ -394,10 +402,11 @@ class refGen {
         position = specifications.tags.map(x => x.name).indexOf(tagName)
       }
 
-      // Check x-beta on tag, then fall back to defaults
-      let beta_tag = specifications.tags[group]?.['x-beta']
+      // Check x-beta on tag, then fall back to defaults; zilliz-only tier
+      // values do not badge the milvus target (betaTier.js).
+      let beta_tag = resolveBetaForTarget(specifications.tags[group]?.['x-beta'], target)
       if (!beta_tag) {
-        beta_tag = this.getBetaTag(slug, version)
+        beta_tag = this.getBetaTag(slug, version, target)
       }
 
       const t = template.render({

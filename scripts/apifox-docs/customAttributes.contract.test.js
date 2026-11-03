@@ -65,3 +65,12 @@ test('documents x-zilliz-cluster-types with the manifests-locked domain', () => 
   }
   assert.match(doc, /absent.*all cluster types|fail-open/i);
 });
+
+test('documents the target scoping of x-beta release-notes tiers', () => {
+  const doc = readDoc();
+  assert.match(doc, /### 1\.3 `x-beta`/);
+  assert.match(doc, /release-notes tier/i);
+  assert.match(doc, /Only `FALSE` and `DEPRECATED` are target-neutral/);
+  assert.match(doc, /resolves tier values as if they were unset/);
+  assert.match(doc, /betaTier\.js/);
+});

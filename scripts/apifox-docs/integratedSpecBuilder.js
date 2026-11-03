@@ -1,6 +1,7 @@
 const { normalizeReleaseTrack, compareReleaseTracks } = require('./releaseTrack');
 const { applyLifecycleForTrack, validateLifecycle } = require('./lifecycle');
 const { assertNoDanglingLocalRefs, pruneUnreachableComponents } = require('./componentGraph');
+const { resolveBetaForTarget } = require('./betaTier');
 
 const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head', 'trace']);
 const LIFECYCLE_KEYS = new Set(['x-added-at', 'x-last-modified', 'x-deprecated-since']);
@@ -91,6 +92,12 @@ function filterSelection(value, options, stats, pointer = '$') {
   const result = {};
   const omittedByFilter = new Set();
   for (const [key, child] of Object.entries(value)) {
+    // Zilliz release-notes tiers on `x-beta` are zdoc-site marks (the milvus
+    // token scan cannot see enum values, so this is their enforcement point);
+    // the milvus projection treats them as unset. FALSE/DEPRECATED stay, and
+    // the zilliz projection passes every value through untouched.
+    if (key === 'x-beta' && options.target === 'milvus' && resolveBetaForTarget(child, options.target) === undefined) continue;
+
     if (key === 'properties' && child && typeof child === 'object' && !Array.isArray(child)) {
       result.properties = {};
       for (const [propertyName, propertySchema] of Object.entries(child)) {
@@ -143,19 +150,32 @@ function buildTagSelection(spec, options) {
 // primary tag excludes the publication target have no place in it, even when
 // the operation node itself is unscoped. Operations without a primary tag
 // stay subject to their own markers only, matching the upstream wrapper.
-function dropOperationsOutsideTagSelection(spec, tagSelection, stats) {
+//
+// Shared with milvusTargetHygiene.test.js so the guard and the builder mirror
+// the wrapper cascade through one implementation. Fail-closed on undeclared
+// primary tags: an operation whose primary tag is not declared in spec.tags
+// is a spec defect, not an implicit inclusion.
+function dropOperationsOutsideTagSelection(spec, allowedTagNames, stats) {
   for (const methods of Object.values(spec.paths || {})) {
     if (!methods || typeof methods !== 'object') continue;
     for (const [method, operation] of Object.entries(methods)) {
       if (!HTTP_METHODS.has(method)) continue;
       const tagName = operation?.tags?.[0];
       if (tagName === undefined || tagName === null) continue;
-      if (tagSelection.get(tagName) === false) {
+      if (!allowedTagNames.has(tagName)) {
         delete methods[method];
-        stats.omittedElements++;
+        if (stats) stats.omittedElements++;
       }
     }
   }
+}
+
+function allowedTagNamesFromSelection(tagSelection) {
+  const allowed = new Set();
+  for (const [name, isAllowed] of tagSelection) {
+    if (isAllowed) allowed.add(name);
+  }
+  return allowed;
 }
 
 function pruneUnusedTags(spec) {
@@ -390,11 +410,9 @@ function buildIntegratedSpec(specifications, options) {
   pruneUnusedTags(spec);
 
   const initialOperationCount = countHttpOperations(specifications);
-  const operationCount = countHttpOperations(spec);
-  const omittedOperations = Math.max(0, initialOperationCount - operationCount);
 
   if (releaseTrack) {
-    dropOperationsOutsideTagSelection(spec, tagSelection, filterStats);
+    dropOperationsOutsideTagSelection(spec, allowedTagNamesFromSelection(tagSelection), filterStats);
     cleanEmptyPaths(spec);
     pruneUnusedTags(spec);
     // Prune components orphaned by the target selection before the lifecycle
@@ -427,6 +445,12 @@ function buildIntegratedSpec(specifications, options) {
     tags: operation.tags || [],
   }));
 
+  // Retained/omitted are measured after every drop stage (target filter, tag
+  // cascade, lifecycle projection) so the counts describe the published
+  // document, not an intermediate one.
+  const retainedOperations = endpointInventory.length;
+  const omittedOperations = Math.max(0, initialOperationCount - retainedOperations);
+
   return {
     spec,
     releaseTrack,
@@ -435,7 +459,7 @@ function buildIntegratedSpec(specifications, options) {
     endpointInventory,
     stats: {
       operations: {
-        retained: operationCount,
+        retained: retainedOperations,
         omitted: omittedOperations,
         deprecated: collectHttpOperations(spec).filter(({operation}) => operation.deprecated === true).length,
       },
@@ -451,4 +475,5 @@ module.exports = {
   buildIntegratedSpec,
   filterSelection,
   selectionAllows,
+  dropOperationsOutsideTagSelection,
 };

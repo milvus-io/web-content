@@ -73,6 +73,8 @@ clusters, serverless deployments, …) inside a node that is published to both
 targets must be scoped with this attribute or with the inline
 `<include target="zilliz">…</include>` span. `milvusTargetHygiene.test.js`
 guards the milvus-target projection against unscoped zilliz-only vocabulary.
+The guard is one-way by design: it protects the milvus target only, and there
+is no equivalent scan for milvus-only concepts on the zilliz target.
 
 **Same-endpoint dual-implementation modeling rules** (contract; enforced by
 `dualTargetStructure.contract.test.js` and the target-survival gate in
@@ -97,12 +99,17 @@ one API:
   `describe` versus `get_progress`), and an alias route stays attached to the
   target whose code registers it.
 - Visibility is `x-include-target`'s job; availability on a target is the job
-  of `x-beta` / `x-zilliz-availability` / `x-zilliz-cluster-types`. Never hide
+  of `x-beta` / `x-zilliz-cluster-types`. Never hide
   a field a target's API actually accepts by marking it for the other target.
 - Lifecycle keys (`x-added-at`/`x-last-modified`/`x-deprecated-since`) and
   their evidence rows are Milvus-track attestations: they belong only on
   nodes that survive the milvus target filter, and the target-survival gate
-  fails any evidence pointer the filter removes.
+  fails any evidence pointer the filter removes. A shared surface attested
+  against milvus-io/milvus upstream commits therefore needs no target scope
+  on its tag — fragment 38 (snapshots) is the standing example: its elements
+  are attested against milvus v3.0.0 commits, so it publishes to both
+  targets and its 2.6.x/3.0.x visibility comes from the lifecycle stamps
+  alone.
 
 ### 1.2.1 `x-include-langs`
 
@@ -135,6 +142,8 @@ Controls the visibility badge shown on API reference pages. The effective value 
 ```
 
 Valid values: `DEPRECATED`, `FALSE`, `PRIVATE`, `PUBLIC`, `ON REQUEST`. `ON REQUEST` marks contact-to-enable features (release-notes tier of the same name); it is valid at operation and tag level — the `Snapshot Operations (V2)` tag in `38-snapshot-operations-v2.json` is the in-tree example.
+
+**Target scoping.** Only `FALSE` and `DEPRECATED` are target-neutral; every other value is a Zilliz Cloud release-notes tier and badges zdoc sites only. The milvus publication target resolves tier values as if they were unset — at operation level, tag level, and in `CONFIG.betaOverrides` alike — so the chain falls back to `CONFIG.betaDefaults` (`v2` → `FALSE`). `DEPRECATED` survives because the kernel deprecation it reports applies to Milvus as well. `betaTier.js` owns this vocabulary (an allowlist, so future zilliz tiers cannot leak to milvus.io by default); `filterSelection` strips the tiers from the milvus projection, and `milvusTargetHygiene.test.js` gates the enum surface that the string token scan cannot see.
 
 ### 1.4 `x-admonition`
 
