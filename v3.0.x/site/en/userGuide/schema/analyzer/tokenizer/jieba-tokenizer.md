@@ -25,8 +25,11 @@ With the simple configuration, you only need to set the tokenizer to `"jieba"`. 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -42,14 +45,34 @@ Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "jieba");
 ```
 
+```go
+analyzerParams := map[string]any{"tokenizer": "jieba"}
+```
+
+```rust
+use serde_json::json;
+
+let analyzer_params = json!({"tokenizer": "jieba"});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", "jieba"}
+};
+```
+
 ```javascript
 const analyzer_params = {
     "tokenizer": "jieba",
 };
 ```
 
-```go
-analyzerParams = map[string]any{"tokenizer": "jieba"}
+```csharp
+// Simple configuration: only specifying the tokenizer name
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = "jieba" // Use the default settings: dict=["_default_"], mode="search", hmm=True
+};
 ```
 
 ```bash
@@ -64,39 +87,106 @@ This simple configuration is equivalent to the following custom configuration:
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 # Custom configuration equivalent to the simple configuration above
 analyzer_params = {
-    "type": "jieba",          # Tokenizer type, fixed as "jieba"
-    "dict": ["_default_"],     # Use the default dictionary
-    "mode": "search",          # Use search mode for improved recall (see mode details below)
-    "hmm": True                # Enable HMM for probabilistic segmentation
+    "tokenizer": {                 # Tokenizer configuration
+        "type": "jieba",           # Tokenizer type, fixed as "jieba"
+        "dict": ["_default_"],     # Use the default dictionary
+        "mode": "search",          # Use search mode for improved recall (see mode details below)
+        "hmm": True                # Enable HMM for probabilistic segmentation
+    }
 }
 ```
 
 ```java
 Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("type", "jieba");
-analyzerParams.put("dict", Collections.singletonList("_default_"));
-analyzerParams.put("mode", "search");
-analyzerParams.put("hmm", true);
-```
-
-```javascript
-// javascript
+analyzerParams.put("tokenizer", new HashMap<String, Object>() {{
+  put("type", "jieba");
+  put("dict", Collections.singletonList("_default_"));
+  put("mode", "search");
+  put("hmm", true);
+}});
 ```
 
 ```go
-analyzerParams = map[string]any{"type": "jieba", "dict": []any{"_default_"}, "mode": "search", "hmm": true}
+analyzerParams := map[string]any{
+  "tokenizer": map[string]any{
+    "type": "jieba",
+    "dict": []any{"_default_"},
+    "mode": "search",
+    "hmm":  true,
+  },
+}
+```
+
+```rust
+use serde_json::json;
+
+let analyzer_params = json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["_default_"],
+        "mode": "search",
+        "hmm": true
+    }
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"_default_"}},
+        {"mode", "search"},
+        {"hmm", true}
+    }}
+};
+```
+
+```javascript
+const analyzer_params = {
+  tokenizer: {
+    type: "jieba",
+    dict: ["_default_"],
+    mode: "search",
+    hmm: true,
+  },
+};
+```
+
+```csharp
+// Custom configuration equivalent to the simple configuration above
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = new Dictionary<string, object> // Tokenizer configuration
+    {
+        ["type"] = "jieba",               // Tokenizer type, fixed as "jieba"
+        ["dict"] = new[] { "_default_" }, // Use the default dictionary
+        ["mode"] = "search",              // Use search mode for improved recall (see mode details below)
+        ["hmm"] = true                    // Enable HMM for probabilistic segmentation
+    }
+};
 ```
 
 ```bash
 # restful
+analyzerParams='{
+  "tokenizer": {
+    "type": "jieba",
+    "dict": ["_default_"],
+    "mode": "search",
+    "hmm": true
+  }
+}'
 ```
 
 For details on parameters, refer to [Custom configuration](jieba-tokenizer.md#Custom-configuration).
@@ -108,8 +198,11 @@ For more control, you can provide a custom configuration that allows you to spec
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -126,23 +219,18 @@ analyzer_params = {
 ```
 
 ```java
-Map<String, Object> analyzerParams = new HashMap<>();                                                                          
+Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", new HashMap<String, Object>() {{
-  put("type", "jieba");                                                                                                      
-  put("dict", Arrays.asList("customDictionary"));             
+  put("type", "jieba");
+  put("dict", Arrays.asList("customDictionary"));
   put("mode", "exact");
   put("hmm", false);
 }});
-
-```
-
-```javascript
-// javascript
 ```
 
 ```go
-analyzerParams := map[string]interface{}{
-  "tokenizer": map[string]interface{}{
+analyzerParams := map[string]any{
+  "tokenizer": map[string]any{
       "type": "jieba",
       "dict": []string{"customDictionary"},
       "mode": "exact",
@@ -151,8 +239,65 @@ analyzerParams := map[string]interface{}{
 }
 ```
 
+```rust
+use serde_json::json;
+
+let analyzer_params = json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["customDictionary"],
+        "mode": "exact",
+        "hmm": false
+    }
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+  {"tokenizer", {
+      {"type", "jieba"},
+      {"dict", {"customDictionary"}},
+      {"mode", "exact"},
+      {"hmm", false}
+  }}
+};
+```
+
+```javascript
+const analyzer_params = {
+  tokenizer: {
+    type: "jieba",
+    dict: ["customDictionary"],
+    mode: "exact",
+    hmm: false,
+  },
+};
+```
+
+```csharp
+// Custom configuration with user-defined settings
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = new Dictionary<string, object>
+    {
+        ["type"] = "jieba",                  // Fixed tokenizer type
+        ["dict"] = new[] { "customDictionary" }, // Custom dictionary list; replace with your own terms
+        ["mode"] = "exact",                  // Use exact mode (non-overlapping tokens)
+        ["hmm"] = false                      // Disable HMM; unmatched text will be split into individual characters
+    }
+};
+```
+
 ```bash
 # restful
+analyzerParams='{
+  "tokenizer": {
+    "type": "jieba",
+    "dict": ["customDictionary"],
+    "mode": "exact",
+    "hmm": false
+  }
+}'
 ```
 
 <table>
@@ -187,7 +332,8 @@ To load a large custom vocabulary from an external file instead of inlining it v
 
 After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
-### Custom configuration with a dictionary file | Milvus 3.0.x
+<!-- This section is published to both Cloud manuals, so the heading stays product-neutral. -->
+### Custom configuration with a dictionary file
 
 For large custom vocabularies — domain glossaries, product terminology, or proper-noun lists — store the words in a file and register the file as a remote file resource, then reference it from the tokenizer via the `extra_dict_file` parameter. The analyzer loads these words into its vocabulary on top of the built-in dictionary.
 
@@ -203,15 +349,21 @@ Upload the file to the object store that your Milvus cluster is configured to us
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Register the uploaded file under a name you'll reference from analyzer configs.
 client.add_file_resource(
@@ -221,19 +373,124 @@ client.add_file_resource(
 ```
 
 ```java
-// java
-```
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.AddFileResourceReq;
 
-```javascript
-// nodejs
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+client.addFileResource(AddFileResourceReq.builder()
+        .name("zh_terms")
+        .path("file/zh_terms.txt")
+        .build());
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx := context.Background()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+err = client.AddFileResource(ctx, milvusclient.NewAddFileResourceOption("zh_terms", "file/zh_terms.txt"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+client.add_file_resource(AddFileResourceRequest::builder()
+    .name("zh_terms")
+    .path("file/zh_terms.txt")
+    .build()?).await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::AddFileResourceRequest add_file_request;
+add_file_request.WithName("zh_terms");
+add_file_request.WithPath("file/zh_terms.txt");
+status = client->AddFileResource(add_file_request);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+  address: 'http://localhost:19530',
+  token: 'root:Milvus',
+});
+
+await client.addFileResource({
+  name: "zh_terms",
+  path: "file/zh_terms.txt",
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+// Register the uploaded file under a name you'll reference from analyzer configs.
+await client.AddFileResourceAsync(new AddFileResourceReq
+{
+    Name = "zh_terms",
+    Path = "file/zh_terms.txt" // full S3 object key, including the rootPath prefix
+});
 ```
 
 ```bash
 # restful
+curl --request POST \
+  --url "http://localhost:19530/v2/vectordb/file_resources/add" \
+  --header "Authorization: Bearer root:Milvus" \
+  --header "Content-Type: application/json" \
+  --data-raw '{
+    "name": "zh_terms",
+    "path": "file/zh_terms.txt"
+  }'
 ```
 
 Reference the registered resource in the tokenizer via `extra_dict_file`:
@@ -241,8 +498,11 @@ Reference the registered resource in the tokenizer via `extra_dict_file`:
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -261,24 +521,180 @@ analyzer_params = {
     },
 }
 
-client.run_analyzer(["milvus结巴分词器中文测试"], analyzer_params)
-# → [['milvus', '结巴', '分词器', '中文', '测试']]
+result = client.run_analyzer("milvus结巴分词器中文测试", analyzer_params)
+print(result)
 ```
 
 ```java
-// java
-```
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-```javascript
-// nodejs
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", new HashMap<String, Object>() {{
+  put("type", "jieba");
+  put("dict", Collections.singletonList("_default_"));
+  put("mode", "exact");
+  put("hmm", false);
+  put("extra_dict_file", new HashMap<String, Object>() {{
+    put("type", "remote");
+    put("resource_name", "zh_terms");
+    put("file_name", "zh_terms.txt");
+  }});
+}});
+
+List<String> texts = new ArrayList<>();
+texts.add("milvus结巴分词器中文测试");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+texts := []string{"milvus结巴分词器中文测试"}
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, r := range result {
+    for _, token := range r.Tokens {
+        fmt.Println("Jieba analyzer output:", token.Text)
+    }
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let analyzer_params = serde_json::json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["_default_"],
+        "mode": "exact",
+        "hmm": false,
+        "extra_dict_file": {
+            "type": "remote",
+            "resource_name": "zh_terms",
+            "file_name": "zh_terms.txt"
+        }
+    }
+});
+
+let response = client.run_analyzer(RunAnalyzerRequest::builder()
+    .texts(["milvus结巴分词器中文测试"])
+    .analyzer_params(analyzer_params)
+    .build()?).await?;
+
+println!("{:?}", response.results());
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+nlohmann::json analyzer_params = {
+    {"tokenizer", {
+        {"type", "jieba"},
+        {"dict", {"_default_"}},
+        {"mode", "exact"},
+        {"hmm", false},
+        {"extra_dict_file", {
+            {"type", "remote"},
+            {"resource_name", "zh_terms"},
+            {"file_name", "zh_terms.txt"}
+        }}
+    }}
+};
+
+milvus::RunAnalyzerRequest request;
+request.WithAnalyzerParams(analyzer_params);
+request.AddText("milvus结巴分词器中文测试");
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const analyzer_params = {
+  tokenizer: {
+    type: "jieba",
+    dict: ["_default_"],
+    mode: "exact",
+    hmm: false,
+    extra_dict_file: {
+      type: "remote",
+      resource_name: "zh_terms",
+      file_name: "zh_terms.txt",
+    },
+  },
+};
+
+const result = await client.runAnalyzer({
+  text: "milvus结巴分词器中文测试",
+  analyzer_params,
+});
+console.log(result.results);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = new Dictionary<string, object>
+    {
+        ["type"] = "jieba",
+        ["dict"] = new[] { "_default_" }, // keep the built-in dictionary
+        ["mode"] = "exact",
+        ["hmm"] = false,
+        ["extra_dict_file"] = new Dictionary<string, object>
+        {
+            ["type"] = "remote",
+            ["resource_name"] = "zh_terms",
+            ["file_name"] = "zh_terms.txt"
+        }
+    }
+};
+
+var result = await client.RunAnalyzerAsync(new RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = new[] { "milvus结巴分词器中文测试" }
+});
 ```
 
 ```bash
-# restful
+curl --request POST \
+  --url "http://localhost:19530/v2/vectordb/common/run_analyzer" \
+  --header "Authorization: Bearer root:Milvus" \
+  --header "Content-Type: application/json" \
+  --data-raw '{
+    "text": ["milvus结巴分词器中文测试"],
+    "analyzerParams": "{\"tokenizer\":{\"type\":\"jieba\",\"dict\":[\"_default_\"],\"mode\":\"exact\",\"hmm\":false,\"extra_dict_file\":{\"type\":\"remote\",\"resource_name\":\"zh_terms\",\"file_name\":\"zh_terms.txt\"}}}"
+  }'
 ```
 
 The `extra_dict_file` parameter accepts an object with the following fields:
@@ -313,8 +729,11 @@ Before applying the analyzer configuration to your collection schema, verify its
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -330,22 +749,18 @@ analyzer_params = {
 ```
 
 ```java
-Map<String, Object> analyzerParams = new HashMap<>();                                                                          
+Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", new HashMap<String, Object>() {{
-  put("type", "jieba");                                                                                                      
-  put("dict", Arrays.asList("结巴分词器"));                   
+  put("type", "jieba");
+  put("dict", Arrays.asList("结巴分词器"));
   put("mode", "exact");
   put("hmm", false);
 }});
 ```
 
-```javascript
-// javascript
-```
-
 ```go
-analyzerParams := map[string]interface{}{
-  "tokenizer": map[string]interface{}{
+analyzerParams := map[string]any{
+  "tokenizer": map[string]any{
       "type": "jieba",
       "dict": []string{"结巴分词器"},
       "mode": "exact",
@@ -354,8 +769,64 @@ analyzerParams := map[string]interface{}{
 }
 ```
 
+```rust
+use serde_json::json;
+
+let analyzer_params = json!({
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["结巴分词器"],
+        "mode": "exact",
+        "hmm": false
+    }
+});
+```
+
+```cpp
+nlohmann::json analyzer_params = {
+  {"tokenizer", {
+      {"type", "jieba"},
+      {"dict", {"结巴分词器"}},
+      {"mode", "exact"},
+      {"hmm", false}
+  }}
+};
+```
+
+```javascript
+const analyzer_params = {
+  tokenizer: {
+    type: "jieba",
+    dict: ["结巴分词器"],
+    mode: "exact",
+    hmm: false,
+  },
+};
+```
+
+```csharp
+var analyzerParams = new Dictionary<string, object>
+{
+    ["tokenizer"] = new Dictionary<string, object>
+    {
+        ["type"] = "jieba",
+        ["dict"] = new[] { "结巴分词器" },
+        ["mode"] = "exact",
+        ["hmm"] = false
+    }
+};
+```
+
 ```bash
 # restful
+analyzerParams='{
+  "tokenizer": {
+    "type": "jieba",
+    "dict": ["结巴分词器"],
+    "mode": "exact",
+    "hmm": false
+  }
+}'
 ```
 
 ### Verification using `run_analyzer`
@@ -363,8 +834,11 @@ analyzerParams := map[string]interface{}{
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -381,12 +855,13 @@ client = MilvusClient(
 # Sample text to analyze
 sample_text = "milvus结巴分词器中文测试"
 
-# Run the standard analyzer with the defined configuration
+# Run the jieba tokenizer with the defined configuration
 result = client.run_analyzer(sample_text, analyzer_params)
-print("Standard analyzer output:", result)
+print("Jieba analyzer output:", result)
 ```
 
 ```java
+import java.util.*;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.service.vector.request.RunAnalyzerReq;
@@ -406,23 +881,26 @@ RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
         .analyzerParams(analyzerParams)
         .build());
 List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
-```
 
-```javascript
-// javascript
+for (RunAnalyzerResp.AnalyzerResult result : results) {
+    for (RunAnalyzerResp.AnalyzerToken token : result.getTokens()) {
+        System.out.println("Jieba analyzer output: " + token.getToken());
+    }
+}
 ```
 
 ```go
 import (
     "context"
-    "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
+ctx := context.Background()
+
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "http://localhost:19530",
     APIKey:  "root:Milvus",
 })
 if err != nil {
@@ -430,25 +908,140 @@ if err != nil {
     // handle error
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []string{"milvus结巴分词器中文测试"}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+for _, r := range result {
+    for _, token := range r.Tokens {
+        fmt.Println("Jieba analyzer output:", token.Text)
+    }
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let response = client
+    .run_analyzer(
+        RunAnalyzerRequest::builder()
+            .texts(["milvus结巴分词器中文测试"])
+            .analyzer_params(analyzer_params)
+            .build()?,
+    )
+    .await?;
+
+for result in response.results() {
+    for token in result.get_tokens() {
+        println!("Jieba analyzer output: {}", token.get_text());
+    }
+}
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <string>
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::string text = "milvus结巴分词器中文测试";
+auto request = milvus::RunAnalyzerRequest()
+                       .AddText(text)
+                       .WithAnalyzerParams(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client->RunAnalyzer(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (const auto& result : response.Results()) {
+    for (const auto& token : result.Tokens()) {
+        std::cout << "Jieba analyzer output: " << token.token_ << std::endl;
+    }
+}
+```
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+  address: 'http://localhost:19530',
+  token: 'root:Milvus',
+});
+
+const sample_text = 'milvus结巴分词器中文测试';
+const result = await client.runAnalyzer({
+  text: sample_text,
+  analyzer_params,
+});
+const tokens = result.results.flatMap(r => r.tokens.map(t => t.token));
+console.log('Jieba analyzer output:', tokens);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+// Sample text to analyze
+var sampleText = "milvus结巴分词器中文测试";
+
+// Run the jieba tokenizer with the defined configuration
+RunAnalyzerResp result = await client.RunAnalyzerAsync(new RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = new[] { sampleText }
+});
+
+foreach (AnalyzerResult r in result.Results)
+{
+    foreach (AnalyzerToken t in r.Tokens)
+    {
+        Console.WriteLine($"Jieba analyzer output: {t.Token}");
+    }
+}
 ```
 
 ```bash
-# restful
+curl --request POST \
+  --url "http://localhost:19530/v2/vectordb/common/run_analyzer" \
+  --header "Authorization: Bearer root:Milvus" \
+  --header "Content-Type: application/json" \
+  --data-raw '{
+    "text": ["milvus结巴分词器中文测试"],
+    "analyzerParams": "{\"tokenizer\":{\"type\":\"jieba\",\"dict\":[\"结巴分词器\"],\"mode\":\"exact\",\"hmm\":false}}"
+  }'
 ```
 
 ### Expected output
 
-```python
+For the sample text, the analyzer produces the following tokens in order. SDK response objects and printed formatting vary by language; the REST response contains these tokens at `data.results[].tokens[].token`.
+
+```plaintext
 ['milvus', '结巴分词器', '中', '文', '测', '试']
 ```
-
