@@ -53,3 +53,21 @@ export interface IndexDescription {
 - **pending_index_rows** (*string*) -
 
     The number of rows pending index build.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.describeIndex({
+    collection_name: 'my_collection',
+});
+
+console.log(res.index_descriptions); // IndexDescription[]
+```
+

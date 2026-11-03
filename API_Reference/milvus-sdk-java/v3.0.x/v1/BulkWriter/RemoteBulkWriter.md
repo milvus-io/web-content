@@ -261,3 +261,54 @@ try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) 
     throw e;
 }
 ```
+
+## Example
+
+```java
+import io.milvus.bulkwriter.RemoteBulkWriter;
+import io.milvus.bulkwriter.RemoteBulkWriterParam;
+import io.milvus.bulkwriter.connect.S3ConnectParam;
+import io.milvus.bulkwriter.common.clientenum.BulkFileType;
+import io.milvus.grpc.DataType;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.List;
+
+CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
+        .addFieldType(FieldType.newBuilder()
+                .withName("id")
+                .withDataType(DataType.Int64)
+                .withPrimaryKey(true)
+                .build())
+        .build();
+
+S3ConnectParam connectParam = S3ConnectParam.newBuilder()
+        .withEndpoint("https://s3.amazonaws.com")
+        .withCloudName("aws")
+        .withBucketName("my-bucket")
+        .withAccessKey("access-key")
+        .withSecretKey("secret-key")
+        .withRegion("us-east-1")
+        .build();
+
+RemoteBulkWriterParam bulkWriterParam = RemoteBulkWriterParam.newBuilder()
+        .withCollectionSchema(collectionSchema)
+        .withRemotePath("bulk_data")
+        .withFileType(BulkFileType.PARQUET)
+        .withConnectParam(connectParam)
+        .build();
+
+try (RemoteBulkWriter remoteBulkWriter = new RemoteBulkWriter(bulkWriterParam)) {
+    Gson gson = new Gson();
+    JsonObject row = new JsonObject();
+    row.addProperty("id", 1);
+    remoteBulkWriter.appendRow(row);
+    remoteBulkWriter.commit(false);
+    List<List<String>> batchFiles = remoteBulkWriter.getBatchFiles();
+    System.out.printf("Data files have been uploaded: %s%n", batchFiles);
+} catch (Exception e) {
+    throw e;
+}
+```

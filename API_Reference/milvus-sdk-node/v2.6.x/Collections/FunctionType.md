@@ -28,3 +28,28 @@ export enum FunctionType {
 - **RERANK** (3)
 
     Sets the function type to **RERANK**, a reranking function.
+
+## Example
+
+```javascript
+import { MilvusClient, FunctionType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createCollection({
+    collection_name: 'my_collection',
+    functions: [
+        {
+            name: 'bm25_fn',
+            type: FunctionType.BM25,
+            input_field_names: ['text'],
+            output_field_names: ['sparse_vector'],
+            params: {},
+        },
+    ],
+});
+```
+

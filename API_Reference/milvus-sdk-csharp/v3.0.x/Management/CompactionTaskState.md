@@ -64,3 +64,31 @@ public enum CompactionTaskState
 - **Statistic** (10)
 
     The task is collecting statistics.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetCompactionPlansResp result = await client.GetCompactionPlansAsync(new GetCompactionPlansReq
+{
+    CompactionId = 450357031542
+});
+
+foreach (CompactionMergeInfo plan in result.MergeInfos)
+{
+    if (plan.State == CompactionTaskState.Completed)
+    {
+        Console.WriteLine($"Task {plan.PlanId} completed");
+    }
+}
+```

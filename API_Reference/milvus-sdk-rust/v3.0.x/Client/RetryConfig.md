@@ -35,3 +35,18 @@ Each field has a consuming setter, a mutable setter, and a getter.
 - `max_backoff(mut self, value: Duration) -> Self` — sets the upper bound for the delay between attempts. `set_max_backoff(&mut self, value)` and `get_max_backoff() -> Duration` are also available.
 - `backoff_multiplier(mut self, value: f64) -> Self` — sets the delay multiplier. `set_backoff_multiplier(&mut self, value)` and `get_backoff_multiplier() -> f64` are also available.
 - `retry_on_rate_limit(mut self, value: bool) -> Self` — sets whether rate-limit responses are retried. `set_retry_on_rate_limit(&mut self, value)` and `get_retry_on_rate_limit() -> bool` are also available.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let retry = RetryConfig::new()
+    .max_attempts(10)
+    .retry_on_rate_limit(true);
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .retry(retry);
+let client = ClientV2::new(&config).await?;
+```

@@ -58,3 +58,34 @@ public sealed class FunctionSchema
 - `CreateBm25(string name, string inputFieldName, string outputFieldName, string description = "", IDictionary<string, string>? @params = null)` (*static*) -
 
     Creates a BM25 full-text-search function. `inputFieldName` is the name of the input field and `outputFieldName` is the name of the output field.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var schema = new CollectionSchema { Name = "my_collection" };
+schema.Fields.Add(new FieldSchema("id", DataType.Int64, isPrimaryKey: true, autoId: true));
+schema.Fields.Add(FieldSchema.CreateVarchar("text", maxLength: 1024, enableAnalyzer: true));
+schema.Fields.Add(FieldSchema.CreateSparseFloatVector("sparse"));
+
+schema.Functions.Add(FunctionSchema.CreateBm25(
+    name: "bm25",
+    inputFieldName: "text",
+    outputFieldName: "sparse"));
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema
+});
+```

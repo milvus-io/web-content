@@ -51,3 +51,30 @@ public enum CompactionTaskState
 - **Statistic** (10)
 
     The compaction task is collecting statistics.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.CompactionPlan;
+import io.milvus.v2.common.CompactionTaskState;
+import io.milvus.v2.service.utility.request.GetCompactionPlansReq;
+import io.milvus.v2.service.utility.response.GetCompactionPlansResp;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus") // replace this with your token
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+GetCompactionPlansResp resp = client.getCompactionPlans(GetCompactionPlansReq.builder()
+        .compactionID(compactionID)
+        .build());
+for (CompactionPlan plan : resp.getPlans()) {
+    if (plan.getState() == CompactionTaskState.Completed) {
+        System.out.println("Compaction task completed: " + plan.getPlanId());
+    }
+}
+```

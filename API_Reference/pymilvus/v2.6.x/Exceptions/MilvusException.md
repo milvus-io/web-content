@@ -170,3 +170,23 @@ The following exception classes derive from **MilvusException**:
 - **ServerVersionIncompatibleException** -
 
     Raised when the server version is incompatible.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, MilvusException
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+try:
+    client.create_collection(
+        collection_name="my_collection",
+        dimension=5,
+    )
+except MilvusException as e:
+    print(f"Error code: {e.code}")
+    print(f"Error message: {e.message}")
+```

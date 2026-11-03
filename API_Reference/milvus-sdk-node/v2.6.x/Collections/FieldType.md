@@ -77,3 +77,26 @@ export type FieldType = {
 - **fields** (FieldType[])
 
     Nested fields, for struct fields.
+
+## Example
+
+```javascript
+import { MilvusClient, DataType, FieldType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const fields: FieldType[] = [
+    { name: 'id', data_type: DataType.Int64, is_primary_key: true, autoID: true },
+    { name: 'text', data_type: DataType.VarChar, type_params: { max_length: 512 } },
+    { name: 'vector', data_type: DataType.FloatVector, type_params: { dim: 8 } },
+];
+
+await milvusClient.createCollection({
+    collection_name: 'my_collection',
+    fields,
+});
+```
+

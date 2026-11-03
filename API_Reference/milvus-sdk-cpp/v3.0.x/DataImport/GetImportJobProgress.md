@@ -54,30 +54,7 @@ auto status = milvus::BulkImport::GetImportJobProgress(
 
 *[Status](../Client/Status.md)*
 
-Returns a [Status](../Client/Status.md) indicating whether the REST call succeeded. The REST envelope and payload are carried in `BulkImportResponse`.
-
-- **response** (*BulkImportResponse*) -
-
-
-    - **RawJson** (*const nlohmann::json&*) -
-
-        Returns the raw JSON body.
-
-    - **Code** (*int64_t*) -
-
-        Returns the REST envelope code.
-
-    - **Message** (*std::string*) -
-
-        Returns the REST envelope message.
-
-    - **Data** (*const nlohmann::json&*) -
-
-        Returns the REST envelope data object.
-
-    - **JobId** (*std::string*) -
-
-        Returns the created job ID when applicable; otherwise returns an empty string.
+Returns a [Status](../Client/Status.md) indicating whether the REST call succeeded. The REST envelope and payload are carried in a [BulkImportResponse](BulkImportResponse.md). See [BulkImportResponse](BulkImportResponse.md) for its members.
 
 **ERROR HANDLING:**
 

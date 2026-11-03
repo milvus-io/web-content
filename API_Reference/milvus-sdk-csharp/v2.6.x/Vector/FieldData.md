@@ -86,3 +86,30 @@ public class FieldData<TData> : FieldData
 - `CreateJson(...)` (*static*) -
 
     Creates a `Json` field data; each row is a JSON string.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+await client.InsertAsync(new InsertReq
+{
+    CollectionName = "my_collection",
+    ColumnsData =
+    [
+        FieldData.Create<long>("id", [1, 2, 3]),
+        FieldData.CreateVarChar("title", ["Book A", "Book B", "Book C"]),
+        FieldData.CreateFloatVector("embedding",
+            [new float[] { 0.1f, 0.2f }, new float[] { 0.3f, 0.4f }, new float[] { 0.5f, 0.6f }])
+    ]
+});
+```

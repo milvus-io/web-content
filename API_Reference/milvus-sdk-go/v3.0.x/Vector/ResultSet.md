@@ -58,3 +58,36 @@ The search error, if any.
 - `Unmarshal(receiver any) error`
 
     Unmarshals the data set into a slice of pointers to model structs in a row-based way. Note that distance/score is not unmarshaled here.
+
+## Example
+
+Demonstrates ResultSet usage.
+
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "127.0.0.1:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+rs, err := cli.Query(ctx, milvusclient.NewQueryOption("quick_setup").
+	WithFilter("emb_type == 3").
+	WithOutputFields("id", "emb_type"))
+if err != nil {
+	// handle error
+}
+
+fmt.Println(rs.Len(), rs.GetColumn("id"))
+```

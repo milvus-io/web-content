@@ -33,3 +33,27 @@ public enum CompactionState
 - **Completed** (2)
 
     The compaction job has completed.
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.CompactionState;
+import io.milvus.v2.service.utility.request.GetCompactionStateReq;
+import io.milvus.v2.service.utility.response.GetCompactionStateResp;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus") // replace this with your token
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+GetCompactionStateResp resp = client.getCompactionState(GetCompactionStateReq.builder()
+        .compactionID(compactionID)
+        .build());
+if (resp.getState() == CompactionState.Completed) {
+    System.out.println("Compaction completed");
+}
+```

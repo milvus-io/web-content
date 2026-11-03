@@ -91,3 +91,26 @@ public enum RestoreSnapshotState
 - **Failed** (4)
 
     The restore job has failed.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Snapshot;
+using Milvus.Client.V2.Responses.Snapshot;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetRestoreSnapshotStateResp result = await client.GetRestoreSnapshotStateAsync(new GetRestoreSnapshotStateReq
+{
+    JobId = 12345
+});
+
+RestoreSnapshotJobInfo job = result.JobInfo;
+Console.WriteLine($"{job.CollectionName}: {job.State} ({job.Progress}%)");
+```

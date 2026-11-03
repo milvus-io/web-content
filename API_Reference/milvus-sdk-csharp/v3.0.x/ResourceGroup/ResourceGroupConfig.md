@@ -34,3 +34,34 @@ public sealed class ResourceGroupConfig
 - `NodeFilterLabels` (*IDictionary\<string, string\>*) -
 
     The node labels used to filter nodes when assigning them to this resource group. Entries are added via the collection-initializer syntax `NodeFilterLabels = { ... }`.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.ResourceGroup;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var config = new ResourceGroupConfig
+{
+    RequestsNodeNum = 1,
+    LimitsNodeNum = 2,
+    TransferFrom = { "rg_2" },
+    NodeFilterLabels = { ["type"] = "gpu" }
+};
+
+await client.UpdateResourceGroupsAsync(new UpdateResourceGroupsReq
+{
+    ResourceGroups = new Dictionary<string, ResourceGroupConfig>
+    {
+        ["rg_1"] = config
+    }
+});
+```

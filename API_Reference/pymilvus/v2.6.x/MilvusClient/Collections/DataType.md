@@ -102,3 +102,25 @@ class DataType(IntEnum):
 - **SPARSE_FLOAT_VECTOR** (104)
 
     Sets the data type to **Sparse Vector**.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, DataType
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Set up a schema using DataType constants
+schema = client.create_schema(auto_id=False, enable_dynamic_field=False)
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="title", datatype=DataType.VARCHAR, max_length=512)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+
+client.create_collection(
+    collection_name="my_collection",
+    schema=schema,
+)
+```

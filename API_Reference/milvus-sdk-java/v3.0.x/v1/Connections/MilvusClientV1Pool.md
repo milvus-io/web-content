@@ -166,3 +166,31 @@ try {
     pool.returnClient("client_name", client); // make sure the client is returned after use
 }
 ```
+
+## Example
+
+```java
+import io.milvus.param.ConnectParam;
+import io.milvus.pool.PoolConfig;
+import io.milvus.pool.MilvusClientV1Pool;
+import io.milvus.client.MilvusClient;
+
+ConnectParam connectParam = ConnectParam.newBuilder()
+        .withHost("localhost")
+        .withPort(19530)
+        .build();
+PoolConfig poolConfig = PoolConfig.builder()
+        .maxIdlePerKey(10)
+        .maxTotalPerKey(20)
+        .maxTotal(100)
+        .build();
+MilvusClientV1Pool pool = new MilvusClientV1Pool(poolConfig, connectParam);
+
+MilvusClient client = pool.getClient("client_name");
+try {
+    // use the client to do something
+} finally {
+    pool.returnClient("client_name", client); // make sure the client is returned after use
+}
+pool.close();
+```

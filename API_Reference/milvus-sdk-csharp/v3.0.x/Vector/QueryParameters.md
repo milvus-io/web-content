@@ -69,3 +69,32 @@ public sealed class QueryParameters
 - `ExtraParameters` (*IDictionary\<string, string\>*) -
 
     Additional query parameters passed through to the server verbatim, mirroring the Java SDK's `QueryReq.queryParams` map. Entries are added via the collection-initializer syntax `ExtraParameters = { ... }`.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+QueryResp results = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "pages > {minPages}",
+    Parameters = new QueryParameters
+    {
+        Limit = 10,
+        OutputFields = { "title", "pages" },
+        ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+        FilterTemplates = { ["minPages"] = 100 }
+    }
+});
+```

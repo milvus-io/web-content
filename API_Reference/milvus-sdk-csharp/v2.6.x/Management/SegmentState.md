@@ -79,3 +79,28 @@ public enum SegmentLevel
 - **L2** (3)
 
     L2 segment: segment with extra data distribution info.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetQuerySegmentInfoResp info = await client.GetQuerySegmentInfoAsync(new GetQuerySegmentInfoReq
+{
+    CollectionName = "my_collection"
+});
+
+foreach (QuerySegmentInfo segment in info.Infos)
+{
+    Console.WriteLine($"Segment {segment.SegmentId}: {segment.State}");
+}
+```

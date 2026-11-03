@@ -28,3 +28,22 @@ class FunctionType(IntEnum):
 - **MINHASH** (4)
 
     Sets the function type to **MINHASH**. This indicates that Milvus will use the MinHash algorithm to generate a binary vector embedding for a designated VARCHAR or TEXT field.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, Function, FunctionType
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Create a BM25 function that generates sparse embeddings from a text field
+bm25_function = Function(
+    name="bm25",
+    function_type=FunctionType.BM25,
+    input_field_names=["text"],
+    output_field_names=["sparse_vector"],
+)
+```

@@ -198,6 +198,15 @@ discipline:
   replacement re-wraps them (`(*[T](path)*)`, not `([T](path))`); and per-tree
   key mismatches (e.g. keys carrying a version prefix the lookup omits)
   silently empty the target set.
+- **Do not assume one inline-annotation form.** The C# tree expands types
+  inline with a bold `**T**` type name + code sketch + `**PARAMETERS:**`
+  member block, not `(*T*)` annotations. A detector keyed only on `(*T*)` /
+  `### T` forms silently reports zero inline expansions for C# and misses
+  real "both inline and standalone page" duplicates (e.g. a top-level
+  response wrapper page that its operation pages also expand inline). Include
+  the C# bold-form detector and, when a scan reports zero matches, verify the
+  target tree actually uses the scanned annotation form before trusting the
+  result.
 
 ## Two modes
 
@@ -1064,6 +1073,38 @@ rewrite the members from memory.
 After creating a new page, run the whole-tree reference sweep (see "When
 reconciliation creates a new dedicated type/enum page" above) to link every
 mention of the type.
+
+**Detect every inline-expansion form.** Inline expansions are NOT limited to
+the `(*T*)` annotation + nested-member-bullets form used by C++/Rust/Go. The
+C# tree documents a type inline with a **bold `**T**`** type name (or a bare
+`T` in the prose/signature), a code sketch listing the members with `// ->
+type` annotations, and a `**PARAMETERS:**` / `**METHODS:**` member block —
+with NO `(*T*)` annotation at all. When scanning for "type X is expanded
+inline on page P" (Step 9 eligibility, Step 10 dedup, and the both-inline-and-
+page check), recognize each SDK's native inline form:
+- `(*T*)` annotation followed by indented member bullets (C++/Rust/Go/Java).
+- `**T**` (or bare `T`) + code sketch + `**PARAMETERS:**`/`**METHODS:**`
+  member block (C#). Do NOT treat a `[T](T.md)` link or a bold mention that is
+  immediately followed by a `](` link as an inline expansion by itself — but do
+  count it as inline when the same member block (code sketch + PARAMETERS)
+  documents the type, as in the C# operation pages.
+The dedicated-page eligibility rules above are per-type, not per-format: a
+**top-level response wrapper/envelope** (`BulkImportResp`, `XxxResp`,
+`XxxResponse`) that the operation pages already expand inline must never keep
+a standalone page — fold it and delete the page even when several operations
+share it. A **response subtype** (e.g. `SingleResult` under `SearchResp`,
+`HighlightResult`) referenced by multiple pages does keep a standalone page and
+is linked, not inline-expanded. Only global/cross-cutting status/response
+types (C++ `Status`, Java `MilvusClientException`), multi-page reusable
+domain types, and **a single top-level response class that a whole endpoint
+family shares** get standalone pages. The last exception covers the bulk-import
+REST endpoints in C# (`BulkImportResp`), Rust (`BulkImportResponse`), and C++
+(`BulkImportResponse`): every endpoint of the family returns the same envelope,
+so it keeps one standalone page under `DataImport/` and the operation pages
+link to it — the per-endpoint-unique top-level response wrappers stay folded
+inline as usual. A scanner that reports zero inline
+expansions for a tree with documented `**PARAMETERS:**` member blocks is
+missing that SDK's inline form — fix the scanner before proceeding.
 
 **Step 10 — Unnecessary standalone pages**: fold and delete a standalone page
 when it is a non-allowlisted nested request/response subtype, or when it is a

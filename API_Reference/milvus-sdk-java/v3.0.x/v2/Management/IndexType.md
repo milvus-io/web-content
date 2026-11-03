@@ -127,3 +127,15 @@ public enum IndexType
 - **FMINDEX**
 
     An exact byte-level substring index for VarChar fields. It answers anchored `LIKE` queries with prefix, infix, or suffix matching and no candidate recheck. This applies to VarChar fields only.
+
+## Example
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+```

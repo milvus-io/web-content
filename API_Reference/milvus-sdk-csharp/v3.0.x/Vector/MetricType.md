@@ -79,3 +79,28 @@ public enum MetricType
 - **MaxSimHamming** (13)
 
     Max-sim Hamming similarity (smaller is more similar). Applies to binary vectors inside a struct field.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "embedding",
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
+    MetricType = MetricType.Cosine,
+    Limit = 5
+});
+```

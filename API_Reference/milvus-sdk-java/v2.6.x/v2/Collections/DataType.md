@@ -87,3 +87,16 @@ public enum DataType
 - **Struct** (201)
 
     Sets the data type to **Struct**, which should be the element type of an **Array** field.
+
+## Example
+
+```java
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.CollectionSchema schema = MilvusClientV2.CreateSchema();
+schema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).build());
+schema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(2).build());
+```

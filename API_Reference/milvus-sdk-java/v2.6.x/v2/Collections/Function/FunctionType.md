@@ -23,3 +23,18 @@ public enum FunctionType
 - **RERANK** (3)
 
     Sets the function type to **Rerank**.
+
+## Example
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import java.util.Arrays;
+
+CreateCollectionReq.Function function = CreateCollectionReq.Function.builder()
+        .name("bm25")
+        .functionType(FunctionType.BM25)
+        .inputFieldNames(Arrays.asList("text"))
+        .outputFieldNames(Arrays.asList("sparse_vector"))
+        .build();
+```

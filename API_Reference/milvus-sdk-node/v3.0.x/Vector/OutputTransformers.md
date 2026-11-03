@@ -28,3 +28,24 @@ export type OutputTransformers = {
 - **[DataType.Int8Vector]** (*(int8Vector: Int8Array) => Int8Vector*) -
 
     Transforms Int8 vector arrays.
+
+## Example
+
+```javascript
+import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.search({
+    collection_name: 'my_collection',
+    vector: [0.1, 0.2, 0.3, 0.4],
+    limit: 5,
+    transformers: {
+        [DataType.Float16Vector]: bytes => new Float32Array(bytes),
+    },
+});
+```
+

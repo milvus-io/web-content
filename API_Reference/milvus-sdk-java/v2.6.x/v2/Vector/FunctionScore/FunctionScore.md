@@ -62,3 +62,29 @@ FunctionScore.builder()
 **RETURNS:**
 
 A **FunctionScore** instance.
+
+## Example
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.FunctionScore;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import java.util.Collections;
+
+CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
+        .functionType(FunctionType.RERANK)
+        .name("boost")
+        .param("reranker", "boost")
+        .param("weight", "0.5")
+        .build();
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f, 0.5f})))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build();
+```

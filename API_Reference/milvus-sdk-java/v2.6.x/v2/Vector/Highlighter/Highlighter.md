@@ -23,3 +23,28 @@ The following are the methods of the `Highlighter` interface:
 - [LexicalHighlighter](LexicalHighlighter.md)
 
 - [SemanticHighlighter](SemanticHighlighter.md)
+
+## Example
+
+```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.highlighter.Highlighter;
+import io.milvus.v2.service.vector.request.highlighter.LexicalHighlighter;
+import java.util.Arrays;
+import java.util.Collections;
+
+Highlighter highlighter = LexicalHighlighter.builder()
+        .highlightSearchText(true)
+        .preTags(Arrays.asList("{"))
+        .postTags(Arrays.asList("}"))
+        .build();
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(new EmbeddedText("test")))
+        .annsField("sparse_vector")
+        .topK(10)
+        .highlighter(highlighter)
+        .build();
+```

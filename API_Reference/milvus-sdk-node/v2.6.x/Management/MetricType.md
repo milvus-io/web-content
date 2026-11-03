@@ -88,3 +88,22 @@ export enum MetricType {
 - **DTW_IP** ('DTW_IP')
 
     Sets the metric type to DTW_IP. This applies only to embedding lists.
+
+## Example
+
+```javascript
+import { MilvusClient, IndexType, MetricType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createIndex({
+    collection_name: 'my_collection',
+    field_name: 'vector',
+    index_type: IndexType.HNSW,
+    metric_type: MetricType.COSINE,
+});
+```
+

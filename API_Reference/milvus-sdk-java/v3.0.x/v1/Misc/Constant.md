@@ -46,3 +46,33 @@ Predefined constant values for quick input for interfaces.
      <td><p>Property key for createCollection() and alterCollection() to set default resource groups.</p></td>
    </tr>
 </table>
+
+## Example
+
+```java
+import io.milvus.grpc.DataType;
+import io.milvus.param.Constant;
+import io.milvus.param.CreateCollectionParam;
+import io.milvus.param.R;
+import io.milvus.param.RpcStatus;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+
+CollectionSchemaParam schema = CollectionSchemaParam.newBuilder()
+        .addFieldType(FieldType.newBuilder()
+                .withName("id")
+                .withDataType(DataType.Int64)
+                .withPrimaryKey(true)
+                .build())
+        .build();
+
+CreateCollectionParam param = CreateCollectionParam.newBuilder()
+        .withCollectionName(COLLECTION_NAME)
+        .withSchema(schema)
+        .withProperty(Constant.TTL_SECONDS, "100")
+        .build();
+R<RpcStatus> response = client.createCollection(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+```

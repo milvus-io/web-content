@@ -24,3 +24,26 @@ public enum RowPolicyType
 - **Restrictive** (2)
 
     Restrictive policy type. A row must match all restrictive policies.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Rls;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+await client.CreateRowPolicyAsync(new CreateRowPolicyReq
+{
+    CollectionName = "my_collection",
+    PolicyName = "policy_1",
+    PolicyType = RowPolicyType.Restrictive,
+    Actions = [RowPolicyAction.Query],
+    UsingExpr = "region = 'EU'"
+});
+```

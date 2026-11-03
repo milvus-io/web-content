@@ -42,3 +42,27 @@ class BulkInsertState:
 - **ImportUnknownState** (100)
 
     Indicates that the bulk insert task state is unknown.
+
+## Example
+
+```python
+from pymilvus import connections, utility, BulkInsertState
+
+# Connect to localhost:19530
+connections.connect()
+
+# Bulk-insert data
+task_id = utility.do_bulk_insert(
+    collection_name="test_collection",
+    files=["data/id.npy", "data/vector.npy"],
+)
+
+# Get the state of the bulk-insert task
+res = utility.get_bulk_insert_state(task_id=task_id)
+
+# Check the task state against BulkInsertState constants
+if res.state == BulkInsertState.ImportCompleted:
+    print("Bulk insert completed")
+elif res.state == BulkInsertState.ImportFailed:
+    print("Bulk insert failed")
+```

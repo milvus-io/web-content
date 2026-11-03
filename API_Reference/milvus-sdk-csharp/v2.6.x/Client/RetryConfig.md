@@ -39,3 +39,27 @@ public sealed class RetryConfig
 - `MaxRetryTimeout` (*TimeSpan?*) -
 
     An optional overall timeout for the whole retry loop. `null` (or `TimeSpan.Zero`) means no overall cap; only `MaxRetryTimes` applies.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+var retry = new RetryConfig
+{
+    MaxRetryTimes = 10,
+    InitialBackOff = TimeSpan.FromMilliseconds(100),
+    MaxBackOff = TimeSpan.FromSeconds(5),
+    BackOffMultiplier = 2,
+    RetryOnRateLimit = true
+};
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus",
+    Retry = retry
+});
+```

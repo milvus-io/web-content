@@ -275,3 +275,20 @@ R<ShowCollectionsResponse> response = client.withTimeout(2, TimeUnit.SECONDS).sh
 
 client.close(1);
 ```
+
+## Example
+
+```java
+import io.milvus.client.MilvusClient;
+import io.milvus.client.MilvusServiceClient;
+import io.milvus.param.ConnectParam;
+
+ConnectParam connectParam = ConnectParam.newBuilder()
+        .withHost("localhost")
+        .withPort(19530)
+        .withAuthorization("root", "Milvus")
+        .build();
+
+MilvusClient client = new MilvusServiceClient(connectParam);
+client.close(1);
+```

@@ -53,3 +53,15 @@ Each field has a consuming setter, a mutable setter, and a getter.
 - `database(mut self, database: impl Into<String>) -> Self` — sets the database selected on connection. `set_database(&mut self, database)` and `get_database() -> &str` are also available.
 - `retry(mut self, retry: RetryConfig) -> Self` — sets the retry policy. `set_retry(&mut self, retry)` and `get_retry() -> &RetryConfig` are also available.
 - `username_password(self, username: &str, password: &str) -> Self` — sets the token from a username and password pair.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .database("books");
+let client = ClientV2::new(&config).await?;
+```

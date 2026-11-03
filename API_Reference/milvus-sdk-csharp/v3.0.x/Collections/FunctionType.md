@@ -39,3 +39,35 @@ public enum FunctionType
 - **MolFingerprint** (5)
 
     A molecular-fingerprint function.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var schema = new CollectionSchema { Name = "my_collection" };
+schema.Fields.Add(new FieldSchema("id", DataType.Int64, isPrimaryKey: true, autoId: true));
+schema.Fields.Add(FieldSchema.CreateVarchar("text", maxLength: 1024));
+schema.Fields.Add(FieldSchema.CreateSparseFloatVector("sparse"));
+
+schema.Functions.Add(new FunctionSchema(
+    "bm25",
+    FunctionType.Bm25,
+    inputFieldNames: ["text"],
+    outputFieldNames: ["sparse"]));
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema
+});
+```

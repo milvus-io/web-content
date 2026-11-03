@@ -34,6 +34,10 @@ type ResourceGroupConfig struct {
 
     The node filter.
 
+    A `ResourceGroupNodeFilter` selects nodes by label when the resource group is used. It has one field:
+
+    - **NodeLabels** (*map[string]string*) - The label keys and values that matching nodes must have.
+
 ## Example
 
 ```go

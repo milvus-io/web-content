@@ -69,3 +69,24 @@ public sealed class ConnectConfig
 - `Retry` (*RetryConfig?*) -
 
     The retry policy applied to RPC calls. When `null`, a default [RetryConfig](RetryConfig.md) is used.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus",
+    ConnectTimeout = TimeSpan.FromSeconds(30),
+    Retry = new RetryConfig
+    {
+        MaxRetryTimes = 10,
+        RetryOnRateLimit = true
+    }
+});
+await client.ConnectAsync();
+```

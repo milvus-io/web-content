@@ -41,3 +41,39 @@ public sealed class MilvusHighlightData
 - `Scores` (*IReadOnlyList\<float\>*) -
 
     The per-fragment relevance scores.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "sparse",
+    Texts = ["The Hobbit"],
+    Limit = 5,
+    Parameters = new SearchParameters
+    {
+        Highlighter = { ["pre_tag"] = "<b>", ["post_tag"] = "</b>" }
+    }
+});
+
+foreach (HighlightResult highlight in results.HighlightResults ?? [])
+{
+    foreach (MilvusHighlightData data in highlight.Datas)
+    {
+        Console.WriteLine(string.Join(" ", data.Fragments));
+    }
+}
+```

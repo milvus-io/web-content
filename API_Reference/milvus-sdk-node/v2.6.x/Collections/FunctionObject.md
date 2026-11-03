@@ -38,3 +38,28 @@ export type FunctionObject = {
 - **params** (*Record<string, any>*) -
 
     Function parameters.
+
+## Example
+
+```javascript
+import { MilvusClient, FunctionType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createCollection({
+    collection_name: 'my_collection',
+    functions: [
+        {
+            name: 'text_embedding',
+            type: FunctionType.TEXTEMBEDDING,
+            input_field_names: ['text'],
+            output_field_names: ['vector'],
+            params: { model: 'bge-large-zh-v1.5' },
+        },
+    ],
+});
+```
+

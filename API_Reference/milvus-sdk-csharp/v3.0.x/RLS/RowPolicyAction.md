@@ -54,3 +54,27 @@ public enum RowPolicyAction
 - **HybridSearch** (7)
 
     Hybrid search action.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Rls;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+await client.CreateRowPolicyAsync(new CreateRowPolicyReq
+{
+    CollectionName = "my_collection",
+    PolicyName = "policy_1",
+    PolicyType = RowPolicyType.Permissive,
+    Actions = [RowPolicyAction.Query, RowPolicyAction.Insert],
+    UsingExpr = "age > 18",
+    CheckExpr = "age > 18"
+});
+```

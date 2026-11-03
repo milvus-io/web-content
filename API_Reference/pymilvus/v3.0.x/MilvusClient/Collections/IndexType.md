@@ -122,3 +122,36 @@ class IndexType(str, Enum):
 - **AUTOINDEX**
 
     Sets the index type to **AUTOINDEX**.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, DataType, IndexType
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Set up a schema
+schema = client.create_schema(auto_id=False, enable_dynamic_field=False)
+schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+
+# Prepare index parameters
+index_params = client.prepare_index_params()
+
+# Add an index using an IndexType constant
+index_params.add_index(
+    field_name="my_vector",
+    index_type=IndexType.AUTOINDEX,
+    metric_type="L2",
+)
+
+# Create the collection with the index
+client.create_collection(
+    collection_name="customized_setup",
+    schema=schema,
+    index_params=index_params,
+)
+```

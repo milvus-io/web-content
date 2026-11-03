@@ -105,3 +105,41 @@ A **[RemoteBulkWriter](RemoteBulkWriter.md)** object.
 
     This exception will be raised if the connection fails.
 
+## Example
+
+```python
+from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus.bulk_writer import RemoteBulkWriter
+
+# Set up a schema
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=5),
+    ]
+)
+
+# Set up AWS-S3-compatible connection parameters
+connect_param = RemoteBulkWriter.S3ConnectParam(
+    bucket_name="my-bucket",
+    endpoint="s3.amazonaws.com",
+    access_key="ACCESS_KEY",
+    secret_key="SECRET_KEY",
+    secure=True,
+)
+
+# Set up a remote bulk writer
+writer = RemoteBulkWriter(
+    schema=schema,
+    remote_path="/path/to/bucket/prefix",
+    connect_param=connect_param,
+)
+
+# Append a row to the writer
+writer.append_row(
+    {"id": 0, "vector": [0.1, 0.4, -0.8, -0.2, 0.4]}
+)
+
+# Commit the appended data
+writer.commit()
+```
+

@@ -33,3 +33,24 @@ export enum ConsistencyLevelEnum {
 - **Customized** (4)
 
     The caller passes its own guarantee timestamp. Deprecated.
+
+## Example
+
+```javascript
+import { MilvusClient, ConsistencyLevelEnum, DataType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createCollection({
+    collection_name: 'my_collection',
+    consistency_level: ConsistencyLevelEnum.Strong,
+    fields: [
+        { name: 'id', data_type: DataType.Int64, is_primary_key: true, autoID: true },
+        { name: 'vector', data_type: DataType.FloatVector, type_params: { dim: 8 } },
+    ],
+});
+```
+

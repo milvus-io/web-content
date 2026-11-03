@@ -26,3 +26,17 @@ public sealed class CrossClusterTopology
 - `CrossClusterTopology(string sourceClusterId, string targetClusterId)` (*constructor*) -
 
     Creates a new topology entry.
+
+## Example
+
+```csharp
+using Milvus.Client.V2.Types;
+
+var topology = new CrossClusterTopology(
+    sourceClusterId: "cluster-a",
+    targetClusterId: "cluster-b");
+
+var configuration = new ReplicateConfiguration(
+    clusters: [new MilvusCluster("cluster-a", "http://cluster-a:19530", "token-a")],
+    crossClusterTopologies: [topology]);
+```

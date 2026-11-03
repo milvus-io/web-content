@@ -36,3 +36,17 @@ public sealed class MilvusCluster
 - `MilvusCluster(string clusterId, string uri, string token = "", IEnumerable<string>? pchannels = null)` (*constructor*) -
 
     Creates a new cluster definition.
+
+## Example
+
+```csharp
+using Milvus.Client.V2.Types;
+
+var cluster = new MilvusCluster(
+    clusterId: "cluster-a",
+    uri: "http://cluster-a:19530",
+    token: "token-a",
+    pchannels: ["by-dev-rootcoord-dml_0"]);
+
+var configuration = new ReplicateConfiguration(clusters: [cluster]);
+```

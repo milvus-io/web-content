@@ -152,53 +152,7 @@ The request selects exactly one import mode: open-source Milvus with `files`, Zi
 
 **RETURNS:**
 
-A **BulkImportResponse** containing the bulk-import endpoint response. Returns an `Error` if the operation fails.
-
-```rust
-BulkImportResponse
-    code() // -> i64
-    message() // -> &str
-    data() // -> &Value
-    get_data_field() // -> Option<&Value>
-    job_id() // -> Option<&str>
-    state() // -> Option<&str>
-    progress() // -> Option<i64>
-    reason() // -> Option<&str>
-```
-
-**METHODS:**
-
-- `code()` (*i64*) -
-
-    The response status code.
-
-- `message()` (*&str*) -
-
-    The response message.
-
-- `data()` (*&Value*) -
-
-    The raw response data payload.
-
-- `get_data_field()` (*Option<&Value>*) -
-
-    A named field from the response data, when present.
-
-- `job_id()` (*Option<&str>*) -
-
-    The job ID reported by the endpoint, when present.
-
-- `state()` (*Option<&str>*) -
-
-    The job state reported by the endpoint, when present.
-
-- `progress()` (*Option<i64>*) -
-
-    The job progress reported by the endpoint, when present.
-
-- `reason()` (*Option<&str>*) -
-
-    The failure reason reported by the endpoint, when present.
+A **[BulkImportResponse](BulkImportResponse.md)** object containing the bulk-import endpoint response. Returns an `Error` if the operation fails. See [BulkImportResponse](BulkImportResponse.md) for its methods.
 
 ### ListImportJobs()
 

@@ -17,6 +17,22 @@ public sealed class FunctionChain
 
     The execution stage where this function chain runs. Must be set to a non-unspecified stage (e.g. `FunctionChainStage.L2Rerank`).
 
+    The `FunctionChainStage` enum supports the following values:
+
+    - `Unspecified` (0) - The stage is unspecified; the request is rejected.
+
+    - `Ingestion` (1) - The chain runs at ingestion time.
+
+    - `PreProcess` (2) - The chain runs before the vector search.
+
+    - `L0Rerank` (3) - The chain reranks L0 candidates.
+
+    - `L1Rerank` (4) - The chain reranks L1 candidates.
+
+    - `L2Rerank` (5) - The chain reranks L2 candidates.
+
+    - `PostProcess` (6) - The chain runs after all reranking.
+
 - `Name` (*string*) -
 
     An optional SDK/debug name of this function chain.
@@ -155,3 +171,36 @@ A dynamically-typed parameter value for function-chain arguments. Values can be 
 - `FromObject(IReadOnlyDictionary<string, FunctionParamValue> fields)` (*static*) -
 
     Creates an object (map) parameter value.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var chain = new FunctionChain
+{
+    Stage = FunctionChainStage.L2Rerank,
+    Name = "rerank_chain"
+};
+chain.Ops.Add(FunctionChainOp.Sort("score", desc: true));
+chain.Ops.Add(FunctionChainOp.Limit(5));
+
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "embedding",
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
+    Limit = 10,
+    FunctionChains = [chain]
+});
+```

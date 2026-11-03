@@ -49,3 +49,22 @@ class SegmentState(IntEnum):
 - **Importing** (7)
 
     Indicates that the segment is being imported through a bulk import job.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, SegmentState
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# List only sealed and flushed segments
+segments = client.list_segments(
+    collection_name="my_collection",
+    states=[SegmentState.Sealed, SegmentState.Flushed],
+)
+for seg in segments:
+    print(f"Segment {seg.segment_id}: state={seg.state}")
+```

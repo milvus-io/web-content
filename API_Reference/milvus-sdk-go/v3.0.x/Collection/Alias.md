@@ -23,3 +23,33 @@ type Alias struct {
 - **CollectionName** (*string*)
 
     The name of the associated collection.
+
+## Example
+
+Demonstrates Alias usage.
+
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "127.0.0.1:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+alias, err := cli.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption("bob"))
+if err != nil {
+	// handle error
+}
+fmt.Println(alias.Alias, alias.CollectionName)
+```

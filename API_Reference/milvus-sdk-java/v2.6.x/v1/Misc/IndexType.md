@@ -114,3 +114,21 @@ public enum IndexType
      <td><p>Only for SparseFloatVector type field.</p></td>
    </tr>
 </table>
+
+## Example
+
+```java
+import io.milvus.param.*;
+
+CreateIndexParam param = CreateIndexParam.newBuilder()
+        .withCollectionName(COLLECTION_NAME)
+        .withFieldName("vector")
+        .withIndexType(IndexType.IVF_FLAT)
+        .withMetricType(MetricType.L2)
+        .withExtraParam("{\"nlist\":64}")
+        .build();
+R<RpcStatus> response = client.createIndex(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+```

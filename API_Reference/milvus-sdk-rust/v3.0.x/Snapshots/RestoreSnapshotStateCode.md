@@ -33,3 +33,19 @@ pub enum RestoreSnapshotStateCode {
 - **Failed**
 
     The restore task failed.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let request = GetRestoreSnapshotStateRequest::builder()
+    .job_id(job_id)
+    .build()?;
+let resp = client.get_restore_snapshot_state(request).await?;
+match resp.job_info().get_state() {
+    RestoreSnapshotStateCode::Completed => println!("restore completed"),
+    RestoreSnapshotStateCode::Failed => println!("restore failed: {}", resp.job_info().get_reason()),
+    _ => println!("restore in progress"),
+}
+```
