@@ -391,7 +391,7 @@ Weighted Ranker is designed specifically for hybrid search operations that combi
 ```python
 from pymilvus import MilvusClient, AnnSearchRequest
 
-# Connect to Milvus server
+# Connect to the Milvus server
 milvus_client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"

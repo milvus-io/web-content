@@ -23,6 +23,7 @@
   "birdwatcher_release": "1.1.1",
   "minio_release": "RELEASE.2024-12-18T13-15-44Z",
   "product_name": "Milvus",
+  "connection_target": "the Milvus server",
   "example_endpoint": "http://localhost:19530",
   "example_token": "root:Milvus"
 }
