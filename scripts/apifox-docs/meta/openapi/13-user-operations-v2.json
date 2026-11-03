@@ -121,7 +121,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for creating a user, specifying the user name and password via `userName` and `password`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建用户的请求体，通过 `userName` 和 `password` 指定用户名和密码。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーを作成するためのリクエストボディです。`userName` と `password` でユーザー名とパスワードを指定します。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -253,7 +262,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the user is created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建用户后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ユーザー作成後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -365,7 +383,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for describing a user, identified by `userName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于描述用户的请求体，通过 `userName` 指定用户。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーの詳細を取得するためのリクエストボディです。対象のユーザーは `userName` で指定します。"
+                  }
+                }
               },
               "example": {
                 "userName": "my_user"
@@ -524,7 +551,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body containing information about the specified user.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含指定用户信息的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定したユーザーの情報を含むレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -631,7 +667,16 @@
                     "type": "string",
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The name of the database whose users you want to list.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要列出其用户的数据库名称。"
+                      },
+                      "ja-JP": {
+                        "description": "ユーザーを一覧表示するデータベースの名前。"
+                      }
+                    }
                   }
                 },
                 "description": "An empty object.",
@@ -787,7 +832,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body listing users.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出用户的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ユーザーを一覧表示するレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -915,7 +969,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for dropping a user, identified by `userName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于删除用户的请求体，通过 `userName` 指定要删除的用户。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーを削除するためのリクエストボディです。削除するユーザーは `userName` で指定します。"
+                  }
+                }
               },
               "example": {
                 "userName": "my_user"
@@ -1040,7 +1103,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The 200 response body returned for the drop-user operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除用户操作返回的 200 响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ユーザー削除操作で返される 200 レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1203,7 +1275,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for updating a user password; `userName` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "更新用户密码的请求载荷；`userName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーパスワードを更新するためのリクエストペイロード。`userName` は必須です。"
+                  }
+                }
               },
               "example": {
                 "newPassword": "P@ssw0rd!",
@@ -1347,7 +1428,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The 200 response body returned for the update-password operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新密码操作返回的 200 响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "パスワード更新操作で返される 200 レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1475,7 +1565,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for granting a role to a user; `roleName` and `userName` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "向用户授予角色的请求载荷；`roleName` 和 `userName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーにロールを付与するためのリクエストペイロード。`roleName` と `userName` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1619,7 +1718,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The 200 response body returned for the grant-role operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "授予角色操作返回的 200 响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロール付与操作で返される 200 レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1747,7 +1855,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for revoking a role from a user; `roleName` and `userName` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "从用户撤销角色的请求载荷；`roleName` 和 `userName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "ユーザーからロールを剥奪するためのリクエストペイロード。`roleName` と `userName` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1891,7 +2008,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The 200 response body returned for the revoke-role operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "撤销角色操作返回的 200 响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロール剥奪操作で返される 200 レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -102,11 +102,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of a partition to which this operation applies.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "此操作作用的一个分区名称。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作の対象となるパーティション名です。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the partitions to which this operation applies. When specified, the operation is limited to those partitions; when omitted, the entire Collection is covered.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "此操作作用的分区名称。指定后，操作范围仅限于这些分区；未指定时，则覆盖整个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作の対象となるパーティション名です。指定した場合、操作範囲はそれらのパーティションに限定され、指定しない場合は Collection 全体が対象になります。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -114,7 +132,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for listing the partitions of a Collection, which identifies the target Collection through `collectionName`, a required field.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "列出某个 Collection 中分区的请求体，通过必填字段 `collectionName` 指定目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection のパーティション一覧を取得するリクエストボディで、必須フィールド `collectionName` で対象の Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup"
@@ -192,7 +219,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload object that the operation may return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作可能返回的响应载荷对象。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作が返す可能性のあるレスポンスペイロードオブジェクトです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -248,7 +284,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the request that lists the partitions of a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Collection 分区的请求所返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のパーティション一覧取得リクエストに対して返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -388,7 +433,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for creating a Partition. It must include `collectionName` to identify the target Collection and `partitionName` for the Partition to create.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Partition 的请求体。必须包含用于指定目标 Collection 的 `collectionName`，以及用于指定要创建的 Partition 的 `partitionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Partition を作成するためのリクエストペイロードです。対象の Collection を指定する `collectionName` と、作成する Partition を指定する `partitionName` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "partitionName": "january",
@@ -522,7 +576,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload returned after the Partition creation request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理 Partition 创建请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Partition の作成リクエストが処理された後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -672,7 +735,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for loading Partitions into memory. It must include `collectionName` to identify the target Collection and `partitionNames` listing the Partitions to load.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于将 Partition 加载到内存的请求体。必须包含用于指定目标 Collection 的 `collectionName`，以及列出待加载 Partition 的 `partitionNames`。"
+                  },
+                  "ja-JP": {
+                    "description": "Partition をメモリにロードするためのリクエストペイロードです。対象の Collection を指定する `collectionName` と、ロードする Partition を列挙する `partitionNames` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "medium_articles",
@@ -801,7 +873,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload returned after the Partition load request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理 Partition 加载请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Partition のロードリクエストが処理された後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -956,7 +1037,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for releasing Partitions from memory. It must include `collectionName` to identify the target Collection and `partitionNames` listing the Partitions to release.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于将 Partition 从内存中释放的请求体。必须包含用于指定目标 Collection 的 `collectionName`，以及列出待释放 Partition 的 `partitionNames`。"
+                  },
+                  "ja-JP": {
+                    "description": "Partition をメモリから解放するためのリクエストペイロードです。対象の Collection を指定する `collectionName` と、解放する Partition を列挙する `partitionNames` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "partitionNames": [
@@ -1093,7 +1183,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload returned after the Partition release request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理 Partition 释放请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Partition の解放リクエストが処理された後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1228,7 +1327,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for checking whether a Partition exists. It must include `collectionName` to identify the target Collection and `partitionName` naming the Partition to check.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于检查 Partition 是否存在的请求体。必须包含用于指定目标 Collection 的 `collectionName`，以及指定待检查 Partition 的 `partitionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Partition が存在するかどうかを確認するためのリクエストペイロードです。対象の Collection を指定する `collectionName` と、確認する Partition を指定する `partitionName` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "partitionName": "january",
@@ -1310,7 +1418,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload form for the Partition existence check, reporting whether the requested Partition is present.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Partition 存在性检查的一种响应体形式，用于报告所请求的 Partition 是否存在。"
+                        },
+                        "ja-JP": {
+                          "description": "Partition の存在確認におけるレスポンスペイロードの一形態で、要求された Partition が存在するかどうかを示します。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1366,7 +1483,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload for the Partition existence check, reporting whether the requested Partition is present.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Partition 存在性检查的响应体，用于报告所请求的 Partition 是否存在。"
+                    },
+                    "ja-JP": {
+                      "description": "Partition の存在確認に対するレスポンスペイロードで、要求された Partition が存在するかどうかを示します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1504,7 +1630,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for retrieving statistics of a Partition. It must include `collectionName` to identify the target Collection and `partitionName` naming the Partition whose statistics are requested.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取 Partition 统计信息的请求体。必须包含用于指定目标 Collection 的 `collectionName`，以及指定需要获取统计信息的 Partition 的 `partitionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Partition の統計情報を取得するためのリクエストペイロードです。対象の Collection を指定する `collectionName` と、統計情報を取得する Partition を指定する `partitionName` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "partitionName": "january",
@@ -1586,7 +1721,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload form carrying the statistics of the requested Partition.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "携带所请求 Partition 统计信息的一种响应体形式。"
+                        },
+                        "ja-JP": {
+                          "description": "要求された Partition の統計情報を含むレスポンスペイロードの一形態です。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1642,7 +1786,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload carrying the statistics of the requested Partition.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "携带所请求 Partition 统计信息的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Partition の統計情報を含むレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1779,7 +1932,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for dropping a Partition from a Collection. It must include the target `collectionName` and the `partitionName` of the Partition to drop.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于从 Collection 中删除 Partition 的请求负载。必须包含目标 `collectionName` 以及要删除的 Partition 的 `partitionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection から Partition を削除するためのリクエストペイロードです。対象の `collectionName` と、削除する Partition の `partitionName` を含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "partitionName": "january",
@@ -1905,7 +2067,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned by the Partition drop operation, reporting the outcome of the request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Partition 删除操作返回的响应体，用于报告该请求的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Partition 削除操作が返すレスポンスボディで、リクエストの結果を報告します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

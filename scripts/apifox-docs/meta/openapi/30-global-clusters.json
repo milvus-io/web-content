@@ -90,9 +90,36 @@
                             "type": "array",
                             "items": {
                               "type": "string",
-                              "example": "aws-us-west-2"
+                              "example": "aws-us-west-2",
+                              "description": "A region group whose member regions can communicate with each other for Global Cluster usage.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "一个区域组，组内区域之间可以为 Global Cluster 互相通信。"
+                                },
+                                "ja-JP": {
+                                  "description": "リージョングループ。同じグループ内のリージョン同士は Global Cluster のために相互に通信できます。"
+                                }
+                              }
+                            },
+                            "description": "Region groups whose member regions can communicate with each other for Global Cluster usage. An empty array means no available region combination is currently exposed for the organization.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "可用于 Global Cluster 的区域组，组内区域之间可以互相通信。空数组表示当前没有为该组织提供可用的区域组合。"
+                              },
+                              "ja-JP": {
+                                "description": "Global Cluster で利用できるリージョングループ。同じグループ内のリージョン同士は相互に通信できます。空の配列は、現在この組織に利用可能なリージョンの組み合わせが公開されていないことを示します。"
+                              }
                             }
                           }
+                        }
+                      },
+                      "description": "A successful response payload listing the region groups available for Global Cluster usage.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "请求成功时返回的响应载荷之一，列出可用于 Global Cluster 的区域组。"
+                        },
+                        "ja-JP": {
+                          "description": "リクエスト成功時に返されるレスポンスペイロードのひとつで、Global Cluster に利用可能なリージョングループを一覧します。"
                         }
                       }
                     },
@@ -137,7 +164,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload listing the regions available for global clusters.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 global clusters 可用区域的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "global clusters で利用可能なリージョンを一覧するレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -456,8 +492,26 @@
                                 },
                                 "example": "2026-06-01T12:00:00Z"
                               }
+                            },
+                            "description": "A single Global Cluster returned in the list.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "列表中返回的一个 Global Cluster。"
+                              },
+                              "ja-JP": {
+                                "description": "リストに含まれる 1 つの Global Cluster。"
+                              }
                             }
                           }
+                        }
+                      },
+                      "description": "A response payload carrying the `globalClusters` list.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含 `globalClusters` 列表的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "`globalClusters` リストを含むレスポンスペイロード。"
                         }
                       }
                     },
@@ -503,7 +557,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body listing Global Clusters.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Global Cluster 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Global Cluster を一覧するレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -767,7 +830,16 @@
                       "required": [
                         "clusterName",
                         "regionId"
-                      ]
+                      ],
+                      "description": "A secondary Cluster to add to the Global Cluster, identified by `clusterName` and `regionId`; both are required. One or more secondary Clusters can be specified.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要添加到 Global Cluster 的从 Cluster，由 `clusterName` 和 `regionId` 标识，两者均为必填项。可以指定一个或多个从 Cluster。"
+                        },
+                        "ja-JP": {
+                          "description": "Global Cluster に追加するセカンダリ Cluster。`clusterName` と `regionId` で指定し、いずれも必須です。複数のセカンダリ Cluster を指定できます。"
+                        }
+                      }
                     }
                   }
                 },
@@ -778,7 +850,16 @@
                   "cuSize",
                   "primaryCluster",
                   "secondaryClusters"
-                ]
+                ],
+                "description": "Request body for creating a Global Cluster. `globalClusterName`, `projectId`, `cuType`, `cuSize`, `primaryCluster`, and `secondaryClusters` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "创建 Global Cluster 的请求体。`globalClusterName`、`projectId`、`cuType`、`cuSize`、`primaryCluster` 和 `secondaryClusters` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Global Cluster を作成するためのリクエストボディ。`globalClusterName`、`projectId`、`cuType`、`cuSize`、`primaryCluster`、`secondaryClusters` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -906,6 +987,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "A successful response payload for the Global Cluster creation request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Global Cluster 创建请求成功时返回的响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Global Cluster の作成リクエストが成功したときのレスポンスペイロード。"
+                        }
                       }
                     },
                     {
@@ -947,7 +1037,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when the Global Cluster creation request succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Global Cluster 创建请求成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Global Cluster の作成リクエストが成功したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1100,7 +1199,16 @@
                           },
                           "items": {
                             "type": "string",
-                            "example": "aws-us-west-2"
+                            "example": "aws-us-west-2",
+                            "description": "A region ID associated with the global cluster.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "与 Global Cluster 关联的一个区域 ID。"
+                              },
+                              "ja-JP": {
+                                "description": "Global Cluster に関連付けられたリージョン ID。"
+                              }
+                            }
                           }
                         },
                         "cuType": {
@@ -1244,11 +1352,29 @@
                                 },
                                 "example": "RUNNING"
                               }
+                            },
+                            "description": "A member cluster in the global cluster.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Global Cluster 中的一个成员集群。"
+                              },
+                              "ja-JP": {
+                                "description": "Global Cluster 内のメンバークラスター。"
+                              }
                             }
                           }
                         }
                       },
-                      "x-tab-label": "success"
+                      "x-tab-label": "success",
+                      "description": "A successful response payload for the single Global Cluster lookup.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "查询单个 Global Cluster 成功时返回的响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "単一の Global Cluster 取得が成功したときのレスポンスペイロード。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1291,7 +1417,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when retrieving a single Global Cluster by `globalClusterId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "通过 `globalClusterId` 获取单个 Global Cluster 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`globalClusterId` で単一の Global Cluster を取得したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1543,8 +1678,26 @@
                                 },
                                 "example": 120
                               }
+                            },
+                            "description": "Replication lag from the primary cluster to a secondary cluster.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "从主集群到一个辅助集群的复制延迟。"
+                              },
+                              "ja-JP": {
+                                "description": "プライマリクラスターからセカンダリクラスターへのレプリケーションラグ。"
+                              }
                             }
                           }
+                        }
+                      },
+                      "description": "A replication lag result for the global cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Global Cluster 的一个复制延迟结果。"
+                        },
+                        "ja-JP": {
+                          "description": "Global Cluster のレプリケーションラグ結果。"
                         }
                       }
                     },
@@ -1589,7 +1742,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The replication lag information for the global cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Global Cluster 的复制延迟信息。"
+                    },
+                    "ja-JP": {
+                      "description": "Global Cluster のレプリケーションラグ情報。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1738,14 +1900,32 @@
                       "required": [
                         "clusterName",
                         "regionId"
-                      ]
+                      ],
+                      "description": "A secondary cluster to add to the global cluster, specified by `clusterName` and `regionId`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要添加到 Global Cluster 的一个辅助集群，由 `clusterName` 和 `regionId` 指定。"
+                        },
+                        "ja-JP": {
+                          "description": "`clusterName` と `regionId` で指定される、Global Cluster に追加するセカンダリクラスター。"
+                        }
+                      }
                     },
                     "minItems": 1
                   }
                 },
                 "required": [
                   "secondaryClusters"
-                ]
+                ],
+                "description": "Request body for adding one or more secondary clusters to the global cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于向 Global Cluster 添加一个或多个辅助集群的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "Global Cluster に 1 つ以上のセカンダリクラスターを追加するためのリクエストボディ。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1796,6 +1976,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "The outcome of adding one or more secondary clusters to the global cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "向 Global Cluster 添加一个或多个辅助集群的结果。"
+                        },
+                        "ja-JP": {
+                          "description": "Global Cluster に 1 つ以上のセカンダリクラスターを追加した結果。"
+                        }
                       }
                     },
                     {
@@ -1839,7 +2028,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The result of adding secondary clusters to the global cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "向 Global Cluster 添加辅助集群的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Global Cluster へのセカンダリクラスター追加の結果。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1995,6 +2193,15 @@
                           },
                           "example": "The cluster has been deleted. If you consider this action to be an error, you have the option to restore the deleted cluster from the recycle bin within a 30-day period. Kindly note, this recovery feature does not apply to free clusters."
                         }
+                      },
+                      "description": "The outcome of removing the specified cluster from the global cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "从 Global Cluster 中移除指定集群的结果。"
+                        },
+                        "ja-JP": {
+                          "description": "Global Cluster から指定したクラスターを削除した結果。"
+                        }
                       }
                     },
                     {
@@ -2038,7 +2245,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The result of removing a cluster from the global cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从 Global Cluster 中移除一个集群的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Global Cluster からクラスターを削除した結果。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2152,7 +2368,16 @@
                 },
                 "required": [
                   "newPrimaryClusterId"
-                ]
+                ],
+                "description": "Request body for switching the primary cluster of the global cluster, specified by `newPrimaryClusterId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于切换 Global Cluster 主集群的请求体，由 `newPrimaryClusterId` 指定。"
+                  },
+                  "ja-JP": {
+                    "description": "`newPrimaryClusterId` で指定される、Global Cluster のプライマリクラスターを切り替えるためのリクエストボディ。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -2237,6 +2462,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "One possible success response payload for the switchover operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "switchover 操作可能返回的一种成功响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "スイッチオーバー操作で返される可能性がある成功レスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -2280,7 +2514,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when a global cluster switchover succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "全局集群切换成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "グローバルクラスターのスイッチオーバーが成功したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2395,7 +2638,16 @@
                 },
                 "required": [
                   "newPrimaryClusterId"
-                ]
+                ],
+                "description": "Request payload for failing over a global cluster, requiring `newPrimaryClusterId` to identify the new primary cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "对全局集群执行故障转移的请求负载，必须用 `newPrimaryClusterId` 指定新的主集群。"
+                  },
+                  "ja-JP": {
+                    "description": "グローバルクラスターのフェイルオーバー要求のペイロードで、新しいプライマリクラスターを指定する `newPrimaryClusterId` が必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -2480,6 +2732,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "One possible success response payload for the failover operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "failover 操作可能返回的一种成功响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "フェイルオーバー操作で返される可能性がある成功レスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -2523,7 +2784,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when a global cluster failover succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "全局集群故障转移成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "グローバルクラスターのフェイルオーバーが成功したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2729,12 +2999,30 @@
                               "required": [
                                 "cron",
                                 "target"
-                              ]
+                              ],
+                              "description": "An auto-scaling schedule defined by a `cron` expression and a `target`. Auto-scaling schedules are mutually exclusive with `min`/`max`, so specify only one of them.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "由 `cron` 表达式和 `target` 定义的自动扩缩容调度。自动扩缩容调度与 `min`/`max` 互斥，只能指定其中一种。"
+                                },
+                                "ja-JP": {
+                                  "description": "`cron` 式と `target` で定義される自動スケーリングスケジュール。自動スケーリングスケジュールは `min`/`max` と相互排他的であるため、いずれか一方のみを指定します。"
+                                }
+                              }
                             }
                           }
                         }
                       }
                     }
+                  }
+                },
+                "description": "Request payload for modifying the compute unit configuration of a global cluster; auto-scaling CU schedules can be supplied under `autoscaling.cu.schedules`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改全局集群计算单元配置的请求负载；可在 `autoscaling.cu.schedules` 下提供自动扩缩容 CU 调度。"
+                  },
+                  "ja-JP": {
+                    "description": "グローバルクラスターのコンピューティングユニット構成を変更する要求のペイロードです。自動スケーリングの CU スケジュールは `autoscaling.cu.schedules` で指定できます。"
                   }
                 }
               },
@@ -2811,6 +3099,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "One possible success response payload for the compute unit modification operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "modifyCU 操作可能返回的一种成功响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "コンピューティングユニット変更操作で返される可能性がある成功レスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -2854,7 +3151,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when modifying the compute unit configuration of a global cluster succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改全局集群计算单元配置成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "グローバルクラスターのコンピューティングユニット構成の変更が成功したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2966,6 +3272,15 @@
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "One possible success response payload for the global endpoint removal operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "移除全局端点操作可能返回的一种成功响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "グローバルエンドポイント削除操作で返される可能性がある成功レスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -3009,7 +3324,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when removing the global endpoint of a global cluster succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "移除全局集群的全局端点成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "グローバルクラスターのグローバルエンドポイントの削除が成功したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3157,7 +3481,16 @@
                       "required": [
                         "clusterName",
                         "regionId"
-                      ]
+                      ],
+                      "description": "Configuration for one secondary cluster to add when converting a cluster to a global cluster. It requires `clusterName` and `regionId`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "将集群转换为全局集群时要添加的一个次级集群的配置。需要提供 `clusterName` 和 `regionId`。"
+                        },
+                        "ja-JP": {
+                          "description": "クラスターをグローバルクラスターに変換する際に追加するセカンダリクラスター1つの設定です。`clusterName` と `regionId` が必要です。"
+                        }
+                      }
                     },
                     "minItems": 1
                   }
@@ -3166,7 +3499,16 @@
                   "clusterId",
                   "globalClusterName",
                   "secondaryClusters"
-                ]
+                ],
+                "description": "Request payload for converting an existing cluster into a global cluster, requiring `clusterId`, `globalClusterName`, and `secondaryClusters`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将现有集群转换为全局集群的请求负载，必须提供 `clusterId`、`globalClusterName` 和 `secondaryClusters`。"
+                  },
+                  "ja-JP": {
+                    "description": "既存のクラスターをグローバルクラスターに変換する要求のペイロードで、`clusterId`、`globalClusterName`、`secondaryClusters` が必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -3248,6 +3590,15 @@
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
                         }
+                      },
+                      "description": "A response object representing the result of converting a cluster to a global cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "表示将集群转换为全局集群结果的一个响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "クラスターをグローバルクラスターに変換した結果を表すレスポンスオブジェクト。"
+                        }
                       }
                     },
                     {
@@ -3291,7 +3642,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body for converting a cluster to a global cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "将集群转换为全局集群后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "クラスターをグローバルクラスターに変換した後に返される成功レスポンスのボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

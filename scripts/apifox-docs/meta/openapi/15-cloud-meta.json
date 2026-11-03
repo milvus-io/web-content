@@ -197,7 +197,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response returned by the clouds listing operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "云列表操作返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "クラウド一覧取得操作で返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -468,7 +477,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response returned by the regions listing operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "区域列表操作返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "リージョン一覧取得操作で返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

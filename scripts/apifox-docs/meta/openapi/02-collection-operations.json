@@ -211,7 +211,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response payload that lists Collections.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Collection 的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の一覧を返すレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -425,7 +434,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for creating a Collection. The caller must provide `collectionName` and `dimension`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Collection 的请求负载。调用方必须提供 `collectionName` 和 `dimension`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection を作成するためのリクエストペイロードです。呼び出し元は `collectionName` と `dimension` を指定する必要があります。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -498,7 +516,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single response payload returned by the Collection creation operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Collection 创建操作返回的单个响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "Collection の作成操作によって返される単一のレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -554,7 +581,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response payload returned by the Collection creation operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Collection 创建操作返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の作成操作によって返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -999,7 +1035,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "An object describing a Collection returned by the describe operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "由 describe 操作返回的、描述某个 Collection 的对象。"
+                        },
+                        "ja-JP": {
+                          "description": "describe 操作によって返される、Collection を説明するオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1055,7 +1100,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response payload that describes a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述 Collection 的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection を説明するレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1277,7 +1331,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for dropping a Collection. `collectionName` is required and identifies the Collection to drop.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "删除 Collection 的请求体。`collectionName` 为必填项，用于指定要删除的 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection を削除するためのリクエストボディ。`collectionName` は必須で、削除する Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "medium_articles"
@@ -1341,7 +1404,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "An object returned when a Collection is dropped successfully.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功删除 Collection 时返回的对象。"
+                        },
+                        "ja-JP": {
+                          "description": "Collection の削除が成功したときに返されるオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1397,7 +1469,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned after a Collection is dropped.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 Collection 后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の削除後に返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

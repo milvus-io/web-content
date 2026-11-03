@@ -164,7 +164,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for importing data into a Collection. The caller must provide `collectionName`, `objectUrl`, and `clusterId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于将数据导入 Collection 的请求负载。调用方必须提供 `collectionName`、`objectUrl` 和 `clusterId`。"
+                  },
+                  "ja-JP": {
+                    "description": "データを Collection にインポートするためのリクエストペイロードです。呼び出し元は `collectionName`、`objectUrl`、`clusterId` を指定する必要があります。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -256,7 +265,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single response payload returned by the import operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入操作返回的单个响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "インポート操作によって返される単一のレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -312,7 +330,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response payload returned by the import operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "导入操作返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "インポート操作によって返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -671,7 +698,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single response payload returned by the import status query.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入状态查询返回的单个响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートステータスの照会によって返される単一のレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -727,7 +763,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned by the import status query.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "导入状态查询返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートステータスの照会によって返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1066,7 +1111,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single response payload returned by the import list query.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入列表查询返回的单个响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "インポート一覧の照会によって返される単一のレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1122,7 +1176,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response payload that lists imports.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出导入的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートの一覧を返すレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -94,6 +94,15 @@
                       }
                     }
                   }
+                },
+                "description": "Request payload for a usage query.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用量查询的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "使用量クエリのリクエストペイロード。"
+                  }
                 }
               },
               "example": {
@@ -473,9 +482,36 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "description": "A single item within the result, represented as a key-value pair.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "结果中的单个条目，以键值对表示。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "結果内の単一の項目。キーと値のペアとして表されます。"
+                                        }
                                       }
                                     }
                                   }
+                                },
+                                "description": "A single result object in the usage query response.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "用量查询响应中的单个结果对象。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "使用量クエリレスポンス内の単一の結果オブジェクト。"
+                                  }
+                                }
+                              },
+                              "description": "Array of result objects produced by the usage query.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用量查询生成的结果对象数组。"
+                                },
+                                "ja-JP": {
+                                  "description": "使用量クエリによって生成される結果オブジェクトの配列。"
                                 }
                               }
                             }
@@ -525,7 +561,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload for a usage query.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "用量查询的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "使用量クエリのレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

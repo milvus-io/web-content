@@ -246,6 +246,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative object shapes the response body may take; a single shape applies per response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应体可能采用的备选对象结构之一；每次响应仅适用一种结构。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスボディが取り得る代替オブジェクト形状の 1 つ。レスポンスごとに 1 つの形状のみが適用されます。"
+                        }
                       }
                     },
                     {
@@ -290,7 +299,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned for the job listing request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "作业列表请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ジョブ一覧リクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -451,6 +469,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative object shapes the response body may take; a single shape applies per response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应体可能采用的备选对象结构之一；每次响应仅适用一种结构。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスボディが取り得る代替オブジェクト形状の 1 つ。レスポンスごとに 1 つの形状のみが適用されます。"
+                        }
                       }
                     },
                     {
@@ -495,7 +522,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body describing the requested job.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求作业的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "要求されたジョブを表すレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -657,6 +693,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative object shapes the response body may take; a single shape applies per response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应体可能采用的备选对象结构之一；每次响应仅适用一种结构。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスボディが取り得る代替オブジェクト形状の 1 つ。レスポンスごとに 1 つの形状のみが適用されます。"
+                        }
                       }
                     },
                     {
@@ -701,7 +746,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the cancel request has been accepted.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "取消请求已被接受时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "キャンセルリクエストが受け付けられたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -978,7 +1032,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the Spark JAR job has been created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Spark JAR 作业创建完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Spark JAR ジョブが作成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1207,7 +1270,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the deduplication job based on primary keys has been created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "基于主键的去重作业创建完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "主キーに基づく重複排除ジョブが作成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1441,7 +1513,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the deduplication job based on vector similarity has been created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "基于向量相似度的去重作业创建完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ベクトル類似度に基づく重複排除ジョブが作成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1672,7 +1753,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the kmeans job has been created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "kmeans 作业创建完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "kmeans ジョブが作成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1903,7 +1993,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the anomaly detection job has been created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "异常检测作业创建完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "異常検知ジョブが作成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2676,7 +2775,16 @@
           "fields": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One field name reported for the backfill job, taken from the non-empty scalar fields used to form aggregation buckets.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "为回填任务报告的一个字段名，取自用于构成聚合分组的非空标量字段。"
+                },
+                "ja-JP": {
+                  "description": "バックフィルジョブについて報告されるフィールド名の 1 つで、集計バケットを形成するために使用される非空のスカラーフィールドから取得されます。"
+                }
+              }
             },
             "description": "The target fields.",
             "x-i18n": {
@@ -2691,7 +2799,16 @@
           "columnMapping": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "Source-to-target column mapping reported for the backfill job, mapping each source column name to its target column name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "为回填任务报告的源列到目标列映射，将每个源列名映射到其目标列名。"
+                },
+                "ja-JP": {
+                  "description": "バックフィルジョブについて報告されるソース列からターゲット列へのマッピングで、各ソース列名を対応するターゲット列名にマッピングします。"
+                }
+              }
             },
             "description": "Source-to-target column mapping.",
             "x-i18n": {
@@ -2792,7 +2909,16 @@
           "fields": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One field name included in the precheck report, taken from the non-empty scalar fields used to form aggregation buckets.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "预检查报告中包含的一个字段名，取自用于构成聚合分组的非空标量字段。"
+                },
+                "ja-JP": {
+                  "description": "プリチェックレポートに含まれるフィールド名の 1 つで、集計バケットを形成するために使用される非空のスカラーフィールドから取得されます。"
+                }
+              }
             },
             "description": "The target fields.",
             "x-i18n": {
@@ -2807,7 +2933,16 @@
           "columnMapping": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "Source-to-target column mapping used by the precheck, mapping each source column name to its target column name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "预检查使用的源列到目标列映射，将每个源列名映射到其目标列名。"
+                },
+                "ja-JP": {
+                  "description": "プリチェックで使用されるソース列からターゲット列へのマッピングで、各ソース列名を対応するターゲット列名にマッピングします。"
+                }
+              }
             },
             "description": "Source-to-target column mapping.",
             "x-i18n": {
@@ -2822,7 +2957,16 @@
           "requiredSourceColumns": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One of the source columns required by the precheck.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "预检查所需的源列之一。"
+                },
+                "ja-JP": {
+                  "description": "プリチェックに必要なソース列の 1 つ。"
+                }
+              }
             },
             "description": "The required source columns.",
             "x-i18n": {
@@ -3146,7 +3290,16 @@
           "fields": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One field name for the backfill job, taken from the non-empty scalar fields used to form aggregation buckets.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "回填任务的一个字段名，取自用于构成聚合分组的非空标量字段。"
+                },
+                "ja-JP": {
+                  "description": "バックフィルジョブのフィールド名の 1 つで、集計バケットを形成するために使用される非空のスカラーフィールドから取得されます。"
+                }
+              }
             },
             "description": "The target fields.",
             "x-i18n": {
@@ -3161,7 +3314,16 @@
           "columnMapping": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "Source-to-target column mapping for the backfill job, mapping each source column name to its target column name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "回填任务的源列到目标列映射，将每个源列名映射到其目标列名。"
+                },
+                "ja-JP": {
+                  "description": "バックフィルジョブのソース列からターゲット列へのマッピングで、各ソース列名を対応するターゲット列名にマッピングします。"
+                }
+              }
             },
             "description": "Source-to-target column mapping.",
             "x-i18n": {
@@ -3281,7 +3443,16 @@
           "fields": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One field name for the precheck job, taken from the non-empty scalar fields used to form aggregation buckets.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "预检查任务的一个字段名，取自用于构成聚合分组的非空标量字段。"
+                },
+                "ja-JP": {
+                  "description": "プリチェックジョブのフィールド名の 1 つで、集計バケットを形成するために使用される非空のスカラーフィールドから取得されます。"
+                }
+              }
             },
             "description": "The target fields.",
             "x-i18n": {
@@ -3296,7 +3467,16 @@
           "columnMapping": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "Source-to-target column mapping for the precheck job, mapping each source column name to its target column name.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "预检查任务的源列到目标列映射，将每个源列名映射到其目标列名。"
+                },
+                "ja-JP": {
+                  "description": "プリチェックジョブのソース列からターゲット列へのマッピングで、各ソース列名を対応するターゲット列名にマッピングします。"
+                }
+              }
             },
             "description": "Source-to-target column mapping.",
             "x-i18n": {
@@ -3507,7 +3687,16 @@
           "arguments": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One argument passed to the Spark JAR job.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "传递给 Spark JAR 任务的一个参数。"
+                },
+                "ja-JP": {
+                  "description": "Spark JAR ジョブに渡される引数の 1 つ。"
+                }
+              }
             },
             "description": "The job arguments.",
             "x-i18n": {
@@ -3522,7 +3711,16 @@
           "jobParameters": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "Job parameters supplied to the Spark JAR job.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "为 Spark JAR 任务提供的任务参数。"
+                },
+                "ja-JP": {
+                  "description": "Spark JAR ジョブに指定するジョブパラメータ。"
+                }
+              }
             },
             "description": "The job parameters.",
             "x-i18n": {
@@ -3537,7 +3735,16 @@
           "sparkConf": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "description": "The Spark configuration for the job, expressed as a string value.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "该作业的 Spark 配置，以字符串值形式表示。"
+                },
+                "ja-JP": {
+                  "description": "ジョブの Spark 設定。文字列値として指定します。"
+                }
+              }
             },
             "description": "The Spark configuration.",
             "x-i18n": {

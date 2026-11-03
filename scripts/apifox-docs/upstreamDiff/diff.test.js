@@ -776,3 +776,27 @@ test('lifecycle tracks reject control-plane sources and malformed values', () =>
         /REST_UPSTREAM_LIFECYCLE_TRACK_REJECTED/,
     )
 })
+
+test('upstream Go comments are harvested onto entries and never ride change.after', () => {
+    const upstream = treeUpstream()
+    upstream.components.schemas.CollectionNameReq.properties.dbName['x-upstream-comment'] = 'DbName selects the database scope.'
+    upstream.components.schemas.CollectionNameReq.properties.newField = {type: 'string', 'x-upstream-comment': 'NewField toggles the fast path.'}
+    const result = diffSpecifications({
+        source: TREE_SOURCE,
+        upstreamPin: SHA,
+        upstream,
+        fragments: new Map([['05-collection-operations-v2.json', treeFragment()]]),
+        ledger: EMPTY_LEDGER,
+        ruleset: RULESET,
+    })
+    const added = result.entries.find(entry => entry.field === 'newField')
+    assert.ok(added, 'the uncovered field is reported')
+    assert.deepEqual(added.upstreamComments, {'': 'NewField toggles the fast path.'})
+    assert.equal(JSON.stringify(added.change.after).includes('x-upstream-comment'), false)
+    // The existing dbName mirror carries its harvested comment keyed by root path
+    const mirror = result.entries.find(entry => entry.field === 'dbName')
+    assert.equal(JSON.stringify(mirror.change.after).includes('x-upstream-comment'), false)
+    // Entries without comments carry no upstreamComments key at all (byte-stable output)
+    const uncommented = result.entries.filter(entry => !('upstreamComments' in entry))
+    assert.ok(uncommented.length > 0, 'some entries carry no comment key at all')
+})

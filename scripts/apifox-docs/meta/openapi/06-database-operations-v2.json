@@ -311,7 +311,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for creating a database; `dbName` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建数据库的请求体；`dbName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースを作成するためのリクエストボディ。`dbName` は必須です。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database",
@@ -378,7 +387,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response body returned by a successful database creation request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功创建数据库请求返回的一种响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "データベース作成リクエストの成功によって返されるレスポンスボディ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -431,7 +449,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned after a successful database creation request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功创建数据库请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベース作成リクエストの成功後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -505,7 +532,16 @@
                 "properties": {},
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for listing databases.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出数据库的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースを一覧表示するためのリクエストボディ。"
+                  }
+                }
               },
               "example": {}
             }
@@ -554,7 +590,16 @@
                             "type": "string",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "One entry in the list of databases.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "数据库列表中的一个条目。"
+                              },
+                              "ja-JP": {
+                                "description": "データベース一覧内の 1 つのエントリ。"
+                              }
+                            }
                           },
                           "description": "A list of database names.",
                           "x-i18n": {
@@ -572,7 +617,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response body returned by a successful database list request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功列出数据库请求返回的一种响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "データベース一覧リクエストの成功によって返されるレスポンスボディ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -625,7 +679,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned after a successful database list request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功列出数据库请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベース一覧リクエストの成功後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -713,7 +776,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for describing a database; `dbName` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于描述数据库的请求体；`dbName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースを describe するためのリクエストボディ。`dbName` は必須です。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database"
@@ -884,7 +956,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response body returned by a successful database describe request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功描述数据库请求返回的一种响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "データベースの describe リクエストの成功によって返されるレスポンスボディ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -937,7 +1018,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned after a successful database describe request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功描述数据库请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベースの describe リクエストの成功後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1275,7 +1365,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for altering a database; `dbName` and `properties` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改数据库的请求体；`dbName` 和 `properties` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースを変更するためのリクエストボディ。`dbName` と `properties` は必須です。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database",
@@ -1341,7 +1440,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A successful response payload for the database property alteration operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "数据库属性修改操作成功时返回的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "データベースプロパティ変更操作が成功したときのレスポンスペイロード。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1394,7 +1502,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the properties of a database are altered successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功修改数据库属性后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベースのプロパティの変更が成功した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1525,7 +1642,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping properties from a database, specifying the target database in `dbName` and the properties to remove in `propertyKeys`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "从数据库删除属性的请求体，通过 `dbName` 指定目标数据库，并通过 `propertyKeys` 指定要删除的属性。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースからプロパティを削除するためのリクエストボディ。`dbName` で対象データベースを、`propertyKeys` で削除するプロパティを指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database",
@@ -1591,7 +1717,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A successful response payload for the database property deletion operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "数据库属性删除操作成功时返回的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "データベースプロパティ削除操作が成功したときのレスポンスペイロード。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1644,7 +1779,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after properties are dropped from a database successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功从数据库删除属性后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベースからプロパティの削除が成功した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1729,7 +1873,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping a database, identified by `dbName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "删除数据库的请求体，通过 `dbName` 指定数据库。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースを削除するためのリクエストボディ。`dbName` でデータベースを指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database"
@@ -1792,7 +1945,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A successful response payload for the database deletion operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "数据库删除操作成功时返回的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "データベース削除操作が成功したときのレスポンスペイロード。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1845,7 +2007,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after a database is dropped successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功删除数据库后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベースの削除が成功した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1945,7 +2116,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for altering the properties of a database, identified by `dbName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改数据库属性的请求体，通过 `dbName` 指定数据库。"
+                  },
+                  "ja-JP": {
+                    "description": "データベースのプロパティを変更するためのリクエストボディ。`dbName` でデータベースを指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database",
@@ -1975,7 +2155,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the properties of a database are altered successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功修改数据库属性后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "データベースのプロパティの変更が成功した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2141,12 +2330,30 @@
             "properties": {},
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "The response payload object returned by the operation.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "操作返回的响应负载对象。"
+              },
+              "ja-JP": {
+                "description": "操作によって返されるレスポンスペイロードオブジェクト。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "An empty response body returned when an operation completes without additional data.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "当操作完成且不返回额外数据时返回的空响应体。"
+          },
+          "ja-JP": {
+            "description": "操作が完了し、追加のデータが返されない場合に返される空のレスポンスボディです。"
+          }
+        }
       }
     },
     "parameters": {

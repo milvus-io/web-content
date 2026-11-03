@@ -68,12 +68,19 @@ type schema struct {
 	// Downstream, the fragment's hand-authored documentation is the authority
 	// below an opaque node; the mirror must never retire it as upstream-deleted.
 	Opaque bool `json:"x-milvus-opaque,omitempty"`
+	// Comment carries the Go doc/trailing comment of the struct field this
+	// property came from. It is grounding evidence for the describe stage
+	// only: the diff harvests it onto the entry (upstreamComments) and strips
+	// the marker before the subtree rides anywhere else, so it never reaches
+	// a fragment.
+	Comment string `json:"x-upstream-comment,omitempty"`
 }
 
 type fieldDef struct {
 	jsonName string
 	required bool
 	goType   ast.Expr
+	comment  string
 }
 
 type structDef struct {
@@ -171,16 +178,19 @@ func (ex *extractor) collectDeclarations(file *ast.File) {
 						def.fields = append(def.fields, fieldDef{goType: field.Type})
 						continue
 					}
-					if jsonName == "" {
-						// encoding/json marshals untagged fields under their
-						// exact Go field name.
-						jsonName = field.Names[0].Name
-					}
-					def.fields = append(def.fields, fieldDef{
-						jsonName: jsonName,
-						required: required,
-						goType:   field.Type,
-					})
+				if jsonName == "" {
+					// encoding/json marshals untagged fields under their
+					// exact Go field name.
+					jsonName = field.Names[0].Name
+				}
+				def.fields = append(def.fields, fieldDef{
+					jsonName: jsonName,
+					required: required,
+					goType:   field.Type,
+					// Comment groups keep their line breaks; grounding evidence
+					// reads best as one line, so collapse all whitespace runs.
+					comment: strings.Join(strings.Fields(commentText(field.Doc)+" "+commentText(field.Comment)), " "),
+				})
 				}
 				ex.structs[typed.Name.Name] = def
 			}
@@ -258,11 +268,12 @@ func (ex *extractor) structSchema(name string, depth int) (*schema, error) {
 			required = append(required, embedded.Required...)
 			continue
 		}
-		fieldSchema, err := ex.typeSchema(field.goType, depth+1)
-		if err != nil {
-			return nil, fmt.Errorf("field %s.%s: %w", name, field.jsonName, err)
-		}
-		properties[field.jsonName] = fieldSchema
+			fieldSchema, err := ex.typeSchema(field.goType, depth+1)
+			if err != nil {
+				return nil, fmt.Errorf("field %s.%s: %w", name, field.jsonName, err)
+			}
+			fieldSchema.Comment = field.comment
+			properties[field.jsonName] = fieldSchema
 		if field.required {
 			required = append(required, field.jsonName)
 		}

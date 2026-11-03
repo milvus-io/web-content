@@ -287,7 +287,16 @@
                       "collectionName",
                       "destDbName",
                       "destCollectionName"
-                    ]
+                    ],
+                    "description": "One of the accepted payload shapes for the merge request; each variant requires `clusterId`, `dbName`, `collectionName`, `destDbName` and `destCollectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "合并请求可接受的载荷形式之一；每个变体都要求 `clusterId`、`dbName`、`collectionName`、`destDbName` 和 `destCollectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "マージリクエストで受け付けられるペイロード形式の1つで、各バリアントには `clusterId`、`dbName`、`collectionName`、`destDbName`、`destCollectionName` が必要です。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "use object storage",
@@ -535,9 +544,27 @@
                       "collectionName",
                       "destDbName",
                       "destCollectionName"
-                    ]
+                    ],
+                    "description": "One of the accepted payload shapes for the merge request; each variant requires `clusterId`, `dbName`, `collectionName`, `destDbName` and `destCollectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "合并请求可接受的载荷形式之一；每个变体都要求 `clusterId`、`dbName`、`collectionName`、`destDbName` 和 `destCollectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "マージリクエストで受け付けられるペイロード形式の1つで、各バリアントには `clusterId`、`dbName`、`collectionName`、`destDbName`、`destCollectionName` が必要です。"
+                      }
+                    }
                   }
-                ]
+                ],
+                "description": "Request payload for a merge operation, identifying the source Cluster, database, and Collection together with the destination database and Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "合并操作的请求载荷，用于指定源 Cluster、数据库和 Collection 以及目标数据库和 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "マージ操作のリクエストペイロードで、ソースの Cluster、データベース、Collection とマージ先のデータベース、Collection を指定します。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -700,6 +727,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative response payloads returned by the merge operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "合并操作返回的备选响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "マージ操作によって返される代替レスポンスペイロードの1つです。"
+                        }
                       }
                     },
                     {
@@ -744,7 +780,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned by the merge operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "合并操作返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "マージ操作によって返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

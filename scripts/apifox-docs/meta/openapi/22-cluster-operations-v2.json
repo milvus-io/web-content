@@ -420,6 +420,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload variant returned when listing Clusters.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列出 Cluster 时返回的一种响应负载变体。"
+                        },
+                        "ja-JP": {
+                          "description": "Cluster の一覧取得時に返されるレスポンスペイロードのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -464,7 +473,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload containing the Clusters returned by the query.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含查询返回的集群（Cluster）的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "クエリで返されるクラスターを含むレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -766,7 +784,16 @@
                       }
                     },
                     "additionalProperties": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "A key-value label under `labels` used for BYOC Cluster identification.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "`labels` 下用于 BYOC Cluster 识别的键值标签。"
+                        },
+                        "ja-JP": {
+                          "description": "`labels` 配下で BYOC Cluster の識別に使用されるキーと値のラベルです。"
+                        }
+                      }
                     }
                   },
                   "bucketInfo": {
@@ -820,7 +847,16 @@
                   "regionId",
                   "cuSize",
                   "cuType"
-                ]
+                ],
+                "description": "Request body for creating a Dedicated Cluster. Requires `clusterName`, `projectId`, `regionId`, `cuSize`, and `cuType`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Dedicated Cluster 的请求体。需要 `clusterName`、`projectId`、`regionId`、`cuSize` 和 `cuType`。"
+                  },
+                  "ja-JP": {
+                    "description": "Dedicated Cluster を作成するためのリクエストボディです。`clusterName`、`projectId`、`regionId`、`cuSize`、`cuType` が必要です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -946,6 +982,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload variant returned after creating a Dedicated Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Dedicated Cluster 后返回的一种响应负载变体。"
+                        },
+                        "ja-JP": {
+                          "description": "Dedicated Cluster の作成後に返されるレスポンスペイロードのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -990,7 +1035,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating a Dedicated Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Dedicated Cluster 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Dedicated Cluster の作成後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1128,7 +1182,16 @@
                   "clusterName",
                   "projectId",
                   "regionId"
-                ]
+                ],
+                "description": "Request body for creating a Free Cluster. Requires `clusterName`, `projectId`, and `regionId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Free Cluster 的请求体。需要 `clusterName`、`projectId` 和 `regionId`。"
+                  },
+                  "ja-JP": {
+                    "description": "Free Cluster を作成するためのリクエストボディです。`clusterName`、`projectId`、`regionId` が必要です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1248,6 +1311,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload variant returned after creating a Free Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Free Cluster 后返回的一种响应负载变体。"
+                        },
+                        "ja-JP": {
+                          "description": "Free Cluster の作成後に返されるレスポンスペイロードのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -1292,7 +1364,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating a Free Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Free Cluster 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Free Cluster の作成後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1430,7 +1511,16 @@
                   "clusterName",
                   "projectId",
                   "regionId"
-                ]
+                ],
+                "description": "Request body for creating a Serverless Cluster. Requires `clusterName`, `projectId`, and `regionId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Serverless Cluster 的请求体。需要 `clusterName`、`projectId` 和 `regionId`。"
+                  },
+                  "ja-JP": {
+                    "description": "Serverless Cluster を作成するためのリクエストボディです。`clusterName`、`projectId`、`regionId` が必要です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1550,6 +1640,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload variant returned after creating a Serverless Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Serverless Cluster 后返回的一种响应负载变体。"
+                        },
+                        "ja-JP": {
+                          "description": "Serverless Cluster の作成後に返されるレスポンスペイロードのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -1594,7 +1693,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating a Serverless Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Serverless Cluster 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Serverless Cluster の作成後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2225,6 +2333,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body containing the requested Cluster for the specified `CLUSTER_ID`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含针对指定 `CLUSTER_ID` 所请求 Cluster 的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した `CLUSTER_ID` に対して要求された Cluster を含む成功レスポンス本文です。"
+                        }
                       }
                     },
                     {
@@ -2269,7 +2386,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body describing the requested Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求 Cluster 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Cluster を表すレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2694,6 +2820,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after updating the specified Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "更新指定 Cluster 后返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した Cluster を更新した後に返される成功レスポンス本文です。"
+                        }
                       }
                     },
                     {
@@ -2738,7 +2873,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body returned after updating the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新指定 Cluster 后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Cluster を更新した後に返される成功レスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2916,6 +3060,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after dropping the specified Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "对指定 Cluster 执行 drop 操作后返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した Cluster に対して drop 操作を実行した後に返される成功レスポンス本文です。"
+                        }
                       }
                     },
                     {
@@ -2960,7 +3113,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body returned after dropping the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "对指定 Cluster 执行 drop 操作后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Cluster に対して drop 操作を実行した後に返される成功レスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3304,6 +3466,15 @@
                       }
                     }
                   }
+                },
+                "description": "The request body for modifying the specified Cluster.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改指定 Cluster 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "指定した Cluster を変更するためのリクエスト本文です。"
+                  }
                 }
               },
               "examples": {
@@ -3405,6 +3576,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after modifying the specified Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "修改指定 Cluster 后返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した Cluster を変更した後に返される成功レスポンス本文です。"
+                        }
                       }
                     },
                     {
@@ -3449,7 +3629,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body returned after modifying the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改指定 Cluster 后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Cluster を変更した後に返される成功レスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3575,7 +3764,16 @@
                 },
                 "required": [
                   "replica"
-                ]
+                ],
+                "description": "The request body for modifying the replica of the specified Cluster. The `replica` property is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改指定 Cluster 的副本的请求体。`replica` 属性为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "指定した Cluster のレプリカを変更するためのリクエスト本文です。`replica` プロパティは必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -3663,6 +3861,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after modifying the replica of the specified Cluster.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "修改指定 Cluster 的副本后返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "指定した Cluster のレプリカを変更した後に返される成功レスポンス本文です。"
+                        }
                       }
                     },
                     {
@@ -3707,7 +3914,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body returned after modifying the replica of the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改指定 Cluster 的副本后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Cluster のレプリカを変更した後に返される成功レスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3885,6 +4101,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after resuming the cluster, provided in one of several possible shapes.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "恢复集群后返回的成功响应体，采用多种可能形态之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Cluster の再開後に返される成功レスポンス本文で、複数の可能な形式のいずれかで提供されます。"
+                        }
                       }
                     },
                     {
@@ -3929,7 +4154,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The successful response body returned after resuming the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "恢复指定 Cluster 后返回的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Cluster を再開した後に返される成功レスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4102,6 +4336,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned after suspending the cluster, provided in one of several possible shapes.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "暂停集群后返回的成功响应体，采用多种可能形态之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Cluster の一時停止後に返される成功レスポンス本文で、複数の可能な形式のいずれかで提供されます。"
+                        }
                       }
                     },
                     {
@@ -4146,7 +4389,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned when the cluster has been suspended.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "集群已暂停时返回的成功响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Cluster が一時停止されたときに返される成功レスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

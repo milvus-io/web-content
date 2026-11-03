@@ -108,7 +108,16 @@
                 "required": [
                   "projectId",
                   "regionId"
-                ]
+                ],
+                "description": "Request body for enabling on-demand compute; `projectId` and `regionId` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "启用 on-demand compute 的请求体；`projectId` 和 `regionId` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "on-demand compute を有効化するためのリクエスト本文。`projectId` と `regionId` が必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -275,7 +284,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after enabling on-demand compute.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "启用 on-demand compute 后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "on-demand compute を有効化した後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -537,7 +555,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned when retrieving on-demand compute information.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取 on-demand compute 信息时返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "on-demand compute の情報を取得したときに返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

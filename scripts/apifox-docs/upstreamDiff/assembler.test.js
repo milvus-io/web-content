@@ -458,3 +458,16 @@ test('loadDecisions reads a JSONL file from disk', () => {
         fs.rmSync(dir, {recursive: true, force: true})
     }
 })
+
+test('Step-0 lane: assembled mirrors/additions report their prose-less schema nodes', () => {
+    const {changeSet, reports} = assembleChangeSet({diffDocument: diffDocument(), decisions: [], fragmentLoader: name => FRAGMENTS.get(name)})
+    // dbName keeps its local prose through the mirror (not reported); the
+    // branched `data` addition is unplaced here and already rides
+    // reports.unplaced; the unbranched `result` addition is assembled with a
+    // prose-less root and is reported; the described pageSize parameter is not.
+    assert.deepEqual(reports.missingDescriptions.map(item => item.field), ['result'])
+    assert.deepEqual(reports.missingDescriptions[0].paths, ['(root)'])
+    // the assembled addition value itself is untouched by the report lane
+    const addition = changeSet.entries.find(entry => entry.diffEntryId.endsWith('result|field-uncovered|'))
+    assert.equal(addition.value.result.description, undefined)
+})

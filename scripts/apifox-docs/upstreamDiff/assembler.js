@@ -17,7 +17,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const Ajv2020 = require('ajv/dist/2020')
 const {diffDigestOf} = require('./changeSet')
-const {mergeMirrorProse} = require('./mirror')
+const {mergeMirrorProse, undescribedNodes} = require('./mirror')
 const {buildPlacementRecords, validatePlacements, branchLabelsForScope} = require('./branchPlan')
 
 const decisionsSchema = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'contracts', 'rest-upstream-decisions.schema.json'), 'utf8'))
@@ -292,7 +292,7 @@ function ledgerEntry({decision, entry}) {
 // AUTO lane — mirror: the value is the upstream subtree with the fragment's
 // prose merged back in, recomputed here from the fragment copy. The applier
 // recomputes the same merge from the live fragment and refuses any deviation.
-function mirrorEntry({entry, fragmentDocument}) {
+function mirrorEntry({entry, fragmentDocument, reports = null}) {
     const base = evidenceBase(entry)
     const context = stanceContext({entry, fragmentDocument})
     const current = resolvePointer(fragmentDocument, context.fieldObjectPath)
@@ -301,6 +301,7 @@ function mirrorEntry({entry, fragmentDocument}) {
     }
     const mergeOptions = entry.preserveLocalScalarConstraints ? {preserveLocalScalarConstraints: true} : {}
     const value = mergeMirrorProse(entry.change.after, current, mergeOptions)
+    if (reports) reportMissingDescriptions(reports, entry, value, context.fieldObjectPath)
     // NOTE: preserveLocalScalarConstraints deliberately does NOT ride the
     // change-set entry — the contract's entry object is closed
     // (additionalProperties: false) and the applier reads the flag from the
@@ -318,11 +319,13 @@ function mirrorEntry({entry, fragmentDocument}) {
 // AUTO lane — addition: value shape is {<field>: subtree} merged into the
 // target branch's properties container, or the upstream parameter object
 // appended to the operation's parameters.
-function additionEntries({entry, targets, fragmentDocument}) {
+function additionEntries({entry, targets, fragmentDocument, reports = null}) {
     const base = evidenceBase(entry)
     if (entry.category === 'upstream-added-param') {
+        const parameter = structuredClone(entry.change.after)
+        if (reports) reportMissingDescriptions(reports, entry, parameter, 'parameters')
         return [{diffEntryId: entry.id, kind: 'addition', targetFragment: entry.fragment,
-            opPath: `${operationBasePath(entry.opKey)}/parameters`, value: structuredClone(entry.change.after),
+            opPath: `${operationBasePath(entry.opKey)}/parameters`, value: parameter,
             evidence: `${base} parameter added from upstream (appended to parameters)`, override: false}]
     }
     const entries = []
@@ -331,6 +334,7 @@ function additionEntries({entry, targets, fragmentDocument}) {
             responseStatus: entry.responseStatus, branch: target, fragmentDocument})
         const propertiesPath = `${schemaPath}/properties`
         const where = target ? ` into branch '${target}'` : ''
+        if (reports) reportMissingDescriptions(reports, entry, structuredClone(entry.change.after), `${propertiesPath}/${entry.field}`)
         entries.push({diffEntryId: entry.id, kind: 'addition', targetFragment: entry.fragment,
             opPath: propertiesPath, value: {[entry.field]: structuredClone(entry.change.after)},
             requiredMembership: entry.requiredMembership ?? null,
@@ -340,6 +344,21 @@ function additionEntries({entry, targets, fragmentDocument}) {
         }
     }
     return entries
+}
+
+// Step-0 visibility lane (2026-11-03): a mirror/addition may land schema nodes
+// the upstream could not describe (the Go extractor emits structure only), and
+// before the describe stage existed those gaps were silent — 109 of them rode
+// one refresh unnoticed. Report every assembled value's prose-less nodes so
+// the PR body shows what the describe stage will attempt and what it left.
+// Paths use the undescribedNodes grammar, matching the describe stage's node
+// addressing exactly.
+function reportMissingDescriptions(reports, entry, subtree, locus) {
+    const missing = undescribedNodes(subtree)
+    if (missing.length === 0) return
+    reports.missingDescriptions.push({id: entry.id, opKey: entry.opKey, scope: entry.scope,
+        branch: entry.branch ?? null, field: entry.field ?? null, locus,
+        paths: missing.map(node => node.path || '(root)')})
 }
 
 function buildReports() {
@@ -353,6 +372,7 @@ function buildReports() {
         placementsApplied: [],
         rejectedPlacements: [],
         reorganizations: [],
+        missingDescriptions: [],
     }
 }
 
@@ -422,7 +442,7 @@ function assembleChangeSet({diffDocument, decisions, fragmentLoader, branchPlan 
             for (const retired of entry.droppedLocalFields ?? []) {
                 reports.deletions.push({id: entry.id, opKey: entry.opKey, scope: entry.scope, field: retired, kind: 'mirror-retired-local'})
             }
-            entries.push(...mirrorEntry({entry, fragmentDocument: loader(entry.fragment)}))
+            entries.push(...mirrorEntry({entry, fragmentDocument: loader(entry.fragment), reports}))
             continue
         }
 
@@ -431,7 +451,7 @@ function assembleChangeSet({diffDocument, decisions, fragmentLoader, branchPlan 
         // human-review list; an unattributed ledger stance stays legal there.
         if (entry.category === 'upstream-added-param') {
             if (decision) fail('REST_UPSTREAM_ASSEMBLE_AUTO_STANCE', `${entry.id}: added parameters are assembled automatically; no stance is taken on them`)
-            entries.push(...additionEntries({entry, targets: [], fragmentDocument: loader(entry.fragment)}))
+            entries.push(...additionEntries({entry, targets: [], fragmentDocument: loader(entry.fragment), reports}))
             continue
         }
         if (entry.category === 'upstream-added-field' || entry.category === 'unattributed') {
@@ -447,7 +467,7 @@ function assembleChangeSet({diffDocument, decisions, fragmentLoader, branchPlan 
                     reports.supersededStances.push({id: entry.id, action: decision.action, note: 'branch placement takes precedence over the ledger stance'})
                 }
                 reports.placementsApplied.push({id: entry.id, opKey: entry.opKey, field: entry.field, targets})
-                entries.push(...additionEntries({entry, targets, fragmentDocument: loader(entry.fragment)}))
+                entries.push(...additionEntries({entry, targets, fragmentDocument: loader(entry.fragment), reports}))
                 continue
             }
             const branchInfo = entry.fragment ? branchLabelsForScope(loader(entry.fragment), entry) : null
@@ -467,7 +487,7 @@ function assembleChangeSet({diffDocument, decisions, fragmentLoader, branchPlan 
                 entries.push(ledgerEntry({decision, entry}))
                 continue
             }
-            entries.push(...additionEntries({entry, targets: [null], fragmentDocument: loader(entry.fragment)}))
+            entries.push(...additionEntries({entry, targets: [null], fragmentDocument: loader(entry.fragment), reports}))
             continue
         }
 

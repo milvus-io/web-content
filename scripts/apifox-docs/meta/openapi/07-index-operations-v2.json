@@ -275,7 +275,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for creating an index in a Collection, specifying the target Collection in `collectionName` and the index configuration in `indexParams`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "在 Collection 中创建索引的请求体，通过 `collectionName` 指定目标 Collection，并通过 `indexParams` 指定索引配置。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection にインデックスを作成するためのリクエストボディ。`collectionName` で対象の Collection を、`indexParams` でインデックス設定を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "my_collection",
@@ -417,7 +426,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after an index is created successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功创建索引后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インデックスの作成が成功した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -557,7 +575,16 @@
                     "type": "integer",
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "An integer timestamp associated with the index description request.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "与索引描述请求关联的整数时间戳。"
+                      },
+                      "ja-JP": {
+                        "description": "インデックス記述リクエストに関連する整数のタイムスタンプ。"
+                      }
+                    }
                   }
                 },
                 "x-i18n-langs": [
@@ -569,7 +596,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for describing an index, naming the target `collectionName` and `indexName` to inspect.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于描述索引的请求体，通过 `collectionName` 和 `indexName` 指定要查看的目标索引。"
+                  },
+                  "ja-JP": {
+                    "description": "インデックスを記述するためのリクエストボディで、対象となる `collectionName` と `indexName` を指定します。"
+                  }
+                }
               },
               "example": {
                 "indexName": "vector",
@@ -887,7 +923,16 @@
                                 },
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The parameters that apply to the index-building process of this index.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "适用于该索引构建过程的参数。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このインデックスの構築処理に適用されるパラメータ。"
+                                  }
+                                }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
@@ -966,7 +1011,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the index description request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "索引描述请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インデックス記述リクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1219,7 +1273,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for altering index properties, naming the target `collectionName` and `indexName` and supplying the `properties` to update.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改索引属性的请求体，通过 `collectionName` 和 `indexName` 指定目标索引，并提供要更新的 `properties`。"
+                  },
+                  "ja-JP": {
+                    "description": "インデックスプロパティを変更するためのリクエストボディで、対象となる `collectionName` と `indexName` を指定し、更新する `properties` を渡します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection",
@@ -1273,12 +1336,30 @@
                           "properties": {},
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The payload returned after the index properties are altered.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "索引属性修改后返回的响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスプロパティの変更後に返されるペイロード。"
+                            }
+                          }
                         }
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response body variant returned for the alter index properties request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "修改索引属性请求返回的响应体变体。"
+                        },
+                        "ja-JP": {
+                          "description": "インデックスプロパティ変更リクエストに対して返されるレスポンスボディのバリアント。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1331,7 +1412,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the alter index properties request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改索引属性请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インデックスプロパティ変更リクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1518,7 +1608,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping index properties, naming the target `collectionName` and `indexName` and listing the `propertyKeys` to remove.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于删除索引属性的请求体，通过 `collectionName` 和 `indexName` 指定目标索引，并列出要移除的 `propertyKeys`。"
+                  },
+                  "ja-JP": {
+                    "description": "インデックスプロパティを削除するためのリクエストボディで、対象となる `collectionName` と `indexName` を指定し、削除する `propertyKeys` を列挙します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection",
@@ -1572,12 +1671,30 @@
                           "properties": {},
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The payload returned after the index properties are dropped.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "索引属性删除后返回的响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "インデックスプロパティの削除後に返されるペイロード。"
+                            }
+                          }
                         }
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response body variant returned for the drop index properties request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "删除索引属性请求返回的响应体变体。"
+                        },
+                        "ja-JP": {
+                          "description": "インデックスプロパティ削除リクエストに対して返されるレスポンスボディのバリアント。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1630,7 +1747,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the drop index properties request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除索引属性请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インデックスプロパティ削除リクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1775,7 +1901,16 @@
                     "type": "integer",
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "A timestamp for the drop request, given as an integer.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "删除请求的时间戳，以整数形式给出。"
+                      },
+                      "ja-JP": {
+                        "description": "削除リクエストのタイムスタンプで、整数で指定します。"
+                      }
+                    }
                   }
                 },
                 "x-i18n-langs": [
@@ -1787,7 +1922,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping an index, identifying the target Collection by `collectionName` and the index to remove by `indexName`. Both `collectionName` and `indexName` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "删除索引请求的请求体，通过 `collectionName` 指定目标 Collection，并通过 `indexName` 指定要删除的索引。`collectionName` 和 `indexName` 均为必填。"
+                  },
+                  "ja-JP": {
+                    "description": "インデックス削除リクエストのリクエストボディで、`collectionName` で対象の Collection を、`indexName` で削除するインデックスを指定します。`collectionName` と `indexName` はどちらも必須です。"
+                  }
+                }
               },
               "example": {
                 "indexName": "my_vector",
@@ -1913,7 +2057,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the index drop request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "索引删除请求处理完成后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インデックス削除リクエストの処理後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2040,11 +2193,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of a partition to which this operation applies.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "此操作作用的一个分区名称。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作の対象となるパーティション名です。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the partitions to which this operation applies. When specified, the operation is limited to those partitions; when omitted, the entire Collection is covered.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "此操作作用的分区名称。指定后，操作范围仅限于这些分区；未指定时，则覆盖整个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作の対象となるパーティション名です。指定した場合、操作範囲はそれらのパーティションに限定され、指定しない場合は Collection 全体が対象になります。"
+                      }
+                    }
                   }
                 },
                 "x-i18n-langs": [
@@ -2055,7 +2226,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for listing the indexes of a Collection, which identifies the target Collection through `collectionName`, a required field.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "列出某个 Collection 中索引的请求体，通过必填字段 `collectionName` 指定目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection のインデックス一覧を取得するリクエストボディで、必須フィールド `collectionName` で対象の Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection"
@@ -2199,7 +2379,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the request that lists the indexes of a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Collection 索引的请求所返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のインデックス一覧取得リクエストに対して返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

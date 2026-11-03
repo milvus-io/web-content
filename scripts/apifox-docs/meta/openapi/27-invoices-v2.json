@@ -391,9 +391,45 @@
                                         }
                                       }
                                     }
+                                  },
+                                  "description": "One invoice record associated with the returned data entry.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "与返回的数据条目关联的单条发票记录。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "返されたデータエントリに関連付けられた 1 件の請求書レコード。"
+                                    }
+                                  }
+                                },
+                                "description": "List of invoices contained in this record.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "此记录中包含的 invoice 列表。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このレコードに含まれる請求書のリストです。"
                                   }
                                 }
                               }
+                            },
+                            "description": "A single invoice record in the response payload.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "响应负载中的单条 invoice 记录。"
+                              },
+                              "ja-JP": {
+                                "description": "レスポンスペイロード内の 1 件の請求書レコードです。"
+                              }
+                            }
+                          },
+                          "description": "Response payload containing the invoice records.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含 invoice 记录的响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "請求書レコードを含むレスポンスペイロードです。"
                             }
                           }
                         }
@@ -441,7 +477,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body listing invoices.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 invoice 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "請求書の一覧を返すレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -797,6 +842,15 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload object containing the data returned for the requested invoice.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载对象，包含针对所请求发票返回的数据。"
+                            },
+                            "ja-JP": {
+                              "description": "要求された請求書に対して返されるデータを含むレスポンスペイロードオブジェクト。"
+                            }
                           }
                         }
                       }
@@ -843,7 +897,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when retrieving a single invoice by `INVOICE_ID`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "按 `INVOICE_ID` 获取单张发票时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`INVOICE_ID` を指定して単一の請求書を取得したときに返されるレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

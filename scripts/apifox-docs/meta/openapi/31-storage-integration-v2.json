@@ -212,7 +212,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body for listing storage integrations.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Storage Integration 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Storage Integration を一覧表示するためのレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -333,7 +342,16 @@
                     "x-target-lang": "zh-CN",
                     "$ref": "#/components/schemas/CreateStorageIntegrationRequestAWS"
                   }
-                ]
+                ],
+                "description": "The request body for creating a storage integration.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "创建 Storage Integration 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "Storage Integration を作成するためのリクエスト本文。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -514,7 +532,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after creating a storage integration.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Storage Integration 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Storage Integration の作成後に返されるレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -705,7 +732,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body for retrieving a storage integration.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "检索 Storage Integration 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Storage Integration を取得するためのレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -914,7 +950,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after deleting a storage integration.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 Storage Integration 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Storage Integration の削除後に返されるレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1124,7 +1169,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after validating a storage integration configuration.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "验证 Storage Integration 配置后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Storage Integration 設定の検証後に返されるレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1474,7 +1528,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when the storage integration authorization materials are generated for the request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "为请求生成存储集成授权材料时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "リクエストに対してストレージ統合の認可マテリアルが生成されたときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1763,6 +1826,15 @@
               }
             }
           }
+        },
+        "description": "Request body for creating an AWS storage integration. It specifies the `projectId`, `name`, `regionId`, and `bucketName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 AWS 存储集成的请求体。需要指定 `projectId`、`name`、`regionId` 和 `bucketName`。"
+          },
+          "ja-JP": {
+            "description": "AWS ストレージ統合を作成するためのリクエストボディです。`projectId`、`name`、`regionId`、`bucketName` を指定します。"
+          }
         }
       },
       "CreateStorageIntegrationRequestGCP": {
@@ -1871,6 +1943,15 @@
                 "description": "provider 固有の認証情報フィールド。"
               }
             }
+          }
+        },
+        "description": "Request body for creating a GCP storage integration. It specifies the `projectId`, `name`, `regionId`, and `bucketName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 GCP 存储集成的请求体。需要指定 `projectId`、`name`、`regionId` 和 `bucketName`。"
+          },
+          "ja-JP": {
+            "description": "GCP ストレージ統合を作成するためのリクエストボディです。`projectId`、`name`、`regionId`、`bucketName` を指定します。"
           }
         }
       },
@@ -1993,6 +2074,15 @@
               }
             }
           }
+        },
+        "description": "Request body for creating an Azure storage integration. It specifies the `projectId`, `name`, `regionId`, and `bucketName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "创建 Azure 存储集成的请求体。需要指定 `projectId`、`name`、`regionId` 和 `bucketName`。"
+          },
+          "ja-JP": {
+            "description": "Azure ストレージ統合を作成するためのリクエストボディです。`projectId`、`name`、`regionId`、`bucketName` を指定します。"
+          }
         }
       },
       "ValidateStorageIntegrationRequest": {
@@ -2055,6 +2145,15 @@
               }
             }
           }
+        },
+        "description": "Request body for validating a storage integration. It specifies the `projectId`, `regionId`, and `bucketName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "验证存储集成的请求体。需要指定 `projectId`、`regionId` 和 `bucketName`。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合を検証するためのリクエストボディです。`projectId`、`regionId`、`bucketName` を指定します。"
+          }
         }
       },
       "GenerateStorageIntegrationAuthorizationMaterialsRequest": {
@@ -2100,6 +2199,15 @@
                 "description": "ポリシーまたは認証情報の生成に使用される bucket、container、または storage の名前。"
               }
             }
+          }
+        },
+        "description": "Request body for generating authorization materials for a storage integration. It specifies the `projectId`, `regionId`, and `bucketName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "为存储集成生成授权材料的请求体。需要指定 `projectId`、`regionId` 和 `bucketName`。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合の認可マテリアルを生成するためのリクエストボディです。`projectId`、`regionId`、`bucketName` を指定します。"
           }
         }
       },
@@ -2182,6 +2290,15 @@
               }
             }
           }
+        },
+        "description": "Summary information for a storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "存储集成的摘要信息。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合の概要情報。"
+          }
         }
       },
       "ListStorageIntegrationsData": {
@@ -2238,6 +2355,15 @@
               }
             }
           }
+        },
+        "description": "Data returned by an operation that lists storage integrations.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "列出存储集成时返回的数据。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合を一覧表示するときに返されるデータ。"
+          }
         }
       },
       "StorageIntegrationDetail": {
@@ -2291,7 +2417,16 @@
               }
             }
           }
-        ]
+        ],
+        "description": "Detailed information for a storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "存储集成的详细信息。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合の詳細情報。"
+          }
+        }
       },
       "StorageIntegrationMutationData": {
         "type": "object",
@@ -2319,6 +2454,15 @@
                 "description": "storage integration の名前。"
               }
             }
+          }
+        },
+        "description": "Data returned from a storage integration mutation operation.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "存储集成变更操作返回的数据。"
+          },
+          "ja-JP": {
+            "description": "ストレージ統合の変更操作で返されるデータ。"
           }
         }
       },
@@ -2348,6 +2492,15 @@
                 "description": "検証に失敗した場合の失敗理由。検証が成功した場合、このフィールドは空です。"
               }
             }
+          }
+        },
+        "description": "The data used to validate a storage integration configuration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于验证 Storage Integration 配置的数据。"
+          },
+          "ja-JP": {
+            "description": "Storage Integration 設定を検証するために使用するデータ。"
           }
         }
       },
@@ -2426,6 +2579,15 @@
               }
             }
           }
+        },
+        "description": "Authorization materials for an AWS S3 storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "AWS S3 Storage Integration 的授权材料。"
+          },
+          "ja-JP": {
+            "description": "AWS S3 Storage Integration の認可情報。"
+          }
         }
       },
       "GcpGcsAuthorizationMaterialsData": {
@@ -2443,7 +2605,16 @@
               }
             },
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "A GCP bucket permission to grant for the storage integration.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "要为 Storage Integration 授予的一项 GCP 存储桶权限。"
+                },
+                "ja-JP": {
+                  "description": "Storage Integration に付与する GCP バケット権限。"
+                }
+              }
             }
           },
           "googleCloudServiceAccount": {
@@ -2457,6 +2628,15 @@
                 "description": "Zilliz が管理する Google Cloud service account のメールアドレス。"
               }
             }
+          }
+        },
+        "description": "Authorization materials for a GCP GCS storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "GCP GCS Storage Integration 的授权材料。"
+          },
+          "ja-JP": {
+            "description": "GCP GCS Storage Integration の認可情報。"
           }
         }
       },
@@ -2512,6 +2692,15 @@
                 }
               }
             }
+          }
+        },
+        "description": "Authorization materials for an Azure Blob storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Azure Blob Storage Integration 的授权材料。"
+          },
+          "ja-JP": {
+            "description": "Azure Blob Storage Integration の認可情報。"
           }
         }
       },
@@ -2589,6 +2778,15 @@
                 "description": "生成された external ID。"
               }
             }
+          }
+        },
+        "description": "Authorization materials for an Alibaba Cloud OSS storage integration.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Alibaba Cloud OSS Storage Integration 的授权材料。"
+          },
+          "ja-JP": {
+            "description": "Alibaba Cloud OSS Storage Integration の認可情報。"
           }
         }
       }

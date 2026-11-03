@@ -67,7 +67,16 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A privilege name to include in the new privilege group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要包含在新权限组中的权限名称。"
+                        },
+                        "ja-JP": {
+                          "description": "新しい権限グループに含める権限名。"
+                        }
+                      }
                     },
                     "description": "A list of privilege names to include in the group.",
                     "x-i18n": {
@@ -88,7 +97,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for creating a privilege group; `privilegeGroupName` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "创建权限组的请求载荷；`privilegeGroupName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "権限グループを作成するためのリクエストペイロード。`privilegeGroupName` は必須です。"
+                  }
+                }
               },
               "example": {
                 "privilegeGroupName": "my_priv_group",
@@ -126,7 +144,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The 200 response body returned for the privilege-group creation operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建权限组操作返回的 200 响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "権限グループ作成操作で返される 200 レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -213,11 +240,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of one privilege associated with the privilege group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "与该权限组关联的单个权限名称。"
+                        },
+                        "ja-JP": {
+                          "description": "権限グループに関連付けられた 1 つの権限名。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "A list of privilege names associated with the privilege group.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "与该权限组关联的权限名称列表。"
+                      },
+                      "ja-JP": {
+                        "description": "権限グループに関連付けられた権限名のリスト。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -225,7 +270,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping a privilege group. It must include `privilegeGroupName` to identify the group to remove.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于删除权限组的请求体。必须包含 `privilegeGroupName` 以指定要删除的权限组。"
+                  },
+                  "ja-JP": {
+                    "description": "権限グループを削除するためのリクエストボディです。削除するグループを指定する `privilegeGroupName` を必ず含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "privilegeGroupName": "my_priv_group"
@@ -259,7 +313,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the drop request completes.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除请求完成时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "削除リクエストの完了時に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -343,7 +406,16 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for listing privilege groups.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出权限组的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "権限グループを一覧表示するためのリクエストボディです。"
+                  }
+                }
               },
               "example": {}
             }
@@ -366,7 +438,16 @@
                           "type": "integer",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response code indicating whether the request succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "表示请求是否成功的响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "リクエストが成功したかどうかを示すレスポンスコード。"
+                            }
+                          }
                         },
                         "data": {
                           "type": "array",
@@ -377,7 +458,16 @@
                                 "type": "string",
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of the privilege group.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "权限组的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "権限グループの名前。"
+                                  }
+                                }
                               },
                               "privileges": {
                                 "type": "array",
@@ -385,26 +475,71 @@
                                   "type": "string",
                                   "x-added-at": "2.6.x",
                                   "x-last-modified": "2.6.x",
-                                  "x-deprecated-since": null
+                                  "x-deprecated-since": null,
+                                  "description": "One privilege name included in the privilege group's `privileges` list.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "权限组 `privileges` 列表中的一个权限名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "権限グループの `privileges` リストに含まれる 1 つの権限名。"
+                                    }
+                                  }
                                 },
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The privilege names included in the privilege group.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该权限组中包含的权限名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "権限グループに含まれる権限名。"
+                                  }
+                                }
                               }
                             },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "One privilege group entry in the response payload.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "响应负载中的一个权限组条目。"
+                              },
+                              "ja-JP": {
+                                "description": "レスポンスペイロード内の 1 つの権限グループエントリ。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response payload, which holds the privilege groups returned by the request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，包含请求返回的权限组。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。リクエストによって返された権限グループを保持します。"
+                            }
+                          }
                         }
                       },
                       "x-tab-label": "success",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One possible response shape returned on success, carrying the `code` and `data` fields.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功时返回的一种可能响应结构，包含 `code` 和 `data` 字段。"
+                        },
+                        "ja-JP": {
+                          "description": "成功時に返されるレスポンス構造の 1 つで、`code` と `data` フィールドを持ちます。"
+                        }
+                      }
                     },
                     {
                       "$ref": "#/components/schemas/ErrorResponse",
@@ -418,7 +553,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the list request succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列表请求成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "一覧取得リクエストが成功したときに返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -513,7 +657,16 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A privilege name to add to the privilege group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要添加到权限组的一个权限名称。"
+                        },
+                        "ja-JP": {
+                          "description": "権限グループに追加する 1 つの権限名。"
+                        }
+                      }
                     },
                     "description": "A list of privilege names to add to the group.",
                     "x-i18n": {
@@ -535,7 +688,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for adding privileges to a privilege group, containing the required `privilegeGroupName` and `privileges`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于向权限组添加权限的请求体，包含必填的 `privilegeGroupName` 和 `privileges`。"
+                  },
+                  "ja-JP": {
+                    "description": "権限グループに権限を追加するためのリクエストボディで、必須の `privilegeGroupName` と `privileges` を含みます。"
+                  }
+                }
               },
               "example": {
                 "privilegeGroupName": "my_priv_group",
@@ -573,7 +735,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned after privileges are added to the privilege group.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "权限添加至权限组后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "権限グループに権限が追加された後に返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -660,7 +831,16 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A privilege name to remove from the privilege group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要从权限组移除的一个权限名称。"
+                        },
+                        "ja-JP": {
+                          "description": "権限グループから削除する 1 つの権限名。"
+                        }
+                      }
                     },
                     "description": "A list of privilege names to remove from the group.",
                     "x-i18n": {
@@ -682,7 +862,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for removing privileges from a privilege group, containing the required `privilegeGroupName` and `privileges`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于从权限组移除权限的请求体，包含必填的 `privilegeGroupName` 和 `privileges`。"
+                  },
+                  "ja-JP": {
+                    "description": "権限グループから権限を削除するためのリクエストボディで、必須の `privilegeGroupName` と `privileges` を含みます。"
+                  }
+                }
               },
               "example": {
                 "privilegeGroupName": "my_priv_group",
@@ -719,7 +908,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned after privileges are removed from the privilege group.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "权限从权限组移除后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "権限グループから権限が削除された後に返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -840,12 +1038,30 @@
             "properties": {},
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "A generic response payload object included in the response.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应中包含的通用响应载荷对象。"
+              },
+              "ja-JP": {
+                "description": "レスポンスに含まれる汎用のレスポンスペイロードオブジェクト。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "A generic empty response object used when an operation returns no operation-specific payload.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "通用空响应对象，在操作不返回特定于该操作的载荷时使用。"
+          },
+          "ja-JP": {
+            "description": "操作固有のペイロードを返さない場合に使用される汎用の空レスポンスオブジェクト。"
+          }
+        }
       }
     },
     "parameters": {

@@ -240,6 +240,15 @@
                       }
                     }
                   }
+                },
+                "description": "Request body for starting a migration whose source is specified remotely.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于启动源端从远端指定的迁移的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "ソースをリモートで指定して移行を開始するためのリクエスト本文です。"
+                  }
                 }
               }
             }
@@ -302,6 +311,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body for the start-by-remote migration request, provided in one of several possible shapes.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "由远端启动的迁移请求的成功响应体，采用多种可能形态之一。"
+                        },
+                        "ja-JP": {
+                          "description": "リモート指定で開始する移行リクエストの成功レスポンス本文で、複数の可能な形式のいずれかで提供されます。"
+                        }
                       }
                     },
                     {
@@ -346,7 +364,16 @@
                         "zh-CN"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the start-by-remote migration request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "由远端启动的迁移请求返回的成功响应。"
+                    },
+                    "ja-JP": {
+                      "description": "リモート指定で開始する移行リクエストに対して返される成功レスポンスです。"
+                    }
+                  }
                 }
               }
             }
@@ -439,7 +466,17 @@
                             "ja-JP": {
                               "description": "Job の情報。"
                             }
-                          }
+                          },
+                          "description": "Response payload carrying details of the resulting import task, such as the import job ID or the progress of the import task."
+                        }
+                      },
+                      "description": "A successful response body for the migration to an existing cluster, provided in one of several possible shapes.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "迁移到已有集群的成功响应体，采用多种可能形态之一。"
+                        },
+                        "ja-JP": {
+                          "description": "既存の Cluster への移行の成功レスポンス本文で、複数の可能な形式のいずれかで提供されます。"
                         }
                       }
                     },
@@ -485,7 +522,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the migration to an existing cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "迁移到已有集群的请求返回的成功响应。"
+                    },
+                    "ja-JP": {
+                      "description": "既存の Cluster への移行に対して返される成功レスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -678,7 +724,16 @@
                 "required": [
                   "source",
                   "destination"
-                ]
+                ],
+                "description": "Request body for migrating data into an existing cluster. Both `source` and `destination` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将数据迁移到已有集群的请求体。`source` 和 `destination` 均为必填。"
+                  },
+                  "ja-JP": {
+                    "description": "既存の Cluster へデータを移行するためのリクエスト本文です。`source` と `destination` はどちらも必須です。"
+                  }
+                }
               },
               "example": {
                 "source": {
@@ -822,7 +877,17 @@
                             "ja-JP": {
                               "description": "移行先 cluster と移行 job の情報。"
                             }
-                          }
+                          },
+                          "description": "Response payload, an object containing the import job ID or the progress of the import task."
+                        }
+                      },
+                      "description": "One of the possible response bodies this operation can return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作可能返回的响应体之一。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作が返す可能性のあるレスポンスボディの 1 つ。"
                         }
                       }
                     },
@@ -868,7 +933,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned on success.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "成功時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1041,7 +1115,8 @@
                       "ja-JP": {
                         "description": "作成する移行先 cluster の情報。"
                       }
-                    }
+                    },
+                    "description": "Destination cluster configuration. `clusterName`, `projectId`, `regionId`, `plan`, `cuType`, and `cuSize` are required."
                   },
                   "dbCollections": {
                     "type": "array",
@@ -1081,7 +1156,8 @@
                         "ja-JP": {
                           "description": "移行元 database と移行先 database のペア。"
                         }
-                      }
+                      },
+                      "description": "One entry in the migration's list of source- and destination-database pairs, identifying the `Collection`s that need to be migrated."
                     },
                     "x-i18n": {
                       "zh-CN": {
@@ -1096,7 +1172,16 @@
                 "required": [
                   "source",
                   "destination"
-                ]
+                ],
+                "description": "Request body for migrating data into a new dedicated cluster. Both `source` and `destination` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将数据迁移到新的专属集群的请求体。`source` 和 `destination` 均为必填。"
+                  },
+                  "ja-JP": {
+                    "description": "新しい専用 Cluster へデータを移行するためのリクエスト本文です。`source` と `destination` はどちらも必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
