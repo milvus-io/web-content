@@ -617,9 +617,15 @@ Returns a [Status](../Client/Status.md) and hands back a SearchIteratorPtr (the 
 
             - **field_name** (*std::string*) -
 
+                Name of the highlighted field.
+
             - **fragments** (*std::vector<std::string>*) -
 
+                Highlighted fragments of the field value.
+
             - **scores** (*std::vector<float>*) -
+
+                Highlight scores for each fragment.
 
         - **GetRowCount** (*uint64_t*) -
 

@@ -326,9 +326,15 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
                 - **field_name** (*std::string*) -
 
+                    Name of the highlighted field.
+
                 - **fragments** (*std::vector<std::string>*) -
 
+                    Highlighted fragments of the field value.
+
                 - **scores** (*std::vector<float>*) -
+
+                    Highlight scores for each fragment.
 
             - **GetRowCount** (*uint64_t*) -
 
@@ -340,13 +346,23 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
     - **SessionTs** (*uint64_t*) -
 
+        Session timestamp of the search, used to guarantee consistency in a session.
+
     - **Cost** (*int64_t*) -
+
+        Execution cost of the search in cost units, -1 when not reported.
 
     - **ScannedRemoteBytes** (*int64_t*) -
 
+        Number of bytes scanned from remote storage.
+
     - **ScannedTotalBytes** (*int64_t*) -
 
+        Total number of bytes scanned.
+
     - **CacheHitRatio** (*float*) -
+
+        Cache hit ratio as a value between 0.0 and 1.0.
 
 **ERROR HANDLING:**
 

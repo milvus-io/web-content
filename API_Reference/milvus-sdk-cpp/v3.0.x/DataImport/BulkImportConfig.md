@@ -19,3 +19,16 @@ BulkImportConfig config;
 - `const std::string& CaCertPath() const` / `BulkImportConfig& WithCaCertPath(const std::string& ca_cert_path)`
 
     Returns or sets the CA certificate bundle path used to verify the server.
+
+## Example
+
+```cpp
+#include "milvus/BulkImport.h"
+using namespace milvus;
+
+// Configure transport behavior for the BulkImport REST helpers
+BulkImportConfig config;
+config.WithTimeout(300)
+      .WithVerifyServerCert(true)
+      .WithCaCertPath("/etc/ssl/certs/ca-bundle.crt");
+```

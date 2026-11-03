@@ -53,6 +53,11 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
         Get index names.
 
+    - **Descs** (*const std::vector<IndexDesc>&*) -
+
+        Get index description.
+        See [IndexDesc](IndexDesc.md).
+
 **ERROR HANDLING:**
 
 - **[Status](../Client/Status.md)**

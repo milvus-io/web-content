@@ -29,3 +29,27 @@ enum class SegmentState {
 - **FLUSHING** (5) - The segment is being flushed to storage.
 
 - **DROPPED** (6) - The segment has been dropped.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+using namespace milvus;
+
+// ListQuerySegments() reports the runtime state of each segment in the collection
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+ListQuerySegmentsResponse response;
+auto status = client->ListQuerySegments(
+    ListQuerySegmentsRequest().WithCollectionName("my_collection"),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& seg : response.Result()) {
+    std::cout << "segment " << seg.SegmentID()
+              << " state=" << static_cast<int>(seg.State()) << std::endl;
+}
+```

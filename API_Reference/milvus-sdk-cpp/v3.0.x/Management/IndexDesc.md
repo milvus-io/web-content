@@ -98,18 +98,18 @@ auto client = MilvusClientV2::Create();
 client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
 
 // Create an HNSW vector index and a scalar TRIE index together
-IndexParam index_vec("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+IndexDesc index_vec("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
 index_vec.AddExtraParam("M", "16");
 index_vec.AddExtraParam("efConstruction", "200");
 
-IndexParam index_name("name", "", IndexType::TRIE);
+IndexDesc index_name("name", "", IndexType::TRIE);
 
 auto status = client->CreateIndex(
     CreateIndexRequest()
         .WithCollectionName("my_collection")
         .WithSync(true)
-        .AddIndexParam(std::move(index_vec))
-        .AddIndexParam(std::move(index_name)));
+        .AddIndex(std::move(index_vec))
+        .AddIndex(std::move(index_name)));
 
 // Inspect build progress via DescribeIndex
 DescribeIndexResponse resp;

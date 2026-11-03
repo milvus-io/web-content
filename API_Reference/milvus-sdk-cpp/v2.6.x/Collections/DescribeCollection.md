@@ -80,6 +80,8 @@ Returns a [Status](../Client/Status.md) indicating success or failure, and fills
 
             - **EnableDynamicField** (*bool*) -
 
+                Whether the dynamic field is enabled for the collection.
+
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.

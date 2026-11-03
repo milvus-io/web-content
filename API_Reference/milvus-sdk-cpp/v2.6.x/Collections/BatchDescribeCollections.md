@@ -99,6 +99,8 @@ Returns one collection description ([CollectionDesc](CollectionDesc.md)) per req
 
             - **EnableDynamicField** (*bool*) -
 
+                Whether the dynamic field is enabled for the collection.
+
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
                 Fields schema array.

@@ -259,6 +259,10 @@ The `QueryResponse` object exposes execution statistics that describe the cost o
 
     Returns the cache hit ratio as a value between 0.0 and 1.0.
 
+- `uint64_t SessionTs() const`
+
+    Returns the session timestamp of the query, used to guarantee consistency in a session.
+
 #### Output field types
 
 Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.

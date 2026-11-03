@@ -39,3 +39,28 @@ This class holds the information of a snapshot restore job, as returned by `List
 - `uint64_t TimeCost() const`
 
     The elapsed time of the restore job.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+using namespace milvus;
+
+// ListRestoreSnapshotJobs() returns one job-info object per restore job
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+ListRestoreSnapshotJobsResponse response;
+auto status = client->ListRestoreSnapshotJobs(
+    ListRestoreSnapshotJobsRequest().WithCollectionName("my_collection"),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& job : response.Jobs()) {
+    std::cout << "job " << job.JobID()
+              << " state=" << static_cast<int>(job.State())
+              << " progress=" << job.Progress() << std::endl;
+}
+```

@@ -29,73 +29,63 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const ResourceGroupDesc&*) -
 
-        Get resource group description.
-        See [ResourceGroupDesc](ResourceGroupDesc.md).
+        Get resource group description. See the `### ResourceGroupDesc` section below.
 
-        - **Name** (*const std::string&*) -
+### ResourceGroupDesc
 
-            Name of the resource group.
+This class represents the current state of a resource group, including its configuration, node counts, and the list of query nodes currently in the group. It is returned by calling `Desc()` on a `DescribeResourceGroupResponse`.
 
-        - **Capacity** (*uint32_t*) -
+```cpp
+const ResourceGroupDesc& desc = response.Desc();
+```
 
-            Capacity of requested nodes.
+**METHODS:**
 
-        - **AvailableNodesNum** (*uint32_t*) -
+- `const std::string& Name() const`
 
-            Number of available nodes.
+    Name of the resource group.
 
-        - **LoadedReplicasNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+- `uint32_t Capacity() const`
 
-            Loaded replica number for each collection.
+    Configured node capacity (the `Requests` value from `ResourceGroupConfig`).
 
-        - **OutgoingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+- `uint32_t AvailableNodesNum() const`
 
-            Accessed other resource group's nodes number for each collection.
+    Number of query nodes currently available in the resource group.
 
-        - **IncomingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+- `const std::unordered_map<std::string, uint32_t>& LoadedReplicasNum() const`
 
-            The number of nodes accessed by other resource groups for each collection.
+    Map from collection name to the number of loaded replicas in this group.
 
-        - **Config** (*const ResourceGroupConfig&*) -
+- `const std::unordered_map<std::string, uint32_t>& OutgoingNodesNum() const`
 
-            Configurations of the resource group.
-            See [ResourceGroupConfig](ResourceGroupConfig.md).
+    Map from collection name to the count of nodes this group is borrowing from other groups.
 
-            - **Requests** (*uint32_t*) -
+- `const std::unordered_map<std::string, uint32_t>& IncomingNodesNum() const`
 
-                Number of requested nodes.
+    Map from collection name to the count of nodes other groups are borrowing from this group.
 
-            - **Limits** (*uint32_t*) -
+- `const ResourceGroupConfig& Config() const`
 
-                Maximum number of nodes.
+    The current configuration of the resource group. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
-            - **TransferFromGroups** (*const std::set<std::string>&*) -
+- `const std::vector<NodeInfo>& Nodes() const`
 
-                Group names from which the nodes can be transferred.
+    List of query nodes currently assigned to this resource group. Each entry is a NodeInfo struct (see below).
 
-            - **TransferToGroups** (*const std::set<std::string>&*) -
+### NodeInfo
 
-                Group names to which the nodes can be transferred.
+`NodeInfo` is a plain struct that describes a single query node.
 
-            - **NodeFilters** (*const std::unordered_map<std::string, std::string>&*) -
+```cpp
+struct NodeInfo {
+    NodeInfo(int64_t id, const std::string& address, const std::string& hostname);
 
-                Node filters; the resource group will prefer to accept nodes matching the filter.
-
-        - **Nodes** (*const std::vector<NodeInfo>&*) -
-
-            Basic informations of all nodes in the resource group.
-
-            - **id_** (*int64_t*) -
-
-                id of this node.
-
-            - **address_** (*std::string*) -
-
-                address of this node.
-
-            - **hostname_** (*std::string*) -
-
-                hostname of this node.
+    int64_t     id_;        // Server-assigned node ID
+    std::string address_;   // Network address (host:port)
+    std::string hostname_;  // Hostname of the node
+};
+```
 
 **ERROR HANDLING:**
 

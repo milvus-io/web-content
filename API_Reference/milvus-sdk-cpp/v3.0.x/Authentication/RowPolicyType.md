@@ -23,3 +23,16 @@ enum class RowPolicyType {
 - **RESTRICTIVE** (2)
 
     Every applicable restrictive policy must admit a row.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+using namespace milvus;
+
+// Choose a permissive or restrictive policy when creating a row policy
+RowPolicyRequest request;
+request.WithPolicyName("tenant_read_only")
+       .WithPolicyType(RowPolicyType::RESTRICTIVE)
+       .WithUsingExpr("tenant_id == \"tenant-a\"");
+```

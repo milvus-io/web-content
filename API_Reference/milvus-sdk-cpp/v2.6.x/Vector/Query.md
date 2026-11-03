@@ -227,6 +227,8 @@ Returns a [Status](../Client/Status.md) indicating whether the query succeeded, 
 
     - **SessionTs** (*uint64_t*) -
 
+        Session timestamp of the query, used to guarantee consistency in a session.
+
 ### QueryResults
 
 **METHODS:**

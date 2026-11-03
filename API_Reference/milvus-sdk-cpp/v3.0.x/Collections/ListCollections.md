@@ -42,28 +42,40 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **CollectionInfos** (*const std::vector<CollectionInfo>&*) -
 
-        Get brief information of collections.
-        See [CollectionInfo](CollectionInfo.md).
-
-        - **Name** (*const std::string&*) -
-
-            Name of the collection.
-
-        - **ID** (*int64_t*) -
-
-            Internal ID of the collection.
-
-        - **CreatedTime** (*uint64_t*) -
-
-            UTC time when the collection is created.
-
-        - **MemoryPercentage** (*uint64_t*) -
-
-            Loading percentage of the collection.
+        Get brief information of collections. See the `### CollectionInfo` section below.
 
     - **CollectionNames** (*const std::vector<std::string>&*) -
 
         Get collection names.
+
+### CollectionInfo
+
+This class holds summary information about a single collection in a list result. `ListCollectionsResponse::CollectionInfos()` returns a `CollectionsInfo` value, which is a type alias for `std::vector<CollectionInfo>`.
+
+```cpp
+CollectionInfo();
+CollectionInfo(std::string collection_name, int64_t collection_id, uint64_t create_time);
+
+using CollectionsInfo = std::vector<CollectionInfo>;
+```
+
+**METHODS:**
+
+- `const std::string& Name() const`
+
+    Name of the collection.
+
+- `int64_t ID() const`
+
+    Server-assigned internal ID of the collection.
+
+- `uint64_t CreatedTime() const`
+
+    UTC timestamp (microseconds) when the collection was created.
+
+- `uint64_t MemoryPercentage() const`
+
+    Deprecated. Always returns `0`. Use `GetLoadState()` to check the load progress instead.
 
 **ERROR HANDLING:**
 

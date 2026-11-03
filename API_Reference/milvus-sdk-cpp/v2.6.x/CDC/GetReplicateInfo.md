@@ -44,29 +44,49 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
         - **ClusterID** (*const std::string&*) -
 
+            ID of the Milvus cluster that owns the channel.
+
         - **PChannel** (*const std::string&*) -
+
+            Name of the physical channel.
 
         - **MessageID** (*const ReplicateMessageID&*) -
 
             - **ID** (*const std::string&*) -
 
+                ID of the replicated message.
+
             - **WalName** (*const std::string&*) -
 
+                Name of the WAL (write-ahead log) entry for the message.
+
         - **TimeTick** (*uint64_t*) -
+
+            Timestamp (timetick) recorded at the checkpoint.
 
     - **SalvageCheckpoint** (*const ReplicateCheckpoint&*) -
 
         - **ClusterID** (*const std::string&*) -
 
+            ID of the Milvus cluster that owns the channel.
+
         - **PChannel** (*const std::string&*) -
+
+            Name of the physical channel.
 
         - **MessageID** (*const ReplicateMessageID&*) -
 
             - **ID** (*const std::string&*) -
 
+                ID of the replicated message.
+
             - **WalName** (*const std::string&*) -
 
+                Name of the WAL (write-ahead log) entry for the message.
+
         - **TimeTick** (*uint64_t*) -
+
+            Timestamp (timetick) recorded at the checkpoint.
 
 **ERROR HANDLING:**
 
