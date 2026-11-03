@@ -314,7 +314,7 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
 
     Sets the application-level row-level-security principal for this request.
 
-- `AddFunctionChain(FunctionChain&& function_chain)`
+- `AddFunctionChain(const FunctionChain& function_chain)`
 
     Adds one reranking function chain. See [FunctionChain](FunctionChain.md).
 

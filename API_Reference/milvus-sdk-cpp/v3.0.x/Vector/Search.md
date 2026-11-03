@@ -609,6 +609,14 @@ The `SearchResponse` object exposes execution statistics that describe the cost 
 
     Returns the cache hit ratio as a value between 0.0 and 1.0.
 
+- `uint64_t SessionTs() const`
+
+    Returns the session timestamp of the search, used to guarantee consistency in a session.
+
+- `const AggregationBuckets& AggregationBuckets() const`
+
+    Returns the aggregation buckets grouped by search query. The outer vector follows query order; queries with no buckets retain an empty inner vector so their indexes stay aligned with the search request. See [SearchAggregation](SearchAggregation.md).
+
 #### SingleResult
 
 `SingleResult` contains the top-k hits for one query vector, including scores, primary keys, and requested output fields. `SearchResults` is the outer collection that contains these per-query results.

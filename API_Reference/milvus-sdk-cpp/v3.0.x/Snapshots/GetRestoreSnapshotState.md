@@ -31,7 +31,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
 - **response** (*GetRestoreSnapshotStateResponse*) -
 
-    - **JobInfo** (*const RestoreSnapshotJobInfo&*)
+    - **JobInfo** (*const RestoreSnapshotJobInfo&*) -
 
         Get the restore job information.
         See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).

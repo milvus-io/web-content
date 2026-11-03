@@ -184,3 +184,28 @@ enum class CompactionTaskState {
 - **STATISTIC** (10)
 
     The task is collecting statistics.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+using namespace milvus;
+
+// GetCompactionPlans() returns the compaction plans for the collection
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+GetCompactionPlansResponse response;
+auto status = client->GetCompactionPlans(
+    GetCompactionPlansRequest().WithCompactionID(compaction_id),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& plan : response.Plans()) {
+    std::cout << "plan " << plan.PlanId()
+              << " type=" << static_cast<int>(plan.Type())
+              << " state=" << static_cast<int>(plan.State()) << std::endl;
+}
+```

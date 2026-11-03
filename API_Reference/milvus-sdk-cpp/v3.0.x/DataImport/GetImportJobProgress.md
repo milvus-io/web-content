@@ -58,7 +58,6 @@ Returns a [Status](../Client/Status.md) indicating whether the REST call succeed
 
 - **response** (*BulkImportResponse*) -
 
-    See [BulkImportResponse](BulkImportResponse.md).
 
     - **RawJson** (*const nlohmann::json&*) -
 

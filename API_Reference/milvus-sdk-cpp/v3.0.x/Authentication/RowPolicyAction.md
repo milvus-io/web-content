@@ -48,3 +48,16 @@ enum class RowPolicyAction {
 - **HYBRID_SEARCH** (7)
 
     Covers hybrid multi-vector search operations.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+using namespace milvus;
+
+// A row policy governs specific row-bearing operations; select the actions it covers
+RowPolicyRequest request;
+request.WithPolicyName("tenant_read_only")
+       .WithPolicyType(RowPolicyType::RESTRICTIVE)
+       .WithActions({RowPolicyAction::QUERY, RowPolicyAction::SEARCH, RowPolicyAction::HYBRID_SEARCH});
+```

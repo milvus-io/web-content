@@ -29,73 +29,63 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const ResourceGroupDesc&*) -
 
-        Get resource group description.
-        See [ResourceGroupDesc](ResourceGroupDesc.md).
+        Get resource group description. See the `### ResourceGroupDesc` section below.
 
-        - **AvailableNodesNum** (*uint32_t*) -
+### ResourceGroupDesc
 
-            Number of available nodes.
+This class represents the current state of a resource group, including its configuration, node counts, and the list of query nodes currently in the group. It is returned by calling `Desc()` on a `DescribeResourceGroupResponse`.
 
-        - **Capacity** (*uint32_t*) -
+```cpp
+const ResourceGroupDesc& desc = response.Desc();
+```
 
-            Capacity of requested nodes.
+**METHODS:**
 
-        - **Config** (*const ResourceGroupConfig&*) -
+- `const std::string& Name() const`
 
-            Configurations of the resource group.
-            See [ResourceGroupConfig](ResourceGroupConfig.md).
+    Name of the resource group.
 
-            - **Limits** (*uint32_t*) -
+- `uint32_t Capacity() const`
 
-                Maximum number of nodes.
+    Configured node capacity (the `Requests` value from `ResourceGroupConfig`).
 
-            - **NodeFilters** (*const std::unordered_map<std::string, std::string>&*) -
+- `uint32_t AvailableNodesNum() const`
 
-                Node filters that the resource group prefers.
+    Number of query nodes currently available in the resource group.
 
-            - **Requests** (*uint32_t*) -
+- `const std::unordered_map<std::string, uint32_t>& LoadedReplicasNum() const`
 
-                Number of requested nodes.
+    Map from collection name to the number of loaded replicas in this group.
 
-            - **TransferFromGroups** (*const std::set<std::string>&*) -
+- `const std::unordered_map<std::string, uint32_t>& OutgoingNodesNum() const`
 
-                Group names from which nodes can be transferred.
+    Map from collection name to the count of nodes this group is borrowing from other groups.
 
-            - **TransferToGroups** (*const std::set<std::string>&*) -
+- `const std::unordered_map<std::string, uint32_t>& IncomingNodesNum() const`
 
-                Group names to which nodes can be transferred.
+    Map from collection name to the count of nodes other groups are borrowing from this group.
 
-        - **IncomingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+- `const ResourceGroupConfig& Config() const`
 
-            Number of nodes accessed by other resource groups, per collection.
+    The current configuration of the resource group. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
-        - **LoadedReplicasNum** (*const std::unordered_map<std::string, uint32_t>&*) -
+- `const std::vector<NodeInfo>& Nodes() const`
 
-            Loaded replica number for each collection.
+    List of query nodes currently assigned to this resource group. Each entry is a NodeInfo struct (see below).
 
-        - **Name** (*const std::string&*) -
+### NodeInfo
 
-            Name of the resource group.
+`NodeInfo` is a plain struct that describes a single query node.
 
-        - **Nodes** (*const std::vector<NodeInfo>&*) -
+```cpp
+struct NodeInfo {
+    NodeInfo(int64_t id, const std::string& address, const std::string& hostname);
 
-            Basic information of all nodes in the resource group.
-
-            - **id_** (*int64_t*) -
-
-                ID of this node.
-
-            - **address_** (*std::string*) -
-
-                Address of this node.
-
-            - **hostname_** (*std::string*) -
-
-                Hostname of this node.
-
-        - **OutgoingNodesNum** (*const std::unordered_map<std::string, uint32_t>&*) -
-
-            Number of other resource group nodes accessed, per collection.
+    int64_t     id_;        // Server-assigned node ID
+    std::string address_;   // Network address (host:port)
+    std::string hostname_;  // Hostname of the node
+};
+```
 
 **ERROR HANDLING:**
 

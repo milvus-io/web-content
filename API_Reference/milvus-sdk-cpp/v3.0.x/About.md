@@ -73,13 +73,15 @@ int main() {
         return 1;
     }
 
-    // Search
+    // Search with a consistency level of Strong so the just-inserted data is immediately visible.
+    // In production you can choose a consistency level (for example, Bounded) that fits your scenario.
     milvus::SearchResponse response;
     auto search_status = client->Search(milvus::SearchRequest()
         .WithCollectionName("hello_milvus")
         .WithAnnsField("embedding")
         .AddFloatVector({0.1f, 0.2f, 0.3f})
         .WithMetricType(milvus::MetricType::COSINE)
+        .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG)
         .WithLimit(1),
         response);
     if (!search_status.IsOk()) {

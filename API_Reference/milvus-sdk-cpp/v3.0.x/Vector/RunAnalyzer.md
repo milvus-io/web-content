@@ -77,15 +77,27 @@ Returns a status indicating whether the operation succeeded.
 
             - **token_** (*std::string*) -
 
+                The analyzed token text.
+
             - **start_offset_** (*int64_t*) -
+
+                Start character offset of the token in the original text.
 
             - **end_offset_** (*int64_t*) -
 
+                End character offset of the token in the original text.
+
             - **position_** (*int64_t*) -
+
+                Position of the token in the token sequence.
 
             - **position_length_** (*int64_t*) -
 
+                Number of token positions spanned by the token.
+
             - **hash_** (*uint32_t*) -
+
+                Hash value of the token, included when hash values are requested.
 
 **ERROR HANDLING:**
 

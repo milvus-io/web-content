@@ -95,7 +95,7 @@ coverage, method signature accuracy, standalone type page eligibility, inlined
 enum format, cross-links, misplaced type pages, missing/absent inline
 expansions, unnecessary standalone pages, operation page filename and title, error
 reporting convention, About.md format compliance, example relevance, example
-heading cardinality, section heading forms) plus the
+heading cardinality, standalone type-page examples, section heading forms) plus the
 Pass 1 response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
 versions — it audits and corrects whatever the checklist surfaces, including
@@ -104,6 +104,7 @@ the steps reveal as missing or wrong, as well as pure formatting issues (wrong
 property names, missing `**Constants:**` headers, empty member bullets, 3+
 consecutive blank lines, missing or blank code-fence language tags, incorrect
 titles, examples that describe a different API or type than the page documents,
+standalone type or enum pages missing a `## Example` (see Step 13),
 example headings that disagree with the number of examples in their section,
 section headings that deviate from the canonical heading forms).
 **Step 10 (unnecessary standalone pages) is applied unconditionally**:
@@ -1136,9 +1137,15 @@ member methods, and demonstrate the documented return value. Preserve the
 page's existing example scaffolding where it is already on-topic (import
 pattern, `# include-start <tag>`/`# include-end` markers, setup steps), and
 match the sibling pages' verbosity. After rewriting, re-run the compile-level
-verifier (Step 4b) so the new example still compiles. Type pages that carry no
-`## Example` at all (e.g. plain enum pages with no example section) are not
-affected by this step.
+verifier (Step 4b) so the new example still compiles. **Every standalone type
+page — including plain enum pages — must carry a `## Example` that demonstrates
+the documented type or enum** (e.g. `DataType.md`, `IndexType.md`,
+`MetricType.md`, and `ConsistencyLevel.md` all carry examples). A standalone
+type or enum page found without a `## Example` is a violation: add one that
+constructs the documented type or uses the enum values in a realistic API call
+(parameter names and defaults from the target tag), matching sibling pages'
+verbosity. Inline type expansions on an operation page are the exception and
+must NOT carry their own `## Example` (see Step 10).
 
 **Step 14 — Example heading cardinality**: the `## Example` / `## Examples`
 heading must match the number of examples actually under it. Count the fenced

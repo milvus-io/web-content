@@ -39,3 +39,28 @@ This class holds the information of an external collection refresh job, as retur
 - `const nlohmann::json& ExternalSpec() const`
 
     The external specification of the collection.
+
+## Example
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+using namespace milvus;
+
+// ListRefreshExternalCollectionJobs() returns one job-info object per job
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+ListRefreshExternalCollectionJobsResponse response;
+auto status = client->ListRefreshExternalCollectionJobs(
+    ListRefreshExternalCollectionJobsRequest().WithCollectionName("my_collection"),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& job : response.Jobs()) {
+    std::cout << "job " << job.JobID()
+              << " state=" << static_cast<int>(job.State())
+              << " progress=" << job.Progress() << std::endl;
+}
+```
