@@ -546,62 +546,73 @@ When `search_aggregation` is set, PyMilvus returns no ordinary entity hits in `r
 
 <summary>View the example bucket output</summary>
 
-The following output was captured from the request above and serialized as JSON for readability. PyMilvus returns `AggregationBucket` objects rather than JSON. The `key` value is always an ordered list of key components, even when `fields` contains only one field. This preserves field order for composite keys.
+The following response was captured from the request above and serialized as JSON for readability. PyMilvus returns `AggregationBucket` objects rather than JSON, exposing each key component as a `field_name`/`field_id`/`value` dict. Either way, the `key` value is always an ordered list of key components, even when `fields` contains only one field. This preserves field order for composite keys.
 
 ```json
-[
-  {
-    "key": [
-      {
-        "field_id": 103,
-        "field_name": "brand",
-        "value": "Brand B"
-      }
-    ],
-    "count": 1,
-    "metrics": {
-      "product_count": 1,
-      "avg_price": 159.99,
-      "min_price": 159.99
-    },
-    "hits": [],
-    "sub_groups": []
-  },
-  {
-    "key": [
-      {
-        "field_id": 103,
-        "field_name": "brand",
-        "value": "Brand A"
-      }
-    ],
-    "count": 1,
-    "metrics": {
-      "product_count": 1,
-      "avg_price": 129.99,
-      "min_price": 129.99
-    },
-    "hits": [],
-    "sub_groups": []
-  },
-  {
-    "key": [
-      {
-        "field_id": 103,
-        "field_name": "brand",
-        "value": "Brand C"
-      }
-    ],
-    "count": 1,
-    "metrics": {
-      "product_count": 1,
-      "avg_price": 119.99,
-      "min_price": 119.99
-    },
-    "hits": [],
-    "sub_groups": []
-  }
-]
+{
+  "aggTopks": [
+    3
+  ],
+  "code": 0,
+  "cost": 0,
+  "data": [
+    {
+      "buckets": [
+        {
+          "count": 1,
+          "hits": [],
+          "key": [
+            {
+              "fieldId": 103,
+              "fieldName": "brand",
+              "value": "Brand B"
+            }
+          ],
+          "metrics": {
+            "avg_price": 159.99,
+            "min_price": 159.99,
+            "product_count": 1
+          },
+          "subGroups": []
+        },
+        {
+          "count": 1,
+          "hits": [],
+          "key": [
+            {
+              "fieldId": 103,
+              "fieldName": "brand",
+              "value": "Brand A"
+            }
+          ],
+          "metrics": {
+            "avg_price": 129.99,
+            "min_price": 129.99,
+            "product_count": 1
+          },
+          "subGroups": []
+        },
+        {
+          "count": 1,
+          "hits": [],
+          "key": [
+            {
+              "fieldId": 103,
+              "fieldName": "brand",
+              "value": "Brand C"
+            }
+          ],
+          "metrics": {
+            "avg_price": 119.99,
+            "min_price": 119.99,
+            "product_count": 1
+          },
+          "subGroups": []
+        }
+      ]
+    }
+  ]
+}
 ```
 
 </details>
@@ -825,6 +836,7 @@ const aggregation = {
 payload='{
   "collectionName": "product_search_aggregation",
   "data": [[0.11, 0.40, 0.19, 0.64, 0.30]], "annsField": "embedding", "limit": 10,
+  "outputFields": ["name", "brand", "category", "color", "price", "rating", "in_stock"],
   "searchParams": {"metric_type": "COSINE", "params": {}},
   "searchAggregation": {"fields": ["brand"], "size": 3, "topHits": {"size": 2, "sort": [{"fieldName": "rating", "direction": "desc"}, {"fieldName": "_score", "direction": "desc"}]}}
 }'
@@ -835,48 +847,44 @@ search "$payload"
 
 <summary>View a bucket with representative hits</summary>
 
-The following Brand A bucket was captured from the request above and serialized as JSON for readability.
+The following Brand A bucket was captured from the request above and serialized as JSON for readability. In the REST response, each hit carries the primary key under the primary-key field's name (`id` here), the similarity score as `distance`, and the requested output fields flattened onto the hit object.
 
 ```json
 {
+  "count": 2,
+  "hits": [
+    {
+      "brand": "Brand A",
+      "category": "running_shoes",
+      "color": "black",
+      "distance": 0.99976647,
+      "id": 1,
+      "in_stock": true,
+      "name": "Runner A1",
+      "price": 129.99,
+      "rating": 4.7
+    },
+    {
+      "brand": "Brand A",
+      "category": "running_shoes",
+      "color": "blue",
+      "distance": 0.99970484,
+      "id": 2,
+      "in_stock": true,
+      "name": "Trail A2",
+      "price": 139.99,
+      "rating": 4.6
+    }
+  ],
   "key": [
     {
-      "field_id": 103,
-      "field_name": "brand",
+      "fieldId": 103,
+      "fieldName": "brand",
       "value": "Brand A"
     }
   ],
-  "count": 2,
   "metrics": {},
-  "hits": [
-    {
-      "pk": 1,
-      "score": 0.99976646900177,
-      "fields": {
-        "brand": "Brand A",
-        "category": "running_shoes",
-        "color": "black",
-        "in_stock": true,
-        "name": "Runner A1",
-        "price": 129.99,
-        "rating": 4.7
-      }
-    },
-    {
-      "pk": 2,
-      "score": 0.9997048377990723,
-      "fields": {
-        "brand": "Brand A",
-        "category": "running_shoes",
-        "color": "blue",
-        "in_stock": true,
-        "name": "Trail A2",
-        "price": 139.99,
-        "rating": 4.6
-      }
-    }
-  ],
-  "sub_groups": []
+  "subGroups": []
 }
 ```
 
@@ -1000,6 +1008,7 @@ const aggregation = {
 payload='{
   "collectionName": "product_search_aggregation",
   "data": [[0.11, 0.40, 0.19, 0.64, 0.30]], "annsField": "embedding", "limit": 10,
+  "outputFields": ["name", "brand", "category", "color", "price", "rating", "in_stock"],
   "searchParams": {"metric_type": "COSINE", "params": {}},
   "searchAggregation": {
     "fields": ["category"], "size": 2,
@@ -1019,49 +1028,47 @@ The following serialized excerpt shows the `running_shoes` parent bucket and its
 
 ```json
 {
+  "count": 4,
+  "hits": [],
   "key": [
     {
-      "field_id": 104,
-      "field_name": "category",
+      "fieldId": 104,
+      "fieldName": "category",
       "value": "running_shoes"
     }
   ],
-  "count": 4,
   "metrics": {
     "avg_price": 137.49,
     "product_count": 4
   },
-  "hits": [],
-  "sub_groups": [
+  "subGroups": [
     {
+      "count": 1,
+      "hits": [
+        {
+          "brand": "Brand B",
+          "category": "running_shoes",
+          "color": "white",
+          "distance": 0.99945426,
+          "id": 3,
+          "in_stock": true,
+          "name": "Runner B1",
+          "price": 159.99,
+          "rating": 4.8
+        }
+      ],
       "key": [
         {
-          "field_id": 103,
-          "field_name": "brand",
+          "fieldId": 103,
+          "fieldName": "brand",
           "value": "Brand B"
         }
       ],
-      "count": 1,
       "metrics": {
         "avg_rating": 4.8,
         "brand_count": 1
       },
-      "hits": [
-        {
-          "pk": 3,
-          "score": 0.9994542598724365,
-          "fields": {
-            "brand": "Brand B",
-            "category": "running_shoes",
-            "color": "white",
-            "in_stock": true,
-            "name": "Runner B1",
-            "price": 159.99,
-            "rating": 4.8
-          }
-        }
-      ],
-      "sub_groups": []
+      "subGroups": []
     }
   ]
 }
