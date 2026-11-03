@@ -40,7 +40,7 @@ The following diagram illustrates the main workflow of Boost Rankers.
 
 ![Boost Ranker Mechanism](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/boost-ranker-mechanism.png)
 
-When you insert data, Milvus distributes it across segments. During a search, each segment returns a set of candidates, and Milvus ranks these candidates from all segments to produce the final results. When a search request includes a Boost Ranker, Milvus applies it to the candidate results from each segment to prevent potential precision loss and improve recall. 
+When you insert data, Milvus distributes it across segments. During a search, each segment returns a set of candidates, and Milvus ranks these candidates from all segments to produce the final results. When a search request includes a Boost Ranker, Milvus applies it to the candidate results from each segment to prevent potential precision loss and improve recall.
 
 Before finalizing the results, Milvus processes these candidates with the Boost Ranker as follows:
 
@@ -392,6 +392,8 @@ Before passing a Boost Ranker as the reranker of a search request, you should pr
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -399,7 +401,7 @@ Before passing a Boost Ranker as the reranker of a search request, you should pr
 ```python
 from pymilvus import Function, FunctionType
 
-ranker = Function(
+rerank = Function(
     name="boost",
     input_field_names=[], # Must be an empty list
     function_type=FunctionType.RERANK,
@@ -418,23 +420,55 @@ ranker = Function(
 ```java
 import io.milvus.v2.service.vector.request.ranker.BoostRanker;
 
-BoostRanker ranker = BoostRanker.builder()
+BoostRanker rerank = BoostRanker.builder()
         .name("boost")
         .filter("doctype == \"abstract\"")
-        .weight(5.0f)
+        .weight(0.5f)
         .randomScoreField("id")
-        .randomScoreSeed(126)
+        .randomScoreSeed(126L)
         .build();
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+rerank := entity.NewFunction().
+    WithName("boost").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "boost").
+    WithParam("filter", "doctype == 'abstract'").
+    WithParam("random_score", "{\"seed\": 126, \"field\": \"id\"}").
+    WithParam("weight", "0.5")
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let rerank = Function::new()
+    .name("boost")
+    .function_type(FunctionType::Rerank)
+    .param("reranker", "boost")
+    .param("filter", "doctype == 'abstract'")
+    .param("random_score", "{\"seed\": 126, \"field\": \"id\"}")
+    .param("weight", "0.5");
+```
+
+```cpp
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+auto rerank = std::make_shared<milvus::BoostRerank>("boost");
+rerank->SetFilter("doctype == 'abstract'");
+rerank->SetWeight(0.5);
+// Note: SetRandomScoreField()/SetRandomScoreSeed() are not usable as of
+// milvus-sdk-cpp v3.0.3 - the SDK sends the seed as a string, which the
+// server rejects (a numeric seed is required).
 ```
 
 ```javascript
 import {FunctionType} from '@zilliz/milvus2-sdk-node';
 
-const ranker = {
+const rerank = {
   name: "boost",
   input_field_names: [],
   type: FunctionType.RERANK,
@@ -448,11 +482,22 @@ const ranker = {
     weight: 0.5,
   },
 };
-
 ```
 
 ```bash
 # restful
+export RANKER='{
+    "name": "boost",
+    "type": "Rerank",
+    "inputFieldNames": [],
+    "outputFieldNames": [],
+    "params": {
+        "reranker": "boost",
+        "filter": "doctype == '\''abstract'\''",
+        "random_score": {"seed": 126, "field": "id"},
+        "weight": 0.5
+    }
+}'
 ```
 
 <table>
@@ -514,6 +559,8 @@ Once the Boost Ranker function is ready, you can reference it in a search reques
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -535,37 +582,110 @@ client.search(
     data=[[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
     anns_field="vector",
     params={},
-    output_field=["doctype"],
-    ranker=ranker
+    output_fields=["doctype"],
+    ranker=rerank
 )
 ```
 
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.SearchReq;
-import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.*;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build());
-        
-SearchResp searchReq = client.search(SearchReq.builder()
+
+SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(new FloatVec(new float[]{-0.619954f, 0.447943f, -0.174938f, -0.424803f, -0.864845f})))
         .annsField("vector")
         .outputFields(Collections.singletonList("doctype"))
+        .topK(10)
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .build());
-SearchResp searchResp = client.search(searchReq);
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+resultSet, err := client.Search(ctx, milvusclient.NewSearchOption("my_collection", 10, []entity.Vector{
+    entity.FloatVector{-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911},
+}).
+    WithANNSField("vector").
+    WithOutputFields("doctype").
+    WithFunctionScore(entity.NewFunctionScore().AddFunction(rerank)))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(resultSet)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(&ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus")).await?;
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![vec![-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]]))
+            .output_fields(["doctype"])
+            .limit(10)
+            .rerank(FunctionScore::new().add_function(rerank.clone()))
+            .build()?,
+    )
+    .await?;
+println!("{:?}", response);
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(rerank);
+
+std::vector<float> query_vector = {-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector")
+                   .WithLimit(10)
+                   .WithRerank(function_score)
+                   .AddOutputField("doctype")
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ```javascript
@@ -573,7 +693,7 @@ import { MilvusClient } from '@zilliz/milvus2-sdk-node';
 
 // Connect to the Milvus server
 const client = new MilvusClient({
-  address: 'localhost:19530',
+  address: 'http://localhost:19530',
   token: 'root:Milvus'
 });
 
@@ -585,7 +705,8 @@ const searchResults = await client.search({
   data: [-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
   anns_field: 'vector',
   output_fields: ['doctype'],
-  rerank: ranker,
+  limit: 10,
+  rerank: rerank,
 });
 
 console.log('Search results:', searchResults);
@@ -593,6 +714,36 @@ console.log('Search results:', searchResults);
 
 ```bash
 # restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+--header "Authorization: Bearer ${TOKEN}" \
+-d '{
+    "collectionName": "my_collection",
+    "data": [[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
+    "annsField": "vector",
+    "limit": 10,
+    "outputFields": ["doctype"],
+    "functionScore": {
+        "functions": [
+            {
+                "name": "boost",
+                "type": "Rerank",
+                "inputFieldNames": [],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "boost",
+                    "filter": "doctype == '\''abstract'\''",
+                    "random_score": {"seed": 126, "field": "id"},
+                    "weight": 0.5
+                }
+            }
+        ]
+    }
+}'
 ```
 
 ### Search with multiple Boost Rankers
@@ -605,6 +756,8 @@ The following example shows how to modify the scores of all identified entities 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -655,7 +808,7 @@ client.search(
     data=[[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
     anns_field="vector",
     params={},
-    output_field=["doctype"],
+    output_fields=["doctype"],
     ranker=ranker
 )
 ```
@@ -663,43 +816,159 @@ client.search(
 ```java
 import io.milvus.common.clientenum.FunctionType;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.FunctionScore;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.*;
 
 CreateCollectionReq.Function fixWeightRanker = CreateCollectionReq.Function.builder()
-                 .functionType(FunctionType.RERANK)
-                 .name("boost")
-                 .param("reranker", "boost")
-                 .param("weight", "0.8")
-                 .build();
-                 
+        .functionType(FunctionType.RERANK)
+        .name("boost")
+        .param("reranker", "boost")
+        .param("weight", "0.8")
+        .build();
+
 CreateCollectionReq.Function randomWeightRanker = CreateCollectionReq.Function.builder()
-                 .functionType(FunctionType.RERANK)
-                 .name("boost")
-                 .param("reranker", "boost")
-                 .param("weight", "0.4")
-                 .param("random_score", "{\"seed\": 126}")
-                 .build();
+        .functionType(FunctionType.RERANK)
+        .name("boost")
+        .param("reranker", "boost")
+        .param("weight", "0.4")
+        .param("random_score", "{\"seed\": 126}")
+        .build();
 
 Map<String, String> params = new HashMap<>();
-params.put("boost_mode","Multiply");
-params.put("function_mode","Sum");     
-FunctionScore ranker = FunctionScore.builder()
-                 .addFunction(fixWeightRanker)
-                 .addFunction(randomWeightRanker)
-                 .params(params)
-                 .build()
+params.put("boost_mode", "Multiply");
+params.put("function_mode", "Sum");
 
-SearchResp searchReq = client.search(SearchReq.builder()
-                 .collectionName("my_collection")
-                 .data(Collections.singletonList(new FloatVec(new float[]{-0.619954f, 0.447943f, -0.174938f, -0.424803f, -0.864845f})))
-                 .annsField("vector")
-                 .outputFields(Collections.singletonList("doctype"))
-                 .addFunction(ranker)
-                 .build());
-SearchResp searchResp = client.search(searchReq);
+FunctionScore ranker = FunctionScore.builder()
+        .addFunction(fixWeightRanker)
+        .addFunction(randomWeightRanker)
+        .params(params)
+        .build();
+
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(new FloatVec(new float[]{-0.619954382375778f, 0.4479436794798608f, -0.17493894838751745f, -0.4248030059917294f, -0.8648452746018911f})))
+        .annsField("vector")
+        .outputFields(Collections.singletonList("doctype"))
+        .topK(10)
+        .functionScore(ranker)
+        .build());
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+fixWeightRanker := entity.NewFunction().
+    WithName("boost").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "boost").
+    WithParam("weight", "0.8")
+
+randomWeightRanker := entity.NewFunction().
+    WithName("boost").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "boost").
+    WithParam("random_score", "{\"seed\": 126}").
+    WithParam("weight", "0.4")
+
+ranker := entity.NewFunctionScore().
+    AddFunction(fixWeightRanker).
+    AddFunction(randomWeightRanker).
+    WithParam("boost_mode", "Multiply").
+    WithParam("function_mode", "Sum")
+
+resultSet, err := client.Search(ctx, milvusclient.NewSearchOption("my_collection", 10, []entity.Vector{entity.FloatVector{-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911}}).
+    WithANNSField("vector").
+    WithOutputFields("doctype").
+    WithFunctionScore(ranker))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(resultSet)
+```
+
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let client = ClientV2::new(&ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus")).await?;
+
+let fix_weight_ranker = Function::new()
+    .name("boost")
+    .function_type(FunctionType::Rerank)
+    .param("reranker", "boost")
+    .param("weight", "0.8");
+
+let random_weight_ranker = Function::new()
+    .name("boost")
+    .function_type(FunctionType::Rerank)
+    .param("reranker", "boost")
+    .param("random_score", "{\"seed\": 126}")
+    .param("weight", "0.4");
+
+let function_score = FunctionScore::new()
+    .add_function(fix_weight_ranker)
+    .add_function(random_weight_ranker)
+    .params(HashMap::from([
+        ("boost_mode".to_string(), "Multiply".into()),
+        ("function_mode".to_string(), "Sum".into()),
+    ]));
+
+let response = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("vector")
+            .vectors(SearchVectors::Float(vec![vec![-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]]))
+            .output_fields(["doctype"])
+            .limit(10)
+            .rerank(function_score)
+            .build()?,
+    )
+    .await?;
+println!("{:?}", response);
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <vector>
+
+auto fix_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+fix_weight_ranker->SetWeight(0.8);
+
+auto random_weight_ranker = std::make_shared<milvus::BoostRerank>("boost");
+random_weight_ranker->SetWeight(0.4);
+// Note: SetRandomScoreSeed() is not usable as of milvus-sdk-cpp v3.0.3 —
+// the SDK sends the seed as a string, which the server rejects.
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(fix_weight_ranker);
+function_score->AddFunction(random_weight_ranker);
+
+std::vector<float> query_vector = {-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("vector")
+                   .WithLimit(10)
+                   .WithRerank(function_score)
+                   .AddOutputField("doctype")
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ```javascript
@@ -741,14 +1010,57 @@ await client.search({
   data: [[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
   anns_field: "vector",
   params: {},
-  output_field: ["doctype"],
-  ranker: ranker
+  output_fields: ["doctype"],
+  limit: 10,
+  rerank: ranker
 });
-
 ```
 
 ```bash
 # restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+--header "Authorization: Bearer ${TOKEN}" \
+-d '{
+    "collectionName": "my_collection",
+    "data": [[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
+    "annsField": "vector",
+    "limit": 10,
+    "outputFields": ["doctype"],
+    "functionScore": {
+        "functions": [
+            {
+                "name": "boost",
+                "type": "Rerank",
+                "inputFieldNames": [],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "boost",
+                    "weight": 0.8
+                }
+            },
+            {
+                "name": "boost",
+                "type": "Rerank",
+                "inputFieldNames": [],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "boost",
+                    "random_score": {"seed": 126},
+                    "weight": 0.4
+                }
+            }
+        ],
+        "params": {
+            "boost_mode": "Multiply",
+            "function_mode": "Sum"
+        }
+    }
+}'
 ```
 
 Specifically, there are two Boost Rankers: one applies a fixed weight to all found entities, while the other assigns a random weight to them. Then, we reference these two rankers in a **FunctionScore**, which also defines how the weights influence the scores of the found entities. 

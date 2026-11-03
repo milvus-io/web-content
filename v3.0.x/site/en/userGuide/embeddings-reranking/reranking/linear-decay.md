@@ -136,8 +136,11 @@ After your collection is set up with a numeric field (in this example, `event_da
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -150,7 +153,7 @@ current_time = int(time.time())
 
 # Create a linear decay ranker for event listings
 # Note: All time parameters must use the same unit as your collection data
-ranker = Function(
+rerank = Function(
     name="event_relevance",               # Function identifier
     input_field_names=["event_date"],     # Numeric field to use
     function_type=FunctionType.RERANK,    # Function type. Must be RERANK
@@ -167,30 +170,80 @@ ranker = Function(
 
 ```java
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
+import java.util.Collections;
 
-DecayRanker ranker = DecayRanker.builder()
+DecayRanker rerank = DecayRanker.builder()
         .name("event_relevance")
         .inputFieldNames(Collections.singletonList("event_date"))
         .function("linear")
-        .origin(System.currentTimeMillis())
-        .offset(12 * 60 * 60)
-        .decay(0.5)
-        .scale(7 * 24 * 60 * 60)
+        .origin(System.currentTimeMillis() / 1000)  // Current time (seconds, matching collection data)
+        .offset(12 * 60 * 60)            // 12 hour immediate events window (seconds)
+        .decay(0.5)                      // Half score at scale distance
+        .scale(7 * 24 * 60 * 60)         // 7 days (in seconds, matching collection data)
         .build();
+```
 
+```go
+import (
+    "time"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+)
+
+currentTime := time.Now().Unix()
+
+rerank := entity.NewFunction().
+    WithName("event_relevance").
+    WithInputFields("event_date").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "decay").
+    WithParam("function", "linear").
+    WithParam("origin", currentTime).
+    WithParam("scale", 7*24*60*60).
+    WithParam("offset", 12*60*60).
+    WithParam("decay", 0.5)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let rerank = DecayRerank::new()
+    .function(Function::new()
+        .name("event_relevance")
+        .input_fields(["event_date"])
+        .function_type(FunctionType::Rerank)
+        .param("reranker", "decay"))
+    .decay_function("linear")
+    .origin(std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs())
+    .scale(7 * 24 * 60 * 60)
+    .offset(12 * 60 * 60)
+    .decay(0.5);
+```
+
+```cpp
+auto rerank = std::make_shared<milvus::DecayRerank>("event_relevance");
+rerank->AddInputFieldName("event_date");
+rerank->SetFunction("linear");
+rerank->SetOrigin(1736870400);
+rerank->SetScale(7 * 24 * 60 * 60);
+rerank->SetOffset(12 * 60 * 60);
+rerank->SetDecay(0.5);
 ```
 
 ```javascript
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
-const ranker = {
+const rerank = {
   name: "event_relevance",
   input_field_names: ["event_date"],
   type: FunctionType.RERANK,
   params: {
     reranker: "decay",
     function: "linear",
-    origin: new Date(2025, 1, 15).getTime(),
+    origin: Math.floor(Date.now() / 1000), // Current time (seconds)
     offset: 12 * 60 * 60,
     decay: 0.5,
     scale: 7 * 24 * 60 * 60,
@@ -198,12 +251,25 @@ const ranker = {
 };
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2.Types;
+
+// Calculate current time
+long currentTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+// Create a linear decay ranker for event listings
+// Note: All time parameters must use the same unit as your collection data
+var rerank = new DecayRerank("event_relevance") // Function identifier
+    .WithInputField("event_date") // Numeric field to use
+    .WithFunction("linear") // Choose linear decay
+    .WithOrigin(currentTime) // Current time (seconds, matching collection data)
+    .WithOffset(12L * 60 * 60) // 12 hour immediate events window (seconds)
+    .WithDecay(0.5f) // Half score at scale distance
+    .WithScale(7L * 24 * 60 * 60); // 7 days (in seconds, matching collection data)
 ```
 
 ```bash
-# restful
+# Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.
 ```
 
 ### Apply to standard vector search
@@ -213,8 +279,11 @@ After defining your decay ranker, you can apply it during search operations by p
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -227,16 +296,19 @@ result = milvus_client.search(
     limit=10,                             # Number of results
     output_fields=["title", "venue", "event_date"], # Fields to return
     #  highlight-next-line
-    ranker=ranker,                        # Apply the decay ranker
+    ranker=rerank,                        # Apply the decay ranker
     consistency_level="Strong"
 )
 ```
 
 ```java
 import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.SearchReq;
-import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
 
 SearchReq searchReq = SearchReq.builder()
         .collectionName(COLLECTION_NAME)
@@ -245,30 +317,105 @@ SearchReq searchReq = SearchReq.builder()
         .limit(10)
         .outputFields(Arrays.asList("title", "venue", "event_date"))
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 SearchResp searchResp = client.search(searchReq);
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+functionScore := entity.NewFunctionScore().AddFunction(rerank)
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    collection_name, // collection name
+    10,              // limit
+    []entity.Vector{your_query_vector}, // query vector
+).WithANNSField("dense").
+    WithFunctionScore(functionScore).
+    WithOutputFields("title", "venue", "event_date"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let function_score = FunctionScore::new().add_function(rerank);
+let request = SearchRequest::builder()
+    .collection_name(collection_name)
+    .vectors(SearchVectors::Float(vec![your_query_vector]))
+    .vector_field("dense")
+    .limit(10)
+    .output_fields(vec!["title", "venue", "event_date"])
+    .rerank(function_score)
+    .build()?;
+let resp = client.search(request).await?;
+```
+
+```cpp
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(rerank);
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName(collection_name)
+                   .WithAnnsField("dense")
+                   .WithRerank(function_score)
+                   .WithLimit(10)
+                   .AddOutputField("title")
+                   .AddOutputField("venue")
+                   .AddOutputField("event_date")
+                   .AddFloatVector(your_query_vector)
+                   .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 const result = await milvusClient.search({
-  collection_name: "collection_name",
+  collection_name: collection_name,
   data: [your_query_vector], // Replace with your query vector
   anns_field: "dense",
   limit: 10,
   output_fields: ["title", "venue", "event_date"],
-  rerank: ranker,
+  rerank: rerank,
   consistency_level: "Strong",
 });
-
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Types;
+
+// Apply decay ranker to vector search
+var result = await client.SearchAsync(new SearchReq
+{
+    CollectionName = collectionName,
+    VectorFieldName = "dense", // Vector field to search
+    Vectors = new[] { yourQueryVector }, // Replace with your query vector
+    Limit = 10, // Number of results
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "title", "venue", "event_date" }, // Fields to return
+        FunctionScoreReranker = rerank, // Apply the decay ranker
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 ```
 
 ```bash
-# restful
+# Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.
 ```

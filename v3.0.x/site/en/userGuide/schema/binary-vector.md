@@ -53,8 +53,11 @@ To use binary vectors in Milvus, first define a vector field for storing binary 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -65,7 +68,7 @@ client = MilvusClient(uri="http://localhost:19530")
 
 schema = client.create_schema(
     auto_id=True,
-    enable_dynamic_fields=True,
+    enable_dynamic_field=True,
 )
 
 schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
@@ -75,16 +78,16 @@ schema.add_field(field_name="binary_vector", datatype=DataType.BINARY_VECTOR, di
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build());
-        
-CreateCollectionReq.CollectionSchema schema = client.createSchema();
+
+CreateCollectionReq.CollectionSchema schema = MilvusClientV2.CreateSchema();
 schema.setEnableDynamicField(true);
 schema.addField(AddFieldReq.builder()
         .fieldName("pk")
@@ -101,33 +104,21 @@ schema.addField(AddFieldReq.builder()
         .build());
 ```
 
-```javascript
-import { DataType } from "@zilliz/milvus2-sdk-node";
-
-schema.push({
-  name: "binary vector",
-  data_type: DataType.BinaryVector,
-  dim: 128,
-});
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    milvusclient "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -135,18 +126,109 @@ if err != nil {
 }
 defer client.Close(ctx)
 
-schema := entity.NewSchema()
-schema.WithField(entity.NewField().
-    WithName("pk").
-    WithDataType(entity.FieldTypeVarChar).
-    WithIsAutoID(true).
-    WithIsPrimaryKey(true).
-    WithMaxLength(100),
-).WithField(entity.NewField().
-    WithName("binary_vector").
-    WithDataType(entity.FieldTypeBinaryVector).
-    WithDim(128),
+schema := entity.NewSchema().WithDynamicFieldEnabled(true).
+    WithField(entity.NewField().
+        WithName("pk").
+        WithDataType(entity.FieldTypeVarChar).
+        WithIsAutoID(true).
+        WithIsPrimaryKey(true).
+        WithMaxLength(100),
+    ).WithField(entity.NewField().
+        WithName("binary_vector").
+        WithDataType(entity.FieldTypeBinaryVector).
+        WithDim(128),
+    )
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
 )
+.await?;
+
+let mut schema = CollectionSchema::new().enable_dynamic_field(true);
+schema = schema
+    .add_field(
+        FieldSchema::new()
+            .name("pk")
+            .data_type(DataType::VarChar)
+            .primary_key(true)
+            .auto_id(true)
+            .max_length(100),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("binary_vector")
+            .data_type(DataType::BinaryVector)
+            .dimension(128),
+    );
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR, "", true, true).WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("binary_vector", milvus::DataType::BINARY_VECTOR).WithDimension(128));
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+  address: "http://localhost:19530",
+});
+
+const schema = [
+  {
+    name: "pk",
+    data_type: DataType.VarChar,
+    is_primary_key: true,
+    autoID: true,
+    max_length: 100,
+  },
+  {
+    name: "binary_vector",
+    data_type: DataType.BinaryVector,
+    dim: 128,
+  },
+];
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+var schema = new CollectionSchema
+{
+    EnableDynamicFields = true,
+    Fields =
+    {
+        new FieldSchema("pk", DataType.VarChar, isPrimaryKey: true, autoId: true) { MaxLength = 100 },
+        new FieldSchema("binary_vector", DataType.BinaryVector) { Dimension = 128 }
+    }
+};
 ```
 
 ```bash
@@ -175,7 +257,6 @@ export schema="{
     ],
     \"enableDynamicField\": true
 }"
-
 ```
 
 In this example, a vector field named `binary_vector` is added for storing binary vectors. The data type of this field is `BINARY_VECTOR`, with a dimension of 128.
@@ -187,8 +268,11 @@ To speed up searches, an index must be created for the binary vector field. Inde
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -208,29 +292,61 @@ import io.milvus.v2.common.IndexParam;
 import java.util.*;
 
 List<IndexParam> indexParams = new ArrayList<>();
-Map<String,Object> extraParams = new HashMap<>();
 
 indexParams.add(IndexParam.builder()
         .fieldName("binary_vector")
+        .indexName("binary_vector_index")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.HAMMING)
         .build());
 ```
 
-```javascript
-import { MetricType, IndexType } from "@zilliz/milvus2-sdk-node";
+```go
+import (
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
 
-const indexParams = {
-  indexName: "binary_vector_index",
-  field_name: "binary_vector",
-  metric_type: MetricType.HAMMING,
-  index_type: IndexType.AUTOINDEX
+idx := index.NewAutoIndex(entity.HAMMING)
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "binary_vector", idx)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let index_params = vec![IndexParam::new()
+    .field_name("binary_vector")
+    .index_name("binary_vector_index")
+    .index_type(IndexType::AutoIndex)
+    .metric_type(MetricType::Hamming)];
+```
+
+```cpp
+std::vector<milvus::IndexDesc> indexes = {
+    milvus::IndexDesc("binary_vector", "binary_vector_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::HAMMING)
 };
 ```
 
-```go
-idx := index.NewAutoIndex(entity.HAMMING)
-indexOption := milvusclient.NewCreateIndexOption("my_collection", "binary_vector", idx)
+```javascript
+import { MetricType, IndexType } from "@zilliz/milvus2-sdk-node";
+
+const indexParams = [{
+  index_name: "binary_vector_index",
+  field_name: "binary_vector",
+  metric_type: MetricType.HAMMING,
+  index_type: IndexType.AUTOINDEX
+}];
+```
+
+```csharp
+using Milvus.Client.V2.Types;
+
+var indexParam = new IndexParam(
+    fieldName: "binary_vector",
+    indexName: "binary_vector_index",
+    indexType: IndexType.AutoIndex,
+    metricType: MetricType.Hamming);
 ```
 
 ```bash
@@ -257,8 +373,11 @@ Once the binary vector and index settings are complete, create a collection that
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -271,12 +390,7 @@ client.create_collection(
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .build());
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
@@ -286,12 +400,58 @@ CreateCollectionReq requestCreate = CreateCollectionReq.builder()
 client.createCollection(requestCreate);
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
+        WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+if err = loadTask.Await(ctx); err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                        .WithCollectionName("my_collection")
+                                        .WithIndexes(std::move(indexes))
+                                        .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-
-const client = new MilvusClient({
-    address: 'http://localhost:19530'
-});
 
 await client.createCollection({
     collection_name: 'my_collection',
@@ -300,14 +460,15 @@ await client.createCollection({
 });
 ```
 
-```go
-err = client.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption("my_collection", schema).
-        WithIndexOptions(indexOption))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema,
+    Indexes = [indexParam]
+});
 ```
 
 ```bash
@@ -332,8 +493,11 @@ For example, for a 128-dimensional binary vector, a 16-byte array is required (s
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -355,7 +519,7 @@ bool_vectors = [
     [0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1] + [0] * 112,
 ]
 
-data = [{"binary_vector": convert_bool_list_to_bytes(bool_vector) for bool_vector in bool_vectors}]
+data = [{"binary_vector": convert_bool_list_to_bytes(bool_vector)} for bool_vector in bool_vectors]
 
 client.insert(
     collection_name="my_collection",
@@ -368,34 +532,29 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.milvus.v2.service.vector.request.InsertReq;
 import io.milvus.v2.service.vector.response.InsertResp;
+import java.nio.ByteBuffer;
 
-private static byte[] convertBoolArrayToBytes(boolean[] booleanArray) {
-    byte[] byteArray = new byte[booleanArray.length / Byte.SIZE];
-    for (int i = 0; i < booleanArray.length; i++) {
-        if (booleanArray[i]) {
-            int index = i / Byte.SIZE;
-            int shift = i % Byte.SIZE;
-            byteArray[index] |= (byte) (1 << shift);
-        }
-    }
+// Binary vectors (128 bits = 16 bytes)
+// vector1: [1,0,0,1,1,0,1,1, 0,1,0,1,0,1,0,0] + [0]*112
+byte[] vector1 = new byte[16];
+vector1[0] = (byte) 0xD9;
+vector1[1] = 0x2A;
 
-    return byteArray;
-}
+// vector2: [0,1,0,1,0,1,0,0, 1,1,0,0,1,1,0,1] + [0]*112
+byte[] vector2 = new byte[16];
+vector2[0] = 0x2A;
+vector2[1] = (byte) 0xB3;
 
 List<JsonObject> rows = new ArrayList<>();
 Gson gson = new Gson();
-{
-    boolean[] boolArray = {true, false, false, true, true, false, true, true, false, true, false, false, true, true, false, true};
-    JsonObject row = new JsonObject();
-    row.add("binary_vector", gson.toJsonTree(convertBoolArrayToBytes(boolArray)));
-    rows.add(row);
-}
-{
-    boolean[] boolArray = {false, true, false, true, false, true, false, false, true, true, false, false, true, true, false, true};
-    JsonObject row = new JsonObject();
-    row.add("binary_vector", gson.toJsonTree(convertBoolArrayToBytes(boolArray)));
-    rows.add(row);
-}
+
+JsonObject row1 = new JsonObject();
+row1.add("binary_vector", gson.toJsonTree(vector1));
+rows.add(row1);
+
+JsonObject row2 = new JsonObject();
+row2.add("binary_vector", gson.toJsonTree(vector2));
+rows.add(row2);
 
 InsertResp insertR = client.insert(InsertReq.builder()
         .collectionName("my_collection")
@@ -403,23 +562,17 @@ InsertResp insertR = client.insert(InsertReq.builder()
         .build());
 ```
 
-```javascript
-const data = [
-  { binary_vector: [1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1] },
-  { binary_vector: [1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1] },
-];
-
-client.insert({
-  collection_name: "my_collection",
-  data: data,
-});
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithBinaryVectorColumn("binary_vector", 128, [][]byte{
-        {0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0b10011011, 0b01010101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0b11011001, 0b00101010, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0b00101010, 0b10110011, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     }))
 if err != nil {
     fmt.Println(err.Error())
@@ -427,7 +580,91 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// Binary vectors (128 bits = 16 bytes)
+let binary_vectors: Vec<Vec<u8>> = vec![
+    vec![0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    vec![0x2A, 0xB3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .columns(vec![FieldData::binary_vector(
+                "binary_vector",
+                binary_vectors,
+            )])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Binary vectors (128 bits = 16 bytes)
+std::vector<uint8_t> vector1 = {0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+std::vector<uint8_t> vector2 = {0x2A, 0xB3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+milvus::EntityRows data = {
+    {{"binary_vector", vector1}},
+    {{"binary_vector", vector2}}
+};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data)),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const data = [
+  { binary_vector: [1,0,0,1,1,0,1,1,0,1,0,1,0,1,0,0] },
+  { binary_vector: [0,1,0,1,0,1,0,0,1,1,0,0,1,1,0,1] },
+];
+
+await client.insert({
+  collection_name: "my_collection",
+  data: data,
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Types;
+
+// Binary vectors (128 bits = 16 bytes)
+// vector1: [1,0,0,1,1,0,1,1, 0,1,0,1,0,1,0,0] + [0]*112
+byte[] vector1 = { 0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+// vector2: [0,1,0,1,0,1,0,0, 1,1,0,0,1,1,0,1] + [0]*112
+byte[] vector2 = { 0x2A, 0xB3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+await client.InsertAsync(new InsertReq
+{
+    CollectionName = "my_collection",
+    ColumnsData =
+    [
+        new BinaryVectorFieldData("binary_vector", new ReadOnlyMemory<byte>[]
+        {
+            vector1,
+            vector2
+        })
+    ]
+});
+```
+
 ```bash
+export data='[
+    {"binary_vector": "2SoAAAAAAAAAAAAAAAAAAA=="},
+    {"binary_vector": "KrMAAAAAAAAAAAAAAAAAAA=="}
+]'
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
@@ -448,8 +685,11 @@ During search operations, binary vectors must also be provided in the form of a 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -480,51 +720,45 @@ print(res)
 import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.BinaryVec;
 import io.milvus.v2.service.vector.response.SearchResp;
+import java.nio.ByteBuffer;
+
+// query vector = vector1
+byte[] queryBytes = new byte[16];
+queryBytes[0] = (byte) 0xD9;
+queryBytes[1] = 0x2A;
+ByteBuffer queryVector = ByteBuffer.wrap(queryBytes);
 
 Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("nprobe",10);
-
-boolean[] boolArray = {true, false, false, true, true, false, true, true, false, true, false, false, true, true, false, true};
-BinaryVec queryVector = new BinaryVec(convertBoolArrayToBytes(boolArray));
+searchParams.put("nprobe", 10);
 
 SearchResp searchR = client.search(SearchReq.builder()
         .collectionName("my_collection")
-        .data(Collections.singletonList(queryVector))
+        .data(Collections.singletonList(new BinaryVec(queryVector)))
         .annsField("binary_vector")
         .searchParams(searchParams)
         .topK(5)
         .outputFields(Collections.singletonList("pk"))
         .build());
-        
- System.out.println(searchR.getSearchResults());
- 
- // Output
- //
- // [[SearchResp.SearchResult(entity={pk=453444327741536775}, score=0.0, id=453444327741536775), SearchResp.SearchResult(entity={pk=453444327741536776}, score=7.0, id=453444327741536776)]]
-```
 
-```javascript
-query_vector = [1,0,1,0,1,1,1,1,1,1,1,1];
-
-client.search({
-    collection_name: 'my_collection',
-    data: query_vector,
-    limit: 5,
-    output_fields: ['pk'],
-    params: {
-        nprobe: 10
-    }
-});
+System.out.println(searchR.getSearchResults());
 ```
 
 ```go
-queryVector := []byte{0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+queryVector := []byte{0b11011001, 0b00101010, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 annSearchParams := index.NewCustomAnnParam()
 annSearchParams.WithExtraParam("nprobe", 10)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     "my_collection", // collectionName
-    5,                      // limit
+    5,               // limit
     []entity.Vector{entity.BinaryVector(queryVector)},
 ).WithANNSField("binary_vector").
     WithOutputFields("pk").
@@ -541,10 +775,98 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// query vector = vector1
+let query_vector: Vec<u8> = vec![0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+let results = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("binary_vector")
+            .vectors(SearchVectors::Binary(vec![query_vector]))
+            .limit(5)
+            .output_fields(vec!["pk"])
+            .metric_type(MetricType::Hamming)
+            .build()?,
+    )
+    .await?;
+println!("{:?}", results.results());
+```
+
+```cpp
+// query vector = vector1
+std::vector<uint8_t> query_vector = {0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("binary_vector")
+                   .WithLimit(5)
+                   .AddOutputField("pk")
+                   .AddBinaryVector(query_vector);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+auto search_results = response.Results();
+for (auto& result : search_results.Results()) {
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
+```javascript
+const query_vector = [1,0,0,1,1,0,1,1,0,1,0,1,0,1,0,0];
+
+await client.search({
+    collection_name: 'my_collection',
+    data: query_vector,
+    anns_field: 'binary_vector',
+    limit: 5,
+    output_fields: ['pk'],
+    params: { nprobe: 10 }
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+// query vector = vector1
+byte[] queryBytes = { 0xD9, 0x2A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+SearchResp res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    BinaryVectors = [new ReadOnlyMemory<byte>(queryBytes)],
+    VectorFieldName = "binary_vector",
+    MetricType = MetricType.Hamming,
+    Limit = 5,
+    Parameters = new SearchParameters
+    {
+        Nprobe = 10,
+        OutputFields = { "pk" }
+    }
+});
+Console.WriteLine(res);
+```
+
 ```bash
 export searchParams='{
         "params":{"nprobe":10}
     }'
+
+export data='[
+    {"binary_vector": "2SoAAAAAAAAAAAAAAAAAAA=="}
+]'
 
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \

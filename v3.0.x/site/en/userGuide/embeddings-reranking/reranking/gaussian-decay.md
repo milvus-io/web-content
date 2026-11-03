@@ -116,8 +116,11 @@ After your collection is set up with a numeric field (in this example, `distance
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -125,7 +128,7 @@ After your collection is set up with a numeric field (in this example, `distance
 from pymilvus import Function, FunctionType
 
 # Create a Gaussian decay ranker for location-based restaurant search
-ranker = Function(
+rerank = Function(
     name="restaurant_distance_decay",     # Function identifier
     input_field_names=["distance"],       # Numeric field for distance in meters
     function_type=FunctionType.RERANK,    # Function type. Must be RERANK
@@ -142,8 +145,9 @@ ranker = Function(
 
 ```java
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
+import java.util.Collections;
 
-DecayRanker ranker = DecayRanker.builder()
+DecayRanker rerank = DecayRanker.builder()
         .name("restaurant_distance_decay")
         .inputFieldNames(Collections.singletonList("distance"))
         .function("gauss")
@@ -154,13 +158,53 @@ DecayRanker ranker = DecayRanker.builder()
         .build();
 ```
 
+```go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+rerank := entity.NewFunction().
+    WithName("restaurant_distance_decay").
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields("distance").
+    WithParam("reranker", "decay").
+    WithParam("function", "gauss").
+    WithParam("origin", "0").
+    WithParam("offset", "300").
+    WithParam("decay", "0.5").
+    WithParam("scale", "2000")
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let rerank = Function::new()
+    .name("restaurant_distance_decay")
+    .function_type(FunctionType::Rerank)
+    .input_fields(vec!["distance"])
+    .param("reranker", "decay")
+    .param("function", "gauss")
+    .param("origin", "0")
+    .param("offset", "300")
+    .param("decay", "0.5")
+    .param("scale", "2000");
+```
+
+```cpp
+auto rerank = std::make_shared<milvus::DecayRerank>("restaurant_distance_decay");
+rerank->AddInputFieldName("distance");
+rerank->SetFunction("gauss");
+rerank->SetOrigin(0);
+rerank->SetScale(2000);
+rerank->SetOffset(300);
+rerank->SetDecay(0.5);
+```
+
 ```javascript
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
-const ranker = {
+const rerank = {
   name: "restaurant_distance_decay",
   input_field_names: ["distance"],
-  function_type: FunctionType.RERANK,
+  type: FunctionType.RERANK,
   params: {
     reranker: "decay",
     function: "gauss",
@@ -170,15 +214,35 @@ const ranker = {
     scale: 2000,
   },
 };
-
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2.Types;
+
+// Create a Gaussian decay ranker for location-based restaurant search
+DecayRerank rerank = new DecayRerank("restaurant_distance_decay") // Function identifier
+    .WithInputField("distance")                        // Numeric field for distance in meters
+    .WithFunction("gauss")                             // Choose Gaussian decay
+    .WithOrigin(0)                                     // Your current location (0 meters)
+    .WithOffset(300)                                   // 300m no-decay zone
+    .WithDecay(0.5f)                                   // Half score at scale distance
+    .WithScale(2000);                                  // 2 km scale (2000 meters)
 ```
 
 ```bash
-# restful
+rerank='{
+  "name": "restaurant_distance_decay",
+  "type": "Rerank",
+  "inputFieldNames": ["distance"],
+  "params": {
+    "reranker": "decay",
+    "function": "gauss",
+    "origin": 0,
+    "offset": 300,
+    "decay": 0.5,
+    "scale": 2000
+  }
+}'
 ```
 
 ### Apply to standard vector search
@@ -188,8 +252,11 @@ After defining your decay ranker, you can apply it during search operations by p
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -202,47 +269,159 @@ result = milvus_client.search(
     limit=10,                             # Number of results
     output_fields=["name", "cuisine", "distance"],  # Fields to return
     #  highlight-next-line
-    ranker=ranker,                        # Apply the decay ranker
+    ranker=rerank,                        # Apply the decay ranker
     consistency_level="Strong"
 )
 ```
 
 ```java
 import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import java.util.Arrays;
+import java.util.Collections;
 
 SearchReq searchReq = SearchReq.builder()
         .collectionName(COLLECTION_NAME)
-        .data(Collections.singletonList(new EmbeddedText("italian restaurants")))
-        .annsField("vector_field")
+        .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f}))) // Replace with your query vector
+        .annsField("dense")
         .limit(10)
         .outputFields(Arrays.asList("name", "cuisine", "distance"))
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 SearchResp searchResp = client.search(searchReq);
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "restaurant_db", 10,
+    []entity.Vector{entity.FloatVector{0.1, 0.2, 0.3, 0.4}}). // Replace with your query vector
+    WithANNSField("dense").
+    WithOutputFields("name", "cuisine", "distance").
+    WithFunctionReranker(rerank).
+    WithConsistencyLevel(entity.ClStrong))
+if err != nil {
+    fmt.Println(err.Error())
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let search_req = SearchRequest::builder()
+    .collection_name("restaurant_db")
+    .vector_field("dense")
+    .vectors(SearchVectors::Float(vec![vec![0.1f32, 0.2, 0.3, 0.4]]))
+    .limit(10)
+    .output_fields(vec!["name", "cuisine", "distance"])
+    .rerank(FunctionScore::new().add_function(rerank))
+    .consistency_level(ConsistencyLevel::Strong)
+    .build()?;
+
+let res = client.search(search_req).await?;
+println!("{:?}", res.results());
+```
+
+```cpp
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(rerank);
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName(collection_name)
+                   .WithAnnsField("dense")
+                   .WithRerank(function_score)
+                   .WithLimit(10)
+                   .AddOutputField("name")
+                   .AddOutputField("cuisine")
+                   .AddOutputField("distance")
+                   .AddFloatVector(your_query_vector)
+                   .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 const result = await milvusClient.search({
-  collection_name: "collection_name",
+  collection_name: collection_name,
   data: [your_query_vector], // Replace with your query vector
   anns_field: "dense",
   limit: 10,
   output_fields: ["name", "cuisine", "distance"],
-  rerank: ranker,
+  rerank: rerank,
   consistency_level: "Strong",
 });
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+MilvusClientV2 client = new(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+
+float[] queryVector = [0.1f, 0.2f, 0.3f, 0.4f]; // Replace with your query vector
+
+// Apply decay ranker to restaurant vector search
+SearchResp resp = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "restaurant_db",
+    VectorFieldName = "dense",
+    Vectors = [queryVector],
+    Limit = 10,
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "name", "cuisine", "distance" },
+        FunctionScoreReranker = rerank,
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "restaurant_db",
+    "data": [[0.1, 0.2, 0.3, 0.4]],
+    "annsField": "dense",
+    "limit": 10,
+    "outputFields": ["name", "cuisine", "distance"],
+    "functionScore": {
+        "functions": [
+            {
+                "name": "restaurant_distance_decay",
+                "type": "Rerank",
+                "inputFieldNames": ["distance"],
+                "params": {"reranker": "decay", "function": "gauss", "origin": 0, "offset": 300, "decay": 0.5, "scale": 2000}
+            }
+        ]
+    },
+    "consistencyLevel": "Strong"
+}'
 ```

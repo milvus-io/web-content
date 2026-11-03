@@ -132,8 +132,11 @@ After your collection is set up with a numeric field (in this example, `publish_
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -143,7 +146,7 @@ import datetime
 
 # Create an exponential decay ranker for news recency
 # Note: All time parameters must use the same unit as your collection data
-ranker = Function(
+rerank = Function(
     name="news_recency",                  # Function identifier
     input_field_names=["publish_time"],   # Numeric field to use
     function_type=FunctionType.RERANK,    # Function type. Must be RERANK
@@ -159,46 +162,118 @@ ranker = Function(
 ```
 
 ```java
+import java.util.Collections;
 import io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-DecayRanker ranker = DecayRanker.builder()
+DecayRanker rerank = DecayRanker.builder()
         .name("news_recency")
         .inputFieldNames(Collections.singletonList("publish_time"))
         .function("exp")
-        .origin(System.currentTimeMillis())
+        .origin(System.currentTimeMillis() / 1000)  // Current time (seconds, matching collection data)
+        .offset(3 * 60 * 60)            // 3 hour breaking news window (seconds)
+        .decay(0.5)                     // Half score at scale distance
+        .scale(24 * 60 * 60)            // 24 hours (in seconds, matching collection data)
+        .build();
+```
+
+```go
+import (
+    "time"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+)
+
+// Create an exponential decay ranker for news recency
+// Note: All time parameters must use the same unit as your collection data
+rerank := entity.NewFunction().
+    WithName("news_recency").
+    WithInputFields("publish_time").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "decay").
+    WithParam("function", "exp").
+    WithParam("origin", time.Now().Unix()).
+    WithParam("offset", 3*60*60).
+    WithParam("decay", 0.5).
+    WithParam("scale", 24*60*60)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// Create an exponential decay ranker for news recency
+// Note: All time parameters must use the same unit as your collection data
+let origin = std::time::SystemTime::now()
+    .duration_since(std::time::UNIX_EPOCH)
+    .unwrap()
+    .as_secs();
+let rerank = {
+    let rerank = DecayRerank::new()
+        .name("news_recency")
+        .decay_function("exp")
+        .origin(origin)
         .offset(3 * 60 * 60)
         .decay(0.5)
-        .scale(24 * 60 * 60)
-        .build();
+        .scale(24 * 60 * 60);
+    let value = rerank.get_function().clone().input_fields(["publish_time"]);
+    rerank.function(value)
+};
+```
 
+```cpp
+#include <ctime>
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+auto rerank = std::make_shared<milvus::DecayRerank>("news_recency");
+rerank->AddInputFieldName("publish_time");
+rerank->SetFunction("exp");
+rerank->SetOrigin(std::time(nullptr));  // Current time (seconds, matching collection data)
+rerank->SetScale(24 * 60 * 60);
+rerank->SetOffset(3 * 60 * 60);
+rerank->SetDecay(0.5);
 ```
 
 ```javascript
-
 import { FunctionType } from "@zilliz/milvus2-sdk-node";
 
-const ranker = {
+const rerank = {
   name: "news_recency",
   input_field_names: ["publish_time"],
   type: FunctionType.RERANK,
   params: {
     reranker: "decay",
     function: "exp",
-    origin: new Date(2025, 1, 15).getTime(),
-    offset: 3 * 60 * 60,
-    decay: 0.5,
-    scale: 24 * 60 * 60,
+    origin: Math.floor(Date.now() / 1000), // Current time (seconds)
+    offset: 3 * 60 * 60,                   // 3 hour breaking news window (seconds)
+    decay: 0.5,                            // Half score at scale distance
+    scale: 24 * 60 * 60,                   // 24 hours (seconds)
   },
 };
-
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+// Create an exponential decay ranker for news recency
+// Note: All time parameters must use the same unit as your collection data
+var rerank = new DecayRerank("news_recency")  // Function identifier
+    .WithInputField("publish_time")           // Numeric field to use
+    .WithFunction("exp")                      // Choose exponential decay
+    .WithOrigin(DateTimeOffset.UtcNow.ToUnixTimeSeconds())  // Current time (seconds, matching collection data)
+    .WithOffset(3 * 60 * 60)                  // 3 hour breaking news window (seconds)
+    .WithDecay(0.5f)                          // Half score at scale distance
+    .WithScale(24 * 60 * 60);                 // 24 hours (in seconds, matching collection data)
 ```
 
 ```bash
-# restful
+# Note: The RESTful API does not expose a standalone "create a decay ranker"
+# endpoint. The decay function is passed inline through the functionScore
+# field of the search request (see the next section).
 ```
 
 ### Apply to standard vector search
@@ -208,8 +283,11 @@ After defining your decay ranker, you can apply it during search operations by p
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -222,52 +300,167 @@ result = milvus_client.search(
     limit=10,                             # Number of results
     output_fields=["title", "publish_time"], # Fields to return
     #  highlight-next-line
-    ranker=ranker,                        # Apply the decay ranker
+    ranker=rerank,                        # Apply the decay ranker
     consistency_level="Strong"
 )
 ```
 
 ```java
+import java.util.Arrays;
+import java.util.Collections;
 import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.FunctionScore;
 import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
-import io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+String COLLECTION_NAME = "collection_name";
 
 SearchReq searchReq = SearchReq.builder()
         .collectionName(COLLECTION_NAME)
-        .data(Collections.singletonList(new EmbeddedText("market analysis")))
-        .annsField("vector_field")
-        .limit(10)
-        .outputFields(Arrays.asList("title", "publish_time"))
+        .data(Collections.singletonList(new FloatVec(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f))))  // Replace with your query vector
+        .annsField("dense")                    // Vector field to search
+        .limit(10)                             // Number of results
+        .outputFields(Arrays.asList("title", "publish_time"))  // Fields to return
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)           // Apply the decay ranker
                 .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 SearchResp searchResp = client.search(searchReq);
 ```
 
+```go
+import (
+    "context"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+// Apply decay ranker to vector search
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "collection_name", 10, []entity.Vector{
+        entity.FloatVector{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8}, // Replace with your query vector
+    }).
+    WithANNSField("dense").                    // Vector field to search
+    WithOutputFields("title", "publish_time"). // Fields to return
+    WithFunctionReranker(rerank).              // Apply the decay ranker
+    WithConsistencyLevel(entity.ClStrong))
+if err != nil {
+    panic(err)
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// Apply decay ranker to vector search
+let response = client.search(
+    SearchRequest::builder()
+        .collection_name("collection_name")
+        .vector_field("dense")                                // Vector field to search
+        .vectors(SearchVectors::Float(vec![vec![0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]])) // Replace with your query vector
+        .limit(10)                                             // Number of results
+        .output_fields(["title", "publish_time"])             // Fields to return
+        .rerank(FunctionScore::new().add_function(rerank))    // Apply the decay ranker
+        .consistency_level(ConsistencyLevel::Strong)
+        .build()?,
+).await?;
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+auto function_score = std::make_shared<milvus::FunctionScore>();
+function_score->AddFunction(rerank);
+
+auto request = milvus::SearchRequest()
+                   .WithCollectionName(collection_name)
+                   .WithAnnsField("dense")
+                   .WithRerank(function_score)
+                   .WithLimit(10)
+                   .AddOutputField("title")
+                   .AddOutputField("publish_time")
+                   .AddFloatVector(your_query_vector)
+                   .WithConsistencyLevel(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
-import { FunctionType MilvusClient } from "@zilliz/milvus2-sdk-node";
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
 const milvusClient = new MilvusClient("http://localhost:19530");
 
 const result = await milvusClient.search({
   collection_name: "collection_name",
-  data: [your_query_vector], // Replace with your query vector
+  data: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]], // Replace with your query vector
   anns_field: "dense",
   limit: 10,
   output_fields: ["title", "publish_time"],
-  rerank: ranker,
+  rerank: rerank, // Apply the decay ranker
   consistency_level: "Strong",
 });
-
 ```
 
-```go
-// go
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+// Apply decay ranker to vector search
+var result = await client.SearchAsync(new SearchReq
+{
+    CollectionName = collectionName,
+    VectorFieldName = "dense",                    // Vector field to search
+    Vectors = new[] { new ReadOnlyMemory<float>(yourQueryVector) },  // Replace with your query vector
+    Limit = 10,                                   // Number of results
+    Parameters = new SearchParameters
+    {
+        OutputFields = { "title", "publish_time" }, // Fields to return
+        FunctionScoreReranker = rerank,             // Apply the decay ranker
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 ```
 
 ```bash
-# restful
+curl -s http://localhost:19530/v2/vectordb/entities/search \
+    -H "Authorization: Bearer root:Milvus" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "collectionName": "collection_name",
+        "data": [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+        "annsField": "dense",
+        "limit": 10,
+        "outputFields": ["title", "publish_time"],
+        "functionScore": {
+            "functions": [{
+                "name": "news_recency",
+                "type": "Rerank",
+                "inputFieldNames": ["publish_time"],
+                "outputFieldNames": [],
+                "params": {
+                    "reranker": "decay",
+                    "function": "exp",
+                    "origin": 1790872778,
+                    "offset": 10800,
+                    "decay": 0.5,
+                    "scale": 86400
+                }
+            }],
+            "params": {}
+        },
+        "consistencyLevel": "Strong"
+    }'
 ```

@@ -68,8 +68,11 @@ In the example below, we add a vector field named `dense_vector` to store dense 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -80,7 +83,7 @@ client = MilvusClient(uri="http://localhost:19530")
 
 schema = client.create_schema(
     auto_id=True,
-    enable_dynamic_fields=True,
+    enable_dynamic_field=True,
 )
 
 schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
@@ -116,34 +119,21 @@ schema.addField(AddFieldReq.builder()
         .build());
 ```
 
-```javascript
-import { DataType } from "@zilliz/milvus2-sdk-node";
-
-schema.push({
-  name: "dense_vector",
-  data_type: DataType.FloatVector,
-  dim: 4,
-});
-
-```
-
 ```go
 import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -151,7 +141,7 @@ if err != nil {
 }
 defer client.Close(ctx)
 
-schema := entity.NewSchema()
+schema := entity.NewSchema().WithDynamicFieldEnabled(true)
 schema.WithField(entity.NewField().
     WithName("pk").
     WithDataType(entity.FieldTypeVarChar).
@@ -163,6 +153,98 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeFloatVector).
     WithDim(4),
 )
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        FieldSchema::new()
+            .name("pk")
+            .data_type(DataType::VarChar)
+            .primary_key(true)
+            .auto_id(true)
+            .max_length(100),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("dense_vector")
+            .data_type(DataType::FloatVector)
+            .dimension(4),
+    );
+```
+
+```cpp
+#include <iostream>
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("pk", milvus::DataType::VARCHAR, "", true, true).WithMaxLength(100));
+schema->AddField(milvus::FieldSchema("dense_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(4));
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530"
+});
+
+const schema = [
+    {
+        name: "pk",
+        data_type: DataType.VarChar,
+        is_primary_key: true,
+        autoID: true,
+        max_length: 100
+    },
+    {
+        name: "dense_vector",
+        data_type: DataType.FloatVector,
+        dim: 4
+    }
+];
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+var schema = new CollectionSchema
+{
+    EnableDynamicFields = true,
+    Fields =
+    {
+        FieldSchema.CreateVarchar("pk", maxLength: 100, isPrimaryKey: true, autoId: true),
+        FieldSchema.CreateFloatVector("dense_vector", dimension: 4)
+    }
+};
 ```
 
 ```bash
@@ -224,8 +306,11 @@ To accelerate semantic searches, an index must be created for the vector field. 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -248,9 +333,40 @@ List<IndexParam> indexes = new ArrayList<>();
 
 indexes.add(IndexParam.builder()
         .fieldName("dense_vector")
+        .indexName("dense_vector_index")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.IP)
         .build());
+```
+
+```go
+import (
+    "github.com/milvus-io/milvus/client/v3/entity"
+
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+idx := index.NewAutoIndex(entity.IP)
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let index_params = vec![IndexParam::new()
+    .field_name("dense_vector")
+    .index_name("dense_vector_index")
+    .index_type(IndexType::AutoIndex)
+    .metric_type(MetricType::Ip)];
+```
+
+```cpp
+#include <vector>
+
+std::vector<milvus::IndexDesc> indexes = {
+    milvus::IndexDesc("dense_vector", "dense_vector_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::IP)
+};
 ```
 
 ```javascript
@@ -264,9 +380,18 @@ const indexParams = {
 };
 ```
 
-```go
-idx := index.NewAutoIndex(index.MetricType(entity.IP))
-indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+var indexParams = new[]
+{
+    new IndexParam(
+        fieldName: "dense_vector",
+        indexName: "dense_vector_index",
+        indexType: IndexType.AutoIndex,
+        metricType: MetricType.Ip)
+};
 ```
 
 ```bash
@@ -293,8 +418,11 @@ Once the dense vector and index param settings are complete, you can create a co
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -307,12 +435,7 @@ client.create_collection(
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .build());
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
         .collectionName("my_collection")
@@ -322,22 +445,13 @@ CreateCollectionReq requestCreate = CreateCollectionReq.builder()
 client.createCollection(requestCreate);
 ```
 
-```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-
-const client = new MilvusClient({
-    address: 'http://localhost:19530'
-});
-
-await client.createCollection({
-    collection_name: 'my_collection',
-    schema: schema,
-    index_params: indexParams
-});
-
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption("my_collection", schema).
         WithIndexOptions(indexOption))
@@ -345,9 +459,70 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+
+loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+if err := loadTask.Await(ctx); err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("my_collection")
+            .schema(schema)
+            .index_params(index_params)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// CreateCollection creates the configured indexes and loads the collection automatically.
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                            .WithCollectionName("my_collection")
+                                            .WithIndexes(std::move(indexes))
+                                            .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const createRes = await client.createCollection({
+    collection_name: "my_collection",
+    schema: schema,
+    index_params: indexParams
+});
+
+console.log(createRes);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema,
+    Indexes = indexParams
+});
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
@@ -367,8 +542,11 @@ After creating the collection, use the `insert` method to add data containing de
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -392,8 +570,8 @@ import io.milvus.v2.service.vector.response.InsertResp;
 
 List<JsonObject> rows = new ArrayList<>();
 Gson gson = new Gson();
-rows.add(gson.fromJson("{\"dense_vector\": [0.1, 0.2, 0.3, 0.4]}", JsonObject.class));
-rows.add(gson.fromJson("{\"dense_vector\": [0.2, 0.3, 0.4, 0.5]}", JsonObject.class));
+rows.add(gson.fromJson("{\"dense_vector\": [0.1, 0.2, 0.3, 0.7]}", JsonObject.class));
+rows.add(gson.fromJson("{\"dense_vector\": [0.2, 0.3, 0.4, 0.8]}", JsonObject.class));
 
 InsertResp insertR = client.insert(InsertReq.builder()
         .collectionName("my_collection")
@@ -401,19 +579,13 @@ InsertResp insertR = client.insert(InsertReq.builder()
         .build());
 ```
 
-```javascript
-const data = [
-  { dense_vector: [0.1, 0.2, 0.3, 0.7] },
-  { dense_vector: [0.2, 0.3, 0.4, 0.8] },
-];
-
-client.insert({
-  collection_name: "my_collection",
-  data: data,
-});
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithFloatVectorColumn("dense_vector", 4, [][]float32{
         {0.1, 0.2, 0.3, 0.7},
@@ -424,9 +596,98 @@ if err != nil {
     fmt.Println(err.Error())
     // handle err
 }
+
+flushTask, err := client.Flush(ctx, milvusclient.NewFlushOption("my_collection"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
+if err := flushTask.Await(ctx); err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let rows = vec![
+    serde_json::json!({"dense_vector": [0.1, 0.2, 0.3, 0.7]}),
+    serde_json::json!({"dense_vector": [0.2, 0.3, 0.4, 0.8]}),
+];
+
+let insert = client
+    .insert(
+        InsertRequest::builder()
+            .collection_name("my_collection")
+            .rows(rows)
+            .build()?,
+    )
+    .await?;
+println!("{} rows inserted", insert.insert_count());
+```
+
+```cpp
+milvus::EntityRows data = {{{"dense_vector", std::vector<float>{0.1, 0.2, 0.3, 0.7}}},
+                           {{"dense_vector", std::vector<float>{0.2, 0.3, 0.4, 0.8}}}};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName("my_collection")
+                                .WithRowsData(std::move(data)),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->Flush(milvus::FlushRequest().AddCollectionName("my_collection"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const data = [
+    { dense_vector: [0.1, 0.2, 0.3, 0.7] },
+    { dense_vector: [0.2, 0.3, 0.4, 0.8] }
+];
+
+const insertRes = await client.insert({
+    collection_name: "my_collection",
+    data: data
+});
+
+console.log(insertRes);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Types;
+
+var data = new[]
+{
+    new Dictionary<string, object?>
+    {
+        ["dense_vector"] = new[] { 0.1f, 0.2f, 0.3f, 0.7f }
+    },
+    new Dictionary<string, object?>
+    {
+        ["dense_vector"] = new[] { 0.2f, 0.3f, 0.4f, 0.8f }
+    }
+};
+
+await client.InsertAsync(new InsertReq
+{
+    CollectionName = "my_collection",
+    RowsData = data
+});
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
@@ -434,8 +695,8 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "data": [
-        {"dense_vector": [0.1, 0.2, 0.3, 0.4]},
-        {"dense_vector": [0.2, 0.3, 0.4, 0.5]}        
+        {"dense_vector": [0.1, 0.2, 0.3, 0.7]},
+        {"dense_vector": [0.2, 0.3, 0.4, 0.8]}
     ],
     "collectionName": "my_collection"
 }'
@@ -450,8 +711,11 @@ Semantic search based on dense vectors is one of the core features of Milvus, al
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -478,12 +742,14 @@ print(res)
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("nprobe",10);
+searchParams.put("nprobe", 10);
 
-FloatVec queryVector = new FloatVec(new float[]{0.1f, 0.3f, 0.3f, 0.4f});
+FloatVec queryVector = new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.7f});
 
 SearchResp searchR = client.search(SearchReq.builder()
         .collectionName("my_collection")
@@ -493,29 +759,19 @@ SearchResp searchR = client.search(SearchReq.builder()
         .topK(5)
         .outputFields(Collections.singletonList("pk"))
         .build());
-        
+
 System.out.println(searchR.getSearchResults());
-
-// Output
-//
-// [[SearchResp.SearchResult(entity={pk=453444327741536779}, score=0.65, id=453444327741536779), SearchResp.SearchResult(entity={pk=453444327741536778}, score=0.65, id=453444327741536778)]]
-```
-
-```javascript
-query_vector = [0.1, 0.2, 0.3, 0.7];
-
-client.search({
-    collection_name: 'my_collection',
-    data: query_vector,
-    limit: 5,
-    output_fields: ['pk'],
-    params: {
-        nprobe: 10
-    }
-});
 ```
 
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 queryVector := []float32{0.1, 0.2, 0.3, 0.7}
 
 annParam := index.NewCustomAnnParam()
@@ -539,7 +795,97 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+let query_vector = vec![0.1, 0.2, 0.3, 0.7];
+
+let search = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("my_collection")
+            .vector_field("dense_vector")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .extra_params(HashMap::from([("nprobe".to_string(), "10".to_string())]))
+            .limit(5)
+            .output_fields(["pk"])
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", search.results());
+```
+
+```cpp
+std::vector<float> query_vector = {0.1, 0.2, 0.3, 0.7};
+auto request = milvus::SearchRequest()
+                   .WithCollectionName("my_collection")
+                   .WithAnnsField("dense_vector")
+                   .WithLimit(5)
+                   .AddExtraParam("nprobe", "10")
+                   .AddOutputField("pk")
+                   .AddFloatVector(query_vector);
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+auto search_results = response.Results();
+for (auto& result : search_results.Results()) {
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```
+
+```javascript
+const query_vector = [0.1, 0.2, 0.3, 0.7];
+
+const searchRes = await client.search({
+    collection_name: "my_collection",
+    data: query_vector,
+    anns_field: "dense_vector",
+    limit: 5,
+    output_fields: ["pk"],
+    params: {
+        nprobe: 10
+    }
+});
+
+console.log(searchRes);
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var queryVector = new ReadOnlyMemory<float>(new[] { 0.1f, 0.2f, 0.3f, 0.7f });
+
+SearchResp res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "dense_vector",
+    Vectors = new[] { queryVector },
+    Limit = 5,
+    Parameters = new SearchParameters
+    {
+        Nprobe = 10,
+        OutputFields = { "pk" }
+    }
+});
+Console.WriteLine(string.Join(", ", res.SingleResults.SelectMany(r => r.Scores)));
+```
+
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
