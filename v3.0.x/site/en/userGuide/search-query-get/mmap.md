@@ -234,7 +234,7 @@ export idField='{
         "max_length": 512
     },
     "isPrimary": true,
-    "auto_id": false
+    "autoId": false
 }'
 
 export vectorField='{
