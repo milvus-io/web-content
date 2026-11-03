@@ -38,7 +38,7 @@ By default, Grouping Search returns only one entity per group. If you want to in
 
 This section provides example code to demonstrate the use of Grouping Search. The following example assumes the collection includes fields for `id`, `vector`, `chunk`, and `docId`.
 
-```python
+```plaintext
 [
         {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "chunk": "pink_8682", "docId": 1},
         {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "chunk": "red_7025", "docId": 5},
@@ -60,7 +60,9 @@ In the search request, set both `group_by_field` and `output_fields` to `docId`.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -92,9 +94,11 @@ doc_ids = [result['entity']['docId'] for result in res[0]]
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.SearchReq;
 import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Collections;
+import java.util.List;
 
 MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
@@ -139,7 +143,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -170,6 +174,36 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let query_vectors = vec![
+    vec![0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088],
+];
+
+// Group search results
+let res = client.search(SearchRequest::builder()
+    .collection_name("my_collection")
+    .vector_field("vector")
+    .vectors(SearchVectors::Float(query_vectors))
+    .limit(3)
+    .group_by_field("docId")
+    .output_fields(["docId"])
+    .build()?)
+    .await?;
+
+// Retrieve the values in the `docId` column
+let mut doc_ids = Vec::new();
+for result in res.results() {
+    for row in result.rows()? {
+        doc_ids.push(row.get_i32("docId")?);
+    }
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -190,6 +224,37 @@ res = await client.search({
 
 // Retrieve the values in the `docId` column
 var docIds = res.results.map(result => result.entity.docId)
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+float[] queryVectors = new[] { 0.14529211512077012f, 0.9147257273453546f, 0.7965055218724449f, 0.7009258593102812f, 0.5605206522382088f };
+
+// Group search results
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    Vectors = new[] { new ReadOnlyMemory<float>(queryVectors) },
+    Limit = 3,
+    Parameters = new SearchParameters
+    {
+        GroupByField = "docId",
+        OutputFields = { "docId" }
+    }
+});
 ```
 
 ```bash
@@ -265,7 +330,9 @@ By default, Grouping Search returns only one entity per group. If you want multi
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -274,7 +341,7 @@ By default, Grouping Search returns only one entity per group. If you want multi
 # Group search results
 
 res = client.search(
-    collection_name="my_collection", 
+    collection_name="my_collection",
     data=query_vectors, # query vector
     limit=5, # number of groups to return
     group_by_field="docId", # grouping field
@@ -328,7 +395,7 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -361,6 +428,38 @@ for _, resultSet := range resultSets {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let query_vectors = vec![
+    vec![0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088],
+];
+
+// Group search results
+let res = client.search(SearchRequest::builder()
+    .collection_name("my_collection")
+    .vector_field("vector")
+    .vectors(SearchVectors::Float(query_vectors)) // Query vector
+    .limit(5) // Number of groups to return
+    .group_by_field("docId") // Grouping field
+    .group_size(2) // Up to 2 entities to return from each group
+    .strict_group_size(true) // Return exactly 2 entities from each group
+    .output_fields(["docId"])
+    .build()?)
+    .await?;
+
+// Retrieve the values in the `docId` column
+let mut doc_ids = Vec::new();
+for result in res.results() {
+    for row in result.rows()? {
+        doc_ids.push(row.get_i32("docId")?);
+    }
+}
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -383,6 +482,30 @@ res = await client.search({
 
 // Retrieve the values in the `docId` column
 var docIds = res.results.map(result => result.entity.docId)
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+// Group search results
+var res = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    Vectors = new[] { new ReadOnlyMemory<float>(queryVectors) },  // Query vector
+    Limit = 5,                               // Number of groups to return
+    Parameters = new SearchParameters
+    {
+        GroupByField = "docId",              // Grouping field
+        GroupSize = 2,                       // Up to 2 entities to return from each group
+        StrictGroupSize = true,              // Return exactly 2 entities from each group
+        OutputFields = { "docId" }
+    }
+});
 ```
 
 ```bash
@@ -457,7 +580,7 @@ In the example above:
 
 For additional parameter details, refer to [search](https://docs.zilliz.com/reference/python/python/Vector-search).
 
-## Order groups by a scalar field | Milvus 3.0.x
+## Order groups by a scalar field
 
 You can combine Grouping Search with `order_by_fields` to order groups by a scalar field. This is useful when you want diverse results across groups, but still want the groups to follow a business-relevant order such as price or rating.
 
@@ -467,7 +590,9 @@ The following example groups search results by `category`, returns up to three e
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -533,6 +658,12 @@ const response = await client.search({
 console.log(response.results);
 ```
 
+```csharp
+using Milvus.Client.V2;
+
+// Note: Ordering groups by a scalar field is not supported in milvus-sdk-csharp as of v3.0.0.
+```
+
 ```go
 import (
     "fmt"
@@ -557,6 +688,39 @@ if err != nil {
 for _, result := range results {
     fmt.Println(result.IDs, result.Scores)
     fmt.Println(result.GetColumn("category"), result.GetColumn("price"), result.GetColumn("rating"))
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new().uri("http://localhost:19530").token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+// Prerequisite: the collection product_catalog is loaded.
+let query_vectors = vec![
+    vec![0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088],
+];
+
+let res = client.search(SearchRequest::builder()
+    .collection_name("product_catalog")
+    .vector_field("embedding")
+    .vectors(SearchVectors::Float(query_vectors))
+    .limit(20)
+    .group_by_field("category")
+    .group_size(3)
+    .strict_group_size(true)
+    .output_fields(["category", "price", "rating"])
+    .order_by_fields([OrderByField::new()
+        .field_name("price")
+        .direction(AggDirection::Asc)])
+    .build()?)
+    .await?;
+
+for result in res.results() {
+    for row in result.rows()? {
+        println!("{:?}", row.to_entity_row()?);
+    }
 }
 ```
 

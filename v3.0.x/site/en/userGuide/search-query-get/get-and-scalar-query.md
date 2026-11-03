@@ -63,7 +63,7 @@ For more on metadata filtering, refer to [Boolean Expression Rules](basic-operat
 
 When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection.
 
-```python
+```plaintext
 [
         {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
         {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
@@ -84,7 +84,9 @@ You can get entities by their IDs as follows.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -109,8 +111,8 @@ print(res)
 ```java
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.vector.request.GetReq
-import io.milvus.v2.service.vector.request.GetResp
+import io.milvus.v2.service.vector.request.GetReq;
+import io.milvus.v2.service.vector.response.GetResp;
 import io.milvus.v2.service.vector.response.QueryResp;
 import java.util.*;
 
@@ -118,7 +120,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .uri("http://localhost:19530")
         .token("root:Milvus")
         .build());
-        
+
 GetReq getReq = GetReq.builder()
         .collectionName("my_collection")
         .ids(Arrays.asList(0, 1, 2))
@@ -127,7 +129,7 @@ GetReq getReq = GetReq.builder()
 
 GetResp getResp = client.get(getReq);
 
-List<QueryResp.QueryResult> results = getResp.getGetResults();
+List<QueryResp.QueryResult> results = getResp.getQueryResults();
 for (QueryResp.QueryResult result : results) {
     System.out.println(result.getEntity());
 }
@@ -143,15 +145,15 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -175,6 +177,25 @@ fmt.Println("vector: ", resultSet.GetColumn("vector").FieldData().GetVectors())
 fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 ```
 
+```rust
+use milvus::v2::prelude::*;
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+let res = client.get(
+    GetRequest::builder()
+        .collection_name("my_collection")
+        .ids(Ids::Int64(vec![0, 1, 2]))
+        .output_fields(["vector", "color"])
+        .build()?,
+)
+.await?;
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -182,11 +203,35 @@ const address = "http://localhost:19530";
 const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
-const res = client.get({
-    collection_name="my_collection",
-    ids=[0,1,2],
-    output_fields=["vector", "color"]
+const res = await client.get({
+    collection_name: "my_collection",
+    ids: [0, 1, 2],
+    output_fields: ["vector", "color"]
 })
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+GetResp getResp = await client.GetAsync(new GetReq
+{
+    CollectionName = "my_collection",
+    Ids = [0, 1, 2],
+    OutputFields = ["vector", "color"]
+});
+Console.WriteLine(getResp);
 ```
 
 ```bash
@@ -242,7 +287,9 @@ When you need to find entities by custom filtering conditions, use the **Query**
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -264,8 +311,10 @@ res = client.query(
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.QueryReq
-import io.milvus.v2.service.vector.request.QueryResp
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
+import java.util.List;
 
 QueryReq queryReq = QueryReq.builder()
         .collectionName("my_collection")
@@ -302,6 +351,18 @@ fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 
 ```
 
+```rust
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("color like \"red%\"")
+        .output_fields(["vector", "color"])
+        .limit(3)
+        .build()?,
+)
+.await?;
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -309,12 +370,25 @@ const address = "http://localhost:19530";
 const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
-const res = client.query({
-    collection_name="my_collection",
-    filter='color like "red%"',
-    output_fields=["vector", "color"],
-    limit(3)
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: 'color like "red%"',
+    output_fields: ["vector", "color"],
+    limit: 3
 })
+```
+
+```csharp
+QueryResp res = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "vector", "color" },
+        Limit = 3
+    }
+});
 ```
 
 ```bash
@@ -363,7 +437,7 @@ if (!status.IsOk()) {
 
 <a id="Sort-Query-Results"></a>
 
-### Sort Query Results | Milvus 3.0.x
+### Sort Query Results
 
 By default, Query returns results in an unspecified order. Use the `order_by` parameter to sort results by one or more scalar fields. When using `order_by`, note that:
 
@@ -381,7 +455,9 @@ Pass a list of `"field_name:direction"` strings to the `order_by` parameter, whe
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -406,19 +482,85 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("order_by_fields", "id:asc");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("color like \"red%\"")
+        .outputFields(Arrays.asList("vector", "color"))
+        .limit(3)
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("color like \"red%\"").
+    WithOutputFields("vector", "color").
+    WithLimit(3).
+    WithOrderByFields("id:asc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
+fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
+```
+
+```rust
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("color like \"red%\"")
+        .output_fields(["vector", "color"])
+        .limit(3)
+        .order_by_fields([OrderByField::new().field_name("id").direction(AggDirection::Asc)])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+  collection_name: "my_collection",
+  filter: 'color like "red%"',
+  output_fields: ["vector", "color"],
+  limit: 3,
+  // highlight-next-line
+  order_by: ["id:asc"],
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query ORDER BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "color like \"red%\"",
+    "limit": 3,
+    "outputFields": ["vector", "color"],
+    "orderByFields": ["id:asc"]
+}'
 ```
 
 ```cpp
@@ -457,7 +599,9 @@ You can sort by multiple fields at once. Results are first ordered by the first 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -475,19 +619,89 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("order_by_fields", "rating:desc,price:asc");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("")
+        .outputFields(Arrays.asList("color", "rating", "price"))
+        .limit(10)
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("").
+    WithOutputFields("color", "rating", "price").
+    WithLimit(10).
+    WithOrderByFields("rating:desc", "price:asc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
+fmt.Println("rating: ", resultSet.GetColumn("rating").FieldData().GetScalars())
+fmt.Println("price: ", resultSet.GetColumn("price").FieldData().GetScalars())
+```
+
+```rust
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("")
+        .output_fields(["color", "rating", "price"])
+        .limit(10)
+        .order_by_fields([
+            OrderByField::new().field_name("rating").direction(AggDirection::Desc),
+            OrderByField::new().field_name("price").direction(AggDirection::Asc),
+        ])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+  collection_name: "my_collection",
+  filter: "",
+  output_fields: ["color", "rating", "price"],
+  limit: 10,
+  // highlight-next-line
+  order_by: ["rating:desc", "price:asc"],
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query ORDER BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "",
+    "limit": 10,
+    "outputFields": ["color", "rating", "price"],
+    "orderByFields": ["rating:desc", "price:asc"]
+}'
 ```
 
 ```cpp
@@ -528,7 +742,9 @@ Use `order_by` together with `limit` and `offset` to paginate through sorted res
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -558,19 +774,179 @@ page2 = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("order_by_fields", "price:asc");
+
+QueryReq page1Req = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("color like \"red%\"")
+        .outputFields(Arrays.asList("color", "price"))
+        .limit(5)
+        .offset(0)
+        .queryParams(queryParams)
+        .build();
+
+QueryResp page1 = client.query(page1Req);
+for (QueryResp.QueryResult result : page1.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
+
+QueryReq page2Req = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("color like \"red%\"")
+        .outputFields(Arrays.asList("color", "price"))
+        .limit(5)
+        .offset(5)
+        .queryParams(queryParams)
+        .build();
+
+QueryResp page2 = client.query(page2Req);
+for (QueryResp.QueryResult result : page2.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+page1, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("color like \"red%\"").
+    WithOutputFields("color", "price").
+    WithLimit(5).
+    WithOffset(0).
+    WithOrderByFields("price:asc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+page2, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter("color like \"red%\"").
+    WithOutputFields("color", "price").
+    WithLimit(5).
+    WithOffset(5).
+    WithOrderByFields("price:asc"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("page1: ", page1.GetColumn("color").FieldData().GetScalars())
+fmt.Println("page2: ", page2.GetColumn("color").FieldData().GetScalars())
+```
+
+```rust
+let page1 = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("color like \"red%\"")
+        .output_fields(["color", "price"])
+        .limit(5)
+        .offset(0)
+        .order_by_fields([OrderByField::new().field_name("price").direction(AggDirection::Asc)])
+        .build()?,
+)
+.await?;
+
+let page2 = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("color like \"red%\"")
+        .output_fields(["color", "price"])
+        .limit(5)
+        .offset(5)
+        .order_by_fields([OrderByField::new().field_name("price").direction(AggDirection::Asc)])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const page1 = await client.query({
+  collection_name: "my_collection",
+  filter: 'color like "red%"',
+  output_fields: ["color", "price"],
+  limit: 5,
+  offset: 0,
+  // highlight-next-line
+  order_by: ["price:asc"],
+});
+
+console.log(page1.data);
+
+const page2 = await client.query({
+  collection_name: "my_collection",
+  filter: 'color like "red%"',
+  output_fields: ["color", "price"],
+  limit: 5,
+  offset: 5,
+  // highlight-next-line
+  order_by: ["price:asc"],
+});
+
+console.log(page2.data);
+```
+
+```csharp
+// Note: order_by is not supported in milvus-sdk-csharp as of v3.0.0.
+
+// Page 1
+QueryResp page1 = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "color", "price" },
+        Limit = 5,
+        Offset = 0
+    }
+});
+
+// Page 2
+QueryResp page2 = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "color", "price" },
+        Limit = 5,
+        Offset = 5
+    }
+});
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "color like \"red%\"",
+    "limit": 5,
+    "offset": 0,
+    "outputFields": ["color", "price"],
+    "orderByFields": ["price:asc"]
+}'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "color like \"red%\"",
+    "limit": 5,
+    "offset": 5,
+    "outputFields": ["color", "price"],
+    "orderByFields": ["price:asc"]
+}'
 ```
 
 ```cpp
@@ -618,7 +994,7 @@ if (!status.IsOk()) {
 }
 ```
 
-### Aggregate Query Results | Milvus 3.0.x
+### Aggregate Query Results
 
 You can group query results by one or more scalar fields and compute aggregations per group. The supported aggregation operators are `count`, `min`, `max`, `sum`, and `avg`.
 
@@ -636,7 +1012,9 @@ The following example groups entities by the `color` field and returns the numbe
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -666,19 +1044,73 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("group_by_fields", "color");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("")
+        .outputFields(Arrays.asList("color", "count(*)"))
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+// The Go SDK does not expose query-level group-by aggregation. Grouping is
+// available on the search path through WithGroupByField().
+```
+
+```rust
+use std::collections::HashMap;
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("")
+        .extra_params(HashMap::from([
+            ("group_by_fields".to_string(), "color".to_string()),
+        ]))
+        .output_fields(["color", "count(*)"])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: "",
+    output_fields: ["color", "count(*)"],
+    group_by_fields: ["color"]
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query GROUP BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "",
+    "outputFields": ["color", "count(*)"],
+    "groupByFields": ["color"]
+}'
 ```
 
 ```cpp
@@ -713,7 +1145,9 @@ You can request several aggregation expressions in a single call. The following 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -736,19 +1170,73 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("group_by_fields", "color");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("")
+        .outputFields(Arrays.asList("color", "count(*)", "avg(price)", "max(rating)"))
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+// The Go SDK does not expose query-level group-by aggregation. Grouping is
+// available on the search path through WithGroupByField().
+```
+
+```rust
+use std::collections::HashMap;
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("")
+        .extra_params(HashMap::from([
+            ("group_by_fields".to_string(), "color".to_string()),
+        ]))
+        .output_fields(["color", "count(*)", "avg(price)", "max(rating)"])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: "",
+    output_fields: ["color", "count(*)", "avg(price)", "max(rating)"],
+    group_by_fields: ["color"]
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query GROUP BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "",
+    "outputFields": ["color", "count(*)", "avg(price)", "max(rating)"],
+    "groupByFields": ["color"]
+}'
 ```
 
 ```cpp
@@ -785,7 +1273,9 @@ Pass more than one field to `group_by_fields` to compute composite groups. The f
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -809,19 +1299,73 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("group_by_fields", "color,rating");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("")
+        .outputFields(Arrays.asList("color", "rating", "min(price)", "max(price)"))
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+// The Go SDK does not expose query-level group-by aggregation. Grouping is
+// available on the search path through WithGroupByField().
+```
+
+```rust
+use std::collections::HashMap;
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("")
+        .extra_params(HashMap::from([
+            ("group_by_fields".to_string(), "color,rating".to_string()),
+        ]))
+        .output_fields(["color", "rating", "min(price)", "max(price)"])
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: "",
+    output_fields: ["color", "rating", "min(price)", "max(price)"],
+    group_by_fields: ["color", "rating"]
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query GROUP BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "",
+    "outputFields": ["color", "rating", "min(price)", "max(price)"],
+    "groupByFields": ["color", "rating"]
+}'
 ```
 
 ```cpp
@@ -858,7 +1402,9 @@ You can also combine `group_by_fields` with `limit` to cap how many groups come 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -881,19 +1427,78 @@ res = client.query(
 ```
 
 ```java
-// java
+Map<String, Object> queryParams = new HashMap<>();
+// highlight-next-line
+queryParams.put("group_by_fields", "color");
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("my_collection")
+        .filter("")
+        .outputFields(Arrays.asList("color", "avg(price)", "count(*)"))
+        // highlight-next-line
+        .limit(5)
+        .queryParams(queryParams)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+for (QueryResp.QueryResult result : queryResp.getQueryResults()) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+// The Go SDK does not expose query-level group-by aggregation. Grouping is
+// available on the search path through WithGroupByField().
+```
+
+```rust
+use std::collections::HashMap;
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("")
+        .extra_params(HashMap::from([
+            ("group_by_fields".to_string(), "color".to_string()),
+        ]))
+        .output_fields(["color", "avg(price)", "count(*)"])
+        .limit(5)
+        .build()?,
+)
+.await?;
 ```
 
 ```javascript
-// nodejs
+const res = await client.query({
+    collection_name: "my_collection",
+    filter: "",
+    limit: 5,
+    output_fields: ["color", "avg(price)", "count(*)"],
+    group_by_fields: ["color"]
+});
+
+console.log(res.data);
+```
+
+```csharp
+// Note: Query GROUP BY is not supported in milvus-sdk-csharp as of v3.0.0.
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "",
+    "limit": 5,
+    "outputFields": ["color", "avg(price)", "count(*)"],
+    "groupByFields": ["color"]
+}'
 ```
 
 ```cpp
@@ -932,7 +1537,9 @@ When you need to find entities by custom filtering conditions through paginated 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -990,13 +1597,47 @@ while (true) {
 ```
 
 ```go
-// go
+iterator, err := client.QueryIterator(ctx, milvusclient.NewQueryIteratorOption("my_collection").
+    WithFilter("color like \"red%\"").
+    WithBatchSize(10).
+    WithOutputFields("color"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for {
+    resultSet, err := iterator.Next(ctx)
+    // io.EOF marks the end of the iterator
+    if err != nil {
+        break
+    }
+    fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
+}
+```
+
+```rust
+let mut iterator = client.query_iterator(
+    QueryIteratorRequest::builder()
+        .query(
+            QueryRequest::builder()
+                .collection_name("my_collection")
+                .filter("color like \"red%\"")
+                .output_fields(["color"])
+                .build()?,
+        )
+        .batch_size(10)
+        .build()?,
+)
+.await?;
+
+while let Some(result) = iterator.next().await? {
+    println!("{:?}", result);
+}
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const iterator = await milvusClient.queryIterator({
+const iterator = await client.queryIterator({
   collection_name: 'my_collection',
   batchSize: 10,
   expr: 'color like "red%"',
@@ -1006,12 +1647,28 @@ const iterator = await milvusClient.queryIterator({
 const results = [];
 for await (const value of iterator) {
   results.push(...value);
-  page += 1;
+}
+```
+
+```csharp
+await foreach (IReadOnlyList<FieldData> batch in client.QueryIteratorAsync(new QueryIteratorReq
+{
+    CollectionName = "my_collection",
+    BatchSize = 10,
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "color" }
+    }
+}))
+{
+    Console.WriteLine(batch);
 }
 ```
 
 ```bash
-# Not available
+# The RESTful API does not expose QueryIterator. Paginate with repeated query
+# calls that increase offset, or use the Python, Java, Go, or Node.js SDK.
 ```
 
 ```cpp
@@ -1026,7 +1683,9 @@ You can also perform queries within one or multiple partitions by including the 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -1088,7 +1747,7 @@ QueryReq queryReq = QueryReq.builder()
         .limit(3)
         .build();
 
-QueryResp getResp = client.query(queryReq);
+QueryResp queryResp = client.query(queryReq);
 
 QueryIteratorReq req = QueryIteratorReq.builder()
         .collectionName("my_collection")
@@ -1115,7 +1774,7 @@ fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
 fmt.Println("vector: ", resultSet.GetColumn("vector").FieldData().GetVectors())
 fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 
-resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+resultSet, err = client.Query(ctx, milvusclient.NewQueryOption("my_collection").
     WithPartitions("partitionA").
     WithFilter("color like \"red%\"").
     WithOutputFields("vector", "color"))
@@ -1129,28 +1788,70 @@ fmt.Println("vector: ", resultSet.GetColumn("vector").FieldData().GetVectors())
 fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 ```
 
+```rust
+let res = client.get(
+    GetRequest::builder()
+        .collection_name("my_collection")
+        .partition_names(["partitionA"])
+        .ids(Ids::Int64(vec![10, 11, 12]))
+        .output_fields(["vector", "color"])
+        .build()?,
+)
+.await?;
+
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .partition_names(["partitionA"])
+        .filter("color like \"red%\"")
+        .output_fields(["vector", "color"])
+        .limit(3)
+        .build()?,
+)
+.await?;
+
+let mut iterator = client.query_iterator(
+    QueryIteratorRequest::builder()
+        .query(
+            QueryRequest::builder()
+                .collection_name("my_collection")
+                .partition_names(["partitionA"])
+                .filter("color like \"red%\"")
+                .output_fields(["color"])
+                .build()?,
+        )
+        .batch_size(10)
+        .build()?,
+)
+.await?;
+
+while let Some(result) = iterator.next().await? {
+    println!("{:?}", result);
+}
+```
+
 ```javascript
 // Use get
-var res = client.get({
-    collection_name="my_collection",
+var res = await client.get({
+    collection_name: "my_collection",
     // highlight-next-line
-    partition_names=["partitionA"],
-    ids=[10,11,12],
-    output_fields=["vector", "color"]
+    partition_names: ["partitionA"],
+    ids: [10, 11, 12],
+    output_fields: ["vector", "color"]
 })
 
 // Use query
-res = client.query({
-    collection_name="my_collection",
+res = await client.query({
+    collection_name: "my_collection",
     // highlight-next-line
-    partition_names=["partitionA"],
-    filter="color like \"red%\"",
-    output_fields=["vector", "color"],
-    limit(3)
+    partition_names: ["partitionA"],
+    filter: 'color like "red%"',
+    output_fields: ["vector", "color"],
+    limit: 3
 })
 
 // Use queryiterator
-const iterator = await milvusClient.queryIterator({
+const iterator = await client.queryIterator({
   collection_name: 'my_collection',
   partition_names: ['partitionA'],
   batchSize: 10,
@@ -1159,9 +1860,48 @@ const iterator = await milvusClient.queryIterator({
 });
 
 const results = [];
+let page = 0;
 for await (const value of iterator) {
   results.push(...value);
   page += 1;
+}
+```
+
+```csharp
+GetResp getResp = await client.GetAsync(new GetReq
+{
+    CollectionName = "my_collection",
+    Partitions = ["partitionA"],
+    Ids = [10, 11, 12],
+    OutputFields = ["vector", "color"]
+});
+
+QueryResp queryResp = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        PartitionNames = { "partitionA" },
+        OutputFields = { "vector", "color" },
+        Limit = 3
+    }
+});
+
+// Use QueryIterator
+await foreach (IReadOnlyList<FieldData> batch in client.QueryIteratorAsync(new QueryIteratorReq
+{
+    CollectionName = "my_collection",
+    BatchSize = 10,
+    Expression = "color like \"red%\"",
+    Parameters = new QueryParameters
+    {
+        PartitionNames = { "partitionA" },
+        OutputFields = { "color" }
+    }
+}))
+{
+    Console.WriteLine(batch);
 }
 ```
 
@@ -1254,7 +1994,9 @@ For detailed usage, advanced examples, and best practices, refer to [Random Samp
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -1272,7 +2014,7 @@ print(f"Sampled {len(res)} entities from collection")
 
 # Combine with other filters - first filter, then sample
 res = client.query(
-    collection_name="my_collection", 
+    collection_name="my_collection",
     # highlight-next-line
     filter="color like \"red%\" AND RANDOM_SAMPLE(0.005)",
     output_fields=["vector", "color"],
@@ -1283,11 +2025,9 @@ print(f"Found {len(res)} red items in sample")
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.GetReq
-import io.milvus.v2.service.vector.request.GetResp
-import io.milvus.v2.service.vector.request.QueryReq
-import io.milvus.v2.service.vector.request.QueryResp
-import java.util.*;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
 
 QueryReq queryReq = QueryReq.builder()
         .collectionName("my_collection")
@@ -1318,9 +2058,9 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/column"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
@@ -1339,12 +2079,101 @@ if err != nil {
 }
 ```
 
+```rust
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("RANDOM_SAMPLE(0.01)")
+        .output_fields(["vector", "color"])
+        .build()?,
+)
+.await?;
+
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("color like \"red%\" AND RANDOM_SAMPLE(0.005)")
+        .output_fields(["vector", "color"])
+        .limit(10)
+        .build()?,
+)
+.await?;
+```
+
 ```javascript
-// node
+// Sample 1% of the entire collection
+let res = await client.query({
+    collection_name: "my_collection",
+    filter: "RANDOM_SAMPLE(0.01)",
+    output_fields: ["vector", "color"]
+});
+
+console.log(`Sampled ${res.data.length} entities from collection`);
+
+// Combine with other filters - first filter, then sample
+res = await client.query({
+    collection_name: "my_collection",
+    filter: 'color like "red%" AND RANDOM_SAMPLE(0.005)',
+    output_fields: ["vector", "color"],
+    limit: 10
+});
+
+console.log(`Found ${res.data.length} red items in sample`);
+```
+
+```csharp
+// Sample 1% of the entire collection
+QueryResp res = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "RANDOM_SAMPLE(0.01)",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "vector", "color" }
+    }
+});
+Console.WriteLine($"Sampled {res.RowCount} entities from collection");
+
+// Combine with other filters - first filter, then sample
+QueryResp res2 = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "color like \"red%\" AND RANDOM_SAMPLE(0.005)",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "vector", "color" },
+        Limit = 10
+    }
+});
+Console.WriteLine($"Found {res2.RowCount} red items in sample");
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "RANDOM_SAMPLE(0.01)",
+    "outputFields": ["vector", "color"]
+}'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "filter": "color like \"red%\" AND RANDOM_SAMPLE(0.005)",
+    "limit": 10,
+    "outputFields": ["vector", "color"]
+}'
 ```
 
 ```cpp
@@ -1395,11 +2224,14 @@ The value of `timezone` must be a valid [IANA time zone identifier](https://en.w
 
 The example below shows how to temporarily set a timezone for a query operation:
 
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#bash">cURL</a>
     <a href="#cpp">C++</a>
 </div>
@@ -1417,9 +2249,10 @@ results = client.query(
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.QueryReq
-import io.milvus.v2.service.vector.request.QueryResp
-import java.util.*;
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+import java.util.Arrays;
+import java.util.List;
 
 // Query data and display the tsz field converted to "America/Havana"
 QueryReq queryReq = QueryReq.builder()
@@ -1427,7 +2260,7 @@ QueryReq queryReq = QueryReq.builder()
         .filter("id <= 10")
         .outputFields(Arrays.asList("id", "tsz", "vec"))
         .limit(2)
-        .timeZone("America/Havana")
+        .timezone("America/Havana")
         .build();
 
 QueryResp queryResp = client.query(queryReq);
@@ -1439,48 +2272,37 @@ for (QueryResp.QueryResult result : results) {
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const address = "http://localhost:19530";
-const token = "root:Milvus";
-const client = new MilvusClient({address, token});
-
-// Query data and display the tsz field converted to "America/Havana"
+// The Node.js SDK does not expose the `timezone` query parameter. Query results
+// for TIMESTAMPTZ fields use the database or collection default timezone.
 const res = await client.query({
     collection_name: "my_collection",
     filter: 'id <= 10',
     output_fields: ["id", "tsz", "vec"],
-    limit: 2,
-    timezone: "America/Havana"
+    limit: 2
+});
+```
+
+```csharp
+// Query data and display the tsz field converted to "America/Havana"
+QueryResp results = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "my_collection",
+    Expression = "id <= 10",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "id", "tsz", "vec" },
+        Limit = 2,
+        Timezone = "America/Havana"
+    }
 });
 ```
 
 ```go
-import (
-    "context"
-    "fmt"
-
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "localhost:19530"
-client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-defer client.Close(ctx)
-
-// Query data and display the tsz field converted to "America/Havana"
+// The Go SDK does not expose the `timezone` query parameter. Query results for
+// TIMESTAMPTZ fields use the database or collection default timezone.
 resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
     WithFilter("id <= 10").
     WithLimit(2).
-    WithTimeZone("America/Havana").
     WithOutputFields("id", "tsz", "vec"))
 if err != nil {
     fmt.Println(err.Error())
@@ -1490,6 +2312,19 @@ if err != nil {
 fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
 fmt.Println("tsz: ", resultSet.GetColumn("tsz").FieldData().GetScalars())
 fmt.Println("vec: ", resultSet.GetColumn("vec").FieldData().GetVectors())
+```
+
+```rust
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("my_collection")
+        .filter("id <= 10")
+        .output_fields(["id", "tsz", "vec"])
+        .limit(2)
+        .timezone("America/Havana")
+        .build()?,
+)
+.await?;
 ```
 
 ```bash
@@ -1539,3 +2374,4 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+
