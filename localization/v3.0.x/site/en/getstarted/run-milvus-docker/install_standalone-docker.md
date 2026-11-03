@@ -66,7 +66,7 @@ title: Run Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>The script is downloaded from the Milvus <code translate="no">master</code> branch. Its Docker image tag is defined in the script and can differ from v3.0.3. To install that exact release, use the versioned configuration in <a href="/docs/install_standalone-docker-compose.md">Run Milvus with Docker Compose</a>.</p>
+<p>The script is downloaded from the Milvus <code translate="no">master</code> branch. Its Docker image tag is defined in the script and can differ from v3.0.5. To install that exact release, use the versioned configuration in <a href="/docs/install_standalone-docker-compose.md">Run Milvus with Docker Compose</a>.</p>
 <p>This Docker deployment runs <strong>Woodpecker</strong> with the <strong>local filesystem</strong> as its WAL backend, so no external message-queue service is required. See <a href="/docs/woodpecker.md">Woodpecker</a>.</p>
 <p>If you want to use <a href="/docs/milvus_backup_overview.md">Backup</a> in standalone deployment mode, it is recommended to use the <a href="/docs/install_standalone-docker-compose.md">Docker Compose</a> deployment method.</p>
 <p>If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we’ll provide you with the necessary support.</p>
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The script’s <code translate="no">upgrade</code> command downloads the script from <code translate="no">master</code> and recreates the container using the image selected by that script. It does not validate a supported source-to-target version path and can recreate generated configuration files. Do not treat it as a guarantee that an arbitrary older deployment can upgrade safely to v3.0.3.</p>
+    </button></h2><p>The script’s <code translate="no">upgrade</code> command downloads the script from <code translate="no">master</code> and recreates the container using the image selected by that script. It does not validate a supported source-to-target version path and can recreate generated configuration files. Do not treat it as a guarantee that an arbitrary older deployment can upgrade safely to v3.0.5.</p>
 <p>Before an upgrade, back up metadata, persistent data, <code translate="no">embedEtcd.yaml</code>, and <code translate="no">user.yaml</code>. Check the target version, message queue, and storage compatibility, and validate recovery in a non-production environment. For deployments managed with Docker Compose, follow <a href="/docs/upgrade_milvus_standalone-docker.md">Upgrade Milvus Standalone with Docker Compose</a>; do not apply that procedure directly to a script-managed container.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Stop and delete Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

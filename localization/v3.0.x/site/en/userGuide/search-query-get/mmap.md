@@ -283,7 +283,7 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         &quot;max_length&quot;: 512
     },
     &quot;isPrimary&quot;: true,
-    &quot;auto_id&quot;: false
+    &quot;autoId&quot;: false
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
