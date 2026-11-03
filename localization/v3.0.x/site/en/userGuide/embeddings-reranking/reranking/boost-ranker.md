@@ -465,7 +465,7 @@ rerank = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;boost&quot;</span>,
         <span class="hljs-string">&quot;filter&quot;</span>: <span class="hljs-string">&quot;doctype == &#x27;abstract&#x27;&quot;</span>,
-        <span class="hljs-string">&quot;random_score&quot;</span>: { 
+        <span class="hljs-string">&quot;random_score&quot;</span>: {
             <span class="hljs-string">&quot;seed&quot;</span>: <span class="hljs-number">126</span>,
             <span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;id&quot;</span>
         },
@@ -842,7 +842,7 @@ random_weight_ranker = Function(
 <span class="hljs-comment"># Create a Function Score</span>
 ranker = FunctionScore(
     functions=[
-        fix_weight_ranker, 
+        fix_weight_ranker,
         random_weight_ranker
     ],
     params={
