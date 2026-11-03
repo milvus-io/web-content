@@ -381,6 +381,8 @@ beta: Milvus 2.6.2+
 </ol></li>
 <li><p><strong>What if I encounter an error?</strong></p>
 <p>If the build or load process fails, you can quickly disable the feature by setting <code translate="no">common.enabledJSONShredding=false</code>. To clear any remaining tasks, use the <code translate="no">remove stats-task &lt;task_id&gt;</code> command in <a href="/docs/birdwatcher_usage_guides.md">Birdwatcher</a>. If a query fails, set <code translate="no">common.usingjsonShreddingForQuery=false</code> to revert to the original query path, bypassing the shredded data.</p></li>
+</ul>
+<ul>
 <li><p><strong>How do I select between JSON shredding and JSON indexing?</strong></p>
 <ul>
 <li><p><strong>JSON shredding</strong> is ideal for keys that appear frequently in your documents, especially for complex JSON structures. It combines the benefits of columnar storage and inverted indexing, making it well-suited for read-heavy scenarios where you query many different keys. However, it is not recommended for very small JSON documents as the performance gain is minimal. The smaller the proportion of the key’s value to the total size of the JSON document, the better the performance optimization from shredding.</p></li>
