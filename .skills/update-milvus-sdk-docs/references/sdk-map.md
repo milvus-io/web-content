@@ -490,6 +490,15 @@ local directory via this table before editing. Current latest version line is
   `**EXCEPTIONS:**` section linking `Client/MilvusException.md` (see the
   shared exception/status/return-code rule in SKILL.md); `MilvusException` and
   `MilvusErrorCode` each have a dedicated page under `Client/`.
+- **Inline-expansion form differs from other SDKs**: C# expands a type inline
+  with a bold `**T**` type name + a code sketch (`// -> type` member list) + a
+  `**PARAMETERS:**`/`**METHODS:**` member block — there is NO `(*T*)`
+  annotation. Detectors and dedup sweeps must recognize this form (see SKILL.md
+  Step 9 "Detect every inline-expansion form" and Scripted batch edits
+  pitfalls). Top-level response wrappers/envelopes that the operation pages
+  already expand inline (`BulkImportResp`) never keep a standalone page, while
+  response **subtypes** referenced from multiple pages (`SingleResult`,
+  `HighlightResult`) keep their standalone pages and are linked.
 
 ## milvus-sdk-rust
 
