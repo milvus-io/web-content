@@ -113,7 +113,16 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for the list Collections operation.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出 Collection 操作的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection をリストする操作のリクエストボディ。"
+                  }
+                }
               },
               "example": {
                 "dbName": "my_database"
@@ -155,7 +164,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Successful response body for the list Collections operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Collection 操作的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection をリストする操作の成功レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -538,7 +556,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Successful response body for the create Collection operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Collection 操作的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection を作成する操作の成功レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -648,7 +675,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Successful response body for the flush Collection operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "flush Collection 操作的成功响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の flush 操作の成功レスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -752,7 +788,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for compacting a Collection, identifying the target Collection by `collectionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于压缩 Collection 的请求体，通过 `collectionName` 标识目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection をコンパクションするためのリクエストボディで、`collectionName` によって対象の Collection を識別します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection",
@@ -795,7 +840,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of the `compact` operation on a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含对 Collection 执行 `compact` 操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection に対する `compact` 操作の結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -875,7 +929,16 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for retrieving the compaction state of a Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取 Collection 压缩状态的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection のコンパクション状態を取得するためのリクエストボディです。"
+                  }
+                }
               },
               "example": {
                 "jobID": "xxxxxxxxxxxxxxxxxxxxxx"
@@ -917,7 +980,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of retrieving the compaction state of a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含获取 Collection 压缩状态的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のコンパクション状態を取得した結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1314,7 +1386,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of dropping a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含删除 Collection 的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の削除結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1415,7 +1496,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of truncating a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含截断 Collection 的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のトランケート結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1524,7 +1614,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of checking whether a Collection exists.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含检查 Collection 是否存在的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection が存在するかどうかを確認した結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1631,7 +1730,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains statistics for a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含 Collection 的统计信息。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の統計情報を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1723,11 +1831,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of a partition to which the refresh applies.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "刷新操作适用的一个 Partition 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "更新の対象となる Partition 名。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the partitions to which the refresh applies; if not specified, the operation applies to the entire Collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "刷新操作适用的 Partition 名称列表；如果未指定，则该操作适用于整个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "更新の対象となる Partition 名のリストです。指定しない場合、操作は Collection 全体に適用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1735,7 +1861,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for refreshing the load of a Collection; `collectionName` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于刷新 Collection 加载状态的请求体；`collectionName` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection のロードを更新するためのリクエストボディです。`collectionName` は必須です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup"
@@ -1777,7 +1912,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of refreshing the load of a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含刷新 Collection 加载状态的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のロードを更新した結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1879,7 +2023,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Contains the result of altering the properties of a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含修改 Collection 属性的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のプロパティを変更した結果を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1983,7 +2136,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to drop Collection properties succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功删除 Collection 属性时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のプロパティ削除リクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2095,7 +2257,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to add a field to a Collection succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "向 Collection 添加字段的请求成功时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection へのフィールド追加リクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2200,7 +2371,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to alter field properties succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改字段属性的请求成功时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "フィールドプロパティの変更リクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2297,7 +2477,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to rename a Collection succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "重命名 Collection 的请求成功时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の名前変更リクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2391,11 +2580,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of a Partition to which this operation applies.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "此操作所应用的一个 Partition 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作の対象となる Partition の名前です。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the Partitions to which this operation applies. When set, the operation is limited to the specified Partitions; when omitted, it applies to the entire Collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "此操作所应用的 Partition 名称列表。设置后操作仅作用于指定的 Partition；未设置时则作用于整个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作の対象となる Partition の名前のリストです。設定した場合、操作は指定した Partition に限定され、省略した場合は Collection 全体に適用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -2403,7 +2610,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for loading a Collection into memory. `collectionName` identifies the target Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将 Collection 加载到内存的请求负载，`collectionName` 指定目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection をメモリにロードするためのリクエストペイロードです。`collectionName` は対象の Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup"
@@ -2437,7 +2653,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to load a Collection succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "加载 Collection 的请求成功时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のロードリクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2532,11 +2757,29 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The name of a Partition to which this operation applies.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "此操作所应用的一个 Partition 名称。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作の対象となる Partition の名前です。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the Partitions to which this operation applies. When set, the operation is limited to the specified Partitions; when omitted, it applies to the entire Collection.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "此操作所应用的 Partition 名称列表。设置后操作仅作用于指定的 Partition；未设置时则作用于整个 Collection。"
+                      },
+                      "ja-JP": {
+                        "description": "この操作の対象となる Partition の名前のリストです。設定した場合、操作は指定した Partition に限定され、省略した場合は Collection 全体に適用されます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -2544,7 +2787,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for releasing a Collection from memory. `collectionName` identifies the target Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将 Collection 从内存中释放的请求负载，`collectionName` 指定目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection をメモリから解放するためのリクエストペイロードです。`collectionName` は対象の Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup"
@@ -2578,7 +2830,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to release a Collection succeeds. Its content reflects the outcome of the operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "释放 Collection 的请求成功时返回的响应体，其内容反映该操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection の解放リクエストが成功したときに返されるレスポンスボディです。内容は操作の結果を反映します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2685,7 +2946,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload for the collection load state request, reporting the load state of the specified Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取 Collection 加载状态请求的响应载荷，返回指定 Collection 的加载状态。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection のロード状態取得リクエストのレスポンスペイロードで、指定した Collection のロード状態を返します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2815,7 +3085,16 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one scalar field used as an input to the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用作函数输入的某个标量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の入力として使用するスカラーフィールドの名前。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
@@ -2851,7 +3130,16 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one vector field produced as an output by the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "作为函数输出生成的某个向量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の出力として生成されるベクトルフィールドの名前。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
@@ -2905,8 +3193,12 @@
                     "x-i18n": {
                       "ja-JP": {
                         "description": "function スキーマオブジェクト。"
+                      },
+                      "zh-CN": {
+                        "description": "要添加到 Collection 的函数定义。"
                       }
-                    }
+                    },
+                    "description": "The function definition to add to the Collection."
                   }
                 },
                 "required": [
@@ -2915,7 +3207,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for adding a function to a Collection, requiring `collectionName` and `function`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "向 Collection 添加函数的请求载荷，需要 `collectionName` 和 `function`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection に関数を追加するためのリクエストペイロードで、`collectionName` と `function` が必要です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "my_collection",
@@ -2959,7 +3260,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload returned after the function is added to the Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "函数添加到 Collection 后返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "関数が Collection に追加された後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3103,7 +3413,16 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one scalar field used as an input to the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用作函数输入的某个标量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の入力として使用するスカラーフィールドの名前。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
@@ -3139,7 +3458,16 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one vector field produced as an output by the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "作为函数输出生成的某个向量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の出力として生成されるベクトルフィールドの名前。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
@@ -3193,8 +3521,12 @@
                     "x-i18n": {
                       "ja-JP": {
                         "description": "function スキーマオブジェクト。"
+                      },
+                      "zh-CN": {
+                        "description": "修改现有函数时应用的函数定义。"
                       }
-                    }
+                    },
+                    "description": "The function definition to apply when altering the existing function."
                   }
                 },
                 "required": [
@@ -3204,7 +3536,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for altering a function in a Collection, requiring `collectionName`, `functionName`, and `function`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改 Collection 中函数的请求载荷，需要 `collectionName`、`functionName` 和 `function`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection 内の関数を変更するためのリクエストペイロードで、`collectionName`、`functionName`、`function` が必要です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "my_collection",
@@ -3249,7 +3590,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response payload returned after the function is altered.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "函数修改后返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "関数が変更された後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3368,7 +3718,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for dropping a function from a Collection, requiring `collectionName` and `FunctionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "从 Collection 中删除函数的请求载荷，需要 `collectionName` 和 `FunctionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection から関数を削除するためのリクエストペイロードで、`collectionName` と `FunctionName` が必要です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "my_collection",
@@ -3403,7 +3762,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after a function is dropped from a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从 Collection 中删除函数后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection からファンクションを削除した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3493,7 +3861,16 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One of the text strings to analyze.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "待分析的文本字符串之一。"
+                        },
+                        "ja-JP": {
+                          "description": "分析対象となるテキスト文字列の 1 つ。"
+                        }
+                      }
                     },
                     "description": "A list of text strings to analyze.",
                     "x-i18n": {
@@ -3589,7 +3966,16 @@
                       "type": "string",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One analyzer name to apply to the supplied text.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "应用于所提供文本的 analyzer 名称之一。"
+                        },
+                        "ja-JP": {
+                          "description": "指定したテキストに適用する analyzer 名の 1 つ。"
+                        }
+                      }
                     },
                     "description": "A list of analyzer names to use.",
                     "x-i18n": {
@@ -3610,7 +3996,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for running an analyzer, in which `text` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "运行 analyzer 的请求体，其中 `text` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "analyzer を実行するためのリクエストボディ。`text` は必須です。"
+                  }
+                }
               },
               "example": {
                 "text": [
@@ -3639,7 +4034,16 @@
                           "type": "integer",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response code indicating whether the request succeeded.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "表示请求是否成功的响应码。"
+                            },
+                            "ja-JP": {
+                              "description": "リクエストが成功したかどうかを示すレスポンスコード。"
+                            }
+                          }
                         },
                         "data": {
                           "type": "array",
@@ -3652,26 +4056,71 @@
                                   "type": "string",
                                   "x-added-at": "2.6.x",
                                   "x-last-modified": "2.6.x",
-                                  "x-deprecated-since": null
+                                  "x-deprecated-since": null,
+                                  "description": "One token produced by the analyzer.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "analyzer 生成的其中一个 token。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "analyzer が生成した token の 1 つ。"
+                                    }
+                                  }
                                 },
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The tokens the analyzer produced for the text.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "analyzer 为该文本生成的 token。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "analyzer がそのテキストに対して生成した token。"
+                                  }
+                                }
                               }
                             },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "An analysis result for one of the supplied texts.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "针对其中一段所提供文本的分析结果。"
+                              },
+                              "ja-JP": {
+                                "description": "指定したテキストの 1 つに対する分析結果。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The list of analysis results returned by the analyzer.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "analyzer 返回的分析结果列表。"
+                            },
+                            "ja-JP": {
+                              "description": "analyzer によって返される分析結果のリスト。"
+                            }
+                          }
                         }
                       },
                       "x-tab-label": "success",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One possible shape of the analyze response, containing a `code` and a `data` payload.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "分析响应的一种可能形态，包含 `code` 和 `data` 负载。"
+                        },
+                        "ja-JP": {
+                          "description": "分析レスポンスの取りうる形態の 1 つで、`code` と `data` を含みます。"
+                        }
+                      }
                     },
                     {
                       "$ref": "#/components/schemas/ErrorResponse",
@@ -3685,7 +4134,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response returned by the analyze operation, carrying the analysis result in `data`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "分析操作返回的响应，分析结果位于 `data` 中。"
+                    },
+                    "ja-JP": {
+                      "description": "分析操作によって返されるレスポンス。分析結果は `data` に含まれます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3860,7 +4318,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One of the alternative response bodies that may be returned for the refresh request; only one variant is present in a given response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "刷新请求可能返回的可选响应体之一；每次响应中仅包含一个变体。"
+                        },
+                        "ja-JP": {
+                          "description": "リフレッシュ要求に対して返される可能性のある代替レスポンスボディの 1 つです。1 回のレスポンスには 1 つのバリアントのみが含まれます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -3916,7 +4383,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after an external Collection is refreshed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "刷新外部 Collection 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "外部 Collection をリフレッシュした後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4190,7 +4666,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One of the alternative response bodies that may be returned when describing an external Collection refresh job; only one variant is present in a given response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "描述外部 Collection 刷新任务时可能返回的可选响应体之一；每次响应中仅包含一个变体。"
+                        },
+                        "ja-JP": {
+                          "description": "外部 Collection のリフレッシュジョブを記述するときに返される可能性のある代替レスポンスボディの 1 つです。1 回のレスポンスには 1 つのバリアントのみが含まれます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -4246,7 +4731,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when describing an external Collection refresh job.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述外部 Collection 刷新任务时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "外部 Collection のリフレッシュジョブを記述するときに返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4388,7 +4882,16 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for listing external Collection refresh jobs.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出外部 Collection 刷新任务的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "外部 Collection のリフレッシュジョブを一覧表示するためのリクエストボディです。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -4616,7 +5119,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One of the alternative response bodies that may be returned when listing external Collection refresh jobs; only one variant is present in a given response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列出外部 Collection 刷新任务时可能返回的可选响应体之一；每次响应中仅包含一个变体。"
+                        },
+                        "ja-JP": {
+                          "description": "外部 Collection のリフレッシュジョブを一覧表示するときに返される可能性のある代替レスポンスボディの 1 つです。1 回のレスポンスには 1 つのバリアントのみが含まれます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -4672,7 +5184,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body containing the external Collection refresh jobs returned by the list request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含列表请求所返回的外部 Collection 刷新任务的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "一覧リクエストによって返される外部 Collection のリフレッシュジョブを含むレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4868,7 +5389,16 @@
                           "type": "string",
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one scalar field used as an input to the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用作函数输入的一个标量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の入力として使用する 1 つのスカラーフィールドの名前です。"
+                            }
+                          }
                         },
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
@@ -4904,7 +5434,16 @@
                           "type": "string",
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of one vector field produced as an output of the function.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "作为函数输出生成的一个向量字段的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "関数の出力として生成される 1 つのベクターフィールドの名前です。"
+                            }
+                          }
                         },
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
@@ -5004,7 +5543,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for adding a function field to a Collection. It identifies the target `collectionName` and provides the `function` definition, the `outputField` to create, and the `indexParams`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "向 Collection 添加函数字段的请求体。需指定目标 `collectionName`，并提供 `function` 定义、要创建的 `outputField` 以及 `indexParams`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection にファンクションフィールドを追加するためのリクエストボディです。対象の `collectionName` を指定し、`function` 定義、作成する `outputField`、および `indexParams` を指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -5056,7 +5604,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after adding a function field to a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "向 Collection 添加函数字段后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection にファンクションフィールドを追加した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -5175,7 +5732,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping a function field from a Collection; it specifies the target `collectionName` and the `functionName` to remove.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "从 Collection 删除函数字段的请求体；需指定目标 `collectionName` 和要删除的 `functionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection からファンクションフィールドを削除するためのリクエストボディです。対象の `collectionName` と削除する `functionName` を指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -5206,7 +5772,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after dropping a function field from a Collection.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从 Collection 删除函数字段后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Collection からファンクションフィールドを削除した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -5349,18 +5924,45 @@
                         "type": "string",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The name of the Collection from which the field is dropped.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要从中删除字段的 Collection 名称。"
+                          },
+                          "ja-JP": {
+                            "description": "フィールドを削除する Collection の名前。"
+                          }
+                        }
                       },
                       "dbName": {
                         "type": "string",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The name of the database that contains the target collection. Use it to scope the request to a specific database.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "包含目标 Collection 的数据库名称。用于将请求限定到指定的数据库。"
+                          },
+                          "ja-JP": {
+                            "description": "対象の Collection を含むデータベースの名前。リクエストを特定のデータベースに限定するために使用します。"
+                          }
+                        }
                       }
                     },
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The request body must specify `collectionName` together with either `fieldName` or `fieldId` to identify the field to drop.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "请求体必须指定 `collectionName`，并同时使用 `fieldName` 或 `fieldId` 来指定要删除的字段。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストボディでは `collectionName` を指定し、削除するフィールドを `fieldName` または `fieldId` で識別する必要があります。"
+                      }
+                    }
                   },
                   {
                     "required": [
@@ -5372,23 +5974,59 @@
                         "type": "string",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The name of the Collection from which the field is dropped.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要从中删除字段的 Collection 名称。"
+                          },
+                          "ja-JP": {
+                            "description": "フィールドを削除する Collection の名前。"
+                          }
+                        }
                       },
                       "dbName": {
                         "type": "string",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The name of the database that contains the target collection. Use it to scope the request to a specific database.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "包含目标 Collection 的数据库名称。用于将请求限定到指定的数据库。"
+                          },
+                          "ja-JP": {
+                            "description": "対象の Collection を含むデータベースの名前。リクエストを特定のデータベースに限定するために使用します。"
+                          }
+                        }
                       }
                     },
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The request body must specify `collectionName` together with either `fieldName` or `fieldId` to identify the field to drop.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "请求体必须指定 `collectionName`，并同时使用 `fieldName` 或 `fieldId` 来指定要删除的字段。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストボディでは `collectionName` を指定し、削除するフィールドを `fieldName` または `fieldId` で識別する必要があります。"
+                      }
+                    }
                   }
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for dropping a field from a Collection. It must include `collectionName` and identify the target field by either `fieldName` or `fieldId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于从 Collection 中删除字段的请求体。必须包含 `collectionName`，并通过 `fieldName` 或 `fieldId` 指定目标字段。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection からフィールドを削除するためのリクエストボディです。`collectionName` を含め、`fieldName` または `fieldId` で対象フィールドを指定する必要があります。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -5427,7 +6065,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response returned after the field is successfully dropped.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "字段成功删除后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "フィールドの削除が成功した後に返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -5636,8 +6283,12 @@
                         "x-i18n": {
                           "zh-CN": {
                             "description": "StructArray 字段的附加参数。"
+                          },
+                          "ja-JP": {
+                            "description": "struct array フィールドのパラメータです。`max_capacity` は必須で、エンティティごとに許可される struct 要素の最大数を指定します。"
                           }
-                        }
+                        },
+                        "description": "Parameters for the struct array field. `max_capacity` is required and specifies the maximum number of struct elements allowed per entity."
                       },
                       "nullable": {
                         "type": "boolean",
@@ -5680,7 +6331,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for adding a struct array field to a Collection. It requires `collectionName` and a `schema` definition for the field.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于向 Collection 添加 struct array 字段的请求体。需要提供 `collectionName` 以及该字段的 `schema` 定义。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection に struct array フィールドを追加するためのリクエストボディです。`collectionName` とフィールドの `schema` 定義が必要です。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -5735,7 +6395,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response returned after the struct array field is successfully added.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "struct array 字段成功添加后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "struct array フィールドの追加が成功した後に返されるレスポンスです。"
+                    }
+                  }
                 }
               }
             },
@@ -5891,7 +6560,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for removing properties from a Collection. Both `collectionName` and `propertyKeys` are required.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于从 Collection 中删除属性的请求体。`collectionName` 和 `propertyKeys` 均为必填。"
+          },
+          "ja-JP": {
+            "description": "Collection からプロパティを削除するためのリクエストボディです。`collectionName` と `propertyKeys` は必須です。"
+          }
+        }
       },
       "DescribeCollectionSuccessResponse": {
         "x-tab-label": "success",
@@ -6016,7 +6694,7 @@
                   "Strong",
                   "Bounded",
                   "<include target=\"milvus\">Session</include>",
-                  "Eventual"
+                  "Eventually"
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
@@ -6269,7 +6947,16 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "The response returned when a Collection is described successfully.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "成功描述 Collection 时返回的响应。"
+          },
+          "ja-JP": {
+            "description": "Collection の記述に成功したときに返されるレスポンスです。"
+          }
+        }
       },
       "ErrorResponse": {
         "x-tab-label": "failure",
@@ -6346,12 +7033,30 @@
             "properties": {},
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "The response payload object. Its contents depend on the operation that returns it.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应负载对象，其内容取决于返回它的操作。"
+              },
+              "ja-JP": {
+                "description": "レスポンスのペイロードオブジェクトです。内容はそれを返す操作によって異なります。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "A generic response envelope returned by operations that carry no operation-specific result data. It still includes a `data` object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "由不携带特定操作结果数据的操作返回的通用响应信封。它仍包含 `data` 对象。"
+          },
+          "ja-JP": {
+            "description": "操作固有の結果データを持たない操作が返す汎用レスポンスエンベロープです。`data` オブジェクトを含みます。"
+          }
+        }
       },
       "DescribeCollectionResponse": {
         "oneOf": [
@@ -6364,7 +7069,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "The response body returned when describing a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "描述 Collection 时返回的响应体。"
+          },
+          "ja-JP": {
+            "description": "Collection を記述するときに返されるレスポンスボディです。"
+          }
+        }
       },
       "QuickSetupCollection": {
         "x-tab-label": "quick setup",
@@ -6531,6 +7245,21 @@
           },
           "consistencyLevel": {
             "type": "string",
+            "description": "The consistency level applied to the collection described by this setup. It determines the consistency guarantee used when the collection is queried.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "此配置所描述的 Collection 所应用的一致性级别。它决定查询该 Collection 时所采用的一致性保证。"
+              },
+              "ja-JP": {
+                "description": "この設定で記述される Collection に適用される整合性レベル。Collection をクエリする際に使用される整合性保証を決定します。"
+              }
+            },
+            "enum": [
+              "Strong",
+              "Eventually",
+              "<include target=\"milvus\">Session</include>",
+              "Bounded"
+            ],
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
             "x-deprecated-since": null
@@ -6539,13 +7268,31 @@
             "type": "object",
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "Additional properties of the Collection. Use it to specify extra settings for the Collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Collection 的额外属性。可使用它为该 Collection 指定额外的设置。"
+              },
+              "ja-JP": {
+                "description": "Collection の追加プロパティです。Collection に追加の設定を指定するために使用します。"
+              }
+            }
           },
           "vectorFieldType": {
             "type": "string",
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "The vector data type used for the vector field of the Collection created by quick setup.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "快速设置所创建的 Collection 的向量字段所使用的向量数据类型。"
+              },
+              "ja-JP": {
+                "description": "クイックセットアップで作成される Collection のベクトルフィールドに使用するベクトルデータ型。"
+              }
+            }
           }
         },
         "required": [
@@ -6554,7 +7301,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Defines a Collection to be created with a quick setup. `collectionName` and `dimension` are required.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "定义要通过快速设置创建的 Collection。`collectionName` 和 `dimension` 为必填项。"
+          },
+          "ja-JP": {
+            "description": "クイックセットアップで作成する Collection を定義します。`collectionName` と `dimension` は必須です。"
+          }
+        }
       },
       "QuickCollectionParams": {
         "description": "Extra parameters for the collection.",
@@ -7028,18 +7784,45 @@
                   "type": "string",
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The name of the extra parameter; together with `value` it forms one key-value pair.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "额外参数的名称，与 `value` 一起构成一个键值对。"
+                    },
+                    "ja-JP": {
+                      "description": "追加パラメータの名前。`value` と組み合わせて 1 つのキーと値のペアを構成します。"
+                    }
+                  }
                 },
                 "value": {
                   "type": "string",
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The value assigned to the parameter named by `key`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "赋给由 `key` 指定的参数的值。"
+                    },
+                    "ja-JP": {
+                      "description": "`key` で指定されたパラメータに設定する値。"
+                    }
+                  }
                 }
               },
               "x-added-at": "2.6.x",
               "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "x-deprecated-since": null,
+              "description": "One extra parameter for the sub-field, expressed as a key-value pair.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "子字段的一个额外参数，以键值对形式表示。"
+                },
+                "ja-JP": {
+                  "description": "サブフィールドの追加パラメータをキーと値のペアで 1 つ指定します。"
+                }
+              }
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
@@ -7161,18 +7944,45 @@
                   "type": "string",
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The name of the extra parameter; together with `value` it forms one key-value pair.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "额外参数的名称，与 `value` 一起构成一个键值对。"
+                    },
+                    "ja-JP": {
+                      "description": "追加パラメータの名前。`value` と組み合わせて 1 つのキーと値のペアを構成します。"
+                    }
+                  }
                 },
                 "value": {
                   "type": "string",
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The value assigned to the parameter named by `key`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "赋给由 `key` 指定的参数的值。"
+                    },
+                    "ja-JP": {
+                      "description": "`key` で指定されたパラメータに設定する値。"
+                    }
+                  }
                 }
               },
               "x-added-at": "2.6.x",
               "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "x-deprecated-since": null,
+              "description": "One extra parameter for the struct array field, expressed as a key-value pair.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "struct 数组字段的一个额外参数，以键值对形式表示。"
+                },
+                "ja-JP": {
+                  "description": "struct 配列フィールドの追加パラメータをキーと値のペアで 1 つ指定します。"
+                }
+              }
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
@@ -7413,6 +8223,21 @@
           },
           "consistencyLevel": {
             "type": "string",
+            "description": "The consistency level applied to the collection described by this setup. It determines the consistency guarantee used when the collection is queried.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "此配置所描述的 Collection 所应用的一致性级别。它决定查询该 Collection 时所采用的一致性保证。"
+              },
+              "ja-JP": {
+                "description": "この設定で記述される Collection に適用される整合性レベル。Collection をクエリする際に使用される整合性保証を決定します。"
+              }
+            },
+            "enum": [
+              "Strong",
+              "Eventually",
+              "<include target=\"milvus\">Session</include>",
+              "Bounded"
+            ],
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
             "x-deprecated-since": null
@@ -7421,7 +8246,16 @@
             "type": "object",
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "Additional Collection properties, given as key-value pairs.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "以键值对形式提供的额外 Collection 属性。"
+              },
+              "ja-JP": {
+                "description": "キーと値のペアで指定する Collection の追加プロパティ。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
@@ -7429,7 +8263,16 @@
         "x-deprecated-since": null,
         "required": [
           "collectionName"
-        ]
+        ],
+        "description": "A Collection setup whose configuration is supplied explicitly, including the required `collectionName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "配置需显式提供的 Collection 设置，其中 `collectionName` 为必填项。"
+          },
+          "ja-JP": {
+            "description": "設定を明示的に指定する Collection セットアップ。必須の `collectionName` を含みます。"
+          }
+        }
       },
       "ExternalSetupCollection": {
         "x-tab-label": "external setup",
@@ -7534,6 +8377,21 @@
           },
           "consistencyLevel": {
             "type": "string",
+            "description": "The consistency level applied to the collection described by this setup. It determines the consistency guarantee used when the collection is queried.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "此配置所描述的 Collection 所应用的一致性级别。它决定查询该 Collection 时所采用的一致性保证。"
+              },
+              "ja-JP": {
+                "description": "この設定で記述される Collection に適用される整合性レベル。Collection をクエリする際に使用される整合性保証を決定します。"
+              }
+            },
+            "enum": [
+              "Strong",
+              "Eventually",
+              "<include target=\"milvus\">Session</include>",
+              "Bounded"
+            ],
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
             "x-deprecated-since": null
@@ -7542,7 +8400,16 @@
             "type": "object",
             "x-added-at": "3.0.x",
             "x-last-modified": "3.0.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "Additional properties to apply to the Collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要应用到 Collection 的附加属性。"
+              },
+              "ja-JP": {
+                "description": "Collection に適用する追加のプロパティ。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
@@ -7550,7 +8417,16 @@
         "x-deprecated-since": null,
         "required": [
           "collectionName"
-        ]
+        ],
+        "description": "A Collection setup that refers to an existing external Collection, identified by the required `collectionName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "指向已有外部 Collection 的 Collection 设置，通过必填的 `collectionName` 标识。"
+          },
+          "ja-JP": {
+            "description": "既存の外部 Collection を参照する Collection セットアップ。必須の `collectionName` で識別します。"
+          }
+        }
       },
       "CustomCollectionParams": {
         "description": "Extra parameters for the collection.",
@@ -7759,7 +8635,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for creating a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于创建 Collection 的请求体。"
+          },
+          "ja-JP": {
+            "description": "Collection を作成するためのリクエストボディ。"
+          }
+        }
       },
       "CollectionAlterProperties": {
         "type": "object",
@@ -8191,7 +9076,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for altering the properties of a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于修改 Collection 属性的请求体。"
+          },
+          "ja-JP": {
+            "description": "Collection のプロパティを変更するためのリクエストボディ。"
+          }
+        }
       },
       "AddCollectionFieldRequest": {
         "type": "object",
@@ -8236,7 +9130,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for adding a field to a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于向 Collection 添加字段的请求体。"
+          },
+          "ja-JP": {
+            "description": "Collection にフィールドを追加するためのリクエストボディ。"
+          }
+        }
       },
       "AlterFieldPropertiesRequest": {
         "type": "object",
@@ -8347,7 +9250,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for altering the properties of a field in a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于修改 Collection 中字段属性的请求体。"
+          },
+          "ja-JP": {
+            "description": "Collection 内のフィールドのプロパティを変更するためのリクエストボディ。"
+          }
+        }
       },
       "CollectionLoadStateRequest": {
         "type": "object",
@@ -8380,7 +9292,16 @@
               "type": "string",
               "x-added-at": "2.6.x",
               "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "x-deprecated-since": null,
+              "description": "Name of a partition to which this operation applies. Specifying partitions limits the operation scope to them; otherwise the entire Collection is used.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "此操作适用的 partition 名称。指定 partition 会将操作范围限制为这些 partition；否则使用整个 Collection。"
+                },
+                "ja-JP": {
+                  "description": "この操作の対象となる partition の名前。partition を指定すると操作範囲がそれらに限定され、指定しない場合は Collection 全体が対象になります。"
+                }
+              }
             },
             "description": "A list of partition names. If any partition names are specified, releasing any of these partitions results in the return of a NotLoad state.",
             "x-i18n": {
@@ -8401,7 +9322,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for querying the load state of a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于查询 Collection 加载状态的请求体。"
+          },
+          "ja-JP": {
+            "description": "Collection のロード状態を照会するためのリクエストボディ。"
+          }
+        }
       },
       "CollectionLoadStateResponse": {
         "x-tab-label": "success",
@@ -8473,7 +9403,16 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Response containing the load state of a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "包含 Collection 加载状态的响应。"
+          },
+          "ja-JP": {
+            "description": "Collection のロード状態を含むレスポンス。"
+          }
+        }
       },
       "CollectionCommons": {
         "type": "object",
@@ -8514,11 +9453,29 @@
               "type": "string",
               "x-added-at": "2.6.x",
               "x-last-modified": "2.6.x",
-              "x-deprecated-since": null
+              "x-deprecated-since": null,
+              "description": "Name of a partition to which this operation applies. Specifying partitions limits the operation scope to them; otherwise the entire Collection is used.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "此操作适用的 partition 名称。指定 partition 会将操作范围限制为这些 partition；否则使用整个 Collection。"
+                },
+                "ja-JP": {
+                  "description": "この操作の対象となる partition の名前。partition を指定すると操作範囲がそれらに限定され、指定しない場合は Collection 全体が対象になります。"
+                }
+              }
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "Names of the partitions to which this operation applies. When specified, the operation scope is limited to these partitions; otherwise the entire Collection is used.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "此操作适用的 partition 名称。指定后，操作范围将限制为这些 partition；否则使用整个 Collection。"
+              },
+              "ja-JP": {
+                "description": "この操作の対象となる partition の名前。指定すると操作範囲がこれらの partition に限定され、指定しない場合は Collection 全体が対象になります。"
+              }
+            }
           }
         },
         "required": [
@@ -8526,7 +9483,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Common parameters shared by Collection operations.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Collection 操作共享的通用参数。"
+          },
+          "ja-JP": {
+            "description": "Collection 操作で共有される共通パラメータ。"
+          }
+        }
       },
       "CompactionStateResponse": {
         "x-tab-label": "success",
@@ -8628,12 +9594,30 @@
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "The response payload that carries the compaction state result.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "承载压缩状态结果的响应负载。"
+              },
+              "ja-JP": {
+                "description": "コンパクション状態の結果を含むレスポンスペイロード。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Response containing the compaction state.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "包含 compaction 状态的响应。"
+          },
+          "ja-JP": {
+            "description": "コンパクション状態を含むレスポンス。"
+          }
+        }
       },
       "GetCollectionStatsResponse": {
         "x-tab-label": "success",
@@ -8690,7 +9674,16 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "The response body that returns statistics for a Collection.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "返回 Collection 统计信息的响应体。"
+          },
+          "ja-JP": {
+            "description": "Collection の統計情報を返すレスポンスボディ。"
+          }
+        }
       },
       "HasCollectionResponse": {
         "x-tab-label": "success",
@@ -8747,7 +9740,16 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "The response body indicating whether a specified Collection exists.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "表示指定 Collection 是否存在的响应体。"
+          },
+          "ja-JP": {
+            "description": "指定した Collection が存在するかどうかを示すレスポンスボディ。"
+          }
+        }
       },
       "ListCollectionResponse": {
         "x-tab-label": "success",
@@ -8801,7 +9803,16 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "The response body containing the Collections returned by the list operation.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "包含列表操作返回的 Collection 的响应体。"
+          },
+          "ja-JP": {
+            "description": "リスト操作で返される Collection を含むレスポンスボディ。"
+          }
+        }
       },
       "RenameCollectionRequest": {
         "type": "object",
@@ -8865,7 +9876,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for renaming a Collection, specifying the existing `collectionName` and the desired `newCollectionName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于重命名 Collection 的请求体，指定现有的 `collectionName` 和期望的 `newCollectionName`。"
+          },
+          "ja-JP": {
+            "description": "Collection の名前を変更するためのリクエストボディで、既存の `collectionName` と新しい `newCollectionName` を指定します。"
+          }
+        }
       },
       "FieldSchema": {
         "type": "object",
@@ -9933,7 +10953,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for refreshing an external Collection, identifying the target Collection by `collectionName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于刷新外部 Collection 的请求体，通过 `collectionName` 标识目标 Collection。"
+          },
+          "ja-JP": {
+            "description": "外部 Collection をリフレッシュするためのリクエストボディで、`collectionName` によって対象の Collection を識別します。"
+          }
+        }
       },
       "RefreshExternalCollectionProgressRequest": {
         "type": "object",
@@ -9960,7 +10989,16 @@
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "Request body for checking the progress of an external Collection refresh job, identified by `jobId`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "用于检查外部 Collection 刷新任务进度的请求体，通过 `jobId` 标识该任务。"
+          },
+          "ja-JP": {
+            "description": "外部 Collection のリフレッシュジョブの進捗を確認するためのリクエストボディで、`jobId` によってジョブを識別します。"
+          }
+        }
       },
       "FunctionFieldIndexParams": {
         "type": "object",

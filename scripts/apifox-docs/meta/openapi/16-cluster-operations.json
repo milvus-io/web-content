@@ -428,7 +428,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response returned by the clusters listing operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "集群列表操作返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "クラスター一覧取得操作で返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -757,7 +766,16 @@
                 ],
                 "x-i18n-langs": [
                   "zh-CN"
-                ]
+                ],
+                "description": "Request body for querying metrics for a Cluster, specifying `granularity`, `metricQueries`, `start`, `end`, and `period`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于查询集群指标的请求体，需指定 `granularity`、`metricQueries`、`start`、`end` 和 `period`。"
+                  },
+                  "ja-JP": {
+                    "description": "クラスターのメトリクスをクエリするためのリクエストボディで、`granularity`、`metricQueries`、`start`、`end`、`period` を指定します。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -977,7 +995,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response returned by a metrics query for a Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "集群指标查询返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "クラスターのメトリクスクエリで返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1152,7 +1179,16 @@
                   "projectId",
                   "plan",
                   "cuType"
-                ]
+                ],
+                "description": "Request payload for creating a Cluster; `cuSize`, `clusterName`, `projectId`, `plan`, and `cuType` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Cluster 的请求载荷；`cuSize`、`clusterName`、`projectId`、`plan` 和 `cuType` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Cluster を作成するためのリクエストペイロードです。`cuSize`、`clusterName`、`projectId`、`plan`、`cuType` は必須です。"
+                  }
+                }
               },
               "example": {
                 "cuSize": 1,
@@ -1310,7 +1346,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned when a Cluster is created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Cluster 时返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "Cluster の作成時に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1718,7 +1763,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload describing the requested Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求 Cluster 的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Cluster を表すレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1942,7 +1996,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload confirming that the specified Cluster was dropped.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "确认指定 Cluster 已被删除的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "指定された Cluster が削除されたことを示すレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2054,7 +2117,16 @@
                 ],
                 "required": [
                   "cuSize"
-                ]
+                ],
+                "description": "Request payload for modifying an existing Cluster; `cuSize` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改现有 Cluster 的请求载荷；`cuSize` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "既存の Cluster を変更するためのリクエストペイロードです。`cuSize` は必須です。"
+                  }
+                }
               },
               "example": {
                 "cuSize": 2
@@ -2187,7 +2259,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after modifying the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改指定 Cluster 后返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "指定された Cluster の変更後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2401,7 +2482,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after resuming the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "恢复指定 Cluster 后返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "指定された Cluster の再開後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2612,7 +2702,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after suspending the specified Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "暂停指定 Cluster 后返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "指定された Cluster の一時停止後に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2733,7 +2832,16 @@
                   "plan",
                   "clusterName",
                   "projectId"
-                ]
+                ],
+                "description": "Request payload for creating a Serverless Cluster; `plan`, `clusterName`, and `projectId` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Serverless Cluster 的请求载荷；`plan`、`clusterName` 和 `projectId` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Serverless Cluster を作成するためのリクエストペイロードです。`plan`、`clusterName`、`projectId` は必須です。"
+                  }
+                }
               },
               "example": {
                 "plan": "Free",
@@ -2880,7 +2988,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned when a Serverless Cluster is created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Serverless Cluster 时返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "Serverless Cluster の作成時に返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3106,7 +3223,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned by the projects listing endpoint.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "项目列表端点返回的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "プロジェクト一覧エンドポイントから返されるレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -1,6 +1,6 @@
 const {isDeepStrictEqual} = require('node:util')
 const {attachLifecycleSuggestion, assertLifecycleSource, parseTrack} = require('./lifecycle')
-const {apiProjection, resolveSchemaDeep, droppedLocalFieldPaths, droppedLocalKeys, relaxedRequiredMembers, stripScalarConstraints, overlayOpaque, stripOpaqueMarkers} = require('./mirror')
+const {apiProjection, resolveSchemaDeep, droppedLocalFieldPaths, droppedLocalKeys, relaxedRequiredMembers, stripScalarConstraints, overlayOpaque, stripOpaqueMarkers, harvestUpstreamComments} = require('./mirror')
 
 // Branch-aware diff between a pinned upstream spec and the zdoc fragments.
 // Truth assignment (2026-10-30 merge model): STRUCTURE follows upstream
@@ -196,7 +196,14 @@ function resolveMirrorSubtree(upstreamDocument, node, fragmentDocument = null, f
         const resolvedLocal = fragmentDocument ? resolveSchemaDeep(fragmentDocument, fragmentNode) : null
         const comparableUpstream = overlayOpaque(resolvedUpstream, resolvedLocal)
         return {resolvedUpstream, resolvedLocal, comparableUpstream,
-            after: stripOpaqueMarkers(comparableUpstream), unresolvableSubtree: false}
+            after: stripOpaqueMarkers(comparableUpstream),
+            // Grounding evidence (the extractor's captured Go field comments),
+            // harvested off the subtree before the marker is stripped: the
+            // describe stage reads it at the entry level, fragments never see
+            // the key. Empty for comment-less sources so the default diff
+            // output stays byte-identical.
+            upstreamComments: harvestUpstreamComments(comparableUpstream),
+            unresolvableSubtree: false}
     } catch (error) {
         if (!error.message.startsWith('REST_UPSTREAM_MIRROR_REF_CYCLE:')) throw error
         return {after: null, unresolvableSubtree: true}
@@ -280,6 +287,7 @@ function diffSchemaPair(context) {
             const nestedRelaxation = mirrorPair.unresolvableSubtree ? [] : relaxedRequiredMembers(comparableUpstream, localView)
             const entry = makeEntry({...context.meta, category: 'upstream-modified', scope: context.scope, branch: context.branch, field: name,
                 change: {kind: 'schema', key: 'mirror', before: null, after: mirrorPair.unresolvableSubtree ? null : mirrorPair.after},
+                ...(mirrorPair.upstreamComments && Object.keys(mirrorPair.upstreamComments).length > 0 ? {upstreamComments: mirrorPair.upstreamComments} : {}),
                 requiredMembership,
                 ...(mirrorPair.unresolvableSubtree ? {unresolvableSubtree: true} : {}),
                 ...(context.structureOnly ? {preserveLocalScalarConstraints: true} : {}),
@@ -342,6 +350,7 @@ function diffSchemaPair(context) {
                 // no downstream step ever needs the upstream spec again.
                 change: {kind: 'field-uncovered', before: null, after: addedSubtree.after},
                 ...(addedSubtree.unresolvableSubtree ? {unresolvableSubtree: true} : {}),
+                ...(addedSubtree.upstreamComments && Object.keys(addedSubtree.upstreamComments).length > 0 ? {upstreamComments: addedSubtree.upstreamComments} : {}),
                 requiredMembership: upstreamRequired === null ? null : upstreamRequired.includes(name),
                 evidence: context.upstreamEvidencePath})
             suggestLifecycle(entry, context.lifecycle, null, upstreamProperties[name])
@@ -415,6 +424,7 @@ function diffBodied(context, fragmentContent, upstreamContent, scope) {
         const entry = makeEntry({...context.meta, category: uncoveredCategory, scope, field: name,
             change: {kind: 'field-uncovered', before: null, after: addedSubtree.after},
             ...(addedSubtree.unresolvableSubtree ? {unresolvableSubtree: true} : {}),
+            ...(addedSubtree.upstreamComments && Object.keys(addedSubtree.upstreamComments).length > 0 ? {upstreamComments: addedSubtree.upstreamComments} : {}),
             requiredMembership: upstreamUnionRequired === null ? null : upstreamUnionRequired.includes(name),
             evidence: context.upstreamEvidencePath})
         if (uncoveredCategory === 'upstream-added-field') suggestLifecycle(entry, context.lifecycle, null, upstreamUnionProperties[name])
@@ -500,6 +510,7 @@ function diffResponses(context) {
                 const entry = makeEntry({...statusContext.meta, category: 'upstream-added-field', scope: 'response', field: name,
                     change: {kind: 'field-uncovered', before: null, after: addedSubtree.after},
                     ...(addedSubtree.unresolvableSubtree ? {unresolvableSubtree: true} : {}),
+                    ...(addedSubtree.upstreamComments && Object.keys(addedSubtree.upstreamComments).length > 0 ? {upstreamComments: addedSubtree.upstreamComments} : {}),
                     requiredMembership: upstreamRequired === null ? null : upstreamRequired.includes(name),
                     evidence: context.upstreamEvidencePath})
                 suggestLifecycle(entry, context.lifecycle, null, upstreamProperties[name])

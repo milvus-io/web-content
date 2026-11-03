@@ -47,8 +47,10 @@ type Unreachable struct {
 type CreateCollectionReq struct {
 	DbName         string            `json:"dbName"`
 	CollectionName string            `json:"collectionName" binding:"required"`
-	Dimension      *int32            `json:"dimension"`
-	Schema         *CollectionSchema `json:"schema"`
+	// Dimension is only meaningful for quick-setup collections; custom
+	// setups derive it from the schema's vector field.
+	Dimension *int32            `json:"dimension"`
+	Schema    *CollectionSchema `json:"schema"`
 }
 
 type CollectionSchema struct {

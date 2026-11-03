@@ -227,7 +227,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when retrieving the available private endpoint services.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取可用 private endpoint service 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "利用可能な private endpoint service を取得したときに返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -476,7 +485,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when listing the private endpoints of the project specified by `projectId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出由 `projectId` 指定的项目的 private endpoint 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`projectId` で指定されたプロジェクトの private endpoint を一覧表示したときに返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -714,7 +732,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating a private endpoint in the project specified by `projectId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "在由 `projectId` 指定的项目中创建 private endpoint 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`projectId` で指定されたプロジェクトに private endpoint を作成した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -979,7 +1006,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after deleting the private endpoint identified by `endpointId` from the project specified by `projectId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从由 `projectId` 指定的项目中删除由 `endpointId` 标识的 private endpoint 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`projectId` で指定されたプロジェクトから `endpointId` で識別される private endpoint を削除した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1204,7 +1240,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after adding entries to the private endpoint whitelist of the project specified by `projectId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "向由 `projectId` 指定的项目的 private endpoint whitelist 添加条目后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`projectId` で指定されたプロジェクトの private endpoint whitelist にエントリを追加した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

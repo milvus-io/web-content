@@ -139,7 +139,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for deleting entities, which requires `collectionName` and `filter`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "删除实体的请求体，需要提供 `collectionName` 和 `filter`。"
+                  },
+                  "ja-JP": {
+                    "description": "エンティティを削除するためのリクエストボディ。`collectionName` と `filter` が必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -238,7 +247,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One of the possible result shapes returned by a successful delete request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功删除请求返回的可能结果形式之一。"
+                        },
+                        "ja-JP": {
+                          "description": "削除リクエストの成功時に返される結果の形式の 1 つ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -294,7 +312,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The result returned by a successful delete request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功删除请求返回的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "削除リクエストが成功したときに返される結果。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -507,28 +534,73 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of the field to which the operation applies.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "该操作所应用的字段名称。"
+                            },
+                            "ja-JP": {
+                              "description": "操作の対象となるフィールドの名前。"
+                            }
+                          }
                         },
                         "op": {
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The update operation to apply: `REPLACE` replaces the field value, `ARRAY_APPEND` appends array elements, and `ARRAY_REMOVE` removes matching array elements.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "要应用的更新操作：`REPLACE` 替换字段值，`ARRAY_APPEND` 追加数组元素，`ARRAY_REMOVE` 移除匹配的数组元素。"
+                            },
+                            "ja-JP": {
+                              "description": "適用する更新操作。`REPLACE` はフィールド値を置換し、`ARRAY_APPEND` は配列要素を追加し、`ARRAY_REMOVE` は一致する配列要素を削除します。"
+                            }
+                          }
                         },
                         "path": {
                           "type": "string",
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The path prefix within the volume that the field operation targets. This is required when `type` is `EXTERNAL`.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "该字段操作所指向的 Volume 内的路径前缀。当 `type` 为 `EXTERNAL` 时，此项为必填。"
+                            },
+                            "ja-JP": {
+                              "description": "フィールド操作の対象となる Volume 内のパスプレフィックス。`type` が `EXTERNAL` の場合は必須です。"
+                            }
+                          }
                         }
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single field-level operation that selects a field and specifies how its value is updated.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "单个字段级操作，用于选择一个字段并指定其值的更新方式。"
+                        },
+                        "ja-JP": {
+                          "description": "フィールドを選択し、その値の更新方法を指定する単一のフィールドレベル操作。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "Field-level operations to apply to the entities being written. Each entry selects a field and specifies how its value is updated.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "应用于所写入实体的字段级操作。每个条目选择一个字段并指定其值的更新方式。"
+                      },
+                      "ja-JP": {
+                        "description": "書き込むエンティティに適用するフィールドレベルの操作。各エントリはフィールドを選択し、その値の更新方法を指定します。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -537,7 +609,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for inserting entities, which requires `data` and `collectionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "插入实体的请求体，需要提供 `data` 和 `collectionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "エンティティを挿入するためのリクエストボディ。`data` と `collectionName` が必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -780,7 +861,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload variant returned by the insert operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "插入操作返回的一种响应载荷形式。"
+                        },
+                        "ja-JP": {
+                          "description": "挿入操作が返すレスポンスペイロードのバリエーション。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -836,7 +926,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after inserting entities.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "插入实体后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "エンティティの挿入後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -983,7 +1082,16 @@
                           "type": "object",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A single entity record that maps field names to the values to write.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "单条实体记录，将字段名映射到要写入的值。"
+                            },
+                            "ja-JP": {
+                              "description": "フィールド名を書き込む値にマッピングする単一のエンティティレコード。"
+                            }
+                          }
                         },
                         {
                           "type": "array",
@@ -991,16 +1099,43 @@
                             "type": "object",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "One entity record in the list, mapping field names to the values to write.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "列表中的一条实体记录，将字段名映射到要写入的值。"
+                              },
+                              "ja-JP": {
+                                "description": "リスト内の 1 件のエンティティレコード。フィールド名を書き込む値にマッピングします。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A single entity record that maps field names to the values to write.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "单条实体记录，将字段名映射到要写入的值。"
+                            },
+                            "ja-JP": {
+                              "description": "フィールド名を書き込む値にマッピングする単一のエンティティレコード。"
+                            }
+                          }
                         }
                       ],
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The entity data to upsert, supplied either as a single record or as a list of records keyed by field name.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要 upsert 的实体数据，可以是单条记录，也可以是由字段名索引的记录列表。"
+                        },
+                        "ja-JP": {
+                          "description": "upsert するエンティティデータ。単一のレコード、またはフィールド名をキーとするレコードのリストとして指定します。"
+                        }
+                      }
                     },
                     "description": "An entity object or an array of entity objects. Note that the keys in an entity object should match the collection schema",
                     "x-i18n": {
@@ -1086,7 +1221,16 @@
                       ],
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A field-level operation applied during a partial update, selecting one field and specifying how its value is updated. Each entry requires `fieldName` and `op`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "部分更新期间应用的字段级操作，用于选择某个字段并指定其值的更新方式。每个条目都需要 `fieldName` 和 `op`。"
+                        },
+                        "ja-JP": {
+                          "description": "部分更新時に適用されるフィールドレベルの操作。1 つのフィールドを選択し、その値の更新方法を指定します。各エントリには `fieldName` と `op` が必要です。"
+                        }
+                      }
                     },
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
@@ -1099,7 +1243,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for an upsert operation, which must specify the target `collectionName` and the `data` to write.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "upsert 操作的请求体，必须指定目标 `collectionName` 和要写入的 `data`。"
+                  },
+                  "ja-JP": {
+                    "description": "upsert 操作のリクエストボディ。対象の `collectionName` と書き込む `data` を必ず指定します。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1408,7 +1561,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload variant returned by the upsert operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "upsert 操作返回的一种响应载荷形式。"
+                        },
+                        "ja-JP": {
+                          "description": "upsert 操作が返すレスポンスペイロードのバリエーション。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1464,7 +1626,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after upserting entities.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "upsert 实体后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "エンティティの upsert 後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1800,11 +1971,29 @@
                       "type": "string",
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A single field name used to group the query results.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "用于对查询结果进行分组的一个字段名称。"
+                        },
+                        "ja-JP": {
+                          "description": "クエリ結果のグループ化に使用する 1 つのフィールド名。"
+                        }
+                      }
                     },
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The names of the fields used to group the query results. Each entry identifies one grouping field.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于对查询结果进行分组的字段名称。每个条目对应一个分组字段。"
+                      },
+                      "ja-JP": {
+                        "description": "クエリ結果をグループ化するために使用するフィールド名。各要素は 1 つのグループ化フィールドを表します。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1812,7 +2001,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for a query operation, which must name the target `collectionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "query 操作的请求体，必须指定目标 `collectionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "query 操作のリクエストボディ。対象の `collectionName` を必ず指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup",
@@ -1959,7 +2157,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload variant that the query operation can return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "查询操作可能返回的一种响应负载形式。"
+                        },
+                        "ja-JP": {
+                          "description": "クエリオペレーションが返す可能性があるレスポンスペイロードの形式の 1 つ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -2015,7 +2222,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the query request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "查询请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "クエリリクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2591,7 +2807,16 @@
                                 "type": "string",
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of a scalar field used as input to the function.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "用作函数输入的标量字段名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "関数への入力として使用するスカラーフィールドの名前。"
+                                  }
+                                }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
@@ -2627,7 +2852,16 @@
                                 "type": "string",
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of a vector field used as output for the function.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "用作函数输出的向量字段名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "関数の出力として使用するベクトルフィールドの名前。"
+                                  }
+                                }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
@@ -2677,11 +2911,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A single function definition, identified by `name` and `type` and bound to its input and output fields through `inputFieldNames` and `outputFieldNames`.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "单个函数定义，通过 `name` 和 `type` 标识，并借助 `inputFieldNames` 和 `outputFieldNames` 绑定其输入与输出字段。"
+                            },
+                            "ja-JP": {
+                              "description": "`name` と `type` で識別される 1 つの関数定義で、`inputFieldNames` と `outputFieldNames` によって入出力フィールドに紐付けられます。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The functions applied when function-based scoring is used in the search request, listed in an array.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "搜索请求中使用函数评分时所应用的函数，以数组形式给出。"
+                          },
+                          "ja-JP": {
+                            "description": "検索リクエストで関数スコアリングを使用するときに適用される関数を配列で指定します。"
+                          }
+                        }
                       },
                       "params": {
                         "type": "object",
@@ -2769,11 +3021,29 @@
                       "type": "string",
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One sort specification for the search results, given as a field name (sorted ascending by default), `fieldName:asc`, or `fieldName:desc`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "搜索结果的一条排序指定，可写成字段名（默认按升序）、`fieldName:asc` 或 `fieldName:desc`。"
+                        },
+                        "ja-JP": {
+                          "description": "検索結果に対する 1 つの並べ替え指定で、フィールド名（デフォルトは昇順）、`fieldName:asc`、または `fieldName:desc` で記述します。"
+                        }
+                      }
                     },
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The scalar fields used to sort the search results. Each item can be a field name, `fieldName:asc`, or `fieldName:desc`; the default sort direction is ascending.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于对搜索结果排序的标量字段。每个条目可以是字段名、`fieldName:asc` 或 `fieldName:desc`；默认排序方向为升序。"
+                      },
+                      "ja-JP": {
+                        "description": "検索結果の並べ替えに使用するスカラーフィールド。各要素はフィールド名、`fieldName:asc`、または `fieldName:desc` で指定でき、デフォルトの並べ替え方向は昇順です。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -2782,7 +3052,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for a search request. `collectionName` and `data` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "搜索请求的请求体。`collectionName` 和 `data` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "検索リクエストのリクエストボディ。`collectionName` と `data` は必須です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup",
@@ -2942,7 +3221,16 @@
                             "type": "number",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The recall value for one search result group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "一个搜索结果组的召回值。"
+                              },
+                              "ja-JP": {
+                                "description": "1 つの検索結果グループの再現率の値。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -2963,7 +3251,16 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The number of top-K results returned for one query vector.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "为一个查询向量返回的 top-K 结果数量。"
+                              },
+                              "ja-JP": {
+                                "description": "1 つのクエリベクトルに対して返される top-K 結果の数。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -3017,7 +3314,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One form of the successful response body, carrying the search results together with the `topks` and `recalls` arrays that describe each returned result group.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应体的一种形式，携带搜索结果以及描述每个返回结果组的 `topks` 和 `recalls` 数组。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンスボディの一形式で、検索結果と、返された各結果グループを説明する `topks` および `recalls` 配列を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -3073,7 +3379,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for the search request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "搜索请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "検索リクエストに対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3735,7 +4050,16 @@
                                 "type": "string",
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of one scalar field used as input to the function.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "作为该函数输入的一个标量字段的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "関数の入力として使用されるスカラーフィールドの名前。"
+                                  }
+                                }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
@@ -3771,7 +4095,16 @@
                                 "type": "string",
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of one vector field that receives the output of the function.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "接收该函数输出的一个向量字段的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "関数の出力を受け取るベクターフィールドの名前。"
+                                  }
+                                }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
@@ -3821,11 +4154,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "One function definition, identified by `name` and `type`, that reads the fields listed in `inputFieldNames` and writes its results to the fields listed in `outputFieldNames`.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个函数定义，由 `name` 和 `type` 标识，读取 `inputFieldNames` 中列出的字段，并将结果写入 `outputFieldNames` 中列出的字段。"
+                            },
+                            "ja-JP": {
+                              "description": "`name` と `type` で識別される 1 つの関数定義で、`inputFieldNames` に列挙されたフィールドを読み取り、結果を `outputFieldNames` に列挙されたフィールドへ書き込みます。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The function definitions that `functionScore` applies when scoring the hybrid search results.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "`functionScore` 在为混合搜索结果评分时应用的函数定义。"
+                          },
+                          "ja-JP": {
+                            "description": "`functionScore` がハイブリッド検索結果のスコアリング時に適用する関数定義。"
+                          }
+                        }
                       },
                       "params": {
                         "type": "object",
@@ -3895,7 +4246,16 @@
                           "type": "string",
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The name of the function to apply in the chain.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "在该链中应用的函数名称。"
+                            },
+                            "ja-JP": {
+                              "description": "チェーン内で適用する関数の名前。"
+                            }
+                          }
                         },
                         "ops": {
                           "type": "array",
@@ -3914,38 +4274,101 @@
                                           "type": "string",
                                           "x-added-at": "3.0.x",
                                           "x-last-modified": "3.0.x",
-                                          "x-deprecated-since": null
+                                          "x-deprecated-since": null,
+                                          "description": "The name of the column used as this argument. Exactly one of `column` and `literal` must be specified.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "用作此参数的列名称。必须且只能指定 `column` 和 `literal` 中的一个。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "この引数として使用する列名。`column` と `literal` のいずれか一方のみを指定する必要があります。"
+                                            }
+                                          }
                                         },
                                         "literal": {
                                           "x-added-at": "3.0.x",
                                           "x-last-modified": "3.0.x",
-                                          "x-deprecated-since": null
+                                          "x-deprecated-since": null,
+                                          "description": "A literal value used as this argument. Exactly one of `column` and `literal` must be specified.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "用作此参数的文本值。必须且只能指定 `column` 和 `literal` 中的一个。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "この引数として使用するリテラル値。`column` と `literal` のいずれか一方のみを指定する必要があります。"
+                                            }
+                                          }
                                         }
                                       },
                                       "x-added-at": "3.0.x",
                                       "x-last-modified": "3.0.x",
-                                      "x-deprecated-since": null
+                                      "x-deprecated-since": null,
+                                      "description": "A single argument in the ordered expression argument list.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "有序表达式参数列表中的单个参数。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "順序付けられた式引数リスト内の単一の引数。"
+                                        }
+                                      }
                                     },
                                     "x-added-at": "3.0.x",
                                     "x-last-modified": "3.0.x",
-                                    "x-deprecated-since": null
+                                    "x-deprecated-since": null,
+                                    "description": "The ordered arguments passed to the expression.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "传递给表达式的有序参数。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "式に渡される順序付けられた引数。"
+                                      }
+                                    }
                                   },
                                   "name": {
                                     "type": "string",
                                     "x-added-at": "3.0.x",
                                     "x-last-modified": "3.0.x",
-                                    "x-deprecated-since": null
+                                    "x-deprecated-since": null,
+                                    "description": "The name of the function to apply in this expression.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "此表达式中要应用的函数名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "この式で適用する関数の名前。"
+                                      }
+                                    }
                                   },
                                   "params": {
                                     "type": "object",
                                     "x-added-at": "3.0.x",
                                     "x-last-modified": "3.0.x",
-                                    "x-deprecated-since": null
+                                    "x-deprecated-since": null,
+                                    "description": "Extra parameters for the search, supplied as key-value pairs.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于搜索的额外参数，以键值对形式提供。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "検索用の追加パラメータ。キーと値のペアで指定します。"
+                                      }
+                                    }
                                   }
                                 },
                                 "x-added-at": "3.0.x",
                                 "x-last-modified": "3.0.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "An optional expression evaluated by this operation.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "此操作计算的可选表达式。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "この操作によって評価される任意の式。"
+                                  }
+                                }
                               },
                               "inputs": {
                                 "type": "array",
@@ -3953,17 +4376,44 @@
                                   "type": "string",
                                   "x-added-at": "3.0.x",
                                   "x-last-modified": "3.0.x",
-                                  "x-deprecated-since": null
+                                  "x-deprecated-since": null,
+                                  "description": "An input column name for the operation.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "该操作的一个输入列名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "操作の入力列名。"
+                                    }
+                                  }
                                 },
                                 "x-added-at": "3.0.x",
                                 "x-last-modified": "3.0.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The input column names for the operation.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该操作的输入列名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "操作の入力列名。"
+                                  }
+                                }
                               },
                               "op": {
                                 "type": "string",
                                 "x-added-at": "3.0.x",
                                 "x-last-modified": "3.0.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The name of the operation to perform in this function chain step.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "此 function chain 步骤中要执行的操作名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "この function chain ステップで実行する操作の名前。"
+                                  }
+                                }
                               },
                               "outputs": {
                                 "type": "array",
@@ -3971,41 +4421,113 @@
                                   "type": "string",
                                   "x-added-at": "3.0.x",
                                   "x-last-modified": "3.0.x",
-                                  "x-deprecated-since": null
+                                  "x-deprecated-since": null,
+                                  "description": "The name of an output column produced by this operation in the function chain.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "该操作在函数链中生成的一个输出列名。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "関数チェーン内のこの操作によって生成される出力列名。"
+                                    }
+                                  }
                                 },
                                 "x-added-at": "3.0.x",
                                 "x-last-modified": "3.0.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "The output column names produced by the operation.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该操作生成的输出列名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "操作によって生成される出力列名。"
+                                  }
+                                }
                               },
                               "params": {
                                 "type": "object",
                                 "x-added-at": "3.0.x",
                                 "x-last-modified": "3.0.x",
-                                "x-deprecated-since": null
+                                "x-deprecated-since": null,
+                                "description": "Extra search parameters for this operation, provided as key-value pairs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该操作的额外搜索参数，以键值对形式提供。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "この操作の追加の検索パラメータ。キーと値のペアで指定します。"
+                                  }
+                                }
                               }
                             },
                             "x-added-at": "3.0.x",
                             "x-last-modified": "3.0.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "A single operation in the ordered function chain.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "有序 function chain 中的单个操作。"
+                              },
+                              "ja-JP": {
+                                "description": "順序付けられた function chain 内の単一の操作。"
+                              }
+                            }
                           },
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The ordered operations executed by the function chain.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "该函数链按顺序执行的操作。"
+                            },
+                            "ja-JP": {
+                              "description": "関数チェーンが順番に実行する操作。"
+                            }
+                          }
                         },
                         "stage": {
                           "type": "string",
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The execution stage of the function chain. Supported value: `FunctionChainStageL2Rerank`.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "函数链的执行阶段。支持的值：`FunctionChainStageL2Rerank`。"
+                            },
+                            "ja-JP": {
+                              "description": "関数チェーンの実行ステージ。サポートされる値: `FunctionChainStageL2Rerank`。"
+                            }
+                          }
                         }
                       },
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One function chain applied during search reranking.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "在搜索重排期间应用的一个函数链。"
+                        },
+                        "ja-JP": {
+                          "description": "検索の再ランキング時に適用される 1 つの関数チェーン。"
+                        }
+                      }
                     },
                     "x-added-at": "3.0.x",
                     "x-last-modified": "3.0.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The function chains applied during search reranking.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "在搜索重排期间应用的函数链。"
+                      },
+                      "ja-JP": {
+                        "description": "検索の再ランキング時に適用される関数チェーン。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -4014,7 +4536,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for a hybrid search. It requires `collectionName` and `search`, and can additionally configure function scoring through `functionScore` and reranking through `functionChains`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "混合搜索的请求体。它需要 `collectionName` 和 `search`，还可以通过 `functionScore` 配置函数评分，并通过 `functionChains` 配置重排。"
+                  },
+                  "ja-JP": {
+                    "description": "ハイブリッド検索のリクエストボディです。`collectionName` と `search` が必須で、さらに `functionScore` による関数スコアリングと `functionChains` による再ランキングを設定できます。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection",
@@ -4160,7 +4691,16 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The number of top-K results returned for a single query vector.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "单个查询向量返回的 top-K 结果数量。"
+                              },
+                              "ja-JP": {
+                                "description": "単一のクエリベクトルに対して返される top-K 結果の数。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -4214,7 +4754,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response object returned by the hybrid search operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "混合搜索操作返回的一个响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "ハイブリッド検索操作によって返されるレスポンスオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -4270,7 +4819,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body for the hybrid search request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "混合搜索请求的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ハイブリッド検索リクエストのレスポンス本文。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4461,13 +5019,31 @@
                           "type": "string",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The entity `id` value, which may be a string, an integer, or an array of strings.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "实体 `id` 值，可以是字符串、整数或字符串数组。"
+                            },
+                            "ja-JP": {
+                              "description": "エンティティ `id` の値。文字列、整数、または文字列の配列を使用できます。"
+                            }
+                          }
                         },
                         {
                           "type": "integer",
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The entity `id` value, which may be a string, an integer, or an array of strings.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "实体 `id` 值，可以是字符串、整数或字符串数组。"
+                            },
+                            "ja-JP": {
+                              "description": "エンティティ `id` の値。文字列、整数、または文字列の配列を使用できます。"
+                            }
+                          }
                         },
                         {
                           "type": "array",
@@ -4475,11 +5051,29 @@
                             "type": "string",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "A string value in the array of entity IDs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "实体 ID 数组中的一个字符串值。"
+                              },
+                              "ja-JP": {
+                                "description": "エンティティ ID の配列内の文字列値。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The entity `id` value, which may be a string, an integer, or an array of strings.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "实体 `id` 值，可以是字符串、整数或字符串数组。"
+                            },
+                            "ja-JP": {
+                              "description": "エンティティ `id` の値。文字列、整数、または文字列の配列を使用できます。"
+                            }
+                          }
                         },
                         {
                           "type": "array",
@@ -4487,16 +5081,43 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "One entity ID within the array of identifiers.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "标识符数组中的一个实体 ID。"
+                              },
+                              "ja-JP": {
+                                "description": "識別子の配列内の 1 つのエンティティ ID。"
+                              }
+                            }
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The identifiers of the entities to retrieve, provided as an array.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "要检索的实体的标识符，以数组形式提供。"
+                            },
+                            "ja-JP": {
+                              "description": "取得するエンティティの識別子を配列で指定します。"
+                            }
+                          }
                         }
                       ],
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The ID of the entity to retrieve.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "要检索的实体的 ID。"
+                        },
+                        "ja-JP": {
+                          "description": "取得するエンティティの ID。"
+                        }
+                      }
                     },
                     "description": "A specific entity ID or a list of entity IDs.",
                     "x-i18n": {
@@ -4612,7 +5233,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for the `entities/get` operation, identifying the target Collection and entity IDs.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "`entities/get` 操作的请求体，用于标识目标 Collection 和实体 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "`entities/get` 操作のリクエスト本文。対象の Collection とエンティティ ID を指定します。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "quick_setup",
@@ -4759,7 +5389,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response object returned by the get operation, carrying the outcome of the request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "get 操作返回的响应对象，携带请求的结果。"
+                        },
+                        "ja-JP": {
+                          "description": "get 操作が返すレスポンスオブジェクトで、リクエストの結果を保持します。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -4815,7 +5454,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned by the get operation for the requested entities.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "针对所请求实体的 get 操作返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "要求されたエンティティに対する get 操作が返すレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

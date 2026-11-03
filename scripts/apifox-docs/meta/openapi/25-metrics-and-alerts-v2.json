@@ -575,8 +575,26 @@
                                       }
                                     }
                                   }
+                                },
+                                "description": "An alert rule returned in the list.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "列表中返回的一条告警规则。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "リストで返されるアラートルール。"
+                                  }
                                 }
                               }
+                            }
+                          },
+                          "description": "Response payload for the alert rules request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "告警规则请求的响应载荷。"
+                            },
+                            "ja-JP": {
+                              "description": "アラートルールリクエストのレスポンスペイロード。"
                             }
                           }
                         }
@@ -624,7 +642,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body for retrieving alert rules.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "用于检索告警规则的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "アラートルールを取得するためのレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1290,6 +1317,15 @@
                       }
                     }
                   ]
+                },
+                "description": "Request body for creating an alert rule, containing `projectId`, `ruleName`, `level`, `metricName`, `enabled`, `sendResolved`, and `actions` as required fields.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "创建告警规则的请求体，`projectId`、`ruleName`、`level`、`metricName`、`enabled`、`sendResolved` 和 `actions` 为必需字段。"
+                  },
+                  "ja-JP": {
+                    "description": "アラートルールを作成するためのリクエストボディで、`projectId`、`ruleName`、`level`、`metricName`、`enabled`、`sendResolved`、`actions` が必須フィールドです。"
+                  }
                 }
               },
               "example": {
@@ -1799,6 +1835,15 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload for the alert rule creation request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "告警规则创建请求的响应载荷。"
+                            },
+                            "ja-JP": {
+                              "description": "アラートルール作成リクエストのレスポンスペイロード。"
+                            }
                           }
                         }
                       }
@@ -1845,7 +1890,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating an alert rule.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建告警规则后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "アラートルールの作成後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2493,6 +2547,15 @@
                       }
                     }
                   ]
+                },
+                "description": "Request body for updating the alert rule identified by `ALERT_RULE_ID`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于更新由 `ALERT_RULE_ID` 标识的告警规则的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "`ALERT_RULE_ID` で識別されるアラートルールを更新するためのリクエストボディ。"
+                  }
                 }
               },
               "example": {
@@ -2997,6 +3060,15 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload object returned by the alert rule update.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "告警规则更新操作返回的响应负载对象。"
+                            },
+                            "ja-JP": {
+                              "description": "アラートルール更新操作で返されるレスポンスペイロードオブジェクトです。"
+                            }
                           }
                         }
                       }
@@ -3043,7 +3115,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after updating the alert rule identified by `ALERT_RULE_ID`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新由 `ALERT_RULE_ID` 指定的告警规则后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`ALERT_RULE_ID` で指定したアラートルールを更新した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3304,7 +3385,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after deleting the alert rule identified by `ALERT_RULE_ID`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除由 `ALERT_RULE_ID` 指定的告警规则后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`ALERT_RULE_ID` で指定したアラートルールを削除した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3551,7 +3641,16 @@
                 "required": [
                   "granularity",
                   "metricQueries"
-                ]
+                ],
+                "description": "Request body for querying metrics of the cluster identified by `CLUSTER_ID`; `granularity` and `metricQueries` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于查询由 `CLUSTER_ID` 指定的集群指标的请求体；`granularity` 和 `metricQueries` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "`CLUSTER_ID` で指定したクラスターのメトリクスを照会するためのリクエストボディです。`granularity` と `metricQueries` は必須です。"
+                  }
+                }
               },
               "example": {
                 "start": "2024-06-30T16:09:53Z",
@@ -3708,6 +3807,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One possible shape of the metrics query response payload.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "指标查询响应负载的一种可能形态。"
+                        },
+                        "ja-JP": {
+                          "description": "メトリクスクエリのレスポンスペイロードが取り得る形式の 1 つです。"
+                        }
                       }
                     },
                     {
@@ -3752,7 +3860,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body carrying the results of the metrics query.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "承载指标查询结果的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "メトリクスクエリの結果を含むレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

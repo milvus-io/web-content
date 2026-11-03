@@ -189,7 +189,16 @@
                     },
                     "required": [
                       "collectionName"
-                    ]
+                    ],
+                    "description": "One supported form of the import job creation request. Every form must specify the target `collectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "import job 创建请求的一种受支持形式。每种形式都必须指定目标 `collectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "import job 作成リクエストでサポートされる形式の 1 つです。どの形式でも対象の `collectionName` を指定する必要があります。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "Volume (On-demand)",
@@ -346,7 +355,16 @@
                     },
                     "required": [
                       "collectionName"
-                    ]
+                    ],
+                    "description": "One supported form of the import job creation request. Every form must specify the target `collectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "import job 创建请求的一种受支持形式。每种形式都必须指定目标 `collectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "import job 作成リクエストでサポートされる形式の 1 つです。どの形式でも対象の `collectionName` を指定する必要があります。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "External storage (Serving)",
@@ -532,7 +550,16 @@
                     ],
                     "x-include-target": [
                       "zilliz"
-                    ]
+                    ],
+                    "description": "One supported form of the import job creation request. Every form must specify the target `collectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "import job 创建请求的一种受支持形式。每种形式都必须指定目标 `collectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "import job 作成リクエストでサポートされる形式の 1 つです。どの形式でも対象の `collectionName` を指定する必要があります。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "External storage (On-demand)",
@@ -749,7 +776,16 @@
                     ],
                     "x-include-target": [
                       "zilliz"
-                    ]
+                    ],
+                    "description": "One supported form of the import job creation request. Every form must specify the target `collectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "import job 创建请求的一种受支持形式。每种形式都必须指定目标 `collectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "import job 作成リクエストでサポートされる形式の 1 つです。どの形式でも対象の `collectionName` を指定する必要があります。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "Object storage files",
@@ -887,12 +923,30 @@
                     ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "One supported form of the import job creation request. Every form must specify the target `collectionName`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "import job 创建请求的一种受支持形式。每种形式都必须指定目标 `collectionName`。"
+                      },
+                      "ja-JP": {
+                        "description": "import job 作成リクエストでサポートされる形式の 1 つです。どの形式でも対象の `collectionName` を指定する必要があります。"
+                      }
+                    }
                   }
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for creating an import job that loads data into a Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建将数据导入 Collection 的 import job 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "Collection にデータをロードする import job を作成するためのリクエストボディ。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1178,7 +1232,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The successful response body returned when an import job is created.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建导入任务成功后返回的响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブの作成が成功したときに返されるレスポンスボディ。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1234,7 +1297,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the import job creation request completes successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 import job 的请求成功完成时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "import job の作成リクエストが正常に完了したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1475,7 +1547,16 @@
                     },
                     "required": [
                       "clusterId"
-                    ]
+                    ],
+                    "description": "The request body for listing import jobs; `clusterId` is required when the request targets a cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于列出导入任务的请求体；当请求面向集群时，`clusterId` 为必填项。"
+                      },
+                      "ja-JP": {
+                        "description": "インポートジョブを一覧表示するためのリクエストボディ。クラスターを対象とする場合、`clusterId` は必須です。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "Milvus",
@@ -1500,15 +1581,42 @@
                         "type": "string",
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The name of the Collection to which the import job listing request applies.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "导入任务列表请求所适用的 Collection 名称。"
+                          },
+                          "ja-JP": {
+                            "description": "インポートジョブ一覧リクエストの対象となる Collection の名前。"
+                          }
+                        }
                       }
                     },
                     "required": [],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The request body for listing import jobs; `clusterId` is required when the request targets a cluster.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于列出导入任务的请求体；当请求面向集群时，`clusterId` 为必填项。"
+                      },
+                      "ja-JP": {
+                        "description": "インポートジョブを一覧表示するためのリクエストボディ。クラスターを対象とする場合、`clusterId` は必須です。"
+                      }
+                    }
                   }
-                ]
+                ],
+                "description": "The request body for listing import jobs.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出导入任务的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "インポートジョブを一覧表示するためのリクエストボディ。"
+                  }
+                }
               },
               "example": {
                 "clusterId": "inxx-xxxxxxxxxxxxxxx"
@@ -1675,7 +1783,25 @@
                                         "description": "インポートジョブの詳細。"
                                       }
                                     }
+                                  },
+                                  "description": "The import job records returned by the listing request.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "列表请求返回的导入任务记录。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "一覧リクエストで返されるインポートジョブレコード。"
+                                    }
                                   }
+                                }
+                              },
+                              "description": "The import job listing data returned in the response.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "响应中返回的导入任务列表数据。"
+                                },
+                                "ja-JP": {
+                                  "description": "レスポンスで返されるインポートジョブ一覧データ。"
                                 }
                               }
                             },
@@ -1794,12 +1920,30 @@
                                   },
                                   "x-added-at": "2.6.x",
                                   "x-last-modified": "2.6.x",
-                                  "x-deprecated-since": null
+                                  "x-deprecated-since": null,
+                                  "description": "The import job records returned by the listing request.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "列表请求返回的导入任务记录。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "一覧リクエストで返されるインポートジョブレコード。"
+                                    }
+                                  }
                                 }
                               },
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
+                              "x-deprecated-since": null,
+                              "description": "The import job listing data returned in the response.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "响应中返回的导入任务列表数据。"
+                                },
+                                "ja-JP": {
+                                  "description": "レスポンスで返されるインポートジョブ一覧データ。"
+                                }
+                              }
                             }
                           ]
                         }
@@ -1807,7 +1951,16 @@
                       "x-tab-label": "success",
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The successful response body for the import job listing request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入任务列表请求成功后的响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブ一覧リクエストの成功時のレスポンスボディ。"
+                        }
+                      }
                     },
                     {
                       "description": "Returns an error message.",
@@ -1863,7 +2016,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when import jobs are listed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出导入任务时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートジョブを一覧表示したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2015,7 +2177,16 @@
                 },
                 "required": [
                   "jobId"
-                ]
+                ],
+                "description": "The request body for retrieving the progress of an import job; `jobId` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取导入任务进度的请求体；`jobId` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "インポートジョブの進捗を取得するためのリクエストボディ。`jobId` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -2399,7 +2570,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "Response object containing the progress of the import job.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含导入任务进度的响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブの進捗を含むレスポンスオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -2455,7 +2635,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned when retrieving the progress of an import job.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取导入任务进度时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートジョブの進捗を取得する際に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2598,7 +2787,16 @@
                     "required": [
                       "jobId",
                       "clusterId"
-                    ]
+                    ],
+                    "description": "The request requires `jobId`; it may be combined with `clusterId`, combined with both `projectId` and `regionId`, or supplied alone.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "请求需提供 `jobId`；它可以与 `clusterId` 组合，与 `projectId` 和 `regionId` 同时组合，或单独提供。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストには `jobId` が必要です。`clusterId` と組み合わせるか、`projectId` と `regionId` の両方と組み合わせるか、単独で指定できます。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "On-Demand Compute",
@@ -2648,7 +2846,16 @@
                       "jobId",
                       "projectId",
                       "regionId"
-                    ]
+                    ],
+                    "description": "The request requires `jobId`; it may be combined with `clusterId`, combined with both `projectId` and `regionId`, or supplied alone.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "请求需提供 `jobId`；它可以与 `clusterId` 组合，与 `projectId` 和 `regionId` 同时组合，或单独提供。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストには `jobId` が必要です。`clusterId` と組み合わせるか、`projectId` と `regionId` の両方と組み合わせるか、単独で指定できます。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "Job ID",
@@ -2678,9 +2885,27 @@
                     ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The request requires `jobId`; it may be combined with `clusterId`, combined with both `projectId` and `regionId`, or supplied alone.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "请求需提供 `jobId`；它可以与 `clusterId` 组合，与 `projectId` 和 `regionId` 同时组合，或单独提供。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストには `jobId` が必要です。`clusterId` と組み合わせるか、`projectId` と `regionId` の両方と組み合わせるか、単独で指定できます。"
+                      }
+                    }
                   }
-                ]
+                ],
+                "description": "Request payload for describing an import job.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于描述导入任务的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "インポートジョブを記述するためのリクエストペイロード。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -3092,7 +3317,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "Response object containing the description of the import job.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含导入任务描述的响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブの説明を含むレスポンスオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -3148,7 +3382,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body describing the import job.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述导入任务的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートジョブを記述するレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3279,7 +3522,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for aborting an import job, identified by the required `jobId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于中止导入任务的请求负载，通过必填的 `jobId` 指定任务。"
+                  },
+                  "ja-JP": {
+                    "description": "インポートジョブを中止するためのリクエストペイロードで、必須の `jobId` で対象を指定します。"
+                  }
+                }
               },
               "example": {
                 "jobId": "job-xxxxxxxxxxxxxxxxxxxxx"
@@ -3347,7 +3599,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "Response object that carries `code` alongside either `data` or `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含 `code` 以及 `data` 或 `message` 的响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "`code` と、`data` または `message` を含むレスポンスオブジェクト。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -3390,12 +3651,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "Response object that carries `code` alongside either `data` or `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "包含 `code` 以及 `data` 或 `message` 的响应对象。"
+                        },
+                        "ja-JP": {
+                          "description": "`code` と、`data` または `message` を含むレスポンスオブジェクト。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body confirming the abort request, carrying `code` together with either `data` or `message`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "确认中止请求的响应体，包含 `code` 以及 `data` 或 `message`。"
+                    },
+                    "ja-JP": {
+                      "description": "中止リクエストを確認するレスポンスボディで、`code` と `data` または `message` を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3503,7 +3782,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for committing an import job. `jobId` is required and identifies the import job to commit.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "提交导入任务的请求体。`jobId` 为必填项，用于指定要提交的导入任务。"
+                  },
+                  "ja-JP": {
+                    "description": "インポートジョブをコミットするためのリクエストボディです。`jobId` は必須で、コミットするインポートジョブを識別します。"
+                  }
+                }
               },
               "example": {
                 "jobId": "job-xxxxxxxxxxxxxxxxxxxxx"
@@ -3571,7 +3859,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload for the import job commit operation; it includes `code` together with `data` or `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入任务提交操作返回的响应载荷；包含 `code` 以及 `data` 或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブのコミット操作で返されるレスポンスペイロードです。`code` と、`data` または `message` を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -3614,12 +3911,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload for the import job commit operation; it includes `code` together with `data` or `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导入任务提交操作返回的响应载荷；包含 `code` 以及 `data` 或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "インポートジョブのコミット操作で返されるレスポンスペイロードです。`code` と、`data` または `message` を含みます。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned after an import job commit request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理导入任务提交请求后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "インポートジョブのコミット要求が処理された後に返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

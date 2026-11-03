@@ -253,10 +253,37 @@
                                       }
                                     }
                                   }
+                                },
+                                "description": "A volume that the API key can access.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "API key 可访问的一个 Volume。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "API key がアクセスできる Volume です。"
+                                  }
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload containing the data returned by the operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含操作所返回数据的响应载荷。"
+                            },
+                            "ja-JP": {
+                              "description": "操作によって返されるデータを含むレスポンスペイロードです。"
+                            }
                           }
+                        }
+                      },
+                      "description": "One of the alternative response payloads returned when listing volumes.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列出 Volume 时返回的备选响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Volume の一覧取得時に返される代替レスポンスペイロードの1つです。"
                         }
                       }
                     },
@@ -302,7 +329,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when listing volumes.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Volume 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Volume の一覧取得時に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -485,7 +521,16 @@
                   "volumeName",
                   "regionId",
                   "projectId"
-                ]
+                ],
+                "description": "Request body for creating a Volume. `volumeName`, `regionId`, and `projectId` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Volume 的请求体。`volumeName`、`regionId` 和 `projectId` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Volume を作成するためのリクエストボディです。`volumeName`、`regionId`、`projectId` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -597,6 +642,15 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload object returned by the operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "该操作返回的响应负载对象。"
+                            },
+                            "ja-JP": {
+                              "description": "この操作によって返されるレスポンスペイロードオブジェクトです。"
+                            }
                           }
                         }
                       }
@@ -643,7 +697,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the Volume creation request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Volume 请求成功时返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Volume 作成リクエストが成功したときに返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -868,6 +931,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One variant of the successful response body, given as an object.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应体的一种变体，以对象形式给出。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンスボディのバリエーションのひとつで、オブジェクトとして表されます。"
+                        }
                       }
                     },
                     {
@@ -912,7 +984,16 @@
                         "zh-CN"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Successful response describing the requested Volume.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求 Volume 的成功响应。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Volume を表す成功レスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1107,6 +1188,15 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Response payload object returned by the operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "该操作返回的响应负载对象。"
+                            },
+                            "ja-JP": {
+                              "description": "この操作によって返されるレスポンスペイロードオブジェクトです。"
+                            }
                           }
                         }
                       }
@@ -1153,7 +1243,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the Volume deletion request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 Volume 请求成功时返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Volume 削除リクエストが成功したときに返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1425,6 +1524,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One variant of the successful response body, given as an object.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应体的一种变体，以对象形式给出。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンスボディのバリエーションのひとつで、オブジェクトとして表されます。"
+                        }
                       }
                     },
                     {
@@ -1469,7 +1577,16 @@
                         "zh-CN"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the Volume update request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新 Volume 请求成功时返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Volume 更新リクエストが成功したときに返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

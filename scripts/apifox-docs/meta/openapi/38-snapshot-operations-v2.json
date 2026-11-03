@@ -98,7 +98,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for describing a snapshot job. `jobId` identifies the snapshot job to describe.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取 snapshot job 描述的请求体。`jobId` 指定要描述的 snapshot job。"
+                  },
+                  "ja-JP": {
+                    "description": "snapshot job の詳細を取得するためのリクエストボディ。`jobId` は記述対象の snapshot job を識別します。"
+                  }
+                }
               },
               "example": {
                 "jobId": "451799928999570161"
@@ -157,7 +166,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response envelope containing either `code` and `data` for a successful snapshot job description, or `code` and `message` for an error response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应封装：成功获取 snapshot job 描述时包含 `code` 和 `data`，发生错误时包含 `code` 和 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスエンベロープ。snapshot job の詳細取得に成功した場合は `code` と `data`、エラー時は `code` と `message` を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -200,12 +218,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response envelope containing either `code` and `data` for a successful snapshot job description, or `code` and `message` for an error response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应封装：成功获取 snapshot job 描述时包含 `code` 和 `data`，发生错误时包含 `code` 和 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスエンベロープ。snapshot job の詳細取得に成功した場合は `code` と `data`、エラー時は `code` と `message` を含みます。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body for describing a snapshot job. It contains a success envelope with `code` and `data`, or an error envelope with `code` and `message`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "用于获取 snapshot job 描述的响应体。成功时包含带有 `code` 和 `data` 的响应封装，失败时包含带有 `code` 和 `message` 的响应封装。"
+                    },
+                    "ja-JP": {
+                      "description": "snapshot job の詳細を取得するためのレスポンスボディ。成功時は `code` と `data` を含むレスポンスエンベロープ、エラー時は `code` と `message` を含むレスポンスエンベロープを返します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -385,7 +421,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for exporting a snapshot. It specifies `collectionName`, `snapshotName`, and `targetS3Path`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于导出 snapshot 的请求体。需指定 `collectionName`、`snapshotName` 和 `targetS3Path`。"
+                  },
+                  "ja-JP": {
+                    "description": "snapshot をエクスポートするためのリクエストボディ。`collectionName`、`snapshotName`、`targetS3Path` を指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -458,7 +503,16 @@
                           ],
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "Response payload containing `snapshotMetadataURI`, the URI of the exported snapshot metadata.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应数据，包含 `snapshotMetadataURI`，即导出的 snapshot 元数据的 URI。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。エクスポートされた snapshot メタデータの URI を `snapshotMetadataURI` として含みます。"
+                            }
+                          }
                         }
                       },
                       "required": [
@@ -467,7 +521,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response envelope containing either `code` and `data` for a successful snapshot export, or `code` and `message` for an error response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应封装：成功导出 snapshot 时包含 `code` 和 `data`，发生错误时包含 `code` 和 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスエンベロープ。snapshot のエクスポートに成功した場合は `code` と `data`、エラー時は `code` と `message` を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -510,12 +573,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response envelope containing either `code` and `data` for a successful snapshot export, or `code` and `message` for an error response.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应封装：成功导出 snapshot 时包含 `code` 和 `data`，发生错误时包含 `code` 和 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "レスポンスエンベロープ。snapshot のエクスポートに成功した場合は `code` と `data`、エラー時は `code` と `message` を含みます。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body for exporting a snapshot. It contains a success envelope with `code` and `data`, or an error envelope with `code` and `message`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "用于导出 snapshot 的响应体。成功时包含带有 `code` 和 `data` 的响应封装，失败时包含带有 `code` 和 `message` 的响应封装。"
+                    },
+                    "ja-JP": {
+                      "description": "snapshot をエクスポートするためのレスポンスボディ。成功時は `code` と `data` を含むレスポンスエンベロープ、エラー時は `code` と `message` を含むレスポンスエンベロープを返します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -637,7 +718,16 @@
                 },
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for listing snapshot jobs.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于列出 snapshot job 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "snapshot job を一覧表示するためのリクエストボディ。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -714,7 +804,16 @@
                           ],
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response payload containing the snapshot job `records` returned by the list operation.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含列表操作返回的快照任务 `records`。"
+                            },
+                            "ja-JP": {
+                              "description": "一覧表示操作で返されるスナップショットジョブの `records` を含むレスポンスペイロード。"
+                            }
+                          }
                         }
                       },
                       "required": [
@@ -723,7 +822,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The response body for listing snapshot jobs, including a `code` and either a `data` payload or a `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列出快照任务的响应体，包含 `code` 以及 `data` 载荷或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "スナップショットジョブを一覧表示する操作のレスポンスボディで、`code` と、`data` ペイロードまたは `message` を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -766,12 +874,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The response body for listing snapshot jobs, including a `code` and either a `data` payload or a `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列出快照任务的响应体，包含 `code` 以及 `data` 载荷或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "スナップショットジョブを一覧表示する操作のレスポンスボディで、`code` と、`data` ペイロードまたは `message` を含みます。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned by the snapshot job listing operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "snapshot job 列表操作返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "snapshot job の一覧表示操作によって返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -939,7 +1065,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for restoring a snapshot from external storage, specifying the target Collection via `targetCollectionName` and the snapshot metadata URI via `snapshotMetadataURI`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于从外部存储恢复快照的请求体，通过 `targetCollectionName` 指定目标 Collection，通过 `snapshotMetadataURI` 指定快照元数据 URI。"
+                  },
+                  "ja-JP": {
+                    "description": "外部ストレージからスナップショットをリストアするためのリクエストボディで、`targetCollectionName` でターゲット Collection を、`snapshotMetadataURI` でスナップショットメタデータ URI を指定します。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default",
@@ -1012,7 +1147,16 @@
                           ],
                           "x-added-at": "3.0.x",
                           "x-last-modified": "3.0.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response payload containing the `jobId` of the external snapshot restore job.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应载荷，包含外部快照恢复任务的 `jobId`。"
+                            },
+                            "ja-JP": {
+                              "description": "外部スナップショットのリストアジョブの `jobId` を含むレスポンスペイロード。"
+                            }
+                          }
                         }
                       },
                       "required": [
@@ -1021,7 +1165,16 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The response body for an external snapshot restore request, including a `code` and either a `data` payload or a `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "外部快照恢复请求的响应体，包含 `code` 以及 `data` 载荷或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "外部スナップショットのリストア要求に対するレスポンスボディで、`code` と、`data` ペイロードまたは `message` を含みます。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -1064,12 +1217,30 @@
                       ],
                       "x-added-at": "3.0.x",
                       "x-last-modified": "3.0.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "The response body for an external snapshot restore request, including a `code` and either a `data` payload or a `message`.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "外部快照恢复请求的响应体，包含 `code` 以及 `data` 载荷或 `message`。"
+                        },
+                        "ja-JP": {
+                          "description": "外部スナップショットのリストア要求に対するレスポンスボディで、`code` と、`data` ペイロードまたは `message` を含みます。"
+                        }
+                      }
                     }
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for an external snapshot restore request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "外部快照恢复请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "外部スナップショットのリストア要求に対して返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -145,7 +145,16 @@
                   "projectId",
                   "regionId",
                   "cuSize"
-                ]
+                ],
+                "description": "Request payload for creating an on-demand Cluster. `projectId`, `regionId`, and `cuSize` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建按需 Cluster 的请求载荷。`projectId`、`regionId` 和 `cuSize` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "オンデマンド Cluster を作成するためのリクエストペイロードです。`projectId`、`regionId`、`cuSize` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -245,6 +254,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "An alternative response body returned by the operation, representing one possible outcome of the creation request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作返回的备选响应体，表示创建请求的一种可能结果。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作で返される代替レスポンスボディで、作成リクエストの結果の1つを表します。"
+                        }
                       }
                     },
                     {
@@ -289,7 +307,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after the on-demand Cluster creation request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理按需 Cluster 创建请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "オンデマンド Cluster の作成リクエストが処理された後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -637,7 +664,25 @@
                             }
                           }
                         }
+                      },
+                      "description": "Response payload containing the on-demand Cluster records returned by the listing operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "响应载荷，包含列表操作返回的按需 Cluster 记录。"
+                        },
+                        "ja-JP": {
+                          "description": "一覧取得操作で返されるオンデマンド Cluster のレコードを含むレスポンスペイロードです。"
+                        }
                       }
+                    }
+                  },
+                  "description": "Response body for the on-demand Cluster listing, with the returned records carried in `data`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "按需 Cluster 列表的响应体，返回的记录包含在 `data` 中。"
+                    },
+                    "ja-JP": {
+                      "description": "オンデマンド Cluster 一覧のレスポンスボディで、返されるレコードは `data` に含まれます。"
                     }
                   }
                 },
@@ -882,6 +927,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "An alternative response body returned by the operation, representing one possible outcome of the deletion request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作返回的备选响应体，表示删除请求的一种可能结果。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作で返される代替レスポンスボディで、削除リクエストの結果の1つを表します。"
+                        }
                       }
                     },
                     {
@@ -926,7 +980,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after the on-demand Cluster deletion request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理按需 Cluster 删除请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "オンデマンド Cluster の削除リクエストが処理された後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1224,9 +1287,27 @@
                                 }
                               }
                             }
+                          },
+                          "description": "Properties of the on-demand Cluster, returned as an object of Cluster attributes.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "按需 Cluster 的属性，以 Cluster 属性的对象形式返回。"
+                            },
+                            "ja-JP": {
+                              "description": "オンデマンド Cluster のプロパティで、Cluster の属性を持つオブジェクトとして返されます。"
+                            }
                           }
                         }
                       }
+                    }
+                  },
+                  "description": "Response body describing a single on-demand Cluster.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述单个按需 Cluster 的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "単一のオンデマンド Cluster を表すレスポンスボディです。"
                     }
                   }
                 },
@@ -1493,6 +1574,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "An alternative response body returned by the operation, representing one possible outcome of the update request.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作返回的备选响应体，表示更新请求的一种可能结果。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作で返される代替レスポンスボディで、更新リクエストの結果の1つを表します。"
+                        }
                       }
                     },
                     {
@@ -1537,7 +1627,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after the on-demand Cluster update request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理按需 Cluster 更新请求后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "オンデマンド Cluster の更新リクエストが処理された後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -212,7 +212,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned by `GET /v2/roles`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "由 `GET /v2/roles` 返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`GET /v2/roles` によって返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -438,7 +447,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned by `POST /v2/roles`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "由 `POST /v2/roles` 返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`POST /v2/roles` によって返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -630,7 +648,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when the role identified by `roleId` is retrieved, carrying the current state of that role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取 `roleId` 所标识的角色时返回的响应体，包含该角色的当前状态。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールを取得したときに返されるレスポンスボディで、そのロールの現在の状態を保持します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -846,7 +873,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is updated, carrying the resulting state of that role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新 `roleId` 所标识的角色后返回的响应体，包含该角色更新后的状态。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールを更新した後に返されるレスポンスボディで、更新後のロールの状態を保持します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1042,7 +1078,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is deleted, reflecting the outcome of the removal.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 `roleId` 所标识的角色后返回的响应体，反映该删除操作的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールを削除した後に返されるレスポンスボディで、削除操作の結果を表します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1272,7 +1317,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body listing the principals that are assigned to the role identified by `roleId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出分配给 `roleId` 所标识角色的主体的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールに割り当てられたプリンシパルを一覧するレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1515,7 +1569,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when groups are listed, containing the group entries produced by the query.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出群组时返回的响应体，包含该查询返回的群组条目。"
+                    },
+                    "ja-JP": {
+                      "description": "グループを一覧したときに返されるレスポンスボディで、クエリによって返されたグループのエントリを保持します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1706,7 +1769,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body listing the roles that are assigned to the group identified by `groupId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出分配给 `groupId` 所标识群组的角色的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`groupId` で識別されるグループに割り当てられたロールを一覧するレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1944,7 +2016,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body listing the members of the group identified by `groupId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 `groupId` 所标识群组的成员的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`groupId` で識別されるグループのメンバーを一覧するレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2178,7 +2259,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is assigned to the group identified by `groupId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "将 `roleId` 所标识的角色分配给 `groupId` 所标识的群组后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールを `groupId` で識別されるグループに割り当てた後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2396,7 +2486,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is removed from the group identified by `groupId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从 `groupId` 所标识的群组中移除 `roleId` 所标识的角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`groupId` で識別されるグループから `roleId` で識別されるロールを削除した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2567,7 +2666,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body listing the roles that are assigned to the member identified by `userId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出分配给 `userId` 所标识成员的角色。"
+                    },
+                    "ja-JP": {
+                      "description": "`userId` で識別されるメンバーに割り当てられたロールを一覧するレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2805,7 +2913,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is assigned to the member identified by `userId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "将 `roleId` 所标识的角色分配给 `userId` 所标识的成员后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`roleId` で識別されるロールを `userId` で識別されるメンバーに割り当てた後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3019,7 +3136,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "The response body returned after the role identified by `roleId` is removed from the member identified by `userId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从 `userId` 所标识的成员中移除 `roleId` 所标识的角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`userId` で識別されるメンバーから `roleId` で識別されるロールを削除した後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3208,7 +3334,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when listing members.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出成员时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "メンバー一覧を取得したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3321,7 +3456,16 @@
                 "read",
                 "write",
                 "all"
-              ]
+              ],
+              "description": "A privilege name granted by the policy statement. Supported values are `view`, `create`, `modify`, `delete`, `grant`, `manage`, `usage`, `read`, `write`, and `all`.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "策略声明授予的权限名称。支持的值为 `view`、`create`、`modify`、`delete`、`grant`、`manage`、`usage`、`read`、`write` 和 `all`。"
+                },
+                "ja-JP": {
+                  "description": "ポリシーステートメントで付与される権限名です。サポートされる値は `view`、`create`、`modify`、`delete`、`grant`、`manage`、`usage`、`read`、`write`、`all` です。"
+                }
+              }
             },
             "minItems": 1,
             "description": "Atomic privileges on that resource, e.g. `[\"view\", \"create\"]`.",
@@ -3337,7 +3481,16 @@
           "resources": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "An instance id of the statement's resource type, or `*` for all instances. Which resource types require this field is defined at the array level.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "语句资源类型对应的实例 ID，或 `*` 表示所有实例。哪些资源类型需要此字段以数组级描述为准。"
+                },
+                "ja-JP": {
+                  "description": "ステートメントのリソースタイプにおけるインスタンス ID、またはすべてのインスタンスを表す `*`。このフィールドが必要なリソースタイプは配列レベルの定義を参照してください。"
+                }
+              }
             },
             "minItems": 1,
             "description": "Which instances the statement covers: `*` for all, or explicit ids (validated against the role's project). Required on `serving_cluster`, `on_demand_cluster`, `volume`, `serving_cluster_data`, `volume_data`, `storage_integration`, `model_provider_integration`, `kms_integration` and `datadog_integration`, unless the statement's only privilege is `create`. For `on_demand_compute_data`, predefined roles return `[\"*\"]`; on write this field is rejected and should be omitted. Everywhere else, omit it — it is rejected on write and never returned.",
@@ -3547,7 +3700,16 @@
           "currentPage",
           "pageSize",
           "roles"
-        ]
+        ],
+        "description": "A paginated list of roles containing the total `count`, the `currentPage`, the `pageSize`, and the `roles` on this page.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "分页的角色列表，包含总数 `count`、`currentPage`、`pageSize` 以及当前页的 `roles`。"
+          },
+          "ja-JP": {
+            "description": "ページ分割されたロール一覧で、総数 `count`、`currentPage`、`pageSize`、およびこのページの `roles` を含みます。"
+          }
+        }
       },
       "CreateCloudRoleRequest": {
         "type": "object",
@@ -3794,7 +3956,16 @@
         "required": [
           "projectId",
           "roles"
-        ]
+        ],
+        "description": "Role assignments for a project, identified by `projectId` and containing the assigned `roles`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "项目的角色分配，由 `projectId` 标识，并包含已分配的 `roles`。"
+          },
+          "ja-JP": {
+            "description": "プロジェクトのロール割り当てで、`projectId` によって識別され、割り当てられた `roles` を含みます。"
+          }
+        }
       },
       "RolesByScope": {
         "type": "object",
@@ -3833,7 +4004,16 @@
         "required": [
           "orgRoles",
           "projectRoles"
-        ]
+        ],
+        "description": "Roles grouped by scope, with `orgRoles` for organization roles and `projectRoles` for project roles.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "按作用域分组的角色，其中 `orgRoles` 表示组织角色，`projectRoles` 表示项目角色。"
+          },
+          "ja-JP": {
+            "description": "スコープ別にグループ化されたロールで、`orgRoles` は組織ロール、`projectRoles` はプロジェクトロールを表します。"
+          }
+        }
       },
       "RolePrincipal": {
         "type": "object",
@@ -3911,7 +4091,16 @@
           "principalName",
           "assignedBy",
           "assignedAt"
-        ]
+        ],
+        "description": "A principal assigned to a role, including its `principalType`, `principalId`, `principalName`, and assignment metadata `assignedBy` and `assignedAt`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "分配给角色的主体，包含 `principalType`、`principalId`、`principalName`，以及分配元数据 `assignedBy` 和 `assignedAt`。"
+          },
+          "ja-JP": {
+            "description": "ロールに割り当てられたプリンシパルで、`principalType`、`principalId`、`principalName`、および割り当てメタデータ `assignedBy` と `assignedAt` を含みます。"
+          }
+        }
       },
       "PagedRolePrincipals": {
         "type": "object",
@@ -3976,7 +4165,16 @@
           "currentPage",
           "pageSize",
           "principals"
-        ]
+        ],
+        "description": "A paginated list of role principals with the total `count`, the `currentPage`, the `pageSize`, and the `principals` on this page.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "分页的角色主体列表，包含总数 `count`、`currentPage`、`pageSize` 以及当前页的 `principals`。"
+          },
+          "ja-JP": {
+            "description": "ページ分割されたロールプリンシパル一覧で、総数 `count`、`currentPage`、`pageSize`、およびこのページの `principals` を含みます。"
+          }
+        }
       },
       "GroupSummary": {
         "type": "object",
@@ -4023,7 +4221,16 @@
           "groupId",
           "groupName",
           "memberCount"
-        ]
+        ],
+        "description": "Summary of a group, including its `groupId`, `groupName`, and `memberCount`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "组的摘要，包含 `groupId`、`groupName` 和 `memberCount`。"
+          },
+          "ja-JP": {
+            "description": "グループのサマリーで、`groupId`、`groupName`、`memberCount` を含みます。"
+          }
+        }
       },
       "PagedGroups": {
         "type": "object",
@@ -4088,7 +4295,16 @@
           "currentPage",
           "pageSize",
           "groups"
-        ]
+        ],
+        "description": "A paginated list of groups with the total `count`, the `currentPage`, the `pageSize`, and the `groups` on this page.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "分页的组列表，包含总数 `count`、`currentPage`、`pageSize` 以及当前页的 `groups`。"
+          },
+          "ja-JP": {
+            "description": "ページ分割されたグループ一覧で、総数 `count`、`currentPage`、`pageSize`、およびこのページの `groups` を含みます。"
+          }
+        }
       },
       "GroupMember": {
         "type": "object",
@@ -4122,7 +4338,16 @@
         "required": [
           "username",
           "email"
-        ]
+        ],
+        "description": "A member of a group, identified by `username` and `email`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "组的成员，由 `username` 和 `email` 标识。"
+          },
+          "ja-JP": {
+            "description": "グループのメンバーで、`username` と `email` によって識別されます。"
+          }
+        }
       },
       "PagedGroupMembers": {
         "type": "object",
@@ -4187,7 +4412,16 @@
           "currentPage",
           "pageSize",
           "members"
-        ]
+        ],
+        "description": "A paginated list of group members with the total `count`, the `currentPage`, the `pageSize`, and the `members` on this page.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "分页的组成员列表，包含总数 `count`、`currentPage`、`pageSize` 以及当前页的 `members`。"
+          },
+          "ja-JP": {
+            "description": "ページ分割されたグループメンバー一覧で、総数 `count`、`currentPage`、`pageSize`、およびこのページの `members` を含みます。"
+          }
+        }
       },
       "UserLookupResponse": {
         "type": "object",

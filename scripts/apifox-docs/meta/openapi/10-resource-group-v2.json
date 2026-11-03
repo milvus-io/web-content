@@ -129,12 +129,30 @@
                             "type": "object",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The node labels used by the node filter to match nodes. Labels are expressed as key-value pairs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "节点过滤条件用于匹配节点的节点标签。标签以键值对形式表示。"
+                              },
+                              "ja-JP": {
+                                "description": "ノードフィルターがノードを照合するために使用するノードラベルです。ラベルはキーと値のペアで表現されます。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The node filter that constrains which nodes the resource group may be allocated on. It contains `node_labels`.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "节点过滤条件，用于限定该 Resource Group 可分配到的节点。其中包含 `node_labels`。"
+                          },
+                          "ja-JP": {
+                            "description": "Resource Group を割り当て可能なノードを制限するノードフィルターです。`node_labels` を含みます。"
+                          }
+                        }
                       },
                       "requests": {
                         "type": "object",
@@ -294,7 +312,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for creating a resource group. `name` is required and identifies the resource group to create.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Resource Group 的请求体。`name` 为必填项，用于指定要创建的 Resource Group。"
+                  },
+                  "ja-JP": {
+                    "description": "Resource Group を作成するためのリクエストボディです。`name` は必須で、作成する Resource Group を指定します。"
+                  }
+                }
               },
               "example": {
                 "name": "group1",
@@ -442,7 +469,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for a resource group creation request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Resource Group 请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Resource Group の作成リクエストに対して返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -726,7 +762,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for altering resource groups. `resource_groups` is required and specifies the resource groups to modify.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于修改 Resource Group 的请求体。`resource_groups` 为必填项，用于指定要修改的 Resource Group。"
+                  },
+                  "ja-JP": {
+                    "description": "Resource Group を変更するためのリクエストボディです。`resource_groups` は必須で、変更する Resource Group を指定します。"
+                  }
+                }
               },
               "example": {
                 "resource_groups": {
@@ -875,7 +920,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned for a resource group alteration request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改 Resource Group 请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Resource Group の変更リクエストに対して返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -985,12 +1039,30 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "分配给该 Resource Group 的查询节点数量。"
+                              },
+                              "ja-JP": {
+                                "description": "Resource Group に割り当てるクエリノード数。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The allocation limits for the resource group. It contains `node_num`, the number of query nodes allocated to the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "该 Resource Group 的分配上限。其中包含 `node_num`，即分配给该 Resource Group 的查询节点数量。"
+                          },
+                          "ja-JP": {
+                            "description": "Resource Group の割り当て上限です。Resource Group に割り当てるクエリノード数である `node_num` を含みます。"
+                          }
+                        }
                       },
                       "node_filter": {
                         "type": "object",
@@ -999,12 +1071,30 @@
                             "type": "object",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The node labels used by the node filter to match nodes. Labels are expressed as key-value pairs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "节点过滤条件用于匹配节点的节点标签。标签以键值对形式表示。"
+                              },
+                              "ja-JP": {
+                                "description": "ノードフィルターがノードを照合するために使用するノードラベルです。ラベルはキーと値のペアで表現されます。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The node filter that constrains which nodes the resource group may use. It contains `node_labels`.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "节点过滤条件，用于限定该 Resource Group 可使用的节点。其中包含 `node_labels`。"
+                          },
+                          "ja-JP": {
+                            "description": "Resource Group が使用可能なノードを制限するノードフィルターです。`node_labels` を含みます。"
+                          }
+                        }
                       },
                       "requests": {
                         "type": "object",
@@ -1013,12 +1103,30 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "要分配给资源组的查询节点数。"
+                              },
+                              "ja-JP": {
+                                "description": "リソースグループに割り当てるクエリノードの数。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The query node allocation settings for the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "资源组的查询节点分配设置。"
+                          },
+                          "ja-JP": {
+                            "description": "リソースグループのクエリノード割り当て設定。"
+                          }
+                        }
                       },
                       "transfer_from": {
                         "type": "array",
@@ -1029,7 +1137,16 @@
                               "type": "string",
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
+                              "x-deprecated-since": null,
+                              "description": "The name of the source resource group to transfer query nodes from.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "从中转移查询节点的源资源组的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "クエリノードの転送元となるソースリソースグループの名前。"
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -1037,11 +1154,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A source resource group from which query nodes are transferred.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询节点从其转移的源资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリノードの転送元となるソースリソースグループ。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The list of source resource groups to transfer query nodes from.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "从中转移查询节点的源资源组列表。"
+                          },
+                          "ja-JP": {
+                            "description": "クエリノードの転送元となるソースリソースグループのリスト。"
+                          }
+                        }
                       },
                       "transfer_to": {
                         "type": "array",
@@ -1052,7 +1187,16 @@
                               "type": "string",
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
+                              "x-deprecated-since": null,
+                              "description": "The name of the target resource group to transfer query nodes to.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "将查询节点转移到的目标资源组的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "クエリノードの転送先となるターゲットリソースグループの名前。"
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -1060,11 +1204,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A target resource group to which query nodes are transferred.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询节点转移到的目标资源组。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリノードの転送先となるターゲットリソースグループ。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The list of target resource groups to transfer query nodes to.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "将查询节点转移到的目标资源组列表。"
+                          },
+                          "ja-JP": {
+                            "description": "クエリノードの転送先となるターゲットリソースグループのリスト。"
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -1075,7 +1237,16 @@
                     ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The configuration settings applied by the request. It contains `limits`, `requests`, `transfer_from`, and `transfer_to`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "该请求所使用的配置项。其中包含 `limits`、`requests`、`transfer_from` 和 `transfer_to`。"
+                      },
+                      "ja-JP": {
+                        "description": "リクエストで適用される設定です。`limits`、`requests`、`transfer_from`、`transfer_to` を含みます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1083,7 +1254,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for describing a resource group. `name` is required and identifies the target resource group.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取 Resource Group 详情的请求体。`name` 为必填项，用于指定目标 Resource Group。"
+                  },
+                  "ja-JP": {
+                    "description": "Resource Group の詳細を取得するためのリクエストボディです。`name` は必須で、対象の Resource Group を指定します。"
+                  }
+                }
               },
               "example": {
                 "name": "group1"
@@ -1336,7 +1516,16 @@
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "The response payload containing the result of the request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含请求结果的响应负载。"
+                            },
+                            "ja-JP": {
+                              "description": "リクエストの結果を含むレスポンスペイロード。"
+                            }
+                          }
                         }
                       },
                       "x-added-at": "2.6.x",
@@ -1394,7 +1583,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body for the resource group describe operation.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "资源组 describe 操作的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "リソースグループの describe 操作のレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1502,7 +1700,16 @@
                 "properties": {},
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for the resource group list operation.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "资源组 list 操作的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "リソースグループの list 操作のリクエストボディ。"
+                  }
+                }
               },
               "example": {}
             }
@@ -1641,7 +1848,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body containing the resource group list result.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含资源组列表结果的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "リソースグループのリスト結果を含むレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1754,12 +1970,30 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The maximum number of query nodes to allocate to the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "分配给 resource group 的最大 query nodes 数量。"
+                              },
+                              "ja-JP": {
+                                "description": "resource group に割り当てる query nodes の最大数。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The resource limits for the resource group, including the maximum number of query nodes that can be allocated.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "resource group 的资源限制，包括可分配的最大 query nodes 数量。"
+                          },
+                          "ja-JP": {
+                            "description": "resource group のリソース制限。割り当て可能な query nodes の最大数を含みます。"
+                          }
+                        }
                       },
                       "node_filter": {
                         "type": "object",
@@ -1768,12 +2002,30 @@
                             "type": "object",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The node labels used by the node filter.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "node filter 使用的 node labels。"
+                              },
+                              "ja-JP": {
+                                "description": "node filter で使用される node labels。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The node filter configuration for the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "resource group 的 node filter 配置。"
+                          },
+                          "ja-JP": {
+                            "description": "resource group の node filter 構成。"
+                          }
+                        }
                       },
                       "requests": {
                         "type": "object",
@@ -1782,12 +2034,30 @@
                             "type": "integer",
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "description": "The number of query nodes requested for the resource group.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "为 resource group 请求的 query nodes 数量。"
+                              },
+                              "ja-JP": {
+                                "description": "resource group に対して要求する query nodes の数。"
+                              }
+                            }
                           }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The requested query node allocation for the resource group.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "为 resource group 请求的 query node 分配。"
+                          },
+                          "ja-JP": {
+                            "description": "resource group に対して要求する query node の割り当て。"
+                          }
+                        }
                       },
                       "transfer_from": {
                         "type": "array",
@@ -1798,7 +2068,16 @@
                               "type": "string",
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
+                              "x-deprecated-since": null,
+                              "description": "The name of the source resource group from which query nodes are transferred.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "query nodes 转移来源的源 resource group 名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "query nodes の転送元であるソース resource group の名前。"
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -1806,11 +2085,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "A source resource group from which query nodes are transferred.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "query nodes 转移来源的一个 resource group。"
+                            },
+                            "ja-JP": {
+                              "description": "query nodes の転送元となる 1 つの resource group。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The list of source resource groups from which query nodes are transferred.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "query nodes 转移来源的 resource group 列表。"
+                          },
+                          "ja-JP": {
+                            "description": "query nodes の転送元となる resource group のリスト。"
+                          }
+                        }
                       },
                       "transfer_to": {
                         "type": "array",
@@ -1821,7 +2118,16 @@
                               "type": "string",
                               "x-added-at": "2.6.x",
                               "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
+                              "x-deprecated-since": null,
+                              "description": "The name of the target resource group to which query nodes are transferred from the resource group being dropped.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "查询节点从被删除的 resource group 转移到的目标 resource group 的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "削除される resource group からクエリノードが転送されるターゲット resource group の名前。"
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -1829,11 +2135,29 @@
                           ],
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
-                          "x-deprecated-since": null
+                          "x-deprecated-since": null,
+                          "description": "One target resource group that receives query nodes transferred out of the resource group being dropped. Each entry is an object carrying a `resource_group` field that names the destination.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "被删除的 resource group 中的查询节点要转移到的目标 resource group 之一。每个元素是一个对象，通过 `resource_group` 字段指定目标名称。"
+                            },
+                            "ja-JP": {
+                              "description": "削除される resource group からクエリノードの転送先となるターゲット resource group を 1 つ表します。各要素は `resource_group` フィールドで転送先の名前を指定するオブジェクトです。"
+                            }
+                          }
                         },
                         "x-added-at": "2.6.x",
                         "x-last-modified": "2.6.x",
-                        "x-deprecated-since": null
+                        "x-deprecated-since": null,
+                        "description": "The list of target resource groups to which query nodes are transferred.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "query nodes 转移目标的 resource group 列表。"
+                          },
+                          "ja-JP": {
+                            "description": "query nodes の転送先となる resource group のリスト。"
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -1844,7 +2168,16 @@
                     ],
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "The configuration for the drop action, covering resource limits, requested query nodes, and source and target resource groups for query node transfers.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "删除操作的配置，涵盖资源限制、请求的 query nodes，以及 query node 转移的源和目标 resource group。"
+                      },
+                      "ja-JP": {
+                        "description": "削除アクションの構成で、リソース制限、要求する query nodes、query node 転送の転送元と転送先の resource group を含みます。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1852,7 +2185,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for dropping a resource group; the required `name` identifies the resource group to drop.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于删除 resource group 的请求体；必填的 `name` 指定要删除的 resource group。"
+                  },
+                  "ja-JP": {
+                    "description": "resource group を削除するためのリクエスト本文。必須の `name` が削除対象の resource group を指定します。"
+                  }
+                }
               },
               "example": {
                 "name": "group1"
@@ -1982,7 +2324,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the request to drop a resource group completes successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 resource group 的请求成功完成时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "resource group の削除リクエストが正常に完了したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2136,7 +2487,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request body for transferring replicas of a Collection between resource groups. It must specify the source resource group name `sourceRgName`, the target resource group name `targetRgName`, the `collectionName`, and the number of replicas `replicaNum`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于在 resource group 之间转移 Collection 副本的请求体。必须指定源 resource group 名称 `sourceRgName`、目标 resource group 名称 `targetRgName`、`collectionName` 以及副本数量 `replicaNum`。"
+                  },
+                  "ja-JP": {
+                    "description": "resource group 間で Collection のレプリカを転送するためのリクエストボディです。転送元 resource group 名 `sourceRgName`、転送先 resource group 名 `targetRgName`、`collectionName`、およびレプリカ数 `replicaNum` を指定する必要があります。"
+                  }
+                }
               },
               "example": {
                 "sourceRgName": "__default_resource_group",
@@ -2269,7 +2629,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned when the replica transfer request completes successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "副本转移请求成功完成时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "レプリカ転送リクエストが正常に完了したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

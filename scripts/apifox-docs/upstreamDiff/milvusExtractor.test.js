@@ -43,6 +43,11 @@ test('extractor reproduces the golden skeleton from the hermetic fixture', t => 
             ['/v2/vectordb/entities/delete', 'deleteEntities', false],
         ])
         assert.ok(!('Unreachable' in skeleton.components.schemas))
+        // Field doc comments ride as grounding evidence (x-upstream-comment)
+        // and only there: uncommented fields carry no marker at all.
+        assert.equal(skeleton.components.schemas.CreateCollectionReq.properties.dimension['x-upstream-comment'],
+            'Dimension is only meaningful for quick-setup collections; custom setups derive it from the schema\'s vector field.')
+        assert.equal(skeleton.components.schemas.CreateCollectionReq.properties.collectionName['x-upstream-comment'], undefined)
     } finally {
         fs.rmSync(outDir, {recursive: true, force: true})
     }

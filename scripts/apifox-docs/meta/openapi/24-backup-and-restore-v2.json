@@ -472,6 +472,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the possible response bodies this operation can return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作可能返回的响应体之一。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作が返す可能性のあるレスポンスボディの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -516,7 +525,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned on success.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "成功時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -975,6 +993,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the possible response bodies this operation can return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作可能返回的响应体之一。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作が返す可能性のあるレスポンスボディの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -1019,7 +1046,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned on success.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "成功時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1234,6 +1270,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the possible response bodies this operation can return.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "该操作可能返回的响应体之一。"
+                        },
+                        "ja-JP": {
+                          "description": "この操作が返す可能性のあるレスポンスボディの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -1278,7 +1323,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned on success.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "成功時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1419,6 +1473,15 @@
                     },
                     "example": "destdir/"
                   }
+                },
+                "description": "Request body accepted by the backup export operation.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "备份导出操作接受的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "バックアップのエクスポート操作が受け付けるリクエストボディ。"
+                  }
                 }
               },
               "example": {
@@ -1475,6 +1538,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned when exporting a backup.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "导出备份时返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップのエクスポート時に返される成功レスポンスボディ。"
+                        }
                       }
                     },
                     {
@@ -1519,7 +1591,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned on success.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "成功時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1735,7 +1816,16 @@
                 },
                 "required": [
                   "backupType"
-                ]
+                ],
+                "description": "Request body for creating a backup. `backupType` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建备份的请求体。`backupType` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "バックアップを作成するためのリクエストボディ。`backupType` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1867,7 +1957,25 @@
                                 }
                               }
                             }
+                          },
+                          "description": "The response payload object containing the result of the backup creation request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含备份创建请求结果的响应负载对象。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップ作成リクエストの結果を含むレスポンスペイロードオブジェクト。"
+                            }
                           }
+                        }
+                      },
+                      "description": "A successful response body returned when creating a backup.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建备份时返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップ作成時に返される成功レスポンスボディ。"
                         }
                       }
                     },
@@ -1913,7 +2021,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body for the backup creation request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "备份创建请求的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "バックアップ作成リクエストのレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2188,6 +2305,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response body returned for the backup policy.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "备份策略返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップポリシーに対して返される成功レスポンスボディ。"
+                        }
                       }
                     },
                     {
@@ -2232,7 +2358,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body for the backup policy request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "备份策略请求的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "バックアップポリシーリクエストのレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2477,7 +2612,16 @@
                 },
                 "required": [
                   "enabled"
-                ]
+                ],
+                "description": "Request body for updating the backup policy. `enabled` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于更新备份策略的请求体。`enabled` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "バックアップポリシーを更新するためのリクエストボディ。`enabled` は必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -2593,7 +2737,25 @@
                                 }
                               }
                             }
+                          },
+                          "description": "The response payload object containing the result of the backup policy update request.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "包含备份策略更新请求结果的响应负载对象。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップポリシー更新リクエストの結果を含むレスポンスペイロードオブジェクト。"
+                            }
                           }
+                        }
+                      },
+                      "description": "A successful response body returned after updating the backup policy.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "更新备份策略后返回的成功响应体。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップポリシーの更新後に返される成功レスポンスボディ。"
                         }
                       }
                     },
@@ -2639,7 +2801,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body for the backup policy update request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "备份策略更新请求的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "バックアップポリシー更新リクエストのレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2830,7 +3001,16 @@
                   "clusterName",
                   "cuSize",
                   "collectionStatus"
-                ]
+                ],
+                "description": "Request body for restoring a cluster from a backup. `projectId`, `clusterName`, `cuSize`, and `collectionStatus` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于从备份恢复集群的请求体。`projectId`、`clusterName`、`cuSize` 和 `collectionStatus` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "バックアップからクラスターを復元するためのリクエストボディ。`projectId`、`clusterName`、`cuSize`、`collectionStatus` は必須です。"
+                  }
+                }
               },
               "example": {
                 "projectId": "proj-xxxxxxxxxxxxxxxxxxxx",
@@ -2927,6 +3107,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the possible response payloads for restoring a Cluster backup.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "恢复 Cluster 备份时可能返回的响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Cluster バックアップの復元時に返される可能性があるレスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -2971,7 +3160,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after restoring a Cluster from a backup.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从备份恢复 Cluster 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "バックアップから Cluster を復元した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -3219,7 +3417,16 @@
                 },
                 "required": [
                   "destClusterId"
-                ]
+                ],
+                "description": "Request body for restoring a Collection from a backup, containing the required `destClusterId`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "从备份恢复 Collection 的请求体，包含必需的 `destClusterId`。"
+                  },
+                  "ja-JP": {
+                    "description": "バックアップから Collection を復元するためのリクエストボディで、必須の `destClusterId` を含みます。"
+                  }
+                }
               },
               "example": {
                 "destClusterId": "in01-xxxxxxxxxxxxxx",
@@ -3287,6 +3494,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the possible response payloads for restoring a Collection backup.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "恢复 Collection 备份时可能返回的响应载荷之一。"
+                        },
+                        "ja-JP": {
+                          "description": "Collection バックアップの復元時に返される可能性があるレスポンスペイロードの 1 つ。"
+                        }
                       }
                     },
                     {
@@ -3331,7 +3547,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after restoring a Collection from a backup.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "从备份恢复 Collection 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "バックアップから Collection を復元した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

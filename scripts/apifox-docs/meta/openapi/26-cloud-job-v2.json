@@ -160,6 +160,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One possible shape of the job response payload.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "作业响应负载的一种可能形态。"
+                        },
+                        "ja-JP": {
+                          "description": "ジョブのレスポンスペイロードが取り得る形式の 1 つです。"
+                        }
                       }
                     },
                     {
@@ -204,7 +213,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body describing the job identified by `JOB_ID`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述由 `JOB_ID` 指定的作业的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`JOB_ID` で指定したジョブを表すレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

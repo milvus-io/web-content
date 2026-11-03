@@ -698,6 +698,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned when retrieving a single Pipeline; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "获取单个 Pipeline 时可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "単一の Pipeline を取得したときに返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -1331,6 +1340,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned when retrieving a single Pipeline; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "获取单个 Pipeline 时可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "単一の Pipeline を取得したときに返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -1655,6 +1673,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned when retrieving a single Pipeline; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "获取单个 Pipeline 时可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "単一の Pipeline を取得したときに返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -1699,7 +1726,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload describing the requested Pipeline.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求 Pipeline 的响应载荷。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Pipeline を表すレスポンスペイロードです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2431,6 +2467,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned after a delete request; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "删除请求后可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "削除リクエスト後に返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -3064,6 +3109,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned after a delete request; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "删除请求后可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "削除リクエスト後に返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -3388,6 +3442,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may be returned after a delete request; the response body contains exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "删除请求后可能返回的其中一种 Pipeline 表示形式；响应体中只包含其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "削除リクエスト後に返される可能性がある Pipeline 表現のひとつで、レスポンス本文にはいずれか 1 つのバリアントのみが含まれます。"
+                        }
                       }
                     },
                     {
@@ -3432,7 +3495,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when the delete request for the Pipeline succeeds.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除 Pipeline 的请求成功时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Pipeline の削除リクエストが成功したときに返されるレスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -4020,7 +4092,16 @@
                     ],
                     "x-i18n-langs": [
                       "zh-CN"
-                    ]
+                    ],
+                    "description": "A request body for creating a Pipeline, containing its `name`, `type`, and `functions` along with the `clusterId`, `collectionName`, `projectId`, and `description` that qualify the request.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于创建 Pipeline 的请求体，包含其 `name`、`type` 和 `functions`，以及用于限定该请求的 `clusterId`、`collectionName`、`projectId` 和 `description`。"
+                      },
+                      "ja-JP": {
+                        "description": "Pipeline を作成するためのリクエストボディで、`name`、`type`、`functions` と、リクエストを限定する `clusterId`、`collectionName`、`projectId`、`description` を含みます。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "search",
@@ -4502,7 +4583,16 @@
                                 "zh-CN"
                               ]
                             }
-                          ]
+                          ],
+                          "description": "The functions that the Pipeline executes; each entry defines one function in the list.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "Pipeline 执行的函数；每个条目定义一个函数。"
+                            },
+                            "ja-JP": {
+                              "description": "Pipeline が実行する関数。各要素はリスト内の 1 つの関数を定義します。"
+                            }
+                          }
                         },
                         "description": "Functions to add in the search pipeline to create. A search pipeline can only have one function. ",
                         "x-i18n": {
@@ -4535,7 +4625,16 @@
                     ],
                     "x-i18n-langs": [
                       "zh-CN"
-                    ]
+                    ],
+                    "description": "A request body for creating a Pipeline, containing its `name`, `type`, and `functions` along with the `clusterId`, `collectionName`, `projectId`, and `description` that qualify the request.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于创建 Pipeline 的请求体，包含其 `name`、`type` 和 `functions`，以及用于限定该请求的 `clusterId`、`collectionName`、`projectId` 和 `description`。"
+                      },
+                      "ja-JP": {
+                        "description": "Pipeline を作成するためのリクエストボディで、`name`、`type`、`functions` と、リクエストを限定する `clusterId`、`collectionName`、`projectId`、`description` を含みます。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "deletion",
@@ -4628,7 +4727,16 @@
                               ],
                               "x-i18n-langs": [
                                 "zh-CN"
-                              ]
+                              ],
+                              "description": "A Pipeline function definition, identified by its `name` and the `action` it performs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Pipeline 函数定义，由其 `name` 和执行的 `action` 标识。"
+                                },
+                                "ja-JP": {
+                                  "description": "Pipeline 関数の定義で、`name` と実行する `action` によって識別されます。"
+                                }
+                              }
                             },
                             {
                               "type": "object",
@@ -4670,7 +4778,16 @@
                               ],
                               "x-i18n-langs": [
                                 "zh-CN"
-                              ]
+                              ],
+                              "description": "A Pipeline function definition, identified by its `name` and the `action` it performs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Pipeline 函数定义，由其 `name` 和执行的 `action` 标识。"
+                                },
+                                "ja-JP": {
+                                  "description": "Pipeline 関数の定義で、`name` と実行する `action` によって識別されます。"
+                                }
+                              }
                             },
                             {
                               "type": "object",
@@ -4712,9 +4829,27 @@
                               ],
                               "x-i18n-langs": [
                                 "zh-CN"
-                              ]
+                              ],
+                              "description": "A Pipeline function definition, identified by its `name` and the `action` it performs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Pipeline 函数定义，由其 `name` 和执行的 `action` 标识。"
+                                },
+                                "ja-JP": {
+                                  "description": "Pipeline 関数の定義で、`name` と実行する `action` によって識別されます。"
+                                }
+                              }
                             }
-                          ]
+                          ],
+                          "description": "The functions that the Pipeline executes; each entry defines one function in the list.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "Pipeline 执行的函数；每个条目定义一个函数。"
+                            },
+                            "ja-JP": {
+                              "description": "Pipeline が実行する関数。各要素はリスト内の 1 つの関数を定義します。"
+                            }
+                          }
                         },
                         "description": "Functions to add in the deletion pipeline to create. A deletion pipeline can only have one function. ",
                         "x-i18n": {
@@ -4771,9 +4906,27 @@
                     ],
                     "x-i18n-langs": [
                       "zh-CN"
-                    ]
+                    ],
+                    "description": "A request body for creating a Pipeline, containing its `name`, `type`, and `functions` along with the `clusterId`, `collectionName`, `projectId`, and `description` that qualify the request.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "用于创建 Pipeline 的请求体，包含其 `name`、`type` 和 `functions`，以及用于限定该请求的 `clusterId`、`collectionName`、`projectId` 和 `description`。"
+                      },
+                      "ja-JP": {
+                        "description": "Pipeline を作成するためのリクエストボディで、`name`、`type`、`functions` と、リクエストを限定する `clusterId`、`collectionName`、`projectId`、`description` を含みます。"
+                      }
+                    }
                   }
-                ]
+                ],
+                "description": "Request payload used to create a Pipeline.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建 Pipeline 的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "Pipeline を作成するためのリクエストペイロードです。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -5560,6 +5713,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response returned after a Pipeline is created.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Pipeline 后返回的成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline の作成後に返される成功レスポンス。"
+                        }
                       }
                     },
                     {
@@ -6190,6 +6352,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response returned after a Pipeline is created.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Pipeline 后返回的成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline の作成後に返される成功レスポンス。"
+                        }
                       }
                     },
                     {
@@ -6526,6 +6697,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A successful response returned after a Pipeline is created.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "创建 Pipeline 后返回的成功响应。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline の作成後に返される成功レスポンス。"
+                        }
                       }
                     },
                     {
@@ -6570,7 +6750,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response body returned when a Pipeline is created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 Pipeline 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Pipeline の作成時に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -7519,6 +7708,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may appear in the listing; each entry in the response body is exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列表中可能出现的其中一种 Pipeline 表示形式；响应体中的每一项都是其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "一覧に含まれる可能性がある Pipeline 表現のひとつで、レスポンス本文の各項目はいずれか 1 つのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -8149,6 +8347,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may appear in the listing; each entry in the response body is exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列表中可能出现的其中一种 Pipeline 表示形式；响应体中的每一项都是其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "一覧に含まれる可能性がある Pipeline 表現のひとつで、レスポンス本文の各項目はいずれか 1 つのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -8485,6 +8692,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One of the alternative Pipeline representations that may appear in the listing; each entry in the response body is exactly one of these variants.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "列表中可能出现的其中一种 Pipeline 表示形式；响应体中的每一项都是其中一种变体。"
+                        },
+                        "ja-JP": {
+                          "description": "一覧に含まれる可能性がある Pipeline 表現のひとつで、レスポンス本文の各項目はいずれか 1 つのバリアントです。"
+                        }
                       }
                     },
                     {
@@ -8529,7 +8745,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response body of the request that lists Pipelines.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 Pipeline 的请求所返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "Pipeline を一覧表示するリクエストのレスポンス本文です。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -8723,7 +8948,16 @@
                             },
                             "required": [
                               "doc_url"
-                            ]
+                            ],
+                            "description": "The data payload for the Pipeline run request, requiring either `doc_url`, `text_list`, or a combination of `image_url`, `image_id`, and `image_title`.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Pipeline 运行请求的数据负载，要求提供 `doc_url`、`text_list`，或 `image_url`、`image_id` 和 `image_title` 的组合。"
+                              },
+                              "ja-JP": {
+                                "description": "Pipeline 実行リクエストのデータペイロード。`doc_url`、`text_list`、または `image_url`、`image_id`、`image_title` の組み合わせが必要です。"
+                              }
+                            }
                           },
                           {
                             "type": "object",
@@ -8756,7 +8990,16 @@
                             },
                             "required": [
                               "text_list"
-                            ]
+                            ],
+                            "description": "The data payload for the Pipeline run request, requiring either `doc_url`, `text_list`, or a combination of `image_url`, `image_id`, and `image_title`.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Pipeline 运行请求的数据负载，要求提供 `doc_url`、`text_list`，或 `image_url`、`image_id` 和 `image_title` 的组合。"
+                              },
+                              "ja-JP": {
+                                "description": "Pipeline 実行リクエストのデータペイロード。`doc_url`、`text_list`、または `image_url`、`image_id`、`image_title` の組み合わせが必要です。"
+                              }
+                            }
                           },
                           {
                             "type": "object",
@@ -8802,9 +9045,27 @@
                               "image_url",
                               "image_id",
                               "image_title"
-                            ]
+                            ],
+                            "description": "The data payload for the Pipeline run request, requiring either `doc_url`, `text_list`, or a combination of `image_url`, `image_id`, and `image_title`.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "Pipeline 运行请求的数据负载，要求提供 `doc_url`、`text_list`，或 `image_url`、`image_id` 和 `image_title` 的组合。"
+                              },
+                              "ja-JP": {
+                                "description": "Pipeline 実行リクエストのデータペイロード。`doc_url`、`text_list`、または `image_url`、`image_id`、`image_title` の組み合わせが必要です。"
+                              }
+                            }
                           }
-                        ]
+                        ],
+                        "description": "The data payload for the Pipeline run request.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "Pipeline 运行请求的数据负载。"
+                          },
+                          "ja-JP": {
+                            "description": "Pipeline 実行リクエストのデータペイロード。"
+                          }
+                        }
                       }
                     },
                     "description": "Data ingestion parameters.",
@@ -8946,7 +9207,16 @@
                     "required": [
                       "data",
                       "params"
-                    ]
+                    ],
+                    "description": "The Pipeline run request payload. `data` is required, and some request forms also require `params`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Pipeline 运行请求的负载。`data` 为必需项，某些请求形式还要求 `params`。"
+                      },
+                      "ja-JP": {
+                        "description": "Pipeline 実行リクエストのペイロード。`data` は必須で、一部のリクエスト形式では `params` も必要です。"
+                      }
+                    }
                   },
                   {
                     "x-tab-label": "deletion",
@@ -9010,9 +9280,27 @@
                     },
                     "required": [
                       "data"
-                    ]
+                    ],
+                    "description": "The Pipeline run request payload. `data` is required, and some request forms also require `params`.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Pipeline 运行请求的负载。`data` 为必需项，某些请求形式还要求 `params`。"
+                      },
+                      "ja-JP": {
+                        "description": "Pipeline 実行リクエストのペイロード。`data` は必須で、一部のリクエスト形式では `params` も必要です。"
+                      }
+                    }
                   }
-                ]
+                ],
+                "description": "The request body for running the Pipeline identified by `PIPELINE_ID`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于运行由 `PIPELINE_ID` 指定的 Pipeline 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "`PIPELINE_ID` で指定された Pipeline を実行するためのリクエストボディ。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -9369,6 +9657,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload returned by the Pipeline run operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Pipeline 运行操作返回的响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline 実行操作によって返されるレスポンスペイロード。"
+                        }
                       }
                     },
                     {
@@ -9675,6 +9972,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "A response payload returned by the Pipeline run operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Pipeline 运行操作返回的响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline 実行操作によって返されるレスポンスペイロード。"
+                        }
                       }
                     },
                     {
@@ -9734,6 +10040,15 @@
                             "num_deleted_chunks"
                           ]
                         }
+                      },
+                      "description": "A response payload returned by the Pipeline run operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "Pipeline 运行操作返回的响应负载。"
+                        },
+                        "ja-JP": {
+                          "description": "Pipeline 実行操作によって返されるレスポンスペイロード。"
+                        }
                       }
                     },
                     {
@@ -9778,7 +10093,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "The response returned after running the Pipeline.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "运行 Pipeline 后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "Pipeline の実行後に返されるレスポンス。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

@@ -1,6 +1,6 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const {apiProjection, resolveSchemaDeep, mergeMirrorProse, droppedLocalFieldPaths, droppedLocalKeys, stripScalarConstraints, overlayOpaque, stripOpaqueMarkers, mirrorValueMatches, assertMirrorValueBound, proseNodes, isTranslationComplete, assertSchemaShape} = require('./mirror')
+const {apiProjection, resolveSchemaDeep, mergeMirrorProse, droppedLocalFieldPaths, droppedLocalKeys, stripScalarConstraints, overlayOpaque, stripOpaqueMarkers, mirrorValueMatches, assertMirrorValueBound, proseNodes, isTranslationComplete, assertSchemaShape, undescribedNodes, harvestUpstreamComments} = require('./mirror')
 
 test('opaque blind spots are local-authority boundaries: overlay substitutes the fragment, retirement walkers stop', () => {
     // The Go extractor marks generic maps / interface{} / json.RawMessage as
@@ -191,4 +191,56 @@ test('assertSchemaShape refuses the PR #964 monster classes', () => {
     assert.throws(() => assertSchemaShape({type: 'integer', items: {}}, 't'), /scalar integer but carries items/)
     assert.doesNotThrow(() => assertSchemaShape({type: 'array', items: {type: 'object', properties: {a: {type: 'string'}}}}, 't'))
     assert.doesNotThrow(() => assertSchemaShape({type: 'object', properties: {a: {type: 'array', items: {type: 'string'}}}}, 't'))
+})
+
+// --- describe-lane support (2026-11-03) -------------------------------------
+
+test('stripOpaqueMarkers strips both tooling markers from every depth', () => {
+    assert.deepEqual(stripOpaqueMarkers({'x-milvus-opaque': true, 'x-upstream-comment': 'note', type: 'object',
+        properties: {ttl: {'x-upstream-comment': 'note', type: 'integer'}}}),
+    {type: 'object', properties: {ttl: {type: 'integer'}}})
+})
+
+test('mirrorValueMatches sanctions the describe overlay: added description on prose-less nodes only', () => {
+    const expected = {type: 'object', properties: {params: {type: 'string'}}}
+    const described = {type: 'object', properties: {params: {type: 'string', description: 'The parameters.'}}}
+    assert.equal(mirrorValueMatches(expected, described), true)
+    // prose the merge DID supply must survive verbatim — a rewrite is refused
+    const withProse = {type: 'object', properties: {params: {type: 'string', description: 'Original prose.'}}}
+    const rewritten = {type: 'object', properties: {params: {type: 'string', description: 'Rewritten prose.'}}}
+    assert.equal(mirrorValueMatches(withProse, rewritten), false)
+    // empty-string prose counts as prose-less (the overlay may fill it)
+    const emptyProse = {type: 'string', description: ''}
+    assert.equal(mirrorValueMatches(emptyProse, {type: 'string', description: 'Filled in.'}), true)
+    // describe + translation overlays stack on the same node
+    const both = {type: 'object', properties: {params: {type: 'string', description: 'The parameters.', 'x-i18n': {'zh-CN': {description: '参数。'}, 'ja-JP': {description: 'パラメータ。'}}}}}
+    assert.equal(mirrorValueMatches(expected, both), true)
+})
+
+test('undescribedNodes flags every addressable schema row, parameters included', () => {
+    const value = {type: 'object', properties: {
+        described: {type: 'string', description: 'Has prose.'},
+        leaf: {type: 'string'},
+        nested: {type: 'object', properties: {inner: {type: 'integer'}}},
+        items: {type: 'array', items: {type: 'string'}},
+        combinator: {oneOf: [{type: 'string'}]},
+        opaque: {},
+        'x-annotated': {type: 'string', 'x-admonition': [{type: 'info'}]},
+    }}
+    const paths = undescribedNodes(value).map(node => node.path)
+    assert.deepEqual(paths, ['', 'leaf', 'nested', 'nested.inner', 'items', 'items[]', 'combinator', 'combinator/oneOf[]', 'opaque', 'x-annotated'])
+    const parameter = {name: 'connectTimeout', in: 'query', required: false, schema: {type: 'integer'}}
+    assert.deepEqual(undescribedNodes(parameter).map(node => node.path), [''])
+    assert.deepEqual(undescribedNodes({...parameter, description: 'Timeout.'}), [])
+})
+
+test('harvestUpstreamComments uses the undescribedNodes path grammar', () => {
+    const subtree = {type: 'object', 'x-upstream-comment': 'root comment',
+        properties: {leaf: {type: 'string', 'x-upstream-comment': 'leaf comment'},
+            nested: {type: 'object', properties: {inner: {type: 'integer', 'x-upstream-comment': 'inner comment'}}}}}
+    assert.deepEqual(harvestUpstreamComments(subtree), {
+        '': 'root comment',
+        leaf: 'leaf comment',
+        'nested.inner': 'inner comment',
+    })
 })

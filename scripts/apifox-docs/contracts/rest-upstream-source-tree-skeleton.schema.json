@@ -51,6 +51,11 @@
         "x-milvus-opaque": {
           "description": "Extractor blind spot: the container's JSON content is not enumerable from the route-table structs (generic maps forwarded to gRPC, interface{}/json.RawMessage). The fragment's hand-authored documentation is the authority below this node.",
           "const": true
+        },
+        "x-upstream-comment": {
+          "description": "Grounding evidence only: the Go doc/trailing comment of the struct field this property came from. The diff harvests these onto its entries (upstreamComments) and strips the marker, so it never rides into a fragment.",
+          "type": "string",
+          "minLength": 1
         }
       }
     },

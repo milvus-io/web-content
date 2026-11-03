@@ -104,7 +104,16 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for retrieving the list of aliases.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于获取别名列表的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "エイリアス一覧を取得するためのリクエストボディです。"
+                  }
+                }
               },
               "example": {
                 "dbName": "default"
@@ -183,7 +192,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload returned by the alias list operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "别名列表操作返回的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "エイリアス一覧操作で返されるレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -239,7 +257,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response containing the result of the alias list request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含别名列表请求结果的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "エイリアス一覧リクエストの結果を含むレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -363,7 +390,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for retrieving details about an alias. `aliasName` is required and specifies the alias to describe.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "获取别名详细信息的请求体。`aliasName` 为必填项，用于指定要获取详细信息的别名。"
+                  },
+                  "ja-JP": {
+                    "description": "エイリアスの詳細を取得するためのリクエストボディです。`aliasName` は必須で、詳細を取得するエイリアスを指定します。"
+                  }
+                }
               },
               "example": {
                 "aliasName": "alice"
@@ -474,7 +510,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A response payload returned by the alias describe operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "别名详细信息获取操作返回的响应载荷。"
+                        },
+                        "ja-JP": {
+                          "description": "エイリアス詳細取得操作で返されるレスポンスペイロードです。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -530,7 +575,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response containing the details of the requested alias.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含所请求别名详细信息的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "要求されたエイリアスの詳細を含むレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -672,7 +726,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for altering an alias. `aliasName` and `collectionName` are required; `aliasName` identifies the alias and `collectionName` identifies the associated Collection.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改别名的请求体。`aliasName` 和 `collectionName` 为必填项；`aliasName` 指定别名，`collectionName` 指定关联的 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "エイリアスを変更するためのリクエストボディです。`aliasName` と `collectionName` は必須で、`aliasName` はエイリアスを、`collectionName` は関連する Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "aliasName": "bob",
@@ -806,7 +869,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response returned after an alias alter request is processed.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "处理别名修改请求后返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "エイリアス変更要求が処理された後に返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -928,7 +1000,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for dropping an alias, identified by `aliasName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于删除别名的请求体，通过 `aliasName` 指定要删除的别名。"
+                  },
+                  "ja-JP": {
+                    "description": "エイリアスを削除するためのリクエストボディです。削除するエイリアスは `aliasName` で指定します。"
+                  }
+                }
               },
               "example": {
                 "aliasName": "bob"
@@ -1004,6 +1085,9 @@
                       "x-i18n": {
                         "zh-CN": {
                           "description": "返回错误消息。"
+                        },
+                        "ja-JP": {
+                          "description": "エイリアス削除後に返される成功レスポンスボディです。"
                         }
                       },
                       "x-i18n-langs": [
@@ -1044,12 +1128,22 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "A successful response body returned after the alias is dropped."
                     }
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the alias is dropped.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除别名后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "エイリアス削除後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1192,7 +1286,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for creating an alias, specifying the alias name and the target Collection via `aliasName` and `collectionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建别名的请求体，通过 `aliasName` 和 `collectionName` 指定别名名称和目标 Collection。"
+                  },
+                  "ja-JP": {
+                    "description": "エイリアスを作成するためのリクエストボディです。`aliasName` と `collectionName` でエイリアス名と対象の Collection を指定します。"
+                  }
+                }
               },
               "example": {
                 "aliasName": "bob",
@@ -1318,7 +1421,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after the alias is created.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建别名后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "エイリアス作成後に返されるレスポンスボディです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

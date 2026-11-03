@@ -172,7 +172,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when listing API keys.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 API key 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "API key の一覧を取得したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -386,7 +395,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after creating an API key.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "创建 API key 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "API key を作成した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -560,7 +578,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned when retrieving a single API key.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "获取单个 API key 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "単一の API key を取得したときに返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -776,7 +803,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after updating the API key identified by `apiKeyId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "更新由 `apiKeyId` 标识的 API key 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`apiKeyId` で識別される API key を更新した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -964,7 +1000,16 @@
                         "message"
                       ]
                     }
-                  ]
+                  ],
+                  "description": "Response body returned after deleting the API key identified by `apiKeyId`.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除由 `apiKeyId` 标识的 API key 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "`apiKeyId` で識別される API key を削除した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1090,7 +1135,16 @@
           "currentPage",
           "pageSize",
           "apiKeys"
-        ]
+        ],
+        "description": "A paginated list of API keys, including the total `count`, `currentPage`, `pageSize`, and the `apiKeys` entries for the page.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "API key 的分页列表，包含总数 `count`、`currentPage`、`pageSize` 以及当前页的 `apiKeys` 条目。"
+          },
+          "ja-JP": {
+            "description": "API key のページ分割リスト。総数 `count`、`currentPage`、`pageSize`、およびそのページの `apiKeys` エントリを含みます。"
+          }
+        }
       },
       "CreateApiKeyData": {
         "type": "object",
@@ -1404,7 +1458,16 @@
           "orgRole",
           "projects",
           "createTime"
-        ]
+        ],
+        "description": "Detailed information about an API key, including its identifier, name, creator, organization role, associated projects, and creation time.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "API key 的详细信息，包括标识符、名称、创建者、组织角色、关联项目以及创建时间。"
+          },
+          "ja-JP": {
+            "description": "API key の詳細情報。識別子、名前、作成者、組織ロール、関連付けられたプロジェクト、作成時刻を含みます。"
+          }
+        }
       },
       "ProjectAccessRequest": {
         "type": "object",
@@ -1453,7 +1516,16 @@
           "clusterIds": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "A cluster ID that the API key can access when `allCluster` is false.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "当 `allCluster` 为 false 时，API key 可访问的一个集群 ID。"
+                },
+                "ja-JP": {
+                  "description": "`allCluster` が false のときに API key がアクセスできるクラスター ID。"
+                }
+              }
             },
             "description": "The clusters the API key can access when allCluster is false.",
             "x-i18n": {
@@ -1480,7 +1552,16 @@
           "volumeIds": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "A volume ID that the API key can access when `allVolume` is false.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "当 `allVolume` 为 false 时，API key 可访问的一个 Volume ID。"
+                },
+                "ja-JP": {
+                  "description": "`allVolume` が false のときに API key がアクセスできる Volume ID。"
+                }
+              }
             },
             "description": "The volumes the API key can access when allVolume is false.",
             "x-i18n": {
@@ -1496,7 +1577,16 @@
         "required": [
           "projectId",
           "role"
-        ]
+        ],
+        "description": "Project access assignment for an API key, specifying the `projectId` and the `role` granted on that project.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "API key 的项目访问分配，指定 `projectId` 以及在该项目上授予的 `role`。"
+          },
+          "ja-JP": {
+            "description": "API key のプロジェクトアクセス割り当て。`projectId` と、そのプロジェクトで付与される `role` を指定します。"
+          }
+        }
       },
       "ApiKeyProjectResponse": {
         "type": "object",
@@ -1600,7 +1690,16 @@
         "required": [
           "projectId",
           "role"
-        ]
+        ],
+        "description": "A project associated with an API key, with the `projectId` and the assigned `role`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "与 API key 关联的项目，包含 `projectId` 和分配的 `role`。"
+          },
+          "ja-JP": {
+            "description": "API key に関連付けられたプロジェクト。`projectId` と割り当てられた `role` を含みます。"
+          }
+        }
       },
       "ApiKeyClusterResponse": {
         "type": "object",
@@ -1633,7 +1732,16 @@
         "required": [
           "clusterId",
           "clusterName"
-        ]
+        ],
+        "description": "A cluster associated with an API key, identified by `clusterId` and `clusterName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "与 API key 关联的一个集群，由 `clusterId` 和 `clusterName` 标识。"
+          },
+          "ja-JP": {
+            "description": "API key に関連付けられたクラスター。`clusterId` と `clusterName` で識別されます。"
+          }
+        }
       },
       "ApiKeyVolumeResponse": {
         "type": "object",
@@ -1666,7 +1774,16 @@
         "required": [
           "volumeId",
           "volumeName"
-        ]
+        ],
+        "description": "A volume associated with an API key, identified by `volumeId` and `volumeName`.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "与 API key 关联的一个 Volume，由 `volumeId` 和 `volumeName` 标识。"
+          },
+          "ja-JP": {
+            "description": "API key に関連付けられた Volume。`volumeId` と `volumeName` で識別されます。"
+          }
+        }
       }
     }
   }

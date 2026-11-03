@@ -164,7 +164,16 @@
                       },
                       "x-added-at": "2.6.x",
                       "x-last-modified": "2.6.x",
-                      "x-deprecated-since": null
+                      "x-deprecated-since": null,
+                      "description": "One possible result of the role listing request, representing a single response variant returned by the operation.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "角色列表请求的一种可能结果，表示该操作返回的单个响应变体。"
+                        },
+                        "ja-JP": {
+                          "description": "ロール一覧リクエストで得られる結果の一つで、操作が返す単一のレスポンスバリエーションを表します。"
+                        }
+                      }
                     },
                     {
                       "x-tab-label": "failure",
@@ -220,7 +229,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body for the role listing operation, returning the roles available in the instance.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "角色列表操作的响应体，返回实例中可用的角色。"
+                    },
+                    "ja-JP": {
+                      "description": "ロール一覧操作のレスポンスボディで、インスタンスで利用可能なロールを返します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -355,7 +373,16 @@
                     "type": "string",
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "An optional description string, providing human-readable text for the addressed object.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "可选的描述字符串，为所指向的对象提供可读的文本说明。"
+                      },
+                      "ja-JP": {
+                        "description": "任意の説明文字列で、対象となるオブジェクトの人間が読めるテキストを提供します。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -366,7 +393,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for describing a role. It must include the `roleName` of the role to describe.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于描述角色的请求负载。必须包含要描述角色的 `roleName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールを記述するためのリクエストペイロードです。記述対象ロールの `roleName` を含める必要があります。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -622,7 +658,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body describing the requested role, containing the details of that role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "描述所请求角色的响应体，包含该角色的详细信息。"
+                    },
+                    "ja-JP": {
+                      "description": "要求されたロールを記述するレスポンスボディで、そのロールの詳細を含みます。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -816,7 +861,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for creating a role. It must include the `roleName` of the role to create.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建角色的请求负载。必须包含要创建角色的 `roleName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールを作成するためのリクエストペイロードです。作成するロールの `roleName` を含める必要があります。"
+                  }
+                }
               },
               "example": {
                 "roleName": "my_role"
@@ -941,7 +995,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned after the role creation request is processed, reporting the outcome of the request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "角色创建请求处理完成后返回的响应体，用于报告该请求的结果。"
+                    },
+                    "ja-JP": {
+                      "description": "ロール作成リクエストの処理後に返されるレスポンスボディで、リクエストの結果を報告します。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1110,7 +1173,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request payload for granting a privilege to a role. It must include `roleName`, `privilege`, `objectType`, and `objectName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于向角色授予权限的请求负载。必须包含 `roleName`、`privilege`、`objectType` 和 `objectName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールに権限を付与するためのリクエストペイロードです。`roleName`、`privilege`、`objectType`、`objectName` を含める必要があります。"
+                  }
+                }
               }
             }
           },
@@ -1232,7 +1304,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after granting a privilege on an object to a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "将对象的权限授予角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "オブジェクトに対する権限をロールに付与した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1404,7 +1485,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for revoking a privilege on an object from a role. It requires `objectType`, `privilege`, `objectName`, and `roleName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "撤销角色对某个对象的权限的请求体。需要提供 `objectType`、`privilege`、`objectName` 和 `roleName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールからオブジェクトに対する権限を取り消すためのリクエストペイロード。`objectType`、`privilege`、`objectName`、`roleName` が必要です。"
+                  }
+                }
               }
             }
           },
@@ -1526,7 +1616,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after revoking a privilege on an object from a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "撤销角色对某个对象的权限后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロールからオブジェクトに対する権限を取り消した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1645,7 +1744,16 @@
                     "type": "string",
                     "x-added-at": "2.6.x",
                     "x-last-modified": "2.6.x",
-                    "x-deprecated-since": null
+                    "x-deprecated-since": null,
+                    "description": "An optional description of the role.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "角色的可选描述。"
+                      },
+                      "ja-JP": {
+                        "description": "ロールの任意の説明。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1656,7 +1764,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for dropping a role. It requires `roleName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "删除角色的请求体。需要提供 `roleName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールを削除するためのリクエストペイロード。`roleName` が必要です。"
+                  }
+                }
               },
               "example": {
                 "roleName": "admin"
@@ -1781,7 +1898,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after dropping a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "删除角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロールを削除した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1915,7 +2041,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for granting a privilege to a role. It requires `roleName` and `privilege`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "将权限授予角色的请求体。需要提供 `roleName` 和 `privilege`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールに権限を付与するためのリクエストペイロード。`roleName` と `privilege` が必要です。"
+                  }
+                }
               },
               "example": {
                 "roleName": "my_role",
@@ -1952,7 +2087,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after granting a privilege to a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "将权限授予角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロールに権限を付与した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2085,7 +2229,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for revoking a privilege from a role. It requires `roleName` and `privilege`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "撤销角色权限的请求体。需要提供 `roleName` 和 `privilege`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールから権限を取り消すためのリクエストペイロード。`roleName` と `privilege` が必要です。"
+                  }
+                }
               },
               "example": {
                 "roleName": "my_role",
@@ -2122,7 +2275,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after revoking a privilege from a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "撤销角色权限后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロールから権限を取り消した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2260,7 +2422,16 @@
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "The request payload for altering a role. It requires `roleName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "修改角色的请求体。需要提供 `roleName`。"
+                  },
+                  "ja-JP": {
+                    "description": "ロールを変更するためのリクエストペイロード。`roleName` が必要です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -2391,7 +2562,16 @@
                   ],
                   "x-added-at": "2.6.x",
                   "x-last-modified": "2.6.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after altering a role.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "修改角色后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ロールを変更した後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -2513,12 +2693,30 @@
             "properties": {},
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
+            "x-deprecated-since": null,
+            "description": "Payload object of the response envelope. It holds the result content of the operation.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应封装中的数据对象，用于承载该操作的结果内容。"
+              },
+              "ja-JP": {
+                "description": "レスポンスエンベロープのデータオブジェクトで、操作の結果内容を保持します。"
+              }
+            }
           }
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
+        "x-deprecated-since": null,
+        "description": "A generic response envelope used by operations that return no substantial payload.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "通用响应封装，用于不返回实质负载的操作。"
+          },
+          "ja-JP": {
+            "description": "実質的なペイロードを返さない操作で使用される汎用的なレスポンスエンベロープです。"
+          }
+        }
       }
     },
     "parameters": {

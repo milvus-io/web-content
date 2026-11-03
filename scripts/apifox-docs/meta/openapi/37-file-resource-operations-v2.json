@@ -116,7 +116,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for adding a file resource. Both `name` and `path` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "添加 file resource 的请求体。`name` 和 `path` 均为必填。"
+                  },
+                  "ja-JP": {
+                    "description": "file resource を追加するためのリクエスト本体。`name` と `path` はどちらも必須です。"
+                  }
+                }
               },
               "example": {
                 "name": "synonyms",
@@ -160,7 +169,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned after a file resource is added.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "添加 file resource 后返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "file resource を追加した後に返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -252,7 +270,16 @@
                 "properties": {},
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for listing file resources.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "列出 file resource 的请求体。"
+                  },
+                  "ja-JP": {
+                    "description": "file resource を一覧表示するためのリクエスト本体。"
+                  }
+                }
               },
               "example": {}
             }
@@ -293,7 +320,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "Response body returned when listing file resources.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "列出 file resource 时返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "file resource を一覧表示したときに返されるレスポンス本体。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -410,7 +446,16 @@
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "description": "Request body for removing a file resource. `name` is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "移除 file resource 的请求体。`name` 为必填。"
+                  },
+                  "ja-JP": {
+                    "description": "file resource を削除するためのリクエスト本体。`name` が必須です。"
+                  }
+                }
               },
               "example": {
                 "name": "synonyms"
@@ -453,7 +498,16 @@
                   ],
                   "x-added-at": "3.0.x",
                   "x-last-modified": "3.0.x",
-                  "x-deprecated-since": null
+                  "x-deprecated-since": null,
+                  "description": "The response body returned after a file resource removal request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "文件资源删除请求返回的响应体。"
+                    },
+                    "ja-JP": {
+                      "description": "ファイルリソース削除リクエストの後に返されるレスポンスボディ。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {

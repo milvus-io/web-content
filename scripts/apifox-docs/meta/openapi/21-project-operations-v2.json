@@ -244,6 +244,15 @@
                             }
                           }
                         }
+                      },
+                      "description": "One variant of the successful response body, given as an object.",
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "成功响应体的一种变体，以对象形式给出。"
+                        },
+                        "ja-JP": {
+                          "description": "成功レスポンスボディのバリエーションのひとつで、オブジェクトとして表されます。"
+                        }
                       }
                     },
                     {
@@ -288,7 +297,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Successful response returned for the project listing request.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "项目列表请求成功时返回的响应。"
+                    },
+                    "ja-JP": {
+                      "description": "プロジェクト一覧リクエストが成功したときに返されるレスポンスです。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -460,7 +478,16 @@
                 "required": [
                   "projectName",
                   "plan"
-                ]
+                ],
+                "description": "Request body for creating a project. `projectName` and `plan` are required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用于创建项目的请求体。`projectName` 和 `plan` 为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "プロジェクトを作成するためのリクエストボディです。`projectName` と `plan` は必須です。"
+                  }
+                }
               },
               "example": {
                 "projectName": "My Project",
@@ -576,7 +603,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned when a Project is created successfully.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "成功创建 Project 后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "Project の作成に成功したときに返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -713,6 +749,15 @@
                       }
                     }
                   }
+                },
+                "description": "Request payload carrying the Project properties to update.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "携带要更新的 Project 属性的请求负载。"
+                  },
+                  "ja-JP": {
+                    "description": "更新する Project のプロパティを格納したリクエストペイロード。"
+                  }
                 }
               },
               "examples": {
@@ -822,7 +867,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after the specified Project is updated.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "指定 Project 更新后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Project の更新後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1122,7 +1176,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload containing the details of the requested Project.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "包含所请求 Project 详情的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "要求された Project の詳細を含むレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1305,7 +1368,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after the specified Project is deleted.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "指定 Project 删除后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "指定した Project の削除後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1418,7 +1490,16 @@
                 },
                 "required": [
                   "plan"
-                ]
+                ],
+                "description": "Request payload specifying the new plan for the Project. The `plan` property is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "指定 Project 新套餐（plan）的请求负载。`plan` 属性为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Project の新しい plan を指定するリクエストペイロード。`plan` プロパティは必須です。"
+                  }
+                }
               },
               "example": {
                 "plan": "Enterprise"
@@ -1509,7 +1590,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after the Project plan is updated.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "Project 套餐（plan）更新后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "Project の plan の更新後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1629,7 +1719,16 @@
                 },
                 "required": [
                   "regionIds"
-                ]
+                ],
+                "description": "Request payload listing the regions to add to the Project. The `regionIds` property is required.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "列出要添加到 Project 的区域的请求负载。`regionIds` 属性为必填项。"
+                  },
+                  "ja-JP": {
+                    "description": "Project に追加するリージョンを列挙するリクエストペイロード。`regionIds` プロパティは必須です。"
+                  }
+                }
               },
               "examples": {
                 "1": {
@@ -1763,7 +1862,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after the regions are added to the Project.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "区域添加到 Project 后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "リージョンが Project に追加された後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
@@ -1923,7 +2031,16 @@
                             }
                           },
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "One string value carried in the `data` payload of the response.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "响应 `data` 负载中的一个字符串值。"
+                              },
+                              "ja-JP": {
+                                "description": "レスポンスの `data` ペイロードに含まれる 1 つの文字列値。"
+                              }
+                            }
                           }
                         }
                       }
@@ -1967,7 +2084,16 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "description": "Response payload returned after the specified region is removed from the Project.",
+                  "x-i18n": {
+                    "zh-CN": {
+                      "description": "指定区域从 Project 中移除后返回的响应负载。"
+                    },
+                    "ja-JP": {
+                      "description": "指定したリージョンが Project から削除された後に返されるレスポンスペイロード。"
+                    }
+                  }
                 },
                 "examples": {
                   "1": {
