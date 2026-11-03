@@ -19,12 +19,14 @@ This page describes pattern matching in scalar filter expressions used by `query
 Pattern matching expressions are written in the `filter` parameter. For example, the following query matches log messages that contain an error code such as `E1001`:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -64,12 +66,12 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx := context.Background()
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "http://localhost:19530",
 })
 if err != nil {
     // handle error
@@ -86,40 +88,24 @@ if err != nil {
 fmt.Println(res)
 ```
 
-```javascript
-const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+```rust
+use milvus::v2::prelude::*;
 
-async function main() {
-  const client = new MilvusClient({ address: 'http://localhost:19530' });
+let config = ConnectConfig::new().uri("http://localhost:19530");
+let client = ClientV2::new(&config).await?;
 
-  const res = await client.query({
-    collection_name: 'log_events',
-    // highlight-next-line
-    filter: 'message =~ "E[0-9]{4}"',
-    output_fields: ['message', 'severity'],
-  });
-  console.log(res);
+let res = client.query(
+    QueryRequest::builder()
+        .collection_name("log_events")
+        // highlight-next-line
+        .filter(r#"message =~ "E[0-9]{4}""#)
+        .output_fields(["message", "severity"])
+        .build()?,
+).await?;
+
+for row in res.results().rows()? {
+    println!("{:?}", row.to_entity_row()?);
 }
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
-```
-
-```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
-
-curl --request POST \
-  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
-  --header "Authorization: Bearer ${TOKEN}" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "collectionName": "log_events",
-    "filter": "message =~ \"E[0-9]{4}\"",
-    "outputFields": ["message", "severity"]
-  }'
 ```
 
 ```cpp
@@ -147,7 +133,75 @@ if (!status.IsOk()) {
 }
 ```
 
+```javascript
+const { MilvusClient } = require('@zilliz/milvus2-sdk-node');
+
+async function main() {
+  const client = new MilvusClient({ address: 'http://localhost:19530' });
+
+  const res = await client.query({
+    collection_name: 'log_events',
+    // highlight-next-line
+    filter: 'message =~ "E[0-9]{4}"',
+    output_fields: ['message', 'severity'],
+  });
+  console.log(res);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+QueryResp res = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "log_events",
+    Expression = "message =~ \"E[0-9]{4}\"",
+    Parameters = new QueryParameters
+    {
+        OutputFields = { "message", "severity" }
+    }
+});
+```
+
+```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+  --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "collectionName": "log_events",
+    "filter": "message =~ \"E[0-9]{4}\"",
+    "outputFields": ["message", "severity"]
+  }'
+```
+
 The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
+
+<div class="alert note">
+
+The literal on the left-hand side of a filtering expression can either be a collection field name, such as `message`, `email`, etc., used in examples below, or the name of a StructArray subfield at a specific element index, as in `filter = 'struct[0][subfield] =~ "E[0-9]{4}"'`.
+
+For details on scalar filtering in a StructArray field, refer to [StructArray Operators](struct-array-operators.md).
+
+</div>
 
 ## Supported field types
 
@@ -225,19 +279,21 @@ The right side of `=~` or `!~` must be a string literal.
 | `=~` | Matches values that satisfy the regex pattern. | `filter = 'message =~ "E[0-9]{4}"'` |
 | `!~` | Excludes values that satisfy the regex pattern. | `filter = 'message !~ "^DEBUG"'` |
 
-### Use raw string literals
+### Using raw string literals
 
 Raw string literals are recommended for regex patterns that contain backslashes. In a raw string, written as `r"..."` or `r'...'`, backslashes are passed to the regex engine verbatim. This avoids the extra escaping required by ordinary string literals.
 
 For example:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -252,16 +308,24 @@ String filter = "filename =~ r\"\\.json$\"";
 filter := `filename =~ r"\.json$"`
 ```
 
-```javascript
-const filter = 'filename =~ r"\\.json$"';
-```
-
-```bash
-filter='filename =~ r"\.json$"'
+```rust
+let filter = r#"filename =~ r"\.json$""#;
 ```
 
 ```cpp
 std::string filter = R"(filename =~ r"\.json$")";
+```
+
+```javascript
+const filter = 'filename =~ r"\\.json$"';
+```
+
+```csharp
+string filter = "filename =~ r\"\\.json$\"";
+```
+
+```bash
+filter='filename =~ r"\.json$"'
 ```
 
 This matches strings that end with `.json`, such as `report.json`.
@@ -286,12 +350,14 @@ The following examples use common RE2 syntax in Milvus filter expressions. For c
 To match one of several words, use alternation with `|`:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -306,27 +372,37 @@ String filter = "message =~ \"error|failed|timeout\"";
 filter := `message =~ "error|failed|timeout"`
 ```
 
-```javascript
-const filter = 'message =~ "error|failed|timeout"';
-```
-
-```bash
-filter='message =~ "error|failed|timeout"'
+```rust
+let filter = r#"message =~ "error|failed|timeout""#;
 ```
 
 ```cpp
 std::string filter = R"(message =~ "error|failed|timeout")";
 ```
 
+```javascript
+const filter = 'message =~ "error|failed|timeout"';
+```
+
+```csharp
+string filter = "message =~ \"error|failed|timeout\"";
+```
+
+```bash
+filter='message =~ "error|failed|timeout"'
+```
+
 When matching regex metacharacters literally, escape them in the regex pattern. For example, to match a literal dot (`\.` in regex), write `\\.` in a Python, Java, Go, or Node.js source string:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -341,16 +417,24 @@ String filter = "email =~ \"@gmail\\.com$\"";
 filter := `email =~ "@gmail\\.com$"`
 ```
 
-```javascript
-const filter = 'email =~ "@gmail\\.com$"';
-```
-
-```bash
-filter='email =~ "@gmail\\.com$"'
+```rust
+let filter = r#"email =~ "@gmail\.com$""#;
 ```
 
 ```cpp
 std::string filter = R"(email =~ "@gmail\\.com$")";
+```
+
+```javascript
+const filter = 'email =~ "@gmail\\.com$"';
+```
+
+```csharp
+string filter = "email =~ \"@gmail\\.com$\"";
+```
+
+```bash
+filter='email =~ "@gmail\\.com$"'
 ```
 
 Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
@@ -362,12 +446,14 @@ Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax tha
 Milvus regex matching uses substring semantics. The pattern does not need to match the entire field value. For example, the following filter matches both `E1001` and `failed with E1001 after retry`:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -382,27 +468,37 @@ String filter = "message =~ \"E[0-9]{4}\"";
 filter := `message =~ "E[0-9]{4}"`
 ```
 
-```javascript
-const filter = 'message =~ "E[0-9]{4}"';
-```
-
-```bash
-filter='message =~ "E[0-9]{4}"'
+```rust
+let filter = r#"message =~ "E[0-9]{4}""#;
 ```
 
 ```cpp
 std::string filter = R"(message =~ "E[0-9]{4}")";
 ```
 
+```javascript
+const filter = 'message =~ "E[0-9]{4}"';
+```
+
+```csharp
+string filter = "message =~ \"E[0-9]{4}\"";
+```
+
+```bash
+filter='message =~ "E[0-9]{4}"'
+```
+
 To match the entire field value, use the `^` and `$` anchors:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -420,9 +516,23 @@ String filter = "code =~ \"^E[0-9]{4}$\"";
 filter := `code =~ "^E[0-9]{4}$"`
 ```
 
+```rust
+// Match only values that are exactly E followed by four digits
+let filter = r#"code =~ "^E[0-9]{4}$""#;
+```
+
+```cpp
+std::string filter = R"(code =~ "^E[0-9]{4}$")";
+```
+
 ```javascript
 // Match only values that are exactly E followed by four digits
 const filter = 'code =~ "^E[0-9]{4}$"';
+```
+
+```csharp
+// Match only values that are exactly E followed by four digits
+string filter = "code =~ \"^E[0-9]{4}$\"";
 ```
 
 ```bash
@@ -430,21 +540,19 @@ const filter = 'code =~ "^E[0-9]{4}$"';
 filter='code =~ "^E[0-9]{4}$"'
 ```
 
-```cpp
-std::string filter = R"(code =~ "^E[0-9]{4}$")";
-```
-
 **Nullable VARCHAR fields**
 
 Regex filters do not match null values. This applies to both `=~` and `!~`. If you want to exclude a regex pattern but keep null values, explicitly add `OR field IS NULL`:
 
 <div class="multipleCode">
-  <a href="#python">Python</a>
-  <a href="#java">Java</a>
-  <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#cpp">C++</a>
-  <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -459,16 +567,24 @@ String filter = "message !~ \"^DEBUG\" OR message IS NULL";
 filter := `message !~ "^DEBUG" OR message IS NULL`
 ```
 
-```javascript
-const filter = 'message !~ "^DEBUG" OR message IS NULL';
-```
-
-```bash
-filter='message !~ "^DEBUG" OR message IS NULL'
+```rust
+let filter = r#"message !~ "^DEBUG" OR message IS NULL"#;
 ```
 
 ```cpp
 std::string filter = R"(message !~ "^DEBUG" OR message IS NULL)";
+```
+
+```javascript
+const filter = 'message !~ "^DEBUG" OR message IS NULL';
+```
+
+```csharp
+string filter = "message !~ \"^DEBUG\" OR message IS NULL";
+```
+
+```bash
+filter='message !~ "^DEBUG" OR message IS NULL'
 ```
 
 **JSON paths**
