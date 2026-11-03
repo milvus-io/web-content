@@ -86,6 +86,7 @@ The final phase leverages the optimized storage layout to intelligently select t
 
 - **Optimized path**: Queries on shared keys (e.g., `json['e'] = 'rare'`) use inverted index to quickly locate relevant documents
 
+
 ## Enable JSON shredding
 
 To activate the feature, set `common.enabledJSONShredding` to `true` in your `milvus.yaml` configuration file. New data will automatically trigger the shredding process.
@@ -99,6 +100,8 @@ common:
 ```
 
 Once enabled, Milvus will begin analyzing and restructuring your JSON data upon ingestion without any further manual intervention.
+
+
 
 ## Parameter tuning
 
@@ -142,6 +145,7 @@ For most users, once JSON shredding is enabled, the default settings for other p
      <td><p><strong>Increase</strong> (e.g., to 0.5) if the number of keys that meet the shredding criteria exceeds the <code>dataCoord.jsonShreddingMaxColumns</code> limit. This makes the threshold stricter, reducing the number of keys that qualify for shredding.</p><p><strong>Decrease</strong> (e.g., to 0.1) if you want to shred more keys that appear less frequently than the default 30% threshold.</p></td>
    </tr>
 </table>
+
 
 ## Performance benchmarks
 
@@ -223,6 +227,7 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
 
 ## FAQ
 
+
 - **How do I verify if JSON shredding works properly?**
 
     1. First, check if the data has been built by using the `show segment --format table` command in the [Birdwatcher](birdwatcher_usage_guides.md) tool. If successful, the output will contain `shredding_data/` and `shared_key_index/` under the **Json Key Stats** field.
@@ -234,6 +239,7 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
 - **What if I encounter an error?**
 
     If the build or load process fails, you can quickly disable the feature by setting `common.enabledJSONShredding=false`. To clear any remaining tasks, use the `remove stats-task <task_id>` command in [Birdwatcher](birdwatcher_usage_guides.md). If a query fails, set `common.usingjsonShreddingForQuery=false` to revert to the original query path, bypassing the shredded data.
+
 
 - **How do I select between JSON shredding and JSON indexing?**
 

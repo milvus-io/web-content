@@ -121,7 +121,7 @@ client.createCollection(requestCreate);
 import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 
 const client = new MilvusClient({
-  address: 'localhost:19530'
+  address: 'http://localhost:19530'
 });
 
 // Create collection
@@ -162,7 +162,7 @@ ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: "localhost:19530",
+    Address: "http://localhost:19530",
 })
 if err != nil {
     return err
@@ -170,7 +170,7 @@ if err != nil {
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(true)
 schema.WithField(entity.NewField().
-    WithName("product_id").pk
+    WithName("product_id").
     WithDataType(entity.FieldTypeInt64).
     WithIsPrimaryKey(true),
 ).WithField(entity.NewField().
@@ -205,7 +205,7 @@ export productIdField='{
 export vectorField='{
   "fieldName": "vector",
   "dataType": "FloatVector",
-  "typeParams": {
+  "elementTypeParams": {
     "dim": 5
   }
 }'
@@ -330,7 +330,7 @@ const entities = [
         "metadata": {
             "category": "electronics",
             "brand": "BrandA",
-            "in_stock": True,
+            "in_stock": true,
             "price": 99.99,
             "string_price": "99.99",
             "tags": ["clearance", "summer_sale"],
@@ -362,7 +362,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("product_cat
         []byte(`{
             "category": "electronics",
             "brand": "BrandA",
-            "in_stock": True,
+            "in_stock": true,
             "price": 99.99,
             "string_price": "99.99",
             "tags": ["clearance", "summer_sale"],
@@ -436,6 +436,12 @@ Indexing JSON fields is **optional**. You can still query or filter by JSON path
 </div>
 
 ### Choose between path index and flat index | Milvus 2.6.x
+
+<div class="alert warning">
+
+Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated starting in 3.0.0. Existing indexes and new index-creation requests remain supported for compatibility, but this mode is no longer recommended for new workloads. Create JSON path indexes for known query paths.
+
+</div>
 
 <table>
    <tr>
@@ -511,7 +517,7 @@ To create a JSON path index, specify:
 
 - **JSON cast type** (`json_cast_type`): The data type that Milvus should use when interpreting and indexing the value at the specified path.
 
-    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion).
+    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514).
 
     - For a complete list, see [below](use-json-fields.md#Supported-JSON-cast-types).
 
@@ -882,19 +888,83 @@ index_params.add_index(
 ```
 
 ```java
-// java
+Map<String,Object> extraParams4 = new HashMap<>();
+extraParams4.put("json_path", "metadata");
+extraParams4.put("json_cast_type", "JSON");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("metadata_flat")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams4)
+        .build());
+
+Map<String,Object> extraParams5 = new HashMap<>();
+extraParams5.put("json_path", "metadata[\"supplier\"]");
+extraParams5.put("json_cast_type", "JSON");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("metadata_supplier_flat")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams5)
+        .build());
 ```
 
 ```javascript
-// nodejs
+indexParams.push(
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "metadata_flat",
+    index_type: "AUTOINDEX", // Can also use "INVERTED"
+    extra_params: {
+      json_path: "metadata",
+      json_cast_type: "JSON",
+    },
+  },
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "metadata_supplier_flat",
+    index_type: "AUTOINDEX", // Can also use "INVERTED"
+    extra_params: {
+      json_path: 'metadata["supplier"]',
+      json_cast_type: "JSON",
+    },
+  }
+);
 ```
 
 ```go
-// go
+jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, "JSON", `metadata`).
+    WithIndexName("metadata_flat")
+jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, "JSON", `metadata["supplier"]`).
+    WithIndexName("metadata_supplier_flat")
+
+indexOpt4 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex4)
+indexOpt5 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex5)
 ```
 
 ```bash
 # restful
+export metadataFlatIndex='{
+  "fieldName": "metadata",
+  "indexName": "metadata_flat",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata",
+    "json_cast_type": "JSON"
+  }
+}'
+
+export metadataSupplierFlatIndex='{
+  "fieldName": "metadata",
+  "indexName": "metadata_supplier_flat",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\"supplier\"]",
+    "json_cast_type": "JSON"
+  }
+}'
 ```
 
 ### Apply indexes to the collection
@@ -942,6 +1012,14 @@ indexTask3, err := client.CreateIndex(ctx, indexOpt3)
 if err != nil {
     return err
 }
+indexTask4, err := client.CreateIndex(ctx, indexOpt4)
+if err != nil {
+    return err
+}
+indexTask5, err := client.CreateIndex(ctx, indexOpt5)
+if err != nil {
+    return err
+}
 ```
 
 ```bash
@@ -949,7 +1027,9 @@ if err != nil {
 export indexParams="[
   $categoryIndex,
   $tagsArrayIndex,
-  $stringToDoubleIndex
+  $stringToDoubleIndex,
+  $metadataFlatIndex,
+  $metadataSupplierFlatIndex
 ]"
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
@@ -983,21 +1063,21 @@ filter = 'json_contains(metadata["tags"], "featured")'
 ```
 
 ```java
-String filter = 'metadata["category"] == "electronics"';
-String filter = 'metadata["price"] > 50';
-String filter = 'json_contains(metadata["tags"], "featured")';
+String filterCategory = "metadata[\"category\"] == \"electronics\"";
+String filterPrice = "metadata[\"price\"] > 50";
+String filterTags = "json_contains(metadata[\"tags\"], \"featured\")";
 ```
 
 ```javascript
-let filter = 'metadata["category"] == "electronics"'
-let filter = 'metadata["price"] > 50'
-let filter = 'json_contains(metadata["tags"], "featured")'
+const filterCategory = 'metadata["category"] == "electronics"';
+const filterPrice = 'metadata["price"] > 50';
+const filterTags = 'json_contains(metadata["tags"], "featured")';
 ```
 
 ```go
-filter := 'metadata["category"] == "electronics"'
-filter := 'metadata["price"] > 50'
-filter := 'json_contains(metadata["tags"], "featured")'
+filterCategory := `metadata["category"] == "electronics"`
+filterPrice := `metadata["price"] > 50`
+filterTags := `json_contains(metadata["tags"], "featured")`
 ```
 
 ```bash
