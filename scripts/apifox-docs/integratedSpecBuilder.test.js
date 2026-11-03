@@ -241,6 +241,33 @@ test('track projection drops operations whose primary tag excludes the target', 
   assert.ok(track.spec.paths['/v2/vectordb/entities/search']);
   assert.equal(track.spec.tags.some(tag => tag.name === 'Cloud Only Operations'), false);
   assert.equal(track.stats.contractElements.omitted >= 1, true);
+  // The cascade drop must be visible in the operation stats too, not only in
+  // the contract-element counter.
+  assert.equal(track.stats.operations.omitted >= 1, true);
+});
+
+test('track projection drops operations whose primary tag is undeclared', () => {
+  // An undeclared primary tag is a spec defect; the shared cascade is
+  // fail-closed (drop) so the guard and the builder cannot disagree on it.
+  const spec = fixture('milvus-2.6.x.json');
+  spec.paths['/v1/ghost-tag'] = {
+    get: {
+      summary: 'Operation Tagged Nowhere',
+      tags: ['Tag Declared In No Fragment'],
+      responses: {200: {description: 'OK'}},
+    },
+  };
+
+  const track = buildIntegratedSpec(spec, {
+    publicationPolicy: 'track',
+    target: 'milvus',
+    language: 'en-US',
+    apiSurface: 'data-plane',
+    releaseTrack: '2.6.x',
+  });
+
+  assert.equal(track.spec.paths['/v1/ghost-tag'], undefined);
+  assert.equal(track.stats.operations.omitted >= 1, true);
 });
 
 test('track projection still fails closed on unstamped operations without an excluding tag', () => {

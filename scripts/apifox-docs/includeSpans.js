@@ -28,6 +28,7 @@ function matchFilterTags(markdown) {
 
         const startIndex = match.index;
         let endIndex = 0;
+        let closed = false;
 
         for (let i = 0; i < closeTagMatch.length; i++) {
             const candidate = markdown.slice(startIndex, startIndex + closeTagMatch[i].index + closeTagMatch[i][0].length);
@@ -37,8 +38,18 @@ function matchFilterTags(markdown) {
 
             if (startCount === endCount) {
                 endIndex = startIndex + closeTagMatch[i].index + closeTagMatch[i][0].length;
+                closed = true;
                 break;
             }
+        }
+
+        // Fail closed instead of recursing on a growing string: an unclosed
+        // span used to slice against endIndex 0, prepend the whole document,
+        // and blow the stack.
+        if (!closed) {
+            throw new Error(
+                `REST_INCLUDE_SPAN_UNCLOSED: <${tag} target="${match[2]}"> at offset ${match.index} has no balanced closing tag`,
+            );
         }
 
         spans.push({

@@ -1,9 +1,10 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
-const {buildIntegratedSpec, filterSelection} = require('./integratedSpecBuilder');
+const {buildIntegratedSpec, filterSelection, dropOperationsOutsideTagSelection} = require('./integratedSpecBuilder');
 const {pruneUnreachableComponents} = require('./componentGraph');
 const {resolveIncludeSpans} = require('./includeSpans');
+const {resolveBetaForTarget} = require('./betaTier');
 const {loadSpecifications} = require('./specLoader');
 
 const FRAGMENT_DIR = path.join(__dirname, 'meta', 'openapi');
@@ -46,29 +47,11 @@ function collectStrings(node, pointer, out = []) {
   return out;
 }
 
-const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head', 'trace']);
-
 // The latest-data-plane builder prunes `spec.tags` by target but (without the
 // track policy's tag selection) leaves operations whose primary tag was
 // pruned. The milvus.io wrapper cascades the primary tag, so the guard mirrors
-// that before scanning.
-function dropOperationsOutsideTagSelection(spec) {
-  const tagNames = new Set((spec.tags || []).map(tag => tag.name));
-  for (const [endpoint, pathItem] of Object.entries(spec.paths || {})) {
-    for (const method of HTTP_METHODS) {
-      const operation = pathItem?.[method];
-      if (!operation) continue;
-      const primaryTag = (operation.tags || [])[0];
-      if (primaryTag && !tagNames.has(primaryTag)) {
-        delete pathItem[method];
-      }
-    }
-    if (pathItem && Object.keys(pathItem).length === 0) {
-      delete spec.paths[endpoint];
-    }
-  }
-}
-
+// that before scanning — through the builder's own exported cascade, not a
+// local reimplementation, so the guard cannot drift from the guarded code.
 function projectMilvusLatest(spec, protocolVersion) {
   const {spec: projected} = buildIntegratedSpec(spec, {
     apiSurface: 'data-plane',
@@ -81,7 +64,7 @@ function projectMilvusLatest(spec, protocolVersion) {
     // stay visible to the token scan.
     language: 'en-US',
   });
-  dropOperationsOutsideTagSelection(projected);
+  dropOperationsOutsideTagSelection(projected, new Set((projected.tags || []).map(tag => tag.name)));
   return pruneUnreachableComponents(projected).spec;
 }
 
@@ -102,6 +85,54 @@ for (const protocolVersion of ['v1', 'v2']) {
     assert.deepEqual(offenders, []);
   });
 }
+
+// The vocabulary scan above reads spec strings, so it can never see an
+// `x-beta` enum value rendering as a zilliz badge caption downstream. This
+// companion gate scans the enum surface itself: zilliz release-notes tiers
+// (anything outside FALSE/DEPRECATED — betaTier.js) must not survive the
+// milvus projection, on operations and tags alike.
+function collectBetaValues(node, pointer, out = []) {
+  if (Array.isArray(node)) {
+    node.forEach((child, index) => collectBetaValues(child, `${pointer}[${index}]`, out));
+    return out;
+  }
+  if (node && typeof node === 'object') {
+    for (const [key, child] of Object.entries(node)) {
+      if (key === 'x-beta') out.push([`${pointer}.${key}`, child]);
+      collectBetaValues(child, /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? `${pointer}.${key}` : `${pointer}[${JSON.stringify(key)}]`, out);
+    }
+  }
+  return out;
+}
+
+for (const protocolVersion of ['v1', 'v2']) {
+  test(`milvus-target ${protocolVersion} publication carries no zilliz release-notes x-beta tiers`, () => {
+    const merged = loadSpecifications(FRAGMENT_DIR);
+    // Anti-vacuous control: the shared fragment source really carries tier
+    // marks, so the assertion below can never pass by emptiness.
+    const sourceTiers = collectBetaValues(merged, '$').filter(([, value]) => resolveBetaForTarget(value, 'milvus') === undefined);
+    assert.ok(sourceTiers.length > 0, 'expected zilliz tier x-beta values in the fragment source');
+
+    const spec = projectMilvusLatest(merged, protocolVersion);
+    const offenders = collectBetaValues(spec, '$')
+      .filter(([, value]) => resolveBetaForTarget(value, 'milvus') === undefined)
+      .map(([pointer, value]) => `${pointer} :: ${value}`);
+    assert.deepEqual(offenders, []);
+  });
+}
+
+test('filterSelection drops zilliz x-beta tiers for milvus and leaves every value for zilliz untouched', () => {
+  const operation = {tags: ['Vector Operations (V2)'], summary: 'Ping', 'x-beta': 'PUBLIC'};
+
+  const milvus = filterSelection(operation, {target: 'milvus'}, {omittedElements: 0});
+  assert.equal(milvus['x-beta'], undefined);
+
+  const zilliz = filterSelection(operation, {target: 'zilliz'}, {omittedElements: 0});
+  assert.equal(zilliz['x-beta'], 'PUBLIC');
+
+  const neutral = filterSelection({summary: 'Ping', 'x-beta': 'DEPRECATED'}, {target: 'milvus'}, {omittedElements: 0});
+  assert.equal(neutral['x-beta'], 'DEPRECATED');
+});
 
 function fixture({admonitions, properties, required}) {
   return {
@@ -223,4 +254,17 @@ test('includeSpans resolution semantics', () => {
   );
   // Plain text passes through untouched.
   assert.equal(resolveIncludeSpans('no spans here', 'milvus'), 'no spans here');
+});
+
+test('includeSpans fails closed on an unclosed span', () => {
+  // An unclosed span used to recurse on a growing string until the stack
+  // blew; it must fail with a locatable error instead.
+  assert.throws(
+    () => resolveIncludeSpans('prefix <include target="zilliz">Zilliz Cloud rocks', 'milvus'),
+    /REST_INCLUDE_SPAN_UNCLOSED/,
+  );
+  assert.throws(
+    () => resolveIncludeSpans('<exclude target="milvus">text</exclude> tail <exclude target="zilliz">dangling', 'milvus'),
+    /REST_INCLUDE_SPAN_UNCLOSED/,
+  );
 });
