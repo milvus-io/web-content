@@ -18,11 +18,11 @@ This page illustrates how to launch a Milvus instance in Docker using Docker Com
 
 ## Install Milvus
 
-Milvus provides a Docker Compose configuration file in the Milvus repository. Download the configuration for v3.0.3 and start a new deployment:
+Milvus provides a Docker Compose configuration file in the Milvus repository. Download the configuration for v3.0.5 and start a new deployment:
 
 ```shell
 # Download the configuration file
-$ wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
+$ wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
 
 # Start Milvus
 $ sudo docker compose up -d
@@ -34,7 +34,7 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
-**Default deployment (v3.0.3):** `docker compose up -d` starts three long-running containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, with MinIO / object storage as its WAL backend)**, so no separate message-queue container is required.
+**Default deployment (v3.0.5):** `docker compose up -d` starts three long-running containers — `milvus-etcd` (metadata), `milvus-minio` (object storage), and `milvus-standalone`. The message queue is **Woodpecker (embedded, with MinIO / object storage as its WAL backend)**, so no separate message-queue container is required.
 
 The configuration also runs the one-shot `milvus-volume-init` service to prepare data-directory ownership. It exits after completing that task.
 
@@ -115,7 +115,7 @@ $ sudo rm -rf volumes
 
 For a Milvus 2.6.x standalone deployment, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md). Back up metadata and persistent data, preserve the existing dependencies and configuration, and validate the documented source-to-target upgrade path before changing the Milvus image. Do not replace an older deployment's Compose file with the new-installation configuration above.
 
-**Message Queue limitations**: When upgrading to Milvus v3.0.3, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+**Message Queue limitations**: When upgrading to Milvus v3.0.5, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 Milvus 2.6.x and later default to Woodpecker, while 2.5.x deployments default to **RocksMQ**. If the deployment you are upgrading still runs RocksMQ, pin it in `user.yaml` before changing the Milvus image, so the upgraded instance keeps its existing message queue instead of starting with the new default:
@@ -126,7 +126,7 @@ mq:
   type: rocksmq
 ```
 
-After the upgraded instance is running on v3.0.3, you can move from RocksMQ to Woodpecker with [Switch Message Queue](switch-mq-type.md), which is available in Milvus 3.0 and later.
+After the upgraded instance is running on v3.0.5, you can move from RocksMQ to Woodpecker with [Switch Message Queue](switch-mq-type.md), which is available in Milvus 3.0 and later.
 
 ## Optional dependencies
 

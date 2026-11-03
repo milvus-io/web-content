@@ -32,7 +32,7 @@ The Docker OS type must be `linux`. The Compose examples use the `docker compose
 
 Choose one of the following terminals. Run the commands in a writable working directory; the script stores configuration files and the `volumes` directory there.
 
-The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.3. To deploy that exact release, use the versioned Docker Compose configuration below.
+The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.5. To deploy that exact release, use the versioned Docker Compose configuration below.
 
 ### From PowerShell
 
@@ -89,14 +89,14 @@ To stop Milvus, run `bash standalone_embed.sh stop`. The `bash standalone_embed.
 
 ## Run Milvus with Docker Compose
 
-Use the configuration attached to release v3.0.3. Run only the command sequence for your terminal.
+Use the configuration attached to release v3.0.5. Run only the command sequence for your terminal.
 
 ### From PowerShell
 
 Download the configuration and start Milvus:
 
 ```powershell
-Invoke-WebRequest -Uri "https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml" -OutFile docker-compose.yml
+Invoke-WebRequest -Uri "https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml" -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 ```
@@ -106,7 +106,7 @@ docker compose ps
 Download the configuration and start Milvus:
 
 ```bat
-curl.exe -fL "https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml" -o docker-compose.yml
+curl.exe -fL "https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml" -o docker-compose.yml
 docker compose up -d
 docker compose ps
 ```
@@ -116,7 +116,7 @@ docker compose ps
 Open your WSL distribution, then run the Linux commands:
 
 ```bash
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 ```

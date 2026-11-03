@@ -12,15 +12,15 @@ This page explains package availability for Milvus Standalone and links to insta
 
 ## Check package availability
 
-Milvus 3.0.x releases, including [v3.0.3](https://github.com/milvus-io/milvus/releases/tag/v3.0.3), publish Docker Compose configuration files but no RPM or DEB packages. Do not construct RPM or DEB download URLs for these releases; a package filename in a download command does not make that asset available.
+Milvus 3.0.x releases, including [v3.0.5](https://github.com/milvus-io/milvus/releases/tag/v3.0.5), publish Docker Compose configuration files but no RPM or DEB packages. Do not construct RPM or DEB download URLs for these releases; a package filename in a download command does not make that asset available.
 
 For another release, check the **Assets** section of its [Milvus release page](https://github.com/milvus-io/milvus/releases) before choosing a package installation method. Use only a package actually listed for that release and your system architecture.
 
 ## Install Milvus Standalone with Docker
 
-For v3.0.3, choose one of these installation methods:
+For v3.0.5, choose one of these installation methods:
 
-- [Run Milvus with Docker Compose (Linux)](install_standalone-docker-compose.md) to use the Compose configuration published with v3.0.3.
+- [Run Milvus with Docker Compose (Linux)](install_standalone-docker-compose.md) to use the Compose configuration published with v3.0.5.
 - [Run Milvus in Docker (Linux)](install_standalone-docker.md) to use the standalone installation script. Check the image tag in the script before running it.
 - [Run Milvus in Docker (Windows)](install_standalone-windows.md) to use Docker Desktop with the WSL 2 backend and Linux containers.
 

@@ -34,7 +34,7 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.3. To install that exact release, use the versioned configuration in [Run Milvus with Docker Compose](install_standalone-docker-compose.md).
+The script is downloaded from the Milvus `master` branch. Its Docker image tag is defined in the script and can differ from v3.0.5. To install that exact release, use the versioned configuration in [Run Milvus with Docker Compose](install_standalone-docker-compose.md).
 
 This Docker deployment runs **Woodpecker** with the **local filesystem** as its WAL backend, so no external message-queue service is required. See [Woodpecker](woodpecker.md).
 
@@ -84,7 +84,7 @@ For applicable configuration items, refer to [System Configuration](system_confi
 
 ## Upgrade Milvus
 
-The script's `upgrade` command downloads the script from `master` and recreates the container using the image selected by that script. It does not validate a supported source-to-target version path and can recreate generated configuration files. Do not treat it as a guarantee that an arbitrary older deployment can upgrade safely to v3.0.3.
+The script's `upgrade` command downloads the script from `master` and recreates the container using the image selected by that script. It does not validate a supported source-to-target version path and can recreate generated configuration files. Do not treat it as a guarantee that an arbitrary older deployment can upgrade safely to v3.0.5.
 
 Before an upgrade, back up metadata, persistent data, `embedEtcd.yaml`, and `user.yaml`. Check the target version, message queue, and storage compatibility, and validate recovery in a non-production environment. For deployments managed with Docker Compose, follow [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md); do not apply that procedure directly to a script-managed container.
 
