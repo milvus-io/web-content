@@ -123,3 +123,41 @@ The following are the classes of the `RemoteBulkWriter` class:
 ## Methods
 
 The following are the methods of the `RemoteBulkWriter` class:
+
+## Example
+
+```python
+from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus.bulk_writer import RemoteBulkWriter, BulkFileType
+
+# Set up a schema
+schema = CollectionSchema(fields=[
+    FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
+    FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=5),
+    ]
+)
+
+# Set up bucket connection parameters
+connect_param = RemoteBulkWriter.ConnectParam(
+    endpoint="storage.googleapis.com", # use 's3.amazonaws.com' for AWS
+    access_key="ACCESS_KEY",
+    secret_key="SECRET_KEY",
+    bucket_name="BUCKET_NAME",
+    secure=True,
+)
+
+# Set up a remote bulk writer
+writer = RemoteBulkWriter(
+    schema=schema,
+    remote_path="/path/to/bucket/prefix",
+    connect_param=connect_param,
+)
+
+# Append a row to the writer
+writer.append_row(
+    {"id": 0, "vector": [0.1, 0.4, -0.8, -0.2, 0.4]}
+)
+
+# Commit the appended data
+writer.commit()
+```

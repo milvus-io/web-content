@@ -63,3 +63,14 @@ public enum MetricType
 - **MAX_SIM_HAMMING**
 
     Maximum Hamming similarity for binary vectors inside a Struct field.
+
+## Example
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+```

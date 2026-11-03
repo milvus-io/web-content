@@ -121,3 +121,49 @@ try (LocalBulkWriter localBulkWriter = new LocalBulkWriter(bulkWriterParam)) {
     throw e;
 }
 ```
+
+## Example
+
+```java
+import io.milvus.bulkwriter.LocalBulkWriter;
+import io.milvus.bulkwriter.LocalBulkWriterParam;
+import io.milvus.bulkwriter.common.clientenum.BulkFileType;
+import io.milvus.grpc.DataType;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.util.List;
+
+CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
+        .addFieldType(FieldType.newBuilder()
+                .withName("id")
+                .withDataType(DataType.Int64)
+                .withPrimaryKey(true)
+                .build())
+        .addFieldType(FieldType.newBuilder()
+                .withName("vector")
+                .withDataType(DataType.FloatVector)
+                .withDimension(2)
+                .build())
+        .build();
+
+LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()
+        .withCollectionSchema(collectionSchema)
+        .withLocalPath("/tmp/bulk_writer")
+        .withFileType(BulkFileType.PARQUET)
+        .build();
+
+try (LocalBulkWriter localBulkWriter = new LocalBulkWriter(bulkWriterParam)) {
+    Gson gson = new Gson();
+    JsonObject row = new JsonObject();
+    row.addProperty("id", 1);
+    row.add("vector", gson.toJsonTree(new float[]{0.1f, 0.2f}));
+    localBulkWriter.appendRow(row);
+    localBulkWriter.commit(false);
+    List<List<String>> batchFiles = localBulkWriter.getBatchFiles();
+    System.out.printf("Local writer done! output local files: %s%n", batchFiles);
+} catch (Exception e) {
+    throw e;
+}
+```

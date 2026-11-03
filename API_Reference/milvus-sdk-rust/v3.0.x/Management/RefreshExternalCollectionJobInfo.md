@@ -39,3 +39,17 @@ Information of an external collection refresh job, as returned by `listRefreshEx
 - `get_end_time()` (*u64*) -
 
     The end timestamp of the refresh job.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let request = ListRefreshExternalCollectionJobsRequest::builder()
+    .collection_name("books")
+    .build()?;
+let resp = client.list_refresh_external_collection_jobs(request).await?;
+for job in resp.jobs() {
+    println!("{}: {:?} ({}%)", job.get_collection_name(), job.get_state(), job.get_progress());
+}
+```

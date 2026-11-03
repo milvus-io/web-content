@@ -123,3 +123,15 @@ public enum IndexType
 - **SPARSE_WAND**
 
     A sparse vector index using the WAND algorithm. Since Milvus 2.5.4, prefer `INVERTED_INDEX_ALGO="DAAT_WAND"` in the inverted index; this value remains available for compatibility.
+
+## Example
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vector")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+```

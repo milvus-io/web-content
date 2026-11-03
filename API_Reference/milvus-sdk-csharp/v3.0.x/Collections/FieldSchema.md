@@ -145,3 +145,31 @@ public sealed class FieldSchema
 - `CreateSparseFloatVector(...)` (*static*) -
 
     Creates a new `SparseFloatVector` field schema. See [DataType](DataType.md).
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var schema = new CollectionSchema { Name = "my_collection" };
+schema.Fields.Add(new FieldSchema("id", DataType.Int64, isPrimaryKey: true, autoId: true));
+schema.Fields.Add(FieldSchema.CreateVarchar("title", maxLength: 256, nullable: true, defaultValue: "untitled"));
+schema.Fields.Add(FieldSchema.CreateVarchar("body", maxLength: 1024, enableAnalyzer: true,
+    analyzerParams: new Dictionary<string, object> { ["type"] = "english" }));
+schema.Fields.Add(FieldSchema.CreateFloatVector("embedding", dimension: 128));
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema
+});
+```

@@ -69,3 +69,28 @@ public enum CompactionType
 - **BumpSchemaVersion** (12)
 
     The compaction bumps the schema version.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetCompactionPlansResp result = await client.GetCompactionPlansAsync(new GetCompactionPlansReq
+{
+    CompactionId = 450357031542
+});
+
+foreach (CompactionMergeInfo plan in result.MergeInfos)
+{
+    Console.WriteLine(plan.CompactionType == CompactionType.Major ? "Major compaction" : "Other compaction");
+}
+```

@@ -69,3 +69,40 @@ public sealed class SearchAggregation
 - `FieldName` - The field used to sort top hits.
 
 - `Direction` - The sort direction (an `AggregationDirection`).
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var aggregation = new SearchAggregation
+{
+    Fields = ["category"],
+    Size = 10,
+    Metrics = new Dictionary<string, AggregationMetricSpec>
+    {
+        ["avg_price"] = new() { Op = AggregationMetricOp.Avg, FieldName = "price" }
+    },
+    Order = [new AggregationOrder { Key = "_count", Direction = AggregationDirection.Desc }],
+    TopHits = new AggregationTopHits { Size = 3 }
+};
+
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "embedding",
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
+    Limit = 5,
+    SearchAggregation = aggregation
+});
+```

@@ -106,3 +106,28 @@ FunctionScore(
     )
     ```
 
+## Example
+
+```python
+from pymilvus import Function, FunctionType, FunctionScore
+
+# Create a Boost Ranker with a fixed weight
+fix_weight_ranker = Function(
+    name="boost",
+    input_field_names=[], # Must be an empty list
+    function_type=FunctionType.RERANK,
+    params={
+        "reranker": "boost",
+        "weight": 0.8
+    }
+)
+
+# Combine multiple rankers with a FunctionScore
+ranker = FunctionScore(
+    functions=[fix_weight_ranker],
+    params={
+        "boost_mode": "Multiply",
+        "function_mode": "Sum"
+    }
+)
+```

@@ -37,3 +37,21 @@ public enum MetricType
      <td><p>Only for binary vectors.</p></td>
    </tr>
 </table>
+
+## Example
+
+```java
+import io.milvus.param.*;
+
+CreateIndexParam param = CreateIndexParam.newBuilder()
+        .withCollectionName(COLLECTION_NAME)
+        .withFieldName("vector")
+        .withIndexType(IndexType.IVF_FLAT)
+        .withMetricType(MetricType.COSINE)
+        .withExtraParam("{\"nlist\":64}")
+        .build();
+R<RpcStatus> response = client.createIndex(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+```

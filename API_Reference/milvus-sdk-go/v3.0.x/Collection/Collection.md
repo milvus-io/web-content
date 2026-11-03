@@ -48,3 +48,33 @@ The collection properties (e.g., TTL settings).
 
 - **UpdateTimestamp** (*uint64*) -
 The collection update timestamp, usually used for internal change detection.
+
+## Example
+
+Demonstrates Collection usage.
+
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "127.0.0.1:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+collection, err := cli.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption("quick_setup"))
+if err != nil {
+	// handle error
+}
+fmt.Println(collection.Name, collection.Schema)
+```

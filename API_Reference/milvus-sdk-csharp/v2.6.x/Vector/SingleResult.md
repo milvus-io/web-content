@@ -36,3 +36,36 @@ public sealed class SingleResult
 - `GetRow(int rowIndex)` (*IReadOnlyDictionary\<string, object?\>*) -
 
     Materializes the hit at the given zero-based index into a row dictionary mapping field name to value (plus the `"score"` entry), the same shape the row-based insert/upsert accepts.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+SearchResp results = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "my_collection",
+    VectorFieldName = "embedding",
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
+    Limit = 5
+});
+
+foreach (SingleResult singleResult in results.SingleResults ?? [])
+{
+    Console.WriteLine($"Top score: {singleResult.Scores[0]}");
+    foreach (long id in singleResult.Ids.LongIds ?? Array.Empty<long>())
+    {
+        Console.WriteLine(id);
+    }
+}
+```

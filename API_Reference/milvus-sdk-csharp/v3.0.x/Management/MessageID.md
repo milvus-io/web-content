@@ -66,3 +66,13 @@ public enum WalName
 - **Test** (999)
 
     A test WAL.
+
+## Example
+
+```csharp
+using Milvus.Client.V2.Types;
+
+var messageId = new MessageID("128-2024-07-10-12-34-56", WalName.Kafka);
+
+Console.WriteLine($"Message {messageId.Id} was produced by {messageId.WalName}");
+```

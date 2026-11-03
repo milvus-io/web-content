@@ -34,3 +34,30 @@ public sealed class ReplicateCheckpoint
 - `TimeTick` (*ulong*) -
 
     The time tick of the last replicated message.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetReplicateInfoResp info = await client.GetReplicateInfoAsync(new GetReplicateInfoReq
+{
+    SourceClusterId = "cluster-a",
+    TargetPchannel = "by-dev-rootcoord-dml_0"
+});
+
+ReplicateCheckpoint? checkpoint = info.Checkpoint;
+if (checkpoint is not null)
+{
+    Console.WriteLine($"{checkpoint.MessageId} at time tick {checkpoint.TimeTick}");
+}
+```

@@ -169,3 +169,24 @@ public enum IndexType
 - **Aisaq** (31)
 
     An AISAQ index for scalar/vector fields. Adaptive Indexing with Scalar And Quantization; supports scalar fields and low-dimensional vectors.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+await client.CreateIndexAsync(new CreateIndexReq
+{
+    CollectionName = "my_collection",
+    Indexes = [new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: MetricType.Cosine)]
+});
+```

@@ -33,3 +33,19 @@ Each field has a consuming setter, a mutable setter, and a getter.
 - `sampling_rate(mut self, rate: f64) -> Self` — sets the operation sampling rate, clamped to `0.0..=1.0`. `set_sampling_rate(&mut self, rate)` and `get_sampling_rate() -> f64` are also available.
 - `error_max_count(mut self, count: usize) -> Self` — sets the maximum number of retained recent errors. `set_error_max_count(&mut self, count)` and `get_error_max_count() -> usize` are also available.
 - `client_id(mut self, client_id: impl Into<String>) -> Self` — pins a stable client identifier. `set_client_id(&mut self, client_id)` and `get_client_id() -> &str` are also available.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let telemetry = TelemetryConfig::new()
+    .enabled(true)
+    .sampling_rate(0.5)
+    .error_max_count(50);
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .telemetry(telemetry);
+let client = ClientV2::new(&config).await?;
+```

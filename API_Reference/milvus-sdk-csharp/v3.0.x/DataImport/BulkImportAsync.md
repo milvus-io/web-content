@@ -95,48 +95,7 @@ BulkImportResp response = await bulkImport.BulkImportAsync(request);
 
 **RETURNS:**
 
-A **BulkImportResp** object that contains the envelope returned by the bulk-import REST endpoint. See [BulkImportResp](BulkImportResp.md).
-
-```csharp
-BulkImportResp
-    Code       // -> int
-    Message    // -> string
-    Data       // -> JsonElement
-    JobId      // -> string?
-    State      // -> string?
-    Progress   // -> long?
-    Reason     // -> string?
-```
-
-**PARAMETERS:**
-
-- **Code** (*int*) -
-
-    The server response code (0 on success).
-
-- **Message** (*string*) -
-
-    The server response message.
-
-- **Data** (*JsonElement*) -
-
-    The endpoint-specific response payload.
-
-- **JobId** (*string?*) -
-
-    The created or described import job ID, when supplied in `Data`.
-
-- **State** (*string?*) -
-
-    The import state, when supplied by the describe/progress endpoint.
-
-- **Progress** (*long?*) -
-
-    The import progress percentage, when supplied by the describe/progress endpoint.
-
-- **Reason** (*string?*) -
-
-    The import failure reason, when supplied by the describe/progress endpoint.
+A **[BulkImportResp](BulkImportResp.md)** object that contains the envelope returned by the bulk-import REST endpoint. See [BulkImportResp](BulkImportResp.md) for its members.
 
 **EXCEPTIONS:**
 

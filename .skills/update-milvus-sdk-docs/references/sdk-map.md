@@ -119,7 +119,13 @@ local directory via this table before editing. Current latest version line is
   `src/include/milvus/types/*.h`. Reconcile each operation page's
   `**RETURNS:**` block against them. Response wrapper getters stay inline in the
   operation page, while reusable domain types returned by those getters may have
-  dedicated pages.
+  dedicated pages. Exception: `BulkImportResponse` — the single top-level
+  envelope shared by the v3.0.x bulk-import REST endpoints (`CreateImportJobs`,
+  `GetImportJobProgress`, `ListImportJobs`, `CommitImport`, `AbortImport`) —
+  keeps a standalone page at `DataImport/BulkImportResponse.md`, and those
+  operation pages link to it (shared top-level response class exception; see
+  SKILL.md Step 9). The v2.6.x bulk-import endpoints return `nlohmann::json`
+  and need no such page.
 
   ```bash
   # side A: public getters on the response class (getter return type may be on
@@ -490,6 +496,18 @@ local directory via this table before editing. Current latest version line is
   `**EXCEPTIONS:**` section linking `Client/MilvusException.md` (see the
   shared exception/status/return-code rule in SKILL.md); `MilvusException` and
   `MilvusErrorCode` each have a dedicated page under `Client/`.
+- **Inline-expansion form differs from other SDKs**: C# expands a type inline
+  with a bold `**T**` type name + a code sketch (`// -> type` member list) + a
+  `**PARAMETERS:**`/`**METHODS:**` member block — there is NO `(*T*)`
+  annotation. Detectors and dedup sweeps must recognize this form (see SKILL.md
+  Step 9 "Detect every inline-expansion form" and Scripted batch edits
+  pitfalls). Per-endpoint-unique top-level response wrappers/envelopes that the
+  operation pages already expand inline never keep a standalone page, while
+  response **subtypes** referenced from multiple pages (`SingleResult`,
+  `HighlightResult`) keep their standalone pages and are linked. Exception: the
+  bulk-import REST family shares one top-level envelope, `BulkImportResp`, so it
+  keeps a standalone page under `DataImport/` and the operation pages link to
+  it (same rule as Rust/C++ `BulkImportResponse`).
 
 ## milvus-sdk-rust
 
@@ -524,7 +542,11 @@ local directory via this table before editing. Current latest version line is
   documents it at `Collections/FunctionType.md`. References to these types from
   request fields (`columns: Vec<FieldData>`, `ids: Ids`) and response members
   (`get_output_fields()`, `get_ids()`) link the corresponding `Vector/*.md`
-  page.
+  page. `BulkImportResponse` — the single top-level envelope shared by the
+  bulk-import REST endpoints (`bulk_import`, `abort_import`, `commit_import`,
+  `get_import_progress`, `list_import_jobs`) — keeps a standalone page at
+  `DataImport/BulkImportResponse.md`, and those operation pages link to it
+  (shared top-level response class exception; see SKILL.md Step 9).
 - **Tags**: plain `vX.Y.Z` (e.g. `v3.0.1`, `v3.0.2`, `v2.6.1`).
 - **Conventions**: import via `use milvus::v2::prelude::*;`; connect with
   `ClientV2::new(&ConnectConfig::new().uri(uri).token("root:Milvus")).await?`;

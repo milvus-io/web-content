@@ -79,6 +79,14 @@ VolumeBulkWriter(
 
     The value defaults to **ConnectType.AUTO**.
 
+    The `ConnectType` enum supports the following values:
+
+    - **ConnectType.AUTO** - Automatically resolves the endpoint based on the cloud and region.
+
+    - **ConnectType.INTERNAL** - Connects over the internal endpoint of the cluster.
+
+    - **ConnectType.PUBLIC** - Connects over the public endpoint of the cluster.
+
 **RETURN TYPE:**
 
 *VolumeBulkWriter*

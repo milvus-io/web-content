@@ -29,3 +29,26 @@ public enum ConsistencyLevelEnum
      <td><p>Executes a search/query immediately.</p></td>
    </tr>
 </table>
+
+## Example
+
+```java
+import io.milvus.common.clientenum.ConsistencyLevelEnum;
+import io.milvus.grpc.SearchResults;
+import io.milvus.param.MetricType;
+import io.milvus.param.R;
+import io.milvus.param.dml.SearchParam;
+
+SearchParam param = SearchParam.newBuilder()
+        .withCollectionName(COLLECTION_NAME)
+        .withMetricType(MetricType.IP)
+        .withTopK(10)
+        .withFloatVectors(targetVectors)
+        .withVectorFieldName("vector")
+        .withConsistencyLevel(ConsistencyLevelEnum.BOUNDED)
+        .build();
+R<SearchResults> response = client.search(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+}
+```

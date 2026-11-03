@@ -28,3 +28,21 @@ export enum SegmentLevel {
 - **L2** (3)
 
     Level-2 segment with extra data distribution info.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.getPersistentSegmentInfo({
+    collectionName: 'my_collection',
+});
+
+res.infos.forEach(info => console.log(info.level)); // SegmentLevel
+```
+

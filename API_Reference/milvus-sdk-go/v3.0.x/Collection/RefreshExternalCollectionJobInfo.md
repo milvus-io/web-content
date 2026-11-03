@@ -45,3 +45,33 @@ The Unix timestamp when the job started.
 - **EndTime** (*int64*) -
 The Unix timestamp when the job completed.
 
+## Example
+
+Demonstrates RefreshExternalCollectionJobInfo usage.
+
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v3/entity"
+	"github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "127.0.0.1:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+info, err := cli.GetRefreshExternalCollectionProgress(ctx, milvusclient.NewGetRefreshExternalCollectionProgressOption(123))
+if err != nil {
+	// handle error
+}
+fmt.Println(info.State, info.Progress)
+```

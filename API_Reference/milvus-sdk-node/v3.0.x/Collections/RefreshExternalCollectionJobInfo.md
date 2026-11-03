@@ -50,3 +50,21 @@ export interface RefreshExternalCollectionJobInfo {
 - **end_time** (*string*) -
 
     The end time of the refresh job.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.listRefreshExternalCollectionJobs({
+    collection_name: 'my_external_collection',
+});
+
+console.log(res.jobs); // RefreshExternalCollectionJobInfo[]
+```
+

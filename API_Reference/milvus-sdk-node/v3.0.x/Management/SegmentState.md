@@ -48,3 +48,21 @@ export enum SegmentState {
 - **Importing** ('Importing')
 
     The segment is being created via bulk import.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.getPersistentSegmentInfo({
+    collectionName: 'my_collection',
+});
+
+res.infos.forEach(info => console.log(info.state)); // SegmentState
+```
+

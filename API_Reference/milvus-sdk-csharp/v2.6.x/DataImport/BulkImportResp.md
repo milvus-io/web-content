@@ -51,3 +51,26 @@ public sealed class BulkImportResp : IDisposable
 - `GetDataField(string name)` -
 
     Returns one field from the endpoint-specific `Data` payload.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var bulkImport = new BulkImport(new BulkImportConfig
+{
+    Url = "http://localhost:19530",
+    ApiKey = "token"
+});
+
+BulkImportResp resp = await bulkImport.BulkImportAsync(new BulkImportRequest
+{
+    CollectionName = "my_collection",
+    Files = [["/tmp/data.json"]],
+    Options = { ["format"] = "json" }
+});
+
+Console.WriteLine(resp.Code == 0 ? $"Job {resp.JobId} created" : resp.Message);
+```

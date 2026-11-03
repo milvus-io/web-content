@@ -54,3 +54,27 @@ public enum MilvusErrorCode
 - **IndexNotFound** (700)
 
     The index was not found.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+try
+{
+    await client.DescribeCollectionAsync(new DescribeCollectionReq("my_collection"));
+}
+catch (MilvusException e)
+{
+    Console.WriteLine(e.ErrorCode == MilvusErrorCode.CollectionNotFound
+        ? "Collection not found"
+        : $"Error {e.ErrorCode}: {e.Message}");
+}
+```

@@ -33,3 +33,21 @@ export type GrantEntity = {
 - **db_name** (*string*) -
 
     The database the object belongs to.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.listGrants({
+    roleName: 'exampleRole',
+});
+
+console.log(res.entities); // GrantEntity[]
+```
+

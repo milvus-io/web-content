@@ -11,3 +11,21 @@ export type User = { name: string };
 - **name** (*string*) -
 
     The user name.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.describeUser({
+    username: 'root',
+});
+
+console.log(res.results[0]?.user); // User
+```
+

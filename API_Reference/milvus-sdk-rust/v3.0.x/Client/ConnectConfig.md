@@ -61,3 +61,15 @@ Each field has a consuming setter, a mutable setter, and a getter.
 - `retry(mut self, retry: RetryConfig) -> Self` — sets the retry policy. `set_retry(&mut self, retry)` and `get_retry() -> &RetryConfig` are also available.
 - `telemetry(mut self, telemetry: TelemetryConfig) -> Self` — sets the telemetry configuration. `set_telemetry(&mut self, telemetry)` and `get_telemetry() -> &TelemetryConfig` are also available.
 - `username_password(self, username: &str, password: &str) -> Self` — sets both credentials and derives the token unless `token()` was called explicitly.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus")
+    .database("books");
+let client = ClientV2::new(&config).await?;
+```

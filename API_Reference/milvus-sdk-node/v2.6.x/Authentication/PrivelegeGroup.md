@@ -18,3 +18,19 @@ export type PrivelegeGroup = {
 - **privileges** (*[PrivilegeEntity](PrivilegeEntity.md)[]*) -
 
     The privileges contained in the group. See [PrivilegeEntity](PrivilegeEntity.md).
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.listPrivilegeGroups();
+
+console.log(res.privilege_groups); // PrivelegeGroup[]
+```
+

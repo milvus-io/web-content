@@ -39,3 +39,33 @@ public enum IndexState
 - **Retry** (5)
 
     The index build is scheduled for a retry.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Responses.Index;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+DescribeIndexResp desc = await client.DescribeIndexAsync(new DescribeIndexReq
+{
+    CollectionName = "my_collection",
+    FieldName = "embedding"
+});
+
+foreach (IndexDesc index in desc.Indexes)
+{
+    Console.WriteLine($"{index.IndexName}: {index.State}");
+    if (index.State == IndexState.Failed)
+    {
+        Console.WriteLine(index.IndexStateFailReason);
+    }
+}
+```

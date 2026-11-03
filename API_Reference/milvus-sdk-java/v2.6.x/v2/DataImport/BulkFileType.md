@@ -19,3 +19,22 @@ public enum BulkFileType
 - **CSV**
 
     Sets the file type to CSV (*.csv*)
+
+## Example
+
+```java
+import io.milvus.bulkwriter.LocalBulkWriterParam;
+import io.milvus.bulkwriter.common.clientenum.BulkFileType;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder().build();
+collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).build());
+
+LocalBulkWriterParam bulkWriterParam = LocalBulkWriterParam.newBuilder()
+        .withCollectionSchema(collectionSchema)
+        .withLocalPath("/tmp/bulk_writer")
+        .withFileType(BulkFileType.PARQUET)
+        .build();
+```

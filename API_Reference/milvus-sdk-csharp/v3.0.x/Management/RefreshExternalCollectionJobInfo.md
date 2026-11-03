@@ -86,3 +86,26 @@ public enum RefreshExternalCollectionState
 - **Failed** (3)
 
     The refresh job has failed.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetRefreshExternalCollectionProgressResp result = await client.GetRefreshExternalCollectionProgressAsync(new GetRefreshExternalCollectionProgressReq
+{
+    JobId = 12345
+});
+
+RefreshExternalCollectionJobInfo job = result.JobInfo;
+Console.WriteLine($"{job.CollectionName}: {job.State} ({job.Progress}%)");
+```

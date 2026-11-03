@@ -70,3 +70,20 @@ public enum QuotaState
 - **DenyToDdl** (6)
 
     DDL operations are denied.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+HealthState state = await client.HealthAsync();
+Console.WriteLine(state.IsHealthy ? "Healthy" : state.Reason);
+```

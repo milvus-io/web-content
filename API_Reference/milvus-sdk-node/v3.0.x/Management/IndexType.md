@@ -187,3 +187,22 @@ export enum IndexType {
 - **FMINDEX** ('FMINDEX')
 
     Sets the index type to **FMINDEX**, an FM-index for `VARCHAR` that performs exact anchored `LIKE` matching with no recheck.
+
+## Example
+
+```javascript
+import { MilvusClient, IndexType, MetricType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createIndex({
+    collection_name: 'my_collection',
+    field_name: 'vector',
+    index_type: IndexType.HNSW,
+    metric_type: MetricType.COSINE,
+});
+```
+

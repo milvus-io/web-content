@@ -99,3 +99,24 @@ public enum DataType
      <td><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zeros. A sparse vector is a list of key-value pairs, the key type is an unsigned integer and the value type is Float32.</p></td>
    </tr>
 </table>
+
+## Example
+
+```java
+import io.milvus.grpc.DataType;
+import io.milvus.param.collection.CollectionSchemaParam;
+import io.milvus.param.collection.FieldType;
+
+CollectionSchemaParam collectionSchema = CollectionSchemaParam.newBuilder()
+        .addFieldType(FieldType.newBuilder()
+                .withName("id")
+                .withDataType(DataType.Int64)
+                .withPrimaryKey(true)
+                .build())
+        .addFieldType(FieldType.newBuilder()
+                .withName("vector")
+                .withDataType(DataType.FloatVector)
+                .withDimension(2)
+                .build())
+        .build();
+```

@@ -64,3 +64,22 @@ class CompactionTaskState(IntEnum):
 - **Statistic** (10)
 
     Indicates that the compaction task is collecting statistics.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, CompactionTaskState
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Retrieve the compaction plans of a compaction job
+plans = client.get_compaction_plans(job_id=123456789)
+
+# Check the state of each plan against CompactionTaskState constants
+for plan in plans.plans:
+    if plan.state == CompactionTaskState.Completed:
+        print(f"Plan {plan.plan_id} completed")
+```

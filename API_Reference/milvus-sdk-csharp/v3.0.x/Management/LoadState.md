@@ -29,3 +29,25 @@ public enum LoadState
 - **Loaded** (3)
 
     The entity is loaded.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Responses.Collection;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetLoadStateResp loadState = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection"
+});
+
+Console.WriteLine(loadState.State == LoadState.Loaded ? "Loaded" : "Not loaded");
+```

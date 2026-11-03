@@ -218,3 +218,27 @@ if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());
 }
 ```
+
+## Example
+
+```java
+import io.milvus.grpc.SearchResults;
+import io.milvus.param.MetricType;
+import io.milvus.param.R;
+import io.milvus.param.dml.SearchParam;
+
+SearchParam param = SearchParam.newBuilder()
+        .withCollectionName(COLLECTION_NAME)
+        .withMetricType(MetricType.L2)
+        .withTopK(10)
+        .withFloatVectors(targetVectors)
+        .withVectorFieldName("vector")
+        .build();
+R<SearchResults> response = client.search(param);
+if (response.getStatus() != R.Status.Success.getCode()) {
+    System.out.println(response.getMessage());
+} else {
+    SearchResults data = response.getData();
+    System.out.println("Search results: " + data.getResults());
+}
+```

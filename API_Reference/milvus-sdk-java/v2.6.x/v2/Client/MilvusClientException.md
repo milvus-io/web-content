@@ -69,3 +69,29 @@ The **ErrorCode** enumeration classifies the failure category of a **MilvusClien
 | **CLIENT_ERROR** | 4 |
 | **RPC_ERROR** | 5 |
 | **TIMEOUT** | 6 |
+
+## Example
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.exception.MilvusClientException;
+import io.milvus.v2.service.collection.request.HasCollectionReq;
+
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus") // replace this with your token
+        .build();
+
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+try {
+    Boolean exists = client.hasCollection(HasCollectionReq.builder()
+            .collectionName("test")
+            .build());
+    System.out.println(exists);
+} catch (MilvusClientException e) {
+    System.out.println("Error code: " + e.getErrorCode());
+    System.out.println("Error message: " + e.getMessage());
+}
+```

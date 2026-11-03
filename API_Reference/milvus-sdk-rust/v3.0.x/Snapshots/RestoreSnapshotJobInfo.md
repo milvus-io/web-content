@@ -39,3 +39,17 @@ Information of a snapshot restore job, as returned by `listRestoreSnapshotJobs()
 - `get_time_cost()` (*u64*) -
 
     The elapsed time of the restore job.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let request = ListRestoreSnapshotJobsRequest::builder()
+    .collection_name("books")
+    .build()?;
+let resp = client.list_restore_snapshot_jobs(request).await?;
+for job in resp.jobs() {
+    println!("{}: {:?}", job.get_snapshot_name(), job.get_state());
+}
+```

@@ -41,3 +41,34 @@ public sealed class IndexParam
 - `IndexParam(string fieldName, string? indexName = null, IndexType? indexType = null, MetricType? metricType = null)` (*constructor*) -
 
     Creates an index descriptor.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+var indexParam = new IndexParam("embedding", indexType: IndexType.AutoIndex, metricType: MetricType.Cosine)
+{
+    ExtraParams = { ["dim"] = 128 }
+};
+
+var schema = new CollectionSchema { Name = "my_collection" };
+schema.Fields.Add(new FieldSchema("id", DataType.Int64, isPrimaryKey: true, autoId: true));
+schema.Fields.Add(FieldSchema.CreateFloatVector("embedding", dimension: 128));
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema,
+    Indexes = [indexParam]
+});
+```

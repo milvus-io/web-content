@@ -112,3 +112,24 @@ export enum DataType {
 - **Struct** (201)
 
     Sets the data type to **Struct**. Note that this only applies to the elements in an **Array** field.
+
+## Example
+
+```javascript
+import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+await milvusClient.createCollection({
+    collection_name: 'my_collection',
+    fields: [
+        { name: 'id', data_type: DataType.Int64, is_primary_key: true, autoID: true },
+        { name: 'text', data_type: DataType.VarChar, type_params: { max_length: 512 } },
+        { name: 'vector', data_type: DataType.FloatVector, type_params: { dim: 8 } },
+    ],
+});
+```
+

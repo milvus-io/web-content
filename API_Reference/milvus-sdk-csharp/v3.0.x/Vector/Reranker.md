@@ -215,3 +215,42 @@ public sealed class ModelRerank : FunctionReranker<ModelRerank>
 - `WithEndpoint(string endpoint)` -
 
     Sets the model service endpoint URL.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+SearchResp results = await client.HybridSearchAsync(new HybridSearchReq
+{
+    CollectionName = "my_collection",
+    SearchRequests =
+    [
+        new AnnSearchReq
+        {
+            VectorFieldName = "embedding",
+            Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
+            MetricType = MetricType.L2,
+            Limit = 10
+        },
+        new AnnSearchReq
+        {
+            VectorFieldName = "sparse",
+            Texts = ["The Hobbit"],
+            Limit = 10
+        }
+    ],
+    Reranker = new RrfReranker(60),
+    Limit = 5
+});
+```

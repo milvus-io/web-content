@@ -33,3 +33,19 @@ pub enum RefreshExternalCollectionStateCode {
 - **Failed**
 
     The refresh task failed.
+
+## Example
+
+```rust
+use milvus::v2::prelude::*;
+
+let request = GetRefreshExternalCollectionProgressRequest::builder()
+    .job_id(job_id)
+    .build()?;
+let resp = client.get_refresh_external_collection_progress(request).await?;
+match resp.job_info().get_state() {
+    RefreshExternalCollectionStateCode::Completed => println!("refresh completed"),
+    RefreshExternalCollectionStateCode::Failed => println!("refresh failed: {}", resp.job_info().get_reason()),
+    _ => println!("refresh in progress"),
+}
+```

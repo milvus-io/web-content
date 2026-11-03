@@ -69,3 +69,22 @@ class CompactionType(IntEnum):
 - **BumpSchemaVersionCompaction** (12)
 
     Indicates a compaction that bumps the schema version of a segment.
+
+## Example
+
+```python
+from pymilvus import MilvusClient, CompactionType
+
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# Retrieve the compaction plans of a compaction job
+plans = client.get_compaction_plans(job_id=123456789)
+
+# Check the type of each plan against CompactionType constants
+for plan in plans.plans:
+    if plan.compaction_type == CompactionType.MergeCompaction:
+        print(f"Plan {plan.plan_id} merges small segments")
+```
