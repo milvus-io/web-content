@@ -208,7 +208,7 @@ schema.AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR
 
 Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.
 
-By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to [Standard Analyzer](standard-analyzer.md) for details.
+By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation and converts text to lowercase. No additional parameters are required for default usage. Refer to [Standard Analyzer](standard-analyzer.md) for details.
 
 If your application requires a specific analyzer, configure it using the `analyzer_params` parameter. For example, here's how to configure the `english` analyzer for phrase matching in English text:
 
