@@ -1160,7 +1160,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>To preserve existing IDs during data migration, enable the <code translate="no">allow_insert_auto_id</code> property by making the <code translate="no">alter_collection_properties</code> call. When set to true, Milvus accepts user-provided IDs even if AutoID is enabled.</p>
-<p>For configuration details, refer to <a href="/docs/modify-collection.md#Example-6-Enable-allow_insert_auto_id">Modify Collection</a>.</p>
+<p>For configuration details, refer to <a href="/docs/modify-collection.md#Example-6-Enable-allowinsertautoid">Modify Collection</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">Ensure global AutoID uniqueness across clusters<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
