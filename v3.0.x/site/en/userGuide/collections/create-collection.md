@@ -6,7 +6,9 @@ summary: "You can create a collection by defining its schema, index parameters, 
 
 # Create Collection
 
+
 You can create a collection by defining its schema, index parameters, metric type, and whether to load it upon creation. This page introduces how to create a collection from scratch.
+
 
 ## Overview
 
@@ -34,11 +36,15 @@ You can set default values for any scalar field and make it nullable. For detail
 
 </div>
 
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -73,7 +79,7 @@ import io.milvus.v2.service.collection.request.CreateCollectionReq;
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 String TOKEN = "root:Milvus";
 
-// 1. Connect to Milvus server
+// 1. Connect to Milvus
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -85,6 +91,7 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 3.1 Create schema
 CreateCollectionReq.CollectionSchema schema = client.createSchema();
+schema.setEnableDynamicField(true);
 
 // 3.2 Add fields to schema
 schema.addField(AddFieldReq.builder()
@@ -107,6 +114,92 @@ schema.addField(AddFieldReq.builder()
         .build());
 ```
 
+```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "http://localhost:19530"
+token := "root:Milvus"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+    APIKey:  token,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(true).
+    WithField(entity.NewField().WithName("my_id").WithIsAutoID(false).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("my_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).
+    WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512))
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 3. Create a collection in customized setup mode
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// 3.1 + 3.2 Create schema and add fields
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(true)
+    .add_field(
+        FieldSchema::new()
+            .name("my_id")
+            .data_type(DataType::Int64)
+            .primary_key(true)
+            .auto_id(false),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("my_vector")
+            .data_type(DataType::FloatVector)
+            .dimension(5),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("my_varchar")
+            .data_type(DataType::VarChar)
+            .max_length(512),
+    );
+```
+
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(true);
+schema->AddField(milvus::FieldSchema("my_id", milvus::DataType::INT64, "", true, false));
+schema->AddField(milvus::FieldSchema("my_vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+schema->AddField(milvus::FieldSchema("my_varchar", milvus::DataType::VARCHAR).WithMaxLength(512));
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -115,7 +208,7 @@ const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
 // 3. Create a collection in customized setup mode
-// 3.1 Define fields
+// 3.1 + 3.2 Create schema and define fields
 const fields = [
     {
         name: "my_id",
@@ -136,39 +229,35 @@ const fields = [
 ]
 ```
 
-```go
-import (
-    "context"
-    "fmt"
-    
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/v2/common"
-)
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 
-milvusAddr := "localhost:19530"
-client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-defer client.Close(ctx)
+const string CLUSTER_ENDPOINT = "http://localhost:19530";
 
-schema := entity.NewSchema().WithDynamicFieldEnabled(true).
-        WithField(entity.NewField().WithName("my_id").WithIsAutoID(false).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
-        WithField(entity.NewField().WithName("my_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).
-        WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512))
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+var schema = new CollectionSchema
+{
+    EnableDynamicFields = true,
+    Fields =
+    {
+        new FieldSchema("my_id", DataType.Int64, isPrimaryKey: true),
+        FieldSchema.CreateFloatVector("my_vector", dimension: 5),
+        FieldSchema.CreateVarchar("my_varchar", maxLength: 512)
+    }
+};
 ```
 
 ```bash
 export schema='{
         "autoId": false,
-        "enabledDynamicField": false,
+        "enableDynamicField": true,
         "fields": [
             {
                 "fieldName": "my_id",
@@ -193,6 +282,7 @@ export schema='{
     }'
 ```
 
+
 ## (Optional) Set Index Parameters
 
 Creating an index on a specific field accelerates the search against this field. An index records the order of entities within a collection. As shown in the following code snippets, you can use `metric_type` and `index_type` to select appropriate ways for Milvus to index a field and measure similarities between vector embeddings.
@@ -206,8 +296,11 @@ For details, refer to [Index Vector Fields](index-vector-fields.md) and [Index S
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -249,8 +342,43 @@ indexParams.add(indexParamForIdField);
 indexParams.add(indexParamForVectorField);
 ```
 
+```go
+import (
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+collectionName := "customized_setup_1"
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)),
+    milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex(entity.COSINE)),
+}
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 3.3 + 3.4 Prepare and add index parameters
+let index_params = vec![
+    IndexParam::new()
+        .field_name("my_id")
+        .index_type(IndexType::AutoIndex),
+    IndexParam::new()
+        .field_name("my_vector")
+        .index_type(IndexType::AutoIndex)
+        .metric_type(MetricType::Cosine),
+];
+```
+
+```cpp
+std::vector<milvus::IndexDesc> indexes = {
+    milvus::IndexDesc("my_id", "my_id", milvus::IndexType::AUTOINDEX),
+    milvus::IndexDesc("my_vector", "my_vector", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)};
+```
+
 ```javascript
-// 3.2 Prepare index parameters
+// 3.3 + 3.4 Prepare and add index parameters
 const index_params = [{
     field_name: "my_id",
     index_type: "AUTOINDEX"
@@ -261,18 +389,14 @@ const index_params = [{
 }]
 ```
 
-```go
-import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
+```csharp
+using Milvus.Client.V2.Types;
 
-collectionName := "customized_setup_1"
-indexOptions := []milvusclient.CreateIndexOption{
-    milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)),
-    milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex(entity.COSINE)),
-}
+var indexParams = new[]
+{
+    new IndexParam("my_id", "my_id", IndexType.AutoIndex),
+    new IndexParam("my_vector", "my_vector", IndexType.AutoIndex, MetricType.Cosine)
+};
 ```
 
 ```bash
@@ -300,8 +424,11 @@ The following code snippets demonstrate how to create the collection with index 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -330,7 +457,7 @@ print(res)
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.collection.request.GetLoadStateReq;
 
-// 3.4 Create a collection with schema and index parameters
+// 3.5 Create a collection with schema and index parameters
 CreateCollectionReq customizedSetupReq1 = CreateCollectionReq.builder()
         .collectionName("customized_setup_1")
         .collectionSchema(schema)
@@ -339,7 +466,7 @@ CreateCollectionReq customizedSetupReq1 = CreateCollectionReq.builder()
 
 client.createCollection(customizedSetupReq1);
 
-// 3.5 Get load state of the collection
+// Check the load state of the collection
 GetLoadStateReq customSetupLoadStateReq1 = GetLoadStateReq.builder()
         .collectionName("customized_setup_1")
         .build();
@@ -351,20 +478,88 @@ System.out.println(loaded);
 // true
 ```
 
+```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_1", schema).
+    WithIndexOptions(indexOptions...))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println("collection created")
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption("customized_setup_1"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(state.State)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 3.5 Create a collection with the index loaded simultaneously
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_1")
+            .schema(schema.clone())
+            .index_params(index_params.clone())
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("customized_setup_1")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.state());
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                           .WithCollectionName("customized_setup_1")
+                                           .WithCollectionSchema(schema)
+                                           .WithIndexes(std::move(indexes)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                  .WithCollectionName("customized_setup_1"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << std::to_string(response.State()) << std::endl;
+```
+
 ```javascript
-// 3.3 Create a collection with fields and index parameters
-res = await client.createCollection({
+// 3.5 Create a collection with fields and index parameters
+let res = await client.createCollection({
     collection_name: "customized_setup_1",
     fields: fields,
+    enable_dynamic_field: true,
     index_params: index_params,
 })
 
-console.log(res.error_code)  
+console.log(res.error_code)
 
 // Output
-// 
+//
 // Success
-// 
+//
 
 res = await client.getLoadState({
     collection_name: "customized_setup_1"
@@ -373,19 +568,27 @@ res = await client.getLoadState({
 console.log(res.state)
 
 // Output
-// 
+//
 // LoadStateLoaded
-// 
+//
 ```
 
-```go
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_1", schema).
-    WithIndexOptions(indexOptions...))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-fmt.Println("collection created")
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_1",
+    Schema = schema,
+    Indexes = indexParams
+});
+
+var res = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "customized_setup_1"
+});
+Console.WriteLine(res.State);
 ```
 
 ```bash
@@ -402,17 +605,40 @@ curl --request POST \
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/get_load_state" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "customized_setup_1"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "loadProgress": 100,
+#         "loadState": "LoadStateLoaded",
+#         "message": ""
+#     }
+# }
 ```
 
-You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. .
+
+You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation.
+
 
 The following code snippet demonstrates how to create a collection without an index, and the load status of the collection remains unloaded upon creation.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -437,6 +663,9 @@ print(res)
 ```
 
 ```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.GetLoadStateReq;
+
 // 3.6 Create a collection and index it separately
 CreateCollectionReq customizedSetupReq2 = CreateCollectionReq.builder()
     .collectionName("customized_setup_2")
@@ -448,7 +677,7 @@ client.createCollection(customizedSetupReq2);
 GetLoadStateReq customSetupLoadStateReq2 = GetLoadStateReq.builder()
         .collectionName("customized_setup_2")
         .build();
-        
+
 Boolean loaded = client.getLoadState(customSetupLoadStateReq2);
 System.out.println(loaded);
 
@@ -456,33 +685,13 @@ System.out.println(loaded);
 // false
 ```
 
-```javascript
-// 3.4 Create a collection and index it seperately
-res = await client.createCollection({
-    collection_name: "customized_setup_2",
-    fields: fields,
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.getLoadState({
-    collection_name: "customized_setup_2"
-})
-
-console.log(res.state)
-
-// Output
-// 
-// LoadStateNotLoad
-// 
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_2", schema))
 if err != nil {
     fmt.Println(err.Error())
@@ -496,6 +705,92 @@ if err != nil {
     // handle error
 }
 fmt.Println(state.State)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 3.6 Create a collection and index it separately
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_2")
+            .schema(schema.clone())
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .get_load_state(
+        GetLoadStateRequest::builder()
+            .collection_name("customized_setup_2")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.state());
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                           .WithCollectionName("customized_setup_2")
+                                           .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client->GetLoadState(milvus::GetLoadStateRequest()
+                                  .WithCollectionName("customized_setup_2"),
+                              response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << std::to_string(response.State()) << std::endl;
+```
+
+```javascript
+// 3.6 Create a collection and index it separately
+let res = await client.createCollection({
+    collection_name: "customized_setup_2",
+    fields: fields,
+    enable_dynamic_field: true,
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.getLoadState({
+    collection_name: "customized_setup_2"
+})
+
+console.log(res.state)
+
+// Output
+//
+// LoadStateNotLoad
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_2",
+    Schema = schema
+});
+
+var res = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "customized_setup_2"
+});
+Console.WriteLine(res.State);
 ```
 
 ```bash
@@ -517,9 +812,18 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
--d "{
-    \"collectionName\": \"customized_setup_2\"
-}"
+-d '{
+    "collectionName": "customized_setup_2"
+}'
+
+# {
+#     "code": 0,
+#     "data": {
+#         "loadProgress": 0,
+#         "loadState": "LoadStateNotLoad",
+#         "message": ""
+#     }
+# }
 ```
 
 ## Set Collection Properties
@@ -539,8 +843,11 @@ The following code snippet demonstrates how to set the shard number when you cre
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -555,32 +862,80 @@ client.create_collection(
 ```
 
 ```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
 // With shard number
 CreateCollectionReq customizedSetupReq3 = CreateCollectionReq.builder()
     .collectionName("customized_setup_3")
-    .collectionSchema(collectionSchema)
-    # highlight-next-line
+    .collectionSchema(schema)
+    // highlight-next-line
     .numShards(1)
     .build();
 client.createCollection(customizedSetupReq3);
 ```
 
-```javascript
-const createCollectionReq = {
-    collection_name: "customized_setup_3",
-    schema: schema,
-    # highlight-next-line
-    shards_num: 1
-}
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_3", schema).WithShardNum(1))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// With shard number
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_3")
+            .schema(schema.clone())
+            .num_shards(1)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                          .WithCollectionName("customized_setup_3")
+                                          .WithCollectionSchema(schema)
+                                          .WithNumShards(1));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const createCollectionReq = {
+    collection_name: "customized_setup_3",
+    fields: fields,
+    enable_dynamic_field: true,
+    // highlight-next-line
+    shards_num: 1
+}
+
+await client.createCollection(createCollectionReq);
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_3",
+    Schema = schema,
+    ShardsNum = 1
+});
 ```
 
 ```bash
@@ -605,14 +960,17 @@ curl --request POST \
 
 ### Enable mmap
 
-Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to [Use mmap](mmap.md).
+Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. The following example turns mmap off for a single collection; for details on mmap, refer to [Use mmap](mmap.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -627,30 +985,28 @@ client.create_collection(
 
 ```java
 import io.milvus.param.Constant;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 // With MMap
 CreateCollectionReq customizedSetupReq4 = CreateCollectionReq.builder()
         .collectionName("customized_setup_4")
         .collectionSchema(schema)
-        # highlight-next-line
+        // highlight-next-line
         .property(Constant.MMAP_ENABLED, "false")
         .build();
 client.createCollection(customizedSetupReq4);
 ```
 
-```javascript
-client.create_collection({
-    collection_name: "customized_setup_4",
-    schema: schema,
-     properties: {
-        'mmap.enabled': true,
-     },
-})
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/common"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_4", schema).
-    WithProperty(common.MmapEnabledKey, true))
+    WithProperty(common.MmapEnabledKey, false))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
@@ -658,9 +1014,64 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// With mmap
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_4")
+            .schema(schema.clone())
+            .properties(std::collections::HashMap::from([(
+                "mmap.enabled".to_string(),
+                "false".to_string(),
+            )]))
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                          .WithCollectionName("customized_setup_4")
+                                          .WithCollectionSchema(schema)
+                                          .AddProperty(milvus::MMAP_ENABLED, "false"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.createCollection({
+    collection_name: "customized_setup_4",
+    fields: fields,
+    enable_dynamic_field: true,
+    // highlight-next-line
+    properties: {
+        'mmap.enabled': false,
+    },
+})
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_4",
+    Schema = schema,
+    Properties =
+    {
+        ["mmap.enabled"] = "false"
+    }
+});
+```
+
 ```bash
 export params='{
-    "mmap.enabled": True
+    "mmap.enabled": false
 }'
 
 export CLUSTER_ENDPOINT="http://localhost:19530"
@@ -672,7 +1083,7 @@ curl --request POST \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
 -d "{
-    \"collectionName\": \"customized_setup_5\",
+    \"collectionName\": \"customized_setup_4\",
     \"schema\": $schema,
     \"params\": $params
 }"
@@ -687,8 +1098,11 @@ The following code snippet sets the TTL to one day (86400 seconds). You are advi
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -707,37 +1121,91 @@ client.create_collection(
 
 ```java
 import io.milvus.param.Constant;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 // With TTL
 CreateCollectionReq customizedSetupReq5 = CreateCollectionReq.builder()
         .collectionName("customized_setup_5")
         .collectionSchema(schema)
-        # highlight-next-line
+        // highlight-next-line
         .property(Constant.TTL_SECONDS, "86400")
         .build();
 client.createCollection(customizedSetupReq5);
 ```
 
-```javascript
-const createCollectionReq = {
-    collection_name: "customized_setup_5",
-    schema: schema,
-    # highlight-start
-    properties: {
-        "collection.ttl.seconds": 86400
-    }
-    # highlight-end
-}
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/common"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_5", schema).
-    WithProperty(common.CollectionTTLConfigKey, true))
+    WithProperty(common.CollectionTTLConfigKey, 86400))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// With TTL
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_5")
+            .schema(schema.clone())
+            .properties(std::collections::HashMap::from([(
+                "collection.ttl.seconds".to_string(),
+                "86400".to_string(),
+            )]))
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                          .WithCollectionName("customized_setup_5")
+                                          .WithCollectionSchema(schema)
+                                          .AddProperty(milvus::COLLECTION_TTL_SECONDS, "86400"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const createCollectionReq = {
+    collection_name: "customized_setup_5",
+    fields: fields,
+    enable_dynamic_field: true,
+    // highlight-start
+    properties: {
+        "collection.ttl.seconds": 86400
+    }
+    // highlight-end
+}
+
+await client.createCollection(createCollectionReq);
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_5",
+    Schema = schema,
+    Properties =
+    {
+        ["collection.ttl.seconds"] = "86400"
+    }
+});
 ```
 
 ```bash
@@ -767,8 +1235,11 @@ When creating a collection, you can set the consistency level for searches and q
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -784,30 +1255,26 @@ client.create_collection(
 
 ```java
 import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 // With consistency level
 CreateCollectionReq customizedSetupReq6 = CreateCollectionReq.builder()
         .collectionName("customized_setup_6")
         .collectionSchema(schema)
-        # highlight-next-line
+        // highlight-next-line
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 client.createCollection(customizedSetupReq6);
 ```
 
-```javascript
-const createCollectionReq = {
-    collection_name: "customized_setup_6",
-    schema: schema,
-    # highlight-next-line
-    consistency_level: "Bounded",
-    # highlight-end
-}
-
-client.createCollection(createCollectionReq);
-```
-
 ```go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_6", schema).
     WithConsistencyLevel(entity.ClBounded))
 if err != nil {
@@ -815,6 +1282,55 @@ if err != nil {
     // handle error
 }
 fmt.Println("collection created")
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// With consistency level
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name("customized_setup_6")
+            .schema(schema.clone())
+            .consistency_level(ConsistencyLevel::Bounded)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                          .WithCollectionName("customized_setup_6")
+                                          .WithCollectionSchema(schema)
+                                          .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+const createCollectionReq = {
+    collection_name: "customized_setup_6",
+    fields: fields,
+    enable_dynamic_field: true,
+    // highlight-next-line
+    consistency_level: "Bounded",
+}
+
+await client.createCollection(createCollectionReq);
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Types;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "customized_setup_6",
+    Schema = schema,
+    ConsistencyLevel = ConsistencyLevel.BoundedStaleness
+});
 ```
 
 ```bash

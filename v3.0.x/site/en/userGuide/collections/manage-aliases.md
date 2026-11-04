@@ -14,10 +14,10 @@ This page demonstrates how to create, list, reassign, and drop collection aliase
 
 The primary benefit of using an alias is to decouple your client application from a specific, physical collection name.
 
-Imagine you have a live application that queries a collection named `prod_data`. When you need to update the underlying data, you can perform the update without any service interruption. The workflow would be:
+Imagine you have a live application that queries a collection through an alias named `prod_data`. When you need to update the underlying data, you can perform the update without any service interruption. The workflow would be:
 
 1.  **Create a New Collection**: Create a new collection, for instance, `prod_data_v2`.
-2.  **Prepare Data**: Load and index the new data in `prod_data_v2`.
+2.  **Prepare Data**: Index and load the new data in `prod_data_v2`.
 3.  **Switch the Alias**: Once the new collection is ready for service, atomically reassign the alias `prod_data` from the old collection to `prod_data_v2`.
 
 Your application continues to send requests to the alias `prod_data`, experiencing zero downtime. This mechanism enables seamless updates and simplifies operations like blue-green deployments for your vector search service.
@@ -34,8 +34,11 @@ The following code snippet demonstrates how to create an alias for a collection.
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -68,7 +71,7 @@ import io.milvus.v2.client.MilvusClientV2;
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 String TOKEN = "root:Milvus";
 
-// 1. Connect to Milvus server
+// 1. Connect to Milvus
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -94,53 +97,23 @@ createAliasReq = CreateAliasReq.builder()
 client.createAlias(createAliasReq);
 ```
 
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const address = "http://localhost:19530";
-const token = "root:Milvus";
-const client = new MilvusClient({address, token});
-
-// 9. Manage aliases
-// 9.1 Create aliases
-res = await client.createAlias({
-    collection_name: "my_collection_1",
-    alias: "bob"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.createAlias({
-    collection_name: "my_collection_1",
-    alias: "alice"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-```
-
 ```go
 import (
     "context"
     "fmt"
-    
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
+
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
+token := "root:Milvus"
+
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  token,
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -159,6 +132,125 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+let client = ClientV2::new(
+    &ConnectConfig::new()
+        .uri("http://localhost:19530")
+        .token("root:Milvus"),
+)
+.await?;
+
+// 9.1 Create aliases
+client
+    .create_alias(
+        CreateAliasRequest::builder()
+            .collection_name("my_collection_1")
+            .alias("bob")
+            .build()?,
+    )
+    .await?;
+
+client
+    .create_alias(
+        CreateAliasRequest::builder()
+            .collection_name("my_collection_1")
+            .alias("alice")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include <iostream>
+
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->CreateAlias(milvus::CreateAliasRequest()
+                                 .WithCollectionName("my_collection_1")
+                                 .WithAlias("bob"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->CreateAlias(milvus::CreateAliasRequest()
+                                 .WithCollectionName("my_collection_1")
+                                 .WithAlias("alice"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const address = "http://localhost:19530";
+const token = "root:Milvus";
+const client = new MilvusClient({address, token});
+
+// 9.1 Create aliases
+let res = await client.createAlias({
+    collection_name: "my_collection_1",
+    alias: "bob"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.createAlias({
+    collection_name: "my_collection_1",
+    alias: "alice"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Types;
+
+const string CLUSTER_ENDPOINT = "http://localhost:19530";
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = "root:Milvus"
+});
+await client.ConnectAsync();
+
+// 9.1 Create aliases
+await client.CreateAliasAsync(new CreateAliasReq
+{
+    CollectionName = "my_collection_1",
+    Alias = "bob"
+});
+
+await client.CreateAliasAsync(new CreateAliasReq
+{
+    CollectionName = "my_collection_1",
+    Alias = "alice"
+});
 ```
 
 ```bash
@@ -203,8 +295,11 @@ The following code snippet demonstrates the procedure to list the aliases alloca
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -232,7 +327,7 @@ print(res)
 import io.milvus.v2.service.utility.request.ListAliasesReq;
 import io.milvus.v2.service.utility.response.ListAliasResp;
 
-// 9.2 List alises
+// 9.2 List aliases
 ListAliasesReq listAliasesReq = ListAliasesReq.builder()
     .collectionName("my_collection_1")
     .build();
@@ -245,20 +340,6 @@ System.out.println(listAliasRes.getAlias());
 // [bob, alice]
 ```
 
-```javascript
-// 9.2 List aliases
-res = await client.listAliases({
-    collection_name: "my_collection_1"
-})
-
-console.log(res.aliases)
-
-// Output
-// 
-// [ 'bob', 'alice' ]
-// 
-```
-
 ```go
 aliases, err := client.ListAliases(ctx, milvusclient.NewListAliasesOption("my_collection_1"))
 if err != nil {
@@ -266,6 +347,60 @@ if err != nil {
     // handle error
 }
 fmt.Println(aliases)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 9.2 List aliases
+let res = client
+    .list_aliases(
+        ListAliasesRequest::builder()
+            .collection_name("my_collection_1")
+            .build()?,
+    )
+    .await?;
+
+println!("{:?}", res.aliases());
+```
+
+```cpp
+milvus::ListAliasesResponse response;
+auto status = client->ListAliases(milvus::ListAliasesRequest()
+                                      .WithCollectionName("my_collection_1"),
+                                  response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& alias : response.Aliases()) {
+    std::cout << alias << std::endl;
+}
+```
+
+```javascript
+// 9.2 List aliases
+const listRes = await client.listAliases({
+    collection_name: "my_collection_1"
+})
+
+console.log(listRes.aliases)
+
+// Output
+//
+// [ 'bob', 'alice' ]
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+// 9.2 List aliases
+var listRes = await client.ListAliasesAsync(new ListAliasesReq
+{
+    CollectionName = "my_collection_1"
+});
+Console.WriteLine(string.Join(", ", listRes.Aliases));
 ```
 
 ```bash
@@ -277,7 +412,9 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
--d '{}'
+-d '{
+    "collectionName": "my_collection_1"
+}'
 
 # {
 #     "code": 0,
@@ -295,8 +432,11 @@ The following code snippet describes a specific alias in detail, including the n
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -334,17 +474,50 @@ System.out.println(describeAliasRes);
 // DescribeAliasResp(collectionName=my_collection_1, alias=bob)
 ```
 
+```go
+alias, err := client.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption("bob"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(alias)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 9.3 Describe alias
+let res = client
+    .describe_alias(
+        DescribeAliasRequest::builder().alias("bob").build()?,
+    )
+    .await?;
+
+println!("{:?}", res);
+```
+
+```cpp
+milvus::DescribeAliasResponse response;
+auto status = client->DescribeAlias(milvus::DescribeAliasRequest()
+                                        .WithAlias("bob"),
+                                    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << response.Desc().CollectionName() << std::endl;
+```
+
 ```javascript
-// 9.3 Describe aliases
-res = await client.describeAlias({
+// 9.3 Describe alias
+const describeRes = await client.describeAlias({
     collection_name: "my_collection_1",
     alias: "bob"
 })
 
-console.log(res)
+console.log(describeRes)
 
 // Output
-// 
+//
 // {
 //   status: {
 //     extra_info: {},
@@ -358,16 +531,19 @@ console.log(res)
 //   alias: 'bob',
 //   collection: 'my_collection_1'
 // }
-// 
+//
 ```
 
-```go
-alias, err := client.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption("bob"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-fmt.Println(alias)
+```csharp
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Responses.Utility;
+
+// 9.3 Describe alias
+var describeRes = await client.DescribeAliasAsync(new DescribeAliasReq
+{
+    Alias = "bob"
+});
+Console.WriteLine(describeRes.CollectionName);
 ```
 
 ```bash
@@ -400,8 +576,11 @@ You can reallocate the alias already allocated to a specific collection to anoth
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -464,6 +643,9 @@ ListAliasResp listAliasRes = client.listAliases(listAliasesReq);
 
 System.out.println(listAliasRes.getAlias());
 
+// Output:
+// [alice]
+
 listAliasesReq = ListAliasesReq.builder()
         .collectionName("my_collection_1")
         .build();
@@ -474,44 +656,6 @@ System.out.println(listAliasRes.getAlias());
 
 // Output:
 // [bob]
-```
-
-```javascript
-// 9.4 Reassign aliases to other collections
-res = await client.alterAlias({
-    collection_name: "my_collection_2",
-    alias: "alice"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.listAliases({
-    collection_name: "my_collection_2"
-})
-
-console.log(res.aliases)
-
-// Output
-// 
-// [ 'alice' ]
-// 
-
-res = await client.listAliases({
-    collection_name: "my_collection_1"
-})
-
-console.log(res.aliases)
-
-// Output
-// 
-// [ 'bob' ]
-// 
-
 ```
 
 ```go
@@ -534,6 +678,104 @@ if err != nil {
     // handle error
 }
 fmt.Println(aliases)
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 9.4 Reassign an alias to another collection
+client
+    .alter_alias(
+        AlterAliasRequest::builder()
+            .collection_name("my_collection_2")
+            .alias("alice")
+            .build()?,
+    )
+    .await?;
+
+let res = client
+    .list_aliases(
+        ListAliasesRequest::builder()
+            .collection_name("my_collection_2")
+            .build()?,
+    )
+    .await?;
+println!("{:?}", res.aliases());
+```
+
+```cpp
+auto status = client->AlterAlias(milvus::AlterAliasRequest()
+                                     .WithCollectionName("my_collection_2")
+                                     .WithAlias("alice"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListAliasesResponse response;
+status = client->ListAliases(milvus::ListAliasesRequest()
+                                 .WithCollectionName("my_collection_2"),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+for (const auto& alias : response.Aliases()) {
+    std::cout << alias << std::endl;
+}
+```
+
+```javascript
+// 9.4 Reassign aliases to other collections
+let res = await client.alterAlias({
+    collection_name: "my_collection_2",
+    alias: "alice"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.listAliases({
+    collection_name: "my_collection_2"
+})
+
+console.log(res.aliases)
+
+// Output
+//
+// [ 'alice' ]
+//
+
+res = await client.listAliases({
+    collection_name: "my_collection_1"
+})
+
+console.log(res.aliases)
+
+// Output
+//
+// [ 'bob' ]
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Types;
+
+// 9.4 Reassign the alias to another collection
+await client.AlterAliasAsync(new AlterAliasReq
+{
+    CollectionName = "my_collection_2",
+    Alias = "alice"
+});
+
+var listRes = await client.ListAliasesAsync(new ListAliasesReq
+{
+    CollectionName = "my_collection_2"
+});
+Console.WriteLine(string.Join(", ", listRes.Aliases));
 ```
 
 ```bash
@@ -585,7 +827,7 @@ curl --request POST \
 # {
 #     "code": 0,
 #     "data": {
-#         "aliasName": "alice",
+#         "aliasName": "bob",
 #         "collectionName": "my_collection_1",
 #         "dbName": "default"
 #     }
@@ -599,8 +841,11 @@ The following code snippet demonstrates the procedure to drop an alias.
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -632,31 +877,6 @@ dropAliasReq = DropAliasReq.builder()
 client.dropAlias(dropAliasReq);
 ```
 
-```javascript
-// 9.5 Drop aliases
-res = await client.dropAlias({
-    alias: "bob"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-
-res = await client.dropAlias({
-    alias: "alice"
-})
-
-console.log(res.error_code)
-
-// Output
-// 
-// Success
-// 
-```
-
 ```go
 err = client.DropAlias(ctx, milvusclient.NewDropAliasOption("bob"))
 if err != nil {
@@ -669,6 +889,65 @@ if err != nil {
     fmt.Println(err.Error())
     // handle error
 }
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// 9.5 Drop aliases
+client
+    .drop_alias(DropAliasRequest::builder().alias("bob").build()?)
+    .await?;
+
+client
+    .drop_alias(DropAliasRequest::builder().alias("alice").build()?)
+    .await?;
+```
+
+```cpp
+auto status = client->DropAlias(milvus::DropAliasRequest().WithAlias("bob"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->DropAlias(milvus::DropAliasRequest().WithAlias("alice"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+// 9.5 Drop aliases
+let res = await client.dropAlias({
+    alias: "bob"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+
+res = await client.dropAlias({
+    alias: "alice"
+})
+
+console.log(res.error_code)
+
+// Output
+//
+// Success
+//
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Utility;
+using Milvus.Client.V2.Types;
+
+// 9.5 Drop aliases
+await client.DropAliasAsync(new DropAliasReq { Alias = "bob" });
+await client.DropAliasAsync(new DropAliasReq { Alias = "alice" });
 ```
 
 ```bash
@@ -703,4 +982,3 @@ curl --request POST \
 #     "data": {}
 # }
 ```
-

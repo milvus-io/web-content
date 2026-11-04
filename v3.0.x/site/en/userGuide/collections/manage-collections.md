@@ -42,7 +42,9 @@ For more information, please refer to [Primary Field & AutoId](primary-field.md)
 
 ## Index
 
+
 Creating indexes on specific fields improves search efficiency. You are advised to create indexes for all the fields your service relies on, among which indexes on vector fields are mandatory.
+
 
 ## Entity
 
@@ -124,5 +126,7 @@ You can set functions for Milvus to derive fields upon collection creation. For 
 
 Distributed database systems usually use the consistency level to define the data sameness across data nodes and replicas. You can set separate consistency levels when you create a collection or conduct similarity searches within the collection. The applicable consistency levels are **Strong**, **Bounded Staleness**, **Session**, and **Eventually**.
 
- For details on these consistency levels, refer to [Consistency Level](tune_consistency.md).
+
+For details on these consistency levels, refer to [Consistency Level](tune_consistency.md).
+
 
