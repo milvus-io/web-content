@@ -100,6 +100,32 @@ A writer that stages bulk files locally and uploads committed files to the confi
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
 
+## Methods
+
+- **get_volume_upload_result()**
+
+    Returns the metadata of the uploaded data in the target volume.
+
+    **RETURN TYPE:**
+
+    *dict*
+
+    **RETURNS:**
+
+    A dictionary with the following keys:
+
+    - **volume_name** (*str*)
+
+        The name of the target volume.
+
+    - **volumeName** (*str*)
+
+        The name of the target volume.
+
+    - **path** (*str*)
+
+        The remote path in the volume that holds the uploaded data.
+
 ## Example
 
 ```python
