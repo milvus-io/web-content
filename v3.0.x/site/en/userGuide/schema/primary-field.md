@@ -1096,7 +1096,7 @@ Your responsibilities:
 
 To preserve existing IDs during data migration, enable the `allow_insert_auto_id` property by making the `alter_collection_properties` call. When set to true, Milvus accepts user-provided IDs even if AutoID is enabled.
 
-For configuration details, refer to [Modify Collection](modify-collection.md#Example-6-Enable-allow_insert_auto_id).
+For configuration details, refer to [Modify Collection](modify-collection.md#Example-6-Enable-allowinsertautoid).
 
 ### Ensure global AutoID uniqueness across clusters
 
