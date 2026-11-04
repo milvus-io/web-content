@@ -146,16 +146,16 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -428,16 +428,16 @@ params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hlj
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+    index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.05</span>))
+indexOption.WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -456,7 +456,7 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{
                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
                &quot;bm25_k1&quot;: 1.2,
@@ -533,8 +533,11 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
     schema=schema, 
     index_params=index_params
 )
+
+client.load_collection(<span class="hljs-string">&#x27;my_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -542,6 +545,9 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
@@ -550,13 +556,21 @@ client.createCollection(requestCreate);
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: index_params,
-    <span class="hljs-attr">functions</span>: functions
+    <span class="hljs-attr">functions</span>: functions,
 });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -571,6 +585,14 @@ curl --request POST \
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
                                     .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -711,6 +733,7 @@ milvus::InsertResponse response;
 <span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
 <span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>},
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -720,6 +743,7 @@ milvus::InsertResponse response;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -731,6 +755,7 @@ Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <s
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
@@ -755,6 +780,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;BM25&#x27;</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
@@ -774,6 +800,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         &quot;text&quot;
     ],
     &quot;searchParams&quot;:{
+        &quot;metric_type&quot;: &quot;BM25&quot;,
         &quot;params&quot;:{}
     }
 }&#x27;</span>
@@ -783,6 +810,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
                        .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)
                        .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
                        .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+                       .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
                        .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
 
 milvus::SearchResponse response;
@@ -866,7 +894,9 @@ milvus::SearchResponse response;
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
+<pre><code translate="no" class="language-python">search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>}
+
+<span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
     data=[<span class="hljs-string">&#x27;query text&#x27;</span>],

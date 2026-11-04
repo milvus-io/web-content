@@ -104,7 +104,10 @@ summary: >-
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -172,18 +175,17 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -207,22 +209,96 @@ schema.WithField(entity.NewField().
     WithDim(<span class="hljs-number">5</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">512</span>)
+            .<span class="hljs-title function_ invoke__">partition_key</span>(<span class="hljs-literal">true</span>), <span class="hljs-comment">// Add the partition key</span>
+    );
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;my_varchar&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithPartitionKey</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">512</span>));
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
 
-<span class="hljs-comment">// 3. Create a collection in customized setup mode</span>
-<span class="hljs-comment">// 3.1 Define fields</span>
+<span class="hljs-comment">// Define fields</span>
 <span class="hljs-keyword">const</span> fields = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;my_varchar&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>,</span>
+  },
+];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    Fields =
     {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
-        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
-        <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>),
+        FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;vector&quot;</span>, dimension: <span class="hljs-number">5</span>),
+        <span class="hljs-comment">// Add the partition key</span>
+        FieldSchema.CreateVarchar(<span class="hljs-string">&quot;my_varchar&quot;</span>, maxLength: <span class="hljs-number">512</span>, isPartitionKey: <span class="hljs-literal">true</span>)
     }
-]
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -272,7 +348,10 @@ schema.WithField(entity.NewField().
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -298,11 +377,42 @@ schema.WithField(entity.NewField().
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">num_partitions</span>(<span class="hljs-number">128</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithNumPartitions</span>(<span class="hljs-number">128</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">schema</span>: schema,
+    <span class="hljs-attr">fields</span>: fields,
     <span class="hljs-attr">num_partitions</span>: <span class="hljs-number">128</span>
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    NumPartitions = <span class="hljs-number">128</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
     &quot;partitionsNum&quot;: 128
@@ -344,7 +454,10 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
@@ -357,19 +470,37 @@ curl --request POST \
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
-filter = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>
+filter := <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
 filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+std::string filter = <span class="hljs-string">R&quot;(partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;)&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+filter = <span class="hljs-string">R&quot;(partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
-<span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
+filter = <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
@@ -484,7 +615,10 @@ client.createIndex(CreateIndexReq.builder()
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
             &quot;fieldName&quot;: &quot;vector&quot;,
             &quot;metricType&quot;: &quot;COSINE&quot;,
@@ -557,7 +691,10 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -586,12 +723,47 @@ client.createCollection(createCollectionReq);
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">properties</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([(
+            <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(),
+            <span class="hljs-string">&quot;true&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(),
+        )]))
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: {
         <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">true</span>
     }
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    Properties = { [<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
     &quot;partitionKeyIsolation&quot;: true

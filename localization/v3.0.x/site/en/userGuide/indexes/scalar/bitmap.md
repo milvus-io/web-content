@@ -74,13 +74,23 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>To create a bitmap index in Milvus, use the <code translate="no">create_index()</code> method and set the <code translate="no">index_type</code> parameter to <code translate="no">&quot;BITMAP&quot;</code>.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = client.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
     index_type=<span class="hljs-string">&quot;BITMAP&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
@@ -91,6 +101,145 @@ client.create_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
     index_params=index_params
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexParams(Collections.singletonList(IndexParam.builder()
+                .fieldName(<span class="hljs-string">&quot;category&quot;</span>)
+                .indexType(IndexParam.IndexType.BITMAP)
+                .indexName(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>)
+                .build()))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+
+_, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>, index.NewBitmapIndex()).WithIndexName(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>))
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to create index: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">create_index</span>(
+        CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_param</span>(
+                IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;category&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::Bitmap)
+                    .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-built_in">AddIndex</span>(milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;category_bitmap_index&quot;</span>, milvus::IndexType::BITMAP)));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;category&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;BITMAP&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;category_bitmap_index&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// Prepare index building params</span>
+<span class="hljs-keyword">var</span> indexParam = <span class="hljs-keyword">new</span> IndexParam(
+    fieldName: <span class="hljs-string">&quot;category&quot;</span>,
+    indexType: IndexType.Bitmap,
+    indexName: <span class="hljs-string">&quot;category_bitmap_index&quot;</span>);
+
+<span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Indexes = [indexParam]
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;category&quot;,
+            &quot;indexName&quot;: &quot;category_bitmap_index&quot;,
+            &quot;indexType&quot;: &quot;BITMAP&quot;
+        }
+    ]
+}&#x27;</span>
+
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
+<span class="hljs-comment">#     &quot;data&quot;: {}</span>
+<span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In this example, we create a bitmap index on the <code translate="no">category</code> field of the <code translate="no">my_collection</code> collection. The <code translate="no">add_index()</code> method is used to specify the field name, index type, and index name.</p>
 <p>Once the bitmap index is created, you can use the <code translate="no">filter</code> parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <a href="/docs/boolean.md">Filtering Explained</a>.</p>
@@ -116,10 +265,125 @@ client.create_index(
 <li><p>From <strong>v2.6.4</strong> or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.</p></li>
 </ul>
 </div>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
     index_name=<span class="hljs-string">&quot;category_bitmap_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.DropIndexReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+client.dropIndex(DropIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+
+err = cli.DropIndex(ctx, milvusclient.NewDropIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;category_bitmap_index&quot;</span>))
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop index: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_index</span>(
+        DropIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">DropIndex</span>(milvus::<span class="hljs-built_in">DropIndexRequest</span>()
+        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-built_in">WithIndexName</span>(<span class="hljs-string">&quot;category_bitmap_index&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;category_bitmap_index&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+
+<span class="hljs-keyword">await</span> client.DropIndexAsync(<span class="hljs-keyword">new</span> DropIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Name of the collection</span>
+    IndexName = <span class="hljs-string">&quot;category_bitmap_index&quot;</span> <span class="hljs-comment">// Name of the index to drop</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/drop&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexName&quot;: &quot;category_bitmap_index&quot;
+}&#x27;</span>
+
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
+<span class="hljs-comment">#     &quot;data&quot;: {}</span>
+<span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

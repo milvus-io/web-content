@@ -78,14 +78,17 @@ highlighter = LexicalHighlighter(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighting output</strong></p>
-<p>When highlighting is enabled, Milvus returns highlighted text in a dedicated <code translate="no">highlight</code> field. By default, highlighted output is returned as a fragment starting from the first matched term.</p>
-<p>In this example, the search term is <code translate="no">&quot;BM25&quot;</code>, so it is highlighted in the returned result:</p>
+<p>When highlighting is enabled, Milvus returns highlighted text in a dedicated <code translate="no">highlight</code> field of each search result. The <code translate="no">highlight</code> object maps each highlighted field name to an object that contains a <code translate="no">fragments</code> list and a matching <code translate="no">scores</code> list. By default, highlighted output is returned as a fragment starting from the first matched term.</p>
+<p>In this example, the search term is <code translate="no">&quot;BM25&quot;</code>, so it is highlighted in the returned result. <code translate="no">fragments</code> holds the highlighted text and <code translate="no">scores</code> holds the corresponding numeric score of each fragment; the score values shown on this page are illustrative.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     ...<span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;highlight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-            <span class="hljs-string">&quot;{BM25} for keyword relevance. Filters can narrow results.&quot;</span>
-        <span class="hljs-punctuation">]</span>
+        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;fragments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;{BM25} for keyword relevance. Filters can narrow results.&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;scores&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.72</span><span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -145,9 +148,12 @@ highlighter = LexicalHighlighter(
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     ...<span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;highlight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-            <span class="hljs-string">&quot;{text} {filtering} works in Milvus.&quot;</span>
-        <span class="hljs-punctuation">]</span>
+        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;fragments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;{text} {filtering} works in Milvus.&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;scores&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.72</span><span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -198,13 +204,16 @@ highlighter = LexicalHighlighter(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Highlighting output</strong></p>
-<p>With fragment-based highlighting enabled, Milvus returns highlighted text as fragments in the <code translate="no">highlight</code> field:</p>
+<p>With fragment-based highlighting enabled, Milvus returns highlighted text as fragments in the <code translate="no">fragments</code> list of the field’s <code translate="no">highlight</code> object:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     ...<span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;highlight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-            <span class="hljs-string">&quot;Use {BM25} for keyword relevance. Filters can narrow results.&quot;</span>
-        <span class="hljs-punctuation">]</span>
+        <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;fragments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;Use {BM25} for keyword relevance. Filters can narrow results.&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;scores&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.72</span><span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -349,7 +358,7 @@ results = client.search(
 )
 
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, <span class="hljs-subst">{}</span>).get(&#x27;fragments&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
@@ -401,7 +410,7 @@ results = client.search(
 )
 
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, <span class="hljs-subst">{}</span>).get(&#x27;fragments&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
@@ -443,7 +452,7 @@ results = client.search(
 
 results = client.search(
     collection_name=COLLECTION_NAME,
-    data=[<span class="hljs-string">&quot;Milvus&quot;</span>],
+    data=[<span class="hljs-string">&quot;Milvus&quot;</span>],  <span class="hljs-comment"># Query term to highlight</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     search_params=SEARCH_PARAMS,
@@ -452,7 +461,7 @@ results = client.search(
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(results[<span class="hljs-number">0</span>]):
-    frags = hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}).get(<span class="hljs-string">&#x27;text&#x27;</span>, [])
+    frags = hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}).get(<span class="hljs-string">&#x27;text&#x27;</span>, {}).get(<span class="hljs-string">&#x27;fragments&#x27;</span>, [])
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Doc <span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>: <span class="hljs-subst">{frags}</span>&quot;</span>)
 <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
@@ -503,7 +512,7 @@ results = client.search(
     query_term = [<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Milvus&quot;</span>][nq_idx]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Query &#x27;<span class="hljs-subst">{query_term}</span>&#x27;:&quot;</span>)
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;    <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;    <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, <span class="hljs-subst">{}</span>).get(&#x27;fragments&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
@@ -549,7 +558,7 @@ results = client.search(
 )
 
 <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, [])}&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{hit.get(<span class="hljs-string">&#x27;highlight&#x27;</span>, {}</span>).get(&#x27;text&#x27;, <span class="hljs-subst">{}</span>).get(&#x27;fragments&#x27;, [])}&quot;</span>)
 <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>

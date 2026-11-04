@@ -158,7 +158,7 @@ schema.addField(AddFieldReq.builder()
         .dimension(<span class="hljs-number">5</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
 
 <span class="hljs-comment">// Create a schema for a new collection</span>
 schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
@@ -232,18 +232,18 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/CollectionSchema.h&quot;</span></span>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
 
 <span class="hljs-comment">// Create a schema for a new collection</span>
-<span class="hljs-function">milvus::CollectionSchema <span class="hljs-title">schema</span><span class="hljs-params">(<span class="hljs-string">&quot;tech_articles&quot;</span>)</span></span>;
-schema.<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>));
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
 <span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
                     .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string in bytes</span>
                     .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Enables text analysis (tokenization)</span>
                     .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));    <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
                     .<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Optional: Configure an analyzer<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
@@ -605,7 +605,14 @@ result_slop1 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -731,7 +738,14 @@ result_slop2 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -843,7 +857,7 @@ milvus::SearchResponse response;
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 filter_slop3 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>
 
-result_slop2 = client.search(
+result_slop3 = client.search(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>,             <span class="hljs-comment"># Vector field name</span>
     data=[query_vector],                 <span class="hljs-comment"># Query vector</span>
@@ -853,7 +867,14 @@ result_slop2 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -979,7 +1000,7 @@ milvus::SearchResponse response;
     </button></h2><ul>
 <li><p>Enabling phrase matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.</p></li>
 <li><p>Once you’ve defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.</p></li>
-<li><p>Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the <code translate="no">run_analyzer</code> method to review the tokenization output. For more information, refer to <a href="/docs/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Analyzer Overview</a>.</p></li>
+<li><p>Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the <code translate="no">run_analyzer</code> method to review the tokenization output. For more information, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p></li>
 <li><p>Escape rules in <code translate="no">filter</code> expressions:</p>
 <ul>
 <li><p>Characters enclosed in double quotes or single quotes within expressions are interpreted as string constants. If the string constant includes escape characters, the escape characters must be represented with escape sequence. For example, use <code translate="no">\\</code> to represent <code translate="no">\</code>, <code translate="no">\\t</code> to represent a tab <code translate="no">\t</code>, and <code translate="no">\\n</code> to represent a newline.</p></li>
