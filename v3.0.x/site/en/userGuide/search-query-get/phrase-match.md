@@ -47,9 +47,11 @@ Here's an example schema definition to enable phrase match:
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -131,6 +133,52 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+// Create a schema for a new collection
+let schema = CollectionSchema::new()
+    .enable_dynamic_field(false)
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true)
+            .auto_id(true),
+    )
+    // Add a VARCHAR field configured for phrase matching
+    .add_field(
+        FieldSchema::new()
+            .name("text")                   // Name of the field
+            .data_type(DataType::VarChar)   // Field data type set as VARCHAR (string)
+            .max_length(1000)               // Maximum length of the string in bytes
+            .enable_analyzer(true)          // Enables text analysis (tokenization)
+            .enable_match(true),            // Enables inverted indexing for phrase matching
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("embeddings")
+            .data_type(DataType::FloatVector)
+            .dimension(5),
+    );
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+// Create a schema for a new collection
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+// Add a VARCHAR field configured for phrase matching
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
+                    .WithMaxLength(1000)    // Maximum length of the string in bytes
+                    .EnableAnalyzer(true)   // Enables text analysis (tokenization)
+                    .EnableMatch(true));    // Enables inverted indexing for phrase matching
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
+                    .WithDimension(5));
+```
+
 ```javascript
 import { DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -156,6 +204,24 @@ const schema = [
     dim: 5,
   },
 ];
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+// Create a schema for a new collection
+CollectionSchema schema = new()
+{
+    EnableDynamicFields = false,
+    Fields =
+    {
+        new FieldSchema("id", DataType.Int64, isPrimaryKey: true, autoId: true),
+        // Add a VARCHAR field configured for phrase matching
+        FieldSchema.CreateVarchar("text", 1000, enableAnalyzer: true, enableMatch: true),
+        new FieldSchema("embeddings", DataType.FloatVector) { Dimension = 5 }
+    }
+};
 ```
 
 ```bash
@@ -188,22 +254,6 @@ export schema='{
     }'
 ```
 
-```cpp
-#include "milvus/MilvusClientV2.h"
-
-// Create a schema for a new collection
-milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
-schema->SetEnableDynamicField(false);
-schema->AddField({"id", milvus::DataType::INT64, "", true, true});
-// Add a VARCHAR field configured for phrase matching
-schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
-                    .WithMaxLength(1000)    // Maximum length of the string in bytes
-                    .EnableAnalyzer(true)   // Enables text analysis (tokenization)
-                    .EnableMatch(true));    // Enables inverted indexing for phrase matching
-schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
-                    .WithDimension(5));
-```
-
 ### Optional: Configure an analyzer
 
 Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.
@@ -216,9 +266,11 @@ If your application requires a specific analyzer, configure it using the `analyz
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -269,6 +321,34 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```rust
+// Define analyzer parameters for English-language tokenization
+let analyzer_params = serde_json::json!({"type": "english"});
+
+// Add the VARCHAR field with the English analyzer enabled
+let schema = CollectionSchema::new().add_field(
+    FieldSchema::new()
+        .name("text")                   // Name of the field
+        .data_type(DataType::VarChar)   // Field data type set as VARCHAR
+        .max_length(1000)               // Maximum length of the string in bytes
+        .enable_analyzer(true)          // Enables text analysis
+        .analyzer_params(analyzer_params) // Specifies the analyzer configuration
+        .enable_match(true),            // Enables inverted indexing for phrase matching
+);
+```
+
+```cpp
+// Define analyzer parameters for English-language tokenization
+nlohmann::json analyzer_params = {{"type", "english"}};
+
+// Add the VARCHAR field with the English analyzer enabled
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
+                    .WithMaxLength(1000)                 // Maximum length of the string in bytes
+                    .EnableAnalyzer(true)                // Enables text analysis
+                    .WithAnalyzerParams(analyzer_params) // Specifies the analyzer configuration
+                    .EnableMatch(true));                 // Enables inverted indexing for phrase matching
+```
+
 ```javascript
 // Define analyzer parameters for English-language tokenization
 const analyzer_params = { type: "english" };
@@ -284,6 +364,26 @@ const schema = [
     enable_match: true, // Enables inverted indexing for phrase matching
   },
 ];
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+// Define analyzer parameters for English-language tokenization
+var analyzerParams = new Dictionary<string, object> { ["type"] = "english" };
+
+// Add the VARCHAR field with the English analyzer enabled
+var schema = new CollectionSchema
+{
+    Fields =
+    {
+        FieldSchema.CreateVarchar("text", 1000,
+            enableAnalyzer: true,           // Enables text analysis
+            analyzerParams: analyzerParams,  // Specifies the analyzer configuration
+            enableMatch: true)               // Enables inverted indexing for phrase matching
+    }
+};
 ```
 
 ```bash
@@ -305,19 +405,584 @@ export schema='{
     }'
 ```
 
-```cpp
-// Define analyzer parameters for English-language tokenization
-nlohmann::json analyzer_params = {{"type", "english"}};
+Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to [Analyzer Overview](analyzer-overview.md).
 
-// Add the VARCHAR field with the English analyzer enabled
-schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
-                    .WithMaxLength(1000)                // Maximum length of the string in bytes
-                    .EnableAnalyzer(true)               // Enables text analysis
-                    .WithAnalyzerParams(analyzer_params) // Specifies the analyzer configuration
-                    .EnableMatch(true));                // Enables inverted indexing for phrase matching
+### Create the collection
+
+Once the necessary fields are defined, use the following code to create the collection:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Create the collection
+COLLECTION_NAME = "tech_articles"  # Name your collection
+
+if client.has_collection(COLLECTION_NAME):
+    client.drop_collection(COLLECTION_NAME)
+
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema
+)
 ```
 
-Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to [Analyzer Overview](analyzer-overview.md).
+```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.collection.request.HasCollectionReq;
+
+String COLLECTION_NAME = "tech_articles";  // Name your collection
+
+if (client.hasCollection(
+        HasCollectionReq.builder()
+            .collectionName(COLLECTION_NAME)
+            .build()
+    )) {
+    client.dropCollection(
+        DropCollectionReq.builder()
+            .collectionName(COLLECTION_NAME)
+            .build()
+    );
+}
+
+client.createCollection(
+    CreateCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .collectionSchema(schema)
+        .build()
+);
+```
+
+```go
+collectionName := "tech_articles"  // Name your collection
+
+has, err := client.HasCollection(ctx, milvusclient.NewHasCollectionOption(collectionName))
+if err != nil {
+    log.Fatal(err)
+}
+if has {
+    _ = client.DropCollection(ctx, milvusclient.NewDropCollectionOption(collectionName))
+}
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(collectionName, schema))
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+```rust
+let collection_name = "tech_articles";  // Name your collection
+
+if client
+    .has_collection(
+        HasCollectionRequest::builder()
+            .collection_name(collection_name)
+            .build()?,
+    )
+    .await?
+    .exists()
+{
+    client
+        .drop_collection(
+            DropCollectionRequest::builder()
+                .collection_name(collection_name)
+                .build()?,
+        )
+        .await?;
+}
+
+client
+    .create_collection(
+        CreateCollectionRequest::builder()
+            .collection_name(collection_name)
+            .schema(schema)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+
+const std::string collection_name = "tech_articles";  // Name your collection
+
+milvus::HasCollectionResponse response;
+auto status = client->HasCollection(milvus::HasCollectionRequest().WithCollectionName(collection_name), response);
+if (response.Has()) {
+    status = client->DropCollection(milvus::DropCollectionRequest().WithCollectionName(collection_name));
+}
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName(collection_name)
+                                    .WithCollectionSchema(schema));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+// Create or recreate the collection if it already exists
+const COLLECTION_NAME = "tech_articles"; // Name your collection
+
+const hasCollection = await client.hasCollection({ collection_name: COLLECTION_NAME });
+
+if (hasCollection.value) {
+    await client.dropCollection({ collection_name: COLLECTION_NAME });
+}
+
+await client.createCollection(schema);
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+// Create the collection
+const string COLLECTION_NAME = "tech_articles"; // Name your collection
+
+if (await client.HasCollectionAsync(new HasCollectionReq { CollectionName = COLLECTION_NAME }) is { Has: true })
+{
+    await client.DropCollectionAsync(new DropCollectionReq { CollectionName = COLLECTION_NAME });
+}
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = COLLECTION_NAME,
+    Schema = schema
+});
+```
+
+```bash
+# Check whether the collection exists
+curl -X POST "http://localhost:19530/v2/vectordb/collections/has" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "tech_articles"
+  }'
+
+# Drop the existing collection
+curl -X POST "http://localhost:19530/v2/vectordb/collections/drop" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "tech_articles"
+  }'
+
+# Create the new collection
+curl -X POST "http://localhost:19530/v2/vectordb/collections/create" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d "{
+    \"collectionName\": \"tech_articles\",
+    \"schema\": $schema
+  }"
+```
+
+After the collection is created, make sure the following necessary steps are performed before [using phrase match](#use-phrase-match):
+
+- Entities are inserted into the collection;
+
+- You have created an index on each vector field;
+
+- The collection is loaded into memory.
+
+<details>
+
+<summary>Show example code</summary>
+
+The following self-contained example creates a separate `phrase_match_demo` collection, inserts five documents, builds a vector index, and loads the collection. The query and search examples later on this page use the `tech_articles` dataset described in [Example dataset](#example-dataset).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Insert sample data with text containing "machine learning" phrases
+COLLECTION_NAME = "phrase_match_demo"
+
+sample_data = [
+    {
+        "text": "Machine learning is a subset of artificial intelligence that focuses on algorithms.",
+        "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5]
+    },
+    {
+        "text": "Deep learning machine algorithms require large datasets for training.",
+        "embeddings": [0.2, 0.3, 0.4, 0.5, 0.6]
+    },
+    {
+        "text": "The machine learning model showed excellent performance on the test set.",
+        "embeddings": [0.3, 0.4, 0.5, 0.6, 0.7]
+    },
+    {
+        "text": "Natural language processing and machine learning go hand in hand.",
+        "embeddings": [0.4, 0.5, 0.6, 0.7, 0.8]
+    },
+    {
+        "text": "This article discusses various learning machine techniques and applications.",
+        "embeddings": [0.5, 0.6, 0.7, 0.8, 0.9]
+    }
+]
+
+client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+
+# Index the vector field and load the collection
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name="embeddings",
+    index_type="AUTOINDEX",
+    index_name="embeddings_index",
+    metric_type="COSINE"
+)
+
+client.create_index(collection_name=COLLECTION_NAME, index_params=index_params)
+client.load_collection(collection_name=COLLECTION_NAME)
+```
+
+```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+String COLLECTION_NAME = "phrase_match_demo";
+
+// Build the sample rows
+Gson gson = new Gson();
+List<JsonObject> data = new ArrayList<>();
+
+JsonObject row1 = new JsonObject();
+row1.addProperty("text", "Machine learning is a subset of artificial intelligence that focuses on algorithms.");
+row1.add("embeddings", gson.toJsonTree(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f, 0.5f)));
+data.add(row1);
+
+JsonObject row2 = new JsonObject();
+row2.addProperty("text", "Deep learning machine algorithms require large datasets for training.");
+row2.add("embeddings", gson.toJsonTree(Arrays.asList(0.2f, 0.3f, 0.4f, 0.5f, 0.6f)));
+data.add(row2);
+
+JsonObject row3 = new JsonObject();
+row3.addProperty("text", "The machine learning model showed excellent performance on the test set.");
+row3.add("embeddings", gson.toJsonTree(Arrays.asList(0.3f, 0.4f, 0.5f, 0.6f, 0.7f)));
+data.add(row3);
+
+JsonObject row4 = new JsonObject();
+row4.addProperty("text", "Natural language processing and machine learning go hand in hand.");
+row4.add("embeddings", gson.toJsonTree(Arrays.asList(0.4f, 0.5f, 0.6f, 0.7f, 0.8f)));
+data.add(row4);
+
+JsonObject row5 = new JsonObject();
+row5.addProperty("text", "This article discusses various learning machine techniques and applications.");
+row5.add("embeddings", gson.toJsonTree(Arrays.asList(0.5f, 0.6f, 0.7f, 0.8f, 0.9f)));
+data.add(row5);
+
+client.insert(InsertReq.builder().collectionName(COLLECTION_NAME).data(data).build());
+
+// Index the vector field and load the collection
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("embeddings")
+        .indexName("embeddings_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .build());
+```
+
+```go
+collectionName := "phrase_match_demo"
+
+texts := []string{
+    "Machine learning is a subset of artificial intelligence that focuses on algorithms.",
+    "Deep learning machine algorithms require large datasets for training.",
+    "The machine learning model showed excellent performance on the test set.",
+    "Natural language processing and machine learning go hand in hand.",
+    "This article discusses various learning machine techniques and applications.",
+}
+embeddings := [][]float32{
+    {0.1, 0.2, 0.3, 0.4, 0.5},
+    {0.2, 0.3, 0.4, 0.5, 0.6},
+    {0.3, 0.4, 0.5, 0.6, 0.7},
+    {0.4, 0.5, 0.6, 0.7, 0.8},
+    {0.5, 0.6, 0.7, 0.8, 0.9},
+}
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(collectionName).
+    WithVarcharColumn("text", texts).
+    WithFloatVectorColumn("embeddings", 5, embeddings))
+if err != nil {
+    log.Fatal(err)
+}
+
+// Index the vector field and load the collection
+indexOption := milvusclient.NewCreateIndexOption(collectionName, "embeddings", index.NewAutoIndex(entity.COSINE)).
+    WithIndexName("embeddings_index")
+_, err = client.CreateIndex(ctx, indexOption)
+if err != nil {
+    log.Fatal(err)
+}
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(collectionName))
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+```rust
+let collection_name = "phrase_match_demo";
+
+// Insert sample data with text containing "machine learning" phrases
+let data = vec![
+    json!({"text": "Machine learning is a subset of artificial intelligence that focuses on algorithms.", "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5]}),
+    json!({"text": "Deep learning machine algorithms require large datasets for training.", "embeddings": [0.2, 0.3, 0.4, 0.5, 0.6]}),
+    json!({"text": "The machine learning model showed excellent performance on the test set.", "embeddings": [0.3, 0.4, 0.5, 0.6, 0.7]}),
+    json!({"text": "Natural language processing and machine learning go hand in hand.", "embeddings": [0.4, 0.5, 0.6, 0.7, 0.8]}),
+    json!({"text": "This article discusses various learning machine techniques and applications.", "embeddings": [0.5, 0.6, 0.7, 0.8, 0.9]}),
+];
+
+client
+    .insert(
+        InsertRequest::builder()
+            .collection_name(collection_name)
+            .rows(data)
+            .build()?,
+    )
+    .await?;
+
+// Index the vector field and load the collection
+client
+    .create_index(
+        CreateIndexRequest::builder()
+            .collection_name(collection_name)
+            .index_param(
+                IndexParam::new()
+                    .field_name("embeddings")
+                    .index_name("embeddings_index")
+                    .index_type(IndexType::AutoIndex)
+                    .metric_type(MetricType::Cosine),
+            )
+            .build()?,
+    )
+    .await?;
+
+client
+    .load_collection(
+        LoadCollectionRequest::builder()
+            .collection_name(collection_name)
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <iostream>
+#include <utility>
+#include <vector>
+
+const std::string collection_name = "phrase_match_demo";
+
+milvus::EntityRows data = {
+    {{"text", "Machine learning is a subset of artificial intelligence that focuses on algorithms."}, {"embeddings", std::vector<float>{0.1, 0.2, 0.3, 0.4, 0.5}}},
+    {{"text", "Deep learning machine algorithms require large datasets for training."}, {"embeddings", std::vector<float>{0.2, 0.3, 0.4, 0.5, 0.6}}},
+    {{"text", "The machine learning model showed excellent performance on the test set."}, {"embeddings", std::vector<float>{0.3, 0.4, 0.5, 0.6, 0.7}}},
+    {{"text", "Natural language processing and machine learning go hand in hand."}, {"embeddings", std::vector<float>{0.4, 0.5, 0.6, 0.7, 0.8}}},
+    {{"text", "This article discusses various learning machine techniques and applications."}, {"embeddings", std::vector<float>{0.5, 0.6, 0.7, 0.8, 0.9}}}
+};
+
+milvus::InsertResponse response;
+auto status = client->Insert(milvus::InsertRequest()
+                                .WithCollectionName(collection_name)
+                                .WithRowsData(std::move(data)),
+                            response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Index the vector field and load the collection
+milvus::IndexDesc embeddings_index("embeddings", "embeddings_index", milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE);
+status = client->CreateIndex(milvus::CreateIndexRequest()
+                                .WithCollectionName(collection_name)
+                                .AddIndex(std::move(embeddings_index)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->LoadCollection(milvus::LoadCollectionRequest().WithCollectionName(collection_name));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+// Insert sample data with text containing "machine learning" phrases
+const COLLECTION_NAME = "phrase_match_demo";
+
+const sampleData = [
+  {
+    text: "Machine learning is a subset of artificial intelligence that focuses on algorithms.",
+    embeddings: [0.1, 0.2, 0.3, 0.4, 0.5],
+  },
+  {
+    text: "Deep learning machine algorithms require large datasets for training.",
+    embeddings: [0.2, 0.3, 0.4, 0.5, 0.6],
+  },
+  {
+    text: "The machine learning model showed excellent performance on the test set.",
+    embeddings: [0.3, 0.4, 0.5, 0.6, 0.7],
+  },
+  {
+    text: "Natural language processing and machine learning go hand in hand.",
+    embeddings: [0.4, 0.5, 0.6, 0.7, 0.8],
+  },
+  {
+    text: "This article discusses various learning machine techniques and applications.",
+    embeddings: [0.5, 0.6, 0.7, 0.8, 0.9],
+  },
+];
+
+await client.insert({
+  collection_name: COLLECTION_NAME,
+  data: sampleData,
+});
+
+// Create an index on the vector field and load the collection
+await client.createIndex({
+  collection_name: COLLECTION_NAME,
+  field_name: "embeddings",
+  index_type: "AUTOINDEX",
+  index_name: "embeddings_index",
+  metric_type: "COSINE",
+});
+
+await client.loadCollection({
+  collection_name: COLLECTION_NAME,
+});
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Requests.Dml;
+using Milvus.Client.V2.Requests.Index;
+using Milvus.Client.V2.Types;
+
+const string COLLECTION_NAME = "phrase_match_demo";
+
+// Insert sample data with text containing "machine learning" phrases
+await client.InsertAsync(new InsertReq
+{
+    CollectionName = COLLECTION_NAME,
+    RowsData =
+    [
+        new Dictionary<string, object?> { ["text"] = "Machine learning is a subset of artificial intelligence that focuses on algorithms.", ["embeddings"] = new[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } },
+        new Dictionary<string, object?> { ["text"] = "Deep learning machine algorithms require large datasets for training.", ["embeddings"] = new[] { 0.2f, 0.3f, 0.4f, 0.5f, 0.6f } },
+        new Dictionary<string, object?> { ["text"] = "The machine learning model showed excellent performance on the test set.", ["embeddings"] = new[] { 0.3f, 0.4f, 0.5f, 0.6f, 0.7f } },
+        new Dictionary<string, object?> { ["text"] = "Natural language processing and machine learning go hand in hand.", ["embeddings"] = new[] { 0.4f, 0.5f, 0.6f, 0.7f, 0.8f } },
+        new Dictionary<string, object?> { ["text"] = "This article discusses various learning machine techniques and applications.", ["embeddings"] = new[] { 0.5f, 0.6f, 0.7f, 0.8f, 0.9f } }
+    ]
+});
+
+// Index the vector field and load the collection
+await client.CreateIndexAsync(new CreateIndexReq
+{
+    CollectionName = COLLECTION_NAME,
+    Indexes = new[] { new IndexParam("embeddings", "embeddings_index", IndexType.AutoIndex, MetricType.Cosine) }
+});
+
+await client.LoadCollectionAsync(new LoadCollectionReq { CollectionName = COLLECTION_NAME });
+```
+
+```bash
+# Insert the data into the collection
+curl -X POST "http://localhost:19530/v2/vectordb/entities/insert" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "phrase_match_demo",
+    "data": [
+      {
+        "text": "Machine learning is a subset of artificial intelligence that focuses on algorithms.",
+        "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5]
+      },
+      {
+        "text": "Deep learning machine algorithms require large datasets for training.",
+        "embeddings": [0.2, 0.3, 0.4, 0.5, 0.6]
+      },
+      {
+        "text": "The machine learning model showed excellent performance on the test set.",
+        "embeddings": [0.3, 0.4, 0.5, 0.6, 0.7]
+      },
+      {
+        "text": "Natural language processing and machine learning go hand in hand.",
+        "embeddings": [0.4, 0.5, 0.6, 0.7, 0.8]
+      },
+      {
+        "text": "This article discusses various learning machine techniques and applications.",
+        "embeddings": [0.5, 0.6, 0.7, 0.8, 0.9]
+      }
+    ]
+  }'
+
+# Create an index on the vector field and load the collection
+curl -X POST "http://localhost:19530/v2/vectordb/indexes/create" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "phrase_match_demo",
+    "indexParams": [
+      {
+        "fieldName": "embeddings",
+        "indexName": "embeddings_index",
+        "metricType": "COSINE",
+        "indexType": "AUTOINDEX"
+      }
+    ]
+  }'
+
+curl -X POST "http://localhost:19530/v2/vectordb/collections/load" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer root:Milvus" \
+  -H "Request-Timeout: 10" \
+  -d '{
+    "collectionName": "phrase_match_demo"
+  }'
+```
+
+</details>
 
 ## Use phrase match
 
@@ -337,9 +1002,11 @@ Use the `PHRASE_MATCH` expression to specify the field, phrase, and optional fle
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -347,23 +1014,32 @@ PHRASE_MATCH(field_name, phrase, slop)
 ```
 
 ```java
-PHRASE_MATCH(field_name, phrase, slop)
+String filter = "PHRASE_MATCH(text, 'machine learning')";
 ```
 
 ```go
 PHRASE_MATCH(field_name, phrase, slop)
 ```
 
+```rust
+let filter = "PHRASE_MATCH(text, 'machine learning')";
+```
+
+```cpp
+const auto filter = R"(PHRASE_MATCH(text, 'machine learning'))";
+```
+
 ```javascript
 PHRASE_MATCH(field_name, phrase, slop)
 ```
 
-```bash
-PHRASE_MATCH(field_name, phrase, slop)
+```csharp
+string filter = "PHRASE_MATCH(text, 'machine learning')";
 ```
 
-```cpp
-PHRASE_MATCH(field_name, phrase, slop)
+```bash
+# restful
+export filter="PHRASE_MATCH(field_name, phrase, slop)"
 ```
 
 - `field_name`**:** The name of the `VARCHAR` field on which you perform phrase matches.
@@ -409,6 +1085,8 @@ Suppose you have a collection named **tech_articles** containing the following f
    </tr>
 </table>
 
+The query and search examples below use this dataset. The runnable example in [Create the collection](#create-the-collection) inserts its own rows into a separate `phrase_match_demo` collection, so its printed output differs from the expected results below.
+
 ### Query with phrase match
 
 When using the `query()` method, **PHRASE_MATCH** acts as a scalar filter. Only documents that contain the specified phrase (subject to the allowed slop) are returned.
@@ -421,9 +1099,11 @@ This example returns documents containing the exact phrase **"machine learning"*
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -461,6 +1141,35 @@ if err != nil {
 }
 ```
 
+```rust
+// Match documents containing exactly "machine learning"
+let filter = "PHRASE_MATCH(text, 'machine learning')";
+
+let result = client
+    .query(
+        QueryRequest::builder()
+            .collection_name("tech_articles")
+            .filter(filter)
+            .output_fields(["id", "text"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Match documents containing exactly "machine learning"
+milvus::QueryResponse response;
+auto status = client->Query(milvus::QueryRequest()
+                                .WithCollectionName("tech_articles")
+                                .WithFilter("PHRASE_MATCH(text, 'machine learning')")
+                                .AddOutputField("id")
+                                .AddOutputField("text"),
+                            response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 // Match documents containing exactly "machine learning"
 const filter = "PHRASE_MATCH(text, 'machine learning')";
@@ -469,6 +1178,18 @@ const result = await client.query({
     collection_name: "tech_articles",
     filter: filter,
     output_fields: ["id", "text"],
+});
+```
+
+```csharp
+// Match documents containing exactly "machine learning"
+string filter = "PHRASE_MATCH(text, 'machine learning')";
+
+QueryResp result = await client.QueryAsync(new QueryReq
+{
+    CollectionName = "tech_articles",
+    Expression = filter,
+    Parameters = new QueryParameters { OutputFields = { "id", "text" } }
 });
 ```
 
@@ -488,20 +1209,6 @@ curl --request POST \
     "filter": '"$filter"',
     "outputFields": ["id", "text"]
 }'
-```
-
-```cpp
-// Match documents containing exactly "machine learning"
-milvus::QueryResponse response;
-auto status = client->Query(milvus::QueryRequest()
-                                .WithCollectionName("tech_articles")
-                                .WithFilter("PHRASE_MATCH(text, 'machine learning')")
-                                .AddOutputField("id")
-                                .AddOutputField("text"),
-                            response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 
 **Expected match results:**
@@ -531,9 +1238,11 @@ Here, we allow a slop of 1. The filter is applied to documents that contain the 
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -594,6 +1303,43 @@ if err != nil {
 }
 ```
 
+```rust
+// Example: Filter documents containing "learning machine" with slop=1
+let filter = "PHRASE_MATCH(text, 'learning machine', 1)";
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4, 0.5];
+
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("tech_articles")
+            .vector_field("embeddings")
+            .vectors(SearchVectors::Float(vec![query_vector]))
+            .filter(filter)
+            .limit(10)
+            .output_fields(["id", "text"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Example: Filter documents containing "learning machine" with slop=1
+milvus::SearchResponse response;
+auto status = client->Search(milvus::SearchRequest()
+                                 .WithCollectionName("tech_articles")
+                                 .WithAnnsField("embeddings")
+                                 .AddFloatVector(query_vector)
+                                 .WithFilter("PHRASE_MATCH(text, 'learning machine', 1)")
+                                 .AddExtraParam("nprobe", "10")
+                                 .WithLimit(10)
+                                 .AddOutputField("id")
+                                 .AddOutputField("text"),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 // Example: Filter documents containing "learning machine" with slop=1
 const filter = "PHRASE_MATCH(text, 'learning machine', 1)";
@@ -606,6 +1352,24 @@ const result = await client.search({
     params: { nprobe: 10 },
     limit: 10,
     output_fields: ["id", "text"],
+});
+```
+
+```csharp
+// Example: Filter documents containing "learning machine" with slop=1
+string filter = "PHRASE_MATCH(text, 'learning machine', 1)";
+
+SearchResp result = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "tech_articles",
+    VectorFieldName = "embeddings",
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f }],
+    Limit = 10,
+    Parameters = new SearchParameters
+    {
+        Expression = filter,
+        OutputFields = { "id", "text" }
+    }
 });
 ```
 
@@ -633,24 +1397,6 @@ curl --request POST \
     "limit": 10,
     "outputFields": ["id", "text"]
 }'
-```
-
-```cpp
-// Example: Filter documents containing "learning machine" with slop=1
-milvus::SearchResponse response;
-auto status = client->Search(milvus::SearchRequest()
-                                 .WithCollectionName("tech_articles")
-                                 .WithAnnsField("embeddings")
-                                 .AddFloatVector(query_vector)
-                                 .WithFilter("PHRASE_MATCH(text, 'learning machine', 1)")
-                                 .AddExtraParam("nprobe", "10")
-                                 .WithLimit(10)
-                                 .AddOutputField("id")
-                                 .AddOutputField("text"),
-                             response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 
 **Match results:**
@@ -682,9 +1428,11 @@ This example allows a slop of 2, meaning that up to two extra tokens (or reverse
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -745,6 +1493,43 @@ if err != nil {
 }
 ```
 
+```rust
+// Example: Filter documents containing "machine learning" with slop=2
+let filter = "PHRASE_MATCH(text, 'machine learning', 2)";
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4, 0.5];
+
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("tech_articles")
+            .vector_field("embeddings")     // Vector field name
+            .vectors(SearchVectors::Float(vec![query_vector])) // Query vector
+            .filter(filter)                 // Filter expression
+            .limit(10)                      // Maximum results to return
+            .output_fields(["id", "text"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Example: Filter documents containing "machine learning" with slop=2
+milvus::SearchResponse response;
+auto status = client->Search(milvus::SearchRequest()
+                                 .WithCollectionName("tech_articles")
+                                 .WithAnnsField("embeddings") // Vector field name
+                                 .AddFloatVector(query_vector) // Query vector
+                                 .WithFilter("PHRASE_MATCH(text, 'machine learning', 2)") // Filter expression
+                                 .AddExtraParam("nprobe", "10")
+                                 .WithLimit(10) // Maximum results to return
+                                 .AddOutputField("id")
+                                 .AddOutputField("text"),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 // Example: Filter documents containing "machine learning" with slop=2
 const filter = "PHRASE_MATCH(text, 'machine learning', 2)";
@@ -757,6 +1542,24 @@ const result = await client.search({
     params: { nprobe: 10 },
     limit: 10, // Maximum results to return
     output_fields: ["id", "text"],
+});
+```
+
+```csharp
+// Example: Filter documents containing "machine learning" with slop=2
+string filter = "PHRASE_MATCH(text, 'machine learning', 2)";
+
+SearchResp result = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "tech_articles",
+    VectorFieldName = "embeddings",          // Vector field name
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f }], // Query vector
+    Limit = 10,                              // Maximum results to return
+    Parameters = new SearchParameters
+    {
+        Expression = filter,                 // Filter expression
+        OutputFields = { "id", "text" }
+    }
 });
 ```
 
@@ -786,24 +1589,6 @@ curl --request POST \
 }'
 ```
 
-```cpp
-// Example: Filter documents containing "machine learning" with slop=2
-milvus::SearchResponse response;
-auto status = client->Search(milvus::SearchRequest()
-                                 .WithCollectionName("tech_articles")
-                                 .WithAnnsField("embeddings") // Vector field name
-                                 .AddFloatVector(query_vector) // Query vector
-                                 .WithFilter("PHRASE_MATCH(text, 'machine learning', 2)") // Filter expression
-                                 .AddExtraParam("nprobe", "10")
-                                 .WithLimit(10) // Maximum results to return
-                                 .AddOutputField("id")
-                                 .AddOutputField("text"),
-                             response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
-
 **Match results:**
 
 <table>
@@ -829,9 +1614,11 @@ In this example, a slop of 3 provides even more flexibility. The filter searches
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -892,6 +1679,43 @@ if err != nil {
 }
 ```
 
+```rust
+// Example: Filter documents containing "machine learning" with slop=3
+let filter = "PHRASE_MATCH(text, 'machine learning', 3)";
+let query_vector = vec![0.1f32, 0.2, 0.3, 0.4, 0.5];
+
+let result = client
+    .search(
+        SearchRequest::builder()
+            .collection_name("tech_articles")
+            .vector_field("embeddings")     // Vector field name
+            .vectors(SearchVectors::Float(vec![query_vector])) // Query vector
+            .filter(filter)                 // Filter expression
+            .limit(10)                      // Maximum results to return
+            .output_fields(["id", "text"])
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+// Example: Filter documents containing "machine learning" with slop=3
+milvus::SearchResponse response;
+auto status = client->Search(milvus::SearchRequest()
+                                 .WithCollectionName("tech_articles")
+                                 .WithAnnsField("embeddings") // Vector field name
+                                 .AddFloatVector(query_vector) // Query vector
+                                 .WithFilter("PHRASE_MATCH(text, 'machine learning', 3)") // Filter expression
+                                 .AddExtraParam("nprobe", "10")
+                                 .WithLimit(10) // Maximum results to return
+                                 .AddOutputField("id")
+                                 .AddOutputField("text"),
+                             response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 // Example: Filter documents containing "machine learning" with slop=3
 const filter = "PHRASE_MATCH(text, 'machine learning', 3)";
@@ -904,6 +1728,24 @@ const result = await client.search({
     params: { nprobe: 10 },
     limit: 10, // Maximum results to return
     output_fields: ["id", "text"],
+});
+```
+
+```csharp
+// Example: Filter documents containing "machine learning" with slop=3
+string filter = "PHRASE_MATCH(text, 'machine learning', 3)";
+
+SearchResp result = await client.SearchAsync(new SearchReq
+{
+    CollectionName = "tech_articles",
+    VectorFieldName = "embeddings",          // Vector field name
+    Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f }], // Query vector
+    Limit = 10,                              // Maximum results to return
+    Parameters = new SearchParameters
+    {
+        Expression = filter,                 // Filter expression
+        OutputFields = { "id", "text" }
+    }
 });
 ```
 
@@ -931,24 +1773,6 @@ curl --request POST \
     "limit": 10,
     "outputFields": ["id", "text"]
 }'
-```
-
-```cpp
-// Example: Filter documents containing "machine learning" with slop=3
-milvus::SearchResponse response;
-auto status = client->Search(milvus::SearchRequest()
-                                 .WithCollectionName("tech_articles")
-                                 .WithAnnsField("embeddings") // Vector field name
-                                 .AddFloatVector(query_vector) // Query vector
-                                 .WithFilter("PHRASE_MATCH(text, 'machine learning', 3)") // Filter expression
-                                 .AddExtraParam("nprobe", "10")
-                                 .WithLimit(10) // Maximum results to return
-                                 .AddOutputField("id")
-                                 .AddOutputField("text"),
-                             response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 
 **Match results:**
@@ -991,4 +1815,3 @@ if (!status.IsOk()) {
     - If a string constant is enclosed by single quotes, a single quote within the constant should be represented as `\\'` while a double quote can be represented as either `"` or `\\"`. Example: `'It\\'s milvus'`.
 
     - If a string constant is enclosed by double quotes, a double quote within the constant should be represented as `\\"` while a single quote can be represented as either `'` or `\\'`. Example: `"He said \\"Hi\\""`.
-
