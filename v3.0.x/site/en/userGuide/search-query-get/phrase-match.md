@@ -109,7 +109,7 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import "github.com/milvus-io/milvus/client/v3/entity"
 
 // Create a schema for a new collection
 schema := entity.NewSchema().WithDynamicFieldEnabled(false)
@@ -189,18 +189,18 @@ export schema='{
 ```
 
 ```cpp
-#include "milvus/types/CollectionSchema.h"
+#include "milvus/MilvusClientV2.h"
 
 // Create a schema for a new collection
-milvus::CollectionSchema schema("tech_articles");
-schema.SetEnableDynamicField(false);
-schema.AddField(milvus::FieldSchema("id", milvus::DataType::INT64, "", true, true));
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->SetEnableDynamicField(false);
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
 // Add a VARCHAR field configured for phrase matching
-schema.AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR)  // Name of the field
                     .WithMaxLength(1000)    // Maximum length of the string in bytes
                     .EnableAnalyzer(true)   // Enables text analysis (tokenization)
                     .EnableMatch(true));    // Enables inverted indexing for phrase matching
-schema.AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
+schema->AddField(milvus::FieldSchema("embeddings", milvus::DataType::FLOAT_VECTOR)
                     .WithDimension(5));
 ```
 
@@ -552,6 +552,13 @@ result_slop1 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "learning machine" with slop=1
 String filter = "PHRASE_MATCH(text, 'learning machine', 1)";
 
@@ -696,6 +703,13 @@ result_slop2 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "machine learning" with slop=2
 String filter = "PHRASE_MATCH(text, 'machine learning', 2)";
 
@@ -824,7 +838,7 @@ In this example, a slop of 3 provides even more flexibility. The filter searches
 # Example: Filter documents containing "machine learning" with slop=3
 filter_slop3 = "PHRASE_MATCH(text, 'machine learning', 3)"
 
-result_slop2 = client.search(
+result_slop3 = client.search(
     collection_name="tech_articles",
     anns_field="embeddings",             # Vector field name
     data=[query_vector],                 # Query vector
@@ -836,6 +850,13 @@ result_slop2 = client.search(
 ```
 
 ```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 // Example: Filter documents containing "machine learning" with slop=3
 String filter = "PHRASE_MATCH(text, 'machine learning', 3)";
 
@@ -961,7 +982,7 @@ if (!status.IsOk()) {
 
 - Once you've defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.
 
-- Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the `run_analyzer` method to review the tokenization output. For more information, refer to [Analyzer Overview](analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT).
+- Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the `run_analyzer` method to review the tokenization output. For more information, refer to [Example use](analyzer-overview.md#Example-use).
 
 - Escape rules in `filter` expressions:
 

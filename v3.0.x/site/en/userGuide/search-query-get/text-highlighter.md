@@ -72,17 +72,20 @@ results = client.search(
 
 **Highlighting output**
 
-When highlighting is enabled, Milvus returns highlighted text in a dedicated `highlight` field. By default, highlighted output is returned as a fragment starting from the first matched term.
+When highlighting is enabled, Milvus returns highlighted text in a dedicated `highlight` field of each search result. The `highlight` object maps each highlighted field name to an object that contains a `fragments` list and a matching `scores` list. By default, highlighted output is returned as a fragment starting from the first matched term.
 
-In this example, the search term is `"BM25"`, so it is highlighted in the returned result:
+In this example, the search term is `"BM25"`, so it is highlighted in the returned result. `fragments` holds the highlighted text and `scores` holds the corresponding numeric score of each fragment; the score values shown on this page are illustrative.
 
 ```json
 {
     ...,
     "highlight": {
-        "text": [
-            "{BM25} for keyword relevance. Filters can narrow results."
-        ]
+        "text": {
+            "fragments": [
+                "{BM25} for keyword relevance. Filters can narrow results."
+            ],
+            "scores": [0.72]
+        }
     }
 }
 ```
@@ -152,9 +155,12 @@ In this example, the first matched term is `"text"`, so the returned highlighted
 {
     ...,
     "highlight": {
-        "text": [
-            "{text} {filtering} works in Milvus."
-        ]
+        "text": {
+            "fragments": [
+                "{text} {filtering} works in Milvus."
+            ],
+            "scores": [0.72]
+        }
     }
 }
 ```
@@ -209,15 +215,18 @@ results = client.search(
 
 **Highlighting output**
 
-With fragment-based highlighting enabled, Milvus returns highlighted text as fragments in the `highlight` field:
+With fragment-based highlighting enabled, Milvus returns highlighted text as fragments in the `fragments` list of the field's `highlight` object:
 
 ```json
 {
     ...,
     "highlight": {
-        "text": [
-            "Use {BM25} for keyword relevance. Filters can narrow results."
-        ]
+        "text": {
+            "fragments": [
+                "Use {BM25} for keyword relevance. Filters can narrow results."
+            ],
+            "scores": [0.72]
+        }
     }
 }
 ```
@@ -338,7 +347,7 @@ results = client.search(
 )
 
 for hit in results[0]:
-    print(f"  {hit.get('highlight', {}).get('text', [])}")
+    print(f"  {hit.get('highlight', {}).get('text', {}).get('fragments', [])}")
 print()
 ```
 
@@ -389,7 +398,7 @@ results = client.search(
 )
 
 for hit in results[0]:
-    print(f"  {hit.get('highlight', {}).get('text', [])}")
+    print(f"  {hit.get('highlight', {}).get('text', {}).get('fragments', [])}")
 print()
 ```
 
@@ -429,7 +438,7 @@ highlighter = LexicalHighlighter(
 
 results = client.search(
     collection_name=COLLECTION_NAME,
-    data=["Milvus"],
+    data=["Milvus"],  # Query term to highlight
     anns_field="sparse_vector",
     limit=10,
     search_params=SEARCH_PARAMS,
@@ -439,7 +448,7 @@ results = client.search(
 )
 
 for i, hit in enumerate(results[0]):
-    frags = hit.get('highlight', {}).get('text', [])
+    frags = hit.get('highlight', {}).get('text', {}).get('fragments', [])
     print(f"  Doc {i+1}: {frags}")
 print()
 ```
@@ -489,7 +498,7 @@ for nq_idx, hits in enumerate(results):
     query_term = ["test", "Milvus"][nq_idx]
     print(f"  Query '{query_term}':")
     for hit in hits:
-        print(f"    {hit.get('highlight', {}).get('text', [])}")
+        print(f"    {hit.get('highlight', {}).get('text', {}).get('fragments', [])}")
 print()
 ```
 
@@ -533,7 +542,7 @@ results = client.search(
 )
 
 for hit in results[0]:
-    print(f"  {hit.get('highlight', {}).get('text', [])}")
+    print(f"  {hit.get('highlight', {}).get('text', {}).get('fragments', [])}")
 print()
 ```
 

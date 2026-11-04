@@ -6,13 +6,13 @@ summary: "In Milvus, multi-tenancy means multiple customers or teams—referred 
 
 # Implement Multi-tenancy
 
-In Milvus, multi-tenancy means multiple customers or teams—referred to as **tenants**— share the same cluster while maintaining isolated data environments. 
+In Milvus, multi-tenancy means multiple customers or teams—referred to as **tenants**— share the same cluster while maintaining isolated data environments.
 
 Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.
 
 ## Multi-tenancy strategies
 
-Milvus supports multi-tenancy at four levels: **Database**, **Collection**, **Partition**, and **Partition Key**. 
+Milvus supports multi-tenancy at four levels: **Database**, **Collection**, **Partition**, and **Partition Key**.
 
 ### Database-level multi-tenancy
 
@@ -160,4 +160,3 @@ There are several factors to consider when you choose the multi-tenancy strategy
     1. **Effective handling of hot and cold data**: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling. 
 
     1. **Cross-tenant searches**: Only the partition-level and partition-key-level strategies support cross-tenant queries.
-

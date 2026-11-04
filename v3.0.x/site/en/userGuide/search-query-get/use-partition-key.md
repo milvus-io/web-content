@@ -16,7 +16,7 @@ Milvus introduces the Partition Key for you to reuse partitions in data segregat
 
 ![Partition Vs Partition Key](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-vs-partition-key.png)
 
-The following figure illustrates how Milvus processes the search requests in a collection with or without the Partition Key feature enabled. 
+The following figure illustrates how Milvus processes the search requests in a collection with or without the Partition Key feature enabled.
 
 - If the Partition Key is disabled, Milvus searches for entities that are the most similar to the query vector within the collection. You can narrow the search scope if you know which partition contains the most relevant results.
 
@@ -50,7 +50,10 @@ When you set a scalar field as the Partition Key, the field values cannot be emp
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -126,18 +129,17 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
+milvusAddr := "http://localhost:19530"
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  "root:Milvus",
 })
 if err != nil {
     fmt.Println(err.Error())
@@ -162,6 +164,53 @@ schema.WithField(entity.NewField().
 )
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+let config = ConnectConfig::new()
+    .uri("http://localhost:19530")
+    .token("root:Milvus");
+let client = ClientV2::new(&config).await?;
+
+let schema = CollectionSchema::new()
+    .add_field(
+        FieldSchema::new()
+            .name("id")
+            .data_type(DataType::Int64)
+            .primary_key(true),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("vector")
+            .data_type(DataType::FloatVector)
+            .dimension(5),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("my_varchar")
+            .data_type(DataType::VarChar)
+            .max_length(512)
+            .partition_key(true), // Add the partition key
+    );
+```
+
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, false});
+schema->AddField(milvus::FieldSchema("vector", milvus::DataType::FLOAT_VECTOR).WithDimension(5));
+schema->AddField(milvus::FieldSchema("my_varchar", milvus::DataType::VARCHAR).WithPartitionKey(true).WithMaxLength(512));
+```
+
 ```javascript
 import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
@@ -169,17 +218,50 @@ const address = "http://localhost:19530";
 const token = "root:Milvus";
 const client = new MilvusClient({address, token});
 
-// 3. Create a collection in customized setup mode
-// 3.1 Define fields
+// Define fields
 const fields = [
+  {
+    name: 'id',
+    data_type: DataType.Int64,
+    is_primary_key: true,
+  },
+  {
+    name: 'vector',
+    data_type: DataType.FloatVector,
+    dim: 5,
+  },
+  {
+    name: 'my_varchar',
+    data_type: DataType.VarChar,
+    max_length: 512,
+    // highlight-next-line
+    is_partition_key: true,
+  },
+];
+```
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
+
+var config = new ConnectConfig
+{
+    Uri = "http://localhost:19530",
+    ApiKey = "root:Milvus"
+};
+using var client = new MilvusClientV2(config);
+await client.ConnectAsync();
+
+var schema = new CollectionSchema
+{
+    Fields =
     {
-        name: "my_varchar",
-        data_type: DataType.VarChar,
-        max_length: 512,
-        // highlight-next-line
-        is_partition_key: true
+        new FieldSchema("id", DataType.Int64, isPrimaryKey: true),
+        FieldSchema.CreateFloatVector("vector", dimension: 5),
+        // Add the partition key
+        FieldSchema.CreateVarchar("my_varchar", maxLength: 512, isPartitionKey: true)
     }
-]
+};
 ```
 
 ```bash
@@ -211,9 +293,10 @@ export schema='{
     }'
 ```
 
+
 ### Set Partition Numbers
 
-When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values. 
+When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values.
 
 You can also determine the number of partitions to create along with the collection. This is valid only if you have a scalar field designated as the Partition Key.
 
@@ -221,7 +304,10 @@ You can also determine the number of partitions to create along with the collect
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -255,12 +341,49 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+
+client.create_collection(
+    CreateCollectionRequest::builder()
+        .collection_name("my_collection")
+        .schema(schema)
+        .num_partitions(128)
+        .build()?,
+)
+.await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("my_collection")
+                                      .WithCollectionSchema(schema)
+                                      .WithNumPartitions(128));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
 await client.create_collection({
     collection_name: "my_collection",
-    schema: schema,
+    fields: fields,
     num_partitions: 128
 })
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema,
+    NumPartitions = 128
+});
 ```
 
 ```bash
@@ -283,9 +406,10 @@ curl --request POST \
 }"
 ```
 
+
 ### Create Filtering Condition
 
-When conducting ANN searches in a collection with the Partition Key feature enabled, you need to include a filtering expression involving the Partition Key in the search request. In the filtering expression, you can restrict the Partition Key value within a specific range so that Milvus restricts the search scope within the corresponding partitions. 
+When conducting ANN searches in a collection with the Partition Key feature enabled, you need to include a filtering expression involving the Partition Key in the search request. In the filtering expression, you can restrict the Partition Key value within a specific range so that Milvus restricts the search scope within the corresponding partitions.
 
 When performing delete operations, It is advisable to include a filter expression that specifies a single partition key to achieve more efficient deletion. This approach limits the delete operation to a particular partition, reducing write amplification during compaction and conserving resources for compaction and indexing.
 
@@ -295,7 +419,10 @@ The following examples demonstrate Partition-Key-based filtering based on a spec
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -312,15 +439,31 @@ filter='partition_key in ["x", "y", "z"] && <other conditions>'
 String filter = "partition_key == 'x' && <other conditions>";
 
 // Filter based on multiple partition key values
-String filter = "partition_key in ['x', 'y', 'z'] && <other conditions>";
+filter = "partition_key in ['x', 'y', 'z'] && <other conditions>";
 ```
 
 ```go
 // Filter based on a single partition key value, or
-filter = "partition_key == 'x' && <other conditions>"
+filter := "partition_key == 'x' && <other conditions>"
 
 // Filter based on multiple partition key values
 filter = "partition_key in ['x', 'y', 'z'] && <other conditions>"
+```
+
+```rust
+// Filter based on a single partition key value, or
+let filter = "partition_key == 'x' && <other conditions>";
+
+// Filter based on multiple partition key values
+let filter = "partition_key in ['x', 'y', 'z'] && <other conditions>";
+```
+
+```cpp
+// Filter based on a single partition key value, or
+std::string filter = R"(partition_key == 'x' && <other conditions>)";
+
+// Filter based on multiple partition key values
+filter = R"(partition_key in ['x', 'y', 'z'] && <other conditions>)";
 ```
 
 ```javascript
@@ -328,7 +471,15 @@ filter = "partition_key in ['x', 'y', 'z'] && <other conditions>"
 const filter = 'partition_key == "x" && <other conditions>'
 
 // Filter based on multiple partition key values
-const filter = 'partition_key in ["x", "y", "z"] && <other conditions>'
+filter = 'partition_key in ["x", "y", "z"] && <other conditions>'
+```
+
+```csharp
+// Filter based on a single partition key value, or
+string filter = "partition_key == 'x' && <other conditions>";
+
+// Filter based on multiple partition key values
+filter = "partition_key in ['x', 'y', 'z'] && <other conditions>";
 ```
 
 ```bash
@@ -338,6 +489,7 @@ export filter='partition_key == "x" && <other conditions>'
 # Filter based on multiple partition key values
 export filter='partition_key in ["x", "y", "z"] && <other conditions>'
 ```
+
 
 <div class="alert note">
 
@@ -455,6 +607,9 @@ await client.createIndex(index_params)
 ```
 
 ```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
 export indexParams='[
         {
             "fieldName": "vector",
@@ -508,7 +663,10 @@ The following code examples demonstrate how to enable Partition Key Isolation.
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 
@@ -545,13 +703,54 @@ if err != nil {
 }
 ```
 
+```rust
+use milvus::v2::prelude::*;
+use std::collections::HashMap;
+
+client.create_collection(
+    CreateCollectionRequest::builder()
+        .collection_name("my_collection")
+        .schema(schema)
+        .properties(HashMap::from([(
+            "partitionkey.isolation".to_string(),
+            "true".to_string(),
+        )]))
+        .build()?,
+)
+.await?;
+```
+
+```cpp
+#include <iostream>
+#include "milvus/MilvusClientV2.h"
+
+status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                      .WithCollectionName("my_collection")
+                                      .WithCollectionSchema(schema)
+                                      .AddProperty("partitionkey.isolation", "true"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
 ```javascript
-res = await client.alterCollection({
+await client.alterCollectionProperties({
     collection_name: "my_collection",
     properties: {
         "partitionkey.isolation": true
     }
 })
+```
+
+```csharp
+using Milvus.Client.V2.Requests.Collection;
+
+await client.CreateCollectionAsync(new CreateCollectionReq
+{
+    CollectionName = "my_collection",
+    Schema = schema,
+    Properties = { ["partitionkey.isolation"] = "true" }
+});
 ```
 
 ```bash
@@ -573,5 +772,6 @@ curl --request POST \
     \"params\": $params
 }"
 ```
+
 
 Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in [Set Partition Numbers](use-partition-key.md#Set-Partition-Numbers). Note that the Partition-Key-based filter should include only a specific Partition Key value.
