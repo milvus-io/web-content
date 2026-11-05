@@ -825,7 +825,7 @@
                 "schema": {
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/EmptyResponse",
+                      "$ref": "#/components/schemas/CompactResponse",
                       "x-tab-label": "success"
                     },
                     {
@@ -998,7 +998,7 @@
                     "value": {
                       "code": 0,
                       "data": {
-                        "compactionID": "xxxxxxxxxxxxxxxxxxxxxx",
+                        "compactionID": 470224091360920600,
                         "state": "Completed",
                         "executingPlanNumber": 0,
                         "timeoutPlanNumber": 0,
@@ -2965,8 +2965,7 @@
                       "code": 0,
                       "data": {
                         "loadProgress": 100,
-                        "loadState": "LoadStateLoaded",
-                        "message": ""
+                        "loadState": "LoadStateLoaded"
                       }
                     }
                   },
@@ -9517,7 +9516,7 @@
             "type": "object",
             "properties": {
               "compactionID": {
-                "type": "string",
+                "type": "integer",
                 "description": "The ID of the compaction task.",
                 "x-i18n": {
                   "zh-CN": {
@@ -9529,7 +9528,8 @@
                 },
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
-                "x-deprecated-since": null
+                "x-deprecated-since": null,
+                "format": "int64"
               },
               "state": {
                 "type": "string",
@@ -11114,6 +11114,72 @@
           },
           "ja-JP": {
             "description": "関数とともに作成される出力フィールドのインデックス設定。"
+          }
+        }
+      },
+      "CompactResponse": {
+        "x-tab-label": "success",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Response code.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应码。"
+              },
+              "ja-JP": {
+                "description": "レスポンスコード。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "compactionID": {
+                "type": "integer",
+                "description": "The ID of the compaction task that has been started.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "已启动的 Compaction 任务的 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "開始された compaction タスクの ID。"
+                  }
+                },
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null,
+                "format": "int64"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null,
+            "description": "The response payload object. Its contents depend on the operation that returns it.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "响应负载对象，其内容取决于返回它的操作。"
+              },
+              "ja-JP": {
+                "description": "レスポンスのペイロードオブジェクトです。内容はそれを返す操作によって異なります。"
+              }
+            }
+          }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null,
+        "description": "A generic response envelope returned by operations that carry no operation-specific result data. It still includes a `data` object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "由不携带特定操作结果数据的操作返回的通用响应信封。它仍包含 `data` 对象。"
+          },
+          "ja-JP": {
+            "description": "操作固有の結果データを持たない操作が返す汎用レスポンスエンベロープです。`data` オブジェクトを含みます。"
           }
         }
       }

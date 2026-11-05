@@ -1646,7 +1646,7 @@
                       "type": "object",
                       "properties": {
                         "code": {
-                          "type": "string",
+                          "type": "integer",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

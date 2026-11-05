@@ -46,6 +46,10 @@ module.exports = [
       // (that is how the empty file landed here originally); nothing in this
       // copy reads it, so keep it out entirely.
       /^meta\/lifecycle-evidence\//,
+      // zdoc-side live-verification tooling and evidence (4.2 MB: runners,
+      // suites, goldens, schema inventory, reports). Nothing in this copy
+      // reads it; it is zdoc-internal conformance workflow, so keep it out.
+      /^conformance\//,
     ],
   },
 ];

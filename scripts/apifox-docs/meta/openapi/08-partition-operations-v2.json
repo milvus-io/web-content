@@ -310,11 +310,8 @@
                     "summary": "failure",
                     "x-target-response": "OPTION 2",
                     "value": {
-                      "summary": "failure",
-                      "value": {
-                        "code": 1800,
-                        "message": "User hasn't authenticated"
-                      }
+                      "code": 1800,
+                      "message": "User hasn't authenticated"
                     }
                   }
                 }

@@ -145,281 +145,331 @@
                           }
                         },
                         "data": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "count": {
-                                "type": "integer",
-                                "description": "The total number of invoices.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "发票总数。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "請求書の総数。"
-                                  }
-                                }
-                              },
-                              "currentPage": {
-                                "type": "integer",
-                                "description": "The current page number.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "当前页码。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "現在のページ番号。"
-                                  }
-                                }
-                              },
-                              "pageSize": {
-                                "type": "integer",
-                                "description": "The number of records in each page.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "每页记录数。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "各ページのレコード数。"
-                                  }
-                                }
-                              },
-                              "invoices": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "description": "The ID of the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票 ID。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の ID。"
-                                        }
-                                      }
-                                    },
-                                    "orgId": {
-                                      "type": "string",
-                                      "description": "The ID of the organization to which the invoice belongs.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票所属组织 ID。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書が属する組織の ID。"
-                                        }
-                                      }
-                                    },
-                                    "periodStart": {
-                                      "type": "string",
-                                      "description": "The start time of the invoice period.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票帐期开始时间。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求期間の開始時刻。"
-                                        }
-                                      }
-                                    },
-                                    "periodEnd": {
-                                      "type": "string",
-                                      "description": "The end time of the invoice period.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票帐期结束时间。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求期間の終了時刻。"
-                                        }
-                                      }
-                                    },
-                                    "invoiceDate": {
-                                      "type": "string",
-                                      "description": "The date on which the invoice was issued.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票生成日期。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書が発行された日付。"
-                                        }
-                                      }
-                                    },
-                                    "dueDate": {
-                                      "type": "string",
-                                      "description": "The due date of the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票逾期时间。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の支払期日。"
-                                        }
-                                      }
-                                    },
-                                    "currency": {
-                                      "type": "string",
-                                      "description": "The currency of the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票币种。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の通貨。"
-                                        }
-                                      }
-                                    },
-                                    "status": {
-                                      "type": "string",
-                                      "description": "The status of the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票状态。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書のステータス。"
-                                        }
-                                      },
-                                      "enum": [
-                                        "unbilled",
-                                        "unconfirmed",
-                                        "disputed",
-                                        "unpaid",
-                                        "overdue",
-                                        "paid",
-                                        "free"
-                                      ]
-                                    },
-                                    "usageAmount": {
-                                      "type": "number",
-                                      "description": "The total amount recorded in the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票记录的总金额。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書に記録された合計金額。"
-                                        }
-                                      }
-                                    },
-                                    "creditsApplied": {
-                                      "type": "number",
-                                      "description": "The total credits applied to the invoice, which should be subtracted from the total amount.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "已应用的信用额度，应从总金额中减去。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書に適用されたクレジットの合計額で、合計金額から差し引かれる金額です。"
-                                        }
-                                      }
-                                    },
-                                    "alreadyBilledAmount": {
-                                      "type": "number",
-                                      "description": "The total amount that has already been billed.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "已开票金额。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "すでに請求済みの合計金額。"
-                                        }
-                                      }
-                                    },
-                                    "subtotal": {
-                                      "type": "number",
-                                      "description": "The subtotal of the invoice, which is the total amount minus any credits applied.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票小计金额，即总金额减去已应用的信用额度。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の小計で、合計金額から適用されたクレジットを差し引いた金額です。"
-                                        }
-                                      }
-                                    },
-                                    "tax": {
-                                      "type": "number",
-                                      "description": "The tax amount of the invoice.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票税额。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の税額。"
-                                        }
-                                      }
-                                    },
-                                    "total": {
-                                      "type": "number",
-                                      "description": "The total amount of the invoice, which is the subtotal plus the tax.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票含税金额，即小计金额加上税额。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の合計金額で、小計に税額を加えた金額です。"
-                                        }
-                                      }
-                                    },
-                                    "advancePayAmount": {
-                                      "type": "number",
-                                      "description": "The advance payment amount of the organization to which the current user belongs, which can be used to pay for unpaid invoices.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "当前用户所属组织预存金额，可用于冲抵待付款。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "現在のユーザーが所属する組織の前払い金額で、未払いの請求書の支払いに使用できます。"
-                                        }
-                                      }
-                                    },
-                                    "amountDue": {
-                                      "type": "number",
-                                      "description": "The amount due for the invoice, which is the advance payment amount minus the total amount that has already been billed.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "发票应付金额，即预存金额减去含税金额。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "請求書の支払額で、前払い金額からすでに請求済みの合計金額を差し引いた金額です。"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "description": "One invoice record associated with the returned data entry.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "与返回的数据条目关联的单条发票记录。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "返されたデータエントリに関連付けられた 1 件の請求書レコード。"
-                                    }
-                                  }
+                          "type": "object",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "description": "Total number of invoice records available.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "可用的 invoice 记录总数。"
                                 },
-                                "description": "List of invoices contained in this record.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "此记录中包含的 invoice 列表。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "このレコードに含まれる請求書のリストです。"
-                                  }
+                                "ja-JP": {
+                                  "description": "利用可能な請求書レコードの総数。"
                                 }
                               }
                             },
-                            "description": "A single invoice record in the response payload.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "响应负载中的单条 invoice 记录。"
+                            "currentPage": {
+                              "type": "integer",
+                              "description": "The page number of the returned records.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前返回记录的页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "返されたレコードのページ番号。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "description": "The number of records per page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页的记录数。"
+                                },
+                                "ja-JP": {
+                                  "description": "1 ページあたりのレコード数。"
+                                }
+                              }
+                            },
+                            "invoices": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "count": {
+                                    "type": "integer",
+                                    "description": "The total number of invoices.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "发票总数。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "請求書の総数。"
+                                      }
+                                    }
+                                  },
+                                  "currentPage": {
+                                    "type": "integer",
+                                    "description": "The current page number.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "当前页码。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "現在のページ番号。"
+                                      }
+                                    }
+                                  },
+                                  "pageSize": {
+                                    "type": "integer",
+                                    "description": "The number of records in each page.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "每页记录数。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "各ページのレコード数。"
+                                      }
+                                    }
+                                  },
+                                  "invoices": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "description": "The ID of the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票 ID。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の ID。"
+                                            }
+                                          }
+                                        },
+                                        "orgId": {
+                                          "type": "string",
+                                          "description": "The ID of the organization to which the invoice belongs.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票所属组织 ID。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書が属する組織の ID。"
+                                            }
+                                          }
+                                        },
+                                        "periodStart": {
+                                          "type": "string",
+                                          "description": "The start time of the invoice period.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票帐期开始时间。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求期間の開始時刻。"
+                                            }
+                                          }
+                                        },
+                                        "periodEnd": {
+                                          "type": "string",
+                                          "description": "The end time of the invoice period.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票帐期结束时间。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求期間の終了時刻。"
+                                            }
+                                          }
+                                        },
+                                        "invoiceDate": {
+                                          "type": "string",
+                                          "description": "The date on which the invoice was issued.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票生成日期。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書が発行された日付。"
+                                            }
+                                          }
+                                        },
+                                        "dueDate": {
+                                          "type": "string",
+                                          "description": "The due date of the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票逾期时间。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の支払期日。"
+                                            }
+                                          }
+                                        },
+                                        "currency": {
+                                          "type": "string",
+                                          "description": "The currency of the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票币种。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の通貨。"
+                                            }
+                                          }
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "description": "The status of the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票状态。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書のステータス。"
+                                            }
+                                          },
+                                          "enum": [
+                                            "unbilled",
+                                            "unconfirmed",
+                                            "disputed",
+                                            "unpaid",
+                                            "overdue",
+                                            "paid",
+                                            "free"
+                                          ]
+                                        },
+                                        "usageAmount": {
+                                          "type": "number",
+                                          "description": "The total amount recorded in the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票记录的总金额。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書に記録された合計金額。"
+                                            }
+                                          }
+                                        },
+                                        "creditsApplied": {
+                                          "type": "number",
+                                          "description": "The total credits applied to the invoice, which should be subtracted from the total amount.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "已应用的信用额度，应从总金额中减去。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書に適用されたクレジットの合計額で、合計金額から差し引かれる金額です。"
+                                            }
+                                          }
+                                        },
+                                        "alreadyBilledAmount": {
+                                          "type": "number",
+                                          "description": "The total amount that has already been billed.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "已开票金额。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "すでに請求済みの合計金額。"
+                                            }
+                                          }
+                                        },
+                                        "subtotal": {
+                                          "type": "number",
+                                          "description": "The subtotal of the invoice, which is the total amount minus any credits applied.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票小计金额，即总金额减去已应用的信用额度。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の小計で、合計金額から適用されたクレジットを差し引いた金額です。"
+                                            }
+                                          }
+                                        },
+                                        "tax": {
+                                          "type": "number",
+                                          "description": "The tax amount of the invoice.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票税额。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の税額。"
+                                            }
+                                          }
+                                        },
+                                        "total": {
+                                          "type": "number",
+                                          "description": "The total amount of the invoice, which is the subtotal plus the tax.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票含税金额，即小计金额加上税额。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の合計金額で、小計に税額を加えた金額です。"
+                                            }
+                                          }
+                                        },
+                                        "advancePayAmount": {
+                                          "type": "number",
+                                          "description": "The advance payment amount of the organization to which the current user belongs, which can be used to pay for unpaid invoices.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前用户所属组织预存金额，可用于冲抵待付款。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "現在のユーザーが所属する組織の前払い金額で、未払いの請求書の支払いに使用できます。"
+                                            }
+                                          }
+                                        },
+                                        "amountDue": {
+                                          "type": "number",
+                                          "description": "The amount due for the invoice, which is the advance payment amount minus the total amount that has already been billed.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "发票应付金额，即预存金额减去含税金额。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "請求書の支払額で、前払い金額からすでに請求済みの合計金額を差し引いた金額です。"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "description": "One invoice record associated with the returned data entry.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "与返回的数据条目关联的单条发票记录。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "返されたデータエントリに関連付けられた 1 件の請求書レコード。"
+                                        }
+                                      }
+                                    },
+                                    "description": "List of invoices contained in this record.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "此记录中包含的 invoice 列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "このレコードに含まれる請求書のリストです。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "description": "A single invoice record in the response payload.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "响应负载中的单条 invoice 记录。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "レスポンスペイロード内の 1 件の請求書レコードです。"
+                                  }
+                                }
                               },
-                              "ja-JP": {
-                                "description": "レスポンスペイロード内の 1 件の請求書レコードです。"
+                              "description": "The invoice records on the current page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页的 invoice 记录。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページの請求書レコード。"
+                                }
                               }
                             }
                           },
