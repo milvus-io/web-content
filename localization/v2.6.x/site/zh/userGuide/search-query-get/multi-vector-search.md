@@ -90,7 +90,7 @@ summary: >-
 <li><p><code translate="no">text</code>:用于存储文本内容。该字段的数据类型为<code translate="no">VARCHAR</code> ，最大长度为 1000 字节。<code translate="no">enable_analyzer</code> 选项设置为<code translate="no">True</code> ，以便于全文检索。</p></li>
 <li><p><code translate="no">text_dense</code>:用于存储文本的密集向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维数为 768。</p></li>
 <li><p><code translate="no">text_sparse</code>:用于存储文本的稀疏向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
-<li><p><code translate="no">image_dense</code>:用于存储产品图像的密集向量。该字段的数据类型为<code translate="no">FLOAT_VETOR</code> ，向量维数为 512。</p></li>
+<li><p><code translate="no">image_dense</code>:用于存储产品图像的密集向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维数为 512。</p></li>
 </ul>
 <p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此有必要在 Schema 中添加 Milvus<code translate="no">Function</code> 。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>。</p>
 <div class="multipleCode">
