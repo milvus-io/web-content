@@ -105,7 +105,8 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         // dir_path = the directory path this record contributes (used as parent for children).
         // page_id  = the file path to write (ends in .md) or folder path (no .md, skipped).
         const resolveCache = new Map()
-        const allocatedPaths = new Set()
+        // Case-insensitive key -> allocated path (leaf files and container directories).
+        const allocatedPaths = new Map()
         const allocateCaseInsensitivePath = (parentDir, localName, ext='') => {
             const baseDir = parentDir || ''
             let suffix = 1
@@ -116,12 +117,29 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 const key = candidate.toLowerCase()
 
                 if (!allocatedPaths.has(key)) {
-                    allocatedPaths.add(key)
+                    allocatedPaths.set(key, candidate)
                     return candidate
                 }
 
                 suffix += 1
             }
+        }
+        // Container directories (VirtualNode/Module, and the method-holder
+        // directory of a Class) are namespace nodes: a same-named container
+        // reuses the already allocated directory instead of suffixing, so e.g.
+        // children of a VirtualNode sharing a Class's name land beside the
+        // Class's own page rather than under "<Name>-2". Leaf file collisions
+        // still suffix via allocateCaseInsensitivePath.
+        const allocateContainerPath = (parentDir, localName) => {
+            const candidate = parentDir ? `${parentDir}/${localName}` : localName
+            const key = candidate.toLowerCase()
+
+            if (allocatedPaths.has(key)) {
+                return allocatedPaths.get(key)
+            }
+
+            allocatedPaths.set(key, candidate)
+            return candidate
         }
         const fileStem = (filePath) => filePath.replace(/\.md$/i, '')
         const resolve = (record_id) => {
@@ -146,7 +164,7 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
             let result
             if (type === 'Class' && hasChildren) {
                 // Has own overview file AND serves as a directory for its methods
-                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
+                const dirPath = allocateContainerPath(parentDir, localName)
                 result = { pageId: allocateCaseInsensitivePath(dirPath, localName, '.md'), dirPath }
             } else if (type === 'Class' || type === 'Function' || type === 'Enum') {
                 // Leaf file only
@@ -154,7 +172,7 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
                 result = { pageId, dirPath: fileStem(pageId) }
             } else {
                 // VirtualNode, Module — folder only, no file written
-                const dirPath = allocateCaseInsensitivePath(parentDir, localName)
+                const dirPath = allocateContainerPath(parentDir, localName)
                 result = { pageId: dirPath, dirPath }
             }
 
