@@ -46,7 +46,7 @@ This example incorporates the following fields into the schema:
 
 - `text_sparse`: Used to store sparse vectors of the texts. This field is of the data type `SPARSE_FLOAT_VECTOR`.
 
-- `image_dense`: Used to store dense vectors of the product images. This field is of the data type `FLOAT_VETOR` with a vector dimension of 512.
+- `image_dense`: Used to store dense vectors of the product images. This field is of the data type `FLOAT_VECTOR` with a vector dimension of 512.
 
 Since we will use the built-in BM25 algorithm to perform a full-text search on the text field, it is necessary to add the Milvus `Function` to the schema. For further details, please refer to [Full Text Search](full-text-search.md).
 
