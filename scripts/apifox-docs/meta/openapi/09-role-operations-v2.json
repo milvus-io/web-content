@@ -680,24 +680,24 @@
                       "code": 0,
                       "data": [
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "root",
-                          "objectName": "*",
-                          "objectType": "Collection",
-                          "privilege": "IndexDetail"
+                          "object_name": "*",
+                          "object_type": "Global",
+                          "privilege": "ShowCollections"
                         },
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "root",
-                          "objectName": "*",
-                          "objectType": "Global",
-                          "privilege": "DescribeCollection"
+                          "object_name": "*",
+                          "object_type": "Global",
+                          "privilege": "ShowCollections"
                         },
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "root",
-                          "objectName": "*",
-                          "objectType": "Global",
+                          "object_name": "*",
+                          "object_type": "Global",
                           "privilege": "ShowCollections"
                         }
                       ],
@@ -714,24 +714,24 @@
                       "code": 0,
                       "data": [
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "db_admin",
-                          "objectName": "*",
-                          "objectType": "Collection",
-                          "privilege": "IndexDetail"
+                          "object_name": "*",
+                          "object_type": "Global",
+                          "privilege": "ShowCollections"
                         },
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "db_admin",
-                          "objectName": "*",
-                          "objectType": "Global",
-                          "privilege": "DescribeCollection"
+                          "object_name": "*",
+                          "object_type": "Global",
+                          "privilege": "ShowCollections"
                         },
                         {
-                          "dbName": "*",
+                          "db_name": "*",
                           "grantor": "db_admin",
-                          "objectName": "*",
-                          "objectType": "Global",
+                          "object_name": "*",
+                          "object_type": "Global",
                           "privilege": "ShowCollections"
                         }
                       ],

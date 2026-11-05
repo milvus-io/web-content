@@ -619,13 +619,13 @@
         },
         "responses": {
           "200": {
-            "description": "An object that contains the detailed description of the current index.",
+            "description": "An array that contains the detailed descriptions of the current indexes.",
             "x-i18n": {
               "zh-CN": {
                 "description": "返回一个包含当前索引详细信息的对象。"
               },
               "ja-JP": {
-                "description": "現在のインデックスの詳細な説明を含むオブジェクト。"
+                "description": "現在のインデックスの詳細な説明を含む配列。"
               }
             },
             "content": {
@@ -653,291 +653,309 @@
                           "x-deprecated-since": null
                         },
                         "data": {
-                          "description": "Response payload which is detailed information about the index.",
+                          "description": "Response payload containing the detailed descriptions of the indexes.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，为索引详细信息。"
                             },
                             "ja-JP": {
-                              "description": "インデックスに関する詳細情報を含むレスポンスペイロード。"
+                              "description": "インデックスの詳細情報の配列を含むレスポンスペイロード。"
                             }
                           },
-                          "type": "object",
-                          "properties": {
-                            "indexName": {
-                              "type": "string",
-                              "description": "The name of the index.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "索引的名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスの名前。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "fieldName": {
-                              "type": "string",
-                              "description": "The name of the target field.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "目标字段的名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "対象フィールドの名前。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "indexType": {
-                              "type": "string",
-                              "description": "The type of this index.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "当前索引的类型。"
-                                },
-                                "ja-JP": {
-                                  "description": "このインデックスのタイプ。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "metricType": {
-                              "type": "string",
-                              "description": "The type of the similarity metric.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "相似度类型。"
-                                },
-                                "ja-JP": {
-                                  "description": "類似度メトリックのタイプ。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "mmap.enabled": {
-                              "type": "string",
-                              "description": "Whether memory mapping is enabled for this index.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "是否为当前索引启用内存映射。"
-                                },
-                                "ja-JP": {
-                                  "description": "このインデックスで memory mapping が有効かどうか。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "indexoffsetcache.enabled": {
-                              "type": "string",
-                              "description": "Whether to cache the index offset in memory.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "是否将索引偏移量缓存在内存中。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスオフセットをメモリにキャッシュするかどうか。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "warmup": {
-                              "type": "string",
-                              "description": "Whether to load the index into memory when the index is created or updated.<ul><li><b>sync</b>: Warm up before a segment is considered loaded</li><li><b>async</b>: Warm up in background after load</li><li><b>disable</b>: Do not proactively warm up; load on demand</li></ul>",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "在创建或更新索引时是否将索引加载到内存中。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスの作成時または更新時に、インデックスをメモリに読み込むかどうか。<ul><li><b>sync</b>: セグメントがロード済みと見なされる前にウォームアップします</li><li><b>async</b>: ロード後にバックグラウンドでウォームアップします</li><li><b>disable</b>: 事前にウォームアップせず、必要に応じてロードします</li></ul>"
-                                }
-                              },
-                              "enum": [
-                                "sync",
-                                "async",
-                                "disable"
-                              ],
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "totalRows": {
-                              "type": "integer",
-                              "description": "The total number of entities/rows.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "Entity 总数或行数。"
-                                },
-                                "ja-JP": {
-                                  "description": "エンティティ/行の総数。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "pendingRows": {
-                              "type": "integer",
-                              "description": "The number of entities/rows that are waiting to be indexed.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "等待被索引的 Entity 总数或行数。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックス作成待ちのエンティティ/行の数。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "indexedRows": {
-                              "type": "integer",
-                              "description": "The total number of entities/rows that have been indexed.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "已索引的 Entity 总数或行数。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックス作成済みのエンティティ/行の総数。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "indexState": {
-                              "description": "The status of the indexing progress.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "索引当前状态。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックス作成の進行状況のステータス。"
-                                }
-                              },
-                              "type": "string",
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "failReason": {
-                              "type": "string",
-                              "description": "The reason for the failure to build indexes.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "构建索引失败的原因。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスの構築に失敗した理由。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "minIndexVersion": {
-                              "type": "string",
-                              "description": "The minimum version of the index.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "索引的最低版本。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスの最小バージョン。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "maxIndexVersion": {
-                              "type": "string",
-                              "description": "The maximum version of the index.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "索引的最高版本。"
-                                },
-                                "ja-JP": {
-                                  "description": "インデックスの最大バージョン。"
-                                }
-                              },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            },
-                            "indexParams": {
-                              "type": "array",
-                              "description": "The index parameters used to build the index in a list of key-value pairs.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "用于构建索引的索引参数，以键值对的形式列出。"
-                                },
-                                "ja-JP": {
-                                  "description": "キーと値のペアのリストで示される、インデックスの構築に使用されたインデックスパラメーター。"
-                                }
-                              },
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "key": {
-                                    "type": "string",
-                                    "description": "The name of the index parameter.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "索引参数的名称。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "インデックスパラメーターの名前。"
-                                      }
-                                    },
-                                    "x-added-at": "2.6.x",
-                                    "x-last-modified": "2.6.x",
-                                    "x-deprecated-since": null
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "indexName": {
+                                "type": "string",
+                                "description": "The name of the index.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "索引的名称。"
                                   },
-                                  "value": {
-                                    "type": "string",
-                                    "description": "The value of the index parameter.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "索引参数的值。"
-                                      }
-                                    },
-                                    "x-added-at": "2.6.x",
-                                    "x-last-modified": "2.6.x",
-                                    "x-deprecated-since": null
+                                  "ja-JP": {
+                                    "description": "インデックスの名前。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "fieldName": {
+                                "type": "string",
+                                "description": "The name of the target field.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "目标字段的名称。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "対象フィールドの名前。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "indexType": {
+                                "type": "string",
+                                "description": "The type of this index.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前索引的类型。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このインデックスのタイプ。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "metricType": {
+                                "type": "string",
+                                "description": "The type of the similarity metric.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "相似度类型。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "類似度メトリックのタイプ。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "mmap.enabled": {
+                                "type": "string",
+                                "description": "Whether memory mapping is enabled for this index.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "是否为当前索引启用内存映射。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "このインデックスで memory mapping が有効かどうか。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "indexoffsetcache.enabled": {
+                                "type": "string",
+                                "description": "Whether to cache the index offset in memory.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "是否将索引偏移量缓存在内存中。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックスオフセットをメモリにキャッシュするかどうか。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "warmup": {
+                                "type": "string",
+                                "description": "Whether to load the index into memory when the index is created or updated.<ul><li><b>sync</b>: Warm up before a segment is considered loaded</li><li><b>async</b>: Warm up in background after load</li><li><b>disable</b>: Do not proactively warm up; load on demand</li></ul>",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "在创建或更新索引时是否将索引加载到内存中。<ul><li><b>sync</b>: 在一个 segment 被认为已加载之前进行预热</li><li><b>async</b>: 在加载后后台进行预热</li><li><b>disable</b>: 不主动预热；按需加载</li></ul>"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックスの作成時または更新時に、インデックスをメモリに読み込むかどうか。<ul><li><b>sync</b>: セグメントがロード済みと見なされる前にウォームアップします</li><li><b>async</b>: ロード後にバックグラウンドでウォームアップします</li><li><b>disable</b>: 事前にウォームアップせず、必要に応じてロードします</li></ul>"
+                                  }
+                                },
+                                "enum": [
+                                  "",
+                                  "sync",
+                                  "async",
+                                  "disable"
+                                ],
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "totalRows": {
+                                "type": "integer",
+                                "description": "The total number of entities/rows.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "Entity 总数或行数。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "エンティティ/行の総数。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "pendingRows": {
+                                "type": "integer",
+                                "description": "The number of entities/rows that are waiting to be indexed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "等待被索引的 Entity 总数或行数。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックス作成待ちのエンティティ/行の数。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "indexedRows": {
+                                "type": "integer",
+                                "description": "The total number of entities/rows that have been indexed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "已索引的 Entity 总数或行数。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックス作成済みのエンティティ/行の総数。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "indexState": {
+                                "description": "The status of the indexing progress.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "索引当前状态。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックス作成の進行状況のステータス。"
+                                  }
+                                },
+                                "type": "string",
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "failReason": {
+                                "type": "string",
+                                "description": "The reason for the failure to build indexes.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "构建索引失败的原因。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックスの構築に失敗した理由。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "minIndexVersion": {
+                                "type": "integer",
+                                "description": "The minimum version of the index.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "索引的最低版本。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インデックスの最小バージョン。"
                                   }
                                 },
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
                                 "x-deprecated-since": null,
-                                "description": "The parameters that apply to the index-building process of this index.",
+                                "format": "int32"
+                              },
+                              "maxIndexVersion": {
+                                "type": "integer",
+                                "description": "The maximum version of the index.",
                                 "x-i18n": {
                                   "zh-CN": {
-                                    "description": "适用于该索引构建过程的参数。"
+                                    "description": "索引的最高版本。"
                                   },
                                   "ja-JP": {
-                                    "description": "このインデックスの構築処理に適用されるパラメータ。"
+                                    "description": "インデックスの最大バージョン。"
                                   }
-                                }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null,
+                                "format": "int32"
                               },
-                              "x-added-at": "2.6.x",
-                              "x-last-modified": "2.6.x",
-                              "x-deprecated-since": null
-                            }
+                              "indexParams": {
+                                "type": "array",
+                                "description": "The index parameters used to build the index in a list of key-value pairs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "用于构建索引的索引参数，以键值对的形式列出。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "キーと値のペアのリストで示される、インデックスの構築に使用されたインデックスパラメーター。"
+                                  }
+                                },
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string",
+                                      "description": "The name of the index parameter.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "索引参数的名称。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "インデックスパラメーターの名前。"
+                                        }
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
+                                    },
+                                    "value": {
+                                      "type": "string",
+                                      "description": "The value of the index parameter.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "索引参数的值。"
+                                        }
+                                      },
+                                      "x-added-at": "2.6.x",
+                                      "x-last-modified": "2.6.x",
+                                      "x-deprecated-since": null
+                                    }
+                                  },
+                                  "x-added-at": "2.6.x",
+                                  "x-last-modified": "2.6.x",
+                                  "x-deprecated-since": null,
+                                  "description": "The parameters that apply to the index-building process of this index.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "适用于该索引构建过程的参数。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "このインデックスの構築処理に適用されるパラメータ。"
+                                    }
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              }
+                            },
+                            "description": "Detailed information about one index.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "单个索引的详细信息。"
+                              },
+                              "ja-JP": {
+                                "description": "1 つのインデックスに関する詳細情報。"
+                              }
+                            },
+                            "x-added-at": "2.6.x",
+                            "x-last-modified": "2.6.x",
+                            "x-deprecated-since": null
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",

@@ -230,16 +230,32 @@
                         },
                         "data": {
                           "type": "object",
-                          "description": "Response payload which is an empty object.",
+                          "description": "Response payload containing the number of entities deleted.",
                           "x-i18n": {
                             "zh-CN": {
-                              "description": "响应载荷，为空对象。"
+                              "description": "响应载荷，包含删除的实体数量。"
                             },
                             "ja-JP": {
-                              "description": "空のオブジェクトであるレスポンスペイロード。"
+                              "description": "削除されたエンティティの数を含むレスポンスペイロード。"
                             }
                           },
-                          "properties": {},
+                          "properties": {
+                            "deleteCount": {
+                              "type": "integer",
+                              "description": "The number of entities removed by the request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "请求删除的实体数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "リクエストによって削除されたエンティティの数。"
+                                }
+                              },
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null
+                            }
+                          },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
                           "x-deprecated-since": null
@@ -330,7 +346,9 @@
                     "value": {
                       "code": 0,
                       "cost": 0,
-                      "data": {}
+                      "data": {
+                        "deleteCount": 1
+                      }
                     }
                   },
                   "2": {
@@ -826,7 +844,6 @@
                             "insertIds": {
                               "type": "array",
                               "items": {
-                                "type": "string",
                                 "description": "The ID of an inserted entity.",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -836,6 +853,20 @@
                                     "description": "挿入されたエンティティの ID。"
                                   }
                                 },
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
                                 "x-deprecated-since": null
@@ -1481,7 +1512,6 @@
                             "upsertIds": {
                               "type": "array",
                               "items": {
-                                "type": "string",
                                 "description": "The ID of an upserted entity.",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -1491,6 +1521,20 @@
                                     "description": "upsert された entity の ID。"
                                   }
                                 },
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
                                 "x-deprecated-since": null
@@ -2091,7 +2135,66 @@
                           },
                           "items": {
                             "type": "object",
-                            "properties": {},
+                            "properties": {
+                              "id": {
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
+                                "description": "The primary key value of the returned entity. Milvus primary keys are Int64 or VarChar depending on the collection schema, so the value may arrive as a number or a string.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "返回实体的主键值。Milvus 主键可为 Int64 或 VarChar（取决于 Collection 的 Schema），因此该值可能是数字或字符串。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "返されたエンティティのプライマリキーの値。Milvus のプライマリキーは Collection のスキーマに応じて Int64 または VarChar のため、値は数値または文字列のいずれかです。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "grp": {
+                                "type": "string",
+                                "description": "The group that this result belongs to, present when groupingField is specified.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该结果所属的分组，指定 groupingField 时返回。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "groupingField を指定した場合に返される、この結果が属するグループ。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "count(*)": {
+                                "type": "number",
+                                "description": "The aggregated count of the group, present when a group-by count-only query is performed.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该分组的聚合计数，执行仅计数的分组查询时返回。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グループの集計カウント。件数のみのグループ別クエリ実行時に返されます。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              }
+                            },
                             "description": "An entity object",
                             "x-i18n": {
                               "zh-CN": {
@@ -2103,7 +2206,8 @@
                             },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "additionalProperties": true
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -3197,10 +3301,298 @@
                                 "description": "エンティティ オブジェクト。"
                               }
                             },
-                            "properties": {},
+                            "properties": {
+                              "id": {
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
+                                "description": "The primary key value of the returned entity. Milvus primary keys are Int64 or VarChar depending on the collection schema, so the value may arrive as a number or a string.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "返回实体的主键值。Milvus 主键可为 Int64 或 VarChar（取决于 Collection 的 Schema），因此该值可能是数字或字符串。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "返されたエンティティのプライマリキーの値。Milvus のプライマリキーは Collection のスキーマに応じて Int64 または VarChar のため、値は数値または文字列のいずれかです。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "distance": {
+                                "type": "number",
+                                "description": "The similarity distance between the query vector and this returned entity.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "查询向量与该返回实体之间的相似性距离。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クエリベクトルとこの返されたエンティティの間の類似度距離。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "grp": {
+                                "type": "string",
+                                "description": "The group that this result belongs to, present when groupingField is specified.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该结果所属的分组，指定 groupingField 时返回。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "groupingField を指定した場合に返される、この結果が属するグループ。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "buckets": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "count": {
+                                      "type": "number",
+                                      "description": "The number of entities aggregated into this bucket.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "聚合到此分桶中的实体数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "このバケットに集約されたエンティティの数。"
+                                        }
+                                      },
+                                      "x-added-at": "3.0.x",
+                                      "x-last-modified": "3.0.x",
+                                      "x-deprecated-since": null
+                                    },
+                                    "hits": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "x-added-at": "3.0.x",
+                                        "x-last-modified": "3.0.x",
+                                        "x-deprecated-since": null
+                                      },
+                                      "description": "The search results aggregated into this bucket.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "聚合到此分桶中的搜索结果。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "このバケットに集約された検索結果。"
+                                        }
+                                      },
+                                      "x-added-at": "3.0.x",
+                                      "x-last-modified": "3.0.x",
+                                      "x-deprecated-since": null
+                                    },
+                                    "key": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "fieldId": {
+                                            "type": "integer",
+                                            "description": "The ID of the field that defines this bucket.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定义该分桶的字段 ID。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "このバケットを定義するフィールドの ID。"
+                                              }
+                                            },
+                                            "x-added-at": "3.0.x",
+                                            "x-last-modified": "3.0.x",
+                                            "x-deprecated-since": null
+                                          },
+                                          "fieldName": {
+                                            "type": "string",
+                                            "description": "The name of the field that defines this bucket.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定义该分桶的字段名。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "このバケットを定義するフィールドの名前。"
+                                              }
+                                            },
+                                            "x-added-at": "3.0.x",
+                                            "x-last-modified": "3.0.x",
+                                            "x-deprecated-since": null
+                                          }
+                                        },
+                                        "additionalProperties": true,
+                                        "x-added-at": "3.0.x",
+                                        "x-last-modified": "3.0.x",
+                                        "x-deprecated-since": null
+                                      },
+                                      "description": "The key values that define this bucket.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "定义该分桶的键值。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "このバケットを定義するキー値。"
+                                        }
+                                      },
+                                      "x-added-at": "3.0.x",
+                                      "x-last-modified": "3.0.x",
+                                      "x-deprecated-since": null
+                                    },
+                                    "metrics": {
+                                      "type": "object",
+                                      "properties": {
+                                        "avg": {
+                                          "type": "number",
+                                          "description": "The average distance of the hits in this bucket.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "该分桶内命中的平均距离。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このバケット内のヒットの平均距離。"
+                                            }
+                                          },
+                                          "x-added-at": "3.0.x",
+                                          "x-last-modified": "3.0.x",
+                                          "x-deprecated-since": null
+                                        },
+                                        "max": {
+                                          "type": "number",
+                                          "description": "The maximum distance of the hits in this bucket.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "该分桶内命中的最大距离。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このバケット内のヒットの最大距離。"
+                                            }
+                                          },
+                                          "x-added-at": "3.0.x",
+                                          "x-last-modified": "3.0.x",
+                                          "x-deprecated-since": null
+                                        },
+                                        "min": {
+                                          "type": "number",
+                                          "description": "The minimum distance of the hits in this bucket.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "该分桶内命中的最小距离。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このバケット内のヒットの最小距離。"
+                                            }
+                                          },
+                                          "x-added-at": "3.0.x",
+                                          "x-last-modified": "3.0.x",
+                                          "x-deprecated-since": null
+                                        },
+                                        "n": {
+                                          "type": "number",
+                                          "description": "The number of hits aggregated into this bucket.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "聚合到此分桶中的命中数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このバケットに集約されたヒットの数。"
+                                            }
+                                          },
+                                          "x-added-at": "3.0.x",
+                                          "x-last-modified": "3.0.x",
+                                          "x-deprecated-since": null
+                                        },
+                                        "total": {
+                                          "type": "number",
+                                          "description": "The total distance of the hits in this bucket.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "该分桶内命中的距离总和。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このバケット内のヒットの距離の合計。"
+                                            }
+                                          },
+                                          "x-added-at": "3.0.x",
+                                          "x-last-modified": "3.0.x",
+                                          "x-deprecated-since": null
+                                        }
+                                      },
+                                      "description": "Aggregation metrics computed over the hits in this bucket.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "对该分桶内命中计算的聚合指标。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "このバケット内のヒットに対して計算された集計メトリクス。"
+                                        }
+                                      },
+                                      "x-added-at": "3.0.x",
+                                      "x-last-modified": "3.0.x",
+                                      "x-deprecated-since": null
+                                    },
+                                    "subGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "x-added-at": "3.0.x",
+                                        "x-last-modified": "3.0.x",
+                                        "x-deprecated-since": null
+                                      },
+                                      "description": "Nested sub-groups of this bucket.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "该分桶的嵌套子分组。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "このバケットのネストされたサブグループ。"
+                                        }
+                                      },
+                                      "x-added-at": "3.0.x",
+                                      "x-last-modified": "3.0.x",
+                                      "x-deprecated-since": null
+                                    }
+                                  },
+                                  "x-added-at": "3.0.x",
+                                  "x-last-modified": "3.0.x",
+                                  "x-deprecated-since": null
+                                },
+                                "description": "Aggregated search buckets, present when searchAggregation is specified.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "指定 searchAggregation 时返回的聚合分桶。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "searchAggregation を指定した場合に返される集計バケット。"
+                                  }
+                                },
+                                "x-added-at": "3.0.x",
+                                "x-last-modified": "3.0.x",
+                                "x-deprecated-since": null
+                              }
+                            },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "additionalProperties": true
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -3309,6 +3701,27 @@
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
+                          "x-deprecated-since": null
+                        },
+                        "aggTopks": {
+                          "type": "array",
+                          "items": {
+                            "type": "number",
+                            "x-added-at": "3.0.x",
+                            "x-last-modified": "3.0.x",
+                            "x-deprecated-since": null
+                          },
+                          "description": "The top-k limits of the aggregated search branches, present when searchAggregation is specified.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "聚合搜索分支使用的 top-k 限制，指定 searchAggregation 时返回。"
+                            },
+                            "ja-JP": {
+                              "description": "searchAggregation を指定した場合に返される、集計検索ブランチの top-k 制限。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
                           "x-deprecated-since": null
                         }
                       },
@@ -4667,10 +5080,70 @@
                                 "description": "エンティティ オブジェクト。"
                               }
                             },
-                            "properties": {},
+                            "properties": {
+                              "id": {
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
+                                "description": "The primary key value of the returned entity. Milvus primary keys are Int64 or VarChar depending on the collection schema, so the value may arrive as a number or a string.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "返回实体的主键值。Milvus 主键可为 Int64 或 VarChar（取决于 Collection 的 Schema），因此该值可能是数字或字符串。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "返されたエンティティのプライマリキーの値。Milvus のプライマリキーは Collection のスキーマに応じて Int64 または VarChar のため、値は数値または文字列のいずれかです。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "distance": {
+                                "type": "number",
+                                "description": "The similarity distance between the query vector and this returned entity.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "查询向量与该返回实体之间的相似性距离。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クエリベクトルとこの返されたエンティティの間の類似度距離。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              },
+                              "grp": {
+                                "type": "string",
+                                "description": "The group that this result belongs to, present when groupingField is specified.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该结果所属的分组，指定 groupingField 时返回。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "groupingField を指定した場合に返される、この結果が属するグループ。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              }
+                            },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "additionalProperties": true
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",
@@ -5332,10 +5805,40 @@
                                 "description": "エンティティオブジェクト。"
                               }
                             },
-                            "properties": {},
+                            "properties": {
+                              "id": {
+                                "oneOf": [
+                                  {
+                                    "type": "integer",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  },
+                                  {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null
+                                  }
+                                ],
+                                "description": "The primary key value of the returned entity. Milvus primary keys are Int64 or VarChar depending on the collection schema, so the value may arrive as a number or a string.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "返回实体的主键值。Milvus 主键可为 Int64 或 VarChar（取决于 Collection 的 Schema），因此该值可能是数字或字符串。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "返されたエンティティのプライマリキーの値。Milvus のプライマリキーは Collection のスキーマに応じて Int64 または VarChar のため、値は数値または文字列のいずれかです。"
+                                  }
+                                },
+                                "x-added-at": "2.6.x",
+                                "x-last-modified": "2.6.x",
+                                "x-deprecated-since": null
+                              }
+                            },
                             "x-added-at": "2.6.x",
                             "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null
+                            "x-deprecated-since": null,
+                            "additionalProperties": true
                           },
                           "x-added-at": "2.6.x",
                           "x-last-modified": "2.6.x",

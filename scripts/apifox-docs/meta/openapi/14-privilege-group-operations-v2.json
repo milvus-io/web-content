@@ -450,66 +450,68 @@
                           }
                         },
                         "data": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "privilegeGroupName": {
-                                "type": "string",
-                                "x-added-at": "2.6.x",
-                                "x-last-modified": "2.6.x",
-                                "x-deprecated-since": null,
-                                "description": "The name of the privilege group.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "权限组的名称。"
+                          "type": "object",
+                          "properties": {
+                            "privilegeGroups": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "privilegeGroupName": {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "description": "The name of the privilege group.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "权限组的名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "権限グループの名前。"
+                                      }
+                                    }
                                   },
-                                  "ja-JP": {
-                                    "description": "権限グループの名前。"
-                                  }
-                                }
-                              },
-                              "privileges": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string",
-                                  "x-added-at": "2.6.x",
-                                  "x-last-modified": "2.6.x",
-                                  "x-deprecated-since": null,
-                                  "description": "One privilege name included in the privilege group's `privileges` list.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "权限组 `privileges` 列表中的一个权限名称。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "権限グループの `privileges` リストに含まれる 1 つの権限名。"
+                                  "privileges": {
+                                    "type": "string",
+                                    "x-added-at": "2.6.x",
+                                    "x-last-modified": "2.6.x",
+                                    "x-deprecated-since": null,
+                                    "description": "The privileges included in the privilege group, joined by commas.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "该权限组中包含的权限名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "権限グループに含まれる権限名（カンマ区切り）。"
+                                      }
                                     }
                                   }
                                 },
                                 "x-added-at": "2.6.x",
                                 "x-last-modified": "2.6.x",
                                 "x-deprecated-since": null,
-                                "description": "The privilege names included in the privilege group.",
+                                "description": "One privilege group entry in the response payload.",
                                 "x-i18n": {
                                   "zh-CN": {
-                                    "description": "该权限组中包含的权限名称。"
+                                    "description": "响应负载中的一个权限组条目。"
                                   },
                                   "ja-JP": {
-                                    "description": "権限グループに含まれる権限名。"
+                                    "description": "レスポンスペイロード内の 1 つの権限グループエントリ。"
                                   }
                                 }
-                              }
-                            },
-                            "x-added-at": "2.6.x",
-                            "x-last-modified": "2.6.x",
-                            "x-deprecated-since": null,
-                            "description": "One privilege group entry in the response payload.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "响应负载中的一个权限组条目。"
                               },
-                              "ja-JP": {
-                                "description": "レスポンスペイロード内の 1 つの権限グループエントリ。"
+                              "x-added-at": "2.6.x",
+                              "x-last-modified": "2.6.x",
+                              "x-deprecated-since": null,
+                              "description": "The privilege groups returned by the request.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "请求返回的权限组列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "リクエストによって返された権限グループのリスト。"
+                                }
                               }
                             }
                           },
@@ -570,15 +572,14 @@
                     "x-target-response": "OPTION 1",
                     "value": {
                       "code": 0,
-                      "data": [
-                        {
-                          "privilegeGroupName": "my_priv_group",
-                          "privileges": [
-                            "Insert",
-                            "Search"
-                          ]
-                        }
-                      ]
+                      "data": {
+                        "privilegeGroups": [
+                          {
+                            "privilegeGroupName": "my_priv_group",
+                            "privileges": "Insert,Search"
+                          }
+                        ]
+                      }
                     }
                   },
                   "2": {
