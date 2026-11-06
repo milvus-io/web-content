@@ -421,77 +421,13 @@ curl --request POST \
 
 ## Index values inside the JSON field
 
-To accelerate scalar filtering on JSON fields, Milvus supports the following types of indexes:
-
-- **JSON path index** – index specific JSON paths with a declared scalar type.
-
-- **JSON flat index** – index an entire JSON object (or subtree) with automatic type inference.
+To accelerate scalar filtering on JSON fields, Milvus supports **JSON path indexing**, which indexes specific JSON paths with a declared scalar type.
 
 <div class="alert note">
 
 Indexing JSON fields is **optional**. You can still query or filter by JSON paths without an index, but it may result in slower performance due to brute-force search.
 
 </div>
-
-### Choose between path index and flat index | Milvus 2.6.x
-
-<table>
-   <tr>
-     <th><p><strong>Capability</strong></p></th>
-     <th><p><strong>JSON Path Index</strong></p></th>
-     <th><p><strong>JSON Flat Index</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>What it indexes</p></td>
-     <td><p>Specific path(s) you name</p></td>
-     <td><p>All flattened paths under an object path</p></td>
-   </tr>
-   <tr>
-     <td><p>Type handling</p></td>
-     <td><p>You declare <code>json_cast_type</code> (scalar types)</p></td>
-     <td><p>Must be JSON (auto type inference)</p></td>
-   </tr>
-   <tr>
-     <td><p>Arrays as LHS¹</p></td>
-     <td><p>Supported</p></td>
-     <td><p>Not supported</p></td>
-   </tr>
-   <tr>
-     <td><p>Query speed</p></td>
-     <td><p><strong>High</strong> on indexed paths</p></td>
-     <td><p><strong>High</strong>, slightly lower on average</p></td>
-   </tr>
-   <tr>
-     <td><p>Disk use</p></td>
-     <td><p>Lower</p></td>
-     <td><p>Higher</p></td>
-   </tr>
-</table>
-
-¹ *Arrays as LHS* means the left-hand side of the filter expression is a JSON array, for example:
-
-```plaintext
-metadata["tags"] == ["clearance", "summer_sale"]
-json_contains(metadata["tags"], "clearance")
-```
-
-In these cases, `metadata["tags"]` is an array. JSON flat indexing does not accelerate such filters — use a JSON path index with an array cast type instead.
-
-**Use JSON path index when:**
-
-- You know the hot keys to query in advance.
-
-- You need to filter where the left-hand side is an array.
-
-- You want to minimize disk usage.
-
-**Use JSON flat index when:**
-
-- You want to index a whole subtree (including the root).
-
-- Your JSON structure changes frequently.
-
-- You want broader query coverage without declaring every path.
 
 ### JSON path indexing
 
@@ -796,104 +732,6 @@ export stringToDoubleIndex='{
 - If conversion fails (e.g., non-numeric string), the value is skipped and not indexed.
 
 </div>
-
-### JSON flat indexing | Milvus 2.6.x
-
-For **JSON flat indexing**, Milvus indexes all key–value pairs within a JSON object path (including nested objects) by *flattening* the JSON structure and automatically inferring the type of each value.
-
-#### How flattening and type inference work
-
-When you create a JSON flat index on an object path, Milvus will:
-
-1. **Flatten** – Recursively traverse the object starting from the specified `json_path` and extract nested key–value pairs as fully qualified paths. Using the earlier `metadata` example:
-
-    ```json
-    "metadata": {
-      "category": "electronics",
-      "price": 99.99,
-      "supplier": { "country": "USA" }
-    }
-    ```
-
-    becomes:
-
-    ```plaintext
-    metadata["category"] = "electronics"
-    metadata["price"] = 99.99
-    metadata["supplier"]["country"] = "USA"
-    ```
-
-1. **Infer types automatically** – For each value, Milvus determines its type in the following order:
-
-    ```plaintext
-    unsigned integer → signed integer → floating-point → string
-    ```
-
-    The first type that fits the value is used for indexing.
-
-    This means the inferred type will always be **one of these four**.
-
-    Type inference is performed **per document**, so the same path can have different inferred types across documents.
-
-    After type inference, the flattened data is internally represented as terms with their inferred types, for example:
-
-    ```plaintext
-    ("category", Text, "electronics")
-    ("price", Double, 99.99)
-    ("supplier.country", Text, "USA")
-    ```
-
-#### Example: Create JSON flat index
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# 1. Create a flat index on the root object of the JSON column (covers the entire JSON subtree)
-index_params.add_index(
-    field_name="metadata",
-    index_type="AUTOINDEX",          # Or "INVERTED", same as Path Index
-    index_name="metadata_flat",      # Unique index name
-    params={
-        "json_path": 'metadata',     # Object path: the root object of the column
-        # highlight-next-line
-        "json_cast_type": "JSON"     # Key difference: must be "JSON" for Flat Index; case-insensitive
-    }
-)
-
-# 2. Optionally, create a flat index on a sub-object (e.g., supplier subtree)
-index_params.add_index(
-    field_name="metadata",
-    index_type="AUTOINDEX",
-    index_name="metadata_supplier_flat",
-    params={
-        "json_path": 'metadata["supplier"]',  # Object path: sub-object path
-        # highlight-next-line
-        "json_cast_type": "JSON"
-    }
-)
-```
-
-```java
-// java
-```
-
-```javascript
-// nodejs
-```
-
-```go
-// go
-```
-
-```bash
-# restful
-```
 
 ### Apply indexes to the collection
 
