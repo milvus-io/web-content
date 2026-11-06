@@ -53,7 +53,7 @@ type RefreshExternalCollectionJobInfo struct {
 
 - **State** (*string*) -
 
-    The current state of the specified job. Possible values are:
+    The current state of the specified job. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`. Possible values are:
 
     - RefreshPending
 

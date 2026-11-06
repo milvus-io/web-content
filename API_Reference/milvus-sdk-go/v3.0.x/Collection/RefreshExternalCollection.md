@@ -29,6 +29,8 @@ result, err := client.RefreshExternalCollection(option)
 
     This sets the source data URI, which is similar to an AWS S3 object path.
 
+    Provide `externalSource` and `externalSpec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
+
 - `WithExternalSpec(externalSpec string)`
 
     The external source specifications, which are a set of secondary parameters:
@@ -37,7 +39,7 @@ result, err := client.RefreshExternalCollection(option)
 
         The format of the target source data files.
 
-        Possible values are `parquet`, `vortex`, `lance-table`, and `iceberg-table`.
+        Possible values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `externalSource` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
     - **extfs** (*string*) -  
 

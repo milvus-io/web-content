@@ -68,7 +68,7 @@ This is a class method. You should call this method like this: `MilvusClient.cre
 
         The format of the target source data files.
 
-        Possible values are `parquet`, `vortex`, `lance-table`, and `iceberg-table`.
+        Possible values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
     - **snapshot_id** (*str*) -
 

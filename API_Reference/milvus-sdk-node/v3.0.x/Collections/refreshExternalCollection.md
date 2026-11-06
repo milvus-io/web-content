@@ -26,10 +26,10 @@ await milvusClient.refreshExternalCollection({
 The name of the external collection to refresh.
 
 - **external_source** (*string*) -
-Optional new external source path. If provided, the collection will be refreshed from this new source.
+Optional new external source path. If provided, the collection will be refreshed from this new source. Provide `external_source` and `external_spec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
 
 - **external_spec** (*string*) -
-Optional new external spec configuration. If provided, the collection will use this new spec.
+Optional new external spec configuration. If provided, the collection will use this new spec. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 - **db_name** (*string*) -
 The name of the database. Optional.

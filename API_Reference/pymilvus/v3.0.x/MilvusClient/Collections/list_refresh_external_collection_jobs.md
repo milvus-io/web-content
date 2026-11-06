@@ -36,23 +36,10 @@ A list of **RefreshExternalCollectionJobInfo** objects, each recording the detai
 {
     'job_id': 4325693842392,
     'collection_name': 'test_collection',
-    'state': 'RefreshPending',
+    'state': 'RefreshInProgress',
     'progress': 67,
     'reason': ''
     'external_source': 's3://s3.<region-id>.amazonaws.com/<bucket>/' 
-    'start_time': 1776470400000
-    'end_time': 1776470434567    
-}
-```
-
-```python
-{
-    'job_id': 4325693842392,
-    'collection_name': 'test_collection',
-    'state': 'RefreshPending',
-    'progress': 67,
-    'reason': ''
-    'external_source': 'volume://<my_volume>/<bucket>/' 
     'start_time': 1776470400000
     'end_time': 1776470434567    
 }
@@ -70,7 +57,7 @@ A list of **RefreshExternalCollectionJobInfo** objects, each recording the detai
 
 - **state** (*string*) -
 
-    The current state of the specified job. Possible values are:
+    The current state of the specified job. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`. Possible values are:
 
     - RefreshPending
 

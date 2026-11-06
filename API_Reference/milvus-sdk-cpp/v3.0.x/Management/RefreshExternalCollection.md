@@ -36,7 +36,9 @@ auto request = milvus::RefreshExternalCollectionRequest()
 
 - `WithExternalSource(const std::string& external_source)`
 
-    Sets the external source type.
+    Sets the external source URI.
+
+    Provide `external_source` and `external_spec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
 
 - `SetExternalSource(const std::string& external_source)`
 
@@ -44,7 +46,7 @@ auto request = milvus::RefreshExternalCollectionRequest()
 
 - `WithExternalSpec(const nlohmann::json& external_spec)`
 
-    Sets provider-specific refresh configuration as JSON.
+    Sets the external source specifications as JSON, such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 - `SetExternalSpec(const nlohmann::json& external_spec)`
 
