@@ -38,9 +38,14 @@ Choose the cast type that matches the values stored at the path. To check whethe
 | `ARRAY_BOOL` | An array of Boolean values | `[true, false]` |
 | `ARRAY_DOUBLE` | An array of numeric values | `[1.2, 3.14]` |
 | `ARRAY_VARCHAR` | An array of string values | `["tag1", "tag2"]` |
-| `JSON` | An entire JSON object or sub-object. Whole-object JSON indexing is deprecated starting in Milvus 3.0.0. | `{"supplier": {"country": "USA"}}` |
 
 If values at the same path have inconsistent types, only values that match the cast type are indexed. For example, if `metadata["price"]` contains both `99.99` and `"99.99"`, an index of the `DOUBLE` cast type includes the numeric value and skips the string value. To convert string values during indexing, use `json_cast_function`; see [Example 5: Convert data type at index time](json-indexing.md#Example-5-Convert-data-type-at-index-time).
+
+<div class="alert warning">
+
+Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Create JSON path indexes for known query paths, or consider [JSON Shredding](json-shredding.md) for broad query acceleration.
+
+</div>
 
 ### Choose an index type
 
@@ -50,11 +55,10 @@ After you choose a cast type, choose the index type according to your query patt
 | --- | --- | --- | --- |
 | Mixed equality and range filters on scalar values | `AUTOINDEX` | Use `BOOL`, `DOUBLE`, or `VARCHAR`. | Lets Milvus choose the internal index layout based on value cardinality. |
 | Filters on values inside JSON arrays | `INVERTED` | Use `ARRAY_BOOL`, `ARRAY_DOUBLE`, or `ARRAY_VARCHAR`. | Required for all array cast types. |
-| Whole-object or sub-object indexing (deprecated) | `INVERTED` or `AUTOINDEX` (compatibility only) | Use `JSON`. | Supported for compatibility. For new workloads, create path-specific indexes or consider [JSON Shredding](json-shredding.md). |
 | Range filters on numbers or sortable strings | `STL_SORT` or `AUTOINDEX` | Use `DOUBLE` or `VARCHAR`. | Use `STL_SORT` to force a sorted layout; use `AUTOINDEX` when you want automatic selection. |
 | Equality or `IN` filters on low-cardinality values | `BITMAP` or `AUTOINDEX` | Use `BOOL` or `VARCHAR`. | Use `BITMAP` to force a bitmap layout. For numeric values, use `AUTOINDEX` or `STL_SORT`. |
 
-When in doubt, start with `AUTOINDEX` for scalar paths. Use `INVERTED` explicitly for array cast types and text-match queries. Whole-object JSON indexing with either `INVERTED` or `AUTOINDEX` remains supported, but it is deprecated starting in Milvus 3.0.0.
+When in doubt, start with `AUTOINDEX` for scalar paths. Use `INVERTED` explicitly for array cast types and text-match queries.
 
 ### AUTOINDEX
 
@@ -64,7 +68,6 @@ When in doubt, start with `AUTOINDEX` for scalar paths. Use `INVERTED` explicitl
 | --- | --- |
 | `BOOL`, `DOUBLE`, `VARCHAR` | Chooses between `BITMAP` and `STL_SORT` based on value cardinality. |
 | `ARRAY_BOOL`, `ARRAY_DOUBLE`, `ARRAY_VARCHAR` | Not supported. Use `INVERTED` explicitly as the index type. |
-| `JSON` | Uses `INVERTED` for whole-object or sub-object indexing. This mode is deprecated starting in Milvus 3.0.0. |
 
 For scalar cast types (`BOOL`, `DOUBLE`, and `VARCHAR`), `AUTOINDEX` is the recommended starting point when you want Milvus to choose the internal index layout. During index build, Milvus measures the **cardinality** of the values at the JSON path. Cardinality means the number of distinct values at that path.
 
@@ -78,23 +81,19 @@ The default `BITMAP`-vs-`STL_SORT` threshold is **100 distinct values**. You can
 
 <div class="alert note">
 
-**Behavior change in Milvus 3.0**. In earlier versions, `AUTOINDEX` on JSON paths always built an `INVERTED` index. From Milvus 3.0, `AUTOINDEX` picks between `BITMAP` and `STL_SORT` for scalar cast types. For `JSON`, `AUTOINDEX` still uses `INVERTED`, although whole-object JSON indexing is deprecated. For array cast types and text-match queries, specify `INVERTED` explicitly.
+**Behavior change in Milvus 3.0**. In earlier versions, `AUTOINDEX` on JSON paths always built an `INVERTED` index. From Milvus 3.0, `AUTOINDEX` picks between `BITMAP` and `STL_SORT` for scalar cast types. For array cast types and text-match queries, specify `INVERTED` explicitly.
 
 </div>
 
 ### INVERTED
 
-`INVERTED` is the best fit when you need text-match queries or array indexing. It also remains available for deprecated whole-object JSON indexing.
+`INVERTED` is the best fit when you need text-match queries or array indexing.
 
 Specify `INVERTED` explicitly when:
 
 - You need to index values inside JSON arrays.
 
-- You maintain an existing index on an entire JSON object or sub-object and want to make the `INVERTED` behavior explicit.
-
-- You want one index type that handles equality, `IN`, range, text-match, and array queries. Whole-object support remains available for compatibility, at the cost of a larger index size.
-
-For existing indexes on entire JSON objects (`json_cast_type="JSON"`), you can continue to use either `INVERTED` or `AUTOINDEX`. `AUTOINDEX` uses `INVERTED` for this cast type. Whole-object JSON indexing is no longer recommended for new workloads.
+- You want one index type that handles equality, `IN`, range, text-match, and array queries.
 
 For details, refer to [INVERTED](inverted.md).
 
@@ -110,7 +109,7 @@ For details, refer to [INVERTED](inverted.md).
 
 - You want to force a sorted layout instead of letting `AUTOINDEX` choose.
 
-`STL_SORT` does not support `BOOL`, `ARRAY_*`, or `JSON` cast types. Use `INVERTED` for arrays. Existing whole-object indexes can continue to use `INVERTED` or `AUTOINDEX`, but whole-object JSON indexing is deprecated.
+`STL_SORT` does not support `BOOL` or `ARRAY_*` cast types. Use `INVERTED` for arrays.
 
 For details, refer to [STL_SORT](stl-sort.md).
 
@@ -126,7 +125,7 @@ For details, refer to [STL_SORT](stl-sort.md).
 
 - You want to force a bitmap layout instead of letting `AUTOINDEX` choose.
 
-`BITMAP` does not support `DOUBLE`, `ARRAY_*`, or `JSON` cast types. For numeric values, use `AUTOINDEX`, `STL_SORT`, or `INVERTED` instead.
+`BITMAP` does not support `DOUBLE` or `ARRAY_*` cast types. For numeric values, use `AUTOINDEX`, `STL_SORT`, or `INVERTED` instead.
 
 For details, refer to [BITMAP](bitmap.md).
 
@@ -142,7 +141,6 @@ Use the following matrix as a quick reference for supported `(cast type, index t
 | `ARRAY_BOOL` | Array of booleans. | `[true, false]` | No | Yes | No | No |
 | `ARRAY_DOUBLE` | Array of numbers. | `[1.2, 3.14]` | No | Yes | No | No |
 | `ARRAY_VARCHAR` | Array of strings. | `["tag1", "tag2"]` | No | Yes | No | No |
-| `JSON` | An entire JSON object or sub-object with automatic type inference and flattening. Deprecated starting in Milvus 3.0.0. | any nested object | Yes (deprecated) | Yes (deprecated) | No | No |
 
 For cells marked `No`, Milvus rejects the request at index-creation time. For array cast types, use `INVERTED` explicitly (`AUTOINDEX` does not cover arrays).
 
@@ -1318,261 +1316,6 @@ export stringToDoubleIndex='{
 
 If conversion fails for a row (for example, a non-numeric string like `"invalid"`), that row is skipped during indexing.
 
-### Example 6: Index entire JSON objects
-
-<div class="alert warning">
-
-Starting in Milvus 3.0.0, whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Existing indexes and new index-creation requests remain supported for compatibility, but this mode is no longer recommended for new workloads. Create JSON path indexes for known query paths. For complex or evolving JSON documents with broad query patterns, consider [JSON Shredding](json-shredding.md). JSON shredding does not accelerate values inside arrays; use JSON path indexes with array cast types for those queries.
-
-</div>
-
-For compatible existing workloads, setting `json_cast_type="JSON"` indexes the full structure at the given path. Milvus flattens nested objects into paths and automatically infers each value's type. All keys under the path become searchable.
-
-`AUTOINDEX` transparently uses `INVERTED` for `JSON` cast type, since flattening and type inference are inverted-index capabilities.
-
-Index the entire `metadata` object:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#rust">Rust</a>
-    <a href="#cpp">C++</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#csharp">C#</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-index_params.add_index(
-    field_name="metadata",
-    # highlight-next-line
-    index_type="AUTOINDEX",
-    index_name="metadata_full_index",
-    params={
-        # highlight-start
-        "json_path": "metadata",
-        "json_cast_type": "JSON",
-        # highlight-end
-    }
-)
-```
-
-```java
-import io.milvus.v2.common.IndexParam;
-import java.util.HashMap;
-import java.util.Map;
-
-Map<String, Object> extraParams = new HashMap<>();
-extraParams.put("json_path", "metadata");
-extraParams.put("json_cast_type", "JSON");
-indexParams.add(IndexParam.builder()
-        .fieldName("metadata")
-        .indexName("metadata_full_index")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .extraParams(extraParams)
-        .build());
-```
-
-```go
-import (
-    "github.com/milvus-io/milvus/client/v3/index"
-
-    "github.com/milvus-io/milvus/client/v3/milvusclient"
-)
-
-jsonIndex6 := index.NewJSONPathIndex(index.AUTOINDEX, "json", `metadata`).
-    WithIndexName("metadata_full_index")
-indexOpts = append(indexOpts, milvusclient.NewCreateIndexOption("your_collection_name", "metadata", jsonIndex6).
-    WithIndexName("metadata_full_index"))
-```
-
-```rust
-use milvus::v2::prelude::*;
-use std::collections::HashMap;
-
-index_params.push(
-    IndexParam::new()
-        .field_name("metadata")
-        .index_name("metadata_full_index")
-        .index_type(IndexType::AutoIndex)
-        .extra_params(HashMap::from([
-            ("json_path".to_string(), "metadata".to_string()),
-            ("json_cast_type".to_string(), "JSON".to_string()),
-        ])),
-);
-```
-
-```cpp
-#include <utility>
-#include "milvus/MilvusClientV2.h"
-
-milvus::IndexDesc metadata_full_index("metadata", "metadata_full_index", milvus::IndexType::AUTOINDEX);
-metadata_full_index.AddExtraParam("json_path", "metadata");
-metadata_full_index.AddExtraParam("json_cast_type", "JSON");
-index_params.push_back(std::move(metadata_full_index));
-```
-
-```javascript
-indexParams.push({
-  collection_name: "your_collection_name",
-  field_name: "metadata",
-  index_name: "metadata_full_index",
-  index_type: "AUTOINDEX",
-  extra_params: {
-    json_path: "metadata",
-    json_cast_type: "JSON",
-  },
-});
-```
-
-```csharp
-using Milvus.Client.V2.Types;
-
-indexParams.Add(new IndexParam("metadata", "metadata_full_index", IndexType.AutoIndex)
-{
-    ExtraParams =
-    {
-        ["json_path"] = "metadata",
-        ["json_cast_type"] = "JSON"
-    }
-});
-```
-
-```bash
-export metadataFullIndex='{
-  "fieldName": "metadata",
-  "indexName": "metadata_full_index",
-  "params": {
-    "index_type": "AUTOINDEX",
-    "json_path": "metadata",
-    "json_cast_type": "JSON"
-  }
-}'
-```
-
-Or index a sub-object, such as all `supplier` information:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#rust">Rust</a>
-    <a href="#cpp">C++</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#csharp">C#</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-index_params.add_index(
-    field_name="metadata",
-    # highlight-next-line
-    index_type="AUTOINDEX",
-    index_name="supplier_index",
-    params={
-        # highlight-start
-        "json_path": 'metadata["supplier"]',
-        "json_cast_type": "JSON",
-        # highlight-end
-    }
-)
-```
-
-```java
-import io.milvus.v2.common.IndexParam;
-import java.util.HashMap;
-import java.util.Map;
-
-Map<String, Object> extraParams = new HashMap<>();
-extraParams.put("json_path", "metadata[\"supplier\"]");
-extraParams.put("json_cast_type", "JSON");
-indexParams.add(IndexParam.builder()
-        .fieldName("metadata")
-        .indexName("supplier_index")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .extraParams(extraParams)
-        .build());
-```
-
-```go
-import (
-    "github.com/milvus-io/milvus/client/v3/index"
-
-    "github.com/milvus-io/milvus/client/v3/milvusclient"
-)
-
-jsonIndex7 := index.NewJSONPathIndex(index.AUTOINDEX, "json", `metadata["supplier"]`).
-    WithIndexName("supplier_index")
-indexOpts = append(indexOpts, milvusclient.NewCreateIndexOption("your_collection_name", "metadata", jsonIndex7).
-    WithIndexName("supplier_index"))
-```
-
-```rust
-use milvus::v2::prelude::*;
-use std::collections::HashMap;
-
-index_params.push(
-    IndexParam::new()
-        .field_name("metadata")
-        .index_name("supplier_index")
-        .index_type(IndexType::AutoIndex)
-        .extra_params(HashMap::from([
-            ("json_path".to_string(), "metadata[\"supplier\"]".to_string()),
-            ("json_cast_type".to_string(), "JSON".to_string()),
-        ])),
-);
-```
-
-```cpp
-#include <utility>
-#include "milvus/MilvusClientV2.h"
-
-milvus::IndexDesc supplier_index("metadata", "supplier_index", milvus::IndexType::AUTOINDEX);
-supplier_index.AddExtraParam("json_path", "metadata[\"supplier\"]");
-supplier_index.AddExtraParam("json_cast_type", "JSON");
-index_params.push_back(std::move(supplier_index));
-```
-
-```javascript
-indexParams.push({
-  collection_name: "your_collection_name",
-  field_name: "metadata",
-  index_name: "supplier_index",
-  index_type: "AUTOINDEX",
-  extra_params: {
-    json_path: 'metadata["supplier"]',
-    json_cast_type: "JSON",
-  },
-});
-```
-
-```csharp
-using Milvus.Client.V2.Types;
-
-indexParams.Add(new IndexParam("metadata", "supplier_index", IndexType.AutoIndex)
-{
-    ExtraParams =
-    {
-        ["json_path"] = "metadata[\"supplier\"]",
-        ["json_cast_type"] = "JSON"
-    }
-});
-```
-
-```bash
-export supplierIndex='{
-  "fieldName": "metadata",
-  "indexName": "supplier_index",
-  "params": {
-    "index_type": "AUTOINDEX",
-    "json_path": "metadata[\\\"supplier\\\"]",
-    "json_cast_type": "JSON"
-  }
-}'
-```
-
-Indexing entire objects increases index size. For new workloads with deeply nested documents and diverse query patterns, use path-specific indexes or consider [JSON Shredding](json-shredding.md).
 
 ### Apply the index
 
@@ -1807,8 +1550,6 @@ Start with `AUTOINDEX`. It picks the right layout from your data's cardinality, 
 
 - You're indexing array cast types. Use `INVERTED` explicitly.
 
-- You're maintaining an existing whole-object JSON index. Both `INVERTED` and `AUTOINDEX` remain supported for compatibility, but whole-object JSON indexing is deprecated starting in Milvus 3.0.0.
-
 ### What happens if a query's filter expression uses a different type than the indexed cast type?
 
 If your filter expression uses a different type than the index's `json_cast_type`, Milvus does not use the index and may fall back to a slower brute-force scan if the data allows. For best performance, always align your filter expression with the cast type of the index. For example, if a numeric index is created with `json_cast_type="DOUBLE"`, only numeric filter conditions will leverage the index.
@@ -1819,7 +1560,7 @@ Inconsistent types can lead to **partial indexing**. For example, if `metadata["
 
 ### Can I create multiple indexes on the same JSON key?
 
-No. Milvus allows at most one index per `(field, json_path)` pair, regardless of cast type or index type. You cannot create both an `INVERTED` and a `BITMAP` index on the same path, or two indexes on the same path with different cast types. You can, however, create an index on the entire JSON object and a separate index on a nested key within that object because those are different paths.
+No. Milvus allows at most one index per `(field, json_path)` pair, regardless of cast type or index type. You cannot create both an `INVERTED` and a `BITMAP` index on the same path, or two indexes on the same path with different cast types.
 
 ### How do I tune AUTOINDEX's BITMAP-vs-STL_SORT threshold?
 

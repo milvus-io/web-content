@@ -1552,7 +1552,7 @@ By default, queries on JSON fields without acceleration will perform a full scan
 
 <div class="alert warning">
 
-Starting in Milvus 3.0.0, whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Existing indexes and new index-creation requests remain supported for compatibility, but this mode is no longer recommended for new workloads. Use JSON path indexing for known query paths, or consider [JSON Shredding](json-shredding.md) for broad query acceleration across complex or evolving documents.
+Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Use JSON path indexing for known query paths, or consider [JSON Shredding](json-shredding.md) for broad query acceleration.
 
 </div>
 
