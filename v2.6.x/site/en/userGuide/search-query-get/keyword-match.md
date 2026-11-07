@@ -172,7 +172,7 @@ export schema='{
 
 The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.
 
-By default, Milvus uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
+By default, Milvus uses the `standard` analyzer, which tokenizes text based on whitespace and punctuation and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to [Standard](standard-analyzer.md).
 
 In cases where a different analyzer is required, you can configure one using the `analyzer_params` parameter. For example, to apply the `english` analyzer for processing English text:
 
