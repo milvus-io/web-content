@@ -158,7 +158,7 @@ client
     .await?;
 ```
 
-```c++
+```cpp
 #include <iostream>
 #include "milvus/MilvusClientV2.h"
 
@@ -303,7 +303,7 @@ client
     .await?;
 ```
 
-```c++
+```cpp
 #include <iostream>
 #include "milvus/MilvusClientV2.h"
 

@@ -26,6 +26,7 @@ curl -X POST "http://localhost:19530/v2/vectordb/jobs/import/create" \
 ```
 
 <!-- TODO: the `headers` parameter and `IDEMPOTENCY_KEY_HEADER` are merged but not released: milvus-io/pymilvus#3784 (master), milvus-io/pymilvus#3807 (3.0), milvus-io/pymilvus#3808 (2.6). They are expected in pymilvus v3.0.3 and v2.6.18. After those tags exist, verify this example against the released API. -->
+
 ```python
 from pymilvus.bulk_writer import IDEMPOTENCY_KEY_HEADER, bulk_import
 

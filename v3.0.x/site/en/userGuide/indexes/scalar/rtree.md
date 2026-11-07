@@ -148,7 +148,7 @@ let create_index_req = CreateIndexRequest::builder()
 client.create_index(create_index_req).await?;
 ```
 
-```c++
+```cpp
 #include "milvus/MilvusClientV2.h"
 #include <iostream>
 
@@ -316,7 +316,7 @@ let res = client.query(query_req).await?;
 println!("{:?}", res.results());
 ```
 
-```c++
+```cpp
 #include <iostream>
 #include <string>
 
@@ -470,7 +470,7 @@ let res = client.search(search_req).await?;
 println!("{:?}", res.results());
 ```
 
-```c++
+```cpp
 #include <iostream>
 #include <vector>
 #include <string>
@@ -616,7 +616,7 @@ let drop_index_req = DropIndexRequest::builder()
 client.drop_index(drop_index_req).await?;
 ```
 
-```c++
+```cpp
 status = client->DropIndex(milvus::DropIndexRequest()
                                .WithCollectionName("geo_demo")
                                .WithIndexName("rtree_geo"));

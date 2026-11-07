@@ -176,6 +176,22 @@ const schema = [
 console.log(schema);
 ```
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
+schema->AddField({"id", milvus::DataType::INT64, "", true, true});
+schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
+schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
+```
 ```bash
 export schema='{
         "autoId": true,
@@ -200,22 +216,6 @@ export schema='{
             }
         ]
     }'
-```
-```cpp
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-
-milvus::CollectionSchemaPtr schema = std::make_shared<milvus::CollectionSchema>();
-schema->AddField({"id", milvus::DataType::INT64, "", true, true});
-schema->AddField(milvus::FieldSchema("text", milvus::DataType::VARCHAR).WithMaxLength(1000).EnableAnalyzer(true));
-schema->AddField(milvus::FieldSchema("sparse", milvus::DataType::SPARSE_FLOAT_VECTOR));
 ```
 
 In the preceding config,
@@ -289,6 +289,12 @@ const functions = [
 ];
 ```
 
+```cpp
+milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
+function->AddInputFieldName("text");
+function->AddOutputFieldName("sparse");
+schema->AddFunction(function);
+```
 ```bash
 export schema='{
         "autoId": true,
@@ -322,12 +328,6 @@ export schema='{
             }
         ]
     }'
-```
-```cpp
-milvus::FunctionPtr function = std::make_shared<milvus::Function>("text_bm25_emb", milvus::FunctionType::BM25);
-function->AddInputFieldName("text");
-function->AddOutputFieldName("sparse");
-schema->AddFunction(function);
 ```
 
 <table>
@@ -429,6 +429,12 @@ const index_params = [
 ];
 ```
 
+```cpp
+auto index_params = milvus::IndexDesc("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
+index_params.AddExtraParam("bm25_k1", "1.2");
+index_params.AddExtraParam("bm25_b", "0.75");
+```
 ```bash
 export indexParams='[
         {
@@ -442,12 +448,6 @@ export indexParams='[
             }
         }
     ]'
-```
-```cpp
-auto index_params = milvus::IndexDesc("sparse", "", milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
-index_params.AddExtraParam("inverted_index_algo", "DAAT_MAXSCORE");
-index_params.AddExtraParam("bm25_k1", "1.2");
-index_params.AddExtraParam("bm25_b", "0.75");
 ```
 
 <table>
@@ -550,6 +550,15 @@ await client.createCollection({
 await client.loadCollection({ collection_name: 'my_collection' });
 ```
 
+```cpp
+auto status = client->CreateCollection(milvus::CreateCollectionRequest()
+                                    .WithCollectionName("my_collection")
+                                    .WithCollectionSchema(schema)
+                                    .AddIndex(std::move(index_params)));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
 ```bash
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
@@ -572,15 +581,6 @@ curl --request POST \
 --data '{
     "collectionName": "my_collection"
 }'
-```
-```cpp
-auto status = client->CreateCollection(milvus::CreateCollectionRequest()
-                                    .WithCollectionName("my_collection")
-                                    .WithCollectionSchema(schema)
-                                    .AddIndex(std::move(index_params)));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 
 ## Insert text data
@@ -649,22 +649,6 @@ await client.insert({
 });
 ```
 
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
---header "Request-Timeout: 10" \
--d '{
-    "data": [
-        {"text": "information retrieval is a field of study."},
-        {"text": "information retrieval focuses on finding relevant information in large datasets."},
-        {"text": "data mining and information retrieval overlap in research."}       
-    ],
-    "collectionName": "my_collection"
-}'
-
-```
 ```cpp
 milvus::EntityRows data = {
     {{"text", "information retrieval is a field of study."}},
@@ -680,6 +664,22 @@ auto status = client->Insert(milvus::InsertRequest()
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
+```
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "data": [
+        {"text": "information retrieval is a field of study."},
+        {"text": "information retrieval focuses on finding relevant information in large datasets."},
+        {"text": "data mining and information retrieval overlap in research."}       
+    ],
+    "collectionName": "my_collection"
+}'
+
 ```
 
 ## Perform full text search
@@ -768,6 +768,21 @@ await client.search({
 });
 ```
 
+```cpp
+auto request = milvus::SearchRequest()
+                       .WithCollectionName("my_collection")
+                       .AddEmbeddedText("whats the focus of information retrieval?")
+                       .WithLimit(3)
+                       .WithAnnsField("sparse")
+                       .AddExtraParam("metric_type", "BM25")
+                       .AddOutputField("text");
+
+milvus::SearchResponse response;
+auto status = client->Search(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -789,21 +804,6 @@ curl --request POST \
         "params":{}
     }
 }'
-```
-```cpp
-auto request = milvus::SearchRequest()
-                       .WithCollectionName("my_collection")
-                       .AddEmbeddedText("whats the focus of information retrieval?")
-                       .WithLimit(3)
-                       .WithAnnsField("sparse")
-                       .AddExtraParam("metric_type", "BM25")
-                       .AddOutputField("text");
-
-milvus::SearchResponse response;
-auto status = client->Search(request, response);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
 ```
 
 <table>
@@ -923,6 +923,16 @@ await client.search({
 });
 ```
 
+```cpp
+// Searching with the sparse field in output_fields throws an error.
+// Only output the original text and metadata fields.
+milvus::SearchRequest request = milvus::SearchRequest()
+    .WithCollectionName("my_collection")
+    .AddEmbeddedText("query text")
+    .WithLimit(3)
+    .WithAnnsField("sparse")
+    .AddOutputField("text");
+```
 ```bash
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
@@ -938,16 +948,6 @@ curl --request POST \
 }'
 ```
 
-```cpp
-// Searching with the sparse field in output_fields throws an error.
-// Only output the original text and metadata fields.
-milvus::SearchRequest request = milvus::SearchRequest()
-    .WithCollectionName("my_collection")
-    .AddEmbeddedText("query text")
-    .WithLimit(3)
-    .WithAnnsField("sparse")
-    .AddOutputField("text");
-```
 
 ### Why do I need to define a sparse vector field if I can't access it?
 

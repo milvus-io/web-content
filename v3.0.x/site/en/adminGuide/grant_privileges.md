@@ -618,7 +618,7 @@ curl --request POST \
 
 Below is an example output. 
 
-```python
+```json
 {
      "role": "role_a",
      "privileges": [
