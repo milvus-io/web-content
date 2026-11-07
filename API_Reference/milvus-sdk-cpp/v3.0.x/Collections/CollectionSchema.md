@@ -91,6 +91,8 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 
     Sets the external file specification and returns this schema for chaining.
 
+    The specification carries secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
+
 **Dynamic field:**
 
 - `void SetEnableDynamicField(bool enable_dynamic_field)`

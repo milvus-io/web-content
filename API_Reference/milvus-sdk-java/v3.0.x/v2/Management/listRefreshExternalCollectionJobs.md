@@ -48,7 +48,7 @@ A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExter
 
     - `getState()` (*String*) -
 
-        The current job state (e.g., `"PENDING"`, `"RUNNING"`, `"SUCCEEDED"`, `"FAILED"`).
+        The current job state. Possible values are `RefreshPending`, `RefreshInProgress`, `RefreshCompleted`, and `RefreshFailed`. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`.
 
     - `getProgress()` (*int*) -
 
@@ -56,7 +56,7 @@ A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExter
 
     - `getReason()` (*String*) -
 
-        The failure reason if `state` is `"FAILED"`; empty otherwise.
+        The failure reason if `state` is `RefreshFailed`; empty otherwise.
 
     - `getExternalSource()` (*String*) -
 

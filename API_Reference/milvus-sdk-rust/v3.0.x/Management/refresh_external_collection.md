@@ -29,11 +29,15 @@ let request = RefreshExternalCollectionRequest::builder()
 
 - `external_source: String`
 
-    Name of the external data source to refresh from.
+    The external source URI to refresh from.
+
+    Provide `external_source` and `external_spec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
 
 - `external_spec: Option<serde_json::Value>`
 
     Optional external-source specification as a JSON object.
+
+    The specification carries secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 **RETURN TYPE:**
 

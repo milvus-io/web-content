@@ -57,7 +57,7 @@ public sealed class RefreshExternalCollectionJobInfo
 
 ## RefreshExternalCollectionState
 
-This enum represents the state of an external-collection refresh job.
+This enum represents the state of an external-collection refresh job. A refresh job transitions from `InProgress` to `Completed` or `Failed`.
 
 ```csharp
 public enum RefreshExternalCollectionState

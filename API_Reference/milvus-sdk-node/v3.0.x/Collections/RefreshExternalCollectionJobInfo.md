@@ -29,7 +29,7 @@ export interface RefreshExternalCollectionJobInfo {
 
 - **state** (*RefreshExternalCollectionState | keyof typeof RefreshExternalCollectionState*) -
 
-    The refresh job state.
+    The refresh job state. Possible values are **RefreshPending**, **RefreshInProgress**, **RefreshCompleted**, and **RefreshFailed**. A refresh job transitions from **RefreshInProgress** to **RefreshCompleted** or **RefreshFailed**.
 
 - **progress** (*string*) -
 

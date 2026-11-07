@@ -1,6 +1,6 @@
 # RefreshExternalCollectionStateCode
 
-This enum describes the state of an external collection refresh job.
+This enum describes the state of an external collection refresh job. A refresh job transitions from `IN_PROGRESS` to `COMPLETED` or `FAILED`.
 
 ```cpp
 enum class RefreshExternalCollectionStateCode {

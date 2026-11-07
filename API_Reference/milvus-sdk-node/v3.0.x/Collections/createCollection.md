@@ -118,6 +118,8 @@ await milvusClient.createCollection({
 
     The external spec configuration. This applies to the creation of external collections.
 
+    The spec is a JSON string of secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
+
 - **do_physical_backfill** (*boolean*) -
 
     Whether to physically backfill external data. This applies to the creation of external collections.
@@ -332,6 +334,8 @@ await milvusClient.createCollection({
 - **external_spec** (*string*) -
 
     The external spec configuration. This applies to the creation of external collections.
+
+    The spec is a JSON string of secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 - **do_physical_backfill** (*boolean*) -
 
@@ -574,6 +578,8 @@ await milvusClient.createCollection({
 - **external_spec** (*string*) -
 
     The external spec configuration. This applies to the creation of external collections.
+
+    The spec is a JSON string of secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 - **do_physical_backfill** (*boolean*) -
 
