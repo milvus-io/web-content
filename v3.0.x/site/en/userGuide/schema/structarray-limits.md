@@ -35,9 +35,11 @@ StructArray schemas have the following limits:
 | Struct is not a top-level field type. | Create a StructArray field as `datatype=DataType.ARRAY` with `element_type=DataType.STRUCT` and a `struct_schema`. |
 | All elements share one schema. | Every Struct element in a StructArray field follows the same subfield list and subfield data types. |
 | `max_capacity` is required. | The number of Struct elements in one entity must not exceed the `max_capacity` configured for the StructArray field. |
+| All subfields share one `max_capacity`. | Every subfield must declare `max_capacity`, and all subfields of a StructArray field must declare the same value. The value must be greater than 0 and must not exceed `proxy.maxArrayCapacity`, which defaults to 4096. |
 | Existing subfields are fixed. | You cannot append new subfields to an existing StructArray field. To change the subfield schema, drop the StructArray field and add it again with the updated schema. |
 | Nested StructArray is not supported. | A StructArray field cannot contain nested `Array`, `ArrayOfVector`, `Struct`, or `ArrayOfStruct` subfields. |
 | Functions are not supported inside StructArray. | Do not define field functions for StructArray fields or their subfields. |
+| Text analysis is not supported on subfields. | `enable_match` and `enable_analyzer` settings on Struct subfields have no effect because text indexes are built only for top-level fields. |
 
 For schema creation examples, see [Create a StructArray Field](create-structarray-field.md).
 
@@ -108,7 +110,7 @@ A StructArray vector subfield can be indexed for either EmbeddingList search or 
 
 Use separate vector subfields when both modes are required. For example, use `chunks[emb_list_vector]` for EmbeddingList search and `chunks[emb]` for element-level search.
 
-StructArray vector subfields count as vector subfields when you plan your collection schema. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.
+StructArray vector subfields count as vector fields toward the collection-level limit `proxy.maxVectorFieldNum`, which defaults to 10. A StructArray field whose vector subfields are the collection's only vector fields is valid, and dropping such a field is rejected when it would leave the collection without a vector field. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.
 
 For the supported index-type and metric-type matrix, see [Index StructArray Fields](index-structarray-fields.md).
 
@@ -142,6 +144,12 @@ At a high level:
 - JSON path syntax, JSON functions, array container functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates.
 
 - Prefer explicit boolean comparisons such as `$[has_code] == true` instead of bare boolean expressions.
+
+## Import limits
+
+| Limit | Details |
+| --- | --- |
+| Source file formats | JSON, JSONL, CSV, and Parquet files can carry StructArray fields. NumPy files hold one file per top-level field and cannot provide StructArray data; use JSON, CSV, or Parquet files for collections that have a StructArray field. For file shapes, see [Prepare Source Data](prepare-source-data.md#StructArray-fields-in-source-files). |
 
 ## Related pages
 
