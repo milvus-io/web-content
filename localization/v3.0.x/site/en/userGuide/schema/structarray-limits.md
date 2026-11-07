@@ -80,9 +80,11 @@ summary: >-
 <tr><td>Struct is not a top-level field type.</td><td>Create a StructArray field as <code translate="no">datatype=DataType.ARRAY</code> with <code translate="no">element_type=DataType.STRUCT</code> and a <code translate="no">struct_schema</code>.</td></tr>
 <tr><td>All elements share one schema.</td><td>Every Struct element in a StructArray field follows the same subfield list and subfield data types.</td></tr>
 <tr><td><code translate="no">max_capacity</code> is required.</td><td>The number of Struct elements in one entity must not exceed the <code translate="no">max_capacity</code> configured for the StructArray field.</td></tr>
+<tr><td>All subfields share one <code translate="no">max_capacity</code>.</td><td>Every subfield must declare <code translate="no">max_capacity</code>, and all subfields of a StructArray field must declare the same value. The value must be greater than 0 and must not exceed <code translate="no">proxy.maxArrayCapacity</code>, which defaults to 4096.</td></tr>
 <tr><td>Existing subfields are fixed.</td><td>You cannot append new subfields to an existing StructArray field. To change the subfield schema, drop the StructArray field and add it again with the updated schema.</td></tr>
 <tr><td>Nested StructArray is not supported.</td><td>A StructArray field cannot contain nested <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code> subfields.</td></tr>
 <tr><td>Functions are not supported inside StructArray.</td><td>Do not define field functions for StructArray fields or their subfields.</td></tr>
+<tr><td>Text analysis is not supported on subfields.</td><td><code translate="no">enable_match</code> and <code translate="no">enable_analyzer</code> settings on Struct subfields have no effect because text indexes are built only for top-level fields.</td></tr>
 </tbody>
 </table>
 <p>For schema creation examples, see <a href="/docs/create-structarray-field.md">Create a StructArray Field</a>.</p>
@@ -212,7 +214,7 @@ summary: >-
 </tbody>
 </table>
 <p>Use separate vector subfields when both modes are required. For example, use <code translate="no">chunks[emb_list_vector]</code> for EmbeddingList search and <code translate="no">chunks[emb]</code> for element-level search.</p>
-<p>StructArray vector subfields count as vector subfields when you plan your collection schema. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.</p>
+<p>StructArray vector subfields count as vector fields toward the collection-level limit <code translate="no">proxy.maxVectorFieldNum</code>, which defaults to 10. A StructArray field whose vector subfields are the collection’s only vector fields is valid, and dropping such a field is rejected when it would leave the collection without a vector field. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.</p>
 <p>For the supported index-type and metric-type matrix, see <a href="/docs/index-structarray-fields.md">Index StructArray Fields</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Search limits<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,6 +270,29 @@ summary: >-
 <li><p>JSON path syntax, JSON functions, array container functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates.</p></li>
 <li><p>Prefer explicit boolean comparisons such as <code translate="no">$[has_code] == true</code> instead of bare boolean expressions.</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">Import limits<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Limit</th><th>Details</th></tr>
+</thead>
+<tbody>
+<tr><td>Source file formats</td><td>JSON, JSONL, CSV, and Parquet files can carry StructArray fields. NumPy files hold one file per top-level field and cannot provide StructArray data; use JSON, CSV, or Parquet files for collections that have a StructArray field. For file shapes, see <a href="/docs/prepare-source-data.md#StructArray-fields-in-source-files">Prepare Source Data</a>.</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">Related pages<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
