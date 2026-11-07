@@ -2014,6 +2014,16 @@ status = client-&gt;<span class="hljs-built_in">Upsert</span>(milvus::<span clas
     CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
     Properties = { [<span class="hljs-string">&quot;ttl_field&quot;</span>] = <span class="hljs-string">&quot;expire_at&quot;</span> }
 });
+<span class="hljs-comment">// Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+<span class="hljs-keyword">var</span> vector = Enumerable.Repeat(<span class="hljs-number">0.1f</span>, <span class="hljs-number">128</span>).ToArray();
+<span class="hljs-keyword">await</span> client.UpsertAsync(<span class="hljs-keyword">new</span> UpsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span> }
+    ]
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -2478,6 +2488,16 @@ status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>
 {
     CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
     Properties = { [<span class="hljs-string">&quot;ttl_field&quot;</span>] = <span class="hljs-string">&quot;expire_at&quot;</span> }
+});
+<span class="hljs-comment">// Step 4 (optional) — backfill expiration timestamps for historical entities</span>
+<span class="hljs-keyword">var</span> vector = Enumerable.Repeat(<span class="hljs-number">0.1f</span>, <span class="hljs-number">128</span>).ToArray();
+<span class="hljs-keyword">await</span> client.UpsertAsync(<span class="hljs-keyword">new</span> UpsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span> }
+    ]
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
