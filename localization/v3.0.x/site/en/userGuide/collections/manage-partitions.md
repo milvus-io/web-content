@@ -991,7 +991,7 @@ curl --request POST \
     </button></h3><p>You can perform insert, upsert, and delete operations in specific operations. For details, refer to</p>
 <ul>
 <li><p><a href="/docs/insert-update-delete.md#Insert-Entities-into-a-Partition">Insert Entities into Partition</a></p></li>
-<li><p><a href="/docs/upsert-entities.md#Upsert-Entities-in-a-Partition">Upsert Entities into Partition</a></p></li>
+<li><p><a href="/docs/upsert-entities.md#Upsert-entities-in-a-partition">Upsert Entities into Partition</a></p></li>
 <li><p><a href="/docs/delete-entities.md#Delete-Entities-from-Partitions">Delete Entities from Partition</a></p></li>
 </ul>
 <h3 id="Search-and-Query" class="common-anchor-header">Search and Query<button data-href="#Search-and-Query" class="anchor-icon" translate="no">

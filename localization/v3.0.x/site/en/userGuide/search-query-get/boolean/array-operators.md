@@ -378,7 +378,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_append&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Attaching <code translate="no">ARRAY_APPEND</code> to a field through <code translate="no">field_ops</code> enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert ARRAY fields in merge mode</a>.</p>
+<p>Attaching <code translate="no">ARRAY_APPEND</code> to a field through <code translate="no">field_ops</code> enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Upsert ARRAY fields in merge mode</a>.</p>
 <h2 id="ARRAYREMOVE" class="common-anchor-header">ARRAY_REMOVE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#ARRAYREMOVE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -515,4 +515,4 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_remove&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Attaching <code translate="no">ARRAY_REMOVE</code> to a field through <code translate="no">field_ops</code> enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert ARRAY fields in merge mode</a>.</p>
+<p>Attaching <code translate="no">ARRAY_REMOVE</code> to a field through <code translate="no">field_ops</code> enables partial-update semantics for that field. For the full workflow, supported element types, and limits, refer to <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Upsert ARRAY fields in merge mode</a>.</p>
