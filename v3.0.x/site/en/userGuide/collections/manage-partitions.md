@@ -964,7 +964,7 @@ You can perform insert, upsert, and delete operations in specific operations. Fo
 
 - [Insert Entities into Partition](insert-update-delete.md#Insert-Entities-into-a-Partition)
 
-- [Upsert Entities into Partition](upsert-entities.md#Upsert-Entities-in-a-Partition)
+- [Upsert Entities into Partition](upsert-entities.md#Upsert-entities-in-a-partition)
 
 - [Delete Entities from Partition](delete-entities.md#Delete-Entities-from-Partitions)
 
